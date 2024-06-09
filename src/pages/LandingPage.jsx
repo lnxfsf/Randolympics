@@ -1,4 +1,7 @@
 
+import { Navbar } from "../components/Navbar";
+
+
 
 
 const LandingPage = () => {
@@ -10,6 +13,11 @@ const LandingPage = () => {
   
   return (
     <>
+
+        {/* navbar */}
+        <Navbar />
+
+
 
         <h1>hello</h1>
 
