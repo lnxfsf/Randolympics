@@ -7,6 +7,7 @@ export default {
 
       pinky: "#EA1179",
       blacky: "#111",
+      red_first: "#AF2626",
 
       
     },
