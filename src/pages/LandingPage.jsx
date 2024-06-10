@@ -29,7 +29,6 @@ const LandingPage = () => {
       </div>
 
       {/* second part */}
-
       <div className="flex">
         {/*TODO basis-1/2  to stavi na obje. za sada ovako 45% u css.. dok ne resis mobile posle */}
         <div className="first_div">
@@ -149,12 +148,13 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* third part */}
+      {/* start third part */}
       <h1 className="flex text-[40px] mt-32 justify-center underline decoration-red_first">
         How does it work ?
       </h1>
 
       <div className="flex">
+        {/* image */}
         <div className="basis-1/2 flex justify-center items-center pl-32 pt-24 pb-16 ">
           <img
             src="landing_page/other_images/1.png "
@@ -163,9 +163,8 @@ const LandingPage = () => {
         </div>
 
         {/* flex-wrap flex-col */}
+        {/* text */}
         <div className="basis-1/2 flex justify-start items-center flex-wrap">
-
-
           <div className="flex-wrap flex-col">
             <h2 className="text-2xl font-bold underline decoration-red_first pl-16">
               1. One
@@ -175,8 +174,6 @@ const LandingPage = () => {
               <span className="text-red_first  font-bold ">Sign up</span>{" "}
               together <br /> with your friends
             </h1>
-
-
 
             <div className="pl-16 pt-6">
               <Button
@@ -199,23 +196,105 @@ const LandingPage = () => {
                 <span className="popins-font">Randomize</span>
               </Button>
             </div>
-
-
-
-
           </div>
 
-
-
+          {/* arrow */}
           <div className="flex justify-end items-end mt-[450px]">
-                    <img src="landing_page/arrow_down_1.png"/>
-                </div>
-                
+            <img src="landing_page/arrow_down_1.png" />
+          </div>
+        </div>
+      </div>
+
+      {/* end third part */}
+
+      {/* start fourth part */}
+
+      <div className="flex">
+
+
+
+
+        {/* flex-wrap flex-col */}
+        {/* text */}
+        <div className="basis-1/2 flex justify-start items-center flex-wrap">
+
+
+        
+
+
+            {/* arrow */}
+            <div className="flex justify-start items-start mt-[450px] ml-16">
+                <img src="landing_page/arrow_down_2.png" />
+            </div>
+
+
+          <div className="flex-wrap flex-col">
+            <h2 className="text-2xl font-bold underline decoration-red_first pl-16 text-right">
+              2. Two
+            </h2>
+
+            <h1 className="text-[43px] pl-16 pt-8 text-right">
+              
+       
+       
+
+
+              Get elected and <br/> represent <span className="text-red_first  font-bold ">your</span> <br/>country
+
+
+            </h1>
+          </div>
+
+            
 
 
 
         </div>
+
+
+
+      {/* image */}
+      <div className="basis-1/2 flex justify-center items-center pr-32 pt-24 pb-16 ">
+        <img src="landing_page/other_images/2.png " className="image_landing" />
       </div>
+
+
+      </div>
+
+      {/* end fourth part */}
+
+
+
+
+
+      {/* start fifth part */}
+      {/* image */}
+      <div className="flex">
+        <div className="basis-1/2 flex justify-center items-center pl-32 pt-24 pb-16 ">
+          <img
+            src="landing_page/other_images/3.png "
+            className="image_landing"
+          />
+        </div>
+
+        {/* text */}
+        {/* flex-wrap flex-col */}
+        <div className="basis-1/2 flex justify-start items-center flex-wrap">
+          <div className="flex-wrap flex-col">
+            <h2 className="text-2xl font-bold underline decoration-red_first pl-16">
+              3. Three
+            </h2>
+
+            <h1 className="text-[43px] pl-16 pt-8">
+              Have a chance to <br /> win your{" "}
+              <span className="text-red_first  font-bold ">gold</span> <br />
+              medal
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      {/* end fifth part */}
 
       <h1>hello</h1>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
