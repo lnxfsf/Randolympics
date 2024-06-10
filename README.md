@@ -25,3 +25,11 @@ sass - (npm install -D sass)
 mui  - npm install @mui/material @emotion/react @emotion/styled
 
 
+npm i react-google-recaptcha
+
+
+npm i axios;
+
+
+
+

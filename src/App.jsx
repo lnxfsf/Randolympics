@@ -6,6 +6,8 @@ import { LandingPage } from "./pages/LandingPage";
 import { Login } from "./pages/Login";
 import { ForgotPassword } from "./components/Login/ForgotPassword";
 
+import { ToS } from "./pages/ToS";
+
 
 
 
@@ -24,6 +26,8 @@ const App  = () =>  {
         <Route path="/" element={ <LandingPage /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/forgotpassword" element={ <ForgotPassword /> } />
+        <Route path="/tos" element={ <ToS /> } />
+
 
         
 
