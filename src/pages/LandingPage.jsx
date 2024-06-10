@@ -1,10 +1,38 @@
 import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+
 
 import "../styles/landingPage.scoped.scss";
 
+
 import { Button } from "@mui/material";
 
+
+
+// on button click, redirect to other component. like <Link>
+import { useNavigate } from "react-router-dom";
+
+
+
 const LandingPage = () => {
+
+
+
+
+
+
+  // on button, redirect to other component. like <Link>
+  const navigate = useNavigate();
+
+  // on button, redirect to other component. like <Link>
+  const handleRedirectRegister = () => {
+    navigate("/login");
+  };
+
+    
+
+
+
   return (
     <>
       {/* navbar
@@ -177,8 +205,11 @@ const LandingPage = () => {
 
             <div className="pl-16 pt-6">
               <Button
+    
+                onClick={handleRedirectRegister}
                 className="w-32 "
                 style={{ marginTop: "20px" }}
+
                 sx={{
                   height: "60px",
                   bgcolor: "#AF2626",
@@ -191,9 +222,11 @@ const LandingPage = () => {
                     border: `1px solid rgb(196, 43, 43)`,
                   },
                 }}
+
                 id="register-btn"
+
               >
-                <span className="popins-font">Randomize</span>
+                <span className="popins-font">Register</span>
               </Button>
             </div>
           </div>
@@ -273,6 +306,9 @@ const LandingPage = () => {
 
       {/* start about us part */}
 
+      <div className="mb-52">
+
+        
       <h1 className="flex text-[40px] mt-32 justify-center underline decoration-red_first">
         About us
       </h1>
@@ -337,10 +373,20 @@ const LandingPage = () => {
         a man who chooses to enjoy a pleasure that has no annoying consequences,
         or one who avoids a pain that produces no resultant pleasure
       </div>
+
+      </div>
+
       {/* end about us part */}
 
-      <h1>hello</h1>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+
+
+
+
+ {/* TODO, will need to make that image go more on top
+      <Footer />
+      */}
+
+
     </>
   );
 };

@@ -5,8 +5,8 @@ export default {
     colors: {
 
 
-      pinky: "#EA1179",
-      blacky: "#111",
+      black_first: "#232323",
+      blue_first: "#315FB7",
       red_first: "#AF2626",
 
       
