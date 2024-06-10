@@ -7,13 +7,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="static">
-        {/* <Toolbar sx={{bgcolor: "#1e1e1e", backg-image:linear-gradient(-45deg, #EA1179 0%, #75083c 100%) }} > */}
         <Toolbar sx={{ bgcolor: "#AF2626" }}>
-
-
-
-
-
           <Link className="first_h2 nav_btns" to="/">
             <img src="logo_randolymics_nav.png" />
           </Link>

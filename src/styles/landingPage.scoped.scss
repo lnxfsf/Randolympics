@@ -1,0 +1,78 @@
+// .image_banner{
+//    background-image: url("landing_page/first.png");
+//}
+
+.text {
+  color: white;
+}
+
+.first_div {
+   width: 50%;
+
+  //    font-size: 25px;
+
+  padding: 55px;
+  padding-left: 120px;
+}
+
+// TODO font should be added as well
+.popins-font {
+  font-family: "Popins", sans-serif;
+  font-weight: bold;
+}
+
+// we need grid with 3 elements, and just fill up with images..   3 x 5
+.second_div_grid_container {
+
+    
+// cisto, da gap, namesti nekako...
+    width: 45%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+   grid-template-rows: repeat(5, 1fr);
+
+  
+
+  justify-items: center;
+  align-items: center;
+
+
+  gap: 10px;
+  
+
+
+  margin-top: -45px;
+
+  // z-index: 0;
+}
+
+.second_div_grid_item {
+  // 37 is difference between width and height
+
+  width: 200px;
+  height: 160px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  //z-index: -1;
+}
+
+
+
+
+.image_landing {
+
+    width: 650px;
+
+    height: 400px;
+    object-fit: cover;
+
+
+    border-radius: 6px;
+
+}
