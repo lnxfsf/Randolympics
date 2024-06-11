@@ -22,19 +22,84 @@ const Login = () => {
 
 
   const recaptcha = useRef();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+
 
   useEffect(() => {
     // set custom error messages on input fields
-    const tos_field = document.getElementById("tos");
+   // const tos_field = document.getElementById("tos");
 
-    if (tos_field) {
-      tos_field.oninvalid = function (e) {
-        e.target.setCustomValidity("You have to agree on Terms of Service !");
-      };
-    }
+   // if (tos_field) {
+   //   tos_field.oninvalid = function (e) {
+     //   e.target.setCustomValidity("You have to agree on Terms of Service !");
+     // };
+    //}
   }, []);
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    
+    var email = e.target.email.value;
+    var password = e.target.pass.value;
+
+
+    // TODO set up remember me (false) on session storage, and (true) on localstorage
+    var remember_me = e.target.remember.value;
+
+
+
+    // check again, if email is correctly inserted
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+    }
+
+
+
+
+    // check if captcha okay
+    const captchaValue = recaptcha.current.getValue();
+
+    if (!captchaValue) {
+      alert("Please verify the reCAPTCHA!");
+    } else {
+      const res = await fetch("http://localhost:5000/captcha/verify", {
+        method: "POST",
+        body: JSON.stringify({ captchaValue }),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      // response in json we have "success" field, that google send us, if it's verified or not
+      if (data.success) {
+        // make form submission
+
+        // TODO , ovde pozivas authContext 
+         
+        // ? this is just to pass to store auth in (local|session) storage
+        loginUser(email, password, remember_me);
+
+
+
+
+
+       // alert("Form submission successful!");
+      } else {
+        alert("reCAPTCHA validation failed!");
+      }
+
+      // make form submission
+    }
+
+
+
+  };
+
 
 
   //
@@ -133,7 +198,7 @@ const Login = () => {
           <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
-            onSubmit={loginUser}
+            onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-center mt-8">
               <label htmlFor="email">Email*</label>

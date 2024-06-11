@@ -239,15 +239,18 @@ export const AuthProvider = ({ children }) => {
 
 
 // TODO ovo je moj kod za sto treba ti.. 
-  let loginUser = async (e) => {
-    e.preventDefault();
+  // let loginUser = async (e) => {
 
-    var email = e.target.email.value;
-    var password = e.target.pass.value;
+    let loginUser = async (email, password, remember_me) => {
+    
+    // e.preventDefault();
+
+    //var email = e.target.email.value;
+    // var password = e.target.pass.value;
 
 
     // TODO set up remember me (false) on session storage, and (true) on localstorage
-    var remember_me = e.target.remember.value;
+   // var remember_me = e.target.remember.value;
 
 
 
@@ -255,29 +258,30 @@ export const AuthProvider = ({ children }) => {
 
 
     // check again, if email is correctly inserted
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    //const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
-    }
+   // if (!emailRegex.test(email)) {
+  //    alert("Please enter a valid email address");
+   // }
 
     // check if captcha okay
-    const captchaValue = recaptcha.current.getValue();
+    //    const captchaValue = recaptcha.current.getValue();
 
-    if (!captchaValue) {
-      alert("Please verify the reCAPTCHA!");
-    } else {
-      const res = await fetch("http://localhost:5000/captcha/verify", {
-        method: "POST",
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+  //  if (!captchaValue) {
+    //  alert("Please verify the reCAPTCHA!");
+   // } else {
+     // const res = await fetch("http://localhost:5000/captcha/verify", {
+     //   method: "POST",
+    //    body: JSON.stringify({ captchaValue }),
+   //     headers: {
+   //       "content-type": "application/json",
+   //     },
+   //   });
 
-      const data = await res.json();
+     // const data = await res.json();
+
       // response in json we have "success" field, that google send us, if it's verified or not
-      if (data.success) {
+    //  if (data.success) {
         // make form submission
 
         // TODO jos ovoga
@@ -335,12 +339,12 @@ export const AuthProvider = ({ children }) => {
 
 
        // alert("Form submission successful!");
-      } else {
-        alert("reCAPTCHA validation failed!");
-      }
+   //   } else {
+   //     alert("reCAPTCHA validation failed!");
+   //   }
 
       // make form submission
-    }
+    //}
 
     //  alert('Form submission successful!')
   };
