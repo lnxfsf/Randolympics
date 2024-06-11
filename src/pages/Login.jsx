@@ -3,7 +3,10 @@ import "../styles/login.scoped.scss";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import React, { useContext } from "react";
+
+import AuthContext from "../context/AuthContext";
 
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -14,65 +17,110 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Login = () => {
+
+  let { loginUser } = useContext(AuthContext);
+
+
   const recaptcha = useRef();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  let loginUser = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    // set custom error messages on input fields
+    const tos_field = document.getElementById("tos");
 
-    var email = e.target.email.value;
-    var password = e.target.pass.value;
-
-    // check again, if email is correctly inserted
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+    if (tos_field) {
+      tos_field.oninvalid = function (e) {
+        e.target.setCustomValidity("You have to agree on Terms of Service !");
+      };
     }
+  }, []);
 
-    // check if captcha okay
-    const captchaValue = recaptcha.current.getValue();
 
-    if (!captchaValue) {
-      alert("Please verify the reCAPTCHA!");
-    } else {
-      const res = await fetch("http://localhost:5000/captcha/verify", {
-        method: "POST",
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+  //
+  //  let loginUser = async (e) => {
+  //    e.preventDefault();
+  //
+  //    var email = e.target.email.value;
+  //    var password = e.target.pass.value;
+  //
+  //
+  //    // TODO set up remember me (false) on session storage, and (true) on localstorage
+  //    var remember_me = e.target.remember.value;
+  //
+  //
+  //
+  //
+  //
+  //
+  //    // check again, if email is correctly inserted
+  //    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  //
+  //    if (!emailRegex.test(email)) {
+  //      alert("Please enter a valid email address");
+  //    }
+  //
+  //    // check if captcha okay
+  //    const captchaValue = recaptcha.current.getValue();
+  //
+  //    if (!captchaValue) {
+  //      alert("Please verify the reCAPTCHA!");
+  //    } else {
+  //      const res = await fetch("http://localhost:5000/captcha/verify", {
+  //        method: "POST",
+  //        body: JSON.stringify({ captchaValue }),
+  //        headers: {
+  //          "content-type": "application/json",
+  //        },
+  //      });
+  //
+  //      const data = await res.json();
+  //      // response in json we have "success" field, that google send us, if it's verified or not
+  //      if (data.success) {
+  //        // make form submission
+  //
+  //
+  //
+  //        // TODO, e ovde ides, za login kako treba, u context...
+  //        let response = await axios.post(
+  //          `${BACKEND_SERVER_BASE_URL}/auth/login`,
+  //          { email, password }
+  //        );
+  //
+  //
+  //
+  //        if (response) {
+  //          alert("Login success ");
+  //        } else {
+  //          alert("Login failed");
+  //        }
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //       // alert("Form submission successful!");
+  //      } else {
+  //        alert("reCAPTCHA validation failed!");
+  //      }
+  //
+  //      // make form submission
+  //    }
+  //
+  //    //  alert('Form submission successful!')
+  //  };
 
-      const data = await res.json();
-      if (data.success) {
-        // make form submission
 
-        let response = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/auth/login`,
-          { email, password }
-        );
 
-        if (response) {
-          alert("Login success ");
-        } else {
-          alert("Login failed");
-        }
 
-       // alert("Form submission successful!");
-      } else {
-        alert("reCAPTCHA validation failed!");
-      }
-
-      // make form submission
-    }
-
-    //  alert('Form submission successful!')
-  };
 
   let APP_SITE_KEY =
     import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
+
 
   return (
     <>
@@ -82,10 +130,15 @@ const Login = () => {
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
-          <form action="#" className="sign-in-form" onSubmit={loginUser}>
-            <div className="flex flex-col mb-1 justify-center mt-16">
+          <form
+            action="#"
+            className="sign-in-form flex flex-col wrap justify-start items-center"
+            onSubmit={loginUser}
+          >
+            <div className="flex flex-col mb-1 justify-center mt-8">
               <label htmlFor="email">Email*</label>
               <input
+                placeholder="johndoe@gmail.com"
                 className="w-[420px] "
                 type="email"
                 id="email"
@@ -94,16 +147,27 @@ const Login = () => {
               />
             </div>
 
-            <div className="flex flex-col mb-2.5 justify-center mt-16">
+            <div className="flex flex-col mb-2.5 justify-center mt-2">
               <label htmlFor="pass">Password*</label>
-              <input type="password" id="pass" name="pass" required />
+              <input
+                placeholder="password"
+                className="w-[420px]"
+                type="password"
+                id="pass"
+                name="pass"
+                required
+              />
             </div>
 
-            <ReCAPTCHA ref={recaptcha} sitekey={APP_SITE_KEY} />
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey={APP_SITE_KEY}
+              className="mt-2"
+            />
 
             {/*  this is for checkbox and forgot password*/}
-            <div className="flex">
-              <div className="basis-1/2">
+            <div className="flex w-[420px] flex items-center justify-center mt-4 ">
+              <div className="basis-1/2 justify-end">
                 <label htmlFor="remember">
                   <input
                     type="checkbox"
@@ -115,7 +179,7 @@ const Login = () => {
                 </label>
               </div>
 
-              <div className="flex basis-1/2">
+              <div className="flex basis-1/2 justify-end">
                 <Link
                   to="/forgotpassword"
                   className="bg-white text-red_first  "
@@ -125,20 +189,26 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="flex">
+            <div className="flex self-start mt-2">
               <label htmlFor="tos">
-                <input type="checkbox" id="tos" name="tos" className="mr-2" />I
-                have read and understood the{" "}
+                <input
+                  type="checkbox"
+                  id="tos"
+                  name="tos"
+                  className="mr-2"
+                  required
+                />
+                I have read and understood the{" "}
                 <Link
                   to="/tos"
                   className="text-red_first font-bold underline decoration-red_first"
                 >
-                  terms of service
+                  Terms of Service
                 </Link>
               </label>
             </div>
 
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-2">
               <Button
                 className="w-[420px]"
                 style={{ marginTop: "20px" }}
