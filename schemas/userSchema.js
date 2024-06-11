@@ -1,6 +1,5 @@
 // schema for the user table
 
-
 const userSchema = `
   CREATE TABLE IF NOT EXISTS users (
       userId VARCHAR(255) PRIMARY KEY,
@@ -10,5 +9,3 @@ const userSchema = `
 `;
 
 module.exports = userSchema;
-
-

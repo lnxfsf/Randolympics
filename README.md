@@ -24,10 +24,21 @@ curl -X POST \
 // login
 
 curl -X POST \
-  http://localhost:5000/login \
+  http://localhost:5000/auth/login \
   -H 'Content-Type: application/json' \
   -d '{
     "email": "igor@gmail.com",
     "password": "igor123"
 }'
+
+
+
+
+
+curl -X POST http://localhost:5000/captcha/verify \
+     -H "Content-Type: application/json" \
+     -d '{"captchaValue": "your_captcha_value"}'
+
+
+
 
