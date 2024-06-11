@@ -7,8 +7,6 @@ npm i express mysql2
 
 
 
-
-
 // register
 
 curl -X POST \
