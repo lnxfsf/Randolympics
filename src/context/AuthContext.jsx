@@ -218,11 +218,30 @@ export const AuthProvider = ({ children }) => {
 
 
     // TODO ovo je sa drugi, treba session isto..
-  let [user, setUser] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? jwtDecode(localStorage.getItem("authTokens"))
-      : null
-  );
+  
+   // let [user, setUser] = useState(() =>
+  //  localStorage.getItem("authTokens")
+  //    ? jwtDecode(localStorage.getItem("authTokens"))
+  //    : null
+ // );
+
+ const [user, setUser] = useState(() => {
+    const tokenString = localStorage.getItem("authTokens");
+    if (tokenString) {
+      try {
+        const authData = JSON.parse(tokenString);
+        return jwtDecode(authData.data.access_token);
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("authTokens");
+        return null;
+      }
+    }
+    return null;
+  });
+
+
+
 
 
   let [authTokens, setAuthTokens] = useState(() =>
@@ -372,15 +391,15 @@ export const AuthProvider = ({ children }) => {
 
 
   //TODO refresh tokens  
-  useEffect(() => {
-    const REFRESH_INTERVAL = 1000 * 60 * 9; // 9 minutes
-    let interval = setInterval(() => {
-      if (authTokens && loading) {
+ // useEffect(() => {
+  //  const REFRESH_INTERVAL = 1000 * 60 * 9; // 9 minutes
+  //  let interval = setInterval(() => {
+  //    if (authTokens && loading) {
         //updateToken();
-      }
-    }, REFRESH_INTERVAL);
-    return () => clearInterval(interval);
-  }, [authTokens, loading]);
+  //    }
+   // }, REFRESH_INTERVAL);
+  //  return () => clearInterval(interval);
+ // }, [authTokens, loading]);
 
 
 
