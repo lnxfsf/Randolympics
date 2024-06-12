@@ -10,7 +10,13 @@ import AuthContext from "../context/AuthContext";
 
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
+
+
+
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -18,8 +24,9 @@ let BACKEND_SERVER_BASE_URL =
 
 const Login = () => {
 
+  
   let { loginUser } = useContext(AuthContext);
-
+  const navigate = useNavigate();
 
   const recaptcha = useRef();
 
@@ -113,6 +120,9 @@ const Login = () => {
   };
 
 
+  const handleSignUp = () => {
+    navigate("/register");
+  }
 
   //
   //  let loginUser = async (e) => {
@@ -315,6 +325,7 @@ const Login = () => {
 
           <div className="flex justify-center mt-2">
             <Button
+              onClick={handleSignUp}
               className="w-[420px]"
               style={{ marginTop: "20px" }}
               sx={{
