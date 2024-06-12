@@ -233,14 +233,12 @@ export const AuthProvider = ({ children }) => {
         return jwtDecode(authData.data.access_token);
       } catch (error) {
         console.error("Invalid token:", error);
-        localStorage.removeItem("authTokens");
-        return null;
+       // localStorage.removeItem("authTokens");
+        // return null;
       }
     }
-    return null;
+   // return null;
   });
-
-
 
 
 
@@ -250,6 +248,8 @@ export const AuthProvider = ({ children }) => {
       : null
   );
   
+
+
 
   let [loading, setLoading] = useState(true);
 

@@ -33,6 +33,18 @@ const Login = () => {
      //   e.target.setCustomValidity("You have to agree on Terms of Service !");
      // };
     //}
+
+
+    
+    // make captcha required
+    window.addEventListener('load', () => {
+      const $recaptcha = document.querySelector('#g-recaptcha-response');
+      if ($recaptcha) {
+        $recaptcha.setAttribute('required', 'required');
+      }
+    })
+
+
   }, []);
 
 
@@ -227,7 +239,8 @@ const Login = () => {
             <ReCAPTCHA
               ref={recaptcha}
               sitekey={APP_SITE_KEY}
-              className="mt-2"
+              className="mt-2 g-recaptcha-response"
+
             />
 
             {/*  this is for checkbox and forgot password*/}
