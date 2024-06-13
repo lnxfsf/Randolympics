@@ -8,32 +8,26 @@ import React, { useContext } from "react";
 
 import AuthContext from "../context/AuthContext";
 
-
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-// MUI 
+// MUI
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
-
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-  
 const Login = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
- 
-
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -43,8 +37,6 @@ const Login = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-
 
   useEffect(() => {
     // set custom error messages on input fields
@@ -182,6 +174,7 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-center mt-8">
+              {/* 
               <label htmlFor="email">Email*</label>
               <input
                 placeholder="johndoe@gmail.com"
@@ -189,9 +182,37 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="email"
+              /> */}
+
+              <TextField
+                label="Email"
+                placeholder="johndoe@gmail.com"
+                id="email"
+                name="email"
                 required
+                type="email"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
               />
             </div>
+
+            {/* ---------------- 
 
             <div className="flex flex-col mb-2.5 justify-center mt-2">
               <label htmlFor="pass">Password*</label>
@@ -204,37 +225,65 @@ const Login = () => {
                 required
               />
             </div>
-
+*/}
             {/* ---------------- */}
 
-            <TextField
-              label="Password"
-              placeholder="password"
-              id="outlined-start-adornment"
-              type={showPassword ? "text" : "password"}
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <div className="flex flex-col mb-2.5 justify-center mt-2">
+
+
+              <TextField
+                label="Password"
+                placeholder="password"
+                id="pass"
+                name="pass"
+                required
+                type={showPassword ? "text" : "password"}
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+
+
+
+            </div>
 
             {/* ---------------- */}
 
             {/*  this is for checkbox and forgot password*/}
             <div className="flex w-[420px] flex items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
-                <label htmlFor="remember">
+                
+                
+            {/*     <label htmlFor="remember">
                   <input
                     type="checkbox"
                     id="remember"
@@ -242,7 +291,24 @@ const Login = () => {
                     className="mr-2"
                   />
                   Remember me
-                </label>
+                </label> */}
+
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={{
+                        color: "#FF0000",
+                        "&.Mui-checked": {
+                          color: "#FF0000",
+                        },
+                      }}
+                      id="remember"
+                      name="remember"
+                      className="mr-2"
+                    />
+                  }
+                  label="Remember me"
+                />
               </div>
 
               <div className="flex basis-1/2 justify-end">

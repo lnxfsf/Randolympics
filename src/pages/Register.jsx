@@ -16,6 +16,26 @@ import axios from "axios";
 
 import ReactFlagsSelect from "react-flags-select";
 
+// MUI
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
+import Menu from '@mui/material/Menu';
+
+
+
+
+
+
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
 
@@ -34,6 +54,48 @@ const Register = () => {
   const [selectedRole, setSelectedRole] = useState("AH");
 
   const recaptcha = useRef();
+
+  // this is for password <input> field, MUI library we use
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+
+
+
+
+// ? HERE, for crypto..
+
+const cryptoOptions = ['BTC', 'ETH', 'XMR']; // supported cryptos
+
+
+const [cryptoMenuAnchorEl, setCryptoMenuAnchorEl] = useState(null);
+  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
+
+const handleCryptoMenuClick  = (event) => {
+  setCryptoMenuAnchorEl(event.currentTarget);
+};
+
+const handleCryptoMenuClose = () => {
+  setCryptoMenuAnchorEl(null);
+};
+
+const handleCryptoOptionSelect = (option) => {
+  setSelectedCrypto(option);
+  setCryptoMenuAnchorEl(null); // Close the menu after selection (optional)
+};
+
+// ? HERE
+
+
+
+
+
+
 
   useEffect(() => {
     // make captcha required
@@ -150,9 +212,16 @@ const Register = () => {
           {/* different users roles */}
           {/* TODO, put this in separate component (others as well, check which ones as well) */}
           <div>
-            <label htmlFor="roleDropdown">Register as: </label>
-            <br />
-            <select
+
+
+
+
+            {/* <label htmlFor="roleDropdown">Register as: </label>
+            <br /> */}
+
+
+
+           {/*  <select
               id="roleDropdown"
               value={selectedRole}
               onChange={handleChangeRole}
@@ -170,7 +239,45 @@ const Register = () => {
               <option value="VM">VM - Validation Manager</option>
               <option value="LM">LM - Legal Manager</option>
               <option value="RS">RS - Referee & support</option>
-            </select>
+            </select> */}
+
+      <InputLabel id="roleDropdowns">Register as:</InputLabel>
+            <Select
+    labelId="roleDropdowns"
+    id="roleDropdown"
+    label="Sign up as:"
+    value={selectedRole}
+    onChange={handleChangeRole}
+    className="w-[420px]"
+    style={{ color: '#000' }}  
+
+    >
+    
+    
+
+
+              <MenuItem value={"AH"}>AH - Athlete</MenuItem>
+              <MenuItem value={"GP"}>GP - Global President</MenuItem>
+              <MenuItem value={"NP"}>NP - National President</MenuItem>
+              <MenuItem value={"EM"}>EM - Event Manager</MenuItem>
+              <MenuItem value={"ITM"}>
+                ITM - IT Manager Page Editor (for adding news articles)
+              </MenuItem>
+              <MenuItem value={"MM"}>MM - Marketing Manager</MenuItem>
+              <MenuItem value={"SM"}>SM - Sales Manager</MenuItem>
+              <MenuItem value={"VM"}>VM - Validation Manager</MenuItem>
+              <MenuItem value={"LM"}>LM - Legal Manager</MenuItem>
+              <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
+
+
+  </Select>
+
+
+
+
+
+
+
           </div>
 
           <form
@@ -179,25 +286,60 @@ const Register = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-center mt-4">
-              <label htmlFor="email">Email*</label>
-              <input
+              <TextField
+                label="Email"
                 placeholder="johndoe@gmail.com"
-                className="w-[420px] "
-                type="email"
                 id="email"
                 name="email"
                 required
+                type="email"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
               />
             </div>
 
-            <div className="flex flex-col mb-1 justify-center mt-4">
-              <label htmlFor="name">Name*</label>
-              <input
+            <div className="flex flex-col mb-1 justify-center mt-0">
+              <TextField
+                label="Name"
                 placeholder="John Doe"
-                className="w-[420px] "
-                type="text"
                 id="name"
                 name="name"
+                required
+                type="text"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
               />
             </div>
 
@@ -222,36 +364,85 @@ const Register = () => {
               </select>
             </div> */}
 
-            <div className="flex flex-col mb-2.5 justify-center mt-4">
-              <label htmlFor="pass">Password*</label>
-              <input
+            <div className="flex flex-col mb-2.5 justify-center mt-0">
+              <TextField
+                label="Password"
                 placeholder="password"
-                className="w-[420px]"
-                type="password"
                 id="pass"
                 name="pass"
                 required
+                type={showPassword ? "text" : "password"}
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
 
             {/* <!--TODO implement one more password confirmation as well !  --> */}
-            <div className="flex flex-col mb-2.5 justify-center mt-4">
-              <label htmlFor="pass">Phone number*</label>
-              <input
+            <div className="flex flex-col mb-2.5 justify-center mt-0">
+              <TextField
+                label="Phone number"
                 placeholder="+1 212 456 7890"
-                className="w-[420px]"
-                type="tel"
                 id="phone"
                 name="phone"
+                required
+                type="tel"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
               />
             </div>
 
-            <div className="flex flex-col mb-2.5 justify-center mt-4">
+            <div className="flex flex-col mb-2.5 justify-center mt-0">
               <label htmlFor="nationality">Nationality*</label>
               <ReactFlagsSelect
                 selected={selected}
                 onSelect={(code) => setSelected(code)}
-                className="w-[420px] "
+                className="w-[420px]  "
                 searchable={true}
                 id="nationality"
               />
@@ -271,14 +462,100 @@ const Register = () => {
             )}
 
             <div className="flex flex-col mb-2.5 justify-center mt-4">
-              <label htmlFor="pass">Cryptoaddress</label>
-              <input
-                placeholder="+1 212 456 7890"
-                className="w-[420px]"
-                type="tel"
-                id="phone"
-                name="phone"
+
+
+
+
+            <TextField
+      label="Crypto"
+      id="cryptoaddr"
+      name="cryptoaddr"
+      placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+     
+      sx={{ m: 1, width: '420px', 
+        "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+       }}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle BTC/ETH/XMR"
+              onClick={handleCryptoMenuClick}
+              edge="end"
+            >
+              {/* Icon for dropdown, e.g., a downward arrow */}
+              {selectedCrypto}
+            </IconButton>
+            <Menu
+              id="crypto-menu"
+              anchorEl={cryptoMenuAnchorEl}
+              open={Boolean(cryptoMenuAnchorEl)}
+              onClose={handleCryptoMenuClose}
+            >
+              {cryptoOptions.map((option) => (
+                <MenuItem
+                  key={option}
+                  onClick={() => handleCryptoOptionSelect(option)}
+                  selected={option === selectedCrypto}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
+          </InputAdornment>
+        ),
+      }}
+    />
+
+
+
+
+
+{/* 
+
+<TextField
+                label="Cryptoaddress"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                id="cryptoaddr"
+                name="cryptoaddr"
+               
+                type="text"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
               />
+
+ */}
+
+
             </div>
 
             <ReCAPTCHA
@@ -313,22 +590,32 @@ const Register = () => {
                 */}
 
             <div className="flex self-start mt-2">
-              <label htmlFor="tos">
-                <input
-                  type="checkbox"
-                  id="tos"
-                  name="tos"
-                  className="mr-2"
-                  required
-                />
-                I have read and understood the{" "}
-                <Link
-                  to="/tos"
-                  className="text-red_first font-bold underline decoration-red_first"
-                >
-                  Terms of Service
-                </Link>
-              </label>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={{
+                      color: "#FF0000",
+                      "&.Mui-checked": {
+                        color: "#FF0000",
+                      },
+                    }}
+                    id="tos"
+                    name="tos"
+                    className="mr-2"
+                  />
+                }
+                label={
+                  <span>
+                    I have read and understood the{" "}
+                    <Link
+                      to="/tos"
+                      className="text-red_first font-bold underline decoration-red_first"
+                    >
+                      Terms of Service
+                    </Link>
+                  </span>
+                }
+              />
             </div>
 
             <div className="flex justify-center mb-32">
@@ -361,22 +648,19 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col justify-start">
-
-
           <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96">
             <img src="login/1.png" className="image_login" />
           </div>
 
-         
-          <div className="flex flex-col" >
-        
+          <div className="flex flex-col">
             <label for="bio">Tell us about yourself:</label>
 
-
-            <textarea type="text" id="bio" name="bio" className="w-full h-32 rounded-md border border-gray-900"></textarea>
-
-
-
+            <textarea
+              type="text"
+              id="bio"
+              name="bio"
+              className="w-full h-32 rounded-md border border-gray-900"
+            ></textarea>
           </div>
         </div>
       </div>
