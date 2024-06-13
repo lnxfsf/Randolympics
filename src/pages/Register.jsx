@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
+import ReactFlagsSelect from "react-flags-select";
+
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
 
@@ -24,6 +26,12 @@ let BACKEND_SERVER_BASE_URL =
 const Register = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  {
+    /*this is for nationality */
+  }
+  const [selected, setSelected] = useState("");
+  const [selectedRole, setSelectedRole] = useState("AH");
 
   const recaptcha = useRef();
 
@@ -42,10 +50,6 @@ const Register = () => {
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
-
-    
-    
-    
 
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -84,27 +88,21 @@ const Register = () => {
             `${BACKEND_SERVER_BASE_URL}/auth/register`,
             { email, password }
           );
-
-          
-
         } catch (error) {
           console.log(error);
 
-          
           if (axios.isAxiosError(error)) {
-            // Check for status code 409
             if (error.response && error.response.status === 409) {
-              alert('User already exists');
+              alert("User already exists");
             } else {
-              // Handle other errors
-              alert('An error occurred: ' + (error.response?.data?.message || error.message));
+              alert(
+                "An error occurred: " +
+                  (error.response?.data?.message || error.message)
+              );
             }
           } else {
-            // Handle non-Axios errors
-            alert('An unexpected error occurred: ' + error.message);
+            alert("An unexpected error occurred: " + error.message);
           }
-      
-          
 
           //if (error.response.status === 401) {
           // alert("Wrong username or password");
@@ -122,9 +120,11 @@ const Register = () => {
       } else {
         alert("reCAPTCHA validation failed!");
       }
-
-      // make form submission
     }
+  };
+
+  const handleChangeRole = (event) => {
+    setSelectedRole(event.target.value);
   };
 
   // Get the current year,
@@ -146,6 +146,32 @@ const Register = () => {
       <div className="flex m-16">
         <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
+
+          {/* different users roles */}
+          {/* TODO, put this in separate component (others as well, check which ones as well) */}
+          <div>
+            <label htmlFor="roleDropdown">Register as: </label>
+            <br />
+            <select
+              id="roleDropdown"
+              value={selectedRole}
+              onChange={handleChangeRole}
+              className="w-[420px]"
+            >
+              <option value="AH">AH - Athlete</option>
+              <option value="GP">GP - Global President</option>
+              <option value="NP">NP - National President</option>
+              <option value="EM">EM - Event Manager</option>
+              <option value="ITM">
+                ITM - IT Manager Page Editor (for adding news articles)
+              </option>
+              <option value="MM">MM - Marketing Manager</option>
+              <option value="SM">SM - Sales Manager</option>
+              <option value="VM">VM - Validation Manager</option>
+              <option value="LM">LM - Legal Manager</option>
+              <option value="RS">RS - Referee & support</option>
+            </select>
+          </div>
 
           <form
             action="#"
@@ -175,6 +201,7 @@ const Register = () => {
               />
             </div>
 
+            {/*
             <div className="flex flex-col mb-1 justify-center mt-4">
               <label htmlFor="yearOfBirth">Year of birth*</label>
               <select
@@ -193,7 +220,7 @@ const Register = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
             <div className="flex flex-col mb-2.5 justify-center mt-4">
               <label htmlFor="pass">Password*</label>
@@ -210,6 +237,41 @@ const Register = () => {
             {/* <!--TODO implement one more password confirmation as well !  --> */}
             <div className="flex flex-col mb-2.5 justify-center mt-4">
               <label htmlFor="pass">Phone number*</label>
+              <input
+                placeholder="+1 212 456 7890"
+                className="w-[420px]"
+                type="tel"
+                id="phone"
+                name="phone"
+              />
+            </div>
+
+            <div className="flex flex-col mb-2.5 justify-center mt-4">
+              <label htmlFor="nationality">Nationality*</label>
+              <ReactFlagsSelect
+                selected={selected}
+                onSelect={(code) => setSelected(code)}
+                className="w-[420px] "
+                searchable={true}
+                id="nationality"
+              />
+            </div>
+
+            {selectedRole === "AH" && (
+              <div className="flex flex-col mb-2.5 justify-center mt-4">
+                <label htmlFor="pass">Weight*</label>
+                <input
+                  placeholder="85kg "
+                  className="w-[420px]"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                />
+              </div>
+            )}
+
+            <div className="flex flex-col mb-2.5 justify-center mt-4">
+              <label htmlFor="pass">Cryptoaddress</label>
               <input
                 placeholder="+1 212 456 7890"
                 className="w-[420px]"
@@ -269,44 +331,55 @@ const Register = () => {
               </label>
             </div>
 
-
-
-
-      <div className="flex justify-center mb-32">
-        <Button
-          className="w-[420px]"
-          style={{ marginTop: "20px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 15,
-            border: `1px solid #AF2626`,
-            "&:hover": {
-              background: "rgb(196, 43, 43)",
-              color: "white",
-              border: `1px solid rgb(196, 43, 43)`,
-            },
-          }}
-          type="submit"
-          variant="text"
-          value="Login"
-          id="login-btn"
-        >
-          <span className="popins-font">Create account</span>
-        </Button>
-      </div>
+            <div className="flex justify-center mb-32">
+              <Button
+                className="w-[420px]"
+                style={{ marginTop: "20px" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 15,
+                  border: `1px solid #AF2626`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+                type="submit"
+                variant="text"
+                value="Login"
+                id="login-btn"
+              >
+                <span className="popins-font">Create account</span>
+              </Button>
+            </div>
           </form>
-
 
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
         </div>
 
-        <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">
-          <img src="login/1.png" className="image_login" />
+        <div className="flex flex-col justify-start">
+
+
+          <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96">
+            <img src="login/1.png" className="image_login" />
+          </div>
+
+         
+          <div className="flex flex-col" >
+        
+            <label for="bio">Tell us about yourself:</label>
+
+
+            <textarea type="text" id="bio" name="bio" className="w-full h-32 rounded-md border border-gray-900"></textarea>
+
+
+
+          </div>
         </div>
       </div>
-
     </>
   );
 };

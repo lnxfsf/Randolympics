@@ -8,13 +8,17 @@ import React, { useContext } from "react";
 
 import AuthContext from "../context/AuthContext";
 
-import ReCAPTCHA from "react-google-recaptcha";
-
 
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
+// MUI 
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 
 
@@ -22,52 +26,51 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const Login = () => {
 
   
+const Login = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const recaptcha = useRef();
+ 
+
+
+  // this is for password <input> field, MUI library we use
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
 
 
   useEffect(() => {
     // set custom error messages on input fields
-   // const tos_field = document.getElementById("tos");
-
-   // if (tos_field) {
-   //   tos_field.oninvalid = function (e) {
-     //   e.target.setCustomValidity("You have to agree on Terms of Service !");
-     // };
+    // const tos_field = document.getElementById("tos");
+    // if (tos_field) {
+    //   tos_field.oninvalid = function (e) {
+    //   e.target.setCustomValidity("You have to agree on Terms of Service !");
+    // };
     //}
-
-
-    
     // make captcha required
-    window.addEventListener('load', () => {
+    /*    window.addEventListener('load', () => {
       const $recaptcha = document.querySelector('#g-recaptcha-response');
       if ($recaptcha) {
         $recaptcha.setAttribute('required', 'required');
       }
-    })
-
-
+    }) */
   }, []);
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    
+
     var email = e.target.email.value;
     var password = e.target.pass.value;
 
-
     // TODO set up remember me (false) on session storage, and (true) on localstorage
     var remember_me = e.target.remember.value;
-
-
 
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -76,53 +79,14 @@ const Login = () => {
       alert("Please enter a valid email address");
     }
 
-
-
-
-    // check if captcha okay
-    const captchaValue = recaptcha.current.getValue();
-
-    if (!captchaValue) {
-      alert("Please verify the reCAPTCHA!");
-    } else {
-      const res = await fetch("http://localhost:5000/captcha/verify", {
-        method: "POST",
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-      // response in json we have "success" field, that google send us, if it's verified or not
-      if (data.success) {
-        // make form submission
-
-        // TODO , ovde pozivas authContext 
-         
-        // ? this is just to pass to store auth in (local|session) storage
-        loginUser(email, password, remember_me);
-
-
-
-
-
-       // alert("Form submission successful!");
-      } else {
-        alert("reCAPTCHA validation failed!");
-      }
-
-      // make form submission
-    }
-
-
-
+    // ? ovde pozivas authContext
+    // ? this is just to pass to store auth in (local|session) storage
+    loginUser(email, password, remember_me);
   };
-
 
   const handleSignUp = () => {
     navigate("/register");
-  }
+  };
 
   //
   //  let loginUser = async (e) => {
@@ -201,13 +165,8 @@ const Login = () => {
   //    //  alert('Form submission successful!')
   //  };
 
-
-
-
-
   let APP_SITE_KEY =
     import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
-
 
   return (
     <>
@@ -246,12 +205,31 @@ const Login = () => {
               />
             </div>
 
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey={APP_SITE_KEY}
-              className="mt-2 g-recaptcha-response"
+            {/* ---------------- */}
 
+            <TextField
+              label="Password"
+              placeholder="password"
+              id="outlined-start-adornment"
+              type={showPassword ? "text" : "password"}
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+
+            {/* ---------------- */}
 
             {/*  this is for checkbox and forgot password*/}
             <div className="flex w-[420px] flex items-center justify-center mt-4 ">
@@ -275,25 +253,6 @@ const Login = () => {
                   Forgot Password?
                 </Link>
               </div>
-            </div>
-
-            <div className="flex self-start mt-2">
-              <label htmlFor="tos">
-                <input
-                  type="checkbox"
-                  id="tos"
-                  name="tos"
-                  className="mr-2"
-                  required
-                />
-                I have read and understood the{" "}
-                <Link
-                  to="/tos"
-                  className="text-red_first font-bold underline decoration-red_first"
-                >
-                  Terms of Service
-                </Link>
-              </label>
             </div>
 
             <div className="flex justify-center mt-2">
