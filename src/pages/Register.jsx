@@ -25,16 +25,11 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
 
-import Menu from '@mui/material/Menu';
-
-
-
-
-
+import Menu from "@mui/material/Menu";
 
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
@@ -64,36 +59,50 @@ const Register = () => {
     event.preventDefault();
   };
 
+  // ? HERE, for crypto..
+
+  const cryptoOptions = ["BTC", "ETH", "USDT", "BNB", "SOL", "DOGE", "ADA"]; // supported cryptos
+
+  const [cryptoMenuAnchorEl, setCryptoMenuAnchorEl] = useState(null);
+  const [selectedCrypto, setSelectedCrypto] = useState("BTC");
+
+  const handleCryptoMenuClick = (event) => {
+    setCryptoMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleCryptoMenuClose = () => {
+    setCryptoMenuAnchorEl(null);
+  };
+
+  const handleCryptoOptionSelect = (option) => {
+    setSelectedCrypto(option);
+    setCryptoMenuAnchorEl(null); // Close the menu after selection (optional)
+  };
+
+  // ? HERE
 
 
+   // ? HERE, for weight..
+   
+  const weightOptions = ["Kg", "Lb"]; // supported cryptos
 
+  const [weightMenuAnchorEl, setWeightMenuAnchorEl] = useState(null);
+  const [selectedWeight, setSelectedWeight] = useState("Kg");
 
-// ? HERE, for crypto..
+  const handleWeightMenuClick = (event) => {
+    setWeightMenuAnchorEl(event.currentTarget);
+  };
 
-const cryptoOptions = ['BTC', 'ETH', 'XMR']; // supported cryptos
+  const handleWeightMenuClose = () => {
+    setWeightMenuAnchorEl(null);
+  };
 
+  const handleWeightOptionSelect = (option) => {
+    setSelectedWeight(option);
+    setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
+  };
 
-const [cryptoMenuAnchorEl, setCryptoMenuAnchorEl] = useState(null);
-  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
-
-const handleCryptoMenuClick  = (event) => {
-  setCryptoMenuAnchorEl(event.currentTarget);
-};
-
-const handleCryptoMenuClose = () => {
-  setCryptoMenuAnchorEl(null);
-};
-
-const handleCryptoOptionSelect = (option) => {
-  setSelectedCrypto(option);
-  setCryptoMenuAnchorEl(null); // Close the menu after selection (optional)
-};
-
-// ? HERE
-
-
-
-
+  // ? HERE, for weight..
 
 
 
@@ -212,16 +221,10 @@ const handleCryptoOptionSelect = (option) => {
           {/* different users roles */}
           {/* TODO, put this in separate component (others as well, check which ones as well) */}
           <div>
-
-
-
-
             {/* <label htmlFor="roleDropdown">Register as: </label>
             <br /> */}
 
-
-
-           {/*  <select
+            {/*  <select
               id="roleDropdown"
               value={selectedRole}
               onChange={handleChangeRole}
@@ -241,21 +244,16 @@ const handleCryptoOptionSelect = (option) => {
               <option value="RS">RS - Referee & support</option>
             </select> */}
 
-      <InputLabel id="roleDropdowns">Register as:</InputLabel>
+            <InputLabel id="roleDropdowns">Register as:</InputLabel>
             <Select
-    labelId="roleDropdowns"
-    id="roleDropdown"
-    label="Sign up as:"
-    value={selectedRole}
-    onChange={handleChangeRole}
-    className="w-[420px]"
-    style={{ color: '#000' }}  
-
-    >
-    
-    
-
-
+              labelId="roleDropdowns"
+              id="roleDropdown"
+              label="Sign up as:"
+              value={selectedRole}
+              onChange={handleChangeRole}
+              className="w-[420px]"
+              style={{ color: "#000" }}
+            >
               <MenuItem value={"AH"}>AH - Athlete</MenuItem>
               <MenuItem value={"GP"}>GP - Global President</MenuItem>
               <MenuItem value={"NP"}>NP - National President</MenuItem>
@@ -268,16 +266,7 @@ const handleCryptoOptionSelect = (option) => {
               <MenuItem value={"VM"}>VM - Validation Manager</MenuItem>
               <MenuItem value={"LM"}>LM - Legal Manager</MenuItem>
               <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
-
-
-  </Select>
-
-
-
-
-
-
-
+            </Select>
           </div>
 
           <form
@@ -449,31 +438,25 @@ const handleCryptoOptionSelect = (option) => {
             </div>
 
             {selectedRole === "AH" && (
-              <div className="flex flex-col mb-2.5 justify-center mt-4">
-                <label htmlFor="pass">Weight*</label>
-                <input
-                  placeholder="85kg "
-                  className="w-[420px]"
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                />
-              </div>
-            )}
-
-            <div className="flex flex-col mb-2.5 justify-center mt-4">
 
 
 
 
-            <TextField
-      label="Crypto"
-      id="cryptoaddr"
-      name="cryptoaddr"
-      placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-     
-      sx={{ m: 1, width: '420px', 
-        "& .MuiOutlinedInput-root": {
+
+
+<div className="flex flex-col mb-2.5 justify-center mt-4">
+              <TextField
+                label="Weight"
+                id="weight"
+                name="weight"
+                required
+                type="number"
+              
+                placeholder="85 kg/185 lb"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
                     borderRadius: 5, // Rounded corners
                   },
 
@@ -487,44 +470,40 @@ const handleCryptoOptionSelect = (option) => {
                       color: "black", // Set label color to black when focused
                     },
                   },
-       }}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle BTC/ETH/XMR"
-              onClick={handleCryptoMenuClick}
-              edge="end"
-            >
-              {/* Icon for dropdown, e.g., a downward arrow */}
-              {selectedCrypto}
-            </IconButton>
-            <Menu
-              id="crypto-menu"
-              anchorEl={cryptoMenuAnchorEl}
-              open={Boolean(cryptoMenuAnchorEl)}
-              onClose={handleCryptoMenuClose}
-            >
-              {cryptoOptions.map((option) => (
-                <MenuItem
-                  key={option}
-                  onClick={() => handleCryptoOptionSelect(option)}
-                  selected={option === selectedCrypto}
-                >
-                  {option}
-                </MenuItem>
-              ))}
-            </Menu>
-          </InputAdornment>
-        ),
-      }}
-    />
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle kg / lb"
+                        onClick={handleWeightMenuClick}
+                        edge="end"
+                      >
+                        {/* Icon for dropdown, e.g., a downward arrow */}
+                        {selectedWeight}
+                      </IconButton>
+                      <Menu
+                        id="weight-menu"
+                        anchorEl={weightMenuAnchorEl}
+                        open={Boolean(weightMenuAnchorEl)}
+                        onClose={handleWeightMenuClose}
+                      >
+                        {weightOptions.map((option) => (
+                          <MenuItem
+                            key={option}
+                            onClick={() => handleWeightOptionSelect(option)}
+                            selected={option === selectedWeight}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
-
-
-
-
-{/* 
+              {/* 
 
 <TextField
                 label="Cryptoaddress"
@@ -554,8 +533,105 @@ const handleCryptoOptionSelect = (option) => {
               />
 
  */}
+            </div>
 
 
+
+
+
+
+            )}
+
+
+
+{/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto... 
+ */}            
+        <div className="flex flex-col mb-2.5 justify-center mt-4">
+              <TextField
+                label="Crypto"
+                id="cryptoaddr"
+                name="cryptoaddr"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle BTC/ETH/XMR"
+                        onClick={handleCryptoMenuClick}
+                        edge="end"
+                      >
+                        {/* Icon for dropdown, e.g., a downward arrow */}
+                        {selectedCrypto}
+                      </IconButton>
+                      <Menu
+                        id="crypto-menu"
+                        anchorEl={cryptoMenuAnchorEl}
+                        open={Boolean(cryptoMenuAnchorEl)}
+                        onClose={handleCryptoMenuClose}
+                      >
+                        {cryptoOptions.map((option) => (
+                          <MenuItem
+                            key={option}
+                            onClick={() => handleCryptoOptionSelect(option)}
+                            selected={option === selectedCrypto}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+
+              {/* 
+
+<TextField
+                label="Cryptoaddress"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                id="cryptoaddr"
+                name="cryptoaddr"
+               
+                type="text"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+              />
+
+ */}
             </div>
 
             <ReCAPTCHA
