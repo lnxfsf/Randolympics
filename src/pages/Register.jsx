@@ -28,10 +28,13 @@ import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import FormControl from '@mui/material/FormControl';
+import FormControl from "@mui/material/FormControl";
+
+
 
 
 import Menu from "@mui/material/Menu";
+
 
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
@@ -40,27 +43,39 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-
-  
-
 const Register = () => {
-
-
-  
-
-
-
-
-
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+
+
+
+ // ? image upload
+  const [image, setImage] = useState({
+    preview: '',
+    raw: '',
+  });
+
+
+  const handlePhotoChange = (e) => {
+    if (e.target.files.length) {
+        setImage({
+            preview: URL.createObjectURL(e.target.files[0]),
+            raw: e.target.files[0],
+        });
+    }
+};
+
+
+
+
+ // ? image upload
+
+
 
   const [email_private, setEmail_private] = useState(true);
   const [phone_private, setPhone_private] = useState(true);
   const [weight_private, setWeight_private] = useState(true);
-
-
 
   const handleEmailPrivacyChange = (event) => {
     setEmail_private(event.target.value);
@@ -74,8 +89,6 @@ const Register = () => {
     setWeight_private(event.target.value);
   };
 
-
-  
   {
     /*this is for nationality */
   }
@@ -150,6 +163,28 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    // ? for image upload
+
+    let formData = new FormData();
+    await formData.append('image', image.raw);
+
+    var profile_uploaded = await axios
+    .post(`http://localhost:5000/profile_photo/upload`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+  
+    
+
+    console.log(profile_uploaded)
+
+
+
+
+
+
     var email = e.target.email.value;
     var password = e.target.pass.value;
     var name = e.target.name.value;
@@ -211,9 +246,10 @@ const Register = () => {
               nationality: nationality_selected,
               weight,
               cryptoaddress: cryptoaddr,
+              picture: profile_uploaded.data,
 
               cryptoaddress_type: selectedCrypto,
-              bio
+              bio,
             }
           );
         } catch (error) {
@@ -268,36 +304,26 @@ const Register = () => {
 
   return (
     <>
-
-
-
-
       <div className="flex justify-center mt-32">
         <img src="login/logo.svg" />
       </div>
 
+      <form
+        action="#"
+        className="sign-in-form flex flex-col wrap justify-start items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex m-16">
+          <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
+            {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
-<form
- action="#"
- className="sign-in-form flex flex-col wrap justify-start items-center"
- onSubmit={handleSubmit}
->
-
-
-      <div className="flex m-16">
-
-
-
-        <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
-          {/* START FORM SUBMISSION (login), FOR LOGIN */}
-
-          {/* different users roles */}
-          {/* TODO, put this in separate component (others as well, check which ones as well) */}
-          <div>
-            {/* <label htmlFor="roleDropdown">Register as: </label>
+            {/* different users roles */}
+            {/* TODO, put this in separate component (others as well, check which ones as well) */}
+            <div>
+              {/* <label htmlFor="roleDropdown">Register as: </label>
             <br /> */}
 
-            {/*  <select
+              {/*  <select
               id="roleDropdown"
               value={selectedRole}
               onChange={handleChangeRole}
@@ -317,137 +343,118 @@ const Register = () => {
               <option value="RS">RS - Referee & support</option>
             </select> */}
 
+              <InputLabel id="roleDropdowns">Register as:</InputLabel>
+              <Select
+                labelId="roleDropdowns"
+                id="roleDropdown"
+                label="Sign up as:"
+                value={selectedRole}
+                onChange={handleChangeRole}
+                className="w-[420px]"
+                style={{ color: "#000" }}
+              >
+                <MenuItem value={"AH"}>AH - Athlete</MenuItem>
+                <MenuItem value={"GP"}>GP - Global President</MenuItem>
+                <MenuItem value={"NP"}>NP - National President</MenuItem>
+                <MenuItem value={"EM"}>EM - Event Manager</MenuItem>
+                <MenuItem value={"ITM"}>
+                  ITM - IT Manager Page Editor (for adding news articles)
+                </MenuItem>
+                <MenuItem value={"MM"}>MM - Marketing Manager</MenuItem>
+                <MenuItem value={"SM"}>SM - Sales Manager</MenuItem>
+                <MenuItem value={"VM"}>VM - Validation Manager</MenuItem>
+                <MenuItem value={"LM"}>LM - Legal Manager</MenuItem>
+                <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
+              </Select>
+            </div>
 
-
-            <InputLabel id="roleDropdowns">Register as:</InputLabel>
-            <Select
-              labelId="roleDropdowns"
-              id="roleDropdown"
-              label="Sign up as:"
-              value={selectedRole}
-              onChange={handleChangeRole}
-              className="w-[420px]"
-              style={{ color: "#000" }}
+            <div
+              action="#"
+              className="sign-in-form flex flex-col wrap justify-start items-center"
             >
-              <MenuItem value={"AH"}>AH - Athlete</MenuItem>
-              <MenuItem value={"GP"}>GP - Global President</MenuItem>
-              <MenuItem value={"NP"}>NP - National President</MenuItem>
-              <MenuItem value={"EM"}>EM - Event Manager</MenuItem>
-              <MenuItem value={"ITM"}>
-                ITM - IT Manager Page Editor (for adding news articles)
-              </MenuItem>
-              <MenuItem value={"MM"}>MM - Marketing Manager</MenuItem>
-              <MenuItem value={"SM"}>SM - Sales Manager</MenuItem>
-              <MenuItem value={"VM"}>VM - Validation Manager</MenuItem>
-              <MenuItem value={"LM"}>LM - Legal Manager</MenuItem>
-              <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
-            </Select>
-          </div>
-
-          <div
-            action="#"
-            className="sign-in-form flex flex-col wrap justify-start items-center"
-            
-          >
-            <div className="flex mb-1 justify-center items-center mt-4">
-              
-              
-              <TextField
-                label="Email"
-                placeholder="johndoe@gmail.com"
-                id="email"
-                name="email"
-                required
-                type="email"
-                maxLength="80"
-
-                
-                inputProps={{
-                  maxLength: 80
-                }}
-
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
+              <div className="flex mb-1 justify-center items-center mt-4">
+                <TextField
+                  label="Email"
+                  placeholder="johndoe@gmail.com"
+                  id="email"
+                  name="email"
+                  required
+                  type="email"
+                  maxLength="80"
+                  inputProps={{
+                    maxLength: 80,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5, // Rounded corners
                     },
 
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red", // Red border on focus
+                      },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black", // Set label color to black when focused
+                      },
                     },
-                  },
-                }}
-              />
+                  }}
+                />
 
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    name="email_private"
+                    id="email_private"
+                    value={email_private}
+                    disableUnderline
+                    onChange={handleEmailPrivacyChange}
+                    sx={{
+                      boxShadow: "none",
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    }}
+                  >
+                    <MenuItem value={true}>Private</MenuItem>
+                    <MenuItem value={false}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
 
-
-<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          name="email_private"
-          id="email_private"
-          
-          value={email_private}
-          disableUnderline
-          onChange={handleEmailPrivacyChange}
-          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-        >
-         
-          <MenuItem value={true}>Private</MenuItem>
-          <MenuItem value={false}>Public</MenuItem>
-        </Select>
-        </FormControl>
-
-
-            </div>
-
-
-
-            <div className="flex flex-col mb-1 justify-center mt-0">
-              <TextField
-                label="Name"
-                placeholder="John Doe"
-                id="name"
-                name="name"
-              
-                
-                required
-                type="text"
-
-                
-                inputProps={{
-                  maxLength: 255
-                }}
-
-
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  label="Name"
+                  placeholder="John Doe"
+                  id="name"
+                  name="name"
+                  required
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5, // Rounded corners
                     },
 
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-              />
-            </div>
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red", // Red border on focus
+                      },
 
-            {/*
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black", // Set label color to black when focused
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              {/*
             <div className="flex flex-col mb-1 justify-center mt-4">
               <label htmlFor="yearOfBirth">Year of birth*</label>
               <select
@@ -468,133 +475,63 @@ const Register = () => {
               </select>
             </div> */}
 
-            <div className="flex flex-col mb-2.5 justify-center mt-0">
-              <TextField
-                label="Password"
-                placeholder="password"
-                id="pass"
-           
-                name="pass"
-                required
-
-
-                type={showPassword ? "text" : "password"}
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-                InputProps={{
-
-                  
-               
-                  maxLength: 255,
-              
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-
-            {/* <!--TODO implement one more password confirmation as well !  --> */}
-            <div className="flex mb-2.5 justify-center items-center mt-0">
-              <TextField
-                label="Phone number"
-                placeholder="+1 212 456 7890"
-                id="phone"
-                name="phone"
-                required
-            
-                
-                type="tel"
-
-                
-                
-                inputProps={{
-                  maxLength: 15
-                }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-              />
-
-<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          name="phone_private"
-          id="phone_private"
-          value={phone_private}
-          disableUnderline
-          onChange={handlePhonePrivacyChange}
-          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-        >
-         
-          <MenuItem value={true}>Private</MenuItem>
-          <MenuItem value={false}>Public</MenuItem>
-        </Select>
-        </FormControl>
-
-            </div>
-
-            <div className="flex flex-col mb-2.5 justify-center  mt-2">
-              {/* <label htmlFor="nationality">Nationality*</label> */}
-              <ReactFlagsSelect
-                selected={nationality_selected}
-                onSelect={(code) => setNationality_selected(code)}
-                className="w-[420px]  "
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality *"
-              />
-            </div>
-
-            {selectedRole === "AH" && (
-              <div className="flex mb-2.5 justify-center items-center mt-2">
+              <div className="flex flex-col mb-2.5 justify-center mt-0">
                 <TextField
-                  label="Weight"
-                  id="weight"
-                  name="weight"
+                  label="Password"
+                  placeholder="password"
+                  id="pass"
+                  name="pass"
                   required
-                  type="number"
-                  placeholder="85 kg/185 lb"
+                  type={showPassword ? "text" : "password"}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5, // Rounded corners
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red", // Red border on focus
+                      },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black", // Set label color to black when focused
+                      },
+                    },
+                  }}
+                  InputProps={{
+                    maxLength: 255,
+
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+
+              {/* <!--TODO implement one more password confirmation as well !  --> */}
+              <div className="flex mb-2.5 justify-center items-center mt-0">
+                <TextField
+                  label="Phone number"
+                  placeholder="+1 212 456 7890"
+                  id="phone"
+                  name="phone"
+                  required
+                  type="tel"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
                   sx={{
                     m: 1,
                     width: "280px",
@@ -613,28 +550,196 @@ const Register = () => {
                       },
                     },
                   }}
+                />
+
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    name="phone_private"
+                    id="phone_private"
+                    value={phone_private}
+                    disableUnderline
+                    onChange={handlePhonePrivacyChange}
+                    sx={{
+                      boxShadow: "none",
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    }}
+                  >
+                    <MenuItem value={true}>Private</MenuItem>
+                    <MenuItem value={false}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="flex flex-col mb-2.5 justify-center  mt-2">
+                {/* <label htmlFor="nationality">Nationality*</label> */}
+                <ReactFlagsSelect
+                  selected={nationality_selected}
+                  onSelect={(code) => setNationality_selected(code)}
+                  className="w-[420px]  "
+                  searchable={true}
+                  id="nationality"
+                  name="nationality"
+                  placeholder="Nationality *"
+                />
+              </div>
+
+              {selectedRole === "AH" && (
+                <div className="flex mb-2.5 justify-center items-center mt-2">
+                  <TextField
+                    label="Weight"
+                    id="weight"
+                    name="weight"
+                    required
+                    type="number"
+                    placeholder="85 kg/185 lb"
+                    sx={{
+                      m: 1,
+                      width: "280px",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 5, // Rounded corners
+                      },
+
+                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "red", // Red border on focus
+                        },
+
+                      "& .MuiInputLabel-root": {
+                        "&.Mui-focused": {
+                          color: "black", // Set label color to black when focused
+                        },
+                      },
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle kg / lb"
+                            onClick={handleWeightMenuClick}
+                            edge="end"
+                          >
+                            {/* Icon for dropdown, e.g., a downward arrow */}
+                            {selectedWeight}
+                          </IconButton>
+                          <Menu
+                            id="weight-menu"
+                            anchorEl={weightMenuAnchorEl}
+                            open={Boolean(weightMenuAnchorEl)}
+                            onClose={handleWeightMenuClose}
+                          >
+                            {weightOptions.map((option) => (
+                              <MenuItem
+                                key={option}
+                                onClick={() => handleWeightOptionSelect(option)}
+                                selected={option === selectedWeight}
+                              >
+                                {option}
+                              </MenuItem>
+                            ))}
+                          </Menu>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      name="weight_private"
+                      id="weight_private"
+                      value={weight_private}
+                      onChange={handleWeightPrivacyChange}
+                      disableUnderline
+                      sx={{
+                        boxShadow: "none",
+                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                      }}
+                    >
+                      <MenuItem value={true}>Private</MenuItem>
+                      <MenuItem value={false}>Public</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {/* 
+
+<TextField
+                label="Cryptoaddress"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                id="cryptoaddr"
+                name="cryptoaddr"
+               
+                type="text"
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+              />
+
+ */}
+                </div>
+              )}
+
+              {/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto...
+               */}
+              <div className="flex flex-col mb-2.5 justify-center mt-4">
+                <TextField
+                  label="Crypto"
+                  id="cryptoaddr"
+                  name="cryptoaddr"
+                  placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5, // Rounded corners
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red", // Red border on focus
+                      },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black", // Set label color to black when focused
+                      },
+                    },
+                  }}
                   InputProps={{
+                    maxLength: 150,
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          aria-label="toggle kg / lb"
-                          onClick={handleWeightMenuClick}
+                          aria-label="toggle BTC/ETH/XMR"
+                          onClick={handleCryptoMenuClick}
                           edge="end"
                         >
                           {/* Icon for dropdown, e.g., a downward arrow */}
-                          {selectedWeight}
+                          {selectedCrypto}
                         </IconButton>
                         <Menu
-                          id="weight-menu"
-                          anchorEl={weightMenuAnchorEl}
-                          open={Boolean(weightMenuAnchorEl)}
-                          onClose={handleWeightMenuClose}
+                          id="crypto-menu"
+                          anchorEl={cryptoMenuAnchorEl}
+                          open={Boolean(cryptoMenuAnchorEl)}
+                          onClose={handleCryptoMenuClose}
                         >
-                          {weightOptions.map((option) => (
+                          {cryptoOptions.map((option) => (
                             <MenuItem
                               key={option}
-                              onClick={() => handleWeightOptionSelect(option)}
-                              selected={option === selectedWeight}
+                              onClick={() => handleCryptoOptionSelect(option)}
+                              selected={option === selectedCrypto}
                             >
                               {option}
                             </MenuItem>
@@ -645,21 +750,6 @@ const Register = () => {
                   }}
                 />
 
-
-<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-<Select
-          name="weight_private"
-          id="weight_private"
-          value={weight_private}
-          onChange={handleWeightPrivacyChange}
-          disableUnderline
-          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-        >
-         
-          <MenuItem value={true}>Private</MenuItem>
-          <MenuItem value={false}>Public</MenuItem>
-        </Select>
-        </FormControl>
                 {/* 
 
 <TextField
@@ -691,111 +781,19 @@ const Register = () => {
 
  */}
               </div>
-            )}
 
-            {/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto...
-             */}
-            <div className="flex flex-col mb-2.5 justify-center mt-4">
-              <TextField
-                label="Crypto"
-                id="cryptoaddr"
-                name="cryptoaddr"
-             
-                
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-
-                
-
-                InputProps={{
-                  maxLength: 150, 
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle BTC/ETH/XMR"
-                        onClick={handleCryptoMenuClick}
-                        edge="end"
-                      >
-                        {/* Icon for dropdown, e.g., a downward arrow */}
-                        {selectedCrypto}
-                      </IconButton>
-                      <Menu
-                        id="crypto-menu"
-                        anchorEl={cryptoMenuAnchorEl}
-                        open={Boolean(cryptoMenuAnchorEl)}
-                        onClose={handleCryptoMenuClose}
-                      >
-                        {cryptoOptions.map((option) => (
-                          <MenuItem
-                            key={option}
-                            onClick={() => handleCryptoOptionSelect(option)}
-                            selected={option === selectedCrypto}
-                          >
-                            {option}
-                          </MenuItem>
-                        ))}
-                      </Menu>
-                    </InputAdornment>
-                  ),
-                }}
+              <ReCAPTCHA
+                ref={recaptcha}
+                sitekey={APP_SITE_KEY}
+                className="mt-2 g-recaptcha-response"
               />
 
-              {/* 
 
-<TextField
-                label="Cryptoaddress"
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                id="cryptoaddr"
-                name="cryptoaddr"
-               
-                type="text"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
 
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
 
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-              />
 
- */}
-            </div>
 
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey={APP_SITE_KEY}
-              className="mt-2 g-recaptcha-response"
-            />
-
-            {/*  this is for checkbox and forgot password
+              {/*  this is for checkbox and forgot password
                 <div className="flex w-[420px] flex items-center justify-center mt-4 ">
                   <div className="basis-1/2 justify-end">
                     <label htmlFor="remember">
@@ -820,61 +818,93 @@ const Register = () => {
                 </div>
                 */}
 
-            <div className="flex self-start mt-2">
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#FF0000",
-                      "&.Mui-checked": {
+              <div className="flex self-start mt-2">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={{
                         color: "#FF0000",
-                      },
-                    }}
-                    id="tos"
-                    name="tos"
-                    className="mr-2"
-                  />
-                }
-                label={
-                  <span>
-                    I have read and understood the{" "}
-                    <Link
-                      to="/tos"
-                      className="text-red_first font-bold underline decoration-red_first"
-                    >
-                      Terms of Service
-                    </Link>
-                  </span>
-                }
-              />
+                        "&.Mui-checked": {
+                          color: "#FF0000",
+                        },
+                      }}
+                      id="tos"
+                      name="tos"
+                      className="mr-2"
+                    />
+                  }
+                  label={
+                    <span>
+                      I have read and understood the{" "}
+                      <Link
+                        to="/tos"
+                        className="text-red_first font-bold underline decoration-red_first"
+                      >
+                        Terms of Service
+                      </Link>
+                    </span>
+                  }
+                />
+              </div>
             </div>
 
-
-
-           
-
-
+            {/* END FORM SUBMISSION (login), FOR LOGIN */}
           </div>
 
-          {/* END FORM SUBMISSION (login), FOR LOGIN */}
-        </div>
+          <div className="flex flex-col justify-start">
+            <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96 mb-64">
+              <img src="login/1.png" className="image_login" />
 
-        <div className="flex flex-col justify-start">
-          <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96">
-            <img src="login/1.png" className="image_login" />
-          </div>
 
-          <div className="flex flex-col">
 
-          {/*   <label for="bio">Tell us about yourself:</label> */}
 
-        {/*     <textarea
+
+              <label htmlFor="upload-button">
+          {image.preview ? (
+            <img
+              src={image.preview}
+              alt="dummy"
+              width="300"
+              height="300"
+              className="my-10 mx-5"
+            />
+          ) : (
+            <>
+              <p className="text-white text-1xl text-left w-full text-left">
+                Upload Image
+              </p>
+              <div  />
+            </>
+          )}
+        </label>
+
+
+              <input
+          name="image"
+          type="file"
+          id="upload-button"
+          
+          
+          onChange={handlePhotoChange}
+        />
+
+
+
+
+
+
+            </div>
+
+            <div className="flex flex-col">
+              {/*   <label for="bio">Tell us about yourself:</label> */}
+
+              {/*     <textarea
               type="text"
               id="bio"
               name="bio"
               className="w-full h-32 rounded-md border border-gray-900"
             ></textarea> */}
-{/* 
+              {/* 
 <TextField
   placeholder="Tell us about yourself:"
   multiline
@@ -882,22 +912,16 @@ const Register = () => {
   maxRows={4}
 /> */}
 
-
-
-<TextField
+              <TextField
                 label="Tell us about yourself"
                 placeholder="Bio"
                 id="bio"
                 name="bio"
                 multiline
-                
-                
                 rows={5}
                 maxRows={8}
                 className="w-full h-32 rounded-md border border-gray-900"
                 type="text"
-                
-                
                 sx={{
                   m: 1,
                   width: "420px",
@@ -916,59 +940,51 @@ const Register = () => {
                     },
                   },
                 }}
-
-
-
                 inputProps={{
-                  maxLength: 255
+                  maxLength: 255,
                 }}
-                
-                
-          
-
-
               />
- 
-
-
-
+            </div>
           </div>
+        </div>
+
+        <div className="flex justify-center mb-32">
+          <Button
+            className="w-[420px]"
+            style={{ marginTop: "20px" }}
+            sx={{
+              height: "50px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 15,
+              border: `1px solid #AF2626`,
+              "&:hover": {
+                background: "rgb(196, 43, 43)",
+                color: "white",
+                border: `1px solid rgb(196, 43, 43)`,
+              },
+            }}
+            type="submit"
+            variant="text"
+            value="Login"
+            id="login-btn"
+          >
+            <span className="popins-font">Create account</span>
+          </Button>
         </div>
 
 
 
 
+          
+  
+  
+
+      </form>
 
 
-      </div>
 
 
-      <div className="flex justify-center mb-32">
-              <Button
-                className="w-[420px]"
-                style={{ marginTop: "20px" }}
-                sx={{
-                  height: "50px",
-                  bgcolor: "#AF2626",
-                  color: "#fff",
-                  borderRadius: 15,
-                  border: `1px solid #AF2626`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-                type="submit"
-                variant="text"
-                value="Login"
-                id="login-btn"
-              >
-                <span className="popins-font">Create account</span>
-              </Button>
-            </div>
-
-            </form>
 
     </>
   );
