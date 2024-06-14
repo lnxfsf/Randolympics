@@ -144,8 +144,20 @@ const login = async (req, res) => {
       if (passwordMatch) {
         res.status(200).json({
           userId: existingUser.userId,
+          user_type: existingUser.user_type,
           email: existingUser.email,
           access_token: generateAccessToken(existingUser.userId),
+
+          name: existingUser.name,
+          birthdate: existingUser.birthdate,
+          phone: existingUser.phone,
+          nationality: existingUser.nationality,
+          weight: existingUser.weight,
+          picture: existingUser.picture,
+          bio: existingUser.bio,
+          cryptoaddress: existingUser.cryptoaddress,
+          cryptoaddress_type: existingUser.cryptoaddress_type,
+
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
