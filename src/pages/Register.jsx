@@ -46,6 +46,22 @@ const Register = () => {
   const [phone_private, setPhone_private] = useState(true);
   const [weight_private, setWeight_private] = useState(true);
 
+
+
+  const handleEmailPrivacyChange = (event) => {
+    setEmail_private(event.target.value);
+  };
+
+  const handlePhonePrivacyChange = (event) => {
+    setPhone_private(event.target.value);
+  };
+
+  const handleWeightPrivacyChange = (event) => {
+    setWeight_private(event.target.value);
+  };
+
+
+  
   {
     /*this is for nationality */
   }
@@ -236,11 +252,26 @@ const Register = () => {
 
   return (
     <>
+
+
+
+
       <div className="flex justify-center mt-32">
         <img src="login/logo.svg" />
       </div>
 
+
+<form
+ action="#"
+ className="sign-in-form flex flex-col wrap justify-start items-center"
+ onSubmit={handleSubmit}
+>
+
+
       <div className="flex m-16">
+
+
+
         <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
@@ -295,12 +326,12 @@ const Register = () => {
             </Select>
           </div>
 
-          <form
+          <div
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
-            onSubmit={handleSubmit}
+            
           >
-            <div className="flex flex-col mb-1 justify-center mt-4">
+            <div className="flex mb-1 justify-center mt-4">
               <TextField
                 label="Email"
                 placeholder="johndoe@gmail.com"
@@ -310,7 +341,7 @@ const Register = () => {
                 type="email"
                 sx={{
                   m: 1,
-                  width: "420px",
+                  width: "320px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: 5, // Rounded corners
                   },
@@ -327,7 +358,25 @@ const Register = () => {
                   },
                 }}
               />
+
+
+
+        <Select
+          name="email_private"
+          id="email_private"
+          value={email_private}
+          onChange={handleEmailPrivacyChange}
+          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
+        >
+         
+          <MenuItem value={true}>Private</MenuItem>
+          <MenuItem value={false}>Public</MenuItem>
+        </Select>
+
+
             </div>
+
+
 
             <div className="flex flex-col mb-1 justify-center mt-0">
               <TextField
@@ -423,7 +472,7 @@ const Register = () => {
             </div>
 
             {/* <!--TODO implement one more password confirmation as well !  --> */}
-            <div className="flex flex-col mb-2.5 justify-center mt-0">
+            <div className="flex mb-2.5 justify-center mt-0">
               <TextField
                 label="Phone number"
                 placeholder="+1 212 456 7890"
@@ -433,7 +482,7 @@ const Register = () => {
                 type="tel"
                 sx={{
                   m: 1,
-                  width: "420px",
+                  width: "320px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: 5, // Rounded corners
                   },
@@ -450,6 +499,21 @@ const Register = () => {
                   },
                 }}
               />
+
+
+        <Select
+          name="phone_private"
+          id="phone_private"
+          value={phone_private}
+          onChange={handlePhonePrivacyChange}
+          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
+        >
+         
+          <MenuItem value={true}>Private</MenuItem>
+          <MenuItem value={false}>Public</MenuItem>
+        </Select>
+
+
             </div>
 
             <div className="flex flex-col mb-2.5 justify-center mt-0">
@@ -465,7 +529,7 @@ const Register = () => {
             </div>
 
             {selectedRole === "AH" && (
-              <div className="flex flex-col mb-2.5 justify-center mt-4">
+              <div className="flex mb-2.5 justify-center mt-4">
                 <TextField
                   label="Weight"
                   id="weight"
@@ -475,7 +539,7 @@ const Register = () => {
                   placeholder="85 kg/185 lb"
                   sx={{
                     m: 1,
-                    width: "420px",
+                    width: "320px",
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 5, // Rounded corners
                     },
@@ -522,6 +586,19 @@ const Register = () => {
                     ),
                   }}
                 />
+
+
+<Select
+          name="weight_private"
+          id="weight_private"
+          value={weight_private}
+          onChange={handleWeightPrivacyChange}
+          sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
+        >
+         
+          <MenuItem value={true}>Private</MenuItem>
+          <MenuItem value={false}>Public</MenuItem>
+        </Select>
 
                 {/* 
 
@@ -706,7 +783,42 @@ const Register = () => {
               />
             </div>
 
-            <div className="flex justify-center mb-32">
+
+
+           
+
+
+          </div>
+
+          {/* END FORM SUBMISSION (login), FOR LOGIN */}
+        </div>
+
+        <div className="flex flex-col justify-start">
+          <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96">
+            <img src="login/1.png" className="image_login" />
+          </div>
+
+          <div className="flex flex-col">
+            <label for="bio">Tell us about yourself:</label>
+
+            <textarea
+              type="text"
+              id="bio"
+              name="bio"
+              className="w-full h-32 rounded-md border border-gray-900"
+            ></textarea>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+      <div className="flex justify-center mb-32">
               <Button
                 className="w-[420px]"
                 style={{ marginTop: "20px" }}
@@ -730,28 +842,9 @@ const Register = () => {
                 <span className="popins-font">Create account</span>
               </Button>
             </div>
-          </form>
 
-          {/* END FORM SUBMISSION (login), FOR LOGIN */}
-        </div>
+            </form>
 
-        <div className="flex flex-col justify-start">
-          <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96">
-            <img src="login/1.png" className="image_login" />
-          </div>
-
-          <div className="flex flex-col">
-            <label for="bio">Tell us about yourself:</label>
-
-            <textarea
-              type="text"
-              id="bio"
-              name="bio"
-              className="w-full h-32 rounded-md border border-gray-900"
-            ></textarea>
-          </div>
-        </div>
-      </div>
     </>
   );
 };
