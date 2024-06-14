@@ -37,6 +37,8 @@ const register = async (req, res) => {
     bio,
     cryptoaddress,
     cryptoaddress_type,
+    picture
+
   } = req.body;
 
   // TODO, samo polja koja ne smeju biti prazna (osim weight, nebitno je.. ionako nece biti requirement u database)
@@ -80,7 +82,7 @@ const register = async (req, res) => {
     nationality_verify: null,
     weight,
     weight_private,
-    picture: null,
+    picture,
     passport_photo: null,
     passport_expiry: null,
     passport_expiry_verify: null,

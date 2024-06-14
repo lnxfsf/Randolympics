@@ -5,6 +5,7 @@ npm i express cors dotenv nodemon mysql2 uuid jsonwebtoken bcryptjs
 // treba mysql2. noviji je
 npm i express mysql2
 npm i nodemailer
+npm i multer
 
 
 // register
