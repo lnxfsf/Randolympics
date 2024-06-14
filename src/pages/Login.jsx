@@ -191,6 +191,12 @@ const Login = () => {
                 name="email"
                 required
                 type="email"
+
+                
+                inputProps={{
+                  maxLength: 80
+                }}
+
                 sx={{
                   m: 1,
                   width: "420px",
@@ -238,6 +244,11 @@ const Login = () => {
                 name="pass"
                 required
                 type={showPassword ? "text" : "password"}
+                
+                inputProps={{
+                  maxLength: 255
+                }}
+
                 sx={{
                   m: 1,
                   width: "420px",

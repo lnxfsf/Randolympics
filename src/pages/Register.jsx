@@ -40,7 +40,19 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+
+  
+
 const Register = () => {
+
+
+  
+
+
+
+
+
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -142,6 +154,7 @@ const Register = () => {
     var password = e.target.pass.value;
     var name = e.target.name.value;
     var phone = e.target.phone.value;
+    var bio = e.target.bio.value;
 
     if (!e.target.weight) {
       var weight = null;
@@ -200,6 +213,7 @@ const Register = () => {
               cryptoaddress: cryptoaddr,
 
               cryptoaddress_type: selectedCrypto,
+              bio
             }
           );
         } catch (error) {
@@ -303,6 +317,8 @@ const Register = () => {
               <option value="RS">RS - Referee & support</option>
             </select> */}
 
+
+
             <InputLabel id="roleDropdowns">Register as:</InputLabel>
             <Select
               labelId="roleDropdowns"
@@ -334,6 +350,8 @@ const Register = () => {
             
           >
             <div className="flex mb-1 justify-center items-center mt-4">
+              
+              
               <TextField
                 label="Email"
                 placeholder="johndoe@gmail.com"
@@ -341,6 +359,13 @@ const Register = () => {
                 name="email"
                 required
                 type="email"
+                maxLength="80"
+
+                
+                inputProps={{
+                  maxLength: 80
+                }}
+
                 sx={{
                   m: 1,
                   width: "280px",
@@ -367,6 +392,7 @@ const Register = () => {
         <Select
           name="email_private"
           id="email_private"
+          
           value={email_private}
           disableUnderline
           onChange={handleEmailPrivacyChange}
@@ -389,8 +415,17 @@ const Register = () => {
                 placeholder="John Doe"
                 id="name"
                 name="name"
+              
+                
                 required
                 type="text"
+
+                
+                inputProps={{
+                  maxLength: 255
+                }}
+
+
                 sx={{
                   m: 1,
                   width: "420px",
@@ -438,8 +473,11 @@ const Register = () => {
                 label="Password"
                 placeholder="password"
                 id="pass"
+           
                 name="pass"
                 required
+
+
                 type={showPassword ? "text" : "password"}
                 sx={{
                   m: 1,
@@ -460,6 +498,11 @@ const Register = () => {
                   },
                 }}
                 InputProps={{
+
+                  
+               
+                  maxLength: 255,
+              
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -484,7 +527,15 @@ const Register = () => {
                 id="phone"
                 name="phone"
                 required
+            
+                
                 type="tel"
+
+                
+                
+                inputProps={{
+                  maxLength: 15
+                }}
                 sx={{
                   m: 1,
                   width: "280px",
@@ -522,8 +573,8 @@ const Register = () => {
 
             </div>
 
-            <div className="flex flex-col mb-2.5 justify-center  mt-0">
-              <label htmlFor="nationality">Nationality*</label>
+            <div className="flex flex-col mb-2.5 justify-center  mt-2">
+              {/* <label htmlFor="nationality">Nationality*</label> */}
               <ReactFlagsSelect
                 selected={nationality_selected}
                 onSelect={(code) => setNationality_selected(code)}
@@ -531,11 +582,12 @@ const Register = () => {
                 searchable={true}
                 id="nationality"
                 name="nationality"
+                placeholder="Nationality *"
               />
             </div>
 
             {selectedRole === "AH" && (
-              <div className="flex mb-2.5 justify-center items-center mt-4">
+              <div className="flex mb-2.5 justify-center items-center mt-2">
                 <TextField
                   label="Weight"
                   id="weight"
@@ -648,6 +700,8 @@ const Register = () => {
                 label="Crypto"
                 id="cryptoaddr"
                 name="cryptoaddr"
+             
+                
                 placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
                 sx={{
                   m: 1,
@@ -667,7 +721,11 @@ const Register = () => {
                     },
                   },
                 }}
+
+                
+
                 InputProps={{
+                  maxLength: 150, 
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -807,14 +865,73 @@ const Register = () => {
           </div>
 
           <div className="flex flex-col">
-            <label for="bio">Tell us about yourself:</label>
 
-            <textarea
+          {/*   <label for="bio">Tell us about yourself:</label> */}
+
+        {/*     <textarea
               type="text"
               id="bio"
               name="bio"
               className="w-full h-32 rounded-md border border-gray-900"
-            ></textarea>
+            ></textarea> */}
+{/* 
+<TextField
+  placeholder="Tell us about yourself:"
+  multiline
+  rows={2}
+  maxRows={4}
+/> */}
+
+
+
+<TextField
+                label="Tell us about yourself"
+                placeholder="Bio"
+                id="bio"
+                name="bio"
+                multiline
+                
+                
+                rows={5}
+                maxRows={8}
+                className="w-full h-32 rounded-md border border-gray-900"
+                type="text"
+                
+                
+                sx={{
+                  m: 1,
+                  width: "420px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5, // Rounded corners
+                  },
+
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red", // Red border on focus
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black", // Set label color to black when focused
+                    },
+                  },
+                }}
+
+
+
+                inputProps={{
+                  maxLength: 255
+                }}
+                
+                
+          
+
+
+              />
+ 
+
+
+
           </div>
         </div>
 
