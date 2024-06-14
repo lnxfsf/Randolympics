@@ -1,5 +1,3 @@
-import "../styles/login.scoped.scss";
-
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -30,11 +28,38 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
-
-
-
 import Menu from "@mui/material/Menu";
 
+// FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+
+// css
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
+
+import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
+
+import FilePondPluginFilePoster from "filepond-plugin-file-poster";
+
+import "@pqina/pintura/pintura.css";
+
+//registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
+
+registerPlugin(
+  FilePondPluginFileValidateType,
+  FilePondPluginFilePoster,
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform,
+  FilePondPluginImageEdit
+);
 
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
@@ -44,34 +69,31 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+  // ? FILEPOND ZA IMAGE
+
+  const [files, setFiles] = useState([]);
+
+  // ? FILEPOND ZA IMAGE
+
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-
-
-
- // ? image upload
+  // ? image upload
   const [image, setImage] = useState({
-    preview: '',
-    raw: '',
+    preview: "",
+    raw: "",
   });
-
 
   const handlePhotoChange = (e) => {
     if (e.target.files.length) {
-        setImage({
-            preview: URL.createObjectURL(e.target.files[0]),
-            raw: e.target.files[0],
-        });
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      });
     }
-};
+  };
 
-
-
-
- // ? image upload
-
-
+  // ? image upload
 
   const [email_private, setEmail_private] = useState(true);
   const [phone_private, setPhone_private] = useState(true);
@@ -163,27 +185,22 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     // ? for image upload
 
     let formData = new FormData();
-    await formData.append('image', image.raw);
+    await formData.append("image", image.raw);
 
-    var profile_uploaded = await axios
-    .post(`http://localhost:5000/profile_photo/upload`, formData, {
+    var profile_uploaded = await axios.post(
+      `http://localhost:5000/profile_photo/upload`,
+      formData,
+      {
         headers: {
-            'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
-    })
-  
-    
+      }
+    );
 
-    console.log(profile_uploaded)
-
-
-
-
-
+    console.log(profile_uploaded);
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
@@ -788,11 +805,6 @@ const Register = () => {
                 className="mt-2 g-recaptcha-response"
               />
 
-
-
-
-
-
               {/*  this is for checkbox and forgot password
                 <div className="flex w-[420px] flex items-center justify-center mt-4 ">
                   <div className="basis-1/2 justify-end">
@@ -852,13 +864,11 @@ const Register = () => {
           </div>
 
           <div className="flex flex-col justify-start">
-            <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-96 h-96 mb-64">
-              <img src="login/1.png" className="image_login" />
+            <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-auto mt-8 h-auto mb-6">
+              {/* <img src="login/1.png" className="image_login" />
+               */}
 
-
-
-
-
+              {/* 
               <label htmlFor="upload-button">
           {image.preview ? (
             <img
@@ -877,8 +887,8 @@ const Register = () => {
             </>
           )}
         </label>
-
-
+ */}
+              {/* 
               <input
           name="image"
           type="file"
@@ -886,13 +896,37 @@ const Register = () => {
           
           
           onChange={handlePhotoChange}
-        />
+        /> */}
 
-
-
-
-
-
+              <FilePond
+                type="file"
+                className={"profile_pic_upload"}
+                onupdatefiles={setFiles}
+                allowMultiple={false}
+                maxFiles={1}
+                server="http://localhost:5000/profile_photo/upload"
+                name="image"
+                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span>'
+                accept="image/png, image/jpeg, image/gif"
+                dropOnPage
+                dropValidation
+                allowFileEncode={true}
+                allowFileTypeValidation={true}
+                allowImagePreview={true}
+                allowImageCrop={true}
+                allowImageResize={true}
+                allowImageTransform={true}
+                imagePreviewHeight={170}
+                imageCropAspectRatio="1:1"
+                imageResizeTargetWidth={200}
+                imageResizeTargetHeight={200}
+                stylePanelLayout="compact circle"
+                styleLoadIndicatorPosition="center bottom"
+                styleProgressIndicatorPosition="center bottom"
+                styleButtonRemoveItemPosition="center bottom"
+                styleButtonProcessItemPosition="center bottom"
+                imageEditAllowEdit={false}
+              />
             </div>
 
             <div className="flex flex-col">
@@ -972,20 +1006,7 @@ const Register = () => {
             <span className="popins-font">Create account</span>
           </Button>
         </div>
-
-
-
-
-          
-  
-  
-
       </form>
-
-
-
-
-
     </>
   );
 };
