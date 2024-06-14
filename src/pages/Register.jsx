@@ -28,6 +28,8 @@ import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
+import FormControl from '@mui/material/FormControl';
+
 
 import Menu from "@mui/material/Menu";
 
@@ -331,7 +333,7 @@ const Register = () => {
             className="sign-in-form flex flex-col wrap justify-start items-center"
             
           >
-            <div className="flex mb-1 justify-center mt-4">
+            <div className="flex mb-1 justify-center items-center mt-4">
               <TextField
                 label="Email"
                 placeholder="johndoe@gmail.com"
@@ -341,7 +343,7 @@ const Register = () => {
                 type="email"
                 sx={{
                   m: 1,
-                  width: "320px",
+                  width: "280px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: 5, // Rounded corners
                   },
@@ -361,10 +363,12 @@ const Register = () => {
 
 
 
+<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <Select
           name="email_private"
           id="email_private"
           value={email_private}
+          disableUnderline
           onChange={handleEmailPrivacyChange}
           sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
         >
@@ -372,6 +376,7 @@ const Register = () => {
           <MenuItem value={true}>Private</MenuItem>
           <MenuItem value={false}>Public</MenuItem>
         </Select>
+        </FormControl>
 
 
             </div>
@@ -472,7 +477,7 @@ const Register = () => {
             </div>
 
             {/* <!--TODO implement one more password confirmation as well !  --> */}
-            <div className="flex mb-2.5 justify-center mt-0">
+            <div className="flex mb-2.5 justify-center items-center mt-0">
               <TextField
                 label="Phone number"
                 placeholder="+1 212 456 7890"
@@ -482,7 +487,7 @@ const Register = () => {
                 type="tel"
                 sx={{
                   m: 1,
-                  width: "320px",
+                  width: "280px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: 5, // Rounded corners
                   },
@@ -500,11 +505,12 @@ const Register = () => {
                 }}
               />
 
-
+<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <Select
           name="phone_private"
           id="phone_private"
           value={phone_private}
+          disableUnderline
           onChange={handlePhonePrivacyChange}
           sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
         >
@@ -512,11 +518,11 @@ const Register = () => {
           <MenuItem value={true}>Private</MenuItem>
           <MenuItem value={false}>Public</MenuItem>
         </Select>
-
+        </FormControl>
 
             </div>
 
-            <div className="flex flex-col mb-2.5 justify-center mt-0">
+            <div className="flex flex-col mb-2.5 justify-center  mt-0">
               <label htmlFor="nationality">Nationality*</label>
               <ReactFlagsSelect
                 selected={nationality_selected}
@@ -529,7 +535,7 @@ const Register = () => {
             </div>
 
             {selectedRole === "AH" && (
-              <div className="flex mb-2.5 justify-center mt-4">
+              <div className="flex mb-2.5 justify-center items-center mt-4">
                 <TextField
                   label="Weight"
                   id="weight"
@@ -539,7 +545,7 @@ const Register = () => {
                   placeholder="85 kg/185 lb"
                   sx={{
                     m: 1,
-                    width: "320px",
+                    width: "280px",
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 5, // Rounded corners
                     },
@@ -588,18 +594,20 @@ const Register = () => {
                 />
 
 
+<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
 <Select
           name="weight_private"
           id="weight_private"
           value={weight_private}
           onChange={handleWeightPrivacyChange}
+          disableUnderline
           sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
         >
          
           <MenuItem value={true}>Private</MenuItem>
           <MenuItem value={false}>Public</MenuItem>
         </Select>
-
+        </FormControl>
                 {/* 
 
 <TextField
