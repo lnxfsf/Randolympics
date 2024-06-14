@@ -6,11 +6,8 @@ const jwt = require("jsonwebtoken");
 const userSchema = require("../schemas/userSchema");
 const bcrypt = require("bcryptjs");
 
-
 // TODO, ti vidi, da promenis ovo u taj ORM isto.. ako treba za email confirmaciju.. jer znas i sam, da je lakse sa ORM
 //TODO to sto sad radis ovde dole je ORM vec.. al nestadarizovan...
-
-
 
 const {
   createTable,
@@ -22,25 +19,28 @@ const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-
-
-
-
-
-
 const register = async (req, res) => {
-
-
   // TODO samo da pass values.. to je to... za sad... (kao i crypto isto, zavisno koji je... da zna.. (dodaj novi value koji tip crypto-a..))
 
   // TODO, you only haven't inserted "picture field", because I yet need to set image upload..
-  const { user_type, email, email_private, password, name, 
-    phone, phone_private, nationality , 
-    weight, weight_private ,bio,cryptoaddress, cryptoaddress_type  } = req.body;
-
+  const {
+    user_type,
+    email,
+    email_private,
+    password,
+    name,
+    phone,
+    phone_private,
+    nationality,
+    weight,
+    weight_private,
+    bio,
+    cryptoaddress,
+    cryptoaddress_type,
+  } = req.body;
 
   // TODO, samo polja koja ne smeju biti prazna (osim weight, nebitno je.. ionako nece biti requirement u database)
-/*   if (!email || !password ) {
+  /*   if (!email || !password ) {
     res
       .status(400)
       .json({ error: "Email or Password fields cannot be empty!" });
@@ -56,9 +56,8 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt); //hash password
 
-
-  // TODO da, evo on ovde ubaci vrednosti samo... 
- /*  const user = {
+  // TODO da, evo on ovde ubaci vrednosti samo...
+  /*  const user = {
     userId: uuidv4(),
     email,
     password: hashedPassword,
@@ -93,10 +92,7 @@ const register = async (req, res) => {
     ranking_low: null,
     team: null,
     cryptoaddress,
-    cryptoaddress_type
-
-
-
+    cryptoaddress_type,
   };
 
   try {
@@ -108,7 +104,6 @@ const register = async (req, res) => {
     if (userAlreadyExists) {
       res.status(409).json({ error: "Email already exists" });
     } else {
-
       await insertRecord("users", user);
 
       res.status(201).json({ message: "User created successfully!" });
