@@ -42,10 +42,14 @@ const Register = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [email_private, setEmail_private] = useState(true);
+  const [phone_private, setPhone_private] = useState(true);
+  const [weight_private, setWeight_private] = useState(true);
+
   {
     /*this is for nationality */
   }
-  const [selected, setSelected] = useState("");
+  const [nationality_selected, setNationality_selected] = useState("");
   const [selectedRole, setSelectedRole] = useState("AH");
 
   const recaptcha = useRef();
@@ -81,9 +85,8 @@ const Register = () => {
 
   // ? HERE
 
+  // ? HERE, for weight..
 
-   // ? HERE, for weight..
-   
   const weightOptions = ["Kg", "Lb"]; // supported cryptos
 
   const [weightMenuAnchorEl, setWeightMenuAnchorEl] = useState(null);
@@ -104,8 +107,6 @@ const Register = () => {
 
   // ? HERE, for weight..
 
-
-
   useEffect(() => {
     // make captcha required
     window.addEventListener("load", () => {
@@ -121,6 +122,16 @@ const Register = () => {
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
+    var name = e.target.name.value;
+    var phone = e.target.phone.value;
+
+    if (!e.target.weight) {
+      var weight = null;
+    } else {
+      var weight = e.target.weight.value;
+    }
+
+    var cryptoaddr = e.target.cryptoaddr.value;
 
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -157,7 +168,21 @@ const Register = () => {
         try {
           var response = await axios.post(
             `${BACKEND_SERVER_BASE_URL}/auth/register`,
-            { email, password }
+            {
+              user_type: selectedRole,
+              email,
+              password,
+              email_private,
+              phone_private,
+              weight_private,
+              name,
+              phone,
+              nationality: nationality_selected,
+              weight,
+              cryptoaddress: cryptoaddr,
+
+              cryptoaddress_type: selectedCrypto,
+            }
           );
         } catch (error) {
           console.log(error);
@@ -198,6 +223,7 @@ const Register = () => {
     setSelectedRole(event.target.value);
   };
 
+  // ? for dropdown menu
   // Get the current year,
   const currentYear = new Date().getFullYear();
   const startYear = 1950;
@@ -429,81 +455,75 @@ const Register = () => {
             <div className="flex flex-col mb-2.5 justify-center mt-0">
               <label htmlFor="nationality">Nationality*</label>
               <ReactFlagsSelect
-                selected={selected}
-                onSelect={(code) => setSelected(code)}
+                selected={nationality_selected}
+                onSelect={(code) => setNationality_selected(code)}
                 className="w-[420px]  "
                 searchable={true}
                 id="nationality"
+                name="nationality"
               />
             </div>
 
             {selectedRole === "AH" && (
-
-
-
-
-
-
-<div className="flex flex-col mb-2.5 justify-center mt-4">
-              <TextField
-                label="Weight"
-                id="weight"
-                name="weight"
-                required
-                type="number"
-              
-                placeholder="85 kg/185 lb"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
+              <div className="flex flex-col mb-2.5 justify-center mt-4">
+                <TextField
+                  label="Weight"
+                  id="weight"
+                  name="weight"
+                  required
+                  type="number"
+                  placeholder="85 kg/185 lb"
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5, // Rounded corners
                     },
 
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle kg / lb"
-                        onClick={handleWeightMenuClick}
-                        edge="end"
-                      >
-                        {/* Icon for dropdown, e.g., a downward arrow */}
-                        {selectedWeight}
-                      </IconButton>
-                      <Menu
-                        id="weight-menu"
-                        anchorEl={weightMenuAnchorEl}
-                        open={Boolean(weightMenuAnchorEl)}
-                        onClose={handleWeightMenuClose}
-                      >
-                        {weightOptions.map((option) => (
-                          <MenuItem
-                            key={option}
-                            onClick={() => handleWeightOptionSelect(option)}
-                            selected={option === selectedWeight}
-                          >
-                            {option}
-                          </MenuItem>
-                        ))}
-                      </Menu>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red", // Red border on focus
+                      },
 
-              {/* 
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black", // Set label color to black when focused
+                      },
+                    },
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle kg / lb"
+                          onClick={handleWeightMenuClick}
+                          edge="end"
+                        >
+                          {/* Icon for dropdown, e.g., a downward arrow */}
+                          {selectedWeight}
+                        </IconButton>
+                        <Menu
+                          id="weight-menu"
+                          anchorEl={weightMenuAnchorEl}
+                          open={Boolean(weightMenuAnchorEl)}
+                          onClose={handleWeightMenuClose}
+                        >
+                          {weightOptions.map((option) => (
+                            <MenuItem
+                              key={option}
+                              onClick={() => handleWeightOptionSelect(option)}
+                              selected={option === selectedWeight}
+                            >
+                              {option}
+                            </MenuItem>
+                          ))}
+                        </Menu>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+
+                {/* 
 
 <TextField
                 label="Cryptoaddress"
@@ -533,20 +553,12 @@ const Register = () => {
               />
 
  */}
-            </div>
-
-
-
-
-
-
+              </div>
             )}
 
-
-
-{/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto... 
- */}            
-        <div className="flex flex-col mb-2.5 justify-center mt-4">
+            {/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto...
+             */}
+            <div className="flex flex-col mb-2.5 justify-center mt-4">
               <TextField
                 label="Crypto"
                 id="cryptoaddr"
