@@ -1,6 +1,10 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import "../styles/register.scoped.scss";
+ 
+
+
 import { useRef, useState, useEffect } from "react";
 import React, { useContext } from "react";
 
@@ -206,7 +210,7 @@ const Register = () => {
     var password = e.target.pass.value;
     var name = e.target.name.value;
     var phone = e.target.phone.value;
-    var bio = e.target.bio.value;
+    var bio = ""; // because we don't user bio field right now, or maybe we will use it. 
 
     if (!e.target.weight) {
       var weight = null;
@@ -906,30 +910,57 @@ const Register = () => {
                 maxFiles={1}
                 server="http://localhost:5000/profile_photo/upload"
                 name="image"
-                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span>'
+                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(not mandatory)'
                 accept="image/png, image/jpeg, image/gif"
                 dropOnPage
                 dropValidation
+                allowPaste={true}
+                allowReplace={true}
+                credits={""}
+               
+                
+
+
                 allowFileEncode={true}
                 allowFileTypeValidation={true}
+                
                 allowImagePreview={true}
                 allowImageCrop={true}
                 allowImageResize={true}
                 allowImageTransform={true}
-                imagePreviewHeight={170}
+
+                /*  rectangle or circle  */
+                imagePreviewHeight={360}
+
                 imageCropAspectRatio="1:1"
-                imageResizeTargetWidth={200}
+
+                
+                imageResizeTargetWidth={360}
                 imageResizeTargetHeight={200}
-                stylePanelLayout="compact circle"
+
+
+               /*  rectangle or circle  */
+/*                  stylePanelLayout="compact circle "
+ */               
+                stylePanelLayout="compact"
+               
+
                 styleLoadIndicatorPosition="center bottom"
+
                 styleProgressIndicatorPosition="center bottom"
-                styleButtonRemoveItemPosition="center bottom"
+
+                styleButtonRemoveItemPosition="center  bottom"
+
                 styleButtonProcessItemPosition="center bottom"
+                
+
                 imageEditAllowEdit={false}
+
+                
               />
             </div>
 
-            <div className="flex flex-col">
+             <div className="flex flex-col w-[420px]"> 
               {/*   <label for="bio">Tell us about yourself:</label> */}
 
               {/*     <textarea
@@ -938,15 +969,15 @@ const Register = () => {
               name="bio"
               className="w-full h-32 rounded-md border border-gray-900"
             ></textarea> */}
-              {/* 
+          {/*     
 <TextField
   placeholder="Tell us about yourself:"
   multiline
   rows={2}
   maxRows={4}
-/> */}
-
-              <TextField
+/>  */}
+{/* 
+               <TextField
                 label="Tell us about yourself"
                 placeholder="Bio"
                 id="bio"
@@ -977,8 +1008,13 @@ const Register = () => {
                 inputProps={{
                   maxLength: 255,
                 }}
-              />
-            </div>
+              /> */}
+ 
+
+
+            </div> 
+
+            
           </div>
         </div>
 

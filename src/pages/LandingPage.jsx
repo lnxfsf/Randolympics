@@ -26,8 +26,6 @@ const LandingPage = () => {
 
         <Navbar />
 
-         */}
-
       {/* first part */}
       <div>
         <img src="/landing_page/first.png" className="z-10" />
@@ -188,6 +186,9 @@ const LandingPage = () => {
             </h1>
 
             <div className="pl-16 pt-6">
+              
+              
+              
               <Button
                 onClick={handleRedirectRegister}
                 className="w-32 "
@@ -208,6 +209,8 @@ const LandingPage = () => {
               >
                 <span className="popins-font">Register</span>
               </Button>
+
+              
             </div>
           </div>
 
@@ -356,9 +359,9 @@ const LandingPage = () => {
 
       {/* end about us part */}
 
-      {/* TODO, will need to make that image go more on top
+      {/* TODO, will need to make that image go more on top*/}
       <Footer />
-      */}
+      
     </>
   );
 };
