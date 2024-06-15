@@ -6,6 +6,8 @@ npm i express cors dotenv nodemon mysql2 uuid jsonwebtoken bcryptjs
 npm i express mysql2
 npm i nodemailer
 npm i multer
+npm i sequelize
+npm i @sequelize/mysql  (so mysql with sequelize could work)
 
 
 // register
