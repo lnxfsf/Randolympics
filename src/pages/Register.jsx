@@ -2,8 +2,6 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import "../styles/register.scoped.scss";
- 
-
 
 import { useRef, useState, useEffect } from "react";
 import React, { useContext } from "react";
@@ -172,6 +170,7 @@ const Register = () => {
   const handleWeightOptionSelect = (option) => {
     setSelectedWeight(option);
     setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
+
   };
 
   // ? HERE, for weight..
@@ -210,12 +209,20 @@ const Register = () => {
     var password = e.target.pass.value;
     var name = e.target.name.value;
     var phone = e.target.phone.value;
-    var bio = ""; // because we don't user bio field right now, or maybe we will use it. 
+    var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
     if (!e.target.weight) {
       var weight = null;
     } else {
       var weight = e.target.weight.value;
+
+      // TODO, ovde konverziju u kg uradis ako je lb ! (kg ne diras, to je default)
+      // no, you don't have to convert between kg/lb in input field.. just check it here, before upload in database
+      if ( selectedWeight === "Lb"){
+        weight = weight * 0.45359237;
+        console.log(weight)
+      }
+
     }
 
     var cryptoaddr = e.target.cryptoaddr.value;
@@ -917,50 +924,30 @@ const Register = () => {
                 allowPaste={true}
                 allowReplace={true}
                 credits={""}
-               
-                
-
-
                 allowFileEncode={true}
                 allowFileTypeValidation={true}
-                
                 allowImagePreview={true}
                 allowImageCrop={true}
                 allowImageResize={true}
                 allowImageTransform={true}
-
                 /*  rectangle or circle  */
                 imagePreviewHeight={360}
-
                 imageCropAspectRatio="1:1"
-
-                
                 imageResizeTargetWidth={360}
                 imageResizeTargetHeight={200}
-
-
-               /*  rectangle or circle  */
-/*                  stylePanelLayout="compact circle "
- */               
+                /*  rectangle or circle  */
+                /*                  stylePanelLayout="compact circle "
+                 */
                 stylePanelLayout="compact"
-               
-
                 styleLoadIndicatorPosition="center bottom"
-
                 styleProgressIndicatorPosition="center bottom"
-
                 styleButtonRemoveItemPosition="center  bottom"
-
                 styleButtonProcessItemPosition="center bottom"
-                
-
                 imageEditAllowEdit={false}
-
-                
               />
             </div>
 
-             <div className="flex flex-col w-[420px]"> 
+            <div className="flex flex-col w-[420px]">
               {/*   <label for="bio">Tell us about yourself:</label> */}
 
               {/*     <textarea
@@ -969,14 +956,14 @@ const Register = () => {
               name="bio"
               className="w-full h-32 rounded-md border border-gray-900"
             ></textarea> */}
-          {/*     
+              {/*     
 <TextField
   placeholder="Tell us about yourself:"
   multiline
   rows={2}
   maxRows={4}
 />  */}
-{/* 
+              {/* 
                <TextField
                 label="Tell us about yourself"
                 placeholder="Bio"
@@ -1009,12 +996,7 @@ const Register = () => {
                   maxLength: 255,
                 }}
               /> */}
- 
-
-
-            </div> 
-
-            
+            </div>
           </div>
         </div>
 

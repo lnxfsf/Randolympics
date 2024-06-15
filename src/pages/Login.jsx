@@ -172,7 +172,7 @@ const Login = () => {
   //  };
 
   let APP_SITE_KEY =
-    import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
+    import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY ;
 
   return (
     <>
