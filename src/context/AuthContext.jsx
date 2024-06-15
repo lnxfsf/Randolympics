@@ -226,7 +226,11 @@ export const AuthProvider = ({ children }) => {
  // );
 
  const [user, setUser] = useState(() => {
-    const tokenString = localStorage.getItem("authTokens");
+
+    // TODO on ustvari samo ČITA ! znači moze biti i samo || da i sa sessionStorage i tjt...
+    const tokenString = localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens");
+
+
     if (tokenString) {
       try {
         const authData = JSON.parse(tokenString);
@@ -243,9 +247,27 @@ export const AuthProvider = ({ children }) => {
 
 
   let [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
+
+        // TODO on ustvari samo ČITA ! znači moze biti i samo || da i sa sessionStorage i tjt...
+{
+
+  let authTokensString = 
+  (typeof localStorage !== "undefined" && localStorage.getItem("authTokens")) ||
+  (typeof sessionStorage !== "undefined" && sessionStorage.getItem("authTokens"));
+
+  return authTokensString ? JSON.parse(authTokensString) : null;
+
+
+
+}
+
+        
+ //    localStorage.getItem("authTokens")
+   //   \? JSON.parse(localStorage.getItem("authTokens"))
+     // : null 
+
+
+
   );
   
 
@@ -322,12 +344,23 @@ export const AuthProvider = ({ children }) => {
 
           // TODO, E OVDE JA MSM, MOZES ODLUCITI DA LI JE LOCAL ili session storage, zavisno jel "remember me" izabrano ili ne..
           if (response) {
-            localStorage.setItem("authTokens", JSON.stringify(response));
+
+            if(remember_me){
+                          localStorage.setItem("authTokens", JSON.stringify(response));
+
+            }else{
+              sessionStorage.setItem("authTokens", JSON.stringify(response));
+
+      
+            }
+
+
             setAuthTokens(response);
     
             console.log("token je:" + response.data.access_token);
     
             setUser(jwtDecode(response.data.access_token));
+
             navigate("/");
           } else {
             console.log("Something went wrong while loggin in the user!");

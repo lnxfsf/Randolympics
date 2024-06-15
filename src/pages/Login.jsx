@@ -31,6 +31,17 @@ const Login = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+
+
+  // remember me checkbox
+  const [rememberChecked, setRememberChecked] = useState(false)
+  
+  const handleCheckboxRemember = () => {
+    setRememberChecked(!rememberChecked); //toogle
+  }
+
+
+
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -64,7 +75,8 @@ const Login = () => {
     var password = e.target.pass.value;
 
     // TODO set up remember me (false) on session storage, and (true) on localstorage
-    var remember_me = e.target.remember.value;
+    //var remember_me = e.target.remember.value;
+    console.log("remember is:" + rememberChecked)
 
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -75,7 +87,7 @@ const Login = () => {
 
     // ? ovde pozivas authContext
     // ? this is just to pass to store auth in (local|session) storage
-    loginUser(email, password, remember_me);
+    loginUser(email, password, rememberChecked);
   };
 
   const handleSignUp = () => {
@@ -309,6 +321,7 @@ const Login = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
+                    
                       sx={{
                         color: "#FF0000",
                         "&.Mui-checked": {
@@ -318,6 +331,7 @@ const Login = () => {
                       id="remember"
                       name="remember"
                       className="mr-2"
+                      onChange={handleCheckboxRemember}
                     />
                   }
                   label="Remember me"
