@@ -44,6 +44,8 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
+
+
 const register = async (req, res) => {
   // TODO samo da pass values.. to je to... za sad... (kao i crypto isto, zavisno koji je... da zna.. (dodaj novi value koji tip crypto-a..))
 
@@ -137,13 +139,53 @@ const register = async (req, res) => {
 
     // Create a new user
     const newUser = await User.create(user_data);
+    // TODO sa newUser, mozes koristiti za email konfirmaciju sada ovde dole..
     //console.log("New user created:", newUser);
+
+    sendEmail(newUser.email, 'Email Verification', `<p>Click <a href="http://localhost:5173/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`);
+// aha, pa da, ovo je kao samo običan link, da ide direktno do te rute...
+// treba   /auth/verify ruta da bude finalna...
+
+
+
+
+
 
     res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+const verify_token = async (req, res) => {
+    
+  const token = req.params.token;
+
+  try {
+
+    await db.sequelize.sync();
+
+    const user = await User.findOne({ where: { verificationToken: token } });
+
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.isVerified = true;
+    user.verificationToken = null;
+
+    await user.save();
+    console.log("user verified")
+
+    // return res.redirect('/verification-success');
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
 
 
 
@@ -159,10 +201,7 @@ const login = async (req, res) => {
   }
 
   try {
-    // ! proveri, pretrazi, ako ima.. da, to je sve.. on ako ima nesto da vrati, vratice i ici ce u ovu "if" , ako nema, vratice neki error dole i nece smetat..
-    // const existingUser = await checkRecordExists("users", "email", email);
-
-
+   
     await db.sequelize.sync();
 
     const existingUser = await User.findOne({
@@ -216,4 +255,5 @@ const login = async (req, res) => {
 module.exports = {
   register,
   login,
+  verify_token
 };

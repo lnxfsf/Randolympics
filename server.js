@@ -31,7 +31,11 @@ app.use(express.urlencoded({ extended: false }));
 // we separated every route in it's file
 // we use separate routes, for them
 app.use("/captcha", captchaRoutes);
+
+
 app.use("/auth", authRoutes); // routes, login, register.
+
+
 app.use("/profile_photo", multerConfig);
 
 //! on ovde poveze znaci..

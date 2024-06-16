@@ -13,11 +13,12 @@ module.exports = async (email, subject, text) => {
         });
 
         // here he sends mail
+        //TODO , ti stavio: html: ` ` da moze poslati subject koji treba. inace je bilo:  text: text
         await transporter.sendMail({
             from: process.env.USER_email,
             to: email,
             subject: subject,
-            text: text
+            html: text
         });
 
         console.log("Email sent successfully");
