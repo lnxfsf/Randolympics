@@ -144,6 +144,36 @@ const register = async (req, res) => {
   }
 };
 
+
+
+
+const email_resend = async (req, res) => {
+
+  const { email } = req.body;
+
+  try {
+ await db.sequelize.sync();
+
+ const user = await User.findOne({
+   where: { email: user_data.email },
+ });
+
+ sendEmail(
+  user.email,
+  "Email Verification",
+  `<p>Click <a href="http://localhost:5000/auth/verify/${user.verificationToken}">here</a> to verify your email.</p>`
+);
+
+
+
+} catch (error) {
+res.status(500).json({ error: error.message });
+}
+
+
+}
+
+
 const verification_success = async (req, res) => {
   res.sendFile(path.join(__dirname, "../public/verified.html"));
 };
@@ -194,7 +224,7 @@ const forgot_password = async (req, res) => {
 
     console.log("korisnik je: " + user.name)
 
-    if (user) {
+    if (user && user.isVerified) {
 
       const token = generateVerificationToken();
 
@@ -213,6 +243,8 @@ const forgot_password = async (req, res) => {
 
       //res.redirect(`/auth/reset_password/${token}`);
 
+    }else{
+      res.status(500).json({ message: "User didn't verified email !" });
     }
 
 
@@ -238,7 +270,71 @@ const reset_password_token = async (req, res) => {
     //da nema tog, user-a, ne bi slao ništa.. 
     if(user){
        // da, on radi post, u ovu drugu route, da resetuje password.. (premda ovo u FE ćeš srediti lako, al eto, da funkcionise samo makar.. pa sredices odma zatim)
-    res.send(`<form method="post" action="/auth/reset_password"><input type="password" name="password" required><input type="hidden" name="token" value="${token}"><input type="submit" value="Reset Password"></form>`);
+    //res.send(`<form method="post"  action="/auth/reset_password"><input  type="password" name="password" required><input type="hidden" name="token" value="${token}"><input type="submit" value="Reset Password"></form>`);
+      
+    res.send(`
+      <html>
+        <head>
+            <style>
+            body {
+              font-family: 'Roboto', sans-serif;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 0;
+              background-color: #f5f5f5;
+            }
+            form {
+              background: #fff;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+              width: 300px;
+            }
+            input[type="password"] {
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 10px;
+              font-size: 16px;
+              width: 100%;
+              box-sizing: border-box;
+              transition: border-color 0.3s;
+            }
+            input[type="password"]:focus {
+              border-color: #3f51b5;
+              outline: none;
+            }
+            input[type="hidden"] {
+              display: none;
+            }
+            input[type="submit"] {
+              background: #AF2626;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              padding: 10px;
+              font-size: 16px;
+              cursor: pointer;
+              transition: background-color 0.3s;
+            }
+            input[type="submit"]:hover {
+              background-color: #8E1F1F;
+            }
+          </style>
+        </head>
+        <body>
+          <form method="post" action="/auth/reset_password">
+            <input type="password" name="password" placeholder="New Password" required>
+            <input type="hidden" name="token" value="${token}">
+            <input type="submit" value="Reset Password">
+          </form>
+        </body>
+      </html>
+    `);
 
     }
    
@@ -374,5 +470,6 @@ module.exports = {
   verification_success,
   forgot_password, 
   reset_password_token, 
-  reset_password
+  reset_password,
+  email_resend
 };
