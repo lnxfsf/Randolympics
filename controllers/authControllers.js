@@ -176,6 +176,137 @@ const verify_token = async (req, res) => {
   }
 };
 
+
+
+
+// password recover
+const forgot_password = async (req, res) => {
+
+  const { email } = req.body;
+
+
+  try {
+    await db.sequelize.sync();
+
+    const user = await User.findOne({
+      where: { email: email },
+    });
+
+    console.log("korisnik je: " + user.name)
+
+    if (user) {
+
+      const token = generateVerificationToken();
+
+      user.verificationToken = token;
+      await user.save();
+
+      console.log("password reset token saved in user");
+
+
+      sendEmail(
+        email,
+        "Password Reset",
+        `<p>Click <a href="http://localhost:5000/auth/reset_password/${token}">here</a> to reset your password.</p>`
+      );
+
+
+      //res.redirect(`/auth/reset_password/${token}`);
+
+    }
+
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+}
+
+const reset_password_token = async (req, res) => {
+  const token = req.params.token; 
+
+
+  try {
+    await db.sequelize.sync();
+
+    // Check if the token exists and is still valid
+    const user = await User.findOne({ where: { verificationToken: token } });
+
+    //da nema tog, user-a, ne bi slao ništa.. 
+    if(user){
+       // da, on radi post, u ovu drugu route, da resetuje password.. (premda ovo u FE ćeš srediti lako, al eto, da funkcionise samo makar.. pa sredices odma zatim)
+    res.send(`<form method="post" action="/auth/reset_password"><input type="password" name="password" required><input type="hidden" name="token" value="${token}"><input type="submit" value="Reset Password"></form>`);
+
+    }
+   
+  
+  
+  
+  }catch (error) {
+    console.error(error);
+
+    res.status(500).json({ message: "Internal server error" });
+  }
+
+
+}
+
+
+const reset_password = async (req, res) => {
+
+
+  const { token, password } = req.body;
+
+
+  try {
+    await db.sequelize.sync();
+
+    const user = await User.findOne({ where: { verificationToken: token } });
+    
+    if(user){
+
+      console.log("email mu je:" + user.email);
+
+      // treba da je šifruješ samo !!! 
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt); //hash password
+
+
+      user.password = hashedPassword;
+
+
+      user.verificationToken = null;
+
+      await user.save();
+      res.status(200).send('Password updated successfully');
+
+    }else {
+      res.status(404).send('Invalid or expired token');
+    }
+  
+
+
+
+
+  }catch (error) {
+    console.error(error);
+
+    res.status(500).json({ message: "Internal server error" });
+  }
+
+
+
+
+}
+
+
+
+
+
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -241,4 +372,7 @@ module.exports = {
   login,
   verify_token,
   verification_success,
+  forgot_password, 
+  reset_password_token, 
+  reset_password
 };
