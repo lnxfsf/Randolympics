@@ -66,6 +66,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+//! what is this
+db.users = require('./users')(sequelize,DataTypes)
+//db.token = require('./token')(sequelize,DataTypes)
+
+
+
 db.sequelize.sync({ force: false })
   .then(() => {
     console.log('yes re-sync is done!');

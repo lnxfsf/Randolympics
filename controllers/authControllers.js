@@ -2,6 +2,25 @@
 // These functions will handle user data and authentication logic
 
 
+
+
+// ? ovo ovde je za email confirmation
+
+const db = require("../models");
+const User = db.users;
+const Token = db.token;
+const Op = db. Sequelize.Op;
+//onst bcrypt = require('bcrypt')
+//const jwt = require('jsonwebtoken');
+
+const sendEmail = require("../utils/sendEmail");
+
+const crypto = require('crypto');
+
+// ? ovo ovde je za email confirmation
+
+
+
 const { v4: uuidv4 } = require("uuid");
 
 const jwt = require("jsonwebtoken");
@@ -21,9 +40,19 @@ const {
   insertRecord,
 } = require("../utils/sqlFunctions");  // ! OVO MAKNI 
 
+
+
 const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
+
+
+// When a user signs up, generate a unique verification token and save it in the database along with the user's email.
+// When a user registers, you can call the generateVerificationToken function to create a token, save it to the database, and send it to the user's email address.
+const generateVerificationToken = () => {
+  return crypto.randomBytes(16).toString('hex');
+};
+
 
 
 
@@ -52,6 +81,10 @@ const register = async (req, res) => {
 
   } = req.body;
 
+
+
+
+
   // TODO, samo polja koja ne smeju biti prazna (osim weight, nebitno je.. ionako nece biti requirement u database)
   /*   if (!email || !password ) {
     res
@@ -79,7 +112,7 @@ const register = async (req, res) => {
 
 
   // user objekat, i ovo ce on isto tako slati.. inače.. 
-  const user = {
+  const user_data = {
     userId: uuidv4(),
     user_type,
     email,
@@ -109,37 +142,96 @@ const register = async (req, res) => {
     team: null,
     cryptoaddress,
     cryptoaddress_type,
+
+
+    isVerified: false,
+    verificationToken: generateVerificationToken()
+
+
   };
 
+
+  console.log("data iz FE je:" +  JSON.stringify(user_data))
 
 
 
   try {
 
 
+    await db.sequelize.sync();
 
-    // ! ovde treba, da kreira model vrv, tabelu, ako nema. on ce znati ako ima ili nema, njegov sequelize
-    await createTable(userSchema); // this is for first time... to create table..
+    const userAlreadyExists = await User.findOne({ where: { email: user_data.email } });
+
+    if (userAlreadyExists) {
+      return res.status(409).json({ error: "Email already exists" });
+    } 
+
+
+
+    // Create a new user
+    const newUser = await User.create(user_data);
+    console.log("New user created:", newUser);
+
+    res.status(201).json({ message: "User created successfully!" });
+
+
+
+    //  ovde treba, da kreira model vrv, tabelu, ako nema. on ce znati ako ima ili nema, njegov sequelize //! KREIRA ON 
+    //wait createTable(userSchema); // this is for first time... to create table..
 
     //does it have email in database records
     // ! i ovde unutar sync(), pozivom na taj kreirani model gore.. il ako ga ima vec, znace on...  da proveris polja samo... za email.. (znaci, ni ne treba ovaj recordExists,,), ima kao mongodb, da ga on nadje, ako ima, nema...
-    const userAlreadyExists = await checkRecordExists("users", "email", email);
+  
+    //const userAlreadyExists = await checkRecordExists("users", "email", email);
+   // ! let userAlreadyExists = false
+
+    // TODO, proveri u terminal, ako radi. vrv je bio prazan, pa treba da ubaci tek, novi values..
+   // ! db.sequelize.sync().then(() => {
+
+    
+  // !    User.findOne({ where: { email: user_data.email } }).then(res => {
+
+  // !      console.log("I found matching record" + res)
+ // !       userAlreadyExists = true
+
+  // !  }).catch((error) => {
+   // !     console.error('Failed to retrieve data (no matching record) : ', error);
+   // !     userAlreadyExists = false
+  // !  });
+    
+  // !  });
+
+    //checkRecordExists("users", "email", email);
 
 
+ // !   if (userAlreadyExists) {
+ // !     res.status(409).json({ error: "Email already exists" });
+ // !   } else {
 
-    if (userAlreadyExists) {
-      res.status(409).json({ error: "Email already exists" });
-    } else {
+
 
 
       // ! i ovde ga ubacuje !! ako nema.. i tjt. nista drugo ne menjas logiku vidis ! to je to, ostalo ostaje isto. da na email confirmation predjes..
-      await insertRecord("users", user);
+      //await insertRecord("users", user);
+   // !   db.sequelize.sync().then(() => {
+
+    
+  // !      User.create({ user_data }).then(res => {
+   // !       console.log(res)
+   // !   }).catch((error) => {
+   // !       console.error('Failed to create a new record : ', error);
+   // !   });
+      
+  // !    });
 
 
 
 
-      res.status(201).json({ message: "User created successfully!" });
-    }
+ // !     res.status(201).json({ message: "User created successfully!" });
+   // ! }
+
+
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
