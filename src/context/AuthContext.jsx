@@ -334,7 +334,7 @@ export const AuthProvider = ({ children }) => {
               alert("Wrong username or password");
             }else{
             
-            console.log(error)
+              console.log(error)
             }
             
           }

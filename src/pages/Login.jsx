@@ -32,6 +32,8 @@ const Login = () => {
   const navigate = useNavigate();
 
 
+  const [resultText, setResultText] = useState("")
+  const [resultTextColor, setResultTextColor] = useState("black")
 
   // remember me checkbox
   const [rememberChecked, setRememberChecked] = useState(false)
@@ -82,7 +84,9 @@ const Login = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+
+      setResultText("Please enter a valid email address");
+      setResultTextColor("red");
     }
 
     // ? ovde pozivas authContext
@@ -178,6 +182,7 @@ const Login = () => {
     <>
       <div className="flex m-16">
         <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
+
           <img src="login/logo.svg" />
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
@@ -348,7 +353,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="flex justify-center mt-2">
+            <div className="flex justify-center mt-2 flex-col items-center">
               <Button
                 className="w-[420px]"
                 style={{ marginTop: "20px" }}
@@ -371,6 +376,11 @@ const Login = () => {
               >
                 <span className="popins-font">Login</span>
               </Button>
+
+              
+     {/*   */}
+      <p className="mt-4 " style= {{color: `${resultTextColor}`, display: "hidden"}}>{resultText}</p>
+
             </div>
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
@@ -396,6 +406,8 @@ const Login = () => {
             >
               <span className="popins-font">Sign Up</span>
             </Button>
+
+          
           </div>
 
           <div className="flex justify-center mt-12">
@@ -406,7 +418,9 @@ const Login = () => {
         <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">
           <img src="login/1.png" className="image_login" />
         </div>
+
       </div>
+
     </>
   );
 };

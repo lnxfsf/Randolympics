@@ -71,6 +71,24 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+
+
+
+ // ? ovo za error u input da prikaze
+ const [isEmailError, setIsEmailError] = useState(false)
+ const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("")
+
+ const [resultText, setResultText] = useState("")
+ const [resultTextColor, setResultTextColor] = useState("black")
+
+ 
+ 
+
+ 
+
+
+
+
   // ? FILEPOND ZA IMAGE
 
   const [files, setFiles] = useState([]);
@@ -230,15 +248,21 @@ const Register = () => {
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
+
+    // TODO, i ovo namesti, da radi kako treba...
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+
+      setIsEmailError(true)
+      setIsEmailErrorHelper("Enter a valid email address")
+      
+      
     }
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
-      alert("Please verify the reCAPTCHA!");
+      setResultText("Please verify the reCAPTCHA!");
     } else {
       const res = await fetch("http://localhost:5000/captcha/verify", {
         method: "POST",
@@ -249,6 +273,10 @@ const Register = () => {
       });
 
       const data = await res.json();
+
+
+      console.log("ovo vidi:"+isEmailError)
+
       // response in json we have "success" field, that google send us, if it's verified or not
       if (data.success) {
         // make form submission
@@ -285,15 +313,21 @@ const Register = () => {
 
           if (axios.isAxiosError(error)) {
             if (error.response && error.response.status === 409) {
-              alert("User already exists");
+
+              //alert("");
+
+              setResultText("User already exists ! ")
+              setResultTextColor("red")
+
+
             } else {
-              alert(
+              setResultText(
                 "An error occurred: " +
                   (error.response?.data?.message || error.message)
               );
             }
           } else {
-            alert("An unexpected error occurred: " + error.message);
+            setResultText("An unexpected error occurred: " + error.message);
           }
 
           //if (error.response.status === 401) {
@@ -305,14 +339,23 @@ const Register = () => {
         }
 
         if (response) {
-          alert("Signed up !");
+         
+
+          setResultText("Signed up ! Email verification sent.")
         }
 
         // alert("Form submission successful!");
       } else {
-        alert("reCAPTCHA validation failed!");
+
+        
+          setResultText("reCAPTCHA validation failed!");
+          setResultTextColor("red")
+        
+        
       }
     }
+
+    
   };
 
   const handleChangeRole = (event) => {
@@ -401,7 +444,12 @@ const Register = () => {
               className="sign-in-form flex flex-col wrap justify-start items-center"
             >
               <div className="flex mb-1 justify-center items-center mt-4">
+               
+               
                 <TextField
+                  error={isEmailError}
+                  helperText={isEmailErrorHelper}
+
                   label="Email"
                   placeholder="johndoe@gmail.com"
                   id="email"
@@ -1000,7 +1048,8 @@ const Register = () => {
           </div>
         </div>
 
-        <div className="flex justify-center mb-32">
+        <div className="flex justify-center items-center mb-32 flex-col">
+
           <Button
             className="w-[420px]"
             style={{ marginTop: "20px" }}
@@ -1023,7 +1072,13 @@ const Register = () => {
           >
             <span className="popins-font">Create account</span>
           </Button>
+
+
+          {/* resultTextColor */}
+          <p className="mt-4 " style= {{color: `${resultTextColor}`}}>{resultText}</p>
         </div>
+
+        
       </form>
     </>
   );
