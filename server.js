@@ -4,8 +4,6 @@ dotenv.config();
 const cors = require("cors");
 
 
-//! on ovde poveze znaci..
-//const connectDB = require("./data/database");
 
 /* const path = require('path');
 const multer = require('multer'); */
@@ -15,7 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const captchaRoutes = require("./routes/captchaRoutes");
 const multerConfig = require("./routes/profilePicture");
 
-const db = require("./models/index");
+const db = require("./models/database");
 
 
 const port = process.env.PORT;
@@ -31,18 +29,13 @@ app.use(express.urlencoded({ extended: false }));
 // we separated every route in it's file
 // we use separate routes, for them
 app.use("/captcha", captchaRoutes);
-
-
 app.use("/auth", authRoutes); // routes, login, register.
-
-
 app.use("/profile_photo", multerConfig);
 
-//! on ovde poveze znaci..
-//connectDB();
 
 
-// ! ovako treba, da on zna da ima konekciju prvo sa database...
+
+
 db.sequelize.sync().then(() => {
 
   app.listen(port, () => {

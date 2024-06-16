@@ -3,7 +3,7 @@
 
 // ? ovo ovde je za email confirmation
 
-const db = require("../models");
+const db = require("../models/database");
 const User = db.users;
 const Token = db.token;
 const Op = db.Sequelize.Op;
@@ -20,19 +20,9 @@ const { v4: uuidv4 } = require("uuid");
 
 const jwt = require("jsonwebtoken");
 
-const userSchema = require("../schemas/userSchema"); // ! OVO MAKNI
-
 const bcrypt = require("bcryptjs");
 
-// TODO, ti vidi, da promenis ovo u taj ORM isto.. ako treba za email confirmaciju.. jer znas i sam, da je lakse sa ORM
-//TODO to sto sad radis ovde dole je ORM vec.. al nestadarizovan...
-
-// da , ovo ti nece trebati vise. ovo je naporno odrzavati i ovo stvarno, skrati kod, i lakse za email confrimation..
-const {
-  createTable,
-  checkRecordExists,
-  insertRecord,
-} = require("../utils/sqlFunctions"); // ! OVO MAKNI
+var path = require("path");
 
 const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
@@ -43,8 +33,6 @@ const generateAccessToken = (userId) => {
 const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
-
-
 
 const register = async (req, res) => {
   // TODO samo da pass values.. to je to... za sad... (kao i crypto isto, zavisno koji je... da zna.. (dodaj novi value koji tip crypto-a..))
@@ -85,8 +73,6 @@ const register = async (req, res) => {
   // hashuje password, i ovo isto normalno. nema jos uvek sql nista..
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt); //hash password
-
-  
 
   // user objekat, i ovo ce on isto tako slati.. inače..
   const user_data = {
@@ -139,17 +125,18 @@ const register = async (req, res) => {
 
     // Create a new user
     const newUser = await User.create(user_data);
-    // TODO sa newUser, mozes koristiti za email konfirmaciju sada ovde dole..
     //console.log("New user created:", newUser);
 
-    sendEmail(newUser.email, 'Email Verification', `<p>Click <a href="http://localhost:5173/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`);
-// aha, pa da, ovo je kao samo običan link, da ide direktno do te rute...
-// treba   /auth/verify ruta da bude finalna...
+    sendEmail(
+      newUser.email,
+      "Email Verification",
+      `<p>Click <a href="http://localhost:5000/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+    );
+    // aha, pa da, ovo je kao samo običan link, da ide direktno do te rute...
+    // treba   /auth/verify ruta da bude finalna...
 
-
-
-
-
+    // da, znači, on koristi IP od OVOG servera !!! 5000 , tako i na web kad budes bio, isto ćeš.. tako..
+    // samo u chrome mozes ukucati, da pokrene GET request za ovaj, i onda ga redirect negde drugde... na FE da prikazuje to kao...
 
     res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
@@ -157,38 +144,37 @@ const register = async (req, res) => {
   }
 };
 
+const verification_success = async (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/verified.html"));
+};
 
 const verify_token = async (req, res) => {
-    
   const token = req.params.token;
 
   try {
-
     await db.sequelize.sync();
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
-
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     user.isVerified = true;
     user.verificationToken = null;
 
     await user.save();
-    console.log("user verified")
+    console.log("user verified");
+    //res.status(500).json({ message: 'User verified' });
+    //res.sendFile(path.join(__dirname, '../public/timeout.html'));
 
-    // return res.redirect('/verification-success');
-
+    return res.redirect("/auth/verification-success");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+
+    res.status(500).json({ message: "Internal server error" });
   }
-}
-
-
-
+};
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -201,13 +187,11 @@ const login = async (req, res) => {
   }
 
   try {
-   
     await db.sequelize.sync();
 
     const existingUser = await User.findOne({
       where: { email: email },
     });
-
 
     if (existingUser) {
       if (!existingUser.password) {
@@ -255,5 +239,6 @@ const login = async (req, res) => {
 module.exports = {
   register,
   login,
-  verify_token
+  verify_token,
+  verification_success,
 };
