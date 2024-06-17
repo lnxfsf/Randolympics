@@ -37,3 +37,5 @@ npm install react-filepond filepond
 npm i @pqina/pintura @pqina/filepond-plugin-image-editor filepond-plugin-file-poster
 
 npm i @pqina/react-pintura
+
+

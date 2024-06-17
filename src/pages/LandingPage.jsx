@@ -17,6 +17,10 @@ const LandingPage = () => {
     navigate("/login");
   };
 
+  const goToRandomize = () => {
+    navigate("/randomize");
+  };
+
   return (
     <>
       {/* navbar
@@ -70,6 +74,7 @@ const LandingPage = () => {
           </p>
 
           <Button
+            onClick={goToRandomize}
             className="w-full"
             style={{ marginTop: "20px" }}
             sx={{
