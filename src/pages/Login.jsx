@@ -32,6 +32,10 @@ const Login = () => {
   const navigate = useNavigate();
 
 
+  const [isEmailVerified, setIsEmailVerified] = useState(true)
+ 
+  
+
   const [resultText, setResultText] = useState("")
   const [resultTextColor, setResultTextColor] = useState("black")
 
@@ -43,6 +47,7 @@ const Login = () => {
   }
 
 
+  const [email_resend, setEmail_resend] = useState("")
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -70,11 +75,36 @@ const Login = () => {
     }) */
   }, []);
 
+
+  const handleResendEmailVerify = async () => {
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/email_resend`,
+        {email: email_resend,
+        }
+      );
+
+      if (response.status === 200){
+        setResultText(response.data.message)
+      }
+      
+    } catch (error) {
+      console.log(error);
+  
+  
+  }
+
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsEmailVerified(false)
+
     var email = e.target.email.value;
     var password = e.target.pass.value;
+    setEmail_resend(email);
 
     // TODO set up remember me (false) on session storage, and (true) on localstorage
     //var remember_me = e.target.remember.value;
@@ -92,7 +122,19 @@ const Login = () => {
     // ? ovde pozivas authContext
     // ? this is just to pass to store auth in (local|session) storage
     loginUser(email, password, rememberChecked);
+
+
+    // TODO, aj, dodaj samo tu i tjt... ako ga zadrzi ono..
+    
+
+
+
   };
+
+
+
+  
+
 
   const handleSignUp = () => {
     navigate("/register");
@@ -379,8 +421,15 @@ const Login = () => {
 
               
      {/*   */}
-      <p className="mt-4 " style= {{color: `${resultTextColor}`, display: "hidden"}}>{resultText}</p>
+      <p className="mt-4 " style= {{color: `${resultTextColor}`, }}>{resultText}</p>
 
+{!isEmailVerified && (
+
+      <p onClick={handleResendEmailVerify} className="" style= {{color: `${resultTextColor}`, textDecoration: 'underline', cursor: 'pointer',userSelect: 'none' }}>Resend verification email ?</p>
+
+
+)
+}
             </div>
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
