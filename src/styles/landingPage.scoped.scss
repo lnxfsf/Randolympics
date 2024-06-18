@@ -1,7 +1,3 @@
-// .image_banner{
-//    background-image: url("landing_page/first.png");
-//}
-
 .text {
   color: white;
 }
@@ -21,22 +17,15 @@
   font-weight: bold;
 }
 
-// we need grid with 3 elements, and just fill up with images..   3 x 5
+
 .second_div_grid_container {
-  // cisto, da gap, namesti nekako...
   width: 45%;
-
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
   grid-template-rows: repeat(5, 1fr);
-
   justify-items: center;
   align-items: center;
-
   gap: 10px;
-
   margin-top: -45px;
 
   // z-index: 0;
@@ -47,9 +36,7 @@
 
   width: 200px;
   height: 160px;
-
   object-fit: cover;
-
   border-radius: 10px;
 
   //z-index: -1;
@@ -57,20 +44,15 @@
 
 .image_landing {
   width: 650px;
-
   height: 400px;
   object-fit: cover;
-
   border-radius: 6px;
 }
 
 .image_landing_about_us {
   width: 550px;
-
   height: 400px;
   object-fit: cover;
-
   border-radius: 15px;
-
   padding: 15px;
 }

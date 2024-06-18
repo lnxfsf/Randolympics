@@ -41,14 +41,11 @@ import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
 
-// css
+// FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
-
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
-
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
-
 import "@pqina/pintura/pintura.css";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
@@ -71,35 +68,22 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+  // ? this for error in the "input" to display
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
 
+  const [resultText, setResultText] = useState("");
+  const [resultTextColor, setResultTextColor] = useState("black");
 
-
- // ? ovo za error u input da prikaze
- const [isEmailError, setIsEmailError] = useState(false)
- const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("")
-
- const [resultText, setResultText] = useState("")
- const [resultTextColor, setResultTextColor] = useState("black")
-
- 
- 
-
- 
-
-
-
-
-  // ? FILEPOND ZA IMAGE
-
+  // ? FILEPOND for IMAGE
   const [files, setFiles] = useState([]);
 
-  // ? FILEPOND ZA IMAGE
-
+  // ? FILEPOND for IMAGE
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // ? image upload
-  const [image, setImage] = useState({
+  /*   const [image, setImage] = useState({
     preview: "",
     raw: "",
   });
@@ -111,7 +95,7 @@ const Register = () => {
         raw: e.target.files[0],
       });
     }
-  };
+  }; */
 
   // ? image upload
 
@@ -188,7 +172,6 @@ const Register = () => {
   const handleWeightOptionSelect = (option) => {
     setSelectedWeight(option);
     setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
-
   };
 
   // ? HERE, for weight..
@@ -206,8 +189,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ? for image upload
-
+    // ? for image upload. now FilePond
+    /* 
     let formData = new FormData();
     await formData.append("image", image.raw);
 
@@ -221,7 +204,7 @@ const Register = () => {
       }
     );
 
-    console.log(profile_uploaded);
+    console.log(profile_uploaded); */
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
@@ -234,13 +217,11 @@ const Register = () => {
     } else {
       var weight = e.target.weight.value;
 
-      // TODO, ovde konverziju u kg uradis ako je lb ! (kg ne diras, to je default)
-      // no, you don't have to convert between kg/lb in input field.. just check it here, before upload in database
-      if ( selectedWeight === "Lb"){
+      // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
+      if (selectedWeight === "Lb") {
         weight = weight * 0.45359237;
-        console.log(weight)
+        console.log(weight);
       }
-
     }
 
     var cryptoaddr = e.target.cryptoaddr.value;
@@ -248,14 +229,9 @@ const Register = () => {
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-
-    // TODO, i ovo namesti, da radi kako treba...
     if (!emailRegex.test(email)) {
-
-      setIsEmailError(true)
-      setIsEmailErrorHelper("Enter a valid email address")
-      
-      
+      setIsEmailError(true);
+      setIsEmailErrorHelper("Enter a valid email address");
     }
 
     // check if captcha okay
@@ -274,19 +250,10 @@ const Register = () => {
 
       const data = await res.json();
 
-
-      console.log("ovo vidi:"+isEmailError)
-
       // response in json we have "success" field, that google send us, if it's verified or not
       if (data.success) {
         // make form submission
 
-        // TODO , ovde pozivas authContext
-
-        // ? this is just to pass to store auth in (local|session) storage
-        //loginUser(email, password, remember_me);
-
-        // TODO jos ovoga
         try {
           var response = await axios.post(
             `${BACKEND_SERVER_BASE_URL}/auth/register`,
@@ -313,13 +280,10 @@ const Register = () => {
 
           if (axios.isAxiosError(error)) {
             if (error.response && error.response.status === 409) {
-
               //alert("");
 
-              setResultText("User already exists ! ")
-              setResultTextColor("red")
-
-
+              setResultText("User already exists ! ");
+              setResultTextColor("red");
             } else {
               setResultText(
                 "An error occurred: " +
@@ -329,33 +293,16 @@ const Register = () => {
           } else {
             setResultText("An unexpected error occurred: " + error.message);
           }
-
-          //if (error.response.status === 401) {
-          // alert("Wrong username or password");
-          //}else{
-
-          //console.log(error)
-          // }
         }
 
         if (response) {
-         
-
-          setResultText("Signed up ! Email verification sent.")
+          setResultText("Signed up ! Email verification sent.");
         }
-
-        // alert("Form submission successful!");
       } else {
-
-        
-          setResultText("reCAPTCHA validation failed!");
-          setResultTextColor("red")
-        
-        
+        setResultText("reCAPTCHA validation failed!");
+        setResultTextColor("red");
       }
     }
-
-    
   };
 
   const handleChangeRole = (event) => {
@@ -372,6 +319,7 @@ const Register = () => {
     years.push(year);
   }
   years.reverse();
+  // ? for dropdown menu
 
   return (
     <>
@@ -388,32 +336,7 @@ const Register = () => {
           <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
             {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
-            {/* different users roles */}
-            {/* TODO, put this in separate component (others as well, check which ones as well) */}
-            <div>
-              {/* <label htmlFor="roleDropdown">Register as: </label>
-            <br /> */}
-
-              {/*  <select
-              id="roleDropdown"
-              value={selectedRole}
-              onChange={handleChangeRole}
-              className="w-[420px]"
-            >
-              <option value="AH">AH - Athlete</option>
-              <option value="GP">GP - Global President</option>
-              <option value="NP">NP - National President</option>
-              <option value="EM">EM - Event Manager</option>
-              <option value="ITM">
-                ITM - IT Manager Page Editor (for adding news articles)
-              </option>
-              <option value="MM">MM - Marketing Manager</option>
-              <option value="SM">SM - Sales Manager</option>
-              <option value="VM">VM - Validation Manager</option>
-              <option value="LM">LM - Legal Manager</option>
-              <option value="RS">RS - Referee & support</option>
-            </select> */}
-
+            <div className="flex m-0 flex-col">
               <InputLabel id="roleDropdowns">Register as:</InputLabel>
               <Select
                 labelId="roleDropdowns"
@@ -444,12 +367,9 @@ const Register = () => {
               className="sign-in-form flex flex-col wrap justify-start items-center"
             >
               <div className="flex mb-1 justify-center items-center mt-4">
-               
-               
                 <TextField
                   error={isEmailError}
                   helperText={isEmailErrorHelper}
-
                   label="Email"
                   placeholder="johndoe@gmail.com"
                   id="email"
@@ -464,17 +384,17 @@ const Register = () => {
                     m: 1,
                     width: "280px",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5, // Rounded corners
+                      borderRadius: 5,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: "red", // Red border on focus
+                        borderColor: "red",
                       },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
-                        color: "black", // Set label color to black when focused
+                        color: "black",
                       },
                     },
                   }}
@@ -513,43 +433,22 @@ const Register = () => {
                     m: 1,
                     width: "420px",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5, // Rounded corners
+                      borderRadius: 5,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: "red", // Red border on focus
+                        borderColor: "red",
                       },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
-                        color: "black", // Set label color to black when focused
+                        color: "black",
                       },
                     },
                   }}
                 />
               </div>
-
-              {/*
-            <div className="flex flex-col mb-1 justify-center mt-4">
-              <label htmlFor="yearOfBirth">Year of birth*</label>
-              <select
-                placeholder="number"
-                className="w-[420px] "
-                type="number"
-                id="yearOfBirth"
-                name="yearOfBirth"
-              >
-                <option value="" disabled selected>
-                  Select year
-                </option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div> */}
 
               <div className="flex flex-col mb-2.5 justify-center mt-0">
                 <TextField
@@ -563,17 +462,17 @@ const Register = () => {
                     m: 1,
                     width: "420px",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5, // Rounded corners
+                      borderRadius: 5,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: "red", // Red border on focus
+                        borderColor: "red",
                       },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
-                        color: "black", // Set label color to black when focused
+                        color: "black",
                       },
                     },
                   }}
@@ -596,7 +495,7 @@ const Register = () => {
                 />
               </div>
 
-              {/* <!--TODO implement one more password confirmation as well !  --> */}
+              {/* // TODO implement one more password confirmation as well ! ... maybe later. when they do it in figma as well. and if required */}
               <div className="flex mb-2.5 justify-center items-center mt-0">
                 <TextField
                   label="Phone number"
@@ -612,17 +511,17 @@ const Register = () => {
                     m: 1,
                     width: "280px",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5, // Rounded corners
+                      borderRadius: 5,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: "red", // Red border on focus
+                        borderColor: "red",
                       },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
-                        color: "black", // Set label color to black when focused
+                        color: "black",
                       },
                     },
                   }}
@@ -647,7 +546,6 @@ const Register = () => {
               </div>
 
               <div className="flex flex-col mb-2.5 justify-center  mt-2">
-                {/* <label htmlFor="nationality">Nationality*</label> */}
                 <ReactFlagsSelect
                   selected={nationality_selected}
                   onSelect={(code) => setNationality_selected(code)}
@@ -672,17 +570,17 @@ const Register = () => {
                       m: 1,
                       width: "280px",
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 5, // Rounded corners
+                        borderRadius: 5,
                       },
 
                       "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                         {
-                          borderColor: "red", // Red border on focus
+                          borderColor: "red",
                         },
 
                       "& .MuiInputLabel-root": {
                         "&.Mui-focused": {
-                          color: "black", // Set label color to black when focused
+                          color: "black",
                         },
                       },
                     }}
@@ -734,41 +632,9 @@ const Register = () => {
                       <MenuItem value={false}>Public</MenuItem>
                     </Select>
                   </FormControl>
-                  {/* 
-
-<TextField
-                label="Cryptoaddress"
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                id="cryptoaddr"
-                name="cryptoaddr"
-               
-                type="text"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-              />
-
- */}
                 </div>
               )}
 
-              {/* this, part with dropdown menu, you should separate it in resuable component. for weight and crypto...
-               */}
               <div className="flex flex-col mb-2.5 justify-center mt-4">
                 <TextField
                   label="Crypto"
@@ -779,17 +645,17 @@ const Register = () => {
                     m: 1,
                     width: "420px",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5, // Rounded corners
+                      borderRadius: 5,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
-                        borderColor: "red", // Red border on focus
+                        borderColor: "red",
                       },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
-                        color: "black", // Set label color to black when focused
+                        color: "black",
                       },
                     },
                   }}
@@ -825,37 +691,6 @@ const Register = () => {
                     ),
                   }}
                 />
-
-                {/* 
-
-<TextField
-                label="Cryptoaddress"
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                id="cryptoaddr"
-                name="cryptoaddr"
-               
-                type="text"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-              />
-
- */}
               </div>
 
               <ReCAPTCHA
@@ -863,31 +698,6 @@ const Register = () => {
                 sitekey={APP_SITE_KEY}
                 className="mt-2 g-recaptcha-response"
               />
-
-              {/*  this is for checkbox and forgot password
-                <div className="flex w-[420px] flex items-center justify-center mt-4 ">
-                  <div className="basis-1/2 justify-end">
-                    <label htmlFor="remember">
-                      <input
-                        type="checkbox"
-                        id="remember"
-                        name="remember"
-                        className="mr-2"
-                      />
-                      Remember me
-                    </label>
-                  </div>
-    
-                  <div className="flex basis-1/2 justify-end">
-                    <Link
-                      to="/forgotpassword"
-                      className="bg-white text-red_first  "
-                    >
-                      Forgot Password?
-                    </Link>
-                  </div>
-                </div>
-                */}
 
               <div className="flex self-start mt-2">
                 <FormControlLabel
@@ -924,39 +734,6 @@ const Register = () => {
 
           <div className="flex flex-col justify-start">
             <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-auto mt-8 h-auto mb-6">
-              {/* <img src="login/1.png" className="image_login" />
-               */}
-
-              {/* 
-              <label htmlFor="upload-button">
-          {image.preview ? (
-            <img
-              src={image.preview}
-              alt="dummy"
-              width="300"
-              height="300"
-              className="my-10 mx-5"
-            />
-          ) : (
-            <>
-              <p className="text-white text-1xl text-left w-full text-left">
-                Upload Image
-              </p>
-              <div  />
-            </>
-          )}
-        </label>
- */}
-              {/* 
-              <input
-          name="image"
-          type="file"
-          id="upload-button"
-          
-          
-          onChange={handlePhotoChange}
-        /> */}
-
               <FilePond
                 type="file"
                 className={"profile_pic_upload"}
@@ -978,7 +755,6 @@ const Register = () => {
                 allowImageCrop={true}
                 allowImageResize={true}
                 allowImageTransform={true}
-                /*  rectangle or circle  */
                 imagePreviewHeight={360}
                 imageCropAspectRatio="1:1"
                 imageResizeTargetWidth={360}
@@ -1049,7 +825,6 @@ const Register = () => {
         </div>
 
         <div className="flex justify-center items-center mb-32 flex-col">
-
           <Button
             className="w-[420px]"
             style={{ marginTop: "20px" }}
@@ -1073,12 +848,11 @@ const Register = () => {
             <span className="popins-font">Create account</span>
           </Button>
 
-
           {/* resultTextColor */}
-          <p className="mt-4 " style= {{color: `${resultTextColor}`}}>{resultText}</p>
+          <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
+            {resultText}
+          </p>
         </div>
-
-        
       </form>
     </>
   );

@@ -7,16 +7,14 @@ const Footer = () => {
       <div>
         <div className="fuuter flex">
           <div className="basis-1/2">
+            <div className="basis-1/2 flex-col wrap ">
+              <h1 className="pt-20 pl-16 text-4xl	" style={{ color: "#ffffff" }}>
+                Ready to get started ?
+              </h1>
 
-
-
-          <div className="basis-1/2 flex-col wrap ">
-            <h1 className="pt-20 pl-16 text-4xl	" style={{ color: "#ffffff" }}>Ready to get started ?</h1>
-
-
-{/*     // TODO       Join the fun, u footer, treba da linkuje, ka tome, main stranici... onoj drugoj, što se preko google-a dolazi... 
- */}            
- <Button
+              {/*     // TODO       "Join the fun", button in the footer, should link to the main page... the other one, which can be accessed via google (this one is for marketing)...
+               */}
+              <Button
                 className="w-56 "
                 style={{ marginTop: "20px", marginLeft: "64px" }}
                 sx={{
@@ -26,44 +24,29 @@ const Footer = () => {
                   borderRadius: 25,
                   border: `1px solid #FFF`,
                   "&:hover": {
-                background: "rgb(255, 255, 255)",
-                color: "black",
-                border: `1px solid rgb(255, 255, 255)`,
-              },
-                  
+                    background: "rgb(255, 255, 255)",
+                    color: "black",
+                    border: `1px solid rgb(255, 255, 255)`,
+                  },
                 }}
                 id="join-the-fun-btn"
               >
                 <span className="popins-font">Join the fun</span>
               </Button>
 
-          
-          <img className="pt-16 pl-16 w-64 	" src="footer/logo_footer.svg" />
+              <img className="pt-16 pl-16 w-64 	" src="footer/logo_footer.svg" />
 
-
-          <div className="flex pl-16 gap-2">
-            <img className="pt-8  w-32" src="footer/app_store.svg" />
-            <img className="pt-8  w-32 " src="footer/google_play.svg" />
-
-
-
-          </div>
-
-
-
-          </div>
-
-
-
-
-
+              <div className="flex pl-16 gap-2">
+                <img className="pt-8  w-32" src="footer/app_store.svg" />
+                <img className="pt-8  w-32 " src="footer/google_play.svg" />
+              </div>
+            </div>
           </div>
 
           <div className="basis-1/2 flex-col wrap footer-basic">
             <div className="footer_img">
               <img className="main_img" src="footer/footer_img.png" />
             </div>
-
 
             <div className="social">
               <a id="facebook" href="#">

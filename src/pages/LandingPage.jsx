@@ -23,18 +23,8 @@ const LandingPage = () => {
 
   return (
     <>
-      {/* navbar
-
-        doesn't need in landing page
-
-
-        <Navbar />
-
-      {/* first part */}
       <div>
         <img src="/landing_page/first.png" className="z-10" />
-
-        {/* <div className="flex justify-start	items-center "> */}
 
         <div className="absolute bottom-0 left-0 flex items-center p-4 bg-opacity-75 bg-black text-white">
           <p className="text text-2xl ml-16 ">Discover more</p>
@@ -44,7 +34,7 @@ const LandingPage = () => {
 
       {/* second part */}
       <div className="flex">
-        {/*TODO basis-1/2  to stavi na obje. za sada ovako 45% u css.. dok ne resis mobile posle */}
+        {/*//TODO basis-1/2  put it on both. for now 45% in css.. until you do for mobile, later.. */}
         <div className="first_div">
           <h1 className="text-[25px]">
             Are you ready to represent your country at the{" "}
@@ -95,9 +85,9 @@ const LandingPage = () => {
           </Button>
         </div>
 
-        {/*TODO basis-1/2  to stavi na obje. za sada ovako 45% u css.. dok ne resis mobile posle */}
+        {/*//TODO basis-1/2  put it on both. for now 45% in css.. until you do for mobile, later.. */}
         <div className="second_div_grid_container ">
-          {/* TODO: dynamically update with images we want from server. or we can leave it just 3x5 as it is. but it's better, for responsiveness, to have some limit */}
+          {/* //TODO: dynamically update with images we want from server. or we can leave it just 3x5 as it is. but it's better, for responsiveness, to have some limit */}
 
           <img
             className="second_div_grid_item"
@@ -191,9 +181,6 @@ const LandingPage = () => {
             </h1>
 
             <div className="pl-16 pt-6">
-              
-              
-              
               <Button
                 onClick={handleRedirectRegister}
                 className="w-32 "
@@ -214,8 +201,6 @@ const LandingPage = () => {
               >
                 <span className="popins-font">Register</span>
               </Button>
-
-              
             </div>
           </div>
 
@@ -364,9 +349,7 @@ const LandingPage = () => {
 
       {/* end about us part */}
 
-      {/* TODO, will need to make that image go more on top*/}
       <Footer />
-      
     </>
   );
 };

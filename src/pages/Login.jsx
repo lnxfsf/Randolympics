@@ -1,7 +1,5 @@
 import "../styles/login.scoped.scss";
 
-
-
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -31,23 +29,19 @@ const Login = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [isEmailVerified, setIsEmailVerified] = useState(true);
 
-  const [isEmailVerified, setIsEmailVerified] = useState(true)
- 
-  
-
-  const [resultText, setResultText] = useState("")
-  const [resultTextColor, setResultTextColor] = useState("black")
+  const [resultText, setResultText] = useState("");
+  const [resultTextColor, setResultTextColor] = useState("black");
 
   // remember me checkbox
-  const [rememberChecked, setRememberChecked] = useState(false)
-  
+  const [rememberChecked, setRememberChecked] = useState(false);
+
   const handleCheckboxRemember = () => {
-    setRememberChecked(!rememberChecked); //toogle
-  }
+    setRememberChecked(!rememberChecked); //toogle "remember me" checkbox
+  };
 
-
-  const [email_resend, setEmail_resend] = useState("")
+  const [email_resend, setEmail_resend] = useState("");
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -58,173 +52,54 @@ const Login = () => {
     event.preventDefault();
   };
 
-  useEffect(() => {
-    // set custom error messages on input fields
-    // const tos_field = document.getElementById("tos");
-    // if (tos_field) {
-    //   tos_field.oninvalid = function (e) {
-    //   e.target.setCustomValidity("You have to agree on Terms of Service !");
-    // };
-    //}
-    // make captcha required
-    /*    window.addEventListener('load', () => {
-      const $recaptcha = document.querySelector('#g-recaptcha-response');
-      if ($recaptcha) {
-        $recaptcha.setAttribute('required', 'required');
-      }
-    }) */
-  }, []);
-
-
   const handleResendEmailVerify = async () => {
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/email_resend`,
-        {email: email_resend,
-        }
+        { email: email_resend }
       );
 
-      if (response.status === 200){
-        setResultText(response.data.message)
+      if (response.status === 200) {
+        setResultText(response.data.message);
       }
-      
     } catch (error) {
       console.log(error);
-  
-  
-  }
-
-  }
-
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsEmailVerified(false)
+    setIsEmailVerified(false);
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
     setEmail_resend(email);
 
-    // TODO set up remember me (false) on session storage, and (true) on localstorage
-    //var remember_me = e.target.remember.value;
-    console.log("remember is:" + rememberChecked)
-
     // check again, if email is correctly inserted
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-
       setResultText("Please enter a valid email address");
       setResultTextColor("red");
     }
 
-    // ? ovde pozivas authContext
+    // ? here you call authContext
     // ? this is just to pass to store auth in (local|session) storage
     loginUser(email, password, rememberChecked);
-
-
-    // TODO, aj, dodaj samo tu i tjt... ako ga zadrzi ono..
-    
-
-
-
   };
-
-
-
-  
-
 
   const handleSignUp = () => {
     navigate("/register");
   };
 
-  //
-  //  let loginUser = async (e) => {
-  //    e.preventDefault();
-  //
-  //    var email = e.target.email.value;
-  //    var password = e.target.pass.value;
-  //
-  //
-  //    // TODO set up remember me (false) on session storage, and (true) on localstorage
-  //    var remember_me = e.target.remember.value;
-  //
-  //
-  //
-  //
-  //
-  //
-  //    // check again, if email is correctly inserted
-  //    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  //
-  //    if (!emailRegex.test(email)) {
-  //      alert("Please enter a valid email address");
-  //    }
-  //
-  //    // check if captcha okay
-  //    const captchaValue = recaptcha.current.getValue();
-  //
-  //    if (!captchaValue) {
-  //      alert("Please verify the reCAPTCHA!");
-  //    } else {
-  //      const res = await fetch("http://localhost:5000/captcha/verify", {
-  //        method: "POST",
-  //        body: JSON.stringify({ captchaValue }),
-  //        headers: {
-  //          "content-type": "application/json",
-  //        },
-  //      });
-  //
-  //      const data = await res.json();
-  //      // response in json we have "success" field, that google send us, if it's verified or not
-  //      if (data.success) {
-  //        // make form submission
-  //
-  //
-  //
-  //        // TODO, e ovde ides, za login kako treba, u context...
-  //        let response = await axios.post(
-  //          `${BACKEND_SERVER_BASE_URL}/auth/login`,
-  //          { email, password }
-  //        );
-  //
-  //
-  //
-  //        if (response) {
-  //          alert("Login success ");
-  //        } else {
-  //          alert("Login failed");
-  //        }
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //       // alert("Form submission successful!");
-  //      } else {
-  //        alert("reCAPTCHA validation failed!");
-  //      }
-  //
-  //      // make form submission
-  //    }
-  //
-  //    //  alert('Form submission successful!')
-  //  };
-
   let APP_SITE_KEY =
-    import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY ;
+    import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
 
   return (
     <>
       <div className="flex m-16">
         <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
-
           <img src="login/logo.svg" />
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
@@ -235,16 +110,6 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-center mt-8">
-              {/* 
-              <label htmlFor="email">Email*</label>
-              <input
-                placeholder="johndoe@gmail.com"
-                className="w-[420px] "
-                type="email"
-                id="email"
-                name="email"
-              /> */}
-
               <TextField
                 label="Email"
                 placeholder="johndoe@gmail.com"
@@ -252,52 +117,31 @@ const Login = () => {
                 name="email"
                 required
                 type="email"
-
-                
                 inputProps={{
-                  maxLength: 80
+                  maxLength: 80,
                 }}
-
                 sx={{
                   m: 1,
                   width: "420px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
+                    borderRadius: 5,
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                     {
-                      borderColor: "red", // Red border on focus
+                      borderColor: "red",
                     },
 
                   "& .MuiInputLabel-root": {
                     "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
+                      color: "black",
                     },
                   },
                 }}
               />
             </div>
 
-            {/* ---------------- 
-
             <div className="flex flex-col mb-2.5 justify-center mt-2">
-              <label htmlFor="pass">Password*</label>
-              <input
-                placeholder="password"
-                className="w-[420px]"
-                type="password"
-                id="pass"
-                name="pass"
-                required
-              />
-            </div>
-*/}
-            {/* ---------------- */}
-
-            <div className="flex flex-col mb-2.5 justify-center mt-2">
-
-
               <TextField
                 label="Password"
                 placeholder="password"
@@ -305,26 +149,24 @@ const Login = () => {
                 name="pass"
                 required
                 type={showPassword ? "text" : "password"}
-                
                 inputProps={{
-                  maxLength: 255
+                  maxLength: 255,
                 }}
-
                 sx={{
                   m: 1,
                   width: "420px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
+                    borderRadius: 5,
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                     {
-                      borderColor: "red", // Red border on focus
+                      borderColor: "red",
                     },
 
                   "& .MuiInputLabel-root": {
                     "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
+                      color: "black",
                     },
                   },
                 }}
@@ -343,9 +185,6 @@ const Login = () => {
                   ),
                 }}
               />
-
-
-
             </div>
 
             {/* ---------------- */}
@@ -353,22 +192,9 @@ const Login = () => {
             {/*  this is for checkbox and forgot password*/}
             <div className="flex w-[420px] flex items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
-                
-                
-            {/*     <label htmlFor="remember">
-                  <input
-                    type="checkbox"
-                    id="remember"
-                    name="remember"
-                    className="mr-2"
-                  />
-                  Remember me
-                </label> */}
-
                 <FormControlLabel
                   control={
                     <Checkbox
-                    
                       sx={{
                         color: "#FF0000",
                         "&.Mui-checked": {
@@ -419,17 +245,25 @@ const Login = () => {
                 <span className="popins-font">Login</span>
               </Button>
 
-              
-     {/*   */}
-      <p className="mt-4 " style= {{color: `${resultTextColor}`, }}>{resultText}</p>
+              {/*   */}
+              <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
+                {resultText}
+              </p>
 
-{!isEmailVerified && (
-
-      <p onClick={handleResendEmailVerify} className="" style= {{color: `${resultTextColor}`, textDecoration: 'underline', cursor: 'pointer',userSelect: 'none' }}>Resend verification email ?</p>
-
-
-)
-}
+              {!isEmailVerified && (
+                <p
+                  onClick={handleResendEmailVerify}
+                  className=""
+                  style={{
+                    color: `${resultTextColor}`,
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                    userSelect: "none",
+                  }}
+                >
+                  Resend verification email ?
+                </p>
+              )}
             </div>
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
@@ -455,8 +289,6 @@ const Login = () => {
             >
               <span className="popins-font">Sign Up</span>
             </Button>
-
-          
           </div>
 
           <div className="flex justify-center mt-12">
@@ -467,9 +299,7 @@ const Login = () => {
         <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">
           <img src="login/1.png" className="image_login" />
         </div>
-
       </div>
-
     </>
   );
 };

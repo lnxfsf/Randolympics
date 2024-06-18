@@ -9,15 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 import { RandomizeItem } from "../components/Randomize/RandomizeItem";
 
-
-
-
-
-
 const Randomize = () => {
-
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const handleRedirectRegister = () => {
     navigate("/register");
@@ -35,96 +28,77 @@ const Randomize = () => {
         </h1>
       </div>
 
+      <div></div>
 
+      <div className="main_grid_schedule m-8 mt-16">
+        <p></p>
 
-    <div >
-        
+        {/* this, time, as well, can be updated dynamically, by data from backend */}
+        <p>
+          <b>09-12:00</b>
+        </p>
+        <p>
+          <b>12-15:00</b>
+        </p>
+        <p>
+          <b>15-18:00</b>
+        </p>
+        <p>
+          <b>18-21:00</b>
+        </p>
+        <p>
+          <b>21-00:00</b>
+        </p>
 
-    </div>
+        <p className="days_grid_schedule">Monday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-    <div className="main_grid_schedule m-8 mt-16">
+        <p className="days_grid_schedule">Tuesday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-            <p></p>
+        <p className="days_grid_schedule">Wednesday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-            {/* this, time, as well, can be updated dynamically, by data from backend */}
-            <p><b>09-12:00</b></p>
-            <p><b>12-15:00</b></p>
-            <p><b>15-18:00</b></p>
-            <p><b>18-21:00</b></p>
-            <p><b>21-00:00</b></p>
+        <p className="days_grid_schedule">Thursday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
+        <p className="days_grid_schedule">Friday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-            <p className="days_grid_schedule" >Monday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
+        <p className="days_grid_schedule">Saturday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-
-            
-            <p className="days_grid_schedule">Tuesday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-
-
-            <p className="days_grid_schedule">Wednesday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-
-
-            <p className="days_grid_schedule">Thursday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-
-
-            <p className="days_grid_schedule">Friday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-
-
-
-
-            <p className="days_grid_schedule">Saturday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-
-
-            <p className="days_grid_schedule">Sunday</p>
-            <RandomizeItem  icon={"swim"} name={"Butterfly Swimming"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-            <RandomizeItem icon={"gun"} name={"Double Trap "}/>
-            <RandomizeItem icon={"hockey"} name={"Field Hockey"}/>
-            <RandomizeItem icon={"hourglass"} name={"Break"}/>
-
-        </div>
-
-
-
-
-
-
-
+        <p className="days_grid_schedule">Sunday</p>
+        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+        <RandomizeItem icon={"gun"} name={"Double Trap "} />
+        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
+        <RandomizeItem icon={"hourglass"} name={"Break"} />
+      </div>
 
       <div className="flex mb-12 mt-32">
         <div className="basis-1/2 flex flex-col items-end justify-center">
