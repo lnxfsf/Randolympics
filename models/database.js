@@ -3,16 +3,7 @@ const dbConfig = require('../data/config');
 const { Sequelize, DataTypes } = require('sequelize');
 
 
-
-
-
-
-
-/* 
-dbConfig.DATABASE, 
-  dbConfig.USER, 
-  dbConfig.PASSWORD, */ 
-
+// this is mySQL database (local for now) connection. on 'randolympics' database
   const sequelize = new Sequelize('randolympics', 'igor', 'igor123', {
     host: 'localhost',
     dialect: 'mysql',
@@ -27,29 +18,6 @@ dbConfig.DATABASE,
   });
   
   
-
-  
-/* 
-const sequelize = new Sequelize(
-  
-  {
-
-    dialect: MySqlDialect,
-    database: 'randolympics', 
-    user: 'igor', 
-    password: 'igor123', 
-
-    host: 'localhost',
-   
-    operatorsAliases: false,
-    pool: {
-      max: dbConfig.pool.max,
-      min: dbConfig.pool.min,
-      acquire: dbConfig.pool.acquire,
-      idle: dbConfig.pool.idle,
-    },
-  }
-);  */
 
 
 
@@ -66,9 +34,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-//! what is this
 db.users = require('./users')(sequelize,DataTypes)
-//db.token = require('./token')(sequelize,DataTypes)
 
 
 

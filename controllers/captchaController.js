@@ -1,4 +1,4 @@
-// And separated the logic for handling requests into controllers.
+// this is for captcha prompt, for signup..
 
 const axios = require("axios");
 const SITE_SECRET = process.env.SITE_SECRET;
