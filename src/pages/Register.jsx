@@ -67,6 +67,13 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+
+
+
+
+
+
 const Register = () => {
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
@@ -96,6 +103,39 @@ const Register = () => {
       });
     }
   }; */
+
+    const [uploadedFile, setUploadedFile] = useState(null);
+
+
+  const server = {
+        /* url: 'http://localhost:5000/profile_photo/upload', */
+
+    process: {
+        url: 'http://localhost:5000/profile_photo/upload',
+        method: 'POST',
+        headers: {},
+        withCredentials: false,
+
+        onload: (response) => {
+
+            // Parse the JSON response to get the filename
+
+            const jsonResponse = JSON.parse(response);
+            const filename = jsonResponse;
+
+            console.log("Uploaded filename:", filename);
+            setUploadedFile(filename);
+            // return filename; 
+        },
+        onerror: (response) => {
+            console.error('Error uploading file:', response);
+            return response;
+        },
+    },
+};
+
+
+
 
   // ? image upload
 
@@ -269,7 +309,7 @@ const Register = () => {
               nationality: nationality_selected,
               weight,
               cryptoaddress: cryptoaddr,
-              picture: profile_uploaded.data,
+              picture: uploadedFile,
 
               cryptoaddress_type: selectedCrypto,
               bio,
@@ -734,13 +774,20 @@ const Register = () => {
 
           <div className="flex flex-col justify-start">
             <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-auto mt-8 h-auto mb-6">
+
+
+
+            {/* server="http://localhost:5000/profile_photo/upload" */}
+
+
               <FilePond
                 type="file"
                 className={"profile_pic_upload"}
                 onupdatefiles={setFiles}
                 allowMultiple={false}
                 maxFiles={1}
-                server="http://localhost:5000/profile_photo/upload"
+                server={server}
+
                 name="image"
                 labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(not mandatory)'
                 accept="image/png, image/jpeg, image/gif"
@@ -768,6 +815,7 @@ const Register = () => {
                 styleButtonRemoveItemPosition="center  bottom"
                 styleButtonProcessItemPosition="center bottom"
                 imageEditAllowEdit={false}
+
               />
             </div>
 
