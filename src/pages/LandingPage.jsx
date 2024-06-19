@@ -1,3 +1,6 @@
+//  this is landing page, where people can come from marketing links, intended for marketing purposes, like a flyer 
+
+
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 

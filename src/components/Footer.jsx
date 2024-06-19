@@ -1,7 +1,22 @@
 import "../styles/footer.scoped.scss";
 import { Button } from "@mui/material";
 
+
+import { useNavigate } from "react-router-dom";
+
+
 const Footer = () => {
+
+
+  const navigate = useNavigate();
+
+
+  
+  const handleToMainHome = () => {
+    navigate("/home");
+  };
+
+
   return (
     <>
       <div>
@@ -15,6 +30,7 @@ const Footer = () => {
               {/*     // TODO       "Join the fun", button in the footer, should link to the main page... the other one, which can be accessed via google (this one is for marketing)...
                */}
               <Button
+                onClick={handleToMainHome}
                 className="w-56 "
                 style={{ marginTop: "20px", marginLeft: "64px" }}
                 sx={{

@@ -21,6 +21,7 @@ const Randomize = () => {
       <Navbar />
 
       <div className="">
+        
         <h1 className="flex text-[40px] mt-8 justify-center ">
           Let’s see <span className=" text-red_first pl-3 pr-3">your</span>{" "}
           schedule for{" "}
