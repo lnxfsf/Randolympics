@@ -3,9 +3,54 @@
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
+import { createDirectus, rest, readItems } from "@directus/sdk";
+
+// okej, ovo radi (ovo je sigurniji način da fetch-ujes, nego axios API... )
 
 const Home = () => {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    fetchNewsGames();
+  }, []);
+
+  const fetchNewsGames = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8055/items/stockholm_games"
+      );
+
+      /* 
+this is from official:
+    const client = createDirectus('http://localhost:8055').with(rest());
+    const response = await client.request(readItems('stockholm_games')); 
+    */
+
+      // set variable.
+      setGames(response.data.data);
+
+      //console.log(games);  // this on first will not reflect updated state ! so it will be null, but access it outside, and it will show...
+    } catch (error) {
+      console.error("Error fetching games:", error);
+    }
+  };
+
+  // so once you accessed it outside of useEffect, then it worked fine..
+  console.log(games);
+
+
+
+  // we need in format: 1 Jan 2024
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+
+
   return (
     <>
       <Navbar />
@@ -16,23 +61,89 @@ const Home = () => {
         </h1>
       </div>
 
+      {/* stockholm games content */}
+
+<br/>
+      <p><b>titles</b></p>
 
       <div>
+        <ul>
+          {games.map((item, index) => (
+            <li key={index}>ID: {item.stockholm_games_id} -- {item.title}</li>
+          ))}
+        </ul>
+      </div>
+
+      <br/>
+
+<p><b>subtitles</b></p>
+      <div>
+        <ul>
+          {games.map((item, index) => (
+            <li key={index}>ID: {item.stockholm_games_id} -- {item.subtitle}</li>
+          ))}
+        </ul>
+      </div>
+
+      <br/>
 
 
+
+      <p><b>time to read</b></p>
+      <div>
+        <ul>
+          {games.map((item, index) => (
+            <li key={index}>ID: {item.stockholm_games_id} -- {item.time_to_read} min read</li>
+          ))}
+        </ul>
       </div>
 
 
 
+      <br/>
+
+
+
+      <p><b>Date</b></p>
+      <div>
+        <ul>
+          {games.map((item, index) => (
+            <li key={index}>ID: {item.stockholm_games_id} -- {formatDate(item.date_created)}</li>
+          ))}
+        </ul>
+      </div>
+
+
+<br/>
+
+      <p><b>Content</b></p>
+      <div>
+        <ul>
+          {games.map((item, index) => (
+            <li key={index}>ID: {item.stockholm_games_id} -- {item.content}</li>
+          ))}
+        </ul>
+      </div>
+
+
+      
+<br/>
+
+<p><b>Images</b></p>
+<div>
+  <ul>
+    {games.map((item, index) => (
+      <>
+        <li key={index}>ID: {item.stockholm_games_id}</li>
+
+        <img src={"http://localhost:8055/assets/"+item.post_image} style={{ width: '100px', height: '100px' }}  /> 
+      </>
+    ))}
+  </ul>
+</div>
 
       {/* just temporary, so I can see content */}
       <div className="h-96"></div>
-
-      
-
-
-
-
 
       {/* start about us part */}
 
@@ -105,7 +216,6 @@ const Home = () => {
       </div>
 
       {/* end about us part */}
-
 
       <Footer />
     </>
