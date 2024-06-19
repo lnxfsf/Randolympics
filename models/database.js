@@ -34,7 +34,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require('./users')(sequelize,DataTypes)
+
+db.users = require('./users')(sequelize,DataTypes)  // model for Users
+
+// model for News
+
 
 
 

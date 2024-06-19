@@ -13,6 +13,9 @@ const authRoutes = require("./routes/authRoutes");
 const captchaRoutes = require("./routes/captchaRoutes");
 const multerConfig = require("./routes/profilePicture");
 
+const blogRoutes = require("./routes/blogRoutes");
+
+
 const db = require("./models/database");
 
 
@@ -31,6 +34,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/captcha", captchaRoutes);
 app.use("/auth", authRoutes); // routes, login, register.
 app.use("/profile_photo", multerConfig);
+
+
+// this is for blog and news, that users add to..
+app.use("/blog", blogRoutes);
 
 
 
