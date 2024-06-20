@@ -20,27 +20,39 @@ import Menu from "@mui/material/Menu";
 
 //we display it as fragment, inside MyProfile...
 
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from 'dayjs';
 
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 //TODO, for passport, you only need to set up on server side, route for passports, and then it stores passports in it's separate folder in /uploads as well...
 
 //TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
 const EditProfile = () => {
+  //For date.  okay, it saves as date object
+  const [selectedDate, setSelectedDate] = useState(null);
+ // const [formattedDate, setFormattedDate] = useState(null); //TODO, you will use this in passport_expiry_date, to show it...
 
-    //For date.  okay, it saves as date object
-    const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    //console.log(date)
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-        console.log(date)
+    //console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
+ 
 
-        console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
-    };
 
+
+ 
+   
+  };
+
+
+ //TODO, you will use this in passport_expiry_date, to show it... like, when you insert (Validation Manager when he can only inserts it )
+ //const FDate = dayjs(selectedDate);
+ //setFormattedDate(FDate.format('MMMM DD, YYYY'));
+ // console.log(formattedDate);
 
 
   const [selectedRole, setSelectedRole] = useState("AH");
@@ -163,8 +175,6 @@ const EditProfile = () => {
         </div>
 
         <div className="editProfileFields mt-4">
-
-
           <div className="flex items-end">
             <div className="flex flex-col mb-1 justify-center mt-0">
               <TextField
@@ -365,8 +375,6 @@ const EditProfile = () => {
           <div className="flex items-end">
             <div className="flex flex-col justify-center ">
               {selectedRole === "AH" && (
-
-
                 <div className="flex justify-end items-end flex-col">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <Select
@@ -444,8 +452,6 @@ const EditProfile = () => {
                     }}
                   />
                 </div>
-
-                
               )}
             </div>
 
@@ -462,37 +468,31 @@ const EditProfile = () => {
             </div>
           </div>
 
-
-
-
-            
           <div className="flex items-end">
-            <div className="flex flex-col mb-1 justify-center mt-6">
-              
-              
+            <div className="flex flex-col  ml-2 mt-6  w-[330px]">
               {/* //TODO this is for date picker, for adding passport expiry */}
               {/* //TODO see values  for date picker, how to access the date, then, and use it for upload  */}
 
-{/*
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Basic date picker" />
-      </DemoContainer>
-    </LocalizationProvider>
-*/}
+             
 
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker
-          label="Basic date picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-          format="MM/DD/YYYY" // Adjust format as per your requirement
-        />
-      </DemoContainer>
-      </LocalizationProvider>
+              <LocalizationProvider dateAdapter={AdapterDayjs} className="">
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                  className="w-full"
+                    label="Birthdate"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    format="MM/DD/YYYY" 
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+
+                     
+              <p></p>
+
+
             </div>
-                </div>
+          </div>
         </div>
       </div>
     </>
