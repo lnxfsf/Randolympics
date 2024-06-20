@@ -30,6 +30,19 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 //TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
 const EditProfile = () => {
+
+    //For date.  okay, it saves as date object
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        console.log(date)
+
+        console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
+    };
+
+
+
   const [selectedRole, setSelectedRole] = useState("AH");
   const [nationality_selected, setNationality_selected] = useState("");
 
@@ -460,14 +473,24 @@ const EditProfile = () => {
               {/* //TODO this is for date picker, for adding passport expiry */}
               {/* //TODO see values  for date picker, how to access the date, then, and use it for upload  */}
 
-
+{/*
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker label="Basic date picker" />
       </DemoContainer>
     </LocalizationProvider>
+*/}
 
-
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker
+          label="Basic date picker"
+          value={selectedDate}
+          onChange={handleDateChange}
+          format="MM/DD/YYYY" // Adjust format as per your requirement
+        />
+      </DemoContainer>
+      </LocalizationProvider>
             </div>
                 </div>
         </div>
