@@ -3,8 +3,6 @@ import React, { useState } from "react";
 
 import ReactFlagsSelect from "react-flags-select";
 
-
-
 // MUI
 import Flag from "react-world-flags";
 import TextField from "@mui/material/TextField";
@@ -23,19 +21,17 @@ import Menu from "@mui/material/Menu";
 //we display it as fragment, inside MyProfile...
 
 
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+//TODO, for passport, you only need to set up on server side, route for passports, and then it stores passports in it's separate folder in /uploads as well...
+
 //TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
 const EditProfile = () => {
-
-
-
-
-
-
-
-
-    const [selectedRole, setSelectedRole] = useState("A");
+  const [selectedRole, setSelectedRole] = useState("AH");
   const [nationality_selected, setNationality_selected] = useState("");
-
 
   // for country flags...
   const [code, setCode] = useState("us");
@@ -56,11 +52,10 @@ const EditProfile = () => {
     setWeight_private(event.target.value);
   };
 
-
-
   // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[330px] ${selectedRole !== "AH" ? 'mt-8 ml-2' : ''}`;
-
+  let classNameFlagsSelect = `w-[330px] ml-2 ${
+    selectedRole !== "AH" ? "mt-8" : ""
+  }`;
 
   // ? HERE, for crypto..
 
@@ -155,6 +150,8 @@ const EditProfile = () => {
         </div>
 
         <div className="editProfileFields mt-4">
+
+
           <div className="flex items-end">
             <div className="flex flex-col mb-1 justify-center mt-0">
               <TextField
@@ -162,7 +159,6 @@ const EditProfile = () => {
                 placeholder="John Doe"
                 id="name"
                 name="name"
-                
                 type="text"
                 inputProps={{
                   maxLength: 255,
@@ -216,7 +212,6 @@ const EditProfile = () => {
                 placeholder="johndoe@gmail.com"
                 id="email"
                 name="email"
-                
                 type="email"
                 maxLength="80"
                 inputProps={{
@@ -328,7 +323,6 @@ const EditProfile = () => {
                 placeholder="+1 212 456 7890"
                 id="phone"
                 name="phone"
-                
                 type="tel"
                 inputProps={{
                   maxLength: 15,
@@ -357,13 +351,13 @@ const EditProfile = () => {
 
           <div className="flex items-end">
             <div className="flex flex-col justify-center ">
-          
-
               {selectedRole === "AH" && (
+
+
                 <div className="flex justify-end items-end flex-col">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <Select
-                    className="h-5 "
+                      className="h-5 "
                       name="weight_private"
                       id="weight_private"
                       value={weight_private}
@@ -371,7 +365,7 @@ const EditProfile = () => {
                       disableUnderline
                       sx={{
                         boxShadow: "none",
-                        height: 15  ,
+                        height: 15,
                         ".MuiOutlinedInput-notchedOutline": { border: 0 },
                       }}
                     >
@@ -385,7 +379,6 @@ const EditProfile = () => {
                     label="Weight"
                     id="weight"
                     name="weight"
-                    
                     type="number"
                     placeholder="85 kg/185 lb"
                     sx={{
@@ -438,25 +431,45 @@ const EditProfile = () => {
                     }}
                   />
                 </div>
+
+                
               )}
             </div>
 
             <div className="flex justify-end items-end pb-2 ">
-            
-            <ReactFlagsSelect
-                  selected={nationality_selected}
-                  onSelect={(code) => setNationality_selected(code)}
-                  className={classNameFlagsSelect}
-                  searchable={true}
-                  id="nationality"
-                  name="nationality"
-                  placeholder="Nationality *"
-                />
+              <ReactFlagsSelect
+                selected={nationality_selected}
+                onSelect={(code) => setNationality_selected(code)}
+                className={classNameFlagsSelect}
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder="Nationality *"
+              />
+            </div>
+          </div>
 
+
+
+
+            
+          <div className="flex items-end">
+            <div className="flex flex-col mb-1 justify-center mt-6">
+              
+              
+              {/* //TODO this is for date picker, for adding passport expiry */}
+              {/* //TODO see values  for date picker, how to access the date, then, and use it for upload  */}
+
+
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker label="Basic date picker" />
+      </DemoContainer>
+    </LocalizationProvider>
 
 
             </div>
-          </div>
+                </div>
         </div>
       </div>
     </>
