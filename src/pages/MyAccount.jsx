@@ -6,9 +6,11 @@ import React, { useState, useEffect } from "react";
 
 
 const MyAccount = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(0);
 
   const items = ["My Account", "Settings", "Team", "Logout"];
+  const itemsIcon = ["/myaccount/user.svg", "/myaccount/settings.svg", "/myaccount/team.svg", "/myaccount/exit.svg"];
+
 
   const handleClick = (index) => {
     setSelectedItem(index);
@@ -26,7 +28,7 @@ const MyAccount = () => {
         <div className="basis-1/3 side_nav p-4">
           
 
-          <ul className="list">
+          <ul className="list  flex flex-col">
             {items.map((item, index) => (
               <li
                 key={index}
@@ -35,7 +37,8 @@ const MyAccount = () => {
                 }`}
                 onClick={() => handleClick(index)}
               >
-                {item}
+               <img src={itemsIcon[index]} className="icon" />
+               {item}
               </li>
             ))}
           </ul>
