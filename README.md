@@ -38,4 +38,5 @@ npm i @pqina/pintura @pqina/filepond-plugin-image-editor filepond-plugin-file-po
 
 npm i @pqina/react-pintura
 
+npm install react-world-flags
 

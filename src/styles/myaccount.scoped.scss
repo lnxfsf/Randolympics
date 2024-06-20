@@ -1,53 +1,45 @@
-
 .side_nav {
-    border-width: 1px 1px 1px 1px;
+  border-width: 1px 1px 1px 1px;
   border-style: solid;
   ///border-color: white;
-  border-color: #DEDEDE;
+  border-color: #dedede;
   border-radius: 20px;
-
-
 }
 
 
-
+// for list items..
 .list {
-    list-style-type: none;
-    
-  }
-  
-  .list-item {
-    //display: block;
-   
-    display: flex; 
-    align-items: center; 
+  list-style-type: none;
+}
 
-    padding: 10px;
-    cursor: pointer;
-    background-color: white; 
-    border-radius: 11px;
+.list-item {
+ 
+  display: flex;
+  align-items: center;
 
-  }
+  padding: 10px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 11px;
+}
 
+.list-item:hover {
+  background-color: #f0f0f0;
+  color: black;
+  border-radius: 11px;
+}
 
-  .list-item:hover {
-    background-color: #f0f0f0; 
-    color: black;
-    border-radius: 11px;
-
-  }
-  
-  .selected {
-    background-color: #AF2626; 
-    color: white;
-    border-radius: 11px;
-  }
-
-
+.selected {
+  background-color: #af2626;
+  color: white;
+  border-radius: 11px;
+}
 
 .icon {
-    margin-right: 10px; 
-    width: 20px; 
-    height: 20px; 
-    display: inline-block;  //this is why it didn't want to display in one line
-  }
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block; //this is why it didn't want to display in one line
+}
+
+// for list items..
