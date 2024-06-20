@@ -33,7 +33,7 @@ import dayjs from 'dayjs';
 const EditProfile = () => {
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(null);
- // const [formattedDate, setFormattedDate] = useState(null); //TODO, you will use this in passport_expiry_date, to show it...
+  const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -78,7 +78,7 @@ const EditProfile = () => {
   };
 
   // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[330px] ml-2 ${
+  let classNameFlagsSelect = `w-[280px] ml-2 ${
     selectedRole !== "AH" ? "mt-8" : ""
   }`;
 
@@ -174,326 +174,303 @@ const EditProfile = () => {
           </p>
         </div>
 
-        <div className="editProfileFields mt-4">
-          <div className="flex items-end">
-            <div className="flex flex-col mb-1 justify-center mt-0">
-              <TextField
-                label="Name"
-                placeholder="John Doe"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                sx={{
-                  m: 1,
-                  width: "330px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
+        
 
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+<hr />
+        <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
+  <div className="flex items-end col-span-2">
+    <div className="flex flex-col mb-1 justify-center mt-0">
+      <TextField
+        label="Name"
+        placeholder="John Doe"
+        id="name"
+        name="name"
+        type="text"
+        inputProps={{
+          maxLength: 255,
+        }}
+        sx={{
+          m: 1,
+          width: "280px",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 5,
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "red",
+            },
+          "& .MuiInputLabel-root": {
+            "&.Mui-focused": {
+              color: "black",
+            },
+          },
+        }}
+      />
+    </div>
+    <div className="flex mb-1 justify-end items-end flex-col">
+      <FormControl className="h-5" variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <Select
+          name="email_private"
+          id="email_private"
+          value={email_private}
+          disableUnderline
+          onChange={handleEmailPrivacyChange}
+          sx={{
+            boxShadow: "none",
+            height: 32,
+            ".MuiOutlinedInput-notchedOutline": { border: 0 },
+          }}
+        >
+          <MenuItem value={true}>Private</MenuItem>
+          <MenuItem value={false}>Public</MenuItem>
+        </Select>
+      </FormControl>
+      <TextField
+        label="Email"
+        placeholder="johndoe@gmail.com"
+        id="email"
+        name="email"
+        type="email"
+        inputProps={{
+          maxLength: 80,
+        }}
+        sx={{
+          m: 1,
+          width: "280px",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 5,
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "red",
+            },
+          "& .MuiInputLabel-root": {
+            "&.Mui-focused": {
+              color: "black",
+            },
+          },
+        }}
+      />
+    </div>
+  </div>
 
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-              />
-            </div>
+  <div className="row-span-3 flex items-start justify-start flex-col">
+    <p className="pb-2"><b>Passport photo</b></p>
+    <img src="editprofile/passport.png" alt="Profile" className="w-[331px] h-[222px] object-fit passport-photo" />
+    <p className="pt-2 " style={{ color: '#DEDEDE' }} >Passport expires: <b>{formattedDate}</b></p>
 
-            <div className="flex mb-1 justify-end items-end     flex-col">
-              <FormControl
-                className="h-5 "
-                variant="standard"
-                sx={{ m: 1, minWidth: 120 }}
+  </div>
+
+  <div className="flex items-end col-span-2">
+    <div className="flex flex-col justify-center">
+      <TextField
+        label="Crypto"
+        id="cryptoaddr"
+        name="cryptoaddr"
+        placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+        sx={{
+          m: 1,
+          width: "280px",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 5,
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "red",
+            },
+          "& .MuiInputLabel-root": {
+            "&.Mui-focused": {
+              color: "black",
+            },
+          },
+        }}
+        InputProps={{
+          maxLength: 150,
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle BTC/ETH/XMR"
+                onClick={handleCryptoMenuClick}
+                edge="end"
               >
-                <Select
-                  name="email_private"
-                  id="email_private"
-                  value={email_private}
-                  disableUnderline
-                  onChange={handleEmailPrivacyChange}
-                  sx={{
-                    boxShadow: "none",
-                    height: 32,
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                  }}
-                >
-                  <MenuItem value={true}>Private</MenuItem>
-                  <MenuItem value={false}>Public</MenuItem>
-                </Select>
-              </FormControl>
+                {selectedCrypto}
+              </IconButton>
+              <Menu
+                id="crypto-menu"
+                anchorEl={cryptoMenuAnchorEl}
+                open={Boolean(cryptoMenuAnchorEl)}
+                onClose={handleCryptoMenuClose}
+              >
+                {cryptoOptions.map((option) => (
+                  <MenuItem
+                    key={option}
+                    onClick={() => handleCryptoOptionSelect(option)}
+                    selected={option === selectedCrypto}
+                  >
+                    {option}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </InputAdornment>
+          ),
+        }}
+      />
+    </div>
+    <div className="flex justify-end items-end flex-col">
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <Select
+          className="h-5"
+          name="phone_private"
+          id="phone_private"
+          value={phone_private}
+          disableUnderline
+          onChange={handlePhonePrivacyChange}
+          sx={{
+            boxShadow: "none",
+            height: 15,
+            ".MuiOutlinedInput-notchedOutline": { border: 0 },
+          }}
+        >
+          <MenuItem value={true}>Private</MenuItem>
+          <MenuItem value={false}>Public</MenuItem>
+        </Select>
+      </FormControl>
+      <TextField
+        label="Phone number"
+        placeholder="+1 212 456 7890"
+        id="phone"
+        name="phone"
+        type="tel"
+        inputProps={{
+          maxLength: 15,
+        }}
+        sx={{
+          m: 1,
+          width: "280px",
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 5,
+          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "red",
+            },
+          "& .MuiInputLabel-root": {
+            "&.Mui-focused": {
+              color: "black",
+            },
+          },
+        }}
+      />
+    </div>
+  </div>
 
-              <TextField
-                label="Email"
-                placeholder="johndoe@gmail.com"
-                id="email"
-                name="email"
-                type="email"
-                maxLength="80"
-                inputProps={{
-                  maxLength: 80,
-                }}
-                sx={{
-                  m: 1,
-                  width: "330px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-end">
-            <div className="flex flex-col     justify-center ">
-              <TextField
-                label="Crypto"
-                id="cryptoaddr"
-                name="cryptoaddr"
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                sx={{
-                  m: 1,
-                  width: "330px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-                InputProps={{
-                  maxLength: 150,
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle BTC/ETH/XMR"
-                        onClick={handleCryptoMenuClick}
-                        edge="end"
+  <div className="flex items-end col-span-2">
+    <div className="flex flex-col justify-center">
+      {selectedRole === "AH" && (
+        <div className="flex justify-end items-end flex-col">
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <Select
+              className="h-5"
+              name="weight_private"
+              id="weight_private"
+              value={weight_private}
+              onChange={handleWeightPrivacyChange}
+              disableUnderline
+              sx={{
+                boxShadow: "none",
+                height: 15,
+                ".MuiOutlinedInput-notchedOutline": { border: 0 },
+              }}
+            >
+              <MenuItem value={true}>Private</MenuItem>
+              <MenuItem value={false}>Public</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            label="Weight"
+            id="weight"
+            name="weight"
+            type="number"
+            placeholder="85 kg/185 lb"
+            sx={{
+              m: 1,
+              width: "280px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 5,
+              },
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: "red",
+                },
+              "& .MuiInputLabel-root": {
+                "&.Mui-focused": {
+                  color: "black",
+                },
+              },
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle kg / lb"
+                    onClick={handleWeightMenuClick}
+                    edge="end"
+                  >
+                    {selectedWeight}
+                  </IconButton>
+                  <Menu
+                    id="weight-menu"
+                    anchorEl={weightMenuAnchorEl}
+                    open={Boolean(weightMenuAnchorEl)}
+                    onClose={handleWeightMenuClose}
+                  >
+                    {weightOptions.map((option) => (
+                      <MenuItem
+                        key={option}
+                        onClick={() => handleWeightOptionSelect(option)}
+                        selected={option === selectedWeight}
                       >
-                        {/* Icon for dropdown, e.g., a downward arrow */}
-                        {selectedCrypto}
-                      </IconButton>
-                      <Menu
-                        id="crypto-menu"
-                        anchorEl={cryptoMenuAnchorEl}
-                        open={Boolean(cryptoMenuAnchorEl)}
-                        onClose={handleCryptoMenuClose}
-                      >
-                        {cryptoOptions.map((option) => (
-                          <MenuItem
-                            key={option}
-                            onClick={() => handleCryptoOptionSelect(option)}
-                            selected={option === selectedCrypto}
-                          >
-                            {option}
-                          </MenuItem>
-                        ))}
-                      </Menu>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-
-            <div className="flex justify-end items-end flex-col">
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                  className="h-5 "
-                  name="phone_private"
-                  id="phone_private"
-                  value={phone_private}
-                  disableUnderline
-                  onChange={handlePhonePrivacyChange}
-                  sx={{
-                    boxShadow: "none",
-                    height: 15,
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                  }}
-                >
-                  <MenuItem value={true}>Private</MenuItem>
-                  <MenuItem value={false}>Public</MenuItem>
-                </Select>
-              </FormControl>
-
-              <TextField
-                label="Phone number"
-                placeholder="+1 212 456 7890"
-                id="phone"
-                name="phone"
-                type="tel"
-                inputProps={{
-                  maxLength: 15,
-                }}
-                sx={{
-                  m: 1,
-                  width: "330px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-end">
-            <div className="flex flex-col justify-center ">
-              {selectedRole === "AH" && (
-                <div className="flex justify-end items-end flex-col">
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      className="h-5 "
-                      name="weight_private"
-                      id="weight_private"
-                      value={weight_private}
-                      onChange={handleWeightPrivacyChange}
-                      disableUnderline
-                      sx={{
-                        boxShadow: "none",
-                        height: 15,
-                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                      }}
-                    >
-                      <MenuItem value={true}>Private</MenuItem>
-                      <MenuItem value={false}>Public</MenuItem>
-                    </Select>
-                  </FormControl>
-
-                  {/*//TODO also dont forget converstion to kg , if lb is inserted... */}
-                  <TextField
-                    label="Weight"
-                    id="weight"
-                    name="weight"
-                    type="number"
-                    placeholder="85 kg/185 lb"
-                    sx={{
-                      m: 1,
-                      width: "330px",
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
-                      },
-
-                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "red",
-                        },
-
-                      "& .MuiInputLabel-root": {
-                        "&.Mui-focused": {
-                          color: "black",
-                        },
-                      },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle kg / lb"
-                            onClick={handleWeightMenuClick}
-                            edge="end"
-                          >
-                            {/* Icon for dropdown, e.g., a downward arrow */}
-                            {selectedWeight}
-                          </IconButton>
-                          <Menu
-                            id="weight-menu"
-                            anchorEl={weightMenuAnchorEl}
-                            open={Boolean(weightMenuAnchorEl)}
-                            onClose={handleWeightMenuClose}
-                          >
-                            {weightOptions.map((option) => (
-                              <MenuItem
-                                key={option}
-                                onClick={() => handleWeightOptionSelect(option)}
-                                selected={option === selectedWeight}
-                              >
-                                {option}
-                              </MenuItem>
-                            ))}
-                          </Menu>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div className="flex justify-end items-end pb-2 ">
-              <ReactFlagsSelect
-                selected={nationality_selected}
-                onSelect={(code) => setNationality_selected(code)}
-                className={classNameFlagsSelect}
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality *"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-end">
-            <div className="flex flex-col  ml-2 mt-6  w-[330px]">
-              {/* //TODO this is for date picker, for adding passport expiry */}
-              {/* //TODO see values  for date picker, how to access the date, then, and use it for upload  */}
-
-             
-
-              <LocalizationProvider dateAdapter={AdapterDayjs} className="">
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                  className="w-full"
-                    label="Birthdate"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    format="MM/DD/YYYY" 
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-
-                     
-              <p></p>
-
-
-            </div>
-          </div>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </InputAdornment>
+              ),
+            }}
+          />
         </div>
+      )}
+    </div>
+    <div className="flex justify-end items-end pb-2">
+      <ReactFlagsSelect
+        selected={nationality_selected}
+        onSelect={(code) => setNationality_selected(code)}
+        className={classNameFlagsSelect}
+        searchable={true}
+        id="nationality"
+        name="nationality"
+        placeholder="Nationality *"
+      />
+    </div>
+  </div>
+
+  <div className="flex items-end col-span-2">
+    <div className="flex flex-col ml-2 mt-6 w-[280px]">
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={["DatePicker"]}>
+          <DatePicker
+            className="w-full"
+            label="Birthdate"
+            value={selectedDate}
+            onChange={handleDateChange}
+            format="MM/DD/YYYY"
+          />
+        </DemoContainer>
+      </LocalizationProvider>
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );
