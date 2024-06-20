@@ -1,6 +1,9 @@
 import "../../styles/editprofile.scoped.scss";
 import React, { useState } from "react";
 
+import { Button } from "@mui/material";
+
+
 import ReactFlagsSelect from "react-flags-select";
 
 // MUI
@@ -25,6 +28,39 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+
+
+
+
+
+// FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+
+// FilePond css
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
+import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
+import FilePondPluginFilePoster from "filepond-plugin-file-poster";
+import "@pqina/pintura/pintura.css";
+
+
+
+registerPlugin(
+  FilePondPluginFileValidateType,
+  FilePondPluginFilePoster,
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform,
+  FilePondPluginImageEdit
+);
+
 
 //TODO, for passport, you only need to set up on server side, route for passports, and then it stores passports in it's separate folder in /uploads as well...
 
@@ -118,6 +154,48 @@ const EditProfile = () => {
   // ? HERE, for weight..
 
 
+  // ? filepond passport upload
+  const [files, setFiles] = useState([]);
+
+
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+
+  const server = {
+        /* url: 'http://localhost:5000/profile_photo/upload', */
+
+    process: {
+        url: 'http://localhost:5000/passport_photo/upload',
+        method: 'POST',
+        headers: {},
+        withCredentials: false,
+
+        onload: (response) => {
+
+            // Parse the JSON response to get the filename
+
+            const jsonResponse = JSON.parse(response);
+            const filename = jsonResponse;
+
+            console.log("Uploaded filename:", filename);
+            setUploadedFile(filename);
+            // return filename; 
+        },
+        onerror: (response) => {
+            console.error('Error uploading file:', response);
+            return response;
+        },
+    },
+};
+
+
+const [passportUpload, setPassportUpload] = useState(false);
+const tooglePassportUpload = () => {
+  setPassportUpload(!passportUpload);
+}
+
+
+  // ? filepond passport upload
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -264,6 +342,10 @@ const EditProfile = () => {
 
           {/*//TODO ths is okay, but also, user need to click and edit this passport picture ie. to update it ! (just put button on bottom, so I can replace this with FilePond one..*/}
           <div className="row-span-3 flex items-start justify-start flex-col">
+           
+           {!passportUpload && (
+
+<>
             <p className="pb-2">
               <b>Passport photo</b>
             </p>
@@ -275,7 +357,108 @@ const EditProfile = () => {
             <p className="pt-2 " style={{ color: "#DEDEDE" }}>
               Passport expires: <b>{formattedDate}</b>
             </p>
+
+
+            <p className="edit-photo" onClick={tooglePassportUpload}>
+                <u>Edit passport photo</u>
+              </p>
+
+
+
+            </>
+           )}
+
+
+{passportUpload && (
+
+  <>
+
+
+<FilePond
+                type="file"
+                
+                onupdatefiles={setFiles}
+                allowMultiple={false}
+                maxFiles={1}
+                server={server}
+
+                name="image"
+                labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
+                accept="image/png, image/jpeg, image/gif"
+                dropOnPage
+                dropValidation
+                allowPaste={true}
+                allowReplace={true}
+                credits={""}
+                allowFileEncode={true}
+                allowFileTypeValidation={true}
+                allowImagePreview={true}
+                allowImageCrop={true}
+                allowImageResize={true}
+                allowImageTransform={true}
+                imagePreviewHeight={222}
+                imageCropAspectRatio="1:1"
+                imageResizeTargetWidth={100}
+                imageResizeTargetHeight={100}
+                stylePanelLayout="compact"
+                styleLoadIndicatorPosition="center bottom"
+                styleProgressIndicatorPosition="center bottom"
+                styleButtonRemoveItemPosition="center  bottom"
+                styleButtonProcessItemPosition="center bottom"
+                imageEditAllowEdit={false}
+/>
+
+
+
+<p className="edit-photo" onClick={tooglePassportUpload}>
+<u>Save passport photo</u>
+</p>
+
+
+
+</>
+)}
+
+{/* 
+
+              <FilePond
+                type="file"
+                
+                onupdatefiles={setFiles}
+                allowMultiple={false}
+                maxFiles={1}
+                server={server}
+
+                name="image"
+                labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
+                accept="image/png, image/jpeg, image/gif"
+                dropOnPage
+                dropValidation
+                allowPaste={true}
+                allowReplace={true}
+                credits={""}
+                allowFileEncode={true}
+                allowFileTypeValidation={true}
+                allowImagePreview={true}
+                allowImageCrop={true}
+                allowImageResize={true}
+                allowImageTransform={true}
+                imagePreviewHeight={222}
+                imageCropAspectRatio="1:1"
+                imageResizeTargetWidth={100}
+                imageResizeTargetHeight={100}
+                stylePanelLayout="compact"
+                styleLoadIndicatorPosition="center bottom"
+                styleProgressIndicatorPosition="center bottom"
+                styleButtonRemoveItemPosition="center  bottom"
+                styleButtonProcessItemPosition="center bottom"
+                imageEditAllowEdit={false}
+
+              />
+              */}
+
           </div>
+
 
           <div className="flex items-end col-span-2">
             <div className="flex flex-col justify-center">
@@ -489,6 +672,59 @@ const EditProfile = () => {
 
         </div>
 
+        <div className="flex justify-end mt-2 gap-2 items-end">
+           
+           
+        <Button
+                className="w-[200px]"
+                style={{ marginTop: "20px" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#fff",
+                  color: "#000",
+                  borderRadius: 15,
+                  border: `1px solid #AF2626`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+             
+                variant="text"
+                value="Login"
+                id="login-btn"
+              >
+                <span className="popins-font">Cancel</span>
+        </Button>
+
+           
+              <Button
+                className="w-[200px]"
+                style={{ marginTop: "20px" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 15,
+                  border: `1px solid #AF2626`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+                type="submit"
+                variant="text"
+                value="Login"
+                id="login-btn"
+              >
+                <span className="popins-font">Save</span>
+              </Button>
+
+             
+         
+            </div>
         </form>
 
 
