@@ -6,6 +6,7 @@ import { Register } from "./pages/Register";
 import { ForgotPassword } from "./components/Login/ForgotPassword";
 import { Randomize } from "./components/Randomize";
 import { ToS } from "./pages/ToS";
+import { MyAccount } from "./pages/MyAccount";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/tos" element={<ToS />} />
         <Route path="/randomize" element={<Randomize />} />
+        <Route path="/myaccount" element={<MyAccount />} />
       </Routes>
     </>
   );
