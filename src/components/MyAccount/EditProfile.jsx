@@ -1,8 +1,10 @@
+// TODO treba ovo da bude private route...
+
 import "../../styles/editprofile.scoped.scss";
 import React, { useState } from "react";
+import axios from "axios";
 
 import { Button } from "@mui/material";
-
 
 import ReactFlagsSelect from "react-flags-select";
 
@@ -29,10 +31,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
-
-
-
-
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -49,8 +47,6 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 
-
-
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginFilePoster,
@@ -61,13 +57,184 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+import { useRef, useEffect } from "react";
+import { useRouteError } from "react-router-dom";
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 //TODO, for passport, you only need to set up on server side, route for passports, and then it stores passports in it's separate folder in /uploads as well...
 
 //TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
 const EditProfile = () => {
+  const [userData, setUserData] = useState(null);
+
+  const handleEmailChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        email: event.target.value,
+      },
+    }));
+  };
+
+  const handleNameChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        name: event.target.value,
+      },
+    }));
+  };
+
+  const handleCryptoChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        cryptoaddress: event.target.value,
+      },
+    }));
+  };
+
+  const handleCancel = (event) => {
+    // this one is used, if "Cancel" is clicked. so it can revert storedData to original contents...
+    const storedOriginalData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    // we will set setUserData if clicked on this !
+    if (storedOriginalData) {
+      setUserData(JSON.parse(storedOriginalData));
+    }
+  };
+
+  const handlePhoneChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        phone: event.target.value,
+      },
+    }));
+  };
+
+  const handleWeightChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        weight: event.target.value,
+      },
+    }));
+  };
+
+  const handleNationalityChange = (code) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        nationality: code,
+      },
+    }));
+  };
+
+  const [original_email, setOriginalEmail] = useState(null);
+  // for country flags...
+  const [code, setCode] = useState(""); // ! us
+
+  const [email_private, setEmail_private] = useState(true);
+  const [phone_private, setPhone_private] = useState(true);
+  const [weight_private, setWeight_private] = useState(true); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
+
+  const [name_header, setNameHeader] = useState(""); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
+
+  const [user_type, setUserType] = useState(""); // ! AH"
+  const [user_typeText, setUserTypeText] = useState(""); //! Athlete
+
+  useEffect(() => {
+    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      var userJson = JSON.parse(storedData); // so, it's easier, to set values right now here..
+
+      setUserData(userJson);
+
+      setOriginalEmail(userJson.data.email);
+
+      setEmail_private(userJson.data.email_private);
+      setPhone_private(userJson.data.phone_private);
+      setWeight_private(userJson.data.weight_private);
+
+      setCode(userJson.data.nationality); //this is for big flag in upper part ..
+      setNameHeader(userJson.data.name);
+
+      settingUserType(userJson.data.user_type);
+    }
+  }, []);
+
+  const settingUserType = (user_type) => {
+  
+    switch (user_type) {
+      case "AH":
+        setUserTypeText("Athlete");
+        break;
+      case "GP":
+        setUserTypeText("Global President");
+        break;
+      case "NP":
+        setUserTypeText("National President");
+        break;
+      case "EM":
+        setUserTypeText("Event Manager");
+        break;
+      case "ITM":
+        setUserTypeText("IT Manager");
+        break;
+      case "IME":
+        setUserTypeText("IT Manager Page Editor"); // Note: Corrected from "ITM"
+        break;
+      case "MM":
+        setUserTypeText("Marketing Manager");
+        break;
+      case "SM":
+        setUserTypeText("Sales Manager");
+        break;
+      case "VM":
+        setUserTypeText("Validation Manager");
+        break;
+      case "LM":
+        setUserTypeText("Legal Manager");
+        break;
+      case "RS":
+        setUserTypeText("Referee & support");
+        break;
+      default:
+        setUserTypeText("Guest");
+        
+        break;
+    }
+    
+
+  };
+
+  //so we can find that user in database.. (if later on, user changes, his email )
+
+  //console.log("json user data (only when logged in): " + userData.data.email)
+  //console.log("hello: " + lolz)
+
   //For date.  okay, it saves as date object
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
   const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
 
   const handleDateChange = (date) => {
@@ -82,26 +249,47 @@ const EditProfile = () => {
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
   // console.log(formattedDate);
 
-  const [selectedRole, setSelectedRole] = useState("AH");
+  const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
-
-  // for country flags...
-  const [code, setCode] = useState("us");
-
-  const [email_private, setEmail_private] = useState(true);
-  const [phone_private, setPhone_private] = useState(true);
-  const [weight_private, setWeight_private] = useState(true); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
 
   const handleEmailPrivacyChange = (event) => {
     setEmail_private(event.target.value);
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        email_private: event.target.value,
+      },
+    }));
   };
 
   const handlePhonePrivacyChange = (event) => {
+    //console.log("clicked" + event.target.value)
     setPhone_private(event.target.value);
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        phone_private: event.target.value,
+      },
+    }));
   };
 
   const handleWeightPrivacyChange = (event) => {
-    setWeight_private(event.target.value);
+    setWeight_private(event.target.weight_private);
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        weight_private: event.target.value,
+      },
+    }));
   };
 
   // if it's NOT "athlete" user type, then , it removes "weight" input !
@@ -126,7 +314,7 @@ const EditProfile = () => {
 
   const handleCryptoOptionSelect = (option) => {
     setSelectedCrypto(option);
-    setCryptoMenuAnchorEl(null); // Close the menu after selection (optional)
+    setCryptoMenuAnchorEl(null);
   };
 
   // ? HERE
@@ -153,54 +341,122 @@ const EditProfile = () => {
 
   // ? HERE, for weight..
 
-
   // ? filepond passport upload
   const [files, setFiles] = useState([]);
 
-
   const [uploadedFile, setUploadedFile] = useState(null);
 
-
   const server = {
-        /* url: 'http://localhost:5000/profile_photo/upload', */
+    /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: 'http://localhost:5000/passport_photo/upload',
-        method: 'POST',
-        headers: {},
-        withCredentials: false,
+      url: "http://localhost:5000/passport_photo/upload",
+      method: "POST",
+      headers: {},
+      withCredentials: false,
 
-        onload: (response) => {
+      onload: (response) => {
+        // Parse the JSON response to get the filename
 
-            // Parse the JSON response to get the filename
+        const jsonResponse = JSON.parse(response);
+        const filename = jsonResponse;
 
-            const jsonResponse = JSON.parse(response);
-            const filename = jsonResponse;
-
-            console.log("Uploaded filename:", filename);
-            setUploadedFile(filename);
-            // return filename; 
-        },
-        onerror: (response) => {
-            console.error('Error uploading file:', response);
-            return response;
-        },
+        console.log("Uploaded filename:", filename);
+        setUploadedFile(filename);
+        // return filename;
+      },
+      onerror: (response) => {
+        console.error("Error uploading file:", response);
+        return response;
+      },
     },
-};
+  };
 
-
-const [passportUpload, setPassportUpload] = useState(false);
-const tooglePassportUpload = () => {
-  setPassportUpload(!passportUpload);
-}
-
+  const [passportUpload, setPassportUpload] = useState(false);
+  const tooglePassportUpload = () => {
+    setPassportUpload(!passportUpload);
+  };
 
   // ? filepond passport upload
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  }
+    // var email = e.target.email.value;
+
+    var name = e.target.name.value;
+    var phone = e.target.phone.value;
+    var cryptoaddr = e.target.cryptoaddr.value;
+
+    // nationality_selected
+
+    if (!e.target.weight) {
+      var weight = null;
+    } else {
+      var weight = e.target.weight.value;
+
+      // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
+      if (selectedWeight === "Lb") {
+        weight = weight * 0.45359237;
+        console.log(weight);
+      }
+    }
+
+    // if birthdate is set
+    if (e.target.birthdate) {
+      var birthdate = e.target.birthdate.value;
+    } else {
+      var birthdate = null;
+    }
+
+    try {
+      //TODO if success, then, also save it in localstorage as well... those updated values
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        {
+          original_email,
+          //email,
+
+          //email_private,
+          //phone_private,
+          //weight_private,
+          name,
+          phone,
+          nationality: nationality_selected,
+          weight,
+          cryptoaddress: cryptoaddr,
+          //picture: uploadedFile,
+
+          cryptoaddress_type: selectedCrypto,
+
+          email_private: email_private,
+          phone_private: phone_private,
+          weight_private: weight_private,
+
+          // bio,
+        }
+      );
+
+      //console.log("salje email private: " + email_private)
+
+      //console.log("hey"+ response.status)
+      if (response.status === 200) {
+        //TODO, ovo stavi ispod text, da kaze da je azurirao values..
+        //setResultText(response.data.message);
+        //TODO, da azurira i u localstorage !
+
+        //localStorage.setItem('authTokens', JSON.stringify(userData));
+
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(userData));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(userData));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -215,7 +471,7 @@ const tooglePassportUpload = () => {
 
           <div className="flex flex-grow">
             <div className="flex flex-col justify-center pl-4">
-              <h1 className="text-[25px]">Name Lastname</h1>
+              <h1 className="text-[25px]">{name_header}</h1>
               <p className="edit-photo">
                 <u>Edit photo</u>
               </p>
@@ -225,7 +481,7 @@ const tooglePassportUpload = () => {
           <div className="flex justify-self-end">
             <div className="flex flex-col justify-center pl-4">
               <p className="text-base text-right">User Type</p>
-              <h1 className="text-[25px] text-right">National President</h1>
+              <h1 className="text-[25px] text-right">{user_typeText}</h1>
             </div>
             <div className="flex flex-col justify-center pl-4">
               <Flag className="flag-photo" code={code} />
@@ -250,176 +506,158 @@ const tooglePassportUpload = () => {
           </p>
         </div>
 
-
-
-
-       <form  action="#"
-            
-            onSubmit={handleSubmit} >
-
-
-        <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
-
-          <div className="flex items-end col-span-2">
-            <div className="flex flex-col mb-1 justify-center mt-0">
-              <TextField
-                label="Name"
-                placeholder="John Doe"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-              />
-            </div>
-            <div className="flex mb-1 justify-end items-end flex-col">
-              <FormControl
-                className="h-5"
-                variant="standard"
-                sx={{ m: 1, minWidth: 120 }}
-              >
-                <Select
-                  name="email_private"
-                  id="email_private"
-                  value={email_private}
-                  disableUnderline
-                  onChange={handleEmailPrivacyChange}
-                  sx={{
-                    boxShadow: "none",
-                    height: 32,
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
+        <form action="#" onSubmit={handleSubmit}>
+          <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
+            <div className="flex items-end col-span-2">
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  value={userData && userData.data.name}
+                  onChange={handleNameChange}
+                  label="Name"
+                  placeholder="John Doe"
+                  id="name"
+                  name="name"
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
                   }}
+                  sx={{
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red",
+                      },
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="flex mb-1 justify-end items-end flex-col">
+                <FormControl
+                  className="h-5"
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 120 }}
                 >
-                  <MenuItem value={true}>Private</MenuItem>
-                  <MenuItem value={false}>Public</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField
-                label="Email"
-                placeholder="johndoe@gmail.com"
-                id="email"
-                name="email"
-                type="email"
-                inputProps={{
-                  maxLength: 80,
-                }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
+                  <Select
+                    name="email_private"
+                    id="email_private"
+                    value={email_private}
+                    disableUnderline
+                    onChange={handleEmailPrivacyChange}
+                    sx={{
+                      boxShadow: "none",
+                      height: 32,
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    }}
+                  >
+                    <MenuItem value={true}>Private</MenuItem>
+                    <MenuItem value={false}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
+                  // now on change, needs to update values, so it can edit it
+                  value={userData && userData.data.email}
+                  onChange={handleEmailChange}
+                  label="Email"
+                  placeholder="johndoe@gmail.com"
+                  id="email"
+                  name="email"
+                  type="email"
+                  disabled
+                  inputProps={{
+                    maxLength: 80,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
                     },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red",
+                      },
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
                     },
-                  },
-                }}
-              />
+                  }}
+                />
+              </div>
             </div>
-          </div>
 
-          {/*//TODO ths is okay, but also, user need to click and edit this passport picture ie. to update it ! (just put button on bottom, so I can replace this with FilePond one..*/}
-          <div className="row-span-3 flex items-start justify-start flex-col">
-           
-           {!passportUpload && (
+            {/*//TODO ths is okay, but also, user need to click and edit this passport picture ie. to update it ! (just put button on bottom, so I can replace this with FilePond one..*/}
+            <div className="row-span-3 flex items-start justify-start flex-col">
+              {!passportUpload && (
+                <>
+                  <p className="pb-2">
+                    <b>Passport photo</b>
+                  </p>
+                  <img
+                    src="editprofile/passport.png"
+                    alt="Profile"
+                    className="w-[331px] h-[222px] object-fit passport-photo"
+                  />
+                  <p className="pt-2 " style={{ color: "#DEDEDE" }}>
+                    Passport expires: <b>{formattedDate}</b>
+                  </p>
 
-<>
-            <p className="pb-2">
-              <b>Passport photo</b>
-            </p>
-            <img
-              src="editprofile/passport.png"
-              alt="Profile"
-              className="w-[331px] h-[222px] object-fit passport-photo"
-            />
-            <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-              Passport expires: <b>{formattedDate}</b>
-            </p>
+                  <p className="edit-photo" onClick={tooglePassportUpload}>
+                    <u>Edit passport photo</u>
+                  </p>
+                </>
+              )}
 
+              {passportUpload && (
+                <>
+                  <FilePond
+                    type="file"
+                    onupdatefiles={setFiles}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    server={server}
+                    name="image"
+                    labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
+                    accept="image/png, image/jpeg, image/gif"
+                    dropOnPage
+                    dropValidation
+                    allowPaste={true}
+                    allowReplace={true}
+                    credits={""}
+                    allowFileEncode={true}
+                    allowFileTypeValidation={true}
+                    allowImagePreview={true}
+                    allowImageCrop={true}
+                    allowImageResize={true}
+                    allowImageTransform={true}
+                    imagePreviewHeight={222}
+                    imageCropAspectRatio="1:1"
+                    imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100}
+                    stylePanelLayout="compact"
+                    styleLoadIndicatorPosition="center bottom"
+                    styleProgressIndicatorPosition="center bottom"
+                    styleButtonRemoveItemPosition="center  bottom"
+                    styleButtonProcessItemPosition="center bottom"
+                    imageEditAllowEdit={false}
+                  />
 
-            <p className="edit-photo" onClick={tooglePassportUpload}>
-                <u>Edit passport photo</u>
-              </p>
+                  <p className="edit-photo" onClick={tooglePassportUpload}>
+                    <u>Save passport photo</u>
+                  </p>
+                </>
+              )}
 
-
-
-            </>
-           )}
-
-
-{passportUpload && (
-
-  <>
-
-
-<FilePond
-                type="file"
-                
-                onupdatefiles={setFiles}
-                allowMultiple={false}
-                maxFiles={1}
-                server={server}
-
-                name="image"
-                labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
-                accept="image/png, image/jpeg, image/gif"
-                dropOnPage
-                dropValidation
-                allowPaste={true}
-                allowReplace={true}
-                credits={""}
-                allowFileEncode={true}
-                allowFileTypeValidation={true}
-                allowImagePreview={true}
-                allowImageCrop={true}
-                allowImageResize={true}
-                allowImageTransform={true}
-                imagePreviewHeight={222}
-                imageCropAspectRatio="1:1"
-                imageResizeTargetWidth={100}
-                imageResizeTargetHeight={100}
-                stylePanelLayout="compact"
-                styleLoadIndicatorPosition="center bottom"
-                styleProgressIndicatorPosition="center bottom"
-                styleButtonRemoveItemPosition="center  bottom"
-                styleButtonProcessItemPosition="center bottom"
-                imageEditAllowEdit={false}
-/>
-
-
-
-<p className="edit-photo" onClick={tooglePassportUpload}>
-<u>Save passport photo</u>
-</p>
-
-
-
-</>
-)}
-
-{/* 
+              {/* 
 
               <FilePond
                 type="file"
@@ -456,278 +694,286 @@ const tooglePassportUpload = () => {
 
               />
               */}
-
-          </div>
-
-
-          <div className="flex items-end col-span-2">
-            <div className="flex flex-col justify-center">
-              <TextField
-                label="Crypto"
-                id="cryptoaddr"
-                name="cryptoaddr"
-                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-                InputProps={{
-                  maxLength: 150,
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle BTC/ETH/XMR"
-                        onClick={handleCryptoMenuClick}
-                        edge="end"
-                      >
-                        {selectedCrypto}
-                      </IconButton>
-                      <Menu
-                        id="crypto-menu"
-                        anchorEl={cryptoMenuAnchorEl}
-                        open={Boolean(cryptoMenuAnchorEl)}
-                        onClose={handleCryptoMenuClose}
-                      >
-                        {cryptoOptions.map((option) => (
-                          <MenuItem
-                            key={option}
-                            onClick={() => handleCryptoOptionSelect(option)}
-                            selected={option === selectedCrypto}
-                          >
-                            {option}
-                          </MenuItem>
-                        ))}
-                      </Menu>
-                    </InputAdornment>
-                  ),
-                }}
-              />
             </div>
-            <div className="flex justify-end items-end flex-col">
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                  className="h-5"
-                  name="phone_private"
-                  id="phone_private"
-                  value={phone_private}
-                  disableUnderline
-                  onChange={handlePhonePrivacyChange}
+
+            <div className="flex items-end col-span-2">
+              <div className="flex flex-col justify-center">
+                <TextField
+                  value={userData && userData.data.cryptoaddress}
+                  onChange={handleCryptoChange}
+                  label="Crypto"
+                  id="cryptoaddr"
+                  name="cryptoaddr"
+                  placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
                   sx={{
-                    boxShadow: "none",
-                    height: 15,
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red",
+                      },
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
                   }}
-                >
-                  <MenuItem value={true}>Private</MenuItem>
-                  <MenuItem value={false}>Public</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField
-                label="Phone number"
-                placeholder="+1 212 456 7890"
-                id="phone"
-                name="phone"
-                type="tel"
-                inputProps={{
-                  maxLength: 15,
-                }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-end col-span-2">
-            <div className="flex flex-col justify-center">
-              {selectedRole === "AH" && (
-                <div className="flex justify-end items-end flex-col">
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      className="h-5"
-                      name="weight_private"
-                      id="weight_private"
-                      value={weight_private}
-                      onChange={handleWeightPrivacyChange}
-                      disableUnderline
-                      sx={{
-                        boxShadow: "none",
-                        height: 15,
-                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                      }}
-                    >
-                      <MenuItem value={true}>Private</MenuItem>
-                      <MenuItem value={false}>Public</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <TextField
-                    label="Weight"
-                    id="weight"
-                    name="weight"
-                    type="number"
-                    placeholder="85 kg/185 lb"
+                  InputProps={{
+                    maxLength: 150,
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle BTC/ETH/XMR"
+                          onClick={handleCryptoMenuClick}
+                          edge="end"
+                        >
+                          {selectedCrypto}
+                        </IconButton>
+                        <Menu
+                          id="crypto-menu"
+                          anchorEl={cryptoMenuAnchorEl}
+                          open={Boolean(cryptoMenuAnchorEl)}
+                          onClose={handleCryptoMenuClose}
+                        >
+                          {cryptoOptions.map((option) => (
+                            <MenuItem
+                              key={option}
+                              onClick={() => handleCryptoOptionSelect(option)}
+                              selected={option === selectedCrypto}
+                            >
+                              {option}
+                            </MenuItem>
+                          ))}
+                        </Menu>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div className="flex justify-end items-end flex-col">
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    className="h-5"
+                    name="phone_private"
+                    id="phone_private"
+                    value={phone_private}
+                    disableUnderline
+                    onChange={handlePhonePrivacyChange}
                     sx={{
-                      m: 1,
-                      width: "280px",
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
-                      },
-                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "red",
-                        },
-                      "& .MuiInputLabel-root": {
-                        "&.Mui-focused": {
-                          color: "black",
-                        },
-                      },
+                      boxShadow: "none",
+                      height: 15,
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
                     }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle kg / lb"
-                            onClick={handleWeightMenuClick}
-                            edge="end"
-                          >
-                            {selectedWeight}
-                          </IconButton>
-                          <Menu
-                            id="weight-menu"
-                            anchorEl={weightMenuAnchorEl}
-                            open={Boolean(weightMenuAnchorEl)}
-                            onClose={handleWeightMenuClose}
-                          >
-                            {weightOptions.map((option) => (
-                              <MenuItem
-                                key={option}
-                                onClick={() => handleWeightOptionSelect(option)}
-                                selected={option === selectedWeight}
-                              >
-                                {option}
-                              </MenuItem>
-                            ))}
-                          </Menu>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </div>
-              )}
+                  >
+                    <MenuItem value={true}>Private</MenuItem>
+                    <MenuItem value={false}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  value={userData && userData.data.phone}
+                  onChange={handlePhoneChange}
+                  label="Phone number"
+                  placeholder="+1 212 456 7890"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red",
+                      },
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
             </div>
-            <div className="flex justify-end items-end pb-2">
-              <ReactFlagsSelect
-                selected={nationality_selected}
-                onSelect={(code) => setNationality_selected(code)}
-                className={classNameFlagsSelect}
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality *"
-              />
+
+            <div className="flex items-end col-span-2">
+              <div className="flex flex-col justify-center">
+                {selectedRole === "AH" && (
+                  <div className="flex justify-end items-end flex-col">
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 120 }}
+                    >
+                      <Select
+                        className="h-5"
+                        name="weight_private"
+                        id="weight_private"
+                        value={weight_private}
+                        onChange={handleWeightPrivacyChange}
+                        disableUnderline
+                        sx={{
+                          boxShadow: "none",
+                          height: 15,
+                          ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                        }}
+                      >
+                        <MenuItem value={true}>Private</MenuItem>
+                        <MenuItem value={false}>Public</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <TextField
+                      value={userData && userData.data.weight}
+                      onChange={handleWeightChange}
+                      label="Weight"
+                      id="weight"
+                      name="weight"
+                      type="number"
+                      placeholder="85 kg/185 lb"
+                      sx={{
+                        m: 1,
+                        width: "280px",
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 5,
+                        },
+                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                          {
+                            borderColor: "red",
+                          },
+                        "& .MuiInputLabel-root": {
+                          "&.Mui-focused": {
+                            color: "black",
+                          },
+                        },
+                      }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle kg / lb"
+                              onClick={handleWeightMenuClick}
+                              edge="end"
+                            >
+                              {selectedWeight}
+                            </IconButton>
+                            <Menu
+                              id="weight-menu"
+                              anchorEl={weightMenuAnchorEl}
+                              open={Boolean(weightMenuAnchorEl)}
+                              onClose={handleWeightMenuClose}
+                            >
+                              {weightOptions.map((option) => (
+                                <MenuItem
+                                  key={option}
+                                  onClick={() =>
+                                    handleWeightOptionSelect(option)
+                                  }
+                                  selected={option === selectedWeight}
+                                >
+                                  {option}
+                                </MenuItem>
+                              ))}
+                            </Menu>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="flex justify-end items-end pb-2">
+                <ReactFlagsSelect
+                  // to fill it with the one, which user's is currently selected...
+                  selected={
+                    nationality_selected ||
+                    (userData && userData.data.nationality)
+                  }
+                  onSelect={(code) => {
+                    setNationality_selected(code);
+                    handleNationalityChange(code);
+                  }}
+                  className={classNameFlagsSelect}
+                  searchable={true}
+                  id="nationality"
+                  name="nationality"
+                  placeholder="Nationality *"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-end col-span-2">
+              <div className="flex flex-col ml-2 mt-6 w-[280px]">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DatePicker
+                      className="w-full"
+                      label="Birthdate"
+                      value={
+                        selectedDate || (userData && userData.data.birthdate)
+                      }
+                      onChange={handleDateChange}
+                      format="MM/DD/YYYY"
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-end col-span-2">
-            <div className="flex flex-col ml-2 mt-6 w-[280px]">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    className="w-full"
-                    label="Birthdate"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    format="MM/DD/YYYY"
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </div>
+          <div className="flex justify-end mt-2 gap-2 items-end">
+            <Button
+              onClick={handleCancel}
+              className="w-[200px]"
+              style={{ marginTop: "20px" }}
+              sx={{
+                height: "50px",
+                bgcolor: "#fff",
+                color: "#000",
+                borderRadius: 15,
+                border: `1px solid #AF2626`,
+                "&:hover": {
+                  background: "rgb(196, 43, 43)",
+                  color: "white",
+                  border: `1px solid rgb(196, 43, 43)`,
+                },
+              }}
+              variant="text"
+              value="Login"
+              id="login-btn"
+            >
+              <span className="popins-font">Cancel</span>
+            </Button>
+
+            <Button
+              className="w-[200px]"
+              style={{ marginTop: "20px" }}
+              sx={{
+                height: "50px",
+                bgcolor: "#AF2626",
+                color: "#fff",
+                borderRadius: 15,
+                border: `1px solid #AF2626`,
+                "&:hover": {
+                  background: "rgb(196, 43, 43)",
+                  color: "white",
+                  border: `1px solid rgb(196, 43, 43)`,
+                },
+              }}
+              type="submit"
+              variant="text"
+              value="Login"
+              id="login-btn"
+            >
+              <span className="popins-font">Save</span>
+            </Button>
           </div>
-
-
-        </div>
-
-        <div className="flex justify-end mt-2 gap-2 items-end">
-           
-           
-        <Button
-                className="w-[200px]"
-                style={{ marginTop: "20px" }}
-                sx={{
-                  height: "50px",
-                  bgcolor: "#fff",
-                  color: "#000",
-                  borderRadius: 15,
-                  border: `1px solid #AF2626`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-             
-                variant="text"
-                value="Login"
-                id="login-btn"
-              >
-                <span className="popins-font">Cancel</span>
-        </Button>
-
-           
-              <Button
-                className="w-[200px]"
-                style={{ marginTop: "20px" }}
-                sx={{
-                  height: "50px",
-                  bgcolor: "#AF2626",
-                  color: "#fff",
-                  borderRadius: 15,
-                  border: `1px solid #AF2626`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-                type="submit"
-                variant="text"
-                value="Login"
-                id="login-btn"
-              >
-                <span className="popins-font">Save</span>
-              </Button>
-
-             
-         
-            </div>
         </form>
-
-
       </div>
     </>
   );

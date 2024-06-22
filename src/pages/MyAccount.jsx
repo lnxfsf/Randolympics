@@ -28,10 +28,10 @@ const MyAccount = () => {
     <>
       <Navbar />
 
-      <div className="flex pl-32 pt-8 text-[35px] ">My Account</div>
+      <div className="flex pl-8 pt-8 text-[35px] ">My Account</div>
 
       {/* main part */}
-      <div className="flex p-28 pt-12 gap-4">
+      <div className="flex p-12 pl-2  pt-12 gap-4">
         {/* side nav bar */}
         <div className="basis-1/3 side_nav p-4">
           <ul className="list  flex flex-col">

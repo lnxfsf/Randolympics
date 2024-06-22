@@ -120,7 +120,10 @@ this is from official:
       <div>
         <ul>
           {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {item.content}</li>
+            <li key={index}>ID: {item.stockholm_games_id} -- {item.content && (
+              <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            )}
+            </li>
           ))}
         </ul>
       </div>
