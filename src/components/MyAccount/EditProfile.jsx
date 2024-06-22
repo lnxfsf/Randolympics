@@ -112,6 +112,8 @@ const EditProfile = () => {
     if (storedOriginalData) {
       setUserData(JSON.parse(storedOriginalData));
     }
+
+
   };
 
   const handlePhoneChange = (event) => {
@@ -149,7 +151,7 @@ const EditProfile = () => {
 
   const [original_email, setOriginalEmail] = useState(null);
   // for country flags...
-  const [code, setCode] = useState(""); // ! us
+  const [code, setCode] = useState(""); //  us
 
   const [email_private, setEmail_private] = useState(true);
   const [phone_private, setPhone_private] = useState(true);
@@ -157,8 +159,12 @@ const EditProfile = () => {
 
   const [name_header, setNameHeader] = useState(""); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
 
-  const [user_type, setUserType] = useState(""); // ! AH"
-  const [user_typeText, setUserTypeText] = useState(""); //! Athlete
+  const [user_type, setUserType] = useState(""); //  AH"
+  const [user_typeText, setUserTypeText] = useState(""); // Athlete
+
+  const [resultText, setResultText] = useState("");
+  const [resultTextColor, setResultTextColor] = useState("black");
+
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -175,11 +181,14 @@ const EditProfile = () => {
       setEmail_private(userJson.data.email_private);
       setPhone_private(userJson.data.phone_private);
       setWeight_private(userJson.data.weight_private);
+      
 
       setCode(userJson.data.nationality); //this is for big flag in upper part ..
       setNameHeader(userJson.data.name);
 
       settingUserType(userJson.data.user_type);
+
+      setSelectedCrypto(userJson.data.cryptoaddress_type)
     }
   }, []);
 
@@ -234,7 +243,7 @@ const EditProfile = () => {
   //console.log("hello: " + lolz)
 
   //For date.  okay, it saves as date object
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState();
   const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
 
   const handleDateChange = (date) => {
@@ -280,7 +289,7 @@ const EditProfile = () => {
   };
 
   const handleWeightPrivacyChange = (event) => {
-    setWeight_private(event.target.weight_private);
+    setWeight_private(event.target.value);
 
     // and also update the object..
     setUserData((prevUserData) => ({
@@ -302,7 +311,7 @@ const EditProfile = () => {
   const cryptoOptions = ["BTC", "ETH", "USDT", "BNB", "SOL", "DOGE", "ADA"]; // supported cryptos
 
   const [cryptoMenuAnchorEl, setCryptoMenuAnchorEl] = useState(null);
-  const [selectedCrypto, setSelectedCrypto] = useState("BTC");
+  const [selectedCrypto, setSelectedCrypto] = useState("");
 
   const handleCryptoMenuClick = (event) => {
     setCryptoMenuAnchorEl(event.currentTarget);
@@ -315,6 +324,17 @@ const EditProfile = () => {
   const handleCryptoOptionSelect = (option) => {
     setSelectedCrypto(option);
     setCryptoMenuAnchorEl(null);
+
+
+    //also, update in object , for local/session storage...
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        cryptoaddress_type: option,
+      },
+    }));
+
   };
 
   // ? HERE
@@ -452,9 +472,16 @@ const EditProfile = () => {
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
+
+
+        setResultText("Profile details saved successfully !")
+     
       }
     } catch (error) {
       console.log(error);
+      setResultText("There was some error !");
+      setResultTextColor("red")
+
     }
   };
 
@@ -973,6 +1000,13 @@ const EditProfile = () => {
               <span className="popins-font">Save</span>
             </Button>
           </div>
+
+          <p className="mt-4 flex justify-end " style={{ color: `${resultTextColor}` }}>
+            {resultText}
+          </p>
+
+
+
         </form>
       </div>
     </>
