@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 
 import ReactFlagsSelect from "react-flags-select";
 
+
 // MUI
 import Flag from "react-world-flags";
 import TextField from "@mui/material/TextField";
@@ -29,7 +30,10 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import dayjs from "dayjs";
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -151,9 +155,15 @@ const EditProfile = () => {
   // for country flags...
   const [code, setCode] = useState(""); //  us
 
+
+  // it's PRIVATE, if it's true...
   const [email_private, setEmail_private] = useState(true);
   const [phone_private, setPhone_private] = useState(true);
   const [weight_private, setWeight_private] = useState(true); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
+  const [birthdate_private, setBirthdate_private] = useState(true);
+
+
+
 
   const [name_header, setNameHeader] = useState(""); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
 
@@ -168,6 +178,11 @@ const EditProfile = () => {
   
   const [passportImage, setPassportImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null)
+
+  
+  //For date.  okay, it saves as date object
+  const [selectedDate, setSelectedDate] = useState();  // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
+
 
 
   useEffect(() => {
@@ -185,6 +200,7 @@ const EditProfile = () => {
       setEmail_private(userJson.data.email_private);
       setPhone_private(userJson.data.phone_private);
       setWeight_private(userJson.data.weight_private);
+      setBirthdate_private(userJson.data.birthdate_private);
 
       setCode(userJson.data.nationality); //this is for big flag in upper part ..
       setNameHeader(userJson.data.name);
@@ -197,8 +213,18 @@ const EditProfile = () => {
 
       setPassportImage(userJson.data.passport_photo);
       setProfileImage(userJson.data.picture);
+
+
+      setSelectedDate(dayjs(userJson.data.birthdate));
+
+
+
     }
   }, []);
+
+ 
+  
+
 
   const settingUserType = (user_type) => {
     switch (user_type) {
@@ -247,16 +273,28 @@ const EditProfile = () => {
   //console.log("json user data (only when logged in): " + userData.data.email)
   //console.log("hello: " + lolz)
 
-  //For date.  okay, it saves as date object
-  const [selectedDate, setSelectedDate] = useState();
   const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
     //console.log(date)
 
+
+     // and also update the object.. so , it stores in session/localStorage as well
+     setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        birthdate: selectedDate,
+      },
+    }));
+
     //console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
   };
+
+  
+  
+
 
   //TODO, you will use this in passport_expiry_date, to show it... like, when you insert (Validation Manager when he can only inserts it )
   //const FDate = dayjs(selectedDate);
@@ -278,6 +316,22 @@ const EditProfile = () => {
       },
     }));
   };
+
+
+  
+  const handleBirthdatePrivacyChange = (event) => {
+    setBirthdate_private(event.target.value);
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        birthdate_private: event.target.value,
+      },
+    }));
+  };
+
 
   const handlePhonePrivacyChange = (event) => {
     //console.log("clicked" + event.target.value)
@@ -464,6 +518,7 @@ const EditProfile = () => {
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
 
+
     // nationality_selected
 
     if (!e.target.weight) {
@@ -486,6 +541,10 @@ const EditProfile = () => {
     }
 
     try {
+
+      
+      
+
       //TODO if success, then, also save it in localstorage as well... those updated values
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
@@ -508,6 +567,10 @@ const EditProfile = () => {
           email_private: email_private,
           phone_private: phone_private,
           weight_private: weight_private,
+
+          birthdate: selectedDate,
+          birthdate_private: birthdate_private,
+
           
           
 
@@ -982,20 +1045,47 @@ const EditProfile = () => {
             </div>
 
             <div className="flex items-end col-span-2">
-              <div className="flex flex-col ml-2 mt-6 w-[280px]">
+              <div className="flex flex-col ml-0 mt-6 w-[280px]">
+
+              <div className="flex mb-1 justify-end items-end flex-col">
+              <FormControl
+                  className="h-5"
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 120 }}
+                >
+                  <Select
+                    name="birthdate_private"
+                    id="birthdate_private"
+                    value={birthdate_private}
+                    disableUnderline
+                    onChange={handleBirthdatePrivacyChange}
+                    sx={{
+                      boxShadow: "none",
+                      height: 32,
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    }}
+                  >
+                    <MenuItem value={true}>Private</MenuItem>
+                    <MenuItem value={false}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+
+
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
+                    
                     <DatePicker
                       className="w-full"
                       label="Birthdate"
-                      value={
-                        selectedDate || (userData && userData.data.birthdate)
-                      }
+                      value={selectedDate}
+                      
                       onChange={handleDateChange}
-                      format="MM/DD/YYYY"
+                      format="MMMM DD, YYYY"
                     />
                   </DemoContainer>
                 </LocalizationProvider>
+
+                </div>
               </div>
             </div>
           </div>

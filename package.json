@@ -21,6 +21,7 @@
     "@pqina/react-pintura": "^9.0.3",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
+    "datejs": "^1.0.0-rc3",
     "dayjs": "^1.11.11",
     "filepond": "^4.31.1",
     "filepond-plugin-file-poster": "^2.5.1",
