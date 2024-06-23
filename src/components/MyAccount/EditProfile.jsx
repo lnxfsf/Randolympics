@@ -712,9 +712,11 @@ const EditProfile = () => {
                     allowFileEncode={true}
                     allowFileTypeValidation={true}
                     allowImagePreview={true}
-                    allowImageCrop={true}
-                    allowImageResize={true}
-                    allowImageTransform={true}
+
+                    allowImageCrop={false}
+                    allowImageResize={false}
+                    allowImageTransform={false}
+
                     imagePreviewHeight={100}
                     imageCropAspectRatio="1:1"
                     imageResizeTargetWidth={100}
