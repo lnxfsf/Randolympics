@@ -32,8 +32,6 @@ const generateVerificationToken = () => {
 };
 
 const register = async (req, res) => {
-
-
   // on ovde uzima varijable
   const {
     user_type,
@@ -52,12 +50,11 @@ const register = async (req, res) => {
     picture,
   } = req.body;
 
-
   // hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt); //hash password
 
-  // user object, this is what we send to mysql 
+  // user object, this is what we send to mysql
   const user_data = {
     userId: uuidv4(),
     user_type,
@@ -93,7 +90,6 @@ const register = async (req, res) => {
     verificationToken: generateVerificationToken(),
   };
 
-
   try {
     await db.sequelize.sync();
 
@@ -107,14 +103,12 @@ const register = async (req, res) => {
 
     // Create a new user
     const newUser = await User.create(user_data);
-  
 
     sendEmail(
       newUser.email,
       "Email Verification",
       `<p>Click <a href="http://localhost:5000/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
     );
-   
 
     res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
@@ -165,7 +159,6 @@ const verify_token = async (req, res) => {
 
     await user.save();
     console.log("user verified");
- 
 
     return res.redirect("/auth/verification-success");
   } catch (error) {
@@ -222,7 +215,6 @@ const reset_password_token = async (req, res) => {
 
     // if user don't exist. won't execute
     if (user) {
-   
       res.send(`
       <html>
         <head>
@@ -350,7 +342,12 @@ const login = async (req, res) => {
           return;
         }
       } else {
-        res.status(401).json({ message: "Email is not verified !", email: existingUser.email });
+        res
+          .status(401)
+          .json({
+            message: "Email is not verified !",
+            email: existingUser.email,
+          });
 
         return;
       }
@@ -361,7 +358,6 @@ const login = async (req, res) => {
         existingUser.password
       );
 
-     
       if (passwordMatch) {
         res.status(200).json({
           userId: existingUser.userId,
@@ -375,9 +371,13 @@ const login = async (req, res) => {
           nationality: existingUser.nationality,
           weight: existingUser.weight,
           picture: existingUser.picture,
+          passport_photo: existingUser.passport_photo,
+
           bio: existingUser.bio,
           cryptoaddress: existingUser.cryptoaddress,
           cryptoaddress_type: existingUser.cryptoaddress_type,
+
+
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -390,14 +390,10 @@ const login = async (req, res) => {
   }
 };
 
-
 const update_user_data = async (req, res) => {
-
-  
-  // get data from FE 
+  // get data from FE
   const {
-    
-    original_email, 
+    original_email,
 
     name,
     phone,
@@ -412,11 +408,9 @@ const update_user_data = async (req, res) => {
     phone_private,
     weight_private,
 
-    
+    passport_photo,
+
   } = req.body;
-
-
-
 
   await db.sequelize.sync();
 
@@ -424,124 +418,81 @@ const update_user_data = async (req, res) => {
     where: { email: original_email },
   });
 
-
-
-
-
-
   if (user) {
-
-    let needsUpdate = false // used as indicator, if we need to update or not
-    const updatingObject = {}
-
+    let needsUpdate = false; // used as indicator, if we need to update or not
+    const updatingObject = {};
 
 
-    if (name && name !== user.name){
+
+
+    if (name && name !== user.name) {
       updatingObject.name = name;
       needsUpdate = true;
     }
-    
-    
-    if (phone && phone !== user.phone){
+
+    if (phone && phone !== user.phone) {
       updatingObject.phone = phone;
       needsUpdate = true;
     }
 
-    
-    if (nationality && nationality !== user.nationality){
+    if (nationality && nationality !== user.nationality) {
       updatingObject.nationality = nationality;
       needsUpdate = true;
     }
 
-    
-    if (weight && weight !== user.weight){
+    if (weight && weight !== user.weight) {
       updatingObject.weight = weight;
       needsUpdate = true;
     }
 
-
-    
-    if (cryptoaddress && cryptoaddress !== user.cryptoaddress){
+    if (cryptoaddress && cryptoaddress !== user.cryptoaddress) {
       updatingObject.cryptoaddress = cryptoaddress;
       needsUpdate = true;
     }
 
-    
-    
-    if (cryptoaddress_type && cryptoaddress_type !== user.cryptoaddress_type){
+    if (cryptoaddress_type && cryptoaddress_type !== user.cryptoaddress_type) {
       updatingObject.cryptoaddress_type = cryptoaddress_type;
       needsUpdate = true;
     }
 
-
-    
-    
-    if (email_private !== user.email_private){
+    if (email_private !== user.email_private) {
       updatingObject.email_private = email_private;
       needsUpdate = true;
     }
 
-    
-    if (phone_private !== user.phone_private){
+    if (phone_private !== user.phone_private) {
       updatingObject.phone_private = phone_private;
       needsUpdate = true;
     }
 
-    
-    if (weight_private !== user.weight_private){
+    if (weight_private !== user.weight_private) {
       updatingObject.weight_private = weight_private;
       needsUpdate = true;
     }
 
 
-
+    // for now, it won't delete older one, if it's null.. only through special field that's passed from FE (so I don't have to implement more complex structure for "Save passport photo", clickable text field )
+    if (passport_photo && passport_photo !== user.passport_photo) {
+      updatingObject.passport_photo = passport_photo;
+      needsUpdate = true;
+    }
 
     if (needsUpdate) {
-
-       
-      
-      try  {
+      try {
         await user.update(updatingObject);
-        
 
         return res.status(200).json({ message: "User details updated" });
-
-
       } catch (error) {
-          return res.status(500).json({ error: error.message });
-
+        return res.status(500).json({ error: error.message });
       }
-      
-      
-      
-
     }
-    
-
-
-
-
-
-
   }
 
-
-
-
-
-
   try {
-
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-
-
-
-}
-
-
-
+};
 
 module.exports = {
   register,

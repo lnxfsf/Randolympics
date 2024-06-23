@@ -35,12 +35,15 @@ const createUpload = (uploadPath) => {
   });
 };
 
-//pass the upload path. for profile_picture
-const uploadProfile = createUpload("uploads/profile_pictures");
 
-const uploadProfileImage = uploadProfile.single("image");
+
 
 const profile_picture_upload = async (req, res) => {
+
+    //pass the upload path. for profile_picture
+    const uploadProfile = createUpload("uploads/profile_pictures");
+    const uploadProfileImage = uploadProfile.single("image");
+
   uploadProfileImage(req, res, function (err) {
     if (err) {
       return res.status(400).send({ message: err.message });
@@ -55,6 +58,32 @@ const profile_picture_upload = async (req, res) => {
   });
 };
 
+
+const passport_picture_upload = async (req, res) => {
+
+     //pass the upload path. for profile_picture
+     const uploadPassport = createUpload("uploads/passport_pictures");
+     const uploadPassportImage = uploadPassport.single("image");
+
+
+    uploadPassportImage(req, res, function (err) {
+        if (err) {
+          return res.status(400).send({ message: err.message });
+        }
+        // Everything went fine.
+        const files = req.files;
+        console.log(files);
+    
+        console.log(filename);
+    
+        res.json(filename);
+      });
+
+}
+
+
+
 module.exports = {
   profile_picture_upload,
+  passport_picture_upload,
 };
