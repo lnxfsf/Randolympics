@@ -5,8 +5,6 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/update_user_data", update_user_data)
-
 
 
 
@@ -22,6 +20,11 @@ router.post('/email_resend', email_resend);
 router.post('/forgot_password', forgot_password)  // to this FE, they send a request to go to that email... here and check it. is the email confirmed, if not, he does not go further until he confirms the email he registered with..
 router.get('/reset_password/:token', reset_password_token)  // here user, enters his new passowrd. with his :token he can enter his URL
 router.post('/reset_password', reset_password) // Route to update the password
+
+
+// for edit profile
+router.post("/update_user_data", update_user_data)
+
 
 
 
