@@ -278,7 +278,7 @@ const EditProfile = () => {
         ...prevUserData.data,
         birthdate: selectedDate,
       },
-    }));
+    }));  
 
     //console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
   };
@@ -884,7 +884,9 @@ const EditProfile = () => {
                       passportImage
                     }
                     alt="Profile"
-                    className="w-[331px] h-[222px] object-fit passport-photo"
+                    className="w-[331px] h-[222px] object-fit  passport-photo"
+
+                    
                   />
                   <p className="pt-2 " style={{ color: "#DEDEDE" }}>
                     Passport expires: <b>{formattedDate}</b>
@@ -915,13 +917,18 @@ const EditProfile = () => {
                     allowFileEncode={true}
                     allowFileTypeValidation={true}
                     allowImagePreview={true}
-                    allowImageCrop={true}
-                    allowImageResize={true}
-                    allowImageTransform={true}
+
+
+                   /*  //TODO, so, with this, user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                 */    
+                    allowImageCrop={false}
+                    allowImageResize={false}
+                    allowImageTransform={false}
+
                     imagePreviewHeight={222}
                     imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
+         /*            imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100} */
                     stylePanelLayout="compact"
                     styleLoadIndicatorPosition="center bottom"
                     styleProgressIndicatorPosition="center bottom"
