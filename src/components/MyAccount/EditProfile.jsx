@@ -8,7 +8,6 @@ import { Button } from "@mui/material";
 
 import ReactFlagsSelect from "react-flags-select";
 
-
 // MUI
 import Flag from "react-world-flags";
 import TextField from "@mui/material/TextField";
@@ -32,8 +31,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import dayjs from "dayjs";
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -72,6 +70,13 @@ let BACKEND_SERVER_BASE_URL =
 
 //TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
 const EditProfile = () => {
+
+
+  
+
+
+  const [toogleProfilePic, setToogleProfilePic] = useState(false);
+
   const [userData, setUserData] = useState(null);
 
   const handleEmailChange = (event) => {
@@ -151,19 +156,18 @@ const EditProfile = () => {
     }));
   };
 
+
+  
+
   const [original_email, setOriginalEmail] = useState(null);
   // for country flags...
   const [code, setCode] = useState(""); //  us
-
 
   // it's PRIVATE, if it's true...
   const [email_private, setEmail_private] = useState(true);
   const [phone_private, setPhone_private] = useState(true);
   const [weight_private, setWeight_private] = useState(true); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
   const [birthdate_private, setBirthdate_private] = useState(true);
-
-
-
 
   const [name_header, setNameHeader] = useState(""); //show this, but only if it's "athlete" user, and it's not null (as for athlete, it can't be set null anyway...)
 
@@ -175,15 +179,11 @@ const EditProfile = () => {
 
   const [bio, setBio] = useState("");
 
-  
   const [passportImage, setPassportImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(null)
+  const [profileImage, setProfileImage] = useState(null);
 
-  
   //For date.  okay, it saves as date object
-  const [selectedDate, setSelectedDate] = useState();  // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
-
-
+  const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -214,17 +214,9 @@ const EditProfile = () => {
       setPassportImage(userJson.data.passport_photo);
       setProfileImage(userJson.data.picture);
 
-
       setSelectedDate(dayjs(userJson.data.birthdate));
-
-
-
     }
   }, []);
-
- 
-  
-
 
   const settingUserType = (user_type) => {
     switch (user_type) {
@@ -279,9 +271,8 @@ const EditProfile = () => {
     setSelectedDate(date);
     //console.log(date)
 
-
-     // and also update the object.. so , it stores in session/localStorage as well
-     setUserData((prevUserData) => ({
+    // and also update the object.. so , it stores in session/localStorage as well
+    setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
         ...prevUserData.data,
@@ -291,10 +282,6 @@ const EditProfile = () => {
 
     //console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
   };
-
-  
-  
-
 
   //TODO, you will use this in passport_expiry_date, to show it... like, when you insert (Validation Manager when he can only inserts it )
   //const FDate = dayjs(selectedDate);
@@ -317,8 +304,6 @@ const EditProfile = () => {
     }));
   };
 
-
-  
   const handleBirthdatePrivacyChange = (event) => {
     setBirthdate_private(event.target.value);
 
@@ -331,7 +316,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handlePhonePrivacyChange = (event) => {
     //console.log("clicked" + event.target.value)
@@ -422,10 +406,6 @@ const EditProfile = () => {
   // ? filepond passport upload
   const [files, setFiles] = useState([]);
 
-
-
-
-
   const server = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
@@ -452,21 +432,51 @@ const EditProfile = () => {
     },
   };
 
+
+  
+
+  
+  const serverProfile = {
+    /* url: 'http://localhost:5000/profile_photo/upload', */
+
+    process: {
+      url: "http://localhost:5000/imageUpload/profilePicture",
+      method: "POST",
+      headers: {},
+      withCredentials: false,
+
+      onload: (response) => {
+        // Parse the JSON response to get the filename
+
+        const jsonResponse = JSON.parse(response);
+        const filename = jsonResponse;
+
+        console.log("Uploaded filename:", filename);
+        
+        setProfileImage(filename)
+
+
+       
+        
+
+        // return filename;
+      },
+      onerror: (response) => {
+        console.error("Error uploading file:", response);
+        return response;
+      },
+    },
+  };
+
   // this is for toggle
   const [passportUpload, setPassportUpload] = useState(false);
 
-
-
   const tooglePassportUpload = async () => {
-
-
-
     setPassportUpload(!passportUpload);
-
 
     // TODO, if it's first time, becoming normal again, from "Save passport image"
     // and here, call, to update in database, new passport photo, url...
-    
+
     // this is so we can  set in session/localStorage as well
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -477,36 +487,32 @@ const EditProfile = () => {
     }));
 
     try {
-
-      // we just upload passport_image URL, in database ! 
+      // we just upload passport_image URL, in database !
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
           original_email,
-          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. ) 
+          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
           passport_photo: passportImage,
-    
-        })
+        }
+      );
 
+      // TODO also update in userData, that will be used..
 
-        // TODO also update in userData, that will be used..
-
-
-        // to update in localStorage 
-        if (response.status === 200) {
-
-          if (localStorage.getItem("authTokens")) {
-            localStorage.setItem("authTokens", JSON.stringify(userData));
-          } else if (sessionStorage.getItem("authTokens")) {
-            sessionStorage.setItem("authTokens", JSON.stringify(userData));
-          }
-         }
-
-         setResultText("Profile details saved successfully !");
-      } catch(error){
-          console.log(error);
+      // to update in localStorage
+      if (response.status === 200) {
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(userData));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(userData));
+        }
       }
+
+      setResultText("Profile details saved successfully !");
+    } catch (error) {
+      console.log(error);
     }
+  };
   // ? filepond passport upload
 
   const handleSubmit = async (e) => {
@@ -517,7 +523,6 @@ const EditProfile = () => {
     var name = e.target.name.value;
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
-
 
     // nationality_selected
 
@@ -541,10 +546,6 @@ const EditProfile = () => {
     }
 
     try {
-
-      
-      
-
       //TODO if success, then, also save it in localstorage as well... those updated values
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
@@ -570,9 +571,6 @@ const EditProfile = () => {
 
           birthdate: selectedDate,
           birthdate_private: birthdate_private,
-
-          
-          
 
           // bio,
         }
@@ -603,23 +601,163 @@ const EditProfile = () => {
     }
   };
 
+
+
+  const toogleProfileUpload = async () => {
+    setToogleProfilePic(!toogleProfilePic);
+
+
+    // TODO if it's same, it doesn't matter (for now), even if we click ("edit profile picture"), it will send this request. but won't update any data on database because there's no difference. 
+    // TODO but later on, you should add, just to upload only when on "save"
+ 
+
+
+    /* 
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        picture: profileImage,
+      },
+    }));
+ */
+
+    
+
+    try {
+      // we just upload profile_image URL, in database !
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        {
+          original_email,
+          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
+          picture: profileImage, // on salje u backend ! kako treba, al local nece
+        }
+      );
+
+      // TODO it appends, and upload correctly on backend, but it can't, update value here in this object at all !!!
+      // TODO, so we could, send this to localStorage to be updated...
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        data: {
+          ...prevUserData.data,
+          picture: profileImage
+        },
+      })); 
+  
+
+      // to update in localStorage
+      if (response.status === 200) {
+
+        if (localStorage.getItem("authTokens")) {
+
+          localStorage.setItem("authTokens", JSON.stringify(userData));
+        
+        
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(userData));
+        }
+      }
+
+      setResultText("Profile details saved successfully !");
+    } catch (error) {
+      console.log(error);
+    }
+ 
+ 
+ 
+  }
+
+
+
+
   return (
     <>
       <div>
         <div className="flex justify-start">
           <div className="flex justify-center items-center">
+
+
+
+
+{!toogleProfilePic && (
+  <>
             <img
-              src={BACKEND_SERVER_BASE_URL+"/imageUpload/profile_pics/"+profileImage}
+              src={
+                BACKEND_SERVER_BASE_URL +
+                "/imageUpload/profile_pics/" +
+                profileImage
+              }
               className="image_editProfile"
             />
+            </>
+          )}
+
+{toogleProfilePic && (
+ <>
+    <FilePond
+                    type="file"
+                    onupdatefiles={setFiles}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    server={serverProfile}//TODO, different one, for profile pic upload
+                    name="image"
+                    labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
+                    accept="image/png, image/jpeg, image/gif"
+                    dropOnPage
+                    dropValidation
+                    allowPaste={true}
+                    allowReplace={true}
+                    credits={""}
+                    allowFileEncode={true}
+                    allowFileTypeValidation={true}
+                    allowImagePreview={true}
+                    allowImageCrop={true}
+                    allowImageResize={true}
+                    allowImageTransform={true}
+                    imagePreviewHeight={100}
+                    imageCropAspectRatio="1:1"
+                    imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100}
+                    stylePanelLayout="compact circle"
+                    styleLoadIndicatorPosition="center bottom"
+                    styleProgressIndicatorPosition="center bottom"
+                    styleButtonRemoveItemPosition="center  bottom"
+                    styleButtonProcessItemPosition="center bottom"
+                    imageEditAllowEdit={false}
+                  />
+</>
+)}
+
+
+
+
           </div>
 
           <div className="flex flex-grow">
             <div className="flex flex-col justify-center pl-4">
               <h1 className="text-[25px]">{name_header}</h1>
-              <p className="edit-photo">
+
+
+              {!toogleProfilePic && (
+  <>
+              <p className="edit-photo" onClick={toogleProfileUpload}>
                 <u>Edit photo</u>
               </p>
+              </>
+              )}
+              {toogleProfilePic && (
+
+                // TODO, e tuda, samo mora u backend, da salje, i sacuva, i u localstorage takodje...
+                <>
+
+                <p className="edit-photo" onClick={toogleProfileUpload}>
+                <u>Save photo</u>
+              </p>
+                </>
+                )}
+
+
             </div>
           </div>
 
@@ -740,7 +878,11 @@ const EditProfile = () => {
                     <b>Passport photo</b>
                   </p>
                   <img
-                    src={BACKEND_SERVER_BASE_URL+"/imageUpload/passport_pics/"+passportImage}
+                    src={
+                      BACKEND_SERVER_BASE_URL +
+                      "/imageUpload/passport_pics/" +
+                      passportImage
+                    }
                     alt="Profile"
                     className="w-[331px] h-[222px] object-fit passport-photo"
                   />
@@ -1046,45 +1188,40 @@ const EditProfile = () => {
 
             <div className="flex items-end col-span-2">
               <div className="flex flex-col ml-0 mt-6 w-[280px]">
-
-              <div className="flex mb-1 justify-end items-end flex-col">
-              <FormControl
-                  className="h-5"
-                  variant="standard"
-                  sx={{ m: 1, minWidth: 120 }}
-                >
-                  <Select
-                    name="birthdate_private"
-                    id="birthdate_private"
-                    value={birthdate_private}
-                    disableUnderline
-                    onChange={handleBirthdatePrivacyChange}
-                    sx={{
-                      boxShadow: "none",
-                      height: 32,
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    }}
+                <div className="flex mb-1 justify-end items-end flex-col">
+                  <FormControl
+                    className="h-5"
+                    variant="standard"
+                    sx={{ m: 1, minWidth: 120 }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
-                  </Select>
-                </FormControl>
+                    <Select
+                      name="birthdate_private"
+                      id="birthdate_private"
+                      value={birthdate_private}
+                      disableUnderline
+                      onChange={handleBirthdatePrivacyChange}
+                      sx={{
+                        boxShadow: "none",
+                        height: 32,
+                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                      }}
+                    >
+                      <MenuItem value={true}>Private</MenuItem>
+                      <MenuItem value={false}>Public</MenuItem>
+                    </Select>
+                  </FormControl>
 
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={["DatePicker"]}>
-                    
-                    <DatePicker
-                      className="w-full"
-                      label="Birthdate"
-                      value={selectedDate}
-                      
-                      onChange={handleDateChange}
-                      format="MMMM DD, YYYY"
-                    />
-                  </DemoContainer>
-                </LocalizationProvider>
-
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["DatePicker"]}>
+                      <DatePicker
+                        className="w-full"
+                        label="Birthdate"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        format="MMMM DD, YYYY"
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
                 </div>
               </div>
             </div>

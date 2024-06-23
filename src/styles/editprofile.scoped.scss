@@ -50,14 +50,22 @@ hr {
 
 
 
+// for passport picture
 .filepond--root,
 .filepond--root .filepond--drop-label  {
     width: 331px;
   height: 222px;
-  
+
+} 
 
 
-  
-  
+// for profile picture
+/* .filepond--root,
+.filepond--root .filepond--drop-label  {
+    width: 90px;
+  height: 90px;
+  font-size: 8pt;
 
-}
+}   */
+
+
