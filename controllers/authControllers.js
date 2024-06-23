@@ -26,6 +26,10 @@ const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
+
+
+
+
 // When a user signs up, generate a unique verification token and save it in the database with user email.
 const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
@@ -367,6 +371,8 @@ const login = async (req, res) => {
 
           name: existingUser.name,
           birthdate: existingUser.birthdate,
+
+
           phone: existingUser.phone,
           nationality: existingUser.nationality,
           weight: existingUser.weight,
@@ -377,6 +383,13 @@ const login = async (req, res) => {
           cryptoaddress: existingUser.cryptoaddress,
           cryptoaddress_type: existingUser.cryptoaddress_type,
 
+
+          email_private: existingUser.email_private,
+          phone_private: existingUser.phone_private,
+          weight_private: existingUser.weight_private,
+
+          birthdate_private: existingUser.birthdate_private ,
+          
 
         });
       } else {
@@ -409,6 +422,8 @@ const update_user_data = async (req, res) => {
     weight_private,
 
     passport_photo,
+    birthdate,
+    birthdate_private,
 
   } = req.body;
 
@@ -423,6 +438,7 @@ const update_user_data = async (req, res) => {
     const updatingObject = {};
 
 
+    
 
 
     if (name && name !== user.name) {
@@ -476,6 +492,22 @@ const update_user_data = async (req, res) => {
       updatingObject.passport_photo = passport_photo;
       needsUpdate = true;
     }
+
+    
+    
+    if (birthdate && birthdate !== user.birthdate) {
+      updatingObject.birthdate = birthdate;
+      needsUpdate = true;
+    }
+
+
+    
+    if (birthdate_private !== user.birthdate_private) {
+      updatingObject.birthdate_private = birthdate_private;
+      needsUpdate = true;
+    }
+
+
 
     if (needsUpdate) {
       try {
