@@ -424,6 +424,7 @@ const update_user_data = async (req, res) => {
     passport_photo,
     birthdate,
     birthdate_private,
+    picture,
 
   } = req.body;
 
@@ -437,9 +438,9 @@ const update_user_data = async (req, res) => {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
 
-
     
 
+    
 
     if (name && name !== user.name) {
       updatingObject.name = name;
@@ -504,6 +505,14 @@ const update_user_data = async (req, res) => {
     
     if (birthdate_private !== user.birthdate_private) {
       updatingObject.birthdate_private = birthdate_private;
+      needsUpdate = true;
+    }
+
+
+    
+
+    if (picture && picture !== user.picture) {
+      updatingObject.picture = picture;
       needsUpdate = true;
     }
 
