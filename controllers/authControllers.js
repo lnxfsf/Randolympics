@@ -390,6 +390,159 @@ const login = async (req, res) => {
   }
 };
 
+
+const update_user_data = async (req, res) => {
+
+  
+  // get data from FE 
+  const {
+    
+    original_email, 
+
+    name,
+    phone,
+    nationality,
+    weight,
+    cryptoaddress,
+    //picture: uploadedFile,
+
+    cryptoaddress_type,
+
+    email_private,
+    phone_private,
+    weight_private,
+
+    
+  } = req.body;
+
+
+
+
+  await db.sequelize.sync();
+
+  const user = await User.findOne({
+    where: { email: original_email },
+  });
+
+
+
+
+
+
+  if (user) {
+
+    let needsUpdate = false // used as indicator, if we need to update or not
+    const updatingObject = {}
+
+
+
+    if (name && name !== user.name){
+      updatingObject.name = name;
+      needsUpdate = true;
+    }
+    
+    
+    if (phone && phone !== user.phone){
+      updatingObject.phone = phone;
+      needsUpdate = true;
+    }
+
+    
+    if (nationality && nationality !== user.nationality){
+      updatingObject.nationality = nationality;
+      needsUpdate = true;
+    }
+
+    
+    if (weight && weight !== user.weight){
+      updatingObject.weight = weight;
+      needsUpdate = true;
+    }
+
+
+    
+    if (cryptoaddress && cryptoaddress !== user.cryptoaddress){
+      updatingObject.cryptoaddress = cryptoaddress;
+      needsUpdate = true;
+    }
+
+    
+    
+    if (cryptoaddress_type && cryptoaddress_type !== user.cryptoaddress_type){
+      updatingObject.cryptoaddress_type = cryptoaddress_type;
+      needsUpdate = true;
+    }
+
+
+    
+    
+    if (email_private !== user.email_private){
+      updatingObject.email_private = email_private;
+      needsUpdate = true;
+    }
+
+    
+    if (phone_private !== user.phone_private){
+      updatingObject.phone_private = phone_private;
+      needsUpdate = true;
+    }
+
+    
+    if (weight_private !== user.weight_private){
+      updatingObject.weight_private = weight_private;
+      needsUpdate = true;
+    }
+
+
+
+
+    if (needsUpdate) {
+
+       
+      
+      try  {
+        await user.update(updatingObject);
+        
+
+        return res.status(200).json({ message: "User details updated" });
+
+
+      } catch (error) {
+          return res.status(500).json({ error: error.message });
+
+      }
+      
+      
+      
+
+    }
+    
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+  try {
+
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+
+
+}
+
+
+
+
 module.exports = {
   register,
   login,
@@ -399,4 +552,5 @@ module.exports = {
   reset_password_token,
   reset_password,
   email_resend,
+  update_user_data,
 };
