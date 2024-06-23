@@ -112,8 +112,6 @@ const EditProfile = () => {
     if (storedOriginalData) {
       setUserData(JSON.parse(storedOriginalData));
     }
-
-
   };
 
   const handlePhoneChange = (event) => {
@@ -165,6 +163,12 @@ const EditProfile = () => {
   const [resultText, setResultText] = useState("");
   const [resultTextColor, setResultTextColor] = useState("black");
 
+  const [bio, setBio] = useState("");
+
+  
+  const [passportImage, setPassportImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(null)
+
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -181,19 +185,22 @@ const EditProfile = () => {
       setEmail_private(userJson.data.email_private);
       setPhone_private(userJson.data.phone_private);
       setWeight_private(userJson.data.weight_private);
-      
 
       setCode(userJson.data.nationality); //this is for big flag in upper part ..
       setNameHeader(userJson.data.name);
 
       settingUserType(userJson.data.user_type);
 
-      setSelectedCrypto(userJson.data.cryptoaddress_type)
+      setSelectedCrypto(userJson.data.cryptoaddress_type);
+
+      setBio(userJson.data.bio);
+
+      setPassportImage(userJson.data.passport_photo);
+      setProfileImage(userJson.data.picture);
     }
   }, []);
 
   const settingUserType = (user_type) => {
-  
     switch (user_type) {
       case "AH":
         setUserTypeText("Athlete");
@@ -230,11 +237,9 @@ const EditProfile = () => {
         break;
       default:
         setUserTypeText("Guest");
-        
+
         break;
     }
-    
-
   };
 
   //so we can find that user in database.. (if later on, user changes, his email )
@@ -311,6 +316,7 @@ const EditProfile = () => {
   const cryptoOptions = ["BTC", "ETH", "USDT", "BNB", "SOL", "DOGE", "ADA"]; // supported cryptos
 
   const [cryptoMenuAnchorEl, setCryptoMenuAnchorEl] = useState(null);
+
   const [selectedCrypto, setSelectedCrypto] = useState("");
 
   const handleCryptoMenuClick = (event) => {
@@ -325,7 +331,6 @@ const EditProfile = () => {
     setSelectedCrypto(option);
     setCryptoMenuAnchorEl(null);
 
-
     //also, update in object , for local/session storage...
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -334,7 +339,6 @@ const EditProfile = () => {
         cryptoaddress_type: option,
       },
     }));
-
   };
 
   // ? HERE
@@ -364,13 +368,15 @@ const EditProfile = () => {
   // ? filepond passport upload
   const [files, setFiles] = useState([]);
 
-  const [uploadedFile, setUploadedFile] = useState(null);
+
+
+
 
   const server = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-      url: "http://localhost:5000/passport_photo/upload",
+      url: "http://localhost:5000/imageUpload/passportPicture",
       method: "POST",
       headers: {},
       withCredentials: false,
@@ -382,7 +388,7 @@ const EditProfile = () => {
         const filename = jsonResponse;
 
         console.log("Uploaded filename:", filename);
-        setUploadedFile(filename);
+        setPassportImage(filename);
         // return filename;
       },
       onerror: (response) => {
@@ -392,11 +398,61 @@ const EditProfile = () => {
     },
   };
 
+  // this is for toggle
   const [passportUpload, setPassportUpload] = useState(false);
-  const tooglePassportUpload = () => {
-    setPassportUpload(!passportUpload);
-  };
 
+
+
+  const tooglePassportUpload = async () => {
+
+
+
+    setPassportUpload(!passportUpload);
+
+
+    // TODO, if it's first time, becoming normal again, from "Save passport image"
+    // and here, call, to update in database, new passport photo, url...
+    
+    // this is so we can  set in session/localStorage as well
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        passport_photo: passportImage,
+      },
+    }));
+
+    try {
+
+      // we just upload passport_image URL, in database ! 
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        {
+          original_email,
+          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. ) 
+          passport_photo: passportImage,
+    
+        })
+
+
+        // TODO also update in userData, that will be used..
+
+
+        // to update in localStorage 
+        if (response.status === 200) {
+
+          if (localStorage.getItem("authTokens")) {
+            localStorage.setItem("authTokens", JSON.stringify(userData));
+          } else if (sessionStorage.getItem("authTokens")) {
+            sessionStorage.setItem("authTokens", JSON.stringify(userData));
+          }
+         }
+
+         setResultText("Profile details saved successfully !");
+      } catch(error){
+          console.log(error);
+      }
+    }
   // ? filepond passport upload
 
   const handleSubmit = async (e) => {
@@ -452,6 +508,8 @@ const EditProfile = () => {
           email_private: email_private,
           phone_private: phone_private,
           weight_private: weight_private,
+          
+          
 
           // bio,
         }
@@ -473,15 +531,12 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-
-        setResultText("Profile details saved successfully !")
-     
+        setResultText("Profile details saved successfully !");
       }
     } catch (error) {
       console.log(error);
       setResultText("There was some error !");
-      setResultTextColor("red")
-
+      setResultTextColor("red");
     }
   };
 
@@ -491,7 +546,7 @@ const EditProfile = () => {
         <div className="flex justify-start">
           <div className="flex justify-center items-center">
             <img
-              src="landing_page/about_us.png"
+              src={BACKEND_SERVER_BASE_URL+"/imageUpload/profile_pics/"+profileImage}
               className="image_editProfile"
             />
           </div>
@@ -522,15 +577,7 @@ const EditProfile = () => {
           <p className="text-lg ">
             <b>About Me</b>
           </p>
-          <p className="text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum
-          </p>
+          <p className="text-base">{bio}</p>
         </div>
 
         <form action="#" onSubmit={handleSubmit}>
@@ -630,7 +677,7 @@ const EditProfile = () => {
                     <b>Passport photo</b>
                   </p>
                   <img
-                    src="editprofile/passport.png"
+                    src={BACKEND_SERVER_BASE_URL+"/imageUpload/passport_pics/"+passportImage}
                     alt="Profile"
                     className="w-[331px] h-[222px] object-fit passport-photo"
                   />
@@ -1001,12 +1048,12 @@ const EditProfile = () => {
             </Button>
           </div>
 
-          <p className="mt-4 flex justify-end " style={{ color: `${resultTextColor}` }}>
+          <p
+            className="mt-4 flex justify-end "
+            style={{ color: `${resultTextColor}` }}
+          >
             {resultText}
           </p>
-
-
-
         </form>
       </div>
     </>

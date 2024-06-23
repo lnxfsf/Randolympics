@@ -111,7 +111,7 @@ const Register = () => {
         /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: 'http://localhost:5000/profile_photo/upload',
+        url: 'http://localhost:5000/imageUpload/profilePicture',
         method: 'POST',
         headers: {},
         withCredentials: false,
@@ -805,11 +805,11 @@ const Register = () => {
                 imagePreviewHeight={360}
                 imageCropAspectRatio="1:1"
                 imageResizeTargetWidth={360}
-                imageResizeTargetHeight={200}
+                imageResizeTargetHeight={360}
                 /*  rectangle or circle  */
                 /*                  stylePanelLayout="compact circle "
                  */
-                stylePanelLayout="compact"
+                stylePanelLayout="compact circle"
                 styleLoadIndicatorPosition="center bottom"
                 styleProgressIndicatorPosition="center bottom"
                 styleButtonRemoveItemPosition="center  bottom"
