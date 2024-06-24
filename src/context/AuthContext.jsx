@@ -88,9 +88,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // just call this function, for logout, and you're done
   let logoutUser = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     localStorage.removeItem("authTokens");
+    sessionStorage.removeItem("authTokens");
     setAuthTokens(null);
     setUser(null);
     navigate("/login");

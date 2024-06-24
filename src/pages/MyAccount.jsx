@@ -7,8 +7,19 @@ import { EditProfile } from "../components/MyAccount/EditProfile";
 import { Settings } from "../components/MyAccount/Settings";
 import { Team } from "../components/MyAccount/Team";
 
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
 
 const MyAccount = () => {
+
+
+  let { logoutUser } = useContext(AuthContext);
+
+
+
+
+
   // by this, you also know which component to display ! in this another one components !
   const [selectedItem, setSelectedItem] = useState(0);
 
@@ -22,6 +33,12 @@ const MyAccount = () => {
 
   const handleClick = (index) => {
     setSelectedItem(index);
+
+    if (index === 3){
+      logoutUser();
+      
+    }
+
   };
 
   return (
@@ -52,30 +69,14 @@ const MyAccount = () => {
 
         {/* content for editing, etc */}
         <div className="w-full">
+          {selectedItem === 0 && <EditProfile />}
+
+          {selectedItem === 1 && <Settings />}
+
+          {selectedItem === 2 && <Team />}
+
+          {/* //TODO and when Logout is clicked on, to logout user. just to call Logout, from auth..   */}
           
-
-
-
-        {selectedItem === 0 && (
-            <EditProfile />
-
-          )}
-
-
-            {selectedItem === 1 && (
-            <Settings />
-
-          )}
-
-
-{selectedItem === 2 && (
-            <Team />
-
-          )}
-
-
-
-      {/* //TODO and when Logout is clicked on, to logout user  */}
 
         </div>
       </div>

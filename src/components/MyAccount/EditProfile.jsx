@@ -1,4 +1,3 @@
-// TODO treba ovo da bude private route...
 
 import "../../styles/editprofile.scoped.scss";
 import React, { useState } from "react";

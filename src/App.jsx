@@ -8,6 +8,11 @@ import { Randomize } from "./components/Randomize";
 import { ToS } from "./pages/ToS";
 import { MyAccount } from "./pages/MyAccount";
 
+import PrivateRoute from './utils/PrivateRoute'
+
+
+
+
 const App = () => {
   return (
     <>
@@ -19,7 +24,8 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/tos" element={<ToS />} />
         <Route path="/randomize" element={<Randomize />} />
-        <Route path="/myaccount" element={<MyAccount />} />
+
+        <Route path="/myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
       </Routes>
     </>
   );

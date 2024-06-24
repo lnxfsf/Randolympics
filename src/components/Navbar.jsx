@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 
 import { AppBar, Toolbar } from "@mui/material";
 
+
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext';
+
+
 const Navbar = () => {
+
+  let { user } = useContext(AuthContext);
+
+
   return (
     <>
       <AppBar position="static">
@@ -20,9 +29,26 @@ const Navbar = () => {
             <Link to="/schedule" className="nav_btns">
               Schedule
             </Link>
+
+
+
+            {user ? (
+              <>
             <Link to="/myaccount" className="nav_btns mr-16">
               My account
             </Link>
+            </>
+
+            ) : (
+
+              <>
+              <Link to="/login" className="nav_btns mr-16">
+                Login
+              </Link>
+              </>
+
+            )}
+
           </nav>
         </Toolbar>
       </AppBar>
