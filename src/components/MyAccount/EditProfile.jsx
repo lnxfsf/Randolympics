@@ -1,11 +1,13 @@
-
 import "../../styles/editprofile.scoped.scss";
+
 import React, { useState } from "react";
 import axios from "axios";
 
 import { Button } from "@mui/material";
 
 import ReactFlagsSelect from "react-flags-select";
+
+import { HeaderMyProfile } from "./HeaderMyProfile";
 
 // MUI
 import Flag from "react-world-flags";
@@ -30,7 +32,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import dayjs from "dayjs";
-
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -65,20 +66,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-
-
-
-
-
 const EditProfile = () => {
-
-
-  
-
-
-  const [toogleProfilePic, setToogleProfilePic] = useState(false);
-
+  /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
+   */
   const [userData, setUserData] = useState(null);
 
   const handleEmailChange = (event) => {
@@ -93,7 +83,6 @@ const EditProfile = () => {
   };
 
   const handleNameChange = (event) => {
-    // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
@@ -104,7 +93,6 @@ const EditProfile = () => {
   };
 
   const handleCryptoChange = (event) => {
-    // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
@@ -126,7 +114,6 @@ const EditProfile = () => {
   };
 
   const handlePhoneChange = (event) => {
-    // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
@@ -137,7 +124,6 @@ const EditProfile = () => {
   };
 
   const handleWeightChange = (event) => {
-    // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
@@ -148,7 +134,6 @@ const EditProfile = () => {
   };
 
   const handleNationalityChange = (code) => {
-    // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
       data: {
@@ -157,9 +142,6 @@ const EditProfile = () => {
       },
     }));
   };
-
-
-  
 
   const [original_email, setOriginalEmail] = useState(null);
   // for country flags...
@@ -182,7 +164,7 @@ const EditProfile = () => {
   const [bio, setBio] = useState("");
 
   const [passportImage, setPassportImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
+  /* const [profileImage, setProfileImage] = useState(null); */
 
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
@@ -193,7 +175,7 @@ const EditProfile = () => {
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
     if (storedData) {
-      var userJson = JSON.parse(storedData); 
+      var userJson = JSON.parse(storedData);
 
       setUserData(userJson);
 
@@ -214,8 +196,8 @@ const EditProfile = () => {
       setBio(userJson.data.bio);
 
       setPassportImage(userJson.data.passport_photo);
-      setProfileImage(userJson.data.picture);
-
+      /* setProfileImage(userJson.data.picture);
+       */
       setSelectedDate(dayjs(userJson.data.birthdate));
     }
   }, []);
@@ -281,12 +263,9 @@ const EditProfile = () => {
         ...prevUserData.data,
         birthdate: selectedDate,
       },
-    }));  
-
-    
+    }));
   };
 
- 
   //const FDate = dayjs(selectedDate);
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
   // console.log(formattedDate);
@@ -435,10 +414,6 @@ const EditProfile = () => {
     },
   };
 
-
-  
-
-  
   const serverProfile = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
@@ -455,12 +430,8 @@ const EditProfile = () => {
         const filename = jsonResponse;
 
         console.log("Uploaded filename:", filename);
-        
-        setProfileImage(filename)
 
-
-       
-        
+        setProfileImage(filename);
 
         // return filename;
       },
@@ -476,8 +447,6 @@ const EditProfile = () => {
 
   const tooglePassportUpload = async () => {
     setPassportUpload(!passportUpload);
-
-
 
     // TODO, this doesn't (sometimes) save passportImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
     // this is so we can  set in session/localStorage as well
@@ -500,7 +469,6 @@ const EditProfile = () => {
         }
       );
 
-      
       // to update in localStorage
       if (response.status === 200) {
         if (localStorage.getItem("authTokens")) {
@@ -548,7 +516,6 @@ const EditProfile = () => {
     }
 
     try {
-     
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
@@ -578,14 +545,7 @@ const EditProfile = () => {
         }
       );
 
-      
-      
       if (response.status === 200) {
-        
-       
-        
-
-
         if (localStorage.getItem("authTokens")) {
           localStorage.setItem("authTokens", JSON.stringify(userData));
         } else if (sessionStorage.getItem("authTokens")) {
@@ -601,13 +561,8 @@ const EditProfile = () => {
     }
   };
 
-
-
   const toogleProfileUpload = async () => {
     setToogleProfilePic(!toogleProfilePic);
-
-
-    
 
     try {
       // we just upload profile_image URL, in database !
@@ -620,25 +575,19 @@ const EditProfile = () => {
         }
       );
 
-
       // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
-       setUserData((prevUserData) => ({
+      setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
           ...prevUserData.data,
-          picture: profileImage
+          picture: profileImage,
         },
-      })); 
-  
+      }));
 
       // to update in localStorage
       if (response.status === 200) {
-
         if (localStorage.getItem("authTokens")) {
-
           localStorage.setItem("authTokens", JSON.stringify(userData));
-        
-        
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
@@ -648,102 +597,85 @@ const EditProfile = () => {
     } catch (error) {
       console.log(error);
     }
- 
- 
- 
-  }
-
-
-
+  };
 
   return (
     <>
       <div>
-        <div className="flex justify-start">
+        <HeaderMyProfile />
+
+        {/*  <div className="flex justify-start">
           <div className="flex justify-center items-center">
+            {!toogleProfilePic && (
+              <>
+                <img
+                  src={
+                    BACKEND_SERVER_BASE_URL +
+                    "/imageUpload/profile_pics/" +
+                    profileImage
+                  }
+                  className="image_editProfile"
+                />
+              </>
+            )}
 
-
-
-
-{!toogleProfilePic && (
-  <>
-            <img
-              src={
-                BACKEND_SERVER_BASE_URL +
-                "/imageUpload/profile_pics/" +
-                profileImage
-              }
-              className="image_editProfile"
-            />
-            </>
-          )}
-
-{toogleProfilePic && (
- <>
-    <FilePond
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={serverProfile}
-                    name="image"
-                    labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-
-                    imagePreviewHeight={100}
-                    imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
-                    stylePanelLayout="compact circle"
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
-</>
-)}
-
-
-
-
+            {toogleProfilePic && (
+              <>
+                <FilePond
+                  type="file"
+                  onupdatefiles={setFiles}
+                  allowMultiple={false}
+                  maxFiles={1}
+                  server={serverProfile}
+                  name="image"
+                  labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
+                  accept="image/png, image/jpeg, image/gif"
+                  dropOnPage
+                  dropValidation
+                  allowPaste={true}
+                  allowReplace={true}
+                  credits={""}
+                  allowFileEncode={true}
+                  allowFileTypeValidation={true}
+                  allowImagePreview={true}
+                  allowImageCrop={false}
+                  allowImageResize={false}
+                  allowImageTransform={false}
+                  imagePreviewHeight={100}
+                  imageCropAspectRatio="1:1"
+                  imageResizeTargetWidth={100}
+                  imageResizeTargetHeight={100}
+                  stylePanelLayout="compact circle"
+                  styleLoadIndicatorPosition="center bottom"
+                  styleProgressIndicatorPosition="center bottom"
+                  styleButtonRemoveItemPosition="center  bottom"
+                  styleButtonProcessItemPosition="center bottom"
+                  imageEditAllowEdit={false}
+                />
+              </>
+            )}
           </div>
+
+
 
           <div className="flex flex-grow">
             <div className="flex flex-col justify-center pl-4">
               <h1 className="text-[25px]">{name_header}</h1>
 
-
               {!toogleProfilePic && (
-  <>
-              <p className="edit-photo" onClick={toogleProfileUpload}>
-                <u>Edit photo</u>
-              </p>
-              </>
+                <>
+                  <p className="edit-photo" onClick={toogleProfileUpload}>
+                    <u>Edit photo</u>
+                  </p>
+                </>
               )}
               {toogleProfilePic && (
-
                 <>
-
-                <p className="edit-photo" onClick={toogleProfileUpload}>
-                <u>Save photo</u>
-              </p>
+                  <p className="edit-photo" onClick={toogleProfileUpload}>
+                    <u>Save photo</u>
+                  </p>
                 </>
-                )}
-
-
+              )}
             </div>
           </div>
 
@@ -756,9 +688,13 @@ const EditProfile = () => {
               <Flag className="flag-photo" code={code} />
             </div>
           </div>
-        </div>
-
+        </div> 
+        
         <hr className="mt-4" />
+        
+        */}
+
+        {/* -------------- */}
 
         <div className="mt-4 mb-4">
           <p className="text-lg ">
@@ -870,8 +806,6 @@ const EditProfile = () => {
                     }
                     alt="Profile"
                     className="w-[331px] h-[222px] object-fit  passport-photo"
-
-                    
                   />
                   <p className="pt-2 " style={{ color: "#DEDEDE" }}>
                     Passport expires: <b>{formattedDate}</b>
@@ -902,18 +836,15 @@ const EditProfile = () => {
                     allowFileEncode={true}
                     allowFileTypeValidation={true}
                     allowImagePreview={true}
-
-
-                   /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                    /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
                    for now, we keep it original resolution, until I know what max resolution we should support 
-                 */    
+                 */
                     allowImageCrop={false}
                     allowImageResize={false}
                     allowImageTransform={false}
-
                     imagePreviewHeight={222}
                     imageCropAspectRatio="1:1"
-         /*            imageResizeTargetWidth={100}
+                    /*            imageResizeTargetWidth={100}
                     imageResizeTargetHeight={100} */
                     stylePanelLayout="compact"
                     styleLoadIndicatorPosition="center bottom"
@@ -1238,8 +1169,7 @@ const EditProfile = () => {
                 },
               }}
               variant="text"
-              value="Login"
-              id="login-btn"
+           
             >
               <span className="popins-font">Cancel</span>
             </Button>
@@ -1261,8 +1191,7 @@ const EditProfile = () => {
               }}
               type="submit"
               variant="text"
-              value="Login"
-              id="login-btn"
+         
             >
               <span className="popins-font">Save</span>
             </Button>
@@ -1275,6 +1204,9 @@ const EditProfile = () => {
             {resultText}
           </p>
         </form>
+
+
+
       </div>
     </>
   );
