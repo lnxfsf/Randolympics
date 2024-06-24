@@ -425,6 +425,7 @@ const update_user_data = async (req, res) => {
     birthdate,
     birthdate_private,
     picture,
+    bio,
 
   } = req.body;
 
@@ -441,6 +442,12 @@ const update_user_data = async (req, res) => {
     
 
     
+    // it can be empty, it will just make it empty..
+    if (bio !== user.bio) {
+      updatingObject.bio = bio;
+      needsUpdate = true;
+    }
+
 
     if (name && name !== user.name) {
       updatingObject.name = name;
