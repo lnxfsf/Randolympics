@@ -1,6 +1,8 @@
 // This shows only to National President user_type...
 import { HeaderMyProfile } from "./HeaderMyProfile";
 
+import "../../styles/elections.scoped.scss";
+
 import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
 
@@ -56,7 +58,7 @@ const Elections = () => {
       age: 30,
       country: "USA",
       email: "john.doe@example.com",
-      phone: "123-456-7890",
+      phone: "123-456-4324",
     },
     {
       rank: 4,
@@ -91,7 +93,7 @@ const Elections = () => {
             labelId="roleDropdowns"
             value={selectedRole}
             onChange={handleChangeRole}
-            className="w-[420px]"
+            className="w-[200px]"
             style={{ color: "#000" }}
           >
             <MenuItem value={"AH"}>Athletes</MenuItem>
@@ -105,22 +107,22 @@ const Elections = () => {
        */}
 
       {/* this is, for columns, and for it to show all columns  */}
-      <div className="mt-8">
+      {/*   <div className="mt-8">
         {/* main column */}
-        <div className="flex justify-evenly items-center font-bold mb-4">
-          <p>Rank</p>
-          <p>Name</p>
-          <p>Age</p>
+     {/*  <div className="flex justify-evenly items-center font-bold mb-4">
+        <p>Rank</p>
+        <p>Name</p>
+        <p>Age</p>
 
-          <p>Country</p>
-          <p>Email</p>
-          <p>Phone</p>
-        </div>
-        <hr />
+        <p>Country</p>
+        <p>Email</p>
+        <p>Phone</p>
+      </div>
+      <hr /> */}
 
-        {/* we just use these components for printing ! we filter data somewhere else...  */}
+      {/* we just use these components for printing ! we filter data somewhere else... 
 
-        {/* // ! get some list, so it can show red line here ! that's how it's going to go ! to render by lists..  */}
+        {/* // ! get some list, so it can show red line here ! that's how it's going to go ! to render by lists.. 
         {top50Users.map((user, index) => (
           <>
             <div
@@ -167,6 +169,58 @@ const Elections = () => {
         
 
 
+      </div> */}
+
+      <div className="mt-8">
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th className="w-[18%]">Rank</th>
+              <th className="w-[15%]">Name</th>
+              <th className="w-[8%]">Age</th>
+              <th className="w-[12%]">Country</th>
+              <th className="w-[27%]">Email</th>
+              <th className="w-[20%]">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+
+           
+
+            {top50Users.map((user, index) => (
+              <Top50
+                rank={user.rank}
+                name={user.name}
+                age={user.age}
+                country={user.country}
+                email={user.email}
+                phone={user.phone}
+                user_type={currentUserType}
+                index={index}
+                lastIndex={top50Users.length - 1}
+              />
+            ))}
+
+             {/* this is red separator, below are all others.. */}
+             <tr className="border-b-2 border-red_first " style={{padding: "0px", paddingTop: "-5px"}}>
+                <td colspan="100%"></td>
+             </tr>
+       
+
+            {otherUsers.map((user, index) => (
+              <Others
+                rank={user.rank}
+                name={user.name}
+                age={user.age}
+                country={user.country}
+                email={user.email}
+                phone={user.phone}
+                user_type={currentUserType}
+                index={index}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <p className="m-2">
