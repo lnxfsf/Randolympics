@@ -31,7 +31,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -66,9 +66,12 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-//TODO, for passport, you only need to set up on server side, route for passports, and then it stores passports in it's separate folder in /uploads as well...
 
-//TODO, you need to set only values that changed. so, when user comes to this screen, there's pre-filled data in <input>, and user can edit those fields. It updates on database only fields that were updated...
+
+
+
+
+
 const EditProfile = () => {
 
 
@@ -191,7 +194,7 @@ const EditProfile = () => {
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
     if (storedData) {
-      var userJson = JSON.parse(storedData); // so, it's easier, to set values right now here..
+      var userJson = JSON.parse(storedData); 
 
       setUserData(userJson);
 
@@ -265,6 +268,7 @@ const EditProfile = () => {
   //console.log("json user data (only when logged in): " + userData.data.email)
   //console.log("hello: " + lolz)
 
+  // TODO, validation manager inserts data here, so he needs to have his own screen for viewing all users
   const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
 
   const handleDateChange = (date) => {
@@ -280,10 +284,10 @@ const EditProfile = () => {
       },
     }));  
 
-    //console.log(selectedDate) //TODO, a sto nece, da sacuva il vani treba
+    
   };
 
-  //TODO, you will use this in passport_expiry_date, to show it... like, when you insert (Validation Manager when he can only inserts it )
+ 
   //const FDate = dayjs(selectedDate);
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
   // console.log(formattedDate);
@@ -474,9 +478,9 @@ const EditProfile = () => {
   const tooglePassportUpload = async () => {
     setPassportUpload(!passportUpload);
 
-    // TODO, if it's first time, becoming normal again, from "Save passport image"
-    // and here, call, to update in database, new passport photo, url...
 
+
+    // TODO, this doesn't (sometimes) save passportImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
     // this is so we can  set in session/localStorage as well
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -497,8 +501,7 @@ const EditProfile = () => {
         }
       );
 
-      // TODO also update in userData, that will be used..
-
+      
       // to update in localStorage
       if (response.status === 200) {
         if (localStorage.getItem("authTokens")) {
@@ -546,7 +549,7 @@ const EditProfile = () => {
     }
 
     try {
-      //TODO if success, then, also save it in localstorage as well... those updated values
+     
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
@@ -576,15 +579,13 @@ const EditProfile = () => {
         }
       );
 
-      //console.log("salje email private: " + email_private)
-
-      //console.log("hey"+ response.status)
+      
+      
       if (response.status === 200) {
-        //TODO, ovo stavi ispod text, da kaze da je azurirao values..
-        //setResultText(response.data.message);
-        //TODO, da azurira i u localstorage !
+        
+       
+        
 
-        //localStorage.setItem('authTokens', JSON.stringify(userData));
 
         if (localStorage.getItem("authTokens")) {
           localStorage.setItem("authTokens", JSON.stringify(userData));
@@ -607,21 +608,6 @@ const EditProfile = () => {
     setToogleProfilePic(!toogleProfilePic);
 
 
-    // TODO if it's same, it doesn't matter (for now), even if we click ("edit profile picture"), it will send this request. but won't update any data on database because there's no difference. 
-    // TODO but later on, you should add, just to upload only when on "save"
- 
-
-
-    /* 
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      data: {
-        ...prevUserData.data,
-        picture: profileImage,
-      },
-    }));
- */
-
     
 
     try {
@@ -635,9 +621,9 @@ const EditProfile = () => {
         }
       );
 
-      // TODO it appends, and upload correctly on backend, but it can't, update value here in this object at all !!!
-      // TODO, so we could, send this to localStorage to be updated...
-      setUserData((prevUserData) => ({
+
+      // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
+       setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
           ...prevUserData.data,
@@ -700,7 +686,7 @@ const EditProfile = () => {
                     onupdatefiles={setFiles}
                     allowMultiple={false}
                     maxFiles={1}
-                    server={serverProfile}//TODO, different one, for profile pic upload
+                    server={serverProfile}
                     name="image"
                     labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
                     accept="image/png, image/jpeg, image/gif"
@@ -750,7 +736,6 @@ const EditProfile = () => {
               )}
               {toogleProfilePic && (
 
-                // TODO, e tuda, samo mora u backend, da salje, i sacuva, i u localstorage takodje...
                 <>
 
                 <p className="edit-photo" onClick={toogleProfileUpload}>
@@ -872,7 +857,6 @@ const EditProfile = () => {
               </div>
             </div>
 
-            {/*//TODO ths is okay, but also, user need to click and edit this passport picture ie. to update it ! (just put button on bottom, so I can replace this with FilePond one..*/}
             <div className="row-span-3 flex items-start justify-start flex-col">
               {!passportUpload && (
                 <>
@@ -921,7 +905,8 @@ const EditProfile = () => {
                     allowImagePreview={true}
 
 
-                   /*  //TODO, so, with this, user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                   /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                   for now, we keep it original resolution, until I know what max resolution we should support 
                  */    
                     allowImageCrop={false}
                     allowImageResize={false}

@@ -75,7 +75,7 @@ const MyAccount = () => {
 
 
 
-      {/* //TODO and when Logout is clicked on, to logout user (go in AuthContext), and go in /login route.. */}
+      {/* //TODO and when Logout is clicked on, to logout user  */}
 
         </div>
       </div>

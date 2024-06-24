@@ -27,8 +27,7 @@ const Footer = () => {
                 Ready to get started ?
               </h1>
 
-              {/*     // TODO       "Join the fun", button in the footer, should link to the main page... the other one, which can be accessed via google (this one is for marketing)...
-               */}
+       
               <Button
                 onClick={handleToMainHome}
                 className="w-56 "

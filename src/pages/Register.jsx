@@ -535,7 +535,6 @@ const Register = () => {
                 />
               </div>
 
-              {/* // TODO implement one more password confirmation as well ! ... maybe later. when they do it in figma as well. and if required */}
               <div className="flex mb-2.5 justify-center items-center mt-0">
                 <TextField
                   label="Phone number"
