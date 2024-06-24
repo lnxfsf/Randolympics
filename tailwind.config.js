@@ -8,6 +8,7 @@ export default {
       black_first: "#232323",
       blue_first: "#315FB7",
       red_first: "#AF2626",
+      gray_first: "#C6C6C6",
 
       
     },
