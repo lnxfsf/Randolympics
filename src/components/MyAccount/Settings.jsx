@@ -158,6 +158,7 @@ const Settings = () => {
             <div className="self-center flex items-center">
 
               <img src="myaccount/trash.svg" style={{height: "20px", width: "20px", margin: "5px"}}/>
+             {/*  // TODO, you just need to make request to backend. And after user click "OK" on "Are you sure" pop up box, then it sends request to backend, as email by which to delete. But it should send confirmation email , and on that email, is link, to actually delete account (so, it's security there... ) */}
               <p className="text-red_first cursor-pointer select-none">Delete account </p>
 
               

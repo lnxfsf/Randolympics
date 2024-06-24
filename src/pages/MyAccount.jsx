@@ -6,6 +6,9 @@ import React, { useState, useEffect } from "react";
 import { EditProfile } from "../components/MyAccount/EditProfile";
 import { Settings } from "../components/MyAccount/Settings";
 import { Team } from "../components/MyAccount/Team";
+import { Elections } from "../components/MyAccount/Elections";
+
+
 
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
@@ -17,16 +20,32 @@ const MyAccount = () => {
   let { logoutUser } = useContext(AuthContext);
 
 
+  const [user_type, setUserType] = useState("");
+
+
+  useEffect(() => {
+    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      var userJson = JSON.parse(storedData);
+
+      setUserType(userJson.data.user_type);
+
+    }
+  }, []);
 
 
 
   // by this, you also know which component to display ! in this another one components !
   const [selectedItem, setSelectedItem] = useState(0);
 
-  const items = ["My Account", "Settings", "Team", "Logout"];
+  const items = ["My Account", "Settings", "Team", "Elections", "Logout"];
   const itemsIcon = [
     "/myaccount/user.svg",
     "/myaccount/settings.svg",
+    "/myaccount/team.svg",
     "/myaccount/team.svg",
     "/myaccount/exit.svg",
   ];
@@ -34,7 +53,7 @@ const MyAccount = () => {
   const handleClick = (index) => {
     setSelectedItem(index);
 
-    if (index === 3){
+    if (index === 4){
       logoutUser();
       
     }
@@ -75,7 +94,11 @@ const MyAccount = () => {
 
           {selectedItem === 2 && <Team />}
 
-          {/* //TODO and when Logout is clicked on, to logout user. just to call Logout, from auth..   */}
+
+          {/* so, only national president will see this */}
+          { user_type === "NP" && selectedItem === 3 && (
+            <Elections />
+          ) }
           
 
         </div>
