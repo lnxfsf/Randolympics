@@ -26,10 +26,6 @@ const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-
-
-
-
 // When a user signs up, generate a unique verification token and save it in the database with user email.
 const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
@@ -346,12 +342,10 @@ const login = async (req, res) => {
           return;
         }
       } else {
-        res
-          .status(401)
-          .json({
-            message: "Email is not verified !",
-            email: existingUser.email,
-          });
+        res.status(401).json({
+          message: "Email is not verified !",
+          email: existingUser.email,
+        });
 
         return;
       }
@@ -372,7 +366,6 @@ const login = async (req, res) => {
           name: existingUser.name,
           birthdate: existingUser.birthdate,
 
-
           phone: existingUser.phone,
           nationality: existingUser.nationality,
           weight: existingUser.weight,
@@ -383,14 +376,17 @@ const login = async (req, res) => {
           cryptoaddress: existingUser.cryptoaddress,
           cryptoaddress_type: existingUser.cryptoaddress_type,
 
-
           email_private: existingUser.email_private,
           phone_private: existingUser.phone_private,
           weight_private: existingUser.weight_private,
 
-          birthdate_private: existingUser.birthdate_private ,
-          
+          birthdate_private: existingUser.birthdate_private,
 
+          ranking: existingUser.ranking,
+          ranking_heavy: existingUser.ranking_heavy,
+          ranking_medium: existingUser.ranking_medium,
+          ranking_low: existingUser.ranking_low,
+          team: existingUser.team,
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -400,6 +396,74 @@ const login = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+const update_rank_data = async (req, res) => {
+  const { original_email, originalRank, goingToRank } = req.body;
+
+  await db.sequelize.sync();
+
+  const user = await User.findOne({
+    where: { email: original_email },
+  });
+
+  if (user) {
+    console.log("original rank je:" + originalRank);
+    console.log("going to rank:" + goingToRank);
+
+    var originalRankLoop = originalRank;
+    
+    // this is in case of error, so it doesn't write directly in database
+    const t = await db.sequelize.transaction();
+
+    try {
+
+      
+
+
+
+      // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+      while (originalRankLoop !== goingToRank) {
+        
+        let lowerUser = await User.findOne({
+          where: { ranking: user.ranking + 1 }, 
+         
+        });  
+
+        //if there's none, nevermind, just go one number +1 then.. no problem...  
+         if (lowerUser) {
+          await lowerUser.update({ ranking: user.ranking }, { transaction: t });
+        } 
+
+        // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+         //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+        await user.update({ ranking: user.ranking + 1 }, { transaction: t });
+       
+
+      
+        // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+        originalRankLoop = originalRankLoop + 1;
+      }
+
+      await t.commit();
+      return res.status(200).json({ message: "User rank updated" });
+    } catch (error) {
+      await t.rollback(); 
+      return res.status(500).json({ error: error.message });
+    }
+
+    /* 
+    try {
+      // await user.update(updatingObject);
+
+      return res.status(200).json({ message: "User details updated" });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    } */
+
+    // TODO, this later, when, you actually success update it..
+    // return res.status(200).json({ message: "User rank updated" });
   }
 };
 
@@ -426,7 +490,6 @@ const update_user_data = async (req, res) => {
     birthdate_private,
     picture,
     bio,
-
   } = req.body;
 
   await db.sequelize.sync();
@@ -439,15 +502,11 @@ const update_user_data = async (req, res) => {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
 
-    
-
-    
     // it can be empty, it will just make it empty..
     if (bio !== user.bio) {
       updatingObject.bio = bio;
       needsUpdate = true;
     }
-
 
     if (name && name !== user.name) {
       updatingObject.name = name;
@@ -494,36 +553,26 @@ const update_user_data = async (req, res) => {
       needsUpdate = true;
     }
 
-
     // for now, it won't delete older one, if it's null.. only through special field that's passed from FE (so I don't have to implement more complex structure for "Save passport photo", clickable text field )
     if (passport_photo && passport_photo !== user.passport_photo) {
       updatingObject.passport_photo = passport_photo;
       needsUpdate = true;
     }
 
-    
-    
     if (birthdate && birthdate !== user.birthdate) {
       updatingObject.birthdate = birthdate;
       needsUpdate = true;
     }
 
-
-    
     if (birthdate_private !== user.birthdate_private) {
       updatingObject.birthdate_private = birthdate_private;
       needsUpdate = true;
     }
 
-
-    
-
     if (picture && picture !== user.picture) {
       updatingObject.picture = picture;
       needsUpdate = true;
     }
-
-
 
     if (needsUpdate) {
       try {
@@ -552,4 +601,5 @@ module.exports = {
   reset_password,
   email_resend,
   update_user_data,
+  update_rank_data,
 };

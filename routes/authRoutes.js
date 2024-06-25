@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data } = require("../controllers/authControllers");
+const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data } = require("../controllers/authControllers");
 const router = express.Router();
 
 
@@ -24,6 +24,7 @@ router.post('/reset_password', reset_password) // Route to update the password
 
 // for edit profile
 router.post("/update_user_data", update_user_data)
+router.post("/update_rank_data", update_rank_data)  // this is to update rank data, for normal Rank.. 
 
 
 

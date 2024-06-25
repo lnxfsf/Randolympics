@@ -80,16 +80,16 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(250),
     },
     ranking: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
     },
     ranking_heavy: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
     },
     ranking_medium: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
     },
     ranking_low: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
     },
     team: {
         type: DataTypes.STRING(150),
