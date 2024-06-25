@@ -17,6 +17,7 @@ const Top50 = ({
   user_type,
   index,
   lastIndex,
+  setRankUpdated,
 }) => {
 
 
@@ -106,13 +107,20 @@ const Top50 = ({
         }
       );
 
+
+
       if (response.status === 200) {
 
-        console.log("sent (going to rank): " + currentRank)
+       // setRankUpdated((prev) => !prev);  //this is so we can update list now .. 
+        //console.log("sent (going to rank): " + currentRank)
+        //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
+        setRankUpdated((prev) => !prev); 
+        popupRef.current.close();
       }
 
 
     } catch (error) {
+      console.log("sta je")
       console.log(error);
     }
   }
