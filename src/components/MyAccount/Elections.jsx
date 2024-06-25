@@ -13,6 +13,8 @@ import FormControl from "@mui/material/FormControl";
 
 import { useState, useEffect } from "react";
 
+
+
 const Elections = () => {
   const [userData, setUserData] = useState(null);
   const [currentUserType, setCurrentUserType] = useState(null); // so it can show different fields , and reuse components
@@ -29,6 +31,10 @@ const Elections = () => {
       setCurrentUserType(userJson.data.user_type);
     }
   }, []);
+
+
+
+  //TODO, and if "rank" is "null", show text "not set"
 
   // the ones that are in 50
   // TODO, this one, you fill up, by filter, and by database (that all goes in filter)
