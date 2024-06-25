@@ -412,58 +412,82 @@ const update_rank_data = async (req, res) => {
     console.log("original rank je:" + originalRank);
     console.log("going to rank:" + goingToRank);
 
-    var originalRankLoop = originalRank;
-    
-    // this is in case of error, so it doesn't write directly in database
-    const t = await db.sequelize.transaction();
+    // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
+    // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
+    if (goingToRank - originalRank > 0) {
+      var originalRankLoop = originalRank;
 
-    try {
+      // this is in case of error, so it doesn't write directly in database
+      const t = await db.sequelize.transaction();
 
-      
+      try {
+        // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+        while (originalRankLoop !== goingToRank) {
+          let lowerUser = await User.findOne({
+            where: { ranking: user.ranking + 1 },
+          });
 
+          //if there's none, nevermind, just go one number +1 then.. no problem...
+          if (lowerUser) {
+            await lowerUser.update(
+              { ranking: user.ranking },
+              { transaction: t }
+            );
+          }
 
+          // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+          //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+          await user.update({ ranking: user.ranking + 1 }, { transaction: t });
 
-      // if it reached 1, and goingToRank is also being 1, then won't go furhter..
-      while (originalRankLoop !== goingToRank) {
-        
-        let lowerUser = await User.findOne({
-          where: { ranking: user.ranking + 1 }, 
-         
-        });  
+          // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+          originalRankLoop = originalRankLoop + 1;
+        }
 
-        //if there's none, nevermind, just go one number +1 then.. no problem...  
-         if (lowerUser) {
-          await lowerUser.update({ ranking: user.ranking }, { transaction: t });
-        } 
-
-        // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
-         //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-        await user.update({ ranking: user.ranking + 1 }, { transaction: t });
-       
-
-      
-        // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
-        originalRankLoop = originalRankLoop + 1;
+        await t.commit();
+        return res.status(200).json({ message: "User rank updated" });
+      } catch (error) {
+        await t.rollback();
+        return res.status(500).json({ error: error.message });
       }
+    } else if (goingToRank - originalRank < 0) {
+      // when athlete goes UPPER IN RANK (but that's calculated as going DOWN in rank NUMBER.. )
+      // for ( <0 ), when it's negative number. i.e. to go down in rank number. (i.e. athlete goes up in rank, from 5 to 2 .. )
 
-      await t.commit();
-      return res.status(200).json({ message: "User rank updated" });
-    } catch (error) {
-      await t.rollback(); 
-      return res.status(500).json({ error: error.message });
+      var originalRankLoop = originalRank;
+
+      // this is in case of error, so it doesn't write directly in database
+      const t = await db.sequelize.transaction();
+
+      try {
+        // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+        while (originalRankLoop !== goingToRank) {
+          let lowerUser = await User.findOne({
+            where: { ranking: user.ranking - 1 },
+          });
+
+          //if there's none, nevermind, just go one number +1 then.. no problem...
+          if (lowerUser) {
+            await lowerUser.update(
+              { ranking: user.ranking },
+              { transaction: t }
+            );
+          }
+
+          // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+          //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+          await user.update({ ranking: user.ranking - 1 }, { transaction: t });
+
+          // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+          originalRankLoop = originalRankLoop - 1;
+        }
+
+        await t.commit();
+        return res.status(200).json({ message: "User rank updated" });
+      } catch (error) {
+        await t.rollback();
+        return res.status(500).json({ error: error.message });
+      }
     }
-
-    /* 
-    try {
-      // await user.update(updatingObject);
-
-      return res.status(200).json({ message: "User details updated" });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    } */
-
-    // TODO, this later, when, you actually success update it..
-    // return res.status(200).json({ message: "User rank updated" });
   }
 };
 
