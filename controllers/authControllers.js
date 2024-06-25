@@ -31,7 +31,32 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
+
+const lastInRank = async () => {
+
+  try {
+    const latestUser = await User.findOne({
+        attributes: ['ranking'],
+        order: [['ranking', 'DESC']],
+    });
+
+    if (latestUser) {
+        console.log('Latest ranking:', latestUser.ranking);
+        return (latestUser.ranking+1)
+        //so, it returns index, +1, than latest in rows.. (so "ranking" is never null value.. )
+    } else {
+        console.log('No users found.'); // Handle case where no users exist
+    }
+} catch (error) {
+    console.error('Error finding latest ranking user:', error);
+}
+
+}
+
+
 const register = async (req, res) => {
+
+
   // on ovde uzima varijable
   const {
     user_type,
@@ -78,7 +103,7 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: null,
+    ranking: await lastInRank(), // he needs this, to complete this function, and return value..
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
@@ -89,6 +114,8 @@ const register = async (req, res) => {
     isVerified: false,
     verificationToken: generateVerificationToken(),
   };
+
+  
 
   try {
     await db.sequelize.sync();
@@ -615,6 +642,32 @@ const update_user_data = async (req, res) => {
   }
 };
 
+
+const rankingTop50 = async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10; // Default limit to 10
+  const offset = parseInt(req.query.offset) || 0;
+
+  try {
+    const topUsers = await User.findAll({
+        where: {
+            ranking: {
+                [Op.lte]: 50 // Fetch users with ranking less than or equal to 50
+            }
+        },
+        order: [['ranking', 'ASC']], // Sort by ranking ascending
+        limit: limit,
+        offset: offset
+    });
+
+    res.json(topUsers);
+
+} catch (error) {
+  console.error('Error fetching top users:', error);
+  res.status(500).json({ error: 'Internal server error' });
+}
+
+}
+
 module.exports = {
   register,
   login,
@@ -626,4 +679,5 @@ module.exports = {
   email_resend,
   update_user_data,
   update_rank_data,
+  rankingTop50,
 };
