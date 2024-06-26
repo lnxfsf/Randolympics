@@ -47,7 +47,7 @@ const Top50 = ({
   const [original_email, setOriginalEmail] = useState(null);
 
 
-  
+
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -107,6 +107,7 @@ const Top50 = ({
         //console.log("sent (going to rank): " + currentRank)
         //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
         setRankUpdated((prev) => !prev); 
+        setCurrentRank(rank) //bring it back to original... 
         popupRef.current.close();
       }
 

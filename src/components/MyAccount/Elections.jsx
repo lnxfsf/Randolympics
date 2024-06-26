@@ -14,16 +14,21 @@ let BACKEND_SERVER_BASE_URL =
 const Elections = () => {
   const [userData, setUserData] = useState(null);
   const [currentUserType, setCurrentUserType] = useState(null);
+
+  // list to fill it up, to send to component.. 
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
+
+
+  //what page is it.. 
   const [top50Page, setTop50Page] = useState(1);
   const [otherPage, setOtherPage] = useState(1);
 
   // we need this, so we know if fetching is empty, to stop, and just disable buttons "next", "previous"...  as well to hide, etc.. 
-  const [showingTop50, setShowingTop50] = useState(true);
+  const [showingTop50, setShowingTop50] = useState(true);  // znači da prikazuje top50 listu i dalje..  TRUE je, kada ima (>10) elemenata u fetch koji dobije u listi (koji i prikazuje..)
 
-  const [hasMoreTop50, setHasMoreTop50] = useState(true);
-  const [hasMoreOthers, setHasMoreOthers] = useState(true);
+  const [hasMoreTop50, setHasMoreTop50] = useState(true); // isto kao top50, ono da označi ima li jos elemenata u listi (ako je <10, onda nema... )
+  const [hasMoreOthers, setHasMoreOthers] = useState(true); // ono da označi ima li jos elemenata u listi (ako je <10, onda nema... )
 
   const [rankUpdated, setRankUpdated] = useState(false); //when rank updates.. //we pass function to update, directly in props..
 
@@ -38,17 +43,18 @@ const Elections = () => {
     }
 
     // first it fetches top50 (who are selected to go in.. )
-    if(showingTop50){
+    //if(showingTop50){
       fetchTop50Users();
-    }
+    //}
    
-    console.log("sinn:" + showingTop50)
-    // onda ne treba vise, a udjavola, treba da isprazni negde listu... 
-
+    
     // but if by fetching top50, list is empty, then fetch data from Other users.. (this is for pagination.. ). so we can show Top50 first...
     if (!showingTop50) {
       fetchOtherUsers();
     }
+
+
+
   }, [top50Page, otherPage, rankUpdated, showingTop50]);
 
   const fetchTop50Users = async () => {
@@ -128,13 +134,24 @@ const Elections = () => {
 
   // ! previous page
   const handlePreviousPage = () => {
+
+    // 
     if (showingTop50 && top50Page > 1) {
+    
       setTop50Page((prev) => prev - 1);
+    
+    
     } else if (!showingTop50 && otherPage > 1) {
+    
       setOtherPage((prev) => prev - 1);
+    
     } else if (!showingTop50 && otherPage === 1) {
+    
       setShowingTop50(true);
       setTop50Page(Math.max(1, top50Page - 1));
+    
+
+    
     }
   };
 
@@ -241,9 +258,17 @@ YOU NEED TO SET THIS UP... FIRST GOES top50 component, if it have more of pagina
        */}{" "}
       {/* <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
        */}
+
+       {/* ovo ti ne treba:otherPage === 1  (jer, on treba da radi i na druge... )
+       
+       
+        a ovo, nzm, treba obrnuto da bude..:  && !hasMoreOthers 
+       
+       */}
+
       <div className="flex justify-center mt-4">
         <button
-          disabled={(showingTop50 && top50Page === 1) || (!showingTop50 && otherPage === 1 && !hasMoreOthers)}
+          disabled={(showingTop50 && top50Page === 1) || (!showingTop50 && hasMoreOthers)}
           onClick={handlePreviousPage}
           className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
         >
