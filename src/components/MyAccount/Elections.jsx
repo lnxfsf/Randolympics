@@ -1,138 +1,204 @@
+
+
 // This shows only to National President user_type...
+
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { HeaderMyProfile } from "./HeaderMyProfile";
-
-import "../../styles/elections.scoped.scss";
-
 import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import axios from "axios";
-
-import { useState, useEffect } from "react";
-
-
-
-let BACKEND_SERVER_BASE_URL =
-import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
-process.env.VITE_BACKEND_SERVER_BASE_URL;
-
-
+let BACKEND_SERVER_BASE_URL = import.meta.env.VITE_BACKEND_SERVER_BASE_URL || process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Elections = () => {
   const [userData, setUserData] = useState(null);
-  const [currentUserType, setCurrentUserType] = useState(null); // so it can show different fields , and reuse components
-
-  
+  const [currentUserType, setCurrentUserType] = useState(null);
   const [top50Users, setTop50Users] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);  //and pagination as well... at most 10 items per page you can have anyways... so, you finish that now !
+  const [otherUsers, setOtherUsers] = useState([]);
+  const [top50Page, setTop50Page] = useState(1);
+  const [otherPage, setOtherPage] = useState(1);
+  const [showingTop50, setShowingTop50] = useState(true);
+
 
   const [rankUpdated, setRankUpdated] = useState(false); //when rank updates.. //we pass function to update, directly in props.. 
 
 
-
   useEffect(() => {
-    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
+    const storedData = localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens");
     if (storedData) {
-      var userJson = JSON.parse(storedData);
-
+      const userJson = JSON.parse(storedData);
       setUserData(userJson);
       setCurrentUserType(userJson.data.user_type);
     }
-
-
     
-    // calling function to fill up top50Users (that holds list of objects, for component here below.. ) (so, later on, we can pass to this function, arguments that would be filter...)
+    // first it fetches top50 (who are selected to go in.. )
     fetchTop50Users();
-  }, [currentPage, rankUpdated]); 
 
-  // [currentPage]  Refresh list when currentPage changes. as, we need to delete older contents, and replace it with new ones.. 
-
-
+    // but if by fetching top50, list is empty, then fetch data from Other users.. (this is for pagination.. ). so we can show Top50 first... 
+    if (!showingTop50) {
+      fetchOtherUsers();
+    }
+  }, [top50Page, otherPage, rankUpdated,  showingTop50]);
 
 
   const fetchTop50Users = async () => {
-
-    //TODO now, it needs to fetch from database, only those that have rank, higher than 50 !
-
-    // TODO , and set up pagination as well (10 items per list.. )
-    // TODO, or maybe, you just, fetch, now, with LIMIT property, like LIMIT 10, if there's too much... and make pagination...
-    // TODO etc. check it out later on... 
-
-
     try {
-      //TODO, make a route, where you can get rank data.. but server side, needs to be only for that ! for last 50 ! and send only those.. 
       const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/rankingTop50`, {
-          params: {
-              limit: 10, //how much elements we need, for one list, if it doesn't have that much, fine.. 
-              offset: (currentPage - 1) * 10 // Calculate offset based on currentPage. from what row to start in database ! 
-          }
+        params: {
+          limit: 10,
+          offset: (top50Page - 1) * 10,
+        },
       });
       setTop50Users(response.data);
-  } catch (error) {
+
+      // Check if we should switch to showing other users
+      if (response.data.length < 10) {
+        setShowingTop50(false);
+      }
+    } catch (error) {
       console.error('Error fetching top users:', error);
+    }
+  };
+
+  const fetchOtherUsers = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/otherUsers`, {
+        params: {
+          limit: 10,
+          offset: (otherPage - 1) * 10,
+        },
+      });
+      setOtherUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching other users:', error);
+    }
+  };
+
+
+  // ! with this, we need to determine...
+  const handleNextPage = () => {
+
+    if (showingTop50) {
+      setTop50Page(prev => prev + 1);  // if top50page, was 1, then add +1 to it. so it's 2 then. to update (increment) it's value.. 
+        //znači, to je sledeći page !
+    } else {
+      setOtherPage(prev => prev + 1);
+    }
+  };
+
+// ! previous page
+const handlePreviousPage = () => {
+  if (showingTop50 && top50Page > 1) {
+    setTop50Page(prev => prev - 1);
+  } else if (!showingTop50 && otherPage > 1) {
+    setOtherPage(prev => prev - 1);
+  } else if (!showingTop50 && otherPage === 1) {
+    setShowingTop50(true);
+    setTop50Page(Math.max(1, top50Page - 1)); // If moving back to top50, reduce the page if possible
   }
+};
 
 
 
-
-
-  }
-
-
-
-
-  // the ones that are in 50
-  // TODO, this one, you fill up, by filter, and by database (that all goes in filter)
- /*  const top50Users = [
-    {
-      rank: 1,
-      name: "John Doe",
-      age: 30,
-      country: "USA",
-      email: "john.doe@example.com",
-      phone: "123-456-7890",
-    },  
-    {
-      rank: 2,
-      name: "Jane Smith",
-      age: 25,
-      country: "Canada",
-      email: "jane.smith@example.com",
-      phone: "987-654-3210",
-    },
-  ]; */
-
-  const otherUsers = [
-    {
-      rank: 3,
-      name: "John Doe",
-      age: 30,
-      country: "USA",
-      email: "john.doe@example.com",
-      phone: "123-456-4324",
-    },
-    {
-      rank: 4,
-      name: "Jane Smith",
-      age: 25,
-      country: "Canada",
-      email: "jane.smith@example.com",
-      phone: "987-654-3210",
-    },
-  ];
 
   const [selectedRole, setSelectedRole] = useState("AH");
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
+
+ /*  return (
+    <>
+      <HeaderMyProfile />
+
+      <div className="flex m-0 flex-col">
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 120 }}
+          className="m-4 ml-0 mb-1"
+        >
+          <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+            <b>Selecting</b>
+          </InputLabel>
+          <Select
+            labelId="roleDropdowns"
+            value={selectedRole}
+            onChange={handleChangeRole}
+            className="w-[200px]"
+            style={{ color: "#000" }}
+          >
+            <MenuItem value={"AH"}>Athletes</MenuItem>
+            <MenuItem value={"GP"}>Global President</MenuItem>
+            <MenuItem value={"RS"}>Referee & support</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+
+      <div className="mt-8">
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th className="w-[18%]">Rank</th>
+              <th className="w-[15%]">Name</th>
+              <th className="w-[8%]">Age</th>
+              <th className="w-[12%]">Country</th>
+              <th className="w-[27%]">Email</th>
+              <th className="w-[20%]">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {top50Users.map((user, index) => (
+              <Top50
+                key={user.userId}
+                userId={user.userId}
+                rank={user.ranking}
+                name={user.name}
+                age={user.age}
+                country={user.country}
+                email={user.email}
+                phone={user.phone}
+                user_type={currentUserType}
+                index={index}
+                lastIndex={top50Users.length - 1}
+                setRankUpdated={setRankUpdated}
+              />
+            ))}
+            {!showingTop50 && otherUsers.length > 0 && (
+              <tr className="border-b-2 border-red_first ">
+                <td colSpan="6"></td>
+              </tr>
+            )}
+            {!showingTop50 && otherUsers.map((user, index) => (
+              <Others
+                key={user.userId}
+                userId={user.userId}
+                rank={user.rank}
+                name={user.name}
+                age={user.age}
+                country={user.country}
+                email={user.email}
+                phone={user.phone}
+                user_type={currentUserType}
+                index={index}
+                lastIndex={otherUsers.length - 1}
+                setRankUpdated={setRankUpdated}
+              />
+            ))}
+          </tbody>
+        </table>
+
+
+        <div className="flex justify-center mt-4">
+          <button onClick={handleNextPage} className="px-4 py-2 bg-blue-500 text-white rounded">Next Page</button>
+        </div>
+
+
+      </div>
+    </>
+  ); */
+
 
   return (
     <>
@@ -247,6 +313,7 @@ const Elections = () => {
 
             {top50Users.map((user, index) => (
               <Top50
+                userId={user.userId}
                 rank={user.ranking}
                 name={user.name}
                 age={user.age}
@@ -260,15 +327,21 @@ const Elections = () => {
               />
             ))}
 
+
+{!showingTop50 && otherUsers.length > 0 && (
+  <>
              {/* this is red separator, below are all others.. */}
              <tr className="border-b-2 border-red_first " style={{padding: "0px", paddingTop: "-5px"}}>
                 <td colSpan="100%"></td>
              </tr>
-       
+             </>
+        )}
 
-            {otherUsers.map((user, index) => (
+
+        {!showingTop50 && otherUsers.map((user, index) => (
               <Others
-                rank={user.rank}
+              userId={user.userId}
+                rank={user.ranking}
                 name={user.name}
                 age={user.age}
                 country={user.country}
@@ -276,6 +349,13 @@ const Elections = () => {
                 phone={user.phone}
                 user_type={currentUserType}
                 index={index}
+                
+                lastIndex={top50Users.length - 1}
+                setRankUpdated={setRankUpdated}
+                /* 
+YOU NEED TO SET THIS UP... FIRST GOES top50 component, if it have more of pagination, to show .. if it does.. then shows pagination for top50.. but if not, then shows this one... 
+                lastIndex={top50Users.length - 1}
+                setRankUpdated={setRankUpdated} */
               />
             ))}
           </tbody>
@@ -284,8 +364,14 @@ const Elections = () => {
 
 
 {/* // TODO, and just make this style better, on right side.. of lists..  */}
-      <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+     {/*  <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+   */}    {/* <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+ */}
+
+        <div className="flex justify-center mt-4">
+          <button onClick={handleNextPage} className="px-4 py-2 bg-blue-500 text-white rounded">Next Page</button>
+        </div>
+
 
       <p className="m-2">
         You are selecting the athletes to compete in the next games. The{" "}

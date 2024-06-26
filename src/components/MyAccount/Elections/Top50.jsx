@@ -18,6 +18,7 @@ const Top50 = ({
   index,
   lastIndex,
   setRankUpdated,
+  userId,
 }) => {
 
 
@@ -46,7 +47,7 @@ const Top50 = ({
   const [original_email, setOriginalEmail] = useState(null);
 
 
- 
+  
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -64,24 +65,15 @@ const Top50 = ({
     }
   }, []);
 
-
-
-
-
-
-
-
   const increaseRank = () => {
     setCurrentRank(currentRank + 1)
   }
 
-  
   const decreaseRank = () => {
     setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1))
     // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..) 
     // for resigning, he's becoming last in rank
   }
-
 
   const cancel = () => {
     setCurrentRank(rank) // just revert it
@@ -100,7 +92,7 @@ const Top50 = ({
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
         {
-          original_email,
+          userId,
 
           originalRank: rank,
           goingToRank: currentRank,
@@ -124,9 +116,6 @@ const Top50 = ({
       console.log(error);
     }
   }
-
-
-
 
   return (
     <>
