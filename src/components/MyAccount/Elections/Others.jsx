@@ -18,7 +18,9 @@ const Others = ({   rank,
   lastIndex,
   setRankUpdated,
   userId, }) => {
- 
+
+    
+    console.log("userid je: "+ userId)
   
 
   const [currentRank, setCurrentRank] = useState(rank);

@@ -15,22 +15,28 @@ const Elections = () => {
   const [userData, setUserData] = useState(null);
   const [currentUserType, setCurrentUserType] = useState(null);
 
-  // list to fill it up, to send to component.. 
+  // list to fill it up, to send to component..
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
 
-  //what page is it.. 
+
+  //what page is it..
   const [top50Page, setTop50Page] = useState(1);
   const [otherPage, setOtherPage] = useState(1);
 
-  // we need this, so we know if fetching is empty, to stop, and just disable buttons "next", "previous"...  as well to hide, etc.. 
-  const [showingTop50, setShowingTop50] = useState(true);  // znači da prikazuje top50 listu i dalje..  TRUE je, kada ima (>10) elemenata u fetch koji dobije u listi (koji i prikazuje..)
+
+  // we need this, so we know if fetching is empty, to stop, and just disable buttons "next", "previous"...  as well to hide, etc..
+  // const [showingTop50, setShowingTop50] = useState(true);  // znači da prikazuje top50 listu i dalje..  TRUE je, kada ima (>10) elemenata u fetch koji dobije u listi (koji i prikazuje..)
 
   const [hasMoreTop50, setHasMoreTop50] = useState(true); // isto kao top50, ono da označi ima li jos elemenata u listi (ako je <10, onda nema... )
   const [hasMoreOthers, setHasMoreOthers] = useState(true); // ono da označi ima li jos elemenata u listi (ako je <10, onda nema... )
 
   const [rankUpdated, setRankUpdated] = useState(false); //when rank updates.. //we pass function to update, directly in props..
+
+
+  const [showingTop50 , setShowingTop50] = useState(true)  // i need another variable, just so i can hide, and empty top50, by fetching one last time, so it can show Others
+
 
   useEffect(() => {
     const storedData =
@@ -42,20 +48,34 @@ const Elections = () => {
       setCurrentUserType(userJson.data.user_type);
     }
 
+
+
+
+    //this is where we fetch !!! and what we do with it !!!
+
+
+
     // first it fetches top50 (who are selected to go in.. )
-    //if(showingTop50){
-      fetchTop50Users();
-    //}
-   
-    
+    /* if(hasMoreTop50 ){
+      fetchTop50Users(); 
+    } */
+      fetchTop50Users(); 
+      // TODO moras da vidis zasto on ne izvlaci podatke koje treba ! zato miksa jako.. on prikaze ispod crte, 
+  
+  
+
+
+       fetchOtherUsers();
     // but if by fetching top50, list is empty, then fetch data from Other users.. (this is for pagination.. ). so we can show Top50 first...
-    if (!showingTop50) {
+    // or just hasOthers, then render it.. as we need to rerender Top50 first..
+   
+   /* 
+     if (!hasMoreTop50 || hasMoreOthers) {
       fetchOtherUsers();
-    }
+    }  */
 
 
-
-  }, [top50Page, otherPage, rankUpdated, showingTop50]);
+  }, [top50Page, otherPage, rankUpdated, hasMoreTop50, hasMoreOthers]);
 
   const fetchTop50Users = async () => {
     try {
@@ -72,19 +92,10 @@ const Elections = () => {
 
       // Check if we should switch to showing other users
       if (response.data.length < 10) {
-        setShowingTop50(false);
-
-      }
-
-      if (response.data.length < 10) {
         setHasMoreTop50(false);
-        setShowingTop50(false);
       } else {
         setHasMoreTop50(true);
-        setShowingTop50(true);
       }
-
-
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
@@ -102,58 +113,52 @@ const Elections = () => {
         }
       );
       setOtherUsers(response.data);
+      
+      
 
+      // ! ovde  ne treba za Others ovo uopste ! jer onda smeta i nece da renderuje.. 
       if (response.data.length < 10) {
-        
         setHasMoreOthers(false);
+        
       } else {
         setHasMoreOthers(true);
-      }
-
-
+      } 
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
   };
 
+
+
+
   // ! with this, we need to determine...
   const handleNextPage = () => {
-    if (showingTop50) {
-      if (hasMoreTop50) {
-        setTop50Page((prev) => prev + 1);
-      } else {
-        setShowingTop50(false);
-        setOtherPage(1);
-      }
-    } else {
-      if (hasMoreOthers) { 
-        setOtherPage((prev) => prev + 1);
-      }
+
+
+    console.log("ma"+ hasMoreTop50);
+
+
+    if (hasMoreTop50) {
+      setTop50Page((prev) => prev + 1);
+    } else if (hasMoreOthers) {
+      setOtherPage((prev) => prev + 1); // nema 
+      
     }
   };
 
   // ! previous page
   const handlePreviousPage = () => {
-
-    // 
-    if (showingTop50 && top50Page > 1) {
-
-      setTop50Page((prev) => prev - 1);  // go to previous page for top50, IF, we're showing top50 only.. 
-    
-    
-    } else if (!showingTop50 && otherPage > 1) {
-    
-      setOtherPage((prev) => prev - 1);   // but this is when we're just going back, and we don't have top50 showing in list at all ! it's just, so we can go back one page on Others
-    
-    } else if (!showingTop50 && otherPage === 1) {
-    
-      // and this is if Others is first page... 
-      setShowingTop50(true);
+    //
+    if (top50Page > 1) {
+      setTop50Page((prev) => prev - 1); // go to previous page for top50, IF, we're showing top50 only..
+    } else if (otherPage > 1) {
+      setOtherPage((prev) => prev - 1); // but this is when we're just going back, and we don't have top50 showing in list at all ! it's just, so we can go back one page on Others
+    } else if (otherPage === 1) {
+      // and this is if Others is first page...
+      setHasMoreTop50(true);
       setTop50Page(Math.max(1, top50Page - 1)); // so we can go to latest page from top50 !!! as we need to show by top50, (if for instance, it have 50 entries ...)
-    
-
-    
     }
+
   };
 
   const [selectedRole, setSelectedRole] = useState("AH");
@@ -161,7 +166,6 @@ const Elections = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
-
 
   return (
     <>
@@ -188,8 +192,7 @@ const Elections = () => {
           </Select>
         </FormControl>
       </div>
-   
-  
+
       <div className="mt-8">
         <table className="w-full">
           <thead>
@@ -219,8 +222,11 @@ const Elections = () => {
               />
             ))}
 
-            {!showingTop50 && otherUsers.length > 0 && (
+            {/* //TODO ovo moras da sklonis. znači, kada je samo otherUsers, da nema crvene linije.. */}
+            {!hasMoreTop50 && otherUsers.length > 0 && (
               <>
+
+
                 {/* this is red separator, below are all others.. */}
                 <tr
                   className="border-b-2 border-red_first "
@@ -231,7 +237,9 @@ const Elections = () => {
               </>
             )}
 
-            {!showingTop50 &&
+{/* // ! do ovoga je bilo, nije ni renderovao... !hasMoreTop50 , znači prikazuje ovo, samo kada, top50, nema vise elemenata dodatnih. tako treba... ako je to false, ovaj je true i radi... 
+ */}
+            {hasMoreTop50 &&
               otherUsers.map((user, index) => (
                 <Others
                   userId={user.userId}
@@ -245,38 +253,40 @@ const Elections = () => {
                   index={index}
                   lastIndex={top50Users.length - 1}
                   setRankUpdated={setRankUpdated}
-                  /* 
-YOU NEED TO SET THIS UP... FIRST GOES top50 component, if it have more of pagination, to show .. if it does.. then shows pagination for top50.. but if not, then shows this one... 
-                lastIndex={top50Users.length - 1}
-                setRankUpdated={setRankUpdated} */
                 />
               ))}
           </tbody>
         </table>
       </div>
-      {/* // TODO, and just make this style better, on right side.. of lists..  */}
-      {/*  <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-       */}{" "}
-      {/* <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
-       */}
-
-       {/* ovo ti ne treba:otherPage === 1  (jer, on treba da radi i na druge... )
-       
-       
-        a ovo, nzm, treba obrnuto da bude..:  && !hasMoreOthers 
-       
-       */}
 
       <div className="flex justify-center mt-4">
+        {/* //  it will be disabled, if it's on first page of Top50, and there's some elements in that list ! that should work
+
+// also will be disabled, if there's no more top50 elements, but in same time, there's Others elements.. (so, that's when we're actually showing Others.. )
+
+*/}
         <button
-          disabled={(showingTop50 && top50Page === 1) || (!showingTop50 && hasMoreOthers)}
+          /*  disabled={(hasMoreTop50 && top50Page === 1) || (!hasMoreTop50 && hasMoreOthers)} */
+          disabled={
+            (top50Page === 1 && hasMoreTop50) ||
+            (otherPage === 1 && hasMoreOthers)
+          }
           onClick={handlePreviousPage}
           className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
         >
           Previous
         </button>
+
+        {/* 
+bice disabled, ako nema vise top50 elemenata. 
+ili
+bice disabled, ako nema top50, I nema Others elemenata */}
         <button
-          disabled={(showingTop50 && !hasMoreTop50) || (!showingTop50 && !hasMoreOthers)}
+          /* disabled={(!hasMoreTop50) || (!hasMoreTop50 && !hasMoreOthers)} */
+          disabled={
+            (top50Page > 1 && !hasMoreTop50) ||
+            (otherPage > 1 && !hasMoreOthers)
+          }
           onClick={handleNextPage}
           className="px-4 py-2 bg-blue-500 text-white rounded"
         >
