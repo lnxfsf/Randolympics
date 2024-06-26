@@ -126,7 +126,7 @@ const Elections = () => {
         setOtherPage(1);
       }
     } else {
-      if (hasMoreOthers) {
+      if (hasMoreOthers) { 
         setOtherPage((prev) => prev + 1);
       }
     }
@@ -137,18 +137,19 @@ const Elections = () => {
 
     // 
     if (showingTop50 && top50Page > 1) {
-    
-      setTop50Page((prev) => prev - 1);
+
+      setTop50Page((prev) => prev - 1);  // go to previous page for top50, IF, we're showing top50 only.. 
     
     
     } else if (!showingTop50 && otherPage > 1) {
     
-      setOtherPage((prev) => prev - 1);
+      setOtherPage((prev) => prev - 1);   // but this is when we're just going back, and we don't have top50 showing in list at all ! it's just, so we can go back one page on Others
     
     } else if (!showingTop50 && otherPage === 1) {
     
+      // and this is if Others is first page... 
       setShowingTop50(true);
-      setTop50Page(Math.max(1, top50Page - 1));
+      setTop50Page(Math.max(1, top50Page - 1)); // so we can go to latest page from top50 !!! as we need to show by top50, (if for instance, it have 50 entries ...)
     
 
     
