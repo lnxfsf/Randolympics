@@ -22,6 +22,7 @@ const Top50 = ({
 }) => {
 
 
+  console.log("prikazuje od top50: "+userId);
 
   
 

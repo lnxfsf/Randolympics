@@ -27,7 +27,7 @@ const Others = ({   rank,
   
   const popupRef = useRef(null);
 
-
+    
 
 
 
