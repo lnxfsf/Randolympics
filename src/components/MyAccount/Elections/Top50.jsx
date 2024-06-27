@@ -17,6 +17,7 @@ const Top50 = ({
   lastIndex,
   setRankUpdated,
   userId,
+  gender,
 }) => {
   console.log("prikazuje od top50: " + userId);
 
@@ -103,7 +104,7 @@ const Top50 = ({
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                <p>{rank}</p>
+                <p>{gender} {rank}</p>
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">

@@ -161,6 +161,9 @@ const Register = () => {
   const [nationality_selected, setNationality_selected] = useState("");
   const [selectedRole, setSelectedRole] = useState("AH");
 
+
+  const [selectedGender, setSelectedGender] = useState("M");
+
   const recaptcha = useRef();
 
   // this is for password <input> field, MUI library we use
@@ -313,6 +316,7 @@ const Register = () => {
 
               cryptoaddress_type: selectedCrypto,
               bio,
+              gender: selectedGender,
             }
           );
         } catch (error) {
@@ -348,6 +352,11 @@ const Register = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
+
+  const handleChangeGender = (event) => {
+    setSelectedGender(event.target.value);
+  };
+
 
   // ? for dropdown menu
   // Get the current year,
@@ -401,6 +410,8 @@ const Register = () => {
                 <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
               </Select>
             </div>
+
+            
 
             <div
               action="#"
@@ -595,6 +606,23 @@ const Register = () => {
                   placeholder="Nationality *"
                 />
               </div>
+
+              <div className="flex mt-0 mb-2 flex-col">
+              <InputLabel id="roleDropdowns">Gender</InputLabel>
+              <Select
+                labelId="roleDropdowns"
+                id="roleDropdown"
+                label="gender"
+                value={selectedGender}
+                onChange={handleChangeGender}
+                className="w-[420px] h-10"
+                style={{ color: "#000" }}
+              >
+                <MenuItem value={"M"}>Male</MenuItem>
+                <MenuItem value={"F"}>Female</MenuItem>
+          
+              </Select>
+            </div>
 
               {selectedRole === "AH" && (
                 <div className="flex mb-2.5 justify-center items-center mt-2">

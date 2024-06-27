@@ -247,6 +247,7 @@ const Elections = () => {
                 index={index}
                 lastIndex={top50Users.length - 1}
                 setRankUpdated={setRankUpdated}
+                gender={user.gender}
               />
             ))}
 
@@ -264,6 +265,7 @@ const Elections = () => {
             {!showingTop50 &&
               otherUsers.map((user, index) => (
                 <Others
+
                   userId={user.userId}
                   rank={user.ranking}
                   name={user.name}
@@ -273,8 +275,9 @@ const Elections = () => {
                   phone={user.phone}
                   user_type={currentUserType}
                   index={index}
-                  lastIndex={top50Users.length - 1}
+                  lastIndex={otherUsers.length - 1}
                   setRankUpdated={setRankUpdated}
+                  gender={user.gender}
                 
                 />
               ))}

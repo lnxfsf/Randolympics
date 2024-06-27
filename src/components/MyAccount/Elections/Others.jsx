@@ -7,7 +7,8 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 
-const Others = ({   rank,
+const Others = ({   
+  rank,
   name,
   age,
   country,
@@ -17,7 +18,9 @@ const Others = ({   rank,
   index,
   lastIndex,
   setRankUpdated,
-  userId, }) => {
+  userId, 
+  gender,
+}) => {
 
     
     console.log("userid je: "+ userId)
@@ -127,7 +130,7 @@ const Others = ({   rank,
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                <p>{rank}</p>
+                <p>{gender} {rank}</p>
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">
@@ -272,15 +275,15 @@ const Others = ({   rank,
         <td>{phone}</td>
       </tr>
 
-      {/*       it doesn't render on last element, so it can properly show red line..
+      {/*       it doesn't render on last element, so it can properly show red line.. not needed in Others..
        */}
-      {index !== lastIndex && (
+     {/*  {index !== lastIndex && (
         <tr>
           <td colSpan="6">
             <hr />
           </td>
         </tr>
-      )}
+      )} */}
       {/* <hr /> */}
     </>
   );
