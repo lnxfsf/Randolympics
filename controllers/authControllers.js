@@ -654,6 +654,7 @@ const rankingTop50 = async (req, res) => {
   const offset = parseInt(req.query.offset) || 0;  //parseInt, is because we want it as integer
   const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others.. 
 
+  const searchText = req.query.searchText;
 
   console.log("primam user tip: "+ user_type)
 
@@ -665,7 +666,12 @@ const rankingTop50 = async (req, res) => {
             ranking: {
                 [Op.lte]: 50 // Fetch users with ranking less than or equal to 50
             },
-            user_type: user_type
+            user_type: user_type,
+
+            
+            name: {
+              [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
+          }
 
         },
         order: [['ranking', 'ASC']], 
@@ -674,8 +680,7 @@ const rankingTop50 = async (req, res) => {
         
     });
 
-    //ne vraca nista..
-    console.log("stampa"+topUsers)
+
     res.json(topUsers);
 
 
@@ -693,8 +698,10 @@ const otherUsers = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
   const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others.. 
-
   
+  const searchText = req.query.searchText;
+
+
   try {
     const otherUsers = await User.findAll({
         where: {
@@ -702,12 +709,21 @@ const otherUsers = async (req, res) => {
                 [Op.gt]: 50 // Fetch users with ranking greater than 50
             },
             user_type: user_type,
+
+            
+            name: {
+              [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
+          }
+
+
         },
         order: [['ranking', 'ASC']], // Sort by ranking ascending
         limit: limit,
         offset: offset
     });
 
+        //ne vraca nista..
+        console.log("stampa"+otherUsers)
     res.json(otherUsers);
 
 } catch (error) {
