@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50 } = require("../controllers/authControllers");
+const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50, otherUsers } = require("../controllers/authControllers");
 const router = express.Router();
 
 
@@ -24,12 +24,16 @@ router.post('/reset_password', reset_password) // Route to update the password
 
 // for edit profile
 router.post("/update_user_data", update_user_data)
-router.post("/update_rank_data", update_rank_data)  // this is to update rank data, for normal Rank.. 
+
+//router.post("/update_rank_data", update_rank_data)  // this is to update rank data, for normal Rank.. 
 
 
 //TODO, this concerning rank, etc. should have it's own routes.. as it will be many. top50, and others... so in backend already, it eases frontend work.. 
 // to get top50, only last 50 based on "ranking" column
-router.get("/rankingTop50",rankingTop50)
+/* router.get("/rankingTop50",rankingTop50)
+router.get("/otherUsers",otherUsers) */
+
+
 
 
 

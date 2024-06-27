@@ -426,13 +426,16 @@ const login = async (req, res) => {
   }
 };
 
+
 const update_rank_data = async (req, res) => {
-  const { original_email, originalRank, goingToRank } = req.body;
+  const { userId, originalRank, goingToRank } = req.body;
 
   await db.sequelize.sync();
 
+
+  //this is the selected user... find by userId..
   const user = await User.findOne({
-    where: { email: original_email },
+    where: { userId: userId },
   });
 
   if (user) {
@@ -517,6 +520,8 @@ const update_rank_data = async (req, res) => {
     }
   }
 };
+
+
 
 const update_user_data = async (req, res) => {
   // get data from FE
@@ -643,6 +648,7 @@ const update_user_data = async (req, res) => {
 };
 
 
+// ! for fetching in list
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
@@ -654,7 +660,7 @@ const rankingTop50 = async (req, res) => {
                 [Op.lte]: 50 // Fetch users with ranking less than or equal to 50
             }
         },
-        order: [['ranking', 'ASC']], // Sort by ranking ascending
+        order: [['ranking', 'ASC']], 
         limit: limit,
         offset: offset
     });
@@ -668,6 +674,34 @@ const rankingTop50 = async (req, res) => {
 
 }
 
+
+const otherUsers = async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10; // Default limit to 10
+  const offset = parseInt(req.query.offset) || 0;
+
+  try {
+    const otherUsers = await User.findAll({
+        where: {
+            ranking: {
+                [Op.gt]: 50 // Fetch users with ranking greater than 50
+            }
+        },
+        order: [['ranking', 'ASC']], 
+        limit: limit,
+        offset: offset
+    });
+
+    // on vraca ovo 100%
+    res.json(otherUsers);
+
+} catch (error) {
+  console.error('Error fetching top users:', error);
+  res.status(500).json({ error: 'Internal server error' });
+}
+
+}
+
+
 module.exports = {
   register,
   login,
@@ -679,5 +713,8 @@ module.exports = {
   email_resend,
   update_user_data,
   update_rank_data,
+
+  
   rankingTop50,
+  otherUsers,
 };
