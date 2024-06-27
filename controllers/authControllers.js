@@ -675,6 +675,8 @@ const rankingTop50 = async (req, res) => {
 }
 
 
+
+
 const otherUsers = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
@@ -686,12 +688,11 @@ const otherUsers = async (req, res) => {
                 [Op.gt]: 50 // Fetch users with ranking greater than 50
             }
         },
-        order: [['ranking', 'ASC']], 
+        order: [['ranking', 'ASC']], // Sort by ranking ascending
         limit: limit,
         offset: offset
     });
 
-    // on vraca ovo 100%
     res.json(otherUsers);
 
 } catch (error) {
