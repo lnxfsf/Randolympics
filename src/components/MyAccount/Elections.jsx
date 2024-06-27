@@ -250,6 +250,7 @@ const Elections = () => {
                 lastIndex={top50Users.length - 1}
                 setRankUpdated={setRankUpdated}
                 gender={user.gender}
+                selectedRole={selectedRole}
               />
             ))}
 
@@ -279,6 +280,7 @@ const Elections = () => {
                   lastIndex={otherUsers.length - 1}
                   setRankUpdated={setRankUpdated}
                   gender={user.gender}
+                  selectedRole={selectedRole}
                 />
               ))}
           </tbody>

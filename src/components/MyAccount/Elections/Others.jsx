@@ -20,6 +20,7 @@ const Others = ({
   setRankUpdated,
   userId, 
   gender,
+  selectedRole,
 }) => {
 
     
@@ -130,7 +131,8 @@ const Others = ({
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                <p>{gender} {rank}</p>
+                
+{selectedRole !== "GP" ? (<p>{gender} {rank}</p> ) : ( <p>{rank}</p>)}
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">

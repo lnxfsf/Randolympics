@@ -8,20 +8,13 @@ import { Settings } from "../components/MyAccount/Settings";
 import { Team } from "../components/MyAccount/Team";
 import { Elections } from "../components/MyAccount/Elections";
 
-
-
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
-
 const MyAccount = () => {
-
-
   let { logoutUser } = useContext(AuthContext);
 
-
   const [user_type, setUserType] = useState("");
-
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -32,11 +25,8 @@ const MyAccount = () => {
       var userJson = JSON.parse(storedData);
 
       setUserType(userJson.data.user_type);
-
     }
   }, []);
-
-
 
   // by this, you also know which component to display ! in this another one components !
   const [selectedItem, setSelectedItem] = useState(0);
@@ -53,11 +43,9 @@ const MyAccount = () => {
   const handleClick = (index) => {
     setSelectedItem(index);
 
-    if (index === 4){
+    if (index === 4) {
       logoutUser();
-      
     }
-
   };
 
   return (
@@ -71,18 +59,19 @@ const MyAccount = () => {
         {/* side nav bar */}
         <div className="basis-1/3 side_nav p-4">
           <ul className="list  flex flex-col">
-            {items.map((item, index) => (
-              <li
-                key={index}
-                className={`list-item ${
-                  selectedItem === index ? "selected" : ""
-                }`}
-                onClick={() => handleClick(index)}
-              >
-                <img src={itemsIcon[index]} className="icon" />
-                {item}
-              </li>
-            ))}
+              {items.map((item, index) => (
+                  <li
+                    key={index}
+                    className={`list-item ${
+                      selectedItem === index ? "selected" : ""
+                    }`}
+                    onClick={() => handleClick(index)}
+                  >
+                  
+                    <img src={itemsIcon[index]} className="icon" />
+                    {item}
+                  </li>
+                ))}
           </ul>
         </div>
 
@@ -94,13 +83,8 @@ const MyAccount = () => {
 
           {selectedItem === 2 && <Team />}
 
-
           {/* so, only national president will see this */}
-          { user_type === "NP" && selectedItem === 3 && (
-            <Elections />
-          ) }
-          
-
+          {user_type === "NP" && selectedItem === 3 && <Elections />}
         </div>
       </div>
 

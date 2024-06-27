@@ -18,6 +18,7 @@ const Top50 = ({
   setRankUpdated,
   userId,
   gender,
+  selectedRole
 }) => {
   console.log("prikazuje od top50: " + userId);
 
@@ -104,7 +105,12 @@ const Top50 = ({
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                <p>{gender} {rank}</p>
+
+
+{selectedRole !== "GP" ? (<p>{gender} {rank}</p> ) : ( <p>{rank}</p>)
+                
+              }
+              
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">
