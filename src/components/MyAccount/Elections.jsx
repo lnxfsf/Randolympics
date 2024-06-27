@@ -27,6 +27,10 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
+  
+  const [selectedRole, setSelectedRole] = useState("AH");
+
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -49,9 +53,12 @@ const Elections = () => {
 
 
 
-  }, [top50Page, otherPage, rankUpdated, showingTop50]);
+  }, [top50Page, otherPage, rankUpdated, showingTop50, selectedRole]);
 
   const fetchTop50Users = async () => {
+
+    // this params: , is actually a variables to send to server ! 
+    // user_type, is for the selection dropdown...
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/auth/rankingTop50`,
@@ -59,6 +66,8 @@ const Elections = () => {
           params: {
             limit: 10,
             offset: (top50Page - 1) * 10,
+            user_type: selectedRole,
+
           },
         }
       );
@@ -92,6 +101,7 @@ const Elections = () => {
           params: {
             limit: 10,
             offset: (otherPage - 1) * 10,
+            user_type: selectedRole,
           },
         }
       );
@@ -138,12 +148,14 @@ const Elections = () => {
     }
   };
 
-  const [selectedRole, setSelectedRole] = useState("AH");
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
-  };
 
+
+
+  };
+  console.log("selected role is changed to:" + selectedRole);
 
   return (
     <>
