@@ -29,8 +29,17 @@ const Elections = () => {
   };
 
   const [userData, setUserData] = useState(null);
-  const [currentUserType, setCurrentUserType] = useState(null);
-
+  const [currentUserType, setCurrentUserType] = useState(() => {
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      const userJson = JSON.parse(storedData);
+      
+      return userJson.data.user_type;
+    }
+  }); // TODO , it must initialie here first ! 
+ 
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
@@ -44,7 +53,19 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-  const [selectedRole, setSelectedRole] = useState("");
+
+  const [selectedRole, setSelectedRole] = useState(() => {
+    if (currentUserType === "NP") {
+      return "AH";
+    } else if (currentUserType === "AH") {
+      return "NP";
+    } else if (currentUserType === "GP") {
+      return "LM";
+    }
+  });
+
+
+
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -67,12 +88,6 @@ const Elections = () => {
 
 
 
-    // get different default role, based on signed up user
-    if (currentUserType === "NP") {
-      setSelectedRole("AH");
-    } else if ( currentUserType === "AH") {
-      setSelectedRole("NP");
-    }
 
   }, [
     top50Page,
@@ -84,6 +99,10 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
   ]);
+
+
+  
+
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -235,6 +254,35 @@ const Elections = () => {
             </>
             </>
           )}
+
+
+            {/* this is what Global President can select  */}
+            {currentUserType === "GP" && (
+            <>
+              
+
+              <>
+              <Select
+                labelId="roleDropdowns"
+                value={selectedRole}
+                onChange={handleChangeRole}
+                className="w-[200px]"
+                style={{ color: "#000" }}
+              >
+               <MenuItem value={"LM"}>Legal Manager</MenuItem>
+               <MenuItem value={"ITM"}>IT Manager</MenuItem>
+
+               <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+               <MenuItem value={"SM"}>Sales Manager</MenuItem>
+               <MenuItem value={"VM"}>Validation Manager</MenuItem>
+               <MenuItem value={"EM"}>Event Manager</MenuItem>
+
+              </Select>
+            </>
+            </>
+          )}
+
+
         </FormControl>
       </div>
       {/* div's, for Search bar and Filter */}

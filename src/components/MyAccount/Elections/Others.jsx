@@ -97,13 +97,14 @@ const Others = ({
 
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
       <tr key={index}>
-        {user_type === "NP" ? (
+        {user_type === "NP" || user_type === "GP" ? (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                {selectedRole === "GP" || selectedRole === "RS" ? (
+                {/* only for Athletes, it shows, M, F, category...  */}
+                {selectedRole !== "AH"  ? (
                   <p>{rank}</p>
                 ) : (
                   <p>
