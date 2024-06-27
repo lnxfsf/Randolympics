@@ -132,7 +132,7 @@ const Others = ({
             <td className="flex gap-2 justify-start items-center">
               <div>
                 
-{selectedRole !== "GP" ? (<p>{gender} {rank}</p> ) : ( <p>{rank}</p>)}
+              {selectedRole === "GP" || selectedRole === "RS"  ? ( <p>{rank}</p>) : (<p>{gender} {rank}</p> ) }
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">

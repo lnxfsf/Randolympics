@@ -107,9 +107,7 @@ const Top50 = ({
               <div>
 
 
-{selectedRole !== "GP" ? (<p>{gender} {rank}</p> ) : ( <p>{rank}</p>)
-                
-              }
+{selectedRole === "GP" || selectedRole === "RS"  ? ( <p>{rank}</p>) : (<p>{gender} {rank}</p> ) }
               
               </div>
               <div>
