@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { HeaderMyProfile } from "./HeaderMyProfile";
@@ -6,8 +5,9 @@ import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-import SearchBar from '@mkyy/mui-search-bar';
+import "../../styles/elections.scoped.scss"
 
+import SearchBar from "@mkyy/mui-search-bar";
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -15,6 +15,27 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Elections = () => {
+
+
+  // with this, we also need to send to backend, so we can filter, based on gender, and later on category.. 
+  // we listen on changes, send to backend, and filter by it.. 
+  const [genderFilter, setGenderFilter] = useState('M');
+  const [categoryFilter, setCategoryFilter] = useState('medium');
+
+
+  const handleGenderFilter = (gender) => {
+    setGenderFilter(gender);
+    setCategoryFilter(null); // Reset category filter when gender is selected
+  };
+
+  const handleCategoryFilter = (category) => {
+    setCategoryFilter(category);
+   
+  };
+
+
+
+
   const [userData, setUserData] = useState(null);
   const [currentUserType, setCurrentUserType] = useState(null);
 
@@ -31,7 +52,6 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-  
   const [selectedRole, setSelectedRole] = useState("AH");
 
   const [searchText, setSearchText] = useState(""); //search box
@@ -46,32 +66,31 @@ const Elections = () => {
       setCurrentUserType(userJson.data.user_type);
     }
 
-    
-      fetchTop50Users();
- 
-   
-    
-    
+    fetchTop50Users();
+
     if (!showingTop50) {
       fetchOtherUsers();
     }
+  }, [
+    top50Page,
+    otherPage,
+    rankUpdated,
+    showingTop50,
+    selectedRole,
+    searchText,
+    genderFilter,
+    categoryFilter,
 
-
-
-  }, [top50Page, otherPage, rankUpdated, showingTop50, selectedRole, searchText]);
-
+  ]);
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
 
-    console.log("ovo ne radi")
-  }
-
-
+    console.log("ovo ne radi");
+  };
 
   const fetchTop50Users = async () => {
-
-    // this params: , is actually a variables to send to server ! 
+    // this params: , is actually a variables to send to server !
     // user_type, is for the selection dropdown...
     try {
       const response = await axios.get(
@@ -82,7 +101,8 @@ const Elections = () => {
             offset: (top50Page - 1) * 10,
             user_type: selectedRole,
             searchText: searchText,
-
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
           },
         }
       );
@@ -91,7 +111,6 @@ const Elections = () => {
       // Check if we should switch to showing other users
       if (response.data.length < 10) {
         setShowingTop50(false);
-
       }
 
       if (response.data.length < 10) {
@@ -101,8 +120,6 @@ const Elections = () => {
         setHasMoreTop50(true);
         setShowingTop50(true);
       }
-
-
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
@@ -118,6 +135,8 @@ const Elections = () => {
             offset: (otherPage - 1) * 10,
             user_type: selectedRole,
             searchText: searchText,
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
           },
         }
       );
@@ -128,8 +147,6 @@ const Elections = () => {
       } else {
         setHasMoreOthers(true);
       }
-
-
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
@@ -157,19 +174,14 @@ const Elections = () => {
       setTop50Page((prev) => prev - 1);
     } else if (!showingTop50 && otherPage > 1) {
       setOtherPage((prev) => prev - 1);
-    
     } else if (!showingTop50 && otherPage === 1) {
       setShowingTop50(true);
       setTop50Page(Math.max(1, top50Page - 1));
     }
   };
 
-
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
-
-
-
   };
   console.log("selected role is changed to:" + selectedRole);
 
@@ -198,29 +210,19 @@ const Elections = () => {
           </Select>
         </FormControl>
       </div>
-
-
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end">
-
-
-
-          <SearchBar
-            value={searchText}
-            onChange={newValue => setSearchText(newValue)}
-            onCancelResearch={newValue => setSearchText("")}
-            onSearch={handleSearch}
-            style={{
-              border: '1px solid #C6C6C6', // Border color and thickness
-              borderRadius: '20px',     // Border radius
-              
-            }}
-        
-          />
-
-
-      </div>   
-  
+        <SearchBar
+          value={searchText}
+          onChange={(newValue) => setSearchText(newValue)}
+          onCancelResearch={(newValue) => setSearchText("")}
+          onSearch={handleSearch}
+          style={{
+            border: "1px solid #C6C6C6", // Border color and thickness
+            borderRadius: "20px", // Border radius
+          }}
+        />
+      </div>
       <div className="mt-8">
         <table className="w-full">
           <thead>
@@ -265,7 +267,6 @@ const Elections = () => {
             {!showingTop50 &&
               otherUsers.map((user, index) => (
                 <Others
-
                   userId={user.userId}
                   rank={user.ranking}
                   name={user.name}
@@ -278,30 +279,90 @@ const Elections = () => {
                   lastIndex={otherUsers.length - 1}
                   setRankUpdated={setRankUpdated}
                   gender={user.gender}
-                
                 />
               ))}
           </tbody>
         </table>
       </div>
-    
-
       <div className="flex justify-center mt-4">
         <button
-          disabled={(showingTop50 && top50Page === 1) || (!showingTop50 && hasMoreOthers)}
+          disabled={
+            (showingTop50 && top50Page === 1) ||
+            (!showingTop50 && hasMoreOthers)
+          }
           onClick={handlePreviousPage}
           className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
         >
           Previous
         </button>
         <button
-          disabled={(showingTop50 && !hasMoreTop50) || (!showingTop50 && !hasMoreOthers)}
+          disabled={
+            (showingTop50 && !hasMoreTop50) || (!showingTop50 && !hasMoreOthers)
+          }
           onClick={handleNextPage}
           className="px-4 py-2 bg-blue-500 text-white rounded"
         >
           Next Page
         </button>
       </div>
+
+
+
+
+
+      <div>
+      <div>
+        <h2>Gender:</h2>
+        <div>
+          <button
+            className={`gender-button ${genderFilter === 'M' ? 'male active' : ''}`}
+            onClick={() => handleGenderFilter('M')}
+            disabled={genderFilter === 'M'}
+          >
+            M
+          </button>
+          <button
+            className={`gender-button ${genderFilter === 'F' ? 'female active' : ''}`}
+            onClick={() => handleGenderFilter('F')}
+            disabled={genderFilter === 'F'}
+          >
+            F
+          </button>
+        </div>
+      </div>
+
+
+      <div className="button-container">
+        <h2>Category:</h2>
+        <div>
+          <button
+            className={`category-button ${categoryFilter === 'heavy' ? 'heavy active' : ''}`}
+            onClick={() => handleCategoryFilter('heavy')}
+            disabled={categoryFilter === 'heavy'}
+          >
+            Heavy
+          </button>
+          <button
+            className={`category-button ${categoryFilter === 'medium' ? 'medium active' : ''}`}
+            onClick={() => handleCategoryFilter('medium')}
+            disabled={categoryFilter === 'medium'}
+          >
+            Medium
+          </button>
+          <button
+            className={`category-button ${categoryFilter === 'light' ? 'light active' : ''}`}
+            onClick={() => handleCategoryFilter('light')}
+            disabled={categoryFilter === 'light'}
+          >
+            Light
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+
       <p className="m-2">
         You are selecting the athletes to compete in the next games. The{" "}
         <span className="text-red_first">top 50</span> athletes in the list will
