@@ -6,6 +6,10 @@ import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
+import SearchBar from '@mkyy/mui-search-bar';
+
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -30,6 +34,7 @@ const Elections = () => {
   
   const [selectedRole, setSelectedRole] = useState("AH");
 
+  const [searchText, setSearchText] = useState(""); //search box
 
   useEffect(() => {
     const storedData =
@@ -53,7 +58,16 @@ const Elections = () => {
 
 
 
-  }, [top50Page, otherPage, rankUpdated, showingTop50, selectedRole]);
+  }, [top50Page, otherPage, rankUpdated, showingTop50, selectedRole, searchText]);
+
+
+  const handleSearch = (he) => {
+    // Fired when enter button is pressed.
+
+    console.log("ovo ne radi")
+  }
+
+
 
   const fetchTop50Users = async () => {
 
@@ -67,6 +81,7 @@ const Elections = () => {
             limit: 10,
             offset: (top50Page - 1) * 10,
             user_type: selectedRole,
+            searchText: searchText,
 
           },
         }
@@ -102,6 +117,7 @@ const Elections = () => {
             limit: 10,
             offset: (otherPage - 1) * 10,
             user_type: selectedRole,
+            searchText: searchText,
           },
         }
       );
@@ -182,7 +198,28 @@ const Elections = () => {
           </Select>
         </FormControl>
       </div>
-   
+
+
+      {/* div's, for Search bar and Filter */}
+      <div className="flex justify-end">
+
+
+
+          <SearchBar
+            value={searchText}
+            onChange={newValue => setSearchText(newValue)}
+            onCancelResearch={newValue => setSearchText("")}
+            onSearch={handleSearch}
+            style={{
+              border: '1px solid #C6C6C6', // Border color and thickness
+              borderRadius: '20px',     // Border radius
+              
+            }}
+        
+          />
+
+
+      </div>   
   
       <div className="mt-8">
         <table className="w-full">
