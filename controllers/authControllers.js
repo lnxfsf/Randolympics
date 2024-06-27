@@ -654,7 +654,9 @@ const rankingTop50 = async (req, res) => {
   // as pagination, is just offset anyways... )
 
   // GP (and those management position, don't have filtering by M or F (buttons won't affect it ))
-  if (user_type === "GP") {
+  // this, is also for these others, gives only one as in top, and all others are in Others.. 
+  if (user_type === "GP" || user_type === "LM" || user_type === "ITM" || user_type === "MM" || user_type === "SM" || user_type === "VM" || user_type === "EM"
+  ) {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -740,7 +742,8 @@ const otherUsers = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
-  if (user_type === "GP") {
+  if (user_type === "GP" || user_type === "LM" || user_type === "ITM" || user_type === "MM" || user_type === "SM" || user_type === "VM" || user_type === "EM"
+  ) {
     try {
       const otherUsers = await User.findAll({
         where: {
