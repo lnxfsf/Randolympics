@@ -658,6 +658,11 @@ const rankingTop50 = async (req, res) => {
 
   const searchText = req.query.searchText;
 
+  const genderFilter = req.query.genderFilter;
+  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later... 
+
+
+
   console.log("primam user tip: "+ user_type)
 
 
@@ -673,7 +678,11 @@ const rankingTop50 = async (req, res) => {
             
             name: {
               [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
-          }
+          },
+
+          gender: {
+            [Op.like]: `%${genderFilter}%`
+          },
 
         },
         order: [['ranking', 'ASC']], 
@@ -703,6 +712,9 @@ const otherUsers = async (req, res) => {
   
   const searchText = req.query.searchText;
 
+  const genderFilter = req.query.genderFilter;
+  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later... 
+
 
   try {
     const otherUsers = await User.findAll({
@@ -715,7 +727,10 @@ const otherUsers = async (req, res) => {
             
             name: {
               [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
-          }
+          },
+          gender: {
+            [Op.like]: `%${genderFilter}%`
+          },
 
 
         },
