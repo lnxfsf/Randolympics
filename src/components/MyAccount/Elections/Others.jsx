@@ -86,7 +86,7 @@ const Others = ({   rank,
     try {
       
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
         {
           userId,
 

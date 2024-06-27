@@ -3,9 +3,7 @@ import "reactjs-popup/dist/index.css";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
-
-
-import { Button  } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Top50 = ({
   rank,
@@ -20,35 +18,21 @@ const Top50 = ({
   setRankUpdated,
   userId,
 }) => {
-
-
-  console.log("prikazuje od top50: "+userId);
-
-  
+  console.log("prikazuje od top50: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
 
   // original rank will be "rank", use that ! it won't change
-  
+
   const popupRef = useRef(null);
 
-
-
-
-
-
-
   let BACKEND_SERVER_BASE_URL =
-  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
-  process.env.VITE_BACKEND_SERVER_BASE_URL;
+    import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+    process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-  // just once, you save in 
+  // just once, you save in
   const [userData, setUserData] = useState(null);
   const [original_email, setOriginalEmail] = useState(null);
-
-
-
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -61,37 +45,30 @@ const Top50 = ({
       setUserData(userJson);
 
       setOriginalEmail(userJson.data.email);
-
-
     }
   }, []);
 
   const increaseRank = () => {
-    setCurrentRank(currentRank + 1)
-  }
+    setCurrentRank(currentRank + 1);
+  };
 
   const decreaseRank = () => {
-    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1))
-    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..) 
+    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1));
+    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..)
     // for resigning, he's becoming last in rank
-  }
+  };
 
   const cancel = () => {
-    setCurrentRank(rank) // just revert it
-    
+    setCurrentRank(rank); // just revert it
+
     // and exit popup
     popupRef.current.close();
-
-
-  }
+  };
 
   const saveChanges = async () => {
-
-
     try {
-      
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
         {
           userId,
 
@@ -100,24 +77,19 @@ const Top50 = ({
         }
       );
 
-
-
       if (response.status === 200) {
-
-       // setRankUpdated((prev) => !prev);  //this is so we can update list now .. 
+        // setRankUpdated((prev) => !prev);  //this is so we can update list now ..
         //console.log("sent (going to rank): " + currentRank)
         //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
-        setRankUpdated((prev) => !prev); 
-        setCurrentRank(rank) //bring it back to original... 
+        setRankUpdated((prev) => !prev);
+        setCurrentRank(rank); //bring it back to original...
         popupRef.current.close();
       }
-
-
     } catch (error) {
-      console.log("sta je")
+      console.log("sta je");
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -149,7 +121,6 @@ const Top50 = ({
                           height: "10px",
                           display: "inline-block",
                           marginBottom: "5px",
-
                         }}
                       />
                     </p>

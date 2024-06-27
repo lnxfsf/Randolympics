@@ -60,7 +60,7 @@ const Elections = () => {
   const fetchTop50Users = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/rankingTop50`,
+        `${BACKEND_SERVER_BASE_URL}/listsRanking/rankingTop50`,
         {
           params: {
             limit: 10,
@@ -93,7 +93,7 @@ const Elections = () => {
   const fetchOtherUsers = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/otherUsers`,
+        `${BACKEND_SERVER_BASE_URL}/listsRanking/otherUsers`,
         {
           params: {
             limit: 10,
