@@ -1,13 +1,10 @@
-
-
 import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-
-const Others = ({   
+const Others = ({
   rank,
   name,
   age,
@@ -18,38 +15,25 @@ const Others = ({
   index,
   lastIndex,
   setRankUpdated,
-  userId, 
+  userId,
   gender,
   selectedRole,
 }) => {
-
-    
-    console.log("userid je: "+ userId)
-  
+  console.log("userid je: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
 
   // original rank will be "rank", use that ! it won't change
-  
+
   const popupRef = useRef(null);
 
-    
-
-
-
-
-
   let BACKEND_SERVER_BASE_URL =
-  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
-  process.env.VITE_BACKEND_SERVER_BASE_URL;
+    import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+    process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-  // just once, you save in 
+  // just once, you save in
   const [userData, setUserData] = useState(null);
   const [original_email, setOriginalEmail] = useState(null);
-
-
-  
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -62,35 +46,28 @@ const Others = ({
       setUserData(userJson);
 
       setOriginalEmail(userJson.data.email);
-
-
     }
   }, []);
 
   const increaseRank = () => {
-    setCurrentRank(currentRank + 1)
-  }
+    setCurrentRank(currentRank + 1);
+  };
 
   const decreaseRank = () => {
-    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1))
-    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..) 
+    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1));
+    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..)
     // for resigning, he's becoming last in rank
-  }
+  };
 
   const cancel = () => {
-    setCurrentRank(rank) // just revert it
-    
+    setCurrentRank(rank); // just revert it
+
     // and exit popup
     popupRef.current.close();
-
-
-  }
+  };
 
   const saveChanges = async () => {
-
-
     try {
-      
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
         {
@@ -101,23 +78,18 @@ const Others = ({
         }
       );
 
-
-
       if (response.status === 200) {
-
-       // setRankUpdated((prev) => !prev);  //this is so we can update list now .. 
+        // setRankUpdated((prev) => !prev);  //this is so we can update list now ..
         //console.log("sent (going to rank): " + currentRank)
         //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
-        setRankUpdated((prev) => !prev); 
+        setRankUpdated((prev) => !prev);
         popupRef.current.close();
       }
-
-
     } catch (error) {
-      console.log("sta je")
+      console.log("sta je");
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -131,8 +103,13 @@ const Others = ({
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                
-              {selectedRole === "GP" || selectedRole === "RS"  ? ( <p>{rank}</p>) : (<p>{gender} {rank}</p> ) }
+                {selectedRole === "GP" || selectedRole === "RS" ? (
+                  <p>{rank}</p>
+                ) : (
+                  <p>
+                    {gender} {rank}
+                  </p>
+                )}
               </div>
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">
@@ -150,7 +127,6 @@ const Others = ({
                           height: "10px",
                           display: "inline-block",
                           marginBottom: "5px",
-
                         }}
                       />
                     </p>
@@ -279,7 +255,7 @@ const Others = ({
 
       {/*       it doesn't render on last element, so it can properly show red line.. not needed in Others..
        */}
-     {/*  {index !== lastIndex && (
+      {/*  {index !== lastIndex && (
         <tr>
           <td colSpan="6">
             <hr />
@@ -289,11 +265,6 @@ const Others = ({
       {/* <hr /> */}
     </>
   );
-
-
-
-
-
 };
 
 export { Others };

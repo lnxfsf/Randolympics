@@ -83,8 +83,8 @@ const MyAccount = () => {
 
           {selectedItem === 2 && <Team />}
 
-          {/* so, only national president will see this */}
-          {user_type === "NP" && selectedItem === 3 && <Elections />}
+          {/* so, only national president will see this. in fact, there should be all other users, to be able to elect something.. it's just you determine what to render..   */}
+          {/* user_type === "NP" && */ selectedItem === 3 && <Elections />}
         </div>
       </div>
 

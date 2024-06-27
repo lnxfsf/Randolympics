@@ -5,23 +5,19 @@ import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-import "../../styles/elections.scoped.scss"
+import "../../styles/elections.scoped.scss";
 
 import SearchBar from "@mkyy/mui-search-bar";
-
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Elections = () => {
-
-
-  // with this, we also need to send to backend, so we can filter, based on gender, and later on category.. 
-  // we listen on changes, send to backend, and filter by it.. 
-  const [genderFilter, setGenderFilter] = useState('M');
-  const [categoryFilter, setCategoryFilter] = useState('medium');
-
+  // with this, we also need to send to backend, so we can filter, based on gender, and later on category..
+  // we listen on changes, send to backend, and filter by it..
+  const [genderFilter, setGenderFilter] = useState("M");
+  const [categoryFilter, setCategoryFilter] = useState("medium");
 
   const handleGenderFilter = (gender) => {
     setGenderFilter(gender);
@@ -30,11 +26,7 @@ const Elections = () => {
 
   const handleCategoryFilter = (category) => {
     setCategoryFilter(category);
-   
   };
-
-
-
 
   const [userData, setUserData] = useState(null);
   const [currentUserType, setCurrentUserType] = useState(null);
@@ -52,7 +44,7 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-  const [selectedRole, setSelectedRole] = useState("AH");
+  const [selectedRole, setSelectedRole] = useState("");
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -71,6 +63,17 @@ const Elections = () => {
     if (!showingTop50) {
       fetchOtherUsers();
     }
+
+
+
+
+    // get different default role, based on signed up user
+    if (currentUserType === "NP") {
+      setSelectedRole("AH");
+    } else if ( currentUserType === "AH") {
+      setSelectedRole("NP");
+    }
+
   }, [
     top50Page,
     otherPage,
@@ -80,7 +83,6 @@ const Elections = () => {
     searchText,
     genderFilter,
     categoryFilter,
-
   ]);
 
   const handleSearch = (he) => {
@@ -197,17 +199,42 @@ const Elections = () => {
           <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
             <b>Selecting</b>
           </InputLabel>
-          <Select
-            labelId="roleDropdowns"
-            value={selectedRole}
-            onChange={handleChangeRole}
-            className="w-[200px]"
-            style={{ color: "#000" }}
-          >
-            <MenuItem value={"AH"}>Athletes</MenuItem>
-            <MenuItem value={"GP"}>Global President</MenuItem>
-            <MenuItem value={"RS"}>Referee & support</MenuItem>
-          </Select>
+          {/* this is what NP can select  */}
+          {currentUserType === "NP" && (
+            <>
+           
+              <Select
+                labelId="roleDropdowns"
+                value={selectedRole}
+                onChange={handleChangeRole}
+                className="w-[200px]"
+                style={{ color: "#000" }}
+              >
+                <MenuItem value={"AH"}>Athletes</MenuItem>
+                <MenuItem value={"GP"}>Global President</MenuItem>
+                <MenuItem value={"RS"}>Referee & support</MenuItem>
+              </Select>
+            </>
+          )}
+
+          {/* this is what athlete can select  */}
+          {currentUserType === "AH" && (
+            <>
+              
+
+              <>
+              <Select
+                labelId="roleDropdowns"
+                value={selectedRole}
+                onChange={handleChangeRole}
+                className="w-[200px]"
+                style={{ color: "#000" }}
+              >
+               <MenuItem value={"NP"}>National President</MenuItem>
+              </Select>
+            </>
+            </>
+          )}
         </FormControl>
       </div>
       {/* div's, for Search bar and Filter */}
@@ -309,62 +336,69 @@ const Elections = () => {
       </div>
 
 
+{ currentUserType === "NP" && (
+<>
+<div>
+<div>
+  <h2>Gender:</h2>
+  <div>
+    <button
+      className={`gender-button ${
+        genderFilter === "M" ? "male active" : ""
+      }`}
+      onClick={() => handleGenderFilter("M")}
+      disabled={genderFilter === "M"}
+    >
+      M
+    </button>
+    <button
+      className={`gender-button ${
+        genderFilter === "F" ? "female active" : ""
+      }`}
+      onClick={() => handleGenderFilter("F")}
+      disabled={genderFilter === "F"}
+    >
+      F
+    </button>
+  </div>
+</div>
 
-
-
-      <div>
-      <div>
-        <h2>Gender:</h2>
-        <div>
-          <button
-            className={`gender-button ${genderFilter === 'M' ? 'male active' : ''}`}
-            onClick={() => handleGenderFilter('M')}
-            disabled={genderFilter === 'M'}
-          >
-            M
-          </button>
-          <button
-            className={`gender-button ${genderFilter === 'F' ? 'female active' : ''}`}
-            onClick={() => handleGenderFilter('F')}
-            disabled={genderFilter === 'F'}
-          >
-            F
-          </button>
-        </div>
-      </div>
-
-
-      <div className="button-container">
-        <h2>Category:</h2>
-        <div>
-          <button
-            className={`category-button ${categoryFilter === 'heavy' ? 'heavy active' : ''}`}
-            onClick={() => handleCategoryFilter('heavy')}
-            disabled={categoryFilter === 'heavy'}
-          >
-            Heavy
-          </button>
-          <button
-            className={`category-button ${categoryFilter === 'medium' ? 'medium active' : ''}`}
-            onClick={() => handleCategoryFilter('medium')}
-            disabled={categoryFilter === 'medium'}
-          >
-            Medium
-          </button>
-          <button
-            className={`category-button ${categoryFilter === 'light' ? 'light active' : ''}`}
-            onClick={() => handleCategoryFilter('light')}
-            disabled={categoryFilter === 'light'}
-          >
-            Light
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-
-
+<div className="button-container">
+  <h2>Category:</h2>
+  <div>
+    <button
+      className={`category-button ${
+        categoryFilter === "heavy" ? "heavy active" : ""
+      }`}
+      onClick={() => handleCategoryFilter("heavy")}
+      disabled={categoryFilter === "heavy"}
+    >
+      Heavy
+    </button>
+    <button
+      className={`category-button ${
+        categoryFilter === "medium" ? "medium active" : ""
+      }`}
+      onClick={() => handleCategoryFilter("medium")}
+      disabled={categoryFilter === "medium"}
+    >
+      Medium
+    </button>
+    <button
+      className={`category-button ${
+        categoryFilter === "light" ? "light active" : ""
+      }`}
+      onClick={() => handleCategoryFilter("light")}
+      disabled={categoryFilter === "light"}
+    >
+      Light
+    </button>
+  </div>
+</div>
+</div>
+</>
+)
+}
       <p className="m-2">
         You are selecting the athletes to compete in the next games. The{" "}
         <span className="text-red_first">top 50</span> athletes in the list will
