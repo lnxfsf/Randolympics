@@ -31,32 +31,26 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
-
 const lastInRank = async () => {
-
   try {
     const latestUser = await User.findOne({
-        attributes: ['ranking'],
-        order: [['ranking', 'DESC']],
+      attributes: ["ranking"],
+      order: [["ranking", "DESC"]],
     });
 
     if (latestUser) {
-        console.log('Latest ranking:', latestUser.ranking);
-        return (latestUser.ranking+1)
-        //so, it returns index, +1, than latest in rows.. (so "ranking" is never null value.. )
+      console.log("Latest ranking:", latestUser.ranking);
+      return latestUser.ranking + 1;
+      //so, it returns index, +1, than latest in rows.. (so "ranking" is never null value.. )
     } else {
-        console.log('No users found.'); // Handle case where no users exist
+      console.log("No users found."); // Handle case where no users exist
     }
-} catch (error) {
-    console.error('Error finding latest ranking user:', error);
-}
-
-}
-
+  } catch (error) {
+    console.error("Error finding latest ranking user:", error);
+  }
+};
 
 const register = async (req, res) => {
-
-
   // on ovde uzima varijable
   const {
     user_type,
@@ -116,8 +110,6 @@ const register = async (req, res) => {
     verificationToken: generateVerificationToken(),
     gender,
   };
-
-  
 
   try {
     await db.sequelize.sync();
@@ -428,12 +420,10 @@ const login = async (req, res) => {
   }
 };
 
-
 const update_rank_data = async (req, res) => {
   const { userId, originalRank, goingToRank } = req.body;
 
   await db.sequelize.sync();
-
 
   //this is the selected user... find by userId..
   const user = await User.findOne({
@@ -522,8 +512,6 @@ const update_rank_data = async (req, res) => {
     }
   }
 };
-
-
 
 const update_user_data = async (req, res) => {
   // get data from FE
@@ -649,107 +637,144 @@ const update_user_data = async (req, res) => {
   }
 };
 
-
 // ! for fetching in list
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
-  const offset = parseInt(req.query.offset) || 0;  //parseInt, is because we want it as integer
-  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others.. 
+  const offset = parseInt(req.query.offset) || 0; //parseInt, is because we want it as integer
+  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
 
   const searchText = req.query.searchText;
 
   const genderFilter = req.query.genderFilter;
-  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later... 
+  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
-
-
-  console.log("primam user tip: "+ user_type)
-
-
+  console.log("primam user tip: " + user_type);
 
   try {
-    const topUsers = await User.findAll({
-        where: {
-            ranking: {
-                [Op.lte]: 50 // Fetch users with ranking less than or equal to 50
-            },
-            user_type: user_type,
+    // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
+    // as pagination, is just offset anyways... )
 
-            
-            name: {
-              [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
+    // GP (and those management position, don't have filtering by M or F (buttons won't affect it ))
+    if (user_type === "GP") {
+      const topUsers = await User.findAll({
+        where: {
+          ranking: 1, //users, with ranking 1
+          user_type: user_type,
+
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
+        },
+        order: [["ranking", "ASC"]],
+        limit: limit,
+        offset: offset,
+      });
+
+      res.json(topUsers);
+    } else {
+      const topUsers = await User.findAll({
+        where: {
+          ranking: {
+            [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
+          },
+          user_type: user_type,
+
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
 
           gender: {
-            [Op.like]: `%${genderFilter}%`
+            [Op.like]: `%${genderFilter}%`,
           },
-
         },
-        order: [['ranking', 'ASC']], 
+        order: [["ranking", "ASC"]],
         limit: limit,
         offset: offset,
-        
-    });
+      });
 
-
-    res.json(topUsers);
-
-
-} catch (error) {
-  console.error('Error fetching top users:', error);
-  res.status(500).json({ error: 'Internal server error' });
-}
-
-}
-
-
-
+      res.json(topUsers);
+    }
+  } catch (error) {
+    console.error("Error fetching top users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 const otherUsers = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
-  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others.. 
-  
+  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
+
   const searchText = req.query.searchText;
 
   const genderFilter = req.query.genderFilter;
-  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later... 
+  // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
 
-  try {
-    const otherUsers = await User.findAll({
+  if (user_type === "GP") {
+    try {
+      const otherUsers = await User.findAll({
         where: {
-            ranking: {
-                [Op.gt]: 50 // Fetch users with ranking greater than 50
-            },
-            user_type: user_type,
+          ranking: {
+            [Op.gt]: 1, // Fetch users with ranking greater than 1
+          },
+          user_type: user_type,
+  
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
+          
+        },
+        order: [["ranking", "ASC"]], // Sort by ranking ascending
+        limit: limit,
+        offset: offset,
+      });
+  
+      //ne vraca nista..
+      console.log("stampa" + otherUsers);
+      res.json(otherUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
 
-            
-            name: {
-              [Op.like]: `%${searchText}%` //this is so it can search by name (that's for now)
+
+
+
+  } else {
+    try {
+      const otherUsers = await User.findAll({
+        where: {
+          ranking: {
+            [Op.gt]: 50, // Fetch users with ranking greater than 50
+          },
+          user_type: user_type,
+  
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
           gender: {
-            [Op.like]: `%${genderFilter}%`
+            [Op.like]: `%${genderFilter}%`,
           },
-
-
         },
-        order: [['ranking', 'ASC']], // Sort by ranking ascending
+        order: [["ranking", "ASC"]], // Sort by ranking ascending
         limit: limit,
-        offset: offset
-    });
+        offset: offset,
+      });
+  
+      //ne vraca nista..
+      console.log("stampa" + otherUsers);
+      res.json(otherUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+ 
 
-        //ne vraca nista..
-        console.log("stampa"+otherUsers)
-    res.json(otherUsers);
 
-} catch (error) {
-  console.error('Error fetching top users:', error);
-  res.status(500).json({ error: 'Internal server error' });
-}
 
-}
-
+};
 
 module.exports = {
   register,
@@ -763,7 +788,6 @@ module.exports = {
   update_user_data,
   update_rank_data,
 
-  
   rankingTop50,
   otherUsers,
 };
