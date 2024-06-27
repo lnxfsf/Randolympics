@@ -650,12 +650,12 @@ const rankingTop50 = async (req, res) => {
 
   console.log("primam user tip: " + user_type);
 
-  try {
-    // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
-    // as pagination, is just offset anyways... )
+  // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
+  // as pagination, is just offset anyways... )
 
-    // GP (and those management position, don't have filtering by M or F (buttons won't affect it ))
-    if (user_type === "GP") {
+  // GP (and those management position, don't have filtering by M or F (buttons won't affect it ))
+  if (user_type === "GP") {
+    try {
       const topUsers = await User.findAll({
         where: {
           ranking: 1, //users, with ranking 1
@@ -671,7 +671,37 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-    } else {
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } else if (user_type === "RS")  {
+    try {
+      const topUsers = await User.findAll({
+        where: {
+          ranking: {
+            [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
+          },
+          user_type: user_type,
+
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
+
+          
+        },
+        order: [["ranking", "ASC"]],
+        limit: limit,
+        offset: offset,
+      });
+
+      res.json(topUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } else {
+    try {
       const topUsers = await User.findAll({
         where: {
           ranking: {
@@ -693,10 +723,10 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-  } catch (error) {
-    console.error("Error fetching top users:", error);
-    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -710,7 +740,6 @@ const otherUsers = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
-
   if (user_type === "GP") {
     try {
       const otherUsers = await User.findAll({
@@ -719,17 +748,16 @@ const otherUsers = async (req, res) => {
             [Op.gt]: 1, // Fetch users with ranking greater than 1
           },
           user_type: user_type,
-  
+
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
-          
         },
         order: [["ranking", "ASC"]], // Sort by ranking ascending
         limit: limit,
         offset: offset,
       });
-  
+
       //ne vraca nista..
       console.log("stampa" + otherUsers);
       res.json(otherUsers);
@@ -737,10 +765,32 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
+  } else if (user_type === "RS") {
+    // for "Referee & support", we also use number, and don't discern between male and female ...
+    try {
+      const otherUsers = await User.findAll({
+        where: {
+          ranking: {
+            [Op.gt]: 50, // Fetch users with ranking greater than 50
+          },
+          user_type: user_type,
 
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
+        },
+        order: [["ranking", "ASC"]], // Sort by ranking ascending
+        limit: limit,
+        offset: offset,
+      });
 
-
-
+      //ne vraca nista..
+      console.log("stampa" + otherUsers);
+      res.json(otherUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   } else {
     try {
       const otherUsers = await User.findAll({
@@ -749,7 +799,7 @@ const otherUsers = async (req, res) => {
             [Op.gt]: 50, // Fetch users with ranking greater than 50
           },
           user_type: user_type,
-  
+
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
@@ -761,7 +811,7 @@ const otherUsers = async (req, res) => {
         limit: limit,
         offset: offset,
       });
-  
+
       //ne vraca nista..
       console.log("stampa" + otherUsers);
       res.json(otherUsers);
@@ -770,10 +820,6 @@ const otherUsers = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   }
- 
-
-
-
 };
 
 module.exports = {
