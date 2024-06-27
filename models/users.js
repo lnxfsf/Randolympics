@@ -111,6 +111,10 @@ module.exports = function(sequelize, DataTypes) {
       },
 
 
+      gender: {
+        type: DataTypes.CHAR(1),
+      }
+
 
 
 

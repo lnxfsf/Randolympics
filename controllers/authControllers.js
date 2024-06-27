@@ -73,6 +73,7 @@ const register = async (req, res) => {
     cryptoaddress,
     cryptoaddress_type,
     picture,
+    gender,
   } = req.body;
 
   // hash password
@@ -113,6 +114,7 @@ const register = async (req, res) => {
 
     isVerified: false,
     verificationToken: generateVerificationToken(),
+    gender,
   };
 
   
