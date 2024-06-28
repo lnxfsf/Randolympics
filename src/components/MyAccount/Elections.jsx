@@ -40,20 +40,18 @@ const Elections = () => {
     }
   }); // TODO , it must initialie here first !
 
-
-  
   const [votedFor, setVotedFor] = useState(() => {
-    //TODO ovo , NE radi uporno 
+    //TODO ovo , NE radi uporno
     const storedData =
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
     if (storedData) {
       const userJson = JSON.parse(storedData);
-      console.log("unutra: "+userJson.data.votedFor)
+      console.log("unutra: " + userJson.data.votedFor);
       return userJson.data.votedFor;
     }
   });
-  
+
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
@@ -67,7 +65,6 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-  
   const [selectedRole, setSelectedRole] = useState(() => {
     if (currentUserType === "NP") {
       return "AH";
@@ -90,8 +87,6 @@ const Elections = () => {
       setCurrentUserType(userJson.data.user_type);
     }
 
- 
-
     fetchTop50Users();
 
     if (!showingTop50) {
@@ -107,7 +102,6 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
   ]);
-
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -209,36 +203,31 @@ const Elections = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
-  
+
   // ! to saljes u backend... i on, sada to koristi...
   const settingVotedFor = async (event) => {
-    setVotedFor(event.target.value.name);  // we get object "user", and get .name
+    setVotedFor(event.target.value.name); // we get object "user", and get .name
 
-   // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
-  try {
-     var response = await axios.post(
-      `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
-      { votedFor: event.target.value.name,
-        NPuserId: event.target.value.userId, // and userId of that NP in question 
+    // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
+        {
+          votedFor: event.target.value.name,  
+          NPuserId: event.target.value.userId, // and userId of that NP in question
 
-        current_user_userId: userData.data.userId
-        
-        
-       }
-    ); 
+          current_user_userId: userData.data.userId,
+        }
+      );
 
- if (response.status === 200) { 
-  console.log("sta e")
- }
-  
-  } catch (error) {
-    //console.log(error);
-    setResultText(error.response.data.message);
-  } 
-}; 
-
-
-  
+      if (response.status === 200) {
+        console.log("sta e");
+      }
+    } catch (error) {
+      //console.log(error);
+      setResultText(error.response.data.message);
+    }
+  };
 
   return (
     <>
