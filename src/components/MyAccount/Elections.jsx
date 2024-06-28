@@ -35,11 +35,11 @@ const Elections = () => {
       sessionStorage.getItem("authTokens");
     if (storedData) {
       const userJson = JSON.parse(storedData);
-      
+
       return userJson.data.user_type;
     }
-  }); // TODO , it must initialie here first ! 
- 
+  }); // TODO , it must initialie here first !
+
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
@@ -53,7 +53,6 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-
   const [selectedRole, setSelectedRole] = useState(() => {
     if (currentUserType === "NP") {
       return "AH";
@@ -63,9 +62,6 @@ const Elections = () => {
       return "LM";
     }
   });
-
-
-
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -84,11 +80,6 @@ const Elections = () => {
     if (!showingTop50) {
       fetchOtherUsers();
     }
-
-
-
-
-
   }, [
     top50Page,
     otherPage,
@@ -99,10 +90,6 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
   ]);
-
-
-  
-
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -204,12 +191,37 @@ const Elections = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
-  console.log("selected role is changed to:" + selectedRole);
 
+  const [votedFor, setVotedFor] = useState();
+
+  // ! to saljes u backend... i on, sada to koristi...
+  const handleVotedFor = async (event) => {
+    setVotedFor(event.target.value.name); // we get object "user", and get .name
+
+    // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
+        {
+          votedFor: event.target.value.name,
+          NPuserId: event.target.value.userId, // and userId of that NP in question
+
+          current_user_userId: userData.data.userId,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("sta e");
+      }
+    } catch (error) {
+      //console.log(error);
+      setResultText(error.response.data.message);
+    }
+  };
   return (
     <>
       <HeaderMyProfile />
-      <div className="flex m-0 flex-col">
+      <div className="flex m-0 flex justify-start items-center gap-4">
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
@@ -221,7 +233,6 @@ const Elections = () => {
           {/* this is what NP can select  */}
           {currentUserType === "NP" && (
             <>
-           
               <Select
                 labelId="roleDropdowns"
                 value={selectedRole}
@@ -239,51 +250,80 @@ const Elections = () => {
           {/* this is what athlete can select  */}
           {currentUserType === "AH" && (
             <>
-              
-
               <>
-              <Select
-                labelId="roleDropdowns"
-                value={selectedRole}
-                onChange={handleChangeRole}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-               <MenuItem value={"NP"}>National President</MenuItem>
-              </Select>
-            </>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"NP"}>National President</MenuItem>
+                </Select>
+              </>
             </>
           )}
 
-
-            {/* this is what Global President can select  */}
-            {currentUserType === "GP" && (
+          {/* this is what Global President can select  */}
+          {currentUserType === "GP" && (
             <>
-              
-
               <>
-              <Select
-                labelId="roleDropdowns"
-                value={selectedRole}
-                onChange={handleChangeRole}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-               <MenuItem value={"LM"}>Legal Manager</MenuItem>
-               <MenuItem value={"ITM"}>IT Manager</MenuItem>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"LM"}>Legal Manager</MenuItem>
+                  <MenuItem value={"ITM"}>IT Manager</MenuItem>
 
-               <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-               <MenuItem value={"SM"}>Sales Manager</MenuItem>
-               <MenuItem value={"VM"}>Validation Manager</MenuItem>
-               <MenuItem value={"EM"}>Event Manager</MenuItem>
-
-              </Select>
-            </>
+                  <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+                  <MenuItem value={"SM"}>Sales Manager</MenuItem>
+                  <MenuItem value={"VM"}>Validation Manager</MenuItem>
+                  <MenuItem value={"EM"}>Event Manager</MenuItem>
+                </Select>
+              </>
             </>
           )}
-
-
         </FormControl>
+
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 120 }}
+          className="m-4 ml-0 mb-1"
+        >
+          <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+            <b>Selecting</b>
+          </InputLabel>
+
+          <Select
+            labelId="roleDropdowns"
+            value={votedFor}
+            onChange={handleVotedFor}
+            className="w-[200px]"
+            style={{ color: "#000" }}
+          >
+          
+          
+          
+           
+            {top50Users.map(user => (
+              <MenuItem key={user.id} value={user}>
+                {user.name}
+              </MenuItem>
+            ))}
+          
+          
+          {otherUsers.map(user => (
+              <MenuItem key={user.id} value={user}>
+                {user.name}
+              </MenuItem>
+            ))}
+          
+          </Select>
+        </FormControl>
+        <></>
       </div>
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end">
@@ -383,70 +423,68 @@ const Elections = () => {
         </button>
       </div>
 
+      {currentUserType === "NP" && (
+        <>
+          <div>
+            <div>
+              <h2>Gender:</h2>
+              <div>
+                <button
+                  className={`gender-button ${
+                    genderFilter === "M" ? "male active" : ""
+                  }`}
+                  onClick={() => handleGenderFilter("M")}
+                  disabled={genderFilter === "M"}
+                >
+                  M
+                </button>
+                <button
+                  className={`gender-button ${
+                    genderFilter === "F" ? "female active" : ""
+                  }`}
+                  onClick={() => handleGenderFilter("F")}
+                  disabled={genderFilter === "F"}
+                >
+                  F
+                </button>
+              </div>
+            </div>
 
-{ currentUserType === "NP" && (
-<>
-<div>
-<div>
-  <h2>Gender:</h2>
-  <div>
-    <button
-      className={`gender-button ${
-        genderFilter === "M" ? "male active" : ""
-      }`}
-      onClick={() => handleGenderFilter("M")}
-      disabled={genderFilter === "M"}
-    >
-      M
-    </button>
-    <button
-      className={`gender-button ${
-        genderFilter === "F" ? "female active" : ""
-      }`}
-      onClick={() => handleGenderFilter("F")}
-      disabled={genderFilter === "F"}
-    >
-      F
-    </button>
-  </div>
-</div>
-
-<div className="button-container">
-  <h2>Category:</h2>
-  <div>
-    <button
-      className={`category-button ${
-        categoryFilter === "heavy" ? "heavy active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("heavy")}
-      disabled={categoryFilter === "heavy"}
-    >
-      Heavy
-    </button>
-    <button
-      className={`category-button ${
-        categoryFilter === "medium" ? "medium active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("medium")}
-      disabled={categoryFilter === "medium"}
-    >
-      Medium
-    </button>
-    <button
-      className={`category-button ${
-        categoryFilter === "light" ? "light active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("light")}
-      disabled={categoryFilter === "light"}
-    >
-      Light
-    </button>
-  </div>
-</div>
-</div>
-</>
-)
-}
+            <div className="button-container">
+              <h2>Category:</h2>
+              <div>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "heavy" ? "heavy active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("heavy")}
+                  disabled={categoryFilter === "heavy"}
+                >
+                  Heavy
+                </button>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "medium" ? "medium active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("medium")}
+                  disabled={categoryFilter === "medium"}
+                >
+                  Medium
+                </button>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "light" ? "light active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("light")}
+                  disabled={categoryFilter === "light"}
+                >
+                  Light
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <p className="m-2">
         You are selecting the athletes to compete in the next games. The{" "}
         <span className="text-red_first">top 50</span> athletes in the list will
