@@ -911,21 +911,41 @@ const votingForNP = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const { votedFor, userId } = req.body;
+    const { votedFor, NPuserId, current_user_userId } = req.body;
 
     // userId, od NP, for who he voted for.. so we can work with it !
     
 
     try {
+
+      
+      // ovo je current User da nadjes.. da samo kolonu azuriras mu
+      const currentUser = await User.findOne({
+        where: {
+          userId: current_user_userId,
+        },
+      });
+
+
+      // ovo je NP da nadjes.. 
       const selectedVoteNP = await User.findOne({
         where: {
-          userId: userId,
+          userId: NPuserId,
         },
       });
 
       //ne vraca nista..
-      console.log("stampa sinovac" + votedFor);
-      console.log("stampa sinovac" + userId);
+      console.log("votedFor je" + votedFor);
+      console.log("NPuserId je " + NPuserId);
+      console.log("current_user_userId je: " + current_user_userId)
+
+      //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
+      // dobija ovde 
+
+
+
+      // TODO, i vrsi taj raspored, po "votes" i govna.. ne gubi vreme na frontend, taj localstorage udjavola... 
+
       
       res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
     } catch (error) {
