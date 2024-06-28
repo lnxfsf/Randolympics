@@ -919,6 +919,8 @@ const votingForNP = async (req, res) => {
     try {
 
       
+      await db.sequelize.sync();
+
       // ovo je current User da nadjes.. da samo kolonu azuriras mu
       const currentUser = await User.findOne({
         where: {
@@ -941,12 +943,22 @@ const votingForNP = async (req, res) => {
 
       //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
       // dobija ovde 
+      if (currentUser) {
+        try {
+          
+          currentUser.votedFor = votedFor; 
+          await currentUser.save();
+  
+      } catch (error) {
+          console.log(error.message)
+        }
+      }
 
 
 
       // TODO, i vrsi taj raspored, po "votes" i govna.. ne gubi vreme na frontend, taj localstorage udjavola... 
-
       
+
       res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
     } catch (error) {
       console.error("Error fetching top users:", error);
