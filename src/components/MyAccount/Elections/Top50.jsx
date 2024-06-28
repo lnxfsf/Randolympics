@@ -3,6 +3,8 @@ import "reactjs-popup/dist/index.css";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 
 const Top50 = ({
@@ -253,15 +255,17 @@ const Top50 = ({
         <td>{country}</td>
         <td>{email}</td>
         <td>{phone}</td>
+
+      
       </tr>
 
       {/*       it doesn't render on last element, so it can properly show red line..
        */}
       {index !== lastIndex && (
         <tr>
-          <td colSpan="6">
-            <hr />
-          </td>
+           <td colSpan="6">
+              <hr />
+            </td>
         </tr>
       )}
       {/* <hr /> */}

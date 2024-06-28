@@ -4,6 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+
 const Others = ({
   rank,
   name,
@@ -252,6 +256,8 @@ const Others = ({
         <td>{country}</td>
         <td>{email}</td>
         <td>{phone}</td>
+
+       
       </tr>
 
       {/*       it doesn't render on last element, so it can properly show red line.. not needed in Others..

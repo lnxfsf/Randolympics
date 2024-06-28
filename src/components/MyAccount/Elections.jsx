@@ -35,11 +35,11 @@ const Elections = () => {
       sessionStorage.getItem("authTokens");
     if (storedData) {
       const userJson = JSON.parse(storedData);
-      
+
       return userJson.data.user_type;
     }
-  }); // TODO , it must initialie here first ! 
- 
+  }); // TODO , it must initialie here first !
+
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
@@ -53,7 +53,7 @@ const Elections = () => {
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
-
+  
   const [selectedRole, setSelectedRole] = useState(() => {
     if (currentUserType === "NP") {
       return "AH";
@@ -63,9 +63,6 @@ const Elections = () => {
       return "LM";
     }
   });
-
-
-
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -79,16 +76,13 @@ const Elections = () => {
       setCurrentUserType(userJson.data.user_type);
     }
 
+ 
+
     fetchTop50Users();
 
     if (!showingTop50) {
       fetchOtherUsers();
     }
-
-
-
-
-
   }, [
     top50Page,
     otherPage,
@@ -100,9 +94,17 @@ const Elections = () => {
     categoryFilter,
   ]);
 
+  const [votedFor, setVotedFor] = useState(() => {
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      const userJson = JSON.parse(storedData);
 
-  
-
+      return userJson.data.votedFor;
+    }
+  });
+  console.log(userData);
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -204,12 +206,59 @@ const Elections = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
-  console.log("selected role is changed to:" + selectedRole);
+  
+  // ! to saljes u backend... i on, sada to koristi...
+   const settingVotedFor = async (event) => {
+    
+  
+    var name = event.target.value.name;
+    setVotedFor(name);  // we get object "user", and get .name
+
+     // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
+    try {
+       var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
+        { votedFor: event.target.value.name,
+          userId: event.target.value.userId, // and userId of that NP in question 
+
+          
+         }
+      ); 
+
+   if (response.status === 200) { 
+    console.log("sta e")
+   }
+    
+    } catch (error) {
+      //console.log(error);
+      setResultText(error.response.data.message);
+    } 
+  }; 
+/* 
+  const settingVotedFor = (event) => {
+    setVotedFor(event.target.value);
+  
+    console.log("Value selected: " + event.target.value);
+  
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        votedFor: event.target.value,
+      },
+    }));
+  
+    console.log("Updated userData: ", userData);
+  
+    
+  }; */
+
+  
 
   return (
     <>
       <HeaderMyProfile />
-      <div className="flex m-0 flex-col">
+      <div className="flex m-0 flex justify-start items-center gap-4">
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
@@ -221,7 +270,6 @@ const Elections = () => {
           {/* this is what NP can select  */}
           {currentUserType === "NP" && (
             <>
-           
               <Select
                 labelId="roleDropdowns"
                 value={selectedRole}
@@ -239,51 +287,80 @@ const Elections = () => {
           {/* this is what athlete can select  */}
           {currentUserType === "AH" && (
             <>
-              
-
               <>
-              <Select
-                labelId="roleDropdowns"
-                value={selectedRole}
-                onChange={handleChangeRole}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-               <MenuItem value={"NP"}>National President</MenuItem>
-              </Select>
-            </>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"NP"}>National President</MenuItem>
+                </Select>
+              </>
             </>
           )}
 
-
-            {/* this is what Global President can select  */}
-            {currentUserType === "GP" && (
+          {/* this is what Global President can select  */}
+          {currentUserType === "GP" && (
             <>
-              
-
               <>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"LM"}>Legal Manager</MenuItem>
+                  <MenuItem value={"ITM"}>IT Manager</MenuItem>
+
+                  <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+                  <MenuItem value={"SM"}>Sales Manager</MenuItem>
+                  <MenuItem value={"VM"}>Validation Manager</MenuItem>
+                  <MenuItem value={"EM"}>Event Manager</MenuItem>
+                </Select>
+              </>
+            </>
+          )}
+        </FormControl>
+
+        {/* // ! this is for voting  */}
+        {currentUserType === "AH" && (
+          <>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 120 }}
+              className="m-4 ml-0 mb-1"
+            >
+              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                <b>Vote for</b>
+              </InputLabel>
+
               <Select
                 labelId="roleDropdowns"
-                value={selectedRole}
-                onChange={handleChangeRole}
+                value={votedFor}
+                onChange={settingVotedFor}
                 className="w-[200px]"
                 style={{ color: "#000" }}
               >
-               <MenuItem value={"LM"}>Legal Manager</MenuItem>
-               <MenuItem value={"ITM"}>IT Manager</MenuItem>
+                {/* <MenuItem value={"NP"}>National President</MenuItem>
+                 */}
 
-               <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-               <MenuItem value={"SM"}>Sales Manager</MenuItem>
-               <MenuItem value={"VM"}>Validation Manager</MenuItem>
-               <MenuItem value={"EM"}>Event Manager</MenuItem>
-
+                {top50Users.map((user, index) => (
+                  <MenuItem key={`top50-${index}`} value={user}>
+                    {user.name}
+                  </MenuItem>
+                ))}
+                {otherUsers.map((user, index) => (
+                  <MenuItem key={`other-${index}`} value={user}>
+                    {user.name}
+                  </MenuItem>
+                ))}
               </Select>
-            </>
-            </>
-          )}
-
-
-        </FormControl>
+            </FormControl>
+          </>
+        )}
       </div>
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end">
@@ -383,70 +460,68 @@ const Elections = () => {
         </button>
       </div>
 
+      {currentUserType === "NP" && (
+        <>
+          <div>
+            <div>
+              <h2>Gender:</h2>
+              <div>
+                <button
+                  className={`gender-button ${
+                    genderFilter === "M" ? "male active" : ""
+                  }`}
+                  onClick={() => handleGenderFilter("M")}
+                  disabled={genderFilter === "M"}
+                >
+                  M
+                </button>
+                <button
+                  className={`gender-button ${
+                    genderFilter === "F" ? "female active" : ""
+                  }`}
+                  onClick={() => handleGenderFilter("F")}
+                  disabled={genderFilter === "F"}
+                >
+                  F
+                </button>
+              </div>
+            </div>
 
-{ currentUserType === "NP" && (
-<>
-<div>
-<div>
-  <h2>Gender:</h2>
-  <div>
-    <button
-      className={`gender-button ${
-        genderFilter === "M" ? "male active" : ""
-      }`}
-      onClick={() => handleGenderFilter("M")}
-      disabled={genderFilter === "M"}
-    >
-      M
-    </button>
-    <button
-      className={`gender-button ${
-        genderFilter === "F" ? "female active" : ""
-      }`}
-      onClick={() => handleGenderFilter("F")}
-      disabled={genderFilter === "F"}
-    >
-      F
-    </button>
-  </div>
-</div>
-
-<div className="button-container">
-  <h2>Category:</h2>
-  <div>
-    <button
-      className={`category-button ${
-        categoryFilter === "heavy" ? "heavy active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("heavy")}
-      disabled={categoryFilter === "heavy"}
-    >
-      Heavy
-    </button>
-    <button
-      className={`category-button ${
-        categoryFilter === "medium" ? "medium active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("medium")}
-      disabled={categoryFilter === "medium"}
-    >
-      Medium
-    </button>
-    <button
-      className={`category-button ${
-        categoryFilter === "light" ? "light active" : ""
-      }`}
-      onClick={() => handleCategoryFilter("light")}
-      disabled={categoryFilter === "light"}
-    >
-      Light
-    </button>
-  </div>
-</div>
-</div>
-</>
-)
-}
+            <div className="button-container">
+              <h2>Category:</h2>
+              <div>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "heavy" ? "heavy active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("heavy")}
+                  disabled={categoryFilter === "heavy"}
+                >
+                  Heavy
+                </button>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "medium" ? "medium active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("medium")}
+                  disabled={categoryFilter === "medium"}
+                >
+                  Medium
+                </button>
+                <button
+                  className={`category-button ${
+                    categoryFilter === "light" ? "light active" : ""
+                  }`}
+                  onClick={() => handleCategoryFilter("light")}
+                  disabled={categoryFilter === "light"}
+                >
+                  Light
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <p className="m-2">
         You are selecting the athletes to compete in the next games. The{" "}
         <span className="text-red_first">top 50</span> athletes in the list will
