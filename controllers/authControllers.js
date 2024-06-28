@@ -956,7 +956,7 @@ const votingForNP = async (req, res) => {
 
 
 
-      // TODO, i vrsi taj raspored, po "votes" i govna.. ne gubi vreme na frontend, taj localstorage udjavola... 
+      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola... 
       
 
       res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
