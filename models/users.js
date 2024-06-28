@@ -75,12 +75,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     bio: {
         type: DataTypes.STRING(250),
+  
     },
     achievements: {
         type: DataTypes.STRING(250),
     },
     ranking: {
         type: DataTypes.INTEGER,
+        
     },
     ranking_heavy: {
         type: DataTypes.INTEGER,
@@ -113,8 +115,16 @@ module.exports = function(sequelize, DataTypes) {
 
       gender: {
         type: DataTypes.CHAR(1),
-      }
+      },
 
+      votes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+
+      votedFor: {
+        type: DataTypes.STRING(255),
+      }
 
 
 

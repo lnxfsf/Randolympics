@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50, otherUsers } = require("../controllers/authControllers");
+const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50, otherUsers, votingForNP } = require("../controllers/authControllers");
 const router = express.Router();
 
 
@@ -33,6 +33,10 @@ router.post("/update_user_data", update_user_data)
 router.get("/rankingTop50",rankingTop50)
 router.get("/otherUsers", otherUsers)
 
+
+//NP, elections. handled separatelly routes, so less confusion.. 
+router.get("/votingForNP", votingForNP )
+router.post("/votingForNP", votingForNP )
 
 
 

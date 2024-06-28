@@ -74,6 +74,8 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt); //hash password
 
+  var votes = 0;
+
   // user object, this is what we send to mysql
   const user_data = {
     userId: uuidv4(),
@@ -109,6 +111,7 @@ const register = async (req, res) => {
     isVerified: false,
     verificationToken: generateVerificationToken(),
     gender,
+    votes, // in mysql, default value is 0 , if this is empty..
   };
 
   try {
@@ -408,6 +411,8 @@ const login = async (req, res) => {
           ranking_medium: existingUser.ranking_medium,
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
+          votedFor: existingUser.votedFor,
+
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -654,8 +659,15 @@ const rankingTop50 = async (req, res) => {
   // as pagination, is just offset anyways... )
 
   // GP (and those management position, don't have filtering by M or F (buttons won't affect it ))
-  // this, is also for these others, gives only one as in top, and all others are in Others.. 
-  if (user_type === "GP" || user_type === "LM" || user_type === "ITM" || user_type === "MM" || user_type === "SM" || user_type === "VM" || user_type === "EM"
+  // this, is also for these others, gives only one as in top, and all others are in Others..
+  if (
+    user_type === "GP" ||
+    user_type === "LM" ||
+    user_type === "ITM" ||
+    user_type === "MM" ||
+    user_type === "SM" ||
+    user_type === "VM" ||
+    user_type === "EM"
   ) {
     try {
       const topUsers = await User.findAll({
@@ -677,7 +689,7 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "RS")  {
+  } else if (user_type === "RS") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -689,8 +701,28 @@ const rankingTop50 = async (req, res) => {
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
+        },
+        order: [["ranking", "ASC"]],
+        limit: limit,
+        offset: offset,
+      });
 
-          
+      res.json(topUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } else if (user_type === "NP") {
+    try {
+      // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
+      const topUsers = await User.findAll({
+        where: {
+          ranking: 1, // just first (one) NP
+          user_type: user_type,
+
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
         },
         order: [["ranking", "ASC"]],
         limit: limit,
@@ -742,7 +774,14 @@ const otherUsers = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
-  if (user_type === "GP" || user_type === "LM" || user_type === "ITM" || user_type === "MM" || user_type === "SM" || user_type === "VM" || user_type === "EM"
+  if (
+    user_type === "GP" ||
+    user_type === "LM" ||
+    user_type === "ITM" ||
+    user_type === "MM" ||
+    user_type === "SM" ||
+    user_type === "VM" ||
+    user_type === "EM"
   ) {
     try {
       const otherUsers = await User.findAll({
@@ -794,6 +833,32 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
+  } else if (user_type === "NP") {
+    // ! this, is also, for NP, we need it's own route, as we will handle other stuff...
+    try {
+      const otherUsers = await User.findAll({
+        where: {
+          ranking: {
+            [Op.gt]: 1, // Fetch users with ranking greater than 1
+          },
+          user_type: user_type,
+
+          name: {
+            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+          },
+        },
+        order: [["ranking", "ASC"]], // Sort by ranking ascending
+        limit: limit,
+        offset: offset,
+      });
+
+      //ne vraca nista..
+      console.log("stampa" + otherUsers);
+      res.json(otherUsers);
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   } else {
     try {
       const otherUsers = await User.findAll({
@@ -825,6 +890,51 @@ const otherUsers = async (req, res) => {
   }
 };
 
+const votingForNP = async (req, res) => {
+  if (req.method === "GET") {
+    const userId = req.query.user_type;
+
+    try {
+      const selectedVoteNP = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+      //ne vraca nista..
+      console.log("stampa sinovac" + selectedVoteNP);
+      res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  if (req.method === "POST") {
+    const { votedFor, userId } = req.body;
+
+    // userId, od NP, for who he voted for.. so we can work with it !
+    
+
+    try {
+      const selectedVoteNP = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+      //ne vraca nista..
+      console.log("stampa sinovac" + votedFor);
+      console.log("stampa sinovac" + userId);
+      
+      res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -839,4 +949,5 @@ module.exports = {
 
   rankingTop50,
   otherUsers,
+  votingForNP,
 };
