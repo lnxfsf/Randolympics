@@ -40,18 +40,6 @@ const Elections = () => {
     }
   }); // TODO , it must initialie here first !
 
-  const [votedFor, setVotedFor] = useState(() => {
-    //TODO ovo , NE radi uporno
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
-    if (storedData) {
-      const userJson = JSON.parse(storedData);
-      console.log("unutra: " + userJson.data.votedFor);
-      return userJson.data.votedFor;
-    }
-  });
-
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
@@ -204,8 +192,10 @@ const Elections = () => {
     setSelectedRole(event.target.value);
   };
 
+  const [votedFor, setVotedFor] = useState();
+
   // ! to saljes u backend... i on, sada to koristi...
-  const settingVotedFor = async (event) => {
+  const handleVotedFor = async (event) => {
     setVotedFor(event.target.value.name); // we get object "user", and get .name
 
     // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
@@ -213,7 +203,7 @@ const Elections = () => {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
         {
-          votedFor: event.target.value.name,  
+          votedFor: event.target.value.name,
           NPuserId: event.target.value.userId, // and userId of that NP in question
 
           current_user_userId: userData.data.userId,
@@ -228,7 +218,6 @@ const Elections = () => {
       setResultText(error.response.data.message);
     }
   };
-
   return (
     <>
       <HeaderMyProfile />
@@ -299,42 +288,42 @@ const Elections = () => {
           )}
         </FormControl>
 
-        {/* // ! this is for voting  */}
-        {currentUserType === "AH" && (
-          <>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1, minWidth: 120 }}
-              className="m-4 ml-0 mb-1"
-            >
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Vote for</b>
-              </InputLabel>
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 120 }}
+          className="m-4 ml-0 mb-1"
+        >
+          <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+            <b>Selecting</b>
+          </InputLabel>
 
-              <Select
-                labelId="roleDropdowns"
-                value={votedFor}
-                onChange={settingVotedFor}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-                {/* <MenuItem value={"NP"}>National President</MenuItem>
-                 */}
-
-                {top50Users.map((user, index) => (
-                  <MenuItem key={`top50-${index}`} value={user}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-                {otherUsers.map((user, index) => (
-                  <MenuItem key={`other-${index}`} value={user}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </>
-        )}
+          <Select
+            labelId="roleDropdowns"
+            value={votedFor}
+            onChange={handleVotedFor}
+            className="w-[200px]"
+            style={{ color: "#000" }}
+          >
+          
+          
+          
+           
+            {top50Users.map(user => (
+              <MenuItem key={user.id} value={user}>
+                {user.name}
+              </MenuItem>
+            ))}
+          
+          
+          {otherUsers.map(user => (
+              <MenuItem key={user.id} value={user}>
+                {user.name}
+              </MenuItem>
+            ))}
+          
+          </Select>
+        </FormControl>
+        <></>
       </div>
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end">
