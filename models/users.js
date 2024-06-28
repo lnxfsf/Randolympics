@@ -124,7 +124,12 @@ module.exports = function(sequelize, DataTypes) {
 
       votedFor: {
         type: DataTypes.STRING(255),
-      }
+      }, 
+
+      votedForNPuserId: {
+        type: DataTypes.STRING,
+        defaultValue: '',
+      }, 
 
 
 
