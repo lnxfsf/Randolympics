@@ -294,7 +294,7 @@ const Elections = () => {
           className="m-4 ml-0 mb-1"
         >
           <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-            <b>Selecting</b>
+            <b>Vote for</b>
           </InputLabel>
 
           <Select
@@ -304,23 +304,17 @@ const Elections = () => {
             className="w-[200px]"
             style={{ color: "#000" }}
           >
-          
-          
-          
-           
-            {top50Users.map(user => (
+            {top50Users.map((user) => (
               <MenuItem key={user.id} value={user}>
                 {user.name}
               </MenuItem>
             ))}
-          
-          
-          {otherUsers.map(user => (
+
+            {otherUsers.map((user) => (
               <MenuItem key={user.id} value={user}>
                 {user.name}
               </MenuItem>
             ))}
-          
           </Select>
         </FormControl>
         <></>
@@ -342,7 +336,16 @@ const Elections = () => {
         <table className="w-full">
           <thead>
             <tr>
-              <th className="w-[18%]">Rank</th>
+              {currentUserType === "AH" ? (
+                <>
+                  <th className="w-[18%]">All votes</th>
+                </>
+              ) : (
+                <>
+                  <th className="w-[18%]">Rank</th>
+                </>
+              )}
+
               <th className="w-[15%]">Name</th>
               <th className="w-[8%]">Age</th>
               <th className="w-[12%]">Country</th>
