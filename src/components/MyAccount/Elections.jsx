@@ -65,6 +65,8 @@ const Elections = () => {
 
   const [searchText, setSearchText] = useState(""); //search box
 
+  const [votedFor, setVotedFor] = useState();
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -89,6 +91,7 @@ const Elections = () => {
     searchText,
     genderFilter,
     categoryFilter,
+    votedFor,
   ]);
 
   const handleSearch = (he) => {
@@ -191,8 +194,6 @@ const Elections = () => {
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
-
-  const [votedFor, setVotedFor] = useState();
 
   // ! to saljes u backend... i on, sada to koristi...
   const handleVotedFor = async (event) => {
@@ -400,6 +401,7 @@ const Elections = () => {
                   setRankUpdated={setRankUpdated}
                   gender={user.gender}
                   selectedRole={selectedRole}
+                  votes={user.votes}
                 />
               ))}
           </tbody>
@@ -489,12 +491,27 @@ const Elections = () => {
           </div>
         </>
       )}
-      <p className="m-2">
-        You are selecting the athletes to compete in the next games. The{" "}
-        <span className="text-red_first">top 50</span> athletes in the list will
-        be chosen to participate in the games. Use the Update Rank feature to
-        increase or decrease the rank of each athlete.
-      </p>
+
+      {currentUserType === "AH" ? (
+        <>
+          <p className="m-2">
+            You are selecting the National President. <br />
+            Current National President will be replaced if there's 130% more
+            votes than for current one. <br />
+            Above red line, is current National President. <br />
+            Your vote is in "Vote for" dropdown menu. <br />
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="m-2">
+            You are selecting the athletes to compete in the next games. The{" "}
+            <span className="text-red_first">top 50</span> athletes in the list
+            will be chosen to participate in the games. Use the Update Rank
+            feature to increase or decrease the rank of each athlete.
+          </p>
+        </>
+      )}
     </>
   );
 };
