@@ -66,7 +66,7 @@ const Elections = () => {
   const [searchText, setSearchText] = useState(""); //search box
 
   const [votedFor, setVotedFor] = useState();
-  const [votedForHisNPUserID, setVotedForHisNPUserID] = useState();  // UserID of NP, we voted for... 
+  const [votedForHisNPUserID, setVotedForHisNPUserID] = useState(); // UserID of NP, we voted for...
 
   useEffect(() => {
     const storedData =
@@ -96,22 +96,15 @@ const Elections = () => {
     votedForHisNPUserID,
   ]);
 
-
-
-
-
   const votedForCheckbox = (votedForNPuserId) => {
-
     // votedForNPuserId, is from iteration, to check each one, if it's same as one locally...
     // votedForHisNPUserID, it's directly from user's column (of same name..)
-    if (votedForHisNPUserID == votedForNPuserId){
+    if (votedForHisNPUserID == votedForNPuserId) {
       return true;
     } else {
       return false;
     }
-    
-  } 
-
+  };
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -268,7 +261,7 @@ const Elections = () => {
           )}
 
           {/* this is what athlete and "referee & support" can select  */}
-          {currentUserType === "AH" && (
+          {(currentUserType === "AH" || currentUserType == "RS") && (
             <>
               <>
                 <Select
@@ -308,35 +301,40 @@ const Elections = () => {
           )}
         </FormControl>
 
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, minWidth: 120 }}
-          className="m-4 ml-0 mb-1"
-        >
-          <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-            <b>Vote for</b>
-          </InputLabel>
+        {(currentUserType === "AH" || currentUserType === "RS" ) && (
+          <>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 120 }}
+              className="m-4 ml-0 mb-1"
+            >
+              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                <b>Vote for</b>
+              </InputLabel>
 
-          <Select
-            labelId="roleDropdowns"
-            value={votedFor}
-            onChange={handleVotedFor}
-            className="w-[200px]"
-            style={{ color: "#000" }}
-          >
-            {top50Users.map((user) => (
-              <MenuItem key={user.id} value={user}>
-                {user.name}
-              </MenuItem>
-            ))}
+              <Select
+                labelId="roleDropdowns"
+                value={votedFor}
+                onChange={handleVotedFor}
+                className="w-[200px]"
+                style={{ color: "#000" }}
+              >
+                {top50Users.map((user) => (
+                  <MenuItem key={user.id} value={user}>
+                    {user.name}
+                  </MenuItem>
+                ))}
 
-            {otherUsers.map((user) => (
-              <MenuItem key={user.id} value={user}>
-                {user.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+                {otherUsers.map((user) => (
+                  <MenuItem key={user.id} value={user}>
+                    {user.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </>
+        )}
+
         <></>
       </div>
       {/* div's, for Search bar and Filter */}
@@ -356,13 +354,11 @@ const Elections = () => {
         <table className="w-full">
           <thead>
             <tr>
-
-            {currentUserType === "AH" && (
+              {currentUserType === "AH" && (
                 <>
                   <th className="w-[8%]">My vote</th>
                 </>
               )}
-
 
               {currentUserType === "AH" ? (
                 <>
@@ -399,12 +395,9 @@ const Elections = () => {
                 selectedRole={selectedRole}
                 votes={user.votes}
                 userNPPercentage={user.userNPPercentage}
-
-                votedForNPuserIdBOOLEAN={votedForCheckbox(user.votedForNPuserId)}
-                 
-                
-
-
+                votedForNPuserIdBOOLEAN={votedForCheckbox(
+                  user.votedForNPuserId
+                )}
               />
             ))}
 
@@ -437,7 +430,9 @@ const Elections = () => {
                   selectedRole={selectedRole}
                   votes={user.votes}
                   userNPPercentage={user.userNPPercentage}
-                  votedForNPuserIdBOOLEAN={votedForCheckbox(user.votedForNPuserId)}
+                  votedForNPuserIdBOOLEAN={votedForCheckbox(
+                    user.votedForNPuserId
+                  )}
                 />
               ))}
           </tbody>
