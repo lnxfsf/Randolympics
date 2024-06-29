@@ -842,7 +842,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "NP") {
     // ! this, is also, for NP, we need it's own route, as we will handle other stuff...
     try {
-      const otherUsers = await User.findAll({
+      const otherNPs = await User.findAll({
         where: {
 
           // everything that's not NP..  (as we don't go by ranking.. at all)
@@ -860,8 +860,8 @@ const otherUsers = async (req, res) => {
       });
 
       //ne vraca nista..
-      console.log("vraca otherUsers za NP" + otherUsers);
-      res.json(otherUsers);
+     
+      res.json(otherNPs);
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -899,6 +899,29 @@ const otherUsers = async (req, res) => {
 
 
 
+const calculateNPVotesPercentage = async (req, res) => {
+  const user_type = "NP"; 
+
+
+  // Fetch all NP users
+  const npUsers = await User.findAll({
+    where: {
+      user_type: user_type,
+    },
+  
+  });
+
+  // Calculate total votes, in all NPs
+  const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
+
+
+
+
+
+
+}
+
+
 
 const votingForNP = async (req, res) => {
 
@@ -928,7 +951,7 @@ const votingForNP = async (req, res) => {
   if (req.method === "POST") {
     const { votedFor, NPuserId, current_user_userId } = req.body;
     // votedFor , is .name , value..
-    // samo i ime sačuvaj u taj current user ! 
+
 
 
     // userId, od NP, for who he voted for.. so we can work with it !
@@ -964,6 +987,9 @@ const votingForNP = async (req, res) => {
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
       if (currentUser.votedForNPuserId !== NPuserId) {
 
+        
+        console.log("staaaaaaaaaaaaaa neeeeeeeeeeeeeeeeeeccccccccccccccceeeeeeeeee")
+
         // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
         if (selectedVoteNP) {
 
@@ -977,7 +1003,66 @@ const votingForNP = async (req, res) => {
           // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt.. 
           await selectedVoteNP.increment("votes", { by: 1 });
 
+
+
+          // ! here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
+          // you find who is currentNP now.. to try to replace him.. 
+          const currentNP = await User.findOne({
+            where: {
+              currentNP: true,
+              
+
+            },
+          });
+
+          console.log(currentNP)
         
+          
+          // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
+          if (currentNP) {
+
+            // ! now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
+            
+            // Calculate the percentage increase
+            let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 4 - 1 = 3 
+            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // (3*100). to je 300% više.. 
+
+
+
+            // davno treba da izvrsi ovo 
+            if (percentageIncrease >= 130) {
+              console.log("setting as trueeeeeeeeeeeeeeeeeeeeeeeeee here: ")
+                /* selectedVoteNP.currentNP = true;
+                currentNP.currentNP = false; */
+                await selectedVoteNP.update({ currentNP: true });
+                await currentNP.update({ currentNP: false });
+
+            } else {
+                /* selectedVoteNP.currentNP = false;
+                currentNP.currentNP = true; */
+
+                await selectedVoteNP.update({ currentNP: false });
+                await currentNP.update({ currentNP: true });
+            }
+
+
+
+            // nisi sačuvao u database !
+            /* console.log("Savuvava al llllllllllllllllloooooooooooooooosssssssssssseeeeeeeeeee")
+            await selectedVoteNP.save();
+            await currentNP.save(); */
+
+
+
+          } else {
+            // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
+           /*  selectedVoteNP.currentNP = true;
+            
+            await selectedVoteNP.save(); */
+
+            await selectedVoteNP.update({ currentNP: true });
+
+          }
 
 
 
