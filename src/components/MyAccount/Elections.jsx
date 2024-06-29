@@ -369,6 +369,7 @@ const Elections = () => {
                 setRankUpdated={setRankUpdated}
                 gender={user.gender}
                 selectedRole={selectedRole}
+                votes={user.votes}
               />
             ))}
 

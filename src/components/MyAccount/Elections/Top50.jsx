@@ -21,6 +21,7 @@ const Top50 = ({
   userId,
   gender,
   selectedRole,
+  votes,
 }) => {
   console.log("prikazuje od top50: " + userId);
 
@@ -243,9 +244,18 @@ const Top50 = ({
         ) : (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
-            <td className="flex gap-2 justify-start">
-              <p>{rank}</p>
-            </td>
+
+            {/* if it's Athlete, then it shows "Votes", for those "NP" */}
+            {user_type === "AH" ? (
+              <td className="flex gap-2 justify-start">
+                <p>{votes}</p>
+              </td>
+            ) : (
+              <td className="flex gap-2 justify-start">
+                <p>{rank}</p>
+              </td>
+            )}
+
             {/* </div> */}
           </>
         )}
@@ -255,17 +265,15 @@ const Top50 = ({
         <td>{country}</td>
         <td>{email}</td>
         <td>{phone}</td>
-
-      
       </tr>
 
       {/*       it doesn't render on last element, so it can properly show red line..
        */}
       {index !== lastIndex && (
         <tr>
-           <td colSpan="6">
-              <hr />
-            </td>
+          <td colSpan="6">
+            <hr />
+          </td>
         </tr>
       )}
       {/* <hr /> */}
