@@ -728,7 +728,7 @@ const rankingTop50 = async (req, res) => {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
         },
-       /*  order: [["voting", "DESC"]], */ // from highest votes, to least.. 
+       /*  order: [["votes", "DESC"]], */ // from highest votes, to least.. 
        /*  limit: limit, */
        /*  offset: offset, */
       });
@@ -1010,10 +1010,26 @@ const votingForNP = async (req, res) => {
           const currentNP = await User.findOne({
             where: {
               currentNP: true,
-              
+              user_type: "NP",
 
             },
           });
+
+
+          // you don't use selectedNP ! but 2nd, who have most votes... (as is not currentNP: false). okay, just the one with most votes, without,  currentNP: false
+          const secondMostVotes = await User.findOne({
+            where: {
+              currentNP: false,
+
+              user_type: "NP",
+
+              
+
+            },
+            order: [["votes", "DESC"]]
+          });
+
+          console.log("the one with most values:"+ secondMostVotes)
 
           console.log(currentNP)
         
@@ -1024,33 +1040,33 @@ const votingForNP = async (req, res) => {
             // ! now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
             
             // Calculate the percentage increase
-            let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 4 - 1 = 3 
-            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // (3*100). to je 300% više.. 
+         /*    let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 2 - 4 =  -2
+            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // ((-2)*100). to je 300% više.. 
+ */
+
+            let voteDifference = secondMostVotes.votes - currentNP.votes;   // 2 - 4 =  -2
+            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // ((-2)*100). to je 300% više.. 
 
 
 
             // davno treba da izvrsi ovo 
             if (percentageIncrease >= 130) {
-              console.log("setting as trueeeeeeeeeeeeeeeeeeeeeeeeee here: ")
+              
                 /* selectedVoteNP.currentNP = true;
                 currentNP.currentNP = false; */
-                await selectedVoteNP.update({ currentNP: true });
+                await secondMostVotes.update({ currentNP: true });
                 await currentNP.update({ currentNP: false });
 
             } else {
                 /* selectedVoteNP.currentNP = false;
                 currentNP.currentNP = true; */
 
-                await selectedVoteNP.update({ currentNP: false });
+                await secondMostVotes.update({ currentNP: false });
                 await currentNP.update({ currentNP: true });
             }
 
 
-
-            // nisi sačuvao u database !
-            /* console.log("Savuvava al llllllllllllllllloooooooooooooooosssssssssssseeeeeeeeeee")
-            await selectedVoteNP.save();
-            await currentNP.save(); */
+            
 
 
 
@@ -1060,7 +1076,7 @@ const votingForNP = async (req, res) => {
             
             await selectedVoteNP.save(); */
 
-            await selectedVoteNP.update({ currentNP: true });
+            await secondMostVotes.update({ currentNP: true });
 
           }
 
