@@ -889,6 +889,120 @@ const otherUsers = async (req, res) => {
   }
 };
 
+
+
+
+const votingForNP = async (req, res) => {
+
+
+  // this is for dropdown menu 
+  if (req.method === "GET") {
+    const userId = req.query.user_type;
+
+    // for "athletes", and their selection of NP, we just show votes... (and their percent.. ). 
+
+    try {
+      const selectedVoteNP = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+      //ne vraca nista..
+      console.log("stampa sinovac" + selectedVoteNP);
+      res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  if (req.method === "POST") {
+    const { votedFor, NPuserId, current_user_userId } = req.body;
+    // votedFor , is .name , value..
+    // samo i ime sačuvaj u taj current user ! 
+
+    
+    // userId, od NP, for who he voted for.. so we can work with it !
+
+    try {
+      await db.sequelize.sync();
+
+      // ovo je current User da nadjes.. da samo kolonu azuriras mu
+      const currentUser = await User.findOne({
+        where: {
+          userId: current_user_userId,
+        },
+      });
+
+      // ovo je NP da nadjes.. TO JE TRENUTNI KOJI KORISNIK IZABRAO !
+      const selectedVoteNP = await User.findOne({
+        where: {
+          userId: NPuserId,
+        },
+      });
+
+      const previousVoteNP = currentUser.votedForNPuserId
+        ? await User.findOne({
+            where: { userId: currentUser.votedForNPuserId },
+          })
+        : null;
+
+  
+
+      // TODO, ako, nije nijedan ubelezen, treba samo da upise, u tjt..
+
+      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola...
+      // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
+      if (currentUser.votedForNPuserId !== NPuserId) {
+
+        // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
+        if (selectedVoteNP) {
+
+          // doesn't need to decrement previous vote, if it was null (for user who was just created.. )
+          if (previousVoteNP) {
+            await previousVoteNP.decrement("votes", { by: 1 });
+          }
+
+
+          
+          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt.. 
+          await selectedVoteNP.increment("votes", { by: 1 });
+
+        
+
+
+
+
+
+        }
+
+        // NE ČUVAJ ODMAH, nego moras da znaš i prethodni, votedFor koji je bio...
+        //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
+        // dobija ovde
+        if (currentUser) {
+          try {
+            //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
+            // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
+            currentUser.votedForNPuserId = NPuserId;
+            currentUser.votedFor = votedFor;
+            await currentUser.save();
+          } catch (error) {
+            console.log(error.message);
+          }
+        }
+
+        res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+      }
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+};
+
+/* 
+
 const votingForNP = async (req, res) => {
   if (req.method === "GET") {
     const userId = req.query.user_type;
@@ -930,6 +1044,7 @@ const votingForNP = async (req, res) => {
           userId: NPuserId,
         },
       });
+
 
       // this is so we can access values of previous NP ... (before it was changed.. )
       const previousVoteNP = await User.findOne({
@@ -1039,8 +1154,8 @@ const votingForNP = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   }
-};
-
+}; */
+ 
 module.exports = {
   register,
   login,
