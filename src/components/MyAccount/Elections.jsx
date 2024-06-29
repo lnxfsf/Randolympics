@@ -66,6 +66,7 @@ const Elections = () => {
   const [searchText, setSearchText] = useState(""); //search box
 
   const [votedFor, setVotedFor] = useState();
+  const [votedForHisNPUserID, setVotedForHisNPUserID] = useState();  // UserID of NP, we voted for... 
 
   useEffect(() => {
     const storedData =
@@ -92,7 +93,25 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
     votedFor,
+    votedForHisNPUserID,
   ]);
+
+
+
+
+
+  const votedForCheckbox = (votedForNPuserId) => {
+
+    // votedForNPuserId, is from iteration, to check each one, if it's same as one locally...
+    // votedForHisNPUserID, it's directly from user's column (of same name..)
+    if (votedForHisNPUserID == votedForNPuserId){
+      return true;
+    } else {
+      return false;
+    }
+    
+  } 
+
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -248,7 +267,7 @@ const Elections = () => {
             </>
           )}
 
-          {/* this is what athlete can select  */}
+          {/* this is what athlete and "referee & support" can select  */}
           {currentUserType === "AH" && (
             <>
               <>
@@ -337,9 +356,17 @@ const Elections = () => {
         <table className="w-full">
           <thead>
             <tr>
+
+            {currentUserType === "AH" && (
+                <>
+                  <th className="w-[8%]">My vote</th>
+                </>
+              )}
+
+
               {currentUserType === "AH" ? (
                 <>
-                  <th className="w-[18%]">All votes</th>
+                  <th className="w-[10%]">All votes</th>
                 </>
               ) : (
                 <>
@@ -372,6 +399,12 @@ const Elections = () => {
                 selectedRole={selectedRole}
                 votes={user.votes}
                 userNPPercentage={user.userNPPercentage}
+
+                votedForNPuserIdBOOLEAN={votedForCheckbox(user.votedForNPuserId)}
+                 
+                
+
+
               />
             ))}
 
@@ -404,6 +437,7 @@ const Elections = () => {
                   selectedRole={selectedRole}
                   votes={user.votes}
                   userNPPercentage={user.userNPPercentage}
+                  votedForNPuserIdBOOLEAN={votedForCheckbox(user.votedForNPuserId)}
                 />
               ))}
           </tbody>

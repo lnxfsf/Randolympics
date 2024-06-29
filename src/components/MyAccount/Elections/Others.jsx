@@ -24,6 +24,7 @@ const Others = ({
   selectedRole,
   votes,
   userNPPercentage,
+  votedForNPuserIdBOOLEAN,
 }) => {
   console.log("userid je: " + userId);
 
@@ -103,6 +104,29 @@ const Others = ({
 
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
       <tr key={index}>
+         {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
+         */}
+
+        {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
+     */}    
+     {user_type === "AH"  && (
+          <>
+            <td style={{ textAlign: "center" }}>
+              <Checkbox
+                sx={{
+                  color: "#FF0000",
+                  "&.Mui-checked": {
+                    color: "#FF0000",
+                  },
+                }}
+                checked={votedForNPuserIdBOOLEAN}
+                disabled
+              />
+            </td>
+          </>
+        )}
+
+
         {user_type === "NP" || user_type === "GP" ? (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
