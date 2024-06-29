@@ -412,7 +412,6 @@ const login = async (req, res) => {
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
           votedFor: existingUser.votedFor,
-
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -914,11 +913,8 @@ const votingForNP = async (req, res) => {
     const { votedFor, NPuserId, current_user_userId } = req.body;
 
     // userId, od NP, for who he voted for.. so we can work with it !
-    
 
     try {
-
-      
       await db.sequelize.sync();
 
       // ovo je current User da nadjes.. da samo kolonu azuriras mu
@@ -927,7 +923,6 @@ const votingForNP = async (req, res) => {
           userId: current_user_userId,
         },
       });
-
 
       // ovo je NP da nadjes.. TO JE TRENUTNI KOJI KORISNIK IZABRAO !
       const selectedVoteNP = await User.findOne({
@@ -946,58 +941,100 @@ const votingForNP = async (req, res) => {
       //ne vraca nista..
       console.log("votedFor je" + votedFor);
       console.log("NPuserId je " + NPuserId);
-      console.log("current_user_userId je: " + current_user_userId)
-
+      console.log("current_user_userId je: " + current_user_userId);
 
       // TODO, ako, nije nijedan ubelezen, treba samo da upise, u tjt..
 
-      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola... 
-      // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry.. 
-      if (currentUser.votedForNPuserId !== NPuserId){
-
-
-         // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
-         if(selectedVoteNP){
-
+      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola...
+      // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
+      if (currentUser.votedForNPuserId !== NPuserId) {
+        // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
+        if (selectedVoteNP) {
           // ne smanjuj, ako nije pre toga imao selektovanog user-a uopste.. da ne ide u minus..
-         if(currentUser.votedForNPuserId !== ""){
-              // smanji za -1, prethodni, jer izgubio je taj vote.. 
-            await previousVoteNP.decrement('votes', { by: 1 });
-        }
+          if (currentUser.votedForNPuserId !== "") {
 
-          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1 
-          await selectedVoteNP.increment('votes', { by: 1 });
+            // ! decrement (here, find for below row)
+            // smanji za -1, prethodni, jer izgubio je taj vote.. U SLUČAJU da ga ima uopšte.. 
+            await previousVoteNP.decrement("votes", { by: 1 });
 
-
-          
-         }
-
-
-        
-
-          // NE ČUVAJ ODMAH, nego moras da znaš i prethodni, votedFor koji je bio... 
-          //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
-          // dobija ovde 
-          if (currentUser) {
-            try {
-              //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
-              // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi ! 
-              currentUser.votedForNPuserId = NPuserId;
-              currentUser.votedFor = votedFor; 
-              await currentUser.save();
-      
-          } catch (error) {
-              console.log(error.message)
+            // ! and that means, if we decrement previous (selected one), then, there could possibly occur change in 'ranking' as well. 
+           // we need to check, if now, row below us, have more votes than current one (we just decremented). so we could swap them
+            const belowRowOfVoteNP = await User.findOne({
+              where: {
+                ranking: selectedVoteNP.ranking-1, // selectedVoteNP , is object, of THAT ONE ! and now, we get row above this one user selected.. 
+              },
+            });
+  
+            // if it's not, then do nothing. as votes of below row are not higher, no need to swap... 
+            if (belowRowOfVoteNP.votes > selectedVoteNP.votes ){
+              // if upperRowOfVoteNP have less votes than selectedVoteNP (i.e. selectedVoteNP have more votes than upperRowOfVoteNP), then swap ranking
+  
+              // put selectedVoteNP 'ranking' in upperRowOfVoteNP
+              let belowRowOfVoteNPRankingVar = belowRowOfVoteNP.ranking;
+              belowRowOfVoteNP.ranking = selectedVoteNP.ranking;
+              selectedVoteNP.ranking = belowRowOfVoteNPRankingVar;
+  
+              // and then save both..
+              await belowRowOfVoteNP.save();
+              await selectedVoteNP.save();
             }
+
+            
+
           }
 
-          res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+
+          // ! increment
+          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1
+          await selectedVoteNP.increment("votes", { by: 1 });
+
+          // ! when, it increments, it needs to check IT'S (not user previous), upper row, if THIS one, have more votes than row ABOVE this one (so, we can swap them, AND, swap ranks !). THIS GOES UP, and that one, goes in place of this (just swap...)
+          // BUT, WE CHECK, IT ONLY, if we were this deep in success with this ! 
+          // we check, by going one rank up, (by rank, we find upper row of THIS ONE)
+          const upperRowOfVoteNP = await User.findOne({
+            where: {
+              ranking: selectedVoteNP.ranking+1, // selectedVoteNP , is object, of THAT ONE ! and now, we get row above this one user selected.. 
+            },
+          });
+
+          // if it's not, then do nothing. as votes are not higher, no need to swap... 
+          if (upperRowOfVoteNP.votes < selectedVoteNP.votes ){
+            // if upperRowOfVoteNP have less votes than selectedVoteNP (i.e. selectedVoteNP have more votes than upperRowOfVoteNP), then swap ranking
+
+            // put selectedVoteNP 'ranking' in upperRowOfVoteNP
+            let upperRowOfVoteNPRankingVar = upperRowOfVoteNP.ranking;
+            upperRowOfVoteNP.ranking = selectedVoteNP.ranking;
+            selectedVoteNP.ranking = upperRowOfVoteNPRankingVar;
+
+            // and then save both..
+            await upperRowOfVoteNP.save();
+            await selectedVoteNP.save();
+          }
 
 
 
+
+
+        }
+
+        // NE ČUVAJ ODMAH, nego moras da znaš i prethodni, votedFor koji je bio...
+        //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
+        // dobija ovde
+        if (currentUser) {
+          try {
+            //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
+            // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
+            currentUser.votedForNPuserId = NPuserId;
+            currentUser.votedFor = votedFor;
+            await currentUser.save();
+          } catch (error) {
+            console.log(error.message);
+          }
+        }
+
+        res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
       }
-
-        } catch (error) {
+    } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
