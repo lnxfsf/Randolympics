@@ -711,31 +711,57 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  }  else if (user_type === "NP") {
+  } else if (user_type === "NP") {
     try {
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
       // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
       // findOne, just one we need
       const topCurrentNP = await User.findAll({
         where: {
-
-
-         
-          currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line.. 
+          currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line..
           user_type: user_type,
 
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
         },
-       /*  order: [["votes", "DESC"]], */ // from highest votes, to least.. 
-       /*  limit: limit, */
-       /*  offset: offset, */
+        /*  order: [["votes", "DESC"]], */ // from highest votes, to least..
+        /*  limit: limit, */
+        /*  offset: offset, */
       });
 
-      
-      res.json(topCurrentNP);
 
+
+      // we need to find percentage, for votes, how much each one have
+      // Fetch all NP users
+      const npUsers = await User.findAll({
+        where: {
+          user_type: user_type,
+        },
+      });
+
+      // Calculate total votes, in all NPs
+      const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
+
+      // posto je on array, samo udjes u njega da nadjes tog userId, i onda ce vratiti na kraju percentage ionako...
+      const WithPercentage = topCurrentNP.map((user) => {
+        const currentUser = npUsers.find(
+          (npUser) => npUser.userId === user.userId
+        );
+
+        const userVotes = currentUser.votes;
+        const percentage = (userVotes / totalVotes) * 100;
+
+        // this is where we add percent to object, variable..
+        return {
+          ...user.toJSON(), // Convert Sequelize instance to plain object
+          userNPPercentage: percentage.toFixed(2), // to two points...
+        };
+      });
+
+      res.json(WithPercentage);
+
+      //res.json(topCurrentNP);
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -844,7 +870,6 @@ const otherUsers = async (req, res) => {
     try {
       const otherNPs = await User.findAll({
         where: {
-
           // everything that's not NP..  (as we don't go by ranking.. at all)
           currentNP: false,
 
@@ -859,9 +884,38 @@ const otherUsers = async (req, res) => {
         offset: offset,
       });
 
-      //ne vraca nista..
-     
-      res.json(otherNPs);
+
+
+
+       // we need to find percentage, for votes, how much each one have
+      const npUsers = await User.findAll({
+        where: {
+          user_type: user_type,
+        },
+      });
+
+
+      // Calculate total votes, in all NPs
+      const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
+
+      const WithPercentage = otherNPs.map((user) => {
+        const currentUser = npUsers.find(
+          (npUser) => npUser.userId === user.userId
+        );
+
+        const userVotes = currentUser.votes;
+        const percentage = (userVotes / totalVotes) * 100;
+
+
+        return {
+          ...user.toJSON(), 
+          userNPPercentage: percentage.toFixed(2),
+        };
+      });
+
+      res.json(WithPercentage);
+
+      // res.json(otherNPs);
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -897,40 +951,12 @@ const otherUsers = async (req, res) => {
   }
 };
 
-
-
-const calculateNPVotesPercentage = async (req, res) => {
-  const user_type = "NP"; 
-
-
-  // Fetch all NP users
-  const npUsers = await User.findAll({
-    where: {
-      user_type: user_type,
-    },
-  
-  });
-
-  // Calculate total votes, in all NPs
-  const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
-
-
-
-
-
-
-}
-
-
-
 const votingForNP = async (req, res) => {
-
-
-  // this is for dropdown menu 
+  // this is for dropdown menu
   if (req.method === "GET") {
     const userId = req.query.user_type;
 
-    // for "athletes", and their selection of NP, we just show votes... (and their percent.. ). 
+    // for "athletes", and their selection of NP, we just show votes... (and their percent.. ).
 
     try {
       const selectedVoteNP = await User.findOne({
@@ -951,8 +977,6 @@ const votingForNP = async (req, res) => {
   if (req.method === "POST") {
     const { votedFor, NPuserId, current_user_userId } = req.body;
     // votedFor , is .name , value..
-
-
 
     // userId, od NP, for who he voted for.. so we can work with it !
 
@@ -979,42 +1003,29 @@ const votingForNP = async (req, res) => {
           })
         : null;
 
-  
-
       // TODO, ako, nije nijedan ubelezen, treba samo da upise, u tjt..
 
       // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola...
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
       if (currentUser.votedForNPuserId !== NPuserId) {
-
-        
-        console.log("staaaaaaaaaaaaaa neeeeeeeeeeeeeeeeeeccccccccccccccceeeeeeeeee")
-
         // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
         if (selectedVoteNP) {
-
           // doesn't need to decrement previous vote, if it was null (for user who was just created.. )
           if (previousVoteNP) {
             await previousVoteNP.decrement("votes", { by: 1 });
           }
 
-
-          
-          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt.. 
+          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt..
           await selectedVoteNP.increment("votes", { by: 1 });
 
-
-
           // ! here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
-          // you find who is currentNP now.. to try to replace him.. 
+          // you find who is currentNP now.. to try to replace him..
           const currentNP = await User.findOne({
             where: {
               currentNP: true,
               user_type: "NP",
-
             },
           });
-
 
           // you don't use selectedNP ! but 2nd, who have most votes... (as is not currentNP: false). okay, just the one with most votes, without,  currentNP: false
           const secondMostVotes = await User.findOne({
@@ -1022,68 +1033,47 @@ const votingForNP = async (req, res) => {
               currentNP: false,
 
               user_type: "NP",
-
-              
-
             },
-            order: [["votes", "DESC"]]
+            order: [["votes", "DESC"]],
           });
 
-          console.log("the one with most values:"+ secondMostVotes)
+          console.log("the one with most values:" + secondMostVotes);
 
-          console.log(currentNP)
-        
-          
+          console.log(currentNP);
+
           // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
           if (currentNP) {
+            // now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
 
-            // ! now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
-            
             // Calculate the percentage increase
-         /*    let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 2 - 4 =  -2
+            /*    let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 2 - 4 =  -2
             let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // ((-2)*100). to je 300% više.. 
  */
 
-            let voteDifference = secondMostVotes.votes - currentNP.votes;   // 2 - 4 =  -2
-            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // ((-2)*100). to je 300% više.. 
+            let voteDifference = secondMostVotes.votes - currentNP.votes; // 2 - 4 =  -2
+            let percentageIncrease = (voteDifference / currentNP.votes) * 100; // ((-2)*100). to je 300% više..
 
-
-
-            // davno treba da izvrsi ovo 
+            // davno treba da izvrsi ovo
             if (percentageIncrease >= 130) {
-              
-                /* selectedVoteNP.currentNP = true;
+              /* selectedVoteNP.currentNP = true;
                 currentNP.currentNP = false; */
-                await secondMostVotes.update({ currentNP: true });
-                await currentNP.update({ currentNP: false });
-
+              await secondMostVotes.update({ currentNP: true });
+              await currentNP.update({ currentNP: false });
             } else {
-                /* selectedVoteNP.currentNP = false;
+              /* selectedVoteNP.currentNP = false;
                 currentNP.currentNP = true; */
 
-                await secondMostVotes.update({ currentNP: false });
-                await currentNP.update({ currentNP: true });
+              await secondMostVotes.update({ currentNP: false });
+              await currentNP.update({ currentNP: true });
             }
-
-
-            
-
-
-
           } else {
             // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
-           /*  selectedVoteNP.currentNP = true;
+            /*  selectedVoteNP.currentNP = true;
             
             await selectedVoteNP.save(); */
 
             await secondMostVotes.update({ currentNP: true });
-
           }
-
-
-
-
-
         }
 
         // NE ČUVAJ ODMAH, nego moras da znaš i prethodni, votedFor koji je bio...
@@ -1264,7 +1254,7 @@ const votingForNP = async (req, res) => {
     }
   }
 }; */
- 
+
 module.exports = {
   register,
   login,

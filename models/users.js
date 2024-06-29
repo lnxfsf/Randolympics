@@ -135,7 +135,14 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.BOOLEAN,
         default: false,
         
-      }
+      },
+
+      userNPPercentage: {
+        type: DataTypes.DOUBLE,
+        default: 0.0,
+      },
+
+      
 
 
 
