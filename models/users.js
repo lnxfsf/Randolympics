@@ -131,6 +131,11 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: '',
       }, 
 
+      currentNP: {
+        type: DataTypes.BOOLEAN,
+        default: false,
+        
+      }
 
 
 

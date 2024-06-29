@@ -711,24 +711,31 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "NP") {
+  }  else if (user_type === "NP") {
     try {
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
-      const topUsers = await User.findAll({
+      // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
+      // findOne, just one we need
+      const topCurrentNP = await User.findAll({
         where: {
-          ranking: 1, // just first (one) NP
+
+
+         
+          currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line.. 
           user_type: user_type,
 
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
         },
-        order: [["ranking", "ASC"]],
-        limit: limit,
-        offset: offset,
+       /*  order: [["voting", "DESC"]], */ // from highest votes, to least.. 
+       /*  limit: limit, */
+       /*  offset: offset, */
       });
 
-      res.json(topUsers);
+      
+      res.json(topCurrentNP);
+
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -837,22 +844,23 @@ const otherUsers = async (req, res) => {
     try {
       const otherUsers = await User.findAll({
         where: {
-          ranking: {
-            [Op.gt]: 1, // Fetch users with ranking greater than 1
-          },
+
+          // everything that's not NP..  (as we don't go by ranking.. at all)
+          currentNP: false,
+
           user_type: user_type,
 
           name: {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
         },
-        order: [["ranking", "ASC"]], // Sort by ranking ascending
+        order: [["votes", "DESC"]], // Sort by ranking ascending
         limit: limit,
         offset: offset,
       });
 
       //ne vraca nista..
-      console.log("stampa" + otherUsers);
+      console.log("vraca otherUsers za NP" + otherUsers);
       res.json(otherUsers);
     } catch (error) {
       console.error("Error fetching top users:", error);
@@ -922,7 +930,7 @@ const votingForNP = async (req, res) => {
     // votedFor , is .name , value..
     // samo i ime sačuvaj u taj current user ! 
 
-    
+
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
