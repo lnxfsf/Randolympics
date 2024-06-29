@@ -371,6 +371,7 @@ const Elections = () => {
                 gender={user.gender}
                 selectedRole={selectedRole}
                 votes={user.votes}
+                userNPPercentage={user.userNPPercentage}
               />
             ))}
 
@@ -402,6 +403,7 @@ const Elections = () => {
                   gender={user.gender}
                   selectedRole={selectedRole}
                   votes={user.votes}
+                  userNPPercentage={user.userNPPercentage}
                 />
               ))}
           </tbody>

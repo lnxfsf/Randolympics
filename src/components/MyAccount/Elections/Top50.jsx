@@ -22,6 +22,7 @@ const Top50 = ({
   gender,
   selectedRole,
   votes,
+  userNPPercentage,
 }) => {
   console.log("prikazuje od top50: " + userId);
 
@@ -248,7 +249,8 @@ const Top50 = ({
             {/* if it's Athlete, then it shows "Votes", for those "NP" */}
             {user_type === "AH" ? (
               <td className="flex gap-2 justify-start">
-                <p>{votes}</p>
+                <p><b>{votes}</b>   ({userNPPercentage}%) </p>
+                
               </td>
             ) : (
               <td className="flex gap-2 justify-start">

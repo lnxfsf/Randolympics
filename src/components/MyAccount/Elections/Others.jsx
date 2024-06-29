@@ -23,6 +23,7 @@ const Others = ({
   gender,
   selectedRole,
   votes,
+  userNPPercentage,
 }) => {
   console.log("userid je: " + userId);
 
@@ -247,7 +248,7 @@ const Others = ({
             {/* <div className="flex justify-between items-center gap-2"> */}
             {user_type === "AH" ? (
               <td className="flex gap-2 justify-start">
-                <p>{votes}</p>
+                <p><b>{votes}</b>   ({userNPPercentage}%) </p>
               </td>
             ) : (
               <td className="flex gap-2 justify-start">
