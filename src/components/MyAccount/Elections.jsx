@@ -485,16 +485,18 @@ const Elections = () => {
 
 
 
-/* (!showingTop50 && hasMoreOthers) - to je, kada NE prikazuje top50, (on bude 'false' tada), showingTop50,
+/* only when on first page
+and if it's actually first page, (it won't actually reflect new state in useState, so I think it's useless to mess with this anyways.. )
 
-i kada on IMA Other.. 
+||
 
+
+            (!showingTop50 && hasMoreOthers)
 
 */
-      /*      disabled={
-            (showingTop50 && top50Page === 1) ||
-            (!showingTop50 && hasMoreOthers)
-          }  */
+            disabled={
+            (showingTop50 && top50Page === 1) 
+          }  
 
 
           onClick={handlePreviousPage}
