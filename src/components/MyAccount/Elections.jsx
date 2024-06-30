@@ -488,10 +488,7 @@ const Elections = () => {
 /* only when on first page
 and if it's actually first page, (it won't actually reflect new state in useState, so I think it's useless to mess with this anyways.. )
 
-||
-
-
-            (!showingTop50 && hasMoreOthers)
+|| (!showingTop50 && hasMoreOthers)
 
 */
             disabled={
