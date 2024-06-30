@@ -25,7 +25,7 @@ const Top50 = ({
   userNPPercentage,
   votedForNPuserIdBOOLEAN
 }) => {
-  console.log("prikazuje od top50: " + userId);
+  //console.log("prikazuje od top50: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
 

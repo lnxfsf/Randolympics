@@ -26,7 +26,7 @@ const Others = ({
   userNPPercentage,
   votedForNPuserIdBOOLEAN,
 }) => {
-  console.log("userid je: " + userId);
+  //console.log("userid je: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
 

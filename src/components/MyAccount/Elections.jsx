@@ -38,7 +38,7 @@ const Elections = () => {
 
       return userJson.data.user_type;
     }
-  }); // TODO , it must initialie here first !
+  }); // TODO , it must initialize here first !
 
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
@@ -131,18 +131,23 @@ const Elections = () => {
       );
       setTop50Users(response.data);
 
-      // Check if we should switch to showing other users
-      if (response.data.length < 10) {
-        setShowingTop50(false);
-      }
 
+
+
+      // Check if we should switch to showing other users
       if (response.data.length < 10) {
         setHasMoreTop50(false);
         setShowingTop50(false);
+
+       
+
+      
       } else {
         setHasMoreTop50(true);
         setShowingTop50(true);
       }
+
+
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
@@ -165,6 +170,8 @@ const Elections = () => {
       );
       setOtherUsers(response.data);
 
+
+
       if (response.data.length < 10) {
         setHasMoreOthers(false);
       } else {
@@ -177,18 +184,24 @@ const Elections = () => {
 
   // ! with this, we need to determine...
   const handleNextPage = () => {
+
+
+    // TODO, e to je problem, sto, on ne ide na sledecu..  znaci ON PODESI OVO NA false ! kako i treba ono < , ali ne isprazni listu.. a da isprazni listu, mora fetch-ovati, da bi vratio prazno.., a samo ga ide unazad, za Others.. u suprotnom. eto, tako jedino mozes resiti ovo
     if (showingTop50) {
+      
       if (hasMoreTop50) {
         setTop50Page((prev) => prev + 1);
       } else {
         setShowingTop50(false);
         setOtherPage(1);
       }
-    } else {
-      if (hasMoreOthers) {
+    } else if (hasMoreOthers) {
+        // ! jedino, ovako da ga ispraznis ovde ! I ONDA NA PREVIOUS, SAMO MORAS... uz Others.. to je jedino kako mozes isprazniti ga.. (jer on podesi ono... )
+        setTop50Page((prev) => prev + 1);
+
         setOtherPage((prev) => prev + 1);
       }
-    }
+    
   };
 
   // ! previous page
@@ -196,9 +209,13 @@ const Elections = () => {
     if (showingTop50 && top50Page > 1) {
       setTop50Page((prev) => prev - 1);
     } else if (!showingTop50 && otherPage > 1) {
+      // ! e ovde, vracas ga samo.. za top50, ono, da bi prikazao jos.. 
+      setTop50Page((prev) => prev - 1);
+
       setOtherPage((prev) => prev - 1);
     } else if (!showingTop50 && otherPage === 1) {
-      setShowingTop50(true);
+
+      setShowingTop50(true); // was "true"
       setTop50Page(Math.max(1, top50Page - 1));
     }
   };
@@ -401,7 +418,7 @@ const Elections = () => {
               />
             ))}
 
-            {!showingTop50 && otherUsers.length > 0 && (
+            {!showingTop50 && top50Users.length !== 0 && otherUsers.length > 0 && (
               <>
                 <tr
                   className="border-b-2 border-red_first "
@@ -450,6 +467,8 @@ const Elections = () => {
           Previous
         </button>
         <button
+       /*  showingTop ce biti false (jer nema vise). hasmoretop isto false ! */
+        /*  showingTop ce biti false , ali hasMore others, IMA (true) */
           disabled={
             (showingTop50 && !hasMoreTop50) || (!showingTop50 && !hasMoreOthers)
           }
