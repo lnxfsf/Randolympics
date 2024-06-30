@@ -201,24 +201,49 @@ const Elections = () => {
 
         setOtherPage((prev) => prev + 1);
       }
+
+
+
     
   };
 
+
+  
+      
+  console.log("otherPage je: "+otherPage)
+  console.log("top50Page je: "+top50Page)
+  console.log("showingTop50 je: "+ showingTop50)
+
+  console.log("hasMoreTop50 je: "+ hasMoreTop50)
+  console.log("hasMoreOthers je: "+ hasMoreOthers)
+
+
+
   // ! previous page
   const handlePreviousPage = () => {
+
+
     if (showingTop50 && top50Page > 1) {
+
       setTop50Page((prev) => prev - 1);
+
+
     } else if (!showingTop50 && otherPage > 1) {
       // ! e ovde, vracas ga samo.. za top50, ono, da bi prikazao jos.. 
       setTop50Page((prev) => prev - 1);
 
       setOtherPage((prev) => prev - 1);
+      
     } else if (!showingTop50 && otherPage === 1) {
 
       setShowingTop50(true); // was "true"
       setTop50Page(Math.max(1, top50Page - 1));
     }
+
+
   };
+
+
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
@@ -457,10 +482,21 @@ const Elections = () => {
       </div>
       <div className="flex justify-center mt-4">
         <button
-          disabled={
+
+
+
+/* (!showingTop50 && hasMoreOthers) - to je, kada NE prikazuje top50, (on bude 'false' tada), showingTop50,
+
+i kada on IMA Other.. 
+
+
+*/
+      /*      disabled={
             (showingTop50 && top50Page === 1) ||
             (!showingTop50 && hasMoreOthers)
-          }
+          }  */
+
+
           onClick={handlePreviousPage}
           className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
         >
