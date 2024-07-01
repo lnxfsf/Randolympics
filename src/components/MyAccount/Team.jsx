@@ -33,6 +33,8 @@ const Team = () => {
 
   const [code, setCode] = useState("");
 
+  const [currentNP, setCurrentNP] = useState("");
+
 
   useEffect(() => {
     const storedData =
@@ -48,7 +50,7 @@ const Team = () => {
       setCode(userJson.data.nationality);
     }
 
-    getMiscelan();
+    getCurrentNP();
 
     if (userId) {
       fetchTeamMates();
@@ -88,10 +90,15 @@ const Team = () => {
 
 
 
-  const getMiscelan = async () => {
+  const getCurrentNP = async () => {
     try {
-      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/team`, {
+      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/currentNP`, {
+
       });
+
+
+
+      setCurrentNP(response.data.name)
 
 
       
@@ -126,7 +133,7 @@ const Team = () => {
       <div className="flex gap-16">
         <div className="m-4 ml-0">
           <p  >Your National President</p>
-          <p className="text-xl mt-1">Name </p>
+          <p className="text-xl mt-1">{currentNP}</p>
         </div>
 
         <div className="flex flex-col justify-center items-start pl-4 ">
