@@ -23,7 +23,8 @@ const Top50 = ({
   selectedRole,
   votes,
   userNPPercentage,
-  votedForNPuserIdBOOLEAN
+  
+  votedForUserId,
 }) => {
   //console.log("prikazuje od top50: " + userId);
 
@@ -112,7 +113,8 @@ const Top50 = ({
      {user_type === "AH"  && (
           <>
             <td style={{ textAlign: "center" }}>
-              <Checkbox
+            
+            {/*   <Checkbox
                 sx={{
                   color: "#FF0000",
                   "&.Mui-checked": {
@@ -121,7 +123,10 @@ const Top50 = ({
                 }}
                 checked={votedForNPuserIdBOOLEAN}
                 disabled
-              />
+              /> */}
+
+              {votedForUserId == userId ? ( <p>1</p> ) : (<p>-</p> )}
+
             </td>
           </>
         )}

@@ -65,8 +65,8 @@ const Elections = () => {
 
   const [searchText, setSearchText] = useState(""); //search box
 
-  const [votedFor, setVotedFor] = useState();
-  const [votedForHisNPUserID, setVotedForHisNPUserID] = useState(); // UserID of NP, we voted for...
+  const [votedFor, setVotedFor] = useState(); // UserID of NP, we voted for...
+  
 
   useEffect(() => {
     const storedData =
@@ -93,18 +93,9 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
     votedFor,
-    votedForHisNPUserID,
   ]);
 
-  const votedForCheckbox = (votedForNPuserId) => {
-    // votedForNPuserId, is from iteration, to check each one, if it's same as one locally...
-    // votedForHisNPUserID, it's directly from user's column (of same name..)
-    if (votedForHisNPUserID == votedForNPuserId) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+ 
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
@@ -208,15 +199,6 @@ const Elections = () => {
   };
 
 
-  
-      
-  console.log("otherPage je: "+otherPage)
-  console.log("top50Page je: "+top50Page)
-  console.log("showingTop50 je: "+ showingTop50)
-
-  console.log("hasMoreTop50 je: "+ hasMoreTop50)
-  console.log("hasMoreOthers je: "+ hasMoreOthers)
-
 
 
   // ! previous page
@@ -251,16 +233,15 @@ const Elections = () => {
 
   // ! to saljes u backend... i on, sada to koristi...
   const handleVotedFor = async (event) => {
-    setVotedFor(event.target.value.name); // we get object "user", and get .name
+    setVotedFor(event.target.value);
 
     // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
         {
-          votedFor: event.target.value.name,
-          NPuserId: event.target.value.userId, // and userId of that NP in question
-
+        
+          NPuserId: event.target.value,
           current_user_userId: userData.data.userId,
         }
       );
@@ -362,13 +343,13 @@ const Elections = () => {
                 style={{ color: "#000" }}
               >
                 {top50Users.map((user) => (
-                  <MenuItem key={user.id} value={user}>
+                  <MenuItem key={user.userId} value={user.userId}>
                     {user.name}
                   </MenuItem>
                 ))}
 
                 {otherUsers.map((user) => (
-                  <MenuItem key={user.id} value={user}>
+                  <MenuItem key={user.userId} value={user.userId}>
                     {user.name}
                   </MenuItem>
                 ))}
@@ -437,9 +418,8 @@ const Elections = () => {
                 selectedRole={selectedRole}
                 votes={user.votes}
                 userNPPercentage={user.userNPPercentage}
-                votedForNPuserIdBOOLEAN={votedForCheckbox(
-                  user.votedForNPuserId
-                )}
+                
+                votedForUserId={votedFor}
               />
             ))}
 
@@ -472,9 +452,7 @@ const Elections = () => {
                   selectedRole={selectedRole}
                   votes={user.votes}
                   userNPPercentage={user.userNPPercentage}
-                  votedForNPuserIdBOOLEAN={votedForCheckbox(
-                    user.votedForNPuserId
-                  )}
+                  votedForUserId={votedFor}
                 />
               ))}
           </tbody>

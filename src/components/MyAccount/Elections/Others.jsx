@@ -24,7 +24,9 @@ const Others = ({
   selectedRole,
   votes,
   userNPPercentage,
-  votedForNPuserIdBOOLEAN,
+
+  votedForUserId,
+
 }) => {
   //console.log("userid je: " + userId);
 
@@ -112,7 +114,7 @@ const Others = ({
      {user_type === "AH"  && (
           <>
             <td style={{ textAlign: "center" }}>
-              <Checkbox
+             {/*  <Checkbox
                 sx={{
                   color: "#FF0000",
                   "&.Mui-checked": {
@@ -121,7 +123,10 @@ const Others = ({
                 }}
                 checked={votedForNPuserIdBOOLEAN}
                 disabled
-              />
+              /> */}
+
+                {votedForUserId == userId ? ( <p>1</p> ) : (<p>-</p> )}
+
             </td>
           </>
         )}
