@@ -651,9 +651,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
           <p className="m-2">
             You are selecting the National President. <br />
             Current National President will be replaced if there's 130% more
-            votes than for current one. <br />
-            Above red line, is current National President. <br />
-            Your vote is in "Vote for" dropdown menu. <br />
+            votes than for current one. 
           </p>
         </>
       ) : (
