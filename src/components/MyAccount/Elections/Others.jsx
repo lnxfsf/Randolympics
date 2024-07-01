@@ -114,8 +114,7 @@ const Others = ({
 
   return (
     <>
-      {/*ovo je ispod, samo da probas: border-b-2 border-red-500 */}
-
+     
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
       <tr key={index}>
         {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
@@ -316,16 +315,7 @@ const Others = ({
         )}
       </tr>
 
-      {/*       it doesn't render on last element, so it can properly show red line.. not needed in Others..
-       */}
-      {/*  {index !== lastIndex && (
-        <tr>
-          <td colSpan="6">
-            <hr />
-          </td>
-        </tr>
-      )} */}
-      {/* <hr /> */}
+     
     </>
   );
 };

@@ -95,7 +95,9 @@ const Elections = () => {
   }, [
     top50Page,
     otherPage,
+
     rankUpdated,
+    
     showingTop50,
     selectedRole,
     searchText,
@@ -414,12 +416,14 @@ const Elections = () => {
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
           onSearch={handleSearch}
+         
           style={{
             border: "1px solid #C6C6C6", // Border color and thickness
             borderRadius: "20px", // Border radius
           }}
         />
       </div>
+
       <div className="mt-8">
         <table className="w-full">
           <thead>
