@@ -1041,6 +1041,8 @@ const team = async (req, res) => {
       offset: offset,
     });
 
+    console.log("ovo su svi:...................")
+    console.log(teamMates)
 
     res.json(teamMates);
 
