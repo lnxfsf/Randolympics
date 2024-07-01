@@ -65,7 +65,16 @@ const Elections = () => {
 
   const [searchText, setSearchText] = useState(""); //search box
 
-  const [votedFor, setVotedFor] = useState(); // UserID of NP, we voted for...
+  const [votedFor, setVotedFor] = useState(() => {
+
+    const storedData = localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens");
+    if (storedData) {
+      const userJson = JSON.parse(storedData);
+
+      return userJson.data.votedForNPuserId;
+    }
+
+  }); // UserID of NP, we voted for...
   
 
   useEffect(() => {
@@ -173,11 +182,10 @@ const Elections = () => {
     }
   };
 
-  // ! with this, we need to determine...
+  
   const handleNextPage = () => {
 
 
-    // TODO, e to je problem, sto, on ne ide na sledecu..  znaci ON PODESI OVO NA false ! kako i treba ono < , ali ne isprazni listu.. a da isprazni listu, mora fetch-ovati, da bi vratio prazno.., a samo ga ide unazad, za Others.. u suprotnom. eto, tako jedino mozes resiti ovo
     if (showingTop50) {
       
       if (hasMoreTop50) {
@@ -187,7 +195,6 @@ const Elections = () => {
         setOtherPage(1);
       }
     } else if (hasMoreOthers) {
-        // ! jedino, ovako da ga ispraznis ovde ! I ONDA NA PREVIOUS, SAMO MORAS... uz Others.. to je jedino kako mozes isprazniti ga.. (jer on podesi ono... )
         setTop50Page((prev) => prev + 1);
 
         setOtherPage((prev) => prev + 1);
@@ -201,7 +208,7 @@ const Elections = () => {
 
 
 
-  // ! previous page
+  // previous page
   const handlePreviousPage = () => {
 
 
@@ -211,7 +218,7 @@ const Elections = () => {
 
 
     } else if (!showingTop50 && otherPage > 1) {
-      // ! e ovde, vracas ga samo.. za top50, ono, da bi prikazao jos.. 
+      //  e ovde, vracas ga samo.. za top50, ono, da bi prikazao jos.. 
       setTop50Page((prev) => prev - 1);
 
       setOtherPage((prev) => prev - 1);
@@ -231,7 +238,7 @@ const Elections = () => {
     setSelectedRole(event.target.value);
   };
 
-  // ! to saljes u backend... i on, sada to koristi...
+  //  to saljes u backend... 
   const handleVotedFor = async (event) => {
     setVotedFor(event.target.value);
 
@@ -247,8 +254,44 @@ const Elections = () => {
       );
 
       if (response.status === 200) {
-        console.log("sta e");
+
+
+        console.log("sta ");
+
+
+        // this will apply on next re-render
+        setUserData((prevUserData) => ({
+
+          ...prevUserData,
+          data: {
+            ...prevUserData.data,
+            votedForNPuserId: event.target.value,
+          },
+        
+        }));
+
+
+        // this is new object, so we can insert it directly (faster, we don't wait for next re-render..)
+        var updatedUserData = { ...userData, data: { ...userData.data , votedForNPuserId: event.target.value, } 
+        }
+       
+
+        // ada, nije sačuvao alo ! 
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(updatedUserData));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(updatedUserData));
+        }
+
+
       }
+
+
+
+
+
+
+
     } catch (error) {
       //console.log(error);
       setResultText(error.response.data.message);
