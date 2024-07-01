@@ -142,6 +142,18 @@ module.exports = function(sequelize, DataTypes) {
         default: 0.0,
       },
 
+      status: {
+        type: DataTypes.STRING(255),
+        default: "",
+      },
+
+
+
+      status_date: {
+        type: DataTypes.DATE,
+        
+      }
+
       
 
 

@@ -411,7 +411,7 @@ const login = async (req, res) => {
           ranking_medium: existingUser.ranking_medium,
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
-          votedFor: existingUser.votedFor,
+          votedForNPuserId: existingUser.votedForNPuserId,  //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -652,6 +652,10 @@ const rankingTop50 = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
+  const votedFor = req.query.votedFor;
+
+
+
   console.log("primam user tip: " + user_type);
 
   // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
@@ -718,7 +722,14 @@ const rankingTop50 = async (req, res) => {
       // findOne, just one we need
       const topCurrentNP = await User.findAll({
         where: {
-          currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line..
+         
+         
+         
+         
+          //currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line..
+          
+          userId: votedFor, // userId, of NP, he selected..
+
           user_type: user_type,
 
           name: {
@@ -805,6 +816,8 @@ const otherUsers = async (req, res) => {
 
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
+  const votedFor = req.query.votedFor;
+
 
   if (
     user_type === "GP" ||
@@ -871,7 +884,11 @@ const otherUsers = async (req, res) => {
       const otherNPs = await User.findAll({
         where: {
           // everything that's not NP..  (as we don't go by ranking.. at all)
-          currentNP: false,
+          // currentNP: false,
+
+          userId: {
+            [Op.not]: votedFor
+          },
 
           user_type: user_type,
 
@@ -975,9 +992,11 @@ const votingForNP = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const { votedFor, NPuserId, current_user_userId } = req.body;
+    const { /* votedFor, */  NPuserId , current_user_userId } = req.body;
     // votedFor , is .name , value..
-
+    // cek, dobio je sada userId ! kako, nzm, bolje ne diraj !
+    console.log("dobijooooooo je:"+ NPuserId)
+   
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
@@ -996,6 +1015,10 @@ const votingForNP = async (req, res) => {
           userId: NPuserId,
         },
       });
+
+      console.log("sta je nasao")
+      console.log(selectedVoteNP)
+      console.log("Sada nam je npuserid iz tog objekta:"+ selectedVoteNP.userId)
 
       const previousVoteNP = currentUser.votedForNPuserId
         ? await User.findOne({
@@ -1037,9 +1060,9 @@ const votingForNP = async (req, res) => {
             order: [["votes", "DESC"]],
           });
 
-          console.log("the one with most values:" + secondMostVotes);
+          //console.log("the one with most values:" + secondMostVotes);
 
-          console.log(currentNP);
+          //console.log(currentNP);
 
           // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
           if (currentNP) {
@@ -1083,9 +1106,15 @@ const votingForNP = async (req, res) => {
           try {
             //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
             // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
-            currentUser.votedForNPuserId = NPuserId;
-            currentUser.votedFor = votedFor;
-            await currentUser.save();
+            //currentUser.votedForNPuserId = NPuserId;
+
+            await currentUser.update({ votedForNPuserId: selectedVoteNP.userId });
+            //currentUser.votedFor = votedFor; // samo ime uzmes.. 
+            
+            await currentUser.update({ votedFor: selectedVoteNP.name });
+
+
+            
           } catch (error) {
             console.log(error.message);
           }
