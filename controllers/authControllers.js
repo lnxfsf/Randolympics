@@ -964,6 +964,75 @@ const otherUsers = async (req, res) => {
   }
 };
 
+
+
+
+const team = async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10; // Default limit to 10
+  const offset = parseInt(req.query.offset) || 0;
+ 
+  const searchText = req.query.searchText;
+
+  
+
+  // you send this, by finding out, about your user, .. just by being signed up in there...
+  // const genderFilter = req.query.genderFilter;
+
+
+  const userId = req.query.userId; // this is to get current User, all data from him. 
+  //  console.log(userId)
+
+  // so, from FE, you send: "userId", searchText, offset, limit
+  
+  
+  
+
+  
+  
+   
+  try {
+
+    const currentUser = await User.findOne({
+      where: {
+        userId: userId,
+      },
+    });
+
+    console.log("nasao je")
+    console.log(currentUser)
+
+    // based, on same country.. 
+    const teamMates = await User.findAll({
+      where: {
+        
+        user_type: currentUser.user_type,
+
+        gender: currentUser.gender, // by same gender
+        nationality: currentUser.nationality, // and same country
+
+
+        name: {
+          [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+        },
+      },
+      order: [["ranking", "ASC"]], // Sort by ranking ascending
+      limit: limit,
+      offset: offset,
+    });
+
+
+    res.json(teamMates);
+
+  }catch(error){
+
+  }
+
+
+}
+
+
+
+
 const votingForNP = async (req, res) => {
   // this is for dropdown menu
   if (req.method === "GET") {
@@ -1247,4 +1316,5 @@ module.exports = {
   votingForNP,
 
   resignFromCurrentPosition,
+  team,
 };
