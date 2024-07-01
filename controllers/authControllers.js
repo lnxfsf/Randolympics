@@ -967,6 +967,27 @@ const otherUsers = async (req, res) => {
 
 
 
+const currentNP = async (req, res) => {
+  try {
+
+    const currentNP = await User.findOne({
+      where: {
+        currentNP: true,
+        user_type: "NP",
+      },
+    });
+
+
+    return res.status(200).json(currentNP);
+
+  }catch(error){
+    res.status(500).json({ error: "Internal server error" });
+
+  }
+
+
+}
+
 const team = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
@@ -1317,4 +1338,5 @@ module.exports = {
 
   resignFromCurrentPosition,
   team,
+  currentNP,
 };
