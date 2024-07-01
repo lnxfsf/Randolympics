@@ -7,25 +7,43 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 
+import moment from "moment";
+
 const Top50 = ({
-  rank,
-  name,
-  age,
-  country,
-  email,
-  phone,
+  user, // we just send one big object, and get properties (as they change depending on user_type)
+
   user_type,
+
   index,
   lastIndex,
   setRankUpdated,
-  userId,
-  gender,
+
   selectedRole,
-  votes,
-  userNPPercentage,
-  
+
   votedForUserId,
 }) => {
+  // set up, (and also depends on user_type, as we won't use all of it)
+  const userId = user.userId;
+  const rank = user.ranking;
+  const name = user.name;
+  const age = user.age;
+  const country = user.country;
+  const email = user.email;
+  const phone = user.phone;
+  const gender = user.gender;
+  const votes = user.votes;
+  const userNPPercentage = user.userNPPercentage;
+
+  // we use this, only if we're showing "NP", i.e. when current user_type is "AH" or "RS"
+  const status = user.status;
+
+  var status_date = user.status_date; // we need to format this.
+
+  if (status_date) {
+    status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
+    status_date = status_date.format("(HH:mm MMMM Do YYYY)");
+  }
+
   //console.log("prikazuje od top50: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
@@ -109,12 +127,11 @@ const Top50 = ({
          */}
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
-     */}    
-     {user_type === "AH"  && (
+         */}
+        {user_type === "AH" && (
           <>
             <td style={{ textAlign: "center" }}>
-            
-            {/*   <Checkbox
+              {/*   <Checkbox
                 sx={{
                   color: "#FF0000",
                   "&.Mui-checked": {
@@ -125,8 +142,7 @@ const Top50 = ({
                 disabled
               /> */}
 
-              {votedForUserId == userId ? ( <p>1</p> ) : (<p>-</p> )}
-
+              {votedForUserId == userId ? <p>1</p> : <p>-</p>}
             </td>
           </>
         )}
@@ -286,7 +302,7 @@ const Top50 = ({
 
             {/* if it's Athlete, then it shows "Votes", for those "NP" */}
             {user_type === "AH" ? (
-              <td className="flex gap-2 justify-start" >
+              <td className="flex gap-2 justify-start">
                 <p>
                   <b>{votes}</b> ({userNPPercentage}%){" "}
                 </p>
@@ -306,6 +322,15 @@ const Top50 = ({
         <td>{country}</td>
         <td>{email}</td>
         <td>{phone}</td>
+
+        {user_type === "AH" && (
+          <td>
+            <p>
+              {status} <br />
+              {status_date}
+            </p>
+          </td>
+        )}
       </tr>
 
       {/*       it doesn't render on last element, so it can properly show red line..

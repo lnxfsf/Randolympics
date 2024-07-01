@@ -126,6 +126,8 @@ const Elections = () => {
             searchText: searchText,
             genderFilter: genderFilter,
             categoryFilter: categoryFilter,
+            
+            votedFor: votedFor, // sends selected NP for our user. this is showing then. so we display above red line selected by user... 
           },
         }
       );
@@ -165,6 +167,8 @@ const Elections = () => {
             searchText: searchText,
             genderFilter: genderFilter,
             categoryFilter: categoryFilter,
+
+            votedFor: votedFor, // send this, so to know which one to AVOID 
           },
         }
       );
@@ -256,10 +260,10 @@ const Elections = () => {
       if (response.status === 200) {
 
 
-        console.log("sta ");
+        
 
 
-        // this will apply on next re-render
+        // this will apply on next re-render. so we need to use one locally, for now, just to insert it in localstorage
         setUserData((prevUserData) => ({
 
           ...prevUserData,
@@ -440,12 +444,36 @@ const Elections = () => {
               <th className="w-[8%]">Age</th>
               <th className="w-[12%]">Country</th>
               <th className="w-[27%]">Email</th>
-              <th className="w-[20%]">Phone</th>
+
+
+
+              {/* this is, just for "AH" and "RS", to have place for all columns */}
+              {currentUserType === "AH" ? (
+                <>
+                  <th className="w-[10%]">Phone</th>
+                </>
+              ) : (
+                <>
+                  <th className="w-[20%]">Phone</th>
+                </>
+              )}
+
+              
+
+              {currentUserType === "AH" && (
+                <>
+                  <th className="w-[10%]">Status</th>
+                </>
+              )}
+
+
+
             </tr>
           </thead>
           <tbody>
             {top50Users.map((user, index) => (
               <Top50
+/* 
                 userId={user.userId}
                 rank={user.ranking}
                 name={user.name}
@@ -453,16 +481,21 @@ const Elections = () => {
                 country={user.country}
                 email={user.email}
                 phone={user.phone}
+                gender={user.gender}
+                votes={user.votes}
+                userNPPercentage={user.userNPPercentage} */
+
+                user={user}
+
                 user_type={currentUserType}
+
                 index={index}
                 lastIndex={top50Users.length - 1}
                 setRankUpdated={setRankUpdated}
-                gender={user.gender}
                 selectedRole={selectedRole}
-                votes={user.votes}
-                userNPPercentage={user.userNPPercentage}
-                
                 votedForUserId={votedFor}
+
+
               />
             ))}
 
