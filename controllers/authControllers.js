@@ -411,7 +411,7 @@ const login = async (req, res) => {
           ranking_medium: existingUser.ranking_medium,
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
-          votedForNPuserId: existingUser.votedForNPuserId,  //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
+          votedForNPuserId: existingUser.votedForNPuserId, //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -654,8 +654,6 @@ const rankingTop50 = async (req, res) => {
 
   const votedFor = req.query.votedFor;
 
-
-
   console.log("primam user tip: " + user_type);
 
   // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
@@ -722,12 +720,8 @@ const rankingTop50 = async (req, res) => {
       // findOne, just one we need
       const topCurrentNP = await User.findAll({
         where: {
-         
-         
-         
-         
           //currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line..
-          
+
           userId: votedFor, // userId, of NP, he selected..
 
           user_type: user_type,
@@ -740,8 +734,6 @@ const rankingTop50 = async (req, res) => {
         /*  limit: limit, */
         /*  offset: offset, */
       });
-
-
 
       // we need to find percentage, for votes, how much each one have
       // Fetch all NP users
@@ -761,14 +753,12 @@ const rankingTop50 = async (req, res) => {
         );
 
         const userVotes = currentUser.votes;
-        if(userVotes){
+        if (userVotes) {
           var percentage = (userVotes / totalVotes) * 100;
         } else {
-          // don't divide by 0 , so we just return as 0 here 
+          // don't divide by 0 , so we just return as 0 here
           var percentage = 0;
         }
-       
-
 
         // this is where we add percent to object, variable..
         return {
@@ -824,7 +814,6 @@ const otherUsers = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
   const votedFor = req.query.votedFor;
-
 
   if (
     user_type === "GP" ||
@@ -894,7 +883,7 @@ const otherUsers = async (req, res) => {
           // currentNP: false,
 
           userId: {
-            [Op.not]: votedFor
+            [Op.not]: votedFor,
           },
 
           user_type: user_type,
@@ -908,16 +897,12 @@ const otherUsers = async (req, res) => {
         offset: offset,
       });
 
-
-
-
-       // we need to find percentage, for votes, how much each one have
+      // we need to find percentage, for votes, how much each one have
       const npUsers = await User.findAll({
         where: {
           user_type: user_type,
         },
       });
-
 
       // Calculate total votes, in all NPs
       const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
@@ -928,15 +913,15 @@ const otherUsers = async (req, res) => {
         );
 
         const userVotes = currentUser.votes;
-        if(userVotes){
+        if (userVotes) {
           var percentage = (userVotes / totalVotes) * 100;
         } else {
-          // don't divide by 0 , so we just return as 0 here 
-          var percentage = 0.00;
+          // don't divide by 0 , so we just return as 0 here
+          var percentage = 0.0;
         }
 
         return {
-          ...user.toJSON(), 
+          ...user.toJSON(),
           userNPPercentage: percentage.toFixed(2),
         };
       });
@@ -1003,10 +988,10 @@ const votingForNP = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const { /* votedFor, */  NPuserId , current_user_userId } = req.body;
+    const { /* votedFor, */ NPuserId, current_user_userId } = req.body;
     // votedFor , is .name , value..
     // cek, dobio je sada userId ! kako, nzm, bolje ne diraj !
-    
+
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
@@ -1026,13 +1011,11 @@ const votingForNP = async (req, res) => {
         },
       });
 
-
       const previousVoteNP = currentUser.votedForNPuserId
         ? await User.findOne({
             where: { userId: currentUser.votedForNPuserId },
           })
         : null;
-
 
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
       if (currentUser.votedForNPuserId !== NPuserId) {
@@ -1081,12 +1064,6 @@ const votingForNP = async (req, res) => {
             let voteDifference = secondMostVotes.votes - currentNP.votes; // 2 - 4 =  -2
             let percentageIncrease = (voteDifference / currentNP.votes) * 100; // ((-2)*100). to je 300% više..
 
-
-            
-
-
-
-           
             if (percentageIncrease >= 130) {
               // we swap second most voted NP, with currentNP (so currentNP NO MORE ! )
 
@@ -1094,28 +1071,22 @@ const votingForNP = async (req, res) => {
                 currentNP.currentNP = false; */
               await secondMostVotes.update({ currentNP: true });
 
-              
+              // set first for secondMostVotes (as he's now, new currentNP ! )
+              await secondMostVotes.update({
+                status: "Acting National President",
+              });
+              var date_now = new Date().toString(); //timestamp..
+              await secondMostVotes.update({ status_date: date_now });
 
-
-
-             // set first for secondMostVotes (as he's now, new currentNP ! )
-             await secondMostVotes.update({ status: "Acting National President" });
-             var date_now = new Date().toString(); //timestamp..
-             await secondMostVotes.update({ status_date: date_now });
-
-              
-             // only if he was actually currentNP before, otherwise, don't add these strings to it..
-            if(currentNP.currentNP == true){
+              // only if he was actually currentNP before, otherwise, don't add these strings to it..
+              if (currentNP.currentNP == true) {
                 // set for previouse "currentNP" (as he's resigned now, replaced )
                 await currentNP.update({ status: "Resigned" });
                 var date_now = new Date().toString(); //timestamp..
                 await currentNP.update({ status_date: date_now });
-            }
+              }
 
-            await currentNP.update({ currentNP: false });
-
-
-
+              await currentNP.update({ currentNP: false });
             } else {
               /* selectedVoteNP.currentNP = false;
                 currentNP.currentNP = true; */
@@ -1124,9 +1095,7 @@ const votingForNP = async (req, res) => {
 
               await currentNP.update({ currentNP: true });
 
-
-
-/*  I don't think we need this here.. it's okay for currentNP, but this.. no.. as it's working on every selection..
+              /*  I don't think we need this here.. it's okay for currentNP, but this.. no.. as it's working on every selection..
              // 
              await currentNP.update({ status: "Acting National President" });
              var date_now = new Date().toString(); //timestamp..
@@ -1137,7 +1106,6 @@ const votingForNP = async (req, res) => {
              await secondMostVotes.update({ status: "Resigned" });
              var date_now = new Date().toString(); //timestamp..
              await secondMostVotes.update({ status_date: date_now }); */
-
             }
           } else {
             // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
@@ -1145,14 +1113,14 @@ const votingForNP = async (req, res) => {
             
             await selectedVoteNP.save(); */
 
-
             await secondMostVotes.update({ currentNP: true });
 
             // and set status text, as he's currentNP.. (that's what he wants)
-            await secondMostVotes.update({ status: "Acting National President" });
+            await secondMostVotes.update({
+              status: "Acting National President",
+            });
             var date_now = new Date().toString(); //timestamp..
             await secondMostVotes.update({ status_date: date_now });
-
           }
         }
 
@@ -1165,13 +1133,12 @@ const votingForNP = async (req, res) => {
             // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
             //currentUser.votedForNPuserId = NPuserId;
 
-            await currentUser.update({ votedForNPuserId: selectedVoteNP.userId });
-            //currentUser.votedFor = votedFor; // samo ime uzmes.. 
-            
+            await currentUser.update({
+              votedForNPuserId: selectedVoteNP.userId,
+            });
+            //currentUser.votedFor = votedFor; // samo ime uzmes..
+
             await currentUser.update({ votedFor: selectedVoteNP.name });
-
-
-            
           } catch (error) {
             console.log(error.message);
           }
@@ -1186,160 +1153,82 @@ const votingForNP = async (req, res) => {
   }
 };
 
-/* 
 
-const votingForNP = async (req, res) => {
-  if (req.method === "GET") {
-    const userId = req.query.user_type;
+const resignFromCurrentPosition = async (req, res) => {
 
-    try {
-      const selectedVoteNP = await User.findOne({
-        where: {
-          userId: userId,
-        },
-      });
 
-      //ne vraca nista..
-      console.log("stampa sinovac" + selectedVoteNP);
-      res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
+  const { userId, user_type } = req.body;
+
+
+
+  try {
+    await db.sequelize.sync();
+
+
+     // so, it works only for NP (if he was actually currentNP)
+    // TODO, later on, you do it for GP, as well (when signed user is GP.. ). when you implement his ..
+   
+
+    // this is for "NP"
+    if(user_type == "NP"){
+
+    
+    const currentUserNP = await User.findOne({
+      where: {
+        currentNP: true,
+        userId: userId,
+      },
+    });
+
+    // the second one, with most votes, who wasn't currentNP, will become.. now, because currentNP is resigning 
+    const secondMostVotes = await User.findOne({
+      where: {
+        currentNP: false,
+
+        user_type: "NP",
+      },
+      order: [["votes", "DESC"]],
+    });
+
+    // just swap them...
+    await secondMostVotes.update({ currentNP: true });
+
+    await secondMostVotes.update({
+      status: "Acting National President",
+    });
+    var date_now = new Date().toString(); //timestamp..
+    await secondMostVotes.update({ status_date: date_now });
+
+
+
+
+    if (currentUserNP.currentNP == true) {
+      // set for previouse "currentNP" (as he's resigned now, replaced )
+      await currentUserNP.update({ status: "Resigned" });
+      var date_now = new Date().toString(); //timestamp..
+      await currentUserNP.update({ status_date: date_now });
     }
+
+    await currentUserNP.update({ currentNP: false });
+
+
   }
 
-  if (req.method === "POST") {
-    const { votedFor, NPuserId, current_user_userId } = req.body;
-
-    // userId, od NP, for who he voted for.. so we can work with it !
-
-    try {
-      await db.sequelize.sync();
-
-      // ovo je current User da nadjes.. da samo kolonu azuriras mu
-      const currentUser = await User.findOne({
-        where: {
-          userId: current_user_userId,
-        },
-      });
-
-      // ovo je NP da nadjes.. TO JE TRENUTNI KOJI KORISNIK IZABRAO !
-      const selectedVoteNP = await User.findOne({
-        where: {
-          userId: NPuserId,
-        },
-      });
-
-
-      // this is so we can access values of previous NP ... (before it was changed.. )
-      const previousVoteNP = await User.findOne({
-        where: {
-          userId: currentUser.votedForNPuserId,
-        },
-      });
-
-      //ne vraca nista..
-      console.log("votedFor je" + votedFor);
-      console.log("NPuserId je " + NPuserId);
-      console.log("current_user_userId je: " + current_user_userId);
-
-      // TODO, ako, nije nijedan ubelezen, treba samo da upise, u tjt..
-
-      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola...
-      // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
-      if (currentUser.votedForNPuserId !== NPuserId) {
-        // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
-        if (selectedVoteNP) {
-          // ne smanjuj, ako nije pre toga imao selektovanog user-a uopste.. da ne ide u minus..
-          if (currentUser.votedForNPuserId !== "") {
-
-            // ! decrement (here, find for below row)
-            // smanji za -1, prethodni, jer izgubio je taj vote.. U SLUČAJU da ga ima uopšte.. 
-            await previousVoteNP.decrement("votes", { by: 1 });
-
-            // ! and that means, if we decrement previous (selected one), then, there could possibly occur change in 'ranking' as well. 
-           // we need to check, if now, row below us, have more votes than current one (we just decremented). so we could swap them
-            const belowRowOfVoteNP = await User.findOne({
-              where: {
-                ranking: selectedVoteNP.ranking-1, // selectedVoteNP , is object, of THAT ONE ! and now, we get row above this one user selected.. 
-              },
-            });
-  
-            // if it's not, then do nothing. as votes of below row are not higher, no need to swap... 
-            if (belowRowOfVoteNP.votes > selectedVoteNP.votes ){
-              // if upperRowOfVoteNP have less votes than selectedVoteNP (i.e. selectedVoteNP have more votes than upperRowOfVoteNP), then swap ranking
-  
-              // put selectedVoteNP 'ranking' in upperRowOfVoteNP
-              let belowRowOfVoteNPRankingVar = belowRowOfVoteNP.ranking;
-              belowRowOfVoteNP.ranking = selectedVoteNP.ranking;
-              selectedVoteNP.ranking = belowRowOfVoteNPRankingVar;
-  
-              // and then save both..
-              await belowRowOfVoteNP.save();
-              await selectedVoteNP.save();
-            }
-
-            
-
-          }
-
-
-          // ! increment
-          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1
-          await selectedVoteNP.increment("votes", { by: 1 });
-
-          // ! when, it increments, it needs to check IT'S (not user previous), upper row, if THIS one, have more votes than row ABOVE this one (so, we can swap them, AND, swap ranks !). THIS GOES UP, and that one, goes in place of this (just swap...)
-          // BUT, WE CHECK, IT ONLY, if we were this deep in success with this ! 
-          // we check, by going one rank up, (by rank, we find upper row of THIS ONE)
-          const upperRowOfVoteNP = await User.findOne({
-            where: {
-              ranking: selectedVoteNP.ranking+1, // selectedVoteNP , is object, of THAT ONE ! and now, we get row above this one user selected.. 
-            },
-          });
-
-          // if it's not, then do nothing. as votes are not higher, no need to swap... 
-          if (upperRowOfVoteNP.votes < selectedVoteNP.votes ){
-            // if upperRowOfVoteNP have less votes than selectedVoteNP (i.e. selectedVoteNP have more votes than upperRowOfVoteNP), then swap ranking
-
-            // put selectedVoteNP 'ranking' in upperRowOfVoteNP
-            let upperRowOfVoteNPRankingVar = upperRowOfVoteNP.ranking;
-            upperRowOfVoteNP.ranking = selectedVoteNP.ranking;
-            selectedVoteNP.ranking = upperRowOfVoteNPRankingVar;
-
-            // and then save both..
-            await upperRowOfVoteNP.save();
-            await selectedVoteNP.save();
-          }
 
 
 
 
 
-        }
-
-        // NE ČUVAJ ODMAH, nego moras da znaš i prethodni, votedFor koji je bio...
-        //TODO, SACUVAJ IME, U TAJ CURRENT USER, KOJI JESTE SIGNED UP !
-        // dobija ovde
-        if (currentUser) {
-          try {
-            //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
-            // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
-            currentUser.votedForNPuserId = NPuserId;
-            currentUser.votedFor = votedFor;
-            await currentUser.save();
-          } catch (error) {
-            console.log(error.message);
-          }
-        }
-
-        res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
-      }
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
+  }catch(error){
+    console.log(error.message)
   }
-}; */
+
+
+  res.status(200).send("You resigned !");
+
+}
+
+
 
 module.exports = {
   register,
@@ -1356,4 +1245,6 @@ module.exports = {
   rankingTop50,
   otherUsers,
   votingForNP,
+
+  resignFromCurrentPosition,
 };
