@@ -11,15 +11,11 @@ import moment from "moment";
 
 const Top50 = ({
   user, // we just send one big object, and get properties (as they change depending on user_type)
-
   user_type,
-
   index,
   lastIndex,
   setRankUpdated,
-
   selectedRole,
-
   votedForUserId,
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
@@ -43,8 +39,6 @@ const Top50 = ({
     status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
     status_date = status_date.format("(HH:mm MMMM Do YYYY)");
   }
-
-  //console.log("prikazuje od top50: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
 

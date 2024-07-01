@@ -513,21 +513,36 @@ const Elections = () => {
             {!showingTop50 &&
               otherUsers.map((user, index) => (
                 <Others
-                  userId={user.userId}
-                  rank={user.ranking}
-                  name={user.name}
-                  age={user.age}
-                  country={user.country}
-                  email={user.email}
-                  phone={user.phone}
+
+
+                
+
+                /* 
+                userId={user.userId}
+                rank={user.ranking}
+                name={user.name}
+                age={user.age}
+                country={user.country}
+                email={user.email}
+                phone={user.phone}
+
+
+                gender={user.gender}
+                votes={user.votes}
+                userNPPercentage={user.userNPPercentage} */
+
+                
+                user={user}
+
+
                   user_type={currentUserType}
                   index={index}
                   lastIndex={otherUsers.length - 1}
                   setRankUpdated={setRankUpdated}
-                  gender={user.gender}
+                 
                   selectedRole={selectedRole}
-                  votes={user.votes}
-                  userNPPercentage={user.userNPPercentage}
+                  
+                 
                   votedForUserId={votedFor}
                 />
               ))}

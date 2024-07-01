@@ -7,27 +7,39 @@ import "reactjs-popup/dist/index.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
+import moment from "moment";
 
 const Others = ({
-  rank,
-  name,
-  age,
-  country,
-  email,
-  phone,
+  user,
   user_type,
   index,
   lastIndex,
   setRankUpdated,
-  userId,
-  gender,
   selectedRole,
-  votes,
-  userNPPercentage,
-
   votedForUserId,
-
 }) => {
+  // set up, (and also depends on user_type, as we won't use all of it)
+  const userId = user.userId;
+  const rank = user.ranking;
+  const name = user.name;
+  const age = user.age;
+  const country = user.country;
+  const email = user.email;
+  const phone = user.phone;
+  const gender = user.gender;
+  const votes = user.votes;
+  const userNPPercentage = user.userNPPercentage;
+
+  // we use this, only if we're showing "NP", i.e. when current user_type is "AH" or "RS"
+  const status = user.status;
+
+  var status_date = user.status_date; // we need to format this.
+
+  if (status_date) {
+    status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
+    status_date = status_date.format("(HH:mm MMMM Do YYYY)");
+  }
+
   //console.log("userid je: " + userId);
 
   const [currentRank, setCurrentRank] = useState(rank);
@@ -106,15 +118,15 @@ const Others = ({
 
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
       <tr key={index}>
-         {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
+        {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
          */}
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
-     */}    
-     {user_type === "AH"  && (
+         */}
+        {user_type === "AH" && (
           <>
             <td style={{ textAlign: "center" }}>
-             {/*  <Checkbox
+              {/*  <Checkbox
                 sx={{
                   color: "#FF0000",
                   "&.Mui-checked": {
@@ -125,12 +137,10 @@ const Others = ({
                 disabled
               /> */}
 
-                {votedForUserId == userId ? ( <p>1</p> ) : (<p>-</p> )}
-
+              {votedForUserId == userId ? <p>1</p> : <p>-</p>}
             </td>
           </>
         )}
-
 
         {user_type === "NP" || user_type === "GP" ? (
           <>
@@ -139,7 +149,7 @@ const Others = ({
             <td className="flex gap-2 justify-start items-center">
               <div>
                 {/* only for Athletes, it shows, M, F, category...  */}
-                {selectedRole !== "AH"  ? (
+                {selectedRole !== "AH" ? (
                   <p>{rank}</p>
                 ) : (
                   <p>
@@ -277,7 +287,9 @@ const Others = ({
             {/* <div className="flex justify-between items-center gap-2"> */}
             {user_type === "AH" ? (
               <td className="flex gap-2 justify-start">
-                <p><b>{votes}</b>   ({userNPPercentage}%) </p>
+                <p>
+                  <b>{votes}</b> ({userNPPercentage}%){" "}
+                </p>
               </td>
             ) : (
               <td className="flex gap-2 justify-start">
@@ -294,7 +306,14 @@ const Others = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-       
+        {user_type === "AH" && (
+          <td>
+            <p>
+              {status} <br />
+              {status_date}
+            </p>
+          </td>
+        )}
       </tr>
 
       {/*       it doesn't render on last element, so it can properly show red line.. not needed in Others..
