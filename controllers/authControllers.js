@@ -761,7 +761,14 @@ const rankingTop50 = async (req, res) => {
         );
 
         const userVotes = currentUser.votes;
-        const percentage = (userVotes / totalVotes) * 100;
+        if(userVotes){
+          var percentage = (userVotes / totalVotes) * 100;
+        } else {
+          // don't divide by 0 , so we just return as 0 here 
+          var percentage = 0;
+        }
+       
+
 
         // this is where we add percent to object, variable..
         return {
@@ -921,8 +928,12 @@ const otherUsers = async (req, res) => {
         );
 
         const userVotes = currentUser.votes;
-        const percentage = (userVotes / totalVotes) * 100;
-
+        if(userVotes){
+          var percentage = (userVotes / totalVotes) * 100;
+        } else {
+          // don't divide by 0 , so we just return as 0 here 
+          var percentage = 0.00;
+        }
 
         return {
           ...user.toJSON(), 
@@ -995,8 +1006,7 @@ const votingForNP = async (req, res) => {
     const { /* votedFor, */  NPuserId , current_user_userId } = req.body;
     // votedFor , is .name , value..
     // cek, dobio je sada userId ! kako, nzm, bolje ne diraj !
-    console.log("dobijooooooo je:"+ NPuserId)
-   
+    
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
@@ -1016,9 +1026,6 @@ const votingForNP = async (req, res) => {
         },
       });
 
-      console.log("sta je nasao")
-      console.log(selectedVoteNP)
-      console.log("Sada nam je npuserid iz tog objekta:"+ selectedVoteNP.userId)
 
       const previousVoteNP = currentUser.votedForNPuserId
         ? await User.findOne({
@@ -1026,9 +1033,7 @@ const votingForNP = async (req, res) => {
           })
         : null;
 
-      // TODO, ako, nije nijedan ubelezen, treba samo da upise, u tjt..
 
-      // TODO, i vrsi taj raspored, po "votes".. ne gubi vreme na frontend, taj localstorage udjavola...
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
       if (currentUser.votedForNPuserId !== NPuserId) {
         // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
@@ -1041,7 +1046,7 @@ const votingForNP = async (req, res) => {
           // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt..
           await selectedVoteNP.increment("votes", { by: 1 });
 
-          // ! here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
+          // here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
           // you find who is currentNP now.. to try to replace him..
           const currentNP = await User.findOne({
             where: {
@@ -1076,18 +1081,63 @@ const votingForNP = async (req, res) => {
             let voteDifference = secondMostVotes.votes - currentNP.votes; // 2 - 4 =  -2
             let percentageIncrease = (voteDifference / currentNP.votes) * 100; // ((-2)*100). to je 300% više..
 
-            // davno treba da izvrsi ovo
+
+            
+
+
+
+           
             if (percentageIncrease >= 130) {
+              // we swap second most voted NP, with currentNP (so currentNP NO MORE ! )
+
               /* selectedVoteNP.currentNP = true;
                 currentNP.currentNP = false; */
               await secondMostVotes.update({ currentNP: true });
-              await currentNP.update({ currentNP: false });
+
+              
+
+
+
+             // set first for secondMostVotes (as he's now, new currentNP ! )
+             await secondMostVotes.update({ status: "Acting National President" });
+             var date_now = new Date().toString(); //timestamp..
+             await secondMostVotes.update({ status_date: date_now });
+
+              
+             // only if he was actually currentNP before, otherwise, don't add these strings to it..
+            if(currentNP.currentNP == true){
+                // set for previouse "currentNP" (as he's resigned now, replaced )
+                await currentNP.update({ status: "Resigned" });
+                var date_now = new Date().toString(); //timestamp..
+                await currentNP.update({ status_date: date_now });
+            }
+
+            await currentNP.update({ currentNP: false });
+
+
+
             } else {
               /* selectedVoteNP.currentNP = false;
                 currentNP.currentNP = true; */
 
               await secondMostVotes.update({ currentNP: false });
+
               await currentNP.update({ currentNP: true });
+
+
+
+/*  I don't think we need this here.. it's okay for currentNP, but this.. no.. as it's working on every selection..
+             // 
+             await currentNP.update({ status: "Acting National President" });
+             var date_now = new Date().toString(); //timestamp..
+             await currentNP.update({ status_date: date_now });
+
+
+             // 
+             await secondMostVotes.update({ status: "Resigned" });
+             var date_now = new Date().toString(); //timestamp..
+             await secondMostVotes.update({ status_date: date_now }); */
+
             }
           } else {
             // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
@@ -1095,7 +1145,14 @@ const votingForNP = async (req, res) => {
             
             await selectedVoteNP.save(); */
 
+
             await secondMostVotes.update({ currentNP: true });
+
+            // and set status text, as he's currentNP.. (that's what he wants)
+            await secondMostVotes.update({ status: "Acting National President" });
+            var date_now = new Date().toString(); //timestamp..
+            await secondMostVotes.update({ status_date: date_now });
+
           }
         }
 
