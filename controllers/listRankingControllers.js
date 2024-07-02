@@ -290,6 +290,8 @@ const update_rank_data = async (req, res) => {
             } else {
 
               // should return something here, message now.. or just code, so to show something in there.. 
+              // if we can't do nothing. as we need to wait 4 yrs ...
+              return res.status(408).json({ error: user.currentGP_UpToDate });
 
 
             }
