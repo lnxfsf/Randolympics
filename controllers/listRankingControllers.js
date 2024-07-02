@@ -265,10 +265,38 @@ const update_rank_data = async (req, res) => {
 
             // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
             //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+           
+           if(user.rankingGP !== 1){
             await user.update(
               { rankingGP: user.rankingGP + 1 },
               { transaction: t }
             );
+          } else {
+            // this is, for when we already have currentGP, we need to check, if NP actually can change GP right now. or after 4 yrs, or if he resigned..
+            // and this means, user in question, used here is currentGP, so we can check... 
+
+            const currentDate = new Date(); // current date
+            const date_from_DB = new Date(user.currentGP_UpToDate)  // date from DB, so we can compare them..
+
+          
+            if (user.currentGP == false || currentDate > date_from_DB){
+              // this means he's not president anymore, and resigned.. 
+              // as well, only if we can change it (as we can't until 4yrs have passed)
+
+              await user.update(
+                { rankingGP: user.rankingGP + 1, currentGP: false  },
+                { transaction: t }
+              );
+            } else {
+
+              // should return something here, message now.. or just code, so to show something in there.. 
+
+
+            }
+
+
+
+          }
 
             // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
             originalRankLoop = originalRankLoop + 1;
@@ -525,10 +553,23 @@ const update_rank_data = async (req, res) => {
 
             // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
             //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+            console.log("pre" + user.rankingGP);
             await user.update(
               { rankingGP: user.rankingGP - 1 },
               { transaction: t }
             );
+
+            if (user.rankingGP == 1) {
+              // +4 years from on.. NP can't vote new GP anymore..
+              let date = new Date();  // TODO just test, with current date, if we pass today time, (or yesterday-s..)
+              date.setFullYear(date.getFullYear() + 4);
+
+              // so, we set it as true !
+              await user.update(
+                { currentGP: true, currentGP_UpToDate: date },
+                { transaction: t }
+              );
+            }
 
             // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
             originalRankLoop = originalRankLoop - 1;

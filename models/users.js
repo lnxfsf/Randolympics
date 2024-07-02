@@ -187,6 +187,22 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    currentGP: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+    }, 
+
+    currentGP_UpToDate: {
+      type: DataTypes.DATE,
+      defaultValue: () => {
+        let date = new Date();
+        date.setFullYear(date.getFullYear() + 4);
+        return date;
+      },
+      
+    }
+
+
 
 
     
