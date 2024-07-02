@@ -20,7 +20,33 @@ const Top50 = ({
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
-  const rank = user.ranking;
+
+
+
+
+  if (selectedRole == "AH"){
+    var rank = user.ranking;
+  } else if (selectedRole == "GP") {
+    var rank = user.rankingGP;
+  } else if (selectedRole == "NP") {
+    var rank = user.rankingNP;
+  } else if (selectedRole == "EM") {
+    var rank = user.rankingEM;
+  } else if (selectedRole == "ITM") {
+    var rank = user.rankingITM;
+  } else if (selectedRole == "MM") {
+    var rank = user.rankingMM;
+  } else if (selectedRole == "SM") {
+    var rank = user.rankingSM;
+  } else if (selectedRole == "VM") {
+    var rank = user.rankingVM;
+  } else if (selectedRole == "LM") {
+    var rank = user.rankingLM;
+  } else if (selectedRole == "RS") {
+    var rank = user.rankingRS;
+  }
+  
+
   const name = user.name;
   const age = user.age;
   const country = user.country;
@@ -69,7 +95,9 @@ const Top50 = ({
   }, []);
 
   const increaseRank = () => {
+
     setCurrentRank(currentRank + 1);
+
   };
 
   const decreaseRank = () => {
@@ -94,8 +122,11 @@ const Top50 = ({
 
           originalRank: rank,
           goingToRank: currentRank,
+
         }
       );
+
+      console.log(response)
 
       if (response.status === 200) {
         // setRankUpdated((prev) => !prev);  //this is so we can update list now ..
@@ -104,6 +135,8 @@ const Top50 = ({
         setRankUpdated((prev) => !prev);
         setCurrentRank(rank); //bring it back to original...
         popupRef.current.close();
+
+
       }
     } catch (error) {
       console.log("sta je");
