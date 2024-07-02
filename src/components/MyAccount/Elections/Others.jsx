@@ -43,7 +43,10 @@ const Others = ({
     var rank = user.rankingRS;
   }
 
-
+// you can't have it like 0
+  if (rank == 0){
+    rank = 1;
+  }
 
 
 

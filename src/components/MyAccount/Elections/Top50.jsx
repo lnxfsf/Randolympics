@@ -28,6 +28,8 @@ const Top50 = ({
     var rank = user.ranking;
   } else if (selectedRole == "GP") {
     var rank = user.rankingGP;
+    var currentGP_UpToDate = user.currentGP_UpToDate;  // this is to show, if we're not yet able to show, until 4yrs have passed..
+
   } else if (selectedRole == "NP") {
     var rank = user.rankingNP;
   } else if (selectedRole == "EM") {
@@ -44,6 +46,12 @@ const Top50 = ({
     var rank = user.rankingLM;
   } else if (selectedRole == "RS") {
     var rank = user.rankingRS;
+  }
+
+  
+  // you can't have it like 0
+  if (rank == 0){
+    rank = 1;
   }
   
 
@@ -66,6 +74,8 @@ const Top50 = ({
     status_date = status_date.format("(HH:mm MMMM Do YYYY)");
   }
 
+
+  
   const [currentRank, setCurrentRank] = useState(rank);
 
   // original rank will be "rank", use that ! it won't change
