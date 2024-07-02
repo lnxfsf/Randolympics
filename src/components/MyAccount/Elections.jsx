@@ -65,6 +65,7 @@ const Elections = () => {
 
   const [searchText, setSearchText] = useState(""); //search box
 
+
   const [votedFor, setVotedFor] = useState(() => {
 
     const storedData = localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens");

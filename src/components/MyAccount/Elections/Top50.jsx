@@ -75,7 +75,7 @@ const Top50 = ({
   }
 
 
-  
+
   const [currentRank, setCurrentRank] = useState(rank);
 
   // original rank will be "rank", use that ! it won't change
@@ -89,6 +89,11 @@ const Top50 = ({
   // just once, you save in
   const [userData, setUserData] = useState(null);
   const [original_email, setOriginalEmail] = useState(null);
+
+
+  
+
+
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -136,6 +141,8 @@ const Top50 = ({
         }
       );
 
+
+
       console.log(response)
 
       if (response.status === 200) {
@@ -147,10 +154,23 @@ const Top50 = ({
         popupRef.current.close();
 
 
+
+      } else if (response.status === 408) { 
+          console.log(error.response.data.error)
+         
+
+          
+          alert("You can change global president on: "+ error.response.data.error)
+          popupRef.current.close();
       }
+      
+
     } catch (error) {
-      console.log("sta je");
-      console.log(error);
+      alert("You can change global president on: "+ error.response.data.error)
+      popupRef.current.close();
+
+
+      
     }
   };
 
@@ -231,6 +251,8 @@ const Top50 = ({
                   position="right center"
                   contentStyle={{ width: "auto" }}
                 >
+              
+             
                   <div className="m-4">
                     <div className="flex gap-2 mb-2">
                       <p>Current rank</p>
@@ -326,8 +348,13 @@ const Top50 = ({
                       >
                         <span className="popins-font">Save changes</span>
                       </Button>
+
+                      
                     </div>
                   </div>
+
+                  
+
                 </Popup>
               </div>
             </td>
