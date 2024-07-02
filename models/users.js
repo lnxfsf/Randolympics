@@ -1,176 +1,194 @@
-
-
-
-
-
 // he uses callback for this
-module.exports = function(sequelize, DataTypes) {
-
-    return sequelize.define('users',{
-    
-        
-    
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define("users", {
     userId: {
-        type: DataTypes.STRING(255),
-        primaryKey: true,
+      type: DataTypes.STRING(255),
+      primaryKey: true,
     },
     user_type: {
-        type: DataTypes.STRING(120),
-        allowNull: false,
+      type: DataTypes.STRING(120),
+      allowNull: false,
     },
     email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
     email_private: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     password: {
-        type: DataTypes.STRING(255),
+      type: DataTypes.STRING(255),
     },
     name: {
-        type: DataTypes.STRING(255),
+      type: DataTypes.STRING(255),
     },
     name_verify: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     birthdate: {
-        type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     birthdate_private: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     birthdate_verify: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     phone: {
-        type: DataTypes.STRING(15),
+      type: DataTypes.STRING(15),
     },
     phone_private: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     nationality: {
-        type: DataTypes.STRING(100),
+      type: DataTypes.STRING(100),
     },
     nationality_verify: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     weight: {
-        type: DataTypes.DOUBLE,
+      type: DataTypes.DOUBLE,
     },
     weight_private: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     picture: {
-        type: DataTypes.STRING(400),
+      type: DataTypes.STRING(400),
     },
     passport_photo: {
-        type: DataTypes.STRING(400),
+      type: DataTypes.STRING(400),
     },
     passport_expiry: {
-        type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     passport_expiry_verify: {
-        type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     bio: {
-        type: DataTypes.STRING(250),
-  
+      type: DataTypes.STRING(250),
     },
     achievements: {
-        type: DataTypes.STRING(250),
+      type: DataTypes.STRING(250),
     },
     ranking: {
-        type: DataTypes.INTEGER,
-        
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
     },
     ranking_heavy: {
-        type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     ranking_medium: {
-        type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     ranking_low: {
-        type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     team: {
-        type: DataTypes.STRING(150),
+      type: DataTypes.STRING(150),
     },
     cryptoaddress: {
-        type: DataTypes.STRING(150),
+      type: DataTypes.STRING(150),
     },
     cryptoaddress_type: {
-        type: DataTypes.STRING(10),
+      type: DataTypes.STRING(10),
+    },
+
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    verificationToken: {
+      type: DataTypes.STRING,
+    },
+
+    gender: {
+      type: DataTypes.CHAR(1),
+    },
+
+    votes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
+    votedFor: {
+      type: DataTypes.STRING(255),
+    },
+
+    votedForNPuserId: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+
+    currentNP: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+    },
+
+    userNPPercentage: {
+      type: DataTypes.DOUBLE,
+      default: 0.0,
+    },
+
+    status: {
+      type: DataTypes.STRING(255),
+      default: "Candidate",
+    },
+
+    status_date: {
+      type: DataTypes.DATE,
     },
 
 
-    isVerified: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      verificationToken: {
-        type: DataTypes.STRING,
-      },
 
+    // we need ranking for each user_type.. (so it can easily add to each other)
+    rankingGP: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      gender: {
-        type: DataTypes.CHAR(1),
-      },
+    rankingNP: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      votes: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
+    rankingEM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      votedFor: {
-        type: DataTypes.STRING(255),
-      }, 
+    rankingITM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      votedForNPuserId: {
-        type: DataTypes.STRING,
-        defaultValue: '',
-      }, 
+    rankingMM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      currentNP: {
-        type: DataTypes.BOOLEAN,
-        default: false,
-        
-      },
+    rankingSM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      userNPPercentage: {
-        type: DataTypes.DOUBLE,
-        default: 0.0,
-      },
+    rankingVM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-      status: {
-        type: DataTypes.STRING(255),
-        default: "Candidate",
-      },
+    rankingLM: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
-
-
-      status_date: {
-        type: DataTypes.DATE,
-        
-      }
-
-      
+    rankingRS: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0, // this is, just so it can add onto this..
+    },
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    });
-    };
     
-
+  });
+};
