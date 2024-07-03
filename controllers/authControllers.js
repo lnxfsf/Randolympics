@@ -1456,25 +1456,26 @@ const team = async (req, res) => {
 
 
     // also different ranking depending on user type..
-       if (currentUserType === "AH"){
+    //  treba po selection koji salje ! jer tako on vrši ta filtiranja..
+       if (user_type === "AH"){
       var orderRankingByCurrentUser =  [["ranking", "ASC"]]; // Sort by ranking ascending
-    } else if (currentUserType == "GP") {
+    } else if (user_type == "GP") {
       var orderRankingByCurrentUser = [["rankingGP", "ASC"]];
-    } else if (currentUserType == "NP") {
+    } else if (user_type == "NP") {
       var orderRankingByCurrentUser = [["rankingNP", "ASC"]];
-    } else if (currentUserType == "EM") {
+    } else if (user_type == "EM") {
       var orderRankingByCurrentUser = [["rankingEM", "ASC"]];
-    } else if (currentUserType == "ITM") {
+    } else if (user_type == "ITM") {
       var orderRankingByCurrentUser = [["rankingITM", "ASC"]];
-    } else if (currentUserType == "MM") {
+    } else if (user_type == "MM") {
       var orderRankingByCurrentUser = [["rankingMM", "ASC"]];
-    } else if (currentUserType == "SM") {
+    } else if (user_type == "SM") {
       var orderRankingByCurrentUser = [["rankingSM", "ASC"]];
-    } else if (currentUserType == "VM") {
+    } else if (user_type == "VM") {
       var orderRankingByCurrentUser = [["rankingVM", "ASC"]];
-    } else if (currentUserType == "LM") {
+    } else if (user_type == "LM") {
       var orderRankingByCurrentUser = [["rankingLM", "ASC"]];
-    } else if (currentUserType == "RS") {
+    } else if (user_type == "RS") {
       var orderRankingByCurrentUser = [["rankingRS", "ASC"]];
     } 
 
