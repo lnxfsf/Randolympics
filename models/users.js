@@ -42,6 +42,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     nationality: {
       type: DataTypes.STRING(100),
+      defaultValue: "US",
     },
     nationality_verify: {
       type: DataTypes.BOOLEAN,

@@ -1483,9 +1483,13 @@ const team = async (req, res) => {
 
   // so, from FE, you send: "userId", searchText, offset, limit
   
+  const user_type = req.query.user_type;
   
   
-
+  
+  const genderFilter = req.query.genderFilter;
+  const categoryFilter = req.query.categoryFilter;
+  
   
   
    
@@ -1504,9 +1508,9 @@ const team = async (req, res) => {
     const teamMates = await User.findAll({
       where: {
         
-        user_type: currentUser.user_type,
+        user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji.. 
 
-        gender: currentUser.gender, // by same gender
+        gender: genderFilter, // by gender when NP chooses
         nationality: currentUser.nationality, // and same country
 
 
