@@ -110,11 +110,19 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: 0,
     },
 
+    //NP name
     votedFor: {
       type: DataTypes.STRING(255),
     },
 
+    //NP userId
     votedForNPuserId: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+
+    // GP userId
+    votedForGPuserId: {
       type: DataTypes.STRING,
       defaultValue: "",
     },
@@ -200,7 +208,12 @@ module.exports = function (sequelize, DataTypes) {
         return date;
       },
       
-    }
+    }, 
+
+    votesGP: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
 
 
 

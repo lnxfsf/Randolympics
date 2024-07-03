@@ -560,6 +560,10 @@ const login = async (req, res) => {
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
           votedForNPuserId: existingUser.votedForNPuserId, //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
+          votedForGPuserId: existingUser.votedForGPuserId,  // userId of GP (used by NP's only !)
+
+       
+       
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -1700,6 +1704,196 @@ const votingForNP = async (req, res) => {
 };
 
 
+
+const votingForGP = async (req, res) => {
+ 
+
+
+
+  if (req.method === "GET") {
+
+    const userId = req.query.user_type;
+
+    try {
+      const selectedVoteGP = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+      //ne vraca nista..
+      
+      res.status(200).json(selectedVoteGP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+
+
+  }
+
+  if (req.method === "POST") {
+
+    const {  GPuserId, current_user_userId } = req.body;
+   
+    try {
+      await db.sequelize.sync();
+
+      // ovo je current User da nadjes.. da samo kolonu azuriras mu
+      const currentUser = await User.findOne({
+        where: {
+          userId: current_user_userId,
+        },
+      });
+
+      // ovo je GP da nadjes.. TO JE TRENUTNI KOJI KORISNIK IZABRAO !
+      const selectedVoteGP = await User.findOne({
+        where: {
+          userId: GPuserId,
+        },
+      });
+
+      // he get's this, by checking value of current user, if it's empty or not... aha..
+      const previousVoteGP = currentUser.votedForGPuserId
+        ? await User.findOne({
+            where: { userId: currentUser.votedForGPuserId },
+          })
+        : null;
+
+      // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
+      if (currentUser.votedForGPuserId !== GPuserId) {
+        // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
+        if (selectedVoteGP) {
+          // doesn't need to decrement previous vote, if it was null (for user who was just created.. )
+          if (previousVoteGP) {
+            await previousVoteGP.decrement("votesGP", { by: 1 });
+          }
+
+          // njemu (NP, koji je selektovan sada) uvecavas votes, za +1. i tjt..
+          await selectedVoteGP.increment("votesGP", { by: 1 });
+
+          // here, you check, if selectedVoteNP , have 130% more votes than currentGP (you find him based on flag.. )
+          // you find who is currentGP now.. to try to replace him..
+          const currentGP = await User.findOne({
+            where: {
+              currentGP: true,
+              user_type: "GP",
+            },
+          });
+
+          // you don't use selectedGP ! but 2nd, who have most votes... (as is not currentNP: false). okay, just the one with most votes, without,  currentNP: false
+          const secondMostVotes = await User.findOne({
+            where: {
+              currentGP: false,
+
+              user_type: "GP",
+            },
+            order: [["votesGP", "DESC"]],
+          });
+
+          //console.log("the one with most values:" + secondMostVotes);
+
+          //console.log(currentNP);
+
+          // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
+          if (currentNP) {
+            // now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
+
+            // Calculate the percentage increase
+            /*    let voteDifference = selectedVoteNP.votes - currentNP.votes;   // 2 - 4 =  -2
+            let percentageIncrease = (voteDifference / currentNP.votes) * 100;  // ((-2)*100). to je 300% više.. 
+ */
+
+            let voteDifference = secondMostVotes.votesGP - currentGP.votesGP; // 2 - 4 =  -2
+            let percentageIncrease = (voteDifference / currentGP.votesGP) * 100; // ((-2)*100). to je 300% više..
+
+            // he said, 20% more. so that's 120% more..
+            if (percentageIncrease >= 120) {
+              // we swap second most voted NP, with currentNP (so currentNP NO MORE ! )
+
+              /* selectedVoteNP.currentNP = true;
+                currentNP.currentNP = false; */
+              await secondMostVotes.update({ currentGP: true });
+
+              // set first for secondMostVotes (as he's now, new currentNP ! )
+              await secondMostVotes.update({
+                status: "Acting Global President",
+              });
+              var date_now = new Date().toString(); //timestamp..
+              await secondMostVotes.update({ status_date: date_now });
+
+              //TODO, not yet, but he also said, we need after 4 yrs.. we can't change it.. but for now, just keep this as it is.. for us to be simple, for NP's multiple countries.. 
+
+              // only if he was actually currentGP before, otherwise, don't add these strings to it..
+              if (currentGP.currentGP == true) {
+                // set for previouse "currentGP" (as he's resigned now, replaced )
+                await currentGP.update({ status: "Resigned" });
+                var date_now = new Date().toString(); //timestamp..
+                await currentGP.update({ status_date: date_now });
+              }
+
+              await currentGP.update({ currentGP: false });
+            } else {
+              /* selectedVoteNP.currentNP = false;
+                currentNP.currentNP = true; */
+
+              await secondMostVotes.update({ currentGP: false });
+
+              await currentGP.update({ currentGP: true });
+
+           
+            }
+          } else {
+            // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
+            /*  selectedVoteNP.currentNP = true;
+            
+            await selectedVoteNP.save(); */
+
+            await secondMostVotes.update({ currentGP: true });
+
+            // and set status text, as he's currentNP.. (that's what he wants)
+            await secondMostVotes.update({
+              status: "Acting Global President",
+            });
+            var date_now = new Date().toString(); //timestamp..
+            await secondMostVotes.update({ status_date: date_now });
+          }
+        }
+
+        if (currentUser) {
+          try {
+            //MORAŠ DA ZNAŠ I userId , od NP, za koji si sačuvao !
+            // da bi ovaj gore, mogao da ga smanji, pre nego poveca ovaj drugi !
+            //currentUser.votedForNPuserId = NPuserId;
+
+            await currentUser.update({
+              votedForGPuserId: selectedVoteGP.userId,
+            });
+            //currentUser.votedFor = votedFor; // samo ime uzmes..
+
+            // this is just for name.. we don't need that.. in selection it does that automatically
+            //await currentUser.update({ votedFor: selectedVoteNP.name });
+          } catch (error) {
+            console.log(error.message);
+          }
+        }
+
+        res.status(200).json(selectedVoteGP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
+      }
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+
+
+
+
+  }
+
+
+}
+
+
 const resignFromCurrentPosition = async (req, res) => {
 
 
@@ -1795,4 +1989,5 @@ module.exports = {
   resignFromCurrentPosition,
   team,
   currentNP,
+  votingForGP,
 };
