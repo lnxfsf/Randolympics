@@ -291,6 +291,7 @@ const update_rank_data = async (req, res) => {
 
               // should return something here, message now.. or just code, so to show something in there.. 
               // if we can't do nothing. as we need to wait 4 yrs ...
+              await t.rollback();
               return res.status(408).json({ error: user.currentGP_UpToDate });
 
 
@@ -307,6 +308,7 @@ const update_rank_data = async (req, res) => {
 
         await t.commit();
         return res.status(200).json({ message: "User rank updated" });
+
       } catch (error) {
         await t.rollback();
         return res.status(500).json({ error: error.message });
@@ -540,42 +542,88 @@ const update_rank_data = async (req, res) => {
             originalRankLoop = originalRankLoop - 1;
           }
         } else if (user_type === "GP") {
-          while (originalRankLoop !== goingToRank) {
-            let lowerUser = await User.findOne({
-              where: { rankingGP: user.rankingGP - 1 },
-            });
 
-            //if there's none, nevermind, just go one number +1 then.. no problem...
-            if (lowerUser) {
-              await lowerUser.update(
-                { rankingGP: user.rankingGP },
-                { transaction: t }
-              );
-            }
 
-            // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
-            //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-            console.log("pre" + user.rankingGP);
-            await user.update(
-              { rankingGP: user.rankingGP - 1 },
-              { transaction: t }
-            );
+          // here, we will get number, if we go at that number... 
+          if(goingToRank !== 1 ){
+            while (originalRankLoop !== goingToRank) {
 
-            if (user.rankingGP == 1) {
-              // +4 years from on.. NP can't vote new GP anymore..
-              let date = new Date();  // TODO just test, with current date, if we pass today time, (or yesterday-s..)
-              date.setFullYear(date.getFullYear() + 4);
+              // if this is first place..  
+              let lowerUser = await User.findOne({
+                where: { rankingGP: user.rankingGP - 1 },
+              });
 
-              // so, we set it as true !
+            /*   console.log("lowerUser je:")
+              console.log(lowerUser)
+  */
+
+              //if there's none, nevermind, just go one number +1 then.. no problem...  // this is where, we update it with value (our lower ("upper"))
+              if (lowerUser) {
+                await lowerUser.update(
+                  { rankingGP: user.rankingGP },
+                  { transaction: t }
+                );
+              }
+
+              // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+              //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+              
+              // ! you cant lower it ! if there's some in there ... 
               await user.update(
-                { currentGP: true, currentGP_UpToDate: date },
+                { rankingGP: user.rankingGP - 1 },
                 { transaction: t }
               );
-            }
 
-            // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
-            originalRankLoop = originalRankLoop - 1;
+
+
+              // okay, we need to check, if it's 1 or not...  so it don't do any operation whatsoever
+              // this is, if we go lower, that we add date ! but not, if other row, goes low, at 1st place... 
+              if (user.rankingGP == 1) {
+
+                // +4 years from on.. NP can't vote new GP anymore..
+                let date = new Date();  // TODO just test, with current date, if we pass today time, (or yesterday-s..)
+                date.setFullYear(date.getFullYear() + 4);
+
+                // so, we set it as true !
+                await user.update(
+                  { currentGP: true, currentGP_UpToDate: date },
+                  { transaction: t }
+                );
+              }
+
+              // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+              originalRankLoop = originalRankLoop - 1;
+            }
+        } else {
+
+          // !  here you check, if we can go that low. we know it's first
+          let firstUser = await User.findOne({
+            where: { rankingGP: 1 },
+          });
+
+
+          const currentDate = new Date(); // current date
+          const date_from_DB = new Date(user.currentGP_UpToDate)  // date from DB, so we can compare them..
+
+
+          if (firstUser.currentGP == false || currentDate > date_from_DB){
+            
+
           }
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
         }
 
         await t.commit();
