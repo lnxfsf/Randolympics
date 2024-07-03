@@ -31,6 +31,8 @@ const MyAccount = () => {
   // by this, you also know which component to display ! in this another one components !
   const [selectedItem, setSelectedItem] = useState(0);
 
+
+
   const items = ["My Account", "Settings", "Team", "Elections", "Logout"];
   const itemsIcon = [
     "/myaccount/user.svg",
@@ -58,10 +60,12 @@ const MyAccount = () => {
       <div className="flex p-12 pl-2  pt-12 gap-4">
         {/* side nav bar */}
         <div className="basis-1/3 side_nav p-4">
+         
+         
           <ul className="list  flex flex-col">
-              {items.map((item, index) => (
+              
                   <li
-                    key={index}
+                    /* key={index} */
                     className={`list-item ${
                       selectedItem === index ? "selected" : ""
                     }`}
@@ -71,8 +75,16 @@ const MyAccount = () => {
                     <img src={itemsIcon[index]} className="icon" />
                     {item}
                   </li>
-                ))}
+               
           </ul>
+
+
+
+          {/* ovo moras napraviti prostora za ona dva ,dodatna sto samo "VM" -u se prikazuje... */}
+
+
+
+
         </div>
 
         {/* content for editing, etc */}
