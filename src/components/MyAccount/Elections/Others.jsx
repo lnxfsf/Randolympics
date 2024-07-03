@@ -56,8 +56,15 @@ const Others = ({
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
-  const votes = user.votes;
-  const userNPPercentage = user.userNPPercentage;
+
+  if(user_type === "AH"){
+    var votes = user.votes;
+  } else if ( selectedRole === "GP" ){
+    var votes = user.votesGP;
+  }
+  
+
+  //const userNPPercentage = user.userNPPercentage;
 
   // we use this, only if we're showing "NP", i.e. when current user_type is "AH" or "RS"
   const status = user.status;
@@ -151,7 +158,7 @@ const Others = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {user_type === "AH" && (
+        {(user_type === "AH" || selectedRole === "GP") && (
           <>
             <td style={{ textAlign: "center" }}>
               {/*  <Checkbox
@@ -170,7 +177,7 @@ const Others = ({
           </>
         )}
 
-        {user_type === "NP" || user_type === "GP" ? (
+        {(user_type === "NP" && selectedRole !== "GP" ) || user_type === "GP" ? (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
 
@@ -313,10 +320,10 @@ const Others = ({
         ) : (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
-            {user_type === "AH" ? (
+            {(user_type === "AH" || selectedRole === "GP" ) ? (
               <td className="flex gap-2 justify-start">
                 <p>
-                  <b>{votes}</b> ({userNPPercentage}%){" "}
+                  <b>{votes}</b> 
                 </p>
               </td>
             ) : (
@@ -334,7 +341,7 @@ const Others = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-        {user_type === "AH" && (
+        {(user_type === "AH"  || selectedRole === "GP")  && (
           <td>
             <p>
               {status} <br />

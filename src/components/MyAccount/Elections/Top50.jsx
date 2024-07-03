@@ -16,7 +16,7 @@ const Top50 = ({
   lastIndex,
   setRankUpdated,
   selectedRole,
-  votedForUserId,
+  votedForUserId, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user.. 
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
@@ -61,8 +61,17 @@ const Top50 = ({
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
-  const votes = user.votes;
-  const userNPPercentage = user.userNPPercentage;
+
+  if(user_type === "AH"){
+    var votes = user.votes;
+  } else if ( selectedRole === "GP" ){
+    var votes = user.votesGP;
+  }
+  
+  
+
+
+  // const userNPPercentage = user.userNPPercentage;
 
   // we use this, only if we're showing "NP", i.e. when current user_type is "AH" or "RS"
   const status = user.status;
@@ -185,7 +194,7 @@ const Top50 = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {user_type === "AH" && (
+        {(user_type === "AH" || selectedRole === "GP")  && (
           <>
             <td style={{ textAlign: "center" }}>
               {/*   <Checkbox
@@ -204,7 +213,7 @@ const Top50 = ({
           </>
         )}
 
-        {user_type === "NP" || user_type === "GP" ? (
+        { (user_type === "NP" && selectedRole !== "GP" ) || user_type === "GP" ? (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
 
@@ -220,7 +229,7 @@ const Top50 = ({
 
             <td className="flex gap-2 justify-start items-center">
               <div>
-                {selectedRole !== "AH" ? (
+                {(selectedRole !== "AH" ) ? (
                   <p>{rank}</p>
                 ) : (
                   <p>
@@ -365,10 +374,10 @@ const Top50 = ({
             {/* <div className="flex justify-between items-center gap-2"> */}
 
             {/* if it's Athlete, then it shows "Votes", for those "NP" */}
-            {user_type === "AH" ? (
+            {(user_type === "AH" || selectedRole === "GP" ) ? (
               <td className="flex gap-2 justify-start">
                 <p>
-                  <b>{votes}</b> ({userNPPercentage}%){" "}
+                  <b>{votes}</b> {" "}
                 </p>
               </td>
             ) : (
@@ -387,7 +396,7 @@ const Top50 = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-        {user_type === "AH" && (
+        {(user_type === "AH"  || selectedRole === "GP") && (
           <td>
             <p>
               {status} <br />

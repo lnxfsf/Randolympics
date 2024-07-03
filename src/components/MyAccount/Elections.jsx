@@ -148,6 +148,8 @@ const Elections = () => {
             categoryFilter: categoryFilter,
             
             votedFor: votedFor, // sends selected NP for our user. this is showing then. so we display above red line selected by user... 
+            votedForGP: votedForGP, // this same as for votedFor, just for GP.. so we can discern..
+         
           },
         }
       );
@@ -189,6 +191,7 @@ const Elections = () => {
             categoryFilter: categoryFilter,
 
             votedFor: votedFor, // send this, so to know which one to AVOID 
+            votedForGP: votedForGP, // so he can avoid this one just..
           },
         }
       );
@@ -258,6 +261,14 @@ const Elections = () => {
 
 
 
+  const whichVotedFor = () => {
+    if (currentUserType === "AH"){
+      return votedFor;
+    } else if (selectedRole === "GP"){
+      return votedForGP;
+    }
+  }
+
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
   };
@@ -321,6 +332,9 @@ const Elections = () => {
       setResultText(error.response.data.message);
     }
   };
+
+
+
 
 
   // for GP's selection (by NP's )
@@ -547,13 +561,13 @@ const Elections = () => {
         <table className="w-full">
           <thead>
             <tr>
-              {currentUserType === "AH" && (
+              {(currentUserType === "AH" || selectedRole == "GP") && (
                 <>
                   <th className="w-[8%]">My vote</th>
                 </>
               )}
 
-              {currentUserType === "AH" ? (
+              {(currentUserType === "AH" || selectedRole == "GP" ) ? (
                 <>
                   <th className="w-[10%]">All votes</th>
                 </>
@@ -571,7 +585,7 @@ const Elections = () => {
 
 
               {/* this is, just for "AH" and "RS", to have place for all columns */}
-              {currentUserType === "AH" ? (
+              {(currentUserType === "AH" || currentUserType == "RS" || selectedRole == "GP" )? (
                 <>
                   <th className="w-[10%]">Phone</th>
                 </>
@@ -583,7 +597,7 @@ const Elections = () => {
 
               
 
-              {currentUserType === "AH" && (
+              { (currentUserType === "AH" || selectedRole == "GP") && (
                 <>
                   <th className="w-[10%]">Status</th>
                 </>
@@ -616,7 +630,9 @@ const Elections = () => {
                 lastIndex={top50Users.length - 1}
                 setRankUpdated={setRankUpdated}
                 selectedRole={selectedRole}
-                votedForUserId={votedFor}
+
+
+                votedForUserId={whichVotedFor}
 
 
               />
@@ -666,7 +682,7 @@ const Elections = () => {
                   selectedRole={selectedRole}
                   
                  
-                  votedForUserId={votedFor}
+                  votedForUserId={whichVotedFor}
                 />
               ))}
           </tbody>
