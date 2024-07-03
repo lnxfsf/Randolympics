@@ -45,7 +45,16 @@ const Team = () => {
 
   const [currentNP, setCurrentNP] = useState("");
 
-  const [genderFilter, setGenderFilter] = useState("M");
+  const [genderFilter, setGenderFilter] = useState(() => {
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      var userJson = JSON.parse(storedData);
+      return userJson.data.gender;
+    }
+
+  });
   const [categoryFilter, setCategoryFilter] = useState("medium");
 
   const handleGenderFilter = (gender) => {
@@ -62,7 +71,7 @@ const Team = () => {
       return "AH";
     }
     else if (currentUserType === "AH") {
-      return "NP";
+      return "AH";  // ali, samo koji su više od 50 !! to su ti u team jedini ! 
     } else if (currentUserType === "GP") {
       return "LM";
     }
@@ -86,7 +95,7 @@ const Team = () => {
   const [searchPlaceholderText, setSearchPlaceholderText] = useState("");
 
   const changedSearchPlaceholderText = () => {
-    if (selectedRole === "AH") {
+    if (selectedRole === "AH" || currentUserType === "AH") {
       setSearchPlaceholderText("Athlete");
     } else if (selectedRole === "RS") {
       setSearchPlaceholderText("Referee & Support");
