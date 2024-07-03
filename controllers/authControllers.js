@@ -562,6 +562,9 @@ const login = async (req, res) => {
           votedForNPuserId: existingUser.votedForNPuserId, //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
           votedForGPuserId: existingUser.votedForGPuserId,  // userId of GP (used by NP's only !)
 
+
+
+          gender: existingUser.gender,
        
        
         });
@@ -1506,6 +1509,7 @@ const team = async (req, res) => {
 
     let filterConditions = {
         
+      
       user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji.. 
 
 
@@ -1518,14 +1522,10 @@ const team = async (req, res) => {
         [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
       },
 
+
+
     }
 
-
-
-    console.log(filterConditions)
-
-
-    console.log("aaaaaaaaa sssssaaaaaaaaa ssssssssstampaaaaaaaaaa ssssssssstampaaaaaaaaaa ssssssssstampasssstampa:")
 
 
     if (needGender === 'true') {
@@ -1537,10 +1537,17 @@ const team = async (req, res) => {
       };
     } 
 
-    console.log(filterConditions)
 
-    console.log("nasao je")
-    console.log(currentUser)
+    // ! only, 50 are in team, ! (if we are showing "AH" users !)
+     if (user_type === "AH") {
+      filterConditions = {
+        ...filterConditions,
+        ranking: {
+          [Op.lte]: 50,
+        },
+      };
+    } 
+
 
     // based, on same country.. 
     const teamMates = await User.findAll({
