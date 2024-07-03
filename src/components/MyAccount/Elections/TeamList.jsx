@@ -9,17 +9,11 @@ import Checkbox from "@mui/material/Checkbox";
 
 import moment from "moment";
 
-const TeamList = ({
-  user,
-  index,
-  selectedRole,
-  currentUserType,
-
-}) => {
+const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
 
-  // ranking, also depends on user type.. 
-  if (selectedRole == "AH"){
+  // ranking, also depends on user type..
+  if (selectedRole == "AH") {
     var rank = user.ranking;
   } else if (selectedRole == "GP") {
     var rank = user.rankingGP;
@@ -40,8 +34,6 @@ const TeamList = ({
   } else if (selectedRole == "RS") {
     var rank = user.rankingRS;
   }
-  
-
 
   const name = user.name;
   const age = user.age;
@@ -49,29 +41,20 @@ const TeamList = ({
   const phone = user.phone;
   const gender = user.gender;
 
-
-  
-
-
-
-
-
   return (
     <>
       <tr key={index}>
-
-{selectedRole === "AH" ? (
-  <p>{gender} {rank}</p>
-) : (
-  <p>{rank}</p>
-)
-
-}
-        
+        {selectedRole === "AH" ? (
+          <p>
+            {gender} {rank}
+          </p>
+        ) : (
+          <p>{rank}</p>
+        )}
 
         <td>{name}</td>
         <td>{age}</td>
-      
+
         <td>{email}</td>
         <td>{phone}</td>
       </tr>
