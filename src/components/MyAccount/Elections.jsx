@@ -78,6 +78,22 @@ const Elections = () => {
   }); // UserID of NP, we voted for...
   
 
+
+  // this is for GP selection (only NP's can vote on this !)
+  const [votedForGP,  setVotedForGP] = useState(() => {
+
+    const storedData = localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens");
+    if (storedData) {
+      const userJson = JSON.parse(storedData);
+
+      return userJson.data.votedForGPuserId;  //GP !
+    }
+
+  }); // UserID of GP , we voted for...
+  
+
+
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -105,6 +121,7 @@ const Elections = () => {
     genderFilter,
     categoryFilter,
     votedFor,
+    votedForGP,
   ]);
 
  
@@ -245,7 +262,7 @@ const Elections = () => {
     setSelectedRole(event.target.value);
   };
 
-  //  to saljes u backend... 
+  //  for NP's selection (by Athletes ! )
   const handleVotedFor = async (event) => {
     setVotedFor(event.target.value);
 
@@ -304,6 +321,70 @@ const Elections = () => {
       setResultText(error.response.data.message);
     }
   };
+
+
+  // for GP's selection (by NP's )
+  const handleVotedForGP = async (event) => {
+    setVotedForGP(event.target.value);
+
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/votingForGP`,
+        {
+        
+          GPuserId: event.target.value,
+          current_user_userId: userData.data.userId,
+        }
+      );
+
+      if (response.status === 200) {
+
+
+        
+
+
+        // this will apply on next re-render. so we need to use one locally, for now, just to insert it in localstorage
+        setUserData((prevUserData) => ({
+
+          ...prevUserData,
+          data: {
+            ...prevUserData.data,
+            votedForNPuserId: event.target.value,
+          },
+        
+        }));
+
+
+        // this is new object, so we can insert it directly (faster, we don't wait for next re-render..)
+        var updatedUserData = { ...userData, data: { ...userData.data , votedForGPuserId: event.target.value, } 
+        }
+       
+
+        // ada, nije sačuvao alo ! 
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(updatedUserData));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(updatedUserData));
+        }
+
+
+      }
+
+
+
+
+
+
+
+    } catch (error) {
+      //console.log(error);
+      setResultText(error.response.data.message);
+    }
+
+
+
+  }
+
   return (
     <>
       <HeaderMyProfile />
@@ -407,6 +488,43 @@ const Elections = () => {
             </FormControl>
           </>
         )}
+
+        {/* we have same selection for GP (for GP, it's if one tops another 120% more) */}
+        {(
+          selectedRole === "GP" ) && (
+          <>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 120 }}
+              className="m-4 ml-0 mb-1"
+            >
+              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                <b>Vote for</b>
+              </InputLabel>
+
+              <Select
+                labelId="roleDropdowns"
+                value={votedForGP}
+                onChange={handleVotedForGP}
+                className="w-[200px]"
+                style={{ color: "#000" }}
+              >
+                {top50Users.map((user) => (
+                  <MenuItem key={user.userId} value={user.userId}>
+                    {user.name}
+                  </MenuItem>
+                ))}
+
+                {otherUsers.map((user) => (
+                  <MenuItem key={user.userId} value={user.userId}>
+                    {user.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </>
+        )}
+
 
         <></>
       </div>
