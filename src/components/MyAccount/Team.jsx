@@ -53,7 +53,6 @@ const Team = () => {
       var userJson = JSON.parse(storedData);
       return userJson.data.gender;
     }
-
   });
   const [categoryFilter, setCategoryFilter] = useState("medium");
 
@@ -69,28 +68,36 @@ const Team = () => {
   const [selectedRole, setSelectedRole] = useState(() => {
     if (currentUserType === "NP") {
       return "AH";
-    }
-    else if (currentUserType === "AH") {
-      return "AH";  // ali, samo koji su više od 50 !! to su ti u team jedini ! 
+    } else if (currentUserType === "AH") {
+      return "AH"; // ali, samo koji su više od 50 !! to su ti u team jedini !
     } else if (currentUserType === "GP") {
+      // ! GP also sees, globally ! from all countries !  fix that !
       return "LM";
+    } else if (currentUserType === "LM") {
+      //!  so for managers, they see other managers, globally !
+      return "LM";
+    } else if (currentUserType === "ITM") {
+      return "ITM";
+    } else if (currentUserType === "MM") {
+      return "MM";
+    } else if (currentUserType === "SM") {
+      return "SM";
+    } else if (currentUserType === "VM") {
+      return "VM";
+    } else if (currentUserType === "EM") {
+      return "EM";
     }
-
-
-
   });
-
 
   const [needGender, setNeedGender] = useState("false");
 
-
   const changedNeedGender = () => {
-    if (selectedRole === "AH"){
+    if (selectedRole === "AH") {
       setNeedGender("true");
     } else {
-      setNeedGender("false")
+      setNeedGender("false");
     }
-  }
+  };
 
   const [searchPlaceholderText, setSearchPlaceholderText] = useState("");
 
@@ -99,9 +106,6 @@ const Team = () => {
       setSearchPlaceholderText("Athlete");
     } else if (selectedRole === "RS") {
       setSearchPlaceholderText("Referee & Support");
-
-
-
     } else if (selectedRole === "LM") {
       setSearchPlaceholderText("Legal Manager");
     } else if (selectedRole === "ITM") {
@@ -112,15 +116,9 @@ const Team = () => {
       setSearchPlaceholderText("Sales Manager");
     } else if (selectedRole === "VM") {
       setSearchPlaceholderText("Validation Manager");
-    }else if (selectedRole === "EM") {
+    } else if (selectedRole === "EM") {
       setSearchPlaceholderText("Event Manager");
     }
-
-    
-    
-
-
-
   };
 
   useEffect(() => {
@@ -140,8 +138,7 @@ const Team = () => {
     getCurrentNP();
 
     changedSearchPlaceholderText();
-    changedNeedGender()
-    
+    changedNeedGender();
 
     if (userId) {
       fetchTeamMates();
@@ -158,9 +155,6 @@ const Team = () => {
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
-
-    
-
   };
 
   const fetchTeamMates = async () => {
@@ -173,9 +167,10 @@ const Team = () => {
           searchText: searchText,
 
           userId: userId,
-          user_type: selectedRole,
+          user_type: selectedRole, // and that's by dropdown, what's selected to show
           genderFilter: genderFilter,
           categoryFilter: categoryFilter,
+          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
 
           needGender: needGender,
         },
@@ -228,77 +223,70 @@ const Team = () => {
     <>
       <HeaderMyProfile />
 
-      <div className="flex gap-16">
-        <div className="m-4 ml-0">
-          <p>Your National President</p>
-          <p className="text-xl mt-1">{currentNP}</p>
-        </div>
+      {currentUserType === "AH" && (
+        <div className="flex gap-16">
+          <div className="m-4 ml-0">
+            <p>Your National President</p>
+            <p className="text-xl mt-1">{currentNP}</p>
+          </div>
 
-        <div className="flex flex-col justify-center items-start pl-4 ">
-          <p>Country</p>
+          <div className="flex flex-col justify-center items-start pl-4 ">
+            <p>Country</p>
 
-          <div className="flex justify-center items-center gap-3">
-            <p className="text-xl">{countryList().getLabel(code)}</p>
-            <Flag className="flag-photo-team " code={code} />
+            <div className="flex justify-center items-center gap-3">
+              <p className="text-xl">{countryList().getLabel(code)}</p>
+              <Flag className="flag-photo-team " code={code} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* // ! add this , search bar to be lower.. */}
 
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end mt-8">
         <div style={{ marginTop: "-17px", marginRight: "20px" }}>
-         
-         {(currentUserType === "NP" || currentUserType === "GP") && (
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-              <b>Display</b>
-            </InputLabel>
+          {(currentUserType === "NP" || currentUserType === "GP") && (
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                <b>Display</b>
+              </InputLabel>
 
-            {currentUserType === "NP" && (
-              <>
-                <Select
-                  labelId="roleDropdowns"
-                  value={selectedRole}
-                  onChange={handleChangeRole}
-                  className="w-[200px]"
-                  style={{ color: "#000" }}
-                >
-                  <MenuItem value={"AH"}>Athletes</MenuItem>
-                  <MenuItem value={"RS"}>Referee & Support</MenuItem>
-                </Select>
-              </>
-            )}
+              {currentUserType === "NP" && (
+                <>
+                  <Select
+                    labelId="roleDropdowns"
+                    value={selectedRole}
+                    onChange={handleChangeRole}
+                    className="w-[200px]"
+                    style={{ color: "#000" }}
+                  >
+                    <MenuItem value={"AH"}>Athletes</MenuItem>
+                    <MenuItem value={"RS"}>Referee & Support</MenuItem>
+                  </Select>
+                </>
+              )}
 
+              {currentUserType === "GP" && (
+                <>
+                  <Select
+                    labelId="roleDropdowns"
+                    value={selectedRole}
+                    onChange={handleChangeRole}
+                    className="w-[200px]"
+                    style={{ color: "#000" }}
+                  >
+                    <MenuItem value={"LM"}>Legal Manager</MenuItem>
+                    <MenuItem value={"ITM"}>IT Manager</MenuItem>
 
-          {currentUserType === "GP" && (
-              <>
-                <Select
-                  labelId="roleDropdowns"
-                  value={selectedRole}
-                  onChange={handleChangeRole}
-                  className="w-[200px]"
-                  style={{ color: "#000" }}
-                >
-                  
-                 <MenuItem value={"LM"}>Legal Manager</MenuItem>
-                  <MenuItem value={"ITM"}>IT Manager</MenuItem>
-
-                  <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-                  <MenuItem value={"SM"}>Sales Manager</MenuItem>
-                  <MenuItem value={"VM"}>Validation Manager</MenuItem>
-                  <MenuItem value={"EM"}>Event Manager</MenuItem>
-             
-                </Select>
-              </>
-            )}
-
-
-          </FormControl>
-
+                    <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+                    <MenuItem value={"SM"}>Sales Manager</MenuItem>
+                    <MenuItem value={"VM"}>Validation Manager</MenuItem>
+                    <MenuItem value={"EM"}>Event Manager</MenuItem>
+                  </Select>
+                </>
+              )}
+            </FormControl>
           )}
-
         </div>
 
         <SearchBar
@@ -327,7 +315,7 @@ const Team = () => {
           </thead>
           <tbody>
             {otherUsers.map((user, index) => (
-              <TeamList user={user} index={index} selectedRole={selectedRole} />
+              <TeamList user={user} index={index} selectedRole={selectedRole} currentUserType={currentUserType} />
             ))}
           </tbody>
         </table>
