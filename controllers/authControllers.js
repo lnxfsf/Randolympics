@@ -32,16 +32,12 @@ const generateVerificationToken = () => {
 };
 
 const lastInRank = async (user_type, insert_in_this) => {
-
-  console.log("tip user-a je:")
-  console.log(user_type)
+  console.log("tip user-a je:");
+  console.log(user_type);
 
   try {
-
-
-    if(insert_in_this){
-
-/* 
+    if (insert_in_this) {
+      /* 
 
     const latestUser = await User.findOne({
       attributes: ["rankingGP"],
@@ -55,115 +51,95 @@ const lastInRank = async (user_type, insert_in_this) => {
       return (parseInt(latestUser.rankingGP)+1);
     } */
 
+      if (user_type == "AH") {
+        const latestUser = await User.findOne({
+          attributes: ["ranking"],
+          order: [["ranking", "DESC"]],
+        });
 
- 
+        if (latestUser) {
+          return latestUser.ranking + 1;
+        }
+      } else if (user_type == "GP") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingGP"],
+          order: [["rankingGP", "DESC"]],
+        });
 
-   
-    if(user_type == "AH" ){
-      const latestUser = await User.findOne({
-        attributes: ["ranking"],
-        order: [["ranking", "DESC"]],
-      });
+        if (latestUser) {
+          console.log("ovo je: " + latestUser.rankingGP + 1);
+          return latestUser.rankingGP + 1;
+        }
+      } else if (user_type == "NP") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingNP"],
+          order: [["rankingNP", "DESC"]],
+        });
 
-      if (latestUser) {
-        return latestUser.ranking + 1;
+        if (latestUser) {
+          return latestUser.rankingNP + 1;
+        }
+      } else if (user_type == "EM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingEM"],
+          order: [["rankingEM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingEM + 1;
+        }
+      } else if (user_type == "ITM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingITM"],
+          order: [["rankingITM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingITM + 1;
+        }
+      } else if (user_type == "MM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingMM"],
+          order: [["rankingMM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingMM + 1;
+        }
+      } else if (user_type == "SM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingSM"],
+          order: [["rankingSM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingSM + 1;
+        }
+      } else if (user_type == "VM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingVM"],
+          order: [["rankingVM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingVM + 1;
+        }
+      } else if (user_type == "LM") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingLM"],
+          order: [["rankingLM", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingLM + 1;
+        }
+      } else if (user_type == "RS") {
+        const latestUser = await User.findOne({
+          attributes: ["rankingRS"],
+          order: [["rankingRS", "DESC"]],
+        });
+        if (latestUser) {
+          return latestUser.rankingRS + 1;
+        }
       }
-
-    } else if (user_type == "GP"  ){
-      const latestUser = await User.findOne({
-        attributes: ["rankingGP"],
-        order: [["rankingGP", "DESC"]],
-      });
-
-      
-      if (latestUser) {
-        console.log("ovo je: "+latestUser.rankingGP+1)
-        return latestUser.rankingGP + 1;
-      }
-
-
-    } else if (user_type == "NP"  ){
-      const latestUser = await User.findOne({
-        attributes: ["rankingNP"],
-        order: [["rankingNP", "DESC"]],
-      });
-
-      
-      if (latestUser) {
-        return latestUser.rankingNP + 1;
-      }
-
-
-    } else if (user_type == "EM" ){
-      const latestUser = await User.findOne({
-        attributes: ["rankingEM"],
-        order: [["rankingEM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingEM + 1;
-      }
-
-
-    } else if (user_type == "ITM"){
-      const latestUser = await User.findOne({
-        attributes: ["rankingITM"],
-        order: [["rankingITM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingITM + 1;
-      }
-
-    } else if (user_type == "MM"){
-      const latestUser = await User.findOne({
-        attributes: ["rankingMM"],
-        order: [["rankingMM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingMM + 1;
-      }
-
-    }  else if (user_type == "SM" ){
-      const latestUser = await User.findOne({
-        attributes: ["rankingSM"],
-        order: [["rankingSM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingSM + 1;
-      }
-    } else if (user_type == "VM"){
-      const latestUser = await User.findOne({
-        attributes: ["rankingVM"],
-        order: [["rankingVM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingVM + 1;
-      }
-    } else if (user_type == "LM" ){
-      const latestUser = await User.findOne({
-        attributes: ["rankingLM"],
-        order: [["rankingLM", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingLM + 1;
-      }
-    } else if (user_type == "RS"){
-      const latestUser = await User.findOne({
-        attributes: ["rankingRS"],
-        order: [["rankingRS", "DESC"]],
-      });
-      if (latestUser) {
-        return latestUser.rankingRS + 1;
-      }
-    } 
-  
-  
-  } else {
-
-    // for that one, you just return 0 .. that's the value, it should have. you don't use it (as default it's)
-    return 0;
-  }
-
-
+    } else {
+      // for that one, you just return 0 .. that's the value, it should have. you don't use it (as default it's)
+      return 0;
+    }
 
     /* if (latestUser) {
       // console.log("Latest ranking:", latestUser.ranking);
@@ -172,8 +148,6 @@ const lastInRank = async (user_type, insert_in_this) => {
     } else {
       console.log("No users found."); // Handle case where no users exist
     } */
-
-
   } catch (error) {
     console.error("Error finding latest ranking user:", error);
   }
@@ -205,11 +179,6 @@ const register = async (req, res) => {
 
   var votes = 0;
 
-  
-  
- 
-
-
   // user object, this is what we send to mysql
   const user_data = {
     userId: uuidv4(),
@@ -234,23 +203,21 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type=="AH"), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking"
+    ranking: await lastInRank(user_type, user_type == "AH"), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking"
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
 
     // so, this is for all other users..
-    rankingGP: await lastInRank(user_type, user_type=="GP"),
-    rankingNP: await lastInRank(user_type, user_type=="NP"),
-    rankingEM: await lastInRank(user_type, user_type=="EM"),
-    rankingITM: await lastInRank(user_type, user_type=="ITM"),
-    rankingMM: await lastInRank(user_type, user_type=="MM"),
-    rankingSM: await lastInRank(user_type, user_type=="SM"),
-    rankingVM: await lastInRank(user_type, user_type=="VM"),
-    rankingLM: await lastInRank(user_type, user_type=="LM"),
-    rankingRS: await lastInRank(user_type, user_type=="RS"),
-
-
+    rankingGP: await lastInRank(user_type, user_type == "GP"),
+    rankingNP: await lastInRank(user_type, user_type == "NP"),
+    rankingEM: await lastInRank(user_type, user_type == "EM"),
+    rankingITM: await lastInRank(user_type, user_type == "ITM"),
+    rankingMM: await lastInRank(user_type, user_type == "MM"),
+    rankingSM: await lastInRank(user_type, user_type == "SM"),
+    rankingVM: await lastInRank(user_type, user_type == "VM"),
+    rankingLM: await lastInRank(user_type, user_type == "LM"),
+    rankingRS: await lastInRank(user_type, user_type == "RS"),
 
     team: null,
     cryptoaddress,
@@ -560,13 +527,9 @@ const login = async (req, res) => {
           ranking_low: existingUser.ranking_low,
           team: existingUser.team,
           votedForNPuserId: existingUser.votedForNPuserId, //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
-          votedForGPuserId: existingUser.votedForGPuserId,  // userId of GP (used by NP's only !)
-
-
+          votedForGPuserId: existingUser.votedForGPuserId, // userId of GP (used by NP's only !)
 
           gender: existingUser.gender,
-       
-       
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -807,7 +770,6 @@ const rankingTop50 = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
-
   // this is for NP's selection by athletes
   const votedFor = req.query.votedFor;
 
@@ -926,7 +888,7 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "VM"){
+  } else if (user_type === "VM") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -943,12 +905,11 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "SM"){
+  } else if (user_type === "SM") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -965,12 +926,11 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "MM"){
+  } else if (user_type === "MM") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -987,12 +947,11 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "ITM"){
+  } else if (user_type === "ITM") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -1009,12 +968,11 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "LM"){
+  } else if (user_type === "LM") {
     try {
       const topUsers = await User.findAll({
         where: {
@@ -1031,16 +989,14 @@ const rankingTop50 = async (req, res) => {
       });
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else if (user_type === "GP"){
+  } else if (user_type === "GP") {
     try {
       const topUsers = await User.findAll({
         where: {
-
           // ne, treba da vrati, taj selektovan, userId, sto dobi
           // rankingGP: 1, //users, with ranking 1
 
@@ -1057,11 +1013,10 @@ const rankingTop50 = async (req, res) => {
         offset: offset,
       });
 
-      console.log("kod selekcije GP on vrati")
-      console.log(topUsers)
+      console.log("kod selekcije GP on vrati");
+      console.log(topUsers);
 
       res.json(topUsers);
-
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -1108,7 +1063,6 @@ const otherUsers = async (req, res) => {
   const votedFor = req.query.votedFor;
 
   const votedForGP = req.query.votedForGP; // for GP
-
 
   if (user_type === "EM") {
     try {
@@ -1161,14 +1115,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-  
-  
-  
-
-
-  
-  else if (user_type === "LM") {
+  } else if (user_type === "LM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1194,13 +1141,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-
-
-
-
-  else if (user_type === "ITM") {
+  } else if (user_type === "ITM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1226,9 +1167,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-  else if (user_type === "MM") {
+  } else if (user_type === "MM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1254,9 +1193,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-  else if (user_type === "SM") {
+  } else if (user_type === "SM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1282,9 +1219,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-  else if (user_type === "VM") {
+  } else if (user_type === "VM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1310,17 +1245,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-
-
-
-
-
-
-
-  
-  else if (user_type === "GP") {
+  } else if (user_type === "GP") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
       const otherUsers = await User.findAll({
@@ -1350,12 +1275,7 @@ const otherUsers = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } 
-
-  
-  
-  
-  else if (user_type === "NP") {
+  } else if (user_type === "NP") {
     // ! this, is also, for NP, we need it's own route, as we will handle other stuff...
     try {
       const otherNPs = await User.findAll({
@@ -1445,12 +1365,8 @@ const otherUsers = async (req, res) => {
   }
 };
 
-
-
-
 const currentNP = async (req, res) => {
   try {
-
     const currentNP = await User.findOne({
       where: {
         currentNP: true,
@@ -1458,119 +1374,130 @@ const currentNP = async (req, res) => {
       },
     });
 
-
     return res.status(200).json(currentNP);
-
-  }catch(error){
+  } catch (error) {
     res.status(500).json({ error: "Internal server error" });
-
   }
-
-
-}
+};
 
 const team = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0;
- 
-  const searchText = req.query.searchText;
 
-  
+  const searchText = req.query.searchText;
 
   // you send this, by finding out, about your user, .. just by being signed up in there...
   // const genderFilter = req.query.genderFilter;
 
-
-  const userId = req.query.userId; // this is to get current User, all data from him. 
+  const userId = req.query.userId; // this is to get current User, all data from him.
   //  console.log(userId)
 
   // so, from FE, you send: "userId", searchText, offset, limit
-  
-  const user_type = req.query.user_type;
-  
-  
-  
+ 
+  const user_type = req.query.user_type; // ovo je, koji filtiras, koji trazis, user_type.. iz database-a.. // and that's by dropdown, what's selected to show. it's selectedRole
+
+  const currentUserType = req.query.currentUserType;  // we need this, as for current user, so we know if we need to filter by nationality or not (as not all of them require it, and some of them need it globally.. ). it's just NP's and AH, and RS
+
   const genderFilter = req.query.genderFilter;
   const categoryFilter = req.query.categoryFilter;
-  
-  const needGender = req.query.needGender;
-  
-  
-   
-  try {
 
+  const needGender = req.query.needGender;
+
+  try {
     const currentUser = await User.findOne({
       where: {
         userId: userId,
       },
     });
 
-    console.log(currentUser)
+    console.log(currentUser);
 
     let filterConditions = {
-        
-      
-      user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji.. 
+      user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
 
 
-     // gender: genderFilter, // by gender when NP chooses
-
-      nationality: currentUser.nationality, // and same country
-
+      //nationality: currentUser.nationality, // and same country  || all managers can see all countries. "managers" see other managers.. of same type..
 
       name: {
         [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
       },
+    };
 
 
+    
 
+    if (currentUserType === "AH" || currentUserType === "NP"  ) {
+      filterConditions = {
+        ...filterConditions,
+        nationality: currentUser.nationality, // so for "AH" and "NP" , we filter by nationality. all other users, are not restricted by country. so they can see it globally.. (like managers !)
+      };
     }
 
 
-
-    if (needGender === 'true') {
+    if (needGender === "true") {
       filterConditions = {
         ...filterConditions,
         gender: {
           [Op.like]: `%${genderFilter}%`,
         },
       };
-    } 
-
+    }
 
     // ! only, 50 are in team, ! (if we are showing "AH" users !)
-     if (user_type === "AH") {
+    if (user_type === "AH") {
       filterConditions = {
         ...filterConditions,
         ranking: {
           [Op.lte]: 50,
         },
       };
+    }
+
+
+
+    // also different ranking depending on user type..
+       if (currentUserType === "AH"){
+      var orderRankingByCurrentUser =  [["ranking", "ASC"]]; // Sort by ranking ascending
+    } else if (currentUserType == "GP") {
+      var orderRankingByCurrentUser = [["rankingGP", "ASC"]];
+    } else if (currentUserType == "NP") {
+      var orderRankingByCurrentUser = [["rankingNP", "ASC"]];
+    } else if (currentUserType == "EM") {
+      var orderRankingByCurrentUser = [["rankingEM", "ASC"]];
+    } else if (currentUserType == "ITM") {
+      var orderRankingByCurrentUser = [["rankingITM", "ASC"]];
+    } else if (currentUserType == "MM") {
+      var orderRankingByCurrentUser = [["rankingMM", "ASC"]];
+    } else if (currentUserType == "SM") {
+      var orderRankingByCurrentUser = [["rankingSM", "ASC"]];
+    } else if (currentUserType == "VM") {
+      var orderRankingByCurrentUser = [["rankingVM", "ASC"]];
+    } else if (currentUserType == "LM") {
+      var orderRankingByCurrentUser = [["rankingLM", "ASC"]];
+    } else if (currentUserType == "RS") {
+      var orderRankingByCurrentUser = [["rankingRS", "ASC"]];
     } 
 
 
-    // based, on same country.. 
+
+    // based, on same country..
     const teamMates = await User.findAll({
       where: filterConditions,
-      order: [["ranking", "ASC"]], // Sort by ranking ascending
+
+
+      order: orderRankingByCurrentUser, // Sort by ranking ascending. also depends on currentUserType
+
+
       limit: limit,
       offset: offset,
     });
 
-    console.log("ovo su svi:...................")
-    console.log(teamMates)
+    console.log("ovo su svi:...................");
+    console.log(teamMates);
 
     res.json(teamMates);
-
-  }catch(error){
-
-  }
-
-
-}
-
-
-
+  } catch (error) {}
+};
 
 const votingForNP = async (req, res) => {
   // this is for dropdown menu
@@ -1761,15 +1688,8 @@ const votingForNP = async (req, res) => {
   }
 };
 
-
-
 const votingForGP = async (req, res) => {
- 
-
-
-
   if (req.method === "GET") {
-
     const userId = req.query.user_type;
 
     try {
@@ -1780,20 +1700,17 @@ const votingForGP = async (req, res) => {
       });
 
       //ne vraca nista..
-      
+
       res.status(200).json(selectedVoteGP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
     } catch (error) {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-
-
   }
 
   if (req.method === "POST") {
+    const { GPuserId, current_user_userId } = req.body;
 
-    const {  GPuserId, current_user_userId } = req.body;
-   
     try {
       await db.sequelize.sync();
 
@@ -1880,7 +1797,7 @@ const votingForGP = async (req, res) => {
               var date_now = new Date().toString(); //timestamp..
               await secondMostVotes.update({ status_date: date_now });
 
-              //TODO, not yet, but he also said, we need after 4 yrs.. we can't change it.. but for now, just keep this as it is.. for us to be simple, for NP's multiple countries.. 
+              //TODO, not yet, but he also said, we need after 4 yrs.. we can't change it.. but for now, just keep this as it is.. for us to be simple, for NP's multiple countries..
 
               // only if he was actually currentGP before, otherwise, don't add these strings to it..
               if (currentGP.currentGP == true) {
@@ -1898,8 +1815,6 @@ const votingForGP = async (req, res) => {
               await secondMostVotes.update({ currentGP: false });
 
               await currentGP.update({ currentGP: true });
-
-           
             }
           } else {
             // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
@@ -1942,91 +1857,61 @@ const votingForGP = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-
-
-
-
   }
-
-
-}
-
+};
 
 const resignFromCurrentPosition = async (req, res) => {
-
-
   const { userId, user_type } = req.body;
-
-
 
   try {
     await db.sequelize.sync();
 
-
-     // so, it works only for NP (if he was actually currentNP)
+    // so, it works only for NP (if he was actually currentNP)
     // TODO, later on, you do it for GP, as well (when signed user is GP.. ). when you implement his ..
-   
 
     // this is for "NP"
-    if(user_type == "NP"){
+    if (user_type == "NP") {
+      const currentUserNP = await User.findOne({
+        where: {
+          currentNP: true,
+          userId: userId,
+        },
+      });
 
-    
-    const currentUserNP = await User.findOne({
-      where: {
-        currentNP: true,
-        userId: userId,
-      },
-    });
+      // the second one, with most votes, who wasn't currentNP, will become.. now, because currentNP is resigning
+      const secondMostVotes = await User.findOne({
+        where: {
+          currentNP: false,
 
-    // the second one, with most votes, who wasn't currentNP, will become.. now, because currentNP is resigning 
-    const secondMostVotes = await User.findOne({
-      where: {
-        currentNP: false,
+          user_type: "NP",
+        },
+        order: [["votes", "DESC"]],
+      });
 
-        user_type: "NP",
-      },
-      order: [["votes", "DESC"]],
-    });
+      // just swap them...
+      await secondMostVotes.update({ currentNP: true });
 
-    // just swap them...
-    await secondMostVotes.update({ currentNP: true });
-
-    await secondMostVotes.update({
-      status: "Acting National President",
-    });
-    var date_now = new Date().toString(); //timestamp..
-    await secondMostVotes.update({ status_date: date_now });
-
-
-
-
-    if (currentUserNP.currentNP == true) {
-      // set for previouse "currentNP" (as he's resigned now, replaced )
-      await currentUserNP.update({ status: "Resigned" });
+      await secondMostVotes.update({
+        status: "Acting National President",
+      });
       var date_now = new Date().toString(); //timestamp..
-      await currentUserNP.update({ status_date: date_now });
+      await secondMostVotes.update({ status_date: date_now });
+
+      if (currentUserNP.currentNP == true) {
+        // set for previouse "currentNP" (as he's resigned now, replaced )
+        await currentUserNP.update({ status: "Resigned" });
+        var date_now = new Date().toString(); //timestamp..
+        await currentUserNP.update({ status_date: date_now });
+      }
+
+      await currentUserNP.update({ currentNP: false });
     }
-
-    await currentUserNP.update({ currentNP: false });
-
-
+  } catch (error) {
+    console.log(error.message);
   }
-
-
-
-
-
-
-  }catch(error){
-    console.log(error.message)
-  }
-
 
   res.status(200).send("You resigned !");
-
-}
-
-
+};
 
 module.exports = {
   register,
