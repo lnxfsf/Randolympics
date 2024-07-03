@@ -1816,7 +1816,7 @@ const votingForGP = async (req, res) => {
           //console.log(currentNP);
 
           // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
-          if (currentNP) {
+          if (currentGP) {
             // now we check, if we have 130% more votes than currentNP ! (we just fetched him ! ). JUST BY the currentNP ! (not others.. )
 
             // Calculate the percentage increase
