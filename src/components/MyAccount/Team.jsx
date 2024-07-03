@@ -14,8 +14,6 @@ import countryList from "react-select-country-list";
 import "../../styles/editprofile.scoped.scss";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-
-
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -55,29 +53,66 @@ const Team = () => {
     setCategoryFilter(null); // Reset category filter when gender is selected
   };
 
-
   const handleCategoryFilter = (category) => {
     setCategoryFilter(category);
   };
-  
+
   const [selectedRole, setSelectedRole] = useState(() => {
     if (currentUserType === "NP") {
       return "AH";
     }
-  });  
+    else if (currentUserType === "AH") {
+      return "NP";
+    } else if (currentUserType === "GP") {
+      return "LM";
+    }
 
+
+
+  });
+
+
+  const [needGender, setNeedGender] = useState("false");
+
+
+  const changedNeedGender = () => {
+    if (selectedRole === "AH"){
+      setNeedGender("true");
+    } else {
+      setNeedGender("false")
+    }
+  }
 
   const [searchPlaceholderText, setSearchPlaceholderText] = useState("");
 
   const changedSearchPlaceholderText = () => {
-    if(selectedRole === "AH"){
+    if (selectedRole === "AH") {
       setSearchPlaceholderText("Athlete");
-    } else if (selectedRole === "RS"){
+    } else if (selectedRole === "RS") {
       setSearchPlaceholderText("Referee & Support");
+
+
+
+    } else if (selectedRole === "LM") {
+      setSearchPlaceholderText("Legal Manager");
+    } else if (selectedRole === "ITM") {
+      setSearchPlaceholderText("IT Manager");
+    } else if (selectedRole === "MM") {
+      setSearchPlaceholderText("Marketing Manager");
+    } else if (selectedRole === "SM") {
+      setSearchPlaceholderText("Sales Manager");
+    } else if (selectedRole === "VM") {
+      setSearchPlaceholderText("Validation Manager");
+    }else if (selectedRole === "EM") {
+      setSearchPlaceholderText("Event Manager");
     }
 
-  }
-   
+    
+    
+
+
+
+  };
 
   useEffect(() => {
     const storedData =
@@ -96,28 +131,31 @@ const Team = () => {
     getCurrentNP();
 
     changedSearchPlaceholderText();
+    changedNeedGender()
+    
 
     if (userId) {
-      
-
-      
       fetchTeamMates();
     }
-  }, [userId, otherPage, searchText, selectedRole,genderFilter,categoryFilter ]);
+  }, [
+    userId,
+    otherPage,
+    searchText,
+    selectedRole,
+    genderFilter,
+    categoryFilter,
+    needGender,
+  ]);
 
-
-
-
-  
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
 
-  };
+    
 
+  };
 
   const fetchTeamMates = async () => {
     try {
-
       const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/team`, {
         params: {
           limit: 10,
@@ -127,11 +165,12 @@ const Team = () => {
 
           userId: userId,
           user_type: selectedRole,
-          genderFilter: genderFilter, 
+          genderFilter: genderFilter,
           categoryFilter: categoryFilter,
+
+          needGender: needGender,
         },
       });
-
 
       console.log("salje userid:" + userId);
 
@@ -189,7 +228,6 @@ const Team = () => {
         <div className="flex flex-col justify-center items-start pl-4 ">
           <p>Country</p>
 
-
           <div className="flex justify-center items-center gap-3">
             <p className="text-xl">{countryList().getLabel(code)}</p>
             <Flag className="flag-photo-team " code={code} />
@@ -201,44 +239,64 @@ const Team = () => {
 
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end mt-8">
-     
-     
-     <div style={{marginTop: "-17px", marginRight: "20px"}}>
-       <FormControl
-              variant="standard"
-              sx={{ m: 1, minWidth: 120 }}
-              
-            >
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Display</b>
-              </InputLabel>
+        <div style={{ marginTop: "-17px", marginRight: "20px" }}>
+         
+         {(currentUserType === "NP" || currentUserType === "GP") && (
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+              <b>Display</b>
+            </InputLabel>
 
+            {currentUserType === "NP" && (
+              <>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"AH"}>Athletes</MenuItem>
+                  <MenuItem value={"RS"}>Referee & Support</MenuItem>
+                </Select>
+              </>
+            )}
+
+
+          {currentUserType === "GP" && (
+              <>
+                <Select
+                  labelId="roleDropdowns"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-[200px]"
+                  style={{ color: "#000" }}
+                >
+                  
+                 <MenuItem value={"LM"}>Legal Manager</MenuItem>
+                  <MenuItem value={"ITM"}>IT Manager</MenuItem>
+
+                  <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+                  <MenuItem value={"SM"}>Sales Manager</MenuItem>
+                  <MenuItem value={"VM"}>Validation Manager</MenuItem>
+                  <MenuItem value={"EM"}>Event Manager</MenuItem>
              
-                  {currentUserType === "NP" && (
-					<>
-					  <Select
-						labelId="roleDropdowns"
-						value={selectedRole}
-						onChange={handleChangeRole}
-						className="w-[200px]"
-						style={{ color: "#000" }}
-					  >
-						<MenuItem value={"AH"}>Athletes</MenuItem>
-						<MenuItem value={"RS"}>Referee & Support</MenuItem>
-						
-					  </Select>
-					</>
-				  )}
-            
-            </FormControl>
+                </Select>
+              </>
+            )}
 
-     </div>
-     
+
+          </FormControl>
+
+          )}
+
+        </div>
+
         <SearchBar
           value={searchText}
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
-          placeholder={"Find "+searchPlaceholderText}
+          placeholder={"Find " + searchPlaceholderText}
           onSearch={handleSearch}
           style={{
             border: "1px solid #C6C6C6", // Border color and thickness
@@ -260,7 +318,7 @@ const Team = () => {
           </thead>
           <tbody>
             {otherUsers.map((user, index) => (
-              <TeamList user={user} index={index} selectedRole={selectedRole}/>
+              <TeamList user={user} index={index} selectedRole={selectedRole} />
             ))}
           </tbody>
         </table>
@@ -289,8 +347,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
         </button>
       </div>
 
-
-      {(currentUserType === "NP" && selectedRole == "AH" ) && (
+      {currentUserType === "NP" && selectedRole == "AH" && (
         <>
           <div>
             <div>
@@ -352,11 +409,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
           </div>
         </>
       )}
-
-
-
     </>
-
   );
 };
 
