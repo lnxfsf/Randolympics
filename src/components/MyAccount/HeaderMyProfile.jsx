@@ -34,7 +34,7 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const HeaderMyProfile = () => {
+const HeaderMyProfile = ({ShowEditProfile}) => {
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
   const [user_typeText, setUserTypeText] = useState("");
@@ -172,6 +172,8 @@ const HeaderMyProfile = () => {
     }
   };
 
+
+  
   return (
     <>
       <div className="flex justify-start">
@@ -233,7 +235,12 @@ const HeaderMyProfile = () => {
             {!toogleProfilePic && (
               <>
                 <p className="edit-photo" onClick={toogleProfileUpload}>
+                
+                
+                {(ShowEditProfile) && (
                   <u>Edit photo</u>
+                )}
+
                 </p>
               </>
             )}

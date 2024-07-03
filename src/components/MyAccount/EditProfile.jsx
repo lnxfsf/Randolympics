@@ -602,7 +602,7 @@ const EditProfile = () => {
   return (
     <>
       <div>
-        <HeaderMyProfile />
+        <HeaderMyProfile  ShowEditProfile={true}/>
 
         {/*  <div className="flex justify-start">
           <div className="flex justify-center items-center">
