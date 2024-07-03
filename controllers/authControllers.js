@@ -1490,6 +1490,7 @@ const team = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   const categoryFilter = req.query.categoryFilter;
   
+  const needGender = req.query.needGender;
   
   
    
@@ -1501,23 +1502,49 @@ const team = async (req, res) => {
       },
     });
 
+    console.log(currentUser)
+
+    let filterConditions = {
+        
+      user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji.. 
+
+
+     // gender: genderFilter, // by gender when NP chooses
+
+      nationality: currentUser.nationality, // and same country
+
+
+      name: {
+        [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+      },
+
+    }
+
+
+
+    console.log(filterConditions)
+
+
+    console.log("aaaaaaaaa sssssaaaaaaaaa ssssssssstampaaaaaaaaaa ssssssssstampaaaaaaaaaa ssssssssstampasssstampa:")
+
+
+    if (needGender === 'true') {
+      filterConditions = {
+        ...filterConditions,
+        gender: {
+          [Op.like]: `%${genderFilter}%`,
+        },
+      };
+    } 
+
+    console.log(filterConditions)
+
     console.log("nasao je")
     console.log(currentUser)
 
     // based, on same country.. 
     const teamMates = await User.findAll({
-      where: {
-        
-        user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji.. 
-
-        gender: genderFilter, // by gender when NP chooses
-        nationality: currentUser.nationality, // and same country
-
-
-        name: {
-          [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
-        },
-      },
+      where: filterConditions,
       order: [["ranking", "ASC"]], // Sort by ranking ascending
       limit: limit,
       offset: offset,
