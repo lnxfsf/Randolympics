@@ -198,7 +198,7 @@ module.exports = function (sequelize, DataTypes) {
 
     currentGP: {
       type: DataTypes.BOOLEAN,
-      default: false,
+      defaultValue: false,
     }, 
 
     currentGP_UpToDate: {
@@ -215,6 +215,25 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+
+
+    passportStatus: {
+      type: DataTypes.STRING,
+      defaultValue: "unvalidated",
+    },
+
+
+    passportUploadedDate: {
+      type: DataTypes.DATE,
+    },
+
+    passportLastValidatedRejected: {
+      type: DataTypes.DATE,
+    },
+
+
+
+
 
 
 

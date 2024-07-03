@@ -1914,6 +1914,55 @@ const resignFromCurrentPosition = async (req, res) => {
   res.status(200).send("You resigned !");
 };
 
+
+const listAllUsers = async (req, res) => {
+
+  const limit = parseInt(req.query.limit) || 10; 
+  const offset = parseInt(req.query.offset) || 0; 
+
+  // const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
+
+  //const searchText = req.query.searchText;
+  // const genderFilter = req.query.genderFilter;
+
+
+ /*  let filterConditions = {
+    // ! user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
+
+
+    //nationality: currentUser.nationality, // and same country  || all managers can see all countries. "managers" see other managers.. of same type..
+
+    name: {
+      [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+    },
+  }; */
+
+
+
+  
+
+  try {
+    const listAllUsers = await User.findAll({
+     // where: filterConditions,
+      /* order: [["ranking", "ASC"]], // ! see later, it depends, by what to order it by "unverified" first.. etc.. that's more important to make .. */
+      limit: limit,
+      offset: offset,
+    });
+
+
+    res.json(listAllUsers);
+
+
+  } catch (error) {
+    console.error("Error fetching top users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+
+}
+
+
+
 module.exports = {
   register,
   login,
@@ -1934,4 +1983,5 @@ module.exports = {
   team,
   currentNP,
   votingForGP,
+  listAllUsers,
 };
