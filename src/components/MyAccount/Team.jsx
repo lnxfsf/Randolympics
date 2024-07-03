@@ -67,6 +67,17 @@ const Team = () => {
   });  
 
 
+  const [searchPlaceholderText, setSearchPlaceholderText] = useState("");
+
+  const changedSearchPlaceholderText = () => {
+    if(selectedRole === "AH"){
+      setSearchPlaceholderText("Athlete");
+    } else if (selectedRole === "RS"){
+      setSearchPlaceholderText("Referee & Support");
+    }
+
+  }
+   
 
   useEffect(() => {
     const storedData =
@@ -84,6 +95,8 @@ const Team = () => {
 
     getCurrentNP();
 
+    changedSearchPlaceholderText();
+
     if (userId) {
       
 
@@ -98,6 +111,7 @@ const Team = () => {
   
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
+
   };
 
 
@@ -224,7 +238,7 @@ const Team = () => {
           value={searchText}
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
-          placeholder="Find athlete"
+          placeholder={"Find "+searchPlaceholderText}
           onSearch={handleSearch}
           style={{
             border: "1px solid #C6C6C6", // Border color and thickness
@@ -246,7 +260,7 @@ const Team = () => {
           </thead>
           <tbody>
             {otherUsers.map((user, index) => (
-              <TeamList user={user} index={index} />
+              <TeamList user={user} index={index} selectedRole={selectedRole}/>
             ))}
           </tbody>
         </table>

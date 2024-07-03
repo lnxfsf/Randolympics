@@ -12,6 +12,7 @@ import moment from "moment";
 const TeamList = ({
   user,
   index,
+  selectedRole,
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const rank = user.ranking;
@@ -20,6 +21,8 @@ const TeamList = ({
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
+
+
   
 
 
@@ -29,7 +32,16 @@ const TeamList = ({
   return (
     <>
       <tr key={index}>
-        <p>{gender} {rank}</p>
+
+{selectedRole === "AH" ? (
+  <p>{gender} {rank}</p>
+) : (
+  <p>{rank}</p>
+)
+
+}
+        
+
         <td>{name}</td>
         <td>{age}</td>
       
