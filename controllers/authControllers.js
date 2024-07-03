@@ -804,7 +804,12 @@ const rankingTop50 = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
 
+
+  // this is for NP's selection by athletes
   const votedFor = req.query.votedFor;
+
+  // this is for GP's selection by NP's (so it show above red line only one selected by user)
+  const votedForGP = req.query.votedForGP;
 
   console.log("primam user tip: " + user_type);
 
@@ -1032,7 +1037,12 @@ const rankingTop50 = async (req, res) => {
     try {
       const topUsers = await User.findAll({
         where: {
-          rankingGP: 1, //users, with ranking 1
+
+          // ne, treba da vrati, taj selektovan, userId, sto dobi
+          // rankingGP: 1, //users, with ranking 1
+
+          userId: votedForGP,
+
           user_type: user_type,
 
           name: {
@@ -1043,6 +1053,9 @@ const rankingTop50 = async (req, res) => {
         limit: limit,
         offset: offset,
       });
+
+      console.log("kod selekcije GP on vrati")
+      console.log(topUsers)
 
       res.json(topUsers);
 
@@ -1090,6 +1103,9 @@ const otherUsers = async (req, res) => {
   const genderFilter = req.query.genderFilter;
   // const categoryFilter = req.query.categoryFilter; // TODO, this is for category, heavy, medium, light.. but that's later...
   const votedFor = req.query.votedFor;
+
+  const votedForGP = req.query.votedForGP; // for GP
+
 
   if (user_type === "EM") {
     try {
@@ -1306,9 +1322,13 @@ const otherUsers = async (req, res) => {
     try {
       const otherUsers = await User.findAll({
         where: {
-          rankingGP: {
+          /* rankingGP: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
+          }, */
+          userId: {
+            [Op.not]: votedForGP,
           },
+
           user_type: user_type,
 
           name: {
