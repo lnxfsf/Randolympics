@@ -709,8 +709,9 @@ const EditProfile = () => {
               <div className="flex flex-col mb-1 justify-center mt-0">
                 <TextField
                   value={userData && userData.data.name}
-                  onChange={handleNameChange}
+                 /*  onChange={handleNameChange} */
                   label="Name"
+                  disabled
                   placeholder="John Doe"
                   id="name"
                   name="name"
