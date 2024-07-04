@@ -93,6 +93,8 @@ const Elections = () => {
   
 
 
+  const [passportStatus, setPassportStatus] = useState()
+
 
   useEffect(() => {
     const storedData =
@@ -102,9 +104,15 @@ const Elections = () => {
       const userJson = JSON.parse(storedData);
       setUserData(userJson);
       setCurrentUserType(userJson.data.user_type);
+      
+      setPassportStatus(userJson.data.passportStatus)
+
     }
 
+
     fetchTop50Users();
+
+
 
     if (!showingTop50) {
       fetchOtherUsers();
@@ -469,7 +477,7 @@ const Elections = () => {
           )}
         </FormControl>
 
-        {(currentUserType === "AH" || currentUserType === "RS" ) && (
+        {((currentUserType === "AH" || currentUserType === "RS" ) && passportStatus === "validated") && (
           <>
             <FormControl
               variant="standard"
@@ -505,7 +513,7 @@ const Elections = () => {
 
         {/* we have same selection for GP (for GP, it's if one tops another 120% more) */}
         {(
-          selectedRole === "GP" ) && (
+          selectedRole === "GP" && passportStatus === "validated" ) && (
           <>
             <FormControl
               variant="standard"
@@ -624,6 +632,8 @@ const Elections = () => {
 
                 user={user}
 
+                currentUserPassportStatus={passportStatus}
+
                 user_type={currentUserType}
 
                 index={index}
@@ -673,7 +683,7 @@ const Elections = () => {
                 
                 user={user}
 
-
+                currentUserPassportStatus={passportStatus}
                   user_type={currentUserType}
                   index={index}
                   lastIndex={otherUsers.length - 1}

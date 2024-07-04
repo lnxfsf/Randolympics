@@ -11,6 +11,7 @@ import moment from "moment";
 
 const Top50 = ({
   user, // we just send one big object, and get properties (as they change depending on user_type)
+  currentUserPassportStatus,
   user_type,
   index,
   lastIndex,
@@ -21,7 +22,9 @@ const Top50 = ({
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
 
-
+  // should be able to get his passportStatus, to check if he can vote (if he have verified passport), every other state is not allowed to vote etc..
+  const passportStatus = user.passportStatus;
+  
 
 
   if (selectedRole == "AH"){
@@ -241,6 +244,9 @@ const Top50 = ({
                 {/*     <p className="cursor-pointer select-none text-gray_first">
                   Update Rank <img src="myaccount/pencil.svg" style={{width: "10px", height: "10px", display: "inline-block", marginBottom: "5px"}} />
                 </p> */}
+               
+               {(currentUserPassportStatus === "validated") && (
+                <>
                 <Popup
                   ref={popupRef}
                   trigger={
@@ -365,6 +371,9 @@ const Top50 = ({
                   
 
                 </Popup>
+                </>
+               )}
+
               </div>
             </td>
             {/* </div> */}

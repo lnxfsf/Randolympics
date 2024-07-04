@@ -11,6 +11,7 @@ import moment from "moment";
 
 const Others = ({
   user,
+  currentUserPassportStatus,
   user_type,
   index,
   lastIndex,
@@ -196,6 +197,9 @@ const Others = ({
                 {/*     <p className="cursor-pointer select-none text-gray_first">
                   Update Rank <img src="myaccount/pencil.svg" style={{width: "10px", height: "10px", display: "inline-block", marginBottom: "5px"}} />
                 </p> */}
+                {(currentUserPassportStatus === "validated") && (
+
+<>
                 <Popup
                   ref={popupRef}
                   trigger={
@@ -313,6 +317,10 @@ const Others = ({
                     </div>
                   </div>
                 </Popup>
+                </>
+             
+             )}
+
               </div>
             </td>
             {/* </div> */}

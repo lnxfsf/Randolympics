@@ -68,7 +68,6 @@ let BACKEND_SERVER_BASE_URL =
 
 import moment from "moment";
 
-
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
@@ -172,9 +171,7 @@ const EditProfile = () => {
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
 
-  
-  const [passportExpiryDate, setPassportExpiryDate] = useState(null); 
-
+  const [passportExpiryDate, setPassportExpiryDate] = useState(null);
 
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -208,18 +205,61 @@ const EditProfile = () => {
       setSelectedDate(dayjs(userJson.data.birthdate));
 
       setPassportExpiryDate(() => {
-// "Sep 17, 2025"
-   
-if(userJson.data.passport_expiry){
-        let passport_expiry_date = moment(userJson.data.passport_expiry, "YYYY-MM-DD");
-        return passport_expiry_date.format("MMMM DD, YYYY");
-      } else{
-        return "";
-      }
-        
-      })
+        // "Sep 17, 2025"
+
+        if (userJson.data.passport_expiry) {
+          let passport_expiry_date = moment(
+            userJson.data.passport_expiry,
+            "YYYY-MM-DD"
+          );
+          return passport_expiry_date.format("MMMM DD, YYYY");
+        } else {
+          return "";
+        }
+      });
+
+
+
+      // fetch latest data, and store it in localstorage. (so it can display realtime data for passport updates.. ). okay, this will execute just once ! at render ! so no problem here !
+      fetchLatestInLocalStorage(userJson.data.userId);
+
+
     }
   }, []);
+
+
+
+  const fetchLatestInLocalStorage = async (userId) => {
+
+
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/fetchLatestData`,
+        { userId: userId }
+      );
+
+      if (response.status === 200) {
+
+        setUserData(response); //we update it again.. yes.. but this is latest btw..
+
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(response));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(response));
+        }
+
+
+
+
+        console.log(response)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+
 
   const settingUserType = (user_type) => {
     switch (user_type) {
@@ -268,10 +308,6 @@ if(userJson.data.passport_expiry){
   //console.log("json user data (only when logged in): " + userData.data.email)
   //console.log("hello: " + lolz)
 
-    
-    
-  
-  
   const handleDateChange = (date) => {
     setSelectedDate(date);
     //console.log(date)
@@ -481,15 +517,13 @@ if(userJson.data.passport_expiry){
     try {
       // we just upload passport_image URL, in database !
 
-      // ? you're handling "passportUploadedDate", only once, you actually save date in that user ! so it's in backend, on this route.. 
+      // ? you're handling "passportUploadedDate", only once, you actually save date in that user ! so it's in backend, on this route..
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
           original_email,
           // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
           passport_photo: passportImage,
-
-
         }
       );
 
@@ -626,7 +660,7 @@ if(userJson.data.passport_expiry){
   return (
     <>
       <div>
-        <HeaderMyProfile  ShowEditProfile={true}/>
+        <HeaderMyProfile ShowEditProfile={true} />
 
         {/*  <div className="flex justify-start">
           <div className="flex justify-center items-center">
@@ -733,7 +767,7 @@ if(userJson.data.passport_expiry){
               <div className="flex flex-col mb-1 justify-center mt-0">
                 <TextField
                   value={userData && userData.data.name}
-                 /*  onChange={handleNameChange} */
+                  /*  onChange={handleNameChange} */
                   label="Name"
                   disabled
                   placeholder="John Doe"
@@ -832,12 +866,11 @@ if(userJson.data.passport_expiry){
                     alt="Profile"
                     className="w-[331px] h-[222px] object-fit  passport-photo"
                   />
-                 {passportExpiryDate && (
-                  <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-                    Passport expires: <b>{passportExpiryDate}</b>
-                  </p>
-                  )
-                }
+                  {passportExpiryDate && (
+                    <p className="pt-2 " style={{ color: "#DEDEDE" }}>
+                      Passport expires: <b>{passportExpiryDate}</b>
+                    </p>
+                  )}
                   <p className="edit-photo" onClick={tooglePassportUpload}>
                     <u>Edit passport photo</u>
                   </p>
@@ -1196,7 +1229,6 @@ if(userJson.data.passport_expiry){
                 },
               }}
               variant="text"
-           
             >
               <span className="popins-font">Cancel</span>
             </Button>
@@ -1218,7 +1250,6 @@ if(userJson.data.passport_expiry){
               }}
               type="submit"
               variant="text"
-         
             >
               <span className="popins-font">Save</span>
             </Button>
@@ -1231,9 +1262,6 @@ if(userJson.data.passport_expiry){
             {resultText}
           </p>
         </form>
-
-
-
       </div>
     </>
   );
