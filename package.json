@@ -45,6 +45,7 @@
     "react-router-dom": "^6.23.1",
     "react-select-country-list": "^2.2.3",
     "react-world-flags": "^1.6.0",
+    "react-zoom-pan-pinch": "^3.6.1",
     "reactjs-popup": "^2.0.6"
   },
   "devDependencies": {
