@@ -24,6 +24,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     name_verify: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     birthdate: {
       type: DataTypes.DATEONLY,
@@ -33,6 +34,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     birthdate_verify: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     phone: {
       type: DataTypes.STRING(15),
@@ -46,6 +48,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     nationality_verify: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     weight: {
       type: DataTypes.DOUBLE,
@@ -64,6 +67,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     passport_expiry_verify: {
       type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     bio: {
       type: DataTypes.STRING(250),
