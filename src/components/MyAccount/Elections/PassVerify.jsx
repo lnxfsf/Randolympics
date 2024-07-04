@@ -161,18 +161,23 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
   // ovo se ne azurira ! svaki put ! treba u useEffect da ga stavis vrv..
   const [userTypeText, setUserTypeText] = useState();
 
+  const [currentUserTypeLoggedIn, setCurrentUserTypeLoggedIn] = useState(() => {
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+    if (storedData) {
+      const userJson = JSON.parse(storedData);
+      return userJson.data.user_type;
+    }
+  });
 
   useEffect(() => {
     functionSetUserTypeText();
-
-  },[user_type])
-
-
+  }, [user_type]);
 
   const functionSetUserTypeText = () => {
-
     if (user_type === "AH") {
-      setUserTypeText( "Athlete");
+      setUserTypeText("Athlete");
     } else if (user_type === "GP") {
       setUserTypeText("Global President");
     } else if (user_type === "NP") {
@@ -192,7 +197,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
     } else if (user_type === "RS") {
       setUserTypeText("Referee & Support");
     }
-  } 
+  };
 
   const handlePassportExpiryDateChange = (date) => {
     setPassportExpiryDate(date);
@@ -273,6 +278,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       },
                     }}
                     checked={nameVerify}
+                    disabled={currentUserTypeLoggedIn === "GP"}
                     onChange={() => {
                       setNameVerify(!nameVerify);
                     }}
@@ -308,6 +314,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       },
                     }}
                     checked={nationalityVerify}
+                    disabled={currentUserTypeLoggedIn === "GP"}
                     onChange={() => {
                       setNationalityVerify(!nationalityVerify);
                     }}
@@ -330,6 +337,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       },
                     }}
                     checked={birthdateVerify}
+                    disabled={currentUserTypeLoggedIn === "GP"}
                     onChange={() => {
                       setBirthdateVerify(!birthdateVerify);
                     }}
@@ -356,6 +364,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker
+                    disabled={currentUserTypeLoggedIn === "GP"}
                     className="w-32"
                     label="Passport Expiry Date"
                     value={passportExpiryDate}
@@ -374,6 +383,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       },
                     }}
                     checked={passportExpiryVerify}
+                    disabled={currentUserTypeLoggedIn === "GP"}
                     onChange={() => {
                       setPassportExpiryVerify(!passportExpiryVerify);
                     }}
@@ -384,78 +394,81 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
               />
             </div>
 
-            <div className="flex justify-around items-center gap-2 m-4">
-              <div>
-                <Button
-                  onClick={reject}
-                  className="w-[85px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
-                  sx={{
-                    fontSize: "8pt",
-                    height: "30px",
-                    bgcolor: "#fff",
-                    color: "#232323",
-                    borderRadius: 15,
-                    border: `1px solid #fff`,
-                    "&:hover": {
-                      background: "rgb(196, 43, 43)",
-                      color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
-                    },
-                  }}
-                >
-                  <span className="popins-font">Reject</span>
-                </Button>
-              </div>
+            {currentUserTypeLoggedIn !== "GP" && (
+              <>
+                <div className="flex justify-around items-center gap-2 m-4">
+                  <div>
+                    <Button
+                      onClick={reject}
+                      className="w-[85px]"
+                      style={{ marginTop: "0px", padding: "0px" }}
+                      sx={{
+                        fontSize: "8pt",
+                        height: "30px",
+                        bgcolor: "#fff",
+                        color: "#232323",
+                        borderRadius: 15,
+                        border: `1px solid #fff`,
+                        "&:hover": {
+                          background: "rgb(196, 43, 43)",
+                          color: "white",
+                          border: `1px solid rgb(196, 43, 43)`,
+                        },
+                      }}
+                    >
+                      <span className="popins-font">Reject</span>
+                    </Button>
+                  </div>
 
-              <div className="flex gap-2">
-                <Button
-                  onClick={cancel}
-                  className="w-[85px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
-                  sx={{
-                    fontSize: "8pt",
-                    height: "30px",
-                    bgcolor: "#fff",
-                    color: "#232323",
-                    borderRadius: 15,
-                    border: `1px solid #fff`,
-                    "&:hover": {
-                      background: "rgb(196, 43, 43)",
-                      color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
-                    },
-                  }}
-                >
-                  <span className="popins-font">Cancel</span>
-                </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={cancel}
+                      className="w-[85px]"
+                      style={{ marginTop: "0px", padding: "0px" }}
+                      sx={{
+                        fontSize: "8pt",
+                        height: "30px",
+                        bgcolor: "#fff",
+                        color: "#232323",
+                        borderRadius: 15,
+                        border: `1px solid #fff`,
+                        "&:hover": {
+                          background: "rgb(196, 43, 43)",
+                          color: "white",
+                          border: `1px solid rgb(196, 43, 43)`,
+                        },
+                      }}
+                    >
+                      <span className="popins-font">Cancel</span>
+                    </Button>
 
-                <Button
-                  onClick={saveChanges}
-                  className="w-[120px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
-                  sx={{
-                    fontSize: "8pt",
-                    height: "30px",
-                    bgcolor: "#AF2626",
-                    color: "#fff",
-                    borderRadius: 15,
-                    border: `1px solid #AF2626`,
-                    "&:hover": {
-                      background: "rgb(196, 43, 43)",
-                      color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
-                    },
-                  }}
-                >
-                  <span className="popins-font">Save changes</span>
-                </Button>
-              </div>
-            </div>
+                    <Button
+                      onClick={saveChanges}
+                      className="w-[120px]"
+                      style={{ marginTop: "0px", padding: "0px" }}
+                      sx={{
+                        fontSize: "8pt",
+                        height: "30px",
+                        bgcolor: "#AF2626",
+                        color: "#fff",
+                        borderRadius: 15,
+                        border: `1px solid #AF2626`,
+                        "&:hover": {
+                          background: "rgb(196, 43, 43)",
+                          color: "white",
+                          border: `1px solid rgb(196, 43, 43)`,
+                        },
+                      }}
+                    >
+                      <span className="popins-font">Save changes</span>
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </Popup>
 
-        {/* // ! e evo, prikazi sada country flag, taman, nesto da radis ono.. */}
         <td>
           <Flag className="flag-photo-pass-verify" code={nationality} />
         </td>
