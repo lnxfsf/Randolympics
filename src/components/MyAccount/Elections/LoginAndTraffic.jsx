@@ -43,7 +43,7 @@ const LoginAndTraffic = ({ row, index }) => {
     <>
       <tr key={index}>
 
-        <td>{user_type}</td>
+        <td>{userTypeText}</td>
 
         <td>
           <Flag className="flag-photo-pass-verify" code={nationality} />

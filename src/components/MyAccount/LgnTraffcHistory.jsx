@@ -30,8 +30,23 @@ const LgnTraffcHistory = () => {
 
   const [listOfLoginsPage, setListOfUsersPage] = useState(1);
 
+  const [hasMoreListOfLogins, setHasMoreListOfLogins] = useState(true);
+
+
   const [filterRole, setFilterRole] = useState();
-  const [filterNationality_selected, setFilterNationality_selected] = useState();
+  const [filterNationality_selected, setFilterNationality_selected] = useState(() => {
+    // it uses currently user's country, just so it displays less, when first loaded. and just can filter later on by country.. 
+
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+
+      if (storedData) {
+        const userJson = JSON.parse(storedData);
+        return userJson.data.nationality; // 
+      }
+
+  });
 
 
 
@@ -78,12 +93,27 @@ const LgnTraffcHistory = () => {
 
       // Check if we should switch to showing other users
       if (response.data.length < 10) {
-        setHasMoreListAllUsers(false);
+        setHasMoreListOfLogins(false);
       } else {
-        setHasMoreListAllUsers(true);
+        setHasMoreListOfLogins(true);
       }
     } catch (error) {
       console.error("Error fetching top users:", error);
+    }
+  };
+
+
+
+
+  const handleNextPage = () => {
+    if (hasMoreListOfLogins) {
+        setListOfUsersPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (listOfLoginsPage > 1) {
+        setListOfUsersPage((prev) => prev - 1);
     }
   };
 
@@ -215,6 +245,26 @@ const LgnTraffcHistory = () => {
           </tbody>
         </table>
       </div>
+
+
+      <div className="flex justify-center mt-4">
+        <button
+          disabled={listOfLoginsPage === 1}
+          onClick={handlePreviousPage}
+          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
+        >
+          Previous
+        </button>
+        <button
+          disabled={!hasMoreListOfLogins}
+          onClick={handleNextPage}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Next Page
+        </button>
+      </div>
+
+
     </>
   );
 };
