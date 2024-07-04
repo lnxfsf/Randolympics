@@ -456,6 +456,77 @@ const reset_password = async (req, res) => {
   }
 };
 
+
+const fetchLatestData = async (req, res) => {
+
+  const { userId }  = req.body;
+  // only if it's logged in, we will know it's userId, hence nobody can guess this route.. 
+
+
+  try {
+
+    await db.sequelize.sync();
+
+    const existingUser = await User.findOne({
+      where: { userId: userId },
+    });
+
+
+    if (existingUser) {
+
+      res.status(200).json({
+        userId: existingUser.userId,
+        user_type: existingUser.user_type,
+        email: existingUser.email,
+
+        access_token: generateAccessToken(existingUser.userId),  // ! just check, if you will have trouble logging in, but shouldn't be.. 
+
+        name: existingUser.name,
+        birthdate: existingUser.birthdate,
+
+        phone: existingUser.phone,
+        nationality: existingUser.nationality,
+        weight: existingUser.weight,
+        picture: existingUser.picture,
+        passport_photo: existingUser.passport_photo,
+
+        bio: existingUser.bio,
+        cryptoaddress: existingUser.cryptoaddress,
+        cryptoaddress_type: existingUser.cryptoaddress_type,
+
+        email_private: existingUser.email_private,
+        phone_private: existingUser.phone_private,
+        weight_private: existingUser.weight_private,
+
+        birthdate_private: existingUser.birthdate_private,
+
+        ranking: existingUser.ranking,
+        ranking_heavy: existingUser.ranking_heavy,
+        ranking_medium: existingUser.ranking_medium,
+        ranking_low: existingUser.ranking_low,
+        team: existingUser.team,
+        votedForNPuserId: existingUser.votedForNPuserId, //userId of NP they (user) voted for. (we have "votedFor", just to keep name, just in case.. )
+        votedForGPuserId: existingUser.votedForGPuserId, // userId of GP (used by NP's only !)
+
+        gender: existingUser.gender,
+
+        passport_expiry: existingUser.passport_expiry,
+
+        passportStatus: existingUser.passportStatus,
+
+       
+      });
+
+    }
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+}
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -532,6 +603,7 @@ const login = async (req, res) => {
           gender: existingUser.gender,
 
           passport_expiry: existingUser.passport_expiry,
+          passportStatus: existingUser.passportStatus,
 
          
         });
@@ -2068,4 +2140,6 @@ module.exports = {
   currentNP,
   votingForGP,
   listAllUsers,
+
+  fetchLatestData,
 };
