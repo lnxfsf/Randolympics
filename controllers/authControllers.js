@@ -8,6 +8,8 @@ const User = db.users;
 const Token = db.token;
 const Op = db.Sequelize.Op;
 
+const Sequelize = db.Sequelize; // ! this
+
 const sendEmail = require("../utils/sendEmail");
 
 const crypto = require("crypto");
@@ -456,30 +458,24 @@ const reset_password = async (req, res) => {
   }
 };
 
-
 const fetchLatestData = async (req, res) => {
-
-  const { userId }  = req.body;
-  // only if it's logged in, we will know it's userId, hence nobody can guess this route.. 
-
+  const { userId } = req.body;
+  // only if it's logged in, we will know it's userId, hence nobody can guess this route..
 
   try {
-
     await db.sequelize.sync();
 
     const existingUser = await User.findOne({
       where: { userId: userId },
     });
 
-
     if (existingUser) {
-
       res.status(200).json({
         userId: existingUser.userId,
         user_type: existingUser.user_type,
         email: existingUser.email,
 
-        access_token: generateAccessToken(existingUser.userId),  // ! just check, if you will have trouble logging in, but shouldn't be.. 
+        access_token: generateAccessToken(existingUser.userId), // ! just check, if you will have trouble logging in, but shouldn't be..
 
         name: existingUser.name,
         birthdate: existingUser.birthdate,
@@ -513,19 +509,12 @@ const fetchLatestData = async (req, res) => {
         passport_expiry: existingUser.passport_expiry,
 
         passportStatus: existingUser.passportStatus,
-
-       
       });
-
     }
-
-
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
-}
+};
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -604,8 +593,6 @@ const login = async (req, res) => {
 
           passport_expiry: existingUser.passport_expiry,
           passportStatus: existingUser.passportStatus,
-
-         
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -744,15 +731,10 @@ const update_user_data = async (req, res) => {
 
     passport_expiry,
 
-
     passportLastValidatedRejected,
-
 
     isRejected, // then sets all 4 fields to null... (false)
   } = req.body;
-
-
-
 
   await db.sequelize.sync();
 
@@ -760,30 +742,22 @@ const update_user_data = async (req, res) => {
     where: { email: original_email },
   });
 
-
-  
-
   if (user) {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
 
-    
-
-    if(passport_expiry !== user.passport_expiry){
+    if (passport_expiry !== user.passport_expiry) {
       updatingObject.passport_expiry = passport_expiry;
       needsUpdate = true;
     }
-    
+
     // ? so this is for passport
 
-
-    if(passportLastValidatedRejected !== user.passportLastValidatedRejected){
-      updatingObject.passportLastValidatedRejected = passportLastValidatedRejected;
+    if (passportLastValidatedRejected !== user.passportLastValidatedRejected) {
+      updatingObject.passportLastValidatedRejected =
+        passportLastValidatedRejected;
       needsUpdate = true;
     }
-
-
-   
 
     var passportStatus = "unvalidated";
     if (
@@ -792,58 +766,49 @@ const update_user_data = async (req, res) => {
       nationality_verify &&
       passport_expiry_verify &&
       passport_expiry
-
     ) {
       var passportStatus = "validated";
     } else {
       var passportStatus = "unvalidated";
     }
 
-
-    if(isRejected === true){
-      passportStatus = "rejected";  // it will be updated in one below.. for this one..  
+    if (isRejected === true) {
+      passportStatus = "rejected"; // it will be updated in one below.. for this one..
       needsUpdate = true;
 
       // now set others at null
       updatingObject.name_verify = false;
       updatingObject.birthdate_verify = false;
       updatingObject.nationality_verify = false;
-      updatingObject.passport_expiry_verify = null; // ! needs to remove date.. 
- 
-      
+      updatingObject.passport_expiry_verify = null; // ! needs to remove date..
     }
 
-    if(passportStatus !== user.passportStatus){
+    if (passportStatus !== user.passportStatus) {
       updatingObject.passportStatus = passportStatus;
       needsUpdate = true;
-
-
     }
 
-    if(name_verify !== user.name_verify ){
+    if (name_verify !== user.name_verify) {
       updatingObject.name_verify = name_verify;
       needsUpdate = true;
     }
 
-
-    if(birthdate_verify !== user.birthdate_verify ){
+    if (birthdate_verify !== user.birthdate_verify) {
       updatingObject.birthdate_verify = birthdate_verify;
       needsUpdate = true;
     }
 
-    
-    if(nationality_verify !== user.nationality_verify ){
+    if (nationality_verify !== user.nationality_verify) {
       updatingObject.nationality_verify = nationality_verify;
       needsUpdate = true;
     }
 
-    if(passport_expiry_verify !== user.passport_expiry_verify ){
+    if (passport_expiry_verify !== user.passport_expiry_verify) {
       updatingObject.passport_expiry_verify = passport_expiry_verify;
       needsUpdate = true;
     }
 
     // ? so this is for passport
-
 
     // it can be empty, it will just make it empty..
     if (bio !== user.bio) {
@@ -898,12 +863,10 @@ const update_user_data = async (req, res) => {
 
     // for now, it won't delete older one, if it's null.. only through special field that's passed from FE (so I don't have to implement more complex structure for "Save passport photo", clickable text field )
     if (passport_photo && passport_photo !== user.passport_photo) {
-
-
       updatingObject.passport_photo = passport_photo;
       needsUpdate = true;
 
-      // so, if we successfully uploaded, here we are adding that date ! 
+      // so, if we successfully uploaded, here we are adding that date !
       var passportUploadedDate = new Date();
       updatingObject.passportUploadedDate = passportUploadedDate;
     }
@@ -2093,37 +2056,61 @@ const listAllUsers = async (req, res) => {
   const searchText = req.query.searchText;
   // const genderFilter = req.query.genderFilter;
 
-    let filterConditions = {
-    // ! user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
+  const nationality = req.query.nationality;
 
+  const passportStatus = req.query.passportStatus;
 
-    //nationality: currentUser.nationality, // and same country  || all managers can see all countries. "managers" see other managers.. of same type..
-
+  let filterConditions = {
     name: {
       [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
     },
-  }; 
+  };
 
-  if(user_type){
-
+  if (user_type) {
     filterConditions = {
       ...filterConditions,
       user_type: {
         [Op.like]: `%${user_type}%`, //this is so it can search by name (that's for now)
       },
-      
-
-
     };
-
   }
 
-  console.log("primam user tip"+user_type)
+  if (nationality) {
+    filterConditions = {
+      ...filterConditions,
+      nationality: nationality,
+    };
+  }
+
+
+  
+
+  console.log("stampa nam: "+passportStatus)
+  
+  if (passportStatus) {
+    filterConditions = {
+      ...filterConditions,
+      passportStatus: {
+        [Op.like]: `${passportStatus}`, //this is so it can search by that passport status
+      },
+    };
+  }
+ 
+
+  var ordersBy = [
+    /*   [Sequelize.literal('FIELD(passportStatus, "unvalidated", "rejected", "validated")'), 'ASC'] */
+    [Sequelize.literal(`passportStatus <> 'unvalidated'`), "ASC"],
+    [Sequelize.literal(`passportStatus <> 'rejected'`), "ASC"],
+    ["passportStatus", "ASC"],
+  ];
 
   try {
     const listAllUsers = await User.findAll({
       where: filterConditions,
-      /* order: [["ranking", "ASC"]], // ! see later, it depends, by what to order it by "unverified" first.. etc.. that's more important to make .. */
+
+      // "unvalidated", have more priority, shows first. then "rejected", second.. and then "validated"
+      order: ordersBy,
+
       limit: limit,
       offset: offset,
     });
