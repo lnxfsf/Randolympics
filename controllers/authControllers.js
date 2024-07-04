@@ -2085,8 +2085,6 @@ const listAllUsers = async (req, res) => {
 
   
 
-  console.log("stampa nam: "+passportStatus)
-  
   if (passportStatus) {
     filterConditions = {
       ...filterConditions,
