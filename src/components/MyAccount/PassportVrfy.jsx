@@ -11,6 +11,9 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 import TuneIcon from "@mui/icons-material/Tune";
+import RestoreIcon from '@mui/icons-material/Restore';
+
+import ReactFlagsSelect from "react-flags-select";
 
 import { FormControl, InputLabel, Select, MenuItem, Divider  } from "@mui/material";
 
@@ -36,15 +39,29 @@ const PassportVrfy = () => {
   const [searchText, setSearchText] = useState(""); //search box
 
   const [filterRole, setFilterRole] = useState();
-
+  const [filterNationality_selected, setFilterNationality_selected] = useState();
+  const [filterPassportStatus, setFilterPassportStatus] = useState();
 
   const handleFilterRole = (event) => {
     setFilterRole(event.target.value)
   }
 
+
+  const handleFilterPassportStatus = (event) => {
+    setFilterPassportStatus(event.target.value);
+  }
+
+  const resetFilterFields = () => {
+    setFilterRole();
+    setFilterNationality_selected();
+    setFilterPassportStatus();
+  }
+
+
+
   useEffect(() => {
     fetchlistOfUsers();
-  }, [filterRole, listOfUsersPage, updatedPassport, searchText, ]);
+  }, [listOfUsersPage, updatedPassport, searchText, filterRole, filterNationality_selected, filterPassportStatus ]);
 
   const fetchlistOfUsers = async () => {
     // yes, fetch all if there's no filter... ofc, it will fetch 10 by 10 (pages..)
@@ -60,7 +77,12 @@ const PassportVrfy = () => {
 
             searchText: searchText,
 
-            // ! nationality: nationality, // ! also by nationality as well (to easy filter out stuff... )
+    
+            
+
+            nationality: filterNationality_selected,  // ! also by nationality as well (to easy filter out stuff... )
+
+            passportStatus: filterPassportStatus,
 
             // genderFilter: genderFilter, // ! i ovo kasnije..
             /*     categoryFilter: categoryFilter,  // */
@@ -141,8 +163,34 @@ const PassportVrfy = () => {
            
           >
 
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center items-center">
 
+
+
+            <Button
+              onClick={resetFilterFields}
+                startIcon={<RestoreIcon />}
+                className="w-[150px] "
+                style={{
+                  marginTop: "10px",
+                 
+                }}
+                sx={{
+                  fontSize: "8pt",
+                  height: "30px",
+                  bgcolor: "#fff",
+                  color: "#232323",
+                  borderRadius: 15,
+                  border: `1px solid #000`,
+                  "&:hover": {
+                    background: "rgb(00, 00, 00)",
+                    color: "white",
+                    border: `1px solid rgb(00, 00, 00)`,
+                  },
+                }}
+              >
+                <span className="popins-font">Reset fields</span>
+              </Button>
            
             <FormControl
               variant="standard"
@@ -157,7 +205,7 @@ const PassportVrfy = () => {
                 labelId="roleDropdowns"
                 value={filterRole}
                 onChange={handleFilterRole} 
-                className="w-[160px]"
+                className="w-[300px]"
                 style={{ color: "#000" }}
               >
                
@@ -186,25 +234,48 @@ const PassportVrfy = () => {
             </FormControl>
 
 
-            <FormControl
+            <ReactFlagsSelect
+                  selected={filterNationality_selected}
+                  onSelect={(code) => setFilterNationality_selected(code)}
+                  className="w-[300px]  "
+                  searchable={true}
+                  id="nationality"
+                  name="nationality"
+                  placeholder="Nationality"
+                />
+
+
+<FormControl
               variant="standard"
               sx={{ m: 1, minWidth: 120 }}
               className="m-4 ml-0 mb-1"
             >
               <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Country</b>
+                <b>Passport status</b>
               </InputLabel>
 
               <Select
                 labelId="roleDropdowns"
-                /*  value={votedFor}
-                onChange={handleVotedFor} */
-                className="w-[160px]"
+                value={filterPassportStatus}
+                onChange={handleFilterPassportStatus} 
+                className="w-[300px]"
                 style={{ color: "#000" }}
               >
-                <MenuItem value="AH">Athlete</MenuItem>
+               
+
+               <MenuItem value="">None</MenuItem>
+               <Divider />
+                <MenuItem value="unvalidated">Unvalidated</MenuItem>
+                <MenuItem value="rejected">Rejected</MenuItem>
+                <MenuItem value="validated">Validated</MenuItem>
+       
+
+
+
+
               </Select>
             </FormControl>
+
 
             </div>
           </Popup>
