@@ -31,6 +31,7 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const PassVerify = ({ user, index, setUpdatedPassport }) => {
+
   const name = user.name;
   const nationality = user.nationality;
   const user_type = user.user_type;
@@ -58,6 +59,19 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
       "YYYY-MM-DD  HH:mm:ss"
     );
   }
+
+
+  const [birhdateDate, setBirhdateDate] = useState(() => {
+    
+    if(user.birthdate){
+      let birthdate = moment(user.birthdate, "YYYY-MM-DD");
+      return birthdate.format("YYYY-MM-DD");
+  }else {
+    return "Not entered";
+  }
+
+
+  });
 
   const [nameVerify, setNameVerify] = useState(user.name_verify);
   const [birthdateVerify, setBirthdateVerify] = useState(user.birthdate_verify);
@@ -326,7 +340,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
             </div>
 
             <div className="flex justify-between items-center gap-16">
-              <p>Birthdate</p>
+              <p>Birthdate {birhdateDate}</p>
               <FormControlLabel
                 control={
                   <Checkbox
