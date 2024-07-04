@@ -11,7 +11,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 import axios from "axios";
 
-
 import { Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -78,160 +77,122 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
     dayjs(user.passport_expiry)
   ); // okay, directly passed from user,
 
-
-
-  
-
   const reject = async () => {
+    setNameVerify(false);
+    setBirthdateVerify(false);
+    setNationalityVerify(false);
+    setPassportExpiryVerify(false);
 
-    
-
-
-    setNameVerify(false)
-    setBirthdateVerify(false)
-    setNationalityVerify(false)
-    setPassportExpiryVerify(false)
-    
-    setPassportExpiryDate(null)
+    setPassportExpiryDate(null);
 
     passportLastValidatedRejected = new Date();
 
-
     try {
-        var response = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
-          {
-              original_email: user.email,
-  
-             /*  name_verify: false,
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        {
+          original_email: user.email,
+
+          /*  name_verify: false,
               birthdate_verify: false,
               nationality_verify: false,
               passport_expiry_verify: false,
               passport_expiry: null, 
                */
-              passportLastValidatedRejected: passportLastValidatedRejected,
-              
-              isRejected: true,
-              
-  
-          }
-        );
-  
-  
-  
-  
-        if (response.status === 200) {
-         
-          setUpdatedPassport((prev) => !prev);
-          popupRef.current.close();
-  
-  
-        } 
-        
-  
-      } catch (error) {
-        
+          passportLastValidatedRejected: passportLastValidatedRejected,
+
+          isRejected: true,
+        }
+      );
+
+      if (response.status === 200) {
+        setUpdatedPassport((prev) => !prev);
         popupRef.current.close();
-  
-  
-        
-      } 
-
-
+      }
+    } catch (error) {
+      popupRef.current.close();
+    }
 
     popupRef.current.close();
-  }
-
-
+  };
 
   const cancel = () => {
     // reset fields, to what was before.
-    setNameVerify(user.name_verify)
-    setBirthdateVerify(user.birthdate_verify)
-    setNationalityVerify(user.nationality_verify)
-    setPassportExpiryVerify(user.passport_expiry_verify)
-    
-    setPassportExpiryDate(dayjs(user.passport_expiry))
+    setNameVerify(user.name_verify);
+    setBirthdateVerify(user.birthdate_verify);
+    setNationalityVerify(user.nationality_verify);
+    setPassportExpiryVerify(user.passport_expiry_verify);
 
+    setPassportExpiryDate(dayjs(user.passport_expiry));
 
     // and exit popup
     popupRef.current.close();
   };
 
   const saveChanges = async () => {
+    passportLastValidatedRejected = new Date(); // as last time, when we edited passport data (validated/rejected..)
 
-
-
-
-    passportLastValidatedRejected = new Date();  // as last time, when we edited passport data (validated/rejected..)
-    
-
-      try {
+    try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
+          original_email: user.email,
 
-            original_email: user.email,
+          name_verify: nameVerify,
+          birthdate_verify: birthdateVerify,
+          nationality_verify: nationalityVerify,
+          passport_expiry_verify: passportExpiryVerify,
 
-            name_verify: nameVerify,
-            birthdate_verify: birthdateVerify,
-            nationality_verify: nationalityVerify,
-            passport_expiry_verify: passportExpiryVerify,
+          passport_expiry: passportExpiryDate,
 
-
-            passport_expiry: passportExpiryDate,
-
-            passportLastValidatedRejected: passportLastValidatedRejected,
-            
-            
-
+          passportLastValidatedRejected: passportLastValidatedRejected,
         }
       );
 
-
-
-
       if (response.status === 200) {
-       
         setUpdatedPassport((prev) => !prev);
         popupRef.current.close();
-
-
-      } 
-      
-
+      }
     } catch (error) {
-      
       popupRef.current.close();
-
-
-      
-    } 
+    }
   };
 
-  const [userTypeText, setUserTypeText] = useState(() => {
-    if (user_type == "AH") {
-      return "Athlete";
-    } else if (user_type == "GP") {
-      return "Global President";
-    } else if (user_type == "NP") {
-      return "National President";
-    } else if (user_type == "EM") {
-      return "Event Manager";
-    } else if (user_type == "ITM") {
-      return "IT Manager Page editor";
-    } else if (user_type == "MM") {
-      return "Marketing Manager";
-    } else if (user_type == "SM") {
-      return "Sales Manager";
-    } else if (user_type == "VM") {
-      return "Validation Manager";
-    } else if (user_type == "LM") {
-      return "Legal Manager";
-    } else if (user_type == "RS") {
-      return "Referee & Support";
+  // ovo se ne azurira ! svaki put ! treba u useEffect da ga stavis vrv..
+  const [userTypeText, setUserTypeText] = useState();
+
+
+  useEffect(() => {
+    functionSetUserTypeText();
+
+  },[user_type])
+
+
+
+  const functionSetUserTypeText = () => {
+
+    if (user_type === "AH") {
+      setUserTypeText( "Athlete");
+    } else if (user_type === "GP") {
+      setUserTypeText("Global President");
+    } else if (user_type === "NP") {
+      setUserTypeText("National President");
+    } else if (user_type === "EM") {
+      setUserTypeText("Event Manager");
+    } else if (user_type === "ITM") {
+      setUserTypeText("IT Manager Page editor");
+    } else if (user_type === "MM") {
+      setUserTypeText("Marketing Manager");
+    } else if (user_type === "SM") {
+      setUserTypeText("Sales Manager");
+    } else if (user_type === "VM") {
+      setUserTypeText("Validation Manager");
+    } else if (user_type === "LM") {
+      setUserTypeText("Legal Manager");
+    } else if (user_type === "RS") {
+      setUserTypeText("Referee & Support");
     }
-  });
+  } 
 
   const handlePassportExpiryDateChange = (date) => {
     setPassportExpiryDate(date);
@@ -286,11 +247,15 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
               >
                 <TransformWrapper>
                   <TransformComponent>
-                    <img src={
-                    BACKEND_SERVER_BASE_URL +
-                    "/imageUpload/passport_pics/" +
-                    user.passport_photo
-                  } alt="Profile" className="w-[500px] h-96 object-fit " />
+                    <img
+                      src={
+                        BACKEND_SERVER_BASE_URL +
+                        "/imageUpload/passport_pics/" +
+                        user.passport_photo
+                      }
+                      alt="Profile"
+                      className="w-[500px] h-96 object-fit "
+                    />
                   </TransformComponent>
                 </TransformWrapper>
               </Popup>
@@ -420,75 +385,72 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
             </div>
 
             <div className="flex justify-around items-center gap-2 m-4">
-             
-             <div>
-
-             <Button
-                onClick={reject}
-                className="w-[85px]"
-                style={{ marginTop: "0px", padding: "0px" }}
-                sx={{
-                  fontSize: "8pt",
-                  height: "30px",
-                  bgcolor: "#fff",
-                  color: "#232323",
-                  borderRadius: 15,
-                  border: `1px solid #fff`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-              >
-                <span className="popins-font">Reject</span>
-              </Button>
-             </div>
-
-             <div className="flex gap-2">
-              <Button
-                onClick={cancel}
-                className="w-[85px]"
-                style={{ marginTop: "0px", padding: "0px" }}
-                sx={{
-                  fontSize: "8pt",
-                  height: "30px",
-                  bgcolor: "#fff",
-                  color: "#232323",
-                  borderRadius: 15,
-                  border: `1px solid #fff`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-              >
-                <span className="popins-font">Cancel</span>
-              </Button>
-
-              <Button
-                onClick={saveChanges}
-                className="w-[120px]"
-                style={{ marginTop: "0px", padding: "0px" }}
-                sx={{
-                  fontSize: "8pt",
-                  height: "30px",
-                  bgcolor: "#AF2626",
-                  color: "#fff",
-                  borderRadius: 15,
-                  border: `1px solid #AF2626`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-              >
-                <span className="popins-font">Save changes</span>
-              </Button>
+              <div>
+                <Button
+                  onClick={reject}
+                  className="w-[85px]"
+                  style={{ marginTop: "0px", padding: "0px" }}
+                  sx={{
+                    fontSize: "8pt",
+                    height: "30px",
+                    bgcolor: "#fff",
+                    color: "#232323",
+                    borderRadius: 15,
+                    border: `1px solid #fff`,
+                    "&:hover": {
+                      background: "rgb(196, 43, 43)",
+                      color: "white",
+                      border: `1px solid rgb(196, 43, 43)`,
+                    },
+                  }}
+                >
+                  <span className="popins-font">Reject</span>
+                </Button>
               </div>
 
+              <div className="flex gap-2">
+                <Button
+                  onClick={cancel}
+                  className="w-[85px]"
+                  style={{ marginTop: "0px", padding: "0px" }}
+                  sx={{
+                    fontSize: "8pt",
+                    height: "30px",
+                    bgcolor: "#fff",
+                    color: "#232323",
+                    borderRadius: 15,
+                    border: `1px solid #fff`,
+                    "&:hover": {
+                      background: "rgb(196, 43, 43)",
+                      color: "white",
+                      border: `1px solid rgb(196, 43, 43)`,
+                    },
+                  }}
+                >
+                  <span className="popins-font">Cancel</span>
+                </Button>
+
+                <Button
+                  onClick={saveChanges}
+                  className="w-[120px]"
+                  style={{ marginTop: "0px", padding: "0px" }}
+                  sx={{
+                    fontSize: "8pt",
+                    height: "30px",
+                    bgcolor: "#AF2626",
+                    color: "#fff",
+                    borderRadius: 15,
+                    border: `1px solid #AF2626`,
+                    "&:hover": {
+                      background: "rgb(196, 43, 43)",
+                      color: "white",
+                      border: `1px solid rgb(196, 43, 43)`,
+                    },
+                  }}
+                >
+                  <span className="popins-font">Save changes</span>
+                </Button>
+              </div>
             </div>
           </div>
         </Popup>
