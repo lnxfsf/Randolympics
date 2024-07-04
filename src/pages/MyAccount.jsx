@@ -11,9 +11,6 @@ import { Elections } from "../components/MyAccount/Elections";
 import { LgnTraffcHistory } from "../components/MyAccount/LgnTraffcHistory";
 import { PassportVrfy } from "../components/MyAccount/PassportVrfy";
 
-
-
-
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
@@ -124,9 +121,14 @@ const MyAccount = () => {
               </li>
             )}
 
-
-       {/*  Show Login & Traffic History (for all managers , can see it ! ) */}
-          {(user_type === "VM" || user_type === "GP") && (
+            {/*  Show Login & Traffic History (for all managers , can see it ! ) */}
+            {(user_type === "VM" ||
+              user_type === "EM" ||
+              user_type === "ITM" ||
+              user_type === "MM" ||
+              user_type === "SM" ||
+              user_type === "LM" ||
+              user_type === "GP") && (
               <li
                 ref={loginTrafficHisRef}
                 className={`list-item ${
@@ -161,8 +163,6 @@ const MyAccount = () => {
 
           {selectedItem === "passportVerification" && <PassportVrfy />}
           {selectedItem === "loginTrafficHistory" && <LgnTraffcHistory />}
-
-
         </div>
       </div>
 

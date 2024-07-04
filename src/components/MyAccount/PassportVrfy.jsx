@@ -292,7 +292,7 @@ const PassportVrfy = () => {
               borderRadius: "20px", // Border radius
             }}
             placeholder="Search by name"
-          />
+          /> 
         </div>
       </div>
 
