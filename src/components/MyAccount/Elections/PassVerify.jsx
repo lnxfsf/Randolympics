@@ -9,6 +9,9 @@ import countryList from "react-select-country-list";
 
 import React, { useState, useEffect, useRef } from "react";
 
+import axios from "axios";
+
+
 import { Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -81,36 +84,43 @@ const PassVerify = ({ user, index }) => {
   };
 
   const saveChanges = async () => {
-    /*  try {
+      try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
 
+            original_email: user.email,
 
-          originalRank: rank,
-          goingToRank: currentRank,
+            name_verify: nameVerify,
+            birthdate_verify: birthdateVerify,
+            nationality_verify: nationalityVerify,
+            passport_expiry_verify: passportExpiryVerify,
+
+
+            passport_expiry: passportExpiryDate,
+            
 
         }
       );
 
 
 
-      console.log(response)
 
       if (response.status === 200) {
        
+        popupRef.current.close();
 
 
       } 
       
 
     } catch (error) {
-      alert("You can change global president on: "+ error.response.data.error)
+      
       popupRef.current.close();
 
 
       
-    } */
+    } 
   };
 
   const [userTypeText, setUserTypeText] = useState(() => {
