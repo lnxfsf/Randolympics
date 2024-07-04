@@ -31,7 +31,7 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const PassVerify = ({ user, index }) => {
+const PassVerify = ({ user, index, setUpdatedPassport }) => {
   const name = user.name;
   const nationality = user.nationality;
   const user_type = user.user_type;
@@ -78,12 +78,94 @@ const PassVerify = ({ user, index }) => {
     dayjs(user.passport_expiry)
   ); // okay, directly passed from user,
 
+
+
+  
+
+  const reject = async () => {
+
+    
+
+
+    setNameVerify(false)
+    setBirthdateVerify(false)
+    setNationalityVerify(false)
+    setPassportExpiryVerify(false)
+    
+    setPassportExpiryDate(null)
+
+    passportLastValidatedRejected = new Date();
+
+
+    try {
+        var response = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+          {
+              original_email: user.email,
+  
+             /*  name_verify: false,
+              birthdate_verify: false,
+              nationality_verify: false,
+              passport_expiry_verify: false,
+              passport_expiry: null, 
+               */
+              passportLastValidatedRejected: passportLastValidatedRejected,
+              
+              isRejected: true,
+              
+  
+          }
+        );
+  
+  
+  
+  
+        if (response.status === 200) {
+         
+          setUpdatedPassport((prev) => !prev);
+          popupRef.current.close();
+  
+  
+        } 
+        
+  
+      } catch (error) {
+        
+        popupRef.current.close();
+  
+  
+        
+      } 
+
+
+
+    popupRef.current.close();
+  }
+
+
+
   const cancel = () => {
+    // reset fields, to what was before.
+    setNameVerify(user.name_verify)
+    setBirthdateVerify(user.birthdate_verify)
+    setNationalityVerify(user.nationality_verify)
+    setPassportExpiryVerify(user.passport_expiry_verify)
+    
+    setPassportExpiryDate(dayjs(user.passport_expiry))
+
+
     // and exit popup
     popupRef.current.close();
   };
 
   const saveChanges = async () => {
+
+
+
+
+    passportLastValidatedRejected = new Date();  // as last time, when we edited passport data (validated/rejected..)
+    
+
       try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
@@ -98,6 +180,9 @@ const PassVerify = ({ user, index }) => {
 
 
             passport_expiry: passportExpiryDate,
+
+            passportLastValidatedRejected: passportLastValidatedRejected,
+            
             
 
         }
@@ -108,6 +193,7 @@ const PassVerify = ({ user, index }) => {
 
       if (response.status === 200) {
        
+        setUpdatedPassport((prev) => !prev);
         popupRef.current.close();
 
 
@@ -333,7 +419,33 @@ const PassVerify = ({ user, index }) => {
               />
             </div>
 
-            <div className="flex justify-center items-center gap-2 m-4">
+            <div className="flex justify-around items-center gap-2 m-4">
+             
+             <div>
+
+             <Button
+                onClick={reject}
+                className="w-[85px]"
+                style={{ marginTop: "0px", padding: "0px" }}
+                sx={{
+                  fontSize: "8pt",
+                  height: "30px",
+                  bgcolor: "#fff",
+                  color: "#232323",
+                  borderRadius: 15,
+                  border: `1px solid #fff`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+              >
+                <span className="popins-font">Reject</span>
+              </Button>
+             </div>
+
+             <div className="flex gap-2">
               <Button
                 onClick={cancel}
                 className="w-[85px]"
@@ -375,6 +487,8 @@ const PassVerify = ({ user, index }) => {
               >
                 <span className="popins-font">Save changes</span>
               </Button>
+              </div>
+
             </div>
           </div>
         </Popup>

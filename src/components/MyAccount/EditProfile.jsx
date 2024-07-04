@@ -66,6 +66,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+import moment from "moment";
+
+
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
@@ -169,6 +172,10 @@ const EditProfile = () => {
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
 
+  
+  const [passportExpiryDate, setPassportExpiryDate] = useState(null); 
+
+
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
@@ -199,6 +206,18 @@ const EditProfile = () => {
       /* setProfileImage(userJson.data.picture);
        */
       setSelectedDate(dayjs(userJson.data.birthdate));
+
+      setPassportExpiryDate(() => {
+// "Sep 17, 2025"
+   
+if(userJson.data.passport_expiry){
+        let passport_expiry_date = moment(userJson.data.passport_expiry, "YYYY-MM-DD");
+        return passport_expiry_date.format("MMMM DD, YYYY");
+      } else{
+        return "";
+      }
+        
+      })
     }
   }, []);
 
@@ -249,9 +268,10 @@ const EditProfile = () => {
   //console.log("json user data (only when logged in): " + userData.data.email)
   //console.log("hello: " + lolz)
 
-  // TODO, validation manager inserts data here, so he needs to have his own screen for viewing all users
-  const [formattedDate, setFormattedDate] = useState("Sep 17, 2025"); //TODO, you will use this in passport_expiry_date, to show it...  tj. samo ovo promenis default state (to samo da bi prikazivao ono kao...)
-
+    
+    
+  
+  
   const handleDateChange = (date) => {
     setSelectedDate(date);
     //console.log(date)
@@ -460,12 +480,16 @@ const EditProfile = () => {
 
     try {
       // we just upload passport_image URL, in database !
+
+      // ? you're handling "passportUploadedDate", only once, you actually save date in that user ! so it's in backend, on this route.. 
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
         {
           original_email,
           // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
           passport_photo: passportImage,
+
+
         }
       );
 
@@ -808,10 +832,12 @@ const EditProfile = () => {
                     alt="Profile"
                     className="w-[331px] h-[222px] object-fit  passport-photo"
                   />
+                 {passportExpiryDate && (
                   <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-                    Passport expires: <b>{formattedDate}</b>
+                    Passport expires: <b>{passportExpiryDate}</b>
                   </p>
-
+                  )
+                }
                   <p className="edit-photo" onClick={tooglePassportUpload}>
                     <u>Edit passport photo</u>
                   </p>

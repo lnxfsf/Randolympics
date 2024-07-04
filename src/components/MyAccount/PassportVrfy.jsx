@@ -19,6 +19,7 @@ const PassportVrfy = () => {
 
   const [listOfUsersPage, setlistOfUsersPage] = useState(1);
 
+  const [updatedPassport, setUpdatedPassport] = useState(false) //just a toogle, so we trigger refresh, from <PassVerify /> which displays <data value="" styleName={}></data>
   // TODO, you will need to filter by user_type, obviously ! if it's "AH", "GP", so it's easier to verify their passports !
   // TODO , as well to put dropdown for what are you selecting "unverified" passports... possibly, there will be "verified", and stuff (for now, there put "All", so that means no filter for that one !). yea, makes sense
   // TODO, and maybe, you add gender filter.. but that later, only if he says we needs
@@ -28,7 +29,7 @@ const PassportVrfy = () => {
 
   useEffect(() => {
     fetchlistOfUsers();
-  }, [listOfUsersPage]);
+  }, [listOfUsersPage, updatedPassport]);
 
   const fetchlistOfUsers = async () => {
     // yes, fetch all if there's no filter... ofc, it will fetch 10 by 10 (pages..)
@@ -103,7 +104,7 @@ const PassportVrfy = () => {
           </thead>
           <tbody>
             {listOfUsers.map((user, index) => (
-              <PassVerify user={user} index={index} />
+              <PassVerify user={user} index={index} setUpdatedPassport={setUpdatedPassport} />
             ))}
           </tbody>
         </table>
