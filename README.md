@@ -7,7 +7,33 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0e02e929-8053-4b1c-bfd4-42b82617cc40/deploy-status)](https://app.netlify.com/sites/randolympics/deploys)
 
 
+---------------
 
+# How to run, setup locally 
+
+- Open this folder in VSCode, then on Terminal 
+- `npm install`
+- `npm run dev`
+
+
+and access the link in terminal output you see. 
+
+```
+  VITE v4.5.3  ready in 253 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h to show help
+
+```
+
+you access `http://localhost:5173/` in browser
+
+
+> Note: make sure you've run backend as well
+
+
+---------------
 
 
 # Imports
