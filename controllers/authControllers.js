@@ -530,6 +530,10 @@ const login = async (req, res) => {
           votedForGPuserId: existingUser.votedForGPuserId, // userId of GP (used by NP's only !)
 
           gender: existingUser.gender,
+
+          passport_expiry: existingUser.passport_expiry,
+
+         
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
@@ -667,6 +671,12 @@ const update_user_data = async (req, res) => {
     passport_expiry_verify,
 
     passport_expiry,
+
+
+    passportLastValidatedRejected,
+
+
+    isRejected, // then sets all 4 fields to null... (false)
   } = req.body;
 
 
@@ -685,6 +695,7 @@ const update_user_data = async (req, res) => {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
 
+    
 
     if(passport_expiry !== user.passport_expiry){
       updatingObject.passport_expiry = passport_expiry;
@@ -692,18 +703,43 @@ const update_user_data = async (req, res) => {
     }
     
     // ? so this is for passport
+
+
+    if(passportLastValidatedRejected !== user.passportLastValidatedRejected){
+      updatingObject.passportLastValidatedRejected = passportLastValidatedRejected;
+      needsUpdate = true;
+    }
+
+
+   
+
     var passportStatus = "unvalidated";
     if (
       name_verify &&
       birthdate_verify &&
       nationality_verify &&
-      passport_expiry_verify
+      passport_expiry_verify &&
+      passport_expiry
+
     ) {
       var passportStatus = "validated";
     } else {
       var passportStatus = "unvalidated";
     }
 
+
+    if(isRejected === true){
+      passportStatus = "rejected";  // it will be updated in one below.. for this one..  
+      needsUpdate = true;
+
+      // now set others at null
+      updatingObject.name_verify = false;
+      updatingObject.birthdate_verify = false;
+      updatingObject.nationality_verify = false;
+      updatingObject.passport_expiry_verify = null; // ! needs to remove date.. 
+ 
+      
+    }
 
     if(passportStatus !== user.passportStatus){
       updatingObject.passportStatus = passportStatus;
@@ -790,8 +826,14 @@ const update_user_data = async (req, res) => {
 
     // for now, it won't delete older one, if it's null.. only through special field that's passed from FE (so I don't have to implement more complex structure for "Save passport photo", clickable text field )
     if (passport_photo && passport_photo !== user.passport_photo) {
+
+
       updatingObject.passport_photo = passport_photo;
       needsUpdate = true;
+
+      // so, if we successfully uploaded, here we are adding that date ! 
+      var passportUploadedDate = new Date();
+      updatingObject.passportUploadedDate = passportUploadedDate;
     }
 
     if (birthdate && birthdate !== user.birthdate) {
