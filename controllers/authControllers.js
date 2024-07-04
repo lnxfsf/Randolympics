@@ -556,6 +556,39 @@ const login = async (req, res) => {
       );
 
       if (passwordMatch) {
+
+        // ! here we logged in. and now, write inside Traffic table,    (create random number for it's id..), "user_type", "nationality",  i onda samo: "numberOfLogins" INCREMENT , i tjt.. 
+        // ! znači on search-uje, i ako ne nadje, kreira (to je update.. ako se ne varam..), i onda increment taj.. 
+
+
+        // try to find that row, if there's no, then you need to create it. AND THEN, increment that value ! and that's it...
+        const loginEntry = await Traffic.findOne({
+          where: {
+            user_type: existingUser.user_type, // yes, we need both , to find ! exact..
+            nationality: existingUser.nationality,
+
+          },
+        });
+
+        if(loginEntry){
+          
+          await loginEntry.increment('numberOfLogins', {by: 1});
+
+        }else {
+          // create that entry, if there's no found.. 
+          // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
+          const newLoginEntry = await Traffic.create({
+
+            trafficHistoryId: uuidv4(),
+            user_type: existingUser.user_type,
+            nationality: existingUser.nationality,
+            numberOfLogins: 1,  // we already put 1, as this is our first immediatelly..
+
+          });
+        }
+
+
+
         res.status(200).json({
           userId: existingUser.userId,
           user_type: existingUser.user_type,
