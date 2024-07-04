@@ -2088,12 +2088,12 @@ const listAllUsers = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
-  // const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
+  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
 
-  //const searchText = req.query.searchText;
+  const searchText = req.query.searchText;
   // const genderFilter = req.query.genderFilter;
 
-  /*  let filterConditions = {
+    let filterConditions = {
     // ! user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
 
 
@@ -2102,11 +2102,27 @@ const listAllUsers = async (req, res) => {
     name: {
       [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
     },
-  }; */
+  }; 
+
+  if(user_type){
+
+    filterConditions = {
+      ...filterConditions,
+      user_type: {
+        [Op.like]: `%${user_type}%`, //this is so it can search by name (that's for now)
+      },
+      
+
+
+    };
+
+  }
+
+  console.log("primam user tip"+user_type)
 
   try {
     const listAllUsers = await User.findAll({
-      // where: filterConditions,
+      where: filterConditions,
       /* order: [["ranking", "ASC"]], // ! see later, it depends, by what to order it by "unverified" first.. etc.. that's more important to make .. */
       limit: limit,
       offset: offset,
