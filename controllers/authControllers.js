@@ -5,7 +5,7 @@
 
 const db = require("../models/database");
 const User = db.users;
-const Token = db.token;
+const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
 const Sequelize = db.Sequelize; // ! this
@@ -2082,9 +2082,6 @@ const listAllUsers = async (req, res) => {
     };
   }
 
-
-  
-
   if (passportStatus) {
     filterConditions = {
       ...filterConditions,
@@ -2093,7 +2090,6 @@ const listAllUsers = async (req, res) => {
       },
     };
   }
- 
 
   var ordersBy = [
     /*   [Sequelize.literal('FIELD(passportStatus, "unvalidated", "rejected", "validated")'), 'ASC'] */
@@ -2120,6 +2116,67 @@ const listAllUsers = async (req, res) => {
   }
 };
 
+const listLoginTrafficHistory = async  (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+  
+
+   const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
+
+  const nationality = req.query.nationality;
+
+ 
+
+   let filterCondition = { }
+
+
+  // TODO, you should send, default, to filter by country NP currently is. and leave that as selected value in filter.. by default.. only on deletion, it removes. but then it shows a big mess.. like all countries, that's not what we want
+  if (user_type) {
+    filterCondition = {
+      ...filterCondition,
+      user_type: {
+        [Op.like]: `%${user_type}%`, //this is so it can search by name (that's for now)
+      },
+    };
+  } 
+
+  
+   if (nationality) {
+    filterCondition = {
+      ...filterCondition,
+      nationality: nationality,
+    };
+  }
+ 
+
+  try {
+    const listLoginTrafficHistory = await Traffic.findAll({
+      where: filterCondition,
+
+      // "unvalidated", have more priority, shows first. then "rejected", second.. and then "validated"
+      order: [["numberOfLogins", "DESC"]], // from highest number of logins to lowest
+
+      limit: limit,
+      offset: offset,
+    });
+
+
+    console.log(listLoginTrafficHistory);
+
+    res.json(listLoginTrafficHistory);
+
+  } catch (error) {
+   
+    
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+
+
+}
+
 module.exports = {
   register,
   login,
@@ -2143,4 +2200,5 @@ module.exports = {
   listAllUsers,
 
   fetchLatestData,
+  listLoginTrafficHistory,
 };

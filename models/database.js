@@ -36,6 +36,7 @@ db.sequelize = sequelize;
 
 
 db.users = require('./users')(sequelize,DataTypes)  // model for Users
+db.traffic = require('./traffic')(sequelize,DataTypes)// this is model, and new database, for all login
 
 // model for News
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50, otherUsers, votingForNP, resignFromCurrentPosition, team, currentNP , votingForGP, listAllUsers, fetchLatestData} = require("../controllers/authControllers");
+const { register, login, verify_token,verification_success, email_resend, forgot_password, reset_password_token, reset_password, update_user_data, update_rank_data, rankingTop50, otherUsers, votingForNP, resignFromCurrentPosition, team, currentNP , votingForGP, listAllUsers, fetchLatestData, listLoginTrafficHistory} = require("../controllers/authControllers");
 const router = express.Router();
 
 
@@ -49,7 +49,8 @@ router.post("/votingForGP", votingForGP )
 // listAllUsers... (for passport verification)
 router.get("/listAllUsers",listAllUsers)
 
-
+// to get login history traffic
+router.get("/listLoginTrafficHistory",listLoginTrafficHistory)
 
 
 
