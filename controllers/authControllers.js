@@ -658,7 +658,19 @@ const update_user_data = async (req, res) => {
     birthdate_private,
     picture,
     bio,
+
+    // this is when we are receiving from Validation Manager. we also need to check, if all values are true, so we can also have another variable "passportStatus". right, and we use this one, to allow/deny access to others, also use it as for showing status
+
+    name_verify,
+    birthdate_verify,
+    nationality_verify,
+    passport_expiry_verify,
+
+    passport_expiry,
   } = req.body;
+
+
+
 
   await db.sequelize.sync();
 
@@ -666,9 +678,64 @@ const update_user_data = async (req, res) => {
     where: { email: original_email },
   });
 
+
+  
+
   if (user) {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
+
+
+    if(passport_expiry !== user.passport_expiry){
+      updatingObject.passport_expiry = passport_expiry;
+      needsUpdate = true;
+    }
+    
+    // ? so this is for passport
+    var passportStatus = "unvalidated";
+    if (
+      name_verify &&
+      birthdate_verify &&
+      nationality_verify &&
+      passport_expiry_verify
+    ) {
+      var passportStatus = "validated";
+    } else {
+      var passportStatus = "unvalidated";
+    }
+
+
+    if(passportStatus !== user.passportStatus){
+      updatingObject.passportStatus = passportStatus;
+      needsUpdate = true;
+
+
+    }
+
+    if(name_verify !== user.name_verify ){
+      updatingObject.name_verify = name_verify;
+      needsUpdate = true;
+    }
+
+
+    if(birthdate_verify !== user.birthdate_verify ){
+      updatingObject.birthdate_verify = birthdate_verify;
+      needsUpdate = true;
+    }
+
+    
+    if(nationality_verify !== user.nationality_verify ){
+      updatingObject.nationality_verify = nationality_verify;
+      needsUpdate = true;
+    }
+
+    if(passport_expiry_verify !== user.passport_expiry_verify ){
+      updatingObject.passport_expiry_verify = passport_expiry_verify;
+      needsUpdate = true;
+    }
+
+    // ? so this is for passport
+
 
     // it can be empty, it will just make it empty..
     if (bio !== user.bio) {
@@ -1393,10 +1460,10 @@ const team = async (req, res) => {
   //  console.log(userId)
 
   // so, from FE, you send: "userId", searchText, offset, limit
- 
+
   const user_type = req.query.user_type; // ovo je, koji filtiras, koji trazis, user_type.. iz database-a.. // and that's by dropdown, what's selected to show. it's selectedRole
 
-  const currentUserType = req.query.currentUserType;  // we need this, as for current user, so we know if we need to filter by nationality or not (as not all of them require it, and some of them need it globally.. ). it's just NP's and AH, and RS
+  const currentUserType = req.query.currentUserType; // we need this, as for current user, so we know if we need to filter by nationality or not (as not all of them require it, and some of them need it globally.. ). it's just NP's and AH, and RS
 
   const genderFilter = req.query.genderFilter;
   const categoryFilter = req.query.categoryFilter;
@@ -1415,7 +1482,6 @@ const team = async (req, res) => {
     let filterConditions = {
       user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
 
-
       //nationality: currentUser.nationality, // and same country  || all managers can see all countries. "managers" see other managers.. of same type..
 
       name: {
@@ -1423,16 +1489,12 @@ const team = async (req, res) => {
       },
     };
 
-
-    
-
-    if (currentUserType === "AH" || currentUserType === "NP"  ) {
+    if (currentUserType === "AH" || currentUserType === "NP") {
       filterConditions = {
         ...filterConditions,
         nationality: currentUser.nationality, // so for "AH" and "NP" , we filter by nationality. all other users, are not restricted by country. so they can see it globally.. (like managers !)
       };
     }
-
 
     if (needGender === "true") {
       filterConditions = {
@@ -1453,12 +1515,10 @@ const team = async (req, res) => {
       };
     }
 
-
-
     // also different ranking depending on user type..
     //  treba po selection koji salje ! jer tako on vrši ta filtiranja..
-       if (user_type === "AH"){
-      var orderRankingByCurrentUser =  [["ranking", "ASC"]]; // Sort by ranking ascending
+    if (user_type === "AH") {
+      var orderRankingByCurrentUser = [["ranking", "ASC"]]; // Sort by ranking ascending
     } else if (user_type == "GP") {
       var orderRankingByCurrentUser = [["rankingGP", "ASC"]];
     } else if (user_type == "NP") {
@@ -1477,17 +1537,13 @@ const team = async (req, res) => {
       var orderRankingByCurrentUser = [["rankingLM", "ASC"]];
     } else if (user_type == "RS") {
       var orderRankingByCurrentUser = [["rankingRS", "ASC"]];
-    } 
-
-
+    }
 
     // based, on same country..
     const teamMates = await User.findAll({
       where: filterConditions,
 
-
       order: orderRankingByCurrentUser, // Sort by ranking ascending. also depends on currentUserType
-
 
       limit: limit,
       offset: offset,
@@ -1914,19 +1970,16 @@ const resignFromCurrentPosition = async (req, res) => {
   res.status(200).send("You resigned !");
 };
 
-
 const listAllUsers = async (req, res) => {
-
-  const limit = parseInt(req.query.limit) || 10; 
-  const offset = parseInt(req.query.offset) || 0; 
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
 
   // const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
 
   //const searchText = req.query.searchText;
   // const genderFilter = req.query.genderFilter;
 
-
- /*  let filterConditions = {
+  /*  let filterConditions = {
     // ! user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
 
 
@@ -1937,31 +1990,20 @@ const listAllUsers = async (req, res) => {
     },
   }; */
 
-
-
-  
-
   try {
     const listAllUsers = await User.findAll({
-     // where: filterConditions,
+      // where: filterConditions,
       /* order: [["ranking", "ASC"]], // ! see later, it depends, by what to order it by "unverified" first.. etc.. that's more important to make .. */
       limit: limit,
       offset: offset,
     });
 
-
     res.json(listAllUsers);
-
-
   } catch (error) {
     console.error("Error fetching top users:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-
-
-}
-
-
+};
 
 module.exports = {
   register,

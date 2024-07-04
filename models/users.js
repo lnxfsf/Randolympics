@@ -63,7 +63,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(400),
     },
     passport_expiry: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
     },
     passport_expiry_verify: {
       type: DataTypes.BOOLEAN,
@@ -219,6 +219,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+
 
 
     passportStatus: {
