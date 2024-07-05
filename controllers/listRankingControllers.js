@@ -5,7 +5,7 @@ const User = db.users;
 const Token = db.token;
 const Op = db.Sequelize.Op;
 
-const update_rank_data = async (req, res) => {
+/* const update_rank_data = async (req, res) => {
   const { userId, originalRank, goingToRank } = req.body;
 
   await db.sequelize.sync();
@@ -555,7 +555,7 @@ const update_rank_data = async (req, res) => {
 
             /*   console.log("lowerUser je:")
               console.log(lowerUser)
-  */
+  
 
               //if there's none, nevermind, just go one number +1 then.. no problem...  // this is where, we update it with value (our lower ("upper"))
               if (lowerUser) {
@@ -634,7 +634,12 @@ const update_rank_data = async (req, res) => {
       }
     }
   }
-};
+}; */
+
+
+
+
+
 
 // ! for fetching in list
 const rankingTop50 = async (req, res) => {
@@ -685,7 +690,7 @@ const otherUsers = async (req, res) => {
 };
 
 module.exports = {
-  update_rank_data,
+ // update_rank_data,
   rankingTop50,
   otherUsers,
 };

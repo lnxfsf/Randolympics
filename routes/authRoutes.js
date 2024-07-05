@@ -54,6 +54,9 @@ router.get("/listLoginTrafficHistory",listLoginTrafficHistory)
 
 
 
+// ! this is just quick fix. it was in listRanking.. so, sort these routes better now..
+router.post("/update_rank_data", update_rank_data)
+
 
 
 module.exports = router;
