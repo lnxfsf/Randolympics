@@ -127,12 +127,15 @@ const Others = ({
   const saveChanges = async () => {
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
         {
           userId,
 
           originalRank: rank,
           goingToRank: currentRank,
+
+          user_type: selectedRole,  // yes, this is , the logged in user_type !!! 
+          nationality: nationality,
         }
       );
 

@@ -7,12 +7,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 
+import Flag from "react-world-flags";
+
+
+
 import moment from "moment";
 
 const Top50 = ({
   user, // we just send one big object, and get properties (as they change depending on user_type)
   currentUserPassportStatus,
-  user_type,
+  user_type,  // yes, this is , the logged in user_type !!! 
   index,
   lastIndex,
   setRankUpdated,
@@ -60,10 +64,13 @@ const Top50 = ({
 
   const name = user.name;
   const age = user.age;
+
   const country = user.country;
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
+
+  const nationality = user.nationality;
 
   if(user_type === "AH" || user_type === "RS"){
     var votes = user.votes;
@@ -143,12 +150,15 @@ const Top50 = ({
   const saveChanges = async () => {
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
         {
           userId,  // userId, of user in question (you're changing.. about.. )
 
           originalRank: rank,
           goingToRank: currentRank,
+
+          user_type: selectedRole,  // this must be, the selected value from dropdown !!! if we select "AH", or "RS " !! that's what you have in backend after all 
+          nationality: nationality,
 
         }
       );
@@ -401,7 +411,7 @@ const Top50 = ({
 
         <td>{name}</td>
         <td>{age}</td>
-        <td>{country}</td>
+        <td><Flag className="flag-photo-team " code={nationality} /></td>
         <td>{email}</td>
         <td>{phone}</td>
 

@@ -662,7 +662,7 @@ const Elections = () => {
 
                 currentUserPassportStatus={passportStatus}
 
-                user_type={currentUserType}
+                user_type={currentUserType}  
 
                 index={index}
                 lastIndex={top50Users.length - 1}
