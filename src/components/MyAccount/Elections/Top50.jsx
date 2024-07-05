@@ -65,7 +65,7 @@ const Top50 = ({
   const phone = user.phone;
   const gender = user.gender;
 
-  if(user_type === "AH"){
+  if(user_type === "AH" || user_type === "RS"){
     var votes = user.votes;
   } else if ( selectedRole === "GP" ){
     var votes = user.votesGP;
@@ -197,8 +197,8 @@ const Top50 = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {(user_type === "AH" || selectedRole === "GP")  && (
-          <>
+        {(user_type === "AH" || user_type === "RS"  || selectedRole === "GP")  && (
+          <>  
             <td style={{ textAlign: "center" }}>
               {/*   <Checkbox
                 sx={{
@@ -383,7 +383,7 @@ const Top50 = ({
             {/* <div className="flex justify-between items-center gap-2"> */}
 
             {/* if it's Athlete, then it shows "Votes", for those "NP" */}
-            {(user_type === "AH" || selectedRole === "GP" ) ? (
+            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP" ) ? (
               <td className="flex gap-2 justify-start">
                 <p>
                   <b>{votes}</b> {" "}
@@ -405,7 +405,7 @@ const Top50 = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-        {(user_type === "AH"  || selectedRole === "GP") && (
+        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
           <td>
             <p>
               {status} <br />

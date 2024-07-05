@@ -58,7 +58,7 @@ const Others = ({
   const phone = user.phone;
   const gender = user.gender;
 
-  if(user_type === "AH"){
+  if(user_type === "AH" || user_type === "RS"){
     var votes = user.votes;
   } else if ( selectedRole === "GP" ){
     var votes = user.votesGP;
@@ -159,7 +159,7 @@ const Others = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {(user_type === "AH" || selectedRole === "GP") && (
+        {(user_type === "AH" || user_type === "RS" ||  selectedRole === "GP") && (
           <>
             <td style={{ textAlign: "center" }}>
               {/*  <Checkbox
@@ -328,7 +328,7 @@ const Others = ({
         ) : (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
-            {(user_type === "AH" || selectedRole === "GP" ) ? (
+            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP" ) ? (
               <td className="flex gap-2 justify-start">
                 <p>
                   <b>{votes}</b> 
@@ -349,7 +349,7 @@ const Others = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-        {(user_type === "AH"  || selectedRole === "GP")  && (
+        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP")  && (
           <td>
             <p>
               {status} <br />

@@ -60,6 +60,8 @@ const Elections = () => {
       return "NP";
     } else if (currentUserType === "GP") {
       return "LM";
+    } else if (currentUserType === "RS") {
+      return "NP";
     }
   });
 
@@ -318,7 +320,7 @@ const Elections = () => {
         
           NPuserId: event.target.value,
           current_user_userId: userData.data.userId,
-          
+
         }
       );
 
@@ -595,13 +597,13 @@ const Elections = () => {
         <table className="w-full">
           <thead>
             <tr>
-              {(currentUserType === "AH" || selectedRole == "GP") && (
+              {((currentUserType === "AH" || currentUserType === "RS" ) || selectedRole == "GP") && (
                 <>
                   <th className="w-[8%]">My vote</th>
                 </>
               )}
 
-              {(currentUserType === "AH" || selectedRole == "GP" ) ? (
+              {((currentUserType === "AH" || currentUserType === "RS" ) || selectedRole == "GP" ) ? (
                 <>
                   <th className="w-[10%]">All votes</th>
                 </>
@@ -631,7 +633,7 @@ const Elections = () => {
 
               
 
-              { (currentUserType === "AH" || selectedRole == "GP") && (
+              { ((currentUserType === "AH" || currentUserType === "RS" ) || selectedRole == "GP") && (
                 <>
                   <th className="w-[10%]">Status</th>
                 </>
