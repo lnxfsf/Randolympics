@@ -20,7 +20,7 @@ const Top50 = ({
   votedForUserId, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user.. 
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
-  const userId = user.userId;
+  const userId = user.userId;  // userId, of user in question (you're changing.. about.. )
 
   // should be able to get his passportStatus, to check if he can vote (if he have verified passport), every other state is not allowed to vote etc..
   const passportStatus = user.passportStatus;
@@ -145,7 +145,7 @@ const Top50 = ({
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/listsRanking/update_rank_data`,
         {
-          userId,
+          userId,  // userId, of user in question (you're changing.. about.. )
 
           originalRank: rank,
           goingToRank: currentRank,
