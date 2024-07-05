@@ -318,6 +318,7 @@ const Elections = () => {
         
           NPuserId: event.target.value,
           current_user_userId: userData.data.userId,
+          
         }
       );
 
