@@ -7,6 +7,8 @@ import moment from "moment";
 import Flag from "react-world-flags";
 import countryList from "react-select-country-list";
 
+import { PopupPassVerify } from "./PopupPassVerify"
+
 import React, { useState, useEffect, useRef } from "react";
 
 import axios from "axios";
@@ -32,6 +34,14 @@ let BACKEND_SERVER_BASE_URL =
 
 const PassVerify = ({ user, index, setUpdatedPassport }) => {
 
+//-------------
+
+const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
+
+
+
+
+  //--------------
   const name = user.name;
   const nationality = user.nationality;
   const user_type = user.user_type;
@@ -73,6 +83,8 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
 
   });
 
+  
+
   const [nameVerify, setNameVerify] = useState(user.name_verify);
   const [birthdateVerify, setBirthdateVerify] = useState(user.birthdate_verify);
   const [nationalityVerify, setNationalityVerify] = useState(
@@ -91,6 +103,10 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
     dayjs(user.passport_expiry)
   ); // okay, directly passed from user,
 
+
+
+
+  // -------------------
   const reject = async () => {
     setNameVerify(false);
     setBirthdateVerify(false);
@@ -120,7 +136,10 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
       );
 
       if (response.status === 200) {
+
         setUpdatedPassport((prev) => !prev);
+
+       
         popupRef.current.close();
       }
     } catch (error) {
@@ -164,13 +183,16 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
       );
 
       if (response.status === 200) {
+
         setUpdatedPassport((prev) => !prev);
         popupRef.current.close();
       }
     } catch (error) {
-      popupRef.current.close();
+     // popupRef.current.close();
     }
   };
+  // -------------------
+
 
   // ovo se ne azurira ! svaki put ! treba u useEffect da ga stavis vrv..
   const [userTypeText, setUserTypeText] = useState();
@@ -187,7 +209,17 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
 
   useEffect(() => {
     functionSetUserTypeText();
-  }, [user_type]);
+
+
+    updateAnotherUpdatedPassport();
+
+  }, [user_type, updatedPassportPopup]);
+
+
+
+  const updateAnotherUpdatedPassport = () => {
+  setUpdatedPassport(updatedPassportPopup);
+}
 
   const functionSetUserTypeText = () => {
     if (user_type === "AH") {
@@ -235,7 +267,9 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
           modal
           nested
         >
-          <div className="m-4">
+
+        <PopupPassVerify user={user} setUpdatedPassportPopup={setUpdatedPassportPopup} popupRef={popupRef}/>
+         {/*  <div className="m-4">
             <div className="flex justify-between items-center gap-16 mt-2">
               <img
                 src={
@@ -302,7 +336,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                 labelPlacement="start"
               />
             </div>
-            {/* e, ovde pored njega samo check !  */}
+            {/* e, ovde pored njega samo check !  
 
             <div className="mt-2 mb-2">
               <p>Email: {user.email}</p>
@@ -480,7 +514,9 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                 </div>
               </>
             )}
-          </div>
+          </div> */}
+
+          
         </Popup>
 
         <td>
