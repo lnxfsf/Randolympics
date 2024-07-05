@@ -1156,6 +1156,7 @@ const rankingTop50 = async (req, res) => {
           //currentNP: true, // BRING BACK (to filter, only one row). that's currentNP. he will be above red line..
 
           userId: votedFor, // userId, of NP, he selected..
+          nationality: countryOfcurrentUserOnFrontend, // this is for displaying list, right.. so... 
 
           user_type: user_type,
 
@@ -1615,6 +1616,8 @@ const otherUsers = async (req, res) => {
           // everything that's not NP..  (as we don't go by ranking.. at all)
           // currentNP: false,
 
+          nationality: countryOfcurrentUserOnFrontend,
+
           userId: {
             [Op.not]: votedFor,
           },
@@ -1709,7 +1712,7 @@ const currentNP = async (req, res) => {
   try {
     const currentNP = await User.findOne({
       where: {
-       //   currentNP: true,  // ! ovo treba videti, kako se selektuju (voting) za NP's..  
+        currentNP: true,  // ! ovo treba videti, kako se selektuju (voting) za NP's..  
         nationality: nationality,
         user_type: "NP",
       },
@@ -1874,6 +1877,9 @@ const votingForNP = async (req, res) => {
         },
       });
 
+      // mozes dobiti nationality, odmah ovde, od tog currentUser, (koji i jeste na frontend.. )
+      const currentUserNationality = currentUser.nationality;
+
       // ovo je NP da nadjes.. TO JE TRENUTNI KOJI KORISNIK IZABRAO !
       const selectedVoteNP = await User.findOne({
         where: {
@@ -1901,9 +1907,11 @@ const votingForNP = async (req, res) => {
 
           // here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
           // you find who is currentNP now.. to try to replace him..
+          
           const currentNP = await User.findOne({
             where: {
               currentNP: true,
+              nationality: currentUserNationality, //  ! also, needs to be from same country. you check by same country only !! the selection 
               user_type: "NP",
             },
           });
@@ -1912,7 +1920,7 @@ const votingForNP = async (req, res) => {
           const secondMostVotes = await User.findOne({
             where: {
               currentNP: false,
-
+              nationality: currentUserNationality, //  ! also, needs to be from same country. you check by same country only !! the selection 
               user_type: "NP",
             },
             order: [["votes", "DESC"]],
