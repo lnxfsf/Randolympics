@@ -33,7 +33,7 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
-const lastInRank = async (user_type, insert_in_this) => {
+const lastInRank = async (user_type, insert_in_this, nationality) => {
   console.log("tip user-a je:");
   console.log(user_type);
 
@@ -54,14 +54,28 @@ const lastInRank = async (user_type, insert_in_this) => {
     } */
 
       if (user_type == "AH") {
+        // jeste ovde samo diras. to je vezano za "AH" samo..
+
+
         const latestUser = await User.findOne({
           attributes: ["ranking"],
+          where: { nationality: nationality },
           order: [["ranking", "DESC"]],
         });
 
+
         if (latestUser) {
+          // ako je našao, onda uveca za +1, i to vraca.. (znači, ako je "AH", u "US", ima vec neki pre njega ranking=4, onda ovaj vraća 5, (to ono sto ce i upisati u OVAJ NAS SADA novi user ! )). jer to je nasao, najveci ranking, filtiran po nationality (country) ! (da, bice mnogo istih ranking, ali oni se po drzavama razlikuju, pa nece sada ono biti to problem..)
           return latestUser.ranking + 1;
+        } else {
+          // a ako nema nijedan takav user. znaci, nema nijedan user sa tim country (uglv, na to ce se svesti)
+          // onda, treba da vrati broj 1 ranking ! DA ! jer, on ubacice ionako country u taj user !
+          // i šta.. samo preostaje, da zna, šta on treba ubaciti u ranking.. ako nije našao ništa pre njega, znači, da nema takav user.. i mozes za ovaj što sada kreiramo, da vratis ranking: 1 , tako da nam bude ovaj onda.. (pa onda koristis dalje.. )
+          return 1;   
         }
+
+
+
       } else if (user_type == "GP") {
         const latestUser = await User.findOne({
           attributes: ["rankingGP"],
@@ -205,21 +219,21 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type == "AH"), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking"
+    ranking: await lastInRank(user_type, user_type == "AH",nationality), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
 
     // so, this is for all other users..
-    rankingGP: await lastInRank(user_type, user_type == "GP"),
-    rankingNP: await lastInRank(user_type, user_type == "NP"),
-    rankingEM: await lastInRank(user_type, user_type == "EM"),
-    rankingITM: await lastInRank(user_type, user_type == "ITM"),
-    rankingMM: await lastInRank(user_type, user_type == "MM"),
-    rankingSM: await lastInRank(user_type, user_type == "SM"),
-    rankingVM: await lastInRank(user_type, user_type == "VM"),
-    rankingLM: await lastInRank(user_type, user_type == "LM"),
-    rankingRS: await lastInRank(user_type, user_type == "RS"),
+    rankingGP: await lastInRank(user_type, user_type == "GP",""),
+    rankingNP: await lastInRank(user_type, user_type == "NP",""),
+    rankingEM: await lastInRank(user_type, user_type == "EM",""),
+    rankingITM: await lastInRank(user_type, user_type == "ITM",""),
+    rankingMM: await lastInRank(user_type, user_type == "MM",""),
+    rankingSM: await lastInRank(user_type, user_type == "SM",""),
+    rankingVM: await lastInRank(user_type, user_type == "VM",""),
+    rankingLM: await lastInRank(user_type, user_type == "LM",""),
+    rankingRS: await lastInRank(user_type, user_type == "RS",""),
 
     team: null,
     cryptoaddress,
@@ -566,7 +580,6 @@ const login = async (req, res) => {
           where: {
             user_type: existingUser.user_type, // yes, we need both , to find ! exact..
             nationality: existingUser.nationality,
-
           },
         });
 
