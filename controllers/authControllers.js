@@ -55,14 +55,13 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
 
       if (user_type == "AH") {
         // jeste ovde samo diras. to je vezano za "AH" samo..
-        // also by user_type !!! 
+        // also by user_type !!!
 
         const latestUser = await User.findOne({
           attributes: ["ranking"],
           where: { nationality: nationality, user_type: user_type },
           order: [["ranking", "DESC"]],
         });
-
 
         if (latestUser) {
           // ako je našao, onda uveca za +1, i to vraca.. (znači, ako je "AH", u "US", ima vec neki pre njega ranking=4, onda ovaj vraća 5, (to ono sto ce i upisati u OVAJ NAS SADA novi user ! )). jer to je nasao, najveci ranking, filtiran po nationality (country) ! (da, bice mnogo istih ranking, ali oni se po drzavama razlikuju, pa nece sada ono biti to problem..)
@@ -71,11 +70,8 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
           // a ako nema nijedan takav user. znaci, nema nijedan user sa tim country (uglv, na to ce se svesti)
           // onda, treba da vrati broj 1 ranking ! DA ! jer, on ubacice ionako country u taj user !
           // i šta.. samo preostaje, da zna, šta on treba ubaciti u ranking.. ako nije našao ništa pre njega, znači, da nema takav user.. i mozes za ovaj što sada kreiramo, da vratis ranking: 1 , tako da nam bude ovaj onda.. (pa onda koristis dalje.. )
-          return 1;   
+          return 1;
         }
-
-
-
       } else if (user_type == "GP") {
         const latestUser = await User.findOne({
           attributes: ["rankingGP"],
@@ -151,10 +147,9 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
         });
         if (latestUser) {
           return latestUser.rankingRS + 1;
-        }  else {
-          return 1;   
+        } else {
+          return 1;
         }
-
       }
     } else {
       // for that one, you just return 0 .. that's the value, it should have. you don't use it (as default it's)
@@ -223,21 +218,21 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type == "AH",nationality), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
+    ranking: await lastInRank(user_type, user_type == "AH", nationality), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
 
     // so, this is for all other users..
-    rankingGP: await lastInRank(user_type, user_type == "GP",""),
-    rankingNP: await lastInRank(user_type, user_type == "NP",""),
-    rankingEM: await lastInRank(user_type, user_type == "EM",""),
-    rankingITM: await lastInRank(user_type, user_type == "ITM",""),
-    rankingMM: await lastInRank(user_type, user_type == "MM",""),
-    rankingSM: await lastInRank(user_type, user_type == "SM",""),
-    rankingVM: await lastInRank(user_type, user_type == "VM",""),
-    rankingLM: await lastInRank(user_type, user_type == "LM",""),
-    rankingRS: await lastInRank(user_type, user_type == "RS",nationality), // and for RS as well ofc..
+    rankingGP: await lastInRank(user_type, user_type == "GP", ""),
+    rankingNP: await lastInRank(user_type, user_type == "NP", ""),
+    rankingEM: await lastInRank(user_type, user_type == "EM", ""),
+    rankingITM: await lastInRank(user_type, user_type == "ITM", ""),
+    rankingMM: await lastInRank(user_type, user_type == "MM", ""),
+    rankingSM: await lastInRank(user_type, user_type == "SM", ""),
+    rankingVM: await lastInRank(user_type, user_type == "VM", ""),
+    rankingLM: await lastInRank(user_type, user_type == "LM", ""),
+    rankingRS: await lastInRank(user_type, user_type == "RS", nationality), // and for RS as well ofc..
 
     team: null,
     cryptoaddress,
@@ -574,10 +569,8 @@ const login = async (req, res) => {
       );
 
       if (passwordMatch) {
-
-        // ! here we logged in. and now, write inside Traffic table,    (create random number for it's id..), "user_type", "nationality",  i onda samo: "numberOfLogins" INCREMENT , i tjt.. 
-        // ! znači on search-uje, i ako ne nadje, kreira (to je update.. ako se ne varam..), i onda increment taj.. 
-
+        // ! here we logged in. and now, write inside Traffic table,    (create random number for it's id..), "user_type", "nationality",  i onda samo: "numberOfLogins" INCREMENT , i tjt..
+        // ! znači on search-uje, i ako ne nadje, kreira (to je update.. ako se ne varam..), i onda increment taj..
 
         // try to find that row, if there's no, then you need to create it. AND THEN, increment that value ! and that's it...
         const loginEntry = await Traffic.findOne({
@@ -587,24 +580,18 @@ const login = async (req, res) => {
           },
         });
 
-        if(loginEntry){
-          
-          await loginEntry.increment('numberOfLogins', {by: 1});
-
-        }else {
-          // create that entry, if there's no found.. 
+        if (loginEntry) {
+          await loginEntry.increment("numberOfLogins", { by: 1 });
+        } else {
+          // create that entry, if there's no found..
           // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
           const newLoginEntry = await Traffic.create({
-
             trafficHistoryId: uuidv4(),
             user_type: existingUser.user_type,
             nationality: existingUser.nationality,
-            numberOfLogins: 1,  // we already put 1, as this is our first immediatelly..
-
+            numberOfLogins: 1, // we already put 1, as this is our first immediatelly..
           });
         }
-
-
 
         res.status(200).json({
           userId: existingUser.userId,
@@ -665,9 +652,124 @@ const update_rank_data = async (req, res) => {
     where: { userId: userId },
   });
 
+  if(user){
+     // just to get these variables.. we need it for ranking
+     var User_typeOfuserWereChanging = user.user_type; // like, so we can use it for ranking.. 
+     var NationalityOfuserWereChanging = user.nationality; // and by nationality. we need it for ranking, to filter by.. 
+ 
+  }
+
+  if(User_typeOfuserWereChanging === "AH"){
+    if (user) {
+      console.log("original rank je:" + originalRank);
+      console.log("going to rank:" + goingToRank);
+
+
+
+    
+
+      // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
+      // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
+      if (goingToRank - originalRank > 0) {
+        var originalRankLoop = originalRank;
+
+        // this is in case of error, so it doesn't write directly in database
+        const t = await db.sequelize.transaction();
+
+        try {
+          // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+          while (originalRankLoop !== goingToRank) {
+            let lowerUser = await User.findOne({
+              where: { 
+                // by these two, we can filter right ranking we need..
+                nationality: NationalityOfuserWereChanging, 
+                user_type: User_typeOfuserWereChanging,
+
+
+                ranking: user.ranking + 1, 
+
+              },
+            });
+
+            //if there's none, nevermind, just go one number +1 then.. no problem...
+            if (lowerUser) {
+              await lowerUser.update(
+                { ranking: user.ranking },
+                { transaction: t }
+              );
+            }
+
+            // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+            //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+            await user.update({ ranking: user.ranking + 1 }, { transaction: t });
+
+            // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+            originalRankLoop = originalRankLoop + 1;
+          }
+
+          await t.commit();
+          return res.status(200).json({ message: "User rank updated" });
+        } catch (error) {
+          await t.rollback();
+          return res.status(500).json({ error: error.message });
+        }
+      } else if (goingToRank - originalRank < 0) {
+        // when athlete goes UPPER IN RANK (but that's calculated as going DOWN in rank NUMBER.. )
+        // for ( <0 ), when it's negative number. i.e. to go down in rank number. (i.e. athlete goes up in rank, from 5 to 2 .. )
+
+        var originalRankLoop = originalRank;
+
+        // this is in case of error, so it doesn't write directly in database
+        const t = await db.sequelize.transaction();
+
+        try {
+          // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+          while (originalRankLoop !== goingToRank) {
+            let lowerUser = await User.findOne({
+              where: { 
+                // by these two, we can filter right ranking we need..
+                nationality: NationalityOfuserWereChanging, 
+                user_type: User_typeOfuserWereChanging,
+                
+                
+                ranking: user.ranking - 1 },
+            });
+
+            //if there's none, nevermind, just go one number +1 then.. no problem...
+            if (lowerUser) {
+              await lowerUser.update(
+                { ranking: user.ranking },
+                { transaction: t }
+              );
+            }
+
+            // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+            //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+            await user.update({ ranking: user.ranking - 1 }, { transaction: t });
+
+            // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+            originalRankLoop = originalRankLoop - 1;
+          }
+
+          await t.commit();
+          return res.status(200).json({ message: "User rank updated" });
+        } catch (error) {
+          await t.rollback();
+          return res.status(500).json({ error: error.message });
+        }
+      }
+    }
+} else if (User_typeOfuserWereChanging === "RS"){
+
+  // for RS, we use rankingRS !
+
   if (user) {
     console.log("original rank je:" + originalRank);
     console.log("going to rank:" + goingToRank);
+
+
+
+  
 
     // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
     // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
@@ -681,20 +783,28 @@ const update_rank_data = async (req, res) => {
         // if it reached 1, and goingToRank is also being 1, then won't go furhter..
         while (originalRankLoop !== goingToRank) {
           let lowerUser = await User.findOne({
-            where: { ranking: user.ranking + 1 },
+            where: { 
+              // by these two, we can filter right ranking we need..
+              nationality: NationalityOfuserWereChanging, 
+              user_type: User_typeOfuserWereChanging,
+
+
+              rankingRS: user.rankingRS + 1, 
+
+            },
           });
 
           //if there's none, nevermind, just go one number +1 then.. no problem...
           if (lowerUser) {
             await lowerUser.update(
-              { ranking: user.ranking },
+              { rankingRS: user.rankingRS },
               { transaction: t }
             );
           }
 
           // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
           //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-          await user.update({ ranking: user.ranking + 1 }, { transaction: t });
+          await user.update({ rankingRS: user.rankingRS + 1 }, { transaction: t });
 
           // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
           originalRankLoop = originalRankLoop + 1;
@@ -719,20 +829,26 @@ const update_rank_data = async (req, res) => {
         // if it reached 1, and goingToRank is also being 1, then won't go furhter..
         while (originalRankLoop !== goingToRank) {
           let lowerUser = await User.findOne({
-            where: { ranking: user.ranking - 1 },
+            where: { 
+              // by these two, we can filter right ranking we need..
+              nationality: NationalityOfuserWereChanging, 
+              user_type: User_typeOfuserWereChanging,
+              
+              
+              rankingRS: user.rankingRS - 1 },
           });
 
           //if there's none, nevermind, just go one number +1 then.. no problem...
           if (lowerUser) {
             await lowerUser.update(
-              { ranking: user.ranking },
+              { rankingRS: user.rankingRS },
               { transaction: t }
             );
           }
 
           // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
           //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-          await user.update({ ranking: user.ranking - 1 }, { transaction: t });
+          await user.update({ rankingRS: user.rankingRS - 1 }, { transaction: t });
 
           // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
           originalRankLoop = originalRankLoop - 1;
@@ -746,6 +862,9 @@ const update_rank_data = async (req, res) => {
       }
     }
   }
+}
+
+
 };
 
 const update_user_data = async (req, res) => {
@@ -972,11 +1091,8 @@ const rankingTop50 = async (req, res) => {
 
   console.log("primam user tip: " + user_type);
 
-
-  const countryOfcurrentUserOnFrontend = req.query.countryOfcurrentUserOnFrontend;  // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way.. 
-
-  
-
+  const countryOfcurrentUserOnFrontend =
+    req.query.countryOfcurrentUserOnFrontend; // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way..
 
   // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
   // as pagination, is just offset anyways... )
@@ -1005,9 +1121,7 @@ const rankingTop50 = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else if (user_type === "RS") {
-   
-   
-    if(countryOfcurrentUserOnFrontend){
+    if (countryOfcurrentUserOnFrontend) {
       try {
         const topUsers = await User.findAll({
           where: {
@@ -1031,17 +1145,9 @@ const rankingTop50 = async (req, res) => {
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
-  }
-
-
-
-  } else if (user_type === "NP" ) {
+    }
+  } else if (user_type === "NP") {
     try {
-     
-      
-
-
-
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
       // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
       // findOne, just one we need
@@ -1234,13 +1340,11 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else  {
-
-
+  } else {
     // can't filter by anything if countryOfcurrentUserOnFrontend  is empty
-    // this is route for Athletes !!!! 
+    // this is route for Athletes !!!!
 
-   if(countryOfcurrentUserOnFrontend){
+    if (countryOfcurrentUserOnFrontend) {
       try {
         const topUsers = await User.findAll({
           where: {
@@ -1257,8 +1361,6 @@ const rankingTop50 = async (req, res) => {
             gender: {
               [Op.like]: `%${genderFilter}%`,
             },
-
-
           },
           order: [["ranking", "ASC"]],
           limit: limit,
@@ -1271,8 +1373,6 @@ const rankingTop50 = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
       }
     }
-  
-
   }
 };
 
@@ -1289,9 +1389,8 @@ const otherUsers = async (req, res) => {
 
   const votedForGP = req.query.votedForGP; // for GP
 
-  const countryOfcurrentUserOnFrontend = req.query.countryOfcurrentUserOnFrontend;  // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way.. 
-
-
+  const countryOfcurrentUserOnFrontend =
+    req.query.countryOfcurrentUserOnFrontend; // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way..
 
   if (user_type === "EM") {
     try {
@@ -1319,10 +1418,9 @@ const otherUsers = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else if (user_type === "RS") {
-   
     // for "Referee & support", we also use number, and don't discern between male and female ...
-    
-    if(countryOfcurrentUserOnFrontend){
+
+    if (countryOfcurrentUserOnFrontend) {
       try {
         const otherUsers = await User.findAll({
           where: {
@@ -1348,8 +1446,7 @@ const otherUsers = async (req, res) => {
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
-  }
-
+    }
   } else if (user_type === "LM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
@@ -1570,9 +1667,7 @@ const otherUsers = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else {
-
-
-    if(countryOfcurrentUserOnFrontend){
+    if (countryOfcurrentUserOnFrontend) {
       try {
         const otherUsers = await User.findAll({
           where: {
@@ -1601,8 +1696,7 @@ const otherUsers = async (req, res) => {
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
-  }
-
+    }
   }
 };
 
@@ -2213,21 +2307,15 @@ const listAllUsers = async (req, res) => {
   }
 };
 
-const listLoginTrafficHistory = async  (req, res) => {
+const listLoginTrafficHistory = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
-
-  
-
-   const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
+  const user_type = req.query.user_type; // for selection, (first filter..), to show AH users, or some others..
 
   const nationality = req.query.nationality;
 
- 
-
-   let filterCondition = { }
-
+  let filterCondition = {};
 
   // TODO, you should send, default, to filter by country NP currently is. and leave that as selected value in filter.. by default.. only on deletion, it removes. but then it shows a big mess.. like all countries, that's not what we want
   if (user_type) {
@@ -2237,16 +2325,14 @@ const listLoginTrafficHistory = async  (req, res) => {
         [Op.like]: `%${user_type}%`, //this is so it can search by name (that's for now)
       },
     };
-  } 
+  }
 
-  
-   if (nationality) {
+  if (nationality) {
     filterCondition = {
       ...filterCondition,
       nationality: nationality,
     };
   }
- 
 
   try {
     const listLoginTrafficHistory = await Traffic.findAll({
@@ -2259,20 +2345,13 @@ const listLoginTrafficHistory = async  (req, res) => {
       offset: offset,
     });
 
-
     console.log(listLoginTrafficHistory);
 
     res.json(listLoginTrafficHistory);
-
   } catch (error) {
-   
-    
     res.status(500).json({ error: "Internal server error" });
   }
-
-
-
-}
+};
 
 module.exports = {
   register,
