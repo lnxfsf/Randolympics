@@ -55,11 +55,11 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
 
       if (user_type == "AH") {
         // jeste ovde samo diras. to je vezano za "AH" samo..
-
+        // also by user_type !!! 
 
         const latestUser = await User.findOne({
           attributes: ["ranking"],
-          where: { nationality: nationality },
+          where: { nationality: nationality, user_type: user_type },
           order: [["ranking", "DESC"]],
         });
 
@@ -146,11 +146,15 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
       } else if (user_type == "RS") {
         const latestUser = await User.findOne({
           attributes: ["rankingRS"],
+          where: { nationality: nationality, user_type: user_type },
           order: [["rankingRS", "DESC"]],
         });
         if (latestUser) {
           return latestUser.rankingRS + 1;
+        }  else {
+          return 1;   
         }
+
       }
     } else {
       // for that one, you just return 0 .. that's the value, it should have. you don't use it (as default it's)
@@ -233,7 +237,7 @@ const register = async (req, res) => {
     rankingSM: await lastInRank(user_type, user_type == "SM",""),
     rankingVM: await lastInRank(user_type, user_type == "VM",""),
     rankingLM: await lastInRank(user_type, user_type == "LM",""),
-    rankingRS: await lastInRank(user_type, user_type == "RS",""),
+    rankingRS: await lastInRank(user_type, user_type == "RS",nationality), // and for RS as well ofc..
 
     team: null,
     cryptoaddress,
@@ -968,6 +972,12 @@ const rankingTop50 = async (req, res) => {
 
   console.log("primam user tip: " + user_type);
 
+
+  const countryOfcurrentUserOnFrontend = req.query.countryOfcurrentUserOnFrontend;  // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way.. 
+
+  
+
+
   // for user_type "GP" (on dropdown menu selection), bring back ONLY  1 element ! NO pagination !  (there won't be any..
   // as pagination, is just offset anyways... )
 
@@ -995,30 +1005,43 @@ const rankingTop50 = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else if (user_type === "RS") {
-    try {
-      const topUsers = await User.findAll({
-        where: {
-          rankingRS: {
-            [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
-          },
-          user_type: user_type,
+   
+   
+    if(countryOfcurrentUserOnFrontend){
+      try {
+        const topUsers = await User.findAll({
+          where: {
+            rankingRS: {
+              [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
+            },
+            user_type: user_type,
+            nationality: countryOfcurrentUserOnFrontend,
 
-          name: {
-            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            name: {
+              [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            },
           },
-        },
-        order: [["rankingRS", "ASC"]],
-        limit: limit,
-        offset: offset,
-      });
+          order: [["rankingRS", "ASC"]],
+          limit: limit,
+          offset: offset,
+        });
 
-      res.json(topUsers);
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  } else if (user_type === "NP") {
+        res.json(topUsers);
+      } catch (error) {
+        console.error("Error fetching top users:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+  }
+
+
+
+  } else if (user_type === "NP" ) {
     try {
+     
+      
+
+
+
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
       // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
       // findOne, just one we need
@@ -1211,33 +1234,45 @@ const rankingTop50 = async (req, res) => {
       console.error("Error fetching top users:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  } else {
-    try {
-      const topUsers = await User.findAll({
-        where: {
-          ranking: {
-            [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
-          },
-          user_type: user_type,
+  } else  {
 
-          name: {
-            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
-          },
 
-          gender: {
-            [Op.like]: `%${genderFilter}%`,
-          },
-        },
-        order: [["ranking", "ASC"]],
-        limit: limit,
-        offset: offset,
-      });
+    // can't filter by anything if countryOfcurrentUserOnFrontend  is empty
+    // this is route for Athletes !!!! 
 
-      res.json(topUsers);
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
+   if(countryOfcurrentUserOnFrontend){
+      try {
+        const topUsers = await User.findAll({
+          where: {
+            ranking: {
+              [Op.lte]: 50, // Fetch users with ranking less than or equal to 50
+            },
+            user_type: user_type,
+            nationality: countryOfcurrentUserOnFrontend,
+
+            name: {
+              [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            },
+
+            gender: {
+              [Op.like]: `%${genderFilter}%`,
+            },
+
+
+          },
+          order: [["ranking", "ASC"]],
+          limit: limit,
+          offset: offset,
+        });
+
+        res.json(topUsers);
+      } catch (error) {
+        console.error("Error fetching top users:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
     }
+  
+
   }
 };
 
@@ -1253,6 +1288,10 @@ const otherUsers = async (req, res) => {
   const votedFor = req.query.votedFor;
 
   const votedForGP = req.query.votedForGP; // for GP
+
+  const countryOfcurrentUserOnFrontend = req.query.countryOfcurrentUserOnFrontend;  // with this, we can get country NP is from, and by that filter "AH"'s, and show only them, and thus, also ranking would be the same way.. 
+
+
 
   if (user_type === "EM") {
     try {
@@ -1280,31 +1319,37 @@ const otherUsers = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else if (user_type === "RS") {
+   
     // for "Referee & support", we also use number, and don't discern between male and female ...
-    try {
-      const otherUsers = await User.findAll({
-        where: {
-          rankingRS: {
-            [Op.gt]: 50, // Fetch users with ranking greater than 50
-          },
-          user_type: user_type,
+    
+    if(countryOfcurrentUserOnFrontend){
+      try {
+        const otherUsers = await User.findAll({
+          where: {
+            rankingRS: {
+              [Op.gt]: 50, // Fetch users with ranking greater than 50
+            },
+            user_type: user_type,
+            nationality: countryOfcurrentUserOnFrontend,
 
-          name: {
-            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            name: {
+              [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            },
           },
-        },
-        order: [["rankingRS", "ASC"]], // Sort by ranking ascending
-        limit: limit,
-        offset: offset,
-      });
+          order: [["rankingRS", "ASC"]], // Sort by ranking ascending
+          limit: limit,
+          offset: offset,
+        });
 
-      //ne vraca nista..
-      console.log("stampa" + otherUsers);
-      res.json(otherUsers);
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
+        //ne vraca nista..
+        console.log("stampa" + otherUsers);
+        res.json(otherUsers);
+      } catch (error) {
+        console.error("Error fetching top users:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+  }
+
   } else if (user_type === "LM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
@@ -1525,33 +1570,39 @@ const otherUsers = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   } else {
-    try {
-      const otherUsers = await User.findAll({
-        where: {
-          ranking: {
-            [Op.gt]: 50, // Fetch users with ranking greater than 50
-          },
-          user_type: user_type,
 
-          name: {
-            [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
-          },
-          gender: {
-            [Op.like]: `%${genderFilter}%`,
-          },
-        },
-        order: [["ranking", "ASC"]], // Sort by ranking ascending
-        limit: limit,
-        offset: offset,
-      });
 
-      //ne vraca nista..
-      console.log("stampa" + otherUsers);
-      res.json(otherUsers);
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
+    if(countryOfcurrentUserOnFrontend){
+      try {
+        const otherUsers = await User.findAll({
+          where: {
+            ranking: {
+              [Op.gt]: 50, // Fetch users with ranking greater than 50
+            },
+            user_type: user_type,
+            nationality: countryOfcurrentUserOnFrontend,
+
+            name: {
+              [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
+            },
+            gender: {
+              [Op.like]: `%${genderFilter}%`,
+            },
+          },
+          order: [["ranking", "ASC"]], // Sort by ranking ascending
+          limit: limit,
+          offset: offset,
+        });
+
+        //ne vraca nista..
+        console.log("stampa" + otherUsers);
+        res.json(otherUsers);
+      } catch (error) {
+        console.error("Error fetching top users:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+  }
+
   }
 };
 
