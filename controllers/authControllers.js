@@ -1701,14 +1701,21 @@ const otherUsers = async (req, res) => {
 };
 
 const currentNP = async (req, res) => {
+
+  const nationality = req.query.nationality;
+
+  console.log("on stampa:" +nationality)
+
   try {
     const currentNP = await User.findOne({
       where: {
-        currentNP: true,
+       //   currentNP: true,  // ! ovo treba videti, kako se selektuju (voting) za NP's..  
+        nationality: nationality,
         user_type: "NP",
       },
     });
 
+    console.log("Stampa NP koji je:")
     return res.status(200).json(currentNP);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -1738,6 +1745,9 @@ const team = async (req, res) => {
 
   const needGender = req.query.needGender;
 
+
+  const nationality = req.query.nationality;
+
   try {
     const currentUser = await User.findOne({
       where: {
@@ -1748,6 +1758,7 @@ const team = async (req, res) => {
     console.log(currentUser);
 
     let filterConditions = {
+      nationality: nationality,
       user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
 
       //nationality: currentUser.nationality, // and same country  || all managers can see all countries. "managers" see other managers.. of same type..
@@ -1817,8 +1828,7 @@ const team = async (req, res) => {
       offset: offset,
     });
 
-    console.log("ovo su svi:...................");
-    console.log(teamMates);
+    
 
     res.json(teamMates);
   } catch (error) {}
