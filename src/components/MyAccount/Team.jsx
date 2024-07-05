@@ -173,6 +173,8 @@ const Team = () => {
           currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
 
           needGender: needGender,
+
+          nationality: code, // we show only from this user country
         },
       });
 
@@ -191,10 +193,16 @@ const Team = () => {
   };
 
   const getCurrentNP = async () => {
+
+
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/auth/currentNP`,
-        {}
+         {params: {
+          nationality: code,  // this is, if NP is from DZ "algeria", then, he will be NP for these athletes... 
+         },
+
+        }
       );
 
       setCurrentNP(response.data.name);
