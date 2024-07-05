@@ -96,6 +96,24 @@ const Elections = () => {
   const [passportStatus, setPassportStatus] = useState()
 
 
+
+  //this is used, for filtering, for .get operations.. 
+  const [ countryOfcurrentUserOnFrontend , setCountryOfcurrentUserOnFrontend] = useState(() => {
+    const storedData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+
+
+      if (storedData) {
+        const userJson = JSON.parse(storedData);
+        return userJson.data.nationality;
+      }
+
+  });
+
+
+  
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -105,11 +123,14 @@ const Elections = () => {
       setUserData(userJson);
       setCurrentUserType(userJson.data.user_type);
       
-      setPassportStatus(userJson.data.passportStatus)
+      setPassportStatus(userJson.data.passportStatus);
+
+     
 
     }
 
 
+    
     fetchTop50Users();
 
 
@@ -158,6 +179,8 @@ const Elections = () => {
             votedFor: votedFor, // sends selected NP for our user. this is showing then. so we display above red line selected by user... 
             votedForGP: votedForGP, // this same as for votedFor, just for GP.. so we can discern..
          
+
+            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
           },
         }
       );
@@ -200,6 +223,8 @@ const Elections = () => {
 
             votedFor: votedFor, // send this, so to know which one to AVOID 
             votedForGP: votedForGP, // so he can avoid this one just..
+
+            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
           },
         }
       );
