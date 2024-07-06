@@ -88,7 +88,8 @@ SELECT * FROM information_schema.EVENTS WHERE EVENT_NAME = 'delete_all_rows_even
 
 Execute this script:
 
-https://pastebin.com/g98zZ6Zy
+
+https://drive.google.com/file/d/1PtTckmNHA0VttthXWS5Z9k7NSo6ALguP/view?usp=sharing
 
 
 
