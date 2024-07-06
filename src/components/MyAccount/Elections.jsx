@@ -318,8 +318,8 @@ const Elections = () => {
         `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
         {
         
-          NPuserId: event.target.value,
-          current_user_userId: userData.data.userId,
+          NPuserId: event.target.value,  // NP userId we're voting for
+          current_user_userId: userData.data.userId,  // current User, userId
 
         }
       );
