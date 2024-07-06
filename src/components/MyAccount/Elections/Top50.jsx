@@ -23,6 +23,12 @@ const Top50 = ({
   selectedRole,
   votedForUserId, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user.. 
 }) => {
+
+
+
+  
+
+
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;  // userId, of user in question (you're changing.. about.. )
 
@@ -236,6 +242,7 @@ const Top50 = ({
               /> */}
 
               {votedForUserId == userId ? <p>1</p> : <p>-</p>}
+              
             </td>
           </>
         )}

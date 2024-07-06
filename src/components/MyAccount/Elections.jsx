@@ -296,13 +296,16 @@ const Elections = () => {
 
 
 
-  const whichVotedFor = () => {
+  const [whichVotedFor, setWhichVotedFor] = useState (() => {
     if (currentUserType === "AH"){
       return votedFor;
     } else if (selectedRole === "GP"){
       return votedForGP;
     }
-  }
+  })
+
+
+
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
