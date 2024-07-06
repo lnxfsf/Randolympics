@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import Flag from "react-world-flags";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
@@ -52,8 +54,8 @@ const Others = ({
 
 
   const name = user.name;
-  const age = user.age;
-  const country = user.country;
+  const age = calculateAge(user.birthdate);  
+  const nationality = user.nationality;
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
@@ -64,6 +66,24 @@ const Others = ({
     var votes = user.votesGP;
   }
   
+
+
+
+  // we calculate age on the fly..
+  function calculateAge(birthdate) {
+    // if birthdate is empty, or invalid..
+    if (!birthdate || !moment(birthdate).isValid()) {
+      return '-';
+    }
+  
+    const today = moment();
+    const birthDate = moment(birthdate);
+    const years = today.diff(birthDate, 'years');
+  
+    return years;
+  }
+  
+
 
   //const userNPPercentage = user.userNPPercentage;
 
@@ -348,7 +368,7 @@ const Others = ({
 
         <td>{name}</td>
         <td>{age}</td>
-        <td>{country}</td>
+        <td><Flag className="flag-photo-team " code={nationality} /></td>
         <td>{email}</td>
         <td>{phone}</td>
 

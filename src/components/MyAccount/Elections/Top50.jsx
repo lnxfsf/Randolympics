@@ -63,19 +63,33 @@ const Top50 = ({
   
 
   const name = user.name;
-  const age = user.age;
-
-  const country = user.country;
+  const age = calculateAge(user.birthdate); 
   const email = user.email;
   const phone = user.phone;
   const gender = user.gender;
-
   const nationality = user.nationality;
 
   if(user_type === "AH" || user_type === "RS"){
     var votes = user.votes;
   } else if ( selectedRole === "GP" ){
     var votes = user.votesGP;
+  }
+  
+
+
+  
+  // we calculate age on the fly..
+  function calculateAge(birthdate) {
+    // if birthdate is empty, or invalid..
+    if (!birthdate || !moment(birthdate).isValid()) {
+      return '-';
+    }
+  
+    const today = moment();
+    const birthDate = moment(birthdate);
+    const years = today.diff(birthDate, 'years');
+  
+    return years;
   }
   
   
