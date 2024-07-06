@@ -118,6 +118,7 @@ module.exports = function (sequelize, DataTypes) {
     //NP name
     votedFor: {
       type: DataTypes.STRING(255),
+      defaultValue: "",
     },
 
     //NP userId

@@ -1117,6 +1117,7 @@ const rankingTop50 = async (req, res) => {
   // this is for NP's selection by athletes
   const votedFor = req.query.votedFor;
 
+  
   // this is for GP's selection by NP's (so it show above red line only one selected by user)
   const votedForGP = req.query.votedForGP;
 
@@ -1179,6 +1180,9 @@ const rankingTop50 = async (req, res) => {
     }
   } else if (user_type === "NP") {
     try {
+
+    
+
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
       // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
       // findOne, just one we need
@@ -1659,7 +1663,15 @@ const otherUsers = async (req, res) => {
             [Op.like]: `%${searchText}%`, //this is so it can search by name (that's for now)
           },
         },
-        order: [["votes", "DESC"]], // Sort by ranking ascending
+        order: [
+          ['votes', 'DESC'], // Sort by ranking descending (greatest first)
+          ['name', 'ASC']    //  name in ascending order 
+        ],
+        
+        
+        
+        
+
         limit: limit,
         offset: offset,
       });
@@ -1908,6 +1920,9 @@ const votingForNP = async (req, res) => {
         },
       });
 
+
+
+
       // mozes dobiti nationality, odmah ovde, od tog currentUser, (koji i jeste na frontend.. )
       const currentUserNationality = currentUser.nationality;
 
@@ -1924,8 +1939,24 @@ const votingForNP = async (req, res) => {
           })
         : null;
 
+
+        console.log("current user je:")
+        console.log(currentUser.name)
+
+        console.log("selected NP  je:")
+        console.log(selectedVoteNP.name)
+
+
+        //console.log("previousVoteNP od current User-a  je:")
+        //console.log(previousVoteNP.name)
+
+
+
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..
       if (currentUser.votedForNPuserId !== NPuserId) {
+
+        console.log(" on prodje prvi if")
+
         // sada handluje, promjenu. jer ovo vrši, kad god i ima neke promjene,u odnosu na sto je imao...
         if (selectedVoteNP) {
           // doesn't need to decrement previous vote, if it was null (for user who was just created.. )
@@ -1948,7 +1979,7 @@ const votingForNP = async (req, res) => {
           });
 
           // you don't use selectedNP ! but 2nd, who have most votes... (as is not currentNP: false). okay, just the one with most votes, without,  currentNP: false
-          const secondMostVotes = await User.findOne({
+          var secondMostVotes = await User.findOne({
             where: {
               currentNP: false,
               nationality: currentUserNationality, //  ! also, needs to be from same country. you check by same country only !! the selection 
@@ -1956,6 +1987,10 @@ const votingForNP = async (req, res) => {
             },
             order: [["votes", "DESC"]],
           });
+
+
+          console.log("nije nego ne nalazi second most votes !!! zato sve ostalo ne izvrsava: ")
+          console.log(secondMostVotes)
 
           //console.log("the one with most values:" + secondMostVotes);
 
@@ -2020,16 +2055,29 @@ const votingForNP = async (req, res) => {
             // if there's no currentNP, then make this selected one, as currentNP (just, precaution.)
             /*  selectedVoteNP.currentNP = true;
             
+            
             await selectedVoteNP.save(); */
 
-            await secondMostVotes.update({ currentNP: true });
+          // !  SELECTED, THE JUST SELECTEB BY USER !!!
+            // ! so this has to go, instead of secondMostVotes.update  , it needs to be    selectedVoteNP.update (so.. selectedVoteNP !! )
+         /*   await secondMostVotes.update({ currentNP: true });
 
             // and set status text, as he's currentNP.. (that's what he wants)
             await secondMostVotes.update({
               status: "Acting National President",
             });
             var date_now = new Date().toString(); //timestamp..
-            await secondMostVotes.update({ status_date: date_now });
+            await secondMostVotes.update({ status_date: date_now });  */
+         
+            await selectedVoteNP.update({ currentNP: true });
+
+            // and set status text, as he's currentNP.. (that's what he wants)
+            await selectedVoteNP.update({
+              status: "Acting National President",
+            });
+            var date_now = new Date().toString(); //timestamp..
+            await selectedVoteNP.update({ status_date: date_now }); 
+         
           }
         }
 
