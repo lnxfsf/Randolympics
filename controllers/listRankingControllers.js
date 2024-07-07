@@ -636,11 +636,6 @@ const Op = db.Sequelize.Op;
   }
 }; */
 
-
-
-
-
-
 // ! for fetching in list
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
@@ -689,8 +684,39 @@ const otherUsers = async (req, res) => {
   }
 };
 
+const lastInRank = async (req, res) => {
+  try {
+    const user_type = req.query.user_type;
+    const nationality = req.query.nationality;
+    const gender = req.query.gender;
+
+
+    console.log("-----------------")
+    console.log(user_type)
+    console.log(nationality)
+    console.log(gender)
+
+
+    const latestUser = await User.findOne({
+      attributes: ["ranking"],
+      where: { nationality: nationality, gender: gender, user_type: user_type },
+      order: [["ranking", "DESC"]],
+    });
+
+
+    console.log(latestUser)
+
+    res.json(latestUser.ranking);
+
+  } catch (error) {
+    console.error("Error fetching top users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
- // update_rank_data,
+  // update_rank_data,
   rankingTop50,
   otherUsers,
+  lastInRank,
 };

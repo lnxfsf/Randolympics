@@ -1802,7 +1802,10 @@ const team = async (req, res) => {
   const categoryFilter = req.query.categoryFilter;
 
   const needGender = req.query.needGender;
+  console.log("trazi li gender za RS (ne treba..)"+needGender)
 
+  
+  
   
 
 
@@ -1817,6 +1820,8 @@ const team = async (req, res) => {
 
     
 
+    console.log("tip je"+user_type)
+
     let filterConditions = {
       nationality: nationality,
       user_type: user_type, // zato NP, trazi po NP'evu ! al ne mora ovako. iz FE, salje on po selekciji..
@@ -1828,7 +1833,11 @@ const team = async (req, res) => {
       },
     };
 
-    if (currentUserType === "AH" || currentUserType === "NP") {
+
+
+
+    // yes, we also need it for RS as well..
+    if (currentUserType === "AH" || currentUserType === "RS" || currentUserType === "NP") {
       filterConditions = {
         ...filterConditions,
         nationality: currentUser.nationality, // so for "AH" and "NP" , we filter by nationality. all other users, are not restricted by country. so they can see it globally.. (like managers !)
@@ -1844,8 +1853,9 @@ const team = async (req, res) => {
       };
     }
 
-    // ! only, 50 are in team, ! (if we are showing "AH" users !)
-    if (user_type === "AH") {
+    // only, 50 are in team, ! (if we are showing "AH" users !)
+    
+    if (user_type === "AH" ) {
       filterConditions = {
         ...filterConditions,
         ranking: {
@@ -1853,6 +1863,19 @@ const team = async (req, res) => {
         },
       };
     }
+
+    // also, applies for RS as well (but it uses another rankingRS ! )
+    if(currentUserType === "RS"){
+      filterConditions = {
+        ...filterConditions,
+        rankingRS: {
+          [Op.lte]: 50,
+        },
+      };
+    }
+
+    console.log("ovo je ono sto treba ti:")
+    console.log(filterConditions)
 
     // also different ranking depending on user type..
     //  treba po selection koji salje ! jer tako on vrši ta filtiranja..
@@ -1889,7 +1912,6 @@ const team = async (req, res) => {
     });
 
     
-    console.log("zensko on salje: "+teamMates)
 
 
     res.json(teamMates);

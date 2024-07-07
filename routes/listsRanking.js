@@ -1,5 +1,5 @@
 const express = require("express");
-const { rankingTop50, otherUsers } = require("../controllers/listRankingControllers");
+const { rankingTop50, otherUsers, lastInRank } = require("../controllers/listRankingControllers");
 const router = express.Router();
 
 
@@ -16,6 +16,7 @@ const router = express.Router();
 router.get("/rankingTop50",rankingTop50)
 router.get("/otherUsers",otherUsers)
 
+router.get("/lastInRank", lastInRank)
 
 
 
