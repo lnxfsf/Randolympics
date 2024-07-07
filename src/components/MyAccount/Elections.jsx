@@ -116,6 +116,8 @@ const Elections = () => {
 
   
 
+  const [lastRank, setLastRank] = useState();
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -132,6 +134,7 @@ const Elections = () => {
     }
 
 
+    lastInRank() // this is for both Others, and Top. for that one (doesn't cut ranking by some number.. )
     
     fetchTop50Users();
 
@@ -162,6 +165,39 @@ const Elections = () => {
 
     console.log("ovo ne radi");
   };
+
+
+  const lastInRank = async () => { 
+
+    try {
+
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsRanking/lastInRank`,
+        {
+          params: {
+            user_type: selectedRole,
+            nationality: countryOfcurrentUserOnFrontend,
+            gender: genderFilter,
+            
+          },
+        }
+      );
+
+      
+     console.log(response.data)
+      setLastRank(response.data)
+
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+    }
+
+
+
+  }
+
+
+
+
 
   const fetchTop50Users = async () => {
     // this params: , is actually a variables to send to server !
@@ -675,6 +711,8 @@ const Elections = () => {
 
                 votedForUserId={whichVotedFor}
 
+                lastRank={lastRank}
+
 
               />
             ))}
@@ -724,6 +762,10 @@ const Elections = () => {
                   
                  
                   votedForUserId={whichVotedFor}
+
+                  lastRank={lastRank}
+
+
                 />
               ))}
           </tbody>

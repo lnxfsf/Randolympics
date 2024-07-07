@@ -24,6 +24,8 @@ const Top50 = ({
   setRankUpdated,
   selectedRole,
   votedForUserId, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user.. 
+  lastRank,
+
 }) => {
 
 
@@ -152,7 +154,11 @@ const Top50 = ({
 
   const increaseRank = () => {
 
-    setCurrentRank(currentRank + 1);
+    // so, it won't go above, latest rank available. so this way, everything is in order. 
+    if(currentRank !== lastRank){
+      setCurrentRank(currentRank + 1);
+    }
+
 
   };
 

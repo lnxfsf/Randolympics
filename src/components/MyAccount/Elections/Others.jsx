@@ -23,6 +23,7 @@ const Others = ({
   setRankUpdated,
   selectedRole,
   votedForUserId,
+  lastRank,
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
@@ -131,7 +132,10 @@ const Others = ({
   }, []);
 
   const increaseRank = () => {
-    setCurrentRank(currentRank + 1);
+
+    if(currentRank !== lastRank){
+      setCurrentRank(currentRank + 1);
+    }
   };
 
   const decreaseRank = () => {
