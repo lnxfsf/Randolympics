@@ -33,7 +33,7 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
-const lastInRank = async (user_type, insert_in_this, nationality) => {
+const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
   console.log("tip user-a je:");
   console.log(user_type);
 
@@ -59,7 +59,9 @@ const lastInRank = async (user_type, insert_in_this, nationality) => {
 
         const latestUser = await User.findOne({
           attributes: ["ranking"],
-          where: { nationality: nationality, user_type: user_type },
+          where: { nationality: nationality,
+            gender: gender,
+             user_type: user_type },
           order: [["ranking", "DESC"]],
         });
 
@@ -218,20 +220,20 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type == "AH", nationality), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
+    ranking: await lastInRank(user_type, user_type == "AH", nationality, gender), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
 
     // so, this is for all other users..
-    rankingGP: await lastInRank(user_type, user_type == "GP", ""),
-    rankingNP: await lastInRank(user_type, user_type == "NP", ""),
-    rankingEM: await lastInRank(user_type, user_type == "EM", ""),
-    rankingITM: await lastInRank(user_type, user_type == "ITM", ""),
-    rankingMM: await lastInRank(user_type, user_type == "MM", ""),
-    rankingSM: await lastInRank(user_type, user_type == "SM", ""),
-    rankingVM: await lastInRank(user_type, user_type == "VM", ""),
-    rankingLM: await lastInRank(user_type, user_type == "LM", ""),
+    rankingGP: await lastInRank(user_type, user_type == "GP", "", ""),
+    rankingNP: await lastInRank(user_type, user_type == "NP", "", ""),
+    rankingEM: await lastInRank(user_type, user_type == "EM", "", ""),
+    rankingITM: await lastInRank(user_type, user_type == "ITM", "", ""),
+    rankingMM: await lastInRank(user_type, user_type == "MM", "", ""),
+    rankingSM: await lastInRank(user_type, user_type == "SM", "", ""),
+    rankingVM: await lastInRank(user_type, user_type == "VM", "", ""),
+    rankingLM: await lastInRank(user_type, user_type == "LM", "", ""),
     rankingRS: await lastInRank(user_type, user_type == "RS", nationality), // and for RS as well ofc..
 
     team: null,
@@ -666,6 +668,9 @@ const update_rank_data = async (req, res) => {
     where: { userId: userId },
   });
 
+  var gender = user.gender;
+
+  console.log("gender je:::::: "+gender)
   /* if(user){ */
      // just to get these variables.. we need it for ranking
     // var user_typeOfuserWereChanging = user.user_type; // like, so we can use it for ranking.. 
@@ -707,6 +712,7 @@ const update_rank_data = async (req, res) => {
                 // by these two, we can filter right ranking we need..
                 nationality: nationality, 
                 user_type: user_type,
+                gender: gender,
 
 
                 ranking: user.ranking + 1, // pronadje njemu gornji
@@ -759,6 +765,7 @@ const update_rank_data = async (req, res) => {
                 // by these two, we can filter right ranking we need..
                 nationality: nationality, 
                 user_type: user_type,
+                gender: gender,
                 
                 
                 ranking: user.ranking - 1 },
@@ -1750,7 +1757,7 @@ const currentNP = async (req, res) => {
 
   const nationality = req.query.nationality;
 
-  console.log("on stampa:" +nationality)
+  // console.log("on stampa:" +nationality)
 
   try {
     const currentNP = await User.findOne({
@@ -1761,7 +1768,9 @@ const currentNP = async (req, res) => {
       },
     });
 
-    console.log("Stampa NP koji je:")
+    // console.log("Stampa NP koji je:")
+    
+
     return res.status(200).json(currentNP);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -1787,9 +1796,14 @@ const team = async (req, res) => {
   const currentUserType = req.query.currentUserType; // we need this, as for current user, so we know if we need to filter by nationality or not (as not all of them require it, and some of them need it globally.. ). it's just NP's and AH, and RS
 
   const genderFilter = req.query.genderFilter;
+
+  
+
   const categoryFilter = req.query.categoryFilter;
 
   const needGender = req.query.needGender;
+
+  
 
 
   const nationality = req.query.nationality;
@@ -1801,7 +1815,7 @@ const team = async (req, res) => {
       },
     });
 
-    console.log(currentUser);
+    
 
     let filterConditions = {
       nationality: nationality,
@@ -1875,6 +1889,8 @@ const team = async (req, res) => {
     });
 
     
+    console.log("zensko on salje: "+teamMates)
+
 
     res.json(teamMates);
   } catch (error) {}
