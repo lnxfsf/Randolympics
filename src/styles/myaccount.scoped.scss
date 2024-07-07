@@ -43,3 +43,35 @@
 }
 
 // for list items..
+
+
+
+
+
+
+// error box
+.error_box {
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  ///border-color: white;
+  border-color: #FFD77C;
+  border-radius: 20px;
+  background-color: #FFFCF5;
+  color: #BD673B;
+
+}
+
+
+
+// error box
+.error_box_rejected {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #FF0000;  /* Bright red border */
+  border-radius: 20px;
+  background-color: #FFEBEB; /* Light red background */
+  color: #8B0000; /* Dark red text */
+  padding: 10px; /* Added some padding for better spacing */
+}
+
+
