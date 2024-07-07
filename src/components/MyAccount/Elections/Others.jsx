@@ -11,6 +11,9 @@ import Checkbox from "@mui/material/Checkbox";
 
 import moment from "moment";
 
+import { Others50Popup } from "./Others50Popup";
+
+
 const Others = ({
   user,
   currentUserPassportStatus,
@@ -242,7 +245,7 @@ const Others = ({
                   position="right center"
                   contentStyle={{ width: "auto" }}
                 >
-                  <div className="m-4">
+                {/*   <div className="m-4">
                     <div className="flex gap-2 mb-2">
                       <p>Current rank</p>
                       <p>
@@ -338,7 +341,12 @@ const Others = ({
                         <span className="popins-font">Save changes</span>
                       </Button>
                     </div>
-                  </div>
+                  </div> */}
+
+
+                  <Others50Popup increaseRank={increaseRank} currentRank={currentRank} decreaseRank={decreaseRank} cancel={cancel} saveChanges={saveChanges}/>
+                  
+
                 </Popup>
                 </>
              
@@ -382,6 +390,11 @@ const Others = ({
         )}
       </tr>
 
+      <tr>
+          <td colSpan="6">
+            <hr />
+          </td>
+        </tr>
      
     </>
   );

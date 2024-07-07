@@ -679,7 +679,7 @@ const Elections = () => {
               />
             ))}
 
-            {!showingTop50 && top50Users.length !== 0 && otherUsers.length > 0 && (
+            { ( (!showingTop50 && top50Users.length !== 0 && otherUsers.length > 0) || (top50Users.length === 10 && top50Page === 5)  ) && (
               <>
                 <tr
                   className="border-b-2 border-red_first "
