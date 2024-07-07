@@ -86,6 +86,8 @@ const Team = () => {
       return "VM";
     } else if (currentUserType === "EM") {
       return "EM";
+    } else if (currentUserType === "RS") {
+      return "RS";
     }
   });
 
