@@ -35,6 +35,8 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const HeaderMyProfile = ({ShowEditProfile}) => {
+
+
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
   const [user_typeText, setUserTypeText] = useState("");
@@ -76,7 +78,7 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
 
   const toogleProfileUpload = async () => {
     setToogleProfilePic(!toogleProfilePic);
-
+    
     try {
       // we just upload profile_image URL, in database !
       var response = await axios.post(
@@ -194,6 +196,9 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
           {toogleProfilePic && (
             <>
               <FilePond
+
+              className="filepond--root small"
+
                 type="file"
                 onupdatefiles={setFiles}
                 allowMultiple={false}

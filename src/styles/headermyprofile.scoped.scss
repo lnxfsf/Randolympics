@@ -1,4 +1,6 @@
 /* // for profile picture
+
+
 .filepond--root,
 .filepond--root .filepond--drop-label  {
     width: 90px;
@@ -6,3 +8,34 @@
   font-size: 8pt;
 
 }    */
+
+/* 
+.filepond--root,
+.filepond--root .filepond--drop-label  {
+    width: 90px;
+  height: 90px;
+  font-size: 8pt;
+
+}
+ */
+
+// you use variables... and for both of them, just use  className="filepond--root small"  or className="filepond--root large". for both instances, set ... and that's it..
+
+.filepond--root,
+.filepond--root .filepond--drop-label {
+  width: var(--width);
+  height: var(--height);
+  font-size: var(--font-size);
+}
+
+.large {
+  --width: 331px;
+  --height: 222px;
+  --font-size: 12pt; /* Adjust as needed */
+}
+
+.small {
+  --width: 90px;
+  --height: 90px;
+  --font-size: 8pt;
+}

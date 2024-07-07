@@ -880,6 +880,7 @@ const EditProfile = () => {
               {passportUpload && (
                 <>
                   <FilePond
+                  className="filepond--root large"
                     type="file"
                     onupdatefiles={setFiles}
                     allowMultiple={false}
