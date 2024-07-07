@@ -2008,6 +2008,25 @@ const votingForNP = async (req, res) => {
           console.log("nije nego ne nalazi second most votes !!! zato sve ostalo ne izvrsava: ")
           console.log(secondMostVotes)
 
+            
+          /* 
+          if(secondMostVotes){
+            // znači, ovo samo ako je prazan. pa onda mora da uzme neki random, samo da bi ono uporedio čisto..
+            // eto, po imenu, alfabetski kao... 
+            var secondMostVotes = await User.findOne({
+              where: {
+                currentNP: false,
+                nationality: currentUserNationality, 
+                user_type: "NP",
+              },
+              order: [["name", "ASC"]],
+            });
+          }
+
+          console.log("a onda postaje: ")
+          console.log(secondMostVotes) */
+
+
           //console.log("the one with most values:" + secondMostVotes);
 
           //console.log(currentNP);
