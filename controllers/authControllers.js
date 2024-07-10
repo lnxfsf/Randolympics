@@ -284,6 +284,8 @@ const register = async (req, res) => {
   }
 };
 
+
+
 const email_resend = async (req, res) => {
   const { email } = req.body;
 
