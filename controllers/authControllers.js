@@ -171,6 +171,12 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
+
+
+
+  var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
+
+
   // on ovde uzima varijable
   const {
     user_type,
@@ -263,7 +269,7 @@ const register = async (req, res) => {
     sendEmail(
       newUser.email,
       "Email Verification",
-      `<p>Click <a href="http://localhost:5000/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
     );
 
     res.status(201).json({ message: "User created successfully!" });
