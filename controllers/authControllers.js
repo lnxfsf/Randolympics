@@ -930,7 +930,7 @@ const update_user_data = async (req, res) => {
     bio,
 
     // this is when we are receiving from Validation Manager. we also need to check, if all values are true, so we can also have another variable "passportStatus". right, and we use this one, to allow/deny access to others, also use it as for showing status
-
+    updating_from_VM, // or otherwise, it will change passportStatus... if we don't intend to 
     name_verify,
     birthdate_verify,
     nationality_verify,
@@ -966,18 +966,24 @@ const update_user_data = async (req, res) => {
       needsUpdate = true;
     }
 
-    var passportStatus = "unvalidated";
-    if (
-      name_verify &&
-      birthdate_verify &&
-      nationality_verify &&
-      passport_expiry_verify &&
-      passport_expiry
-    ) {
-      var passportStatus = "validated";
-    } else {
+
+
+  if(updating_from_VM){
       var passportStatus = "unvalidated";
+      if (
+        name_verify &&
+        birthdate_verify &&
+        nationality_verify &&
+        passport_expiry_verify &&
+        passport_expiry
+      ) {
+        var passportStatus = "validated";
+      } else {
+        var passportStatus = "unvalidated";
+      }
     }
+    
+    
 
     if (isRejected === true) {
       passportStatus = "rejected"; // it will be updated in one below.. for this one..
