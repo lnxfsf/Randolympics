@@ -37,7 +37,9 @@ SITE_SECRET= xxxxxxxxxxxx   // this is for captcha..
 
 # -----
 
-BASE_URL=http://localhost:3000/
+#BASE_URL_BACKEND=http://localhost   // this one should be in prod
+BASE_URL_BACKEND=http://localhost:5000
+
 SERVICE=yahoo
 EMAIL_PORT=587
 SECURE=true

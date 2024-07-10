@@ -171,6 +171,12 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
+
+
+
+  var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
+
+
   // on ovde uzima varijable
   const {
     user_type,
@@ -263,7 +269,7 @@ const register = async (req, res) => {
     sendEmail(
       newUser.email,
       "Email Verification",
-      `<p>Click <a href="http://localhost:5000/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
     );
 
     res.status(201).json({ message: "User created successfully!" });
@@ -277,6 +283,10 @@ const register = async (req, res) => {
 
   }
 };
+
+
+ 
+
 
 const email_resend = async (req, res) => {
   const { email } = req.body;
@@ -930,7 +940,7 @@ const update_user_data = async (req, res) => {
     bio,
 
     // this is when we are receiving from Validation Manager. we also need to check, if all values are true, so we can also have another variable "passportStatus". right, and we use this one, to allow/deny access to others, also use it as for showing status
-
+    updating_from_VM, // or otherwise, it will change passportStatus... if we don't intend to 
     name_verify,
     birthdate_verify,
     nationality_verify,
@@ -966,18 +976,24 @@ const update_user_data = async (req, res) => {
       needsUpdate = true;
     }
 
-    var passportStatus = "unvalidated";
-    if (
-      name_verify &&
-      birthdate_verify &&
-      nationality_verify &&
-      passport_expiry_verify &&
-      passport_expiry
-    ) {
-      var passportStatus = "validated";
-    } else {
+
+
+  if(updating_from_VM){
       var passportStatus = "unvalidated";
+      if (
+        name_verify &&
+        birthdate_verify &&
+        nationality_verify &&
+        passport_expiry_verify &&
+        passport_expiry
+      ) {
+        var passportStatus = "validated";
+      } else {
+        var passportStatus = "unvalidated";
+      }
     }
+    
+    
 
     if (isRejected === true) {
       passportStatus = "rejected"; // it will be updated in one below.. for this one..
