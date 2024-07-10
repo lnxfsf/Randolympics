@@ -35,7 +35,8 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const HeaderMyProfile = ({ShowEditProfile}) => {
-
+ 
+  
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
