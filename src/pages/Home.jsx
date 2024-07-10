@@ -8,9 +8,53 @@ import axios from "axios";
 
 import { createDirectus, rest, readItems } from "@directus/sdk";
 
+import { Collapse } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+
+
+
+// ? expand more
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: '5px',
+
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+// ? expand more
+
+
 // okej, ovo radi (ovo je sigurniji način da fetch-ujes, nego axios API... )
 
 const Home = () => {
+
+
+  // ? expand more
+  const [expanded, setExpanded] = useState(false);
+
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+
+
+
+
+
+
+
+
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -63,7 +107,7 @@ this is from official:
 
       {/* stockholm games content */}
 
-<br/>
+      <br />
       <p><b>titles</b></p>
 
       <div>
@@ -74,9 +118,9 @@ this is from official:
         </ul>
       </div>
 
-      <br/>
+      <br />
 
-<p><b>subtitles</b></p>
+      <p><b>subtitles</b></p>
       <div>
         <ul>
           {games.map((item, index) => (
@@ -85,7 +129,7 @@ this is from official:
         </ul>
       </div>
 
-      <br/>
+      <br />
 
 
 
@@ -100,7 +144,7 @@ this is from official:
 
 
 
-      <br/>
+      <br />
 
 
 
@@ -114,7 +158,7 @@ this is from official:
       </div>
 
 
-<br/>
+      <br />
 
       <p><b>Content</b></p>
       <div>
@@ -129,24 +173,82 @@ this is from official:
       </div>
 
 
-      
-<br/>
 
-<p><b>Images</b></p>
-<div>
-  <ul>
-    {games.map((item, index) => (
-      <>
-        <li key={index}>ID: {item.stockholm_games_id}</li>
+      <br />
 
-        <img src={"http://localhost:8055/assets/"+item.post_image} style={{ width: '100px', height: '100px' }}  /> 
-      </>
-    ))}
-  </ul>
-</div>
+      <p><b>Images</b></p>
+      <div>
+        <ul>
+          {games.map((item, index) => (
+            <>
+              <li key={index}>ID: {item.stockholm_games_id}</li>
 
-      {/* just temporary, so I can see content */}
-      <div className="h-96"></div>
+              <img src={"http://localhost:8055/assets/" + item.post_image} style={{ width: '100px', height: '100px' }} />
+            </>
+          ))}
+        </ul>
+      </div>
+
+
+      <hr className="mt-10 mb-10" />
+
+
+
+
+
+
+
+      <div className="mb-52">
+        <h1 className="flex text-[40px] mt-32 justify-center">
+          We are Brothers & Sisters, United through Sports
+        </h1>
+
+        <div className="m-8">
+          <p > The randolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.
+          </p>
+
+        </div>
+
+
+
+
+
+        <div className="m-8 flex justify-center items-center">
+
+          <p expand={expanded}
+            onClick={handleExpandClick} className="cursor-pointer select-none">Read More</p>
+
+
+
+
+          <ExpandMore
+
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </div>
+
+        <div className="m-8">
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <p>
+              1. Reducing Commercialization and Corruption<br />
+              The randolympics incorporates cryptocurrency and open-source technology to reduce the focus on high-profile endorsements and commercial interests. This approach increases transparency and diminishes the potential for corruption, ensuring a more genuine and fair competition.
+            </p>
+          </Collapse>
+
+
+
+        </div>
+
+
+      </div>
+
+
 
       {/* start about us part */}
 
