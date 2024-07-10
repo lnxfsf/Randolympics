@@ -104,8 +104,9 @@ const Register = () => {
     }
   }; */
 
-    const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
 
+  
 
   const server = {
         /* url: 'http://localhost:5000/profile_photo/upload', */
