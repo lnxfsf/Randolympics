@@ -53,7 +53,7 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-      url: "http://localhost:5000/imageUpload/profilePicture",
+      url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
       method: "POST",
       headers: {},
       withCredentials: false,

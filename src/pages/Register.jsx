@@ -111,7 +111,7 @@ const Register = () => {
         /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: 'http://localhost:5000/imageUpload/profilePicture',
+        url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
         method: 'POST',
         headers: {},
         withCredentials: false,
@@ -283,7 +283,7 @@ const Register = () => {
     if (!captchaValue) {
       setResultText("Please verify the reCAPTCHA!");
     } else {
-      const res = await fetch("http://localhost:5000/captcha/verify", {
+      const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
         method: "POST",
         body: JSON.stringify({ captchaValue }),
         headers: {

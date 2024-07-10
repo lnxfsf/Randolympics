@@ -448,7 +448,7 @@ const EditProfile = () => {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-      url: "http://localhost:5000/imageUpload/passportPicture",
+      url: `${BACKEND_SERVER_BASE_URL}/imageUpload/passportPicture`,
       method: "POST",
       headers: {},
       withCredentials: false,
@@ -474,7 +474,7 @@ const EditProfile = () => {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-      url: "http://localhost:5000/imageUpload/profilePicture",
+      url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
       method: "POST",
       headers: {},
       withCredentials: false,
