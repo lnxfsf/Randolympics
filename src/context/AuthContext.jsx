@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
 
       setUser(jwtDecode(response.data.access_token));
 
-      navigate("/home");
+      navigate("/");
     } else {
       console.log("Something went wrong while loggin in the user!");
     }

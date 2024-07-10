@@ -17,8 +17,12 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+
+
+        <Route path="/landingpage" element={<LandingPage />} />
+        <Route path="/" element={<Home />} />
+
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
@@ -26,6 +30,7 @@ const App = () => {
         <Route path="/randomize" element={<Randomize />} />
 
         <Route path="/myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
+
       </Routes>
     </>
   );
