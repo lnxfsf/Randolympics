@@ -165,7 +165,17 @@ const Register = () => {
 
   const [selectedGender, setSelectedGender] = useState("M");
 
+
+
+  // ? captcha
+
+
+
   const recaptcha = useRef();
+ 
+
+  // ? captcha
+
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -197,6 +207,11 @@ const Register = () => {
   };
 
   // ? HERE
+
+
+
+
+
 
   // ? HERE, for weight..
 
@@ -342,6 +357,7 @@ const Register = () => {
 
         if (response) {
           setResultText("Signed up ! Email verification sent.");
+          
         }
       } else {
         setResultText("reCAPTCHA validation failed!");
@@ -763,7 +779,10 @@ const Register = () => {
 
               <ReCAPTCHA
                 ref={recaptcha}
+          
                 sitekey={APP_SITE_KEY}
+                onExpired={() => {recaptcha.reset();}}
+                
                 className="mt-2 g-recaptcha-response"
               />
 
@@ -902,6 +921,7 @@ const Register = () => {
 
         <div className="flex justify-center items-center mb-32 flex-col">
           <Button
+          
             className="w-[420px]"
             style={{ marginTop: "20px" }}
             sx={{

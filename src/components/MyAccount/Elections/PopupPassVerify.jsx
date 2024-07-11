@@ -154,6 +154,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passportLastValidatedRejected: passportLastValidatedRejected,
 
           isRejected: true,
+          updating_from_VM: true,  // this is, only for Validation Manager type anyways..
         }
       );
 
@@ -200,6 +201,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passport_expiry: passportExpiryDate,
 
           passportLastValidatedRejected: passportLastValidatedRejected,
+          updating_from_VM: true, 
+          
         }
       );
 
