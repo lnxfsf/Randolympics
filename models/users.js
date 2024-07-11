@@ -14,7 +14,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
     email_private: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     password: {
       type: DataTypes.STRING(255),
@@ -23,38 +24,40 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
     },
     name_verify: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     birthdate: {
       type: DataTypes.DATEONLY,
     },
     birthdate_private: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     birthdate_verify: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     phone: {
       type: DataTypes.STRING(15),
     },
     phone_private: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     nationality: {
       type: DataTypes.STRING(100),
       defaultValue: "US",
     },
     nationality_verify: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     weight: {
       type: DataTypes.DOUBLE,
     },
     weight_private: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TINYINT(1),
     },
     picture: {
       type: DataTypes.STRING(400),
@@ -66,8 +69,8 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
     },
     passport_expiry_verify: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     bio: {
       type: DataTypes.STRING(250),
@@ -99,8 +102,8 @@ module.exports = function (sequelize, DataTypes) {
     },
 
     isVerified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
     verificationToken: {
       type: DataTypes.STRING,
@@ -134,18 +137,18 @@ module.exports = function (sequelize, DataTypes) {
     },
 
     currentNP: {
-      type: DataTypes.BOOLEAN,
-      default: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     },
 
     userNPPercentage: {
       type: DataTypes.DOUBLE,
-      default: 0.0,
+      defaultValue: 0.0,
     },
 
     status: {
       type: DataTypes.STRING(255),
-      default: "Candidate",
+      defaultValue: "Candidate",
     },
 
     status_date: {
@@ -202,8 +205,8 @@ module.exports = function (sequelize, DataTypes) {
 
 
     currentGP: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
     }, 
 
     currentGP_UpToDate: {

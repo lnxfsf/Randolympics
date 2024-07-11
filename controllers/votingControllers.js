@@ -5,6 +5,8 @@ const Token = db.token;
 const Op = db.Sequelize.Op;
 
 
+
+
 const update_rank_data = async (req, res) => {
     const { userId, originalRank, goingToRank, user_type, nationality } = req.body;
   
@@ -95,6 +97,9 @@ const update_rank_data = async (req, res) => {
             await t.commit();
             return res.status(200).json({ message: "User rank updated" });
           } catch (error) {
+
+            console.log(error.stack)
+
             await t.rollback();
             return res.status(500).json({ error: error.message });
           }
@@ -146,6 +151,8 @@ const update_rank_data = async (req, res) => {
             await t.commit();
             return res.status(200).json({ message: "User rank updated" });
           } catch (error) {
+            console.log(error.stack)
+
             await t.rollback();
             return res.status(500).json({ error: error.message });
           }
@@ -205,6 +212,8 @@ const update_rank_data = async (req, res) => {
             await t.commit();
             return res.status(200).json({ message: "User rank updated" });
           } catch (error) {
+            console.log(error.stack)
+
             await t.rollback();
             return res.status(500).json({ error: error.message });
           }
@@ -250,6 +259,8 @@ const update_rank_data = async (req, res) => {
             await t.commit();
             return res.status(200).json({ message: "User rank updated" });
           } catch (error) {
+            console.log(error.stack)
+
             await t.rollback();
             return res.status(500).json({ error: error.message });
           }
@@ -282,6 +293,8 @@ const update_rank_data = async (req, res) => {
         console.log("stampa sinovac" + selectedVoteNP);
         res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
       } catch (error) {
+        console.log(error.stack)
+
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
@@ -362,10 +375,13 @@ const update_rank_data = async (req, res) => {
               },
             });
   
+            console.log("ali moze naci trenutni")
+            console.log(currentNP)
+
             // you don't use selectedNP ! but 2nd, who have most votes... (as is not currentNP: false). okay, just the one with most votes, without,  currentNP: false
             var secondMostVotes = await User.findOne({
               where: {
-                currentNP: false,
+                currentNP: false,  // instead of false.. (aha, oke, false i true, ostaje ipak, nego samo tinyint treba, i kao 0 da čuva... i sve okej)
                 nationality: currentUserNationality, //  ! also, needs to be from same country. you check by same country only !! the selection 
                 user_type: "NP",
               },
@@ -500,6 +516,10 @@ const update_rank_data = async (req, res) => {
   
               await currentUser.update({ votedFor: selectedVoteNP.name });
             } catch (error) {
+              
+   
+              console.log(error.stack)
+
               console.log(error.message);
             }
           }
@@ -507,6 +527,7 @@ const update_rank_data = async (req, res) => {
           res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
         }
       } catch (error) {
+        console.log(error.stack)
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
@@ -563,6 +584,7 @@ const update_rank_data = async (req, res) => {
         await currentUserNP.update({ currentNP: false });
       }
     } catch (error) {
+      console.log(error.stack)
       console.log(error.message);
     }
   
@@ -586,6 +608,7 @@ const update_rank_data = async (req, res) => {
   
         res.status(200).json(selectedVoteGP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
       } catch (error) {
+        console.log(error.stack)
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }
@@ -730,6 +753,7 @@ const update_rank_data = async (req, res) => {
               // this is just for name.. we don't need that.. in selection it does that automatically
               //await currentUser.update({ votedFor: selectedVoteNP.name });
             } catch (error) {
+              console.log(error.stack)
               console.log(error.message);
             }
           }
@@ -737,6 +761,8 @@ const update_rank_data = async (req, res) => {
           res.status(200).json(selectedVoteGP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
         }
       } catch (error) {
+        console.log(error.stack)
+
         console.error("Error fetching top users:", error);
         res.status(500).json({ error: "Internal server error" });
       }

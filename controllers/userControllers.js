@@ -294,9 +294,6 @@ const update_user_data = async (req, res) => {
     } catch (error) {
 
 
-        console.log(error)
-        console.log(error.stack)
-
 
       res.status(500).json({ error: error });
 
