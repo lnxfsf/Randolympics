@@ -104,14 +104,15 @@ const Register = () => {
     }
   }; */
 
-    const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
 
+  
 
   const server = {
         /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: 'http://localhost:5000/imageUpload/profilePicture',
+        url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
         method: 'POST',
         headers: {},
         withCredentials: false,
@@ -164,7 +165,17 @@ const Register = () => {
 
   const [selectedGender, setSelectedGender] = useState("M");
 
+
+
+  // ? captcha
+
+
+
   const recaptcha = useRef();
+ 
+
+  // ? captcha
+
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -196,6 +207,11 @@ const Register = () => {
   };
 
   // ? HERE
+
+
+
+
+
 
   // ? HERE, for weight..
 
@@ -283,7 +299,7 @@ const Register = () => {
     if (!captchaValue) {
       setResultText("Please verify the reCAPTCHA!");
     } else {
-      const res = await fetch("http://localhost:5000/captcha/verify", {
+      const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
         method: "POST",
         body: JSON.stringify({ captchaValue }),
         headers: {
@@ -341,6 +357,7 @@ const Register = () => {
 
         if (response) {
           setResultText("Signed up ! Email verification sent.");
+          
         }
       } else {
         setResultText("reCAPTCHA validation failed!");
@@ -762,7 +779,10 @@ const Register = () => {
 
               <ReCAPTCHA
                 ref={recaptcha}
+          
                 sitekey={APP_SITE_KEY}
+                onExpired={() => {recaptcha.reset();}}
+                
                 className="mt-2 g-recaptcha-response"
               />
 
@@ -901,6 +921,7 @@ const Register = () => {
 
         <div className="flex justify-center items-center mb-32 flex-col">
           <Button
+          
             className="w-[420px]"
             style={{ marginTop: "20px" }}
             sx={{

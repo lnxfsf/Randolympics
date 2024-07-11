@@ -58,7 +58,9 @@ const Others = ({
 
 
   const name = user.name;
-  const age = calculateAge(user.birthdate);  
+
+  
+
   const nationality = user.nationality;
   const email = user.email;
   const phone = user.phone;
@@ -79,14 +81,24 @@ const Others = ({
     if (!birthdate || !moment(birthdate).isValid()) {
       return '-';
     }
+
   
     const today = moment();
+    console.log("danas"+today)
+
     const birthDate = moment(birthdate);
+    console.log("rodjendan"+birthDate)
+
     const years = today.diff(birthDate, 'years');
+    console.log("razlika god"+years)
+
   
     return years;
   }
   
+
+  const age = calculateAge(user.birthdate);  
+  console.log("rodjendan"+user.birthdate)
 
 
   //const userNPPercentage = user.userNPPercentage;
@@ -154,7 +166,7 @@ const Others = ({
   const saveChanges = async () => {
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/voting/update_rank_data`,
         {
           userId,
 

@@ -114,6 +114,7 @@ const MyAccount = () => {
         <div className="basis-1/3 side_nav p-4 ">
           <ul className="list flex flex-col">
             <li
+            style={{listStyleType: "none"}}
               ref={myAccountRef}
               className={`list-item ${
                 selectedItem === "myAccount" ? "selected" : ""
@@ -124,6 +125,7 @@ const MyAccount = () => {
               My Account
             </li>
             <li
+            style={{listStyleType: "none"}}
               ref={settingsRef}
               className={`list-item ${
                 selectedItem === "settings" ? "selected" : ""
@@ -134,6 +136,7 @@ const MyAccount = () => {
               Settings
             </li>
             <li
+            style={{listStyleType: "none"}}
               ref={teamRef}
               className={`list-item ${
                 selectedItem === "team" ? "selected" : ""
@@ -146,6 +149,7 @@ const MyAccount = () => {
 
             {user_type !== "VM" && (
               <li
+              style={{listStyleType: "none"}}
                 ref={electionsRef}
                 className={`list-item ${
                   selectedItem === "elections" ? "selected" : ""
@@ -163,6 +167,7 @@ const MyAccount = () => {
             {/* //? passport validation (GP and VM) */}
             {(user_type === "VM" || user_type === "GP") && (
               <li
+              style={{listStyleType: "none"}}
                 ref={passportVerificationRef}
                 className={`list-item ${
                   selectedItem === "passportVerification" ? "selected" : ""
@@ -183,6 +188,7 @@ const MyAccount = () => {
               user_type === "LM" ||
               user_type === "GP") && (
               <li
+              style={{listStyleType: "none"}}
                 ref={loginTrafficHisRef}
                 className={`list-item ${
                   selectedItem === "loginTrafficHistory" ? "selected" : ""
@@ -195,6 +201,7 @@ const MyAccount = () => {
             )}
 
             <li
+            style={{listStyleType: "none"}}
               ref={logoutRef}
               className={`list-item ${
                 selectedItem === "logout" ? "selected" : ""

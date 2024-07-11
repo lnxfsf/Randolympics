@@ -141,7 +141,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email: user.email,
 
@@ -154,6 +154,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passportLastValidatedRejected: passportLastValidatedRejected,
 
           isRejected: true,
+          updating_from_VM: true,  // this is, only for Validation Manager type anyways..
         }
       );
 
@@ -188,7 +189,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email: user.email,
 
@@ -200,6 +201,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passport_expiry: passportExpiryDate,
 
           passportLastValidatedRejected: passportLastValidatedRejected,
+          updating_from_VM: true, 
+          
         }
       );
 

@@ -178,7 +178,7 @@ const Top50 = ({
   const saveChanges = async () => {
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_rank_data`,
+        `${BACKEND_SERVER_BASE_URL}/voting/update_rank_data`,
         {
           userId,  // userId, of user in question (you're changing.. about.. )
 

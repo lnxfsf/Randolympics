@@ -119,7 +119,7 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email: user.email,
 
@@ -167,7 +167,7 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email: user.email,
 

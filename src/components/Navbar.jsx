@@ -26,9 +26,13 @@ const Navbar = () => {
               Home
             </Link>
 
-            <Link to="/schedule" className="nav_btns">
+          {/*   <Link to="/schedule" className="nav_btns">
               Schedule
-            </Link>
+            </Link> */}
+          <Link to="/" className="nav_btns">
+              Schedule
+            </Link> 
+
 
 
 

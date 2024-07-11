@@ -75,7 +75,7 @@ const LgnTraffcHistory = () => {
   const fetchlistOfLogins = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/listLoginTrafficHistory`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/listLoginTrafficHistory`,
         {
           params: {
             limit: 10,

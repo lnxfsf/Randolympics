@@ -83,7 +83,7 @@ const Settings = () => {
     // just add, same for any account, doesn't matter which one it is (hasn't said.. so, just to all for now..)
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/resignFromCurrentPosition`,
+        `${BACKEND_SERVER_BASE_URL}/voting/resignFromCurrentPosition`,
         {
           userId,
           user_type
@@ -129,7 +129,7 @@ const Settings = () => {
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email,
           bio: bio,
