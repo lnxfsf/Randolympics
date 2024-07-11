@@ -13,7 +13,7 @@ const Footer = () => {
 
   
   const handleToMainHome = () => {
-    navigate("/");
+    navigate("/login");
   };
 
 

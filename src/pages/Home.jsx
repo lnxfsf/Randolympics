@@ -16,8 +16,15 @@ import { FirstCollapsibleHome } from "../components/Home/FirstCollapsibleHome";
 
 import "../styles/home.scoped.scss"
 import { CompetitionsHome } from "../components/Home/CompetitionsHome";
+import { EconomiscLoansHome } from "./Home/EconomiscLoansHome";
 
 
+import { useNavigate } from "react-router-dom";
+
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 // ? expand more, arrow icon transformation
 
@@ -43,10 +50,15 @@ const Home = () => {
 
   // ? expand more
   const [expandedFirstText, setExpandedFirstText] = useState(false);
-
   const [expandedSecondText, setExpandedSecondText] = useState(false);
-
   const [expandedThirdText, setExpandedThirdText] = useState(false);
+
+
+
+  const [expandedLoans, setExpandedLoans] = useState(false);
+  const [expandedBroadcast, setExpandedBroadcast] = useState(false);
+  const [expandedSponsorship, setExpandedSponsorship] = useState(false);
+
 
 
 
@@ -59,6 +71,9 @@ const Home = () => {
 
   const [games, setGames] = useState([]);
 
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchNewsGames();
   }, []);
@@ -66,7 +81,7 @@ const Home = () => {
   const fetchNewsGames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8055/items/stockholm_games"
+        `${BACKEND_SERVER_BASE_URL}/items/stockholm_games`
       );
 
       /* 
@@ -386,9 +401,192 @@ this is from official:
             <Collapse in={expandedThirdText} timeout="auto" unmountOnExit>
               <CompetitionsHome />
 
-              
+
             </Collapse>
 
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+
+      {/* economics dio */}
+      <div>
+
+        <div>
+
+          <h1 className="flex text-[40px] mt-32 justify-center">
+            Economics
+          </h1>
+
+
+          {/* for all text */}
+          <div className="m-8">
+
+
+            {/* loans */}
+            <div className="m-8 flex justify-center items-center">
+
+              <p expand={expandedLoans}
+                onClick={() => { setExpandedLoans(!expandedLoans) }} className="cursor-pointer select-none">1. Loans</p>
+
+
+
+
+              <ExpandMore
+
+                expand={expandedLoans}
+                onClick={() => { setExpandedLoans(!expandedLoans) }}
+                aria-expanded={expandedLoans}
+                aria-label="show more"
+              >
+
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </div>
+
+
+            <Collapse in={expandedLoans} timeout="auto" unmountOnExit>
+
+              <div>
+                <h1 className="text-2xl mb-2">Loans</h1>
+
+                <p className="mb-2">Loans are a source of income for the Randolympics organization where they receive funding from loan givers. These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the loan agreement. The general rule is that 20% of all revenues are paid back to existing loan contracts in equal ratios.
+
+                </p>
+
+
+                <div className="flex justify-center">
+                  <Button onClick={() => {
+                    navigate("/economicsloan");
+                  }}>Ongoing Loan Auctions</Button>
+
+                </div>
+              </div>
+
+
+            </Collapse>
+
+
+
+
+
+            {/* broadcasting rigths */}
+            <div className="m-8 flex justify-center items-center">
+
+              <p expand={expandedBroadcast}
+                onClick={() => { setExpandedBroadcast(!expandedBroadcast) }} className="cursor-pointer select-none">2. Broadcasting Rights</p>
+
+
+
+
+              <ExpandMore
+
+                expand={expandedBroadcast}
+                onClick={() => { setExpandedBroadcast(!expandedBroadcast) }}
+                aria-expanded={expandedBroadcast}
+                aria-label="show more"
+              >
+
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </div>
+
+
+            <Collapse in={expandedBroadcast} timeout="auto" unmountOnExit>
+
+              <div>
+                <h1 className="text-2xl mb-2">Broadcasting Rights</h1>
+
+                <p className="mb-2">Broadcasting Rights involve granting media entities the permission to cover and report on Randolympics events. These rights can be acquired by various media platforms, such as:
+                </p>
+
+
+                <ul className="mb-2 ml-8">
+                  <li><b>YouTube Channels</b>: Independent or corporate channels that wish to broadcast the events online.</li>
+                  <li><b>Tik Tok Influencers</b>: Content creators on TikTok who want to provide live coverage or highlights.</li>
+                  <li><b>TV Stations</b>: Traditional television broadcasters who aim to televise the events to a wider audience.</li>
+                </ul>
+
+
+                <p className="mb-2"> The broadcasting rights are distributed by country, meaning media outlets from different countries can acquire the rights specific to their region. This ensures wide and diverse media coverage, catering to different audiences globally.</p>
+
+                <div className="flex justify-center">
+                  <Button onClick={()=>{navigate("/economicsbroadcast")}}>Ongoing Loan Auctions</Button>
+
+                </div>
+              </div>
+
+
+            </Collapse>
+
+
+
+
+
+            {/* Sponsorship */}
+            <div className="m-8 flex justify-center items-center">
+
+              <p expand={expandedSponsorship}
+                onClick={() => { setExpandedSponsorship(!expandedSponsorship) }} className="cursor-pointer select-none">3. Sponsorship</p>
+
+
+
+
+              <ExpandMore
+
+                expand={expandedSponsorship}
+                onClick={() => { setExpandedSponsorship(!expandedSponsorship) }}
+                aria-expanded={expandedSponsorship}
+                aria-label="show more"
+              >
+
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </div>
+
+
+            <Collapse in={expandedSponsorship} timeout="auto" unmountOnExit>
+
+              <div>
+                <h1 className="text-2xl mb-2">Sponsorship</h1>
+
+                <p className="mb-2">Sponsorship is a significant source of income where various entities can sponsor different aspects of the Randolympics. This includes               </p>
+
+
+                <ul className="mb-2 ml-8">
+                  <li><b>Events</b>: Companies or brands can sponsor individual events within the Randolympics.</li>
+                  <li><b>National Teams</b>: Sponsorship deals can be made with national teams, allowing sponsors to have their branding associated with specific teams.</li>
+                  <li><b>Names of the Games</b>: Sponsors can acquire naming rights for the games or specific events within the Randolympics.</li>
+                </ul>
+
+
+                <p className="mb-2"> Additionally, there are opportunities for branded merchandise
+                </p>
+
+                <ul className="mb-2 ml-8">
+                  <li><b>Branded Items</b>: Contracts can be made for selling branded items such as t-shirts, hats, and other merchandise. These contracts allow sponsors to use the Randolympics branding on their products, creating a source of revenue through merchandise sales.</li>
+                </ul>
+
+
+                <p className="mb-2">These income sources ensure the Randolympics organization has a diverse stream of revenue, aiding in the sustainability and gr of the events</p>
+
+
+
+                <div className="flex justify-center">
+                  <Button onClick={()=>{navigate("/economicssponsorship")}}>Ongoing Sponsorship Auctions</Button>
+
+                </div>
+              </div>
+
+
+            </Collapse>
 
 
           </div>
