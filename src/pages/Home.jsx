@@ -12,12 +12,14 @@ import { Collapse } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { FirstCollapsibleHome } from "../components/Home/FirstCollapsibleHome";
+
+import "../styles/home.scoped.scss"
+import { CompetitionsHome } from "../components/Home/CompetitionsHome";
 
 
 
-
-
-// ? expand more
+// ? expand more, arrow icon transformation
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,12 +42,12 @@ const Home = () => {
 
 
   // ? expand more
-  const [expanded, setExpanded] = useState(false);
+  const [expandedFirstText, setExpandedFirstText] = useState(false);
 
+  const [expandedSecondText, setExpandedSecondText] = useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const [expandedThirdText, setExpandedThirdText] = useState(false);
+
 
 
 
@@ -199,50 +201,197 @@ this is from official:
 
 
       <div className="mb-52">
-        <h1 className="flex text-[40px] mt-32 justify-center">
-          We are Brothers & Sisters, United through Sports
-        </h1>
-
-        <div className="m-8">
-          <p > The randolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.
-          </p>
-
-        </div>
 
 
+        {/* prvi blok */}
+        <div>
+          <h1 className="flex text-[40px] mt-32 justify-center">
+            We are Brothers & Sisters, United through Sports
+          </h1>
 
-
-
-        <div className="m-8 flex justify-center items-center">
-
-          <p expand={expanded}
-            onClick={handleExpandClick} className="cursor-pointer select-none">Read More</p>
-
-
-
-
-          <ExpandMore
-
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </div>
-
-
-        <div className="m-8">
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <p>
-              1. Reducing Commercialization and Corruption<br />
-              The randolympics incorporates cryptocurrency and open-source technology to reduce the focus on high-profile endorsements and commercial interests. This approach increases transparency and diminishes the potential for corruption, ensuring a more genuine and fair competition.
+          <div className="m-8">
+            <p > The randolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.
             </p>
-          </Collapse>
+
+          </div>
 
 
+
+
+
+          <div className="m-8 flex justify-center items-center">
+
+            <p expand={expandedFirstText}
+              onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none">Read More</p>
+
+
+
+
+            <ExpandMore
+
+              expand={expandedFirstText}
+              onClick={() => { setExpandedFirstText(!expandedFirstText) }}
+              aria-expanded={expandedFirstText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </div>
+
+
+          <div className="m-8">
+            <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
+              <FirstCollapsibleHome />
+            </Collapse>
+          </div>
+
+
+
+
+          <div className="flex m-8 justify-center">
+            <h1 className=" text-3xl">Get Involved</h1>
+          </div>
+
+          <ul className="m-8" >
+            <li >Learn more about our mission and values</li>
+            <li>Explore how you can participate or host future events.</li>
+            <li>Discover the exciting range of sports and activities featured in the randolympics</li>
+          </ul>
+
+
+
+
+          <div className="flex m-8 justify-center">
+            <h1 className=" text-3xl">Stay Connected</h1>
+          </div>
+
+          <ul className="m-8" >
+            <li >Follow us on social media for the latest updates.</li>
+            <li>Subscribe to our newsletter for exclusive content and event announcements.</li>
+            <li>Engage with the randolympics community and share your experiences.</li>
+          </ul>
+
+
+
+          <p className="m-8" >Experience the thrill of unpredictability and the joy of unity at the randolympics!</p>
+
+        </div>
+
+
+
+
+        {/* drugi blok */}
+        <div>
+
+          <h1 className="flex text-[40px] mt-32 justify-center">
+            Values and Beliefs
+          </h1>
+
+
+          <div className="m-8">
+            <p > We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.
+            </p>
+
+          </div>
+
+
+          <div className="m-8 flex justify-center items-center">
+
+            <p expand={expandedSecondText}
+              onClick={() => { setExpandedSecondText(!expandedSecondText) }} className="cursor-pointer select-none">Read More</p>
+
+
+
+
+            <ExpandMore
+
+              expand={expandedSecondText}
+              onClick={() => { setExpandedSecondText(!expandedSecondText) }}
+              aria-expanded={expandedSecondText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </div>
+
+
+          <div className="m-8">
+            <Collapse in={expandedSecondText} timeout="auto" unmountOnExit>
+
+
+              <p>
+
+                In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. <br />
+                We stand against any political pressure to exclude athletes based on their identity or beliefs. <br />
+                Transparency is our commitment, using open-source technology for payments and communication. <br />
+                Our democratic approach guarantees equal rights and voting power for every nation and citizen. <br />
+                We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values. <br />
+
+              </p>
+            </Collapse>
+          </div>
+
+        </div>
+
+
+
+        {/* treci blok */}
+        <div>
+
+          <h1 className="flex text-[40px] mt-32 justify-center">
+            Our Competitions
+          </h1>
+
+
+          {/* for all text */}
+          <div className="m-8">
+
+            <div className="flex ">
+              <img className="w-10 h-10 mr-4 mb-4" src="home/competitions/archery.png" />
+              <p><b>Archery</b>: Discover your inner sharpshooter! Imagine Jack from work cheering as you hit the bullseye, excitedly sharing your achievements during coffee breaks. Archery enhances focus and precision, and it's a fantastic way to build mental discipline and physical control.
+              </p>
+            </div>
+
+
+            <div className="flex ">
+              <img className="w-10 h-10 mr-4 mb-4" src="home/competitions/archery.png" />
+              <p><b>Athletics</b>: Whether it's running, jumping, or throwing, athletics offers a thrilling way to challenge your body and reach new personal bests. Eva from the gym will be inspired by your dedication and celebrate your milestones with you.
+              </p>
+            </div>
+
+
+            <div className="m-8 flex justify-center items-center">
+
+              <p expand={expandedThirdText}
+                onClick={() => { setExpandedThirdText(!expandedThirdText) }} className="cursor-pointer select-none">Read More</p>
+
+
+
+
+              <ExpandMore
+
+                expand={expandedThirdText}
+                onClick={() => { setExpandedThirdText(!expandedThirdText) }}
+                aria-expanded={expandedThirdText}
+                aria-label="show more"
+              >
+
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </div>
+
+
+            <Collapse in={expandedThirdText} timeout="auto" unmountOnExit>
+              <CompetitionsHome />
+
+              
+            </Collapse>
+
+
+
+          </div>
 
         </div>
 
