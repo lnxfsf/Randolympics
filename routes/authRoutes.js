@@ -35,7 +35,7 @@ router.post('/reset_password', reset_password) // Route to update the password
 // ! ruta /voting
 
 // update ranking
-router.post("/update_rank_data", update_rank_data)
+/* router.post("/update_rank_data", update_rank_data) 
 
 
 //NP, elections (by Athletes). handled separatelly routes, so less confusion.. 
@@ -46,7 +46,7 @@ router.post("/resignFromCurrentPosition", resignFromCurrentPosition)
 
 // for GP elections (by NP's)
 router.get("/votingForGP", votingForGP )
-router.post("/votingForGP", votingForGP )
+router.post("/votingForGP", votingForGP ) */
 // ! ruta /voting
 
 

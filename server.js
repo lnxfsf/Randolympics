@@ -11,6 +11,9 @@ const blogRoutes = require("./routes/blogRoutes");
 
 const listsData = require("./routes/listsData");
 
+const votingRoutes = require("./routes/votingRoutes")
+
+
 const db = require("./models/database");
 const port = process.env.PORT;
 const app = express();
@@ -28,12 +31,16 @@ app.use("/auth", authRoutes); // routes, login, register.
 
 
 
+
 //for images
 app.use("/imageUpload", imageUpload);
 
 // routes for editing users, ranking... 
 app.use("/listsData", listsData)
 
+
+
+app.use("/voting", votingRoutes);
 
 // this is for blog and news, that users add to..
 app.use("/blog", blogRoutes);

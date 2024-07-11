@@ -663,7 +663,7 @@ const login = async (req, res) => {
 };
 
 
-// ! vraca error, nije sve nasao..
+
 const update_rank_data = async (req, res) => {
   const { userId, originalRank, goingToRank, user_type, nationality } = req.body;
 
