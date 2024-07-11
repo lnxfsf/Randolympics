@@ -172,7 +172,7 @@ const Elections = () => {
     try {
 
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsRanking/lastInRank`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/lastInRank`,
         {
           params: {
             user_type: selectedRole,
@@ -204,7 +204,7 @@ const Elections = () => {
     // user_type, is for the selection dropdown...
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/rankingTop50`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/rankingTop50`,
         {
           params: {
             limit: 10,
@@ -249,7 +249,7 @@ const Elections = () => {
   const fetchOtherUsers = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/otherUsers`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/otherUsers`,
         {
           params: {
             limit: 10,
@@ -354,7 +354,7 @@ const Elections = () => {
     // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/votingForNP`,
+        `${BACKEND_SERVER_BASE_URL}/voting/votingForNP`,
         {
         
           NPuserId: event.target.value,  // NP userId we're voting for
@@ -418,7 +418,7 @@ const Elections = () => {
 
     try {
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/votingForGP`,
+        `${BACKEND_SERVER_BASE_URL}/voting/votingForGP`,
         {
         
           GPuserId: event.target.value,

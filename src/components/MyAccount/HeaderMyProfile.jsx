@@ -83,7 +83,7 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
     try {
       // we just upload profile_image URL, in database !
       var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/update_user_data`,
+        `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email,
           // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )

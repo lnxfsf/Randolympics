@@ -161,7 +161,7 @@ const Team = () => {
 
   const fetchTeamMates = async () => {
     try {
-      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/auth/team`, {
+      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
         params: {
           limit: 10,
           offset: (otherPage - 1) * 10,
@@ -199,7 +199,7 @@ const Team = () => {
 
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/currentNP`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/currentNP`,
          {params: {
           nationality: code,  // this is, if NP is from DZ "algeria", then, he will be NP for these athletes... 
          },

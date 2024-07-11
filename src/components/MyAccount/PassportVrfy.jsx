@@ -67,7 +67,7 @@ const PassportVrfy = () => {
     // yes, fetch all if there's no filter... ofc, it will fetch 10 by 10 (pages..)
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/listAllUsers`,
+        `${BACKEND_SERVER_BASE_URL}/user/listAllUsers`,
         {
           params: {
             limit: 10,
