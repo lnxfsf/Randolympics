@@ -8,7 +8,7 @@ const User = db.users;
 const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
-const Sequelize = db.Sequelize; // ! this
+const Sequelize = db.Sequelize; 
 
 const sendEmail = require("../utils/sendEmail");
 
@@ -59,9 +59,11 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 
         const latestUser = await User.findOne({
           attributes: ["ranking"],
-          where: { nationality: nationality,
+          where: {
+            nationality: nationality,
             gender: gender,
-             user_type: user_type },
+            user_type: user_type
+          },
           order: [["ranking", "DESC"]],
         });
 
@@ -285,7 +287,7 @@ const register = async (req, res) => {
 };
 
 
- 
+
 
 
 const email_resend = async (req, res) => {
@@ -663,13 +665,13 @@ const login = async (req, res) => {
 
 // ! vraca error, nije sve nasao..
 const update_rank_data = async (req, res) => {
-  const { userId, originalRank, goingToRank, user_type, nationality  } = req.body;
+  const { userId, originalRank, goingToRank, user_type, nationality } = req.body;
 
-  console.log("primasssssssssss"+userId)
+/*   console.log("primasssssssssss" + userId)
 
-  console.log("primasssssssssss"+nationality)
-  console.log("primasssssssssss"+ user_type) // OVO JE PROBLEM ! on dobija, current user_type ! ali treba ipak da prima, sa selected value !! dropdown !!
-
+  console.log("primasssssssssss" + nationality)
+  console.log("primasssssssssss" + user_type) // OVO JE PROBLEM ! on dobija, current user_type ! ali treba ipak da prima, sa selected value !! dropdown !!
+ */
 
   await db.sequelize.sync();
 
@@ -680,17 +682,17 @@ const update_rank_data = async (req, res) => {
 
   var gender = user.gender;
 
-  console.log("gender je:::::: "+gender)
+  console.log("gender je:::::: " + gender)
   /* if(user){ */
-     // just to get these variables.. we need it for ranking
-    // var user_typeOfuserWereChanging = user.user_type; // like, so we can use it for ranking.. 
-     //var nationalityOfuserWereChanging = user.nationality; // and by nationality. we need it for ranking, to filter by.. 
- 
+  // just to get these variables.. we need it for ranking
+  // var user_typeOfuserWereChanging = user.user_type; // like, so we can use it for ranking.. 
+  //var nationalityOfuserWereChanging = user.nationality; // and by nationality. we need it for ranking, to filter by.. 
 
-     
+
+
   /* } */
 
-  if(user_type === "AH"){
+  if (user_type === "AH") {
     if (user) {
       console.log("original rank je:" + originalRank);
       console.log("going to rank AH:" + goingToRank);
@@ -699,7 +701,7 @@ const update_rank_data = async (req, res) => {
 
 
 
-    
+
 
       // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
       // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
@@ -718,9 +720,9 @@ const update_rank_data = async (req, res) => {
             console.log("zatim u ovaj loop:")
 
             let lowerUser = await User.findOne({
-              where: { 
+              where: {
                 // by these two, we can filter right ranking we need..
-                nationality: nationality, 
+                nationality: nationality,
                 user_type: user_type,
                 gender: gender,
 
@@ -730,7 +732,7 @@ const update_rank_data = async (req, res) => {
               },
             });
 
-            console.log("nasao je, upper user: "+lowerUser)
+            console.log("nasao je, upper user: " + lowerUser)
 
             //if there's none, nevermind, just go one number +1 then.. no problem...
             if (lowerUser) {
@@ -743,7 +745,7 @@ const update_rank_data = async (req, res) => {
             // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
             //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
             await user.update({ ranking: user.ranking + 1 }, { transaction: t });
-            
+
 
             // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
             originalRankLoop = originalRankLoop + 1;
@@ -771,17 +773,18 @@ const update_rank_data = async (req, res) => {
           // if it reached 1, and goingToRank is also being 1, then won't go furhter..
           while (originalRankLoop !== goingToRank) {
             let lowerUser = await User.findOne({
-              where: { 
+              where: {
                 // by these two, we can filter right ranking we need..
-                nationality: nationality, 
+                nationality: nationality,
                 user_type: user_type,
                 gender: gender,
-                
-                
-                ranking: user.ranking - 1 },
+
+
+                ranking: user.ranking - 1
+              },
             });
 
-            console.log("nasao je, lower user: "+lowerUser)
+            console.log("nasao je, lower user: " + lowerUser)
 
             //if there's none, nevermind, just go one number +1 then.. no problem...
             if (lowerUser) {
@@ -807,110 +810,111 @@ const update_rank_data = async (req, res) => {
         }
       }
     }
-} else if (user_type === "RS"){
+  } else if (user_type === "RS") {
 
-  // for RS, we use rankingRS !
+    // for RS, we use rankingRS !
 
-  if (user) {
-    console.log("original rank je:" + originalRank);
-    console.log("going to rank RS:" + goingToRank);
-
-
-
-  
-
-    // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
-    // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
-    if (goingToRank - originalRank > 0) {
-      var originalRankLoop = originalRank;
-
-      // this is in case of error, so it doesn't write directly in database
-      const t = await db.sequelize.transaction();
-
-      try {
-        // if it reached 1, and goingToRank is also being 1, then won't go furhter..
-        while (originalRankLoop !== goingToRank) {
-          let lowerUser = await User.findOne({
-            where: { 
-              // by these two, we can filter right ranking we need..
-              nationality: nationality, 
-              user_type: user_type,
+    if (user) {
+      console.log("original rank je:" + originalRank);
+      console.log("going to rank RS:" + goingToRank);
 
 
-              rankingRS: user.rankingRS + 1, 
 
-            },
-          });
 
-          //if there's none, nevermind, just go one number +1 then.. no problem...
-          if (lowerUser) {
-            await lowerUser.update(
-              { rankingRS: user.rankingRS },
-              { transaction: t }
-            );
+
+      // when athlete goes LOWER IN RANK (but that's calculated as going UP in rank NUMBER.. )
+      // for ( >0 ), when it's positive number. i.e. to go up in rank number. (i.e. athlete goes lower in rank, from 2 to 5 .. )
+      if (goingToRank - originalRank > 0) {
+        var originalRankLoop = originalRank;
+
+        // this is in case of error, so it doesn't write directly in database
+        const t = await db.sequelize.transaction();
+
+        try {
+          // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+          while (originalRankLoop !== goingToRank) {
+            let lowerUser = await User.findOne({
+              where: {
+                // by these two, we can filter right ranking we need..
+                nationality: nationality,
+                user_type: user_type,
+
+
+                rankingRS: user.rankingRS + 1,
+
+              },
+            });
+
+            //if there's none, nevermind, just go one number +1 then.. no problem...
+            if (lowerUser) {
+              await lowerUser.update(
+                { rankingRS: user.rankingRS },
+                { transaction: t }
+              );
+            }
+
+            // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+            //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+            await user.update({ rankingRS: user.rankingRS + 1 }, { transaction: t });
+
+            // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+            originalRankLoop = originalRankLoop + 1;
           }
 
-          // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
-          //await user.increment('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-          await user.update({ rankingRS: user.rankingRS + 1 }, { transaction: t });
-
-          // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
-          originalRankLoop = originalRankLoop + 1;
+          await t.commit();
+          return res.status(200).json({ message: "User rank updated" });
+        } catch (error) {
+          await t.rollback();
+          return res.status(500).json({ error: error.message });
         }
+      } else if (goingToRank - originalRank < 0) {
+        // when athlete goes UPPER IN RANK (but that's calculated as going DOWN in rank NUMBER.. )
+        // for ( <0 ), when it's negative number. i.e. to go down in rank number. (i.e. athlete goes up in rank, from 5 to 2 .. )
 
-        await t.commit();
-        return res.status(200).json({ message: "User rank updated" });
-      } catch (error) {
-        await t.rollback();
-        return res.status(500).json({ error: error.message });
-      }
-    } else if (goingToRank - originalRank < 0) {
-      // when athlete goes UPPER IN RANK (but that's calculated as going DOWN in rank NUMBER.. )
-      // for ( <0 ), when it's negative number. i.e. to go down in rank number. (i.e. athlete goes up in rank, from 5 to 2 .. )
+        var originalRankLoop = originalRank;
 
-      var originalRankLoop = originalRank;
+        // this is in case of error, so it doesn't write directly in database
+        const t = await db.sequelize.transaction();
 
-      // this is in case of error, so it doesn't write directly in database
-      const t = await db.sequelize.transaction();
+        try {
+          // if it reached 1, and goingToRank is also being 1, then won't go furhter..
+          while (originalRankLoop !== goingToRank) {
+            let lowerUser = await User.findOne({
+              where: {
+                // by these two, we can filter right ranking we need..
+                nationality: nationality,
+                user_type: user_type,
 
-      try {
-        // if it reached 1, and goingToRank is also being 1, then won't go furhter..
-        while (originalRankLoop !== goingToRank) {
-          let lowerUser = await User.findOne({
-            where: { 
-              // by these two, we can filter right ranking we need..
-              nationality: nationality, 
-              user_type: user_type,
-              
-              
-              rankingRS: user.rankingRS - 1 },
-          });
 
-          //if there's none, nevermind, just go one number +1 then.. no problem...
-          if (lowerUser) {
-            await lowerUser.update(
-              { rankingRS: user.rankingRS },
-              { transaction: t }
-            );
+                rankingRS: user.rankingRS - 1
+              },
+            });
+
+            //if there's none, nevermind, just go one number +1 then.. no problem...
+            if (lowerUser) {
+              await lowerUser.update(
+                { rankingRS: user.rankingRS },
+                { transaction: t }
+              );
+            }
+
+            // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
+            //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
+            await user.update({ rankingRS: user.rankingRS - 1 }, { transaction: t });
+
+            // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
+            originalRankLoop = originalRankLoop - 1;
           }
 
-          // this is to update it in database. // this one works ! nicely !!! even if it needs to jump !
-          //await user.decrement('ranking', { by: 1 }); // but this, just won't.. BUT, you will use this simple increment/decrement for simpler, (like, when athlete, have to select NP... )
-          await user.update({ rankingRS: user.rankingRS - 1 }, { transaction: t });
-
-          // this is for (while) loop. as it doesn't fetch changes immediatelly, so in variable we do...
-          originalRankLoop = originalRankLoop - 1;
+          await t.commit();
+          return res.status(200).json({ message: "User rank updated" });
+        } catch (error) {
+          await t.rollback();
+          return res.status(500).json({ error: error.message });
         }
-
-        await t.commit();
-        return res.status(200).json({ message: "User rank updated" });
-      } catch (error) {
-        await t.rollback();
-        return res.status(500).json({ error: error.message });
       }
     }
   }
-}
 
 
 };
@@ -978,7 +982,9 @@ const update_user_data = async (req, res) => {
 
 
 
-  if(updating_from_VM){
+    console.log("salje updating_from_VM za:"+ updating_from_VM)
+    
+    if (updating_from_VM) {
       var passportStatus = "unvalidated";
       if (
         name_verify &&
@@ -992,8 +998,8 @@ const update_user_data = async (req, res) => {
         var passportStatus = "unvalidated";
       }
     }
-    
-    
+
+
 
     if (isRejected === true) {
       passportStatus = "rejected"; // it will be updated in one below.. for this one..
@@ -1140,7 +1146,7 @@ const rankingTop50 = async (req, res) => {
   // this is for NP's selection by athletes
   const votedFor = req.query.votedFor;
 
-  
+
   // this is for GP's selection by NP's (so it show above red line only one selected by user)
   const votedForGP = req.query.votedForGP;
 
@@ -1204,7 +1210,7 @@ const rankingTop50 = async (req, res) => {
   } else if (user_type === "NP") {
     try {
 
-    
+
 
       // ! this is route for athletes, and referee & support. ONLY THEM can choose NP ! GP can't !!! so this is route we're gonna use
       // that means, we give back, ordered by "voting" ! we don't need "ranking", for NP selection
@@ -1690,10 +1696,10 @@ const otherUsers = async (req, res) => {
           ['votes', 'DESC'], // Sort by ranking descending (greatest first)
           ['name', 'ASC']    //  name in ascending order 
         ],
-        
-        
-        
-        
+
+
+
+
 
         limit: limit,
         offset: offset,
@@ -1785,7 +1791,7 @@ const currentNP = async (req, res) => {
     });
 
     // console.log("Stampa NP koji je:")
-    
+
 
     return res.status(200).json(currentNP);
   } catch (error) {
@@ -1813,16 +1819,16 @@ const team = async (req, res) => {
 
   const genderFilter = req.query.genderFilter;
 
-  
+
 
   const categoryFilter = req.query.categoryFilter;
 
   const needGender = req.query.needGender;
-  console.log("trazi li gender za RS (ne treba..)"+needGender)
+  console.log("trazi li gender za RS (ne treba..)" + needGender)
 
-  
-  
-  
+
+
+
 
 
   const nationality = req.query.nationality;
@@ -1834,9 +1840,9 @@ const team = async (req, res) => {
       },
     });
 
-    
 
-    console.log("tip je"+user_type)
+
+    console.log("tip je" + user_type)
 
     let filterConditions = {
       nationality: nationality,
@@ -1870,8 +1876,8 @@ const team = async (req, res) => {
     }
 
     // only, 50 are in team, ! (if we are showing "AH" users !)
-    
-    if (user_type === "AH" ) {
+
+    if (user_type === "AH") {
       filterConditions = {
         ...filterConditions,
         ranking: {
@@ -1881,7 +1887,7 @@ const team = async (req, res) => {
     }
 
     // also, applies for RS as well (but it uses another rankingRS ! )
-    if(currentUserType === "RS"){
+    if (currentUserType === "RS") {
       filterConditions = {
         ...filterConditions,
         rankingRS: {
@@ -1927,11 +1933,11 @@ const team = async (req, res) => {
       offset: offset,
     });
 
-    
+
 
 
     res.json(teamMates);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 const votingForNP = async (req, res) => {
@@ -1989,20 +1995,20 @@ const votingForNP = async (req, res) => {
 
       const previousVoteNP = currentUser.votedForNPuserId
         ? await User.findOne({
-            where: { userId: currentUser.votedForNPuserId },
-          })
+          where: { userId: currentUser.votedForNPuserId },
+        })
         : null;
 
 
-        console.log("current user je:")
-        console.log(currentUser.name)
+      console.log("current user je:")
+      console.log(currentUser.name)
 
-        console.log("selected NP  je:")
-        console.log(selectedVoteNP.name)
+      console.log("selected NP  je:")
+      console.log(selectedVoteNP.name)
 
 
-        //console.log("previousVoteNP od current User-a  je:")
-        //console.log(previousVoteNP.name)
+      //console.log("previousVoteNP od current User-a  je:")
+      //console.log(previousVoteNP.name)
 
 
 
@@ -2023,7 +2029,7 @@ const votingForNP = async (req, res) => {
 
           // here, you check, if selectedVoteNP , have 130% more votes than currentNP (you find him based on flag.. )
           // you find who is currentNP now.. to try to replace him..
-          
+
           const currentNP = await User.findOne({
             where: {
               currentNP: true,
@@ -2046,7 +2052,7 @@ const votingForNP = async (req, res) => {
           console.log("nije nego ne nalazi second most votes !!! zato sve ostalo ne izvrsava: ")
           console.log(secondMostVotes)
 
-            
+
           /* 
           if(secondMostVotes){
             // znači, ovo samo ako je prazan. pa onda mora da uzme neki random, samo da bi ono uporedio čisto..
@@ -2131,17 +2137,17 @@ const votingForNP = async (req, res) => {
             
             await selectedVoteNP.save(); */
 
-          // !  SELECTED, THE JUST SELECTEB BY USER !!!
+            // !  SELECTED, THE JUST SELECTEB BY USER !!!
             // ! so this has to go, instead of secondMostVotes.update  , it needs to be    selectedVoteNP.update (so.. selectedVoteNP !! )
-         /*   await secondMostVotes.update({ currentNP: true });
+            /*   await secondMostVotes.update({ currentNP: true });
+   
+               // and set status text, as he's currentNP.. (that's what he wants)
+               await secondMostVotes.update({
+                 status: "Acting National President",
+               });
+               var date_now = new Date().toString(); //timestamp..
+               await secondMostVotes.update({ status_date: date_now });  */
 
-            // and set status text, as he's currentNP.. (that's what he wants)
-            await secondMostVotes.update({
-              status: "Acting National President",
-            });
-            var date_now = new Date().toString(); //timestamp..
-            await secondMostVotes.update({ status_date: date_now });  */
-         
             await selectedVoteNP.update({ currentNP: true });
 
             // and set status text, as he's currentNP.. (that's what he wants)
@@ -2149,8 +2155,8 @@ const votingForNP = async (req, res) => {
               status: "Acting National President",
             });
             var date_now = new Date().toString(); //timestamp..
-            await selectedVoteNP.update({ status_date: date_now }); 
-         
+            await selectedVoteNP.update({ status_date: date_now });
+
           }
         }
 
@@ -2226,8 +2232,8 @@ const votingForGP = async (req, res) => {
       // he get's this, by checking value of current user, if it's empty or not... aha..
       const previousVoteGP = currentUser.votedForGPuserId
         ? await User.findOne({
-            where: { userId: currentUser.votedForGPuserId },
-          })
+          where: { userId: currentUser.votedForGPuserId },
+        })
         : null;
 
       // sad izvuče prethodni , i utvdi da li je doslo do promene, (ako nije, ne radi nista.. ako jeste onda radi nesto... ). tj. negacija, da izvrsi, ako je unique, novi entry..

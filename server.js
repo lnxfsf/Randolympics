@@ -9,7 +9,7 @@ const captchaRoutes = require("./routes/captchaRoutes");
 const imageUpload = require("./routes/imageUpload");
 const blogRoutes = require("./routes/blogRoutes");
 
-const listsRanking = require("./routes/listsRanking");
+const listsData = require("./routes/listsData");
 
 const db = require("./models/database");
 const port = process.env.PORT;
@@ -25,11 +25,14 @@ app.use("/captcha", captchaRoutes);
 app.use("/auth", authRoutes); // routes, login, register.
 
 
+
+
+
 //for images
 app.use("/imageUpload", imageUpload);
 
 // routes for editing users, ranking... 
-app.use("/listsRanking", listsRanking)
+app.use("/listsData", listsData)
 
 
 // this is for blog and news, that users add to..
