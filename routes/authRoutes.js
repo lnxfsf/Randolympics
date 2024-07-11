@@ -82,14 +82,14 @@ router.post("/votingForGP", votingForGP ) */
 
 
 // ! rute  /user
-// for edit profile
+/* // for edit profile
 router.post("/update_user_data", update_user_data)
 
 router.post("/fetchLatestData",fetchLatestData )
 
 
 // listAllUsers... (for passport verification)
-router.get("/listAllUsers",listAllUsers)
+router.get("/listAllUsers",listAllUsers) */
 // ! rute  /user
 
 

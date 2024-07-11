@@ -8,10 +8,12 @@ const authRoutes = require("./routes/authRoutes");
 const captchaRoutes = require("./routes/captchaRoutes");
 const imageUpload = require("./routes/imageUpload");
 const blogRoutes = require("./routes/blogRoutes");
-
 const listsData = require("./routes/listsData");
+const votingRoutes = require("./routes/votingRoutes");
 
-const votingRoutes = require("./routes/votingRoutes")
+const userRoutes = require("./routes/userRoutes")
+
+
 
 
 const db = require("./models/database");
@@ -27,20 +29,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/captcha", captchaRoutes);
 app.use("/auth", authRoutes); // routes, login, register.
 
-
-
-
-
-
 //for images
 app.use("/imageUpload", imageUpload);
 
 // routes for editing users, ranking... 
 app.use("/listsData", listsData)
-
-
-
 app.use("/voting", votingRoutes);
+
+
+app.use("/user", userRoutes)
 
 // this is for blog and news, that users add to..
 app.use("/blog", blogRoutes);
