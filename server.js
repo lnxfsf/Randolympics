@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const captchaRoutes = require("./routes/captchaRoutes");
 const imageUpload = require("./routes/imageUpload");
 const blogRoutes = require("./routes/blogRoutes");
+
 const listsData = require("./routes/listsData");
 const votingRoutes = require("./routes/votingRoutes");
 
