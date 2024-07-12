@@ -8,7 +8,7 @@ const User = db.users;
 const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
-const Sequelize = db.Sequelize; 
+const Sequelize = db.Sequelize;
 
 const sendEmail = require("../utils/sendEmail");
 
@@ -198,6 +198,85 @@ const register = async (req, res) => {
     gender,
   } = req.body;
 
+
+
+
+  // validation !!
+
+
+
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+  if (!emailRegex.test(email)) {
+    res.status(409).json({ message: "Email is incorrect !" });
+    return;
+
+  }
+
+
+  if (name == "") {
+    res.status(409).json({ message: "Name can't be empty !" });
+    return;
+  }
+
+
+
+
+
+  const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
+
+
+
+  if (!phoneRegex.test(phone)) {
+    res.status(409).json({ message: "Phone is incorrect !" });
+    return;
+  }
+
+
+
+
+
+
+
+
+
+  const passwordRegex = /^.{4,}$/;
+
+  if (!passwordRegex.test(password)) {
+    res.status(409).json({ message: "Password should be longer than 4 characters !" });
+    return;
+  }
+
+
+
+
+  // nationality
+  if (nationality === "") {
+    res.status(409).json({ message: "Select nationality !" });
+    return;
+  }
+
+
+
+
+
+  //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
+  if (user_type === "AH") {
+    if (weight == null) {
+      res.status(409).json({ message: "Weight not inserted !" });
+      return;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   // hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt); //hash password
@@ -262,7 +341,7 @@ const register = async (req, res) => {
     });
 
     if (userAlreadyExists) {
-      return res.status(409).json({ error: "Email already exists" });
+      return res.status(409).json({ message: "User already exists" });
     }
 
     // Create a new user
