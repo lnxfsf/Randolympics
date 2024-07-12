@@ -718,6 +718,8 @@ const team = async (req, res) => {
 
 
 
+
+
     console.log("tip je" + user_type)
 
     let filterConditions = {
@@ -813,6 +815,10 @@ const team = async (req, res) => {
 
 
     res.json(teamMates);
+    
+
+
+
   } catch (error) { }
 };
 

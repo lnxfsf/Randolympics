@@ -214,7 +214,7 @@ const register = async (req, res) => {
     name,
     name_verify: null,
     birthdate: null,
-    birthdate_private: null,
+    birthdate_private: 1,
     birthdate_verify: null,
     phone,
     phone_private,
