@@ -62,8 +62,23 @@ const Others = ({
   
 
   const nationality = user.nationality;
-  const email = user.email;
-  const phone = user.phone;
+
+  
+  if(user.email_private == 1){
+    var email = "private";
+  } else {
+    var email = user.email;
+  }
+
+
+   // private je 1 
+  // public je 0 
+  if(user.phone_private == 1){
+    var phone = "private";
+  } else {
+    var phone = user.phone;
+  }
+
   const gender = user.gender;
 
   if(user_type === "AH" || user_type === "RS"){
@@ -97,8 +112,13 @@ const Others = ({
   }
   
 
-  const age = calculateAge(user.birthdate);  
-  console.log("rodjendan"+user.birthdate)
+  if(user.birthdate_private == 1){
+    var age = "private";
+  } else {
+    var age = calculateAge(user.birthdate);
+  }
+
+  
 
 
   //const userNPPercentage = user.userNPPercentage;
