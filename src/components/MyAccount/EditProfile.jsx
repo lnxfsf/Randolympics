@@ -813,8 +813,8 @@ const EditProfile = () => {
                       ".MuiOutlinedInput-notchedOutline": { border: 0 },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
                   </Select>
                 </FormControl>
                 <TextField
@@ -1032,8 +1032,8 @@ const EditProfile = () => {
                       ".MuiOutlinedInput-notchedOutline": { border: 0 },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
                   </Select>
                 </FormControl>
                 <TextField
@@ -1088,8 +1088,8 @@ const EditProfile = () => {
                           ".MuiOutlinedInput-notchedOutline": { border: 0 },
                         }}
                       >
-                        <MenuItem value={true}>Private</MenuItem>
-                        <MenuItem value={false}>Public</MenuItem>
+                        <MenuItem value={1}>Private</MenuItem>
+                        <MenuItem value={0}>Public</MenuItem>
                       </Select>
                     </FormControl>
                     <TextField
@@ -1191,8 +1191,8 @@ const EditProfile = () => {
                         ".MuiOutlinedInput-notchedOutline": { border: 0 },
                       }}
                     >
-                      <MenuItem value={true}>Private</MenuItem>
-                      <MenuItem value={false}>Public</MenuItem>
+                      <MenuItem value={1}>Private</MenuItem>
+                      <MenuItem value={0}>Public</MenuItem>
                     </Select>
                   </FormControl>
 

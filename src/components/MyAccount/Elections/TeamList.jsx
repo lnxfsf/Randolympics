@@ -12,6 +12,31 @@ import moment from "moment";
 const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
 
+
+  function calculateAge(birthdate) {
+    // if birthdate is empty, or invalid..
+    if (!birthdate || !moment(birthdate).isValid()) {
+      return '-';
+    }
+
+  
+    const today = moment();
+    console.log("danas"+today)
+
+    const birthDate = moment(birthdate);
+    console.log("rodjendan"+birthDate)
+
+    const years = today.diff(birthDate, 'years');
+    console.log("razlika god"+years)
+
+  
+    return years;
+  }
+
+
+
+
+
   // ranking, also depends on user type..
   if (selectedRole == "AH") {
     var rank = user.ranking;
@@ -36,9 +61,40 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   }
 
   const name = user.name;
-  const age = user.age;
-  const email = user.email;
-  const phone = user.phone;
+
+
+  
+
+  
+
+  
+  if(user.birthdate_private == 1){
+    var age = "private";
+  } else {
+    var age = calculateAge(user.birthdate);
+  }
+
+
+
+  
+
+  if(user.email_private == 1){
+    var email = "private";
+  } else {
+    var email = user.email;
+  }
+
+
+
+
+  // private je 1 
+  // public je 0 
+  if(user.phone_private == 1){
+    var phone = "private";
+  } else {
+    var phone = user.phone;
+  }
+
   const gender = user.gender;
 
   return (
