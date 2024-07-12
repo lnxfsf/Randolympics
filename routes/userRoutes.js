@@ -2,7 +2,7 @@
 
 
 const express = require("express");
-const { update_user_data, fetchLatestData , listAllUsers  } = require("../controllers/userControllers");
+const { update_user_data, fetchLatestData , listAllUsers, deleteUser  } = require("../controllers/userControllers");
 const router = express.Router();
 
 
@@ -17,6 +17,9 @@ router.post("/fetchLatestData", fetchLatestData )
 router.get("/listAllUsers", listAllUsers)
 
 
+
+// delete user profile... 
+router.post("/deleteUser", deleteUser)
 
 
 module.exports = router;

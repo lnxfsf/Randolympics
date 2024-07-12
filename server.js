@@ -33,7 +33,7 @@ app.use("/auth", authRoutes); // routes, login, register.
 app.use("/imageUpload", imageUpload);
 
 // routes for editing users, ranking... 
-app.use("/listsData", listsData)
+app.use("/listsData", listsData);
 app.use("/voting", votingRoutes);
 
 
