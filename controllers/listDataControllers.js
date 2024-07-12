@@ -2,7 +2,7 @@
 
 const db = require("../models/database");
 const User = db.users;
-const Token = db.token;
+const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
 
@@ -815,7 +815,7 @@ const team = async (req, res) => {
 
 
     res.json(teamMates);
-    
+
 
 
 
@@ -865,6 +865,7 @@ const listLoginTrafficHistory = async (req, res) => {
 
     res.json(listLoginTrafficHistory);
   } catch (error) {
+    console.log(error.stack)
     res.status(500).json({ error: "Internal server error" });
   }
 };
