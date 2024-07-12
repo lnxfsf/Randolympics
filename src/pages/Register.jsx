@@ -78,6 +78,7 @@ const Register = () => {
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
   const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const isEmailErrorFocus = useRef(null);
 
   const [resultText, setResultText] = useState("");
   const [resultTextColor, setResultTextColor] = useState("black");
@@ -106,34 +107,34 @@ const Register = () => {
 
   const [uploadedFile, setUploadedFile] = useState(null);
 
-  
+
 
   const server = {
-        /* url: 'http://localhost:5000/profile_photo/upload', */
+    /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
-        method: 'POST',
-        headers: {},
-        withCredentials: false,
+      url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
+      method: 'POST',
+      headers: {},
+      withCredentials: false,
 
-        onload: (response) => {
+      onload: (response) => {
 
-            // Parse the JSON response to get the filename
+        // Parse the JSON response to get the filename
 
-            const jsonResponse = JSON.parse(response);
-            const filename = jsonResponse;
+        const jsonResponse = JSON.parse(response);
+        const filename = jsonResponse;
 
-            console.log("Uploaded filename:", filename);
-            setUploadedFile(filename);
-            // return filename; 
-        },
-        onerror: (response) => {
-            console.error('Error uploading file:', response);
-            return response;
-        },
+        console.log("Uploaded filename:", filename);
+        setUploadedFile(filename);
+        // return filename; 
+      },
+      onerror: (response) => {
+        console.error('Error uploading file:', response);
+        return response;
+      },
     },
-};
+  };
 
 
 
@@ -172,7 +173,7 @@ const Register = () => {
 
 
   const recaptcha = useRef();
- 
+
 
   // ? captcha
 
@@ -215,6 +216,10 @@ const Register = () => {
 
   // ? HERE, for weight..
 
+  const [weight, setWeight] = useState(null);
+
+
+
   const weightOptions = ["Kg", "Lb"]; // supported cryptos
 
   const [weightMenuAnchorEl, setWeightMenuAnchorEl] = useState(null);
@@ -233,6 +238,8 @@ const Register = () => {
     setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
   };
 
+
+
   // ? HERE, for weight..
 
   useEffect(() => {
@@ -243,7 +250,16 @@ const Register = () => {
         $recaptcha.setAttribute("required", "required");
       }
     });
-  }, []);
+
+
+
+    if (isEmailError && isEmailErrorFocus.current) {
+      isEmailErrorFocus.current.focus();
+    }
+
+
+
+  }, [isEmailError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -274,12 +290,13 @@ const Register = () => {
     if (!e.target.weight) {
       var weight = null;
     } else {
-      var weight = e.target.weight.value;
+      // var weight = e.target.weight.value;
 
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
-        weight = weight * 0.45359237;
-        console.log(weight);
+        setWeight(weight * 0.45359237);
+
+        //console.log(weight);
       }
     }
 
@@ -299,70 +316,103 @@ const Register = () => {
     if (!captchaValue) {
       setResultText("Please verify the reCAPTCHA!");
     } else {
-      const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
-        method: "POST",
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
 
-      const data = await res.json();
 
-      // response in json we have "success" field, that google send us, if it's verified or not
-      if (data.success) {
-        // make form submission
 
-        try {
-          var response = await axios.post(
-            `${BACKEND_SERVER_BASE_URL}/auth/register`,
-            {
-              user_type: selectedRole,
-              email,
-              password,
-              email_private,
-              phone_private,
-              weight_private,
-              name,
-              phone,
-              nationality: nationality_selected,
-              weight,
-              cryptoaddress: cryptoaddr,
-              picture: uploadedFile,
+      // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
+      if (nationality_selected && isEmailError !== false) {
 
-              cryptoaddress_type: selectedCrypto,
-              bio,
-              gender: selectedGender,
-            }
-          );
-        } catch (error) {
-          console.log(error);
 
-          if (axios.isAxiosError(error)) {
-            if (error.response && error.response.status === 409) {
-              //alert("");
+        const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
+          method: "POST",
+          body: JSON.stringify({ captchaValue }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
 
-              setResultText("User already exists ! ");
-              setResultTextColor("red");
-            } else {
-              setResultText(
-                "An error occurred: " +
+        const data = await res.json();
+
+        // response in json we have "success" field, that google send us, if it's verified or not
+        if (data.success) {
+          // make form submission
+
+
+
+
+
+          // ! e ovde ne moze da pusta, ako ova varijable nije na true (tj. string bolje da je.. da bi mogao da ga menjas, i prikazujes errors u polja gde appropriate i takodje, "focus" na to polje !!!)
+
+
+          try {
+            var response = await axios.post(
+              `${BACKEND_SERVER_BASE_URL}/auth/register`,
+              {
+                user_type: selectedRole,
+                email,
+                password,
+                email_private,
+                phone_private,
+                weight_private,
+                name,
+                phone,
+                nationality: nationality_selected,
+                weight,
+                cryptoaddress: cryptoaddr,
+                picture: uploadedFile,
+
+                cryptoaddress_type: selectedCrypto,
+                bio,
+                gender: selectedGender,
+              }
+            );
+          } catch (error) {
+            console.log(error);
+
+            if (axios.isAxiosError(error)) {
+              if (error.response && error.response.status === 409) {
+                //alert("");
+
+                setResultText("User already exists ! ");
+                setResultTextColor("red");
+              } else {
+                setResultText(
+                  "An error occurred: " +
                   (error.response?.data?.message || error.message)
-              );
+                );
+              }
+            } else {
+              setResultText("An unexpected error occurred: " + error.message);
             }
-          } else {
-            setResultText("An unexpected error occurred: " + error.message);
           }
-        }
 
-        if (response) {
-          setResultText("Signed up ! Email verification sent.");
-          
+
+
+
+
+
+
+          if (response) {
+            setResultText("Signed up ! Email verification sent.");
+            setResultTextColor("black");
+          }
+        } else {
+          setResultText("reCAPTCHA validation failed!");
+          setResultTextColor("red");
         }
       } else {
-        setResultText("reCAPTCHA validation failed!");
-        setResultTextColor("red");
+
+        if (nationality_selected === "") {
+          setResultText("Insert nationality !");
+          setResultTextColor("red");
+        } else if (isEmailError === false) {
+          setResultText("Email is not valid !");
+          setResultTextColor("red");
+        }
+
+
       }
+
     }
   };
 
@@ -428,7 +478,7 @@ const Register = () => {
               </Select>
             </div>
 
-            
+
 
             <div
               action="#"
@@ -438,6 +488,9 @@ const Register = () => {
                 <TextField
                   error={isEmailError}
                   helperText={isEmailErrorHelper}
+
+                  inputRef={isEmailErrorFocus}
+
                   label="Email"
                   placeholder="johndoe@gmail.com"
                   id="email"
@@ -456,9 +509,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -505,9 +558,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -534,9 +587,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -571,8 +624,12 @@ const Register = () => {
                   name="phone"
                   required
                   type="tel"
+
                   inputProps={{
                     maxLength: 15,
+
+
+
                   }}
                   sx={{
                     m: 1,
@@ -582,9 +639,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -614,6 +671,7 @@ const Register = () => {
 
               <div className="flex flex-col mb-2.5 justify-center  mt-2">
                 <ReactFlagsSelect
+
                   selected={nationality_selected}
                   onSelect={(code) => setNationality_selected(code)}
                   className="w-[420px]  "
@@ -625,21 +683,21 @@ const Register = () => {
               </div>
 
               <div className="flex mt-0 mb-2 flex-col">
-              <InputLabel id="roleDropdowns">Gender</InputLabel>
-              <Select
-                labelId="roleDropdowns"
-                id="roleDropdown"
-                label="gender"
-                value={selectedGender}
-                onChange={handleChangeGender}
-                className="w-[420px] h-10"
-                style={{ color: "#000" }}
-              >
-                <MenuItem value={"M"}>Male</MenuItem>
-                <MenuItem value={"F"}>Female</MenuItem>
-          
-              </Select>
-            </div>
+                <InputLabel id="roleDropdowns">Gender</InputLabel>
+                <Select
+                  labelId="roleDropdowns"
+                  id="roleDropdown"
+                  label="gender"
+                  value={selectedGender}
+                  onChange={handleChangeGender}
+                  className="w-[420px] h-10"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"M"}>Male</MenuItem>
+                  <MenuItem value={"F"}>Female</MenuItem>
+
+                </Select>
+              </div>
 
               {selectedRole === "AH" && (
                 <div className="flex mb-2.5 justify-center items-center mt-2">
@@ -648,7 +706,19 @@ const Register = () => {
                     id="weight"
                     name="weight"
                     required
+
+
+
+
                     type="number"
+                    
+                    onChange={(event) =>
+                      event.target.value < 0
+                          ? (event.target.value = 0)
+                          : event.target.value
+                  }
+
+
                     placeholder="85 kg/185 lb"
                     sx={{
                       m: 1,
@@ -658,9 +728,9 @@ const Register = () => {
                       },
 
                       "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "red",
-                        },
+                      {
+                        borderColor: "red",
+                      },
 
                       "& .MuiInputLabel-root": {
                         "&.Mui-focused": {
@@ -697,6 +767,14 @@ const Register = () => {
                           </Menu>
                         </InputAdornment>
                       ),
+
+                      inputMode: 'numeric',
+                      pattern: '[0-9]*',
+                      
+                      
+
+
+
                     }}
                   />
 
@@ -733,9 +811,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -779,10 +857,11 @@ const Register = () => {
 
               <ReCAPTCHA
                 ref={recaptcha}
-          
+
                 sitekey={APP_SITE_KEY}
-                onExpired={() => {recaptcha.reset();}}
-                
+
+                onExpired={() => { recaptcha.reset(); }}
+
                 className="mt-2 g-recaptcha-response"
               />
 
@@ -824,7 +903,7 @@ const Register = () => {
 
 
 
-            {/* server="http://localhost:5000/profile_photo/upload" */}
+              {/* server="http://localhost:5000/profile_photo/upload" */}
 
 
               <FilePond
@@ -921,7 +1000,7 @@ const Register = () => {
 
         <div className="flex justify-center items-center mb-32 flex-col">
           <Button
-          
+
             className="w-[420px]"
             style={{ marginTop: "20px" }}
             sx={{

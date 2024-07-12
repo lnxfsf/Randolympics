@@ -1153,6 +1153,7 @@ const EditProfile = () => {
               </div>
               <div className="flex justify-end items-end pb-2">
                 <ReactFlagsSelect
+                disabled
                   // to fill it with the one, which user's is currently selected...
                   selected={
                     nationality_selected ||
