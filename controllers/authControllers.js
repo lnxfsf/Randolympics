@@ -262,7 +262,7 @@ const register = async (req, res) => {
 
   //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
   if (user_type === "AH") {
-    if (weight == null) {
+    if (weight === null) {
       res.status(409).json({ message: "Weight not inserted !" });
       return;
     }
