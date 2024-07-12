@@ -75,6 +75,25 @@ let BACKEND_SERVER_BASE_URL =
 
 
 const Register = () => {
+
+
+
+  // ? this is for phone
+  const [isPhoneError, setIsPhoneError] = useState(false);
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const isPhoneErrorFocus = useRef(null);
+
+
+   // ? this is for password  Password
+   const [isPasswordError, setIsPasswordError] = useState(false);
+   const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
+   const isPasswordErrorFocus = useRef(null);
+ 
+
+
+
+
+
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
   const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
@@ -216,7 +235,7 @@ const Register = () => {
 
   // ? HERE, for weight..
 
-  const [weight, setWeight] = useState(null);
+  
 
 
 
@@ -257,9 +276,18 @@ const Register = () => {
       isEmailErrorFocus.current.focus();
     }
 
+    
+    if (isPhoneError && isPhoneErrorFocus.current) {
+      isPhoneErrorFocus.current.focus();
+    }
+
+    
+    if (isPasswordError && isPasswordErrorFocus.current) {
+      isPasswordErrorFocus.current.focus();
+    }
 
 
-  }, [isEmailError]);
+  }, [isEmailError, isPhoneError, isPasswordError ]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -310,6 +338,36 @@ const Register = () => {
       setIsEmailErrorHelper("Enter a valid email address");
     }
 
+
+    const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
+
+    if (!phoneRegex.test(phone)) {
+      setIsPhoneError(true);
+      setIsPhoneErrorHelper("Enter valid phone number");
+ 
+
+    }else {
+      setIsPhoneError(false);
+    }
+  
+  
+  
+    const passwordRegex = /^.{4,}$/;
+  
+    if (!passwordRegex.test(password)) {
+      setIsPasswordError(true);
+      setIsPasswordErrorHelper("Password should be longer than 4 characters");
+ 
+
+    } else {
+      setIsPasswordError(false);
+    }
+  
+
+
+
+
+
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
 
@@ -318,9 +376,10 @@ const Register = () => {
     } else {
 
 
+      console.log("isEmailEror vrednost: "+isEmailError)
 
       // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
-      if (nationality_selected && isEmailError !== false) {
+      if (nationality_selected && isEmailError === false &&  isPhoneError === false && isPasswordError === false ) {
 
 
         const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
@@ -373,7 +432,12 @@ const Register = () => {
               if (error.response && error.response.status === 409) {
                 //alert("");
 
-                setResultText("User already exists ! ");
+
+                setResultText(error.response.data.message);
+
+                //console.log(error)
+
+
                 setResultTextColor("red");
               } else {
                 setResultText(
@@ -405,8 +469,14 @@ const Register = () => {
         if (nationality_selected === "") {
           setResultText("Insert nationality !");
           setResultTextColor("red");
-        } else if (isEmailError === false) {
+        } else if (isEmailError === true) {
           setResultText("Email is not valid !");
+          setResultTextColor("red");
+        } else if (isPhoneError === true){
+          setResultText("Phone is not valid !");
+          setResultTextColor("red");
+        } else if (isPasswordError === true){
+          setResultText("Password should be longer than 4 characters ! ");
           setResultTextColor("red");
         }
 
@@ -578,6 +648,16 @@ const Register = () => {
                   id="pass"
                   name="pass"
                   required
+
+
+                  
+
+                  error={isPasswordError}
+                  helperText={isPasswordHelper}
+
+                  inputRef={isPasswordErrorFocus}
+
+
                   type={showPassword ? "text" : "password"}
                   sx={{
                     m: 1,
@@ -624,6 +704,15 @@ const Register = () => {
                   name="phone"
                   required
                   type="tel"
+
+
+                  error={isPhoneError}
+                  helperText={isPhonerHelper}
+
+                  inputRef={isPhoneErrorFocus}
+
+
+
 
                   inputProps={{
                     maxLength: 15,
@@ -770,6 +859,7 @@ const Register = () => {
 
                       inputMode: 'numeric',
                       pattern: '[0-9]*',
+                      
                       
                       
 
