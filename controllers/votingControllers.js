@@ -573,7 +573,7 @@ const resignFromCurrentPosition = async (req, res) => {
         where: {
           user_type: "AH",
           ranking: {
-            [Op.lte]: currentUserAH.ranking,
+            [Op.gte]: currentUserAH.ranking,
           },
           nationality: currentUserAH.nationality,
           user_type: currentUserAH.user_type,
@@ -590,8 +590,8 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-      console.log("ne prikazuje sve users da update !")
-      console.log(usersToUpdate)
+    
+     
 
 
       /// and this is actual loop for all those below to go +1 in ranking
@@ -617,10 +617,16 @@ const resignFromCurrentPosition = async (req, res) => {
         order: [["ranking", "DESC"]],
       });
 
-      // and we put it after the last (as we, didn't updated previous..)
-      await currentUserAH.update({ ranking: maxRankingUser.ranking + 1 });
 
-      
+      // if it's last, then don't go any more higher...
+      // tako sto su oba ista.. 
+      if (currentUserAH.ranking !== maxRankingUser.ranking) {
+        // and we put it after the last (as we, didn't updated previous..)
+        await currentUserAH.update({ ranking: maxRankingUser.ranking + 1 });
+      }
+
+
+
 
 
 
