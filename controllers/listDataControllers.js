@@ -764,7 +764,7 @@ const team = async (req, res) => {
       };
     }
 
-    // also, applies for RS as well (but it uses another rankingRS ! )
+    // also, applies for RS as well (but it uses another rankingRS ! ) yes.. it doesnt filter by gender, but still only first 50 goes..
     if (currentUserType === "RS") {
       filterConditions = {
         ...filterConditions,

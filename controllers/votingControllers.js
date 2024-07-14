@@ -543,7 +543,7 @@ const resignFromCurrentPosition = async (req, res) => {
   try {
     await db.sequelize.sync();
 
-    
+
 
 
     if (user_type === "AH") {
@@ -621,15 +621,9 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-    }
+    } else if (user_type === "EM") {
+      // for managers, there's no country or gender
 
-
-
-
-    // for managers, there's no country or gender
-    if (user_type === "EM") {
-
-      
 
       const currentUserEM = await User.findOne({
         where: {
@@ -647,10 +641,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingEM: {
             [Op.gte]: currentUserEM.rankingEM,
           },
-          
+
           user_type: currentUserEM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserEM.userId,
@@ -664,7 +658,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingEM: user.rankingEM - 1 });
       }
@@ -674,7 +668,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "EM",
-   
+
           user_type: currentUserEM.user_type,
 
         },
@@ -682,7 +676,7 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserEM.rankingEM !== maxRankingUser.rankingEM) {
         await currentUserEM.update({ rankingEM: maxRankingUser.rankingEM + 1 });
       }
@@ -697,14 +691,9 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-    }
+    } else if (user_type === "ITM") {
 
 
-
-
-    if (user_type === "ITM") {
-
-      
 
       const currentUserITM = await User.findOne({
         where: {
@@ -722,10 +711,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingITM: {
             [Op.gte]: currentUserITM.rankingITM,
           },
-          
+
           user_type: currentUserITM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserITM.userId,
@@ -739,7 +728,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingITM: user.rankingITM - 1 });
       }
@@ -749,7 +738,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "ITM",
-   
+
           user_type: currentUserITM.user_type,
 
         },
@@ -757,18 +746,15 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserITM.rankingITM !== maxRankingUser.rankingITM) {
         await currentUserITM.update({ rankingITM: maxRankingUser.rankingITM + 1 });
       }
 
 
-    }
+    } else if (user_type === "MM") {
 
 
-    if (user_type === "MM") {
-
-      
 
       const currentUserMM = await User.findOne({
         where: {
@@ -786,10 +772,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingMM: {
             [Op.gte]: currentUserMM.rankingMM,
           },
-          
+
           user_type: currentUserMM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserMM.userId,
@@ -803,7 +789,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingMM: user.rankingMM - 1 });
       }
@@ -813,7 +799,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "MM",
-   
+
           user_type: currentUserMM.user_type,
 
         },
@@ -821,19 +807,15 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserMM.rankingMM !== maxRankingUser.rankingMM) {
         await currentUserMM.update({ rankingMM: maxRankingUser.rankingMM + 1 });
       }
 
 
-    }
+    } else if (user_type === "SM") {
 
 
-
-    if (user_type === "SM") {
-
-      
 
       const currentUserSM = await User.findOne({
         where: {
@@ -851,10 +833,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingSM: {
             [Op.gte]: currentUserSM.rankingSM,
           },
-          
+
           user_type: currentUserSM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserSM.userId,
@@ -868,7 +850,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingSM: user.rankingSM - 1 });
       }
@@ -878,7 +860,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "SM",
-   
+
           user_type: currentUserSM.user_type,
 
         },
@@ -886,19 +868,15 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserSM.rankingSM !== maxRankingUser.rankingSM) {
         await currentUserSM.update({ rankingSM: maxRankingUser.rankingSM + 1 });
       }
 
 
-    }
+    } else if (user_type === "VM") {
 
 
-
-    if (user_type === "VM") {
-
-      
 
       const currentUserVM = await User.findOne({
         where: {
@@ -916,10 +894,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingVM: {
             [Op.gte]: currentUserVM.rankingVM,
           },
-          
+
           user_type: currentUserVM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserVM.userId,
@@ -933,7 +911,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingVM: user.rankingVM - 1 });
       }
@@ -943,7 +921,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "VM",
-   
+
           user_type: currentUserVM.user_type,
 
         },
@@ -951,19 +929,15 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserVM.rankingVM !== maxRankingUser.rankingVM) {
         await currentUserVM.update({ rankingVM: maxRankingUser.rankingVM + 1 });
       }
 
 
-    }
+    } else if (user_type === "LM") {
 
 
-
-    if (user_type === "LM") {
-
-      
 
       const currentUserLM = await User.findOne({
         where: {
@@ -981,10 +955,10 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingLM: {
             [Op.gte]: currentUserLM.rankingLM,
           },
-          
+
           user_type: currentUserLM.user_type,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserLM.userId,
@@ -998,7 +972,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingLM: user.rankingLM - 1 });
       }
@@ -1008,7 +982,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "LM",
-   
+
           user_type: currentUserLM.user_type,
 
         },
@@ -1016,22 +990,15 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserLM.rankingLM !== maxRankingUser.rankingLM) {
         await currentUserLM.update({ rankingLM: maxRankingUser.rankingLM + 1 });
       }
 
 
-    }
+    } else if (user_type === "RS") {
+        // on nema samo po gender, ali ima drzavi ! 
 
-
-
-
-    // ! on nema samo po gender, ali ima drzavi ! 
-
-    if (user_type === "RS") {
-
-      
 
       const currentUserRS = await User.findOne({
         where: {
@@ -1049,11 +1016,11 @@ const resignFromCurrentPosition = async (req, res) => {
           rankingRS: {
             [Op.gte]: currentUserRS.rankingRS,
           },
-          
+
           user_type: currentUserRS.user_type,
           nationality: currentUserRS.nationality,
 
-       
+
 
           userId: {
             [Op.ne]: currentUserRS.userId,
@@ -1067,7 +1034,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-     
+
       for (const user of usersToUpdate) {
         await user.update({ rankingRS: user.rankingRS - 1 });
       }
@@ -1077,7 +1044,7 @@ const resignFromCurrentPosition = async (req, res) => {
       const maxRankingUser = await User.findOne({
         where: {
           user_type: "RS",
-   
+
           user_type: currentUserRS.user_type,
           nationality: currentUserRS.nationality,
 
@@ -1086,22 +1053,16 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
+
       if (currentUserRS.rankingRS !== maxRankingUser.rankingRS) {
         await currentUserRS.update({ rankingRS: maxRankingUser.rankingRS + 1 });
       }
 
 
-    }
+    } else if (user_type === "NP") {
 
+       // this is for "NP"
 
-
-
-
-
-
-    // this is for "NP"
-    if (user_type === "NP") {
 
       // so we actually know he's NP of that country !
       const currentUserNP = await User.findOne({
@@ -1148,13 +1109,12 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
-    }
+    } else if (user_type === "GP") {
 
-
-
-    // for now, do the same for GP (as it goes by votesGP as well)
+      // for now, do the same for GP (as it goes by votesGP as well)
     // this is for "GP"
-    if (user_type === "GP") {
+
+
       const currentUserGP = await User.findOne({
         where: {
           currentGP: true,
