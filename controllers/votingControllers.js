@@ -543,18 +543,14 @@ const resignFromCurrentPosition = async (req, res) => {
   try {
     await db.sequelize.sync();
 
-    // so, it works only for NP (if he was actually currentNP)
-    // TODO, later on, you do it for GP, as well (when signed user is GP.. ). when you implement his ..
+    
 
 
-
-    if (user_type == "AH") {
+    if (user_type === "AH") {
 
       // za AH, radi drugacije
 
-      // kod njega, samo elementi ispod njega, treba da idu za +1 ! (tako ce moci, da rade, i ovi svi ostali. cak i da je na prvo mesto ! )
-
-      // ti znači, za AH, trebaš, samo, da 
+      // kod njega, samo elementi ispod njega, treba da idu za -1 ! (tako ce moci, da rade, i ovi svi ostali. cak i da je na prvo mesto ! )
 
       //za AH, treba da nadjes, koji ima ranking. on znace da nadje direktno njega... 
       const currentUserAH = await User.findOne({
@@ -567,8 +563,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
       // znači, nalazis ih preko "ranking", "nationality", "user_type", "gender"  (da, trebace ti ovo sve, da znas ispod koji su ti)
 
-      // so, all users below currentUserAH ranking. are going +1 ! i tjt.. čak i ako je prvi ovaj, isto doći će mu.. 
-      // and yes, don't touch current user, at end element or whenever we put them... 
+      // so, all users below currentUserAH ranking. are going -1 ! i tjt.. čak i ako je prvi ovaj, isto doći će mu.. 
       const usersToUpdate = await User.findAll({
         where: {
           user_type: "AH",
@@ -590,12 +585,11 @@ const resignFromCurrentPosition = async (req, res) => {
       });
 
 
-    
-     
 
 
-      /// and this is actual loop for all those below to go +1 in ranking
-      // znači MINUS 1 , tako istinski uveca !
+
+
+      /// and this is actual loop for all those below to go -1 in ranking  
       for (const user of usersToUpdate) {
         await user.update({ ranking: user.ranking - 1 });
       }
@@ -627,16 +621,79 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
+    }
+
+
+
+
+    // for managers, there's no country or gender
+    if (user_type === "EM") {
+
+      
+
+      const currentUserEM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "EM",
+
+          rankingEM: {
+            [Op.gte]: currentUserEM.rankingEM,
+          },
+          
+          user_type: currentUserEM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserEM.userId,
+          },
+        },
+        order: [["rankingEM", "ASC"]],
+      });
 
 
 
 
 
 
-      // znači, treba da uveca u sve redove, kolonu "rankingNP" počev od "secondMostVotes" za +1. Ali ne uvećava samo currentUserNP. jer on je na kraju..
-      // okej swapovao je gore...  E SADA, TREBA DA currentUserNP pozicionira na kraj (da, samo rankingNP , ). 
-      // E SAMO GA ZAMENI SA OVIM TRENUTNI KOJI JESTE POSLEDNJI ELEMENT (jer ne treba da dodaje neke na kraju dodatno jos !)
-      // i da počne od secondMostVotes odatle, da poveca sve ka dnu. samo NE uključi (-1), taj zadnji. il proveris samo, da nije taj userID od currentUserNP , i poveca ga... 
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingEM: user.rankingEM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "EM",
+   
+          user_type: currentUserEM.user_type,
+
+        },
+        order: [["rankingEM", "DESC"]],
+      });
+
+
+    
+      if (currentUserEM.rankingEM !== maxRankingUser.rankingEM) {
+        await currentUserEM.update({ rankingEM: maxRankingUser.rankingEM + 1 });
+      }
+
+
+
+
+
+
+
+
 
 
 
@@ -645,8 +702,406 @@ const resignFromCurrentPosition = async (req, res) => {
 
 
 
+    if (user_type === "ITM") {
+
+      
+
+      const currentUserITM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "ITM",
+
+          rankingITM: {
+            [Op.gte]: currentUserITM.rankingITM,
+          },
+          
+          user_type: currentUserITM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserITM.userId,
+          },
+        },
+        order: [["rankingITM", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingITM: user.rankingITM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "ITM",
+   
+          user_type: currentUserITM.user_type,
+
+        },
+        order: [["rankingITM", "DESC"]],
+      });
+
+
+    
+      if (currentUserITM.rankingITM !== maxRankingUser.rankingITM) {
+        await currentUserITM.update({ rankingITM: maxRankingUser.rankingITM + 1 });
+      }
+
+
+    }
+
+
+    if (user_type === "MM") {
+
+      
+
+      const currentUserMM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "MM",
+
+          rankingMM: {
+            [Op.gte]: currentUserMM.rankingMM,
+          },
+          
+          user_type: currentUserMM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserMM.userId,
+          },
+        },
+        order: [["rankingMM", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingMM: user.rankingMM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "MM",
+   
+          user_type: currentUserMM.user_type,
+
+        },
+        order: [["rankingMM", "DESC"]],
+      });
+
+
+    
+      if (currentUserMM.rankingMM !== maxRankingUser.rankingMM) {
+        await currentUserMM.update({ rankingMM: maxRankingUser.rankingMM + 1 });
+      }
+
+
+    }
+
+
+
+    if (user_type === "SM") {
+
+      
+
+      const currentUserSM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "SM",
+
+          rankingSM: {
+            [Op.gte]: currentUserSM.rankingSM,
+          },
+          
+          user_type: currentUserSM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserSM.userId,
+          },
+        },
+        order: [["rankingSM", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingSM: user.rankingSM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "SM",
+   
+          user_type: currentUserSM.user_type,
+
+        },
+        order: [["rankingSM", "DESC"]],
+      });
+
+
+    
+      if (currentUserSM.rankingSM !== maxRankingUser.rankingSM) {
+        await currentUserSM.update({ rankingSM: maxRankingUser.rankingSM + 1 });
+      }
+
+
+    }
+
+
+
+    if (user_type === "VM") {
+
+      
+
+      const currentUserVM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "VM",
+
+          rankingVM: {
+            [Op.gte]: currentUserVM.rankingVM,
+          },
+          
+          user_type: currentUserVM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserVM.userId,
+          },
+        },
+        order: [["rankingVM", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingVM: user.rankingVM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "VM",
+   
+          user_type: currentUserVM.user_type,
+
+        },
+        order: [["rankingVM", "DESC"]],
+      });
+
+
+    
+      if (currentUserVM.rankingVM !== maxRankingUser.rankingVM) {
+        await currentUserVM.update({ rankingVM: maxRankingUser.rankingVM + 1 });
+      }
+
+
+    }
+
+
+
+    if (user_type === "LM") {
+
+      
+
+      const currentUserLM = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "LM",
+
+          rankingLM: {
+            [Op.gte]: currentUserLM.rankingLM,
+          },
+          
+          user_type: currentUserLM.user_type,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserLM.userId,
+          },
+        },
+        order: [["rankingLM", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingLM: user.rankingLM - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "LM",
+   
+          user_type: currentUserLM.user_type,
+
+        },
+        order: [["rankingLM", "DESC"]],
+      });
+
+
+    
+      if (currentUserLM.rankingLM !== maxRankingUser.rankingLM) {
+        await currentUserLM.update({ rankingLM: maxRankingUser.rankingLM + 1 });
+      }
+
+
+    }
+
+
+
+
+    // ! on nema samo po gender, ali ima drzavi ! 
+
+    if (user_type === "RS") {
+
+      
+
+      const currentUserRS = await User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+
+      const usersToUpdate = await User.findAll({
+        where: {
+
+
+          user_type: "RS",
+
+          rankingRS: {
+            [Op.gte]: currentUserRS.rankingRS,
+          },
+          
+          user_type: currentUserRS.user_type,
+          nationality: currentUserRS.nationality,
+
+       
+
+          userId: {
+            [Op.ne]: currentUserRS.userId,
+          },
+        },
+        order: [["rankingRS", "ASC"]],
+      });
+
+
+
+
+
+
+     
+      for (const user of usersToUpdate) {
+        await user.update({ rankingRS: user.rankingRS - 1 });
+      }
+
+
+
+      const maxRankingUser = await User.findOne({
+        where: {
+          user_type: "RS",
+   
+          user_type: currentUserRS.user_type,
+          nationality: currentUserRS.nationality,
+
+        },
+        order: [["rankingRS", "DESC"]],
+      });
+
+
+    
+      if (currentUserRS.rankingRS !== maxRankingUser.rankingRS) {
+        await currentUserRS.update({ rankingRS: maxRankingUser.rankingRS + 1 });
+      }
+
+
+    }
+
+
+
+
+
+
+
     // this is for "NP"
-    if (user_type == "NP") {
+    if (user_type === "NP") {
 
       // so we actually know he's NP of that country !
       const currentUserNP = await User.findOne({
@@ -699,7 +1154,7 @@ const resignFromCurrentPosition = async (req, res) => {
 
     // for now, do the same for GP (as it goes by votesGP as well)
     // this is for "GP"
-    if (user_type == "GP") {
+    if (user_type === "GP") {
       const currentUserGP = await User.findOne({
         where: {
           currentGP: true,
