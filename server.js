@@ -42,6 +42,9 @@ app.use("/user", userRoutes)
 // this is for blog and news, that users add to..
 app.use("/blog", blogRoutes);
 
+
+
+
 db.sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

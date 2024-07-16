@@ -1,5 +1,5 @@
 const express = require("express");
-const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory } = require("../controllers/listDataControllers");
+const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize } = require("../controllers/listDataControllers");
 const router = express.Router();
 
 
@@ -33,6 +33,11 @@ router.get("/currentNP", currentNP)
 // to get login history traffic
 router.get("/listLoginTrafficHistory",listLoginTrafficHistory)  // ! prvo ovaj, zameni sa: listsData
 
+
+
+
+// randomize LANDING PAGE (this one is not saved anywhere..)
+router.get("/landingPageRandomize", landingPageRandomize)
 
 
 module.exports = router;

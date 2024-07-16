@@ -6,6 +6,13 @@ const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
 
+const dayjs = require('dayjs');
+
+var weekday = require("dayjs/plugin/isoWeek");
+dayjs.extend(weekday);
+
+
+
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0; //parseInt, is because we want it as integer
@@ -313,7 +320,6 @@ const rankingTop50 = async (req, res) => {
     }
   }
 };
-
 
 const otherUsers = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
@@ -649,7 +655,6 @@ const otherUsers = async (req, res) => {
   }
 };
 
-
 const currentNP = async (req, res) => {
 
   const nationality = req.query.nationality;
@@ -673,7 +678,6 @@ const currentNP = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 const team = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
@@ -822,7 +826,6 @@ const team = async (req, res) => {
   } catch (error) { }
 };
 
-
 const listLoginTrafficHistory = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
@@ -870,8 +873,6 @@ const listLoginTrafficHistory = async (req, res) => {
   }
 };
 
-
-
 const lastInRank = async (req, res) => {
   try {
     const user_type = req.query.user_type;
@@ -902,6 +903,193 @@ const lastInRank = async (req, res) => {
   }
 };
 
+
+
+const landingPageRandomize = async (req, res) => {
+
+
+  // OVO SU ONI KORISNICI KOJIMA TREBA DA POSALJES REZULTATE KADA CE DOBITI OVO ! (email1, je znači onome kome i treba da vratis za tabelu) !! 
+  const name = req.query.name1;
+  const email1 = req.query.email1;
+  const weight1 = req.query.weight1;
+
+
+
+
+
+  try {
+
+    // TODO : But we don't need that here ! for marketing..  : Finds all athletes that passed (were top50 in all countries (so no filter by country..))
+
+
+
+    // so now, we get time slots, we put those people we have, in ANY of sports available ! (so, randomized in list)
+
+
+
+    // these are most used. the CURRENT STATE, (so, we always know how much athletes are there... ) !
+    var timeSlot_6_9 = 0;
+    var timeSlot_9_12 = 0;
+    var timeSlot_12_15 = 0;
+    var timeSlot_15_18 = 0;
+    var timeSlot_18_21 = 0;
+
+
+
+    // max athletes per time slot (IT DEPENDS ON DAY OF WEEK, but all in all, it's fixed.. )
+    /*  
+     const currentDayName = dayjs().format('dddd');
+     console.log("ime dana je: " + currentDayName);
+  */
+
+
+     
+    for (let i = 0; i < 7; i++) {
+
+      const dayName = dayjs().isoWeekday(i ).format('dddd');
+
+
+      if (dayName === "Sunday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 16;
+        var MaxAthletesPerTimeSlot_9_12 = 27;
+        var MaxAthletesPerTimeSlot_12_15 = 33;
+        var MaxAthletesPerTimeSlot_15_18 = 34;
+        var MaxAthletesPerTimeSlot_18_21 = 21;
+
+        var MaxAthletesPerTimeSlot_21_24 = 0;
+
+      } else if (dayName === "Monday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 12;
+        var MaxAthletesPerTimeSlot_9_12 = 38;
+        var MaxAthletesPerTimeSlot_12_15 = 41;
+        var MaxAthletesPerTimeSlot_15_18 = 32;
+        var MaxAthletesPerTimeSlot_18_21 = 36;
+
+        var MaxAthletesPerTimeSlot_21_24 = 0;
+
+      } else if (dayName === "Tuesday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 24;
+        var MaxAthletesPerTimeSlot_9_12 = 37;
+        var MaxAthletesPerTimeSlot_12_15 = 44;
+        var MaxAthletesPerTimeSlot_15_18 = 47;
+        var MaxAthletesPerTimeSlot_18_21 = 20;
+
+        var MaxAthletesPerTimeSlot_21_24 = 3;
+
+      } else if (dayName === "Wednesday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 36;
+        var MaxAthletesPerTimeSlot_9_12 = 47;
+        var MaxAthletesPerTimeSlot_12_15 = 50;
+        var MaxAthletesPerTimeSlot_15_18 = 44;
+        var MaxAthletesPerTimeSlot_18_21 = 49;
+
+        var MaxAthletesPerTimeSlot_21_24 = 15;
+
+      } else if (dayName === "Thursday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 10;
+
+        var MaxAthletesPerTimeSlot_6_9 = 36;
+        var MaxAthletesPerTimeSlot_9_12 = 47;
+        var MaxAthletesPerTimeSlot_12_15 = 50;
+        var MaxAthletesPerTimeSlot_15_18 = 44;
+        var MaxAthletesPerTimeSlot_18_21 = 49;
+
+        var MaxAthletesPerTimeSlot_21_24 = 15;
+
+      } else if (dayName === "Friday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 15;
+        var MaxAthletesPerTimeSlot_9_12 = 21;
+        var MaxAthletesPerTimeSlot_12_15 = 30;
+        var MaxAthletesPerTimeSlot_15_18 = 48;
+        var MaxAthletesPerTimeSlot_18_21 = 48;
+
+        var MaxAthletesPerTimeSlot_21_24 = 0;
+
+      } else if (dayName === "Saturday") {
+
+        var MaxAthletesPerTimeSlot_3_6 = 0;
+
+        var MaxAthletesPerTimeSlot_6_9 = 40;
+        var MaxAthletesPerTimeSlot_9_12 = 40;
+        var MaxAthletesPerTimeSlot_12_15 = 42;
+        var MaxAthletesPerTimeSlot_15_18 = 12;
+        var MaxAthletesPerTimeSlot_18_21 = 44;
+
+        var MaxAthletesPerTimeSlot_21_24 = 0;
+
+      }
+
+
+console.log("oov---")
+console.log("Day is:"+dayName)
+      console.log(MaxAthletesPerTimeSlot_3_6)
+
+      console.log(MaxAthletesPerTimeSlot_6_9)
+      console.log(MaxAthletesPerTimeSlot_9_12)
+      console.log(MaxAthletesPerTimeSlot_12_15)
+      console.log(MaxAthletesPerTimeSlot_15_18)
+      console.log(MaxAthletesPerTimeSlot_18_21)
+      console.log(MaxAthletesPerTimeSlot_21_24)
+
+
+
+
+      
+
+
+
+
+    }
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
+
+}
+
+
+
+
+
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -912,4 +1100,9 @@ module.exports = {
   team,
   currentNP,
   listLoginTrafficHistory,
+
+
+  // randomization LANDING PAGE
+  landingPageRandomize,
+
 };
