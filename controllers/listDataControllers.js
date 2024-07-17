@@ -1164,14 +1164,15 @@ const randomizeFormData = [
               // znaci, vidis, ovaj se pokrece..  
             const modifiedAthlete = {
               ... selectedAthlete, 
-              sportName: sportName
+              sportName: sportName, 
+              timeSlot: "6_9",  // da eto, da imas sve već u jedan objekat.. 
             };
 
 
 
             occupiedSlotsAthletes.push(modifiedAthlete);
 
-            timeSlot_6_9 = timeSlot_6_9 + 1; 
+            timeSlot_6_9 = timeSlot_6_9 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
           } 
 
