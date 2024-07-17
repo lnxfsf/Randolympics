@@ -6,6 +6,10 @@ const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
 
+
+
+const listOfSports = require('../data/listOfSports')
+
 const dayjs = require('dayjs');
 
 var weekday = require("dayjs/plugin/isoWeek");
@@ -909,12 +913,95 @@ const landingPageRandomize = async (req, res) => {
 
 
   // OVO SU ONI KORISNICI KOJIMA TREBA DA POSALJES REZULTATE KADA CE DOBITI OVO ! (email1, je znači onome kome i treba da vratis za tabelu) !! 
-  const name = req.query.name1;
-  const email1 = req.query.email1;
-  const weight1 = req.query.weight1;
+  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
+
+
+  // to ce uvek biti original data iz kog izvlačis kopije (za svaki time slot zasebno.. )
+ /*  console.log(" ovo......... ")
+  console.log(randomizeFormData) */
+
+  // treba da se uvećava samo taj name{num}, da bude broj samo.. // !  ali, to u frontend, treba biti ja msm vec...  
 
 
 
+
+
+  const getRandomItemSports = (array) => {
+
+    /* console.log("unutra random sport funkc: ")
+    console.log(array) */
+/* 
+    console.log("ovo je destructure") */
+    const { listOfSports } = array;
+   /*  console.log(listOfSports); */
+
+
+
+
+    const randomIndex = Math.floor(Math.random() * listOfSports.length);
+
+
+
+    return listOfSports[randomIndex];
+
+  };
+
+
+
+  const getRandomItemAthletes = (array) => {
+
+    /* console.log("unutra random ATHLETE funkc: ")
+    console.log(array)
+ */
+
+
+    const randomIndex = Math.floor(Math.random() * array.length);
+
+
+
+    return array[randomIndex];
+
+  };
+
+
+
+  const getRandomAthletes = (athletes, count, sportName) => {
+
+    // ovo vraća kao rezultat 
+    const selectedAthletes = [];
+
+    for (let i = 0; i < count; i++) {
+      if (athletes.length === 0) break; // Break if no more athletes available
+
+
+      const selectedAthlete = getRandomItem(athletes);
+      selectedAthletes.push(selectedAthlete);
+
+
+      // remove it from original (now, before we add another variable to that occupiedAthletes... )
+      const index = athletes.indexOf(selectedAthlete);
+      if (index > -1) {
+        athletes.splice(index, 1);
+      }
+
+      selectedAthletes.forEach(athlete => {
+        occupiedSlotsAthletes.push({
+          ...athlete,
+          sportName: sportName
+        });
+
+      });
+
+
+      return selectedAthletes;
+
+
+
+
+
+    }
+
+  }
 
 
   try {
@@ -927,130 +1014,277 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-    // these are most used. the CURRENT STATE, (so, we always know how much athletes are there... ) !
-    var timeSlot_6_9 = 0;
-    var timeSlot_9_12 = 0;
-    var timeSlot_12_15 = 0;
-    var timeSlot_15_18 = 0;
-    var timeSlot_18_21 = 0;
 
 
 
     // max athletes per time slot (IT DEPENDS ON DAY OF WEEK, but all in all, it's fixed.. )
-    /*  
-     const currentDayName = dayjs().format('dddd');
-     console.log("ime dana je: " + currentDayName);
-  */
-
-
-     
+    // to znači, da ne sme da predje ove varijable, pri pokušaju dodavanja !
+    // ali , ovo je SVI GAMES ZAJEDNO U TAJ TIME SLOT !!!
+    // osim toga, svaki sport, će imati za sebe, zasebno, limitaciju koliko athletes moze u taj jedan timeslot da bude. moze opet drugi, ali ne vise od tog, za taj jedan timeframe..
     for (let i = 0; i < 7; i++) {
 
-      const dayName = dayjs().isoWeekday(i ).format('dddd');
 
 
+
+
+      // these are most used. the CURRENT STATE, (so, we always know how much athletes are there... ) !
+      // you need to reset them, for another day ! (as we're gonna fill them up, in each day, so we can calculate it.. )
+      var timeSlot_3_6 = 0;
+      var timeSlot_6_9 = 0;
+      var timeSlot_9_12 = 0;
+      var timeSlot_12_15 = 0;
+      var timeSlot_15_18 = 0;
+      var timeSlot_18_21 = 0;
+      var timeSlot_21_24 = 0;
+
+
+
+
+      const dayName = dayjs().isoWeekday(i).format('dddd');
+
+      /*  
+   const currentDayName = dayjs().format('dddd');
+   console.log("ime dana je: " + currentDayName);
+*/
+
+
+      // za svaki time slot !!! u tom danu , ideš manuelno, eto ovo baš ovde.. 
       if (dayName === "Sunday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 16;
-        var MaxAthletesPerTimeSlot_9_12 = 27;
-        var MaxAthletesPerTimeSlot_12_15 = 33;
-        var MaxAthletesPerTimeSlot_15_18 = 34;
-        var MaxAthletesPerTimeSlot_18_21 = 21;
+        // ? ovo ce vaziti za SVE SPORTOVE KOJE BUDES DODAVAO U TAJ "TIME SLOT" !
 
-        var MaxAthletesPerTimeSlot_21_24 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
+
+        var TotalMaxAthletesPerTimeSlot_6_9 = 16;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 27;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 33;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 34;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 21;
+
+        var TotalMaxAthletesPerTimeSlot_21_24 = 0;
+
+
+
+
+        // ! znači za ovaj fake, marketing, ti koristi tako drugacije slobodno, open i closed slots. smatraj kao countries ih... 
+        // kreiraj objekat, sa info za athletes, koji su occupied.. 
+
+        // to je ove koje on i dobije sa frontenda ! ili u obican database, koji i jesu ! vec primljeni 
+
+        // ! ovo je za each time slot !!! (znači pravis kopiju za svaki time slot !). 
+        // shallow copy
+
+        // da ovo će vaziti za taj jedan dan ... 
+        var freeSlotsAthletes = [...randomizeFormData];
+
+        var occupiedSlotsAthletes = [];
+
+
+
+        // ! znači, koliko je potrebno ljudi u taj timeframe (ne max, ono fixed, nego jedostavno, kolko je potrebno ljudi da se sastavi taj jedan tim !). da toliko ljudi izvlačiš 
+        // ! a ti ces prikazati "current user", tako sto ga filtiras po "email"-u !!! i prikazes za tog, gde se on tačno nalazi u tabelama.. to sklopis tabelu, i to i vracas takodje... 
+
+
+        // sada, select randomly, i ubaci ga u occupied, i za koji je to slot !  (kao i max, kolko moze u taj time slot ! (znači, ako trazi 3-4 users (ili 11 za fudbal), 
+        // to treba )). 
+        /* 
+                console.log("freeSlotsAthletes su:")
+                console.log(freeSlotsAthletes) */
+
+
+
+
+        // okej, dodajes u taj timeSlot (ovo vazi za sve sportove koje ces dodati u taj slot, toga dana ! )
+        // a on ce dodavati, ako treba vise ljudi da sastavi tim uopšte ! 
+        // da, ovo je generalno, on nece dodavati, više ako on nema više tih... (// ! i da, onaj zašto ih ima 2 kocke, to je jer to ustvari označava TRAJANJE tog event-a ! to moras isto dodati sada odma, kolko traje)
+        if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
+
+          // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
+
+          /*  console.log("lista sporta je:")
+           console.log(listOfSports)
+  */
+
+          const selectedSport = getRandomItemSports(listOfSports); // izabira random sport prvo ! 
+         /*  console.log("random selected sport je:")
+          console.log(selectedSport) */
+
+          const { sportName, howMuchAthletesMakeATeam } = selectedSport;  // izvlači ime, i kolko random athletes treba nam za taj sport
+
+     /*      console.log("sport ime:" + sportName)
+          console.log("howMuchMakeATeam :" + howMuchAthletesMakeATeam) */
+
+          //const selectedAthletes = getRandomAthletes(freeSlotsAthletes, howMuchMakeATeam, sportName );
+
+
+
+          // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
+          for (let i = 0; i < howMuchAthletesMakeATeam; i++) {
+
+            if (freeSlotsAthletes.length === 0) break; // Break if no more athletes available
+
+
+            // ne od sports, nego athletes ! 
+
+            var selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+/* 
+            console.log("selectedAthlete vraca:")
+            console.log(selectedAthlete)
+ */
+   // NE, NEGO PUSH, ALI VEC IZMENJEN OVDE 
+          //  occupiedSlotsAthletes.push(selectedAthlete);
+
+            // da doda u taj occupied.. jos property ime sporta (da lakse filtiras posle ako treba..)
+            // znaci te koje i ima on properties, samo doda.. 
+           /*  selectedAthlete.forEach(athlete => {
+              // da, i push, radi upravo u taj koji treba, okej.. 
+              occupiedSlotsAthletes.push({
+                ...athlete,
+                sportName: sportName
+              });
+
+            }); */
+
+
+
+            selectedAthlete = {
+              ... selectedAthlete, 
+              sportName: sportName
+            };
+
+
+            occupiedSlotsAthletes.push(selectedAthlete)
+
+
+
+
+
+
+            // remove it from original (now, before we add another variable to that occupiedAthletes... )
+            const index = freeSlotsAthletes.indexOf(selectedAthlete);
+            if (index > -1) {
+              freeSlotsAthletes.splice(index, 1);
+            }
+
+
+            
+         
+
+
+
+
+
+
+
+          }
+
+
+
+          console.log('Occupied Slots Athletes:', occupiedSlotsAthletes);
+          console.log('Remaining Free Slots Athletes:', freeSlotsAthletes);
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       } else if (dayName === "Monday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 12;
-        var MaxAthletesPerTimeSlot_9_12 = 38;
-        var MaxAthletesPerTimeSlot_12_15 = 41;
-        var MaxAthletesPerTimeSlot_15_18 = 32;
-        var MaxAthletesPerTimeSlot_18_21 = 36;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 12;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 38;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 41;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 32;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 36;
 
-        var MaxAthletesPerTimeSlot_21_24 = 0;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 0;
 
       } else if (dayName === "Tuesday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 24;
-        var MaxAthletesPerTimeSlot_9_12 = 37;
-        var MaxAthletesPerTimeSlot_12_15 = 44;
-        var MaxAthletesPerTimeSlot_15_18 = 47;
-        var MaxAthletesPerTimeSlot_18_21 = 20;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 24;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 37;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 44;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 47;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 20;
 
-        var MaxAthletesPerTimeSlot_21_24 = 3;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 3;
 
       } else if (dayName === "Wednesday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 36;
-        var MaxAthletesPerTimeSlot_9_12 = 47;
-        var MaxAthletesPerTimeSlot_12_15 = 50;
-        var MaxAthletesPerTimeSlot_15_18 = 44;
-        var MaxAthletesPerTimeSlot_18_21 = 49;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 36;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 47;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 50;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 44;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 49;
 
-        var MaxAthletesPerTimeSlot_21_24 = 15;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 15;
 
       } else if (dayName === "Thursday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 10;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 10;
 
-        var MaxAthletesPerTimeSlot_6_9 = 36;
-        var MaxAthletesPerTimeSlot_9_12 = 47;
-        var MaxAthletesPerTimeSlot_12_15 = 50;
-        var MaxAthletesPerTimeSlot_15_18 = 44;
-        var MaxAthletesPerTimeSlot_18_21 = 49;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 36;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 47;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 50;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 44;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 49;
 
-        var MaxAthletesPerTimeSlot_21_24 = 15;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 15;
 
       } else if (dayName === "Friday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 15;
-        var MaxAthletesPerTimeSlot_9_12 = 21;
-        var MaxAthletesPerTimeSlot_12_15 = 30;
-        var MaxAthletesPerTimeSlot_15_18 = 48;
-        var MaxAthletesPerTimeSlot_18_21 = 48;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 15;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 21;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 30;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 48;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 48;
 
-        var MaxAthletesPerTimeSlot_21_24 = 0;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 0;
 
       } else if (dayName === "Saturday") {
 
-        var MaxAthletesPerTimeSlot_3_6 = 0;
+        var TotalMaxAthletesPerTimeSlot_3_6 = 0;
 
-        var MaxAthletesPerTimeSlot_6_9 = 40;
-        var MaxAthletesPerTimeSlot_9_12 = 40;
-        var MaxAthletesPerTimeSlot_12_15 = 42;
-        var MaxAthletesPerTimeSlot_15_18 = 12;
-        var MaxAthletesPerTimeSlot_18_21 = 44;
+        var TotalMaxAthletesPerTimeSlot_6_9 = 40;
+        var TotalMaxAthletesPerTimeSlot_9_12 = 40;
+        var TotalMaxAthletesPerTimeSlot_12_15 = 42;
+        var TotalMaxAthletesPerTimeSlot_15_18 = 12;
+        var TotalMaxAthletesPerTimeSlot_18_21 = 44;
 
-        var MaxAthletesPerTimeSlot_21_24 = 0;
+        var TotalMaxAthletesPerTimeSlot_21_24 = 0;
 
       }
 
 
-console.log("oov---")
-console.log("Day is:"+dayName)
-      console.log(MaxAthletesPerTimeSlot_3_6)
-
-      console.log(MaxAthletesPerTimeSlot_6_9)
-      console.log(MaxAthletesPerTimeSlot_9_12)
-      console.log(MaxAthletesPerTimeSlot_12_15)
-      console.log(MaxAthletesPerTimeSlot_15_18)
-      console.log(MaxAthletesPerTimeSlot_18_21)
-      console.log(MaxAthletesPerTimeSlot_21_24)
-
-
-
-
-      
 
 
 
@@ -1062,8 +1296,18 @@ console.log("Day is:"+dayName)
 
 
 
+    // e sada, lista svih sportova !
+    // i onda randomizer, sklapa ručno raspored kako treba, sklopi to u objekat jedan i šalje nazad !
 
-    
+    // znači u ti gledas, za 1 time slot, da ne sme da se poveca vise od toga. odnosno. ti samo gledas, kada random, dodas taj sport iz tog random izabrano liste, ti trebas
+    // da, povecas za +1 taj time slot, sto oznacava, da se obavlja jedan sport tuda ! 
+    // da, 
+
+
+
+
+
+
 
 
 
