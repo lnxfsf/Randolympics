@@ -913,7 +913,19 @@ const landingPageRandomize = async (req, res) => {
 
 
   // OVO SU ONI KORISNICI KOJIMA TREBA DA POSALJES REZULTATE KADA CE DOBITI OVO ! (email1, je znači onome kome i treba da vratis za tabelu) !! 
-  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
+ // !  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
+// ! vrati ovo samo za frontend... ovo eto, lakse objekat imas da radi.. 
+
+const randomizeFormData = [
+  { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
+  { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' },
+  { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
+  { name: 'fourth', email: 'fourth@gmail.com', weightCategory: 'light', gender: 'M' },
+  { name: 'fifth', email: 'fifth@gmail.com', weightCategory: 'light', gender: 'M' },
+  { name: 'six', email: 'six@gmail.com', weightCategory: 'light', gender: 'M' },
+  { name: 'seven', email: 'seven@gmail.com', weightCategory: 'light', gender: 'F' },
+];
+
 
 
   // to ce uvek biti original data iz kog izvlačis kopije (za svaki time slot zasebno.. )
@@ -1122,59 +1134,46 @@ const landingPageRandomize = async (req, res) => {
           // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
           for (let i = 0; i < howMuchAthletesMakeATeam; i++) {
 
-            if (freeSlotsAthletes.length === 0) break; // Break if no more athletes available
+
+            // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
+            // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam ) {
+             
+             
+           
+              
+
+
+            
 
 
             // ne od sports, nego athletes ! 
 
-            var selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
-/* 
-            console.log("selectedAthlete vraca:")
-            console.log(selectedAthlete)
- */
-   // NE, NEGO PUSH, ALI VEC IZMENJEN OVDE 
-          //  occupiedSlotsAthletes.push(selectedAthlete);
+            const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+          
+       
 
-            // da doda u taj occupied.. jos property ime sporta (da lakse filtiras posle ako treba..)
-            // znaci te koje i ima on properties, samo doda.. 
-           /*  selectedAthlete.forEach(athlete => {
-              // da, i push, radi upravo u taj koji treba, okej.. 
-              occupiedSlotsAthletes.push({
-                ...athlete,
-                sportName: sportName
-              });
-
-            }); */
+            // remove it from original (now, before we add another variable to that occupiedAthletes... )
+            // moras da ga uklonis sa glavnog odma, da bi sklonio. jer on vec ima u povratnoj, taj, samo doda ovu jos jedan property... 
+            const index = freeSlotsAthletes.indexOf(selectedAthlete);
+            if (index > -1) {
+              freeSlotsAthletes.splice(index, 1);
+            };
 
 
-
-            selectedAthlete = {
+              // znaci, vidis, ovaj se pokrece..  
+            const modifiedAthlete = {
               ... selectedAthlete, 
               sportName: sportName
             };
 
 
-            occupiedSlotsAthletes.push(selectedAthlete)
 
+            occupiedSlotsAthletes.push(modifiedAthlete);
 
+            timeSlot_6_9 = timeSlot_6_9 + 1; 
 
-
-
-
-            // remove it from original (now, before we add another variable to that occupiedAthletes... )
-            const index = freeSlotsAthletes.indexOf(selectedAthlete);
-            if (index > -1) {
-              freeSlotsAthletes.splice(index, 1);
-            }
-
-
-            
-         
-
-
-
-
-
+          } 
 
 
           }
