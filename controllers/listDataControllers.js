@@ -916,7 +916,27 @@ const landingPageRandomize = async (req, res) => {
   // !  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
   // ! vrati ovo samo za frontend... ovo eto, lakse objekat imas da radi.. 
 
-  const randomizeFormData = [
+
+  /* 
+
+   const randomizeFormData = [
+    { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fourth', email: 'fourth@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fifth', email: 'fifth@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'six', email: 'six@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'seven', email: 'seven@gmail.com', weightCategory: 'light', gender: 'F' },
+
+
+
+    
+  ]; 
+ */
+
+
+
+   const randomizeFormData = [
     { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
     { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
@@ -974,7 +994,7 @@ const landingPageRandomize = async (req, res) => {
     { name: 'fiftyfive', email: 'fiftyfive@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'fiftysix', email: 'fiftysix@gmail.com', weightCategory: 'light', gender: 'F' },
     { name: 'fiftyseven', email: 'fiftyseven@gmail.com', weightCategory: 'light', gender: 'M' }
-];
+]; 
 
 
 
@@ -1109,6 +1129,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+        
 
 
         // ! znači, koliko je potrebno ljudi u taj timeframe (ne max, ono fixed, nego jedostavno, kolko je potrebno ljudi da se sastavi taj jedan tim !). da toliko ljudi izvlačiš 
@@ -1140,11 +1161,19 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          // drzi broj pokusaja i uporedjuje sa duzinom array-a... da ne predje to. jer onda znas da je prosao sav array svih sportova.. 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
+
+          //  (AKO NE MOZE NACI, A PROŠAO JE SVE, ONDA DA PREKINE, JER ONDA CE BITI U INFINITE LOOP  )
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "3_6");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1216,11 +1245,16 @@ const landingPageRandomize = async (req, res) => {
            let selectedSport;
            let firstDayStartGameTimeSlot;
  
+           let attempts = 0;
+           const maxAttempts = listOfSports.length;
+
+
            // Loop to find a sport with the desired start time slot
            do {
              selectedSport = getRandomItemSports(listOfSports);
              ({ firstDayStartGameTimeSlot } = selectedSport);
-           } while (firstDayStartGameTimeSlot !== "6_9");
+             attempts++;
+            } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
  
            const { howMuchAthletesMakeATeam } = selectedSport;
  
@@ -1308,11 +1342,15 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "9_12");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1373,11 +1411,16 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "12_15");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1435,11 +1478,16 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "15_18");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "15_18"  && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1498,11 +1546,16 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "18_21");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1561,11 +1614,15 @@ const landingPageRandomize = async (req, res) => {
           let selectedSport;
           let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
-          } while (firstDayStartGameTimeSlot !== "21_24");
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1640,6 +1697,8 @@ const landingPageRandomize = async (req, res) => {
 
 
         var freeSlotsAthletes = [...randomizeFormData];
+
+
 
 
 
