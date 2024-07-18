@@ -1056,7 +1056,7 @@ const landingPageRandomize = async (req, res) => {
         // da ovo će vaziti za taj jedan dan ... 
         var freeSlotsAthletes = [...randomizeFormData];
 
-        
+
 
 
 
@@ -1076,147 +1076,71 @@ const landingPageRandomize = async (req, res) => {
         // okej, dodajes u taj timeSlot (ovo vazi za sve sportove koje ces dodati u taj slot, toga dana ! )
         // a on ce dodavati, ako treba vise ljudi da sastavi tim uopšte ! 
         // da, ovo je generalno, on nece dodavati, više ako on nema više tih... (// ! i da, onaj zašto ih ima 2 kocke, to je jer to ustvari označava TRAJANJE tog event-a ! to moras isto dodati sada odma, kolko traje)
-    
-    
-    
-// ! ovo
-        if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
-
-          // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
-
-          /*  console.log("lista sporta je:")
-           console.log(listOfSports)
-          */
 
 
 
-          
-  
-           var selectedSport = getRandomItemSports(listOfSports); // izabira random sport prvo ! 
+        // ! ovo
 
-          
-
-          /*  console.log("random selected sport je:")
-           console.log(selectedSport) */
-
-          const { howMuchAthletesMakeATeam, firstDayStartGameTimeSlot } = selectedSport;  // izvlači ime, i kolko random athletes treba nam za taj sport
-
-
-
-          // ovo je da pokusa, da randomizuje sport, koji počinje sa baš ovim fixed vremenom... 
-          let forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
-            /* samo sport koji bas pocinje tada moze, inace pozovi opet , neki drugi */
-          while ( forWhilefirstDayStartGameTimeSlot !== "6_9" ){
-             selectedSport = getRandomItemSports(listOfSports);
-            
-
-
-             const { firstDayStartGameTimeSlot } = selectedSport;
-             forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
-
-          }
-
-
-          /*      console.log("sport ime:" + sportName)
-               console.log("howMuchMakeATeam :" + howMuchAthletesMakeATeam) */
-
-          //const selectedAthletes = getRandomAthletes(freeSlotsAthletes, howMuchMakeATeam, sportName );
-
-
-
-          // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
-          for (let i = 0; i < howMuchAthletesMakeATeam; i++) {
-
-
-            // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
-            // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
-            if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam) {
-
-
-
-
-
-
-
-
-
-              // ne od sports, nego athletes ! 
-
-              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
-
-
-
-              // remove it from original (now, before we add another variable to that occupiedAthletes... )
-              // moras da ga uklonis sa glavnog odma, da bi sklonio. jer on vec ima u povratnoj, taj, samo doda ovu jos jedan property... 
-              const index = freeSlotsAthletes.indexOf(selectedAthlete);
-              if (index > -1) {
-                freeSlotsAthletes.splice(index, 1);
-              };
-
-
-              // znaci, vidis, ovaj se pokrece..  
-              const modifiedAthlete = {
-                ...selectedAthlete,
-                ...selectedSport,
-
-
-
-              };
-
-
-              // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
-
-
-
-              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
-
-              timeSlot_6_9 = timeSlot_6_9 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
-
-            }
-
-
-          }
-
-
-          console.log("SUNDAY timeslot: 6-9 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
-         /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
- */
-
-
-
-
-
-        } 
 
         // TODO, ali on treba da proveri, da li moze da ubaci, samo ako se i vreme pocinjanja sporta odgovara ovom vremenu isto i tako izbegnes lose vreme, na kraju kada je onako..
 
-// da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
-         if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
-
-          var selectedSport = getRandomItemSports(listOfSports); // izabira random sport prvo ! 
-          const { howMuchAthletesMakeATeam, firstDayStartGameTimeSlot } = selectedSport;  // izvlači ime, i kolko random athletes treba nam za taj sport
+        // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
+        if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
 
 
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
-          let forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
-              
-          while ( forWhilefirstDayStartGameTimeSlot !== "9_12" ){
-               selectedSport = getRandomItemSports(listOfSports);
-              
-  
-  
-               const { firstDayStartGameTimeSlot } = selectedSport;
-               forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
-  
-            }
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "9_12");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
 
-         
+          /* // ! here
+                    let selectedSport = getRandomItemSports(listOfSports); // izabira random sport prvo ! 
+                    const { howMuchAthletesMakeATeam, firstDayStartGameTimeSlot } = selectedSport;  // izvlači ime, i kolko random athletes treba nam za taj sport
+          
+           
+          
+                    let forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
+                        
+          
+                    */
 
-      
-          for (let i = 0; i < howMuchAthletesMakeATeam; i++) {
+
+
+
+          /*  while ( forWhilefirstDayStartGameTimeSlot !== "9_12" ){
+                selectedSport = getRandomItemSports(listOfSports);
+               
+                
+   
+   
+                const { firstDayStartGameTimeSlot } = selectedSport;
+ 
+                if (firstDayStartGameTimeSlot === "9_12"){
+                 break;
+                }
+                forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
+ 
+ 
+   
+           } */
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
             if (freeSlotsAthletes.length !== 0 && timeSlot_9_12 !== howMuchAthletesMakeATeam) {
               const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
@@ -1234,7 +1158,7 @@ const landingPageRandomize = async (req, res) => {
 
               };
 
-              
+
 
 
               sundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -1249,11 +1173,11 @@ const landingPageRandomize = async (req, res) => {
 
           console.log("SUNDAY timeslot: 9-12 ")
           console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
-         /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
- */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
 
 
-        } 
+        }
 
 
 
