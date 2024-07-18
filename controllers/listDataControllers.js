@@ -1705,57 +1705,70 @@ const landingPageRandomize = async (req, res) => {
 
 
         // Filter out athletes who are already occupied
-         function filterFreeSlotsAthletes(freeSlots, occupiedSlots) {
-/* 
-          console.log(occupiedSlots)  */
-          
-          
+        function filterFreeSlotsAthletes(freeSlots, occupiedSlots) {
+          /* 
+                    console.log(occupiedSlots)  */
+
+
           // ovo izvučeš, one, koji trebaju, emails, koji bas odgovaraju koji trebaju (eto, sada if, else if, za t oprethodni dani isto ! unutar tih ...)
           // uglavnom, emails, od svih occupied sto ima... da lakse filtiras.. 
-          
-            
 
+
+          console.log("------occupied--------")
+          console.log(occupiedSlots)
 
           // on ide kroz svaki od ovih elemenata ! jedan po jedan rastavlja ! 
           var slotsFree = freeSlots.filter(athlete => {
-            
+
             // ! const isNotOccupied = !occupiedEmails.includes(athlete.email);
 
 
             //  sundayOccupiedSlotsAthletes 
             const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
-             
+
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
               return true;
             }
-        
 
-            console.log("stampa email"+ correspondingOccupiedAthlete.email)
 
-            console.log("stampa secondDayHowMuchTimeSlotsExpandBy"+ correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy)
-            
+
+            /* 
+                        console.log("stampa secondDayHowMuchTimeSlotsExpandBy"+ correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy)
+                         */
             // znači u sundayOccupiedSlotsAthletes (ne brini, to je sto i saljes, ovo je unutar funkcije.. ). Taj jedan element. da ga pronadje, direktno.
             // jer treba da pristupis, njegovim properties, da vidis da li da vracas, sacuvas.. u filter... 
 
 
+            
 
             // pre 2 dana, nedelja..
-            if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday") ){
+            if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
+              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
+
+
+
+            ) {
+
+              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
               return false;
-             };
+            } else {
+              return true
+            };
 
-             // pre 3 dana, subota
-             if ( (correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")){
-              return false;
-             };
+            /* // pre 3 dana, subota
+            if {
+             return false;
+            }; */
 
 
 
-             // inace, drzi ga tu gde i jeste... UBACUJE GA U LISTU SVIH ATHLETES TAKODJE ! da moze ga koristiti za sportove razne...
-            
-             
-        
+            // inace, drzi ga tu gde i jeste... UBACUJE GA U LISTU SVIH ATHLETES TAKODJE ! da moze ga koristiti za sportove razne...
+
+
+            // evo, ipak, to je za sve ove, ostale ja msm, ipak znas.. cak i ako nadje email, on ipak, mora ovo drugo da ima... 
+
+
 
 
 
@@ -1765,20 +1778,26 @@ const landingPageRandomize = async (req, res) => {
 
             // znači da jeste occupied, i ima ga, pa da makne ! 
             // if (!isNotOccupied) return false;
-          
-          
+
+
           }
-        
-        );
 
-        return slotsFree;
+          );
+
+/* // ! a
+          console.log("---------freeSlotsAthletes---------")
+          console.log(slotsFree) */
+
+
+
+          return slotsFree;
 
 
 
 
-        } 
+        }
 
-          
+
 
         // da ovo će vaziti za taj jedan dan ... 
         // var freeSlotsAthletes = [...randomizeFormData];
@@ -1795,50 +1814,63 @@ const landingPageRandomize = async (req, res) => {
         //!    2) kao i, da je to ZAISTA 2 ili 3 dan u odnosu na danas "Monday" !!!   (ma, radi manuelno ovo onda ! za secondDayHowMuchTimeSlotsExpandBy > 0  mora biti i  && "Sunday" unutar .dayOfStart  , sto i imas... )
 
         ///
-        
-//{
-//    sportName: "Men's Team All-Around Artistic Gymnastics",
-//    howMuchAthletesMakeATeam: 5,
-//    locations: 1,
-//
-//
-//
-//    firstDayHowMuchTimeSlotsExpandBy: 4,
-//    secondDayHowMuchTimeSlotsExpandBy: 2,
-//    thirdDayHowMuchTimeSlotsExpandBy: 0,
-//
-//
-//
-//    firstDayStartGameTimeSlot: "6_9", 
-//    firstDayEndGameTimeSlot: "15_18",
-// 
-//    secondDayStartGameTimeSlot: "6_9", 
-//    secondDayEndGameTimeSlot: "9_12",
-//
-//
-//    thirdDayStartGameTimeSlot: "", 
-//    thirdDayEndGameTimeSlot: "",
-//
-//    dayOfStart: "Wednesday",
-//
-//},
+
+        //{
+        //    sportName: "Men's Team All-Around Artistic Gymnastics",
+        //    howMuchAthletesMakeATeam: 5,
+        //    locations: 1,
+        //
+        //
+        //
+        //    firstDayHowMuchTimeSlotsExpandBy: 4,
+        //    secondDayHowMuchTimeSlotsExpandBy: 2,
+        //    thirdDayHowMuchTimeSlotsExpandBy: 0,
+        //
+        //
+        //
+        //    firstDayStartGameTimeSlot: "6_9", 
+        //    firstDayEndGameTimeSlot: "15_18",
+        // 
+        //    secondDayStartGameTimeSlot: "6_9", 
+        //    secondDayEndGameTimeSlot: "9_12",
+        //
+        //
+        //    thirdDayStartGameTimeSlot: "", 
+        //    thirdDayEndGameTimeSlot: "",
+        //
+        //    dayOfStart: "Wednesday",
+        //
+        //},
 
 
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
-        
+
         let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
 
-        
-/* 
-        console.log(" u ponedeljak je: ")
-        console.log(freeSlotsAthletes ) */
+
+
+
+        console.log("---------sundayOccupiedSlotsAthletes---------")
+        console.log(sundayOccupiedSlotsAthletes)
+
+
+        console.log("---------freeSlotsAthletes---------")
+
+        console.log(freeSlotsAthletes)
+
+        /*  console.log(freeSlotsAthletes) */  // vraca, ove koje mozes koristiti uopste... 
+
+
+        /* 
+                console.log(" u ponedeljak je: ")
+                console.log(freeSlotsAthletes ) */
 
 
 
 
 
-/* // !  var freeSlotsAthletes = [...randomizeFormData]; */
+        /* // !  var freeSlotsAthletes = [...randomizeFormData]; */
 
 
 
