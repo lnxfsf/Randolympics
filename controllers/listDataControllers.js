@@ -924,7 +924,58 @@ const landingPageRandomize = async (req, res) => {
     { name: 'fifth', email: 'fifth@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'six', email: 'six@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'seven', email: 'seven@gmail.com', weightCategory: 'light', gender: 'F' },
-  ];
+    { name: 'eight', email: 'eight@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'nine', email: 'nine@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'ten', email: 'ten@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'eleven', email: 'eleven@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twelve', email: 'twelve@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirteen', email: 'thirteen@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fourteen', email: 'fourteen@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fifteen', email: 'fifteen@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'sixteen', email: 'sixteen@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'seventeen', email: 'seventeen@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'eighteen', email: 'eighteen@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'nineteen', email: 'nineteen@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twenty', email: 'twenty@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'twentyone', email: 'twentyone@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twentytwo', email: 'twentytwo@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'twentythree', email: 'twentythree@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twentyfour', email: 'twentyfour@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'twentyfive', email: 'twentyfive@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twentysix', email: 'twentysix@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'twentyseven', email: 'twentyseven@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'twentyeight', email: 'twentyeight@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'twentynine', email: 'twentynine@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'thirty', email: 'thirty@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirtyone', email: 'thirtyone@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'thirtytwo', email: 'thirtytwo@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirtythree', email: 'thirtythree@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'thirtyfour', email: 'thirtyfour@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirtyfive', email: 'thirtyfive@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'thirtysix', email: 'thirtysix@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirtyseven', email: 'thirtyseven@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'thirtyeight', email: 'thirtyeight@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'thirtynine', email: 'thirtynine@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'forty', email: 'forty@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fortyone', email: 'fortyone@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fortytwo', email: 'fortytwo@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fortythree', email: 'fortythree@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fortyfour', email: 'fortyfour@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fortyfive', email: 'fortyfive@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fortysix', email: 'fortysix@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fortyseven', email: 'fortyseven@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fortyeight', email: 'fortyeight@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fortynine', email: 'fortynine@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fifty', email: 'fifty@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fiftyone', email: 'fiftyone@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fiftytwo', email: 'fiftytwo@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fiftythree', email: 'fiftythree@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fiftyfour', email: 'fiftyfour@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fiftyfive', email: 'fiftyfive@gmail.com', weightCategory: 'light', gender: 'M' },
+    { name: 'fiftysix', email: 'fiftysix@gmail.com', weightCategory: 'light', gender: 'F' },
+    { name: 'fiftyseven', email: 'fiftyseven@gmail.com', weightCategory: 'light', gender: 'M' }
+];
+
 
 
 
@@ -1078,11 +1129,177 @@ const landingPageRandomize = async (req, res) => {
         // da, ovo je generalno, on nece dodavati, više ako on nema više tih... (// ! i da, onaj zašto ih ima 2 kocke, to je jer to ustvari označava TRAJANJE tog event-a ! to moras isto dodati sada odma, kolko traje)
 
 
+        
 
-        // ! ovo
+        
+
+
+        if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
+
+
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "3_6");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            if (freeSlotsAthletes.length !== 0 && timeSlot_3_6 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_3_6 = timeSlot_3_6 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 3_6 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
+
+
+        }
+
+
 
 
         // TODO, ali on treba da proveri, da li moze da ubaci, samo ako se i vreme pocinjanja sporta odgovara ovom vremenu isto i tako izbegnes lose vreme, na kraju kada je onako..
+        if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
+
+          // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
+
+          /*  console.log("lista sporta je:")
+           console.log(listOfSports)
+          */
+
+
+
+          
+  
+        
+       
+           let selectedSport;
+           let firstDayStartGameTimeSlot;
+ 
+           // Loop to find a sport with the desired start time slot
+           do {
+             selectedSport = getRandomItemSports(listOfSports);
+             ({ firstDayStartGameTimeSlot } = selectedSport);
+           } while (firstDayStartGameTimeSlot !== "6_9");
+ 
+           const { howMuchAthletesMakeATeam } = selectedSport;
+ 
+
+
+
+          /*      console.log("sport ime:" + sportName)
+               console.log("howMuchMakeATeam :" + howMuchAthletesMakeATeam) */
+
+          //const selectedAthletes = getRandomAthletes(freeSlotsAthletes, howMuchMakeATeam, sportName );
+
+
+
+          // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
+          // ! da i ovde sam dodao, <= , da eto ne pravi gresku neku.. tkd, aj. nek ne dira..
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
+            // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam) {
+
+
+
+
+
+
+
+
+
+              // ne od sports, nego athletes ! 
+
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+
+
+              // remove it from original (now, before we add another variable to that occupiedAthletes... )
+              // moras da ga uklonis sa glavnog odma, da bi sklonio. jer on vec ima u povratnoj, taj, samo doda ovu jos jedan property... 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              // znaci, vidis, ovaj se pokrece..  
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+              // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_6_9 = timeSlot_6_9 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 6-9 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+         /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+ */
+
+
+
+
+
+        } 
+
 
         // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
         if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
@@ -1098,39 +1315,6 @@ const landingPageRandomize = async (req, res) => {
           } while (firstDayStartGameTimeSlot !== "9_12");
 
           const { howMuchAthletesMakeATeam } = selectedSport;
-
-
-
-          /* // ! here
-                    let selectedSport = getRandomItemSports(listOfSports); // izabira random sport prvo ! 
-                    const { howMuchAthletesMakeATeam, firstDayStartGameTimeSlot } = selectedSport;  // izvlači ime, i kolko random athletes treba nam za taj sport
-          
-           
-          
-                    let forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
-                        
-          
-                    */
-
-
-
-
-          /*  while ( forWhilefirstDayStartGameTimeSlot !== "9_12" ){
-                selectedSport = getRandomItemSports(listOfSports);
-               
-                
-   
-   
-                const { firstDayStartGameTimeSlot } = selectedSport;
- 
-                if (firstDayStartGameTimeSlot === "9_12"){
-                 break;
-                }
-                forWhilefirstDayStartGameTimeSlot = firstDayStartGameTimeSlot;
- 
- 
-   
-           } */
 
 
 
@@ -1183,8 +1367,254 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+        if (timeSlot_12_15 <= TotalMaxAthletesPerTimeSlot_12_15) {
 
 
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "12_15");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            if (freeSlotsAthletes.length !== 0 && timeSlot_12_15 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_12_15 = timeSlot_12_15 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 12_15 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
+
+
+        }
+
+
+        if (timeSlot_15_18 <= TotalMaxAthletesPerTimeSlot_15_18) {
+
+
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "15_18");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            if (freeSlotsAthletes.length !== 0 && timeSlot_15_18 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_15_18 = timeSlot_15_18 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 15_18 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
+
+
+        }
+
+
+
+        if (timeSlot_18_21 <= TotalMaxAthletesPerTimeSlot_18_21) {
+
+
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "18_21");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            if (freeSlotsAthletes.length !== 0 && timeSlot_18_21 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_18_21 = timeSlot_18_21 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 18_21 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
+
+
+        }
+
+
+        
+        if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
+
+
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+          } while (firstDayStartGameTimeSlot !== "21_24");
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
+
+
+
+
+
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+
+
+            if (freeSlotsAthletes.length !== 0 && timeSlot_21_24 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
+
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
+
+
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
+
+
+
+              };
+
+
+
+
+              sundayOccupiedSlotsAthletes.push(modifiedAthlete);
+
+              timeSlot_21_24 = timeSlot_21_24 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+
+            }
+
+
+          }
+
+
+          console.log("SUNDAY timeslot: 21_24 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
+
+
+        }
 
 
 
