@@ -936,7 +936,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-   const randomizeFormData = [
+  const randomizeFormData = [
     { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
     { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
@@ -994,7 +994,7 @@ const landingPageRandomize = async (req, res) => {
     { name: 'fiftyfive', email: 'fiftyfive@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'fiftysix', email: 'fiftysix@gmail.com', weightCategory: 'light', gender: 'F' },
     { name: 'fiftyseven', email: 'fiftyseven@gmail.com', weightCategory: 'light', gender: 'M' }
-]; 
+  ];
 
 
 
@@ -1076,6 +1076,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+
       // these are most used. the CURRENT STATE, (so, we always know how much athletes are there... ) !
       // you need to reset them, for another day ! (as we're gonna fill them up, in each day, so we can calculate it.. )
       var timeSlot_3_6 = 0;
@@ -1129,7 +1130,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-        
+
 
 
         // ! znači, koliko je potrebno ljudi u taj timeframe (ne max, ono fixed, nego jedostavno, kolko je potrebno ljudi da se sastavi taj jedan tim !). da toliko ljudi izvlačiš 
@@ -1150,9 +1151,9 @@ const landingPageRandomize = async (req, res) => {
         // da, ovo je generalno, on nece dodavati, više ako on nema više tih... (// ! i da, onaj zašto ih ima 2 kocke, to je jer to ustvari označava TRAJANJE tog event-a ! to moras isto dodati sada odma, kolko traje)
 
 
-        
 
-        
+
+
 
 
         if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
@@ -1216,8 +1217,8 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 3_6 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*    console.log("SUNDAY timeslot: 3_6 ")
+             console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
   */
 
@@ -1238,26 +1239,26 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-          
-  
-        
-       
-           let selectedSport;
-           let firstDayStartGameTimeSlot;
- 
-           let attempts = 0;
-           const maxAttempts = listOfSports.length;
 
 
-           // Loop to find a sport with the desired start time slot
-           do {
-             selectedSport = getRandomItemSports(listOfSports);
-             ({ firstDayStartGameTimeSlot } = selectedSport);
-             attempts++;
-            } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
- 
-           const { howMuchAthletesMakeATeam } = selectedSport;
- 
+
+
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
+
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
+
+
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+
+          const { howMuchAthletesMakeATeam } = selectedSport;
+
 
 
 
@@ -1323,16 +1324,16 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 6-9 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
-         /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
- */
+          /*   console.log("SUNDAY timeslot: 6-9 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+  */
 
 
 
 
 
-        } 
+        }
 
 
         // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
@@ -1393,8 +1394,8 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 9-12 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*   console.log("SUNDAY timeslot: 9-12 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
   */
 
@@ -1463,8 +1464,8 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 12_15 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /* console.log("SUNDAY timeslot: 12_15 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
   */
 
@@ -1487,7 +1488,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18"  && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1530,8 +1531,8 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 15_18 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*   console.log("SUNDAY timeslot: 15_18 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
   */
 
@@ -1598,8 +1599,8 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 18_21 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*    console.log("SUNDAY timeslot: 18_21 ")
+             console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
   */
 
@@ -1607,7 +1608,7 @@ const landingPageRandomize = async (req, res) => {
         }
 
 
-        
+
         if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
 
@@ -1665,10 +1666,10 @@ const landingPageRandomize = async (req, res) => {
           }
 
 
-          console.log("SUNDAY timeslot: 21_24 ")
-          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes);
+          /*   console.log("SUNDAY timeslot: 21_24 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
           /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-  */
+        */
 
 
         }
@@ -1696,7 +1697,148 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-        var freeSlotsAthletes = [...randomizeFormData];
+
+
+
+
+        // -------------
+
+
+        // Filter out athletes who are already occupied
+         function filterFreeSlotsAthletes(freeSlots, occupiedSlots) {
+/* 
+          console.log(occupiedSlots)  */
+          
+          
+          // ovo izvučeš, one, koji trebaju, emails, koji bas odgovaraju koji trebaju (eto, sada if, else if, za t oprethodni dani isto ! unutar tih ...)
+          // uglavnom, emails, od svih occupied sto ima... da lakse filtiras.. 
+          
+            
+
+
+          // on ide kroz svaki od ovih elemenata ! jedan po jedan rastavlja ! 
+          var slotsFree = freeSlots.filter(athlete => {
+            
+            // ! const isNotOccupied = !occupiedEmails.includes(athlete.email);
+
+
+            //  sundayOccupiedSlotsAthletes 
+            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+             
+            // If there is no corresponding occupied athlete, include this athlete
+            if (!correspondingOccupiedAthlete) {
+              return true;
+            }
+        
+
+            console.log("stampa email"+ correspondingOccupiedAthlete.email)
+
+            console.log("stampa secondDayHowMuchTimeSlotsExpandBy"+ correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy)
+            
+            // znači u sundayOccupiedSlotsAthletes (ne brini, to je sto i saljes, ovo je unutar funkcije.. ). Taj jedan element. da ga pronadje, direktno.
+            // jer treba da pristupis, njegovim properties, da vidis da li da vracas, sacuvas.. u filter... 
+
+
+
+            // pre 2 dana, nedelja..
+            if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday") ){
+              return false;
+             };
+
+             // pre 3 dana, subota
+             if ( (correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")){
+              return false;
+             };
+
+
+
+             // inace, drzi ga tu gde i jeste... UBACUJE GA U LISTU SVIH ATHLETES TAKODJE ! da moze ga koristiti za sportove razne...
+            
+             
+        
+
+
+
+
+
+
+
+            // znači da jeste occupied, i ima ga, pa da makne ! 
+            // if (!isNotOccupied) return false;
+          
+          
+          }
+        
+        );
+
+        return slotsFree;
+
+
+
+
+        } 
+
+          
+
+        // da ovo će vaziti za taj jedan dan ... 
+        // var freeSlotsAthletes = [...randomizeFormData];
+
+
+        // ! treba da PRESKOCI one koji vec jesu u occupiedAthletes ! da njih ne uzme u obzir ! 
+        ///     var sundayOccupiedSlotsAthletes = [];
+
+        // DA FILTIRA PO istom "email" - u, i znace da su oba identicna. i da taj skloni iz "freeSlotsAthletes", da ga ne koristi... 
+
+
+        // ! znači, ti ces gledati: 
+        // !   1)  da li on ima  secondDayHowMuchTimeSlotsExpandBy > 0 || thirdDayHowMuchTimeSlotsExpandBy > 0 (svejedno, da li je 2 ili 3 dan, u odnosu na juče..)
+        //!    2) kao i, da je to ZAISTA 2 ili 3 dan u odnosu na danas "Monday" !!!   (ma, radi manuelno ovo onda ! za secondDayHowMuchTimeSlotsExpandBy > 0  mora biti i  && "Sunday" unutar .dayOfStart  , sto i imas... )
+
+        ///
+        
+//{
+//    sportName: "Men's Team All-Around Artistic Gymnastics",
+//    howMuchAthletesMakeATeam: 5,
+//    locations: 1,
+//
+//
+//
+//    firstDayHowMuchTimeSlotsExpandBy: 4,
+//    secondDayHowMuchTimeSlotsExpandBy: 2,
+//    thirdDayHowMuchTimeSlotsExpandBy: 0,
+//
+//
+//
+//    firstDayStartGameTimeSlot: "6_9", 
+//    firstDayEndGameTimeSlot: "15_18",
+// 
+//    secondDayStartGameTimeSlot: "6_9", 
+//    secondDayEndGameTimeSlot: "9_12",
+//
+//
+//    thirdDayStartGameTimeSlot: "", 
+//    thirdDayEndGameTimeSlot: "",
+//
+//    dayOfStart: "Wednesday",
+//
+//},
+
+
+        var copyfreeSlotsAthletes = [...randomizeFormData];
+
+        
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
+
+        
+/* 
+        console.log(" u ponedeljak je: ")
+        console.log(freeSlotsAthletes ) */
+
+
+
+
+
+/* // !  var freeSlotsAthletes = [...randomizeFormData]; */
 
 
 
