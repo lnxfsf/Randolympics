@@ -3017,7 +3017,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
+          } while ( (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Tuesday")  && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3189,7 +3189,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
+          } while ((firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Tuesday") && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5480,7 +5480,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5641,7 +5641,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5773,7 +5773,7 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports);
             ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5915,6 +5915,30 @@ const landingPageRandomize = async (req, res) => {
     // da, 
 
 
+
+
+    var everyDayInOneForUser = [].concat(
+
+      sundayOccupiedSlotsAthletes,
+      mondayOccupiedSlotsAthletes,
+      tuesdayOccupiedSlotsAthletes,
+      wednesdayOccupiedSlotsAthletes,
+      thursdayOccupiedSlotsAthletes,
+      fridayOccupiedSlotsAthletes,
+      saturdayOccupiedSlotsAthletes
+
+    );
+
+
+
+
+    // Access the first element, to nam je prvi korisnik, i njemu vracamo u frontend samo..
+    const firstUserEmail = randomizeFormData[0].email;
+
+    const filteredAthletes = everyDayInOneForUser.filter(athlete => athlete.email === firstUserEmail);
+
+    console.log("+++++++++++ Za prvog user-a je +++++++++++++++++++")
+    console.log(filteredAthletes);
 
 
 
