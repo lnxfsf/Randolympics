@@ -1799,9 +1799,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1876,9 +1876,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -1971,9 +1971,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2037,9 +2037,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2103,9 +2103,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2169,9 +2169,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2234,9 +2234,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Sunday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2349,6 +2349,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+            // ! da ,ubacuj ti oboje, okej. ta 2 objekta zajedno. DA, TO TAKO RADI ODLICNO ! jer on osim 3-eg, sto ima, on, isto i proveri da je tog i tog dana počeo ...
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
             if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
@@ -2413,9 +2414,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2490,9 +2491,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2585,9 +2586,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2651,9 +2652,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2717,9 +2718,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2783,9 +2784,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2848,9 +2849,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Monday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -2981,7 +2982,15 @@ const landingPageRandomize = async (req, res) => {
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
 
-        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
+
+        // from sunday, and monday together.. occupied.. if there's. because we need last 2 days... (and it gets it..)
+        var bothOccupiedSlotsAthletes = [
+          ...sundayOccupiedSlotsAthletes,
+          ...mondayOccupiedSlotsAthletes,
+
+        ]
+
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, bothOccupiedSlotsAthletes);
 
 
 
@@ -3006,9 +3015,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3083,9 +3092,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3178,9 +3187,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3244,9 +3253,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3310,9 +3319,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3376,9 +3385,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3441,9 +3450,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Tuesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3572,7 +3581,14 @@ const landingPageRandomize = async (req, res) => {
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
 
-        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
+        var bothOccupiedSlotsAthletes = [
+          ...mondayOccupiedSlotsAthletes,
+          ...tuesdayOccupiedSlotsAthletes,
+
+        ]
+
+
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, bothOccupiedSlotsAthletes);
 
 
 
@@ -3597,9 +3613,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3674,9 +3690,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3769,9 +3785,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3835,9 +3851,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3901,9 +3917,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3967,9 +3983,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -4032,9 +4048,9 @@ const landingPageRandomize = async (req, res) => {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Wednesday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -4102,580 +4118,585 @@ const landingPageRandomize = async (req, res) => {
 
         var TotalMaxAthletesPerTimeSlot_21_24 = 15;
 
-        
- function filterFreeSlotsAthletes(freeSlots, occupiedSlots) {
 
+        function filterFreeSlotsAthletes(freeSlots, occupiedSlots) {
 
-  // on ide kroz svaki od ovih elemenata ! jedan po jedan rastavlja ! 
-  var slotsFree = freeSlots.filter(athlete => {
 
-    // const isNotOccupied = !occupiedEmails.includes(athlete.email);
+          // on ide kroz svaki od ovih elemenata ! jedan po jedan rastavlja ! 
+          var slotsFree = freeSlots.filter(athlete => {
 
+            // const isNotOccupied = !occupiedEmails.includes(athlete.email);
 
-    //  sundayOccupiedSlotsAthletes 
-    const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
 
-    // If there is no corresponding occupied athlete, include this athlete
-    if (!correspondingOccupiedAthlete) {
-      return true;
-    }
+            //  sundayOccupiedSlotsAthletes 
+            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
 
+            // If there is no corresponding occupied athlete, include this athlete
+            if (!correspondingOccupiedAthlete) {
+              return true;
+            }
 
 
-    
 
 
-    // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
-    // pre 2 dana, nedelja..
-    if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
-      || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday"))
 
 
+            // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
+            // pre 2 dana, nedelja..
+            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
+              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday"))
 
-    ) {
 
-      // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-      return false;
-    } else {
-      return true
-    };
 
-  }
+            ) {
 
-  );
+              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+              return false;
+            } else {
+              return true
+            };
 
+          }
 
- 
+          );
 
 
-  return slotsFree;
 
 
 
+          return slotsFree;
 
-}
 
 
 
+        }
 
-//},
 
 
-var copyfreeSlotsAthletes = [...randomizeFormData];
 
+        //},
 
-let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
 
+        var copyfreeSlotsAthletes = [...randomizeFormData];
 
+        var bothOccupiedSlotsAthletes = [
+          ...tuesdayOccupiedSlotsAthletes,
+          ...wednesdayOccupiedSlotsAthletes,
 
+        ]
 
-// e sada isto što ima i u Sunday... (samo za ovaj dan Monday, pronalazi nove sportove koji na ovaj dan počinju ! )
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, bothOccupiedSlotsAthletes);
 
 
 
-if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
 
+        // e sada isto što ima i u Sunday... (samo za ovaj dan Monday, pronalazi nove sportove koji na ovaj dan počinju ! )
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  // drzi broj pokusaja i uporedjuje sa duzinom array-a... da ne predje to. jer onda znas da je prosao sav array svih sportova.. 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
 
+        if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
 
-  //  (AKO NE MOZE NACI, A PROŠAO JE SVE, ONDA DA PREKINE, JER ONDA CE BITI U INFINITE LOOP  )
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
+          // drzi broj pokusaja i uporedjuje sa duzinom array-a... da ne predje to. jer onda znas da je prosao sav array svih sportova.. 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
 
+          //  (AKO NE MOZE NACI, A PROŠAO JE SVE, ONDA DA PREKINE, JER ONDA CE BITI U INFINITE LOOP  )
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_3_6 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_3_6 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_3_6 = timeSlot_3_6 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_3_6 = timeSlot_3_6 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*    console.log("SUNDAY timeslot: 3_6 ")
-     console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
 
-if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
 
-  // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
+          /*    console.log("SUNDAY timeslot: 3_6 ")
+             console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-  /*  console.log("lista sporta je:")
-   console.log(listOfSports)
-  */
 
+        }
 
+        if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
 
+          // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
 
+          /*  console.log("lista sporta je:")
+           console.log(listOfSports)
+          */
 
 
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
 
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
-  /*      console.log("sport ime:" + sportName)
-       console.log("howMuchMakeATeam :" + howMuchAthletesMakeATeam) */
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
-  //const selectedAthletes = getRandomAthletes(freeSlotsAthletes, howMuchMakeATeam, sportName );
 
 
 
-  // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
-  // ! da i ovde sam dodao, <= , da eto ne pravi gresku neku.. tkd, aj. nek ne dira..
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
+          /*      console.log("sport ime:" + sportName)
+               console.log("howMuchMakeATeam :" + howMuchAthletesMakeATeam) */
 
+          //const selectedAthletes = getRandomAthletes(freeSlotsAthletes, howMuchMakeATeam, sportName );
 
-    // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
-    // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam) {
 
 
+          // ponavlja tolko puta, koliko nam treba za jedan tim  ! 
+          // ! da i ovde sam dodao, <= , da eto ne pravi gresku neku.. tkd, aj. nek ne dira..
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
+            // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
+            // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam) {
 
 
 
 
 
-      // ne od sports, nego athletes ! 
 
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
 
 
-      // remove it from original (now, before we add another variable to that occupiedAthletes... )
-      // moras da ga uklonis sa glavnog odma, da bi sklonio. jer on vec ima u povratnoj, taj, samo doda ovu jos jedan property... 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
+              // ne od sports, nego athletes ! 
 
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      // znaci, vidis, ovaj se pokrece..  
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
 
+              // remove it from original (now, before we add another variable to that occupiedAthletes... )
+              // moras da ga uklonis sa glavnog odma, da bi sklonio. jer on vec ima u povratnoj, taj, samo doda ovu jos jedan property... 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              // znaci, vidis, ovaj se pokrece..  
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
-      // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
 
 
+              };
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
-      timeSlot_6_9 = timeSlot_6_9 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
+              // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_6_9 = timeSlot_6_9 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*   console.log("SUNDAY timeslot: 6-9 ")
-    console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
+          }
 
 
+          /*   console.log("SUNDAY timeslot: 6-9 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-}
 
-// da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
-if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
 
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
+        }
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+        // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
+        if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
 
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_9_12 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_9_12 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_9_12 = timeSlot_9_12 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_9_12 = timeSlot_9_12 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*   console.log("SUNDAY timeslot: 9-12 ")
-    console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
 
-if (timeSlot_12_15 <= TotalMaxAthletesPerTimeSlot_12_15) {
 
+          /*   console.log("SUNDAY timeslot: 9-12 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
+        }
 
+        if (timeSlot_12_15 <= TotalMaxAthletesPerTimeSlot_12_15) {
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_12_15 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_12_15 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_12_15 = timeSlot_12_15 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_12_15 = timeSlot_12_15 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /* console.log("SUNDAY timeslot: 12_15 ")
-  console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
 
-if (timeSlot_15_18 <= TotalMaxAthletesPerTimeSlot_15_18) {
 
+          /* console.log("SUNDAY timeslot: 12_15 ")
+          console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
+        }
 
+        if (timeSlot_15_18 <= TotalMaxAthletesPerTimeSlot_15_18) {
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_15_18 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_15_18 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_15_18 = timeSlot_15_18 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_15_18 = timeSlot_15_18 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*   console.log("SUNDAY timeslot: 15_18 ")
-    console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
 
-if (timeSlot_18_21 <= TotalMaxAthletesPerTimeSlot_18_21) {
 
+          /*   console.log("SUNDAY timeslot: 15_18 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
+        }
 
+        if (timeSlot_18_21 <= TotalMaxAthletesPerTimeSlot_18_21) {
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_18_21 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_18_21 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_18_21 = timeSlot_18_21 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_18_21 = timeSlot_18_21 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*    console.log("SUNDAY timeslot: 18_21 ")
-     console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
 
-if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
+          /*    console.log("SUNDAY timeslot: 18_21 ")
+             console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
 
-  let selectedSport;
-  let firstDayStartGameTimeSlot;
 
-  let attempts = 0;
-  const maxAttempts = listOfSports.length;
+        }
 
-  // Loop to find a sport with the desired start time slot
-  do {
-    selectedSport = getRandomItemSports(listOfSports);
-    ({ firstDayStartGameTimeSlot } = selectedSport);
-    attempts++;
-  } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+        if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
-  const { howMuchAthletesMakeATeam } = selectedSport;
 
+          let selectedSport;
+          let firstDayStartGameTimeSlot;
 
+          let attempts = 0;
+          const maxAttempts = listOfSports.length;
 
+          // Loop to find a sport with the desired start time slot
+          do {
+            selectedSport = getRandomItemSports(listOfSports);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
+            attempts++;
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Thursday" && attempts < maxAttempts);
 
+          const { howMuchAthletesMakeATeam } = selectedSport;
 
 
-  // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
-  for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-    if (freeSlotsAthletes.length !== 0 && timeSlot_21_24 !== howMuchAthletesMakeATeam) {
-      const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
-      const index = freeSlotsAthletes.indexOf(selectedAthlete);
-      if (index > -1) {
-        freeSlotsAthletes.splice(index, 1);
-      };
 
+          // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
+          for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
-      const modifiedAthlete = {
-        ...selectedAthlete,
-        ...selectedSport,
 
+            if (freeSlotsAthletes.length !== 0 && timeSlot_21_24 !== howMuchAthletesMakeATeam) {
+              const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
+              const index = freeSlotsAthletes.indexOf(selectedAthlete);
+              if (index > -1) {
+                freeSlotsAthletes.splice(index, 1);
+              };
 
-      };
 
+              const modifiedAthlete = {
+                ...selectedAthlete,
+                ...selectedSport,
 
 
 
-      thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
+              };
 
-      timeSlot_21_24 = timeSlot_21_24 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-    }
 
 
-  }
+              thursdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
+              timeSlot_21_24 = timeSlot_21_24 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
-  /*   console.log("SUNDAY timeslot: 21_24 ")
-    console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
-  /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
-*/
+            }
 
 
-}
+          }
+
+
+          /*   console.log("SUNDAY timeslot: 21_24 ")
+            console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
+          /*  console.log('SUNDAY Remaining Free Slots Athletes:', freeSlotsAthletes);
+        */
+
+
+        }
 
 
 
@@ -4711,12 +4732,12 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
 
 
-            
+
 
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
+            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday"))
 
 
@@ -4734,7 +4755,7 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           );
 
 
-         
+
 
 
           return slotsFree;
@@ -4746,14 +4767,21 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
 
 
-        
+
         //},
 
 
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
 
-        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
+
+        var bothOccupiedSlotsAthletes = [
+          ...wednesdayOccupiedSlotsAthletes,
+          ...thursdayOccupiedSlotsAthletes,
+
+        ]
+
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, bothOccupiedSlotsAthletes);
 
 
 
@@ -4761,7 +4789,7 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
         // e sada isto što ima i u Sunday... (samo za ovaj dan Monday, pronalazi nove sportove koji na ovaj dan počinju ! )
 
 
-        
+
         if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
 
 
@@ -4778,9 +4806,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -4855,9 +4883,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -4950,9 +4978,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5016,9 +5044,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5082,9 +5110,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5148,9 +5176,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5213,9 +5241,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Friday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5298,12 +5326,12 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
 
 
-            
+
 
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ( (correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
+            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
 
 
@@ -5321,7 +5349,7 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           );
 
 
-         
+
 
 
           return slotsFree;
@@ -5333,14 +5361,22 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
 
 
 
-        
+
         //},
 
 
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
 
-        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, sundayOccupiedSlotsAthletes);
+
+        var bothOccupiedSlotsAthletes = [
+          ...thursdayOccupiedSlotsAthletes,
+          ...fridayOccupiedSlotsAthletes,
+
+        ]
+
+
+        let freeSlotsAthletes = filterFreeSlotsAthletes(copyfreeSlotsAthletes, bothOccupiedSlotsAthletes);
 
 
 
@@ -5348,7 +5384,7 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
         // e sada isto što ima i u Sunday... (samo za ovaj dan Monday, pronalazi nove sportove koji na ovaj dan počinju ! )
 
 
-        
+
         if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
 
 
@@ -5365,9 +5401,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "3_6" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5442,9 +5478,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "6_9" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "6_9"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5537,9 +5573,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "9_12" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5603,9 +5639,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "12_15" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "12_15"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5669,9 +5705,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "15_18" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "15_18" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5735,9 +5771,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "18_21" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "18_21"  && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5800,9 +5836,9 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
           // Loop to find a sport with the desired start time slot
           do {
             selectedSport = getRandomItemSports(listOfSports);
-            ({ firstDayStartGameTimeSlot } = selectedSport);
+            ({ firstDayStartGameTimeSlot, dayOfStart } = selectedSport);
             attempts++;
-          } while (firstDayStartGameTimeSlot !== "21_24" && attempts < maxAttempts);
+          } while (firstDayStartGameTimeSlot !== "21_24" && dayOfStart !== "Saturday" && attempts < maxAttempts);
 
           const { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -5867,32 +5903,8 @@ if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
     }
 
 
-    console.log("------------ SUNDAY OCCUPIED -------------- ")
-    console.log(sundayOccupiedSlotsAthletes)
 
-    
-    console.log("------------ MONDAY OCCUPIED -------------- ")
-    console.log(mondayOccupiedSlotsAthletes)
 
-    
-    console.log("------------ tuesday OCCUPIED -------------- ")
-    console.log(tuesdayOccupiedSlotsAthletes)
-
-    
-    console.log("------------ wednesday OCCUPIED -------------- ")
-    console.log(wednesdayOccupiedSlotsAthletes)
-
-    
-    console.log("------------ thursday OCCUPIED -------------- ")
-    console.log(thursdayOccupiedSlotsAthletes)
-
-    
-    console.log("------------ friday OCCUPIED -------------- ")
-    console.log(fridayOccupiedSlotsAthletes)
-
-    
-    console.log("------------ saturday OCCUPIED -------------- ")
-    console.log(saturdayOccupiedSlotsAthletes)
 
 
     // e sada, lista svih sportova !
