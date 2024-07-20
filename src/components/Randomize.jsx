@@ -25,37 +25,47 @@ let BACKEND_SERVER_BASE_URL =
 
 
 const Randomize = () => {
+
+
+
+  const [randomizeFormData, setRandomizeFormData] = useState([{ name: '', email: '', weightCategory: 'light', gender: 'M' }]);
+
+  const handleInputChange = (index, event) => {
+    const { name, value } = event.target;
+    const newFormData = randomizeFormData.map((data, idx) => {
+      if (index === idx) {
+        return { ...data, [name]: value };
+      }
+      return data;
+    });
+    setRandomizeFormData(newFormData);
+  };
+
+
+  const addInputSet = () => {
+    setRandomizeFormData([...randomizeFormData, { name: '', email: '', weightCategory: 'light', gender: 'M' }]);
+  };
+
+
+  const removeInputSet = (index) => {
+    setRandomizeFormData(randomizeFormData.filter((_, idx) => idx !== index));
+  };
+
+
+
+
+
+
+
+
+  // ---------------
+
+
   const navigate = useNavigate();
 
 
 
-  // ? HERE, for weight..
 
-
-
-
-
-  const weightOptions = ["Kg", "Lb"]; // supported cryptos
-
-  const [weightMenuAnchorEl, setWeightMenuAnchorEl] = useState(null);
-  const [selectedWeight, setSelectedWeight] = useState("Kg");
-
-  const handleWeightMenuClick = (event) => {
-    setWeightMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleWeightMenuClose = () => {
-    setWeightMenuAnchorEl(null);
-  };
-
-  const handleWeightOptionSelect = (option) => {
-    setSelectedWeight(option);
-    setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
-  };
-
-
-
-  // ? HERE, for weight..
 
 
 
@@ -67,27 +77,11 @@ const Randomize = () => {
   const handleRandomize = async (e) => {
     e.preventDefault();
 
-
-    var name1 = e.target.name1.value;
-    var email1 = e.target.email1.value;
-    
+    console.log("sent")
 
 
 
-    if (!e.target.weight1) {
-      var weight1 = null;
-    } else {
-      //var weight = e.target.weight.value;
-
-      // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
-      if (selectedWeight === "Lb") {
-        var weight1 = (e.target.weight1 * 0.45359237);
-
-        //console.log(weight);
-      }
-    }
-
-
+    // nece weight biti ! ovde ! 
 
     // TODO, moras, da uradis jos jedan time slot , 06-09 , jos jedan. 
     // TODO za table što je... 
@@ -98,14 +92,16 @@ const Randomize = () => {
       var response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/landingPageRandomize`,
         {
-         params: {
-          name1,
-          email1,
-          weight1,
-         },
+          params: {
+            randomizeFormData
+          },
 
         }
       );
+
+
+     
+
     } catch (error) {
       console.log(error);
 
@@ -128,75 +124,168 @@ const Randomize = () => {
         </h1>
       </div>
 
-      <div></div>
 
-      <div className="main_grid_schedule m-8 mt-16">
-        <p></p>
 
-        {/* this, time, as well, can be updated dynamically, by data from backend */}
-        <p>
-          <b>09-12:00</b>
-        </p>
-        <p>
-          <b>12-15:00</b>
-        </p>
-        <p>
-          <b>15-18:00</b>
-        </p>
-        <p>
-          <b>18-21:00</b>
-        </p>
-        <p>
-          <b>21-00:00</b>
-        </p>
 
-        <p className="days_grid_schedule">Monday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        
 
-        <p className="days_grid_schedule">Tuesday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-        <p className="days_grid_schedule">Wednesday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
 
-        <p className="days_grid_schedule">Thursday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
+      <table className="tablez">
+        <thead>
+          <tr>
+            <th className="thz">Date</th>
+            <th className="thz">00-03:00</th>
+            <th className="thz">03-06:00</th>
+            <th className="thz"> 06-09:00</th>
+            <th className="thz">09-12:00</th>
+            <th className="thz"> 12-15:00</th>
+            <th className="thz">15-18:00</th>
+            <th className="thz">18-21:00</th>
+            <th className="thz">21-24:00</th>
+          </tr>
+        </thead>
+        <tbody>
 
-        <p className="days_grid_schedule">Friday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
+          <tr>
+            <th className="thz">Saturday (June 24th)</th>
 
-        <p className="days_grid_schedule">Saturday</p>
-        <RandomizeItem icon={"swim"} name={"Butterfly Swimming"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
-        <RandomizeItem icon={"gun"} name={"Double Trap "} />
-        <RandomizeItem icon={"hockey"} name={"Field Hockey"} />
-        <RandomizeItem icon={"hourglass"} name={"Break"} />
+            <td className="tdz" className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
 
-        <p className="days_grid_schedule">Sunday</p>
-        <RandomizeItem icon={""} name={"Awards and closing event"} />
 
-      </div>
+          </tr>
+
+
+          <tr>
+            <th className="thz">Sunday  June 25th</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's 50m Freestyle Swimming"} /></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Monday June 26th</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's 50m Freestyle Swimming"} /></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Tuesday June 27th</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Wednesday (June 28th)</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Thursday June 29th</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
+
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Friday June 30th</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            
+             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+   
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+          <tr>
+            <th className="thz">Saturday July 1st</th>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+          </tr>
+
+
+          <tr >
+            <th rowSpan={2} className="thz">Sunday July 2nd</th>
+
+
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+
+          </tr>
+
+          <tr>
+
+
+
+
+            <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
+
+
+
+          </tr>
+
+
+
+
+        </tbody>
+      </table>
+
+
+
+
 
 
       <div>
@@ -208,166 +297,76 @@ const Randomize = () => {
           onSubmit={handleRandomize}
         >
 
-          <div className="flex flex-col mb-1 justify-center mt-8">
-            <TextField
-              label="User"
-              placeholder="Name"
-
-              name="name1"
-              id="name1"
-
-              type="text"
-              inputProps={{
-                maxLength: 80,
-              }}
-              sx={{
-                m: 1,
-                width: "420px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                {
-                  borderColor: "red",
-                },
-
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-            />
+          {randomizeFormData.map((data, index) => (
 
 
-            <TextField
-              label="Email"
-              placeholder="Email"
+            <div key={index} style={{ marginBottom: '10px' }}>
 
-              name="email1"
-              id="email1"
 
-              type="email"
-              inputProps={{
-                maxLength: 80,
-              }}
-              sx={{
-                m: 1,
-                width: "420px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                {
-                  borderColor: "red",
-                },
-
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-            />
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={data.name}
+                onChange={(event) => handleInputChange(index, event)}
+              />
 
 
 
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={data.email}
+                onChange={(event) => handleInputChange(index, event)}
+              />
 
 
 
-          </div>
+              <select
+                name="weightCategory"
+                value={data.weightCategory}
+                onChange={(event) => handleInputChange(index, event)}
+              >
+                <option value="light">Light</option>
+                <option value="medium">Medium</option>
+                <option value="heavy">Heavy</option>
+              </select>
 
 
-          <div className="flex mb-2.5 justify-center items-center mt-2">
-            <TextField
-              label="Weight"
-              
-              name="weight1"
-              id="weight1"
+              <select
+                name="gender"
+                value={data.gender}
+                onChange={(event) => handleInputChange(index, event)}
+              >
+                <option value="M">Man</option>
+                <option value="F">Woman</option>
 
-              required
-
-
-
-
-              type="number"
-
-              onChange={(event) =>
-                event.target.value < 0
-                  ? (event.target.value = 0)
-                  : event.target.value
-              }
-
-
-              placeholder="85 kg/185 lb"
-              sx={{
-                m: 1,
-                width: "280px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                {
-                  borderColor: "red",
-                },
-
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle kg / lb"
-                      onClick={handleWeightMenuClick}
-                      edge="end"
-                    >
-                      {/* Icon for dropdown, e.g., a downward arrow */}
-                      {selectedWeight}
-                    </IconButton>
-                    <Menu
-                      id="weight-menu"
-                      anchorEl={weightMenuAnchorEl}
-                      open={Boolean(weightMenuAnchorEl)}
-                      onClose={handleWeightMenuClose}
-                    >
-                      {weightOptions.map((option) => (
-                        <MenuItem
-                          key={option}
-                          onClick={() => handleWeightOptionSelect(option)}
-                          selected={option === selectedWeight}
-                        >
-                          {option}
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </InputAdornment>
-                ),
-
-                inputMode: 'numeric',
-                pattern: '[0-9]*',
+              </select>
 
 
 
+              <button type="button" onClick={() => removeInputSet(index)}>
+                Remove
+              </button>
 
 
 
-              }}
-            />
+            </div>
 
 
-          </div>
+
+          ))}
+
+
+
+          <button type="button" onClick={addInputSet}>
+            Add Another
+          </button>
 
 
 
           <Button
-
             className="w-44 "
             style={{ marginTop: "20px" }}
             sx={{

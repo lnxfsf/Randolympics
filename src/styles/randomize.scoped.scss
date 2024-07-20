@@ -1,4 +1,4 @@
-.main_grid_schedule {
+/* .main_grid_schedule {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -14,4 +14,32 @@
 
 .grid_border_bottom {
   border-bottom: 2px solid #ccc;
+} */
+
+
+
+
+
+.tablez {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
 }
+
+.thz, .tdz {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center !important; // don't know why but it needs !important
+  vertical-align: middle;
+
+
+}
+
+
+.thz {
+  background-color: #f2f2f2;
+}
+
+.time-slot {
+  font-weight: bold;
+} 
