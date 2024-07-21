@@ -1842,7 +1842,21 @@ const landingPageRandomize = async (req, res) => {
            } while (firstDayStartGameTimeSlot !== "3_6" && dayOfStart !== "Sunday" && attempts < maxAttempts);
   */
 
-          selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday");
+
+           // on ovde treba da nadje, sport, koji ce i dalje odgovarati ovom timeframe-u ! a da ga ne overflow-uje isto...
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday");
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+            
+          }while(timeSlot_3_6+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_3_6)
+            // da, ide  >  , jer on moze biti <= , i to je okej, i nece traziti novi sport. ali ako jeste, onda trazi novi sport ipak... jer trazi vise igraca..
+            // a ovo ce biti nista, ako nije pronasao taj uopste ! to je koji i jeste 0, koji vec i ima u timeSlot_3_6
+             
+
           // on nadje taj.. al sto nece da ubaci 
 
           if (selectedSport) {
@@ -1933,7 +1947,19 @@ const landingPageRandomize = async (req, res) => {
   */
 
 
-          selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday");
+          
+
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday");
+            
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+
+          }while(timeSlot_6_9+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_6_9)
+
 
           if (selectedSport) {
 
@@ -2037,8 +2063,21 @@ const landingPageRandomize = async (req, res) => {
             } while (firstDayStartGameTimeSlot !== "9_12" && dayOfStart !== "Sunday" && attempts < maxAttempts);
    */
 
-          selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
+          
       
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+
+          }while(timeSlot_9_12+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_9_12)
+
+
+
+
 
 
           if (selectedSport) {
@@ -2110,7 +2149,19 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-          selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday");
+         
+
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday");
+         
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+
+          }while(timeSlot_12_15+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_12_15)
+
 
          
 
@@ -2181,7 +2232,17 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-          selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday");
+          
+
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday");
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+          }while(timeSlot_15_18+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_15_18)
+
 
           if (selectedSport) {
 
@@ -2246,7 +2307,20 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-          selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday");
+         
+
+          
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday");
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+          }while(timeSlot_18_21+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_18_21)
+
+
+
 
           if (selectedSport) {
 
@@ -2308,7 +2382,19 @@ const landingPageRandomize = async (req, res) => {
           const maxAttempts = listOfSports.length;
 
 
-          selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday");
+         
+
+          do{
+            selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday");
+            if(selectedSport){
+              var { howMuchAthletesMakeATeam } = selectedSport;
+            } else {
+              var howMuchAthletesMakeATeam = 0;
+            }
+          }while(timeSlot_21_24+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_21_24)
+
+
+
 
           if (selectedSport) {
 
