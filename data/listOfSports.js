@@ -4,7 +4,9 @@
 
 // can you make a list of sports, that's gonna be defined in: listOfSports.js file. and then exported and used , in function of another file. 
 
-const listOfSports = [{
+const listOfSports = [
+    
+  /*   {
     sportName: "Men's 50m Freestyle Swimming",
     howMuchAthletesMakeATeam: 1,
     locations: 1,
@@ -140,6 +142,36 @@ const listOfSports = [{
 
 
 
+
+{
+    sportName: "Men's Water Polo",
+    howMuchAthletesMakeATeam: 11,
+    locations: 11,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 4,
+    secondDayHowMuchTimeSlotsExpandBy: 2,
+    thirdDayHowMuchTimeSlotsExpandBy: 1,
+
+
+
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "18_21",
+ 
+    secondDayStartGameTimeSlot: "15_18", 
+    secondDayEndGameTimeSlot: "18_21",
+
+
+    thirdDayStartGameTimeSlot: "15_18", 
+    thirdDayEndGameTimeSlot: "15_18",
+
+    dayOfStart: "Tuesday",
+
+},
+
+
+
 {
     sportName: "Men's Team All-Around Artistic Gymnastics",
     howMuchAthletesMakeATeam: 5,
@@ -166,6 +198,94 @@ const listOfSports = [{
     dayOfStart: "Wednesday",
 
 },
+
+
+
+{
+    sportName: "Men's Water Polo",
+    howMuchAthletesMakeATeam: 11,
+    locations: 11,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 4,
+    secondDayHowMuchTimeSlotsExpandBy: 2,
+    thirdDayHowMuchTimeSlotsExpandBy: 1,
+
+
+
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "18_21",
+ 
+    secondDayStartGameTimeSlot: "15_18", 
+    secondDayEndGameTimeSlot: "18_21",
+
+
+    thirdDayStartGameTimeSlot: "15_18", 
+    thirdDayEndGameTimeSlot: "15_18",
+
+    dayOfStart: "Thursday",
+
+},
+
+
+{
+    sportName: "Men's Water Polo",
+    howMuchAthletesMakeATeam: 11,
+    locations: 11,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 4,
+    secondDayHowMuchTimeSlotsExpandBy: 2,
+    thirdDayHowMuchTimeSlotsExpandBy: 1,
+
+
+
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "18_21",
+ 
+    secondDayStartGameTimeSlot: "15_18", 
+    secondDayEndGameTimeSlot: "18_21",
+
+
+    thirdDayStartGameTimeSlot: "15_18", 
+    thirdDayEndGameTimeSlot: "15_18",
+
+    dayOfStart: "Friday",
+
+},
+
+
+
+{
+    sportName: "Men's Water Polo",
+    howMuchAthletesMakeATeam: 11,
+    locations: 11,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 4,
+    secondDayHowMuchTimeSlotsExpandBy: 2,
+    thirdDayHowMuchTimeSlotsExpandBy: 1,
+
+
+
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "18_21",
+ 
+    secondDayStartGameTimeSlot: "15_18", 
+    secondDayEndGameTimeSlot: "18_21",
+
+
+    thirdDayStartGameTimeSlot: "15_18", 
+    thirdDayEndGameTimeSlot: "15_18",
+
+    dayOfStart: "Saturday",
+
+},
+ */
+
 
 
 {
@@ -204,6 +324,223 @@ const listOfSports = [{
 
 
 
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Monday",
+
+
+},
+
+
+
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Tuesday",
+
+
+},
+
+
+
+
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Wednesday",
+
+
+},
+
+
+
+
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Thursday",
+
+
+},
+
+
+
+
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Friday",
+
+
+},
+
+
+
+
+{
+
+    sportName: "Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Saturday",
+
+
+},
 
 
 
