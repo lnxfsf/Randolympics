@@ -921,13 +921,13 @@ const landingPageRandomize = async (req, res) => {
 
    const randomizeFormData = [
     { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
-   /*  { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' }, */
-   /*  { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
+     { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' }, 
+    { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'fourth', email: 'fourth@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'fifth', email: 'fifth@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'six', email: 'six@gmail.com', weightCategory: 'light', gender: 'M' },
     { name: 'seven', email: 'seven@gmail.com', weightCategory: 'light', gender: 'F' },
- */
+  
 
     
   ]; 
@@ -1033,7 +1033,7 @@ const landingPageRandomize = async (req, res) => {
       //  problem je sto ide random ovde, ne ide redom. da pogodi isti element ! (eto, probaj redom ici ovde, popunice svaku ! )
       const randomIndex = Math.floor(Math.random() * listOfSports.length);
 
-      TEMPreturningSportSelected = listOfSports[randomIndex];
+      TEMPreturningSportSelected = listOfSports[attempts];
       //  e ja msm, ovako kazes ti da je random. ali on ionako ovde prodje sve elemente... 
       //, jer znas sta je problem. sa truly random 
       // cak iako prodje kroz 10 njih, to je to.. on pogodi mozda isti i slicno... 
@@ -1049,7 +1049,7 @@ const landingPageRandomize = async (req, res) => {
         TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart
       ) {
 
-        returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+        returningSportSelected = listOfSports[attempts];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
         found = 1;
       }
 
@@ -1894,7 +1894,7 @@ const landingPageRandomize = async (req, res) => {
 
 
               // TODO timeSlot_3_6+howMuchAthletesMakeATeam  , treba vise, ubuduce da li ce moci da stanu jos tih dodatnih tuda... TJ. IZA FOR PETLJE..
-              if (freeSlotsAthletes.length !== 0 && timeSlot_3_6 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0) {
 
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
@@ -2003,7 +2003,7 @@ const landingPageRandomize = async (req, res) => {
 
               // occupiedSlotsAthletes.length === howMuchAthletesMakeATeam, so it means, cut this, loop, if we've done how much we need it.. 
               // in fact, if we use: timeSlot_6_9 , then we just add +1, on every.. 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_6_9 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0) {
 
 
 
@@ -2072,7 +2072,6 @@ const landingPageRandomize = async (req, res) => {
         // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
         while (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12 && freeSlotsAthletes.length !== 0 && noneFound) {
 
-          console.log("on ne prolazi uopste..")
 
           let selectedSport;
           let firstDayStartGameTimeSlot;
@@ -2090,26 +2089,31 @@ const landingPageRandomize = async (req, res) => {
 
           
       
+
           do{
             selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
             if(selectedSport){
               var { howMuchAthletesMakeATeam } = selectedSport;
 
               console.log("on je pronasao")
+              
+              
             } else {
               var howMuchAthletesMakeATeam = 0;
               noneFound = false;
 
             }
 
+            
+
           }while(timeSlot_9_12+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_9_12  && noneFound)
-
-
-
+          // znas, on ce ovde pronaci drugi sport, da ima, ako moze da nadje.. i uračunava, da li ce moci da prihvati toliko novih ljudi u taj sport.. tkd, ono dole je nepotrebno
 
 
 
           if (selectedSport) {
+
+
 
 
             const { howMuchAthletesMakeATeam } = selectedSport;
@@ -2123,8 +2127,12 @@ const landingPageRandomize = async (req, res) => {
             // ! znači, ja sam ovde samo stavio   <=  , jer taj zadnji nije hteo da radi kako treba !!!
             for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
+              // on ovde stane, jer isprazni na drugi user...
+              console.log(freeSlotsAthletes.length)
+              console.log(timeSlot_9_12)
+              console.log(howMuchAthletesMakeATeam)
 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_9_12 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0) {
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
                 const index = freeSlotsAthletes.indexOf(selectedAthlete);
@@ -2210,7 +2218,7 @@ const landingPageRandomize = async (req, res) => {
             for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_12_15 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0) {
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
                 const index = freeSlotsAthletes.indexOf(selectedAthlete);
@@ -2293,7 +2301,7 @@ const landingPageRandomize = async (req, res) => {
             for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_15_18 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0 ) {
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
                 const index = freeSlotsAthletes.indexOf(selectedAthlete);
@@ -2373,7 +2381,7 @@ const landingPageRandomize = async (req, res) => {
             for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_18_21 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0) {
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
                 const index = freeSlotsAthletes.indexOf(selectedAthlete);
@@ -2451,7 +2459,7 @@ const landingPageRandomize = async (req, res) => {
             for (let i = 0; i <= howMuchAthletesMakeATeam; i++) {
 
 
-              if (freeSlotsAthletes.length !== 0 && timeSlot_21_24 !== howMuchAthletesMakeATeam) {
+              if (freeSlotsAthletes.length !== 0 ) {
                 const selectedAthlete = getRandomItemAthletes(freeSlotsAthletes);
 
                 const index = freeSlotsAthletes.indexOf(selectedAthlete);
@@ -5848,7 +5856,22 @@ const landingPageRandomize = async (req, res) => {
     console.log(filteredAthletes);
     //console.log(everyDayInOneForUser)
 
+
+
+    const secondUserEmail = randomizeFormData[1].email;
+
+    const secondfilteredAthletes = everyDayInOneForUser.filter(athlete => athlete.email === secondUserEmail);
+    console.log("+++++++++++ Za drugi user-a je +++++++++++++++++++")
+    console.log(secondfilteredAthletes)
     
+
+
+    
+    const sedmiUserEmail = randomizeFormData[6].email;
+
+    const sedmifilteredAthletes = everyDayInOneForUser.filter(athlete => athlete.email === secondUserEmail);
+    console.log("+++++++++++ Za sedmi user-a je +++++++++++++++++++")
+    console.log(sedmifilteredAthletes)
 
 
     // ends and empties this, for next request again.. 

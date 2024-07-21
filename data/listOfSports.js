@@ -6,7 +6,7 @@
 
 const listOfSports = [
     
-  /*   {
+    {
     sportName: "Men's 50m Freestyle Swimming",
     howMuchAthletesMakeATeam: 1,
     locations: 1,
@@ -284,7 +284,7 @@ const listOfSports = [
     dayOfStart: "Saturday",
 
 },
- */
+ 
 
 
 
