@@ -1033,7 +1033,7 @@ const landingPageRandomize = async (req, res) => {
       //  problem je sto ide random ovde, ne ide redom. da pogodi isti element ! (eto, probaj redom ici ovde, popunice svaku ! )
       const randomIndex = Math.floor(Math.random() * listOfSports.length);
 
-      TEMPreturningSportSelected = listOfSports[attempts];
+      TEMPreturningSportSelected = listOfSports[randomIndex];
       //  e ja msm, ovako kazes ti da je random. ali on ionako ovde prodje sve elemente... 
       //, jer znas sta je problem. sa truly random 
       // cak iako prodje kroz 10 njih, to je to.. on pogodi mozda isti i slicno... 
@@ -1049,7 +1049,7 @@ const landingPageRandomize = async (req, res) => {
         TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart
       ) {
 
-        returningSportSelected = listOfSports[attempts];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+        returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
         found = 1;
       }
 
@@ -1968,7 +1968,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           
-
+          // on ovde izabere drugi sport, za drugoga user-a... (to on isto random ubaci u ove druge ionako..)
           do{
             selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday");
             
@@ -5869,9 +5869,15 @@ const landingPageRandomize = async (req, res) => {
     
     const sedmiUserEmail = randomizeFormData[6].email;
 
-    const sedmifilteredAthletes = everyDayInOneForUser.filter(athlete => athlete.email === secondUserEmail);
+    const sedmifilteredAthletes = everyDayInOneForUser.filter(athlete => athlete.email === sedmiUserEmail);
     console.log("+++++++++++ Za sedmi user-a je +++++++++++++++++++")
     console.log(sedmifilteredAthletes)
+
+
+
+
+    console.log("+++++++++++ Sve ovo ostalo user-a je +++++++++++++++++++")
+    console.log(everyDayInOneForUser)
 
 
     // ends and empties this, for next request again.. 
