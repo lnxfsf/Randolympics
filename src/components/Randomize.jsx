@@ -24,11 +24,65 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const timeSlots = [
+  '0_3', '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
+];
+
+const days = [
+  { day: 'Saturday', date: 'June 24th' },
+  { day: 'Sunday', date: 'June 25th' },
+  { day: 'Monday', date: 'June 26th' },
+  { day: 'Tuesday', date: 'June 27th' },
+  { day: 'Wednesday', date: 'June 28th' },
+  { day: 'Thursday', date: 'June 29th' },
+  { day: 'Friday', date: 'June 30th' },
+  { day: 'Saturday', date: 'July 1st' },
+  { day: 'Sunday', date: 'July 2nd' },
+];
+
+
+
+
+
+
+
 const Randomize = () => {
 
 
 
+
+
+
+
+
   const [randomizeFormData, setRandomizeFormData] = useState([{ name: '', email: '', weightCategory: 'light', gender: 'M' }]);
+
+
+
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -52,6 +106,57 @@ const Randomize = () => {
   };
 
 
+
+
+  const [scheduleData, setScheduleData] = useState([
+    {
+      name: 'first',
+      email: 'first@gmail.com',
+      weightCategory: 'light',
+      gender: 'F',
+      sportName: "Men's 50m Freestyle Swimming",
+      howMuchAthletesMakeATeam: 1,
+      locations: 1,
+      firstDayHowMuchTimeSlotsExpandBy: 1,
+      secondDayHowMuchTimeSlotsExpandBy: 1,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+      firstDayStartGameTimeSlot: '12_15',
+      firstDayEndGameTimeSlot: '12_15',
+      secondDayStartGameTimeSlot: '9_12',
+      secondDayEndGameTimeSlot: '9_12',
+      thirdDayStartGameTimeSlot: '',
+      thirdDayEndGameTimeSlot: '',
+      dayOfStart: 'Sunday'
+    },
+    {
+      name: 'first',
+      email: 'first@gmail.com',
+      weightCategory: 'light',
+      gender: 'F',
+      sportName: "Men's Team All-Around Artistic Gymnastics",
+      howMuchAthletesMakeATeam: 5,
+      locations: 1,
+      firstDayHowMuchTimeSlotsExpandBy: 4,
+      secondDayHowMuchTimeSlotsExpandBy: 2,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+      firstDayStartGameTimeSlot: '6_9',
+      firstDayEndGameTimeSlot: '15_18',
+      secondDayStartGameTimeSlot: '6_9',
+      secondDayEndGameTimeSlot: '9_12',
+      thirdDayStartGameTimeSlot: '',
+      thirdDayEndGameTimeSlot: '',
+      dayOfStart: 'Wednesday'
+
+
+    }
+  ]);
+
+
+  useEffect(() => {
+
+
+
+  }, [scheduleData]);
 
 
 
@@ -100,7 +205,7 @@ const Randomize = () => {
       );
 
 
-     
+
 
     } catch (error) {
       console.log(error);
@@ -110,6 +215,127 @@ const Randomize = () => {
     }
 
   }
+
+
+
+
+
+
+  const renderEventInSlot = (event, day, slot) => {
+
+
+    const dayIndex = days.findIndex(d => d.day === event.dayOfStart);  // koji je indeks u days listi, ??   dayIndex, je onaj sa podataka.
+    // al ovo je isto sa rows, koji je mesto sada.. 
+
+    const slotIndex = timeSlots.indexOf(slot);   // indeks, tog timeSlot-a u taj timeSlots koji je.. (mozda da bi radio sa brojkama..)
+    // slotIndex, isto onda mora biti taj koji je sa podataka ! koji je sada trenutno na loop za rows
+
+    const startSlotIndex = timeSlots.indexOf(event.firstDayStartGameTimeSlot);   // 
+    const endSlotIndex = timeSlots.indexOf(event.firstDayEndGameTimeSlot); // isto, koja brojka je u taj indeks za timeSlots.
+
+
+
+    if ((dayIndex === days.findIndex(d => d.day === day)) && slotIndex === startSlotIndex && slotIndex <= endSlotIndex) {
+      return <RandomizeItem icon="swim" name={event.sportName} />;
+    }
+
+
+
+
+    const secondDayStartSlotIndex = timeSlots.indexOf(event.secondDayStartGameTimeSlot);
+    const secondDayEndSlotIndex = timeSlots.indexOf(event.secondDayEndGameTimeSlot);
+
+    // ! znaci, start slot, mora da ima.. uvek pocetno vrv..
+    // samo, na ovaj sledeci dan, (row) to prikaze.. dan..  da.. (uh, samo slot, time table treba ). jer on ce ovako, i prikazivati podatke ..
+    if (dayIndex + 1 === days.findIndex(d => d.day === day) && slotIndex === secondDayStartSlotIndex && slotIndex <= secondDayEndSlotIndex) {
+      return <RandomizeItem icon="swim" name={event.sportName} />;
+    }
+
+    const thirdDayStartSlotIndex = timeSlots.indexOf(event.thirdDayStartGameTimeSlot);
+    const thirdDayEndSlotIndex = timeSlots.indexOf(event.thirdDayEndGameTimeSlot);
+
+    if (dayIndex + 2 === days.findIndex(d => d.day === day) && slotIndex === thirdDayStartSlotIndex && slotIndex <= thirdDayEndSlotIndex) {
+      return <RandomizeItem icon="swim" name={event.sportName} />;
+    }
+
+    return null;
+  };
+
+
+  const getGameSlot = (data, day, timeSlot) => {
+    const startSlot = data.firstDayStartGameTimeSlot;
+    const endSlot = data.firstDayEndGameTimeSlot;
+
+    // znaci pocinje gde treba da pocne ? 
+    if (day.includes(data.dayOfStart) && timeSlot === startSlot) {
+      return { icon: "swim", name: data.sportName };
+
+    } else if (day.includes(data.dayOfStart) && timeSlot === data.secondDayStartGameTimeSlot) {
+      return { icon: "swim", name: data.sportName };
+    }
+
+    return null;
+  };
+
+
+  const getSlotIndex = (slot) => {
+    return timeSlots.indexOf(slot);
+  };
+
+
+  const getEventSlots = (event) => {
+    
+    const slots = [];
+    const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
+
+    const addSlots = (startDayIndex, startSlot, expandBy) => {
+      const startSlotIndex = getSlotIndex(startSlot);
+
+      // if it's singular then
+      if(expandBy === 1){
+        for (let i = 0; i < expandBy; i++) {
+          slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
+        }
+      } else {
+
+        // ! ovde je bio <= , ali je izgleda izbacivao dodatni jedan..
+        for (let i = 0; i < expandBy; i++) {
+          slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
+        }
+      }
+
+     
+
+
+
+    };
+
+
+    // Add slots for the first day
+    addSlots(startDayIndex, event.firstDayStartGameTimeSlot, event.firstDayHowMuchTimeSlotsExpandBy);
+
+    // Add slots for the second day if applicable
+    if (event.secondDayStartGameTimeSlot) {
+      addSlots(startDayIndex + 1, event.secondDayStartGameTimeSlot, event.secondDayHowMuchTimeSlotsExpandBy);
+    }
+
+    // Add slots for the third day if applicable
+    if (event.thirdDayStartGameTimeSlot) {
+      addSlots(startDayIndex + 2, event.thirdDayStartGameTimeSlot, event.thirdDayHowMuchTimeSlotsExpandBy);
+    }
+
+
+
+    return slots;
+
+    // slotIndex 
+
+    // === index, problem, je sto on sacuva indeks, ali trebalo bi da sacuva i tekst, uz to sto ide. da bi bio precizan ?? kao "3_6". jer vidis
+    // slots je samo array. i on ako ima array=[0]  (prvi element), onda i to ispada kao da je tu o u time, 0_3, 3_6.. a ne treba tako..
+  };
+
+
+
 
   return (
     <>
@@ -129,7 +355,84 @@ const Randomize = () => {
 
 
 
+      <table className="tablez">
+        <thead>
+          <tr>
+            <th className="thz">Date</th>
+            {timeSlots.map(slot => (
+              <th key={slot} className="thz">{slot.replace('_', '-')}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
 
+          {days.map(({ day, date }) => (
+          
+            /* ovo je jedan row ! */
+            <tr key={day}>
+
+              <th className="thz">{day} ({date})</th>
+
+
+
+            {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
+ */}              
+            {timeSlots.map((slot, index) => {
+
+
+
+                  // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
+                const event = scheduleData.find(event =>
+
+                  getEventSlots(event).some(slotData =>
+
+                    slotData.dayIndex === days.findIndex(d => d.day === day) && slotData.slotIndex === index
+                
+                  )
+
+                );
+
+                return (
+
+                  <td key={slot} className="tdz">
+                    {event ? <RandomizeItem icon="swim" name={event.sportName} /> : ''}
+                  </td>
+               
+              );
+              })}
+            </tr>
+
+
+          ))}
+
+
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+
+
+      <br /><br /><br /><br /><br /><br />
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <hr />
+      <hr />
+      <hr />
+      <hr />
+
+      <br />
+      <br />
+      <br />
+      <br />
       <table className="tablez">
         <thead>
           <tr>
@@ -149,7 +452,7 @@ const Randomize = () => {
           <tr>
             <th className="thz">Saturday (June 24th)</th>
 
-            <td className="tdz" className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
+            <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
 
 
           </tr>
@@ -221,13 +524,13 @@ const Randomize = () => {
             <td className="tdz"></td>
             <td className="tdz"></td>
 
-            
-             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
 
-             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-   
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
 
             <td className="tdz"></td>
             <td className="tdz"></td>
@@ -282,6 +585,7 @@ const Randomize = () => {
 
         </tbody>
       </table>
+
 
 
 
