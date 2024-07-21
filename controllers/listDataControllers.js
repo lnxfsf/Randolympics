@@ -6454,7 +6454,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-      }
+      } 
 
 
 
@@ -6520,10 +6520,10 @@ const landingPageRandomize = async (req, res) => {
     console.log(sedmifilteredAthletes)
  */
 
-
+/* 
 
     console.log("+++++++++++ Sve ovo ostalo user-a je +++++++++++++++++++")
-    console.log(everyDayInOneForUser)
+    console.log(everyDayInOneForUser) */
 
 
     // ends and empties this, for next request again.. 
