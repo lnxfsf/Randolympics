@@ -53,7 +53,7 @@ const timeSlots = [
 ];
 
 const days = [
-  { day: 'Saturday', date: 'June 24th' },
+ /*  { day: 'Saturday', date: 'June 24th' }, */
   { day: 'Sunday', date: 'June 25th' },
   { day: 'Monday', date: 'June 26th' },
   { day: 'Tuesday', date: 'June 27th' },
@@ -61,7 +61,7 @@ const days = [
   { day: 'Thursday', date: 'June 29th' },
   { day: 'Friday', date: 'June 30th' },
   { day: 'Saturday', date: 'July 1st' },
-  { day: 'Sunday', date: 'July 2nd' },
+/*   { day: 'Sunday', date: 'July 2nd' }, */
 ];
 
 
@@ -188,9 +188,7 @@ const Randomize = () => {
 
     // nece weight biti ! ovde ! 
 
-    // TODO, moras, da uradis jos jedan time slot , 06-09 , jos jedan. 
-    // TODO za table što je... 
-
+    
 
 
     try {
@@ -204,6 +202,8 @@ const Randomize = () => {
         }
       );
 
+
+      setScheduleData(response.data);
 
 
 
@@ -366,12 +366,21 @@ const Randomize = () => {
         </thead>
         <tbody>
 
+        
+        <tr>
+            <th className="thz">Saturday (June 24th)</th>
+
+            <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
+          </tr>
+
           {days.map(({ day, date }) => (
+          
           
             /* ovo je jedan row ! */
             <tr key={day}>
 
               <th className="thz">{day} ({date})</th>
+
 
 
 
@@ -406,6 +415,39 @@ const Randomize = () => {
           ))}
 
 
+
+<tr >
+            <th rowSpan={2} className="thz">Sunday July 2nd</th>
+
+
+
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+          {/*   <td className="tdz">{ if ( ) } </td> */}
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+            <td className="tdz"></td>
+
+
+          </tr>
+
+          <tr>
+
+
+
+
+            <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
+
+
+
+          </tr>
+
+
+
         </tbody>
       </table>
 
@@ -417,7 +459,7 @@ const Randomize = () => {
 
 
 
-      <br /><br /><br /><br /><br /><br />
+      {/* <br /><br /><br /><br /><br /><br />
 
       <br />
       <br />
@@ -432,8 +474,8 @@ const Randomize = () => {
       <br />
       <br />
       <br />
-      <br />
-      <table className="tablez">
+      <br /> */}
+    {/*   <table className="tablez">
         <thead>
           <tr>
             <th className="thz">Date</th>
@@ -584,7 +626,7 @@ const Randomize = () => {
 
 
         </tbody>
-      </table>
+      </table> */}
 
 
 
