@@ -1030,11 +1030,18 @@ const landingPageRandomize = async (req, res) => {
 
     while (found == 0 && attempts < maxAttempts) {
 
-      // TODO, problem je sto ide random ovde, ne ide redom. pa pogodi isti element ! (eto, probaj redom ici ovde, popunice svaku ! )
+      //  problem je sto ide random ovde, ne ide redom. da pogodi isti element ! (eto, probaj redom ici ovde, popunice svaku ! )
       const randomIndex = Math.floor(Math.random() * listOfSports.length);
 
-      TEMPreturningSportSelected = listOfSports[attempts]; // TODO , ovde je bio [randomIndex] umesto [attempts]. al eto, mozda nije lose, da proveris, da li ce ti raditi to kako treba..
+      TEMPreturningSportSelected = listOfSports[attempts];
+      //  e ja msm, ovako kazes ti da je random. ali on ionako ovde prodje sve elemente... 
+      //, jer znas sta je problem. sa truly random 
+      // cak iako prodje kroz 10 njih, to je to.. on pogodi mozda isti i slicno... 
 
+      // ne moras mu to reći, ono (tj. ja msm, zadrzi za sebe, samo, ces drugu funkciju, da imas) koja randomizuje sportove. 
+      // ali na ovaj nacin, on definitivno moze da prolazi kroz svaki element u sportu !!!
+
+      // okej, reci mu, ali treba da napravis za sport kao jos..
 
 
       // ovako smo sigurni da neće slip up..
@@ -1047,6 +1054,8 @@ const landingPageRandomize = async (req, res) => {
       }
 
       attempts++;
+
+
 
 
     }
@@ -1819,10 +1828,14 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+        // i jos jedan indikator, da AKO BAŠ I NEMA NIJEDAN SPORT, NISTA NIJE PRONASAO INACE... 
 
+        let noneFound = true;
 
-        if (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6) {
+        // prekinice petlju, ako nema vise users.. ili ako je prazan, za sve users (da uglavnom, treba da prodje sve users, ovo je sve randomizer, jer on ionako izabere random user-a kao i sport..)
+        while (timeSlot_3_6 <= TotalMaxAthletesPerTimeSlot_3_6 && freeSlotsAthletes.length !== 0 && noneFound) {
 
+          
 
           let selectedSport;
           let firstDayStartGameTimeSlot;
@@ -1850,9 +1863,13 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+
+              // ne, okej je, prekida celu while petlju za ovaj timeslot, 3_6, zato sto, on treba makar jedan da nadje.. 
+              // da , jer u funkciji, on prolazi kroz celu listu ionako..
+              noneFound = false;
             }
             
-          }while(timeSlot_3_6+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_3_6)
+          }while(timeSlot_3_6+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_3_6 && noneFound)
             // da, ide  >  , jer on moze biti <= , i to je okej, i nece traziti novi sport. ali ako jeste, onda trazi novi sport ipak... jer trazi vise igraca..
             // a ovo ce biti nista, ako nije pronasao taj uopste ! to je koji i jeste 0, koji vec i ima u timeSlot_3_6
              
@@ -1917,7 +1934,10 @@ const landingPageRandomize = async (req, res) => {
         }
 
 
-        if (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9) {
+
+        noneFound = true;
+
+        while (timeSlot_6_9 <= TotalMaxAthletesPerTimeSlot_6_9 && freeSlotsAthletes.length !== 0 && noneFound) {
 
           // ! sada treba, da vidi kolko make a team, taj sport, i toliko da izvrti (znači RANDOM SPORT, a zatim RANDOM ATHLETE po tome ! )
 
@@ -1956,9 +1976,10 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
             }
 
-          }while(timeSlot_6_9+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_6_9)
+          }while(timeSlot_6_9+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_6_9 && noneFound)
 
 
           if (selectedSport) {
@@ -2044,10 +2065,14 @@ const landingPageRandomize = async (req, res) => {
 
         
      
+        noneFound = true;
+       
+
 
         // da, on ide na ovu sledecu takodje, za sledeci time slot u tom istom danu ce isto. da on uzima i dalje, od istih tih ljudi koji su slobodni...
-        if (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12) {
+        while (timeSlot_9_12 <= TotalMaxAthletesPerTimeSlot_9_12 && freeSlotsAthletes.length !== 0 && noneFound) {
 
+          console.log("on ne prolazi uopste..")
 
           let selectedSport;
           let firstDayStartGameTimeSlot;
@@ -2069,11 +2094,15 @@ const landingPageRandomize = async (req, res) => {
             selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
             if(selectedSport){
               var { howMuchAthletesMakeATeam } = selectedSport;
+
+              console.log("on je pronasao")
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
+
             }
 
-          }while(timeSlot_9_12+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_9_12)
+          }while(timeSlot_9_12+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_9_12  && noneFound)
 
 
 
@@ -2086,6 +2115,7 @@ const landingPageRandomize = async (req, res) => {
             const { howMuchAthletesMakeATeam } = selectedSport;
 
             console.log("3:" + selectedSport.dayOfStart)
+
 
 
 
@@ -2123,6 +2153,7 @@ const landingPageRandomize = async (req, res) => {
 
             }
 
+            
 
             /*   console.log("SUNDAY timeslot: 9-12 ")
               console.log('SUNDAY Occupied Slots Athletes:', sundayOccupiedSlotsAthletes); */
@@ -2137,8 +2168,9 @@ const landingPageRandomize = async (req, res) => {
       
 
 
+        noneFound = true;
 
-        if (timeSlot_12_15 <= TotalMaxAthletesPerTimeSlot_12_15) {
+        while (timeSlot_12_15 <= TotalMaxAthletesPerTimeSlot_12_15 && freeSlotsAthletes.length !== 0 && noneFound ) {
 
 
           let selectedSport;
@@ -2158,9 +2190,10 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
             }
 
-          }while(timeSlot_12_15+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_12_15)
+          }while(timeSlot_12_15+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_12_15 && noneFound)
 
 
          
@@ -2219,9 +2252,9 @@ const landingPageRandomize = async (req, res) => {
         }
 
 
+        noneFound = true;
 
-
-        if (timeSlot_15_18 <= TotalMaxAthletesPerTimeSlot_15_18) {
+        while (timeSlot_15_18 <= TotalMaxAthletesPerTimeSlot_15_18 && freeSlotsAthletes.length !== 0 && noneFound) {
 
 
           let selectedSport;
@@ -2240,8 +2273,9 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
             }
-          }while(timeSlot_15_18+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_15_18)
+          }while(timeSlot_15_18+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_15_18 && noneFound)
 
 
           if (selectedSport) {
@@ -2295,7 +2329,9 @@ const landingPageRandomize = async (req, res) => {
 
         }
 
-        if (timeSlot_18_21 <= TotalMaxAthletesPerTimeSlot_18_21) {
+
+        noneFound = true;
+        while (timeSlot_18_21 <= TotalMaxAthletesPerTimeSlot_18_21 && freeSlotsAthletes.length !== 0 && noneFound) {
 
 
           let selectedSport;
@@ -2316,8 +2352,9 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
             }
-          }while(timeSlot_18_21+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_18_21)
+          }while(timeSlot_18_21+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_18_21 && noneFound)
 
 
 
@@ -2372,7 +2409,9 @@ const landingPageRandomize = async (req, res) => {
 
         }
 
-        if (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24) {
+
+        noneFound = true;
+        while (timeSlot_21_24 <= TotalMaxAthletesPerTimeSlot_21_24 && freeSlotsAthletes.length !== 0 && noneFound ) {
 
 
           let selectedSport;
@@ -2390,8 +2429,9 @@ const landingPageRandomize = async (req, res) => {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
               var howMuchAthletesMakeATeam = 0;
+              noneFound = false;
             }
-          }while(timeSlot_21_24+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_21_24)
+          }while(timeSlot_21_24+howMuchAthletesMakeATeam > TotalMaxAthletesPerTimeSlot_21_24 && noneFound)
 
 
 
