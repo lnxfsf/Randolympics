@@ -5,7 +5,7 @@
 // can you make a list of sports, that's gonna be defined in: listOfSports.js file. and then exported and used , in function of another file. 
 
 const listOfSports = [
-    
+    /* 
     {
     sportName: "Men's 50m Freestyle Swimming",
     howMuchAthletesMakeATeam: 1,
@@ -284,10 +284,10 @@ const listOfSports = [
     dayOfStart: "Saturday",
 
 },
- 
+  */
 
 
-
+/* ovo */
 {
 
     sportName: "Men's Long Jump",
