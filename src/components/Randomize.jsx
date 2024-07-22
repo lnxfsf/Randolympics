@@ -368,10 +368,29 @@ const Randomize = () => {
 
         
         <tr>
-            <th className="thz">Saturday (June 24th)</th>
-
+            <th rowSpan={2} className="thz">Saturday (June 24th)</th>
             <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
+            
           </tr>
+
+
+        <tr>
+        <td className="tdz"></td>
+            <td className="tdz"></td>
+
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+
+          {/*   <td className="tdz">{ if ( ) } </td> */}
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
+            <td className="tdz"></td>
+
+           
+          </tr>
+
+
+
 
           {days.map(({ day, date }) => (
           
@@ -436,14 +455,7 @@ const Randomize = () => {
           </tr>
 
           <tr>
-
-
-
-
             <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
-
-
-
           </tr>
 
 
