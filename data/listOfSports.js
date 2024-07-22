@@ -320,6 +320,9 @@ const listOfSports = [
     dayOfStart: "Sunday",
 
 
+    dateOfStart: "June 25th",
+
+
 },
 
 
@@ -354,6 +357,9 @@ const listOfSports = [
     thirdDayEndGameTimeSlot: "",
 
     dayOfStart: "Monday",
+
+    dateOfStart: "June 26th",
+
 
 
 },
@@ -391,6 +397,7 @@ const listOfSports = [
 
     dayOfStart: "Tuesday",
 
+    dateOfStart: "June 27th",
 
 },
 
@@ -427,6 +434,8 @@ const listOfSports = [
     thirdDayEndGameTimeSlot: "",
 
     dayOfStart: "Wednesday",
+
+    dateOfStart: "June 28th",
 
 
 },
@@ -465,6 +474,7 @@ const listOfSports = [
 
     dayOfStart: "Thursday",
 
+    dateOfStart: "June 29th",
 
 },
 
@@ -502,6 +512,7 @@ const listOfSports = [
 
     dayOfStart: "Friday",
 
+    dateOfStart: "June 30th",
 
 },
 
@@ -539,12 +550,120 @@ const listOfSports = [
 
     dayOfStart: "Saturday",
 
+    dateOfStart: "June 24th",
+
+},
+
+
+{
+
+    sportName: "drugi sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Saturday",
+
+
+    dateOfStart: "June 24th",
+
+},
+
+
+{
+
+    sportName: "treci sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Saturday",
+    
+    dateOfStart: "June 24th",
+
 
 },
 
 
 
+{
 
+    sportName: "cetvrti sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Saturday",
+
+    dateOfStart: "June 24th",
+
+},
 
 ];
 
