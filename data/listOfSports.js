@@ -665,6 +665,162 @@ const listOfSports = [
 
 },
 
+
+
+
+
+
+
+
+
+{
+
+    sportName: "Sunday Men's Long Jump",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Sunday",
+
+    dateOfStart: "June 25th",
+
+},
+
+
+{
+
+    sportName: "Sunday drugi sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Sunday",
+
+
+    dateOfStart: "June 25th",
+
+},
+
+
+{
+
+    sportName: "Sunday treci sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Sunday",
+    
+    dateOfStart: "June 25th",
+
+
+},
+
+
+
+{
+
+    sportName: " Sunday cetvrti sport",
+    howMuchAthletesMakeATeam: 1,
+    locations: 1,
+
+
+
+    firstDayHowMuchTimeSlotsExpandBy: 2,
+    secondDayHowMuchTimeSlotsExpandBy: 0,
+    thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+    
+
+    // ----------
+
+    
+    firstDayStartGameTimeSlot: "9_12", 
+    firstDayEndGameTimeSlot: "12_15",
+ 
+    secondDayStartGameTimeSlot: "", 
+    secondDayEndGameTimeSlot: "",
+
+
+    thirdDayStartGameTimeSlot: "", 
+    thirdDayEndGameTimeSlot: "",
+
+    dayOfStart: "Sunday",
+
+    dateOfStart: "June 25th",
+
+},
+
+
+
 ];
 
 

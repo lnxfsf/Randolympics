@@ -7389,7 +7389,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7514,7 +7517,10 @@ const landingPageRandomize = async (req, res) => {
                 // znaci, vidis, ovaj se pokrece..  
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7628,7 +7634,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7715,7 +7724,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7797,7 +7809,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7878,7 +7893,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
@@ -7956,7 +7974,10 @@ const landingPageRandomize = async (req, res) => {
 
                 const modifiedAthlete = {
                   ...selectedAthlete,
-                  ...selectedSport,
+                  ...({
+                    ...selectedSport,
+                    dateOfStart: "July 2nd",
+                  }),
                   julyDay: true,
 
 
