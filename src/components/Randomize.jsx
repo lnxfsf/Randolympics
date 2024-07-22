@@ -52,16 +52,21 @@ const timeSlots = [
   '0_3', '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
 ];
 
+/*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
 const days = [
- /*  { day: 'Saturday', date: 'June 24th' }, */
+  { day: 'Saturday', date: 'June 24th' },
+
   { day: 'Sunday', date: 'June 25th' },
   { day: 'Monday', date: 'June 26th' },
   { day: 'Tuesday', date: 'June 27th' },
   { day: 'Wednesday', date: 'June 28th' },
   { day: 'Thursday', date: 'June 29th' },
   { day: 'Friday', date: 'June 30th' },
+
+
   { day: 'Saturday', date: 'July 1st' },
-/*   { day: 'Sunday', date: 'July 2nd' }, */
+
+  { day: 'Sunday', date: 'July 2nd' },
 ];
 
 
@@ -188,7 +193,7 @@ const Randomize = () => {
 
     // nece weight biti ! ovde ! 
 
-    
+
 
 
     try {
@@ -284,46 +289,54 @@ const Randomize = () => {
 
 
   const getEventSlots = (event) => {
-    
+
     const slots = [];
-    const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
+
+
+    // ! const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
+    const startDateIndex = days.findIndex(d => d.date === event.dateOfStart);
+ 
 
     const addSlots = (startDayIndex, startSlot, expandBy) => {
       const startSlotIndex = getSlotIndex(startSlot);
 
       // if it's singular then
-      if(expandBy === 1){
-        for (let i = 0; i < expandBy; i++) {
-          slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
-        }
-      } else {
-
-        // ! ovde je bio <= , ali je izgleda izbacivao dodatni jedan..
-        for (let i = 0; i < expandBy; i++) {
-          slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
-        }
+      /*  if(expandBy === 1){ */
+      for (let i = 0; i < expandBy; i++) {
+        slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
       }
+      /*  } else {
+ 
+         // ! ovde je bio <= , ali je izgleda izbacivao dodatni jedan..
+         for (let i = 0; i < expandBy; i++) {
+           slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
+         }
+       } */
 
-     
+
 
 
 
     };
 
 
-    // Add slots for the first day
-    addSlots(startDayIndex, event.firstDayStartGameTimeSlot, event.firstDayHowMuchTimeSlotsExpandBy);
 
-    // Add slots for the second day if applicable
-    if (event.secondDayStartGameTimeSlot) {
-      addSlots(startDayIndex + 1, event.secondDayStartGameTimeSlot, event.secondDayHowMuchTimeSlotsExpandBy);
-    }
+    //al sa ovim filtrom, trebalo bi.
+   
 
-    // Add slots for the third day if applicable
-    if (event.thirdDayStartGameTimeSlot) {
-      addSlots(startDayIndex + 2, event.thirdDayStartGameTimeSlot, event.thirdDayHowMuchTimeSlotsExpandBy);
-    }
+      // Add slots for the first day
+      addSlots(startDateIndex, event.firstDayStartGameTimeSlot, event.firstDayHowMuchTimeSlotsExpandBy);
 
+      // Add slots for the second day if applicable
+      if (event.secondDayStartGameTimeSlot) {
+        addSlots(startDateIndex + 1, event.secondDayStartGameTimeSlot, event.secondDayHowMuchTimeSlotsExpandBy);
+      }
+
+      // Add slots for the third day if applicable
+      if (event.thirdDayStartGameTimeSlot) {
+        addSlots(startDateIndex  + 2, event.thirdDayStartGameTimeSlot, event.thirdDayHowMuchTimeSlotsExpandBy);
+      }
+  
 
 
     return slots;
@@ -366,76 +379,121 @@ const Randomize = () => {
         </thead>
         <tbody>
 
-        
-        <tr>
+{/* 
+          <tr>
             <th rowSpan={2} className="thz">Saturday (June 24th)</th>
             <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
-            
+
           </tr>
 
 
-        <tr>
-        <td className="tdz"></td>
+          <tr>
+            <td className="tdz"></td>
             <td className="tdz"></td>
 
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
 
-          {/*   <td className="tdz">{ if ( ) } </td> */}
+            {/*   <td className="tdz">{ if ( ) } </td>
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
             <td className="tdz"></td>
 
-           
-          </tr>
 
+          </tr>
+ */}
 
 
 
           {days.map(({ day, date }) => (
-          
-          
+
+
             /* ovo je jedan row ! */
-            <tr key={day}>
+            <tr key={date}>
 
               <th className="thz">{day} ({date})</th>
 
 
 
 
-            {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
- */}              
-            {timeSlots.map((slot, index) => {
+              {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
+ */}
+              {timeSlots.map((slot, index) => {
 
 
 
-                  // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
+                // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
+               
+               
                 const event = scheduleData.find(event =>
 
                   getEventSlots(event).some(slotData =>
 
-                    slotData.dayIndex === days.findIndex(d => d.day === day) && slotData.slotIndex === index
-                
+                    slotData.dayIndex === days.findIndex(d => d.date === date) && slotData.slotIndex === index
+
                   )
 
                 );
 
+
+
                 return (
 
+
+                  // ! ovde treba, event.julyDay === true, da onda taj drugi prikaze.. 
+                  // ! za to, da dodas jos taj jedan header kao
                   <td key={slot} className="tdz">
                     {event ? <RandomizeItem icon="swim" name={event.sportName} /> : ''}
                   </td>
-               
-              );
+
+                );
               })}
             </tr>
 
 
           ))}
+          {/* Add rows for Sunday, July 2nd */}
+       {/*    <tr>
+            <th rowSpan={2} className="thz">Sunday (July 2nd)</th>
 
 
+            {/* isto prolazi kroz svaki time slot. kolonu 
+            {timeSlots.map((slot, index) => {
 
-<tr >
+              // ! da, ja msm, treba specificno da gledas 8-mi, indeks, to je taj zadnji (zato sto on ovde stoji samostalno, ne vrti kroz petlju sve..).. a iz podataka ce on izvuci          
+              // ustvari, on ovde radi van tog.. jer ima hardcoded  july 2nd..
+
+
+              const event = scheduleData.find(event =>
+
+                getEventSlots(event).some(slotData =>
+
+                  slotData.dayIndex === days.findIndex(d => d.date === "July 2nd") && slotData.slotIndex === index
+
+                )
+
+              );
+
+
+              return (
+                <td key={index} className="tdz">
+
+
+                  {index === 1 ? <RandomizeItem icon={"swim"} name={"Men's Football"} /> : ''}
+
+
+                </td>
+              );
+            })}
+
+
+          </tr>
+          <tr>
+            <td className="tdz" colSpan={timeSlots.length}>Closing & Randomization of Next Games</td>
+          </tr> */}
+
+
+          {/*   <tr >
             <th rowSpan={2} className="thz">Sunday July 2nd</th>
 
 
@@ -446,7 +504,7 @@ const Randomize = () => {
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
             <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
 
-          {/*   <td className="tdz">{ if ( ) } </td> */}
+            {/*   <td className="tdz">{ if ( ) } </td> 
             <td className="tdz"></td>
             <td className="tdz"></td>
             <td className="tdz"></td>
@@ -456,7 +514,7 @@ const Randomize = () => {
 
           <tr>
             <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
-          </tr>
+          </tr> */}
 
 
 
@@ -487,7 +545,7 @@ const Randomize = () => {
       <br />
       <br />
       <br /> */}
-    {/*   <table className="tablez">
+      {/*   <table className="tablez">
         <thead>
           <tr>
             <th className="thz">Date</th>
