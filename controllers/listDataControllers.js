@@ -2912,7 +2912,7 @@ const landingPageRandomize = async (req, res) => {
 
           // on ovde treba da nadje, sport, koji ce i dalje odgovarati ovom timeframe-u ! a da ga ne overflow-uje isto...
           do {
-            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday", "July 2nd");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -3024,7 +3024,7 @@ const landingPageRandomize = async (req, res) => {
 
           // on ovde izabere drugi sport, za drugoga user-a... (to on isto random ubaci u ove druge ionako..)
           do {
-            selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday", "July 2nd");
 
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
@@ -3145,7 +3145,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday", "July 2nd");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -3246,7 +3246,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday", "July 2nd");
 
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
@@ -3330,7 +3330,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday", "July 2nd");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -3409,7 +3409,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday", "July 2nd");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -3486,7 +3486,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday", "July 2nd");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -6936,6 +6936,9 @@ const landingPageRandomize = async (req, res) => {
         var copyfreeSlotsAthletes = [...randomizeFormData];
 
 
+
+        // Thursday (June 29th)
+        // i=6 - Friday (June 30th)
 
         var bothOccupiedSlotsAthletes = [
           ...thursdayOccupiedSlotsAthletes,
