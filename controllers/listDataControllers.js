@@ -934,6 +934,84 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+  const createOpeningGamesStart = (athlete) => {
+
+
+    return {
+      ...athlete,
+      sportName: "Opening ceremony",
+      howMuchAthletesMakeATeam: 1,
+      locations: 1,
+
+
+
+      firstDayHowMuchTimeSlotsExpandBy: 1,
+      secondDayHowMuchTimeSlotsExpandBy: 0,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+
+
+      // ----------
+
+
+      firstDayStartGameTimeSlot: "6_9",
+      firstDayEndGameTimeSlot: "6_9",
+
+      secondDayStartGameTimeSlot: "",
+      secondDayEndGameTimeSlot: "",
+
+
+      thirdDayStartGameTimeSlot: "",
+      thirdDayEndGameTimeSlot: "",
+
+      dayOfStart: "Saturday",
+
+      dateOfStart: "June 24th",
+    };
+  }
+  
+
+
+  const createClosingGamesEnd = (athlete) => {
+
+    return {
+      ...athlete,
+
+
+                  sportName: "Closing ceremony",
+                  howMuchAthletesMakeATeam: 1,
+                  locations: 1,
+
+
+
+                  firstDayHowMuchTimeSlotsExpandBy: 1,
+                  secondDayHowMuchTimeSlotsExpandBy: 0,
+                  thirdDayHowMuchTimeSlotsExpandBy: 0,
+
+
+
+
+
+                  // ----------
+
+
+                  firstDayStartGameTimeSlot: "12_15",
+                  firstDayEndGameTimeSlot: "12_15",
+
+                  secondDayStartGameTimeSlot: "",
+                  secondDayEndGameTimeSlot: "",
+
+
+                  thirdDayStartGameTimeSlot: "",
+                  thirdDayEndGameTimeSlot: "",
+
+                  dayOfStart: "Sunday",
+
+                  dateOfStart: "July 2nd",
+    };
+  }
 
   /*  const randomizeFormData = [
      { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
@@ -1063,7 +1141,7 @@ const landingPageRandomize = async (req, res) => {
           TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
           TEMPreturningSportSelected.dateOfStart !== dateToAvoid
 
-      
+
 
         ) {
 
@@ -1074,7 +1152,7 @@ const landingPageRandomize = async (req, res) => {
 
         // a ovo su svi ostali, normalni dani...
         if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
-          TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart 
+          TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart
 
         ) {
 
@@ -1986,48 +2064,13 @@ const landingPageRandomize = async (req, res) => {
                 // ! I JOS JEDAN, SAMO ZA START OF GAMES (OVDE CES DA URADIS, SAMO, TAJ JEDAN PRVI DA PRIKAZES !!! )
                 // ! i time, push-ujes, jos taj jedan... (jer to je ovaj taj user ono... )
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
+              
 
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
+                
 
                 timeSlot_3_6 = timeSlot_3_6 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
@@ -2132,48 +2175,11 @@ const landingPageRandomize = async (req, res) => {
 
                 };
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
+              
 
 
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
+                  
 
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
 
 
                 // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
@@ -2256,48 +2262,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
+               
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -2371,48 +2336,7 @@ const landingPageRandomize = async (req, res) => {
 
                 };
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
+                
 
 
 
@@ -2490,49 +2414,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
-
+               
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -2607,48 +2489,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
+              
 
 
 
@@ -2724,48 +2565,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const openingGamesStart = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Opening ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "6_9",
-                  firstDayEndGameTimeSlot: "6_9",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Saturday",
-
-                  dateOfStart: "June 24th",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                saturdayOccupiedSlotsAthletes.push(openingGamesStart)
+                
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -7680,7 +7480,7 @@ const landingPageRandomize = async (req, res) => {
 
           // on ovde treba da nadje, sport, koji ce i dalje odgovarati ovom timeframe-u ! a da ga ne overflow-uje isto...
           do {
-            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday" , "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -7740,48 +7540,8 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
 
 
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
 
 
                 JulySundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -7839,7 +7599,7 @@ const landingPageRandomize = async (req, res) => {
 
           // on ovde izabere drugi sport, za drugoga user-a... (to on isto random ubaci u ove druge ionako..)
           do {
-            selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "6_9", "Sunday", "June 25th");
 
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
@@ -7910,48 +7670,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
+               
 
                 // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
 
@@ -8007,7 +7726,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "9_12", "Sunday", "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
 
@@ -8069,48 +7788,6 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
 
 
                 JulySundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -8153,7 +7830,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "12_15", "Sunday", "June 25th");
 
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
@@ -8202,48 +7879,6 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
 
 
                 JulySundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -8282,7 +7917,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "15_18", "Sunday", "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -8331,49 +7966,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
-
+               
 
 
                 JulySundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -8410,7 +8003,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "18_21", "Sunday", "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -8457,48 +8050,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
+                
 
 
 
@@ -8533,7 +8085,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           do {
-            selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday");
+            selectedSport = getRandomItemSports(listOfSports, "21_24", "Sunday", "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -8581,48 +8133,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                const closingGamesEnd = {
-                  ...selectedAthlete,
-
-
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
-
-
-
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
-
-
-
-
-
-                  // ----------
-
-
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
-
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
-
-
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
-
-                  dayOfStart: "Sunday",
-
-                  dateOfStart: "July 2nd",
-                }
-
-
-
-                  ;
-
-                // to je taj (njega ne racunas kao posebni timeslot, on ide zajedno odmah..)
-                JulySundayOccupiedSlotsAthletes.push(closingGamesEnd)
+              
 
 
 
@@ -8677,6 +8188,22 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+
+    // sada dodajes ove, 
+    // za saturday (opening)
+    randomizeFormData.forEach((athlete) => {
+      const openingGamesStart = createOpeningGamesStart(athlete);
+      saturdayOccupiedSlotsAthletes.push(openingGamesStart);
+    });
+
+
+    // za sunday (closing)
+    randomizeFormData.forEach((athlete) => {
+      const closingGamesEnd = createClosingGamesEnd(athlete);
+      JulySundayOccupiedSlotsAthletes.push(closingGamesEnd);
+    });
+
+
     var everyDayInOneForUser = [].concat(
       saturdayOccupiedSlotsAthletes,
       sundayOccupiedSlotsAthletes,
@@ -8693,6 +8220,9 @@ const landingPageRandomize = async (req, res) => {
 
 
     );
+
+
+
 
 
 
