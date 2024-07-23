@@ -48,8 +48,10 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
+
+// we just removed  '0_3' , from here, not to show it everything looks fine
 const timeSlots = [
-  '0_3', '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
+   '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
 ];
 
 /*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
@@ -443,7 +445,7 @@ const Randomize = () => {
                   // ! ovde treba, event.julyDay === true, da onda taj drugi prikaze.. 
                   // ! za to, da dodas jos taj jedan header kao
                   <td key={slot} className="tdz">
-                    {event ? <RandomizeItem icon="swim" name={event.sportName} /> : ''}
+                    {event ? <RandomizeItem icon={event.icon} name={event.sportName} /> : ''}
                   </td>
 
                 );
