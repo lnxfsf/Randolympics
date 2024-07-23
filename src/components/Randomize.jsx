@@ -186,6 +186,32 @@ const Randomize = () => {
   };
 
 
+
+  // it is when user clicks, then we send to those friends...
+  const sendToFriends = async (e) => {
+
+
+    // let's just send 
+
+    const tableElement = document.querySelector('.tablez');
+    const tableHTML = tableElement.outerHTML;
+
+    
+
+    var response = await axios.post(
+      `${BACKEND_SERVER_BASE_URL}/listsData/shareTableLandingPage`,
+      { tableHTML: tableHTML,
+        emailsToSendTo: randomizeFormData,
+       }
+    );
+
+
+
+
+  }
+
+
+
   const handleRandomize = async (e) => {
     e.preventDefault();
 
@@ -381,29 +407,6 @@ const Randomize = () => {
         </thead>
         <tbody>
 
-{/* 
-          <tr>
-            <th rowSpan={2} className="thz">Saturday (June 24th)</th>
-            <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
-
-          </tr>
-
-
-          <tr>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-            {/*   <td className="tdz">{ if ( ) } </td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"></td>
-
-
-          </tr>
- */}
 
 
 
@@ -442,9 +445,10 @@ const Randomize = () => {
                 return (
 
 
-                  // ! ovde treba, event.julyDay === true, da onda taj drugi prikaze.. 
-                  // ! za to, da dodas jos taj jedan header kao
-                  <td key={slot} className="tdz">
+                
+                  <td key={slot} className="tdz" 
+                  style={{ backgroundColor: event && event.icon === 'olympic_flame' ? 'yellow' : 'inherit' }}
+                     >
                     {event ? <RandomizeItem icon={event.icon} name={event.sportName} /> : ''}
                   </td>
 
@@ -454,69 +458,8 @@ const Randomize = () => {
 
 
           ))}
-          {/* Add rows for Sunday, July 2nd */}
-       {/*    <tr>
-            <th rowSpan={2} className="thz">Sunday (July 2nd)</th>
-
-
-            {/* isto prolazi kroz svaki time slot. kolonu 
-            {timeSlots.map((slot, index) => {
-
-              // ! da, ja msm, treba specificno da gledas 8-mi, indeks, to je taj zadnji (zato sto on ovde stoji samostalno, ne vrti kroz petlju sve..).. a iz podataka ce on izvuci          
-              // ustvari, on ovde radi van tog.. jer ima hardcoded  july 2nd..
-
-
-              const event = scheduleData.find(event =>
-
-                getEventSlots(event).some(slotData =>
-
-                  slotData.dayIndex === days.findIndex(d => d.date === "July 2nd") && slotData.slotIndex === index
-
-                )
-
-              );
-
-
-              return (
-                <td key={index} className="tdz">
-
-
-                  {index === 1 ? <RandomizeItem icon={"swim"} name={"Men's Football"} /> : ''}
-
-
-                </td>
-              );
-            })}
-
-
-          </tr>
-          <tr>
-            <td className="tdz" colSpan={timeSlots.length}>Closing & Randomization of Next Games</td>
-          </tr> */}
-
-
-          {/*   <tr >
-            <th rowSpan={2} className="thz">Sunday July 2nd</th>
-
-
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-            {/*   <td className="tdz">{ if ( ) } </td> 
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-
-          </tr>
-
-          <tr>
-            <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
-          </tr> */}
+         
+     
 
 
 
@@ -529,176 +472,6 @@ const Randomize = () => {
 
 
 
-
-
-      {/* <br /><br /><br /><br /><br /><br />
-
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-
-      <br />
-      <br />
-      <br />
-      <br /> */}
-      {/*   <table className="tablez">
-        <thead>
-          <tr>
-            <th className="thz">Date</th>
-            <th className="thz">00-03:00</th>
-            <th className="thz">03-06:00</th>
-            <th className="thz"> 06-09:00</th>
-            <th className="thz">09-12:00</th>
-            <th className="thz"> 12-15:00</th>
-            <th className="thz">15-18:00</th>
-            <th className="thz">18-21:00</th>
-            <th className="thz">21-24:00</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <tr>
-            <th className="thz">Saturday (June 24th)</th>
-
-            <td className="tdz" colSpan={8} >Opening & Randomization of Athletes and Sports</td>
-
-
-          </tr>
-
-
-          <tr>
-            <th className="thz">Sunday  June 25th</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's 50m Freestyle Swimming"} /></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Monday June 26th</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's 50m Freestyle Swimming"} /></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Tuesday June 27th</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Wednesday (June 28th)</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Thursday June 29th</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Team All-Around Artistic Gymnastics"} /></td>
-
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Friday June 30th</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-          <tr>
-            <th className="thz">Saturday July 1st</th>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-          </tr>
-
-
-          <tr >
-            <th rowSpan={2} className="thz">Sunday July 2nd</th>
-
-
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-            <td className="tdz"><RandomizeItem icon={"swim"} name={"Men's Football"} /></td>
-
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-            <td className="tdz"></td>
-
-
-          </tr>
-
-          <tr>
-
-
-
-
-            <td className="tdz" colSpan={8}>Closing & Randomization of Next Games</td>
-
-
-
-          </tr>
-
-
-
-
-        </tbody>
-      </table> */}
 
 
 
@@ -715,19 +488,20 @@ const Randomize = () => {
           onSubmit={handleRandomize}
         >
 
+
           {randomizeFormData.map((data, index) => (
 
 
             <div key={index} style={{ marginBottom: '10px' }}>
 
 
-              <input
+            {/*   <input
                 type="text"
                 name="name"
                 placeholder="Name"
                 value={data.name}
                 onChange={(event) => handleInputChange(index, event)}
-              />
+              /> */}
 
 
 
@@ -740,7 +514,7 @@ const Randomize = () => {
               />
 
 
-
+{/* 
               <select
                 name="weightCategory"
                 value={data.weightCategory}
@@ -749,9 +523,9 @@ const Randomize = () => {
                 <option value="light">Light</option>
                 <option value="medium">Medium</option>
                 <option value="heavy">Heavy</option>
-              </select>
+              </select> */}
 
-
+{/* 
               <select
                 name="gender"
                 value={data.gender}
@@ -761,13 +535,13 @@ const Randomize = () => {
                 <option value="F">Woman</option>
 
               </select>
+ */}
 
 
-
-              <button type="button" onClick={() => removeInputSet(index)}>
+           {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
-
+ */}
 
 
             </div>
@@ -813,6 +587,41 @@ const Randomize = () => {
 
         </form>
 
+
+
+
+
+<div>
+
+<Button
+
+
+            onClick={sendToFriends}
+            className="w-44 "
+            style={{ marginTop: "20px" }}
+            sx={{
+              height: "60px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 25,
+              border: `1px solid #AF2626`,
+              "&:hover": {
+                background: "rgb(196, 43, 43)",
+                color: "white",
+                border: `1px solid rgb(196, 43, 43)`,
+              },
+            }}
+            
+
+            
+
+
+
+
+          >
+            <span className="popins-font">Send</span>
+          </Button>
+</div>
       </div>
 
 
