@@ -1,5 +1,5 @@
 const express = require("express");
-const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize } = require("../controllers/listDataControllers");
+const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize, shareTableLandingPage } = require("../controllers/listDataControllers");
 const router = express.Router();
 
 
@@ -39,6 +39,8 @@ router.get("/listLoginTrafficHistory",listLoginTrafficHistory)  // ! prvo ovaj, 
 // randomize LANDING PAGE (this one is not saved anywhere..)
 router.get("/landingPageRandomize", landingPageRandomize)
 
+// place, to insert <table className="tablez", whole, that was rendered, so we send to all those friend lists.. (just email)
+router.post("/shareTableLandingPage", shareTableLandingPage)
 
 module.exports = router;
 

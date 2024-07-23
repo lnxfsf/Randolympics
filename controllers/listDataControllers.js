@@ -6,6 +6,10 @@ const Traffic = db.traffic;
 const Op = db.Sequelize.Op;
 
 
+const sendEmail = require("../utils/sendEmail");
+const { JSDOM } = require('jsdom');
+
+
 
 
 const listOfSports = require('../data/listOfSports')
@@ -8298,6 +8302,66 @@ const landingPageRandomize = async (req, res) => {
 
 }
 
+const shareTableLandingPage = async (req, res) => {
+
+
+
+  const tableHTML = req.body.tableHTML;
+  const emailsToSendTo = req.body.emailsToSendTo;
+
+
+  const dom = new JSDOM(tableHTML);
+  const document = dom.window.document;
+  document.querySelectorAll('img').forEach(img => img.remove());
+
+  // back to string
+  const modifiedHTML = document.documentElement.outerHTML;
+
+
+
+ 
+
+
+
+  
+  var email = "ivanlerinc1510@gmail.com";
+
+
+
+
+  emailsToSendTo.forEach(user => {
+
+
+    sendEmail(
+      
+      user.email,
+      "See my event schedule",
+      `Hey I thought you should see a demo from <a href="www.randolympics.com">Randolympics</a> website, how it will create random events, for sports we can try to compete in. 
+      <br/>
+      What do you think ? Let's try out some new challenge. Let's sign up together for this.
+      <br/>
+      Let's goooo 🏃🏆🚀
+      <br/>
+      <br/>
+      
+      ${modifiedHTML}
+      
+      
+      
+      
+      
+      `
+    );
+
+
+  })
+ 
+
+
+
+
+}
+
 
 
 
@@ -8317,5 +8381,7 @@ module.exports = {
 
   // randomization LANDING PAGE
   landingPageRandomize,
+
+  shareTableLandingPage,
 
 };
