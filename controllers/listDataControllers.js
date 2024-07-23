@@ -921,13 +921,7 @@ const landingPageRandomize = async (req, res) => {
 
   const randomizeFormData = [
     { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
-    { name: 'second', email: 'second@gmail.com', weightCategory: 'light', gender: 'M' },
-    { name: 'third', email: 'third@gmail.com', weightCategory: 'light', gender: 'M' },
-    { name: 'fourth', email: 'fourth@gmail.com', weightCategory: 'light', gender: 'M' },
-    { name: 'fifth', email: 'fifth@gmail.com', weightCategory: 'light', gender: 'M' },
-    { name: 'six', email: 'six@gmail.com', weightCategory: 'light', gender: 'M' },
-    { name: 'seven', email: 'seven@gmail.com', weightCategory: 'light', gender: 'F' },
-
+  
 
 
   ];
@@ -969,6 +963,8 @@ const landingPageRandomize = async (req, res) => {
       dayOfStart: "Saturday",
 
       dateOfStart: "June 24th",
+
+      icon: "olympic_flame",
     };
   }
   
@@ -1010,6 +1006,8 @@ const landingPageRandomize = async (req, res) => {
                   dayOfStart: "Sunday",
 
                   dateOfStart: "July 2nd",
+
+                  icon: "olympic_flame",
     };
   }
 

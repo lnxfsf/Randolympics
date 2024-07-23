@@ -850,6 +850,7 @@
  */
 
 
+
 const listOfSports = [
 
     {
@@ -871,6 +872,8 @@ const listOfSports = [
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
         
+		
+		icon: "swim",
         
            
     },
@@ -895,6 +898,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -920,6 +925,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -948,6 +955,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -975,6 +984,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -999,6 +1010,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1024,6 +1037,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1047,6 +1062,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1072,6 +1089,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1097,6 +1116,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1121,6 +1142,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1144,6 +1167,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1168,6 +1193,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },
     
     
@@ -1193,6 +1220,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },	
     
     
@@ -1223,6 +1252,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },	
     
     
@@ -1249,6 +1280,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "swim",
     },	
     
     
@@ -1275,6 +1308,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "diving",
     },	
     
     
@@ -1299,6 +1334,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "diving",
     },	
     
     
@@ -1323,6 +1360,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "diving",
     },	
     
     
@@ -1348,6 +1387,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "diving",
     },	
     
     
@@ -1373,6 +1414,9 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "running",
     },	
     
     
@@ -1398,6 +1442,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1424,6 +1470,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1449,6 +1497,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1476,6 +1526,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1500,6 +1552,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1524,6 +1578,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1548,6 +1604,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1575,6 +1633,10 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "jumping_hurdles",
+		
     },	
     
     
@@ -1599,6 +1661,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "jumping_hurdles",
     },	
     
     
@@ -1623,6 +1687,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "jumping_hurdles",
     },	
     
     
@@ -1652,6 +1718,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1677,6 +1745,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "running",
     },	
     
     
@@ -1703,6 +1773,10 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "walk_race",
+		
     },	
     
     
@@ -1728,6 +1802,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "walk_race",
     },	
     
     
@@ -1755,6 +1831,13 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "high_jump",
+		
+		
+		
+		
     },	
     
     
@@ -1781,6 +1864,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "long_jump",
     },	
     
     
@@ -1806,6 +1891,10 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "long_jump",
+		
+		
     },	
     
     
@@ -1831,6 +1920,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "shot_put",
     },	
     
     
@@ -1859,6 +1950,9 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "athletics",
+		
     },	
     
     
@@ -1883,6 +1977,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "athletics",
     },	
     
     
@@ -1908,6 +2004,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "athletics",
     },	
     
     
@@ -1931,6 +2029,9 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "triathlon",
+		
     },	
     
     
@@ -1959,6 +2060,10 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "badminton",
+		
     },	
     
     
@@ -1985,6 +2090,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "badminton",
     },	
     
     
@@ -2012,6 +2119,9 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		
+		icon: "kayaking",
     },	
     
     
@@ -2036,6 +2146,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "kayaking",
     },	
     
     
@@ -2061,6 +2173,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "kayaking",
     },	
     
     
@@ -2086,6 +2200,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "kayaking",
     },	
     
     
@@ -2110,6 +2226,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "kayaking",
     },	
     
     
@@ -2134,6 +2252,8 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "June 25th",
+		
+		icon: "kayaking",
     },	
     
     
@@ -2162,6 +2282,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "waterpolo",
     },	
     
     
@@ -2186,6 +2308,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "archery",
     },	
     
     
@@ -2212,6 +2336,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "archery",
     },	
     
     
@@ -2238,6 +2364,9 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		
+		icon: "surfing",
     },	
     
     
@@ -2263,6 +2392,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "surfing",
     },	
     
     
@@ -2288,6 +2419,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "surfing",
     },
     
     
@@ -2313,6 +2446,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "surfing",
     },
     
     
@@ -2339,6 +2474,8 @@ const listOfSports = [
         
         dayOfStart: "Monday",
         dateOfStart: "June 26th",
+		
+		icon: "weightlifting",
     },
     
     
@@ -2370,6 +2507,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "boxing",
     },
     
     
@@ -2394,6 +2533,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "boxing",
     },
     
     
@@ -2420,6 +2561,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "fencing",
     },
     
     
@@ -2446,6 +2589,9 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		
+		icon: "fencing",
     },
     
     
@@ -2471,6 +2617,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "fencing",
     },
     
     
@@ -2496,6 +2644,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "fencing",
     },
     
     
@@ -2522,6 +2672,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "fencing",
     },
     
     
@@ -2549,6 +2701,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "fencing",
     },
     
     
@@ -2574,6 +2728,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "golf",
     },
     
     
@@ -2599,6 +2755,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2625,6 +2783,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2650,6 +2810,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2676,6 +2838,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2701,6 +2865,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2725,6 +2891,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2749,6 +2917,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2773,6 +2943,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2796,6 +2968,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "shooting",
     },
     
     
@@ -2824,6 +2998,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "tennis",
     },
     
     
@@ -2849,6 +3025,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "tennis",
     },
     
     
@@ -2876,6 +3054,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "volleyball",
     },
     
     
@@ -2903,6 +3083,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -2927,6 +3109,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -2951,6 +3135,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -2974,6 +3160,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -2998,6 +3186,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -3023,6 +3213,8 @@ const listOfSports = [
         
         dayOfStart: "Tuesday",
         dateOfStart: "June 27th",
+		
+		icon: "wrestling",
     },
     
     
@@ -3055,6 +3247,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3080,6 +3274,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3107,6 +3303,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3134,6 +3332,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3159,6 +3359,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3185,6 +3387,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3209,6 +3413,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3233,6 +3439,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3257,6 +3465,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "acrobatics",
     },
     
     
@@ -3283,6 +3493,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "judo",
     },
     
     
@@ -3308,6 +3520,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "judo",
     },
     
     
@@ -3333,6 +3547,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "judo",
     },
     
     
@@ -3358,6 +3574,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "shooting",
     },
     
     
@@ -3384,6 +3602,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3409,6 +3629,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3433,6 +3655,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3458,6 +3682,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3482,6 +3708,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3506,6 +3734,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3531,6 +3761,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3556,6 +3788,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "kayaking",
     },
     
     
@@ -3583,6 +3817,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "rugby",
     },
     
     
@@ -3608,6 +3844,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "ping_pong",
     },
     
     
@@ -3632,6 +3870,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "ping_pong",
     },
     
     
@@ -3657,6 +3897,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "taekwondo",
     },
     
     
@@ -3680,6 +3922,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "taekwondo",
     },
     
     
@@ -3704,6 +3948,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "taekwondo",
     },
     
     
@@ -3733,6 +3979,8 @@ const listOfSports = [
         
         dayOfStart: "Wednesday",
         dateOfStart: "June 28th",
+		
+		icon: "volleyball",
     },
     
     
@@ -3766,6 +4014,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "basketball",
     },
     
     
@@ -3791,6 +4041,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3817,6 +4069,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3843,6 +4097,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3867,6 +4123,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3891,6 +4149,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3916,6 +4176,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3941,6 +4203,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3967,6 +4231,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -3992,6 +4258,8 @@ const listOfSports = [
         
         dayOfStart: "Thursday",
         dateOfStart: "June 29th",
+		
+		icon: "cycling",
     },
     
     
@@ -4025,6 +4293,8 @@ const listOfSports = [
         
         dayOfStart: "Friday",
         dateOfStart: "June 30th",
+		
+		icon: "soccer",
     },
     
     
@@ -4051,6 +4321,8 @@ const listOfSports = [
         
         dayOfStart: "Friday",
         dateOfStart: "June 30th",
+		
+		icon: "handball",
     },
     
     
@@ -4080,6 +4352,8 @@ const listOfSports = [
         
         dayOfStart: "Friday",
         dateOfStart: "June 30th",
+		
+		icon: "hockey",
     },
     
     
@@ -4111,6 +4385,8 @@ const listOfSports = [
         
         dayOfStart: "Saturday",
         dateOfStart: "July 1st",
+		
+		icon: "horse",
     },
     
     
@@ -4136,6 +4412,8 @@ const listOfSports = [
         
         dayOfStart: "Saturday",
         dateOfStart: "July 1st",
+		
+		icon: "horse",
     },
     
     
@@ -4165,6 +4443,9 @@ const listOfSports = [
         
         dayOfStart: "Sunday",
         dateOfStart: "July 2nd",
+		
+		icon: "triathlon",
+		
     },
     
     
