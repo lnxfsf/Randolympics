@@ -94,6 +94,9 @@ const Randomize = () => {
   const [showTable, setShowTable] = useState(false)
 
 
+  const [howManyMedals, setHowManyMedals] = useState()
+
+
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
     const newFormData = randomizeFormData.map((data, idx) => {
@@ -165,9 +168,40 @@ const Randomize = () => {
   useEffect(() => {
 
 
-
+    changeTextHowManyMedals();
   }, [scheduleData]);
 
+
+
+  const changeTextHowManyMedals = () => {
+
+    switch (scheduleData.length - 2) {
+      case 1:
+        setHowManyMedals("one");
+        break;
+      case 2:
+        setHowManyMedals("two");
+        break;
+      case 3:
+        setHowManyMedals("three");
+        break;
+      case 4:
+        setHowManyMedals("four");
+        break;
+      case 5:
+        setHowManyMedals("five");
+        break;
+      case 6:
+        setHowManyMedals("six");
+        break;
+      case 7:
+        setHowManyMedals("seven");
+        break;
+      case 8:
+        setHowManyMedals("eight");
+        break;
+    }
+  }
 
 
 
@@ -401,7 +435,7 @@ const Randomize = () => {
 
       {/* before table is rendered */}
 
-      { !showTable && (
+      {!showTable && (
 
         <>
           <p className=" text-[30px] m-8 mb-4" >Select your:</p>
@@ -494,6 +528,9 @@ const Randomize = () => {
 
       {selectedGender && selectedWeightCategory && showTable && (
         <>
+
+
+          <p>Congratulations: You would compete in six disciplines - {howManyMedals} chances to win a gold medal and eternal fame!</p>
 
           <table className="tablez">
             <thead>
@@ -592,7 +629,7 @@ const Randomize = () => {
             >
 
 
-<Button
+              <Button
                 onClick={handleRandomize}
                 className="w-44 "
                 style={{ marginTop: "20px" }}
@@ -689,7 +726,7 @@ const Randomize = () => {
 
 
 
-            
+
 
 
 
