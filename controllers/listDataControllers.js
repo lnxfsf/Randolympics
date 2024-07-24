@@ -1284,7 +1284,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           //  sundayOccupiedSlotsAthletes 
-          const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+          const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
           // If there is no corresponding occupied athlete, include this athlete
           if (!correspondingOccupiedAthlete) {
@@ -1296,7 +1296,7 @@ const landingPageRandomize = async (req, res) => {
 
 
           // pre 2 dana, nedelja..
-          if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
+        /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
             || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
 
 
@@ -1307,7 +1307,18 @@ const landingPageRandomize = async (req, res) => {
             return false;
           } else {
             return true
-          };
+          }; */
+
+
+          
+          const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+            (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday") ||
+            (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday")
+          );
+
+
+          return !shouldExclude;
+
 
         }
 
@@ -1933,7 +1944,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -1947,7 +1958,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
 
 
@@ -1958,7 +1969,19 @@ const landingPageRandomize = async (req, res) => {
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday")
+            );
+
+
+            return !shouldExclude;
+
 
           }
 
@@ -3399,7 +3422,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -3414,7 +3437,7 @@ const landingPageRandomize = async (req, res) => {
             // ! da ,ubacuj ti oboje, okej. ta 2 objekta zajedno. DA, TO TAKO RADI ODLICNO ! jer on osim 3-eg, sto ima, on, isto i proveri da je tog i tog dana počeo ...
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
+           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
 
 
@@ -3425,7 +3448,22 @@ const landingPageRandomize = async (req, res) => {
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday")
+            );
+
+
+            return !shouldExclude;
+
+
+
 
           }
 
@@ -4071,7 +4109,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -4085,7 +4123,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday")
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday"))
 
 
@@ -4096,7 +4134,20 @@ const landingPageRandomize = async (req, res) => {
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Monday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday")
+            );
+
+
+            return !shouldExclude;
+
+
 
           }
 
@@ -4729,7 +4780,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -4743,7 +4794,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday")
+           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday"))
 
 
@@ -4755,6 +4806,18 @@ const landingPageRandomize = async (req, res) => {
             } else {
               return true
             };
+ */
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Tuesday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Monday")
+            );
+
+
+            return !shouldExclude;
+
+
 
           }
 
@@ -5385,7 +5448,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -5399,7 +5462,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
+           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday"))
 
 
@@ -5410,7 +5473,21 @@ const landingPageRandomize = async (req, res) => {
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Wednesday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Tuesday")
+            );
+
+
+            return !shouldExclude;
+
+
+
 
           }
 
@@ -6045,7 +6122,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -6059,7 +6136,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday"))
 
 
@@ -6071,6 +6148,18 @@ const landingPageRandomize = async (req, res) => {
             } else {
               return true
             };
+ */
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Wednesday")
+            );
+
+
+            return !shouldExclude;
+
+
 
           }
 
@@ -6687,7 +6776,7 @@ const landingPageRandomize = async (req, res) => {
 
 
             //  sundayOccupiedSlotsAthletes 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -6701,7 +6790,7 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
 
 
@@ -6712,7 +6801,20 @@ const landingPageRandomize = async (req, res) => {
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday")
+            );
+
+
+            return !shouldExclude;
+
+
+
 
           }
 
@@ -7375,7 +7477,7 @@ const landingPageRandomize = async (req, res) => {
 
           var slotsFree = freeSlots.filter(athlete => {
 
-            const correspondingOccupiedAthlete = occupiedSlots.find(occAthlete => occAthlete.email === athlete.email);
+            const correspondingOccupiedAthlete = occupiedSlots.filter(occAthlete => occAthlete.email === athlete.email);
 
             // If there is no corresponding occupied athlete, include this athlete
             if (!correspondingOccupiedAthlete) {
@@ -7383,14 +7485,26 @@ const landingPageRandomize = async (req, res) => {
             }
 
             // dobro je, nece se ponavljati, samo on da izbegne ove druge, ako ima neke nove kao znas... da ako su zauzeti vec (samo u frontend, isto posla jos, da to napravis... da prikaze samo.. )
-            if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")
               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday"))
             ) {
 
               return false;
             } else {
               return true
-            };
+            }; */
+
+
+
+            
+            const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
+              (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday") ||
+              (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday")
+            );
+
+
+            return !shouldExclude;
+
 
           }
 
