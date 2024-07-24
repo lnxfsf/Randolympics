@@ -51,7 +51,7 @@ let BACKEND_SERVER_BASE_URL =
 
 // we just removed  '0_3' , from here, not to show it everything looks fine
 const timeSlots = [
-   '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
+  '3_6', '6_9', '9_12', '12_15', '15_18', '18_21', '21_24'
 ];
 
 /*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
@@ -88,7 +88,10 @@ const Randomize = () => {
 
   const [randomizeFormData, setRandomizeFormData] = useState([{ name: '', email: '', weightCategory: 'light', gender: 'M' }]);
 
+  const [selectedGender, setSelectedGender] = useState();
+  const [selectedWeightCategory, setSelectedWeightCategory] = useState();
 
+  const [showTable, setShowTable] = useState(false)
 
 
   const handleInputChange = (index, event) => {
@@ -189,20 +192,21 @@ const Randomize = () => {
 
   // it is when user clicks, then we send to those friends...
   const sendToFriends = async (e) => {
-
+    e.preventDefault();
 
     // let's just send 
 
     const tableElement = document.querySelector('.tablez');
     const tableHTML = tableElement.outerHTML;
 
-    
+
 
     var response = await axios.post(
       `${BACKEND_SERVER_BASE_URL}/listsData/shareTableLandingPage`,
-      { tableHTML: tableHTML,
+      {
+        tableHTML: tableHTML,
         emailsToSendTo: randomizeFormData,
-       }
+      }
     );
 
 
@@ -212,10 +216,11 @@ const Randomize = () => {
 
 
 
-  const handleRandomize = async (e) => {
-    e.preventDefault();
+  const handleRandomize = async () => {
 
-    console.log("sent")
+
+
+
 
 
 
@@ -323,7 +328,7 @@ const Randomize = () => {
 
     // ! const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
     const startDateIndex = days.findIndex(d => d.date === event.dateOfStart);
- 
+
 
     const addSlots = (startDayIndex, startSlot, expandBy) => {
       const startSlotIndex = getSlotIndex(startSlot);
@@ -350,21 +355,21 @@ const Randomize = () => {
 
 
     //al sa ovim filtrom, trebalo bi.
-   
 
-      // Add slots for the first day
-      addSlots(startDateIndex, event.firstDayStartGameTimeSlot, event.firstDayHowMuchTimeSlotsExpandBy);
 
-      // Add slots for the second day if applicable
-      if (event.secondDayStartGameTimeSlot) {
-        addSlots(startDateIndex + 1, event.secondDayStartGameTimeSlot, event.secondDayHowMuchTimeSlotsExpandBy);
-      }
+    // Add slots for the first day
+    addSlots(startDateIndex, event.firstDayStartGameTimeSlot, event.firstDayHowMuchTimeSlotsExpandBy);
 
-      // Add slots for the third day if applicable
-      if (event.thirdDayStartGameTimeSlot) {
-        addSlots(startDateIndex  + 2, event.thirdDayStartGameTimeSlot, event.thirdDayHowMuchTimeSlotsExpandBy);
-      }
-  
+    // Add slots for the second day if applicable
+    if (event.secondDayStartGameTimeSlot) {
+      addSlots(startDateIndex + 1, event.secondDayStartGameTimeSlot, event.secondDayHowMuchTimeSlotsExpandBy);
+    }
+
+    // Add slots for the third day if applicable
+    if (event.thirdDayStartGameTimeSlot) {
+      addSlots(startDateIndex + 2, event.thirdDayStartGameTimeSlot, event.thirdDayHowMuchTimeSlotsExpandBy);
+    }
+
 
 
     return slots;
@@ -394,108 +399,234 @@ const Randomize = () => {
 
 
 
+      {/* before table is rendered */}
 
+      { !showTable && (
 
-      <table className="tablez">
-        <thead>
-          <tr>
-            <th className="thz">Date</th>
-            {timeSlots.map(slot => (
-              <th key={slot} className="thz">{slot.replace('_', '-')}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
+        <>
+          <p className=" text-[30px] m-8 mb-4" >Select your:</p>
+
+          <div className="flex justify-around items-around">
 
 
 
-
-          {days.map(({ day, date }) => (
-
-
-            /* ovo je jedan row ! */
-            <tr key={date}>
-
-              <th className="thz">{day} ({date})</th>
+            <div className="basis-1/2 flex gap-8 ">
 
 
+              {/* <label htmlFor="gender">Gender:</label> */}
+              <p>Gender</p>
+
+              <select className="overflow-hidden" id="gender" name="gender" size="2" value={selectedGender} onChange={event => { setSelectedGender(event.target.value); }} >
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+
+              </select>
+            </div>
 
 
-              {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
- */}
-              {timeSlots.map((slot, index) => {
-
-
-
-                // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
-               
-               
-                const event = scheduleData.find(event =>
-
-                  getEventSlots(event).some(slotData =>
-
-                    slotData.dayIndex === days.findIndex(d => d.date === date) && slotData.slotIndex === index
-
-                  )
-
-                );
-
-
-
-                return (
-
-
-                
-                  <td key={slot} className="tdz" 
-                  style={{ backgroundColor: event && event.icon === 'olympic_flame' ? 'yellow' : 'inherit' }}
-                     >
-                    {event ? <RandomizeItem icon={event.icon} name={event.sportName} /> : ''}
-                  </td>
-
-                );
-              })}
-            </tr>
-
-
-          ))}
-         
-     
-
-
-
-        </tbody>
-      </table>
+            <div className="basis-1/2 flex gap-8 ">
+              <p>Weight category:</p>
 
 
 
 
+              <select className="overflow-hidden" id="weightCategory" name="weightCategory" size="3" value={selectedWeightCategory} onChange={event => { setSelectedWeightCategory(event.target.value); }} >
+                <option value="light">Light</option>
+                <option value="medium">Medium</option>
+                <option value="heavy">Heavy</option>
+              </select>
+            </div>
 
 
 
 
+          </div>
+
+          <div className="flex justify-center items-center m-8">
+
+            <Button
+              onClick={() => {
+
+                if (selectedGender && selectedWeightCategory) {
+                  handleRandomize();
+                  setShowTable(true);
+                } else {
+                  if (!selectedGender) {
+                    alert("Choose gender")
+                  } else if (!selectedWeightCategory) {
+                    alert("Choose weight category")
+                  }
+                }
+
+
+
+              }}
+              className="w-44 "
+              style={{ marginTop: "20px" }}
+              sx={{
+                height: "60px",
+                bgcolor: "#AF2626",
+                color: "#fff",
+                borderRadius: 25,
+                border: `1px solid #AF2626`,
+                "&:hover": {
+                  background: "rgb(196, 43, 43)",
+                  color: "white",
+                  border: `1px solid rgb(196, 43, 43)`,
+                },
+              }}
+              id="randomize-btn"
 
 
 
 
 
 
-      <div>
+            >
+              <span className="popins-font">Randomize</span>
+            </Button>
+          </div>
+          {/* before table is rendered */}
+        </>
+
+      )}
 
 
-        <form
-          action="#"
-          className="sign-in-form flex flex-col wrap justify-start items-center"
-          onSubmit={handleRandomize}
-        >
+      {selectedGender && selectedWeightCategory && showTable && (
+        <>
+
+          <table className="tablez">
+            <thead>
+              <tr>
+                <th className="thz">Date</th>
+                {timeSlots.map(slot => (
+                  <th key={slot} className="thz">{slot.replace('_', '-')}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
 
 
-          {randomizeFormData.map((data, index) => (
 
 
-            <div key={index} style={{ marginBottom: '10px' }}>
+              {days.map(({ day, date }) => (
 
 
-            {/*   <input
+                /* ovo je jedan row ! */
+                <tr key={date}>
+
+                  <th className="thz">{day} ({date})</th>
+
+
+
+
+                  {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
+*/}
+                  {timeSlots.map((slot, index) => {
+
+
+
+                    // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
+
+
+                    const event = scheduleData.find(event =>
+
+                      getEventSlots(event).some(slotData =>
+
+                        slotData.dayIndex === days.findIndex(d => d.date === date) && slotData.slotIndex === index
+
+                      )
+
+                    );
+
+
+
+                    return (
+
+
+
+                      <td key={slot} className="tdz"
+                        style={{ backgroundColor: event && event.icon === 'olympic_flame' ? 'yellow' : 'inherit' }}
+                      >
+                        {event ? <RandomizeItem icon={event.icon} name={event.sportName} /> : ''}
+                      </td>
+
+                    );
+                  })}
+                </tr>
+
+
+              ))}
+
+
+
+
+
+            </tbody>
+          </table>
+
+
+          <div>
+
+
+
+            {/* // da, znaci, kada selektuje i gender i weight category, onda, moze da prikaze ovaj dole "form". 
+        
+        
+        
+        
+        */}
+
+
+
+
+
+
+
+
+
+            <form
+              action="#"
+              className="sign-in-form flex flex-col wrap justify-start items-center"
+              onSubmit={sendToFriends}
+            >
+
+
+<Button
+                onClick={handleRandomize}
+                className="w-44 "
+                style={{ marginTop: "20px" }}
+                sx={{
+                  height: "60px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 25,
+                  border: `1px solid #AF2626`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+                id="randomize-btn"
+
+
+
+
+
+
+              >
+                <span className="popins-font">Randomize again</span>
+              </Button>
+
+
+              {randomizeFormData.map((data, index) => (
+
+
+                <div key={index} style={{ marginBottom: '10px' }}>
+
+
+                  {/*   <input
                 type="text"
                 name="name"
                 placeholder="Name"
@@ -505,16 +636,16 @@ const Randomize = () => {
 
 
 
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={data.email}
-                onChange={(event) => handleInputChange(index, event)}
-              />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={data.email}
+                    onChange={(event) => handleInputChange(index, event)}
+                  />
 
 
-{/* 
+                  {/* 
               <select
                 name="weightCategory"
                 value={data.weightCategory}
@@ -525,7 +656,7 @@ const Randomize = () => {
                 <option value="heavy">Heavy</option>
               </select> */}
 
-{/* 
+                  {/* 
               <select
                 name="gender"
                 value={data.gender}
@@ -538,92 +669,79 @@ const Randomize = () => {
  */}
 
 
-           {/*    <button type="button" onClick={() => removeInputSet(index)}>
+                  {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
  */}
 
 
-            </div>
+                </div>
 
 
 
-          ))}
+              ))}
 
 
 
-          <button type="button" onClick={addInputSet}>
-            Add Another
-          </button>
+              <button type="button" onClick={addInputSet}>
+                Add Another
+              </button>
 
 
-
-          <Button
-            className="w-44 "
-            style={{ marginTop: "20px" }}
-            sx={{
-              height: "60px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 25,
-              border: `1px solid #AF2626`,
-              "&:hover": {
-                background: "rgb(196, 43, 43)",
-                color: "white",
-                border: `1px solid rgb(196, 43, 43)`,
-              },
-            }}
-            id="randomize-btn"
-
-            type="submit"
-
-
-
-
-          >
-            <span className="popins-font">Randomize</span>
-          </Button>
-
-
-        </form>
-
-
-
-
-
-<div>
-
-<Button
-
-
-            onClick={sendToFriends}
-            className="w-44 "
-            style={{ marginTop: "20px" }}
-            sx={{
-              height: "60px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 25,
-              border: `1px solid #AF2626`,
-              "&:hover": {
-                background: "rgb(196, 43, 43)",
-                color: "white",
-                border: `1px solid rgb(196, 43, 43)`,
-              },
-            }}
-            
 
             
 
 
 
+              <div>
 
-          >
-            <span className="popins-font">Send</span>
-          </Button>
-</div>
-      </div>
+                <Button
 
+
+                  onClick={sendToFriends}
+                  className="w-44 "
+                  style={{ marginTop: "20px" }}
+                  sx={{
+                    height: "60px",
+                    bgcolor: "#AF2626",
+                    color: "#fff",
+                    borderRadius: 25,
+                    border: `1px solid #AF2626`,
+                    "&:hover": {
+                      background: "rgb(196, 43, 43)",
+                      color: "white",
+                      border: `1px solid rgb(196, 43, 43)`,
+                    },
+                  }}
+
+                  type="submit"
+
+
+
+
+
+                >
+                  <span className="popins-font">Send to friends</span>
+                </Button>
+              </div>
+            </form>
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+        </>
+      )}
 
 
 
