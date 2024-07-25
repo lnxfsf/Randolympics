@@ -24,6 +24,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Menu from "@mui/material/Menu";
 
+
 //we display it as fragment, inside MyProfile...
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -1153,6 +1154,8 @@ const EditProfile = () => {
               </div>
               <div className="flex justify-end items-end pb-2">
                 <ReactFlagsSelect
+                 countries={["US", "DE","GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI","NO", "KR", "RO","CA", "NL", "CU", "PL", "CH", "BG","NZ","ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
+
                 disabled
                   // to fill it with the one, which user's is currently selected...
                   selected={

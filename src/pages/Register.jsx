@@ -84,11 +84,11 @@ const Register = () => {
   const isPhoneErrorFocus = useRef(null);
 
 
-   // ? this is for password  Password
-   const [isPasswordError, setIsPasswordError] = useState(false);
-   const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
-   const isPasswordErrorFocus = useRef(null);
- 
+  // ? this is for password  Password
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
+  const isPasswordErrorFocus = useRef(null);
+
 
 
 
@@ -235,7 +235,7 @@ const Register = () => {
 
   // ? HERE, for weight..
 
-  
+
 
 
 
@@ -276,18 +276,18 @@ const Register = () => {
       isEmailErrorFocus.current.focus();
     }
 
-    
+
     if (isPhoneError && isPhoneErrorFocus.current) {
       isPhoneErrorFocus.current.focus();
     }
 
-    
+
     if (isPasswordError && isPasswordErrorFocus.current) {
       isPasswordErrorFocus.current.focus();
     }
 
 
-  }, [isEmailError, isPhoneError, isPasswordError ]);
+  }, [isEmailError, isPhoneError, isPasswordError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -344,25 +344,25 @@ const Register = () => {
     if (!phoneRegex.test(phone)) {
       setIsPhoneError(true);
       setIsPhoneErrorHelper("Enter valid phone number");
- 
 
-    }else {
+
+    } else {
       setIsPhoneError(false);
     }
-  
-  
-  
+
+
+
     const passwordRegex = /^.{4,}$/;
-  
+
     if (!passwordRegex.test(password)) {
       setIsPasswordError(true);
       setIsPasswordErrorHelper("Password should be longer than 4 characters");
- 
+
 
     } else {
       setIsPasswordError(false);
     }
-  
+
 
 
 
@@ -376,10 +376,10 @@ const Register = () => {
     } else {
 
 
-      console.log("isEmailEror vrednost: "+isEmailError)
+      console.log("isEmailEror vrednost: " + isEmailError)
 
       // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
-      if (nationality_selected && isEmailError === false &&  isPhoneError === false && isPasswordError === false ) {
+      if (nationality_selected && isEmailError === false && isPhoneError === false && isPasswordError === false) {
 
 
         const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
@@ -472,10 +472,10 @@ const Register = () => {
         } else if (isEmailError === true) {
           setResultText("Email is not valid !");
           setResultTextColor("red");
-        } else if (isPhoneError === true){
+        } else if (isPhoneError === true) {
           setResultText("Phone is not valid !");
           setResultTextColor("red");
-        } else if (isPasswordError === true){
+        } else if (isPasswordError === true) {
           setResultText("Password should be longer than 4 characters ! ");
           setResultTextColor("red");
         }
@@ -650,7 +650,7 @@ const Register = () => {
                   required
 
 
-                  
+
 
                   error={isPasswordError}
                   helperText={isPasswordHelper}
@@ -760,7 +760,7 @@ const Register = () => {
 
               <div className="flex flex-col mb-2.5 justify-center  mt-2">
                 <ReactFlagsSelect
-
+                  countries={["US", "DE","GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI","NO", "KR", "RO","CA", "NL", "CU", "PL", "CH", "BG","NZ","ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
                   selected={nationality_selected}
                   onSelect={(code) => setNationality_selected(code)}
                   className="w-[420px]  "
@@ -800,12 +800,12 @@ const Register = () => {
 
 
                     type="number"
-                    
+
                     onChange={(event) =>
                       event.target.value < 0
-                          ? (event.target.value = 0)
-                          : event.target.value
-                  }
+                        ? (event.target.value = 0)
+                        : event.target.value
+                    }
 
 
                     placeholder="85 kg/185 lb"
@@ -859,9 +859,9 @@ const Register = () => {
 
                       inputMode: 'numeric',
                       pattern: '[0-9]*',
-                      
-                      
-                      
+
+
+
 
 
 
