@@ -91,6 +91,8 @@ const Randomize = () => {
   const [selectedGender, setSelectedGender] = useState();
   const [selectedWeightCategory, setSelectedWeightCategory] = useState();
 
+  const [oneLandingPageUser , setOneLandingPageUser ] = useState()
+
   const [showTable, setShowTable] = useState(false)
 
 
@@ -107,6 +109,7 @@ const Randomize = () => {
     });
     setRandomizeFormData(newFormData);
   };
+
 
 
   const addInputSet = () => {
@@ -169,7 +172,14 @@ const Randomize = () => {
 
 
     changeTextHowManyMedals();
-  }, [scheduleData]);
+
+    // so, now we can use it.. so we send this one user only..
+    if (selectedWeightCategory && selectedGender){
+      setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
+    }
+
+
+  }, [scheduleData, selectedWeightCategory, selectedGender]);
 
 
 
@@ -250,11 +260,13 @@ const Randomize = () => {
 
 
 
-  const handleRandomize = async () => {
+  const handleRandomize = async (e) => {
 
 
-
-
+    if(e){
+      e.preventDefault();
+    }
+    
 
 
 
@@ -268,7 +280,7 @@ const Randomize = () => {
         `${BACKEND_SERVER_BASE_URL}/listsData/landingPageRandomize`,
         {
           params: {
-            randomizeFormData
+            randomizeFormData: oneLandingPageUser,
           },
 
         }
@@ -646,7 +658,7 @@ const Randomize = () => {
                   },
                 }}
                 id="randomize-btn"
-
+                type="submit"
 
 
 
