@@ -184,7 +184,34 @@ const Team = () => {
 
       setOtherUsers(response.data);
 
-      if (response.data.length < 10) {
+
+
+
+
+
+
+      // for next page, to check if there's more !
+      const isThereNextPage = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
+        params: {
+          limit: 10,
+          offset: (otherPage) * 10,
+
+          searchText: searchText,
+
+          userId: userId,
+          user_type: selectedRole, // and that's by dropdown, what's selected to show
+          genderFilter: genderFilter,
+          categoryFilter: categoryFilter,
+          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
+
+          needGender: needGender,
+
+          nationality: code, // we show only from this user country
+        },
+      });
+
+
+      if (isThereNextPage.data.length == 0) {
         setHasMoreOthers(false);
       } else {
         setHasMoreOthers(true);

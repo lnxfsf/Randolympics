@@ -27,8 +27,8 @@ let BACKEND_SERVER_BASE_URL =
 const Settings = () => {
   let { logoutUser } = useContext(AuthContext);
 
- 
-
+  
+  
   const navigate = useNavigate();
 
 
@@ -243,8 +243,8 @@ const Settings = () => {
           </div>
 
 
-{user_type == "NP" && (
-<>
+
+
 
 
 
@@ -368,8 +368,8 @@ const Settings = () => {
 
 
 
-          </>
-)}
+         
+
 
 
 

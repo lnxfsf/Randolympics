@@ -227,8 +227,31 @@ const Elections = () => {
 
 
 
+      const isThereNextPage = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/rankingTop50`,
+        {
+          params: {
+            limit: 10,
+            offset: (top50Page) * 10,
+            user_type: selectedRole,
+            searchText: searchText,
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+            
+            votedFor: votedFor, // sends selected NP for our user. this is showing then. so we display above red line selected by user... 
+            votedForGP: votedForGP, // this same as for votedFor, just for GP.. so we can discern..
+         
+
+            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
+          },
+        }
+      );
+
+
+
+
       // Check if we should switch to showing other users
-      if (response.data.length < 10) {
+      if (isThereNextPage.data.length == 0) {
         setHasMoreTop50(false);
         setShowingTop50(false);
 
@@ -270,7 +293,28 @@ const Elections = () => {
 
 
 
-      if (response.data.length < 10) {
+
+
+      const isThereNextPage = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/otherUsers`,
+        {
+          params: {
+            limit: 10,
+            offset: (otherPage) * 10,
+            user_type: selectedRole,
+            searchText: searchText,
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+
+            votedFor: votedFor, // send this, so to know which one to AVOID 
+            votedForGP: votedForGP, // so he can avoid this one just..
+
+            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
+          },
+        }
+      );
+
+      if (isThereNextPage.data.length == 0) {
         setHasMoreOthers(false);
       } else {
         setHasMoreOthers(true);
@@ -282,6 +326,11 @@ const Elections = () => {
 
   
   const handleNextPage = () => {
+
+
+
+
+
 
 
     if (showingTop50) {

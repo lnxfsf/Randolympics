@@ -318,11 +318,11 @@ const Register = () => {
     if (!e.target.weight) {
       var weight = null;
     } else {
-      // var weight = e.target.weight.value;
+      //var weight = e.target.weight.value;
 
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
-        setWeight(weight * 0.45359237);
+        var weight = (e.target.weight * 0.45359237);
 
         //console.log(weight);
       }
