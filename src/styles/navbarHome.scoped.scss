@@ -11,56 +11,110 @@
     
   }
   
-  .navbar .navbar-logo {
-    
-    display: block;
-    
-    margin-left: 5%; 
-    margin-top: 2%;
 
-    
+  // logo expanded 
+  .navbar .navbar-logo {
+    display: block;
+    margin-left: 17%; 
+    margin-top: 2%;
     width: 200px; /* Adjust the logo size as needed */
     height: auto;
 
     transition: opacity 0.3s ease;
   }
   
+  // links expanded
   .navbar .navbar-content {
+
     display: flex;
-    justify-content: space-around;
+   /*  justify-content: space-around;
+
+    align-items: center; */
+
+    justify-content: center; 
     align-items: center;
+
+
     padding: 1rem;
     transition: all 0.3s ease;
+
+
+    
+
   }
   
+
+
+  // ovo je sami navbar, kada je scrolled down
   .navbar.scrolled {
     padding-top: 0; 
-
-    // ovo je za sami navbar da li veca ili ne..
-
     height: 50px;
   }
   
+  
+  // Hide the logo when scrolled 
   .navbar.scrolled .navbar-logo {
-    display: none; /* Hide the logo when scrolled */
+    display: none; 
 
   }
   
-  .navbar.scrolled .navbar-content {
-   /*  padding: 0.5rem 3rem; */
 
-    padding:  1rem 0.5rem;
+  // content, kada je scrolled, down, onda ima taj svoj dizajn..
+  .navbar.scrolled .navbar-content {
+   
+
+    display: flex;
+     justify-content: space-around;
+    align-items: center; 
+
+    
+    
+    padding: 1rem;
+    transition: all 0.3s ease;
+
+
+  /*   padding:  1rem 0.5rem; */
+
     background: rgba(255, 255, 255, 1);
   }
   
+  // ovo su linkovi unutar navbar 
   .navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+
+    background-color: #AF2626;
+    border: none;
+    border-radius: 10px;
+
+    padding: 0.5rem 1rem; 
+    margin: 0 0.5rem; 
+
+
+  }
+
+  .navbar.scrolled a {
     text-decoration: none;
     color: black;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+
+    background-color: white;
+
+   
+
+
   }
   
+
   .navbar a:hover {
+    color: rgb(211, 211, 211);
+  }
+
+  .navbar.scrolled a:hover {
     color: grey;
   }
   
