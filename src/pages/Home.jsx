@@ -23,6 +23,10 @@ import { useNavigate } from "react-router-dom";
 import { NavbarHome } from "../components/NavbarHome";
 
 
+import Countdown from 'react-countdown';
+
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -44,9 +48,49 @@ const ExpandMore = styled((props) => {
 // ? expand more
 
 
+
+// for countdown
+const calculateTimeLeft = (targetDate) => {
+  const now = new Date();
+  const difference = targetDate - now;
+  let timeLeft = {};
+
+  if (difference > 0) {
+      timeLeft = {
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+      };
+  }
+
+  return timeLeft;
+};
+
 // okej, ovo radi (ovo je sigurniji način da fetch-ujes, nego axios API... )
 
 const Home = () => {
+
+
+  const targetDate = new Date('2028-06-25T00:00:00');
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
+  
+
+  // Renderer callback with condition
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      
+      
+    } else {
+      // Render a countdown
+      return <span>{hours}:{minutes}:{seconds}</span>;
+
+
+      
+    }
+  };
+
+
 
 
   // ? expand more
@@ -78,6 +122,16 @@ const Home = () => {
   useEffect(() => {
     fetchNewsGames();
   }, []);
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft(targetDate));
+    }, 1000);
+
+    return () => clearInterval(timer);
+}, []);
+
 
   const fetchNewsGames = async () => {
     try {
@@ -117,18 +171,57 @@ this is from official:
     <>
       <NavbarHome />
 
-   
-   
-
-
-
-    <img src="landing_page/first.png" />
 
 
 
 
 
 
+      <div className="firstHhomeImage flex justify-center items-center">
+
+
+
+
+        <div className="countdown-timer  flex items-center justify-center ">
+
+          <p className="basis-1/2 p-8 ">Stockholm, Sweden <br /> June 25th - July 2nd 2028</p>
+
+
+          <div className="flex space-x-8">
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.days ?? 0}</p>
+              <p>Days</p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.hours ?? 0}</p>
+              <p>Hours</p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.minutes ?? 0}</p>
+              <p>Minutes</p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.seconds ?? 0}</p>
+              <p>Sec</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <Countdown
+          date={Date.now() + 5000}
+          renderer={renderer}
+        />
+
+      </div>
+
+
+
+      <div className="h-96"></div>
 
 
 
@@ -141,7 +234,11 @@ this is from official:
 
 
 
-    
+
+
+
+
+
       <Footer />
     </>
   );
