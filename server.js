@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const captchaRoutes = require("./routes/captchaRoutes");
 const imageUpload = require("./routes/imageUpload");
 const blogRoutes = require("./routes/blogRoutes");
+
 const listsData = require("./routes/listsData");
 const votingRoutes = require("./routes/votingRoutes");
 
@@ -41,6 +42,9 @@ app.use("/user", userRoutes)
 
 // this is for blog and news, that users add to..
 app.use("/blog", blogRoutes);
+
+
+
 
 db.sequelize.sync().then(() => {
   app.listen(port, () => {

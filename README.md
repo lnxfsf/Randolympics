@@ -117,6 +117,7 @@ npm i multer
 npm i sequelize
 npm i @sequelize/mysql  (so mysql with sequelize could work)
 
+npm i body-parser jsdom
 
 
 
