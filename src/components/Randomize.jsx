@@ -666,9 +666,6 @@ const Randomize = () => {
                 type="submit"
 
 
-
-
-
               >
                 <span className="popins-font">Randomize again</span>
               </Button>

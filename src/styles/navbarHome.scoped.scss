@@ -152,11 +152,6 @@
 
 
 
-.overlay_firstHhomeImage {
-
-    background: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%);
-    
-}
 
 
 .countdown-timer {
@@ -164,13 +159,18 @@
     color: white;
     background-color: rgba(38, 25, 25, 0.8);
     
-    width: 650px;
+    /* width: 650px; */
+    width: 600px;
     height: 100px;
 
     border-radius: 20px;
 
     margin-left: 20%;
-    margin-top: -13%;
+
+    margin-top: 20%
+ /*    margin-top: 15%; */
+
+    
 
 
 

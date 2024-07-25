@@ -83,4 +83,5 @@ npm install react-select-country-list
 
  npm install react-zoom-pan-pinch
 
- npm install react-scroll
+
+

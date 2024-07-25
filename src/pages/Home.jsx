@@ -23,7 +23,8 @@ import { useNavigate } from "react-router-dom";
 import { NavbarHome } from "../components/NavbarHome";
 
 
-import Countdown from 'react-countdown';
+
+
 
 
 
@@ -56,12 +57,12 @@ const calculateTimeLeft = (targetDate) => {
   let timeLeft = {};
 
   if (difference > 0) {
-      timeLeft = {
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-      };
+    timeLeft = {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    };
   }
 
   return timeLeft;
@@ -73,22 +74,9 @@ const Home = () => {
 
 
   const targetDate = new Date('2028-06-25T00:00:00');
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
-  
-
-  // Renderer callback with condition
-  const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-      
-      
-    } else {
-      // Render a countdown
-      return <span>{hours}:{minutes}:{seconds}</span>;
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
 
 
-      
-    }
-  };
 
 
 
@@ -126,11 +114,11 @@ const Home = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-        setTimeLeft(calculateTimeLeft(targetDate));
+      setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
     return () => clearInterval(timer);
-}, []);
+  }, []);
 
 
   const fetchNewsGames = async () => {
@@ -177,19 +165,19 @@ this is from official:
 
 
 
-      <div className="firstHhomeImage flex justify-center items-center">
+      <div className="firstHhomeImage flex justify-center items-center flex-col">
 
 
 
 
         <div className="countdown-timer  flex items-center justify-center ">
 
-          <p className="basis-1/2 p-8 ">Stockholm, Sweden <br /> June 25th - July 2nd 2028</p>
+          <p className="basis-1/2 p-8  ">Stockholm, Sweden <br /> June 25th - July 2nd 2028</p>
 
 
-          <div className="flex space-x-8">
+          <div className="flex space-x-8 p-4">
             <div className="flex flex-col items-center">
-              <p className="text-4xl">{timeLeft.days ?? 0}</p>
+              <p className="text-4xl"><b>{timeLeft.days ?? 0}</b></p>
               <p>Days</p>
             </div>
 
@@ -212,10 +200,43 @@ this is from official:
 
 
 
-        <Countdown
-          date={Date.now() + 5000}
-          renderer={renderer}
-        />
+        <div className="flex items-center justify-center pt-64 gap-8">
+          <p className="text-4xl" style={{ color: "white" }}>Stockholm 2028 Games</p>
+
+          <Button
+
+
+            onClick={() => { navigate("/login") }}
+            className="w-44 "
+            style={{ marginTop: "0px" }}
+            sx={{
+              height: "45px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 3,
+              border: `1px solid #AF2626`,
+              "&:hover": {
+                background: "rgb(196, 43, 43)",
+                color: "white",
+                border: `1px solid rgb(196, 43, 43)`,
+              },
+            }}
+            id="randomize-btn"
+            type="submit"
+
+
+          >
+            <span className="popins-font" style={{ textTransform: "none" }} >Apply for now</span>
+          </Button>
+
+
+        </div>
+
+        <div className="flex items-center justify-center pt-8 pl-24  pr-24  ">
+        <p style={{ color: "white" }}>The Randomolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.</p>
+
+        </div>
+
 
       </div>
 
