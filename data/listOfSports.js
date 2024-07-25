@@ -1845,7 +1845,7 @@ const listOfSports = [
 
         icon: "boxing",
 
-        gender: "M"
+        gender: "M",
 
 
 weightCategory: "light",
@@ -1875,7 +1875,7 @@ weightCategory: "light",
 
         icon: "boxing",
 
-        gender: "M"
+        gender: "M",
 
 weightCategory: "medium",
 

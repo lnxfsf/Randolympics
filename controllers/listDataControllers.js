@@ -925,8 +925,12 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+
+
   console.log("gender je")
-  console.log(randomizeFormData)
+  
+
+  console.log(randomizeFormData[0].gender)
 
 /* 
   const randomizeFormData = [
@@ -1086,19 +1090,13 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-  // to ce uvek biti original data iz kog izvlačis kopije (za svaki time slot zasebno.. )
-  /*  console.log(" ovo......... ")
-   console.log(randomizeFormData) */
-
-  // treba da se uvećava samo taj name{num}, da bude broj samo.. // !  ali, to u frontend, treba biti ja msm vec...  
 
 
 
 
 
 
-
-  const getRandomItemSports = (array, ReceivingfirstDayStartGameTimeSlot, ReceivingdayOfStart, dateToAvoid = "") => {
+  const getRandomItemSports = (array, ReceivingfirstDayStartGameTimeSlot, ReceivingdayOfStart, dateToAvoid = "", weightCategory = randomizeFormData[0].weightCategory, gender = randomizeFormData[0].gender) => {
 
 
 
@@ -1132,16 +1130,7 @@ const landingPageRandomize = async (req, res) => {
       // okej, reci mu, ali treba da napravis za sport kao jos..
 
 
-      // preskoci ovaj date onda.. ovo je samo za ovaj ispod, ono.. 
-      if (dateToAvoid === "") {
-        var BOOLEANdateToAvoid = true;  // on ce pustati, jer nije sporni 1, 2 july.. (nece mešati sa saturday i sunday (jer te dates, imas direktno u database, pa izbegnes njih kao..))
-      } else if (TEMPreturningSportSelected.dateOfStart !== dateToAvoid) {
-
-        // znaci nije empty..
-
-        // treba da ga koristis.. (i koristis ovu drugu on rag, kao, da bi pronasao koji valja..)
-        var BOOLEANdateToAvoid = false;
-      }
+    
 
       if (dateToAvoid) {
         // ovo je za taj july 1, july 2, da nema duplikata tako.. 
