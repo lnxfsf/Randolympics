@@ -175,7 +175,12 @@ const Randomize = () => {
 
     // so, now we can use it.. so we send this one user only..
     if (selectedWeightCategory && selectedGender){
-      setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
+     // TODO, this one is for gender, so it uses F or M (we used below one, just so backend can work for M for now..)
+     // setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
+    
+
+      setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: "M" }])
+    
     }
 
 
