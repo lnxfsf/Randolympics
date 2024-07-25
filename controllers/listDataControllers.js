@@ -928,17 +928,17 @@ const landingPageRandomize = async (req, res) => {
 
 
   console.log("gender je")
-  
+
 
   console.log(randomizeFormData[0].gender)
 
-/* 
-  const randomizeFormData = [
-    { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
+  /* 
+    const randomizeFormData = [
+      { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
+    
   
-
-
-  ]; */
+  
+    ]; */
 
 
 
@@ -983,7 +983,7 @@ const landingPageRandomize = async (req, res) => {
       icon: "olympic_flame",
     };
   }
-  
+
 
 
   const createClosingGamesEnd = (athlete) => {
@@ -992,38 +992,38 @@ const landingPageRandomize = async (req, res) => {
       ...athlete,
 
 
-                  sportName: "Closing ceremony",
-                  howMuchAthletesMakeATeam: 1,
-                  locations: 1,
+      sportName: "Closing ceremony",
+      howMuchAthletesMakeATeam: 1,
+      locations: 1,
 
 
 
-                  firstDayHowMuchTimeSlotsExpandBy: 1,
-                  secondDayHowMuchTimeSlotsExpandBy: 0,
-                  thirdDayHowMuchTimeSlotsExpandBy: 0,
+      firstDayHowMuchTimeSlotsExpandBy: 1,
+      secondDayHowMuchTimeSlotsExpandBy: 0,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
 
 
 
 
 
-                  // ----------
+      // ----------
 
 
-                  firstDayStartGameTimeSlot: "12_15",
-                  firstDayEndGameTimeSlot: "12_15",
+      firstDayStartGameTimeSlot: "12_15",
+      firstDayEndGameTimeSlot: "12_15",
 
-                  secondDayStartGameTimeSlot: "",
-                  secondDayEndGameTimeSlot: "",
+      secondDayStartGameTimeSlot: "",
+      secondDayEndGameTimeSlot: "",
 
 
-                  thirdDayStartGameTimeSlot: "",
-                  thirdDayEndGameTimeSlot: "",
+      thirdDayStartGameTimeSlot: "",
+      thirdDayEndGameTimeSlot: "",
 
-                  dayOfStart: "Sunday",
+      dayOfStart: "Sunday",
 
-                  dateOfStart: "July 2nd",
+      dateOfStart: "July 2nd",
 
-                  icon: "olympic_flame",
+      icon: "olympic_flame",
     };
   }
 
@@ -1094,9 +1094,9 @@ const landingPageRandomize = async (req, res) => {
 
 
 
+    
 
-
-  const getRandomItemSports = (array, ReceivingfirstDayStartGameTimeSlot, ReceivingdayOfStart, dateToAvoid = "", weightCategory = randomizeFormData[0].weightCategory, gender = randomizeFormData[0].gender) => {
+  const getRandomItemSports = (array, ReceivingfirstDayStartGameTimeSlot, ReceivingdayOfStart, dateToAvoid = "", weightCategory = randomizeFormData[0].weightCategory , gender = randomizeFormData[0].gender) => {
 
 
 
@@ -1130,34 +1130,112 @@ const landingPageRandomize = async (req, res) => {
       // okej, reci mu, ali treba da napravis za sport kao jos..
 
 
-    
+
 
       if (dateToAvoid) {
         // ovo je za taj july 1, july 2, da nema duplikata tako.. 
 
-        // ovako smo sigurni da neće slip up..
-        if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
-          TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
-          TEMPreturningSportSelected.dateOfStart !== dateToAvoid
+
+        if (typeof (TEMPreturningSportSelected.weightCategory) !== "undefined") {
+
+            // ovako smo sigurni da neće slip up..
+            if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
+              TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
+              TEMPreturningSportSelected.dateOfStart !== dateToAvoid &&
+              TEMPreturningSportSelected.gender === gender  &&
+              TEMPreturningSportSelected.weightCategory === weightCategory
+
+  
+  
+  
+            ) {
+  
+              returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+              found = 1;
+            }
+
+        } else {
+
+          // ovako smo sigurni da neće slip up..
+          if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
+            TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
+            TEMPreturningSportSelected.dateOfStart !== dateToAvoid &&
+            TEMPreturningSportSelected.gender === gender
 
 
 
-        ) {
+          ) {
 
-          returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
-          found = 1;
+            returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+            found = 1;
+          }
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       } else {
 
-        // a ovo su svi ostali, normalni dani...
-        if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
-          TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart
+        // a ovo su svi ostali, normalni dani...  
 
-        ) {
 
-          returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
-          found = 1;
+
+
+
+
+        // i weightCategory isto..
+        if (typeof (TEMPreturningSportSelected.weightCategory) !== "undefined") {
+
+          // ! gender radi
+          // a ovo su svi ostali, normalni dani...
+          if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
+            TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
+            TEMPreturningSportSelected.gender === gender &&
+            TEMPreturningSportSelected.weightCategory === weightCategory
+
+          ) {
+
+            returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+            found = 1;
+          }
+
+        } else {
+
+          // ! gender radi
+          // a ovo su svi ostali, normalni dani...
+          if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
+            TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
+            TEMPreturningSportSelected.gender === gender
+
+          ) {
+
+            returningSportSelected = listOfSports[randomIndex];  // to je taj selektovan i pronadjen (inače, ide na sledeci random indeks..)
+            found = 1;
+          }
         }
+
+
+
+
+
+
+
+
+
+
+
+
       }
       /* else if (TEMPreturningSportSelected.firstDayStartGameTimeSlot === ReceivingfirstDayStartGameTimeSlot &&
         TEMPreturningSportSelected.dayOfStart === ReceivingdayOfStart &&
@@ -1293,21 +1371,21 @@ const landingPageRandomize = async (req, res) => {
 
 
           // pre 2 dana, nedelja..
-        /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
-            || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
+          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
+              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
+  
+  
+  
+            ) {
+  
+              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+              return false;
+            } else {
+              return true
+            }; */
 
 
 
-          ) {
-
-            // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-            return false;
-          } else {
-            return true
-          }; */
-
-
-          
           const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
             (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday") ||
             (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday")
@@ -1955,22 +2033,22 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
+            /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
+                || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
+  
+  
+  
+              ) {
+  
+                // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+                return false;
+              } else {
+                return true
+              }; */
 
 
 
-            ) {
 
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            }; */
-
-
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday")
@@ -2086,13 +2164,13 @@ const landingPageRandomize = async (req, res) => {
                 // ! I JOS JEDAN, SAMO ZA START OF GAMES (OVDE CES DA URADIS, SAMO, TAJ JEDAN PRVI DA PRIKAZES !!! )
                 // ! i time, push-ujes, jos taj jedan... (jer to je ovaj taj user ono... )
 
-              
+
 
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
 
-                
+
 
                 timeSlot_3_6 = timeSlot_3_6 + 1; // so, every athlete (as well, it really means in all sports it counts.. no matter what sport it is, but actually, this one, is choosing randomly sport...)
 
@@ -2197,10 +2275,10 @@ const landingPageRandomize = async (req, res) => {
 
                 };
 
-              
 
 
-                  
+
+
 
 
 
@@ -2284,7 +2362,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-               
+
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -2358,7 +2436,7 @@ const landingPageRandomize = async (req, res) => {
 
                 };
 
-                
+
 
 
 
@@ -2436,7 +2514,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-               
+
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -2511,7 +2589,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-              
+
 
 
 
@@ -2587,7 +2665,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                
+
 
 
                 saturdayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -3434,23 +3512,23 @@ const landingPageRandomize = async (req, res) => {
             // ! da ,ubacuj ti oboje, okej. ta 2 objekta zajedno. DA, TO TAKO RADI ODLICNO ! jer on osim 3-eg, sto ima, on, isto i proveri da je tog i tog dana počeo ...
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
+            /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday")
+               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday"))
+ 
+ 
+ 
+             ) {
+ 
+               // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+               return false;
+             } else {
+               return true
+             }; */
 
 
 
-            ) {
-
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            }; */
 
 
-
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday")
@@ -4120,22 +4198,22 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday"))
+            /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday")
+                || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Sunday"))
+  
+  
+  
+              ) {
+  
+                // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+                return false;
+              } else {
+                return true
+              }; */
 
 
 
-            ) {
 
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            }; */
-
-
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Monday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Sunday")
@@ -4791,21 +4869,21 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday"))
+            /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday")
+               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Monday"))
+ 
+ 
+ 
+             ) {
+ 
+               // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+               return false;
+             } else {
+               return true
+             };
+  */
 
 
-
-            ) {
-
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            };
- */
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Tuesday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Monday")
@@ -5459,22 +5537,22 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-           /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday"))
+            /*  if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday")
+               || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Tuesday"))
+ 
+ 
+ 
+             ) {
+ 
+               // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+               return false;
+             } else {
+               return true
+             }; */
 
 
 
-            ) {
 
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            }; */
-
-
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Wednesday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Tuesday")
@@ -6133,21 +6211,21 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday"))
+            /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday")
+                || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Wednesday"))
+  
+  
+  
+              ) {
+  
+                // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+                return false;
+              } else {
+                return true
+              };
+   */
 
 
-
-            ) {
-
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            };
- */
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Wednesday")
@@ -6787,21 +6865,21 @@ const landingPageRandomize = async (req, res) => {
 
             // ALO, ON PROLAZI KROZ SVE SLOBODNE (a to su SVI , elementi ! i samo uporedjuje uff)
             // pre 2 dana, nedelja..
-          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
+            /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday")
+                || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Thursday"))
+  
+  
+  
+              ) {
+  
+                // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
+                return false;
+              } else {
+                return true
+              }; */
 
 
 
-            ) {
-
-              // to je za 2 i 3 dana isto.. u suprotnom ide true (da ubaci ga.. ). znaci striktno gleda po ovome..
-              return false;
-            } else {
-              return true
-            }; */
-
-
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Thursday")
@@ -7482,18 +7560,18 @@ const landingPageRandomize = async (req, res) => {
             }
 
             // dobro je, nece se ponavljati, samo on da izbegne ove druge, ako ima neke nove kao znas... da ako su zauzeti vec (samo u frontend, isto posla jos, da to napravis... da prikaze samo.. )
-          /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")
-              || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday"))
-            ) {
+            /*   if ((correspondingOccupiedAthlete.secondDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Saturday")
+                || ((correspondingOccupiedAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0) && (correspondingOccupiedAthlete.dayOfStart === "Friday"))
+              ) {
+  
+                return false;
+              } else {
+                return true
+              }; */
 
-              return false;
-            } else {
-              return true
-            }; */
 
 
 
-            
             const shouldExclude = correspondingOccupiedAthlete.some(occAthlete =>
               (occAthlete.secondDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Saturday") ||
               (occAthlete.thirdDayHowMuchTimeSlotsExpandBy > 0 && occAthlete.dayOfStart === "Friday")
@@ -7593,7 +7671,7 @@ const landingPageRandomize = async (req, res) => {
 
           // on ovde treba da nadje, sport, koji ce i dalje odgovarati ovom timeframe-u ! a da ga ne overflow-uje isto...
           do {
-            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday" , "June 25th");
+            selectedSport = getRandomItemSports(listOfSports, "3_6", "Sunday", "June 25th");
             if (selectedSport) {
               var { howMuchAthletesMakeATeam } = selectedSport;
             } else {
@@ -7783,7 +7861,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-               
+
 
                 // TODO, kad kaze ti da li je starting time always fixed, onda znaces, da li i za sledeci dan, ide u isto vreme, (startingTimeSlot). il ako nije available (vec ima popunjeno), da proba na sledecu (samo na tu sledecu, napravi isto tako, da proveri ako nema koji bi mogao da se stavi kao...)
 
@@ -8079,7 +8157,7 @@ const landingPageRandomize = async (req, res) => {
 
 
 
-               
+
 
 
                 JulySundayOccupiedSlotsAthletes.push(modifiedAthlete);
@@ -8163,7 +8241,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-                
+
 
 
 
@@ -8246,7 +8324,7 @@ const landingPageRandomize = async (req, res) => {
                 };
 
 
-              
+
 
 
 
@@ -8430,11 +8508,11 @@ const shareTableLandingPage = async (req, res) => {
 
 
 
- 
 
 
 
-  
+
+
   var email = "ivanlerinc1510@gmail.com";
 
 
@@ -8444,7 +8522,7 @@ const shareTableLandingPage = async (req, res) => {
 
 
     sendEmail(
-      
+
       user.email,
       "See my event schedule",
       `Hey I thought you should see a demo from <a href="www.randolympics.com">Randolympics</a> website, how it will create random events, for sports we can try to compete in. 
@@ -8466,7 +8544,7 @@ const shareTableLandingPage = async (req, res) => {
 
 
   })
- 
+
 
 
 
