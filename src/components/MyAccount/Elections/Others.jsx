@@ -28,7 +28,7 @@ const Others = ({
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
 
-  if (selectedRole == "AH"){
+  if (selectedRole == "AH") {
     var rank = user.ranking;
   } else if (selectedRole == "GP") {
     var rank = user.rankingGP;
@@ -50,8 +50,8 @@ const Others = ({
     var rank = user.rankingRS;
   }
 
-// you can't have it like 0
-  if (rank == 0){
+  // you can't have it like 0
+  if (rank == 0) {
     rank = 1;
   }
 
@@ -59,19 +59,34 @@ const Others = ({
 
   const name = user.name;
 
-  
+
 
   const nationality = user.nationality;
-  const email = user.email;
-  const phone = user.phone;
+
+
+  if (user.email_private == 1) {
+    var email = "private";
+  } else {
+    var email = user.email;
+  }
+
+
+  // private je 1 
+  // public je 0 
+  if (user.phone_private == 1) {
+    var phone = "private";
+  } else {
+    var phone = user.phone;
+  }
+
   const gender = user.gender;
 
-  if(user_type === "AH" || user_type === "RS"){
+  if (user_type === "AH" || user_type === "RS") {
     var votes = user.votes;
-  } else if ( selectedRole === "GP" ){
+  } else if (selectedRole === "GP") {
     var votes = user.votesGP;
   }
-  
+
 
 
 
@@ -82,23 +97,28 @@ const Others = ({
       return '-';
     }
 
-  
+
     const today = moment();
-    console.log("danas"+today)
+    console.log("danas" + today)
 
     const birthDate = moment(birthdate);
-    console.log("rodjendan"+birthDate)
+    console.log("rodjendan" + birthDate)
 
     const years = today.diff(birthDate, 'years');
-    console.log("razlika god"+years)
+    console.log("razlika god" + years)
 
-  
+
     return years;
   }
-  
 
-  const age = calculateAge(user.birthdate);  
-  console.log("rodjendan"+user.birthdate)
+
+  if (user.birthdate_private == 1) {
+    var age = "private";
+  } else {
+    var age = calculateAge(user.birthdate);
+  }
+
+
 
 
   //const userNPPercentage = user.userNPPercentage;
@@ -145,7 +165,7 @@ const Others = ({
 
   const increaseRank = () => {
 
-    if(currentRank !== lastRank){
+    if (currentRank !== lastRank) {
       setCurrentRank(currentRank + 1);
     }
   };
@@ -193,7 +213,7 @@ const Others = ({
 
   return (
     <>
-     
+
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
       <tr key={index}>
         {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
@@ -201,7 +221,7 @@ const Others = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {(user_type === "AH" || user_type === "RS" ||  selectedRole === "GP") && (
+        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
           <>
             <td style={{ textAlign: "center" }}>
               {/*  <Checkbox
@@ -220,7 +240,7 @@ const Others = ({
           </>
         )}
 
-        {(user_type === "NP" && selectedRole !== "GP" ) || user_type === "GP" ? (
+        {(user_type === "NP" && selectedRole !== "GP") || user_type === "GP" ? (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
 
@@ -241,27 +261,27 @@ const Others = ({
                 </p> */}
                 {(currentUserPassportStatus === "validated") && (
 
-<>
-                <Popup
-                  ref={popupRef}
-                  trigger={
-                    <p className="cursor-pointer select-none text-gray_first">
-                      Update Rank{" "}
-                      <img
-                        src="myaccount/pencil.svg"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          display: "inline-block",
-                          marginBottom: "5px",
-                        }}
-                      />
-                    </p>
-                  }
-                  position="right center"
-                  contentStyle={{ width: "auto" }}
-                >
-                {/*   <div className="m-4">
+                  <>
+                    <Popup
+                      ref={popupRef}
+                      trigger={
+                        <p className="cursor-pointer select-none text-gray_first">
+                          Update Rank{" "}
+                          <img
+                            src="myaccount/pencil.svg"
+                            style={{
+                              width: "10px",
+                              height: "10px",
+                              display: "inline-block",
+                              marginBottom: "5px",
+                            }}
+                          />
+                        </p>
+                      }
+                      position="right center"
+                      contentStyle={{ width: "auto" }}
+                    >
+                      {/*   <div className="m-4">
                     <div className="flex gap-2 mb-2">
                       <p>Current rank</p>
                       <p>
@@ -360,13 +380,13 @@ const Others = ({
                   </div> */}
 
 
-                  <Others50Popup increaseRank={increaseRank} currentRank={currentRank} decreaseRank={decreaseRank} cancel={cancel} saveChanges={saveChanges}/>
-                  
+                      <Others50Popup increaseRank={increaseRank} currentRank={currentRank} decreaseRank={decreaseRank} cancel={cancel} saveChanges={saveChanges} />
 
-                </Popup>
-                </>
-             
-             )}
+
+                    </Popup>
+                  </>
+
+                )}
 
               </div>
             </td>
@@ -375,10 +395,10 @@ const Others = ({
         ) : (
           <>
             {/* <div className="flex justify-between items-center gap-2"> */}
-            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP" ) ? (
+            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") ? (
               <td className="flex gap-2 justify-start">
                 <p>
-                  <b>{votes}</b> 
+                  <b>{votes}</b>
                 </p>
               </td>
             ) : (
@@ -396,7 +416,7 @@ const Others = ({
         <td>{email}</td>
         <td>{phone}</td>
 
-        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP")  && (
+        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
           <td>
             <p>
               {status} <br />
@@ -407,11 +427,24 @@ const Others = ({
       </tr>
 
       <tr>
-          <td colSpan="6">
+
+
+
+
+        {selectedRole == "NP" && (
+          <td colSpan="8">
             <hr />
           </td>
-        </tr>
-     
+        )
+        }
+
+        <td colSpan="6">
+          <hr />
+        </td>
+
+
+      </tr>
+
     </>
   );
 };

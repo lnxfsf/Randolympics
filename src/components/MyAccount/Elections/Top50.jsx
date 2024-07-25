@@ -73,9 +73,31 @@ const Top50 = ({
   
 
   const name = user.name;
-  const age = calculateAge(user.birthdate); 
-  const email = user.email;
-  const phone = user.phone;
+
+
+  if(user.birthdate_private == 1){
+    var age = "private";
+  } else {
+    var age = calculateAge(user.birthdate);
+  }
+
+  
+
+  if(user.email_private == 1){
+    var email = "private";
+  } else {
+    var email = user.email;
+  }
+
+
+   // private je 1 
+  // public je 0 
+  if(user.phone_private == 1){
+    var phone = "private";
+  } else {
+    var phone = user.phone;
+  }
+
   const gender = user.gender;
   const nationality = user.nationality;
 

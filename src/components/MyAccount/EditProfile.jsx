@@ -813,8 +813,8 @@ const EditProfile = () => {
                       ".MuiOutlinedInput-notchedOutline": { border: 0 },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
                   </Select>
                 </FormControl>
                 <TextField
@@ -1032,8 +1032,8 @@ const EditProfile = () => {
                       ".MuiOutlinedInput-notchedOutline": { border: 0 },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
                   </Select>
                 </FormControl>
                 <TextField
@@ -1088,8 +1088,8 @@ const EditProfile = () => {
                           ".MuiOutlinedInput-notchedOutline": { border: 0 },
                         }}
                       >
-                        <MenuItem value={true}>Private</MenuItem>
-                        <MenuItem value={false}>Public</MenuItem>
+                        <MenuItem value={1}>Private</MenuItem>
+                        <MenuItem value={0}>Public</MenuItem>
                       </Select>
                     </FormControl>
                     <TextField
@@ -1153,6 +1153,7 @@ const EditProfile = () => {
               </div>
               <div className="flex justify-end items-end pb-2">
                 <ReactFlagsSelect
+                disabled
                   // to fill it with the one, which user's is currently selected...
                   selected={
                     nationality_selected ||
@@ -1191,8 +1192,8 @@ const EditProfile = () => {
                         ".MuiOutlinedInput-notchedOutline": { border: 0 },
                       }}
                     >
-                      <MenuItem value={true}>Private</MenuItem>
-                      <MenuItem value={false}>Public</MenuItem>
+                      <MenuItem value={1}>Private</MenuItem>
+                      <MenuItem value={0}>Public</MenuItem>
                     </Select>
                   </FormControl>
 

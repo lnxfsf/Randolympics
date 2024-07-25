@@ -75,9 +75,29 @@ let BACKEND_SERVER_BASE_URL =
 
 
 const Register = () => {
+
+
+
+  // ? this is for phone
+  const [isPhoneError, setIsPhoneError] = useState(false);
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const isPhoneErrorFocus = useRef(null);
+
+
+   // ? this is for password  Password
+   const [isPasswordError, setIsPasswordError] = useState(false);
+   const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
+   const isPasswordErrorFocus = useRef(null);
+ 
+
+
+
+
+
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
   const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const isEmailErrorFocus = useRef(null);
 
   const [resultText, setResultText] = useState("");
   const [resultTextColor, setResultTextColor] = useState("black");
@@ -106,34 +126,34 @@ const Register = () => {
 
   const [uploadedFile, setUploadedFile] = useState(null);
 
-  
+
 
   const server = {
-        /* url: 'http://localhost:5000/profile_photo/upload', */
+    /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
-        url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
-        method: 'POST',
-        headers: {},
-        withCredentials: false,
+      url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
+      method: 'POST',
+      headers: {},
+      withCredentials: false,
 
-        onload: (response) => {
+      onload: (response) => {
 
-            // Parse the JSON response to get the filename
+        // Parse the JSON response to get the filename
 
-            const jsonResponse = JSON.parse(response);
-            const filename = jsonResponse;
+        const jsonResponse = JSON.parse(response);
+        const filename = jsonResponse;
 
-            console.log("Uploaded filename:", filename);
-            setUploadedFile(filename);
-            // return filename; 
-        },
-        onerror: (response) => {
-            console.error('Error uploading file:', response);
-            return response;
-        },
+        console.log("Uploaded filename:", filename);
+        setUploadedFile(filename);
+        // return filename; 
+      },
+      onerror: (response) => {
+        console.error('Error uploading file:', response);
+        return response;
+      },
     },
-};
+  };
 
 
 
@@ -172,7 +192,7 @@ const Register = () => {
 
 
   const recaptcha = useRef();
- 
+
 
   // ? captcha
 
@@ -215,6 +235,10 @@ const Register = () => {
 
   // ? HERE, for weight..
 
+  
+
+
+
   const weightOptions = ["Kg", "Lb"]; // supported cryptos
 
   const [weightMenuAnchorEl, setWeightMenuAnchorEl] = useState(null);
@@ -233,6 +257,8 @@ const Register = () => {
     setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
   };
 
+
+
   // ? HERE, for weight..
 
   useEffect(() => {
@@ -243,7 +269,25 @@ const Register = () => {
         $recaptcha.setAttribute("required", "required");
       }
     });
-  }, []);
+
+
+
+    if (isEmailError && isEmailErrorFocus.current) {
+      isEmailErrorFocus.current.focus();
+    }
+
+    
+    if (isPhoneError && isPhoneErrorFocus.current) {
+      isPhoneErrorFocus.current.focus();
+    }
+
+    
+    if (isPasswordError && isPasswordErrorFocus.current) {
+      isPasswordErrorFocus.current.focus();
+    }
+
+
+  }, [isEmailError, isPhoneError, isPasswordError ]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -274,12 +318,13 @@ const Register = () => {
     if (!e.target.weight) {
       var weight = null;
     } else {
-      var weight = e.target.weight.value;
+      //var weight = e.target.weight.value;
 
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
-        weight = weight * 0.45359237;
-        console.log(weight);
+        var weight = (e.target.weight * 0.45359237);
+
+        //console.log(weight);
       }
     }
 
@@ -293,76 +338,151 @@ const Register = () => {
       setIsEmailErrorHelper("Enter a valid email address");
     }
 
+
+    const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
+
+    if (!phoneRegex.test(phone)) {
+      setIsPhoneError(true);
+      setIsPhoneErrorHelper("Enter valid phone number");
+ 
+
+    }else {
+      setIsPhoneError(false);
+    }
+  
+  
+  
+    const passwordRegex = /^.{4,}$/;
+  
+    if (!passwordRegex.test(password)) {
+      setIsPasswordError(true);
+      setIsPasswordErrorHelper("Password should be longer than 4 characters");
+ 
+
+    } else {
+      setIsPasswordError(false);
+    }
+  
+
+
+
+
+
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
       setResultText("Please verify the reCAPTCHA!");
     } else {
-      const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
-        method: "POST",
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
 
-      const data = await res.json();
 
-      // response in json we have "success" field, that google send us, if it's verified or not
-      if (data.success) {
-        // make form submission
+      console.log("isEmailEror vrednost: "+isEmailError)
 
-        try {
-          var response = await axios.post(
-            `${BACKEND_SERVER_BASE_URL}/auth/register`,
-            {
-              user_type: selectedRole,
-              email,
-              password,
-              email_private,
-              phone_private,
-              weight_private,
-              name,
-              phone,
-              nationality: nationality_selected,
-              weight,
-              cryptoaddress: cryptoaddr,
-              picture: uploadedFile,
+      // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
+      if (nationality_selected && isEmailError === false &&  isPhoneError === false && isPasswordError === false ) {
 
-              cryptoaddress_type: selectedCrypto,
-              bio,
-              gender: selectedGender,
-            }
-          );
-        } catch (error) {
-          console.log(error);
 
-          if (axios.isAxiosError(error)) {
-            if (error.response && error.response.status === 409) {
-              //alert("");
+        const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
+          method: "POST",
+          body: JSON.stringify({ captchaValue }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
 
-              setResultText("User already exists ! ");
-              setResultTextColor("red");
-            } else {
-              setResultText(
-                "An error occurred: " +
+        const data = await res.json();
+
+        // response in json we have "success" field, that google send us, if it's verified or not
+        if (data.success) {
+          // make form submission
+
+
+
+
+
+          // ! e ovde ne moze da pusta, ako ova varijable nije na true (tj. string bolje da je.. da bi mogao da ga menjas, i prikazujes errors u polja gde appropriate i takodje, "focus" na to polje !!!)
+
+
+          try {
+            var response = await axios.post(
+              `${BACKEND_SERVER_BASE_URL}/auth/register`,
+              {
+                user_type: selectedRole,
+                email,
+                password,
+                email_private,
+                phone_private,
+                weight_private,
+                name,
+                phone,
+                nationality: nationality_selected,
+                weight,
+                cryptoaddress: cryptoaddr,
+                picture: uploadedFile,
+
+                cryptoaddress_type: selectedCrypto,
+                bio,
+                gender: selectedGender,
+              }
+            );
+          } catch (error) {
+            console.log(error);
+
+            if (axios.isAxiosError(error)) {
+              if (error.response && error.response.status === 409) {
+                //alert("");
+
+
+                setResultText(error.response.data.message);
+
+                //console.log(error)
+
+
+                setResultTextColor("red");
+              } else {
+                setResultText(
+                  "An error occurred: " +
                   (error.response?.data?.message || error.message)
-              );
+                );
+              }
+            } else {
+              setResultText("An unexpected error occurred: " + error.message);
             }
-          } else {
-            setResultText("An unexpected error occurred: " + error.message);
           }
-        }
 
-        if (response) {
-          setResultText("Signed up ! Email verification sent.");
-          
+
+
+
+
+
+
+          if (response) {
+            setResultText("Signed up ! Email verification sent.");
+            setResultTextColor("black");
+          }
+        } else {
+          setResultText("reCAPTCHA validation failed!");
+          setResultTextColor("red");
         }
       } else {
-        setResultText("reCAPTCHA validation failed!");
-        setResultTextColor("red");
+
+        if (nationality_selected === "") {
+          setResultText("Insert nationality !");
+          setResultTextColor("red");
+        } else if (isEmailError === true) {
+          setResultText("Email is not valid !");
+          setResultTextColor("red");
+        } else if (isPhoneError === true){
+          setResultText("Phone is not valid !");
+          setResultTextColor("red");
+        } else if (isPasswordError === true){
+          setResultText("Password should be longer than 4 characters ! ");
+          setResultTextColor("red");
+        }
+
+
       }
+
     }
   };
 
@@ -428,7 +548,7 @@ const Register = () => {
               </Select>
             </div>
 
-            
+
 
             <div
               action="#"
@@ -438,6 +558,9 @@ const Register = () => {
                 <TextField
                   error={isEmailError}
                   helperText={isEmailErrorHelper}
+
+                  inputRef={isEmailErrorFocus}
+
                   label="Email"
                   placeholder="johndoe@gmail.com"
                   id="email"
@@ -456,9 +579,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -505,9 +628,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -525,6 +648,16 @@ const Register = () => {
                   id="pass"
                   name="pass"
                   required
+
+
+                  
+
+                  error={isPasswordError}
+                  helperText={isPasswordHelper}
+
+                  inputRef={isPasswordErrorFocus}
+
+
                   type={showPassword ? "text" : "password"}
                   sx={{
                     m: 1,
@@ -534,9 +667,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -571,8 +704,21 @@ const Register = () => {
                   name="phone"
                   required
                   type="tel"
+
+
+                  error={isPhoneError}
+                  helperText={isPhonerHelper}
+
+                  inputRef={isPhoneErrorFocus}
+
+
+
+
                   inputProps={{
                     maxLength: 15,
+
+
+
                   }}
                   sx={{
                     m: 1,
@@ -582,9 +728,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -614,6 +760,7 @@ const Register = () => {
 
               <div className="flex flex-col mb-2.5 justify-center  mt-2">
                 <ReactFlagsSelect
+
                   selected={nationality_selected}
                   onSelect={(code) => setNationality_selected(code)}
                   className="w-[420px]  "
@@ -625,21 +772,21 @@ const Register = () => {
               </div>
 
               <div className="flex mt-0 mb-2 flex-col">
-              <InputLabel id="roleDropdowns">Gender</InputLabel>
-              <Select
-                labelId="roleDropdowns"
-                id="roleDropdown"
-                label="gender"
-                value={selectedGender}
-                onChange={handleChangeGender}
-                className="w-[420px] h-10"
-                style={{ color: "#000" }}
-              >
-                <MenuItem value={"M"}>Male</MenuItem>
-                <MenuItem value={"F"}>Female</MenuItem>
-          
-              </Select>
-            </div>
+                <InputLabel id="roleDropdowns">Gender</InputLabel>
+                <Select
+                  labelId="roleDropdowns"
+                  id="roleDropdown"
+                  label="gender"
+                  value={selectedGender}
+                  onChange={handleChangeGender}
+                  className="w-[420px] h-10"
+                  style={{ color: "#000" }}
+                >
+                  <MenuItem value={"M"}>Male</MenuItem>
+                  <MenuItem value={"F"}>Female</MenuItem>
+
+                </Select>
+              </div>
 
               {selectedRole === "AH" && (
                 <div className="flex mb-2.5 justify-center items-center mt-2">
@@ -648,7 +795,19 @@ const Register = () => {
                     id="weight"
                     name="weight"
                     required
+
+
+
+
                     type="number"
+                    
+                    onChange={(event) =>
+                      event.target.value < 0
+                          ? (event.target.value = 0)
+                          : event.target.value
+                  }
+
+
                     placeholder="85 kg/185 lb"
                     sx={{
                       m: 1,
@@ -658,9 +817,9 @@ const Register = () => {
                       },
 
                       "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "red",
-                        },
+                      {
+                        borderColor: "red",
+                      },
 
                       "& .MuiInputLabel-root": {
                         "&.Mui-focused": {
@@ -697,6 +856,15 @@ const Register = () => {
                           </Menu>
                         </InputAdornment>
                       ),
+
+                      inputMode: 'numeric',
+                      pattern: '[0-9]*',
+                      
+                      
+                      
+
+
+
                     }}
                   />
 
@@ -733,9 +901,9 @@ const Register = () => {
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
 
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
@@ -779,10 +947,11 @@ const Register = () => {
 
               <ReCAPTCHA
                 ref={recaptcha}
-          
+
                 sitekey={APP_SITE_KEY}
-                onExpired={() => {recaptcha.reset();}}
-                
+
+                onExpired={() => { recaptcha.reset(); }}
+
                 className="mt-2 g-recaptcha-response"
               />
 
@@ -824,7 +993,7 @@ const Register = () => {
 
 
 
-            {/* server="http://localhost:5000/profile_photo/upload" */}
+              {/* server="http://localhost:5000/profile_photo/upload" */}
 
 
               <FilePond
@@ -921,7 +1090,7 @@ const Register = () => {
 
         <div className="flex justify-center items-center mb-32 flex-col">
           <Button
-          
+
             className="w-[420px]"
             style={{ marginTop: "20px" }}
             sx={{

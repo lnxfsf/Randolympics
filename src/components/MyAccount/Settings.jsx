@@ -8,6 +8,16 @@ import { HeaderMyProfile } from "./HeaderMyProfile";
 
 import Popup from "reactjs-popup";
 
+import { useNavigate } from "react-router-dom";
+
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
+
+
+
+
+
+
 
 //we display it as fragment, inside MyProfile...
 let BACKEND_SERVER_BASE_URL =
@@ -15,13 +25,23 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Settings = () => {
+  let { logoutUser } = useContext(AuthContext);
+
+  
+  
+  const navigate = useNavigate();
+
+
   const [userData, setUserData] = useState(null);
-
   const popupRef = useRef(null);
-
   const popupRefResign = useRef(null);
 
 
+
+  const [original_email, setOriginalEmail] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [bio, setBio] = useState("");
+  const [user_type, setUser_type] = useState("");
 
 
 
@@ -36,7 +56,37 @@ const Settings = () => {
     popupRef.current.close();
   };
 
-  const deleteAccount = () => {
+  const deleteAccount = async () => {
+
+    
+
+
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/user/deleteUser`,
+        {
+          userId: userId,
+          
+
+        }
+      );
+
+      if (response.status === 200) {
+       
+
+       popupRef.current.close();
+       logoutUser();
+       
+        
+        
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+
+
 
   }
 
@@ -49,13 +99,14 @@ const Settings = () => {
     // we will set setUserData if clicked on this !
     if (storedOriginalData) {
       setUserData(JSON.parse(storedOriginalData));
+
+     
+
+
     }
   };
 
-  const [original_email, setOriginalEmail] = useState(null);
-  const [userId, setUserId] = useState("");
-  const [bio, setBio] = useState("");
-  const [user_type, setUser_type] = useState("");
+
  
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
@@ -71,6 +122,8 @@ const Settings = () => {
       setUser_type(userJson.data.user_type);
 
       setBio(userJson.data.bio);
+
+
 
     }
   }, []);
@@ -190,8 +243,8 @@ const Settings = () => {
           </div>
 
 
-{user_type == "NP" && (
-<>
+
+
 
 
 
@@ -315,8 +368,8 @@ const Settings = () => {
 
 
 
-          </>
-)}
+         
+
 
 
 
