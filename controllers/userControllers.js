@@ -373,10 +373,42 @@ const update_user_data = async (req, res) => {
   };
 
 
+  const deleteUser = async (req, res) => {
+
+    const { userId } = req.body;
+
+    try {
+
+      await db.sequelize.sync();
+
+
+      await User.destroy({
+        where: {
+          userId: userId,
+        },
+      });
+      
+
+      return res.status(200).json({ message: "User deleted"});
+      
+
+
+
+    } catch(error){
+      console.log(error.stack)
+      res.status(500).json({ error: error });
+    }
+
+
+  }
+
+  
+
 
 module.exports = { 
 update_user_data,
 fetchLatestData,
 listAllUsers,
+deleteUser,
 
 }

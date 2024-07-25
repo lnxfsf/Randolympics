@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     email_private: {
       type: DataTypes.TINYINT(1),
-      defaultValue: 0,
+      defaultValue: 1,
     },
     password: {
       type: DataTypes.STRING(255),
@@ -30,10 +30,12 @@ module.exports = function (sequelize, DataTypes) {
     birthdate: {
       type: DataTypes.DATEONLY,
     },
+
     birthdate_private: {
       type: DataTypes.TINYINT(1),
-      defaultValue: 0,
+      defaultValue: 1,
     },
+
     birthdate_verify: {
       type: DataTypes.TINYINT(1),
       defaultValue: 0,
@@ -43,7 +45,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     phone_private: {
       type: DataTypes.TINYINT(1),
-      defaultValue: 0,
+      defaultValue: 1,
     },
     nationality: {
       type: DataTypes.STRING(100),
@@ -58,6 +60,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     weight_private: {
       type: DataTypes.TINYINT(1),
+      defaultValue: 1,
     },
     picture: {
       type: DataTypes.STRING(400),
