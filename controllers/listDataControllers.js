@@ -921,14 +921,22 @@ const landingPageRandomize = async (req, res) => {
   // ! vrati ovo samo za frontend... ovo eto, lakse objekat imas da radi.. 
 
 
+  const randomizeFormData = req.query.randomizeFormData;
 
 
+
+  console.log("gender je")
+  console.log(randomizeFormData)
+
+/* 
   const randomizeFormData = [
     { name: 'first', email: 'first@gmail.com', weightCategory: 'light', gender: 'F' },
   
 
 
-  ];
+  ]; */
+
+
 
 
 
