@@ -22,7 +22,8 @@ import { EconomiscLoansHome } from "./Home/EconomiscLoansHome";
 import { useNavigate } from "react-router-dom";
 import { NavbarHome } from "../components/NavbarHome";
 
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 
@@ -79,36 +80,11 @@ const Home = () => {
 
 
 
-
-
-  // ? expand more
-  const [expandedFirstText, setExpandedFirstText] = useState(false);
-  const [expandedSecondText, setExpandedSecondText] = useState(false);
-  const [expandedThirdText, setExpandedThirdText] = useState(false);
-
-
-
-  const [expandedLoans, setExpandedLoans] = useState(false);
-  const [expandedBroadcast, setExpandedBroadcast] = useState(false);
-  const [expandedSponsorship, setExpandedSponsorship] = useState(false);
-
-
-
-
-
-
-
-
-
-
-
-  const [games, setGames] = useState([]);
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchNewsGames();
+
+    AOS.init();
   }, []);
 
 
@@ -120,30 +96,6 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
-
-  const fetchNewsGames = async () => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/items/stockholm_games`
-      );
-
-      /* 
-this is from official:
-    const client = createDirectus('http://localhost:8055').with(rest());
-    const response = await client.request(readItems('stockholm_games')); 
-    */
-
-      // set variable.
-      setGames(response.data.data);
-
-      //console.log(games);  // this on first will not reflect updated state ! so it will be null, but access it outside, and it will show...
-    } catch (error) {
-      console.error("Error fetching games:", error);
-    }
-  };
-
-  // so once you accessed it outside of useEffect, then it worked fine..
-  console.log(games);
 
 
 
@@ -233,7 +185,7 @@ this is from official:
         </div>
 
         <div className="flex items-center justify-center pt-8 pl-24  pr-24  ">
-        <p style={{ color: "white" }}>The Randomolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.</p>
+          <p style={{ color: "white" }}>The Randomolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.</p>
 
         </div>
 
@@ -241,6 +193,38 @@ this is from official:
       </div>
 
 
+
+
+      <div className="flex justify-center items-center flex-col">
+
+        <p className="text-[30px] text-red_first mt-8 mb-32"><b>Our Competitions</b></p>
+
+
+
+      </div>
+
+
+
+
+      <div className="flex justify-center items-start">
+
+
+
+        <div data-aos="fade-right" className="basis-1/3 secondHhomeImage flex justify-center items-start">
+
+          <p className="text-4xl mt-8 mr-6" style={{ color: "white" }} >Our Beliefs</p>
+
+        </div>
+
+
+        <div data-aos="fade-left" className="w-full h-[350px] p-4 pt-8 pr-24 bg-[#F7FAFA]">
+
+          <p className="text-justify">We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.</p>
+          <br />
+          <p className="text-justify">In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. We stand against any political pressure to exclude athletes based on their identity or beliefs. Transparency is our commitment, using open-source technology for payments and communication. Our democratic approach guarantees equal rights and voting power for every nation and citizen. We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values.</p>
+        </div>
+
+      </div>
 
       <div className="h-96"></div>
 

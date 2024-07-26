@@ -20,6 +20,7 @@
     "@pqina/filepond-plugin-image-editor": "^9.1.1",
     "@pqina/pintura": "^8.82.6",
     "@pqina/react-pintura": "^9.0.3",
+    "aos": "^2.3.4",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
     "datejs": "^1.0.0-rc3",
