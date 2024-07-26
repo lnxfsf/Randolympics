@@ -7,21 +7,33 @@
     transition: all 0.3s ease;
     z-index: 1000;
     
-    height: 120px;
+    height: 135px;
     
   }
   
 
   // logo expanded 
-  .navbar .navbar-logo {
-    display: block;
-    margin-left: 17%; 
+  .navbar .navbar-first-content{
+
+    display: flex;
+    margin-left: 15%; 
+    margin-right: 12%; 
     margin-top: 2%;
-    width: 200px; /* Adjust the logo size as needed */
+   /*  width: 200px;  *//* Adjust the logo size as needed */
     height: auto;
+
+    justify-content: space-between;
 
     transition: opacity 0.3s ease;
   }
+
+  .navbar-first-content.img {
+    width: 200px; 
+    height: auto;
+  }
+
+
+
   
   // links expanded
   .navbar .navbar-content {
@@ -53,7 +65,7 @@
   
   
   // Hide the logo when scrolled 
-  .navbar.scrolled .navbar-logo {
+  .navbar.scrolled .navbar-first-content {
     display: none; 
 
   }
@@ -96,6 +108,36 @@
 
   }
 
+
+  .navbar-first-content a {
+    text-decoration: none;
+    color: #716363;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(113, 99, 99, 0);
+    border: 1px solid #716363;
+    border-radius: 10px;
+
+  
+    
+
+  }
+  
+
+
+  
+  .navbar-first-content a:hover {
+    color: rgb(247, 250, 250) !important;
+    
+    
+  }
+
+  
+  
+
+
+  
+
   .navbar.scrolled a {
     text-decoration: none;
     color: black;
@@ -111,9 +153,13 @@
   
 
   .navbar a:hover {
-    color: rgb(211, 211, 211);
+    color: "#F7FAFA";
+    background-color: #904242;
   }
 
   .navbar.scrolled a:hover {
     color: grey;
   }
+
+
+
