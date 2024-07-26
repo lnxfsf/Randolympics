@@ -81,6 +81,7 @@ const Home = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
 
 
+  const [expandedFirstText, setExpandedFirstText] = useState(false);
 
 
   const navigate = useNavigate();
@@ -232,7 +233,6 @@ const Home = () => {
 
 
 
-
       <div className="flex justify-center items-start bg-[#F7FAFA] mt-8" data-aos="fade-up">
 
         <div className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 mb-16 " >
@@ -292,10 +292,66 @@ const Home = () => {
           </div>
 
         </div>
+      </div>
 
+
+
+
+
+      <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up">
+
+        <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
+
+
+        <div className='w-1/2'>
+
+
+          {/* <div className=" flex justify-around items-center w-full bg-black_first">
+ */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFirstText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-4`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">1.</p>
+            <p expand={expandedFirstText}
+              onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none flex-grow pl-4  ">What is Randolympics ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedFirstText}
+              onClick={() => { setExpandedFirstText(!expandedFirstText) }}
+              aria-expanded={expandedFirstText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+
+
+          <div className="">
+            <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
+              
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+                
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+        </div>
 
 
       </div>
+
 
       <div className="h-96"></div>
 
