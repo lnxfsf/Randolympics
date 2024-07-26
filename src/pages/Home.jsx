@@ -226,10 +226,51 @@ const Home = () => {
 
       </div>
 
-      <div className="h-96"></div>
 
 
 
+
+      <div className="flex justify-center items-start bg-[#F7FAFA]" data-aos="fade-up">
+
+       <div  className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 ">
+
+
+          <p className="text-[30px] text-red_first mt-8 self-center"><b>Economics: Three types of income:</b></p>
+          <p className=" self-center mt-4 text-center">Our organization has three types of income sources: Loans, Broadcasting Rights, and Sponsorships. All payments are published on the blockchain. Below is a detailed description of each income type:</p>
+          
+
+          <div className="flex justify-around mt-8">
+
+            <div className="flex justify-center items-center flex-col economicsItem">
+                <p className="font-semibold">1</p>
+                <p className="text-xl font-semibold text-red_first" >Loans</p>
+                <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+                
+            </div>
+
+            <div className="flex justify-center items-center flex-col ">
+                <p className="font-semibold" >2</p>
+                <p  className="text-xl font-semibold text-red_first text-center">Broadcasting rights</p>
+
+            </div>
+
+
+            <div className="flex justify-center items-center flex-col">
+                <p className="font-semibold">3</p>
+                <p className="text-xl font-semibold text-red_first text-center">Sponsorship</p>
+
+            </div>
+
+
+          </div>
+       
+       </div> 
+
+
+      
+      </div>
+
+  <div className="h-96"></div>
 
 
 
