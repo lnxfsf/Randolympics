@@ -1,5 +1,8 @@
 // this is main page, where people can come from google search
 
+// ovo import
+import 'animate.css';
+
 
 import { Footer } from "../components/Footer";
 import { Button } from "@mui/material";
@@ -230,49 +233,71 @@ const Home = () => {
 
 
 
-      <div className="flex justify-center items-start bg-[#F7FAFA]" data-aos="fade-up">
+      <div className="flex justify-center items-start bg-[#F7FAFA] mt-8" data-aos="fade-up">
 
-       <div  className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 ">
+        <div className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 mb-16 " >
 
 
           <p className="text-[30px] text-red_first mt-8 self-center"><b>Economics: Three types of income:</b></p>
           <p className=" self-center mt-4 text-center">Our organization has three types of income sources: Loans, Broadcasting Rights, and Sponsorships. All payments are published on the blockchain. Below is a detailed description of each income type:</p>
-          
+
 
           <div className="flex justify-around mt-8 ml-16 mr-16">
 
-            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none">
-                <p className="font-semibold">1</p>
-                <p className="text-lg font-semibold text-red_first" >Loans</p>
-                <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none "
+
+              data-aos="zoom-in-right"
+              data-aos-delay="100"
+
+              data-aos-offset="100"
+
+
+            >
+              <p className="font-semibold">1</p>
+              <p className="text-lg font-semibold text-red_first" >Loans</p>
+              <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img>
 
             </div>
 
-            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none">
-                <p className="font-semibold" >2</p>
-                <p  className="text-lg font-semibold text-red_first text-center">Broadcasting rights</p>
-                <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+
+
+
+            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none"
+
+              data-aos="zoom-in-right"
+              data-aos-delay="300"
+              data-aos-offset="100"
+            >
+              <p className="font-semibold" >2</p>
+              <p className="text-lg font-semibold text-red_first text-center">Broadcasting rights</p>
+              <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
 
             </div>
 
 
-            <div className="  flex justify-center items-center flex-col  economicsItem cursor-pointer select-none">
-                <p className="font-semibold">3</p>
-                <p className="text-lg font-semibold text-red_first text-center">Sponsorship</p>
-                <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+            <div className="  flex justify-center items-center flex-col  economicsItem cursor-pointer select-none"
+
+              data-aos="zoom-in-right"
+              data-aos-delay="600"
+              data-aos-offset="100"
+
+            >
+              <p className="font-semibold">3</p>
+              <p className="text-lg font-semibold text-red_first text-center">Sponsorship</p>
+              <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
 
             </div>
 
 
           </div>
-       
-       </div> 
+
+        </div>
 
 
-      
+
       </div>
 
-  <div className="h-96"></div>
+      <div className="h-96"></div>
 
 
 

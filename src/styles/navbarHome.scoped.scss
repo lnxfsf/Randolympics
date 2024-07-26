@@ -206,6 +206,37 @@
     height: 150px;
     border-radius: 50%;  
     background: white;
+
+
+}
+
+
+ 
+/*  
+
+ovo import u react component
+ import 'animate.css';
+ i ovo: 
+ 
+
+
+-webkit-animation: heartBeat 1s;
+animation: heartBeat  1s;  
+
+
+tako imas na hover animation
+
+*/
+
+.economicsItem:hover {
+
+   
+    -webkit-animation: heartBeat 1s;
+    animation: heartBeat  1s; 
+    
+   
+
+
 }
 
 .ellipse-image {
