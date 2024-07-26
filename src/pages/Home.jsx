@@ -27,6 +27,7 @@ import { NavbarHome } from "../components/NavbarHome";
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { GridOfSportsHome } from '../components/Home/GridOfSportsHome';
 
 
 
@@ -129,7 +130,7 @@ const Home = () => {
 
 
 
-
+      {/* first div */}
       <div className="firstHhomeImage flex justify-center items-center flex-col">
 
 
@@ -208,29 +209,31 @@ const Home = () => {
 
 
 
-      <div className="flex justify-center items-center flex-col">
+      {/* Our Competitions */}
+      <div className="flex justify-center items-center flex-col"  data-aos="fade-up" data-aos-offset="300">
 
-        <p className="text-[30px] text-red_first mt-8 mb-32"><b>Our Competitions</b></p>
+        <p className="text-[30px] text-red_first mt-8 "><b>Our Competitions</b></p>
 
 
-
+        {/* outer box  */}
+        <GridOfSportsHome />
       </div>
 
 
 
-
+      {/* Our Beliefs */}
       <div className="flex justify-center items-start">
 
 
 
-        <div data-aos="fade-right" className="basis-1/3 secondHhomeImage flex justify-center items-start">
+        <div data-aos="fade-right" data-aos-offset="200" className="basis-1/3 secondHhomeImage flex justify-center items-start">
 
           <p className="text-4xl mt-8 mr-6" style={{ color: "white" }} >Our Beliefs</p>
 
         </div>
 
 
-        <div data-aos="fade-left" className="w-full h-[350px] p-4 pt-8 pr-24 bg-[#F7FAFA]">
+        <div data-aos="fade-left" data-aos-offset="200" className="w-full h-[350px] p-4 pt-8 pr-24 bg-[#F7FAFA]">
 
           <p className="text-justify">We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.</p>
           <br />
@@ -241,8 +244,8 @@ const Home = () => {
 
 
 
-
-      <div className="flex justify-center items-start bg-[#F7FAFA] mt-8" data-aos="fade-up">
+      {/* Economics */}
+      <div className="flex justify-center items-start bg-[#F7FAFA] mt-8" data-aos="fade-up" data-aos-offset="200">
 
         <div className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 mb-16 " >
 
@@ -269,7 +272,7 @@ const Home = () => {
 
 
               <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
-              <circle class="fillme"></circle>
+                <circle class="fillme"></circle>
               </svg>
             </div>
 
@@ -287,7 +290,7 @@ const Home = () => {
               {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
 
               <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
-              <circle class="fillme"></circle>
+                <circle class="fillme"></circle>
               </svg>
 
             </div>
@@ -305,7 +308,7 @@ const Home = () => {
               {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
 
               <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
-              <circle class="fillme"></circle>
+                <circle class="fillme"></circle>
               </svg>
 
             </div>
@@ -319,7 +322,7 @@ const Home = () => {
 
 
 
-
+      {/* FAQ */}
       <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up">
 
         <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
