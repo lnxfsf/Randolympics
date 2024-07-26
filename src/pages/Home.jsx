@@ -264,8 +264,13 @@ const Home = () => {
             >
               <p className="font-semibold">1</p>
               <p className="text-lg font-semibold text-red_first" >Loans</p>
-              <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img>
 
+              {/* <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img> */}
+
+
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+              <circle class="fillme"></circle>
+              </svg>
             </div>
 
 
@@ -279,7 +284,11 @@ const Home = () => {
             >
               <p className="font-semibold" >2</p>
               <p className="text-lg font-semibold text-red_first text-center">Broadcasting rights</p>
-              <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
+
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+              <circle class="fillme"></circle>
+              </svg>
 
             </div>
 
@@ -293,7 +302,11 @@ const Home = () => {
             >
               <p className="font-semibold">3</p>
               <p className="text-lg font-semibold text-red_first text-center">Sponsorship</p>
-              <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img>
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
+
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+              <circle class="fillme"></circle>
+              </svg>
 
             </div>
 

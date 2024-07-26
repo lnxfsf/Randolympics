@@ -202,8 +202,12 @@
     
     position: relative;
 
+    /* width: 150px;
+    height: 150px; */
+
     width: 150px;
     height: 150px;
+
     border-radius: 50%;  
     background: white;
 
@@ -228,21 +232,44 @@ tako imas na hover animation
 
 */
 
-.economicsItem:hover {
 
-   
+/* 
+.economicsItem:hover {
     -webkit-animation: heartBeat 1s;
     animation: heartBeat  1s; 
-    
-   
 
 
-}
+} */
 
-.ellipse-image {
+
+  .ellipse-image {
     position: absolute;
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
     bottom: 0;
     right: 0;
+    --size: 100px;
+    --half-size: calc(var(--size) / 2);
+    --stroke-width: 5px;
+    --radius: calc((var(--size) - var(--stroke-width)) / 2);
+    --circumference: calc(var(--radius) * pi * 2);
+    --dash: calc((var(--progress) * var(--circumference)) / 100);
+    --progress: 25;
   }
+  
+  .fillme {
+    cx: var(--half-size);
+    cy: var(--half-size);
+    r: var(--radius);
+    stroke-width: var(--stroke-width);
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+    stroke: #af2626;
+    transition: stroke-dasharray 0.3s linear 0s;
+  }
+  
+  .ellipse-image:hover {
+    --progress: 100;
+  }
+  
