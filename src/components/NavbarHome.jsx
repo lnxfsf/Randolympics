@@ -1,14 +1,19 @@
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import '../styles/navbarHome.scoped.scss';
 
 import logo from '/randolympics_logo.png';
+import { SportsDropDownMenu } from './NavbarHome/SportsDropDownMenu';
 
 const NavbarHome = () => {
 
 
     const [scrolled, setScrolled] = useState(false);
+
+
+    const [isDropdownSportsVisible, setDropdownSportsVisible] = useState(true);  // false default
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -25,6 +30,13 @@ const NavbarHome = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+
+
+
+    
+
+
 
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -44,13 +56,24 @@ const NavbarHome = () => {
             </div>
 
             <div className="navbar-content">
-                <a href="#home">Home</a>
-                <a href="#games">The Games</a>
-                <a href="#iwga">The IWGA</a>
-                <a href="#sports">Sports</a>
+
+                <div>
+                    <a id="sports-link" href="#sports" onMouseEnter={() => {setDropdownSportsVisible(true);}}/*  onMouseLeave={() => {setDropdownSportsVisible(false);}}  */ >Sports</a>
+
+                    {isDropdownSportsVisible &&
+                            <SportsDropDownMenu scrolled={scrolled} />
+                    }
+
+                    
+
+                </div>
+
+                <a href="#beliefs">Our beliefs</a>
+                <a href="#economics">Economics</a>
+                <a href="#FAQ">FAQ</a>
                 <a href="#news">News</a>
-                <a href="#media">TWG Media</a>
-                <a href="#athletes">Athletes & Clean Sport</a>
+                <a href="#join">Join now</a>
+               
             </div>
         </nav>
     );

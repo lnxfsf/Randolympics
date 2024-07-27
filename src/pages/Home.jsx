@@ -145,17 +145,24 @@ const Home = () => {
             <div className="flex flex-col items-center">
               <p className="text-4xl"><b>{timeLeft.days ?? 0}</b></p>
               <p>Days</p>
+              
             </div>
+
+
 
             <div className="flex flex-col items-center">
               <p className="text-4xl">{timeLeft.hours ?? 0}</p>
               <p>Hours</p>
             </div>
 
+         
+
             <div className="flex flex-col items-center">
               <p className="text-4xl">{timeLeft.minutes ?? 0}</p>
               <p>Minutes</p>
             </div>
+
+         
 
             <div className="flex flex-col items-center">
               <p className="text-4xl">{timeLeft.seconds ?? 0}</p>
@@ -210,7 +217,7 @@ const Home = () => {
 
 
       {/* Our Competitions */}
-      <div className="flex justify-center items-center flex-col"  data-aos="fade-up" data-aos-offset="300">
+      <div className="flex justify-center items-center flex-col" data-aos="fade-up" data-aos-offset="300">
 
         <p className="text-[30px] text-red_first mt-8 "><b>Our Competitions</b></p>
 
