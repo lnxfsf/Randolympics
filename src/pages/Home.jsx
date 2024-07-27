@@ -229,7 +229,7 @@ const Home = () => {
 
 
       {/* Our Beliefs */}
-      <div className="flex justify-center items-start">
+      <div className="flex justify-center items-start overflow-x-hidden">
 
 
 

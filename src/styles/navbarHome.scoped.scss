@@ -214,3 +214,87 @@
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 }
+
+
+
+
+
+
+
+
+
+.beliefs-dropdown-menu {
+  position: absolute;
+  top: 8.4rem;
+  color: black;
+  background-color: #F7FAFA;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  //margin-left: 10px;
+
+  margin-left: -85px;
+
+  width: 75%;
+  height: auto;
+
+}
+
+
+
+
+.beliefs-dropdown-menu.scrolled {
+  position: absolute;
+
+  top: 4.5rem;
+  color: black;
+  background-color: #F7FAFA;
+
+
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  
+}
+
+
+
+
+
+
+
+
+
+.economics-dropdown-menu {
+  position: absolute;
+  top: 8.4rem;
+  color: black;
+  background-color: #F7FAFA;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  //margin-left: 10px;
+
+  margin-left: -14rem;
+
+  width: 75%;
+  height: auto;
+
+}
+
+
+
+
+.economics-dropdown-menu.scrolled {
+  position: absolute;
+
+  top: 4.5rem;
+  color: black;
+  background-color: #F7FAFA;
+
+
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  
+}
