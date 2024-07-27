@@ -65,7 +65,7 @@ const NavbarHome = () => {
 
 
                 <div className=' flex '>
-                    <a className='flex justify-center items-center gap-2' onClick={() => {navigate("/login");}}>Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
+                    <a className='flex justify-center items-center gap-2 cursor-pointer select-none' onClick={() => {navigate("/login");}}>Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
                     <a href="#support">Support</a>
                 </div>
 
