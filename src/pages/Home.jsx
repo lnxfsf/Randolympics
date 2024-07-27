@@ -330,7 +330,7 @@ const Home = () => {
 
 
       {/* FAQ */}
-      <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up">
+      <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up" id="FAQ">
 
         <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
 

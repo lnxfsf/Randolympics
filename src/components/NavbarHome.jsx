@@ -8,7 +8,11 @@ import { SportsDropDownMenu } from './NavbarHome/SportsDropDownMenu';
 import { BeliefsDropDownMenu } from './NavbarHome/BeliefsDropDownMenu';
 import { EconomicsDropDownMenu } from './NavbarHome/EconomicsDropDownMenu';
 
+import { useNavigate } from "react-router-dom";
+
+
 const NavbarHome = () => {
+
 
 
     const [scrolled, setScrolled] = useState(false);
@@ -19,8 +23,11 @@ const NavbarHome = () => {
     const [isDropdownBeliefsVisible, setDropdownBeliefsVisible] = useState(false);  // false default
 
 
-    const [isDropdownEconomicsVisible, setDropdownEconomicsVisible] = useState(true);  // false default
+    const [isDropdownEconomicsVisible, setDropdownEconomicsVisible] = useState(false);  // false default
 
+
+
+    const navigate = useNavigate();
 
 
 
@@ -58,16 +65,16 @@ const NavbarHome = () => {
 
 
                 <div className=' flex '>
-                    <a className='flex justify-center items-center gap-2' href="#login">Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
+                    <a className='flex justify-center items-center gap-2' onClick={() => {navigate("/login");}}>Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
                     <a href="#support">Support</a>
                 </div>
 
             </div>
 
-            <div className="navbar-content">
+            <div className="navbar-content ">
 
                 <div>
-                    <a id="sports-link" href="#sports" onMouseEnter={() => { setDropdownSportsVisible(true); }}/*  onMouseLeave={() => {setDropdownSportsVisible(false);}}  */ >Sports</a>
+                    <a className='flex justify-center items-center' id="sports-link" href="#sports" onMouseEnter={() => { setDropdownSportsVisible(true); }}  onMouseLeave={() => {setDropdownSportsVisible(false);}}  >Sports</a>
 
                     {isDropdownSportsVisible &&
                         <SportsDropDownMenu scrolled={scrolled} />
@@ -78,7 +85,7 @@ const NavbarHome = () => {
                 </div>
 
                 <div>
-                    <a href="#beliefs" onMouseEnter={() => { setDropdownBeliefsVisible(true); }}/*  onMouseLeave={() => {setDropdownBeliefsVisible(false);}}  */>Our beliefs</a>
+                    <a className='flex justify-center items-center' href="#beliefs" onMouseEnter={() => { setDropdownBeliefsVisible(true); }}  onMouseLeave={() => {setDropdownBeliefsVisible(false);}} >Our beliefs</a>
                  
                     {isDropdownBeliefsVisible &&
                             <BeliefsDropDownMenu scrolled={scrolled} />
@@ -88,7 +95,7 @@ const NavbarHome = () => {
 
 
                 <div>
-                        <a href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }}/*  onMouseLeave={() => {setDropdownEconomicsVisible(false);}}  */>Economics</a>
+                        <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }}  onMouseLeave={() => {setDropdownEconomicsVisible(false);}}  >Economics</a>
              
                         {isDropdownEconomicsVisible &&
 
@@ -100,9 +107,16 @@ const NavbarHome = () => {
 
 
 
-                <a href="#FAQ">FAQ</a>
-                <a href="#news">News</a>
-                <a href="#join">Join now</a>
+                
+                <a className='flex justify-center items-center' href="#FAQ" onClick={() => {navigate("/");}} >FAQ</a>
+                
+                
+              
+                <a  className='flex justify-center items-center select-none cursor-pointer' onClick={() => {navigate("/news");}}>News</a>
+                
+
+             
+                <a  className='flex justify-center items-center select-none cursor-pointer'  onClick={() => {navigate("/register");}}>Join now</a>
 
             </div>
         </nav>
