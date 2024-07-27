@@ -179,7 +179,7 @@ const Home = () => {
           <Button
 
 
-            onClick={() => { navigate("/login") }}
+            onClick={() => { navigate("/register") }}
             className="w-44 "
             style={{ marginTop: "0px" }}
             sx={{
@@ -189,9 +189,9 @@ const Home = () => {
               borderRadius: 3,
               border: `1px solid #AF2626`,
               "&:hover": {
-                background: "rgb(196, 43, 43)",
+                background: "rgb(202, 67, 67)",
                 color: "white",
-                border: `1px solid rgb(196, 43, 43)`,
+                border: `1px solid rgb(202, 67, 67)`,
               },
             }}
             id="randomize-btn"
