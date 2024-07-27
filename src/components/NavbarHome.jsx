@@ -74,7 +74,7 @@ const NavbarHome = () => {
             <div className="navbar-content ">
 
                 <div>
-                    <a className='flex justify-center items-center' id="sports-link" href="#sports" onMouseEnter={() => { setDropdownSportsVisible(true); }}  onMouseLeave={() => {setDropdownSportsVisible(false);}}  >Sports</a>
+                    <a className='flex justify-center items-center' id="sports-link" href="#sports" onMouseEnter={() => { setDropdownSportsVisible(true); }}  onClick={() => {setDropdownSportsVisible(false);}}  >Sports</a>
 
                     {isDropdownSportsVisible &&
                         <SportsDropDownMenu scrolled={scrolled} />
@@ -85,7 +85,7 @@ const NavbarHome = () => {
                 </div>
 
                 <div>
-                    <a className='flex justify-center items-center' href="#beliefs" onMouseEnter={() => { setDropdownBeliefsVisible(true); }}  onMouseLeave={() => {setDropdownBeliefsVisible(false);}} >Our beliefs</a>
+                    <a className='flex justify-center items-center' href="#beliefs" onMouseEnter={() => { setDropdownBeliefsVisible(true); }}  onClick={() => {setDropdownBeliefsVisible(false);}} >Our beliefs</a>
                  
                     {isDropdownBeliefsVisible &&
                             <BeliefsDropDownMenu scrolled={scrolled} />
@@ -95,7 +95,7 @@ const NavbarHome = () => {
 
 
                 <div>
-                        <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }}  onMouseLeave={() => {setDropdownEconomicsVisible(false);}}  >Economics</a>
+                        <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }}  onClick={() => {setDropdownEconomicsVisible(false);}}  >Economics</a>
              
                         {isDropdownEconomicsVisible &&
 
