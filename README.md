@@ -82,3 +82,7 @@ npm i moment react-moment
 npm install react-select-country-list
 
  npm install react-zoom-pan-pinch
+npm install aos
+npm install animate.css
+
+
