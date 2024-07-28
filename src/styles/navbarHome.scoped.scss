@@ -8,7 +8,8 @@
   transition: all 0.3s ease;
   z-index: 1000;
 
-  height: 135px;
+  height: 165px;
+  /* 135px */
 
 }
 
@@ -50,6 +51,9 @@
 
 
   padding: 1rem;
+
+  padding-bottom: 0px;
+
   transition: all 0.3s ease;
 
 
@@ -66,6 +70,9 @@
 .navbar.scrolled {
   padding-top: 0;
   height: 50px;
+
+  /* height: 50px; */
+  
 }
 
 
@@ -84,7 +91,7 @@
   justify-content: space-around;
   align-items: center;
 
-
+  height: 72px;
 
 
   padding: 1rem;
@@ -185,9 +192,11 @@
 
 // opening menu on hover
 
-
+/*  /// ! here 
 .sports-dropdown-menu {
-  position: absolute;
+  
+
+position: absolute;
   top: 8.4rem;
   color: black;
   background-color: #F7FAFA;
@@ -199,6 +208,51 @@
   height: auto;
 
 }
+ */
+
+ .sports-dropdown-menu {
+
+  will-change: transform;
+  position: absolute;
+ /*  top: 90%; */ /* can't be further away or hover is lost*/
+  
+  margin-top: 15px;
+
+  // 15px work
+
+  left: 0;
+  right: 0;
+  color: black;
+  background-color: #f7fafa;
+  white-space: nowrap;
+  padding: 1rem;
+
+  /* min-width: 200px; */
+  width: 75%;
+  height: auto;
+
+  margin-left: 9rem;
+  
+  border: 1px solid #f7fafa;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: ease-out 0.3s;
+  transform: perspective(300px) rotateX(-90deg);
+  transform-origin: 50% 0%;
+}
+
+.drop {
+  padding: 1rem;
+}
+
+.drop:hover .sports-dropdown-menu {
+  opacity: 1;
+  pointer-events: initial;
+  transform: perspective(300px) rotateX(0deg);
+}
 
 
 
@@ -206,13 +260,16 @@
 .sports-dropdown-menu.scrolled {
   position: absolute;
 
-  top: 4.5rem;
+  /* 4.5rem; */
+  top:  3rem;
   color: black;
   background-color: #F7FAFA;
 
 
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+
+  margin-left: 3rem ;
 }
 
 
@@ -222,31 +279,82 @@
 
 
 
+/* 
+  .beliefs-dropdown-menu {
+    position: absolute;
+    top: 8.4rem;
+    color: black;
+    background-color: #F7FAFA;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 
-.beliefs-dropdown-menu {
-  position: absolute;
-  top: 8.4rem;
-  color: black;
-  background-color: #F7FAFA;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+    //margin-left: 10px;
 
-  //margin-left: 10px;
+    margin-left: -10rem;
 
-  margin-left: -10rem;
+    width: 75%;
+    height: auto;
 
-  width: 75%;
-  height: auto;
-
-}
+  } */
 
 
+
+
+  .beliefs-dropdown-menu {
+
+
+    will-change: transform;
+    position: absolute;
+   /*  top: 90%; */ /* can't be further away or hover is lost*/
+    
+    margin-top: 15px;
+  
+    // 15px work
+  
+    left: 0;
+    right: 0;
+    color: black;
+    background-color: #f7fafa;
+  //  white-space: nowrap;
+    padding: 1rem;
+  
+    /* min-width: 200px; */
+     width: 75%;
+    height: auto;
+  
+    margin-left: 9rem;
+    
+    border: 1px solid #f7fafa;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  
+    opacity: 0;
+    pointer-events: none;
+    transition: ease-out 0.3s;
+    transform: perspective(300px) rotateX(-90deg);
+    transform-origin: 50% 0%;
+  }
+  
+  
+  
+  
+  .dropBeliefs {
+    padding: 1rem;
+  }
+  
+  .dropBeliefs:hover .beliefs-dropdown-menu {
+    opacity: 1;
+    pointer-events: initial;
+    transform: perspective(300px) rotateX(0deg);
+  }
+
+  
 
 
 .beliefs-dropdown-menu.scrolled {
   position: absolute;
 
-  top: 4.5rem;
+  top: 3.3rem;
   color: black;
   background-color: #F7FAFA;
 
@@ -263,9 +371,11 @@
 
 
 
-
+/* 
 
 .economics-dropdown-menu {
+
+
   position: absolute;
   top: 8.4rem;
   color: black;
@@ -280,6 +390,55 @@
   width: 75%;
   height: auto;
 
+} */
+
+
+
+
+.economics-dropdown-menu {
+
+
+  will-change: transform;
+  position: absolute;
+ 
+  margin-top: 15px;
+
+
+  left: 0;
+  right: 0;
+  color: black;
+  background-color: #f7fafa;
+  
+  padding: 1rem;
+
+
+   width: 75%;
+  height: auto;
+
+  margin-left: 9rem;
+  
+  border: 1px solid #f7fafa;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: ease-out 0.3s;
+  transform: perspective(300px) rotateX(-90deg);
+  transform-origin: 50% 0%;
+}
+
+
+
+
+.dropEconomics {
+  padding: 1rem;
+}
+
+.dropEconomics:hover .economics-dropdown-menu {
+  opacity: 1;
+  pointer-events: initial;
+  transform: perspective(300px) rotateX(0deg);
 }
 
 
@@ -288,7 +447,7 @@
 .economics-dropdown-menu.scrolled {
   position: absolute;
 
-  top: 4.5rem;
+  top: 3.5rem;
   color: black;
   background-color: #F7FAFA;
 

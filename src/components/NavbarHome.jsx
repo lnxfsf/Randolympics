@@ -65,7 +65,7 @@ const NavbarHome = () => {
 
 
                 <div className=' flex '>
-                    <a className='flex justify-center items-center gap-2 cursor-pointer select-none' onClick={() => {navigate("/login");}}>Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
+                    <a className='flex justify-center items-center gap-2 cursor-pointer select-none' onClick={() => { navigate("/login"); }}>Login<img width={"15px"} height={"15px"} src="home/login.svg" /></a>
                     <a href="#support">Support</a>
                 </div>
 
@@ -73,50 +73,60 @@ const NavbarHome = () => {
 
             <div className="navbar-content ">
 
-                <div>
-                    <a className='flex justify-center items-center' id="sports-link" href="#sports" onMouseEnter={() => { setDropdownSportsVisible(true); }}  onMouseLeave={() => {setDropdownSportsVisible(false);}}  >Sports</a>
 
-                    {isDropdownSportsVisible &&
+
+                <div class="drop">
+
+
+
+                    <a className='flex justify-center items-center' id="sports-link" href="#sports">Sports</a>
+
+
+
+                    <div className={`sports-dropdown-menu ${scrolled ? 'scrolled' : ''} `}>
                         <SportsDropDownMenu scrolled={scrolled} />
-                    }
 
 
+                    </div>
 
-                </div>
-
-                <div>
-                    <a className='flex justify-center items-center' href="#beliefs" onMouseEnter={() => { setDropdownBeliefsVisible(true); }}  onMouseLeave={() => {setDropdownBeliefsVisible(false);}} >Our beliefs</a>
-                 
-                    {isDropdownBeliefsVisible &&
-                            <BeliefsDropDownMenu scrolled={scrolled} />
-                    }
-                
-                </div>
-
-
-                <div>
-                        <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }}  onMouseLeave={() => {setDropdownEconomicsVisible(false);}}  >Economics</a>
-             
-                        {isDropdownEconomicsVisible &&
-
-
-                            <EconomicsDropDownMenu scrolled={scrolled} />
-                    }
                 </div>
 
 
 
 
-                
-                <a className='flex justify-center items-center' href="#FAQ" onClick={() => {navigate("/");}} >FAQ</a>
-                
-                
-              
-                <a  className='flex justify-center items-center select-none cursor-pointer' onClick={() => {navigate("/news");}}>News</a>
-                
+                <div class="dropBeliefs">
+                    <a className='flex justify-center items-center' href="#beliefs"  >Our beliefs</a>
 
-             
-                <a  className='flex justify-center items-center select-none cursor-pointer'  onClick={() => {navigate("/register");}}>Join now</a>
+                    <div className={`beliefs-dropdown-menu ${scrolled ? 'scrolled' : ''} `}>
+                        <BeliefsDropDownMenu scrolled={scrolled} />
+                    </div>
+
+                </div>
+
+
+                <div class="dropEconomics">
+                    <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }} onMouseLeave={() => { setDropdownEconomicsVisible(false); }}  >Economics</a>
+
+
+                    <div className={`economics-dropdown-menu ${scrolled ? 'scrolled' : ''} `}>
+
+                        <EconomicsDropDownMenu scrolled={scrolled} />
+                    </div>
+                </div>
+
+
+
+
+
+                <a className='flex justify-center items-center' href="#FAQ" onClick={() => { navigate("/"); }} >FAQ</a>
+
+
+
+                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/news"); }}>News</a>
+
+
+
+                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/register"); }}>Join now</a>
 
             </div>
         </nav>

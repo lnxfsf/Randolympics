@@ -7,7 +7,7 @@ const EconomicsDropDownMenu = ({ scrolled }) => {
         <>
 
 
-            <div className={`economics-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  >
+           {/*  <div className={`economics-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  > */}
                 <div className="h-[300px] flex flex-wrap overflow-y-auto	">
 
                     <p className=" text-red_first font-semibold text-base ">Economics</p>
@@ -63,7 +63,7 @@ const EconomicsDropDownMenu = ({ scrolled }) => {
 
                 </div>
 
-            </div>
+          {/*   </div> */}
         </>
     )
 }

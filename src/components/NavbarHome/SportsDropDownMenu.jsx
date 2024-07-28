@@ -5,7 +5,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
     return (
         <>
-            <div className={`sports-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  >
+         {/*    <div className={`sports-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  > */}
                 <div>
                     <p className=" text-red_first font-semibold text-base">Our sports</p>
 
@@ -346,7 +346,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                     </div>
                 </div>
-            </div>
+           {/*  </div> */}
         </>
     )
 }

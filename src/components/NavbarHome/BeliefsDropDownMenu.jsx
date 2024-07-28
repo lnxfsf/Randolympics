@@ -9,7 +9,7 @@ const BeliefsDropDownMenu = ({ scrolled  }) => {
     return (
 
         <>
-            <div className={`beliefs-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  >
+           {/*  <div className={`beliefs-dropdown-menu ${scrolled ? 'scrolled' : ''} p-4`}  > */}
                 <div>
                     <p className=" text-red_first font-semibold text-base">Our beliefs</p>
 
@@ -92,7 +92,7 @@ const BeliefsDropDownMenu = ({ scrolled  }) => {
 
                 </div>
 
-            </div>
+            {/* </div> */}
 
         </>
     )
