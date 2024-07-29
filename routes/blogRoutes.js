@@ -1,6 +1,6 @@
 const express = require("express");
-const { blogGames, blogNews, blogEconomics } = require("../controllers/blogControllers");
-
+const { blogGames, blogNews, blogEconomics, deletegamepost } = require("../controllers/blogControllers");
+const path = require('path');
 
 const router = express.Router();
 
@@ -22,6 +22,13 @@ const router = express.Router();
 router.get('/games', blogGames)  //   route:  /blog/games  , for "Stockholm 2028 Games"
 router.get('/news', blogNews)   //   route:  /blog/news  , for "News"
 router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "Economics"
+
+
+router.post("/deletegamepost", deletegamepost)
+
+
+router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));
+
 
 
 
