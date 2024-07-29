@@ -86,3 +86,8 @@ npm install aos
 npm install animate.css
 
 
+npm i react-swipeable-views-react-18-fix
+npm install --save --legacy-peer-deps react-swipeable-views 
+
+
+npm install --save react-tabs
