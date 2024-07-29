@@ -1,7 +1,7 @@
 
 
 
-const ItemUpcomingGamesList = ({post, index}) => {
+const ItemUpcomingGamesList = ({post, index, onClick}) => {
 
 
     // this is one post... and just, display it rendered as it
@@ -9,7 +9,7 @@ const ItemUpcomingGamesList = ({post, index}) => {
     return (
         <>
 
-        <div key={index} className="p-4 border-2 m-2" >
+        <div key={index} className="p-4 border-2 m-2" onClick={onClick} >
 
             <p>{post.title}</p>
             <p>{post.subtitle}</p>

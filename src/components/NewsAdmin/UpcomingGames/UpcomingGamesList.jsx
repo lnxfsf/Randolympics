@@ -12,7 +12,7 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
-const UpcomingGamesList = () => {
+const UpcomingGamesList = ({ onSelectPost }) => {
 
     const [gamesPosts, setGamesPosts] = useState();
 
@@ -74,7 +74,10 @@ const UpcomingGamesList = () => {
 
              {gamesPosts && gamesPosts.map((post, index) => (
 
-                <ItemUpcomingGamesList post={post} index={index} />
+                <ItemUpcomingGamesList post={post} index={index} key={index}
+                onClick={() => onSelectPost(post)}
+                
+                />
 
 
             ))}
