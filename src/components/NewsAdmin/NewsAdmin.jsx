@@ -17,7 +17,7 @@ const NewsAdmin = () => {
 
 
 
-    
+
 
     // za toast kada se obrise post (bolje izgleda)
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -26,11 +26,11 @@ const NewsAdmin = () => {
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
+
         setOpenSnackbar(false);
-      };
+    };
 
 
 
@@ -59,7 +59,7 @@ const NewsAdmin = () => {
 
                     {selectedPost ? (
                         <GameDetails post={selectedPost} onBack={() => { setSelectedPost(null); setOpenSnackbar(true) }} />
-                        
+
                     ) : (
                         <UpcomingGamesList onSelectPost={setSelectedPost} />
                     )}
@@ -86,20 +86,20 @@ const NewsAdmin = () => {
 
 
 
-            <Snackbar open={openSnackbar} 
-            autoHideDuration={6000} 
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-        <Alert
-          onClose={handleSnackbarClose}
-          severity="success"
-          variant="filled"
-          sx={{ width: '100%' }}
-         
-        >
-          Successfully deleted post
-        </Alert>
-      </Snackbar>
+            <Snackbar open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >
+                    Successfully deleted post
+                </Alert>
+            </Snackbar>
 
 
 

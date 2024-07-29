@@ -30,20 +30,7 @@ const readingTime = (text) => {
     const time = Math.ceil(words / wpm);
     return time
 }
-/* 
 
-    async function deletePost (postId) {
-       try {
-
-        const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/blog/deletegamepost`, {
-            postId: postId
-        });
-        
-
-       } catch(error) {
-        console.error(error);
-       }
-    } */
 
 
 
@@ -51,7 +38,7 @@ const readingTime = (text) => {
 const GameDetails = ({ post, onBack }) => {
     const popupRef = useRef(null);
 
-    
+
 
 
 
@@ -63,9 +50,6 @@ const GameDetails = ({ post, onBack }) => {
 
     }
 
-
-
-
     const deletePost = async () => {
         try {
             const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/blog/deletegamepost`, {
@@ -75,7 +59,7 @@ const GameDetails = ({ post, onBack }) => {
 
             if (response.status === 200) {
                 console.log('Post deleted successfully', response.message);
-              
+
 
                 onBack();
 
@@ -89,8 +73,21 @@ const GameDetails = ({ post, onBack }) => {
 
 
 
+    const handleUpdatePost = (e) => {
+        e.preventDefault();
+
+
+
+    }
+
+
     const [isEditing, setIsEditing] = useState(false)
     const [editingImage, setEditingImage] = useState("blogs/pen_to_square_filled.svg")
+
+
+    const [editTitle, setEditTitle] = useState(post.title)
+    const [editSubTitle, setEditSubTitle] = useState(post.subtitle)
+
 
 
     useEffect(() => {
@@ -199,38 +196,68 @@ const GameDetails = ({ post, onBack }) => {
                         </Popup>
 
 
-                       
+
                     </div>
                 </div>
 
-                <img className="coverImageUpcomingGames" src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + post.cover_image} />
+
+                {!isEditing && (<>
 
 
 
-                <br />
+                    <img className="coverImageUpcomingGames" src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + post.cover_image} />
 
-                <h1 className="text-4xl">{post.title}</h1>
-                <br />
+                    <br />
 
-                <hr />
+                    <h1 className="text-4xl">{post.title}</h1>
+                    <br />
 
-                <h2 className="text-xl">{post.subtitle}</h2>
+                    <hr />
 
-                <hr /><br />
-                <p>Date of publishing: {post.createdAt}</p>
-                <p>Updated at:  {post.updatedAt}</p>
+                    <h2 className="text-xl">{post.subtitle}</h2>
 
-                <p>Reading time: {readingTime(post.content)} minute read</p>
+                    <hr /><br />
+                    <p>Date of publishing: {post.createdAt}</p>
+                    <p>Updated at:  {post.updatedAt}</p>
 
-
-                <br /><br />
-                Content: <br />
+                    <p>Reading time: {readingTime(post.content)} minute read</p>
 
 
-                <hr />
-                <br />
+                    <br /><br />
+                    Content: <br />
 
-                <p >{post.content} </p>
+
+                    <hr />
+                    <br />
+
+                    <p >{post.content} </p>
+
+                </>)}
+
+
+
+
+                {isEditing && (
+                    <>
+                        
+     
+                        <form action="#" onSubmit={handleUpdatePost}>
+<div className="flex flex-col gap-4">
+                            <input type="text" value={editTitle} name="title" maxLength={255} placeholder="title" onChange={(event) => {setEditTitle(event.target.value)}} />
+
+                            <input type="text" value={editSubTitle} name="title" placeholder="subtitle" maxLength={255} onChange={(event) => {setEditSubTitle(event.target.value)}} />
+
+                            </div>
+                        </form>
+
+                        
+                    </>
+                )}
+
+
+
+
+
             </div>
 
         </>
