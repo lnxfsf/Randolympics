@@ -8,7 +8,33 @@ import { GameDetails } from './UpcomingGames/GameDetails';
 
 
 
+
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
 const NewsAdmin = () => {
+
+
+
+    
+
+    // za toast kada se obrise post (bolje izgleda)
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSnackbar(false);
+      };
+
+
+
+
 
 
     const [selectedPost, setSelectedPost] = useState(null);
@@ -32,7 +58,7 @@ const NewsAdmin = () => {
 
 
                     {selectedPost ? (
-                        <GameDetails post={selectedPost} onBack={() => setSelectedPost(null)} />
+                        <GameDetails post={selectedPost} onBack={() => { setSelectedPost(null); setOpenSnackbar(true) }} />
                         
                     ) : (
                         <UpcomingGamesList onSelectPost={setSelectedPost} />
@@ -57,6 +83,23 @@ const NewsAdmin = () => {
 
 
 
+
+
+
+            <Snackbar open={openSnackbar} 
+            autoHideDuration={6000} 
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+         
+        >
+          Successfully deleted post
+        </Alert>
+      </Snackbar>
 
 
 

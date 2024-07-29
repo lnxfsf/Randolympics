@@ -11,10 +11,16 @@ import "reactjs-popup/dist/index.css";
 
 import { Button } from "@mui/material";
 
+
+
+
+
+
+
+
 let BACKEND_SERVER_BASE_URL =
     import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
     process.env.VITE_BACKEND_SERVER_BASE_URL;
-
 
 
 
@@ -45,6 +51,11 @@ const readingTime = (text) => {
 const GameDetails = ({ post, onBack }) => {
     const popupRef = useRef(null);
 
+    
+
+
+
+
 
 
     const cancelDeletion = () => {
@@ -64,8 +75,9 @@ const GameDetails = ({ post, onBack }) => {
 
             if (response.status === 200) {
                 console.log('Post deleted successfully', response.message);
+              
 
-                onBack()
+                onBack();
 
             } else {
                 console.error('Failed to delete post. Status:', response.status);
@@ -187,6 +199,7 @@ const GameDetails = ({ post, onBack }) => {
                         </Popup>
 
 
+                       
                     </div>
                 </div>
 
