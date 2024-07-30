@@ -159,6 +159,11 @@ const GameDetails = ({ post, onBack }) => {
             onload: (response) => {
                 // Parse the JSON response to get the filename
 
+              
+
+
+
+
                 const jsonResponse = JSON.parse(response);
                 const filename = jsonResponse;
 
