@@ -85,6 +85,54 @@ const passport_picture_upload = async (req, res) => {
 
 
 
+
+
+
+const revertPassportPicture = async (req, res) => {
+
+  const { filename } = req.body;
+
+  console.log("on stampa-------- da revertuje image")
+  console.log(filename)
+
+  
+  // find uploaded image..
+  const filePath = path.join(__dirname, '..' , 'uploads', 'passport_pictures', filename);
+  try {
+    if (fs.existsSync(filePath)) {
+
+      // Remove the file
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+          return res.status(500).json({ message: 'Error deleting file' });
+        }
+
+        console.log(`File ${filename} deleted successfully`);
+        res.status(200).json({ message: 'File deleted successfully' });
+      });
+
+
+
+
+    } else {
+      console.log(`File ${filename} does not exist`);
+      res.status(404).json({ message: 'File not found' });
+    }
+
+  } catch (err) {
+    console.error('Server error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
+
+
+
+
+
+}
+
+
 const revertProfilePicture = async (req, res) => {
 
   const { filename } = req.body;
@@ -134,5 +182,6 @@ module.exports = {
   profile_picture_upload,
   passport_picture_upload,
   revertProfilePicture,
+  revertPassportPicture,
 
 };
