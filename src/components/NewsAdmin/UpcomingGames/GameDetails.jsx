@@ -20,6 +20,35 @@ import TextField from "@mui/material/TextField";
 
 
 
+// FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+
+// FilePond css
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
+import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
+import FilePondPluginFilePoster from "filepond-plugin-file-poster";
+import "@pqina/pintura/pintura.css";
+
+registerPlugin(
+    FilePondPluginFileValidateType,
+    FilePondPluginFilePoster,
+    FilePondPluginImageExifOrientation,
+    FilePondPluginImagePreview,
+    FilePondPluginImageResize,
+    FilePondPluginImageTransform,
+    FilePondPluginImageEdit
+);
+
+
+
+
 
 let BACKEND_SERVER_BASE_URL =
     import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -40,6 +69,8 @@ const readingTime = (text) => {
 
 const GameDetails = ({ post, onBack }) => {
     const popupRef = useRef(null);
+
+
 
 
 
@@ -92,6 +123,8 @@ const GameDetails = ({ post, onBack }) => {
     const [editSubTitle, setEditSubTitle] = useState(post.subtitle)
 
     const [editContent, setEditContent] = useState(post.content)
+    const [editCoverImage, setEditCoverImage] = useState(post.cover_image)
+
 
     const toolbarOptions = [
         [{ 'header': [1, 2, false] }],
@@ -109,6 +142,72 @@ const GameDetails = ({ post, onBack }) => {
 
     const modules = { toolbar: toolbarOptions };
 
+
+    // ? filepond passport upload
+    const [files, setFiles] = useState([]);
+
+
+    const server = {
+        /* url: 'http://localhost:5000/profile_photo/upload', */
+
+        process: {
+            url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
+            method: "POST",
+            headers: {},
+            withCredentials: false,
+
+            onload: (response) => {
+                // Parse the JSON response to get the filename
+
+                const jsonResponse = JSON.parse(response);
+                const filename = jsonResponse;
+
+                console.log("Uploaded filename:", filename);
+                setEditCoverImage(filename)
+
+
+            },
+            onerror: (response) => {
+                console.error("Error uploading file:", response);
+                return response;
+            },
+
+
+        },
+
+
+
+
+
+
+        revert: (uniqueFileId, load, error) => {
+            // console.log("ovo mu je" + editCoverImage)
+
+
+            // Send request to the server to delete the file with the uniqueFileId
+            fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename: editCoverImage }),
+            }).then(response => {
+                if (response.ok) {
+                    load(); // Signal that the file has been reverted successfully
+                } else {
+                    response.json().then(errorData => error(errorData.message));
+                }
+            }).catch(err => {
+                console.error('Error reverting file:', err);
+                error('Error reverting file');
+            });
+
+
+        },
+
+
+
+    };
 
 
     useEffect(() => {
@@ -268,8 +367,52 @@ const GameDetails = ({ post, onBack }) => {
 
                         <form action="#" onSubmit={handleUpdatePost}>
                             <div className="flex flex-col gap-4">
-                            
 
+
+                                <FilePond
+                                    /* className="filepond--root large" */
+                                    type="file"
+                                    onupdatefiles={setFiles}
+                                    allowMultiple={false}
+                                    maxFiles={1}
+                                    server={server}
+                                    name="image"
+                                    labelIdle='Drag & Drop cover image or <span class="filepond--label-action">Browse</span> '
+                                    accept="image/png, image/jpeg, image/gif"
+                                    dropOnPage
+                                    dropValidation
+                                    allowPaste={true}
+                                    allowReplace={true}
+                                    credits={""}
+                                    allowFileEncode={true}
+                                    allowFileTypeValidation={true}
+                                    allowImagePreview={true}
+                                    /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                                   for now, we keep it original resolution, until I know what max resolution we should support 
+                                 */
+                                    allowImageCrop={false}
+                                    allowImageResize={false}
+                                    allowImageTransform={false}
+
+
+
+                                    imagePreviewHeight={222}
+
+                                    imageCropAspectRatio="1:1"
+                                    /*            imageResizeTargetWidth={100}
+                                    imageResizeTargetHeight={100} */
+
+                                    stylePanelLayout="compact"
+
+                                    styleLoadIndicatorPosition="center bottom"
+                                    styleProgressIndicatorPosition="center bottom"
+                                    styleButtonRemoveItemPosition="center  bottom"
+                                    styleButtonProcessItemPosition="center bottom"
+                                    imageEditAllowEdit={false}
+
+
+                                    
+                                />
 
 
 

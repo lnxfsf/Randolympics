@@ -167,7 +167,7 @@ const EditProfile = () => {
   const [bio, setBio] = useState("");
 
   const [passportImage, setPassportImage] = useState(null);
-  /* const [profileImage, setProfileImage] = useState(null); */
+   /* const [profileImage, setProfileImage] = useState(null); */
 
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
@@ -201,8 +201,8 @@ const EditProfile = () => {
       setBio(userJson.data.bio);
 
       setPassportImage(userJson.data.passport_photo);
-      /* setProfileImage(userJson.data.picture);
-       */
+      /* setProfileImage(userJson.data.picture); */
+       
       setSelectedDate(dayjs(userJson.data.birthdate));
 
       setPassportExpiryDate(() => {
@@ -384,9 +384,8 @@ const EditProfile = () => {
   };
 
   // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[280px] ml-2 ${
-    selectedRole !== "AH" ? "mt-8" : ""
-  }`;
+  let classNameFlagsSelect = `w-[280px] ml-2 ${selectedRole !== "AH" ? "mt-8" : ""
+    }`;
 
   // ? HERE, for crypto..
 
@@ -469,6 +468,34 @@ const EditProfile = () => {
         return response;
       },
     },
+
+
+    revert: (uniqueFileId, load, error) => {
+      //  console.log("ovo mu je" + profileImage)
+
+      
+      // Send request to the server to delete the file with the uniqueFileId
+       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertPassportPicture`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: profileImage }),
+      }).then(response => {
+        if (response.ok) {
+          load(); // Signal that the file has been reverted successfully
+        } else {
+          response.json().then(errorData => error(errorData.message));
+        }
+      }).catch(err => {
+        console.error('Error reverting file:', err);
+        error('Error reverting file');
+      }); 
+
+
+    },
+
+
   };
 
   const serverProfile = {
@@ -488,7 +515,7 @@ const EditProfile = () => {
 
         console.log("Uploaded filename:", filename);
 
-        setProfileImage(filename);
+        /* setProfileImage(filename); */
 
         // return filename;
       },
@@ -497,6 +524,10 @@ const EditProfile = () => {
         return response;
       },
     },
+
+   
+
+
   };
 
   // this is for toggle
@@ -785,9 +816,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -839,9 +870,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -881,7 +912,7 @@ const EditProfile = () => {
               {passportUpload && (
                 <>
                   <FilePond
-                  className="filepond--root large"
+                    className="filepond--root large"
                     type="file"
                     onupdatefiles={setFiles}
                     allowMultiple={false}
@@ -977,9 +1008,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -1055,9 +1086,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
+                    {
+                      borderColor: "red",
+                    },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -1108,9 +1139,9 @@ const EditProfile = () => {
                           borderRadius: 5,
                         },
                         "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                          {
-                            borderColor: "red",
-                          },
+                        {
+                          borderColor: "red",
+                        },
                         "& .MuiInputLabel-root": {
                           "&.Mui-focused": {
                             color: "black",
@@ -1154,9 +1185,9 @@ const EditProfile = () => {
               </div>
               <div className="flex justify-end items-end pb-2">
                 <ReactFlagsSelect
-                 countries={["US", "DE","GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI","NO", "KR", "RO","CA", "NL", "CU", "PL", "CH", "BG","NZ","ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
+                  countries={["US", "DE", "GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI", "NO", "KR", "RO", "CA", "NL", "CU", "PL", "CH", "BG", "NZ", "ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
 
-                disabled
+                  disabled
                   // to fill it with the one, which user's is currently selected...
                   selected={
                     nationality_selected ||
