@@ -84,6 +84,27 @@ const passport_picture_upload = async (req, res) => {
 }
 
 
+const blogs_upcominggames_picture_upload = async (req, res) => {
+
+  //pass the upload path. for profile_picture
+  const uploadBlogUpcomingGame = createUpload("uploads/blogs/upcominggames");
+  const uploadBlogUpcomingImage = uploadBlogUpcomingGame.single("image");
+
+
+  uploadBlogUpcomingImage(req, res, function (err) {
+    if (err) {
+      return res.status(400).send({ message: err.message });
+    }
+    // Everything went fine.
+    const files = req.files;
+    console.log(files);
+
+    console.log(filename);
+
+    res.json(filename);
+  });
+
+}
 
 
 
@@ -178,10 +199,62 @@ const revertProfilePicture = async (req, res) => {
 }
 
 
+
+
+
+const revertBlogs_upcominggames_picture_upload = async (req, res) => {
+
+  const { filename } = req.body;
+
+  console.log("on stampa-------- da revertuje image")
+  console.log(filename)
+
+
+  // find uploaded image..
+  const filePath = path.join(__dirname, '..' , 'uploads', 'blogs' , 'upcominggames', filename);
+  try {
+    if (fs.existsSync(filePath)) {
+
+      // Remove the file
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+          return res.status(500).json({ message: 'Error deleting file' });
+        }
+
+        console.log(`File ${filename} deleted successfully`);
+        res.status(200).json({ message: 'File deleted successfully' });
+      });
+
+
+
+
+    } else {
+      console.log(`File ${filename} does not exist`);
+      res.status(404).json({ message: 'File not found' });
+    }
+
+  } catch (err) {
+    console.error('Server error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
+
+
+
+
+
+}
+
+
+
+
 module.exports = {
   profile_picture_upload,
   passport_picture_upload,
   revertProfilePicture,
   revertPassportPicture,
+  blogs_upcominggames_picture_upload,
+  revertBlogs_upcominggames_picture_upload,
 
 };
