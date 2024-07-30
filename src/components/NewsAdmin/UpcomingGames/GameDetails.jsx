@@ -151,7 +151,7 @@ const GameDetails = ({ post, onBack }) => {
         /* url: 'http://localhost:5000/profile_photo/upload', */
 
         process: {
-            url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
+            url: `${BACKEND_SERVER_BASE_URL}/imageUpload/blogs_upcominggames_picture_upload`,
             method: "POST",
             headers: {},
             withCredentials: false,
@@ -185,7 +185,7 @@ const GameDetails = ({ post, onBack }) => {
 
 
             // Send request to the server to delete the file with the uniqueFileId
-            fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
+            fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_upcominggames_picture_upload`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
