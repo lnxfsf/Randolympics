@@ -52,6 +52,38 @@ const blogGames = async (req, res) => {
 }
 
 
+
+const gamesDetails  = async (req,res) => {
+    const postId = req.query.postId;
+
+
+    
+  try {
+
+    const oneBlog = await Upcominggames.findOne({
+
+     where: {
+      postId: postId,
+     }
+
+
+    });
+
+
+
+
+    res.json(oneBlog);
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+}
+
+
 const deletegamepost = async (req, res) => {
 
   const postId = req.body.postId;
@@ -82,6 +114,88 @@ const deletegamepost = async (req, res) => {
 
 }
 
+const updateUpcomingGamesBlog = async (req,res) => {
+
+  const { postId, 
+    title,
+    subtitle,
+    content } = req.body;
+
+    await db.sequelize.sync();
+
+
+    console.log("dobija"+postId)
+    console.log(title)
+    console.log(subtitle)
+    console.log(content)
+
+    
+    
+
+
+    try {
+    
+    const blogUpcomingGames = await Upcominggames.findOne({
+      where: { postId: postId },
+    });
+
+
+    let needsUpdate = false; 
+    const updatingObject = {};
+
+    if(blogUpcomingGames){
+
+      
+
+
+
+      if(title !== blogUpcomingGames.title){
+        updatingObject.title = title;
+        needsUpdate = true;
+      }
+
+      console.log("updatingObject")
+      console.log(updatingObject)
+
+      
+      if(subtitle !== blogUpcomingGames.subtitle){
+        updatingObject.subtitle = subtitle;
+        needsUpdate = true;
+      }
+
+      
+      if(content !== blogUpcomingGames.content){
+        updatingObject.content = content;
+        needsUpdate = true;
+      }
+
+
+
+    }
+
+
+    console.log("needsUpdate"+needsUpdate)
+    if (needsUpdate) {
+      try {
+        await blogUpcomingGames.update(updatingObject);
+
+        return res.status(200).json({ message: "Blog updated" });
+   
+      } catch (error) {
+
+        console.log(error.stack)
+        return res.status(500).json({ error: error.message });
+      
+
+    }
+  }
+
+} catch (error) {
+  return res.status(500).json({ error: error.message });
+}
+
+}
+
 
 const blogNews = async (req, res) => {
 
@@ -102,4 +216,9 @@ module.exports = {
 
 
   deletegamepost,
+  updateUpcomingGamesBlog,
+
+  gamesDetails,
+
+
 };

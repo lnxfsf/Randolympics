@@ -1,5 +1,11 @@
 const express = require("express");
-const { blogGames, blogNews, blogEconomics, deletegamepost } = require("../controllers/blogControllers");
+const { blogGames, 
+    blogNews, 
+    blogEconomics, 
+    deletegamepost,
+    updateUpcomingGamesBlog,
+    gamesDetails,
+ } = require("../controllers/blogControllers");
 const path = require('path');
 
 const router = express.Router();
@@ -25,6 +31,14 @@ router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "E
 
 
 router.post("/deletegamepost", deletegamepost)
+
+
+// get only ONE post, by postId (this is, to see changes immediatelly. )
+router.get("/gamesDetails", gamesDetails )
+
+
+// update upcominggames blogs
+router.post("/updateUpcomingGamesBlog", updateUpcomingGamesBlog)
 
 
 router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));
