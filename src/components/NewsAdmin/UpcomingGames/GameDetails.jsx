@@ -67,16 +67,16 @@ const readingTime = (text) => {
 
 
 
-const GameDetails = ({ post, onBack }) => {
+
+
+const GameDetails = ({ postZ, onBack }) => {
     const popupRef = useRef(null);
 
+    
+    const [post, setPost] = useState(postZ); // initial state it gets.. from props.. fine.. so I don't have to redeclare everywhere..  just edit this one..
 
-
-
-
-
-
-
+   
+    
 
 
     const cancelDeletion = () => {
@@ -107,12 +107,6 @@ const GameDetails = ({ post, onBack }) => {
 
 
 
-    const handleUpdatePost = (e) => {
-        e.preventDefault();
-
-
-
-    }
 
 
     const [isEditing, setIsEditing] = useState(false)
@@ -124,6 +118,68 @@ const GameDetails = ({ post, onBack }) => {
 
     const [editContent, setEditContent] = useState(post.content)
     const [editCoverImage, setEditCoverImage] = useState(post.cover_image)
+
+
+
+
+    const handleCancel = () => {
+        // samo vrati sto su bili values te pre (jer nisi nista upload-ovao)
+        setIsEditing(false)
+        setEditTitle(post.title)
+        setEditSubTitle(post.subtitle)
+        setEditContent(post.content)
+        setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
+
+        // TODO, i onda moras da revert, tj. da obrises taj image sto si upload-ovao preko fileponda, ali nije uploadovao.. kako treba nije sačuvao
+    }
+
+    const handleUpdatePost = async (e) => {
+        e.preventDefault();
+
+        var title = e.target.title.value;
+
+        var subtitle = e.target.subtitle.value;
+
+
+
+        try {
+
+
+            var response = await axios.post(
+                `${BACKEND_SERVER_BASE_URL}/blog/updateUpcomingGamesBlog`,
+                {
+                    postId: post.postId,
+                    title,
+                    subtitle,
+                    content: editContent,
+                }
+            );
+
+            if (response.status === 200) {
+                // TODO, e sada, obrises prethodnu image url sto je bio ! 
+                // ako je doslo do promena..
+                console.log(response.data.message)
+
+                setIsEditing(false)
+
+
+
+            }
+
+        } catch (error) {
+            console.log(error);
+
+
+            // TODO, ovde onaj popup da imas..
+        }
+
+
+
+
+
+
+
+    }
 
 
     const toolbarOptions = [
@@ -159,7 +215,7 @@ const GameDetails = ({ post, onBack }) => {
             onload: (response) => {
                 // Parse the JSON response to get the filename
 
-              
+
 
 
 
@@ -218,6 +274,7 @@ const GameDetails = ({ post, onBack }) => {
     useEffect(() => {
 
         changeEditingImage();
+        updateLatestData();
 
 
     }, [isEditing]);
@@ -231,6 +288,36 @@ const GameDetails = ({ post, onBack }) => {
         }
     }
 
+
+
+    const updateLatestData = async () => {
+
+
+        try{
+
+            const response = await axios.get(
+                `${BACKEND_SERVER_BASE_URL}/blog/gamesDetails`,
+                {
+                  params: {
+                    postId: post.postId,
+                    
+                    
+                  },
+                }
+              );
+
+              console.log(response.data)
+              setPost(response.data)
+
+
+
+
+        } catch (error) {
+            console.error(error);
+          }
+
+
+    }
 
 
 
@@ -416,7 +503,7 @@ const GameDetails = ({ post, onBack }) => {
                                     imageEditAllowEdit={false}
 
 
-                                    
+
                                 />
 
 
@@ -462,7 +549,7 @@ const GameDetails = ({ post, onBack }) => {
 
                                     label="Subtitle"
 
-                                    placeholder="Title"
+                                    placeholder="subtitle"
                                     id="name"
                                     name="subtitle"
                                     type="text"
@@ -497,6 +584,51 @@ const GameDetails = ({ post, onBack }) => {
 
                                 <hr />
 
+
+
+                                <div className="flex justify-end mt-2 gap-2 items-end">
+                                    <Button
+                                        onClick={handleCancel}
+                                        className="w-[200px]"
+                                        style={{ marginTop: "20px" }}
+                                        sx={{
+                                            height: "50px",
+                                            bgcolor: "#fff",
+                                            color: "#000",
+                                            borderRadius: 15,
+                                            border: `1px solid #AF2626`,
+                                            "&:hover": {
+                                                background: "rgb(196, 43, 43)",
+                                                color: "white",
+                                                border: `1px solid rgb(196, 43, 43)`,
+                                            },
+                                        }}
+                                        variant="text"
+                                    >
+                                        <span className="popins-font">Cancel</span>
+                                    </Button>
+
+                                    <Button
+                                        className="w-[200px]"
+                                        style={{ marginTop: "20px" }}
+                                        sx={{
+                                            height: "50px",
+                                            bgcolor: "#AF2626",
+                                            color: "#fff",
+                                            borderRadius: 15,
+                                            border: `1px solid #AF2626`,
+                                            "&:hover": {
+                                                background: "rgb(196, 43, 43)",
+                                                color: "white",
+                                                border: `1px solid rgb(196, 43, 43)`,
+                                            },
+                                        }}
+                                        type="submit"
+                                        variant="text"
+                                    >
+                                        <span className="popins-font">Save</span>
+                                    </Button>
+                                </div>
 
 
                             </div>

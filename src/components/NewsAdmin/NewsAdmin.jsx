@@ -58,7 +58,7 @@ const NewsAdmin = () => {
 
 
                     {selectedPost ? (
-                        <GameDetails post={selectedPost} onBack={() => { setSelectedPost(null); setOpenSnackbar(true) }} />
+                        <GameDetails postZ={selectedPost} onBack={() => { setSelectedPost(null); setOpenSnackbar(true) }} />
 
                     ) : (
                         <UpcomingGamesList onSelectPost={setSelectedPost} />
