@@ -130,7 +130,15 @@ const GameDetails = ({ postZ, onBack }) => {
     const [editSubTitle, setEditSubTitle] = useState(post.subtitle)
 
     const [editContent, setEditContent] = useState(post.content)
-    const [editCoverImage, setEditCoverImage] = useState(post.cover_image)
+
+    console.log("zasto j eon post")
+    console.log(post)
+
+    const [editCoverImage, setEditCoverImage] = useState(post.cover_image)   // used as original, this one to replace, if upload of temp one success, so it doesnt sit in database. 
+
+    const [tempEditCoverImage, setTempEditCoverImage] = useState()  // this is when we upload picture (and we can revert from backend, if it click "X" , or "Cancel")
+
+
 
 
 
@@ -141,9 +149,31 @@ const GameDetails = ({ postZ, onBack }) => {
         setEditTitle(post.title)
         setEditSubTitle(post.subtitle)
         setEditContent(post.content)
-        setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
+        // setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
 
-        // TODO, i onda moras da revert, tj. da obrises taj image sto si upload-ovao preko fileponda, ali nije uploadovao.. kako treba nije sačuvao
+
+        // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
+        fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_upcominggames_picture_upload`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ filename: tempEditCoverImage }),
+        }).then(response => {
+            if (response.ok) {
+                load(); // Signal that the file has been reverted successfully
+            } else {
+                response.json().then(errorData => error(errorData.message));
+            }
+        }).catch(err => {
+            console.error('Error reverting file:', err);
+
+        });
+
+
+
+        setTempEditCoverImage(null);
+
     }
 
     const handleUpdatePost = async (e) => {
@@ -165,6 +195,8 @@ const GameDetails = ({ postZ, onBack }) => {
                     title,
                     subtitle,
                     content: editContent,
+                    cover_image: tempEditCoverImage,
+
                 }
             );
 
@@ -173,9 +205,37 @@ const GameDetails = ({ postZ, onBack }) => {
                 // ako je doslo do promena..
                 console.log(response.data.message)
 
+
+
+                console.log(" novi image treba da zameni sa starijim:" + editCoverImage)
+                // so, we delete previous image (if there was one)
+                // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
+                // i ako zaista ima neki upload uopste.. 
+                if (editCoverImage && tempEditCoverImage) {
+                    fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_upcominggames_picture_upload`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ filename: editCoverImage }),
+                    }).then(response => {
+                        if (response.ok) {
+                            load(); // Signal that the file has been reverted successfully
+                        } else {
+                            response.json().then(errorData => error(errorData.message));
+                        }
+                    }).catch(err => {
+                        console.error('Error reverting file:', err);
+
+                    });
+                }
+
+
+
+
+                
                 setIsEditing(false)
                 setOpenSnackbar(true)
-
 
 
             }
@@ -238,7 +298,11 @@ const GameDetails = ({ postZ, onBack }) => {
                 const filename = jsonResponse;
 
                 console.log("Uploaded filename:", filename);
-                setEditCoverImage(filename)
+
+                // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
+                setTempEditCoverImage(filename)
+
+                // setEditCoverImage(filename)
 
 
             },
@@ -255,17 +319,20 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
+
         revert: (uniqueFileId, load, error) => {
             // console.log("ovo mu je" + editCoverImage)
 
 
             // Send request to the server to delete the file with the uniqueFileId
+
+            // it reverts the image it had ! but it's not yet uploaded, so we can delete it from backend..
             fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_upcominggames_picture_upload`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ filename: editCoverImage }),
+                body: JSON.stringify({ filename: tempEditCoverImage }),
             }).then(response => {
                 if (response.ok) {
                     load(); // Signal that the file has been reverted successfully
@@ -345,7 +412,7 @@ const GameDetails = ({ postZ, onBack }) => {
                 <div className="flex justify-between">
 
 
-                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => {onBack(false)}}>Back to list</button>
+                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false) }}>Back to list</button>
 
                     <div className="flex gap-2 m-2" >
 
@@ -467,19 +534,19 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
                 <Snackbar open={openSnackbar}
-                            autoHideDuration={6000}
-                            onClose={handleSnackbarClose}
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                            <Alert
-                                onClose={handleSnackbarClose}
-                                severity="success"
-                                variant="filled"
-                                sx={{ width: '100%' }}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                    <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
 
-                            >
-                                Post edited
-                            </Alert>
-                        </Snackbar>
+                    >
+                        Post edited
+                    </Alert>
+                </Snackbar>
 
 
 
