@@ -15,6 +15,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 
+import TextField from "@mui/material/TextField";
 
 
 
@@ -95,16 +96,16 @@ const GameDetails = ({ post, onBack }) => {
     const toolbarOptions = [
         [{ 'header': [1, 2, false] }],
         ['bold', 'italic', 'underline'],
-        ['image', 'code-block'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        ['image', 'video', 'code-block', 'blockquote'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
         [{ 'align': [] }],
-       
+
         [{ 'color': [] }, { 'background': [] }],
-    
+
         ['clean'] // remove formatting button
-      ];
+    ];
 
     const modules = { toolbar: toolbarOptions };
 
@@ -234,6 +235,7 @@ const GameDetails = ({ post, onBack }) => {
 
                     <hr />
 
+
                     <h2 className="text-xl">{post.subtitle}</h2>
 
                     <hr /><br />
@@ -250,7 +252,10 @@ const GameDetails = ({ post, onBack }) => {
                     <hr />
                     <br />
 
-                    <p >{post.content} </p>
+                    {/*  <p >{post.content} </p> */}
+
+
+                    <div className="ql-editor" dangerouslySetInnerHTML={{ __html: post.content }} />
 
                 </>)}
 
@@ -259,31 +264,100 @@ const GameDetails = ({ post, onBack }) => {
 
                 {isEditing && (
                     <>
-                        
-     
+
+
                         <form action="#" onSubmit={handleUpdatePost}>
-<div className="flex flex-col gap-4">
-                            <input type="text" value={editTitle} name="title" maxLength={255} placeholder="title" onChange={(event) => {setEditTitle(event.target.value)}} />
-
-                            <input type="text" value={editSubTitle} name="title" placeholder="subtitle" maxLength={255} onChange={(event) => {setEditSubTitle(event.target.value)}} />
+                            <div className="flex flex-col gap-4">
+                            
 
 
 
-                            <ReactQuill theme="snow" value={editContent} onChange={setEditContent} modules={modules} />;
+
+
+                                <TextField
+                                    value={editTitle}
+                                    onChange={(event) => { setEditTitle(event.target.value) }}
+
+                                    label="Title"
+
+                                    placeholder="Title"
+                                    id="name"
+                                    name="title"
+                                    type="text"
+                                    inputProps={{
+                                        maxLength: 255,
+                                    }}
+                                    sx={{
+                                        m: 1,
+                                        width: "auto",
+                                        "& .MuiOutlinedInput-root": {
+                                            borderRadius: 5,
+                                        },
+                                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                        {
+                                            borderColor: "red",
+                                        },
+                                        "& .MuiInputLabel-root": {
+                                            "&.Mui-focused": {
+                                                color: "black",
+                                            },
+                                        },
+                                    }}
+                                />
 
 
 
-<hr />
-<p>Prikaz</p>
 
-<div className="ql-editor" dangerouslySetInnerHTML={{ __html: editContent }} />
+                                <TextField
+                                    value={editSubTitle}
+                                    onChange={(event) => { setEditSubTitle(event.target.value) }}
+
+                                    label="Subtitle"
+
+                                    placeholder="Title"
+                                    id="name"
+                                    name="subtitle"
+                                    type="text"
+                                    inputProps={{
+                                        maxLength: 255,
+                                    }}
+                                    sx={{
+                                        m: 1,
+                                        width: "auto",
+                                        "& .MuiOutlinedInput-root": {
+                                            borderRadius: 5,
+                                        },
+                                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                        {
+                                            borderColor: "red",
+                                        },
+                                        "& .MuiInputLabel-root": {
+                                            "&.Mui-focused": {
+                                                color: "black",
+                                            },
+                                        },
+                                    }}
+                                />
+
+
+
+
+
+                                <ReactQuill theme="snow" value={editContent} onChange={setEditContent} modules={modules} />;
+
+
+
+                                <hr />
+
+
+
                             </div>
 
 
 
                         </form>
 
-                        
+
                     </>
                 )}
 

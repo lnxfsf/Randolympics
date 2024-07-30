@@ -9,7 +9,7 @@ const ItemUpcomingGamesList = ({post, index, onClick}) => {
     return (
         <>
 
-        <div key={index} className="p-4 border-2 m-2" onClick={onClick} >
+        <div key={index} className="p-4 border-2 m-2 cursor-pointer" onClick={onClick}  >
 
             <p>{post.title}</p>
             <p>{post.subtitle}</p>
