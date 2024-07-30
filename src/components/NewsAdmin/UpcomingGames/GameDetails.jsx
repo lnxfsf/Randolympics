@@ -11,6 +11,8 @@ import "reactjs-popup/dist/index.css";
 
 import { Button } from "@mui/material";
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 
@@ -87,6 +89,24 @@ const GameDetails = ({ post, onBack }) => {
 
     const [editTitle, setEditTitle] = useState(post.title)
     const [editSubTitle, setEditSubTitle] = useState(post.subtitle)
+
+    const [editContent, setEditContent] = useState(post.content)
+
+    const toolbarOptions = [
+        [{ 'header': [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        ['image', 'code-block'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'align': [] }],
+       
+        [{ 'color': [] }, { 'background': [] }],
+    
+        ['clean'] // remove formatting button
+      ];
+
+    const modules = { toolbar: toolbarOptions };
 
 
 
@@ -247,7 +267,20 @@ const GameDetails = ({ post, onBack }) => {
 
                             <input type="text" value={editSubTitle} name="title" placeholder="subtitle" maxLength={255} onChange={(event) => {setEditSubTitle(event.target.value)}} />
 
+
+
+                            <ReactQuill theme="snow" value={editContent} onChange={setEditContent} modules={modules} />;
+
+
+
+<hr />
+<p>Prikaz</p>
+
+<div className="ql-editor" dangerouslySetInnerHTML={{ __html: editContent }} />
                             </div>
+
+
+
                         </form>
 
                         

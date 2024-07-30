@@ -91,3 +91,5 @@ npm install --save --legacy-peer-deps react-swipeable-views
 
 
 npm install --save react-tabs
+
+npm install react-quill
