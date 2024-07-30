@@ -153,6 +153,36 @@ const Register = () => {
         return response;
       },
     },
+
+
+
+
+    revert: (uniqueFileId, load, error) => {
+      // console.log("ovo mu je" + editCoverImage)
+
+
+      // Send request to the server to delete the file with the uniqueFileId
+      fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ filename: uploadedFile }),
+      }).then(response => {
+          if (response.ok) {
+              load(); // Signal that the file has been reverted successfully
+          } else {
+              response.json().then(errorData => error(errorData.message));
+          }
+      }).catch(err => {
+          console.error('Error reverting file:', err);
+          error('Error reverting file');
+      });
+
+
+  },
+
+
   };
 
 

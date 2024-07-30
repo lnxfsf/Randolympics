@@ -471,8 +471,9 @@ const EditProfile = () => {
 
 
     revert: (uniqueFileId, load, error) => {
-      //  console.log("ovo mu je" + profileImage)
+      
 
+      
       
       // Send request to the server to delete the file with the uniqueFileId
        fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertPassportPicture`, {
@@ -480,7 +481,7 @@ const EditProfile = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ filename: profileImage }),
+        body: JSON.stringify({ filename: passportImage }),
       }).then(response => {
         if (response.ok) {
           load(); // Signal that the file has been reverted successfully
