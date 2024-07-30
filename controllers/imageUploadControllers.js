@@ -1,5 +1,7 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require('fs');
+
 
 let filename = "";
 
@@ -40,9 +42,9 @@ const createUpload = (uploadPath) => {
 
 const profile_picture_upload = async (req, res) => {
 
-    //pass the upload path. for profile_picture
-    const uploadProfile = createUpload("uploads/profile_pictures");
-    const uploadProfileImage = uploadProfile.single("image");
+  //pass the upload path. for profile_picture
+  const uploadProfile = createUpload("uploads/profile_pictures");
+  const uploadProfileImage = uploadProfile.single("image");
 
   uploadProfileImage(req, res, function (err) {
     if (err) {
@@ -61,29 +63,76 @@ const profile_picture_upload = async (req, res) => {
 
 const passport_picture_upload = async (req, res) => {
 
-     //pass the upload path. for profile_picture
-     const uploadPassport = createUpload("uploads/passport_pictures");
-     const uploadPassportImage = uploadPassport.single("image");
+  //pass the upload path. for profile_picture
+  const uploadPassport = createUpload("uploads/passport_pictures");
+  const uploadPassportImage = uploadPassport.single("image");
 
 
-    uploadPassportImage(req, res, function (err) {
-        if (err) {
-          return res.status(400).send({ message: err.message });
-        }
-        // Everything went fine.
-        const files = req.files;
-        console.log(files);
-    
-        console.log(filename);
-    
-        res.json(filename);
-      });
+  uploadPassportImage(req, res, function (err) {
+    if (err) {
+      return res.status(400).send({ message: err.message });
+    }
+    // Everything went fine.
+    const files = req.files;
+    console.log(files);
+
+    console.log(filename);
+
+    res.json(filename);
+  });
 
 }
 
 
 
+const revertProfilePicture = async (req, res) => {
+
+  const { filename } = req.body;
+
+  console.log("on stampa-------- da revertuje image")
+  console.log(filename)
+
+
+  // find uploaded image..
+  const filePath = path.join(__dirname, '..' , 'uploads', 'profile_pictures', filename);
+  try {
+    if (fs.existsSync(filePath)) {
+
+      // Remove the file
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+          return res.status(500).json({ message: 'Error deleting file' });
+        }
+
+        console.log(`File ${filename} deleted successfully`);
+        res.status(200).json({ message: 'File deleted successfully' });
+      });
+
+
+
+
+    } else {
+      console.log(`File ${filename} does not exist`);
+      res.status(404).json({ message: 'File not found' });
+    }
+
+  } catch (err) {
+    console.error('Server error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
+
+
+
+
+
+}
+
+
 module.exports = {
   profile_picture_upload,
   passport_picture_upload,
+  revertProfilePicture,
+
 };
