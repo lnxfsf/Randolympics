@@ -76,7 +76,7 @@ const GameDetails = ({ postZ, onBack }) => {
     const popupRef = useRef(null);
 
 
-    const [openSnackbar, setOpenSnackbar] = useState(true);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -466,6 +466,22 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
+                <Snackbar open={openSnackbar}
+                            autoHideDuration={6000}
+                            onClose={handleSnackbarClose}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                            <Alert
+                                onClose={handleSnackbarClose}
+                                severity="success"
+                                variant="filled"
+                                sx={{ width: '100%' }}
+
+                            >
+                                Post edited
+                            </Alert>
+                        </Snackbar>
+
+
 
                 {isEditing && (
                     <>
@@ -654,20 +670,6 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
-                        <Snackbar open={openSnackbar}
-                            autoHideDuration={6000}
-                            onClose={handleSnackbarClose}
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                            <Alert
-                                onClose={handleSnackbarClose}
-                                severity="success"
-                                variant="filled"
-                                sx={{ width: '100%' }}
-
-                            >
-                                Post edited
-                            </Alert>
-                        </Snackbar>
 
                     </>
                 )}
