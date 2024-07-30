@@ -27,6 +27,7 @@ const MyAccount = () => {
   const [warningMessage, setWarningMessage] = useState();
   const [isRejected, setIsRejected] = useState(false);
 
+  const [passportStatus, setPassportStatus] = useState()
 
   useEffect(() => {
     const storedData =
@@ -36,6 +37,9 @@ const MyAccount = () => {
       var userJson = JSON.parse(storedData);
 
       setUserType(userJson.data.user_type);
+
+      setPassportStatus(userJson.data.passportStatus)
+
 
 
       /* setPassportStatus(userJson.data.setPassportStatus);
@@ -163,7 +167,7 @@ const MyAccount = () => {
 
 
 
-            {(user_type === "EM" || user_type === "ITM") && (
+            {((user_type === "EM" || user_type === "ITM") && ( passportStatus === "validated"  ) ) && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={newsBlogRef}
