@@ -18,6 +18,9 @@ import 'react-quill/dist/quill.snow.css';
 import TextField from "@mui/material/TextField";
 
 
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 
 
 // FilePond
@@ -72,11 +75,21 @@ const readingTime = (text) => {
 const GameDetails = ({ postZ, onBack }) => {
     const popupRef = useRef(null);
 
-    
+
+    const [openSnackbar, setOpenSnackbar] = useState(true);
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbar(false);
+    };
+
     const [post, setPost] = useState(postZ); // initial state it gets.. from props.. fine.. so I don't have to redeclare everywhere..  just edit this one..
 
-   
-    
+
+
 
 
     const cancelDeletion = () => {
@@ -95,7 +108,7 @@ const GameDetails = ({ postZ, onBack }) => {
                 console.log('Post deleted successfully', response.message);
 
 
-                onBack();
+                onBack(true);
 
             } else {
                 console.error('Failed to delete post. Status:', response.status);
@@ -161,6 +174,7 @@ const GameDetails = ({ postZ, onBack }) => {
                 console.log(response.data.message)
 
                 setIsEditing(false)
+                setOpenSnackbar(true)
 
 
 
@@ -293,28 +307,28 @@ const GameDetails = ({ postZ, onBack }) => {
     const updateLatestData = async () => {
 
 
-        try{
+        try {
 
             const response = await axios.get(
                 `${BACKEND_SERVER_BASE_URL}/blog/gamesDetails`,
                 {
-                  params: {
-                    postId: post.postId,
-                    
-                    
-                  },
-                }
-              );
+                    params: {
+                        postId: post.postId,
 
-              console.log(response.data)
-              setPost(response.data)
+
+                    },
+                }
+            );
+
+            console.log(response.data)
+            setPost(response.data)
 
 
 
 
         } catch (error) {
             console.error(error);
-          }
+        }
 
 
     }
@@ -331,7 +345,7 @@ const GameDetails = ({ postZ, onBack }) => {
                 <div className="flex justify-between">
 
 
-                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={onBack}>Back to list</button>
+                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => {onBack(false)}}>Back to list</button>
 
                     <div className="flex gap-2 m-2" >
 
@@ -637,6 +651,23 @@ const GameDetails = ({ postZ, onBack }) => {
 
                         </form>
 
+
+
+
+                        <Snackbar open={openSnackbar}
+                            autoHideDuration={6000}
+                            onClose={handleSnackbarClose}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                            <Alert
+                                onClose={handleSnackbarClose}
+                                severity="success"
+                                variant="filled"
+                                sx={{ width: '100%' }}
+
+                            >
+                                Post edited
+                            </Alert>
+                        </Snackbar>
 
                     </>
                 )}
