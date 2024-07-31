@@ -1,6 +1,9 @@
 // this is main page, where people can come from google search
 
-import { Navbar } from "../components/Navbar";
+// ovo import
+import 'animate.css';
+
+
 import { Footer } from "../components/Footer";
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
@@ -20,6 +23,14 @@ import { EconomiscLoansHome } from "./Home/EconomiscLoansHome";
 
 
 import { useNavigate } from "react-router-dom";
+import { NavbarHome } from "../components/NavbarHome";
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { GridOfSportsHome } from '../components/Home/GridOfSportsHome';
+
+
+
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -43,64 +54,62 @@ const ExpandMore = styled((props) => {
 // ? expand more
 
 
+
+// for countdown
+const calculateTimeLeft = (targetDate) => {
+  const now = new Date();
+  const difference = targetDate - now;
+  let timeLeft = {};
+
+  if (difference > 0) {
+    timeLeft = {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    };
+  }
+
+  return timeLeft;
+};
+
 // okej, ovo radi (ovo je sigurniji način da fetch-ujes, nego axios API... )
 
 const Home = () => {
 
 
-  // ? expand more
+  const targetDate = new Date('2028-06-25T00:00:00');
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
+
+
   const [expandedFirstText, setExpandedFirstText] = useState(false);
+
   const [expandedSecondText, setExpandedSecondText] = useState(false);
   const [expandedThirdText, setExpandedThirdText] = useState(false);
-
-
-
-  const [expandedLoans, setExpandedLoans] = useState(false);
-  const [expandedBroadcast, setExpandedBroadcast] = useState(false);
-  const [expandedSponsorship, setExpandedSponsorship] = useState(false);
-
-
-
-
-
-
-
-
-
-
-
-  const [games, setGames] = useState([]);
-
+  const [expandedFourthText, setExpandedFourthText] = useState(false);
+  const [expandedFifthText, setExpandedFifthText] = useState(false);
+  const [expandedSixthText, setExpandedSixthText] = useState(false);
+  const [expandedSeventhText, setExpandedSeventhText] = useState(false);
+  const [expandedEighthText, setExpandedEighthText] = useState(false);
+  const [expandedNinethText, setExpandedNinethText] = useState(false);
+  const [expandedTenthText, setExpandedTenthText] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchNewsGames();
+
+    AOS.init();
   }, []);
 
-  const fetchNewsGames = async () => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/items/stockholm_games`
-      );
 
-      /* 
-this is from official:
-    const client = createDirectus('http://localhost:8055').with(rest());
-    const response = await client.request(readItems('stockholm_games')); 
-    */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft(targetDate));
+    }, 1000);
 
-      // set variable.
-      setGames(response.data.data);
+    return () => clearInterval(timer);
+  }, []);
 
-      //console.log(games);  // this on first will not reflect updated state ! so it will be null, but access it outside, and it will show...
-    } catch (error) {
-      console.error("Error fetching games:", error);
-    }
-  };
-
-  // so once you accessed it outside of useEffect, then it worked fine..
-  console.log(games);
 
 
 
@@ -114,130 +123,232 @@ this is from official:
 
   return (
     <>
-      <Navbar />
+      <NavbarHome />
 
-      <div className="">
-        <h1 className="flex text-[40px] mt-8 justify-center underline decoration-red_first pl-4 ">
-          Stockholm 2028 Games
-        </h1>
+
+
+
+
+
+      {/* first div */}
+      <div className="firstHhomeImage flex justify-center items-center flex-col">
+
+
+
+
+        <div className="countdown-timer  flex items-center justify-center ">
+
+          <p className="basis-1/2 p-8  ">Stockholm, Sweden <br /> June 25th - July 2nd 2028</p>
+
+
+          <div className="flex space-x-8 p-4">
+            <div className="flex flex-col items-center">
+              <p className="text-4xl"><b>{timeLeft.days ?? 0}</b></p>
+              <p>Days</p>
+              
+            </div>
+
+
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.hours ?? 0}</p>
+              <p>Hours</p>
+            </div>
+
+         
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.minutes ?? 0}</p>
+              <p>Minutes</p>
+            </div>
+
+         
+
+            <div className="flex flex-col items-center">
+              <p className="text-4xl">{timeLeft.seconds ?? 0}</p>
+              <p>Sec</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div className="flex items-center justify-center pt-64 gap-8">
+          <p className="text-4xl" style={{ color: "white" }}>Stockholm 2028 Games</p>
+
+          <Button
+
+
+            onClick={() => { navigate("/register") }}
+            className="w-44 "
+            style={{ marginTop: "0px" }}
+            sx={{
+              height: "45px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 3,
+              border: `1px solid #AF2626`,
+              "&:hover": {
+                background: "rgb(202, 67, 67)",
+                color: "white",
+                border: `1px solid rgb(202, 67, 67)`,
+              },
+            }}
+            id="randomize-btn"
+            type="submit"
+
+
+          >
+            <span className="popins-font" style={{ textTransform: "none" }} >Apply for now</span>
+          </Button>
+
+
+        </div>
+
+        <div className="flex items-center justify-center pt-8 pl-24  pr-24  ">
+          <p style={{ color: "white" }}>The Randomolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.</p>
+
+        </div>
+
+
       </div>
 
-      {/* stockholm games content */}
-
-      <br />
-      <p><b>titles</b></p>
-
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {item.title}</li>
-          ))}
-        </ul>
-      </div>
-
-      <br />
-
-      <p><b>subtitles</b></p>
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {item.subtitle}</li>
-          ))}
-        </ul>
-      </div>
-
-      <br />
 
 
 
-      <p><b>time to read</b></p>
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {item.time_to_read} min read</li>
-          ))}
-        </ul>
+      {/* Our Competitions */}
+      <div className="flex justify-center items-center flex-col" data-aos="fade-up" data-aos-offset="300">
+
+        <p className="text-[30px] text-red_first mt-8 "><b>Our Competitions</b></p>
+
+
+        {/* outer box  */}
+        <GridOfSportsHome />
       </div>
 
 
 
-      <br />
+      {/* Our Beliefs */}
+      <div className="flex justify-center items-start overflow-x-hidden">
 
 
 
-      <p><b>Date</b></p>
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {formatDate(item.date_created)}</li>
-          ))}
-        </ul>
-      </div>
+        <div data-aos="fade-right" data-aos-offset="200" className="basis-1/3 secondHhomeImage flex justify-center items-start">
+
+          <p className="text-4xl mt-8 mr-6" style={{ color: "white" }} >Our Beliefs</p>
+
+        </div>
 
 
-      <br />
+        <div data-aos="fade-left" data-aos-offset="200" className="w-full h-[350px] p-4 pt-8 pr-24 bg-[#F7FAFA]">
 
-      <p><b>Content</b></p>
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <li key={index}>ID: {item.stockholm_games_id} -- {item.content && (
-              <div dangerouslySetInnerHTML={{ __html: item.content }} />
-            )}
-            </li>
-          ))}
-        </ul>
+          <p className="text-justify">We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.</p>
+          <br />
+          <p className="text-justify">In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. We stand against any political pressure to exclude athletes based on their identity or beliefs. Transparency is our commitment, using open-source technology for payments and communication. Our democratic approach guarantees equal rights and voting power for every nation and citizen. We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values.</p>
+        </div>
+
       </div>
 
 
 
-      <br />
+      {/* Economics */}
+      <div className="flex justify-center items-start bg-[#F7FAFA] mt-8" data-aos="fade-up" data-aos-offset="200">
 
-      <p><b>Images</b></p>
-      <div>
-        <ul>
-          {games.map((item, index) => (
-            <>
-              <li key={index}>ID: {item.stockholm_games_id}</li>
-
-              <img src={"http://localhost:8055/assets/" + item.post_image} style={{ width: '100px', height: '100px' }} />
-            </>
-          ))}
-        </ul>
-      </div>
+        <div className=" flex flex-col w-full h-[350px]  justify-center ml-24 mr-24 p-4 mb-16 " >
 
 
-      <hr className="mt-10 mb-10" />
+          <p className="text-[30px] text-red_first mt-8 self-center"><b>Economics: Three types of income:</b></p>
+          <p className=" self-center mt-4 text-center">Our organization has three types of income sources: Loans, Broadcasting Rights, and Sponsorships. All payments are published on the blockchain. Below is a detailed description of each income type:</p>
+
+
+          <div className="flex justify-around mt-8 ml-16 mr-16">
+
+            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none "
+
+              data-aos="zoom-in-right"
+              data-aos-delay="100"
+
+              data-aos-offset="100"
+
+
+            >
+              <p className="font-semibold">1</p>
+              <p className="text-lg font-semibold text-red_first" >Loans</p>
+
+              {/* <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img> */}
+
+
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+                <circle class="fillme"></circle>
+              </svg>
+            </div>
 
 
 
 
+            <div className=" flex justify-center items-center flex-col economicsItem cursor-pointer select-none"
+
+              data-aos="zoom-in-right"
+              data-aos-delay="300"
+              data-aos-offset="100"
+            >
+              <p className="font-semibold" >2</p>
+              <p className="text-lg font-semibold text-red_first text-center">Broadcasting rights</p>
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
+
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+                <circle class="fillme"></circle>
+              </svg>
+
+            </div>
 
 
+            <div className="  flex justify-center items-center flex-col  economicsItem cursor-pointer select-none"
 
-      <div className="mb-52">
+              data-aos="zoom-in-right"
+              data-aos-delay="600"
+              data-aos-offset="100"
 
+            >
+              <p className="font-semibold">3</p>
+              <p className="text-lg font-semibold text-red_first text-center">Sponsorship</p>
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
 
-        {/* prvi blok */}
-        <div>
-          <h1 className="flex text-[40px] mt-32 justify-center">
-            We are Brothers & Sisters, United through Sports
-          </h1>
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="ellipse-image">
+                <circle class="fillme"></circle>
+              </svg>
 
-          <div className="m-8">
-            <p > The randolympics is an innovative and exciting event that reimagines traditional sports competitions by randomly assigning athletes to various events. This new format addresses several critical issues often associated with major sports events today, promoting a fairer, more inclusive, and sustainable sporting experience.
-            </p>
+            </div>
+
 
           </div>
 
+        </div>
+      </div>
 
 
 
 
-          <div className="m-8 flex justify-center items-center">
+      {/* FAQ */}
+      <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up" id="FAQ">
 
+        <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
+
+
+        <div className='w-1/2'>
+
+
+          {/* <div className=" flex justify-around items-center w-full bg-black_first">
+ */}
+
+          {/* prvi */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFirstText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-4`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">1.</p>
             <p expand={expandedFirstText}
-              onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none">Read More</p>
+              onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none flex-grow pl-4  ">What is Randolympics ?</p>
+
 
 
 
@@ -251,70 +362,32 @@ this is from official:
             >
 
               <ExpandMoreIcon />
+
             </ExpandMore>
+
+
           </div>
-
-
-          <div className="m-8">
+          <div className="">
             <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
-              <FirstCollapsibleHome />
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
             </Collapse>
           </div>
 
 
 
-
-          <div className="flex m-8 justify-center">
-            <h1 className=" text-3xl">Get Involved</h1>
-          </div>
-
-          <ul className="m-8" >
-            <li >Learn more about our mission and values</li>
-            <li>Explore how you can participate or host future events.</li>
-            <li>Discover the exciting range of sports and activities featured in the randolympics</li>
-          </ul>
+          {/* drugi  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSecondText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-
-
-          <div className="flex m-8 justify-center">
-            <h1 className=" text-3xl">Stay Connected</h1>
-          </div>
-
-          <ul className="m-8" >
-            <li >Follow us on social media for the latest updates.</li>
-            <li>Subscribe to our newsletter for exclusive content and event announcements.</li>
-            <li>Engage with the randolympics community and share your experiences.</li>
-          </ul>
-
-
-
-          <p className="m-8" >Experience the thrill of unpredictability and the joy of unity at the randolympics!</p>
-
-        </div>
-
-
-
-
-        {/* drugi blok */}
-        <div>
-
-          <h1 className="flex text-[40px] mt-32 justify-center">
-            Values and Beliefs
-          </h1>
-
-
-          <div className="m-8">
-            <p > We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.
-            </p>
-
-          </div>
-
-
-          <div className="m-8 flex justify-center items-center">
-
+            <p className="text-red_first font-semibold pl-2 select-none">2.</p>
             <p expand={expandedSecondText}
-              onClick={() => { setExpandedSecondText(!expandedSecondText) }} className="cursor-pointer select-none">Read More</p>
+              onClick={() => { setExpandedSecondText(!expandedSecondText) }} className="cursor-pointer select-none flex-grow pl-4  ">How does Randolympics work ?</p>
+
 
 
 
@@ -328,347 +401,352 @@ this is from official:
             >
 
               <ExpandMoreIcon />
+
             </ExpandMore>
+
+
           </div>
-
-
-          <div className="m-8">
+          <div className="">
             <Collapse in={expandedSecondText} timeout="auto" unmountOnExit>
 
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-              <p>
+                <p>familijo</p>
+              </div>
 
-                In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. <br />
-                We stand against any political pressure to exclude athletes based on their identity or beliefs. <br />
-                Transparency is our commitment, using open-source technology for payments and communication. <br />
-                Our democratic approach guarantees equal rights and voting power for every nation and citizen. <br />
-                We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values. <br />
-
-              </p>
             </Collapse>
           </div>
 
-        </div>
 
 
-
-        {/* treci blok */}
-        <div>
-
-          <h1 className="flex text-[40px] mt-32 justify-center">
-            Our Competitions
-          </h1>
+          {/* treci  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedThirdText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-          {/* for all text */}
-          <div className="m-8">
-
-            <div className="flex ">
-              <img className="w-10 h-10 mr-4 mb-4" src="home/competitions/archery.png" />
-              <p><b>Archery</b>: Discover your inner sharpshooter! Imagine Jack from work cheering as you hit the bullseye, excitedly sharing your achievements during coffee breaks. Archery enhances focus and precision, and it's a fantastic way to build mental discipline and physical control.
-              </p>
-            </div>
-
-
-            <div className="flex ">
-              <img className="w-10 h-10 mr-4 mb-4" src="home/competitions/archery.png" />
-              <p><b>Athletics</b>: Whether it's running, jumping, or throwing, athletics offers a thrilling way to challenge your body and reach new personal bests. Eva from the gym will be inspired by your dedication and celebrate your milestones with you.
-              </p>
-            </div>
-
-
-            <div className="m-8 flex justify-center items-center">
-
-              <p expand={expandedThirdText}
-                onClick={() => { setExpandedThirdText(!expandedThirdText) }} className="cursor-pointer select-none">Read More</p>
+            <p className="text-red_first font-semibold pl-2 select-none">3.</p>
+            <p expand={expandedThirdText}
+              onClick={() => { setExpandedThirdText(!expandedThirdText) }} className="cursor-pointer select-none flex-grow pl-4  ">Who can participate ?</p>
 
 
 
 
-              <ExpandMore
 
-                expand={expandedThirdText}
-                onClick={() => { setExpandedThirdText(!expandedThirdText) }}
-                aria-expanded={expandedThirdText}
-                aria-label="show more"
-              >
+            <ExpandMore
 
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </div>
+              expand={expandedThirdText}
+              onClick={() => { setExpandedThirdText(!expandedThirdText) }}
+              aria-expanded={expandedThirdText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
 
 
+          </div>
+          <div className="">
             <Collapse in={expandedThirdText} timeout="auto" unmountOnExit>
-              <CompetitionsHome />
 
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
 
             </Collapse>
+          </div>
 
+
+
+          {/* cetvrti  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFourthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">4.</p>
+            <p expand={expandedFourthText}
+              onClick={() => { setExpandedFourthText(!expandedFourthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are athletes selected ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedFourthText}
+              onClick={() => { setExpandedFourthText(!expandedFourthText) }}
+              aria-expanded={expandedFourthText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
 
 
           </div>
+          <div className="">
+            <Collapse in={expandedFourthText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+
+          {/* peti  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFifthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">5.</p>
+            <p expand={expandedFifthText}
+              onClick={() => { setExpandedFifthText(!expandedFifthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are weight categories organized ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedFifthText}
+              onClick={() => { setExpandedFifthText(!expandedFifthText) }}
+              aria-expanded={expandedFifthText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedFifthText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+
+          {/* sesti  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSixthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">6.</p>
+            <p expand={expandedSixthText}
+              onClick={() => { setExpandedSixthText(!expandedSixthText) }} className="cursor-pointer select-none flex-grow pl-4  ">What sports are included in Randolympics ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedSixthText}
+              onClick={() => { setExpandedSixthText(!expandedSixthText) }}
+              aria-expanded={expandedSixthText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedSixthText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+          {/* sedmi  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSeventhText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">7.</p>
+            <p expand={expandedSeventhText}
+              onClick={() => { setExpandedSeventhText(!expandedSeventhText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are travel costs covered ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedSeventhText}
+              onClick={() => { setExpandedSeventhText(!expandedSeventhText) }}
+              aria-expanded={expandedSeventhText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedSeventhText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+          {/* osmi  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedEighthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">8.</p>
+            <p expand={expandedEighthText}
+              onClick={() => { setExpandedEighthText(!expandedEighthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How can I sign up to participate ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedEighthText}
+              onClick={() => { setExpandedEighthText(!expandedEighthText) }}
+              aria-expanded={expandedEighthText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedEighthText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+
+          {/* deveti  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedNinethText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">9.</p>
+            <p expand={expandedNinethText}
+              onClick={() => { setExpandedNinethText(!expandedNinethText) }} className="cursor-pointer select-none flex-grow pl-4  ">How can my company become a sponsor ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedNinethText}
+              onClick={() => { setExpandedNinethText(!expandedNinethText) }}
+              aria-expanded={expandedNinethText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedNinethText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+          {/* deseti  */}
+          <div className={`flex justify-between items-center w-full bg-black text-white ${expandedTenthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
+
+
+            <p className="text-red_first font-semibold pl-2 select-none">10.</p>
+            <p expand={expandedTenthText}
+              onClick={() => { setExpandedTenthText(!expandedTenthText) }} className="cursor-pointer select-none flex-grow pl-4  ">Where can I find more information about Randolympics ?</p>
+
+
+
+
+
+            <ExpandMore
+
+              expand={expandedTenthText}
+              onClick={() => { setExpandedTenthText(!expandedTenthText) }}
+              aria-expanded={expandedTenthText}
+              aria-label="show more"
+            >
+
+              <ExpandMoreIcon />
+
+            </ExpandMore>
+
+
+          </div>
+          <div className="">
+            <Collapse in={expandedTenthText} timeout="auto" unmountOnExit>
+
+              <div className="bg-[#F7FAFA] rounded-b-lg p-4">
+
+                <p>familijo</p>
+              </div>
+
+            </Collapse>
+          </div>
+
+
+
 
         </div>
-
-
       </div>
 
 
+      <div className="h-96"></div>
 
 
-      {/* economics dio */}
-      <div>
 
-        <div>
 
-          <h1 className="flex text-[40px] mt-32 justify-center">
-            Economics
-          </h1>
 
 
-          {/* for all text */}
-          <div className="m-8">
 
 
-            {/* loans */}
-            <div className="m-8 flex justify-center items-center">
 
-              <p expand={expandedLoans}
-                onClick={() => { setExpandedLoans(!expandedLoans) }} className="cursor-pointer select-none">1. Loans</p>
 
 
 
 
-              <ExpandMore
-
-                expand={expandedLoans}
-                onClick={() => { setExpandedLoans(!expandedLoans) }}
-                aria-expanded={expandedLoans}
-                aria-label="show more"
-              >
-
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </div>
-
-
-            <Collapse in={expandedLoans} timeout="auto" unmountOnExit>
-
-              <div>
-                <h1 className="text-2xl mb-2">Loans</h1>
-
-                <p className="mb-2">Loans are a source of income for the Randolympics organization where they receive funding from loan givers. These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the loan agreement. The general rule is that 20% of all revenues are paid back to existing loan contracts in equal ratios.
-
-                </p>
-
-
-                <div className="flex justify-center">
-                  <Button onClick={() => {
-                    navigate("/economicsloan");
-                  }}>Ongoing Loan Auctions</Button>
-
-                </div>
-              </div>
-
-
-            </Collapse>
-
-
-
-
-
-            {/* broadcasting rigths */}
-            <div className="m-8 flex justify-center items-center">
-
-              <p expand={expandedBroadcast}
-                onClick={() => { setExpandedBroadcast(!expandedBroadcast) }} className="cursor-pointer select-none">2. Broadcasting Rights</p>
-
-
-
-
-              <ExpandMore
-
-                expand={expandedBroadcast}
-                onClick={() => { setExpandedBroadcast(!expandedBroadcast) }}
-                aria-expanded={expandedBroadcast}
-                aria-label="show more"
-              >
-
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </div>
-
-
-            <Collapse in={expandedBroadcast} timeout="auto" unmountOnExit>
-
-              <div>
-                <h1 className="text-2xl mb-2">Broadcasting Rights</h1>
-
-                <p className="mb-2">Broadcasting Rights involve granting media entities the permission to cover and report on Randolympics events. These rights can be acquired by various media platforms, such as:
-                </p>
-
-
-                <ul className="mb-2 ml-8">
-                  <li><b>YouTube Channels</b>: Independent or corporate channels that wish to broadcast the events online.</li>
-                  <li><b>Tik Tok Influencers</b>: Content creators on TikTok who want to provide live coverage or highlights.</li>
-                  <li><b>TV Stations</b>: Traditional television broadcasters who aim to televise the events to a wider audience.</li>
-                </ul>
-
-
-                <p className="mb-2"> The broadcasting rights are distributed by country, meaning media outlets from different countries can acquire the rights specific to their region. This ensures wide and diverse media coverage, catering to different audiences globally.</p>
-
-                <div className="flex justify-center">
-                  <Button onClick={()=>{navigate("/economicsbroadcast")}}>Ongoing Loan Auctions</Button>
-
-                </div>
-              </div>
-
-
-            </Collapse>
-
-
-
-
-
-            {/* Sponsorship */}
-            <div className="m-8 flex justify-center items-center">
-
-              <p expand={expandedSponsorship}
-                onClick={() => { setExpandedSponsorship(!expandedSponsorship) }} className="cursor-pointer select-none">3. Sponsorship</p>
-
-
-
-
-              <ExpandMore
-
-                expand={expandedSponsorship}
-                onClick={() => { setExpandedSponsorship(!expandedSponsorship) }}
-                aria-expanded={expandedSponsorship}
-                aria-label="show more"
-              >
-
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </div>
-
-
-            <Collapse in={expandedSponsorship} timeout="auto" unmountOnExit>
-
-              <div>
-                <h1 className="text-2xl mb-2">Sponsorship</h1>
-
-                <p className="mb-2">Sponsorship is a significant source of income where various entities can sponsor different aspects of the Randolympics. This includes               </p>
-
-
-                <ul className="mb-2 ml-8">
-                  <li><b>Events</b>: Companies or brands can sponsor individual events within the Randolympics.</li>
-                  <li><b>National Teams</b>: Sponsorship deals can be made with national teams, allowing sponsors to have their branding associated with specific teams.</li>
-                  <li><b>Names of the Games</b>: Sponsors can acquire naming rights for the games or specific events within the Randolympics.</li>
-                </ul>
-
-
-                <p className="mb-2"> Additionally, there are opportunities for branded merchandise
-                </p>
-
-                <ul className="mb-2 ml-8">
-                  <li><b>Branded Items</b>: Contracts can be made for selling branded items such as t-shirts, hats, and other merchandise. These contracts allow sponsors to use the Randolympics branding on their products, creating a source of revenue through merchandise sales.</li>
-                </ul>
-
-
-                <p className="mb-2">These income sources ensure the Randolympics organization has a diverse stream of revenue, aiding in the sustainability and gr of the events</p>
-
-
-
-                <div className="flex justify-center">
-                  <Button onClick={()=>{navigate("/economicssponsorship")}}>Ongoing Sponsorship Auctions</Button>
-
-                </div>
-              </div>
-
-
-            </Collapse>
-
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-
-      {/* start about us part */}
-
-      <div className="mb-52">
-        <h1 className="flex text-[40px] mt-32 justify-center underline decoration-red_first">
-          About us
-        </h1>
-
-        <div className="flex ">
-          <div className="basis-1/2 pl-8 pt-16 text-justify">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
-              <br /> <br />
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-              est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-              velit, sed quia non numquam eius modi tempora incidunt ut labore
-              et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-              veniam, quis nostrum exercitationem ullam corporis suscipit
-              laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
-              vel eum iure reprehenderit qui in ea voluptate velit esse quam
-              nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-              voluptas nulla pariatur. But I must explain to you how all this
-              mistaken idea of denouncing pleasure and praising pain was born
-              and I will give you a complete account of the system, and expound
-              the actual teachings of the great explorer of the truth, the
-              master-builder of human happiness. No one rejects, dislikes, or
-              avoids pleasure itself, because it is pleasure, but because those
-              who do not know how to pursue pleas. But I must explain to you how
-              all this mistaken idea of denouncing pleasure and praising pain
-              was born and I will give <br />
-            </p>
-          </div>
-
-          <div className="basis-1/2 flex justify-center items-center">
-            <img
-              src="landing_page/about_us.png"
-              className="image_landing_about_us"
-            />
-          </div>
-        </div>
-
-        <div className="p-8 text-justify">
-          But I must explain to you how all this mistaken idea of denouncing
-          pleasure and praising pain was born and I will give you a complete
-          account of the system, and expound the actual teachings of the great
-          explorer of the truth, the master-builder of human happiness. No one
-          rejects, dislikes, or avoids pleasure itself, because it is pleasure,
-          but because those who do not know how to pursue pleasure rationally
-          encounter consequences that are extremely painful. Nor again is there
-          anyone who loves or pursues or desires to obtain pain of itself,
-          because it is pain, but because occasionally circumstances occur in
-          which toil and pain can procure him some great pleasure. To take a
-          trivial example, which of us ever undertakes laborious physical
-          exercise, except to obtain some advantage from it? But who has any
-          right to find fault with a man who chooses to enjoy a pleasure that
-          has no annoying consequences, or one who avoids a pain that produces
-          no resultant pleasure
-        </div>
-      </div>
-
-      {/* end about us part */}
 
       <Footer />
     </>

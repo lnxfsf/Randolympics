@@ -12,7 +12,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import { EconomiscLoansHome } from "./pages/Home/EconomiscLoansHome";
 import { EconomicsBroadcastingHome } from "./pages/Home/EconomicsBroadcastingHome";
 import { EconomicsSponsorshipHome } from "./pages/Home/EconomicsSponsorshipHome";
-
+import { News } from "./pages/News";
 
 
 
@@ -27,7 +27,7 @@ const App = () => {
 
         
 
-
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
@@ -36,9 +36,13 @@ const App = () => {
 
         <Route path="/myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
 
+
+
         <Route path="/economicsloan" element={<EconomiscLoansHome />} />
         <Route path="/economicsbroadcast" element={<EconomicsBroadcastingHome />} />
         <Route path="/economicssponsorship" element={<EconomicsSponsorshipHome  />} />
+
+        <Route path="/news" element={<News />} />
 
       </Routes>
     </>

@@ -363,6 +363,8 @@ const Settings = () => {
                         <span className="popins-font">Resign</span>
                       </Button>
                     </div>
+
+                    
                   </div>
                 </Popup>
 

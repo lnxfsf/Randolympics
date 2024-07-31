@@ -15,6 +15,7 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
 
 const MyAccount = () => {
   let { logoutUser } = useContext(AuthContext);
@@ -26,6 +27,7 @@ const MyAccount = () => {
   const [warningMessage, setWarningMessage] = useState();
   const [isRejected, setIsRejected] = useState(false);
 
+  const [passportStatus, setPassportStatus] = useState()
 
   useEffect(() => {
     const storedData =
@@ -36,19 +38,22 @@ const MyAccount = () => {
 
       setUserType(userJson.data.user_type);
 
-     
+      setPassportStatus(userJson.data.passportStatus)
+
+
+
       /* setPassportStatus(userJson.data.setPassportStatus);
       setBirthdate(userJson.data.birthdate); */
     }
 
-    
+
     warningBoxFunc(
       userJson.data.passportStatus,
       userJson.data.birthdate,
       userJson.data.passport_photo
     );
 
-   
+
   }, [isRejected, warningMessage]);
 
   const [selectedItem, setSelectedItem] = useState("myAccount");
@@ -58,6 +63,8 @@ const MyAccount = () => {
   const settingsRef = useRef(null);
   const teamRef = useRef(null);
   const electionsRef = useRef(null);
+
+  const newsBlogRef = useRef(null);
 
   const passportVerificationRef = useRef(null);
   const loginTrafficHisRef = useRef(null);
@@ -73,9 +80,9 @@ const MyAccount = () => {
   };
 
   const warningBoxFunc = (passportStatus, birthdate, passport_photo) => {
-    
-   
-    
+
+
+
     if (passportStatus === "unvalidated") {
       if (birthdate == null && passport_photo == null) {
         setWarningMessage(
@@ -99,7 +106,7 @@ const MyAccount = () => {
       setIsRejected(true)
 
       // TODO, red warning box, ! izgleda interesantnije ovaj scenario !
-    } else if (passportStatus === "validted"){
+    } else if (passportStatus === "validted") {
       setWarningMessage("");
       setIsRejected(false)
     }
@@ -114,33 +121,30 @@ const MyAccount = () => {
         <div className="basis-1/3 side_nav p-4 ">
           <ul className="list flex flex-col">
             <li
-            style={{listStyleType: "none"}}
+              style={{ listStyleType: "none" }}
               ref={myAccountRef}
-              className={`list-item ${
-                selectedItem === "myAccount" ? "selected" : ""
-              }`}
+              className={`list-item ${selectedItem === "myAccount" ? "selected" : ""
+                }`}
               onClick={() => handleClick("myAccount")}
             >
               <img src="/myaccount/user.svg" className="icon" />
               My Account
             </li>
             <li
-            style={{listStyleType: "none"}}
+              style={{ listStyleType: "none" }}
               ref={settingsRef}
-              className={`list-item ${
-                selectedItem === "settings" ? "selected" : ""
-              }`}
+              className={`list-item ${selectedItem === "settings" ? "selected" : ""
+                }`}
               onClick={() => handleClick("settings")}
             >
               <img src="/myaccount/settings.svg" className="icon" />
               Settings
             </li>
             <li
-            style={{listStyleType: "none"}}
+              style={{ listStyleType: "none" }}
               ref={teamRef}
-              className={`list-item ${
-                selectedItem === "team" ? "selected" : ""
-              }`}
+              className={`list-item ${selectedItem === "team" ? "selected" : ""
+                }`}
               onClick={() => handleClick("team")}
             >
               <img src="/myaccount/team.svg" className="icon" />
@@ -149,15 +153,30 @@ const MyAccount = () => {
 
             {user_type !== "VM" && (
               <li
-              style={{listStyleType: "none"}}
+                style={{ listStyleType: "none" }}
                 ref={electionsRef}
-                className={`list-item ${
-                  selectedItem === "elections" ? "selected" : ""
-                }`}
+                className={`list-item ${selectedItem === "elections" ? "selected" : ""
+                  }`}
                 onClick={() => handleClick("elections")}
               >
                 <img src="/myaccount/team.svg" className="icon" />
                 Elections
+              </li>
+            )}
+
+
+
+
+            {((user_type === "EM" || user_type === "ITM") && ( passportStatus === "validated"  ) ) && (
+              <li
+                style={{ listStyleType: "none" }}
+                ref={newsBlogRef}
+                className={`list-item ${selectedItem === "news" ? "selected" : ""
+                }`}
+                onClick={() => handleClick("news")}
+              >
+                <img src="/myaccount/news.svg" className="icon" />
+                News
               </li>
             )}
 
@@ -167,17 +186,18 @@ const MyAccount = () => {
             {/* //? passport validation (GP and VM) */}
             {(user_type === "VM" || user_type === "GP") && (
               <li
-              style={{listStyleType: "none"}}
+                style={{ listStyleType: "none" }}
                 ref={passportVerificationRef}
-                className={`list-item ${
-                  selectedItem === "passportVerification" ? "selected" : ""
-                }`}
+                className={`list-item ${selectedItem === "passportVerification" ? "selected" : ""
+                  }`}
                 onClick={() => handleClick("passportVerification")}
               >
                 <img src="/myaccount/passport.svg" className="icon" />
                 Passport Verification
               </li>
             )}
+
+
 
             {/*  Show Login & Traffic History (for all managers , can see it ! ) */}
             {(user_type === "VM" ||
@@ -187,25 +207,23 @@ const MyAccount = () => {
               user_type === "SM" ||
               user_type === "LM" ||
               user_type === "GP") && (
-              <li
-              style={{listStyleType: "none"}}
-                ref={loginTrafficHisRef}
-                className={`list-item ${
-                  selectedItem === "loginTrafficHistory" ? "selected" : ""
-                }`}
-                onClick={() => handleClick("loginTrafficHistory")}
-              >
-                <img src="/myaccount/login_history.svg" className="icon" />
-                Login & Traffic History
-              </li>
-            )}
+                <li
+                  style={{ listStyleType: "none" }}
+                  ref={loginTrafficHisRef}
+                  className={`list-item ${selectedItem === "loginTrafficHistory" ? "selected" : ""
+                    }`}
+                  onClick={() => handleClick("loginTrafficHistory")}
+                >
+                  <img src="/myaccount/login_history.svg" className="icon" />
+                  Login & Traffic History
+                </li>
+              )}
 
             <li
-            style={{listStyleType: "none"}}
+              style={{ listStyleType: "none" }}
               ref={logoutRef}
-              className={`list-item ${
-                selectedItem === "logout" ? "selected" : ""
-              }`}
+              className={`list-item ${selectedItem === "logout" ? "selected" : ""
+                }`}
               onClick={() => handleClick("logout")}
             >
               <img src="/myaccount/exit.svg" className="icon" />
@@ -215,10 +233,10 @@ const MyAccount = () => {
 
           {warningMessage && (
             <>
-             <div className={`flex flex-col p-2 mt-4 pl-2 ${isRejected===true ? 'error_box_rejected' : 'error_box'} `}  >
-             
-             
-             
+              <div className={`flex flex-col p-2 mt-4 pl-2 ${isRejected === true ? 'error_box_rejected' : 'error_box'} `}  >
+
+
+
                 <div className="flex">
                   {/*  <img src="/myaccount/triangle-exclamation.svg" /> */}
                   <WarningAmberIcon />
@@ -239,6 +257,8 @@ const MyAccount = () => {
           {selectedItem === "team" && <Team />}
 
           {selectedItem === "elections" && <Elections />}
+
+          {selectedItem === "news" && <NewsAdmin />}
 
           {selectedItem === "passportVerification" && <PassportVrfy />}
           {selectedItem === "loginTrafficHistory" && <LgnTraffcHistory />}

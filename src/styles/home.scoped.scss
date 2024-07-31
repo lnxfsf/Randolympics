@@ -12,3 +12,216 @@ ul li {
     margin-left: 10px;
     list-style-type: decimal;
  }
+
+
+
+ 
+
+//-----------------
+
+
+.firstHhomeImage {
+
+   /*  background-image: url('/home/home1.jpg'), linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%); 
+    */
+/* 
+  
+   background: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%);
+    */
+
+    background-image: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
+       url('/home/home1.jpg'); 
+
+
+      
+
+   background-size: cover;
+   background-position: center;
+   /* height: 100vh; */
+
+   height: 160vh;
+
+   
+
+}  
+
+
+
+
+
+.countdown-timer {
+
+   color: white;
+   background-color: rgba(38, 25, 25, 0.8);
+   
+   /* width: 650px; */
+   width: 600px;
+   height: 100px;
+
+   border-radius: 20px;
+
+   margin-left: 20%;
+
+   margin-top: 20%
+/*    margin-top: 15%; */
+
+   
+
+
+
+}
+
+
+
+
+
+.secondHhomeImage {
+
+
+    background-image: linear-gradient(0deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
+       url('/home/home2.jpg'); 
+
+
+   background-size: cover;
+   background-position: center;
+   /* height: 100vh; */
+
+   height: 350px;
+
+   
+
+}  
+ 
+
+
+// the round <div>
+
+.economicsItem {
+   
+   position: relative;
+
+   /* width: 150px;
+   height: 150px; */
+
+   width: 150px;
+   height: 150px;
+
+   border-radius: 50%;  
+   background: white;
+
+
+}
+
+
+
+
+/*  
+
+ovo import u react component
+import 'animate.css';
+i ovo: 
+
+
+
+-webkit-animation: heartBeat 1s;
+animation: heartBeat  1s;  
+
+
+tako imas na hover animation
+
+*/
+
+
+
+.economicsItem:hover {
+   -webkit-animation: pulse infinite 1s;
+   animation: pulse infinite 1s; 
+
+  
+}
+
+
+ .ellipse-image {
+   position: absolute;
+   width: 150px;
+   height: 150px;
+   bottom: 0;
+   right: 0;
+   --size: 100px;
+   --half-size: calc(var(--size) / 2);
+   --stroke-width: 5px;
+   --radius: calc((var(--size) - var(--stroke-width)) / 2);
+   --circumference: calc(var(--radius) * pi * 2);
+   --dash: calc((var(--progress) * var(--circumference)) / 100);
+   --progress: 25;
+ }
+ 
+ .fillme {
+   cx: var(--half-size);
+   cy: var(--half-size);
+   r: var(--radius);
+   stroke-width: var(--stroke-width);
+   fill: none;
+   stroke-linecap: round;
+   stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+   stroke: #af2626;
+   transition: stroke-dasharray 0.3s linear 0s;
+ }
+ 
+ .ellipse-image:hover {
+   --progress: 100;
+ }
+ 
+
+
+
+ // for smaller icons, competitions..
+
+ 
+.competitionItem {
+
+   position: relative;
+
+   width: 50px;
+   height: 50px;
+
+   border-radius: 50%;  
+   background: white;
+
+
+}
+
+
+.competitionItem:hover {
+   -webkit-animation: pulse infinite 1s;
+   animation: pulse infinite 1s; 
+
+  
+}
+
+
+ .ellipse-image-competitions {
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   bottom: 0;
+   right: 0;
+   --size: 100px;
+   --half-size: calc(var(--size) / 2);
+   --stroke-width: 5px;
+   --radius: calc((var(--size) - var(--stroke-width)) / 2);
+   --circumference: calc(var(--radius) * pi * 2);
+   --dash: calc((var(--progress) * var(--circumference)) / 100);
+   --progress: 25;
+
+ }
+
+ 
+ .ellipse-image-competitions:hover {
+   --progress: 100;
+ }
+
+
+
+
+ 

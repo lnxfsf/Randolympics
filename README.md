@@ -82,3 +82,14 @@ npm i moment react-moment
 npm install react-select-country-list
 
  npm install react-zoom-pan-pinch
+npm install aos
+npm install animate.css
+
+
+npm i react-swipeable-views-react-18-fix
+npm install --save --legacy-peer-deps react-swipeable-views 
+
+
+npm install --save react-tabs
+
+npm install react-quill
