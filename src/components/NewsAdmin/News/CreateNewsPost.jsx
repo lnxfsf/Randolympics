@@ -131,6 +131,7 @@ const CreateNewsPost = ({ onBack }) => {
                 console.log("created user success")
                 
                 
+                onBack(false, true);
 
 
 
@@ -155,7 +156,7 @@ const CreateNewsPost = ({ onBack }) => {
 
         // TODO, toast , that it created post
 
-        onBack();
+        
 
     }
 

@@ -127,6 +127,7 @@ const CreateUpcomingPost = ({ onBack }) => {
                 console.log("created user success")
                 
                 
+                onBack(false, true);
 
 
 
@@ -151,7 +152,7 @@ const CreateUpcomingPost = ({ onBack }) => {
 
         // TODO, toast , that it created post
 
-        onBack();
+        
 
     }
 
@@ -256,7 +257,7 @@ const CreateUpcomingPost = ({ onBack }) => {
         <>
 
             <div className="flex justify-between">
-                <button button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { handleCancel(); onBack(); }}>Back</button>
+                <button button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { handleCancel(); onBack(false, false); }}>Back</button>
                 <p>Create post</p>
             </div>
 

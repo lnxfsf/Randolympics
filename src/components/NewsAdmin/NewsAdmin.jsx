@@ -35,17 +35,38 @@ const NewsAdmin = () => {
 
 
     // za toast kada se obrise post (bolje izgleda)
-    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [openSnackbarDeleted, setOpenSnackbarDeleted] = useState(false);
 
 
+    
 
-    const handleSnackbarClose = (event, reason) => {
+
+    const handleSnackbarDeletedClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpenSnackbar(false);
+        setOpenSnackbarDeleted(false);
     };
+
+
+
+
+    const [openSnackbarCreated, setOpenSnackbarCreated] = useState(false);
+
+    
+
+    const handleSnackbarCreatedClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbarCreated(false);
+    };
+
+
+
+
 
 
 
@@ -79,9 +100,13 @@ const NewsAdmin = () => {
 
                     {(selectedUpcomingPost || createUpcomingPost) ? (
                         selectedUpcomingPost ? (
-                            <GameDetails postZ={selectedUpcomingPost} onBack={(deleting) => { setSelectedUpcomingPost(null); if (deleting) { setOpenSnackbar(true) } }} />
+                            <GameDetails postZ={selectedUpcomingPost} onBack={(deleting) => { setSelectedUpcomingPost(null); if (deleting) { setOpenSnackbarDeleted(true) } }} />
                         ) : (
-                            <CreateUpcomingPost onBack={() => { setCreateUpcomingPost(false) }} />
+                            <CreateUpcomingPost onBack={(deleting, created) => { setCreateUpcomingPost(false); if (created) { setOpenSnackbarCreated(true) };  console.log("on izvrsava ovo i dobija: "+created )}}   
+                            
+                            
+                              
+                            />
                         )
                     ) : (
                         <UpcomingGamesList onSelectPost={setSelectedUpcomingPost} onCreatePost={setCreateUpcomingPost} />
@@ -98,9 +123,9 @@ const NewsAdmin = () => {
 
                 {(selectedNewsPost || createNewsPost) ? (
                         selectedNewsPost ? (
-                            <NewsDetails postZ={selectedNewsPost} onBack={(deleting, created) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbar(true) } }} />
+                            <NewsDetails postZ={selectedNewsPost} onBack={(deleting, created) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbarDeleted(true) } }} />
                         ) : (
-                            <CreateNewsPost onBack={() => { setCreateNewsPost(false) }} />
+                            <CreateNewsPost onBack={(deleting, created) => { setCreateNewsPost(false); if (created) { setOpenSnackbarCreated(true) };  console.log("on izvrsava ovo i dobija: "+created )  }} />
                         )
                     ) : (
                         <NewsGamesList onSelectPost={setSelectedNewsPost} onCreatePost={setCreateNewsPost} />
@@ -122,20 +147,40 @@ const NewsAdmin = () => {
 
 
 
-            <Snackbar open={openSnackbar}
+            <Snackbar open={openSnackbarDeleted}
                 autoHideDuration={6000}
-                onClose={handleSnackbarClose}
+                onClose={handleSnackbarDeletedClose}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
                 <Alert
-                    onClose={handleSnackbarClose}
+                    onClose={handleSnackbarDeletedClose}
                     severity="success"
                     variant="filled"
                     sx={{ width: '100%' }}
 
                 >
-                    Successfully deleted post
+                    Deleted post
                 </Alert>
             </Snackbar>
+
+
+
+
+
+            <Snackbar open={openSnackbarCreated}
+                autoHideDuration={6000}
+                onClose={handleSnackbarCreatedClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert
+                    onClose={handleSnackbarCreatedClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >
+                    Created post
+                </Alert>
+            </Snackbar>
+
 
 
 

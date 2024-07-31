@@ -118,7 +118,7 @@ const NewsDetails = ({ postZ, onBack }) => {
                 console.log('Post deleted successfully', response.message);
 
 
-                onBack(true);
+                onBack(true,false);
 
             } else {
                 console.error('Failed to delete post. Status:', response.status);
@@ -436,7 +436,7 @@ const NewsDetails = ({ postZ, onBack }) => {
                 <div className="flex justify-between">
 
 
-                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false) }}>Back to list</button>
+                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false,false) }}>Back to list</button>
 
                     <div className="flex gap-2 m-2" >
 
