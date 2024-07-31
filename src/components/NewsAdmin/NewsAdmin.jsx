@@ -11,6 +11,7 @@ import { GameDetails } from './UpcomingGames/GameDetails';
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { CreateUpcomingPost } from './UpcomingGames/CreateUpcomingPost';
 
 
 const NewsAdmin = () => {
@@ -39,6 +40,7 @@ const NewsAdmin = () => {
 
     const [selectedPost, setSelectedPost] = useState(null);
 
+    const [createUpcomingPost, setCreateUpcomingPost] = useState(false)
 
 
     return (
@@ -57,12 +59,26 @@ const NewsAdmin = () => {
                 <TabPanel>
 
 
-                    {selectedPost ? (
-                        <GameDetails postZ={selectedPost} onBack={(deleting) => { setSelectedPost(null); if(deleting){setOpenSnackbar(true)} }} />
+                    {(selectedPost || createUpcomingPost) ? (
+                        selectedPost ? (
+                            <GameDetails postZ={selectedPost} onBack={(deleting) => { setSelectedPost(null); if (deleting) { setOpenSnackbar(true) } }} />
+
+                        ) : (
+                            <CreateUpcomingPost onBack={() => {setCreateUpcomingPost(false)}}/>
+                        )
+                           
+
+                                
+                        
+
 
                     ) : (
-                        <UpcomingGamesList onSelectPost={setSelectedPost} />
+                        <UpcomingGamesList onSelectPost={setSelectedPost} onCreatePost={setCreateUpcomingPost} />
                     )}
+
+
+                    {/* ako kreiramo post ovo prikazuje... (aha, moze onBack isto, samo ce, da stavi ovu varijablu na null, )
+ */}
 
 
                 </TabPanel>

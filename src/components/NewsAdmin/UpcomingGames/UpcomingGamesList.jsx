@@ -2,8 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ItemUpcomingGamesList } from "./ItemUpcomingGamesList";
 
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 
+import "../../../styles/blogPosts.scoped.scss"
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -12,7 +15,7 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
-const UpcomingGamesList = ({ onSelectPost }) => {
+const UpcomingGamesList = ({ onSelectPost, onCreatePost }) => {
 
     const [gamesPosts, setGamesPosts] = useState();
 
@@ -52,8 +55,8 @@ const UpcomingGamesList = ({ onSelectPost }) => {
 
         setGamesPosts(response.data);
 
-        
-        
+
+
 
 
 
@@ -68,23 +71,31 @@ const UpcomingGamesList = ({ onSelectPost }) => {
         <>
 
 
-          
-          
 
-
-             {gamesPosts && gamesPosts.map((post, index) => (
+            {gamesPosts && gamesPosts.map((post, index) => (
 
                 <ItemUpcomingGamesList post={post} index={index} key={index}
-                onClick={() => onSelectPost(post)}
-                
+                    onClick={() => onSelectPost(post) }
+
                 />
 
 
             ))}
 
-       
-        
-        
+            <Fab color="primary" aria-label="add" variant="extended" size="big"
+                style={{
+                    position: 'fixed',
+                    bottom: 16,
+                    right: 65,
+                    zIndex: 1000,
+                }}
+
+                onClick={() => { onCreatePost(true) }}
+
+            >
+                <AddIcon sx={{ mr: 1 }} /> Add post
+            </Fab>
+
 
 
         </>
