@@ -122,10 +122,11 @@ const creategamepost = async (req, res) => {
 
   const subtitle = req.body.subtitle;
   const content = req.body.content;
-  const cover_image = req.body.cover_image;
+  var cover_image = req.body.cover_image;
   
 
 
+  
 
   /* postId - treba da kreira, ID .. */
 
