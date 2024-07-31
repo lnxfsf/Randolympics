@@ -131,8 +131,7 @@ const GameDetails = ({ postZ, onBack }) => {
 
     const [editContent, setEditContent] = useState(post.content)
 
-    console.log("zasto j eon post")
-    console.log(post)
+
 
     const [editCoverImage, setEditCoverImage] = useState(post.cover_image)   // used as original, this one to replace, if upload of temp one success, so it doesnt sit in database. 
 
@@ -180,7 +179,6 @@ const GameDetails = ({ postZ, onBack }) => {
         e.preventDefault();
 
         var title = e.target.title.value;
-
         var subtitle = e.target.subtitle.value;
 
 
@@ -189,7 +187,7 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
             var response = await axios.post(
-                `${BACKEND_SERVER_BASE_URL}/blog/updateUpcomingGamesBlog`,
+                `${BACKEND_SERVER_BASE_URL}/blog/creategamepost`,
                 {
                     postId: post.postId,
                     title,
@@ -273,7 +271,7 @@ const GameDetails = ({ postZ, onBack }) => {
     const modules = { toolbar: toolbarOptions };
 
 
-    // ? filepond passport upload
+    // ? filepond upload
     const [files, setFiles] = useState([]);
 
 
@@ -675,11 +673,9 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
-                                <ReactQuill theme="snow" value={editContent} onChange={setEditContent} modules={modules} />;
+                                <ReactQuill theme="snow" value={editContent} onChange={setEditContent} modules={modules} />
 
 
-
-                                <hr />
 
 
 

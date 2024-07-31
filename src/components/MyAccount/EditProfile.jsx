@@ -72,7 +72,7 @@ import moment from "moment";
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null); 
 
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
