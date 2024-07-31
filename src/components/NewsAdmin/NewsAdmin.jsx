@@ -98,7 +98,7 @@ const NewsAdmin = () => {
 
                 {(selectedNewsPost || createNewsPost) ? (
                         selectedNewsPost ? (
-                            <NewsDetails postZ={selectedNewsPost} onBack={(deleting) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbar(true) } }} />
+                            <NewsDetails postZ={selectedNewsPost} onBack={(deleting, created) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbar(true) } }} />
                         ) : (
                             <CreateNewsPost onBack={() => { setCreateNewsPost(false) }} />
                         )
