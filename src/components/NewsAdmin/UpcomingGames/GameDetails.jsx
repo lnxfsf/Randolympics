@@ -187,7 +187,7 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
             var response = await axios.post(
-                `${BACKEND_SERVER_BASE_URL}/blog/creategamepost`,
+                `${BACKEND_SERVER_BASE_URL}/blog/updateUpcomingGamesBlog`,
                 {
                     postId: post.postId,
                     title,

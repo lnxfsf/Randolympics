@@ -63,7 +63,7 @@ const CreateUpcomingPost = ({ onBack }) => {
 
     const [editContent, setEditContent] = useState("")
 
-    const [tempEditCoverImage, setTempEditCoverImage] = useState()
+    const [tempEditCoverImage, setTempEditCoverImage] = useState("")
 
 
 
