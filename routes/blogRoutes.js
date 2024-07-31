@@ -66,7 +66,7 @@ router.get("/newsDetails", newsDetails )
 router.post("/updateNewsBlog", updateNewsBlog)  
 
 
-router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));
+router.use("/news", express.static("uploads/blogs/news"));
 
 
 
