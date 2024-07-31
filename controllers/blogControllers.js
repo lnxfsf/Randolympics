@@ -122,7 +122,7 @@ const creategamepost = async (req, res) => {
 
   const subtitle = req.body.subtitle;
   const content = req.body.content;
-  var cover_image = req.body.cover_image;
+  const cover_image = req.body.cover_image;
   
 
 
