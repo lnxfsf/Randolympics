@@ -3,6 +3,7 @@
 const db = require("../models/database");
 const User = db.users;
 const Token = db.token;
+
 const Op = db.Sequelize.Op;
 
 const Sequelize = db.Sequelize; 

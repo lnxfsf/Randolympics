@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    return sequelize.define("news", {
+    return sequelize.define("upcominggames", {
         postId: {
             type: DataTypes.STRING(255),
             primaryKey: true,
