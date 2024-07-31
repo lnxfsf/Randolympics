@@ -1,17 +1,31 @@
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+
+
 import { UpcomingGamesList } from './UpcomingGames/UpcomingGamesList';
+import { GameDetails } from './UpcomingGames/GameDetails';
+import { CreateUpcomingPost } from './UpcomingGames/CreateUpcomingPost';
+
+
+
+
+
+
+import { NewsGamesList } from './News/NewsGamesList';
+import { NewsDetails } from './News/NewsDetails';
+import { CreateNewsPost } from './News/CreateNewsPost';
+
 
 import { useEffect, useState } from "react";
-import { GameDetails } from './UpcomingGames/GameDetails';
+
 
 
 
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { CreateUpcomingPost } from './UpcomingGames/CreateUpcomingPost';
+
 
 
 const NewsAdmin = () => {
@@ -37,10 +51,14 @@ const NewsAdmin = () => {
 
 
 
-
-    const [selectedPost, setSelectedPost] = useState(null);
-
+    // upcoming 2028 games
+    const [selectedUpcomingPost, setSelectedUpcomingPost] = useState(null);
     const [createUpcomingPost, setCreateUpcomingPost] = useState(false)
+
+
+    // news
+    const [selectedNewsPost, setSelectedNewsPost] = useState(null);
+    const [createNewsPost, setCreateNewsPost] = useState(false)
 
 
     return (
@@ -59,21 +77,14 @@ const NewsAdmin = () => {
                 <TabPanel>
 
 
-                    {(selectedPost || createUpcomingPost) ? (
-                        selectedPost ? (
-                            <GameDetails postZ={selectedPost} onBack={(deleting) => { setSelectedPost(null); if (deleting) { setOpenSnackbar(true) } }} />
-
+                    {(selectedUpcomingPost || createUpcomingPost) ? (
+                        selectedUpcomingPost ? (
+                            <GameDetails postZ={selectedUpcomingPost} onBack={(deleting) => { setSelectedUpcomingPost(null); if (deleting) { setOpenSnackbar(true) } }} />
                         ) : (
-                            <CreateUpcomingPost onBack={() => {setCreateUpcomingPost(false)}}/>
+                            <CreateUpcomingPost onBack={() => { setCreateUpcomingPost(false) }} />
                         )
-                           
-
-                                
-                        
-
-
                     ) : (
-                        <UpcomingGamesList onSelectPost={setSelectedPost} onCreatePost={setCreateUpcomingPost} />
+                        <UpcomingGamesList onSelectPost={setSelectedUpcomingPost} onCreatePost={setCreateUpcomingPost} />
                     )}
 
 
@@ -85,7 +96,16 @@ const NewsAdmin = () => {
 
                 <TabPanel>
 
-                    <h2>News</h2>
+                {(selectedNewsPost || createNewsPost) ? (
+                        selectedNewsPost ? (
+                            <NewsDetails postZ={selectedNewsPost} onBack={(deleting) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbar(true) } }} />
+                        ) : (
+                            <CreateNewsPost onBack={() => { setCreateNewsPost(false) }} />
+                        )
+                    ) : (
+                        <NewsGamesList onSelectPost={setSelectedNewsPost} onCreatePost={setCreateNewsPost} />
+                    )}
+
 
                 </TabPanel>
 
