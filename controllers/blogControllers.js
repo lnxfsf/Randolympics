@@ -114,12 +114,56 @@ const deletegamepost = async (req, res) => {
 
 }
 
+
+
+const creategamepost = async (req, res) => {
+
+  const title = req.body.title;
+
+  const subtitle = req.body.subtitle;
+  const content = req.body.content;
+  const cover_image = req.body.cover_image;
+  
+
+
+
+  /* postId - treba da kreira, ID .. */
+
+
+  const post = {
+    postId: uuidv4(),
+    title,
+    subtitle,
+    content,
+    cover_image
+  }
+
+
+  await db.sequelize.sync();
+
+  // create new post
+  const newPost = await Upcominggames.create(post);
+
+
+  res.status(201).json({ message: "Post created successfully!" });
+
+
+
+}
+
+
+
+
+
+
 const updateUpcomingGamesBlog = async (req,res) => {
 
   const { postId, 
     title,
     subtitle,
-    content } = req.body;
+    content, 
+    cover_image,
+  } = req.body;
 
     await db.sequelize.sync();
 
@@ -154,8 +198,7 @@ const updateUpcomingGamesBlog = async (req,res) => {
         needsUpdate = true;
       }
 
-      console.log("updatingObject")
-      console.log(updatingObject)
+      
 
       
       if(subtitle !== blogUpcomingGames.subtitle){
@@ -169,6 +212,11 @@ const updateUpcomingGamesBlog = async (req,res) => {
         needsUpdate = true;
       }
 
+      // so, it can't be empty.. and must be different. so, if we upload empty (nothing) here, then it doesnt update picture. but if there's, then it's updated accordingly 
+      if(cover_image && cover_image !== blogUpcomingGames.cover_image){
+        updatingObject.cover_image = cover_image;
+        needsUpdate = true;
+      }
 
 
     }
@@ -219,6 +267,6 @@ module.exports = {
   updateUpcomingGamesBlog,
 
   gamesDetails,
-
+  creategamepost,
 
 };

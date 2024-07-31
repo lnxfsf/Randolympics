@@ -5,6 +5,7 @@ const { blogGames,
     deletegamepost,
     updateUpcomingGamesBlog,
     gamesDetails,
+    creategamepost,
  } = require("../controllers/blogControllers");
 const path = require('path');
 
@@ -31,6 +32,7 @@ router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "E
 
 
 router.post("/deletegamepost", deletegamepost)
+router.post("/creategamepost", creategamepost)
 
 
 // get only ONE post, by postId (this is, to see changes immediatelly. )
