@@ -5,6 +5,8 @@
 const db = require("../models/database");
 
 const Upcominggames = db.upcominggames;
+const News = db.news;
+
 
 const Op = db.Sequelize.Op;
 const Sequelize = db.Sequelize;
@@ -53,18 +55,18 @@ const blogGames = async (req, res) => {
 
 
 
-const gamesDetails  = async (req,res) => {
-    const postId = req.query.postId;
+const gamesDetails = async (req, res) => {
+  const postId = req.query.postId;
 
 
-    
+
   try {
 
     const oneBlog = await Upcominggames.findOne({
 
-     where: {
-      postId: postId,
-     }
+      where: {
+        postId: postId,
+      }
 
 
     });
@@ -88,13 +90,13 @@ const deletegamepost = async (req, res) => {
 
   const postId = req.body.postId;
 
-  
+
   try {
 
 
 
 
-    
+
     await db.sequelize.sync();
 
 
@@ -105,7 +107,7 @@ const deletegamepost = async (req, res) => {
     });
 
     res.status(200).send({ message: 'Blog post deleted successfully' });
-    
+
   }
 
   catch (error) {
@@ -123,10 +125,10 @@ const creategamepost = async (req, res) => {
   const subtitle = req.body.subtitle;
   const content = req.body.content;
   const cover_image = req.body.cover_image;
-  
 
 
-  
+
+
 
   /* postId - treba da kreira, ID .. */
 
@@ -157,64 +159,64 @@ const creategamepost = async (req, res) => {
 
 
 
-const updateUpcomingGamesBlog = async (req,res) => {
+const updateUpcomingGamesBlog = async (req, res) => {
 
-  const { postId, 
+  const { postId,
     title,
     subtitle,
-    content, 
+    content,
     cover_image,
   } = req.body;
 
-    await db.sequelize.sync();
+  await db.sequelize.sync();
 
 
-    console.log("dobija"+postId)
-    console.log(title)
-    console.log(subtitle)
-    console.log(content)
-
-    
-    
+  console.log("dobija" + postId)
+  console.log(title)
+  console.log(subtitle)
+  console.log(content)
 
 
-    try {
-    
+
+
+
+  try {
+
     const blogUpcomingGames = await Upcominggames.findOne({
       where: { postId: postId },
     });
 
 
-    let needsUpdate = false; 
+    let needsUpdate = false;
     const updatingObject = {};
 
-    if(blogUpcomingGames){
-
-      
+    if (blogUpcomingGames) {
 
 
 
-      if(title !== blogUpcomingGames.title){
+
+
+      if (title !== blogUpcomingGames.title) {
         updatingObject.title = title;
         needsUpdate = true;
       }
 
-      
 
-      
-      if(subtitle !== blogUpcomingGames.subtitle){
+
+
+      if (subtitle !== blogUpcomingGames.subtitle) {
         updatingObject.subtitle = subtitle;
         needsUpdate = true;
       }
 
-      
-      if(content !== blogUpcomingGames.content){
+
+      if (content !== blogUpcomingGames.content) {
         updatingObject.content = content;
         needsUpdate = true;
       }
 
       // so, it can't be empty.. and must be different. so, if we upload empty (nothing) here, then it doesnt update picture. but if there's, then it's updated accordingly 
-      if(cover_image && cover_image !== blogUpcomingGames.cover_image){
+      if (cover_image && cover_image !== blogUpcomingGames.cover_image) {
         updatingObject.cover_image = cover_image;
         needsUpdate = true;
       }
@@ -223,33 +225,237 @@ const updateUpcomingGamesBlog = async (req,res) => {
     }
 
 
-    console.log("needsUpdate"+needsUpdate)
+    console.log("needsUpdate" + needsUpdate)
     if (needsUpdate) {
       try {
         await blogUpcomingGames.update(updatingObject);
 
         return res.status(200).json({ message: "Blog updated" });
-   
+
       } catch (error) {
 
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
-      
 
+
+      }
     }
-  }
 
-} catch (error) {
-  return res.status(500).json({ error: error.message });
-}
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 
 }
 
 
 const blogNews = async (req, res) => {
 
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+
+
+  try {
+
+    const allBlogs = await News.findAll({
+
+      order: [["updatedAt", "DESC"]],
+      limit: limit,
+      offset: offset,
+
+
+    });
+
+    res.json(allBlogs);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
 }
 
+
+
+const deletenewspost = async (req, res) => {
+
+  const postId = req.body.postId;
+
+
+
+  try {
+
+
+
+
+
+    await db.sequelize.sync();
+
+
+    await News.destroy({
+      where: {
+        postId: postId,
+      },
+    });
+
+    res.status(200).send({ message: 'Blog post deleted successfully' });
+
+  }
+
+  catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+}
+
+
+const newsDetails = async (req, res) => {
+
+  const postId = req.query.postId;
+
+  try {
+
+    const oneBlog = await News.findOne({
+
+      where: {
+        postId: postId,
+      }
+
+
+    });
+
+
+
+
+    res.json(oneBlog);
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+
+
+}
+
+
+const createnewspost = async (req, res) => {
+  const title = req.body.title;
+
+  const subtitle = req.body.subtitle;
+  const content = req.body.content;
+  const cover_image = req.body.cover_image;
+
+
+
+
+  const post = {
+    postId: uuidv4(),
+    title,
+    subtitle,
+    content,
+    cover_image
+  }
+
+  await db.sequelize.sync();
+
+  // create new post
+  const newPost = await News.create(post);
+
+
+  res.status(201).json({ message: "Post created successfully!" });
+
+
+
+
+}
+
+
+const updateNewsBlog = async (req, res) => {
+
+  const { postId,
+    title,
+    subtitle,
+    content,
+    cover_image,
+  } = req.body;
+
+
+  await db.sequelize.sync();
+
+
+
+  try {
+
+    const blogNews = await News.findOne({
+      where: { postId: postId },
+    });
+
+
+    let needsUpdate = false;
+    const updatingObject = {};
+
+
+    if (blogNews) {
+
+      if (title !== blogNews.title) {
+        updatingObject.title = title;
+        needsUpdate = true;
+      }
+
+
+
+
+      if (subtitle !== blogNews.subtitle) {
+        updatingObject.subtitle = subtitle;
+        needsUpdate = true;
+      }
+
+
+      if (content !== blogNews.content) {
+        updatingObject.content = content;
+        needsUpdate = true;
+      }
+
+      // so, it can't be empty.. and must be different. so, if we upload empty (nothing) here, then it doesnt update picture. but if there's, then it's updated accordingly 
+      if (cover_image && cover_image !== blogNews.cover_image) {
+        updatingObject.cover_image = cover_image;
+        needsUpdate = true;
+      }
+
+
+    }
+
+    if (needsUpdate) {
+      try {
+        await blogNews.update(updatingObject);
+
+        return res.status(200).json({ message: "Blog updated" });
+
+      } catch (error) {
+
+        console.log(error.stack)
+        return res.status(500).json({ error: error.message });
+
+
+      }
+    }
+
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+}
 
 
 const blogEconomics = async (req, res) => {
@@ -259,15 +465,26 @@ const blogEconomics = async (req, res) => {
 
 
 module.exports = {
-  blogGames,
-  blogNews,
+
+
+
   blogEconomics,
 
 
+  blogGames,
   deletegamepost,
   updateUpcomingGamesBlog,
-
   gamesDetails,
   creategamepost,
+
+
+
+  blogNews,
+  deletenewspost,
+  createnewspost,
+  newsDetails,
+  updateNewsBlog,
+
+
 
 };

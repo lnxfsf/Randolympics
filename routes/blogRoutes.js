@@ -1,11 +1,25 @@
 const express = require("express");
-const { blogGames, 
-    blogNews, 
+const { 
+   
+    
     blogEconomics, 
+
+    blogGames, 
     deletegamepost,
     updateUpcomingGamesBlog,
     gamesDetails,
     creategamepost,
+
+
+    blogNews, 
+    deletenewspost,
+    createnewspost,
+    newsDetails,
+    updateNewsBlog,
+
+
+
+
  } = require("../controllers/blogControllers");
 const path = require('path');
 
@@ -26,24 +40,41 @@ const router = express.Router();
 
 
 
-router.get('/games', blogGames)  //   route:  /blog/games  , for "Stockholm 2028 Games"
-router.get('/news', blogNews)   //   route:  /blog/news  , for "News"
+
+
 router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "Economics"
 
 
+
+// route:  /blog/games  , for "Stockholm 2028 Games"
+router.get('/games', blogGames)  
 router.post("/deletegamepost", deletegamepost)
 router.post("/creategamepost", creategamepost)
+router.get("/gamesDetails", gamesDetails )  // get only ONE post, by postId (this is, to see changes immediatelly. )
+router.post("/updateUpcomingGamesBlog", updateUpcomingGamesBlog)  // update upcominggames blogs
 
 
-// get only ONE post, by postId (this is, to see changes immediatelly. )
-router.get("/gamesDetails", gamesDetails )
+router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));  // for static files "Stockholm 2028 Games"
 
 
-// update upcominggames blogs
-router.post("/updateUpcomingGamesBlog", updateUpcomingGamesBlog)
+
+//   route:  /blog/news  , for "News"
+router.get('/news', blogNews)  
+router.post("/deletenewspost", deletenewspost) 
+router.post("/createnewspost", createnewspost)
+router.get("/newsDetails", newsDetails )  
+router.post("/updateNewsBlog", updateNewsBlog)  
 
 
 router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));
+
+
+
+
+
+
+
+
 
 
 
