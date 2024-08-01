@@ -4,8 +4,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 
 // this is mySQL database (local for now) connection. on 'randolympics' database
-  const sequelize = new Sequelize('randolympics', 'igor', 'igor123', {
-    host: 'localhost',
+  const sequelize = new Sequelize(dbConfig.database, dbConfig.user,  dbConfig.password, {
+    host: dbConfig.host,
     dialect: 'mysql',
 
     operatorsAliases: false,
