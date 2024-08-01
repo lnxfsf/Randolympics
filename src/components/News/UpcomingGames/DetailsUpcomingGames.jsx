@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import 'react-quill/dist/quill.snow.css';
 import { NavbarHome } from "../../NavbarHome";
@@ -29,6 +29,8 @@ const readingTime = (text) => {
 const DetailsUpcomingGames = () => {
 
     const { postId } = useParams();
+    const navigate = useNavigate(); 
+
 
     const [post, setPost] = useState()
 
@@ -79,9 +81,10 @@ const DetailsUpcomingGames = () => {
     return (
         <>
 
-<NavbarHome />
+            <NavbarHome />
 
             <div className="mt-64">
+
 
 
 
@@ -91,7 +94,11 @@ const DetailsUpcomingGames = () => {
                 {post && (
 
                     <>
-                        <img className="w-full h-64" style={{objectFit: "contain"}} src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + post.cover_image} />
+
+                        <button className="bg-[#c7e029] " onClick={() => {navigate(-1);}}>Go back</button>
+
+
+                        <img className="w-full h-64" style={{ objectFit: "contain" }} src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + post.cover_image} />
 
                         <br />
 

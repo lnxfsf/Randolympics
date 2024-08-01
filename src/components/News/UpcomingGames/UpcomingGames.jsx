@@ -135,7 +135,9 @@ const UpcomingGames = () => {
 
         {/* second  */}
         {(gamesPosts && gamesPosts[1]) && (
-        <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+        <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
+        onClick={() => {navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[1].title}`);}}
+        >
 
 
 
@@ -177,7 +179,8 @@ const UpcomingGames = () => {
 
         {/* third  */}
         {(gamesPosts && gamesPosts[2]) && (
-            <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+            <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
+            onClick={() => {navigate(`/news/upcoming/${gamesPosts[2].postId}/${gamesPosts[0].title}`);}}>
 
                
                 <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
@@ -220,6 +223,15 @@ const UpcomingGames = () => {
         }
 
 
+
+
+<div className="flex gap-4 cursor-pointer select-none mt-6"  onClick={() => {navigate("/news/upcoming")}}>
+
+
+    <p className="text-red_first text-lg font-medium">Read more</p>
+    <img className="w-4 " src="news/arrow_down.svg" />
+
+</div>
 
 
     </>)
