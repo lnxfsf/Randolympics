@@ -1,8 +1,6 @@
 const express = require("express");
 const { 
    
-    
-    blogEconomics, 
 
     blogGames, 
     deletegamepost,
@@ -16,6 +14,14 @@ const {
     createnewspost,
     newsDetails,
     updateNewsBlog,
+
+
+    blogEconomics,
+    deleteeconomicspost,
+    createeconomicspost,
+    economicsDetails,
+    updateEconomicsBlog,
+
 
 
 
@@ -42,7 +48,7 @@ const router = express.Router();
 
 
 
-router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "Economics"
+
 
 
 
@@ -65,10 +71,18 @@ router.post("/createnewspost", createnewspost)
 router.get("/newsDetails", newsDetails )  
 router.post("/updateNewsBlog", updateNewsBlog)  
 
-
 router.use("/news", express.static("uploads/blogs/news"));
 
 
+
+//   route:  /blog/economics  , for "Economics"
+router.get('/economics', blogEconomics)   
+router.post("/deleteeconomicspost", deleteeconomicspost) 
+router.post("/createeconomicspost", createeconomicspost)
+router.get("/economicsDetails", economicsDetails )  
+router.post("/updateEconomicsBlog", updateEconomicsBlog)  
+
+router.use("/economics", express.static("uploads/blogs/economics"));
 
 
 

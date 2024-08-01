@@ -10,6 +10,9 @@ const {
   blogs_news_picture_upload,
   revertBlogs_news_picture_upload,
 
+  revertBlogs_economics_picture_upload,
+  blogs_economics_picture_upload,
+
 
 } = require("../controllers/imageUploadControllers");
 const router = express.Router();
@@ -37,6 +40,11 @@ router.use("/passport_pics", express.static("uploads/passport_pictures"));
 // for news blog
 router.post("/blogs_news_picture_upload", blogs_news_picture_upload)
 router.delete("/revertBlogs_news_picture_upload",revertBlogs_news_picture_upload)
+
+
+// for economics blog
+router.post("/blogs_economics_picture_upload", blogs_economics_picture_upload)
+router.delete("/revertBlogs_economics_picture_upload",revertBlogs_economics_picture_upload)
 
 
 
