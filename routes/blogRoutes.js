@@ -7,6 +7,10 @@ const {
     updateUpcomingGamesBlog,
     gamesDetails,
     creategamepost,
+    blogGamesToUser, // for News main page ! so it's given as filtered 
+
+
+
 
 
     blogNews, 
@@ -21,6 +25,9 @@ const {
     createeconomicspost,
     economicsDetails,
     updateEconomicsBlog,
+    economicsToUser,
+
+
 
 
 
@@ -63,6 +70,16 @@ router.post("/updateUpcomingGamesBlog", updateUpcomingGamesBlog)  // update upco
 router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));  // for static files "Stockholm 2028 Games"
 
 
+router.get('/gamesToUser', blogGamesToUser) // this is for 3 elements at News main page 
+
+
+
+
+
+
+
+
+
 
 //   route:  /blog/news  , for "News"
 router.get('/news', blogNews)  
@@ -83,6 +100,10 @@ router.get("/economicsDetails", economicsDetails )
 router.post("/updateEconomicsBlog", updateEconomicsBlog)  
 
 router.use("/economics", express.static("uploads/blogs/economics"));
+
+router.get('/economicsToUser', economicsToUser) // this is for 3 elements at News main page 
+
+
 
 
 

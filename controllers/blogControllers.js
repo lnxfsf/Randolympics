@@ -55,6 +55,43 @@ const blogGames = async (req, res) => {
 
 
 
+
+
+const blogGamesToUser = async (req, res) => {
+
+
+  const limit = parseInt(req.query.limit) || 3;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+  try {
+
+    const allBlogs = await Upcominggames.findAll({
+
+      order: [["updatedAt", "DESC"]],
+      limit: limit,
+      offset: offset,
+
+
+    });
+
+
+
+
+    res.json(allBlogs);
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+}
+
+
 const gamesDetails = async (req, res) => {
   const postId = req.query.postId;
 
@@ -133,8 +170,11 @@ const creategamepost = async (req, res) => {
   /* postId - treba da kreira, ID .. */
 
 
+  // postId: uuidv4(),  we don't need big compled id.. just number will do for url..
+
+
   const post = {
-    postId: uuidv4(),
+   
     title,
     subtitle,
     content,
@@ -360,7 +400,7 @@ const createnewspost = async (req, res) => {
 
 
   const post = {
-    postId: uuidv4(),
+   
     title,
     subtitle,
     content,
@@ -541,7 +581,6 @@ const createeconomicspost = async (req, res) => {
 
 
   const post = {
-    postId: uuidv4(),
     title,
     subtitle,
     content,
@@ -684,6 +723,41 @@ const updateEconomicsBlog = async (req, res) => {
 
 
 
+const economicsToUser = async (req, res) => {
+
+
+  const limit = parseInt(req.query.limit) || 3;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+  try {
+
+    const allBlogs = await Economics.findAll({
+
+      order: [["updatedAt", "DESC"]],
+      limit: limit,
+      offset: offset,
+
+
+    });
+
+
+
+
+    res.json(allBlogs);
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+}
+
+
 
 
 
@@ -701,6 +775,7 @@ module.exports = {
   updateUpcomingGamesBlog,
   gamesDetails,
   creategamepost,
+  blogGamesToUser,
 
 
 
@@ -717,6 +792,7 @@ module.exports = {
   createeconomicspost,
   economicsDetails,
   updateEconomicsBlog,
+  economicsToUser,
 
 
 

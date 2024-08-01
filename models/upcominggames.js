@@ -4,7 +4,8 @@ module.exports = function (sequelize, DataTypes) {
 
     return sequelize.define("upcominggames", {
         postId: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
           },
 
