@@ -320,6 +320,38 @@ const blogNews = async (req, res) => {
 
 
 
+const newsToUser = async (req, res) => {
+
+  const limit = parseInt(req.query.limit) || 4;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+
+
+  try {
+
+    const allBlogs = await News.findAll({
+
+      order: [["views", "DESC"]],
+      limit: limit,
+      offset: offset,
+
+
+    });
+
+    res.json(allBlogs);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+}
+
+
+
 const deletenewspost = async (req, res) => {
 
   const postId = req.body.postId;
@@ -388,6 +420,39 @@ const newsDetails = async (req, res) => {
 
 }
 
+// this is to count views, for regular user , not any admin etc.. (so based on views, we count popularity)
+const readingnewsDetails = async (req, res) => {
+
+  const postId = req.query.postId;
+
+  try {
+
+    const oneBlog = await News.findOne({
+
+      where: {
+        postId: postId,
+      }
+
+
+    });
+
+
+    await oneBlog.increment("views", { by: 1 });
+
+    res.json(oneBlog);
+
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+
+
+
+
+
+}
 
 const createnewspost = async (req, res) => {
   const title = req.body.title;
@@ -784,7 +849,8 @@ module.exports = {
   createnewspost,
   newsDetails,
   updateNewsBlog,
-
+  newsToUser,
+  readingnewsDetails,
 
   
   blogEconomics,

@@ -18,6 +18,9 @@ const {
     createnewspost,
     newsDetails,
     updateNewsBlog,
+    newsToUser,
+    readingnewsDetails,
+
 
 
     blogEconomics,
@@ -90,6 +93,8 @@ router.post("/updateNewsBlog", updateNewsBlog)
 
 router.use("/news", express.static("uploads/blogs/news"));
 
+router.get('/newsToUser', newsToUser) // this is for 4 elements at News main page.  it sorts based on views (i.e. popularity)
+router.get('/readingnewsDetails', readingnewsDetails)  // and this is special route, for when regular user views details of news, it shows how many views are there (and based on that, it's filtered out, most popular..) 
 
 
 //   route:  /blog/economics  , for "Economics"

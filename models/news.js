@@ -32,6 +32,11 @@ module.exports = function (sequelize, DataTypes) {
             
           },
 
+          views: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+          }
+
 
 
 
