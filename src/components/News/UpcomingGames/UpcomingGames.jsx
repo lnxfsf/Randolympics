@@ -36,9 +36,9 @@ const readingTime = (text) => {
 
 function getImageUrl(coverImage) {
     return coverImage
-      ? `${BACKEND_SERVER_BASE_URL}/blog/upcominggames/${coverImage}`
-      : "news/news1.png";
-  }
+        ? `${BACKEND_SERVER_BASE_URL}/blog/upcominggames/${coverImage}`
+        : "news/news1.png";
+}
 
 
 
@@ -88,11 +88,11 @@ const UpcomingGames = () => {
         {/* first  */}
         {(gamesPosts && gamesPosts[0]) && (
             <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
-            
-            onClick={() => {navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[0].title}`);}}
+
+                onClick={() => { navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[0].title}`); }}
             >
 
-               
+
                 <div className="basis-1/2 object-cover overflow-hidden rounded-lg ">
                     <img className="image_part "
                         src={getImageUrl(gamesPosts[0].cover_image)}
@@ -135,44 +135,44 @@ const UpcomingGames = () => {
 
         {/* second  */}
         {(gamesPosts && gamesPosts[1]) && (
-        <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
-        onClick={() => {navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[1].title}`);}}
-        >
+            <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
+                onClick={() => { navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[1].title}`); }}
+            >
 
 
 
-            <div className="basis-1/2 flex flex-col ">
+                <div className="basis-1/2 flex flex-col ">
 
-                <p className="text-text_news text-sm font-medium">{formatDate(gamesPosts[1].updatedAt) || "Date not available"}</p>
-
-
-
-                <div className="grow mt-2">
+                    <p className="text-text_news text-sm font-medium">{formatDate(gamesPosts[1].updatedAt) || "Date not available"}</p>
 
 
-                    <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[1].title || ""}</p>
+
+                    <div className="grow mt-2">
 
 
-                    <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[1].subtitle || ""}</p>
+                        <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[1].title || ""}</p>
+
+
+                        <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[1].subtitle || ""}</p>
+
+                    </div>
+
+                    <div className="flex items-center justify-between ">
+                        <p className="text-text_news text-sm">{readingTime(gamesPosts[1].content)} min read</p>
+
+                        <p className="text-red_first text-sm font-semibold cursor-pointer select-none">Read More</p>
+                    </div>
+
 
                 </div>
 
-                <div className="flex items-center justify-between ">
-                    <p className="text-text_news text-sm">{readingTime(gamesPosts[1].content)} min read</p>
 
-                    <p className="text-red_first text-sm font-semibold cursor-pointer select-none">Read More</p>
+                <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
+                    <img className="image_part" src={getImageUrl(gamesPosts[1].cover_image)} />
                 </div>
 
 
             </div>
-
-
-            <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
-                <img className="image_part" src={getImageUrl(gamesPosts[1].cover_image)} />
-            </div>
-
-
-        </div>
         )}
 
 
@@ -180,9 +180,9 @@ const UpcomingGames = () => {
         {/* third  */}
         {(gamesPosts && gamesPosts[2]) && (
             <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
-            onClick={() => {navigate(`/news/upcoming/${gamesPosts[2].postId}/${gamesPosts[0].title}`);}}>
+                onClick={() => { navigate(`/news/upcoming/${gamesPosts[2].postId}/${gamesPosts[0].title}`); }}>
 
-               
+
                 <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
                     <img className="image_part "
                         src={getImageUrl(gamesPosts[2].cover_image)}
@@ -225,13 +225,13 @@ const UpcomingGames = () => {
 
 
 
-<div className="flex gap-4 cursor-pointer select-none mt-6"  onClick={() => {navigate("/news/upcoming")}}>
+        <div className="flex gap-4 cursor-pointer select-none mt-6" onClick={() => { navigate("/news/upcoming") }}>
 
 
-    <p className="text-red_first text-lg font-medium">Read more</p>
-    <img className="w-4 " src="news/arrow_down.svg" />
+            <p className="text-red_first text-lg font-medium">Read more</p>
+            <img className="w-4 " src="news/arrow_down.svg" />
 
-</div>
+        </div>
 
 
     </>)

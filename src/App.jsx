@@ -15,6 +15,8 @@ import { EconomicsSponsorshipHome } from "./pages/Home/EconomicsSponsorshipHome"
 import { News } from "./pages/News";
 import { DetailsUpcomingGames } from "./components/News/UpcomingGames/DetailsUpcomingGames";
 import { ReadMoreUpcomingGames } from "./components/News/UpcomingGames/ReadMoreUpcomingGames";
+import { DetailsNewsEconomics } from "./components/News/Economics/DetailsNewsEconomics";
+import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsEconomics";
 
 
 
@@ -54,6 +56,11 @@ const App = () => {
         <Route path="/news/upcoming/:postId/:title" element={<DetailsUpcomingGames />} />
 
 
+        {/* for list of all Economics news  */}
+        <Route path="/news/economics" element={<ReadMoreNewsEconomics />} />
+        <Route path="/news/economics/:postId/:title" element={<DetailsNewsEconomics />} />
+
+        
       </Routes>
     </>
   );

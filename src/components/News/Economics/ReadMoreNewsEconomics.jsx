@@ -1,14 +1,17 @@
 
 
 
+
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import "../../../styles/blogPosts.scoped.scss"
-import { ItemUpcomingGamesList } from "../../NewsAdmin/UpcomingGames/ItemUpcomingGamesList";
+
 import { NavbarHome } from "../../NavbarHome";
 
 import { useNavigate } from 'react-router-dom';
+import { ItemEconomicsList } from "../../NewsAdmin/Economics/ItemEconomicsList";
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -18,8 +21,10 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
-const ReadMoreUpcomingGames = () => {
 
+
+
+const ReadMoreNewsEconomics = () => {
 
     const [gamesPosts, setGamesPosts] = useState();
 
@@ -28,6 +33,7 @@ const ReadMoreUpcomingGames = () => {
     const [hasMore, setHasMore] = useState(true);
 
 
+    
 
     const navigate = useNavigate();
 
@@ -36,8 +42,7 @@ const ReadMoreUpcomingGames = () => {
     }, [gamesPostsPage]);
 
 
-
-
+    
 
     const handleNextPage = () => {
         if (hasMore) {
@@ -61,7 +66,7 @@ const ReadMoreUpcomingGames = () => {
 
 
         var response = await axios.get(
-            `${BACKEND_SERVER_BASE_URL}/blog/games`,
+            `${BACKEND_SERVER_BASE_URL}/blog/economics`,
             {
                 params: {
                     limit: limit,
@@ -79,7 +84,7 @@ const ReadMoreUpcomingGames = () => {
 
 
         const isThereNextPage = await axios.get(
-            `${BACKEND_SERVER_BASE_URL}/blog/games`,
+            `${BACKEND_SERVER_BASE_URL}/blog/economics`,
             {
                 params: {
                     limit: limit,
@@ -102,12 +107,6 @@ const ReadMoreUpcomingGames = () => {
 
 
 
-
-
-
-
-
-
     return (
         <>
 
@@ -120,8 +119,8 @@ const ReadMoreUpcomingGames = () => {
             <button className="bg-[#c7e029] " onClick={() => { navigate(-1); }}>Go back</button>
             {gamesPosts && gamesPosts.map((post, index) => (
 
-                <ItemUpcomingGamesList post={post} index={index}
-                    onClick={() => { navigate(`/news/upcoming/${post.postId}/${post.title}`); }}
+                <ItemEconomicsList post={post} index={index}
+                    onClick={() => { navigate(`/news/economics/${post.postId}/${post.title}`); }}
 
                 />
 
@@ -156,8 +155,8 @@ const ReadMoreUpcomingGames = () => {
     )
 
 
+
+
 }
 
-
-
-export { ReadMoreUpcomingGames }
+export {ReadMoreNewsEconomics}
