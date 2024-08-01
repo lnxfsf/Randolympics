@@ -1,7 +1,8 @@
 
 
 import { FAQ } from "../components/Home/FAQ";
-import { NavbarHome } from "../components/NavbarHome";
+import { NavbarWhite } from "../components/NavbarWhite";
+
 
 
 
@@ -10,9 +11,19 @@ const News = () => {
     return (
         <>
 
-                <NavbarHome />
 
-                <FAQ />
+            <NavbarWhite />
+
+
+            <div className="flex justify-center mt-12">
+                <p className="text-4xl font-semibold  text-red_first ">Stockholm 2028 Games</p>
+            </div>
+
+
+
+
+
+            <FAQ />
 
 
 
@@ -20,4 +31,4 @@ const News = () => {
     )
 }
 
-export {News}
+export { News }
