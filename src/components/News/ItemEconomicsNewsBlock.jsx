@@ -9,7 +9,7 @@ const ItemEconomicsNewsBlock = () => {
         <>
         
         {/* first  */}
-        <div className="flex w-[70%] mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+        <div className="flex w-[70%] mt-4 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
 
 
             <div className="basis-1/2">

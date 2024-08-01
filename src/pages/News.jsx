@@ -1,6 +1,7 @@
 import 'animate.css';
 
-import { FAQ } from "../components/Home/FAQ";
+
+
 import { NavbarHome } from "../components/NavbarHome";
 import { EconomicsNewsBlock } from "../components/News/EconomicsNewsBlock";
 import { NewsNewsBlock } from "../components/News/NewsNewsBlock";
@@ -28,15 +29,15 @@ const News = () => {
 
 
 
-            <div className="flex justify-center mt-48 flex-col items-center">
+            <div className="flex justify-center mt-16 flex-col items-center">
                 <p className="text-4xl font-semibold  text-red_first ">News</p>
                 <NewsNewsBlock />
 
             </div>
 
 
-            <div className="flex justify-center mt-48 flex-col items-center">
-                <p className="text-4xl font-semibold  text-red_first ">Economics</p>
+            <div className="flex justify-center mt-16 flex-col items-center">
+                <p className="text-4xl font-semibold  text-red_first mb-4">Economics</p>
 
                 <EconomicsNewsBlock />
             </div>
@@ -46,10 +47,8 @@ const News = () => {
 
 
 
-            <FAQ />
 
 
-            <Footer />
 
 
         </>
