@@ -74,6 +74,15 @@ const readingTime = (text) => {
 
 
 
+
+function getImageUrl(coverImage) {
+    return coverImage
+        ? `${BACKEND_SERVER_BASE_URL}/blog/economics/${coverImage}`
+        : "news/news1.png";
+}
+
+
+
 const EconomicsDetails = ({ postZ, onBack }) => {
 
 
@@ -525,7 +534,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
 
 
 
-                    <img className="coverImageUpcomingGames" src={BACKEND_SERVER_BASE_URL + "/blog/economics/" + post.cover_image} />
+                    <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
 
                     <br />
 

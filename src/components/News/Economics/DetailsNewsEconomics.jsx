@@ -29,6 +29,11 @@ const readingTime = (text) => {
     return time
 }
 
+function getImageUrl(coverImage) {
+    return coverImage
+        ? `${BACKEND_SERVER_BASE_URL}/blog/economics/${coverImage}`
+        : "news/news1.png";
+}
 
 
 const DetailsNewsEconomics = () => {
@@ -95,7 +100,7 @@ const DetailsNewsEconomics = () => {
                         <button className="bg-[#c7e029] " onClick={() => {navigate(-1);}}>Go back</button>
 
 
-                        <img className="w-full h-64" style={{ objectFit: "contain" }} src={BACKEND_SERVER_BASE_URL + "/blog/economics/" + post.cover_image} />
+                        <img className="w-full h-64" style={{ objectFit: "contain" }} src={getImageUrl(post.cover_image)} />
 
                         <br />
 
