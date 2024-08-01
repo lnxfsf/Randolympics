@@ -2,7 +2,7 @@
 
 
 
-import "../../styles/news.scoped.scss"
+import "../../../styles/news.scoped.scss"
 import { ItemEconomicsNewsBlock } from "./ItemEconomicsNewsBlock"
 
 

@@ -3,9 +3,9 @@ import 'animate.css';
 
 
 import { NavbarHome } from "../components/NavbarHome";
-import { EconomicsNewsBlock } from "../components/News/EconomicsNewsBlock";
-import { NewsNewsBlock } from "../components/News/NewsNewsBlock";
-import { UpcomingGames } from "../components/News/UpcomingGames";
+import { EconomicsNewsBlock } from "../components/News/Economics/EconomicsNewsBlock";
+import { NewsNewsBlock } from "../components/News/NewsBlock/NewsNewsBlock";
+import { UpcomingGames } from "../components/News/UpcomingGames/UpcomingGames";
 import { Footer } from "../components/Footer";
 
 

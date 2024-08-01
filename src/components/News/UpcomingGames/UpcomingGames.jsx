@@ -3,9 +3,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { useNavigate } from 'react-router-dom';
 
-import "../../styles/news.scoped.scss"
 
+
+import "../../../styles/news.scoped.scss"
 
 
 
@@ -43,6 +45,8 @@ function getImageUrl(coverImage) {
 const UpcomingGames = () => {
 
     const [gamesPosts, setGamesPosts] = useState();
+
+    const navigate = useNavigate();
 
 
 
@@ -83,7 +87,10 @@ const UpcomingGames = () => {
 
         {/* first  */}
         {(gamesPosts && gamesPosts[0]) && (
-            <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+            <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
+            
+            onClick={() => {navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[0].title}`);}}
+            >
 
                
                 <div className="basis-1/2 object-cover overflow-hidden rounded-lg ">

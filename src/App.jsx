@@ -13,6 +13,7 @@ import { EconomiscLoansHome } from "./pages/Home/EconomiscLoansHome";
 import { EconomicsBroadcastingHome } from "./pages/Home/EconomicsBroadcastingHome";
 import { EconomicsSponsorshipHome } from "./pages/Home/EconomicsSponsorshipHome";
 import { News } from "./pages/News";
+import { DetailsUpcomingGames } from "./components/News/UpcomingGames/DetailsUpcomingGames";
 
 
 
@@ -42,7 +43,15 @@ const App = () => {
         <Route path="/economicsbroadcast" element={<EconomicsBroadcastingHome />} />
         <Route path="/economicssponsorship" element={<EconomicsSponsorshipHome  />} />
 
+
+
+
         <Route path="/news" element={<News />} />
+
+        {/* for list of all Upcoming 2028 Games  */}
+        <Route path="/news/upcoming" element={<News />} />
+        <Route path="/news/upcoming/:postId/:title" element={<DetailsUpcomingGames />} />
+
 
       </Routes>
     </>
