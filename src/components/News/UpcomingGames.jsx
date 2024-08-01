@@ -32,6 +32,12 @@ const readingTime = (text) => {
 }
 
 
+function getImageUrl(coverImage) {
+    return coverImage
+      ? `${BACKEND_SERVER_BASE_URL}/blog/upcominggames/${coverImage}`
+      : "news/news1.png";
+  }
+
 
 
 const UpcomingGames = () => {
@@ -79,12 +85,11 @@ const UpcomingGames = () => {
         {(gamesPosts && gamesPosts[0]) && (
             <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
 
-                {/*  */}
-                <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
-                    <img className="image_part"
-                        src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + gamesPosts[0].cover_image || "news/news1.png"}
+               
+                <div className="basis-1/2 object-cover overflow-hidden rounded-lg ">
+                    <img className="image_part "
+                        src={getImageUrl(gamesPosts[0].cover_image)}
 
-                        alt={gamesPosts[0].title || "Title"}
 
                     />
                 </div>
@@ -99,10 +104,10 @@ const UpcomingGames = () => {
                     <div className="grow mt-2">
 
 
-                        <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[0].title || "Title"}</p>
+                        <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[0].title || ""}</p>
 
 
-                        <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[0].subtitle || "Subtitle"}</p>
+                        <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[0].subtitle || ""}</p>
 
                     </div>
 
@@ -122,31 +127,29 @@ const UpcomingGames = () => {
 
 
         {/* second  */}
-        <div className="flex w-[70%] mt-4 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+        {(gamesPosts && gamesPosts[1]) && (
+        <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
 
 
 
             <div className="basis-1/2 flex flex-col ">
 
-                <p className="text-text_news text-sm font-medium">June 1, 2024</p>
+                <p className="text-text_news text-sm font-medium">{formatDate(gamesPosts[1].updatedAt) || "Date not available"}</p>
 
 
 
                 <div className="grow mt-2">
 
 
-                    <p className="two-line-limit text-xl font-semibold mb-2">This will be the title of the first post
-                        We could have 2 rows of textWe could have 2 rows of textWe could have 2 rows of textWe could have 2 rows of text</p>
+                    <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[1].title || ""}</p>
 
 
-                    <p className="three-line-limit text-base text-text_news font-medium ">Here we can add additional information for the readers
-                        Can have multiple rows, same for the title
-                    </p>
+                    <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[1].subtitle || ""}</p>
 
                 </div>
 
                 <div className="flex items-center justify-between ">
-                    <p className="text-text_news text-sm">10 min read</p>
+                    <p className="text-text_news text-sm">{readingTime(gamesPosts[1].content)} min read</p>
 
                     <p className="text-red_first text-sm font-semibold cursor-pointer select-none">Read More</p>
                 </div>
@@ -155,55 +158,59 @@ const UpcomingGames = () => {
             </div>
 
 
-            <div className="basis-1/2">
-                <img className="image_part" src="news/news1.png" />
+            <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
+                <img className="image_part" src={getImageUrl(gamesPosts[1].cover_image)} />
             </div>
 
 
         </div>
-
+        )}
 
 
 
         {/* third  */}
-        <div className="flex w-[70%] mt-4 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+        {(gamesPosts && gamesPosts[2]) && (
+            <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer">
+
+               
+                <div className="basis-1/2 object-cover overflow-hidden rounded-lg">
+                    <img className="image_part "
+                        src={getImageUrl(gamesPosts[2].cover_image)}
 
 
-            <div className="basis-1/2">
-                <img className="image_part" src="news/news1.png" />
-            </div>
-
-
-            <div className="basis-1/2 flex flex-col ">
-
-                <p className="text-text_news text-sm font-medium">June 1, 2024</p>
-
-
-
-                <div className="grow mt-2">
-
-
-                    <p className="two-line-limit text-xl font-semibold mb-2">This will be the title of the first post
-                        We could have 2 rows of textWe could have 2 rows of textWe could have 2 rows of textWe could have 2 rows of text</p>
-
-
-                    <p className="three-line-limit text-base text-text_news font-medium ">Here we can add additional information for the readers
-                        Can have multiple rows, same for the title
-                    </p>
-
-                </div>
-
-                <div className="flex items-center justify-between ">
-                    <p className="text-text_news text-sm">10 min read</p>
-
-                    <p className="text-red_first text-sm font-semibold cursor-pointer select-none">Read More</p>
+                    />
                 </div>
 
 
+                <div className="basis-1/2 flex flex-col ">
+
+                    <p className="text-text_news text-sm font-medium">{formatDate(gamesPosts[2].updatedAt) || "Date not available"}</p>
+
+
+
+                    <div className="grow mt-2">
+
+
+                        <p className="two-line-limit text-xl font-semibold mb-2">{gamesPosts[2].title || ""}</p>
+
+
+                        <p className="three-line-limit text-base text-text_news font-medium ">{gamesPosts[2].subtitle || ""}</p>
+
+                    </div>
+
+                    <div className="flex items-center justify-between ">
+                        <p className="text-text_news text-sm">{readingTime(gamesPosts[2].content)} min read</p>
+
+                        <p className="text-red_first text-sm font-semibold cursor-pointer select-none">Read More</p>
+                    </div>
+
+
+                </div>
+
+
             </div>
-
-
-        </div>
+        )
+        }
 
 
 
