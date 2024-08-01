@@ -19,7 +19,7 @@ const UpcomingGames = () => {
 
 
             <div className="basis-1/2">
-                <img src="news/news1.png" />
+                <img className="image_part" src="news/news1.png" />
             </div>
 
 
@@ -37,6 +37,7 @@ const UpcomingGames = () => {
 
 
                     <p className="three-line-limit text-base text-text_news font-medium ">Here we can add additional information for the readers
+                        Can have multiple rows, same for the titleHere we can add additional information for the readers
                         Can have multiple rows, same for the title
                     </p>
 
@@ -91,7 +92,7 @@ const UpcomingGames = () => {
 
 
             <div className="basis-1/2">
-                <img src="news/news1.png" />
+                <img className="image_part" src="news/news1.png" />
             </div>
 
 
@@ -105,7 +106,7 @@ const UpcomingGames = () => {
 
 
             <div className="basis-1/2">
-                <img src="news/news1.png" />
+                <img className="image_part" src="news/news1.png" />
             </div>
 
 

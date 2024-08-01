@@ -13,7 +13,7 @@ const ItemEconomicsNewsBlock = () => {
 
 
             <div className="basis-1/2">
-                <img src="news/news1.png" />
+                <img className="image_part" src="news/news1.png"  />
             </div>
 
 
