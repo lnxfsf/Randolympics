@@ -167,7 +167,7 @@ const MyAccount = () => {
 
 
 
-            {((user_type === "EM" || user_type === "ITM") && ( passportStatus === "validated"  ) ) && (
+            {((user_type === "EM" || user_type === "ITM" || user_type === "GP" || user_type === "ITM" || user_type === "SM" || user_type === "MM" ) && ( passportStatus === "validated"  ) ) && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={newsBlogRef}

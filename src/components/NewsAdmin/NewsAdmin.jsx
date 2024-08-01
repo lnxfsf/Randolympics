@@ -70,8 +70,18 @@ const NewsAdmin = () => {
 
 
 
+    const [user_type, setUserType] = useState("");
 
+    useEffect(() => {
+        const storedData =
+            localStorage.getItem("authTokens") ||
+            sessionStorage.getItem("authTokens");
+        if (storedData) {
+            var userJson = JSON.parse(storedData);
 
+            setUserType(userJson.data.user_type);
+        }
+    }, []);
 
 
 
@@ -85,7 +95,7 @@ const NewsAdmin = () => {
     const [createNewsPost, setCreateNewsPost] = useState(false)
 
 
-    
+
     // Economics
     const [selectedEconomicsPost, setSelectedEconomicsPost] = useState(null);
     const [createEconomicsPost, setCreateEconomicsPost] = useState(false)
@@ -98,11 +108,19 @@ const NewsAdmin = () => {
 
             <Tabs>
                 <TabList>
-                    <Tab>Upcoming 2028 Games</Tab>
+                    {((user_type === "GP" || user_type === "EM" || user_type === "ITM")) && (
+                        <Tab>Upcoming 2028 Games</Tab>
+                    )}
 
-                    <Tab>News</Tab>
 
-                    <Tab>Economics</Tab>
+                    {((user_type === "GP" || user_type === "MM" || user_type === "ITM")) && (
+                        <Tab>News</Tab>
+                    )}
+
+
+                    {((user_type === "GP" || user_type === "SM" || user_type === "ITM")) && (
+                        <Tab>Economics</Tab>
+                    )}
 
                 </TabList>
 
