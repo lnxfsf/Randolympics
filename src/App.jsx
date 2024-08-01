@@ -17,6 +17,9 @@ import { DetailsUpcomingGames } from "./components/News/UpcomingGames/DetailsUpc
 import { ReadMoreUpcomingGames } from "./components/News/UpcomingGames/ReadMoreUpcomingGames";
 import { DetailsNewsEconomics } from "./components/News/Economics/DetailsNewsEconomics";
 import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsEconomics";
+import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsNewsBlock";
+import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
+
 
 
 
@@ -60,6 +63,11 @@ const App = () => {
         <Route path="/news/economics" element={<ReadMoreNewsEconomics />} />
         <Route path="/news/economics/:postId/:title" element={<DetailsNewsEconomics />} />
 
+        {/* for list of all News news  */}
+        <Route path="/news/news" element={<ReadMoreNewsNewsBlock />} />
+        <Route path="/news/news/:postId/:title" element={<DetailsNewsBlock />} />
+
+        
         
       </Routes>
     </>
