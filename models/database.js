@@ -4,8 +4,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 
 // this is mySQL database (local for now) connection. on 'randolympics' database
-  const sequelize = new Sequelize('randolympics', 'igor', 'igor123', {
-    host: 'localhost',
+  const sequelize = new Sequelize(dbConfig.database, dbConfig.user,  dbConfig.password, {
+    host: dbConfig.host,
     dialect: 'mysql',
 
     operatorsAliases: false,
@@ -39,6 +39,8 @@ db.users = require('./users')(sequelize,DataTypes)  // model for Users
 db.traffic = require('./traffic')(sequelize,DataTypes)// this is model, and new database, for all login
 db.upcominggames = require('./upcominggames')(sequelize,DataTypes)  
 db.news = require('./news')(sequelize,DataTypes)  
+db.economics = require('./economics')(sequelize,DataTypes)  
+
 
 
 // model for News
