@@ -58,6 +58,8 @@ let BACKEND_SERVER_BASE_URL =
     process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 
+    
+
 
 const readingTime = (text) => {
     const wpm = 225;
@@ -67,6 +69,11 @@ const readingTime = (text) => {
 }
 
 
+function getImageUrl(coverImage) {
+    return coverImage
+        ? `${BACKEND_SERVER_BASE_URL}/upcominggames//${coverImage}`
+        : "news/news1.png";
+}
 
 
 
@@ -496,7 +503,7 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
-                    <img className="coverImageUpcomingGames" src={BACKEND_SERVER_BASE_URL + "/blog/upcominggames/" + post.cover_image} />
+                    <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
 
                     <br />
 

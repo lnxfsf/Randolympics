@@ -25,7 +25,6 @@ import Alert from '@mui/material/Alert';
 
 
 
-
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -56,15 +55,15 @@ registerPlugin(
 
 
 
-
-
 let BACKEND_SERVER_BASE_URL =
     import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
     process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 
 
-    
+
+
+
 const readingTime = (text) => {
     const wpm = 225;
     const words = text.trim().split(/\s+/).length;
@@ -76,22 +75,20 @@ const readingTime = (text) => {
 
 
 
-
 function getImageUrl(coverImage) {
     return coverImage
-        ? `${BACKEND_SERVER_BASE_URL}/blog/news/${coverImage}`
+        ? `${BACKEND_SERVER_BASE_URL}/blog/economics/${coverImage}`
         : "news/news1.png";
 }
 
 
 
+const EconomicsDetails = ({ postZ, onBack }) => {
 
-const NewsDetails = ({ postZ, onBack }) => {
 
     const popupRef = useRef(null);
 
 
-    
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleSnackbarClose = (event, reason) => {
@@ -102,9 +99,8 @@ const NewsDetails = ({ postZ, onBack }) => {
         setOpenSnackbar(false);
     };
 
-
-    const [post, setPost] = useState(postZ);
-
+    const [post, setPost] = useState(postZ); 
+    
 
     
     const cancelDeletion = () => {
@@ -116,7 +112,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
     const deletePost = async () => {
         try {
-            const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/blog/deletenewspost`, {
+            const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/blog/deleteeconomicspost`, {
                 postId: post.postId
             });
 
@@ -125,7 +121,7 @@ const NewsDetails = ({ postZ, onBack }) => {
                 console.log('Post deleted successfully', response.message);
 
 
-                onBack(true,false);
+                onBack(true);
 
             } else {
                 console.error('Failed to delete post. Status:', response.status);
@@ -149,22 +145,26 @@ const NewsDetails = ({ postZ, onBack }) => {
 
     const [editContent, setEditContent] = useState(post.content)
 
-    
+
+
     const [editCoverImage, setEditCoverImage] = useState(post.cover_image)  
 	
     const [tempEditCoverImage, setTempEditCoverImage] = useState()  
 	
 
 
+
     const handleCancel = () => {
+        // samo vrati sto su bili values te pre (jer nisi nista upload-ovao)
         setIsEditing(false)
         setEditTitle(post.title)
         setEditSubTitle(post.subtitle)
         setEditContent(post.content)
-        
+        // setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
 
-       
-        fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`, {
+
+        // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
+        fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_economics_picture_upload`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -189,7 +189,6 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
-
     const handleUpdatePost = async (e) => {
         e.preventDefault();
 
@@ -202,7 +201,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
             var response = await axios.post(
-                `${BACKEND_SERVER_BASE_URL}/blog/updateNewsBlog`,
+                `${BACKEND_SERVER_BASE_URL}/blog/updateEconomicsBlog`,
                 {
                     postId: post.postId,
                     title,
@@ -225,7 +224,7 @@ const NewsDetails = ({ postZ, onBack }) => {
                 // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
                 // i ako zaista ima neki upload uopste.. 
                 if (editCoverImage && tempEditCoverImage) {
-                    fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`, {
+                    fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_economics_picture_upload`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -269,8 +268,6 @@ const NewsDetails = ({ postZ, onBack }) => {
     }
 
 
-
-
     
     const toolbarOptions = [
         [{ 'header': [1, 2, false] }],
@@ -288,21 +285,20 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
-    
     const modules = { toolbar: toolbarOptions };
 
 
-
-    
     // ? filepond upload
     const [files, setFiles] = useState([]);
+
+    
 
 
     const server = {
         /* url: 'http://localhost:5000/profile_photo/upload', */
 
         process: {
-            url: `${BACKEND_SERVER_BASE_URL}/imageUpload/blogs_news_picture_upload`,
+            url: `${BACKEND_SERVER_BASE_URL}/imageUpload/blogs_economics_picture_upload`,
             method: "POST",
             headers: {},
             withCredentials: false,
@@ -348,7 +344,7 @@ const NewsDetails = ({ postZ, onBack }) => {
             // Send request to the server to delete the file with the uniqueFileId
 
             // it reverts the image it had ! but it's not yet uploaded, so we can delete it from backend..
-            fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`, {
+            fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_economics_picture_upload`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -375,6 +371,10 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
     
+
+
+    
+
     useEffect(() => {
 
         changeEditingImage();
@@ -385,8 +385,6 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
-    
-
     const changeEditingImage = () => {
         if (isEditing) {
             setEditingImage("blogs/pen_to_square_filled.svg")
@@ -396,15 +394,13 @@ const NewsDetails = ({ postZ, onBack }) => {
     }
 
 
-
-
     const updateLatestData = async () => {
 
 
         try {
 
             const response = await axios.get(
-                `${BACKEND_SERVER_BASE_URL}/blog/newsDetails`,
+                `${BACKEND_SERVER_BASE_URL}/blog/economicsDetails`,
                 {
                     params: {
                         postId: post.postId,
@@ -433,6 +429,15 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
+
+
+
+
+
+
+
+
+   
     return (
         <>
 
@@ -443,7 +448,7 @@ const NewsDetails = ({ postZ, onBack }) => {
                 <div className="flex justify-between">
 
 
-                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false,false) }}>Back to list</button>
+                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false) }}>Back to list</button>
 
                     <div className="flex gap-2 m-2" >
 
@@ -529,7 +534,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
-                    <img className="coverImageUpcomingGames" src={ getImageUrl(post.cover_image)} />
+                    <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
 
                     <br />
 
@@ -779,6 +784,10 @@ const NewsDetails = ({ postZ, onBack }) => {
         </>
     )
 
+
+
+
 }
 
-export { NewsDetails }
+export { EconomicsDetails }
+

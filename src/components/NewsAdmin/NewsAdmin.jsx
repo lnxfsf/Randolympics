@@ -25,6 +25,9 @@ import { useEffect, useState } from "react";
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { EconomicsDetails } from './Economics/EconomicsDetails';
+import { CreateEconomicsPost } from './Economics/CreateEconomicsPost';
+import { EconomicsList } from './Economics/EconomicsList';
 
 
 
@@ -38,7 +41,7 @@ const NewsAdmin = () => {
     const [openSnackbarDeleted, setOpenSnackbarDeleted] = useState(false);
 
 
-    
+
 
 
     const handleSnackbarDeletedClose = (event, reason) => {
@@ -54,7 +57,7 @@ const NewsAdmin = () => {
 
     const [openSnackbarCreated, setOpenSnackbarCreated] = useState(false);
 
-    
+
 
     const handleSnackbarCreatedClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -67,8 +70,18 @@ const NewsAdmin = () => {
 
 
 
+    const [user_type, setUserType] = useState("");
 
+    useEffect(() => {
+        const storedData =
+            localStorage.getItem("authTokens") ||
+            sessionStorage.getItem("authTokens");
+        if (storedData) {
+            var userJson = JSON.parse(storedData);
 
+            setUserType(userJson.data.user_type);
+        }
+    }, []);
 
 
 
@@ -82,16 +95,32 @@ const NewsAdmin = () => {
     const [createNewsPost, setCreateNewsPost] = useState(false)
 
 
+
+    // Economics
+    const [selectedEconomicsPost, setSelectedEconomicsPost] = useState(null);
+    const [createEconomicsPost, setCreateEconomicsPost] = useState(false)
+
+
+
+
     return (
         <>
 
             <Tabs>
                 <TabList>
-                    <Tab>Upcoming 2028 Games</Tab>
+                    {((user_type === "GP" || user_type === "EM" || user_type === "ITM")) && (
+                        <Tab>Upcoming 2028 Games</Tab>
+                    )}
 
-                    <Tab>News</Tab>
 
-                    <Tab>Economics</Tab>
+                    {((user_type === "GP" || user_type === "MM" || user_type === "ITM")) && (
+                        <Tab>News</Tab>
+                    )}
+
+
+                    {((user_type === "GP" || user_type === "SM" || user_type === "ITM")) && (
+                        <Tab>Economics</Tab>
+                    )}
 
                 </TabList>
 
@@ -102,10 +131,10 @@ const NewsAdmin = () => {
                         selectedUpcomingPost ? (
                             <GameDetails postZ={selectedUpcomingPost} onBack={(deleting) => { setSelectedUpcomingPost(null); if (deleting) { setOpenSnackbarDeleted(true) } }} />
                         ) : (
-                            <CreateUpcomingPost onBack={(deleting, created) => { setCreateUpcomingPost(false); if (created) { setOpenSnackbarCreated(true) };  console.log("on izvrsava ovo i dobija: "+created )}}   
-                            
-                            
-                              
+                            <CreateUpcomingPost onBack={(deleting, created) => { setCreateUpcomingPost(false); if (created) { setOpenSnackbarCreated(true) }; console.log("on izvrsava ovo i dobija: " + created) }}
+
+
+
                             />
                         )
                     ) : (
@@ -121,11 +150,11 @@ const NewsAdmin = () => {
 
                 <TabPanel>
 
-                {(selectedNewsPost || createNewsPost) ? (
+                    {(selectedNewsPost || createNewsPost) ? (
                         selectedNewsPost ? (
                             <NewsDetails postZ={selectedNewsPost} onBack={(deleting, created) => { setSelectedNewsPost(null); if (deleting) { setOpenSnackbarDeleted(true) } }} />
                         ) : (
-                            <CreateNewsPost onBack={(deleting, created) => { setCreateNewsPost(false); if (created) { setOpenSnackbarCreated(true) };  console.log("on izvrsava ovo i dobija: "+created )  }} />
+                            <CreateNewsPost onBack={(deleting, created) => { setCreateNewsPost(false); if (created) { setOpenSnackbarCreated(true) }; console.log("on izvrsava ovo i dobija: " + created) }} />
                         )
                     ) : (
                         <NewsGamesList onSelectPost={setSelectedNewsPost} onCreatePost={setCreateNewsPost} />
@@ -136,7 +165,17 @@ const NewsAdmin = () => {
 
                 <TabPanel>
 
-                    <h2>Economics</h2>
+                    {(selectedEconomicsPost || createEconomicsPost) ? (
+                        selectedEconomicsPost ? (
+                            <EconomicsDetails postZ={selectedEconomicsPost} onBack={(deleting, created) => { setSelectedEconomicsPost(null); if (deleting) { setOpenSnackbarDeleted(true) } }} />
+                        ) : (
+                            <CreateEconomicsPost onBack={(deleting, created) => { setCreateEconomicsPost(false); if (created) { setOpenSnackbarCreated(true) }; console.log("on izvrsava ovo i dobija: " + created) }} />
+                        )
+                    ) : (
+                        <EconomicsList onSelectPost={setSelectedEconomicsPost} onCreatePost={setCreateEconomicsPost} />
+                    )}
+
+
 
                 </TabPanel>
 

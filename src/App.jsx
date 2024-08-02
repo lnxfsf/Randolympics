@@ -13,6 +13,13 @@ import { EconomiscLoansHome } from "./pages/Home/EconomiscLoansHome";
 import { EconomicsBroadcastingHome } from "./pages/Home/EconomicsBroadcastingHome";
 import { EconomicsSponsorshipHome } from "./pages/Home/EconomicsSponsorshipHome";
 import { News } from "./pages/News";
+import { DetailsUpcomingGames } from "./components/News/UpcomingGames/DetailsUpcomingGames";
+import { ReadMoreUpcomingGames } from "./components/News/UpcomingGames/ReadMoreUpcomingGames";
+import { DetailsNewsEconomics } from "./components/News/Economics/DetailsNewsEconomics";
+import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsEconomics";
+import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsNewsBlock";
+import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
+
 
 
 
@@ -42,8 +49,26 @@ const App = () => {
         <Route path="/economicsbroadcast" element={<EconomicsBroadcastingHome />} />
         <Route path="/economicssponsorship" element={<EconomicsSponsorshipHome  />} />
 
+
+
+
         <Route path="/news" element={<News />} />
 
+        {/* for list of all Upcoming 2028 Games  */}
+        <Route path="/news/upcoming" element={<ReadMoreUpcomingGames />} />
+        <Route path="/news/upcoming/:postId/:title" element={<DetailsUpcomingGames />} />
+
+
+        {/* for list of all Economics news  */}
+        <Route path="/news/economics" element={<ReadMoreNewsEconomics />} />
+        <Route path="/news/economics/:postId/:title" element={<DetailsNewsEconomics />} />
+
+        {/* for list of all News news  */}
+        <Route path="/news/news" element={<ReadMoreNewsNewsBlock />} />
+        <Route path="/news/news/:postId/:title" element={<DetailsNewsBlock />} />
+
+        
+        
       </Routes>
     </>
   );

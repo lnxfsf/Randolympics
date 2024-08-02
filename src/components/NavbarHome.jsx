@@ -75,7 +75,7 @@ const NavbarHome = () => {
 
 
 
-                <div class="drop">
+                <div className="drop">
 
 
 
@@ -94,7 +94,7 @@ const NavbarHome = () => {
 
 
 
-                <div class="dropBeliefs">
+                <div className="dropBeliefs">
                     <a className='flex justify-center items-center' href="#beliefs"  >Our beliefs</a>
 
                     <div className={`beliefs-dropdown-menu ${scrolled ? 'scrolled' : ''} `}>
@@ -104,7 +104,7 @@ const NavbarHome = () => {
                 </div>
 
 
-                <div class="dropEconomics">
+                <div className="dropEconomics">
                     <a className='flex justify-center items-center' href="#economics" onMouseEnter={() => { setDropdownEconomicsVisible(true); }} onMouseLeave={() => { setDropdownEconomicsVisible(false); }}  >Economics</a>
 
 
