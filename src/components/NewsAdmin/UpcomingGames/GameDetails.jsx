@@ -130,7 +130,7 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
     const [isEditing, setIsEditing] = useState(false)
-    const [editingImage, setEditingImage] = useState("blogs/pen_to_square_filled.svg")
+    const [editingImage, setEditingImage] = useState("/blogs/pen_to_square_filled.svg")
 
 
     const [editTitle, setEditTitle] = useState(post.title)
@@ -368,9 +368,9 @@ const GameDetails = ({ postZ, onBack }) => {
 
     const changeEditingImage = () => {
         if (isEditing) {
-            setEditingImage("blogs/pen_to_square_filled.svg")
+            setEditingImage("/blogs/pen_to_square_filled.svg")
         } else {
-            setEditingImage("blogs/pen_to_square_empty.svg")
+            setEditingImage("/blogs/pen_to_square_empty.svg")
         }
     }
 
@@ -428,7 +428,7 @@ const GameDetails = ({ postZ, onBack }) => {
                             ref={popupRef}
                             trigger={
 
-                                <img className="blogControlsIcon cursor-pointer" src="blogs/trash.svg" onClick={deletePost} />
+                                <img className="blogControlsIcon cursor-pointer" src="/blogs/trash.svg" onClick={deletePost} />
                             }
                             position="left center"
                             contentStyle={{ width: "auto" }}

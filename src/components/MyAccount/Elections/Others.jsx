@@ -268,7 +268,7 @@ const Others = ({
                         <p className="cursor-pointer select-none text-gray_first">
                           Update Rank{" "}
                           <img
-                            src="myaccount/pencil.svg"
+                            src="/myaccount/pencil.svg"
                             style={{
                               width: "10px",
                               height: "10px",
