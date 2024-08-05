@@ -19,6 +19,7 @@ import { DetailsNewsEconomics } from "./components/News/Economics/DetailsNewsEco
 import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsEconomics";
 import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsNewsBlock";
 import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
+import { Supporters } from "./pages/Supporters";
 
 
 
@@ -68,8 +69,15 @@ const App = () => {
         <Route path="/news/news/:postId/:title" element={<DetailsNewsBlock />} />
 
         
+
+
+
+        {/* for campaign supporters */}
+        <Route path="/supporters" element={<Supporters />} />
+
         
       </Routes>
+      
     </>
   );
 };
