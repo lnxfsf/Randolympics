@@ -1,0 +1,31 @@
+
+
+.first-content-container {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    display: none; /* Hide by default */
+
+
+}
+
+
+
+.first-content-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: flex; /* Make it visible */
+}
+
+
+
+.first-content-container.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+    display: none; 
+}
+
+
+
+
+

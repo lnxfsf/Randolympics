@@ -25,6 +25,12 @@ import { Supporters } from "./pages/Supporters";
 
 
 const App = () => {
+
+
+
+  
+
+
   return (
     <>
       <Routes>

@@ -1202,12 +1202,15 @@ const EditProfile = () => {
                   searchable={true}
                   id="nationality"
                   name="nationality"
-                  placeholder="Nationality *"
+                  placeholder="Nationality"
                 />
               </div>
             </div>
 
             <div className="flex items-end col-span-2">
+
+
+
               <div className="flex flex-col ml-0 mt-6 w-[280px]">
                 <div className="flex mb-1 justify-end items-end flex-col">
                   <FormControl
@@ -1245,7 +1248,11 @@ const EditProfile = () => {
                   </LocalizationProvider>
                 </div>
               </div>
+
+
             </div>
+
+
           </div>
 
           <div className="flex justify-end mt-2 gap-2 items-end">

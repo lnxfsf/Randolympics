@@ -71,7 +71,7 @@ const readingTime = (text) => {
 
 function getImageUrl(coverImage) {
     return coverImage
-        ? `${BACKEND_SERVER_BASE_URL}/upcominggames//${coverImage}`
+        ? `${BACKEND_SERVER_BASE_URL}/blog/upcominggames/${coverImage}`
         : "news/news1.png";
 }
 
