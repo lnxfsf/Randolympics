@@ -502,8 +502,9 @@ const GameDetails = ({ postZ, onBack }) => {
                 {!isEditing && (<>
 
 
-
+                    <div className="coverImageUpcomingGames">
                     <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
+</div>
 
                     <br />
 

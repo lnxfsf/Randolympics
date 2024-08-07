@@ -534,8 +534,10 @@ const EconomicsDetails = ({ postZ, onBack }) => {
 
 
 
-                    <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
-
+                    
+                    <div className="coverImageUpcomingGames">
+                        <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
+                    </div>
                     <br />
 
                     <h1 className="text-4xl">{post.title}</h1>

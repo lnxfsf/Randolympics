@@ -86,46 +86,37 @@ const DetailsUpcomingGames = () => {
             <>
               <br />
 
-              <img
-                /*  className="w-full h-64" */
-                /*  ml-auto mr-auto */
-                className="absolute top-10 left-0 right-0 h-80 object-cover z-10 rounded-lg ml-auto mr-auto "
-                style={{ objectFit: "contain" }}
-                src={getImageUrl(post.cover_image)}
-              />
+             
+                <img
+                  /*  className="w-full h-64" */
+                  /*  ml-auto mr-auto */
+                  className="absolute top-10 left-0 right-0 h-80 object-cover z-10 rounded-lg ml-auto mr-auto "
+                  style={{ objectFit: "contain", boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' }}
+                  src={getImageUrl(post.cover_image)}
+                />
+             
 
               <div className=" flex justify-center items-center ">
                 <div className="bg-body_news m-16 mt-24 w-[70%] rounded-lg p-8 pt-0">
                   <div className="flex justify-between pt-64">
-                    
-                    
-
-                    
                     <h1 className=" text-3xl font-semibold w-[80%] ">
                       {post.title}
                     </h1>
-                   
 
                     <div className="flex flex-col justify-start items-end gap-2">
-                      <p className="text-text_news text-sm font-medium">{formatDate(post.createdAt)}</p>
-                      <p className="text-text_news text-sm">{readingTime(post.content)} min read</p>
-
+                      <p className="text-text_news text-sm font-medium">
+                        {formatDate(post.createdAt)}
+                      </p>
+                      <p className="text-text_news text-sm">
+                        {readingTime(post.content)} min read
+                      </p>
                     </div>
                   </div>
 
-                
-                
-                  
-                  
+                  <p className=" text-lg text-text_news font-medium w-[35em]">
+                    {post.subtitle}
+                  </p>
 
-                  <p className=" text-lg text-text_news font-medium w-[35em]">{post.subtitle}</p>
-                 
-              
-              
-
-                
-                    
-                    
                   <div
                     className="ql-editor p-0 pt-12"
                     dangerouslySetInnerHTML={{ __html: post.content }}
