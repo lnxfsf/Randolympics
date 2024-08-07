@@ -135,7 +135,7 @@ const UpcomingGames = () => {
         {/* second  */}
         {(gamesPosts && gamesPosts[1]) && (
             <div className="flex w-[70%] mt-4 h-64 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
-                onClick={() => { navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[1].title}`); }}
+                onClick={() => { navigate(`/news/upcoming/${gamesPosts[1].postId}/${gamesPosts[1].title}`); }}
             >
 
 

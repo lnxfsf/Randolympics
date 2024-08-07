@@ -93,15 +93,15 @@ const ReadMoreNewsEconomics = () => {
 
       {gamesPosts &&
         gamesPosts.map((post, index) => (
-            <div className="flex justify-center items-center">
-          <ItemEconomicsList
-            post={post}
-            index={index}
-            onClick={() => {
-              navigate(`/news/economics/${post.postId}/${post.title}`);
-            }}
-          />
-           </div>
+          <div className="flex justify-center items-center">
+            <ItemEconomicsList
+              post={post}
+              index={index}
+              onClick={() => {
+                navigate(`/news/economics/${post.postId}/${post.title}`);
+              }}
+            />
+          </div>
         ))}
 
       <div className="flex justify-center mt-4">
