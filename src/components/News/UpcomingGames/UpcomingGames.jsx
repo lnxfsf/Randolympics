@@ -88,7 +88,6 @@ const UpcomingGames = () => {
         {/* first  */}
         {(gamesPosts && gamesPosts[0]) && (
             <div className="flex w-[70%] h-64 mt-8 bg-body_news p-4 rounded-lg gap-8 blog-container cursor-pointer"
-
                 onClick={() => { navigate(`/news/upcoming/${gamesPosts[0].postId}/${gamesPosts[0].title}`); }}
             >
 

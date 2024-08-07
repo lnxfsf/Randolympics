@@ -60,7 +60,7 @@ const NavbarHome = () => {
                 }}
               >
                 Account
-                <img width={"15px"} height={"15px"} src="home/user.svg" />
+                <img width={"15px"} height={"15px"} src="/home/user.svg" />
               </a>
             </>
           ) : (
@@ -72,7 +72,7 @@ const NavbarHome = () => {
                 }}
               >
                 Login
-                <img width={"15px"} height={"15px"} src="home/login.svg" />
+                <img width={"15px"} height={"15px"} src="/home/login.svg" />
               </a>
             </>
           )}
