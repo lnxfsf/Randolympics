@@ -21,35 +21,79 @@ import dayjs from "dayjs";
 
 import ReactFlagsSelect from "react-flags-select";
 
+import supportedCountry from "../context/supportedCountry";
+
+import { useNavigate } from "react-router-dom";
 
 
+const inputLabelPropsTextField = {
+    sx: {
+      // Styles when the input is not focused and has no value
+      top: '0px', // Adjust this to move the label closer to the input
+      left: '0px', // Adjust to control horizontal position
+      "&.MuiInputLabel-shrink": {
+        top: "0px", // Position when the label shrinks (focus or input has value)
+        left: '0px',
+      },
+    },
+  }
+
+const sxTextField = {
+    m: 1,
+    width: "280px",
+   
+    "& .MuiInputBase-input": { height: 39, padding: 1 },
+
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 3,
+      backgroundColor: "white",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+      {
+        borderColor: "red",
+      },
+    "& .MuiInputLabel-root": {
+      "&.Mui-focused": {
+        color: "black",
+      },
+    },
+  }
 
 const Supporters = () => {
-
-    
-const [nationality_selected, setNationality_selected] = useState("");
-
-
   const [firstIsVisible, setFirstIsVisible] = useState(true);
-
   const [secondIsVisible, setSecondIsVisible] = useState(false);
+  const [thirdIsVisible, setThirdIsVisible] = useState(false);
+  const [fourthIsVisible, setFourthIsVisible] = useState(false);
+
+  const [fifthIsVisible, setFifthIsVisible] = useState(false);
 
   // friend information
   const [friendName, setFriendName] = useState("");
   const [friendLastName, setFriendLastName] = useState("");
   const [friendEmail, setFriendEmail] = useState("");
   const [friendPhone, setFriendPhone] = useState("");
-  const [friendBirthdate, setFriendBirthdate] = useState("");
-  const [friendNationality, setFriendNationality] = useState("");
+  const [friendBirthdate, setFriendBirthdate] = useState();
+  const [friendNationality, setFriendNationality] = useState();
 
-  const [selectedDate, setSelectedDate] = useState();
+  // supporter information
+  const [supporterName, setSupporterName] = useState("");
+  const [supporterLastName, setSupporterLastName] = useState("");
+  const [supporterEmail, setSupporterEmail] = useState("");
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
+
+  const navigate = useNavigate();
+
 
   return (
     <>
       <NavbarHomeCollapsed />
 
+
+
+{firstIsVisible && (
+
+    <>
       <img
         src="supporters/supporter1op.png"
         style={{
@@ -57,11 +101,106 @@ const [nationality_selected, setNationality_selected] = useState("");
           top: 0,
           left: 0,
           width: "100%",
-          height: "50rem",
+          height: "40rem",
           objectFit: "cover",
           zIndex: -1,
         }}
       />
+
+      </>
+    )}
+
+
+
+    
+
+{secondIsVisible && (
+
+<>
+  <img
+    src="supporters/supporter2.png"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "45rem",
+      objectFit: "cover",
+      zIndex: -1,
+    }}
+  />
+
+  </>
+)}
+
+
+
+{thirdIsVisible && (
+
+<>
+  <img
+    src="supporters/supporter3.png"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "45rem",
+      objectFit: "cover",
+      zIndex: -1,
+    }}
+  />
+
+  </>
+)}
+
+
+
+{fourthIsVisible && (
+
+<>
+  <img
+    src="supporters/supporter4.png"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "45rem",
+      objectFit: "cover",
+      zIndex: -1,
+    }}
+  />
+
+  </>
+)}
+
+
+
+
+
+
+{fifthIsVisible && (
+
+<>
+  <img
+    src="supporters/supporter5.png"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "55rem",
+      objectFit: "cover",
+      zIndex: -1,
+    }}
+  />
+
+  </>
+)}
+
+
+
 
       {/* style={{display: `${firstShow}`}} */}
 
@@ -120,7 +259,7 @@ const [nationality_selected, setNationality_selected] = useState("");
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
-        <p className="text-xl text-center mt-12 mb-6">
+        <p className="text-xl text-center mt-8 mb-12">
           Tell us a little bit more about your friend:
         </p>
 
@@ -140,24 +279,8 @@ const [nationality_selected, setNationality_selected] = useState("");
                 inputProps={{
                   maxLength: 255,
                 }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                    backgroundColor: "white",
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
               />
             </div>
 
@@ -173,24 +296,8 @@ const [nationality_selected, setNationality_selected] = useState("");
                 inputProps={{
                   maxLength: 255,
                 }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                    backgroundColor: "white",
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
               />
             </div>
           </div>
@@ -208,24 +315,8 @@ const [nationality_selected, setNationality_selected] = useState("");
                 inputProps={{
                   maxLength: 255,
                 }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                    backgroundColor: "white",
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
               />
             </div>
 
@@ -241,96 +332,68 @@ const [nationality_selected, setNationality_selected] = useState("");
                 inputProps={{
                   maxLength: 255,
                 }}
-                sx={{
-                  m: 1,
-                  width: "280px",
-
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
-                    backgroundColor: "white",
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black",
-                    },
-                  },
-                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
               />
             </div>
           </div>
 
-       
-       
-       
           <div className="flex justify-around ">
-          <div className="flex mb-1 justify-center items-center flex-col ">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  style={{ backgroundColor: "#fff" }}
-                  className="w-full"
-                  label="Birthdate"
-                  value={selectedDate}
-                  onChange={(date) => {
-                    setSelectedDate(date);
-                  }}
-                  format="MMMM DD, YYYY"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      backgroundColor: "#fff",
-                      borderRadius: "15px", // or 5px, according to your design
-                    },
-                    /*  '& .MuiOutlinedInput-input': {
+            <div className="flex mb-1 justify-center items-center flex-col ">
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    style={{ backgroundColor: "#fff" }}
+                    className="w-[280px]"
+                    label="Birthdate"
+                    value={friendBirthdate}
+                    onChange={(date) => {
+                      setFriendBirthdate(date);
+                    }}
+                   
+                    format="MMMM DD, YYYY"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        backgroundColor: "#fff",
+                       // borderRadius: "15px", // or 5px, according to your design
+                      
+                      },
+                     
+
+                      /*  '& .MuiOutlinedInput-input': {
                       backgroundColor: '#fff',
                       borderRadius: 'inherit', // Ensures consistency
                     },
                    */
-                  }}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
-          </div>
+                    }}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </div>
 
-
-
-          <div className="flex  justify-center items-center flex-col h-auto"  >
-
-           
-          <ReactFlagsSelect
-          
-                  countries={["US", "DE", "GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI", "NO", "KR", "RO", "CA", "NL", "CU", "PL", "CH", "BG", "NZ", "ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
-
-                  
-                  className="w-[280px] bg-[#fff] rounded-md "
-                  // to fill it with the one, which user's is currently selected...
-                  selected={
-                    nationality_selected
-                  }
-                  onSelect={(code) => {
-                    setNationality_selected(code);
-                    
-                  }}
-                 /*  className={classNameFlagsSelect} */
-                  searchable={true}
-                  id="nationality"
-                  name="nationality"
-                  placeholder="Nationality"
-                
-                  
-                />
-
-          </div>
-
+            <div className="flex  justify-center items-center flex-col h-auto">
+              <ReactFlagsSelect
+                countries={supportedCountry}
+                className="w-[280px] bg-[#fff] rounded-md p-0 "
+                // to fill it with the one, which user's is currently selected...
+                selected={friendNationality}
+                onSelect={(code) => {
+                  setFriendNationality(code);
+                }}
+                /*  className={classNameFlagsSelect} */
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder="Nationality"
+              />
+            </div>
           </div>
         </div>
 
         <Button
           onClick={() => {
-            setFirstIsVisible(false);
+            setSecondIsVisible(false);
+            setThirdIsVisible(true);
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
@@ -350,6 +413,240 @@ const [nationality_selected, setNationality_selected] = useState("");
         >
           <span className="popins-font">Proceed</span>
         </Button>
+      </div>
+
+      {/* treca */}
+      <div
+        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
+          thirdIsVisible ? "show" : "hide"
+        } `}
+      >
+        <img className="h-16" src="randolympics_logo.svg" />
+
+        <p className="text-xl text-center mt-12 mb-6">
+          Tell us a little bit more about your yourself:
+        </p>
+
+        <div className="flex flex-col w-[70%]">
+          <div className="flex justify-around ">
+            <div className="flex flex-col justify-start">
+              <TextField
+                value={supporterName}
+                onChange={(e) => {
+                  setSupporterName(e.target.value);
+                }}
+                label="Name"
+                placeholder="John"
+                id="name"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex flex-col justify-start">
+              <TextField
+                value={supporterLastName}
+                onChange={(e) => {
+                  setSupporterLastName(e.target.value);
+                }}
+                label="Last name"
+                placeholder="Doe"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-around mt-4 ">
+            <div className="flex flex-col justify-start">
+              <TextField
+                value={supporterEmail}
+                onChange={(e) => {
+                  setSupporterEmail(e.target.value);
+                }}
+                label="Email"
+                placeholder="Email Address"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+          </div>
+        </div>
+
+        <Button
+          onClick={() => {
+            setThirdIsVisible(false);
+            setFourthIsVisible(true);
+          }}
+          className="w-56"
+          style={{ marginTop: "80px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Ultimate challenge !</span>
+        </Button>
+      </div>
+
+      {/* cetvrta */}
+      <div
+        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
+          fourthIsVisible ? "show" : "hide"
+        } `}
+      >
+        <img className="h-16" src="randolympics_logo.svg" />
+
+        <p className="text-xl text-center mt-12 mb-6">
+          Want to keep this campaign running? <br />
+          Let’s see how you can support your <br />
+          friend!
+        </p>
+
+        <div className="flex  w-[70%]">
+          <div></div>
+        </div>
+
+        <Button
+          onClick={() => {
+            setFourthIsVisible(false);
+            setFifthIsVisible(true);
+          }}
+          className="w-56"
+          style={{ marginTop: "80px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Proceed</span>
+        </Button>
+      </div>
+
+      {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
+
+      <div
+        className={`flex justify-center items-center flex-col pt-28  first-content-container ${
+          fifthIsVisible ? "show" : "hide"
+        } `}
+      >
+        <img className="h-16" src="randolympics_logo.svg" />
+
+        <p className="text-xl text-center mt-12 mb-6">
+          You have successfully supported your <br />
+          friend in this campaign!
+        </p>
+
+        <p className="text-xl text-center mt-4 mb-6">
+        Do you want to invite someone else to <br/> join our campaign? 
+        </p>
+
+        <p className="text-4xl text-center  mt-6 mb-2">
+        Invite link:
+        </p>
+        <p className="text-xl text-center text-red_first  mb-6">
+        <i>https:asjfkaosgjasogsgao.com</i>
+        </p>
+
+        <p className="text-xl text-center mt-4 mb-6">
+        Share on social networks:
+        </p>
+
+        
+
+        <div className="flex justify-center gap-16 items-center w-[70%]">
+            <img className="w-20" src="supporters/fb.svg" />
+            <img  className="w-20" src="supporters/ig.svg" />
+            <img className="w-20" src="supporters/x.svg" />
+            <img  className="w-20" src="supporters/ln.svg" />
+
+        </div>
+
+
+<div className="flex gap-4">
+<Button
+          onClick={() => {
+          navigate("/")
+          }}
+          className="w-56"
+          style={{ marginTop: "80px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Home</span>
+        </Button>
+
+
+        <Button
+          onClick={() => {
+            navigate("/supporters", { replace: true });
+            window.location.reload();
+          }}
+          className="w-56"
+          style={{ marginTop: "80px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Add another friend</span>
+        </Button>
+
+</div>
+       
+
+        <div className="pb-12"></div>
       </div>
 
       {/* <p>Crypto currency: <b>USDT (ERC 20)</b></p>

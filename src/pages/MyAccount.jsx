@@ -118,8 +118,12 @@ const MyAccount = () => {
       <div className="flex pl-8 pt-8 text-[35px] ">My Account</div>
 
       <div className="flex p-12 pl-2  pt-12 gap-4">
+
         <div className="basis-1/3 side_nav p-4 ">
           <ul className="list flex flex-col">
+
+
+            
             <li
               style={{ listStyleType: "none" }}
               ref={myAccountRef}
@@ -130,6 +134,8 @@ const MyAccount = () => {
               <img src="/myaccount/user.svg" className="icon" />
               My Account
             </li>
+
+
             <li
               style={{ listStyleType: "none" }}
               ref={settingsRef}
@@ -229,6 +235,10 @@ const MyAccount = () => {
               <img src="/myaccount/exit.svg" className="icon" />
               Logout
             </li>
+
+
+
+            
           </ul>
 
           {warningMessage && (
@@ -265,9 +275,8 @@ const MyAccount = () => {
         </div>
       </div>
 
-      <div className="h-96"></div>
 
-      <Footer />
+    {/*   <Footer /> */}
     </>
   );
 };
