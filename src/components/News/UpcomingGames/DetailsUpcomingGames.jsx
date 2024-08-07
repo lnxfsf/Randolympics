@@ -68,6 +68,8 @@ const DetailsUpcomingGames = () => {
       <NavbarHomeCollapsed />
       <div className="relative ">
         <div className="mt-32">
+
+
           <div className=" flex justify-center items-center">
             <div className="w-[70%]">
               <IconButton
@@ -81,6 +83,8 @@ const DetailsUpcomingGames = () => {
               </IconButton>
             </div>
           </div>
+
+          
 
           {post && (
             <>
