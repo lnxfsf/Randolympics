@@ -6,6 +6,10 @@ import { ItemUpcomingGamesList } from "../../NewsAdmin/UpcomingGames/ItemUpcomin
 import { NavbarHome } from "../../NavbarHome";
 
 import { useNavigate } from "react-router-dom";
+import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import IconButton from "@mui/material/IconButton";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -65,24 +69,29 @@ const ReadMoreUpcomingGames = () => {
 
   return (
     <>
-      <NavbarHome />
+      <NavbarHomeCollapsed />
 
-      <div className="mb-64"></div>
+      <div className="mb-32"></div>
 
-      <button
-        className="bg-[#c7e029] "
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Go back
-      </button>
+      <div className=" flex justify-center items-center">
+
+        <div className="w-[70%]">
+          <IconButton
+          className="back-icon"
+            aria-label="back"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton >
+        </div>
+
+      </div>
+
       {gamesPosts &&
         gamesPosts.map((post, index) => (
-
-
           <div className="flex justify-center items-center">
-            
             <ItemUpcomingGamesList
               post={post}
               index={index}
@@ -90,10 +99,7 @@ const ReadMoreUpcomingGames = () => {
                 navigate(`/news/upcoming/${post.postId}/${post.title}`);
               }}
             />
-
           </div>
-
-
         ))}
 
       <div className="flex justify-center mt-4">
