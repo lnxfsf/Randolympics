@@ -15,7 +15,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                 <hr/>
                                 <div className="flex gap-2 p-1">
-                                <img width={"20px"} height={"20px"} src="home/competitions/archery.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/archery.svg" />
                                     <p>Archery</p>
                                 </div>
                                 <hr/>
@@ -24,7 +24,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                 <hr/>
                                 <div className="flex gap-2 p-1">
-                                <img width={"20px"} height={"20px"} src="home/competitions/hockey.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/hockey.svg" />
                                     <p>Field hockey</p>
                                 </div>
                                 <hr/>
@@ -34,7 +34,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                 <hr/>
                                 <div className="flex gap-2 p-1">
-                                <img width={"20px"} height={"20px"} src="home/competitions/kayaking.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/kayaking.svg" />
                                     <p>Rowing</p>
                                 </div>
                                 <hr/>
@@ -43,7 +43,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                 <hr/>
                                 <div className="flex gap-2 p-1">
-                                <img width={"20px"} height={"20px"} src="home/competitions/tableTenis.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/tableTenis.svg" />
                                     <p>Table tennis</p>
                                 </div>
                                 <hr/>
@@ -54,7 +54,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                 <hr/>
                                 <div className="flex gap-2 p-1">
-                                <img width={"20px"} height={"20px"} src="home/competitions/swimrun.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/swimrun.svg" />
                                     <p>Swimrun Sprint</p>
                                 </div>
                                 <hr/>
@@ -66,7 +66,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                               
                                 <div className="flex gap-2 p-1 mt-1 ">
-                                <img width={"20px"} height={"20px"} src="home/competitions/JavelinThrow.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/JavelinThrow.svg" />
                                     <p>Athletics</p>
                                 </div>
                                 <hr/>
@@ -76,7 +76,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                
                                 <div className="flex gap-2 p-1 mt-1 ">
-                                <img width={"20px"} height={"20px"} src="home/competitions/JavelinThrow.svg" />
+                                <img width={"20px"} height={"20px"} src="/home/competitions/JavelinThrow.svg" />
                                     <p>Athletics</p>
                                 </div>
                                 <hr/>
@@ -87,7 +87,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
                             <div>
                                
                                <div className="flex gap-2 p-1 mt-1 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/soccer.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/soccer.svg" />
                                    <p>Football</p>
                                </div>
                                <hr/>
@@ -96,7 +96,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-1 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/rugby.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/rugby.svg" />
                                    <p>Rugby Sevens</p>
                                </div>
                                <hr/>
@@ -106,7 +106,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-1 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/taekwondo.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/taekwondo.svg" />
                                    <p>Taekwondo</p>
                                </div>
                                <hr/>
@@ -116,7 +116,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-2 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/badminton.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/badminton.svg" />
                                    <p>Badminton</p>
                                </div>
                                <hr/>
@@ -126,7 +126,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-2 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/golf.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/golf.svg" />
                                    <p>Golf</p>
                                </div>
                                <hr/>
@@ -135,7 +135,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-2 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/sailing.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/sailing.svg" />
                                    <p>Sailing</p>
                                </div>
                                <hr/>
@@ -145,7 +145,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-2 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/tennisRacquet.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/tennisRacquet.svg" />
                                    <p>Tennis</p>
                                </div>
                                <hr/>
@@ -154,7 +154,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-2 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/basketball.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/basketball.svg" />
                                    <p>Basketball</p>
                                </div>
                                <hr/>
@@ -164,7 +164,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-3 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/acrobatics.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/acrobatics.svg" />
                                    <p>Gymnastics</p>
                                </div>
                                <hr/>
@@ -174,7 +174,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-3 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/shooting2.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/shooting2.svg" />
                                    <p>Shooting</p>
                                </div>
                                <hr/>
@@ -183,7 +183,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-3 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/triathlon.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/triathlon.svg" />
                                    <p>Triathlon</p>
                                </div>
                                <hr/>
@@ -193,7 +193,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-3 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/kayaking.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/kayaking.svg" />
                                    <p>Canoeing</p>
                                </div>
                                <hr/>
@@ -202,7 +202,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-3 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/handball.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/handball.svg" />
                                    <p>Handball</p>
                                </div>
                                <hr/>
@@ -212,7 +212,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-4 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/skateboarding.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/skateboarding.svg" />
                                    <p>Skateboarding</p>
                                </div>
                                <hr/>
@@ -221,7 +221,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-4 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/volleyball.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/volleyball.svg" />
                                    <p>Volleyball</p>
                                </div>
                                <hr/>
@@ -231,7 +231,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-4 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/cycling.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/cycling.svg" />
                                    <p>Cycling</p>
                                </div>
                                <hr/>
@@ -240,7 +240,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-4 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/judo.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/judo.svg" />
                                    <p>Judo</p>
                                </div>
                                <hr/>
@@ -249,7 +249,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-4 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/climbing.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/climbing.svg" />
                                    <p>Sport Climbing</p>
                                </div>
                                <hr/>
@@ -259,7 +259,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-5 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/weightlifting.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/weightlifting.svg" />
                                    <p>Weightlifting</p>
                                </div>
                                <hr/>
@@ -268,7 +268,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-5 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/diving.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/diving.svg" />
                                    <p>Diving</p>
                                </div>
                                <hr/>
@@ -277,7 +277,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-5 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/taekwondo.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/taekwondo.svg" />
                                    <p>Karate</p>
                                </div>
                                <hr/>
@@ -286,7 +286,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-5 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/surfing.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/surfing.svg" />
                                    <p>Surfing</p>
                                </div>
                                <hr/>
@@ -295,7 +295,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-5 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/wrestling.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/wrestling.svg" />
                                    <p>Wrestling</p>
                                </div>
                                <hr/>
@@ -304,7 +304,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-6 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/fencing.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/fencing.svg" />
                                    <p>Fencing</p>
                                </div>
                                <hr/>
@@ -313,7 +313,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-6 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/shooting.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/shooting.svg" />
                                    <p>Modern Pentathlon</p>
                                </div>
                                <hr/>
@@ -322,7 +322,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-6 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/swim.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/swim.svg" />
                                    <p>Swimming</p>
                                </div>
                                <hr/>
@@ -332,7 +332,7 @@ const SportsDropDownMenu = ({ scrolled }) => {
 
                            <div>
                                <div className="flex gap-2 p-1 mt-6 ">
-                               <img width={"20px"} height={"20px"} src="home/competitions/swimrun.svg" />
+                               <img width={"20px"} height={"20px"} src="/home/competitions/swimrun.svg" />
                                    <p>Swimrun</p>
                                </div>
                                <hr/>
