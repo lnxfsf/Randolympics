@@ -6,6 +6,10 @@ import { SportsDropDownMenu } from "./NavbarHome/SportsDropDownMenu";
 import { BeliefsDropDownMenu } from "./NavbarHome/BeliefsDropDownMenu";
 import { EconomicsDropDownMenu } from "./NavbarHome/EconomicsDropDownMenu";
 
+import { useContext } from 'react'
+import AuthContext from "../context/AuthContext";
+
+
 import { useNavigate } from "react-router-dom";
 
 const NavbarHome = () => {
@@ -36,6 +40,8 @@ const NavbarHome = () => {
     };
   }, []);
 
+  let { user } = useContext(AuthContext);
+
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       {/* {!scrolled && <img src={logo} alt="Logo" className="navbar-logo" />} */}
@@ -44,15 +50,33 @@ const NavbarHome = () => {
         <img src={logo} alt="Logo" />
 
         <div className=" flex ">
-          <a
-            className="flex justify-center items-center gap-2 cursor-pointer select-none"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
-            <img width={"15px"} height={"15px"} src="home/login.svg" />
-          </a>
+
+          {user ? (
+            <>
+             <a
+                className="flex justify-center items-center gap-2 cursor-pointer select-none"
+                onClick={() => {
+                  navigate("/myaccount");
+                }}
+              >
+                Account
+                <img width={"15px"} height={"15px"} src="home/user.svg" />
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                className="flex justify-center items-center gap-2 cursor-pointer select-none"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+                <img width={"15px"} height={"15px"} src="home/login.svg" />
+              </a>
+            </>
+          )}
+
           <a href="#support">Support</a>
         </div>
       </div>

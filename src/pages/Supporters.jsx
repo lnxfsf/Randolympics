@@ -357,7 +357,7 @@ const Supporters = () => {
                     format="MMMM DD, YYYY"
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        backgroundColor: "#fff",
+                       // backgroundColor: "#fff",
                        // borderRadius: "15px", // or 5px, according to your design
                       
                       },
@@ -377,7 +377,9 @@ const Supporters = () => {
             <div className="flex  justify-center items-center flex-col h-auto">
               <ReactFlagsSelect
                 countries={supportedCountry}
-                className="w-[280px] bg-[#fff] rounded-md p-0 "
+                className="w-[280px] rounded-md p-0 "
+               /*  bg-[#fff]  */
+
                 // to fill it with the one, which user's is currently selected...
                 selected={friendNationality}
                 onSelect={(code) => {
