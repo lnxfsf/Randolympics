@@ -47,6 +47,7 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
+import HorizontalLinearAlternativeLabelStepper from "./HorizontalLinearAlternativeLabelStepper";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -72,21 +73,19 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
-
-
 const Register = () => {
 
 
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
-  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
   const isPhoneErrorFocus = useRef(null);
 
 
   // ? this is for password  Password
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("* Required");
   const isPasswordErrorFocus = useRef(null);
 
 
@@ -96,7 +95,7 @@ const Register = () => {
 
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
   const isEmailErrorFocus = useRef(null);
 
   const [resultText, setResultText] = useState("");
@@ -539,10 +538,15 @@ const Register = () => {
 
   return (
     <>
+
+   
+
       <div className="flex justify-center mt-32">
         <img src="login/logo.svg" />
       </div>
-
+<p>ovde </p>
+      <HorizontalLinearAlternativeLabelStepper />
+      <p>ovde </p>
       <form
         action="#"
         className="sign-in-form flex flex-col wrap justify-start items-center"
@@ -643,6 +647,7 @@ const Register = () => {
                 <TextField
                   label="Name"
                   placeholder="John Doe"
+                  helperText="* Required"
                   id="name"
                   name="name"
                   required
@@ -729,6 +734,7 @@ const Register = () => {
               <div className="flex mb-2.5 justify-center items-center mt-0">
                 <TextField
                   label="Phone number"
+                  
                   placeholder="+1 212 456 7890"
                   id="phone"
                   name="phone"
@@ -822,6 +828,7 @@ const Register = () => {
                 <div className="flex mb-2.5 justify-center items-center mt-2">
                   <TextField
                     label="Weight"
+                    helperText="* Required"
                     id="weight"
                     name="weight"
                     required
@@ -921,6 +928,7 @@ const Register = () => {
                 <TextField
                   label="Crypto"
                   id="cryptoaddr"
+                  helperText="Optional"
                   name="cryptoaddr"
                   placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
                   sx={{
@@ -1035,7 +1043,7 @@ const Register = () => {
                 server={server}
 
                 name="image"
-                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(not mandatory)'
+                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
                 accept="image/png, image/jpeg, image/gif"
                 dropOnPage
                 dropValidation
@@ -1149,6 +1157,9 @@ const Register = () => {
           </p>
         </div>
       </form>
+
+
+     
     </>
   );
 };
