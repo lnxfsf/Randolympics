@@ -47,7 +47,7 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
-import HorizontalLinearAlternativeLabelStepper from "./HorizontalLinearAlternativeLabelStepper";
+import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -544,9 +544,8 @@ const Register = () => {
       <div className="flex justify-center mt-32">
         <img src="login/logo.svg" />
       </div>
-<p>ovde </p>
-      <HorizontalLinearAlternativeLabelStepper />
-      <p>ovde </p>
+      
+    
       <form
         action="#"
         className="sign-in-form flex flex-col wrap justify-start items-center"

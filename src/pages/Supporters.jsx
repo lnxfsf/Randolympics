@@ -24,6 +24,7 @@ import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../context/supportedCountry";
 
 import { useNavigate } from "react-router-dom";
+import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
 
 
 const inputLabelPropsTextField = {
@@ -89,6 +90,8 @@ const Supporters = () => {
     <>
       <NavbarHomeCollapsed />
 
+
+<HorizontalLinearAlternativeLabelStepper />
 
 
 {firstIsVisible && (
