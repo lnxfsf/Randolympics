@@ -270,9 +270,9 @@ const EconomicsDetails = ({ postZ, onBack }) => {
 
     
     const toolbarOptions = [
-        [{ 'header': [1, 2, false] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         ['bold', 'italic', 'underline'],
-        ['image', 'video', 'code-block', 'blockquote'],
+        ['image', 'video' ],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'script': 'sub' }, { 'script': 'super' }],
         [{ 'indent': '-1' }, { 'indent': '+1' }],
