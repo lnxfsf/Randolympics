@@ -3,7 +3,6 @@ import { NavbarHome } from "../components/NavbarHome";
 import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 
-
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -60,6 +59,11 @@ import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 import zIndex from "@mui/material/styles/zIndex";
 
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../themes/theme";
+import { QueryProvider } from "../QueryProvider";
+import DonationForm from "./DonationForm";
+
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginFilePoster,
@@ -78,7 +82,6 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
-  
 const inputLabelPropsTextField = {
   sx: {
     // Styles when the input is not focused and has no value
@@ -112,7 +115,6 @@ const sxTextField = {
 };
 
 const Supporters = () => {
-
   const campaignId = uuidv4();
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
@@ -186,13 +188,12 @@ const Supporters = () => {
           );
 
           if (responseSupport.status === 201) {
-
-           // navigate(`/campaign/${campaignId}`);
+            // navigate(`/campaign/${campaignId}`);
             // ovo u toj funkciji tek ipak !
-            alert("creates supporter account")
+            alert("creates supporter account");
 
-             setFourthIsVisible(false);
-            setFifthIsVisible(true); 
+            setFourthIsVisible(false);
+            setFifthIsVisible(true);
           }
 
           try {
@@ -944,28 +945,35 @@ const Supporters = () => {
 
         <div className="flex  w-[70%] justify-center items-center">
           <div
-            className=" pay-container flex flex-col w-64 border-2 h-32 select-none cursor-pointer  rounded-lg  justify-center items-center"
-            onClick={async () => {
-
+            className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
+          
+           /*  select-none cursor-pointer */
+          
+            /*  onClick={async () => {
               try {
                 var response = await axios.post(
-                  `${BACKEND_SERVER_BASE_URL}/listsData/makePayment`,
+                  `${BACKEND_SERVER_BASE_URL}/listsData/makePayment`
+                  
                 );
               } catch (error) {
                 //console.log(error);
                 console.log(error);
               }
 
-            /*  // window.open(
+              /*  // window.open(
                 "https://donate.stripe.com/test_bIY9BkfAU824dvqcMN",
                 "_blank"
-              ); */
-
-
-            }}
+              ); 
+            }} */
           >
-            <img className="w-12" src="/supporters/pay.svg" />
-            <p>Pay with credit card</p>
+            {/*   <img className="w-12" src="/supporters/pay.svg" />
+            <p>Pay with credit card</p> */}
+
+            <ThemeProvider theme={theme}>
+              <QueryProvider>
+                  <DonationForm />
+              </QueryProvider>
+            </ThemeProvider>
           </div>
         </div>
 
@@ -1011,37 +1019,35 @@ const Supporters = () => {
           Do you want to invite someone else to <br /> join our campaign?
         </p>
 
-        
-<p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
+        <p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
 
-<a href={urlForCampaign} className="underline">
-  Check it out
-</a>
+        <a href={urlForCampaign} className="underline">
+          Check it out
+        </a>
 
+        <TextField
+          value={urlForCampaign}
+          InputLabelProps={inputLabelPropsTextField}
+          sx={sxTextField}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip title="Copy to clipboard">
+                  <IconButton
+                    onClick={() => {
+                      navigator.clipboard.writeText(urlForCampaign);
+                    }}
+                    edge="end"
+                  >
+                    <ContentCopyIcon />
+                  </IconButton>
+                </Tooltip>
+              </InputAdornment>
+            ),
+          }}
+        />
 
-<TextField
-value={urlForCampaign}
-
-
-
-InputLabelProps={inputLabelPropsTextField}
-sx={sxTextField}
-InputProps={{
-endAdornment: (
-  <InputAdornment position="end">
-    <Tooltip title="Copy to clipboard">
-      <IconButton onClick={() => {navigator.clipboard.writeText(urlForCampaign);}} edge="end">
-        <ContentCopyIcon />
-      </IconButton>
-    </Tooltip>
-    
-  </InputAdornment>
-),
-}}
-/>
-
-
-<QRCode value={urlForCampaign} size="150" />
+        <QRCode value={urlForCampaign} size="150" />
 
         <p className="text-xl text-center mt-4 mb-6">
           Share on social networks:

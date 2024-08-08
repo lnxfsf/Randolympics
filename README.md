@@ -98,3 +98,7 @@ npm i react-qr-code
 npm install uuid
 
 
+npm install @stripe/react-stripe-js @stripe/stripe-js
+
+
+npm install react-query
