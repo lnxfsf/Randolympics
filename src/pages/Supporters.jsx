@@ -112,7 +112,7 @@ const sxTextField = {
 };
 
 const Supporters = () => {
-  
+
   const campaignId = uuidv4();
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
@@ -945,11 +945,23 @@ const Supporters = () => {
         <div className="flex  w-[70%] justify-center items-center">
           <div
             className=" pay-container flex flex-col w-64 border-2 h-32 select-none cursor-pointer  rounded-lg  justify-center items-center"
-            onClick={() => {
-              window.open(
+            onClick={async () => {
+
+              try {
+                var response = await axios.post(
+                  `${BACKEND_SERVER_BASE_URL}/listsData/makePayment`,
+                );
+              } catch (error) {
+                //console.log(error);
+                console.log(error);
+              }
+
+            /*  // window.open(
                 "https://donate.stripe.com/test_bIY9BkfAU824dvqcMN",
                 "_blank"
-              );
+              ); */
+
+
             }}
           >
             <img className="w-12" src="/supporters/pay.svg" />

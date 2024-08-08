@@ -96,3 +96,5 @@ npm install react-quill
 npm i react-qr-code
 
 npm install uuid
+
+
