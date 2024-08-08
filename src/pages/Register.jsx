@@ -341,6 +341,10 @@ const Register = () => {
     var email = e.target.email.value;
     var password = e.target.pass.value;
     var name = e.target.name.value;
+    var middleName = e.target.middleName.value;
+    var lastName = e.target.lastName.value;
+
+
     var phone = e.target.phone.value;
     var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
@@ -443,6 +447,8 @@ const Register = () => {
                 phone_private,
                 weight_private,
                 name,
+                middleName,
+                lastName,
                 phone,
                 nationality: nationality_selected,
                 weight,
@@ -477,6 +483,8 @@ const Register = () => {
             } else {
               setResultText("An unexpected error occurred: " + error.message);
             }
+
+
           }
 
 
@@ -644,11 +652,80 @@ const Register = () => {
 
               <div className="flex flex-col mb-1 justify-center mt-0">
                 <TextField
-                  label="Name"
-                  placeholder="John Doe"
+                  label="First Name"
+                  placeholder="John"
                   helperText="* Required"
                   id="name"
                   name="name"
+                  required
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  value=""
+                  label="Middle Name"
+                  placeholder="Doe"
+                  helperText="* Optional"
+                  id="name"
+                  name="middleName"
+                  
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              
+
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  label="Last Name"
+                  placeholder="Doe"
+                  helperText="* Optional"
+                  id="name"
+                  name="lastName"
                   required
                   type="text"
                   inputProps={{

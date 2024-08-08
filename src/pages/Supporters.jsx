@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputLabel from "@mui/material/InputLabel";
 
 // date picker
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -31,6 +32,10 @@ import supportedCountry from "../context/supportedCountry";
 
 import { useNavigate } from "react-router-dom";
 import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
+
+import MenuItem from "@mui/material/MenuItem";
+
+import axios from "axios";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -96,6 +101,82 @@ const sxTextField = {
 };
 
 const Supporters = () => {
+  const makeCampaign = async () => {
+    // signs up friend first !
+    try {
+
+      if (
+        friendEmail &&
+        friendName &&
+        friendGender &&
+        friendNationality &&
+        friendPhone
+      ) { 
+
+        var response = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/auth/register`,
+          {
+        
+
+
+            user_type: "AH",
+            email: friendEmail,
+            email_private: true,
+            phone_private: true,
+            weight_private: true,
+            name: friendName,
+            middleName: friendMiddleName,
+            lastName: friendLastName,
+            phone: friendPhone,
+            nationality: friendNationality,
+            weight: "0",
+            cryptoaddress: "",
+            picture: friendImage,
+            cryptoaddress_type: "BTC",
+            bio: "",
+            gender: friendGender,
+
+            signedByFriend: true
+
+          }
+        );
+
+        if (response.status === 201) {
+          alert("user created");
+          // ovo u toj funkciji tek ipak !
+          setFourthIsVisible(false);
+          setFifthIsVisible(true);
+        }
+     } else {
+        alert("inser email for friend");
+      } 
+    } catch (error) {
+      console.log(error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 409) {
+          //alert("");
+
+
+          alert(error.response.data.message);
+
+          //console.log(error)
+
+
+          
+        } else {
+          alert(
+            "An error occurred: " +
+            (error.response?.data?.message || error.message)
+          );
+        }
+      } else {
+        alert("An unexpected error occurred: " + error.message);
+      }
+
+    }
+  };
+
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -104,6 +185,37 @@ const Supporters = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  // for wizard pages
+  const [firstIsVisible, setFirstIsVisible] = useState(true);
+  const [secondIsVisible, setSecondIsVisible] = useState(false);
+  const [thirdIsVisible, setThirdIsVisible] = useState(false);
+  const [fourthIsVisible, setFourthIsVisible] = useState(false);
+  const [fifthIsVisible, setFifthIsVisible] = useState(false);
+
+  // friend information
+  const [friendName, setFriendName] = useState("");
+  const [friendMiddleName, setFriendMiddleName] = useState("");
+  const [friendLastName, setFriendLastName] = useState("");
+  const [friendEmail, setFriendEmail] = useState("");
+  const [friendPhone, setFriendPhone] = useState("");
+  const [friendBirthdate, setFriendBirthdate] = useState();
+  const [friendNationality, setFriendNationality] = useState();
+  const [friendImage, setFriendImage] = useState();
+  const [friendGender, setFriendGender] = useState("M");
+
+  // supporter information
+  const [supporterName, setSupporterName] = useState("");
+  const [supporterPhone, setSupporterPhone] = useState("");
+  const [supporterEmail, setSupporterEmail] = useState("");
+  const [supporterPassword, setSupporterPassword] = useState("");
+  const [supporterPasswordConfirmation, setSupporterPasswordConfirmation] =
+    useState("");
+  const [supporterComment, setSupporterComment] = useState("");
+
+  /* setSelectedDate(dayjs(userJson.data.birthdate)); */
+
+  const navigate = useNavigate();
 
   // ? for FilePond
 
@@ -127,7 +239,7 @@ const Supporters = () => {
 
         console.log("Uploaded filename:", filename);
 
-        setProfileImage(filename);
+        setFriendImage(filename);
 
         // return filename;
       },
@@ -163,36 +275,6 @@ const Supporters = () => {
   };
 
   // ? for FilePond
-
-  const [firstIsVisible, setFirstIsVisible] = useState(true);
-  const [secondIsVisible, setSecondIsVisible] = useState(false);
-  const [thirdIsVisible, setThirdIsVisible] = useState(false);
-  const [fourthIsVisible, setFourthIsVisible] = useState(false);
-
-  const [fifthIsVisible, setFifthIsVisible] = useState(false);
-
-  // friend information
-  const [friendName, setFriendName] = useState("");
-  const [friendMiddleName, setFriendMiddleName] = useState("");
-  const [friendLastName, setFriendLastName] = useState("");
-  const [friendEmail, setFriendEmail] = useState("");
-  const [friendPhone, setFriendPhone] = useState("");
-  const [friendBirthdate, setFriendBirthdate] = useState();
-  const [friendNationality, setFriendNationality] = useState();
-
-  // supporter information
-  const [supporterName, setSupporterName] = useState("");
-  const [supporterPhone, setSupporterPhone] = useState("");
-  const [supporterEmail, setSupporterEmail] = useState("");
-  const [supporterPassword, setSupporterPassword] = useState("");
-  const [supporterPasswordConfirmation, setSupporterPasswordConfirmation] =
-    useState("");
-  const [supporterComment, setSupporterComment] = useState("");
-
-  /* setSelectedDate(dayjs(userJson.data.birthdate)); */
-
-  const navigate = useNavigate();
-
   return (
     <>
       <NavbarHomeCollapsed />
@@ -287,8 +369,7 @@ const Supporters = () => {
       {/* style={{display: `${firstShow}`}} */}
 
       {/* prva */}
-     
-     {firstIsVisible && (
+
       <div
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
@@ -334,10 +415,9 @@ const Supporters = () => {
           competitor !{" "}
         </p>
       </div>
-)}
+
       {/* druga */}
-     
-      {secondIsVisible && (
+
       <div
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           secondIsVisible ? "show" : "hide"
@@ -527,6 +607,24 @@ const Supporters = () => {
               imageEditAllowEdit={false}
             />
           </div>
+
+          <div className="flex mt-0 mb-2 flex-col">
+            <InputLabel id="roleDropdowns">Gender</InputLabel>
+            <Select
+              labelId="roleDropdowns"
+              id="roleDropdown"
+              label="gender"
+              value={friendGender}
+              onChange={(event) => {
+                setFriendGender(event.target.value);
+              }}
+              className="w-[420px] h-10"
+              style={{ color: "#000" }}
+            >
+              <MenuItem value={"M"}>Male</MenuItem>
+              <MenuItem value={"F"}>Female</MenuItem>
+            </Select>
+          </div>
         </div>
 
         <Button
@@ -553,12 +651,9 @@ const Supporters = () => {
           <span className="popins-font">Proceed</span>
         </Button>
       </div>
-      )}
-
-
 
       {/* treca */}
-      {thirdIsVisible && (
+
       <div
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           thirdIsVisible ? "show" : "hide"
@@ -722,27 +817,24 @@ const Supporters = () => {
             />
           </div>
 
-
           <div className="flex flex-col justify-start">
-              <TextField
-                value={supporterComment}
-                onChange={(e) => {
-                  setSupporterComment(e.target.value);
-                }}
-                label="Supporter comment"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-
-
+            <TextField
+              value={supporterComment}
+              onChange={(e) => {
+                setSupporterComment(e.target.value);
+              }}
+              label="Supporter comment"
+              placeholder="John"
+              id="name"
+              name="name"
+              type="text"
+              inputProps={{
+                maxLength: 255,
+              }}
+              InputLabelProps={inputLabelPropsTextField}
+              sx={sxTextField}
+            />
+          </div>
         </div>
 
         <Button
@@ -769,11 +861,9 @@ const Supporters = () => {
           <span className="popins-font">Ultimate challenge !</span>
         </Button>
       </div>
- )}
-
 
       {/* cetvrta */}
-      {fourthIsVisible && (
+
       <div
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           fourthIsVisible ? "show" : "hide"
@@ -788,28 +878,23 @@ const Supporters = () => {
         </p>
 
         <div className="flex  w-[70%] justify-center items-center">
-         
           <div
-           className=" pay-container flex flex-col w-64 border-2 h-32 select-none cursor-pointer  rounded-lg  justify-center items-center"
-           
-            onClick={() => {window.open('https://donate.stripe.com/test_bIY9BkfAU824dvqcMN', '_blank')}} 
-
-           >
-
-
-
-            <img className="w-12"  src="/supporters/pay.svg"/>
+            className=" pay-container flex flex-col w-64 border-2 h-32 select-none cursor-pointer  rounded-lg  justify-center items-center"
+            onClick={() => {
+              window.open(
+                "https://donate.stripe.com/test_bIY9BkfAU824dvqcMN",
+                "_blank"
+              );
+            }}
+          >
+            <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p>
-
-            <button></button>
-          
           </div>
         </div>
 
         <Button
           onClick={() => {
-            setFourthIsVisible(false);
-            setFifthIsVisible(true);
+            makeCampaign();
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
@@ -830,11 +915,9 @@ const Supporters = () => {
           <span className="popins-font">Proceed</span>
         </Button>
       </div>
-)}
 
       {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
-      
-      {fifthIsVisible && (
+
       <div
         className={`flex justify-center items-center flex-col pt-28  first-content-container ${
           fifthIsVisible ? "show" : "hide"
@@ -918,7 +1001,6 @@ const Supporters = () => {
 
         <div className="pb-12"></div>
       </div>
-)}
 
       {/* <p>Crypto currency: <b>USDT (ERC 20)</b></p>
             <p>Ethereum blockchain</p><br/>
