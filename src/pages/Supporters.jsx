@@ -187,6 +187,7 @@ const Supporters = () => {
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterPasswordConfirmation, setSupporterPasswordConfirmation] =
     useState("");
+  const [supporterComment, setSupporterComment] = useState("");
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
@@ -720,6 +721,28 @@ const Supporters = () => {
               }}
             />
           </div>
+
+
+          <div className="flex flex-col justify-start">
+              <TextField
+                value={supporterComment}
+                onChange={(e) => {
+                  setSupporterComment(e.target.value);
+                }}
+                label="Supporter comment"
+                placeholder="John"
+                id="name"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+
+
         </div>
 
         <Button

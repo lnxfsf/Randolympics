@@ -20,6 +20,7 @@ import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsE
 import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsNewsBlock";
 import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
 import { Supporters } from "./pages/Supporters";
+import { RegisteredByFriend } from "./components/Login/RegisteredByFriend";
 
 
 
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passresetbyfriend" element={<RegisteredByFriend /> } />
         <Route path="/tos" element={<ToS />} />
         <Route path="/randomize" element={<Randomize />} />
 
