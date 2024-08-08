@@ -28,4 +28,33 @@
 
 
 
+.filepond--root,
+.filepond--root .filepond--drop-label {
+  width: var(--width);
+  height: var(--height);
+  font-size: var(--font-size);
+}
 
+
+.athlete {
+    --width: 150px;
+    --height: 150px;
+    --font-size: 10pt;
+  }
+
+
+
+
+
+
+
+
+  
+.pay-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pay-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
