@@ -3,6 +3,10 @@ import { NavbarHome } from "../components/NavbarHome";
 import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 
+
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import Tooltip from "@mui/material/Tooltip";
+
 import TextField from "@mui/material/TextField";
 
 import React, { useState, useEffect } from "react";
@@ -994,11 +998,37 @@ const Supporters = () => {
           Do you want to invite someone else to <br /> join our campaign?
         </p>
 
-        <p className="text-4xl text-center  mt-6 mb-2">Invite link:</p>
-        <p className="text-xl text-center text-red_first  mb-6">
-          <i>{urlForCampaign}</i>
+        
+<p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
 
-        </p>
+<a href={urlForCampaign} className="underline">
+  Check it out
+</a>
+
+
+<TextField
+value={urlForCampaign}
+
+
+
+InputLabelProps={inputLabelPropsTextField}
+sx={sxTextField}
+InputProps={{
+endAdornment: (
+  <InputAdornment position="end">
+    <Tooltip title="Copy to clipboard">
+      <IconButton onClick={() => {navigator.clipboard.writeText(urlForCampaign);}} edge="end">
+        <ContentCopyIcon />
+      </IconButton>
+    </Tooltip>
+    
+  </InputAdornment>
+),
+}}
+/>
+
+
+<QRCode value={urlForCampaign} size="150" />
 
         <p className="text-xl text-center mt-4 mb-6">
           Share on social networks:
