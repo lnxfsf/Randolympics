@@ -31,8 +31,16 @@ export const createPaymentIntent = async (amount) => {
             }
             
           });
-          const data = await response.json();
-          return data.paymentIntent;
+         
+          // const data = await response.json();
+         
+          // TODO, jer axios valjda daje u .json il nesto..
+        /*   console.log("u createPaymentIntent se nalazi: ")
+          console.log(response.data.paymentIntent)
+
+          return data.paymentIntent; */
+
+          return response.data.paymentIntent
 
 
         }catch(e) {

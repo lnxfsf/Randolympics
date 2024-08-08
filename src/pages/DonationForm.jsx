@@ -1,47 +1,34 @@
-import { Card, CardContent, Typography, Grid, InputAdornment, OutlinedInput, Button, CircularProgress } from "@mui/material";
-import { useState } from "react";
-
+import { Card, Fade, Container } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useCreatePaymentIntent } from "../hooks/useCreatePaymentIntent";
-
-
+import DonationInput from "./DonationInput";
 
 export default function DonationForm() {
     const [amount, setAmount] = useState(10);
+
+    const [paymentIntent, setPaymentIntent] = useState(null);
+
     const { mutate, isLoading, data, error } = useCreatePaymentIntent();
     const handleChange = (e) => {
         setAmount(e.target.value);
     }
     const handleSubmit = () => (mutate(amount));
 
+    useEffect(() => {
+        if (data) setPaymentIntent(data);
+    }, [data]);
+
+    console.log("paymentIntent")
+    console.log(paymentIntent)
+
+
+
     return (
         <Card>
-            <CardContent>
-                <Grid container spacing={2} justifyContent={"center"}>
-                    <Grid item xs={12}>
-                        <Typography>
-                            Buy me a Coffee?
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <OutlinedInput
-                                    type="text"
-                                    value={amount}
-                                    onChange={handleChange}
-                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button fullWidth variant="contained" type="submit" onClick={handleSubmit} disabled={isLoading}>
-                                    {isLoading ? <CircularProgress/> : 'Donate'}
-                                </Button>
-                                {error && <Typography variant="alert">Something went wrong</Typography>}
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </CardContent>
+            <Fade in={!paymentIntent} unmountOnExit>
+                <Container>
+                    <DonationInput amount={amount} handleChange={handleChange} handleSubmit={handleSubmit} isLoading={isLoading} data={data} error={error} />
+                </Container>
+            </Fade>
         </Card>)
 }
