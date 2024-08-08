@@ -2,6 +2,7 @@ import { Card, Fade, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCreatePaymentIntent } from "../hooks/useCreatePaymentIntent";
 import DonationInput from "./DonationInput";
+import StripeForm from "./StripeForm";
 
 export default function DonationForm() {
     const [amount, setAmount] = useState(10);
@@ -29,6 +30,18 @@ export default function DonationForm() {
                 <Container>
                     <DonationInput amount={amount} handleChange={handleChange} handleSubmit={handleSubmit} isLoading={isLoading} data={data} error={error} />
                 </Container>
+
+
             </Fade>
+
+            <Fade in={paymentIntent} unmountOnExit>
+                <Container>
+                    <StripeForm paymentIntent={paymentIntent} />
+                </Container>
+
+                
+            </Fade>
+
+
         </Card>)
 }
