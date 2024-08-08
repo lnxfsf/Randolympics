@@ -21,6 +21,8 @@ import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsN
 import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
 import { Supporters } from "./pages/Supporters";
 import { RegisteredByFriend } from "./components/Login/RegisteredByFriend";
+import { Campaign } from "@mui/icons-material";
+import { ItemCampaign } from "./components/Campaign/ItemCampaign";
 
 
 
@@ -82,6 +84,9 @@ const App = () => {
 
         {/* for campaign supporters */}
         <Route path="/supporters" element={<Supporters />} />
+        <Route path="/campaign" element={<Campaign /> } />
+        <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
+
 
         
       </Routes>

@@ -39,7 +39,7 @@ body {
 
 
 /* default header styles (seem to be missing) */
-h1 { 
+/* h1 { 
     display: block;
     font-size: 2em;
     margin-top: 0.67em;
@@ -47,8 +47,8 @@ h1 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
-h2 {
+} */
+/* h2 {
     display: block;
     font-size: 1.5em;
     margin-top: 0.83em;
@@ -56,8 +56,8 @@ h2 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
-h3 { 
+} */
+/* h3 { 
     display: block;
     font-size: 1.17em;
     margin-top: 1em;
@@ -65,16 +65,16 @@ h3 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
-h4 { 
+} */
+/* h4 { 
     display: block;
     margin-top: 1.33em;
     margin-bottom: 1.33em;
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
-h5 { 
+} */
+/* h5 { 
     display: block;
     font-size: .83em;
     margin-top: 1.67em;
@@ -82,8 +82,8 @@ h5 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
-h6 { 
+} */
+/* h6 { 
     display: block;
     font-size: .67em;
     margin-top: 2.33em;
@@ -91,6 +91,6 @@ h6 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-}
+} */
 
 

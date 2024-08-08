@@ -225,9 +225,9 @@ const Login = () => {
             </div>
 
          
-            <p>{emailFriend}</p>
+           
 
-            <div className="flex basis-1/2 justify-end mt-4">
+          {/*   <div className="flex basis-1/2 justify-end mt-4">
                 <Link
                   to="/passresetbyfriend"
 
@@ -241,7 +241,7 @@ const Login = () => {
                 >
                   <u>I got registered by a friend,I don’t have a password yet!</u>
                 </Link>
-              </div>
+              </div> */}
                  
 
 

@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 
 import React, { useState, useEffect } from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import "../styles/supporters.scoped.scss";
 
 // MUI
@@ -68,6 +70,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+let FRONTEND_SERVER_BASE_URL =
+  import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
+  process.env.VITE_FRONTEND_SERVER_BASE_URL;
+
+  
 const inputLabelPropsTextField = {
   sx: {
     // Styles when the input is not focused and has no value
@@ -101,24 +108,23 @@ const sxTextField = {
 };
 
 const Supporters = () => {
+  const campaignId = uuidv4();
+  const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
+
   const makeCampaign = async () => {
     // signs up friend first !
     try {
-
       if (
         friendEmail &&
         friendName &&
         friendGender &&
         friendNationality &&
         friendPhone
-      ) { 
-
+      ) {
+        // this is for athlete register
         var response = await axios.post(
           `${BACKEND_SERVER_BASE_URL}/auth/register`,
           {
-        
-
-
             user_type: "AH",
             email: friendEmail,
             email_private: true,
@@ -136,20 +142,79 @@ const Supporters = () => {
             bio: "",
             gender: friendGender,
 
-            signedByFriend: true
-
+            signedByFriend: true,
+            supporterName: supporterName,
+            campaignURL: urlForCampaign,
           }
         );
 
         if (response.status === 201) {
-          alert("user created");
-          // ovo u toj funkciji tek ipak !
-          setFourthIsVisible(false);
-          setFifthIsVisible(true);
+          alert("athlete user created");
+
+          // ? creating user for supporter
+          var responseSupport = await axios.post(
+            `${BACKEND_SERVER_BASE_URL}/auth/register`,
+            {
+              user_type: "SPT",
+              email: supporterEmail,
+              password: supporterPassword,
+              email_private: true,
+              phone_private: true,
+              weight_private: true,
+              name: supporterName,
+              /*  middleName: friendMiddleName,
+              lastName: friendLastName, */
+              phone: supporterPhone,
+              /*  nationality: friendNationality, */
+              weight: "0",
+              cryptoaddress: "",
+              /*  picture: friendImage, */
+              cryptoaddress_type: "BTC",
+              bio: "",
+              gender: "M", // we don't actually need gender for supporter
+              supporterComment,
+              // signedByFriend: true,
+
+              //supporterName: supporterName,
+              // campaignURL: urlForCampaign,
+            }
+          );
+
+          if (responseSupport.status === 201) {
+
+           // navigate(`/campaign/${campaignId}`);
+            // ovo u toj funkciji tek ipak !
+            alert("creates supporter account")
+
+             setFourthIsVisible(false);
+            setFifthIsVisible(true); 
+          }
+
+          try {
+          } catch (error) {
+            console.log(error);
+
+            if (axios.isAxiosError(error)) {
+              if (error.response && error.response.status === 409) {
+                //alert("");
+
+                alert(error.response.data.message);
+
+                //console.log(error)
+              } else {
+                alert(
+                  "An error occurred: " +
+                    (error.response?.data?.message || error.message)
+                );
+              }
+            } else {
+              alert("An unexpected error occurred: " + error.message);
+            }
+          }
         }
-     } else {
+      } else {
         alert("inser email for friend");
-      } 
+      }
     } catch (error) {
       console.log(error);
 
@@ -157,23 +222,18 @@ const Supporters = () => {
         if (error.response && error.response.status === 409) {
           //alert("");
 
-
           alert(error.response.data.message);
 
           //console.log(error)
-
-
-          
         } else {
           alert(
             "An error occurred: " +
-            (error.response?.data?.message || error.message)
+              (error.response?.data?.message || error.message)
           );
         }
       } else {
         alert("An unexpected error occurred: " + error.message);
       }
-
     }
   };
 
@@ -936,7 +996,8 @@ const Supporters = () => {
 
         <p className="text-4xl text-center  mt-6 mb-2">Invite link:</p>
         <p className="text-xl text-center text-red_first  mb-6">
-          <i>https:asjfkaosgjasogsgao.com</i>
+          <i>{urlForCampaign}</i>
+
         </p>
 
         <p className="text-xl text-center mt-4 mb-6">
