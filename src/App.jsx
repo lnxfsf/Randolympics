@@ -21,7 +21,9 @@ import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsN
 import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
 import { Supporters } from "./pages/Supporters";
 import { RegisteredByFriend } from "./components/Login/RegisteredByFriend";
-import { Campaign } from "@mui/icons-material";
+
+import { Campaign } from "./pages/Campaign";
+
 import { ItemCampaign } from "./components/Campaign/ItemCampaign";
 
 

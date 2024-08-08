@@ -16,6 +16,13 @@ const ItemCampaign = () => {
         <>
 
         <p>{campaignId}</p>
+
+        <p>Campaign</p>
+
+        <p>Athlete </p>
+        <p>Supporter</p>
+
+
         </>
     )
 
