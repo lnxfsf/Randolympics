@@ -29,6 +29,7 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: 0,
     },
 
+
     middleName: {
       type: DataTypes.STRING(255),
     },
@@ -255,6 +256,9 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    supporterComment: {
+      type: DataTypes.STRING(255),
+    },
 
 
 

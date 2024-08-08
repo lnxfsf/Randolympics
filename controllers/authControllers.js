@@ -34,14 +34,15 @@ const generateVerificationToken = () => {
 };
 
 const generatePassword = (length = 8) => {
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charset =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let password = "";
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * charset.length);
     password += charset[randomIndex];
   }
   return password;
-}
+};
 
 const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
   console.log("tip user-a je:");
@@ -72,7 +73,7 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
           where: {
             nationality: nationality,
             gender: gender,
-            user_type: user_type
+            user_type: user_type,
           },
           order: [["ranking", "DESC"]],
         });
@@ -183,18 +184,14 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
-
-
-
   var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
-
 
   // on ovde uzima varijable
   const {
     user_type,
     email,
     email_private,
-   
+
     name,
 
     middleName,
@@ -211,70 +208,48 @@ const register = async (req, res) => {
     picture,
     gender,
     signedByFriend,
+    supporterName, // this is only for sending invite email, so they have name who made it
+    campaignURL,
+    supporterComment,
   } = req.body;
 
-
-  
-
-
   // if he's signedByFriend , then we generate password
-  if(signedByFriend){
+  if (signedByFriend) {
     var password = generatePassword();
   } else {
-    var {password} = req.body;
+    var { password } = req.body;
   }
 
-
-
-
   // validation !!
-
-
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!emailRegex.test(email)) {
     res.status(409).json({ message: "Email is incorrect !" });
     return;
-
   }
-
 
   if (name == "") {
     res.status(409).json({ message: "Name can't be empty !" });
     return;
   }
 
-
-
-
-
-  const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
-
-
+  const phoneRegex =
+    /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
   if (!phoneRegex.test(phone)) {
     res.status(409).json({ message: "Phone is incorrect !" });
     return;
   }
 
-
-
-
-
-
-
-
-
   const passwordRegex = /^.{4,}$/;
 
   if (!passwordRegex.test(password)) {
-    res.status(409).json({ message: "Password should be longer than 4 characters !" });
+    res
+      .status(409)
+      .json({ message: "Password should be longer than 4 characters !" });
     return;
   }
-
-
-
 
   // nationality
   if (nationality === "") {
@@ -282,15 +257,11 @@ const register = async (req, res) => {
     return;
   }
 
-
-  // last name 
+  // last name
   if (lastName === "") {
     res.status(409).json({ message: "Last name can't be empty !" });
     return;
   }
-
-
-
 
   //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
   if (user_type === "AH") {
@@ -299,15 +270,6 @@ const register = async (req, res) => {
       return;
     }
   }
-
-
-
-
-
-
-
-
-
 
   // hash password
   const salt = await bcrypt.genSalt(10);
@@ -343,7 +305,12 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type == "AH", nationality, gender), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
+    ranking: await lastInRank(
+      user_type,
+      user_type == "AH",
+      nationality,
+      gender
+    ), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
@@ -367,6 +334,8 @@ const register = async (req, res) => {
     verificationToken: generateVerificationToken(),
     gender,
     votes, // in mysql, default value is 0 , if this is empty..
+
+    supporterComment,
   };
 
   try {
@@ -380,30 +349,64 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
-
     // Create a new user
     const newUser = await User.create(user_data);
 
-    
-    sendEmail(
-      newUser.email,
-      "Email Verification",
-      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
-    );
+    if (!signedByFriend) {
+      sendEmail(
+        newUser.email,
+        "Email Verification",
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+      );
+    } else {
+      sendEmail(
+        newUser.email,
+        "Invitation to participate in Randolympics",
+
+        `
+        
+       
+<p>
+  ${
+    supporterName ? supporterName : "someone"
+  } invited you to participate in Randolympics !
+  
+  
+</p>
+
+<p>
+  He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
+</p>
+<p>
+   Your email: <b>${email}</b>  <br/>
+  Your password: <b>${password}</b>
+  
+</p>
+
+<p>You can access your campaign in: <a href=${campaignURL}></a></p>
+
+<br/>
+<p>But first you need to verify your account as well </p>
+<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
+          newUser.verificationToken
+        }">here</a> to verify your email.</p>
+
+
+        
+        
+        `
+      );
+    }
 
     res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
-
     //console.log("error zasto je: ")
     //console.log(error.message)
 
-    console.log(error.stack)
+    console.log(error.stack);
     res.status(500).json({ error: error.message });
-
-
   }
 };
-
 
 const email_resend = async (req, res) => {
   const { email } = req.body;
@@ -719,9 +722,6 @@ const login = async (req, res) => {
   }
 };
 
-
-
-
 module.exports = {
   register,
   login,
@@ -732,7 +732,3 @@ module.exports = {
   reset_password,
   email_resend,
 };
-
-
-
-
