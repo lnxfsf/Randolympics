@@ -33,6 +33,16 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
+const generatePassword = (length = 8) => {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+}
+
 const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
   console.log("tip user-a je:");
   console.log(user_type);
@@ -184,8 +194,12 @@ const register = async (req, res) => {
     user_type,
     email,
     email_private,
-    password,
+   
     name,
+
+    middleName,
+    lastName,
+
     phone,
     phone_private,
     nationality,
@@ -196,7 +210,19 @@ const register = async (req, res) => {
     cryptoaddress_type,
     picture,
     gender,
+    signedByFriend,
   } = req.body;
+
+
+  
+
+
+  // if he's signedByFriend , then we generate password
+  if(signedByFriend){
+    var password = generatePassword();
+  } else {
+    var {password} = req.body;
+  }
 
 
 
@@ -257,6 +283,12 @@ const register = async (req, res) => {
   }
 
 
+  // last name 
+  if (lastName === "") {
+    res.status(409).json({ message: "Last name can't be empty !" });
+    return;
+  }
+
 
 
 
@@ -291,6 +323,10 @@ const register = async (req, res) => {
     email_private,
     password: hashedPassword,
     name,
+
+    middleName,
+    lastName,
+
     name_verify: null,
     birthdate: null,
     birthdate_private: 1,
@@ -344,9 +380,11 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
+
     // Create a new user
     const newUser = await User.create(user_data);
 
+    
     sendEmail(
       newUser.email,
       "Email Verification",
@@ -359,6 +397,7 @@ const register = async (req, res) => {
     //console.log("error zasto je: ")
     //console.log(error.message)
 
+    console.log(error.stack)
     res.status(500).json({ error: error.message });
 
 

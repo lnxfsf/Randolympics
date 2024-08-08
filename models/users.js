@@ -23,10 +23,21 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING(255),
     },
+  
     name_verify: {
       type: DataTypes.TINYINT(1),
       defaultValue: 0,
     },
+
+    middleName: {
+      type: DataTypes.STRING(255),
+    },
+
+    lastName: {
+      type: DataTypes.STRING(255),
+    },
+
+
     birthdate: {
       type: DataTypes.DATEONLY,
     },
