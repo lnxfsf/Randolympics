@@ -8560,8 +8560,25 @@ const makePayment = async (req, res) => {
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+  const { amount } = req.body;
+
+  console.log(amount)
   console.log("passed once")
 
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount * 100,
+        currency: 'usd',
+        automatic_payment_methods: { enabled: true },
+    });
+    res.send({
+        paymentIntent
+    });
+} catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+}
 
 
 
