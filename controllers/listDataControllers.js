@@ -12,6 +12,8 @@ const { JSDOM } = require('jsdom');
 
 
 
+const Stripe = require('stripe');
+
 const listOfSports = require('../data/listOfSports')
 
 const dayjs = require('dayjs');
@@ -8553,6 +8555,48 @@ const shareTableLandingPage = async (req, res) => {
 
 
 
+// TODO, put this somewhere else, but this, just so I can work with something
+const makePayment = async (req, res) => {
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+  console.log("passed once")
+
+
+
+
+
+
+
+/*   const stripe = require('stripe')(process.env.STRIPE_TEST_API)
+
+  stripe.products.create({
+    name: 'Starter Subscription',
+    description: '$12/Month subscription',
+  }).then(product => {
+    stripe.prices.create({
+      unit_amount: 1200,
+      currency: 'usd',
+      recurring: {
+        interval: 'month',
+      },
+      product: product.id,
+    }).then(price => {
+      console.log('Success! Here is your starter subscription product id: ' + product.id);
+      console.log('Success! Here is your starter subscription price id: ' + price.id);
+    });
+  }); */
+  
+
+
+
+
+
+
+
+
+
+}
 
 
 
@@ -8572,5 +8616,8 @@ module.exports = {
   landingPageRandomize,
 
   shareTableLandingPage,
+
+
+  makePayment,
 
 };
