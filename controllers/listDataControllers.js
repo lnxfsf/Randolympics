@@ -6555,7 +6555,6 @@ const makePayment = async (req, res) => {
       where: { campaignId: campaignId },
     });
 
-    
     try {
       await oneCampaign.update({ payment_id: paymentIntent.id }); // azurira samo taj
     } catch (error) {
@@ -6592,6 +6591,41 @@ const makePayment = async (req, res) => {
   }); */
 };
 
+const campaignDetails = async (req, res) => {
+  const campaignId = req.query.campaignId;
+
+
+
+  try {
+    
+
+    const oneCampaign = await Campaign.findOne({
+      where: {
+        campaignId: campaignId,
+      },
+    });
+
+    // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
+    const thatAthlete = await User.findOne({
+      where: {
+        email: oneCampaign.friendEmail,
+      },
+    });
+
+
+
+      return res.status(200).json({oneCampaign, thatAthlete});
+
+
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+
+
+
+
+};
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -6609,4 +6643,6 @@ module.exports = {
 
   makePayment,
   createCampaign,
+
+  campaignDetails,
 };

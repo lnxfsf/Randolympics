@@ -1,5 +1,13 @@
 const express = require("express");
-const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize, shareTableLandingPage, makePayment, createCampaign } = require("../controllers/listDataControllers");
+const { rankingTop50, otherUsers, lastInRank,
+         team, currentNP , 
+         listLoginTrafficHistory, 
+         landingPageRandomize, shareTableLandingPage,
+          makePayment,
+           createCampaign,
+           campaignDetails
+        
+        } = require("../controllers/listDataControllers");
 const router = express.Router();
 
 
@@ -44,10 +52,15 @@ router.get("/landingPageRandomize", landingPageRandomize)
 router.post("/shareTableLandingPage", shareTableLandingPage)
 
 
-
+// ! from here, organize later, where these routes should be better suited
 //TODO put this payment somewhere else. maybe just route for payments.. see it how to do... 
 router.post("/makePayment",makePayment)
 router.post("/createCampaign", createCampaign)
+
+
+
+// for reading campaign info 
+router.get("/campaignDetails", campaignDetails)
 
 
 
