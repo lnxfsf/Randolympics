@@ -8563,6 +8563,14 @@ const makePayment = async (req, res) => {
   const { amount } = req.body;
 
   console.log(amount)
+
+
+  // TODO ovde, amount . si 100% siguran kolko novca dano ! 
+
+
+  // TODO i success (mora biti potvrdjen payment ! kako on dobija ovde !)
+
+
   console.log("passed once")
 
 
@@ -8575,6 +8583,9 @@ const makePayment = async (req, res) => {
     res.send({
         paymentIntent
     });
+
+    console.log(paymentIntent)
+
 } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

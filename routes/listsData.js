@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 
+
 // router.post("/update_rank_data", update_rank_data)  // this is to update rank data, for normal Rank.. 
 
 
@@ -47,6 +48,11 @@ router.post("/shareTableLandingPage", shareTableLandingPage)
 //TODO put this payment somewhere else. maybe just route for payments.. see it how to do... 
 router.post("/makePayment",makePayment)
 
+
+
+
+
+  
 
 
 module.exports = router;
