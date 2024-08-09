@@ -14,7 +14,15 @@ import { useElements, useStripe } from "@stripe/react-stripe-js";
 
 import { useState, useEffect } from "react";
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
+
+let STRIPE_PUBLIC_KEY =
+  import.meta.env.VITE_STRIPE_PUBLIC_KEY ||
+  process.env.VITE_STRIPE_PUBLIC_KEY;
+
+
+const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLIC_KEY);
+
 
 const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
   const [confirmData, updateConfirmData] = useState(null);
