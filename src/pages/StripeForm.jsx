@@ -39,7 +39,7 @@ const StripeFormComponent = ({ paymentIntent, handleCancel }) => {
   };
 
   useEffect(() => {
-    if (data) updateConfirmData(data);
+    if (data) confirmPayment(data);
   }, [data]);
 
   return (
@@ -89,16 +89,16 @@ const StripeForm = ({ paymentIntent , handleClear }) => {
 } */
 
 const StripeForm = (props) => {
-  /*  console.log("sta ima u props sve");
-    console.log(props.handleCancel); */
+   console.log("sta ima u props sve");
+    console.log(props);
   return (
     <>
       <Elements
         stripe={stripePromise}
-        handleClear={props.handleCancel}
+        
         options={{ clientSecret: props.paymentIntent.client_secret }}
       >
-        <StripeFormComponent {...props} />
+        <StripeFormComponent {...props} handleClear={props.handleCancel} />
       </Elements>
     </>
   );

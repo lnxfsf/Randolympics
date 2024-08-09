@@ -1,13 +1,18 @@
 import { Card, Fade, Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useCreatePaymentIntent } from "../hooks/useCreatePaymentIntent";
 import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
+
+
+
+
 
 export default function DonationForm() {
     const [amount, setAmount] = useState(10);
 
     const [paymentIntent, setPaymentIntent] = useState(null);
+    const [confirmedPayment, setConfirmedPayment] = useState(null);
 
     const { mutate, isLoading, data, error } = useCreatePaymentIntent();
     const handleChange = (e) => {
@@ -23,13 +28,21 @@ export default function DonationForm() {
     console.log(paymentIntent)
 
 
-    
-    const handleClear = () => {
+
+
+    const handleClear = useCallback(() => {
         setPaymentIntent(null);
- }
- 
+      console.log("da poziva se stvarno ")
+      }, [paymentIntent]);
+    
+    
+      
+
+
     return (
         <Card>
+
+{!paymentIntent && (
             <Fade in={!paymentIntent} unmountOnExit>
                 <Container>
                     <DonationInput amount={amount} handleChange={handleChange} handleSubmit={handleSubmit} isLoading={isLoading} data={data} error={error} />
@@ -37,7 +50,9 @@ export default function DonationForm() {
 
 
             </Fade>
+)}
 
+{paymentIntent && (
             <Fade in={paymentIntent} unmountOnExit>
                 <Container>
                     <StripeForm paymentIntent={paymentIntent} handleCancel={handleClear} />
@@ -45,7 +60,7 @@ export default function DonationForm() {
 
                 
             </Fade>
-
+)}
 
         </Card>)
 }
