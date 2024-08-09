@@ -21,7 +21,7 @@ let STRIPE_PUBLIC_KEY =
   process.env.VITE_STRIPE_PUBLIC_KEY;
 
 
-const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 
 const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
@@ -30,7 +30,7 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
   console.log("handle clear je");
   console.log(handleCancel);
 
-  const stripe = useStripe();
+  const stripe = useStripe(STRIPE_PUBLIC_KEY);
 
   const elements = useElements();
 
