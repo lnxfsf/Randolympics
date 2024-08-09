@@ -23,7 +23,11 @@ export default function DonationForm() {
     console.log(paymentIntent)
 
 
-
+    
+    const handleClear = () => {
+        setPaymentIntent(null);
+ }
+ 
     return (
         <Card>
             <Fade in={!paymentIntent} unmountOnExit>
@@ -36,7 +40,7 @@ export default function DonationForm() {
 
             <Fade in={paymentIntent} unmountOnExit>
                 <Container>
-                    <StripeForm paymentIntent={paymentIntent} />
+                    <StripeForm paymentIntent={paymentIntent} handleCancel={handleClear} />
                 </Container>
 
                 
