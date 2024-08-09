@@ -1,9 +1,5 @@
 
 
-import  '../styles/pageNotFound.scoped.css';
-
-
-
 const PageNotFound = () => {
 
 

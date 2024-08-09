@@ -133,6 +133,45 @@ const Supporters = () => {
 
 
   const makeCampaign = async () => {
+
+      // make campaign with these.
+      try {
+
+        var responseCampaign = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/listsData/createCampaign`,
+          {
+            campaignId,
+            friendName,
+            friendMiddleName,
+            friendLastName,
+            friendEmail,
+            friendPhone,
+            friendBirthdate,
+            friendNationality,
+            friendImage,
+            friendGender,
+
+
+            supporterName,
+            supporterPhone,
+            supporterEmail,
+            supporterComment,
+
+          }
+        );
+
+        if (responseCampaign.status === 201) {
+            alert("created campaign in database")
+        }
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
+
+
+      // and then makes those two accounts. athlete and supporter ! 
     // signs up friend first !
     try {
       if (
@@ -142,6 +181,7 @@ const Supporters = () => {
         friendNationality &&
         friendPhone
       ) {
+
         // this is for athlete register
         var response = await axios.post(
           `${BACKEND_SERVER_BASE_URL}/auth/register`,
@@ -173,6 +213,7 @@ const Supporters = () => {
           alert("athlete user created");
 
           // ? creating user for supporter
+          // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
           var responseSupport = await axios.post(
             `${BACKEND_SERVER_BASE_URL}/auth/register`,
             {
@@ -206,8 +247,7 @@ const Supporters = () => {
             // ovo u toj funkciji tek ipak !
             alert("creates supporter account");
 
-            setFourthIsVisible(false);
-            setFifthIsVisible(true);
+          
           }
 
           try {
@@ -926,40 +966,10 @@ const Supporters = () => {
             setThirdIsVisible(false);
             setFourthIsVisible(true);
 
-            // make campaign with these.
-            try {
-
-              var response = await axios.post(
-                `${BACKEND_SERVER_BASE_URL}/listsData/createCampaign`,
-                {
-                  campaignId,
-                  friendName,
-                  friendMiddleName,
-                  friendLastName,
-                  friendEmail,
-                  friendPhone,
-                  friendBirthdate,
-                  friendNationality,
-                  friendImage,
-                  friendGender,
+            makeCampaign();
 
 
-                  supporterName,
-                  supporterPhone,
-                  supporterEmail,
-                  supporterComment,
-
-                }
-              );
-
-              if (response.status === 201) {
-                  alert("created campaign in database")
-              }
-
-
-            } catch (error) {
-              console.log(error);
-            }
+          
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
@@ -1095,7 +1105,11 @@ const Supporters = () => {
 
         <Button
           onClick={() => {
-            makeCampaign();
+           
+
+            setFourthIsVisible(false);
+            setFifthIsVisible(true);
+
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
