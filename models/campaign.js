@@ -3,6 +3,7 @@ module.exports = function (sequelize, DataTypes) {
     campaignId: {
       type: DataTypes.STRING(255),
       primaryKey: true,
+      
     },
 
     friendName: {
@@ -72,6 +73,6 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
-    
+
   });
 };

@@ -8632,8 +8632,9 @@ const makePayment = async (req, res) => {
 
   
 
-  const { amount } = req.body;
+  const { amount, campaignId } = req.body;
 
+  console.log(campaignId)
   console.log(amount)
 
 
@@ -8657,6 +8658,31 @@ const makePayment = async (req, res) => {
     });
 
     console.log(paymentIntent)
+
+   /*  console.log("ono sto on prima je."+ campaignId)
+    // sad upisi u database (da, i vise puta ako je, ako nije uspeo, ide on dole u error ionako)
+    const oneCampaign = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+try{
+   await oneCampaign.update({payment_id: paymentIntent.id});  // azurira samo taj
+
+}catch (error) {
+  console.log(error.stack)
+
+} */
+   
+
+    try{
+
+      
+    } catch (error) {
+      console.log(error.stack)
+      return res.status(500).json({ error: error.message });
+
+
+    }
+
 
 } catch (error) {
     console.log(error);
