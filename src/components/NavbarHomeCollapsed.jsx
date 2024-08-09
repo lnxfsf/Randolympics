@@ -120,7 +120,7 @@ const NavbarHomeCollapsed = () => {
 
 
 
-                <a className='flex justify-center items-center' href="#FAQ" onClick={() => { navigate("/"); }} >FAQ</a>
+                <a className='flex justify-center items-center' href="#how_it_works" onClick={() => { navigate("/"); }} >How it works</a>
 
 
 
@@ -128,7 +128,7 @@ const NavbarHomeCollapsed = () => {
 
 
 
-                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/register"); }}>Join now</a>
+                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/supporters"); }}>Sign up a friend</a>
 
             </div>
         </nav>

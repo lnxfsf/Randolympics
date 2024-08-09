@@ -133,12 +133,12 @@ const NavbarHome = () => {
 
         <a
           className="flex justify-center items-center"
-          href="#FAQ"
+          href="#how_it_works"
           onClick={() => {
             navigate("/");
           }}
         >
-          FAQ
+          How it works
         </a>
 
         <a
@@ -153,10 +153,10 @@ const NavbarHome = () => {
         <a
           className="flex justify-center items-center select-none cursor-pointer"
           onClick={() => {
-            navigate("/register");
+            navigate("/supporters");
           }}
         >
-          Join now
+          Sign up a friend
         </a>
       </div>
     </nav>
