@@ -21,6 +21,9 @@ const db = require("./models/database");
 const port = process.env.PORT;
 const app = express();
 
+const Campaign = db.campaign;
+const User = db.users;
+
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -39,7 +42,42 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
     // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
 
+
+
+    // make campaign as confirmed (so we keep it)
+    const oneCampaign = await Campaign.findOne({
+      where: { payment_id: paymentIntentId },
+    });
+
+
+    try {
+      await oneCampaign.update({ payment_status: status}); // azurira samo taj
+    } catch (error) {
+      console.log(error.stack);
+    }
+
+
+
+    // we update value in that athlete (it's campaign for one athlete..)
     
+    const oneAthlete = await User.findOne({
+      where: { email: oneCampaign.friendEmail },
+    });
+
+    console.log(" on moze naci oneAthlete")
+    console.log(oneAthlete)
+
+    // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
+    try {
+     // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
+      await oneAthlete.increment('donatedAmount', { by: amount });  // add (+) za toliko amount za taj athlete
+
+    } catch (error) {
+      console.log(error.stack);
+    }
+
+
+
 
 
   }
@@ -68,7 +106,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
           console.log(paymentIntent.id) // evo, on ga pogadja i nalazi u database koji ima za campaign... 
 
           await updatePaymentStatus(paymentIntent.id, 'succeeded', paymentIntent.amount);
-          console.log("sve object ima li amount, da si 100% siguran da radi jako")
+         
           console.log(event.data.object)  // drzi ga u centima da, nema sta da konvertujes ipak ! 
           // ! 10030  , je 100.30 $ ! zadnja dve cifre su broj
 

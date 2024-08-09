@@ -261,7 +261,10 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
-
+    donatedAmount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    }
 
 
 
