@@ -1,0 +1,60 @@
+
+
+.first-content-container {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    display: none; /* Hide by default */
+
+
+}
+
+
+
+.first-content-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: flex; /* Make it visible */
+}
+
+
+
+.first-content-container.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+    display: none; 
+}
+
+
+
+
+.filepond--root,
+.filepond--root .filepond--drop-label {
+  width: var(--width);
+  height: var(--height);
+  font-size: var(--font-size);
+}
+
+
+.athlete {
+    --width: 150px;
+    --height: 150px;
+    --font-size: 10pt;
+  }
+
+
+
+
+
+
+
+
+  
+.pay-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pay-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

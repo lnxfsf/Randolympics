@@ -19,6 +19,7 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
+import zIndex from "@mui/material/styles/zIndex";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -34,10 +35,7 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const HeaderMyProfile = ({ShowEditProfile}) => {
- 
-  
-
+const HeaderMyProfile = ({ ShowEditProfile }) => {
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
   const [user_typeText, setUserTypeText] = useState("");
@@ -76,38 +74,34 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
       },
     },
 
-
     revert: (uniqueFileId, load, error) => {
       //  console.log("ovo mu je" + profileImage)
 
-      
       // Send request to the server to delete the file with the uniqueFileId
-       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
-        method: 'DELETE',
+      fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ filename: profileImage }),
-      }).then(response => {
-        if (response.ok) {
-          load(); // Signal that the file has been reverted successfully
-        } else {
-          response.json().then(errorData => error(errorData.message));
-        }
-      }).catch(err => {
-        console.error('Error reverting file:', err);
-        error('Error reverting file');
-      }); 
-
-
+      })
+        .then((response) => {
+          if (response.ok) {
+            load(); // Signal that the file has been reverted successfully
+          } else {
+            response.json().then((errorData) => error(errorData.message));
+          }
+        })
+        .catch((err) => {
+          console.error("Error reverting file:", err);
+          error("Error reverting file");
+        });
     },
-
-
   };
 
   const toogleProfileUpload = async () => {
     setToogleProfilePic(!toogleProfilePic);
-    
+
     try {
       // we just upload profile_image URL, in database !
       var response = await axios.post(
@@ -203,31 +197,41 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
     }
   };
 
-
-  
   return (
     <>
       <div className="flex justify-start">
         <div className="flex justify-center items-center">
           {!toogleProfilePic && (
             <>
-              <img
-                src={
-                  BACKEND_SERVER_BASE_URL +
-                  "/imageUpload/profile_pics/" +
-                  profileImage
-                }
-                className="image_editProfile"
-              />
+
+
+              <div className="image_editProfile" >
+
+
+                <img
+                  src={
+                    BACKEND_SERVER_BASE_URL +
+                    "/imageUpload/profile_pics/" +
+                    profileImage
+                  }
+
+                  className="image_editProfile"
+                  
+                  
+                  style={{ position: "relative", zIndex: "-1" }}
+                />
+
+
+              </div>
+
+
             </>
           )}
 
           {toogleProfilePic && (
             <>
               <FilePond
-
-              className="filepond--root small"
-
+                className="filepond--root small"
                 type="file"
                 onupdatefiles={setFiles}
                 allowMultiple={false}
@@ -269,12 +273,7 @@ const HeaderMyProfile = ({ShowEditProfile}) => {
             {!toogleProfilePic && (
               <>
                 <p className="edit-photo" onClick={toogleProfileUpload}>
-                
-                
-                {(ShowEditProfile) && (
-                  <u>Edit photo</u>
-                )}
-
+                  {ShowEditProfile && <u>Edit photo</u>}
                 </p>
               </>
             )}

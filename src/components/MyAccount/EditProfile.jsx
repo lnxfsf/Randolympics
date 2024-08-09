@@ -24,7 +24,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Menu from "@mui/material/Menu";
 
-
 //we display it as fragment, inside MyProfile...
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -72,7 +71,7 @@ import moment from "moment";
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
-  const [userData, setUserData] = useState(null); 
+  const [userData, setUserData] = useState(null);
 
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -167,7 +166,7 @@ const EditProfile = () => {
   const [bio, setBio] = useState("");
 
   const [passportImage, setPassportImage] = useState(null);
-   /* const [profileImage, setProfileImage] = useState(null); */
+  /* const [profileImage, setProfileImage] = useState(null); */
 
   //For date.  okay, it saves as date object
   const [selectedDate, setSelectedDate] = useState(); // this one, you upload in database as update field... (can't be empty after it.. ) WITH "Save" button
@@ -202,7 +201,7 @@ const EditProfile = () => {
 
       setPassportImage(userJson.data.passport_photo);
       /* setProfileImage(userJson.data.picture); */
-       
+
       setSelectedDate(dayjs(userJson.data.birthdate));
 
       setPassportExpiryDate(() => {
@@ -219,20 +218,12 @@ const EditProfile = () => {
         }
       });
 
-
-
       // fetch latest data, and store it in localstorage. (so it can display realtime data for passport updates.. ). okay, this will execute just once ! at render ! so no problem here !
       fetchLatestInLocalStorage(userJson.data.userId);
-
-
     }
   }, []);
 
-
-
   const fetchLatestInLocalStorage = async (userId) => {
-
-
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/fetchLatestData`,
@@ -240,7 +231,6 @@ const EditProfile = () => {
       );
 
       if (response.status === 200) {
-
         setUserData(response); //we update it again.. yes.. but this is latest btw..
 
         if (localStorage.getItem("authTokens")) {
@@ -249,18 +239,12 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
 
-
-
-
-        console.log(response)
+        console.log(response);
       }
     } catch (error) {
       console.log(error);
     }
-
-  }
-
-
+  };
 
   const settingUserType = (user_type) => {
     switch (user_type) {
@@ -384,8 +368,9 @@ const EditProfile = () => {
   };
 
   // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[280px] ml-2 ${selectedRole !== "AH" ? "mt-8" : ""
-    }`;
+  let classNameFlagsSelect = `w-[280px] ml-2 ${
+    selectedRole !== "AH" ? "mt-8" : ""
+  }`;
 
   // ? HERE, for crypto..
 
@@ -469,34 +454,27 @@ const EditProfile = () => {
       },
     },
 
-
     revert: (uniqueFileId, load, error) => {
-      
-
-      
-      
       // Send request to the server to delete the file with the uniqueFileId
-       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertPassportPicture`, {
-        method: 'DELETE',
+      fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertPassportPicture`, {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ filename: passportImage }),
-      }).then(response => {
-        if (response.ok) {
-          load(); // Signal that the file has been reverted successfully
-        } else {
-          response.json().then(errorData => error(errorData.message));
-        }
-      }).catch(err => {
-        console.error('Error reverting file:', err);
-        error('Error reverting file');
-      }); 
-
-
+      })
+        .then((response) => {
+          if (response.ok) {
+            load(); // Signal that the file has been reverted successfully
+          } else {
+            response.json().then((errorData) => error(errorData.message));
+          }
+        })
+        .catch((err) => {
+          console.error("Error reverting file:", err);
+          error("Error reverting file");
+        });
     },
-
-
   };
 
   const serverProfile = {
@@ -525,10 +503,6 @@ const EditProfile = () => {
         return response;
       },
     },
-
-   
-
-
   };
 
   // this is for toggle
@@ -817,9 +791,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+                      {
+                        borderColor: "red",
+                      },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -871,9 +845,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+                      {
+                        borderColor: "red",
+                      },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -1009,9 +983,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+                      {
+                        borderColor: "red",
+                      },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -1087,9 +1061,9 @@ const EditProfile = () => {
                       borderRadius: 5,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+                      {
+                        borderColor: "red",
+                      },
                     "& .MuiInputLabel-root": {
                       "&.Mui-focused": {
                         color: "black",
@@ -1140,9 +1114,9 @@ const EditProfile = () => {
                           borderRadius: 5,
                         },
                         "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                        {
-                          borderColor: "red",
-                        },
+                          {
+                            borderColor: "red",
+                          },
                         "& .MuiInputLabel-root": {
                           "&.Mui-focused": {
                             color: "black",
@@ -1186,8 +1160,104 @@ const EditProfile = () => {
               </div>
               <div className="flex justify-end items-end pb-2">
                 <ReactFlagsSelect
-                  countries={["US", "DE", "GB", "CN", "FR", "IT", "HU", "RU", "AU", "SE", "JP", "FI", "NO", "KR", "RO", "CA", "NL", "CU", "PL", "CH", "BG", "NZ", "ES", "BR", "BE", "DK", "UA", "KE", "TR", "ZA", "JM", "AR", "CZ", "AT", "IR", "GR", "BY", "UZ", "MX", "ET", "KP", "HR", "IE", "IN", "PK", "TH", "SK", "GE", "AZ", "PT", "UG", "CO", "TT", "NG", "VE", "ID", "MA", "TN", "DO", "EE", "LT", "EG", "TW", "SI", "ZW", "LV", "PH", "RS", "MN", "KZ", "AM", "DZ", "BS", "LU", "VN", "IS", "PE", "SG", "MY", "PR", "KG", "TJ", "HK", "XK", "AE", "SA", "BH", "QA", "LB", "JO", "CI", "GH", "SY", "MD", "MK", "IL"]}
-
+                  countries={[
+                    "US",
+                    "DE",
+                    "GB",
+                    "CN",
+                    "FR",
+                    "IT",
+                    "HU",
+                    "RU",
+                    "AU",
+                    "SE",
+                    "JP",
+                    "FI",
+                    "NO",
+                    "KR",
+                    "RO",
+                    "CA",
+                    "NL",
+                    "CU",
+                    "PL",
+                    "CH",
+                    "BG",
+                    "NZ",
+                    "ES",
+                    "BR",
+                    "BE",
+                    "DK",
+                    "UA",
+                    "KE",
+                    "TR",
+                    "ZA",
+                    "JM",
+                    "AR",
+                    "CZ",
+                    "AT",
+                    "IR",
+                    "GR",
+                    "BY",
+                    "UZ",
+                    "MX",
+                    "ET",
+                    "KP",
+                    "HR",
+                    "IE",
+                    "IN",
+                    "PK",
+                    "TH",
+                    "SK",
+                    "GE",
+                    "AZ",
+                    "PT",
+                    "UG",
+                    "CO",
+                    "TT",
+                    "NG",
+                    "VE",
+                    "ID",
+                    "MA",
+                    "TN",
+                    "DO",
+                    "EE",
+                    "LT",
+                    "EG",
+                    "TW",
+                    "SI",
+                    "ZW",
+                    "LV",
+                    "PH",
+                    "RS",
+                    "MN",
+                    "KZ",
+                    "AM",
+                    "DZ",
+                    "BS",
+                    "LU",
+                    "VN",
+                    "IS",
+                    "PE",
+                    "SG",
+                    "MY",
+                    "PR",
+                    "KG",
+                    "TJ",
+                    "HK",
+                    "XK",
+                    "AE",
+                    "SA",
+                    "BH",
+                    "QA",
+                    "LB",
+                    "JO",
+                    "CI",
+                    "GH",
+                    "SY",
+                    "MD",
+                    "MK",
+                    "IL",
+                  ]}
                   disabled
                   // to fill it with the one, which user's is currently selected...
                   selected={
@@ -1202,7 +1272,7 @@ const EditProfile = () => {
                   searchable={true}
                   id="nationality"
                   name="nationality"
-                  placeholder="Nationality *"
+                  placeholder="Nationality"
                 />
               </div>
             </div>

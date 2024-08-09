@@ -71,7 +71,7 @@ const readingTime = (text) => {
 
 function getImageUrl(coverImage) {
     return coverImage
-        ? `${BACKEND_SERVER_BASE_URL}/upcominggames//${coverImage}`
+        ? `${BACKEND_SERVER_BASE_URL}/blog/upcominggames/${coverImage}`
         : "news/news1.png";
 }
 
@@ -262,9 +262,9 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
     const toolbarOptions = [
-        [{ 'header': [1, 2, false] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         ['bold', 'italic', 'underline'],
-        ['image', 'video', 'code-block', 'blockquote'],
+        ['image', 'video'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'script': 'sub' }, { 'script': 'super' }],
         [{ 'indent': '-1' }, { 'indent': '+1' }],
@@ -502,8 +502,9 @@ const GameDetails = ({ postZ, onBack }) => {
                 {!isEditing && (<>
 
 
-
+                    <div className="coverImageUpcomingGames">
                     <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
+</div>
 
                     <br />
 

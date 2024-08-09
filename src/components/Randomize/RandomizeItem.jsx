@@ -7,8 +7,10 @@ const RandomizeItem = ({ icon, name }) => {
     <>
       {/*   <div className="flex justify-center items-center gap-2 shadow-md p-3 rounded-lg cursor-pointer select-none ">
       */}
-      <div className="flex justify-center items-center gap-2 cursor-pointer select-none">
-        <img src={icon_url} className="w-8 h-8 mt-1" />
+      <div className="flex justify-center items-center gap-2 cursor-pointer select-none" >
+
+     {/*  mt-1 */}
+        <img src={icon_url} className="w-8 h-8 " />
 
         <p>{name}</p>
       </div>

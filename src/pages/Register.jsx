@@ -47,6 +47,7 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
+import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -72,21 +73,19 @@ let BACKEND_SERVER_BASE_URL =
 
 
 
-
-
 const Register = () => {
 
 
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
-  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
   const isPhoneErrorFocus = useRef(null);
 
 
   // ? this is for password  Password
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("* Required");
   const isPasswordErrorFocus = useRef(null);
 
 
@@ -96,7 +95,7 @@ const Register = () => {
 
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
   const isEmailErrorFocus = useRef(null);
 
   const [resultText, setResultText] = useState("");
@@ -342,6 +341,10 @@ const Register = () => {
     var email = e.target.email.value;
     var password = e.target.pass.value;
     var name = e.target.name.value;
+    var middleName = e.target.middleName.value;
+    var lastName = e.target.lastName.value;
+
+
     var phone = e.target.phone.value;
     var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
@@ -444,6 +447,8 @@ const Register = () => {
                 phone_private,
                 weight_private,
                 name,
+                middleName,
+                lastName,
                 phone,
                 nationality: nationality_selected,
                 weight,
@@ -478,6 +483,8 @@ const Register = () => {
             } else {
               setResultText("An unexpected error occurred: " + error.message);
             }
+
+
           }
 
 
@@ -539,10 +546,14 @@ const Register = () => {
 
   return (
     <>
+
+   
+
       <div className="flex justify-center mt-32">
         <img src="login/logo.svg" />
       </div>
-
+      
+    
       <form
         action="#"
         className="sign-in-form flex flex-col wrap justify-start items-center"
@@ -641,10 +652,80 @@ const Register = () => {
 
               <div className="flex flex-col mb-1 justify-center mt-0">
                 <TextField
-                  label="Name"
-                  placeholder="John Doe"
+                  label="First Name"
+                  placeholder="John"
+                  helperText="* Required"
                   id="name"
                   name="name"
+                  required
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  value=""
+                  label="Middle Name"
+                  placeholder="Doe"
+                  helperText="* Optional"
+                  id="name"
+                  name="middleName"
+                  
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "420px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              
+
+              <div className="flex flex-col mb-1 justify-center mt-0">
+                <TextField
+                  label="Last Name"
+                  placeholder="Doe"
+                  helperText="* Optional"
+                  id="name"
+                  name="lastName"
                   required
                   type="text"
                   inputProps={{
@@ -729,6 +810,7 @@ const Register = () => {
               <div className="flex mb-2.5 justify-center items-center mt-0">
                 <TextField
                   label="Phone number"
+                  
                   placeholder="+1 212 456 7890"
                   id="phone"
                   name="phone"
@@ -822,6 +904,7 @@ const Register = () => {
                 <div className="flex mb-2.5 justify-center items-center mt-2">
                   <TextField
                     label="Weight"
+                    helperText="* Required"
                     id="weight"
                     name="weight"
                     required
@@ -921,6 +1004,7 @@ const Register = () => {
                 <TextField
                   label="Crypto"
                   id="cryptoaddr"
+                  helperText="Optional"
                   name="cryptoaddr"
                   placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
                   sx={{
@@ -1035,7 +1119,7 @@ const Register = () => {
                 server={server}
 
                 name="image"
-                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(not mandatory)'
+                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
                 accept="image/png, image/jpeg, image/gif"
                 dropOnPage
                 dropValidation
@@ -1149,6 +1233,9 @@ const Register = () => {
           </p>
         </div>
       </form>
+
+
+     
     </>
   );
 };

@@ -11,7 +11,9 @@ export default {
       gray_first: "#C6C6C6",
       body_news: "#F7FAFA",
 
-      text_news: "#716363"
+      text_news: "#716363",
+
+      whited: "#fff"
 
       
     },

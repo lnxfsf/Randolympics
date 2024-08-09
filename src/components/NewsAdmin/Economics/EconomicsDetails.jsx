@@ -270,9 +270,9 @@ const EconomicsDetails = ({ postZ, onBack }) => {
 
     
     const toolbarOptions = [
-        [{ 'header': [1, 2, false] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         ['bold', 'italic', 'underline'],
-        ['image', 'video', 'code-block', 'blockquote'],
+        ['image', 'video' ],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'script': 'sub' }, { 'script': 'super' }],
         [{ 'indent': '-1' }, { 'indent': '+1' }],
@@ -534,8 +534,10 @@ const EconomicsDetails = ({ postZ, onBack }) => {
 
 
 
-                    <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
-
+                    
+                    <div className="coverImageUpcomingGames">
+                        <img className="coverImageUpcomingGames" src={getImageUrl(post.cover_image)} />
+                    </div>
                     <br />
 
                     <h1 className="text-4xl">{post.title}</h1>

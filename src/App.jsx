@@ -19,11 +19,24 @@ import { DetailsNewsEconomics } from "./components/News/Economics/DetailsNewsEco
 import { ReadMoreNewsEconomics } from "./components/News/Economics/ReadMoreNewsEconomics";
 import { ReadMoreNewsNewsBlock } from "./components/News/NewsBlock/ReadMoreNewsNewsBlock";
 import { DetailsNewsBlock } from "./components/News/NewsBlock/DetailsNewsBlock";
+import { Supporters } from "./pages/Supporters";
+import { RegisteredByFriend } from "./components/Login/RegisteredByFriend";
+
+import { Campaign } from "./pages/Campaign";
+
+import { ItemCampaign } from "./components/Campaign/ItemCampaign";
+import { PageNotFound } from "./pages/PageNotFound";
 
 
 
 
 const App = () => {
+
+
+
+  
+
+
   return (
     <>
       <Routes>
@@ -38,6 +51,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passresetbyfriend" element={<RegisteredByFriend /> } />
         <Route path="/tos" element={<ToS />} />
         <Route path="/randomize" element={<Randomize />} />
 
@@ -68,8 +82,24 @@ const App = () => {
         <Route path="/news/news/:postId/:title" element={<DetailsNewsBlock />} />
 
         
+
+
+
+        {/* for campaign supporters */}
+        <Route path="/supporters" element={<Supporters />} />
+        <Route path="/campaign" element={<Campaign /> } />
+        <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
+
+
+
+
+        <Route
+                    path="*"
+                    element={<PageNotFound />}
+                />
         
       </Routes>
+      
     </>
   );
 };

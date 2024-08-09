@@ -29,6 +29,8 @@ const Login = () => {
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [emailFriend, setEmailFriend] = useState();
+
   const [isEmailVerified, setIsEmailVerified] = useState(true);
 
   const [resultText, setResultText] = useState("");
@@ -111,6 +113,7 @@ const Login = () => {
           >
             <div className="flex flex-col mb-1 justify-center mt-8">
               <TextField
+                onChange={(event) => {setEmailFriend(event.target.value)}}
                 label="Email"
                 placeholder="johndoe@gmail.com"
                 id="email"
@@ -221,6 +224,27 @@ const Login = () => {
               </div>
             </div>
 
+         
+           
+
+          {/*   <div className="flex basis-1/2 justify-end mt-4">
+                <Link
+                  to="/passresetbyfriend"
+
+                    state={{ email: emailFriend }}
+
+                
+                  
+
+                  className="bg-white  "
+                  
+                >
+                  <u>I got registered by a friend,I don’t have a password yet!</u>
+                </Link>
+              </div> */}
+                 
+
+
             <div className="flex justify-center mt-2 flex-col items-center">
               <Button
                 className="w-[420px]"
@@ -294,6 +318,9 @@ const Login = () => {
           <div className="flex justify-center mt-12">
             <img src="login/other_sign_in.svg" />
           </div>
+
+         
+          
         </div>
 
         <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">

@@ -600,7 +600,7 @@ const Randomize = () => {
 
 
                       <td key={slot} className="tdz"
-                        style={{ backgroundColor: event && event.icon === 'olympic_flame' ? 'yellow' : 'inherit' }}
+                        style={{ backgroundColor:  (event && event.icon) === 'olympic_flame' ? 'yellow' : (event ? '#BB9A9A' : '') }}
                       >
                         {event ? <RandomizeItem icon={event.icon} name={event.sportName} /> : ''}
                       </td>

@@ -23,11 +23,13 @@
 .tablez {
   width: 100%;
   border-collapse: collapse;
-  margin: 8px 0;
+  /* margin: 8px 0; */
+
+  
 }
 
 .thz, .tdz {
-  border: 1px solid #ddd;
+//  border: 1px solid #ddd;
   padding: 8px;
   text-align: center !important; // don't know why but it needs !important
   vertical-align: middle;
@@ -38,6 +40,7 @@
 
 .thz {
   background-color: #f2f2f2;
+  
 }
 
 .time-slot {

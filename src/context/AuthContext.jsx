@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
+import { useCallback } from 'react';
 
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -12,6 +13,12 @@ let BACKEND_SERVER_BASE_URL =
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+
+  
+  
+  let [campaignId, setCampaignId] = useState("");
+  
+
   const [user, setUser] = useState(() => {
     const tokenString =
       localStorage.getItem("authTokens") ||
@@ -43,6 +50,9 @@ export const AuthProvider = ({ children }) => {
   let [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+
+
+
 
   let loginUser = async (email, password, remember_me) => {
     try {
@@ -98,14 +108,37 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+
+
+  // TODO for campaignID ! I should've moved in separate context
+ 
+  let settingCampaignId = useCallback((id) => {
+    setCampaignId(id);
+  }, [campaignId]);
+
+  let thisNow = (id) => {
+    settingCampaignId(id);
+  }
+
+
   let contextData = {
     user: user,
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
+
+   // campaignId: campaignId,
+    //setCampaignId: setCampaignId,
+  //  settingCampaignId: thisNow,
+
+    
   };
+
+
 
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+
+
   );
 };
