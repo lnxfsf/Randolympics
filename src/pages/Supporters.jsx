@@ -340,13 +340,9 @@ const Supporters = () => {
     },
   };
 
-
-
   const [amount, setAmount] = useState(10);
 
-  useEffect(() => {
-    
-  }, [amount]);
+  useEffect(() => {}, [amount]);
 
   // ? for FilePond
   return (
@@ -912,9 +908,44 @@ const Supporters = () => {
         </div>
 
         <Button
-          onClick={() => {
+          onClick={async () => {
             setThirdIsVisible(false);
             setFourthIsVisible(true);
+
+            // make campaign with these.
+            try {
+
+              var response = await axios.post(
+                `${BACKEND_SERVER_BASE_URL}/listsData/createCampaign`,
+                {
+                  campaignId,
+                  friendName,
+                  friendMiddleName,
+                  friendLastName,
+                  friendEmail,
+                  friendPhone,
+                  friendBirthdate,
+                  friendNationality,
+                  friendImage,
+                  friendGender,
+
+
+                  supporterName,
+                  supporterPhone,
+                  supporterEmail,
+                  supporterComment,
+
+                }
+              );
+
+              if (response.status === 201) {
+                  alert("created campaign in database")
+              }
+
+
+            } catch (error) {
+              console.log(error);
+            }
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
@@ -951,61 +982,75 @@ const Supporters = () => {
           friend!
         </p>
 
+        <div className="border-2 flex flex-col justify-center items-center p-4">
+          <p className="underline text-red_first">Note:</p>
+          <p>
+            You can use{" "}
+            <a
+              className="underline text-[#0000ff]"
+              href="https://docs.stripe.com/testing"
+              target="_blank"
+            >
+              test card
+            </a>
+            : <b>4242 4242 4242 4242</b>
+          </p>
+          <p>
+            CVC: <b>567</b> (it can be any 3 digits){" "}
+          </p>
+          <p className="mb-4">
+            Date: <b>12/34</b> (it can be any date){" "}
+          </p>
 
+          <p className="underline font-bold text-red_first">
+            Disable adblocker{" "}
+          </p>
+          <p>
+            (or it will block request to stripe, as this is HTTP (insecure
+            chanel))
+          </p>
+        </div>
 
-<div className="border-2 flex flex-col justify-center items-center p-4">
-        <p className="underline text-red_first">Note:</p>
-        <p>You can use <a className="underline text-[#0000ff]" href="https://docs.stripe.com/testing" target="_blank">test card</a>: <b>4242 4242 4242 4242</b>
-         </p>
-         <p>CVC: <b>567</b> (it can be any 3 digits)	</p>
-          <p className="mb-4">Date: <b>12/34</b> (it can be any date)	</p>
+        {/* and this is for those 3 options */}
+        <p className="mt-4 font-semibold">Select amount</p>
+        <div className="flex justify-around mt-6 mb-6 gap-4">
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(1);
+            }}
+          >
+            <img className=" " src="supporters/1_dollar.png" />
+            <p>1 $</p>
+          </div>
 
-<p className="underline font-bold text-red_first" >Disable adblocker </p>
-<p>(or it will block request to stripe, as this is HTTP (insecure chanel))</p>
-</div>
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(10);
+            }}
+          >
+            <img className=" " src="supporters/10_dollars.png" />
+            <p>10 $</p>
+          </div>
 
-
-
-{/* and this is for those 3 options */}
-<p className="mt-4 font-semibold">Select amount</p>
-<div className="flex justify-around mt-6 mb-6 gap-4">
- 
-  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
-    onClick={() => {setAmount(1)}}
-  >
-      <img className=" " src="supporters/1_dollar.png" />
-      <p>1 $</p>
-
-  </div>
-
-
-
-  
-  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
-    onClick={() => {setAmount(10)}}
-  >
-      <img className=" " src="supporters/10_dollars.png" />
-      <p>10 $</p>
-
-  </div>
-
-
-  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
-    onClick={() => {setAmount(100)}}
-  >
-      <img className=" " src="supporters/100_dollars.png" />
-      <p>100 $</p>
-
-  </div>
-
-</div>
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(100);
+            }}
+          >
+            <img className=" " src="supporters/100_dollars.png" />
+            <p>100 $</p>
+          </div>
+        </div>
 
         <div className="flex  w-[70%] justify-center items-center">
           <div
             className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
-          
-           /*  select-none cursor-pointer */
-          
+
+            /*  select-none cursor-pointer */
+
             /*  onClick={async () => {
               try {
                 var response = await axios.post(
@@ -1026,13 +1071,9 @@ const Supporters = () => {
             {/*   <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
-
-
-
-
             <ThemeProvider theme={theme}>
               <QueryProvider>
-                  <DonationForm  amount={amount} setAmount={setAmount}/>
+                <DonationForm amount={amount} setAmount={setAmount} campaignId={campaignId} />
               </QueryProvider>
             </ThemeProvider>
           </div>
