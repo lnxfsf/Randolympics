@@ -14,7 +14,7 @@ import {
     Typography,
   } from "@mui/material";
 
-  
+
 export default function DonationForm() {
   const [amount, setAmount] = useState(10);
 
@@ -48,6 +48,10 @@ export default function DonationForm() {
     const handleConfirmPayment = useCallback(
         async (payment) => {
           setConfirmedPayment(payment);
+
+
+          console.log("imas ovo payment: ")
+          console.log(payment)
           handleClear(); // Clear the payment intent
           
           // Using a Promise-based delay to clear confirmedPayment after 5 seconds
