@@ -3,7 +3,11 @@
 const db = require("../models/database");
 const User = db.users;
 const Traffic = db.traffic;
+const Campaign = db.campaign;
+
 const Op = db.Sequelize.Op;
+
+
 
 
 const sendEmail = require("../utils/sendEmail");
@@ -11,8 +15,12 @@ const { JSDOM } = require('jsdom');
 
 
 
-
+// stripe
 const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+
+
 
 const listOfSports = require('../data/listOfSports')
 
@@ -8554,11 +8562,75 @@ const shareTableLandingPage = async (req, res) => {
 }
 
 
+const createCampaign =  async (req, res) => {
+
+
+  const { 
+    campaignId,
+    friendName,
+    friendMiddleName,
+    friendLastName,
+    friendEmail,
+    friendPhone,
+    friendBirthdate,
+    friendNationality,
+    friendImage,
+    friendGender,
+
+
+    supporterName,
+    supporterPhone,
+    supporterEmail,
+    supporterComment,
+
+   } = req.body;
+
+   const payment_status = "unpaid";
+   const payment_id = "";
+
+
+   const campaign = {
+
+    campaignId,
+    friendName,
+    friendMiddleName,
+    friendLastName,
+    friendEmail,
+    friendPhone,
+    friendBirthdate,
+    friendNationality,
+    friendImage,
+    friendGender,
+
+
+    supporterName,
+    supporterPhone,
+    supporterEmail,
+    supporterComment,
+
+    payment_status,
+    payment_id
+
+   }
+
+   await db.sequelize.sync();
+
+   const newCampaign = await Campaign.create(campaign);
+
+   res.status(201).json({ message: "Campaign created successfully!" });
+
+
+
+
+
+
+
+}
 
 // TODO, put this somewhere else, but this, just so I can work with something
 const makePayment = async (req, res) => {
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  
 
   const { amount } = req.body;
 
@@ -8647,5 +8719,6 @@ module.exports = {
 
 
   makePayment,
+  createCampaign,
 
 };

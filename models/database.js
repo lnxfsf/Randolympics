@@ -41,6 +41,8 @@ db.upcominggames = require('./upcominggames')(sequelize,DataTypes)
 db.news = require('./news')(sequelize,DataTypes)  
 db.economics = require('./economics')(sequelize,DataTypes)  
 
+db.campaign = require('./campaign')(sequelize,DataTypes)  
+
 
 
 // model for News
