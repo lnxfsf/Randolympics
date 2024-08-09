@@ -944,6 +944,8 @@ const Supporters = () => {
         </p>
 
 
+
+<div className="border-2 flex flex-col justify-center items-center p-4">
         <p className="underline text-red_first">Note:</p>
         <p>You can use <a className="underline text-[#0000ff]" href="https://docs.stripe.com/testing" target="_blank">test card</a>: <b>4242 4242 4242 4242</b>
          </p>
@@ -952,6 +954,7 @@ const Supporters = () => {
 
 <p className="underline font-bold text-red_first" >Disable adblocker </p>
 <p>(or it will block request to stripe, as this is HTTP (insecure chanel))</p>
+</div>
 
 
         <div className="flex  w-[70%] justify-center items-center">

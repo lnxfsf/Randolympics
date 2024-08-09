@@ -5,62 +5,111 @@ import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
 
 
+import {
+    Button,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    CircularProgress,
+    Typography,
+  } from "@mui/material";
 
-
-
+  
 export default function DonationForm() {
-    const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(10);
 
-    const [paymentIntent, setPaymentIntent] = useState(null);
-    const [confirmedPayment, setConfirmedPayment] = useState(null);
+  const [paymentIntent, setPaymentIntent] = useState(null);
+  const [confirmedPayment, setConfirmedPayment] = useState(null);
 
-    const { mutate, isLoading, data, error } = useCreatePaymentIntent();
-    const handleChange = (e) => {
-        setAmount(e.target.value);
-    }
-    const handleSubmit = () => (mutate(amount));
+  const { mutate, isLoading, data, error } = useCreatePaymentIntent();
+  const handleChange = (e) => {
+    setAmount(e.target.value);
+  };
+  const handleSubmit = () => mutate(amount);
 
-    useEffect(() => {
-        if (data) setPaymentIntent(data);
-    }, [data]);
+  const handleClear = useCallback(() => {
+    setPaymentIntent(null);
+    //console.log("da poziva se stvarno ");
+  }, [paymentIntent]);
 
-    console.log("paymentIntent")
-    console.log(paymentIntent)
-
-
-
-
-    const handleClear = useCallback(() => {
-        setPaymentIntent(null);
-      console.log("da poziva se stvarno ")
-      }, [paymentIntent]);
-    
-    
-      
+  const confirmPayment = (payment) => {
+    setConfirmedPayment(payment);
+    handleClear();
+  };
 
 
-    return (
-        <Card>
+ /*  const handleConfirmPayment = async (payment) => {
+    setConfirmedPayment(payment);
+    handleClear();
+    await setTimeout(() => {
+        setConfirmedPayment(null);
+    }, 5000); */
 
-{!paymentIntent && (
-            <Fade in={!paymentIntent} unmountOnExit>
-                <Container>
-                    <DonationInput amount={amount} handleChange={handleChange} handleSubmit={handleSubmit} isLoading={isLoading} data={data} error={error} />
-                </Container>
+    const handleConfirmPayment = useCallback(
+        async (payment) => {
+          setConfirmedPayment(payment);
+          handleClear(); // Clear the payment intent
+          
+          // Using a Promise-based delay to clear confirmedPayment after 5 seconds
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+          
+          setConfirmedPayment(null);
+        },
+
+        [handleClear, setConfirmedPayment] // Dependencies that will cause the function to update if they change
+      );
 
 
-            </Fade>
-)}
+  useEffect(() => {
+    if (data) setPaymentIntent(data);
+  }, [data]);
 
-{paymentIntent && (
-            <Fade in={paymentIntent} unmountOnExit>
-                <Container>
-                    <StripeForm paymentIntent={paymentIntent} handleCancel={handleClear} />
-                </Container>
+  console.log("paymentIntent");
+  console.log(paymentIntent);
 
-                
-            </Fade>
-)}
+  return (
+    <Card>
+      {!paymentIntent && (
+        <Fade in={!paymentIntent} unmountOnExit>
+          <Container>
+            <DonationInput
+              amount={amount}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              isLoading={isLoading}
+              data={data}
+              error={error}
+            />
+          </Container>
+        </Fade>
+      )}
 
-        </Card>)
+      {paymentIntent && (
+        <Fade in={paymentIntent} unmountOnExit>
+          <Container>
+            <StripeForm
+              client_secret={paymentIntent?.client_secret}
+              amount={paymentIntent?.amount}
+              paymentIntent={paymentIntent}
+              handleCancel={handleClear}
+              handleConfirmPayment={handleConfirmPayment} 
+            />
+          </Container>
+        </Fade>
+      )}
+
+
+
+      {confirmedPayment && (
+        <Fade in={confirmedPayment} unmountOnExit>
+          <Typography p={4} variant="h6" textAlign={"center"}>
+            Your generosity goes a long way!
+          </Typography>
+        </Fade>
+      )}
+
+
+
+    </Card>
+  );
 }

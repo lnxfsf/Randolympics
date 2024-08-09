@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-const StripeFormComponent = ({ paymentIntent, handleCancel }) => {
+const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
   const [confirmData, updateConfirmData] = useState(null);
 
   console.log("handle clear je");
@@ -39,7 +39,7 @@ const StripeFormComponent = ({ paymentIntent, handleCancel }) => {
   };
 
   useEffect(() => {
-    if (data) confirmPayment(data);
+    if (data) handleConfirmPayment(data);
   }, [data]);
 
   return (
