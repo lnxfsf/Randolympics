@@ -119,11 +119,14 @@ const sxTextField = {
   },
 };
 
+const campaignId = uuidv4();
+
+
 const Supporters = () => {
 
 
 
-  const campaignId = uuidv4();
+  
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
 
