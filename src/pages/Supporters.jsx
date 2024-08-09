@@ -340,6 +340,14 @@ const Supporters = () => {
     },
   };
 
+
+
+  const [amount, setAmount] = useState(10);
+
+  useEffect(() => {
+    
+  }, [amount]);
+
   // ? for FilePond
   return (
     <>
@@ -957,6 +965,41 @@ const Supporters = () => {
 </div>
 
 
+
+{/* and this is for those 3 options */}
+<p className="mt-4 font-semibold">Select amount</p>
+<div className="flex justify-around mt-6 mb-6 gap-4">
+ 
+  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+    onClick={() => {setAmount(1)}}
+  >
+      <img className=" " src="supporters/1_dollar.png" />
+      <p>1 $</p>
+
+  </div>
+
+
+
+  
+  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+    onClick={() => {setAmount(10)}}
+  >
+      <img className=" " src="supporters/10_dollars.png" />
+      <p>10 $</p>
+
+  </div>
+
+
+  <div className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+    onClick={() => {setAmount(100)}}
+  >
+      <img className=" " src="supporters/100_dollars.png" />
+      <p>100 $</p>
+
+  </div>
+
+</div>
+
         <div className="flex  w-[70%] justify-center items-center">
           <div
             className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
@@ -983,9 +1026,13 @@ const Supporters = () => {
             {/*   <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
+
+
+
+
             <ThemeProvider theme={theme}>
               <QueryProvider>
-                  <DonationForm />
+                  <DonationForm  amount={amount} setAmount={setAmount}/>
               </QueryProvider>
             </ThemeProvider>
           </div>

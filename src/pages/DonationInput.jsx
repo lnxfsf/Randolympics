@@ -6,7 +6,7 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
         <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={12}>
                 <Typography>
-                    Buy me a Coffee?
+                    Donate
                 </Typography>
             </Grid>
             <Grid item xs={6}>

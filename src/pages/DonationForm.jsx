@@ -15,8 +15,9 @@ import {
   } from "@mui/material";
 
 
-export default function DonationForm() {
-  const [amount, setAmount] = useState(10);
+export default function DonationForm({amount, setAmount}) {
+  
+   // const [amount, setAmount] = useState(10);
 
   const [paymentIntent, setPaymentIntent] = useState(null);
   const [confirmedPayment, setConfirmedPayment] = useState(null);
