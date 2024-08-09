@@ -14,8 +14,17 @@ import {
     Typography,
   } from "@mui/material";
 
+  import React, { useContext } from 'react'
+  import AuthContext from '../context/AuthContext';
+
 
 export default function DonationForm({amount, setAmount}) {
+  
+ // let { campaignId } = React.useContext(AuthContext);
+
+ // console.log("a iz state-a je: "+campaignId)
+
+  var campaignId = "haha0";
   
    // const [amount, setAmount] = useState(10);
 
@@ -23,10 +32,11 @@ export default function DonationForm({amount, setAmount}) {
   const [confirmedPayment, setConfirmedPayment] = useState(null);
 
   const { mutate, isLoading, data, error } = useCreatePaymentIntent();
+
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
-  const handleSubmit = () => mutate(amount);
+  const handleSubmit = () => {mutate({ amount, campaignId })};
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);

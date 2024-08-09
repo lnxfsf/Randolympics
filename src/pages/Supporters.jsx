@@ -42,6 +42,11 @@ import MenuItem from "@mui/material/MenuItem";
 
 import axios from "axios";
 
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext';
+
+
+
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -115,8 +120,14 @@ const sxTextField = {
 };
 
 const Supporters = () => {
+
+  let { settingCampaignId } = useContext(AuthContext);
+
   const campaignId = uuidv4();
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
+
+  settingCampaignId(campaignId)
+
 
   const makeCampaign = async () => {
     // signs up friend first !

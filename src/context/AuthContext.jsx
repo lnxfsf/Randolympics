@@ -98,14 +98,34 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+
+
+  // TODO for campaignID ! I should've moved in separate context
+  var campaignId = ""; 
+
+
+  let settingCampaignId = (id) => {
+    campaignId = id;
+  }
+
   let contextData = {
     user: user,
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
+
+    campaignId: campaignId,
+    //setCampaignId: setCampaignId,
+    settingCampaignId: settingCampaignId,
+
+    
   };
+
+
 
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+
+
   );
 };
