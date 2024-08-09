@@ -18,14 +18,15 @@ import {
   import AuthContext from '../context/AuthContext';
 
 
-export default function DonationForm({amount, setAmount}) {
+export default function DonationForm({amount, setAmount, campaignId}) {
   
- // let { campaignId } = React.useContext(AuthContext);
+ //let { campaignId } = useContext(AuthContext);
+  // console.log(user)
+ console.log("a iz state-a je: "+campaignId)
 
- // console.log("a iz state-a je: "+campaignId)
+ // var campaignId = "haha0";
 
-  var campaignId = "haha0";
-  
+
    // const [amount, setAmount] = useState(10);
 
   const [paymentIntent, setPaymentIntent] = useState(null);

@@ -121,12 +121,12 @@ const sxTextField = {
 
 const Supporters = () => {
 
-  let { settingCampaignId } = useContext(AuthContext);
+
 
   const campaignId = uuidv4();
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
-  settingCampaignId(campaignId)
+
 
 
   const makeCampaign = async () => {
