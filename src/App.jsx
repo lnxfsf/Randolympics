@@ -25,6 +25,7 @@ import { RegisteredByFriend } from "./components/Login/RegisteredByFriend";
 import { Campaign } from "./pages/Campaign";
 
 import { ItemCampaign } from "./components/Campaign/ItemCampaign";
+import { PageNotFound } from "./pages/PageNotFound";
 
 
 
@@ -90,6 +91,12 @@ const App = () => {
         <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
 
 
+
+
+        <Route
+                    path="*"
+                    element={<PageNotFound />}
+                />
         
       </Routes>
       
