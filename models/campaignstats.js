@@ -26,10 +26,37 @@ module.exports = function (sequelize, DataTypes) {
       
     },
 
+
+
+
+    supporterName: {
+      type: DataTypes.STRING(255),
+    },
+
+    
+    supporterEmail: {
+      type: DataTypes.STRING(255),
+    },
+
+
     amount: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-    }
+    },
+
+
+    payment_status: {
+      type: DataTypes.STRING(255),
+      defaultValue: "unpaid",
+    },
+
+
+    payment_id: {
+      type: DataTypes.STRING(600),
+    },
+
+
+
 
 
 
