@@ -6780,7 +6780,7 @@ const lastCommentsSupportersCampaign =  async (req, res) => {
 
     
     console.log(lastCommentsSupporters)
-    
+
     res.json(lastCommentsSupporters);
 
   } catch (error) {
@@ -6792,6 +6792,49 @@ const lastCommentsSupportersCampaign =  async (req, res) => {
 
 }
 
+
+
+
+const lastTransactionsSupportersCampaign =  async (req, res) => {
+
+  
+  const campaignId = req.query.campaignId;
+
+
+
+  
+  try {
+
+
+    const lastCommentsSupporters = await Statscampaign.findAll({
+      where: {
+        campaignId: campaignId,
+      
+
+      },
+
+      limit: 3, 
+      attributes: ['supporterName', 'amount'], // only this row in database retrieve
+      order: [
+       
+        ['createdAt', 'DESC']
+      ],
+
+    }); 
+
+    
+    console.log(lastCommentsSupporters)
+    
+    res.json(lastCommentsSupporters);
+
+  } catch (error) {
+    console.log(error.stack)
+  }
+
+
+
+
+}
 
 module.exports = {
   // update_rank_data,
@@ -6814,4 +6857,5 @@ module.exports = {
   campaignDetails,
   howManySupportersCampaign,
   lastCommentsSupportersCampaign,
+  lastTransactionsSupportersCampaign,
 };

@@ -8,6 +8,8 @@ const { rankingTop50, otherUsers, lastInRank,
            campaignDetails,
            howManySupportersCampaign,
            lastCommentsSupportersCampaign,
+           lastTransactionsSupportersCampaign,
+           
         
         } = require("../controllers/listDataControllers");
 const router = express.Router();
@@ -65,6 +67,7 @@ router.post("/createCampaign", createCampaign)
 router.get("/campaignDetails", campaignDetails)
 router.get("/howManySupportersCampaign", howManySupportersCampaign)
 router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
+router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCampaign)
 
 
 
