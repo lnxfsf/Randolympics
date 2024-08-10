@@ -6526,10 +6526,15 @@ const createCampaign = async (req, res) => {
 
 // TODO, put this somewhere else, but this, just so I can work with something
 const makePayment = async (req, res) => {
-  const { amount, campaignId } = req.body;
+  const { amount, campaignId, supporterName, supporterEmail } = req.body;
 
   console.log(campaignId);
   console.log(amount);
+
+  console.log("on dobija supporterName: "+supporterName)
+  console.log("dobija i supporterEmail: "+supporterEmail)
+
+
 
   // TODO ovde, amount . si 100% siguran kolko novca dano !
 
