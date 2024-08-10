@@ -111,6 +111,24 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 
 
+    // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
+
+    
+    
+      const oneCampaign = await Campaign.findOne({
+        where: { campaignId: oneCampaignThirdParty.campaignId },
+      });
+
+       // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
+       try {
+        await oneCampaign.update({ payment_status: status}); // azurira samo taj
+      } catch (error) {
+        console.log(error.stack);
+      }
+
+
+
+
 
 
 
