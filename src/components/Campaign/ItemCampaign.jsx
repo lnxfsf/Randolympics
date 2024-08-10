@@ -10,6 +10,13 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+let FRONTEND_SERVER_BASE_URL =
+  import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
+  process.env.VITE_FRONTEND_SERVER_BASE_URL;
+
+
+
 function formatDate(dateString) {
   let date = new Date(dateString);
   let options = { year: "numeric", month: "long", day: "numeric" };
@@ -19,6 +26,9 @@ function formatDate(dateString) {
 const ItemCampaign = () => {
   const { campaignId } = useParams();
   const navigate = useNavigate();
+
+  const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
+
 
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
@@ -31,6 +41,7 @@ const ItemCampaign = () => {
   useEffect(() => {
     updateLatestData();
   }, []);
+
 
   const updateLatestData = async () => {
     try {
@@ -131,8 +142,8 @@ const ItemCampaign = () => {
               <hr />
               <p className="text-2xl">Athlete statement</p>
 
-              <p className="underline decoration-red_first text-red_first">
-                missing field in database, for <b>athlete user</b>
+              <p>{athlete.athleteStatement}
+                
               </p>
 
               <div className="flex justify-around">
@@ -163,9 +174,10 @@ const ItemCampaign = () => {
                 {athlete.gender === "M" ? "his" : "her"} stats !
               </p>
 
-              <p className="underline mt-4 flex justify-center">
+              <a  href={urlForCampaign}  target="_blank" className="underline mt-4 flex justify-center">
+             
                 Share campaign
-              </p>
+              </a>
 
               <p className="underline mt-4 flex justify-center">Donate</p>
             </div>
