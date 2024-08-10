@@ -314,7 +314,7 @@ const Supporters = () => {
 
     // update supporterStats ! polja.. 
 
-    
+
 
   };
 
@@ -1093,25 +1093,6 @@ const Supporters = () => {
         <div className="flex  w-[70%] justify-center items-center">
           <div
             className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
-
-            /*  select-none cursor-pointer */
-
-            /*  onClick={async () => {
-              try {
-                var response = await axios.post(
-                  `${BACKEND_SERVER_BASE_URL}/listsData/makePayment`
-                  
-                );
-              } catch (error) {
-                //console.log(error);
-                console.log(error);
-              }
-
-              /*  // window.open(
-                "https://donate.stripe.com/test_bIY9BkfAU824dvqcMN",
-                "_blank"
-              ); 
-            }} */
           >
             {/*   <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}

@@ -8,7 +8,7 @@ let BACKEND_SERVER_BASE_URL =
   
 
 
-export const createPaymentIntent = async (amount, campaignId) => {
+export const createPaymentIntent = async (amount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment) => {
 
   console.log("unutra createPaymentIntent")
   console.log(amount) 
@@ -19,6 +19,10 @@ export const createPaymentIntent = async (amount, campaignId) => {
         const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/listsData/makePayment`, {
             amount: amount,
            campaignId,
+           supporterName, 
+           supporterEmail,
+           separateDonationThruPage,
+           supporterComment,
            
           }, {
 

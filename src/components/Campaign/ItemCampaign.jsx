@@ -4,7 +4,17 @@ import Flag from "react-world-flags";
 
 import "../../styles/campaign.scoped.scss";
 
+
+
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../../themes/theme";
+import { QueryProvider } from "../../QueryProvider";
+import DonationForm from "../../pages/DonationForm";
+
+
+
 import { useParams, useNavigate } from "react-router-dom";
+import DonationFormItemCampaign from "../../pages/DonationFormItemCampaign";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -26,13 +36,19 @@ const ItemCampaign = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
+ 
+
+
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
 
   const [textAthleteStatus, setTextAthleteStatus] = useState();
 
+
+  const [amount, setAmount] = useState(10);
   const [supporterName, setSupporterName] = useState();
   const [supporterEmail, setSupporterEmail] = useState();
+  const [supporterComment, setSupporterComment] = useState();
 
   useEffect(() => {
     updateLatestData();
@@ -168,6 +184,7 @@ const ItemCampaign = () => {
                   <p>Supporter info</p>
 
                   <div className="flex">
+                 
                     <input
                       type="text"
                       placeholder="Supporter name"
@@ -178,14 +195,30 @@ const ItemCampaign = () => {
                     />
 
                     <input
-                      type="text"
+                      type="email"
                       placeholder="Supporter email"
                       value={supporterEmail}
-                      onChange={() => {
+                      onChange={(event) => {
                         setSupporterEmail(event.target.value);
                       }}
                     />
+
+
                   </div>
+
+              
+                    
+                    <input
+                      type="text"
+                      placeholder="Supporter comment"
+                      value={supporterComment}
+                      onChange={(event) => {
+                        setSupporterComment(event.target.value);
+                      }}
+                    />
+
+
+
 
                   <p className="text-red_first text-sm w-[50%]">
                     if supporter (others) are donating to here, they don't need
@@ -196,7 +229,9 @@ const ItemCampaign = () => {
 
 
 
-                      
+
+
+
 
 
 
@@ -205,7 +240,103 @@ const ItemCampaign = () => {
 
                 </div>
 
+
+
+                <div className="border-2 flex flex-col justify-center items-center p-4">
+          <p className="underline text-red_first">Note:</p>
+          <p>
+            You can use{" "}
+            <a
+              className="underline text-[#0000ff]"
+              href="https://docs.stripe.com/testing"
+              target="_blank"
+            >
+              test card
+            </a>
+            : <b>4242 4242 4242 4242</b>
+          </p>
+          <p>
+            CVC: <b>567</b> (it can be any 3 digits){" "}
+          </p>
+          <p className="mb-4">
+            Date: <b>12/34</b> (it can be any date){" "}
+          </p>
+
+          <p className="underline font-bold text-red_first">
+            Disable adblocker{" "}
+          </p>
+          <p>
+            (or it will block request to stripe, as this is HTTP (insecure
+            chanel))
+          </p>
+        </div>
+
+
                 <p className="underline mt-4 flex justify-center">Donate</p>
+
+ {/* and this is for those 3 options */}
+ <p className="mt-4 font-semibold">Select amount</p>
+        <div className="flex justify-around mt-6 mb-6 gap-4">
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(1);
+            }}
+          >
+            <img className=" " src="/supporters/1_dollar.png" />
+            <p>1 $</p>
+          </div>
+
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(10);
+            }}
+          >
+            <img className=" " src="/supporters/10_dollars.png" />
+            <p>10 $</p>
+          </div>
+
+          <div
+            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            onClick={() => {
+              setAmount(100);
+            }}
+          >
+            <img className=" " src="/supporters/100_dollars.png" />
+            <p>100 $</p>
+          </div>
+        </div>
+
+                <div
+            className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
+          >
+
+                <ThemeProvider theme={theme}>
+              <QueryProvider>
+
+             
+             
+
+
+<DonationFormItemCampaign  
+amount={amount} 
+setAmount={setAmount} 
+campaignId={campaignId}  
+
+supporterName={supporterName}
+supporterEmail={supporterEmail}
+supporterComment={supporterComment}
+
+separateDonationThruPage={true}
+
+/>
+                
+
+              </QueryProvider>
+            </ThemeProvider>
+</div>
+
               </div>
             </div>
           </div>
