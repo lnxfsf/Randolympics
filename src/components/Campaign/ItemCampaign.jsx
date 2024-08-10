@@ -42,18 +42,14 @@ const ItemCampaign = () => {
   const [supporterEmail, setSupporterEmail] = useState();
   const [supporterComment, setSupporterComment] = useState();
 
-
-
   const [howManySupporters, setHowManySupporters] = useState();
-
+  const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
 
   useEffect(() => {
     updateLatestData();
   }, []);
 
   const updateLatestData = async () => {
-
-
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/campaignDetails`,
@@ -86,38 +82,45 @@ const ItemCampaign = () => {
             setTextAthleteStatus("I'm definitely not going");
         }
       }
-
-
     } catch (error) {
       console.error(error);
     }
 
-
-
-
-    // get supporter numbers 
+    // get supporter numbers
     try {
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/howManySupportersCampaign`,
+        {
+          params: {
+            campaignId: campaignId,
+          },
+        }
+      );
 
-        const response = await axios.get(
-            `${BACKEND_SERVER_BASE_URL}/listsData/howManySupportersCampaign`,
-            {
-              params: {
-                campaignId: campaignId,
-              },
-            }
-          );
-
-         
-          
-          setHowManySupporters(response.data.count)
-
-
-    } catch (error){
-        console.error(error);
+      setHowManySupporters(response.data.count);
+    } catch (error) {
+      console.error(error);
     }
 
+    // get last 3 comments from supporters
 
+    try {
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/lastCommentsSupportersCampaign`,
+        {
+          params: {
+            campaignId: campaignId,
+          },
+        }
+      );
 
+      console.log("saljes ti last coments");
+      console.log(response.data);
+
+      setLastCommentsSupporters(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -136,9 +139,6 @@ const ItemCampaign = () => {
               />
 
               <hr className=" mb-8" />
-
-              
-              
 
               <p>Gender: {athlete.gender === "M" ? "Male" : "Female"}</p>
               <p className="mb-12">
@@ -174,12 +174,21 @@ const ItemCampaign = () => {
 
               <div className="flex justify-around">
                 <p className="text-2xl">Supporters</p>
-                <p >{howManySupporters}</p>
+                <p>{howManySupporters}</p>
               </div>
 
-              <p className="underline decoration-red_first text-red_first">
-                show 3-4 latest comments from supporters. Make a call to BE
-              </p>
+        
+
+              {lastCommentsSupporters &&
+                lastCommentsSupporters.map((item, index) => (
+                  <>
+                  <div className="flex border-2 rounded-lg m-1 p-2">
+                    <p key={index}>{item.supporterComment}</p>
+                  </div>
+                  </>
+                ))}
+
+
 
               <div className="flex justify-around">
                 <p className="text-2xl">Money raised</p>
@@ -212,7 +221,7 @@ const ItemCampaign = () => {
 
                   <div className="flex">
                     <input
-                    className="border-2 rounded-lg"
+                      className="border-2 rounded-lg"
                       type="text"
                       placeholder="Supporter name"
                       value={supporterName}
@@ -222,7 +231,7 @@ const ItemCampaign = () => {
                     />
 
                     <input
-                    className="border-2 rounded-lg"
+                      className="border-2 rounded-lg"
                       type="email"
                       placeholder="Supporter email"
                       value={supporterEmail}
@@ -233,7 +242,7 @@ const ItemCampaign = () => {
                   </div>
 
                   <input
-                  className="border-2 rounded-lg"
+                    className="border-2 rounded-lg"
                     type="text"
                     placeholder="Supporter comment"
                     value={supporterComment}
