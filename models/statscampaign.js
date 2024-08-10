@@ -44,6 +44,11 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    amount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
     payment_status: {
       type: DataTypes.STRING(255),
       defaultValue: "unpaid",
