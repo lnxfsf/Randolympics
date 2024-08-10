@@ -44,6 +44,9 @@ const ItemCampaign = () => {
 
   const [howManySupporters, setHowManySupporters] = useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
+  const [lastTransactionsSupporters, setLastTransactionsSupporters] = useState();
+
+  
 
   useEffect(() => {
     updateLatestData();
@@ -103,10 +106,9 @@ const ItemCampaign = () => {
     }
 
     // get last 3 comments from supporters
-
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/lastCommentsSupportersCampaign`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/lastTransactionsSupportersCampaign`,
         {
           params: {
             campaignId: campaignId,
@@ -121,7 +123,34 @@ const ItemCampaign = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+ 
+
+
+    // get last 3 transactions
+    
+
+    try {
+        const response = await axios.get(
+          `${BACKEND_SERVER_BASE_URL}/listsData/lastTransactionsSupportersCampaign`,
+          {
+            params: {
+              campaignId: campaignId,
+            },
+          }
+        );
+  
+        console.log("saljes ti last coments");
+        console.log(response.data);
+  
+        setLastTransactionsSupporters(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+
+
+
+
+};
 
   return (
     <>
@@ -140,41 +169,47 @@ const ItemCampaign = () => {
 
               <hr className=" mb-8" />
 
-              <p>Gender: {athlete.gender === "M" ? "Male" : "Female"}</p>
+              <p><span className="font-semibold">Gender:</span> {athlete.gender === "M" ? "Male" : "Female"}</p>
               <p className="mb-12">
-                Birthdate: {formatDate(athlete.birthdate)}
+              <span className="font-semibold">Birthdate:</span> {formatDate(athlete.birthdate)}
               </p>
 
-              <p>Weight: {athlete.weight}</p>
+              <p> <span className="font-semibold"> Weight:</span> {athlete.weight}</p>
 
-              <p>Email: {athlete.email}</p>
+              <p><span className="font-semibold">Email:</span> {athlete.email}</p>
 
-              <p>Phone: {athlete.phone}</p>
+              <p><span className="font-semibold">Phone:</span> {athlete.phone}</p>
 
-              <p>Crypto: {athlete.cryptoaddress}</p>
+              <p><span className="font-semibold">Crypto:</span>  {athlete.cryptoaddress ? athlete.cryptoaddress : '0'} {athlete.cryptoaddress_type}</p>
             </div>
 
-            <p class="vertical-text text-lg text-blue-500 underline text-red_first">
+            <p class="vertical-text text-lg text-blue-500 underline text-red_first pt-12 font-semibold">
               {textAthleteStatus}
             </p>
 
             <div className="flex basis-1/2 flex-col ml-8">
-              <div className="flex justify-center text-4xl mt-14">
+              <div className="flex justify-around items-center text-4xl mt-14 pb-6">
                 {athlete.name}
 
-                <div className="flex flex-col justify-center pl-4">
+                <div className="flex flex-col justify-center ">
                   <Flag className="flag-photo" code={athlete.nationality} />
                 </div>
               </div>
 
               <hr />
-              <p className="text-2xl">Athlete statement</p>
+
+              <div className="border-2 m-2">
+              <p className="text-2xl font-bold">Athlete statement</p>
 
               <p>{athlete.athleteStatement}</p>
+              </div>
 
+
+
+<div className="border-2 m-2">
               <div className="flex justify-around">
-                <p className="text-2xl">Supporters</p>
-                <p>{howManySupporters}</p>
+                <p className="text-2xl font-bold">Supporters</p>
+                <p className="font-semibold text-red_first pt-1">{howManySupporters}</p>
               </div>
 
         
@@ -182,27 +217,50 @@ const ItemCampaign = () => {
               {lastCommentsSupporters &&
                 lastCommentsSupporters.map((item, index) => (
                   <>
-                  <div className="flex border-2 rounded-lg m-1 p-2">
+                  <div className="flex border-2 rounded-lg m-1 p-2 ">
                     <p key={index}>{item.supporterComment}</p>
                   </div>
                   </>
                 ))}
 
 
+</div>
 
-              <div className="flex justify-around">
-                <p className="text-2xl">Money raised</p>
-                <p className="">{athlete.donatedAmount / 100} $</p>
+              <div className="flex justify-around border-2">
+                <p className="text-2xl font-bold">Money raised</p>
+                <p className="text-red_first font-semibold mt-1">{athlete.donatedAmount / 100} $</p>
               </div>
 
-              <div className="flex justify-around">
-                <p className="text-2xl">Campaign stats</p>
+
+
+<div className="border-2 m-4 p-2">
+              <div className="flex justify-around border-2 mt-2 ">
+                <p className="text-2xl font-bold">Campaign stats</p>
                 <p className="underline decoration-red_first text-red_first">
                   further explanation needed
                 </p>
+
+
+                
+               
+
+
               </div>
 
-              <p className="underline mt-4 flex justify-center">
+              {lastTransactionsSupporters &&
+                lastTransactionsSupporters.map((item, index) => (
+                  <>
+                  <div className="flex border-2 rounded-lg m-1 p-2 flex-col">
+                    <p key={index}><span className="font-semibold">Supporter name:</span> {item.supporterName}</p>
+                    <p><span className="font-semibold">Donated amount:</span> {item.amount / 100} $</p>
+                  </div>
+                  </>
+                ))}
+</div>
+
+
+
+              <p className="underline mt-4 flex justify-center border-2">
                 Help {athlete.name} improve{" "}
                 {athlete.gender === "M" ? "his" : "her"} stats !
               </p>
@@ -210,7 +268,7 @@ const ItemCampaign = () => {
               <a
                 href={urlForCampaign}
                 target="_blank"
-                className="underline mt-4 flex justify-center"
+                className="underline mt-4 flex justify-center border-2 mb-4"
               >
                 Share campaign
               </a>
