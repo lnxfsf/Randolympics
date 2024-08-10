@@ -7,6 +7,7 @@ const { rankingTop50, otherUsers, lastInRank,
            createCampaign,
            campaignDetails,
            howManySupportersCampaign,
+           lastCommentsSupportersCampaign,
         
         } = require("../controllers/listDataControllers");
 const router = express.Router();
@@ -63,6 +64,7 @@ router.post("/createCampaign", createCampaign)
 // for reading campaign info 
 router.get("/campaignDetails", campaignDetails)
 router.get("/howManySupportersCampaign", howManySupportersCampaign)
+router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
 
 
 

@@ -5,6 +5,7 @@ const User = db.users;
 const Traffic = db.traffic;
 const Campaign = db.campaign;
 const Statscampaign = db.statscampaign;
+const Sequelize = db.Sequelize;
 
 const Op = db.Sequelize.Op;
 
@@ -6748,6 +6749,49 @@ const howManySupportersCampaign = async (req, res) => {
 }
 
 
+const lastCommentsSupportersCampaign =  async (req, res) => {
+
+  
+  const campaignId = req.query.campaignId;
+
+
+
+  
+  try {
+
+
+    const lastCommentsSupporters = await Statscampaign.findAll({
+      where: {
+        campaignId: campaignId,
+        supporterComment: {
+          [Sequelize.Op.ne]: null,  
+        },
+
+      },
+
+      limit: 3, 
+      attributes: ['supporterComment'], // only this row in database retrieve
+      order: [
+       
+        ['createdAt', 'DESC']
+      ],
+
+    }); 
+
+    
+    console.log(lastCommentsSupporters)
+    
+    res.json(lastCommentsSupporters);
+
+  } catch (error) {
+    console.log(error.stack)
+  }
+
+
+
+
+}
+
 
 module.exports = {
   // update_rank_data,
@@ -6769,4 +6813,5 @@ module.exports = {
 
   campaignDetails,
   howManySupportersCampaign,
+  lastCommentsSupportersCampaign,
 };
