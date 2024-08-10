@@ -108,7 +108,7 @@ const ItemCampaign = () => {
     // get last 3 comments from supporters
     try {
       const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/lastTransactionsSupportersCampaign`,
+        `${BACKEND_SERVER_BASE_URL}/listsData/lastCommentsSupportersCampaign`,
         {
           params: {
             campaignId: campaignId,
