@@ -134,6 +134,12 @@ const Supporters = () => {
 
   const makeCampaign = async () => {
 
+    var athleteId = "";
+    var supporterId = "";
+    
+
+
+
       // make campaign with these.
       try {
 
@@ -210,6 +216,10 @@ const Supporters = () => {
         );
 
         if (response.status === 201) {
+
+          console.log("athleteId" + response.data.userId)
+          athleteId = response.data.userId;
+
           alert("athlete user created");
 
           // ? creating user for supporter
@@ -247,6 +257,8 @@ const Supporters = () => {
             // ovo u toj funkciji tek ipak !
             alert("creates supporter account");
 
+            supporterId = response.data.userId;
+
           
           }
 
@@ -273,8 +285,10 @@ const Supporters = () => {
           }
         }
       } else {
-        alert("inser email for friend");
+        alert("insert email for friend");
       }
+
+      
     } catch (error) {
       console.log(error);
 
@@ -295,6 +309,13 @@ const Supporters = () => {
         alert("An unexpected error occurred: " + error.message);
       }
     }
+
+
+
+    // update supporterStats ! polja.. 
+
+    
+
   };
 
   // this is for password <input> field, MUI library we use
