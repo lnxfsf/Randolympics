@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import Flag from "react-world-flags";
 
-import "../../styles/campaign.scoped.scss"
-
+import "../../styles/campaign.scoped.scss";
 
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -24,6 +23,11 @@ const ItemCampaign = () => {
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
 
+
+
+  const [textAthleteStatus, setTextAthleteStatus] = useState();
+
+
   useEffect(() => {
     updateLatestData();
   }, []);
@@ -42,8 +46,37 @@ const ItemCampaign = () => {
       console.log(response.data.oneCampaign);
       console.log(response.data.thatAthlete);
 
+
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
+
+
+      if(response.data.thatAthlete){
+        
+        
+
+          switch (response.data.thatAthlete.athleteStatus) {
+            case "s1":
+              setTextAthleteStatus("Has not logged in yet");
+            case "s2":
+              setTextAthleteStatus("Logged in but no status");
+            case "s3":
+              setTextAthleteStatus("I'm 99% taking the challenge and going");
+            case "s4":
+              setTextAthleteStatus("I'm most likely going");
+            case "s5":
+              setTextAthleteStatus("I'm maybe going");
+            case "s6":
+              setTextAthleteStatus("I'm definitely not going");
+          
+        }
+
+
+      }
+
+
+
+
     } catch (error) {
       console.error(error);
     }
@@ -78,10 +111,13 @@ const ItemCampaign = () => {
               <p>Email: {athlete.email}</p>
 
               <p>Phone: {athlete.phone}</p>
+
+              <p>Crypto: {athlete.cryptoaddress}</p>
             </div>
 
-<p class="vertical-text text-lg text-blue-500 underline text-red_first">status if athlete is going, athlete database</p>
-
+            <p class="vertical-text text-lg text-blue-500 underline text-red_first">
+              {textAthleteStatus}
+            </p>
 
             <div className="flex basis-1/2 flex-col ml-8">
               <div className="flex justify-center text-4xl mt-14">
@@ -122,22 +158,16 @@ const ItemCampaign = () => {
                 </p>
               </div>
 
-
               <p className="underline mt-4 flex justify-center">
                 Help {athlete.name} improve{" "}
                 {athlete.gender === "M" ? "his" : "her"} stats !
               </p>
 
-
               <p className="underline mt-4 flex justify-center">
-               Share campaign
+                Share campaign
               </p>
 
-              <p className="underline mt-4 flex justify-center">
-               Donate
-              </p>
-
-
+              <p className="underline mt-4 flex justify-center">Donate</p>
             </div>
           </div>
         </>

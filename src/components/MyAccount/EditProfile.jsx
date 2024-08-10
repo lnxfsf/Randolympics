@@ -1,5 +1,9 @@
 import "../../styles/editprofile.scoped.scss";
 
+
+
+
+
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -73,6 +77,36 @@ const EditProfile = () => {
    */
   const [userData, setUserData] = useState(null);
 
+
+
+  
+  const handleathleteStatementChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        athleteStatement: event.target.value,
+      },
+    }));
+  };
+
+
+  const handleathleteStatusChange = (event) => {
+    // "prevUserData" comes from the useState hook
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        athleteStatus: event.target.value,
+      },
+    }));
+  };
+
+
+
+
+
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
@@ -83,6 +117,7 @@ const EditProfile = () => {
       },
     }));
   };
+
 
   const handleNameChange = (event) => {
     setUserData((prevUserData) => ({
@@ -559,6 +594,9 @@ const EditProfile = () => {
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
 
+    var athleteStatement = e.target.athleteStatement.value;
+    var athleteStatus = e.target.athleteStatus.value;
+
     // nationality_selected
 
     if (!e.target.weight) {
@@ -605,6 +643,12 @@ const EditProfile = () => {
 
           birthdate: selectedDate,
           birthdate_private: birthdate_private,
+
+          athleteStatement: athleteStatement,
+          athleteStatus: athleteStatus,
+          
+
+
 
           // bio,
         }
@@ -1316,7 +1360,103 @@ const EditProfile = () => {
                 </div>
               </div>
             </div>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
+
+
+          <div className="flex m-0 flex-col">
+              <InputLabel id="roleDropdowns">Athlete status:</InputLabel>
+              <Select
+
+
+                value={userData && userData.data.athleteStatus}
+                onChange={handleathleteStatusChange}
+
+                labelId="athleteStatus"
+                id="athleteStatus"
+                name="athleteStatus"
+              
+                label="Athlete status:"
+              
+               
+                className="w-[280px]"
+                style={{ color: "#000" }}
+                
+              >
+
+                <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
+
+                <MenuItem value={"s2"}>Logged in but no status</MenuItem>
+
+                <MenuItem value={"s3"}>I'm 99% taking the challenge and going</MenuItem>
+
+                <MenuItem value={"s4"}>I'm most likely going</MenuItem>
+
+                <MenuItem value={"s5"}>
+                I'm maybe going
+                </MenuItem>
+
+                <MenuItem value={"s6"}>I'm definitely not going</MenuItem>
+             
+
+
+              </Select>
+            </div>
+
+            <div className="flex   flex-col">
+             
+                <TextField
+            
+            value={userData && userData.data.athleteStatement}
+                
+            onChange={handleathleteStatementChange}
+
+              name="athleteStatement"
+
+                  label="Athlete statement"
+                  placeholder="I can't wait to go"
+                 
+                  
+                  type="text"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
+                  sx={{
+                    m: 1,
+                    width: "280px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 5,
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "red",
+                      },
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+
+
+
 
           <div className="flex justify-end mt-2 gap-2 items-end">
             <Button
