@@ -10,12 +10,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
 let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
-
-
 
 function formatDate(dateString) {
   let date = new Date(dateString);
@@ -29,19 +26,17 @@ const ItemCampaign = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
-
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
 
-
-
   const [textAthleteStatus, setTextAthleteStatus] = useState();
 
+  const [supporterName, setSupporterName] = useState();
+  const [supporterEmail, setSupporterEmail] = useState();
 
   useEffect(() => {
     updateLatestData();
   }, []);
-
 
   const updateLatestData = async () => {
     try {
@@ -57,37 +52,25 @@ const ItemCampaign = () => {
       console.log(response.data.oneCampaign);
       console.log(response.data.thatAthlete);
 
-
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
 
-
-      if(response.data.thatAthlete){
-        
-        
-
-          switch (response.data.thatAthlete.athleteStatus) {
-            case "s1":
-              setTextAthleteStatus("Has not logged in yet");
-            case "s2":
-              setTextAthleteStatus("Logged in but no status");
-            case "s3":
-              setTextAthleteStatus("I'm 99% taking the challenge and going");
-            case "s4":
-              setTextAthleteStatus("I'm most likely going");
-            case "s5":
-              setTextAthleteStatus("I'm maybe going");
-            case "s6":
-              setTextAthleteStatus("I'm definitely not going");
-          
+      if (response.data.thatAthlete) {
+        switch (response.data.thatAthlete.athleteStatus) {
+          case "s1":
+            setTextAthleteStatus("Has not logged in yet");
+          case "s2":
+            setTextAthleteStatus("Logged in but no status");
+          case "s3":
+            setTextAthleteStatus("I'm 99% taking the challenge and going");
+          case "s4":
+            setTextAthleteStatus("I'm most likely going");
+          case "s5":
+            setTextAthleteStatus("I'm maybe going");
+          case "s6":
+            setTextAthleteStatus("I'm definitely not going");
         }
-
-
       }
-
-
-
-
     } catch (error) {
       console.error(error);
     }
@@ -142,9 +125,7 @@ const ItemCampaign = () => {
               <hr />
               <p className="text-2xl">Athlete statement</p>
 
-              <p>{athlete.athleteStatement}
-                
-              </p>
+              <p>{athlete.athleteStatement}</p>
 
               <div className="flex justify-around">
                 <p className="text-2xl">Supporters</p>
@@ -174,12 +155,58 @@ const ItemCampaign = () => {
                 {athlete.gender === "M" ? "his" : "her"} stats !
               </p>
 
-              <a  href={urlForCampaign}  target="_blank" className="underline mt-4 flex justify-center">
-             
+              <a
+                href={urlForCampaign}
+                target="_blank"
+                className="underline mt-4 flex justify-center"
+              >
                 Share campaign
               </a>
 
-              <p className="underline mt-4 flex justify-center">Donate</p>
+              <div className="border-2">
+                <div className="flex justify-center items-center flex-col">
+                  <p>Supporter info</p>
+
+                  <div className="flex">
+                    <input
+                      type="text"
+                      placeholder="Supporter name"
+                      value={supporterName}
+                      onChange={(event) => {
+                        setSupporterName(event.target.value);
+                      }}
+                    />
+
+                    <input
+                      type="text"
+                      placeholder="Supporter email"
+                      value={supporterEmail}
+                      onChange={() => {
+                        setSupporterEmail(event.target.value);
+                      }}
+                    />
+                  </div>
+
+                  <p className="text-red_first text-sm w-[50%]">
+                    if supporter (others) are donating to here, they don't need
+                    account (and they don't get one). these fields are
+                    optional.. (for transaction)
+                  </p>
+
+
+
+
+                      
+
+
+
+
+
+
+                </div>
+
+                <p className="underline mt-4 flex justify-center">Donate</p>
+              </div>
             </div>
           </div>
         </>
