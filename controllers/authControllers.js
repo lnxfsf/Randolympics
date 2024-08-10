@@ -398,7 +398,7 @@ const register = async (req, res) => {
       );
     }
 
-    res.status(201).json({ message: "User created successfully!" });
+    res.status(201).json({ message: "User created successfully!", userId: user_data.userId  });
   } catch (error) {
     //console.log("error zasto je: ")
     //console.log(error.message)
