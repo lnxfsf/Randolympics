@@ -35,7 +35,7 @@ app.use(cors());
 
 
 // Webhook endpoint to handle Stripe events
-app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+/* app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   
   async function updatePaymentStatus(paymentIntentId, status, amount) {
     // Replace this with your actual database update logic
@@ -59,11 +59,11 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 
     // we update value in that athlete (it's campaign for one athlete..)
-    
+    // TODO ovde pravi error ti, za konfirmaciju sada ! , 
     const oneAthlete = await User.findOne({
       where: { email: oneCampaign.friendEmail },
     });
-
+ 
     console.log(" on moze naci oneAthlete")
     console.log(oneAthlete)
 
@@ -134,7 +134,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 
 });
-
+ */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

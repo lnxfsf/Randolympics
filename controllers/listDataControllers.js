@@ -4,6 +4,7 @@ const db = require("../models/database");
 const User = db.users;
 const Traffic = db.traffic;
 const Campaign = db.campaign;
+const Statscampaign = db.statscampaign;
 
 const Op = db.Sequelize.Op;
 
@@ -6526,15 +6527,26 @@ const createCampaign = async (req, res) => {
 
 // TODO, put this somewhere else, but this, just so I can work with something
 const makePayment = async (req, res) => {
-  const { amount, campaignId, supporterName, supporterEmail } = req.body;
+  const {
+    amount,
+    campaignId,
+    supporterName,
+    supporterEmail,
+    separateDonationThruPage,
+    supporterComment,
+
+  } = req.body;
 
   console.log(campaignId);
   console.log(amount);
 
-  console.log("on dobija supporterName: "+supporterName)
-  console.log("dobija i supporterEmail: "+supporterEmail)
+  console.log("on dobija supporterName: " + supporterName);
+  console.log("dobija i supporterEmail: " + supporterEmail);
+  console.log("dobija i supporterComment: " + supporterComment);
+  
 
-
+  console.log("separateDonationThruPage: " + separateDonationThruPage);
+  // TODO, da, sa ovime, on mora da kreira tabelu, jer fino u backend samo posalji sve sto ti treba, da se ne cimam sa FE, insecure je ionako to jako...
 
   // TODO ovde, amount . si 100% siguran kolko novca dano !
 
@@ -6555,21 +6567,101 @@ const makePayment = async (req, res) => {
     console.log(paymentIntent);
 
     console.log("ono sto on prima je." + campaignId);
-    // sad upisi u database (da, i vise puta ako je, ako nije uspeo, ide on dole u error ionako)
-    const oneCampaign = await Campaign.findOne({
-      where: { campaignId: campaignId },
-    });
 
-    try {
-      await oneCampaign.update({ payment_id: paymentIntent.id }); // azurira samo taj
-    } catch (error) {
-      console.log(error.stack);
-    }
+    if (separateDonationThruPage) {
 
-    try {
-    } catch (error) {
-      console.log(error.stack);
-      return res.status(500).json({ error: error.message });
+
+      try {
+          await db.sequelize.sync();
+
+          // find athleteId (so we increase his donatedAmount when we confirm payment)
+        
+
+          // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
+        const campaignViewed = await Campaign.findOne({
+          where: { campaignId: campaignId  },
+        });
+        
+        console.log("--------------------campaignViewed------------------")
+        console.log(campaignViewed)
+        console.log("----------direktni pristup je")
+        console.log(campaignViewed.friendEmail)
+        // sad nalazi athleteId po ovome... 
+        const oneAthlete = await User.findOne({
+          where: { email:  campaignViewed.friendEmail },
+        });
+
+        // e sada uzimas athleteId odatle:   oneAthlete.userId
+
+
+
+        // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId"
+        // znaci izvrsi proveru, da li email supportera (isto je unique zar ne..), matchje neki koji postoji u database. cisto eto moze korisno imat ako treba (za njegovu listu, koga je on supportovao.. (a i fora je, da ako kreira nalog, vidis, isto ce imati pregled koga je supportovao..))
+        // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje ! 
+        const oneSupporter = await User.findOne({
+          where: { email: supporterEmail },
+        });
+
+        if(oneSupporter){
+          var supporterId = oneSupporter.userId;
+          // if there's nothing, no such user, supporter, then nothing happens, it will be "null" stored in database anyways..
+        } else {
+          var supporterId = "";
+        }
+
+
+        // amount, JOS NE UPISUJES OVDE NISTA ! (to tek na drugoj strani pri potvrdi, jer ionako database, kreira ga kao 0 ..)
+
+
+    // on ce supporterEmail, da cuva u ovaj record. pa eto kasnije, kada supporter napravi nalog, moci ce da ima pregled svojih ! bez obzira eto vidis.. pre nego napravio nalog, moci ce da ih vidi isto..
+   
+
+        // payment_status, isto ne diras sad nista, u database biva ionako "unpaid" po default-u
+      
+        const supporter_data = {
+            campaignId,
+            athleteId: oneAthlete.userId,
+            supporterId,
+
+
+            supporterName,
+            supporterEmail,
+            supporterComment,
+
+            payment_id: paymentIntent.id
+
+          
+
+              };
+
+          await Statscampaign.create(supporter_data);
+
+
+          // ! ali, ovo je kada neko dodaje, u vec kreirani campaignId ! radi transaction history (a isto tako, mozemo da čitamo svi komentari od supporters..) 
+
+          // supporterComment
+
+
+     
+        
+      } catch (error) {
+        console.log(error.stack);
+      }
+
+
+    } else {
+
+      // ! OVO JE OBICAN, ubaci u campaignId, trazi on ovde..
+      // sad upisi u database (da, i vise puta ako je, ako nije uspeo, ide on dole u error ionako)
+      const oneCampaign = await Campaign.findOne({
+        where: { campaignId: campaignId },
+      });
+
+      try {
+        await oneCampaign.update({ payment_id: paymentIntent.id }); // azurira samo taj
+      } catch (error) {
+        console.log(error.stack);
+      }
     }
   } catch (error) {
     console.log(error);
@@ -6599,16 +6691,13 @@ const makePayment = async (req, res) => {
 const campaignDetails = async (req, res) => {
   const campaignId = req.query.campaignId;
 
-
-
   try {
-    
-
     const oneCampaign = await Campaign.findOne({
       where: {
         campaignId: campaignId,
       },
     });
+
 
     // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
     const thatAthlete = await User.findOne({
@@ -6617,23 +6706,11 @@ const campaignDetails = async (req, res) => {
       },
     });
 
-
-
-      return res.status(200).json({oneCampaign, thatAthlete});
-
-
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
-    }
-
-
-
-
+    return res.status(200).json({ oneCampaign, thatAthlete });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
-
-
-
-
 
 module.exports = {
   // update_rank_data,

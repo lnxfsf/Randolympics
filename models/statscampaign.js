@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define("campaignstats", {
+  return sequelize.define("statscampaign", {
     
     campaignstatsId: {
       type: DataTypes.INTEGER,
@@ -9,20 +9,20 @@ module.exports = function (sequelize, DataTypes) {
     
     campaignId: {
       type: DataTypes.STRING(255),
-      primaryKey: true,
+      
       
     },
 
 
     athleteId: {
       type: DataTypes.STRING(255),
-      primaryKey: true,
+    
     },
 
 
     supporterId: {
       type: DataTypes.STRING(255),
-      primaryKey: true,
+     
       
     },
 
@@ -33,15 +33,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
     },
 
-    
+
     supporterEmail: {
       type: DataTypes.STRING(255),
     },
 
-
-    amount: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    supporterComment: {
+      type: DataTypes.STRING(255),
+     
     },
 
 

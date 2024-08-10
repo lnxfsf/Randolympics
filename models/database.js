@@ -43,7 +43,7 @@ db.economics = require('./economics')(sequelize,DataTypes)
 
 db.campaign = require('./campaign')(sequelize,DataTypes)  
 
-
+db.statscampaign = require('./statscampaign')(sequelize,DataTypes)  
 
 // model for News
 
