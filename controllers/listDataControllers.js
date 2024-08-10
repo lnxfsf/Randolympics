@@ -6716,13 +6716,29 @@ const campaignDetails = async (req, res) => {
 // how many supporters are there for that athlete (campaign)
 const howManySupportersCampaign = async (req, res) => {
 
-/* 
 
-  const npUsers = await User.findAll({
-    where: {
-      user_type: user_type,
-    },
-  }); */
+  const campaignId = req.query.campaignId;
+
+
+
+    try {
+
+
+      const countOfSupporters = await Statscampaign.count({
+        where: {
+          campaignId: campaignId,
+        },
+      }); 
+
+      
+      res.json({count: countOfSupporters});
+
+    } catch (error) {
+      console.log(error.stack)
+    }
+
+
+
 
 // TODO, ovo je za kolko supporters ima ovde
 
