@@ -6712,6 +6712,27 @@ const campaignDetails = async (req, res) => {
   }
 };
 
+
+// how many supporters are there for that athlete (campaign)
+const howManySupportersCampaign = async (req, res) => {
+
+/* 
+
+  const npUsers = await User.findAll({
+    where: {
+      user_type: user_type,
+    },
+  }); */
+
+// TODO, ovo je za kolko supporters ima ovde
+
+
+
+
+}
+
+
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -6731,4 +6752,5 @@ module.exports = {
   createCampaign,
 
   campaignDetails,
+  howManySupportersCampaign,
 };

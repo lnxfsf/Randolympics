@@ -176,6 +176,66 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 
 
+
+    // okej, dodatj tog supportera, u toj tabeli statscampaign (da bi lakse fetchovao  racunao, da ne pravim duple  itd..)
+
+    if(oneCampaign.supporterEmail){
+
+
+      const oneSupporter = await User.findOne({
+           where: { email: oneCampaign.supporterEmail},
+         });
+       var supporterUserId = oneSupporter.userId;
+     
+     } else {
+       var supporterUserId = " ";
+     }
+
+     
+     const addSupporterToStats = {
+
+
+      campaignId: oneCampaign.campaignId,
+      athleteId: oneAthlete.userId,
+
+      supporterId: supporterUserId,
+      supporterName: oneCampaign.supporterName,
+      supporterEmail: oneCampaign.supporterEmail,
+
+      supporterComment: oneCampaign.supporterComment,
+
+      amount: amount , 
+
+      payment_status: status,
+
+
+     }
+
+
+
+     try {
+      await db.sequelize.sync();
+
+      await Statscampaign.create(addSupporterToStats);
+     } catch (e) {
+      console.log(error.stack)
+     }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
