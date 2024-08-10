@@ -264,8 +264,19 @@ module.exports = function (sequelize, DataTypes) {
     donatedAmount: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-    }
+    },
 
+
+    athleteStatement: {
+      type: DataTypes.STRING(255),
+    },
+
+
+    athleteStatus: {
+      type: DataTypes.STRING(255),
+
+    },
+    
 
 
     

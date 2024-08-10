@@ -59,10 +59,18 @@ const update_user_data = async (req, res) => {
       passport_expiry,
   
       passportLastValidatedRejected,
+
+
+      athleteStatement,
+      athleteStatus,
+
   
       isRejected, // then sets all 4 fields to null... (false)
     } = req.body;
   
+
+
+
     await db.sequelize.sync();
   
     const user = await User.findOne({
@@ -78,6 +86,8 @@ const update_user_data = async (req, res) => {
         needsUpdate = true;
       }
   
+
+
       // ? so this is for passport
   
       if (passportLastValidatedRejected !== user.passportLastValidatedRejected) {
@@ -132,6 +142,7 @@ const update_user_data = async (req, res) => {
         updatingObject.birthdate_verify = birthdate_verify;
         needsUpdate = true;
       }
+
   
       if (nationality_verify !== user.nationality_verify) {
         updatingObject.nationality_verify = nationality_verify;
@@ -220,6 +231,45 @@ const update_user_data = async (req, res) => {
         updatingObject.picture = picture;
         needsUpdate = true;
       }
+
+
+      // da ne obrise prethodno..
+      if (athleteStatement && athleteStatement !== user.athleteStatement) {
+        updatingObject.athleteStatement = athleteStatement;
+        needsUpdate = true;
+      }
+
+
+      if (athleteStatus && athleteStatus !== user.athleteStatus) {
+
+
+     /*    var textAthleteStatus = "";
+
+        switch (athleteStatus) {
+          case "s1":
+            textAthleteStatus = "Has not logged in yet";
+          case "s2":
+            textAthleteStatus = "Logged in but no status";
+          case "s3":
+            textAthleteStatus = "I'm 99% taking the challenge and going";
+          case "s4":
+            textAthleteStatus = "I'm most likely going";
+          case "s5":
+            textAthleteStatus = "I'm maybe going";
+          case "s6":
+            textAthleteStatus = "I'm definitely not going";
+        }
+           */
+
+
+        
+        updatingObject.athleteStatus = athleteStatus;
+        needsUpdate = true;
+      }
+
+
+
+
   
       if (needsUpdate) {
         try {
@@ -290,6 +340,12 @@ const update_user_data = async (req, res) => {
           passport_expiry: existingUser.passport_expiry,
   
           passportStatus: existingUser.passportStatus,
+
+          athleteStatement: existingUser.athleteStatement,
+          athleteStatus: existingUser.athleteStatus,
+
+
+
         });
       }
     } catch (error) {
