@@ -77,10 +77,28 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
     let newSpentAmount = newAmount + oneCoupon.spentAmount;  // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
 
-    console.log("currentDate <= expiryDate"+ currentDate <= expiryDate)
-    console.log("newSpentAmount < oneCoupon.maxSpentLimit"+ newSpentAmount < oneCoupon.maxSpentLimit)
-    console.log(" oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed"+ oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
-   
+    console.log("currentDate")
+    console.log(currentDate)
+
+    console.log("expiryDate")
+    console.log(expiryDate)
+    console.log(currentDate <= expiryDate)
+
+    console.log("newSpentAmount")
+    console.log(newSpentAmount)
+
+    console.log("oneCoupon. maxSpentLimit")
+    console.log(oneCoupon.maxSpentLimit)
+    console.log(newSpentAmount < oneCoupon.maxSpentLimit)
+
+    console.log("oneCoupon.couponTimesUsed")
+    console.log(oneCoupon.couponTimesUsed)
+
+    console.log("oneCoupon.maxCouponTimesUsed")
+    console.log(oneCoupon.maxCouponTimesUsed)
+
+    console.log(oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
+
 
     if((currentDate <= expiryDate) && (newSpentAmount < oneCoupon.maxSpentLimit) && (oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)){
         
@@ -102,6 +120,7 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
       return newAmount;
 
     } else {
+      console.log("da vraca ovde")
       return amountOriginal;
     }
 
