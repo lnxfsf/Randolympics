@@ -35,7 +35,7 @@ app.use(cors());
 
 
 const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode) => {
-
+  await db.sequelize.sync();
 
   // on nadje koji ima.. 
   const oneCoupon = await Couponcodes.findOne({
@@ -49,6 +49,66 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
     return amountOriginal;
   }
 
+  // da ga odma sad vratis..
+  if(oneCoupon.isCouponActive === 0){
+    console.log("coupon code is not active");
+    return amountOriginal;
+  }
+
+
+
+  // i sada, PRVO gleda jel "GLOBAL" (pa onda za national) 
+  if(oneCoupon.country === "GLOBAL"){
+    // e sada, ovde ces da definises , sta on radi ovde jos..
+    
+    // 
+    // proveris da li je kupon validan
+
+    // po datumu
+    const currentDate = new Date();
+    const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+
+    // because this is going by %, we take in consideration, a new value, we add as well, so it don't overflow it. so someone with 100€, can't use it, because it's going to be spent completelly..
+    // maybe to try with lesser amount, so they get that discout..
+
+    // so, calculate how much % up, it goes (that's add, that much %, to payment they gave). if they paid 20€, and coupon is 20%, then we do 20€+20%=24
+      // for "GLOBAL", in couponValue is stored as "0.05", so we use it as % for that. so this would be 5 , it need to be % now
+    let newAmount = amountOriginal +  (amountOriginal * oneCoupon.couponValue);  // this is new amount we get when we apply coupon 
+
+    let newSpentAmount = newAmount + oneCoupon.spentAmount;  // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+
+    console.log("currentDate <= expiryDate"+ currentDate <= expiryDate)
+    console.log("newSpentAmount < oneCoupon.maxSpentLimit"+ newSpentAmount < oneCoupon.maxSpentLimit)
+    console.log(" oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed"+ oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
+   
+
+    if((currentDate <= expiryDate) && (newSpentAmount < oneCoupon.maxSpentLimit) && (oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)){
+        
+
+      // ! you need to update 
+      // couponTimesUsed
+      // spentAmount  (dodaj taj novi sto ima, + newAmount)
+
+
+            
+      try {
+        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount }); // azurira samo taj
+      } catch (error) {
+        console.log(error.stack);
+      }
+
+      
+      // we then, return with discount (we calculated and got it above)
+      return newAmount;
+
+    } else {
+      return amountOriginal;
+    }
+
+
+
+
+  }
 
 
 }
@@ -69,7 +129,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
     // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
 
-
+    await db.sequelize.sync();
 
     // make campaign as confirmed (so we keep it) // ! , e ako je ostavio za kasnije, vidis, isto mora da potvrdi ga 
     // on uvek dobija "campaignId" btw. tako da... prvo ides taj donacije 3 lice ! pa onda ovo .. 
@@ -92,7 +152,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       if(oneCampaignThirdParty.couponDonationCode){
         // znaci ako ima neki coupon
         var amount = await calculateNewAmountWithDiscountCode(amountOriginal, oneCampaignThirdParty.couponDonationCode);
-      
+        console.log("novi amount sa discount: " + amount)
       } else {
         // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
         var amount = amountOriginal;

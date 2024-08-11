@@ -46,13 +46,22 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    spentAmount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
     //  for "GLOBAL", this can be limit, how many times, it can be used ! (once, and then it expires). 
     // For national, we don't check this value (but you can add to it, why not ofc.. )
     couponTimesUsed: {
       type: DataTypes.INTEGER,
+    },
+
+
+    maxCouponTimesUsed: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     }
-
-
 
 
   });
