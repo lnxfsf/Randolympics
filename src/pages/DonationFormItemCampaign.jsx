@@ -18,7 +18,7 @@ import {
   import AuthContext from '../context/AuthContext';
 
 
-export default function DonationFormItemCampaign({amount, setAmount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode}) {
+export default function DonationFormItemCampaign({amount, setAmount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode, countryAthleteIsIn}) {
   
 
 
@@ -42,7 +42,7 @@ export default function DonationFormItemCampaign({amount, setAmount, campaignId,
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
-  const handleSubmit = () => {mutate({ amount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode })};
+  const handleSubmit = () => {mutate({ amount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode, countryAthleteIsIn })};
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);

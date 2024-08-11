@@ -46,6 +46,7 @@ const ItemCampaign = () => {
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
   const [lastTransactionsSupporters, setLastTransactionsSupporters] = useState();
 
+  const [countryAthleteIsIn, setCountryAthleteIsIn ] = useState()
   
 
   const [discountCode, setDiscountCode] = useState();
@@ -89,6 +90,13 @@ const ItemCampaign = () => {
             setTextAthleteStatus("I'm definitely not going");
         }
       }
+
+      if(response.data.thatAthlete){
+        setCountryAthleteIsIn(response.data.thatAthlete.nationality);
+      }
+     
+
+
     } catch (error) {
       console.error(error);
     }
@@ -412,6 +420,7 @@ const ItemCampaign = () => {
                         supporterEmail={supporterEmail}
                         supporterComment={supporterComment}
                         discountCode={discountCode}
+                        countryAthleteIsIn={countryAthleteIsIn}
                         separateDonationThruPage={true}
                       />
                     </QueryProvider>

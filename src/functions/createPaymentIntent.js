@@ -8,7 +8,7 @@ let BACKEND_SERVER_BASE_URL =
   
 
 
-export const createPaymentIntent = async (amount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode) => {
+export const createPaymentIntent = async (amount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode, countryAthleteIsIn) => {
 
   console.log("unutra createPaymentIntent")
   console.log(amount) 
@@ -24,6 +24,7 @@ export const createPaymentIntent = async (amount, campaignId, supporterName, sup
            separateDonationThruPage,
            supporterComment,
            discountCode,
+           countryAthleteIsIn,
            
           }, {
 
