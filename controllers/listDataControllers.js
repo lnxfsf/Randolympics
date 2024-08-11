@@ -6647,7 +6647,17 @@ const makePayment = async (req, res) => {
       });
 
       try {
-        await oneCampaign.update({ payment_id: paymentIntent.id }); // azurira samo taj
+        await oneCampaign.update({ payment_id: paymentIntent.id,
+
+         
+
+         }); // azurira samo taj
+
+
+         Statscampaign // koristi se ovaj !!! 
+ couponDonationCode: discountCode,
+          countryAthleteIsIn: countryAthleteIsIn,
+         // ! 11.08 , i doda discountCode , countryAthleteIsIn, njih takodje azurira u database ! 
       } catch (error) {
         console.log(error.stack);
       }
@@ -6868,10 +6878,16 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
         ) {
           try {
+
             await oneCoupon.update({
               couponTimesUsed: oneCoupon.couponTimesUsed + 1,
               spentAmount: newSpentAmount,
             }); // azurira samo taj
+
+
+            // i azurira status transakcije kao "success", eto da je full-ed
+            await campaignViewed.update({payment_status: "succeeded"})
+
           } catch (error) {
             console.log(error.stack);
           }

@@ -344,6 +344,19 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
     } else {
 
+
+// TODO evo ovde fali ta logika, za amount ja msm, samo..
+      // ovde azurira amount, po discount code koji ima. 
+      if(oneCampaign.couponDonationCode){
+        // znaci ako ima neki coupon
+        var amount = await calculateNewAmountWithDiscountCode(amountOriginal, oneCampaign.couponDonationCode, oneCampaign.countryAthleteIsIn);
+        console.log("novi amount sa discount oneCampaign: " + amount)
+      } else {
+        // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
+        var amount = amountOriginal;
+      }
+
+
       
       // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
         try {
@@ -390,6 +403,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       const oneSupporter = await User.findOne({
            where: { email: oneCampaign.supporterEmail},
          });
+
+         
        var supporterUserId = oneSupporter.userId;
      
      } else {
