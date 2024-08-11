@@ -24,7 +24,7 @@ const app = express();
 const Campaign = db.campaign;
 const User = db.users;
 const Statscampaign = db.statscampaign;
-
+const Couponcodes = db.couponcodes;
 
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -34,12 +34,37 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 app.use(cors());
 
 
+const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode) => {
+
+
+  // on nadje koji ima.. 
+  const oneCoupon = await Couponcodes.findOne({
+    where: { couponCode: couponDonationCode },
+  });
+
+
+  // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
+  if(!oneCoupon){
+    console.log("coupon code is not valid");
+    return amountOriginal;
+  }
+
+
+
+}
 
 
 // Webhook endpoint to handle Stripe events
 app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   
-  async function updatePaymentStatus(paymentIntentId, status, amount) {
+
+
+
+
+
+
+
+  async function updatePaymentStatus(paymentIntentId, status, amountOriginal) {
     // Replace this with your actual database update logic
     // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
     // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
@@ -61,6 +86,17 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
         where: { payment_id: paymentIntentId },
       });
 
+
+
+      // ovde azurira amount, po discount code koji ima. 
+      if(oneCampaignThirdParty.couponDonationCode){
+        // znaci ako ima neki coupon
+        var amount = await calculateNewAmountWithDiscountCode(amountOriginal, oneCampaignThirdParty.couponDonationCode);
+      
+      } else {
+        // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
+        var amount = amountOriginal;
+      }
 
 
       console.log("paymentIntentId je: "+paymentIntentId)

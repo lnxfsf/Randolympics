@@ -45,6 +45,7 @@ db.campaign = require('./campaign')(sequelize,DataTypes)
 
 db.statscampaign = require('./statscampaign')(sequelize,DataTypes)  
 
+db.couponcodes = require('./couponcodes')(sequelize,DataTypes) 
 // model for News
 
 
