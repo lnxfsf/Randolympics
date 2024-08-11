@@ -6649,14 +6649,14 @@ const makePayment = async (req, res) => {
       try {
         await oneCampaign.update({ payment_id: paymentIntent.id,
 
-         
+          couponDonationCode: discountCode,
+          countryAthleteIsIn: countryAthleteIsIn,
 
          }); // azurira samo taj
 
 
-         Statscampaign // koristi se ovaj !!! 
- couponDonationCode: discountCode,
-          countryAthleteIsIn: countryAthleteIsIn,
+      // samo novi model za ove dve stvari upravo..
+ 
          // ! 11.08 , i doda discountCode , countryAthleteIsIn, njih takodje azurira u database ! 
       } catch (error) {
         console.log(error.stack);
