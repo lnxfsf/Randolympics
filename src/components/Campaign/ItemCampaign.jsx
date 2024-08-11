@@ -453,11 +453,14 @@ const ItemCampaign = () => {
                         amount={amount}
                         setAmount={setAmount}
                         campaignId={campaignId}
+
                         supporterName={supporterName}
                         supporterEmail={supporterEmail}
                         supporterComment={supporterComment}
                         discountCode={discountCode}
                         countryAthleteIsIn={countryAthleteIsIn}
+
+                        
                         separateDonationThruPage={true}
                       />
                     </QueryProvider>

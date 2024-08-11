@@ -68,6 +68,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../themes/theme";
 import { QueryProvider } from "../QueryProvider";
 import DonationForm from "./DonationForm";
+import DonationFormItemCampaign from "./DonationFormItemCampaign";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -343,7 +344,7 @@ const Supporters = () => {
   const [friendEmail, setFriendEmail] = useState("");
   const [friendPhone, setFriendPhone] = useState("");
   const [friendBirthdate, setFriendBirthdate] = useState();
-  const [friendNationality, setFriendNationality] = useState();
+  const [friendNationality, setFriendNationality] = useState("");
   const [friendImage, setFriendImage] = useState();
   const [friendGender, setFriendGender] = useState("M");
 
@@ -361,6 +362,11 @@ const Supporters = () => {
   const navigate = useNavigate();
 
   const [discountCode, setDiscountCode] = useState();
+  
+  
+
+
+
 
 
   const donateWithCouponOnly = async () => {
@@ -459,6 +465,8 @@ const Supporters = () => {
       <NavbarHomeCollapsed />
 
       <HorizontalLinearAlternativeLabelStepper />
+
+
 
       {firstIsVisible && (
         <>
@@ -1155,7 +1163,27 @@ const Supporters = () => {
 
             <ThemeProvider theme={theme}>
               <QueryProvider>
-                <DonationForm amount={amount} setAmount={setAmount} campaignId={campaignId} />
+
+
+              {/*   <DonationForm  */}
+                <DonationFormItemCampaign
+                amount={amount} 
+                setAmount={setAmount} 
+                campaignId={campaignId}
+
+
+
+                supporterName={supporterName}
+                supporterEmail={supporterEmail}
+                supporterComment={supporterComment}
+                discountCode={discountCode}
+                countryAthleteIsIn={friendNationality}
+
+                separateDonationThruPage={false}
+
+
+                />
+                {/*  /> */}
               </QueryProvider>
             </ThemeProvider>
           </div>
