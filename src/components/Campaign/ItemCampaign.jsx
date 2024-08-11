@@ -53,6 +53,33 @@ const ItemCampaign = () => {
 
 
 
+
+  const donateWithCouponOnly = async () => {
+
+
+    try {
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/listsData/donateOnlyWithDiscountCode`,
+        {
+         
+          discountCode: discountCode,
+          campaignId: campaignId,
+
+          supporterEmail: supporterEmail,
+          supporterName: supporterName,
+          supporterComment: supporterComment,
+         
+        }
+      );
+    } catch (e) {
+      console.log(e.stack);
+    }
+
+
+  
+  }
+
+
   useEffect(() => {
     updateLatestData();
   }, []);
@@ -341,6 +368,16 @@ const ItemCampaign = () => {
                     value={discountCode}
                     onChange={(event) => {setDiscountCode(event.target.value)}}
                      />
+
+                     <button 
+                     style={{backgroundColor: "#0000ff", color: "#fff"}} className="m-4 rounded-lg p-2"
+                     
+                     onClick={donateWithCouponOnly}
+                     
+
+                     >
+                      
+                      Donate with coupon only</button>
 </div>  
 
 
