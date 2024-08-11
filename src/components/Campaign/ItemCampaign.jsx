@@ -48,6 +48,10 @@ const ItemCampaign = () => {
 
   
 
+  const [discountCode, setDiscountCode] = useState();
+
+
+
   useEffect(() => {
     updateLatestData();
   }, []);
@@ -309,12 +313,28 @@ const ItemCampaign = () => {
                     }}
                   />
 
-                  <p className="text-red_first text-sm w-[50%]">
+                 
+ <p className="text-red_first text-sm w-[50%] mt-4">
                     if supporter (others) are donating to here, they don't need
                     account (and they don't get one). these fields are
-                    optional.. (for transaction)
-                  </p>
+                    optional.. (for transaction). 
+                    <br/>
+                    But if supporter have account, transaction he makes will be displayed on his profile (or even if he later decides to make account), he just need to use same email address, he made transaction with
+</p>
+		
                 </div>
+
+
+                <div className="m-4 flex justify-center flex-col">
+                    <p>Discount codes</p>
+                    <input className="border-2 rounded-lg" 
+                    type="text"
+                    placeholder="Code"
+                    value={discountCode}
+                    onChange={(event) => {setDiscountCode(event.target.value)}}
+                     />
+</div>  
+
 
                 <div className="border-2 flex flex-col justify-center items-center p-4">
                   <p className="underline text-red_first">Note:</p>
@@ -391,6 +411,7 @@ const ItemCampaign = () => {
                         supporterName={supporterName}
                         supporterEmail={supporterEmail}
                         supporterComment={supporterComment}
+                        discountCode={discountCode}
                         separateDonationThruPage={true}
                       />
                     </QueryProvider>
