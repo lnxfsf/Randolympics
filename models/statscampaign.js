@@ -65,6 +65,12 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    countryAthleteIsIn: {
+      type: DataTypes.STRING(100),
+      defaultValue: "US",
+    },
+
+
 
 
 

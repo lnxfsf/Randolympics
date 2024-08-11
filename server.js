@@ -127,6 +127,11 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
 
 
+  } else {
+    // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
+
+    // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
+
   }
 
 
@@ -387,6 +392,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
           const paymentIntent = event.data.object;
           console.log('PaymentIntent was successful!');
 
+         
           console.log(paymentIntent.id) // evo, on ga pogadja i nalazi u database koji ima za campaign... 
 
           await updatePaymentStatus(paymentIntent.id, 'succeeded', paymentIntent.amount);
