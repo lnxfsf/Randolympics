@@ -9,6 +9,8 @@ const { rankingTop50, otherUsers, lastInRank,
            howManySupportersCampaign,
            lastCommentsSupportersCampaign,
            lastTransactionsSupportersCampaign,
+
+           donateOnlyWithDiscountCode,
            
         
         } = require("../controllers/listDataControllers");
@@ -69,6 +71,9 @@ router.get("/howManySupportersCampaign", howManySupportersCampaign)
 router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
 router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCampaign)
 
+
+// donate only with coupon codes
+router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
 
 
 

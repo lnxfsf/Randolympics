@@ -5,6 +5,8 @@ const User = db.users;
 const Traffic = db.traffic;
 const Campaign = db.campaign;
 const Statscampaign = db.statscampaign;
+const Couponcodes = db.couponcodes;
+
 const Sequelize = db.Sequelize;
 
 const Op = db.Sequelize.Op;
@@ -6549,9 +6551,6 @@ const makePayment = async (req, res) => {
   console.log("dobija i discountCode: " + discountCode);
 
   console.log("dobija i countryAthleteIsIn: " + countryAthleteIsIn);
-  
-  
-  
 
   console.log("separateDonationThruPage: " + separateDonationThruPage);
   // TODO, da, sa ovime, on mora da kreira tabelu, jer fino u backend samo posalji sve sto ti treba, da se ne cimam sa FE, insecure je ionako to jako...
@@ -6577,90 +6576,70 @@ const makePayment = async (req, res) => {
     console.log("ono sto on prima je." + campaignId);
 
     if (separateDonationThruPage) {
-
-
       try {
-          await db.sequelize.sync();
+        await db.sequelize.sync();
 
-          // find athleteId (so we increase his donatedAmount when we confirm payment)
-        
+        // find athleteId (so we increase his donatedAmount when we confirm payment)
 
-          // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
+        // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
         const campaignViewed = await Campaign.findOne({
-          where: { campaignId: campaignId  },
+          where: { campaignId: campaignId },
         });
-        
-        console.log("--------------------campaignViewed------------------")
-        console.log(campaignViewed)
-        console.log("----------direktni pristup je")
-        console.log(campaignViewed.friendEmail)
-        // sad nalazi athleteId po ovome... 
+
+        console.log("--------------------campaignViewed------------------");
+        console.log(campaignViewed);
+        console.log("----------direktni pristup je");
+        console.log(campaignViewed.friendEmail);
+        // sad nalazi athleteId po ovome...
         const oneAthlete = await User.findOne({
-          where: { email:  campaignViewed.friendEmail },
+          where: { email: campaignViewed.friendEmail },
         });
 
         // e sada uzimas athleteId odatle:   oneAthlete.userId
 
-
-
         // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId"
         // znaci izvrsi proveru, da li email supportera (isto je unique zar ne..), matchje neki koji postoji u database. cisto eto moze korisno imat ako treba (za njegovu listu, koga je on supportovao.. (a i fora je, da ako kreira nalog, vidis, isto ce imati pregled koga je supportovao..))
-        // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje ! 
+        // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje !
         const oneSupporter = await User.findOne({
           where: { email: supporterEmail },
         });
 
-        if(oneSupporter){
+        if (oneSupporter) {
           var supporterId = oneSupporter.userId;
           // if there's nothing, no such user, supporter, then nothing happens, it will be "null" stored in database anyways..
         } else {
           var supporterId = "";
         }
 
-
         // amount, JOS NE UPISUJES OVDE NISTA ! (to tek na drugoj strani pri potvrdi, jer ionako database, kreira ga kao 0 ..)
 
-
-    // on ce supporterEmail, da cuva u ovaj record. pa eto kasnije, kada supporter napravi nalog, moci ce da ima pregled svojih ! bez obzira eto vidis.. pre nego napravio nalog, moci ce da ih vidi isto..
-   
+        // on ce supporterEmail, da cuva u ovaj record. pa eto kasnije, kada supporter napravi nalog, moci ce da ima pregled svojih ! bez obzira eto vidis.. pre nego napravio nalog, moci ce da ih vidi isto..
 
         // payment_status, isto ne diras sad nista, u database biva ionako "unpaid" po default-u
-      
+
         const supporter_data = {
-            campaignId,
-            athleteId: oneAthlete.userId,
-            supporterId,
+          campaignId,
+          athleteId: oneAthlete.userId,
+          supporterId,
 
+          supporterName,
+          supporterEmail,
+          supporterComment,
 
-            supporterName,
-            supporterEmail,
-            supporterComment,
+          payment_id: paymentIntent.id,
+          couponDonationCode: discountCode,
+          countryAthleteIsIn: countryAthleteIsIn,
+        };
 
-            payment_id: paymentIntent.id,
-            couponDonationCode: discountCode,
-            countryAthleteIsIn: countryAthleteIsIn,
+        await Statscampaign.create(supporter_data);
 
-          
+        // ! ali, ovo je kada neko dodaje, u vec kreirani campaignId ! radi transaction history (a isto tako, mozemo da čitamo svi komentari od supporters..)
 
-              };
-
-          await Statscampaign.create(supporter_data);
-
-
-          // ! ali, ovo je kada neko dodaje, u vec kreirani campaignId ! radi transaction history (a isto tako, mozemo da čitamo svi komentari od supporters..) 
-
-          // supporterComment
-
-
-     
-        
+        // supporterComment
       } catch (error) {
         console.log(error.stack);
       }
-
-
     } else {
-
       // ! OVO JE OBICAN, ubaci u campaignId, trazi on ovde..
       // sad upisi u database (da, i vise puta ako je, ako nije uspeo, ide on dole u error ionako)
       const oneCampaign = await Campaign.findOne({
@@ -6708,7 +6687,6 @@ const campaignDetails = async (req, res) => {
       },
     });
 
-
     // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
     const thatAthlete = await User.findOne({
       where: {
@@ -6722,128 +6700,231 @@ const campaignDetails = async (req, res) => {
   }
 };
 
-
 // how many supporters are there for that athlete (campaign)
 const howManySupportersCampaign = async (req, res) => {
-
-
   const campaignId = req.query.campaignId;
 
-
-
-    try {
-
-
-      const countOfSupporters = await Statscampaign.count({
-        where: {
-          campaignId: campaignId,
-        },
-      }); 
-
-      
-      res.json({count: countOfSupporters});
-
-    } catch (error) {
-      console.log(error.stack)
-    }
-
-
-
-
-// TODO, ovo je za kolko supporters ima ovde
-
-
-
-
-}
-
-
-const lastCommentsSupportersCampaign =  async (req, res) => {
-
-  
-  const campaignId = req.query.campaignId;
-
-
-
-  
   try {
+    const countOfSupporters = await Statscampaign.count({
+      where: {
+        campaignId: campaignId,
+      },
+    });
 
+    res.json({ count: countOfSupporters });
+  } catch (error) {
+    console.log(error.stack);
+  }
 
+  // TODO, ovo je za kolko supporters ima ovde
+};
+
+const lastCommentsSupportersCampaign = async (req, res) => {
+  const campaignId = req.query.campaignId;
+
+  try {
     const lastCommentsSupporters = await Statscampaign.findAll({
       where: {
         campaignId: campaignId,
         supporterComment: {
-          [Sequelize.Op.ne]: null,  
+          [Sequelize.Op.ne]: null,
         },
-
       },
 
-      limit: 3, 
-      attributes: ['supporterComment'], // only this row in database retrieve
-      order: [
-       
-        ['createdAt', 'DESC']
-      ],
+      limit: 3,
+      attributes: ["supporterComment"], // only this row in database retrieve
+      order: [["createdAt", "DESC"]],
+    });
 
-    }); 
-
-    
-    console.log(lastCommentsSupporters)
+    console.log(lastCommentsSupporters);
 
     res.json(lastCommentsSupporters);
-
   } catch (error) {
-    console.log(error.stack)
+    console.log(error.stack);
   }
+};
 
-
-
-
-}
-
-
-
-
-const lastTransactionsSupportersCampaign =  async (req, res) => {
-
-  
+const lastTransactionsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
-
-
-  
   try {
-
-
     const lastCommentsSupporters = await Statscampaign.findAll({
       where: {
         campaignId: campaignId,
-      
-
       },
 
-      limit: 3, 
-      attributes: ['supporterName', 'amount'], // only this row in database retrieve
-      order: [
-       
-        ['createdAt', 'DESC']
-      ],
+      limit: 3,
+      attributes: ["supporterName", "amount"], // only this row in database retrieve
+      order: [["createdAt", "DESC"]],
+    });
 
-    }); 
+    console.log(lastCommentsSupporters);
 
-    
-    console.log(lastCommentsSupporters)
-    
     res.json(lastCommentsSupporters);
-
   } catch (error) {
-    console.log(error.stack)
+    console.log(error.stack);
   }
+};
+
+// donate using only dicsount code
+const donateOnlyWithDiscountCode = async (req, res) => {
+  
+  
+
+  const { discountCode, campaignId,
+
+    supporterEmail,
+    supporterName,
+    supporterComment,
+         
 
 
+  } = req.body;
+
+  try {
+    // ima li koji odgovara tome..
+    await db.sequelize.sync();
+
+    // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
+    const campaignViewed = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+
+    console.log("---------> campaignId"+campaignId)
+    console.log(campaignViewed)
+
+    // sad nalazi athleteId po ovome...
+    const oneAthlete = await User.findOne({
+      where: { email: campaignViewed.friendEmail },
+    });
+
+    console.log("---------> oneAthlete "+campaignViewed.friendEmail)
+    console.log(oneAthlete)
 
 
-}
+    // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId"
+    // znaci izvrsi proveru, da li email supportera (isto je unique zar ne..), matchje neki koji postoji u database. cisto eto moze korisno imat ako treba (za njegovu listu, koga je on supportovao.. (a i fora je, da ako kreira nalog, vidis, isto ce imati pregled koga je supportovao..))
+    // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje !
+   
+    try {
+      const oneSupporter = await User.findOne({
+        where: { email: supporterEmail },
+      });
+
+      if (oneSupporter) {
+        var supporterId = oneSupporter.userId;
+        // if there's nothing, no such user, supporter, then nothing happens, it will be "null" stored in database anyways..
+      } else {
+        var supporterId = "";
+      }
+    } catch(e) {
+      console.log(e.stack)
+    }
+  
+
+    // treba, da odma matchujes i drzavu ovde u "where", da imas manje da trazis i kucas. da preko athlete odmah da ih imas sve tu..
+
+    // on nadje koji ima.. u Coupons
+    const oneCoupon = await Couponcodes.findOne({
+      where: {
+        couponCode: discountCode,
+        isCouponActive: 1,
+        country: oneAthlete.nationality,
+      },
+    });
+
+    if (!oneCoupon) {
+      //  console.log("coupon code is not valid");
+
+      // so it do nothing in backend anyways..
+      res.status(200).json({ message: "coupon code is not valid" });
+    }
+
+    // sada proveri 'Coupons.js'  sa 'statsCampaign.js'
+    if (oneCoupon.couponCode) {
+      // cek, ti ne treba da upisujes nista u statsCampaign ! to ti je za potvrdu bilo ustvari (upisujes samo amount.. )
+      // da, TI USTVARI KREIRAS NOVI ROW, kao transakciju u taj statsCampaign, upravo sa vrednoscu iz tog couponCode-a...
+
+      // prvo izvuces amount koji treba, pa to samo kreiras tu row u tabeli
+
+      /*  const oneCoupon = await Statscampaign.findOne({
+          where: { couponDonationCode: discountCode, },
+        }); */
+
+      // znaci kreiras jedan row .. (da, treba da upises, i u Athlete isto), i ovaj ce jedini biti odmah "success", jer on ne radi potvrdu..
+      try {
+        await db.sequelize.sync();
+
+        const currentDate = new Date();
+        const expiryDate = new Date(oneCoupon.expiryDate);
+
+        let newAmount = oneCoupon.couponValue; // da uvek vazi samo za fixed ! samo, i ovo vazi samo za national (nece matchovati nijedan "GLOBAL", ionako...)
+
+        let newSpentAmount = newAmount + oneCoupon.spentAmount;
+
+        if (
+          currentDate <= expiryDate &&
+          newSpentAmount < oneCoupon.maxSpentLimit &&
+          oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+        ) {
+          try {
+            await oneCoupon.update({
+              couponTimesUsed: oneCoupon.couponTimesUsed + 1,
+              spentAmount: newSpentAmount,
+            }); // azurira samo taj
+          } catch (error) {
+            console.log(error.stack);
+          }
+
+          var amount = newAmount;
+        } else {
+          try {
+            // then it's expired, just set it so, so we don't check it anymore..
+            await oneCoupon.update({ isCouponActive: 0 });
+          } catch (e) {
+            console.log(e.stack);
+          }
+
+          // samo vrati to i tjt..
+          var amount = newAmount;
+        }
+
+        // ! evo ovde
+        //  var amount = calculateDonateWithDiscountOnly(currentDate,expiryDate,newAmount,newSpentAmount);
+
+       
+
+        const supporter_data = {
+          campaignId,
+          athleteId: oneAthlete.userId,
+
+          supporterId,
+
+
+          supporterEmail,
+          supporterName,
+          supporterComment,
+
+         
+
+          countryAthleteIsIn: oneAthlete.nationality,
+
+          amount: amount,
+        };
+
+        await Statscampaign.create(supporter_data);
+
+
+      } catch (e) {
+        console.log(e.stack);
+      }
+    }
+
+    res.status(200).json({ message: "coupon confirmed" });
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
 
 module.exports = {
   // update_rank_data,
@@ -6867,4 +6948,6 @@ module.exports = {
   howManySupportersCampaign,
   lastCommentsSupportersCampaign,
   lastTransactionsSupportersCampaign,
+
+  donateOnlyWithDiscountCode,
 };
