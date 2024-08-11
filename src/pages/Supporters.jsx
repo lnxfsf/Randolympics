@@ -122,6 +122,8 @@ const sxTextField = {
 const campaignId = uuidv4();
 
 
+
+
 const Supporters = () => {
 
 
@@ -357,6 +359,38 @@ const Supporters = () => {
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
   const navigate = useNavigate();
+
+  const [discountCode, setDiscountCode] = useState();
+
+
+  const donateWithCouponOnly = async () => {
+
+
+    try {
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/listsData/donateOnlyWithDiscountCode`,
+        {
+         
+          discountCode: discountCode,
+          campaignId: campaignId,
+
+          supporterEmail: supporterEmail,
+          supporterName: supporterName,
+          supporterComment: supporterComment,
+         
+        }
+      );
+    } catch (e) {
+      console.log(e.stack);
+    }
+
+
+  
+  }
+  
+
+
+
 
   // ? for FilePond
 
@@ -1026,6 +1060,28 @@ const Supporters = () => {
           Let’s see how you can support your <br />
           friend!
         </p>
+
+
+        <div className="m-4 flex justify-center flex-col">
+                    <p>Discount codes</p>
+                    <input className="border-2 rounded-lg" 
+                    type="text"
+                    placeholder="Code"
+                    value={discountCode}
+                    onChange={(event) => {setDiscountCode(event.target.value)}}
+                     />
+
+                     <button 
+                     style={{backgroundColor: "#0000ff", color: "#fff"}} className="m-4 rounded-lg p-2"
+                     
+                     onClick={donateWithCouponOnly}
+                     
+
+                     >
+                      
+                      Donate with coupon only</button>
+</div>  
+
 
         <div className="border-2 flex flex-col justify-center items-center p-4">
           <p className="underline text-red_first">Note:</p>
