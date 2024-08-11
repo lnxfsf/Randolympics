@@ -6535,7 +6535,7 @@ const makePayment = async (req, res) => {
     supporterEmail,
     separateDonationThruPage,
     supporterComment,
-
+    discountCode,
   } = req.body;
 
   console.log(campaignId);
@@ -6544,6 +6544,9 @@ const makePayment = async (req, res) => {
   console.log("on dobija supporterName: " + supporterName);
   console.log("dobija i supporterEmail: " + supporterEmail);
   console.log("dobija i supporterComment: " + supporterComment);
+
+  console.log("dobija i discountCode: " + discountCode);
+  
   
 
   console.log("separateDonationThruPage: " + separateDonationThruPage);
@@ -6629,7 +6632,8 @@ const makePayment = async (req, res) => {
             supporterEmail,
             supporterComment,
 
-            payment_id: paymentIntent.id
+            payment_id: paymentIntent.id,
+            couponDonationCode: discountCode,
 
           
 

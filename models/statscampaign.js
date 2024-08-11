@@ -59,7 +59,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(600),
     },
 
+    couponDonationCode: {
+      type: DataTypes.STRING(255),
 
+    },
 
 
 
