@@ -34,13 +34,14 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 app.use(cors());
 
 
-const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode) => {
+const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode, country) => {
   await db.sequelize.sync();
 
   // on nadje koji ima.. 
   const oneCoupon = await Couponcodes.findOne({
-    where: { couponCode: couponDonationCode },
+    where: { couponCode: couponDonationCode, isCouponActive: 1 },
   });
+
 
 
   // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
@@ -77,7 +78,7 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
     let newSpentAmount = newAmount + oneCoupon.spentAmount;  // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
 
-    console.log("currentDate")
+   /*  console.log("currentDate")
     console.log(currentDate)
 
     console.log("expiryDate")
@@ -95,15 +96,89 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
     console.log(oneCoupon.couponTimesUsed)
 
     console.log("oneCoupon.maxCouponTimesUsed")
-    console.log(oneCoupon.maxCouponTimesUsed)
-
+    console.log(oneCoupon.maxCouponTimesUsed) */
+/* 
     console.log(oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
-
+ */
 
     if((currentDate <= expiryDate) && (newSpentAmount < oneCoupon.maxSpentLimit) && (oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)){
         
 
       // ! you need to update 
+      // couponTimesUsed
+      // spentAmount  (dodaj taj novi sto ima, + newAmount)
+
+
+            
+      try {
+        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount }); // azurira samo taj
+      } catch (error) {
+        console.log(error.stack);
+      }
+
+      
+      // we then, return with discount (we calculated and got it above)
+      return newAmount;
+
+    } else {
+     
+
+      try{
+           // then it's expired, just set it so, so we don't check it anymore..
+    await oneCoupon.update({ isCouponActive: 0 }); 
+
+      } catch (e) {
+        console.log(e.stack)
+      }
+     
+   
+    return amountOriginal;
+
+
+    }
+
+
+
+
+  } else {
+    // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
+
+    // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
+
+  /*   2 | 32SU5DOIZT |              1 | GB      | 2024-09-09 |          10 |         10000 |               0 | 2024-08-10 22:37:41 | 2024-08-10 22:37:41
+ 
+
+
+  --> kod national coupon, njegov couponValue je "fixed" price koliko se nadodaje na to sto on dodaje !
+  --> 
+
+  */
+
+
+  // first, you need to match, if it's matching value that's provided (goes by country..)
+  if(oneCoupon.country === country){
+
+
+     // po datumu
+     const currentDate = new Date();
+     const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+ 
+
+    // this is fixed amount addition ! (so not by percent), yes..
+     let newAmount = amountOriginal + oneCoupon.couponValue;
+
+
+     console.log("unutar drzave je")
+     console.log("amountOriginal: "+amountOriginal)
+     console.log("oneCoupon.couponValue: "+oneCoupon.couponValue)
+
+     let newSpentAmount = newAmount + oneCoupon.spentAmount;
+
+
+     if((currentDate <= expiryDate) && (newSpentAmount < oneCoupon.maxSpentLimit) && (oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)){
+        
+
+      //  you need to update 
       // couponTimesUsed
       // spentAmount  (dodaj taj novi sto ima, + newAmount)
 
@@ -128,9 +203,19 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
 
   } else {
-    // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
 
-    // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
+
+      try {
+        // then it's expired, just set it so, so we don't check it anymore..
+        await oneCoupon.update({ isCouponActive: 0 }); 
+
+      } catch (e) {
+        console.log(e.stack)
+      }
+
+
+    return amountOriginal;
+  }
 
   }
 
@@ -175,7 +260,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       // ovde azurira amount, po discount code koji ima. 
       if(oneCampaignThirdParty.couponDonationCode){
         // znaci ako ima neki coupon
-        var amount = await calculateNewAmountWithDiscountCode(amountOriginal, oneCampaignThirdParty.couponDonationCode);
+        var amount = await calculateNewAmountWithDiscountCode(amountOriginal, oneCampaignThirdParty.couponDonationCode, oneCampaignThirdParty.countryAthleteIsIn);
         console.log("novi amount sa discount: " + amount)
       } else {
         // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
