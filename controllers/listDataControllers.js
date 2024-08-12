@@ -6975,39 +6975,45 @@ const listAllCampaigns = async (req, res) => {
 
 
     const allCampaigns = await Campaign.findAll({
-     where: {
-   
-   
-      
+    /*  where: {
+
       friendGender: {
-        [Op.like]: `%${filterGender}%`,  // Partial match for first name
+        [Op.like]: `${filterGender}`,  // Partial match for first name
       },
-      
 
-
-      
-      
       friendNationality: {
         [Op.like]: `%${filterNationality_selected}%`,  // Partial match for first name
       },
-      
-      
+     
       friendName: {
         [Op.like]: `%${searchFirstNameText}%`,  // Partial match for first name
       },
 
-
-
-      
       friendFamilyName: {
         [Op.like]: `%${searchFamilyNameText}%`,  // Partial match for first name
       },
     
 
 
-      }, 
+      },  */
 
-       
+      where: {
+
+         friendGender: {
+          [Op.like]: `%${filterGender}%`,
+        },
+        friendNationality: {
+          [Op.like]: `%${filterNationality_selected}%`,
+        }, 
+
+
+        friendName: {
+          [Op.like]: `%${searchFirstNameText}%`,
+        },
+        friendFamilyName: {
+          [Op.like]: `%${searchFamilyNameText}%`,
+        }, 
+      },
    /*  order: [["updatedAt", "DESC"]], */
     limit: limit,
     offset: offset,

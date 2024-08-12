@@ -9,6 +9,7 @@ module.exports = function (sequelize, DataTypes) {
     friendName: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      defaultValue: "",
     },
 
     friendMiddleName: {
@@ -18,6 +19,7 @@ module.exports = function (sequelize, DataTypes) {
 
     friendFamilyName: {
       type: DataTypes.STRING(255),
+      defaultValue: "",
     },
 
     friendLastName: {
@@ -49,6 +51,7 @@ module.exports = function (sequelize, DataTypes) {
 
     friendGender: {
       type: DataTypes.CHAR(1),
+      defaultValue: "",
     },
 
     supporterName: {
