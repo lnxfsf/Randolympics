@@ -6476,6 +6476,9 @@ const shareTableLandingPage = async (req, res) => {
       `
     );
   });
+
+
+  
 };
 
 const createCampaign = async (req, res) => {
