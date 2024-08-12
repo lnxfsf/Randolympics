@@ -92,12 +92,9 @@ const App = () => {
 
 
 
-{
-        <Route
-                    path="*"
-                    element={<PageNotFound />}
-                />
-        }
+
+        <Route path="*" element={<PageNotFound />} />
+        
       </Routes>
       
     </>
