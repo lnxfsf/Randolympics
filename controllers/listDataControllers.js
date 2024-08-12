@@ -6942,6 +6942,63 @@ const donateOnlyWithDiscountCode = async (req, res) => {
   }
 };
 
+
+
+
+const listAllCampaigns = async (req, res) => {
+  const campaignId = req.query.campaignId;
+
+
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+
+
+  
+
+
+
+  try {
+
+
+
+
+    const allCampaigns = await Campaign.findAll({
+    /*   where: {
+        campaignId: campaignId,
+      }, */
+
+       
+   /*  order: [["updatedAt", "DESC"]], */
+    limit: limit,
+    offset: offset,
+
+
+  });
+
+    
+   /*  // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
+    const thatAthlete = await User.findOne({
+      where: {
+        email: oneCampaign.friendEmail,
+      },
+    });  */
+   
+
+
+  res.json(allCampaigns);
+
+
+  //  return res.status(200).json({ oneCampaign, thatAthlete });
+
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+
+};
+
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -6966,4 +7023,7 @@ module.exports = {
   lastTransactionsSupportersCampaign,
 
   donateOnlyWithDiscountCode,
+
+
+  listAllCampaigns,
 };

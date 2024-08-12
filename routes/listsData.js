@@ -11,6 +11,8 @@ const { rankingTop50, otherUsers, lastInRank,
            lastTransactionsSupportersCampaign,
 
            donateOnlyWithDiscountCode,
+
+           listAllCampaigns,
            
         
         } = require("../controllers/listDataControllers");
@@ -75,6 +77,8 @@ router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCamp
 // donate only with coupon codes
 router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
 
+// list all campaigns
+router.get("/listAllCampaigns",listAllCampaigns)
 
 
 
