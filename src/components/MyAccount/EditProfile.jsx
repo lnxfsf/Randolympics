@@ -208,6 +208,11 @@ const EditProfile = () => {
 
   const [passportExpiryDate, setPassportExpiryDate] = useState(null);
 
+
+  
+
+
+
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
@@ -348,6 +353,44 @@ const EditProfile = () => {
 
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
+
+
+
+
+  
+
+  const handlelastNameChange = (event) => {
+   
+    
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        lastName: event.target.value,
+      },
+    }));
+  };
+
+
+
+  
+
+  const handlefamilyNameChange = (event) => {
+   
+    
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        familyName: event.target.value,
+      },
+    }));
+  };
+
 
   const handleEmailPrivacyChange = (event) => {
     setEmail_private(event.target.value);
@@ -591,6 +634,13 @@ const EditProfile = () => {
     // var email = e.target.email.value;
 
     var name = e.target.name.value;
+
+    
+    var familyName = e.target.familyName.value;
+    
+    var lastName = e.target.lastName.value;
+    
+
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
 
@@ -647,6 +697,9 @@ const EditProfile = () => {
           athleteStatement: athleteStatement,
           athleteStatus: athleteStatus,
           
+
+          familyName,
+          lastName, 
 
 
 
@@ -1010,6 +1063,67 @@ const EditProfile = () => {
               />
               */}
             </div>
+
+
+                      <TextField
+                                value={userData && userData.data.familyName}
+                                onChange={handlefamilyNameChange}
+                                label="Family name"
+                                id="familyName"
+                                name="familyName"
+                                type="text"
+                                placeholder="Family name"
+                                sx={{
+                                  m: 1,
+                                  width: "280px",
+                                  "& .MuiOutlinedInput-root": {
+                                    borderRadius: 5,
+                                  },
+                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                    {
+                                      borderColor: "red",
+                                    },
+                                  "& .MuiInputLabel-root": {
+                                    "&.Mui-focused": {
+                                      color: "black",
+                                    },
+                                  },
+                                }}
+
+                              />
+
+
+                              
+
+                      <TextField
+                                value={userData && userData.data.lastName}
+                                onChange={handlelastNameChange}
+                                label="Last name"
+                                id="lastName"
+                                name="lastName"
+                                type="text"
+                                placeholder="Last name"
+                                sx={{
+                                  m: 1,
+                                  width: "280px",
+                                  "& .MuiOutlinedInput-root": {
+                                    borderRadius: 5,
+                                  },
+                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                                    {
+                                      borderColor: "red",
+                                    },
+                                  "& .MuiInputLabel-root": {
+                                    "&.Mui-focused": {
+                                      color: "black",
+                                    },
+                                  },
+                                }}
+
+                              />
+
+
+
 
             <div className="flex items-end col-span-2">
               <div className="flex flex-col justify-center">
