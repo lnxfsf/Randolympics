@@ -6483,6 +6483,7 @@ const createCampaign = async (req, res) => {
     campaignId,
     friendName,
     friendMiddleName,
+    friendFamilyName,
     friendLastName,
     friendEmail,
     friendPhone,
@@ -6504,6 +6505,7 @@ const createCampaign = async (req, res) => {
     campaignId,
     friendName,
     friendMiddleName,
+    friendFamilyName,
     friendLastName,
     friendEmail,
     friendPhone,
@@ -6954,8 +6956,17 @@ const listAllCampaigns = async (req, res) => {
 
 
 
-  
+  const filterGender = req.query.filterGender;
+  const filterNationality_selected = req.query.filterNationality_selected;
+  const searchFirstNameText = req.query.searchFirstNameText;
+  const searchFamilyNameText = req.query.searchFamilyNameText;
 
+  console.log("----------listAllCampaigns----------")
+  console.log(filterGender)
+
+  console.log(filterNationality_selected)
+  console.log(searchFirstNameText)
+  console.log(searchFamilyNameText)
 
 
   try {
@@ -6964,9 +6975,37 @@ const listAllCampaigns = async (req, res) => {
 
 
     const allCampaigns = await Campaign.findAll({
-    /*   where: {
-        campaignId: campaignId,
-      }, */
+     where: {
+   
+   
+      
+      friendGender: {
+        [Op.like]: `%${filterGender}%`,  // Partial match for first name
+      },
+      
+
+
+      
+      
+      friendNationality: {
+        [Op.like]: `%${filterNationality_selected}%`,  // Partial match for first name
+      },
+      
+      
+      friendName: {
+        [Op.like]: `%${searchFirstNameText}%`,  // Partial match for first name
+      },
+
+
+
+      
+      friendFamilyName: {
+        [Op.like]: `%${searchFamilyNameText}%`,  // Partial match for first name
+      },
+    
+
+
+      }, 
 
        
    /*  order: [["updatedAt", "DESC"]], */
