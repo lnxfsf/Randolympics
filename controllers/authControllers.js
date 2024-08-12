@@ -211,6 +211,9 @@ const register = async (req, res) => {
     supporterName, // this is only for sending invite email, so they have name who made it
     campaignURL,
     supporterComment,
+
+
+    sendEmailToFriend,  // should we send it to friend ! (invitation ! )
   } = req.body;
 
   // if he's signedByFriend , then we generate password
@@ -359,43 +362,52 @@ const register = async (req, res) => {
         `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
       );
     } else {
-      sendEmail(
-        newUser.email,
-        "Invitation to participate in Randolympics",
-
-        `
-        
-       
-<p>
-  ${
-    supporterName ? supporterName : "someone"
-  } invited you to participate in Randolympics !
-  
-  
-</p>
-
-<p>
-  He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
-</p>
-<p>
-   Your email: <b>${email}</b>  <br/>
-  Your password: <b>${password}</b>
-  
-</p>
-
-<p>You can access your campaign in: <a href=${campaignURL}></a></p>
-
-<br/>
-<p>But first you need to verify your account as well </p>
-<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
-          newUser.verificationToken
-        }">here</a> to verify your email.</p>
+    
 
 
-        
-        
-        `
-      );
+      // maybe we want to keep it a secret.. (then he have to confirm email and receive new password, when trying to get it.. (but it's unusual scenario maybe.. ))
+    if(sendEmailToFriend){
+          sendEmail(
+            newUser.email,
+            "Invitation to participate in Randolympics",
+
+            `
+            
+          
+    <p>
+      ${
+        supporterName ? supporterName : "someone"
+      } invited you to participate in Randolympics !
+      
+      
+    </p>
+
+    <p>
+      He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
+    </p>
+    <p>
+      Your email: <b>${email}</b>  <br/>
+      Your password: <b>${password}</b>
+      
+    </p>
+
+    <p>You can access your campaign in: <a href=${campaignURL}></a></p>
+
+    <br/>
+    <p>But first you need to verify your account as well </p>
+    <p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
+              newUser.verificationToken
+            }">here</a> to verify your email.</p>
+
+
+            
+            
+            `
+          );
+    }
+
+
+
     }
 
     res.status(201).json({ message: "User created successfully!", userId: user_data.userId  });
