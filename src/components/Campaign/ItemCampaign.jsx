@@ -27,7 +27,9 @@ function formatDate(dateString) {
 }
 
 const ItemCampaign = () => {
+
   const { campaignId } = useParams();
+
   const navigate = useNavigate();
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
@@ -98,6 +100,7 @@ const ItemCampaign = () => {
       console.log(response.data.oneCampaign);
       console.log(response.data.thatAthlete);
 
+      
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
 
@@ -197,6 +200,7 @@ const ItemCampaign = () => {
         <>
           <div className="flex">
             <div className="flex flex-col basis-1/2 p-16 pr-0">
+            
               <img
                 className="w-32 mb-8"
                 src={

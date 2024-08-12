@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import Flag from "react-world-flags";
-
+import { useNavigate } from 'react-router-dom';
 
 let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
@@ -18,6 +18,10 @@ const Campaign = () => {
   const [hasMoreCampaigns, setHasMoreCampaigns] = useState(true);
 
   const [limit, setLimit] = useState(10);
+
+  
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     updateLatestData();
@@ -50,31 +54,27 @@ const Campaign = () => {
         <>
           {campaigns.map((item, index) => (
             <>
-              <div key={index} className="flex justify-between border-2 m-4 p-2">
 
+
+              <div
+                key={index}
+                className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer"
+
+                onClick={() => navigate(`/campaign/${item.campaignId}`)}
+              >
                 <div>
-                    <p><b>First name:</b> {item.friendName}</p>
-                    <p><b>Gender:</b> {item.friendGender === "M" ? ('Male') : ('Female') }</p>
-
-                   
-                   
-
-
-                  
-
-
+                  <p>
+                    <b>First name:</b> {item.friendName}
+                  </p>
+                  <p>
+                    <b>Gender:</b>{" "}
+                    {item.friendGender === "M" ? "Male" : "Female"}
+                  </p>
                 </div>
 
-
-<div>
-<Flag className="w-12 m-4" code={item.friendNationality} />
-
-</div>
-
-                
-
-
-
+                <div>
+                  <Flag className="w-12 m-4" code={item.friendNationality} />
+                </div>
               </div>
             </>
           ))}
