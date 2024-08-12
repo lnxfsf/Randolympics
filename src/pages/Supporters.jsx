@@ -6,6 +6,11 @@ import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
+import Radio from '@mui/material/Radio';
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 import TextField from "@mui/material/TextField";
 
 import React, { useState, useEffect } from "react";
@@ -219,6 +224,10 @@ const Supporters = () => {
             signedByFriend: true,
             supporterName: supporterName,
             campaignURL: urlForCampaign,
+
+            sendEmailToFriend: sendEmailToFriend,
+
+
           }
         );
 
@@ -352,6 +361,8 @@ const Supporters = () => {
   const [friendNationality, setFriendNationality] = useState("");
   const [friendImage, setFriendImage] = useState();
   const [friendGender, setFriendGender] = useState("M");
+
+  const[sendEmailToFriend, setSendEmailToFriend] = useState(true)
 
   // supporter information
   const [supporterName, setSupporterName] = useState("");
@@ -839,6 +850,38 @@ const Supporters = () => {
               <MenuItem value={"F"}>Female</MenuItem>
             </Select>
           </div>
+
+
+
+          <FormControl>
+  
+  <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="send"
+    name="radio-buttons-group"
+    onChange={(event) => {
+
+      const value = event.target.value;
+
+      if(value === "send"){
+        setSendEmailToFriend(true);
+      } else if (value === "dontsend") {
+        setSendEmailToFriend(false);
+      }
+
+    }}
+  >
+    <FormControlLabel value="send" control={<Radio />} label={`Send email to ${friendName}`} />
+    <FormControlLabel value="dontsend" control={<Radio />} label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`} />
+    
+  </RadioGroup>
+</FormControl>
+
+
+
+
+
+
         </div>
 
         <Button
