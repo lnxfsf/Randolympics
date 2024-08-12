@@ -153,6 +153,10 @@ const Supporters = () => {
             friendName,
             friendMiddleName,
             friendLastName,
+
+            friendFamilyName,
+
+
             friendEmail,
             friendPhone,
             friendBirthdate,
@@ -340,6 +344,7 @@ const Supporters = () => {
   // friend information
   const [friendName, setFriendName] = useState("");
   const [friendMiddleName, setFriendMiddleName] = useState("");
+  const [friendFamilyName, setFriendFamilyName] = useState("")
   const [friendLastName, setFriendLastName] = useState("");
   const [friendEmail, setFriendEmail] = useState("");
   const [friendPhone, setFriendPhone] = useState("");
@@ -655,6 +660,28 @@ const Supporters = () => {
                 sx={sxTextField}
               />
             </div>
+
+
+            <div className="flex flex-col justify-start">
+              <TextField
+                value={friendFamilyName}
+                onChange={(e) => {
+                  setFriendFamilyName(e.target.value);
+                }}
+                label="Family name"
+                placeholder="John"
+                id="name"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+
+
 
             <div className="flex flex-col justify-start">
               <TextField

@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Flag from "react-world-flags";
 import { useNavigate } from 'react-router-dom';
 
+import SearchBar from "@mkyy/mui-search-bar";
 
 import ReactFlagsSelect from "react-flags-select";
 
@@ -34,10 +35,25 @@ const Campaign = () => {
   const [limit, setLimit] = useState(10);
 
   
-  const [filterGender, setFilterGender] = useState();
-  const [filterNationality_selected, setFilterNationality_selected] = useState();
+  const [filterGender, setFilterGender] = useState("");
+  const [filterNationality_selected, setFilterNationality_selected] = useState("");
+
+  const [searchFirstNameText, setSearchFirstNameText] = useState(""); //search box
+  const [searchPlaceholderFirstNameText,   setSearchPlaceholderFirstNameText] = useState("first name");
+
+  
+  const [searchFamilyNameText, setSearchFamilyNameText] = useState(""); //search box
+  const [searchPlaceholderFamilyNameText,   setSearchPlaceholderFamilyNameText] = useState("family name");
+
+
+
 
   const navigate = useNavigate();
+
+  const handleSearch = (he) => {
+    // Fired when enter button is pressed.
+  };
+
 
   // popup
   const popupRef = useRef(null);
@@ -45,16 +61,31 @@ const Campaign = () => {
 
   useEffect(() => {
     updateLatestData();
-  }, [filterGender,filterNationality_selected]);
+  }, [filterGender,filterNationality_selected, searchFirstNameText, searchFamilyNameText]);
 
   const updateLatestData = async () => {
+
+
     try {
+
+      console.log(" a sta on salje")
+      console.log(filterGender, filterNationality_selected, searchFirstNameText, searchFamilyNameText);
+
+
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/listAllCampaigns`,
         {
           params: {
             limit: limit,
             offset: (campaignsPage - 1) * 10,
+
+                        
+
+            filterGender: filterGender,
+            filterNationality_selected: filterNationality_selected,
+            searchFirstNameText: searchFirstNameText,
+            searchFamilyNameText: searchFamilyNameText,
+
           },
         }
       );
@@ -73,7 +104,8 @@ const Campaign = () => {
   const resetFilterFields = () => {
   
     setFilterGender(null);
-    setFilterNationality_selected(null)
+    setFilterNationality_selected(null);
+    setSearchFirstNameText("");
     
    
   };
@@ -84,7 +116,7 @@ const Campaign = () => {
 
 
 
-      <div className="m-4 flex justify-center items-center">
+      <div className="m-4 flex justify-center items-end">
           <Popup
             ref={popupRef}
             trigger={
@@ -170,16 +202,65 @@ const Campaign = () => {
               <ReactFlagsSelect
                 selected={filterNationality_selected}
                 onSelect={(code) => setFilterNationality_selected(code)}
-                className="w-[300px]  "
+                className="w-[300px] "
                 searchable={true}
                 id="nationality"
                 name="nationality"
                 placeholder="Nationality"
               />
 
+
+<div className="flex items-start flex-col">
+<p>First name</p>
+<SearchBar
+
+          value={searchFirstNameText}
+          onChange={(newValue) => setSearchFirstNameText(newValue)}
+          onCancelResearch={(newValue) => setSearchFirstNameText("")}
+          placeholder={"Search " + searchPlaceholderFirstNameText}
+          onSearch={handleSearch}
+          style={{
+            border: "1px solid #C6C6C6", // Border color and thickness
+            borderRadius: "20px", // Border radius
+          }}
+        />
+        </div>
+
+
+
+
+
+        <div className="flex items-start flex-col">
+<p>Family name</p>
+<SearchBar
+
+          value={searchFamilyNameText}
+          onChange={(newValue) => setSearchFamilyNameText(newValue)}
+          onCancelResearch={(newValue) => setSearchFamilyNameText("")}
+          placeholder={"Search " + searchPlaceholderFamilyNameText}
+          onSearch={handleSearch}
+          style={{
+            border: "1px solid #C6C6C6", // Border color and thickness
+            borderRadius: "20px", // Border radius
+          }}
+        />
+        </div>
              
             </div>
           </Popup>
+
+          <SearchBar
+          className="ml-2"
+          value={searchFirstNameText}
+          onChange={(newValue) => setSearchFirstNameText(newValue)}
+          onCancelResearch={(newValue) => setSearchFirstNameText("")}
+          placeholder={"Search " + searchPlaceholderFirstNameText}
+          onSearch={handleSearch}
+          style={{
+            border: "1px solid #C6C6C6", // Border color and thickness
+            borderRadius: "20px", // Border radius
+          }}
+        />
         </div>
 
 
@@ -213,6 +294,16 @@ const Campaign = () => {
           ))}
         </>
       )}
+
+
+
+
+
+
+
+
+
+
     </>
   );
 };
