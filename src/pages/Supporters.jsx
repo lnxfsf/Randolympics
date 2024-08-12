@@ -6,10 +6,10 @@ import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
-import Radio from '@mui/material/Radio';
-import FormLabel from '@mui/material/FormLabel';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from "@mui/material/Radio";
+import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 import TextField from "@mui/material/TextField";
 
@@ -47,10 +47,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import axios from "axios";
 
-import { useContext } from 'react'
-import AuthContext from '../context/AuthContext';
-
-
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -127,69 +125,81 @@ const sxTextField = {
 
 const campaignId = uuidv4();
 
-
-
-
 const Supporters = () => {
+  const [additionalSupportersFormData, setAdditionalSupportersFormData] =
+    useState([{ name: "", email: "" }]);
+
+
+  console.log("sadaje");
+  console.log(additionalSupportersFormData);
 
 
 
-  
+
+  const handleInputChange = (index, event) => {
+    const { name, value } = event.target;
+    const newFormData = additionalSupportersFormData.map((data, idx) => {
+      if (index === idx) {
+        return { ...data, [name]: value };
+      }
+      return data;
+    });
+    setAdditionalSupportersFormData(newFormData);
+  };
+
+  const addInputSet = () => {
+    setAdditionalSupportersFormData([
+      ...additionalSupportersFormData,
+      { name: "", email: "" },
+    ]);
+  };
+
+  const removeInputSet = (index) => {
+    setAdditionalSupportersFormData(
+      additionalSupportersFormData.filter((_, idx) => idx !== index)
+    );
+  };
+
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
-
-
-
   const makeCampaign = async () => {
-
     var athleteId = "";
     var supporterId = "";
-    
 
+    // make campaign with these.
+    try {
+      var responseCampaign = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/listsData/createCampaign`,
+        {
+          campaignId,
+          friendName,
+          friendMiddleName,
+          friendLastName,
 
+          friendFamilyName,
 
-      // make campaign with these.
-      try {
+          friendEmail,
+          friendPhone,
+          friendBirthdate,
+          friendNationality,
+          friendImage,
+          friendGender,
 
-        var responseCampaign = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/listsData/createCampaign`,
-          {
-            campaignId,
-            friendName,
-            friendMiddleName,
-            friendLastName,
-
-            friendFamilyName,
-
-
-            friendEmail,
-            friendPhone,
-            friendBirthdate,
-            friendNationality,
-            friendImage,
-            friendGender,
-
-
-            supporterName,
-            supporterPhone,
-            supporterEmail,
-            supporterComment,
-
-          }
-        );
-
-        if (responseCampaign.status === 201) {
-            alert("created campaign in database")
+          supporterName,
+          supporterPhone,
+          supporterEmail,
+          supporterComment,
         }
+      );
 
-
-      } catch (error) {
-        console.log(error);
+      if (responseCampaign.status === 201) {
+        alert("created campaign in database");
       }
+    } catch (error) {
+      console.log(error);
+    }
 
-
-
-      // and then makes those two accounts. athlete and supporter ! 
+    // and then makes those two accounts. athlete and supporter !
     // signs up friend first !
     try {
       if (
@@ -199,7 +209,6 @@ const Supporters = () => {
         friendNationality &&
         friendPhone
       ) {
-
         // this is for athlete register
         var response = await axios.post(
           `${BACKEND_SERVER_BASE_URL}/auth/register`,
@@ -226,14 +235,14 @@ const Supporters = () => {
             campaignURL: urlForCampaign,
 
             sendEmailToFriend: sendEmailToFriend,
-
-
           }
         );
 
-        if (response.status === 201) {
 
-          console.log("athleteId" + response.data.userId)
+
+       
+        if (response.status === 201) {
+          console.log("athleteId" + response.data.userId);
           athleteId = response.data.userId;
 
           alert("athlete user created");
@@ -262,7 +271,9 @@ const Supporters = () => {
               gender: "M", // we don't actually need gender for supporter
               supporterComment,
               // signedByFriend: true,
+              campaignURL: urlForCampaign,
 
+              additionalSupporterEmailsToSendTo: additionalSupportersFormData,
               //supporterName: supporterName,
               // campaignURL: urlForCampaign,
             }
@@ -274,8 +285,6 @@ const Supporters = () => {
             alert("creates supporter account");
 
             supporterId = response.data.userId;
-
-          
           }
 
           try {
@@ -303,8 +312,6 @@ const Supporters = () => {
       } else {
         alert("insert email for friend");
       }
-
-      
     } catch (error) {
       console.log(error);
 
@@ -326,14 +333,14 @@ const Supporters = () => {
       }
     }
 
-
-
-    // update supporterStats ! polja.. 
-
-
-
+    // update supporterStats ! polja..
   };
 
+
+  
+  console.log("urlForCampaign ------------>  "+urlForCampaign)
+
+  
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -353,7 +360,7 @@ const Supporters = () => {
   // friend information
   const [friendName, setFriendName] = useState("");
   const [friendMiddleName, setFriendMiddleName] = useState("");
-  const [friendFamilyName, setFriendFamilyName] = useState("")
+  const [friendFamilyName, setFriendFamilyName] = useState("");
   const [friendLastName, setFriendLastName] = useState("");
   const [friendEmail, setFriendEmail] = useState("");
   const [friendPhone, setFriendPhone] = useState("");
@@ -362,7 +369,7 @@ const Supporters = () => {
   const [friendImage, setFriendImage] = useState();
   const [friendGender, setFriendGender] = useState("M");
 
-  const[sendEmailToFriend, setSendEmailToFriend] = useState(true)
+  const [sendEmailToFriend, setSendEmailToFriend] = useState(true);
 
   // supporter information
   const [supporterName, setSupporterName] = useState("");
@@ -378,41 +385,24 @@ const Supporters = () => {
   const navigate = useNavigate();
 
   const [discountCode, setDiscountCode] = useState();
-  
-  
-
-
-
-
 
   const donateWithCouponOnly = async () => {
-
-
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/listsData/donateOnlyWithDiscountCode`,
         {
-         
           discountCode: discountCode,
           campaignId: campaignId,
 
           supporterEmail: supporterEmail,
           supporterName: supporterName,
           supporterComment: supporterComment,
-         
         }
       );
     } catch (e) {
       console.log(e.stack);
     }
-
-
-  
-  }
-  
-
-
-
+  };
 
   // ? for FilePond
 
@@ -481,8 +471,6 @@ const Supporters = () => {
       <NavbarHomeCollapsed />
 
       <HorizontalLinearAlternativeLabelStepper />
-
-
 
       {firstIsVisible && (
         <>
@@ -672,7 +660,6 @@ const Supporters = () => {
               />
             </div>
 
-
             <div className="flex flex-col justify-start">
               <TextField
                 value={friendFamilyName}
@@ -691,8 +678,6 @@ const Supporters = () => {
                 sx={sxTextField}
               />
             </div>
-
-
 
             <div className="flex flex-col justify-start">
               <TextField
@@ -851,37 +836,33 @@ const Supporters = () => {
             </Select>
           </div>
 
-
-
           <FormControl>
-  
-  <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="send"
-    name="radio-buttons-group"
-    onChange={(event) => {
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="send"
+              name="radio-buttons-group"
+              onChange={(event) => {
+                const value = event.target.value;
 
-      const value = event.target.value;
-
-      if(value === "send"){
-        setSendEmailToFriend(true);
-      } else if (value === "dontsend") {
-        setSendEmailToFriend(false);
-      }
-
-    }}
-  >
-    <FormControlLabel value="send" control={<Radio />} label={`Send email to ${friendName}`} />
-    <FormControlLabel value="dontsend" control={<Radio />} label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`} />
-    
-  </RadioGroup>
-</FormControl>
-
-
-
-
-
-
+                if (value === "send") {
+                  setSendEmailToFriend(true);
+                } else if (value === "dontsend") {
+                  setSendEmailToFriend(false);
+                }
+              }}
+            >
+              <FormControlLabel
+                value="send"
+                control={<Radio />}
+                label={`Send email to ${friendName}`}
+              />
+              <FormControlLabel
+                value="dontsend"
+                control={<Radio />}
+                label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
+              />
+            </RadioGroup>
+          </FormControl>
         </div>
 
         <Button
@@ -1091,6 +1072,57 @@ const Supporters = () => {
               InputLabelProps={inputLabelPropsTextField}
               sx={sxTextField}
             />
+
+            {additionalSupportersFormData.map((data, index) => (
+              <div key={index} style={{ marginBottom: "10px" }}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={data.name}
+                  onChange={(event) => handleInputChange(index, event)}
+                />
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={data.email}
+                  onChange={(event) => handleInputChange(index, event)}
+                />
+
+                {/* 
+<select
+name="weightCategory"
+value={data.weightCategory}
+onChange={(event) => handleInputChange(index, event)}
+>
+<option value="light">Light</option>
+<option value="medium">Medium</option>
+<option value="heavy">Heavy</option>
+</select> */}
+
+                {/* 
+<select
+name="gender"
+value={data.gender}
+onChange={(event) => handleInputChange(index, event)}
+>
+<option value="M">Man</option>
+<option value="F">Woman</option>
+
+</select>
+*/}
+
+                <button type="button" onClick={() => removeInputSet(index)}>
+                  Remove
+                </button>
+              </div>
+            ))}
+
+            <button type="button" onClick={addInputSet}>
+              Add Another Supporter
+            </button>
           </div>
         </div>
 
@@ -1100,9 +1132,6 @@ const Supporters = () => {
             setFourthIsVisible(true);
 
             makeCampaign();
-
-
-          
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
@@ -1139,27 +1168,26 @@ const Supporters = () => {
           friend!
         </p>
 
-
         <div className="m-4 flex justify-center flex-col">
-                    <p>Discount codes</p>
-                    <input className="border-2 rounded-lg" 
-                    type="text"
-                    placeholder="Code"
-                    value={discountCode}
-                    onChange={(event) => {setDiscountCode(event.target.value)}}
-                     />
+          <p>Discount codes</p>
+          <input
+            className="border-2 rounded-lg"
+            type="text"
+            placeholder="Code"
+            value={discountCode}
+            onChange={(event) => {
+              setDiscountCode(event.target.value);
+            }}
+          />
 
-                     <button 
-                     style={{backgroundColor: "#0000ff", color: "#fff"}} className="m-4 rounded-lg p-2"
-                     
-                     onClick={donateWithCouponOnly}
-                     
-
-                     >
-                      
-                      Donate with coupon only</button>
-</div>  
-
+          <button
+            style={{ backgroundColor: "#0000ff", color: "#fff" }}
+            className="m-4 rounded-lg p-2"
+            onClick={donateWithCouponOnly}
+          >
+            Donate with coupon only
+          </button>
+        </div>
 
         <div className="border-2 flex flex-col justify-center items-center p-4">
           <p className="underline text-red_first">Note:</p>
@@ -1225,33 +1253,23 @@ const Supporters = () => {
         </div>
 
         <div className="flex  w-[70%] justify-center items-center">
-          <div
-            className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center"
-          >
+          <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
             {/*   <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
             <ThemeProvider theme={theme}>
               <QueryProvider>
-
-
-              {/*   <DonationForm  */}
+                {/*   <DonationForm  */}
                 <DonationFormItemCampaign
-                amount={amount} 
-                setAmount={setAmount} 
-                campaignId={campaignId}
-
-
-
-                supporterName={supporterName}
-                supporterEmail={supporterEmail}
-                supporterComment={supporterComment}
-                discountCode={discountCode}
-                countryAthleteIsIn={friendNationality}
-
-                separateDonationThruPage={false}
-
-
+                  amount={amount}
+                  setAmount={setAmount}
+                  campaignId={campaignId}
+                  supporterName={supporterName}
+                  supporterEmail={supporterEmail}
+                  supporterComment={supporterComment}
+                  discountCode={discountCode}
+                  countryAthleteIsIn={friendNationality}
+                  separateDonationThruPage={false}
                 />
                 {/*  /> */}
               </QueryProvider>
@@ -1261,11 +1279,8 @@ const Supporters = () => {
 
         <Button
           onClick={() => {
-           
-
             setFourthIsVisible(false);
             setFifthIsVisible(true);
-
           }}
           className="w-56"
           style={{ marginTop: "80px" }}
