@@ -26,7 +26,9 @@ const generateAccessToken = (userId) => {
 
 
 const update_user_data = async (req, res) => {
-    // get data from FE
+  
+  
+  // get data from FE
     const {
       original_email,
   
@@ -63,6 +65,11 @@ const update_user_data = async (req, res) => {
 
       athleteStatement,
       athleteStatus,
+
+
+      
+      familyName,
+      lastName, 
 
   
       isRejected, // then sets all 4 fields to null... (false)
@@ -166,6 +173,22 @@ const update_user_data = async (req, res) => {
         updatingObject.name = name;
         needsUpdate = true;
       }
+
+
+      
+      if (lastName && lastName !== user.lastName) {
+        updatingObject.lastName = lastName;
+        needsUpdate = true;
+      }
+      
+
+
+      if (familyName && familyName !== user.familyName) {
+        updatingObject.familyName = familyName;
+        needsUpdate = true;
+      }
+
+
   
       if (phone && phone !== user.phone) {
         updatingObject.phone = phone;
@@ -344,6 +367,9 @@ const update_user_data = async (req, res) => {
           athleteStatement: existingUser.athleteStatement,
           athleteStatus: existingUser.athleteStatus,
 
+
+          lastName: existingUser.lastName,
+          familyName: existingUser.familyName,
 
 
         });

@@ -39,6 +39,10 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    familyName: {
+      type: DataTypes.STRING(255),
+    },
+
     birthdate: {
       type: DataTypes.DATEONLY,
     },
