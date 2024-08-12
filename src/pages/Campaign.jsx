@@ -67,10 +67,7 @@ const Campaign = () => {
 
 
     try {
-
-      console.log(" a sta on salje")
-      console.log(filterGender, filterNationality_selected, searchFirstNameText, searchFamilyNameText);
-
+      
 
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/listAllCampaigns`,
