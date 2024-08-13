@@ -326,13 +326,23 @@ const ItemCampaign = () => {
        
         </div>
 
-              <div className="border-2 m-2">
+        <a
+              /*   href={urlForCampaign} */
+               
+                className="underline mt-4 flex justify-center mb-4 cursor-pointer select-none"
+                onClick={()=> {navigator.clipboard.writeText(urlForCampaign)}}
+              >
+                Copy campaign link
+              </a>
+
+
+              {/* <div className="border-2 m-2">
                 <p className="text-2xl font-bold">Athlete statement</p>
 
                 <p></p>
-              </div>
+              </div> */}
 
-              <div className="border-2 m-2">
+             {/*  <div className="border-2 m-2">
                 <div className="flex justify-around">
                   <p className="text-2xl font-bold">Supporters</p>
                   <p className="font-semibold text-red_first pt-1">
@@ -355,7 +365,31 @@ const ItemCampaign = () => {
                 <p className="text-red_first font-semibold mt-1">
                   {athlete.donatedAmount / 100} $
                 </p>
-              </div>
+              </div> */}
+
+
+            <div className="flex  items-start ">
+
+                  <div className="basis-1/2 flex items-center justify-center gap-4">
+                  <p className="text-2xl font-bold uppercase">Supporters:</p>
+                  <p className="text-xl font-bold">
+                    {howManySupporters}
+                  </p>
+                  </div>
+
+
+
+                  <div className="basis-1/2 flex items-center justify-center gap-4">
+
+                  <p className="text-2xl font-bold uppercase">Money raised:</p>
+                  <p className="text-xl font-bold">{athlete.donatedAmount / 100} $</p>
+
+                    
+                  </div>
+              
+            </div>
+
+
 
               <div className="border-2 m-4 p-2">
                 <div className="flex justify-around border-2 mt-2 ">
