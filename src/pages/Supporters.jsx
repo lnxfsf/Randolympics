@@ -1257,9 +1257,10 @@ onChange={(event) => handleInputChange(index, event)}
             {/*   <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
-            <ThemeProvider theme={theme}>
+          
+          {/*   <ThemeProvider theme={theme}>
               <QueryProvider>
-                {/*   <DonationForm  */}
+                {/*   <DonationForm  
                 <DonationFormItemCampaign
                   amount={amount}
                   setAmount={setAmount}
@@ -1271,9 +1272,11 @@ onChange={(event) => handleInputChange(index, event)}
                   countryAthleteIsIn={friendNationality}
                   separateDonationThruPage={false}
                 />
-                {/*  /> */}
+                {/*  /> 
               </QueryProvider>
-            </ThemeProvider>
+            </ThemeProvider> */}
+
+
           </div>
         </div>
 

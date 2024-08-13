@@ -451,7 +451,9 @@ const ItemCampaign = () => {
                 </div>
 
                 <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
-                  <ThemeProvider theme={theme}>
+                 
+                 
+                {/*   <ThemeProvider theme={theme}>
                     <QueryProvider>
                       <DonationFormItemCampaign
                         amount={amount}
@@ -468,7 +470,9 @@ const ItemCampaign = () => {
                         separateDonationThruPage={true}
                       />
                     </QueryProvider>
-                  </ThemeProvider>
+                  </ThemeProvider> */}
+
+
                 </div>
               </div>
             </div>
