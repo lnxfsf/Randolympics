@@ -6501,6 +6501,9 @@ const createCampaign = async (req, res) => {
     supporterComment,
   } = req.body;
 
+  await db.sequelize.sync();
+
+
   const payment_status = "unpaid";
   const payment_id = "";
 
@@ -6526,11 +6529,23 @@ const createCampaign = async (req, res) => {
     payment_id,
   };
 
-  await db.sequelize.sync();
+  const t = await db.sequelize.transaction();
 
-  const newCampaign = await Campaign.create(campaign);
 
-  res.status(201).json({ message: "Campaign created successfully!" });
+  try {
+
+    
+
+    const newCampaign = await Campaign.create(campaign, { transaction: t });
+    await t.commit();
+  
+    res.status(201).json({ message: "Campaign created successfully!" });
+  } catch(error){
+    console.log(error.stack)
+  }
+
+
+
 };
 
 // TODO, put this somewhere else, but this, just so I can work with something
@@ -6769,7 +6784,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
       },
 
       limit: 3,
-      attributes: ["supporterName", "amount"], // only this row in database retrieve
+      attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
       order: [["createdAt", "DESC"]],
     });
 
@@ -7017,7 +7032,7 @@ const listAllCampaigns = async (req, res) => {
           [Op.like]: `%${searchFamilyNameText}%`,
         }, 
       },
-   /*  order: [["updatedAt", "DESC"]], */
+     order: [["updatedAt", "DESC"]],
     limit: limit,
     offset: offset,
 
