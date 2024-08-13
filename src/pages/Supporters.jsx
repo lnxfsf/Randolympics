@@ -83,6 +83,11 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+
+import AuthCode from 'react-auth-code-input';
+
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -1541,26 +1546,7 @@ onChange={(event) => handleInputChange(index, event)}
           friend!
         </p>
 
-        <div className="m-4 flex justify-center flex-col">
-          <p>Discount codes</p>
-          <input
-            className="border-2 rounded-lg"
-            type="text"
-            placeholder="Code"
-            value={discountCode}
-            onChange={(event) => {
-              setDiscountCode(event.target.value);
-            }}
-          />
-
-          <button
-            style={{ backgroundColor: "#0000ff", color: "#fff" }}
-            className="m-4 rounded-lg p-2"
-            onClick={donateWithCouponOnly}
-          >
-            Donate with coupon only
-          </button>
-        </div>
+       
 
         <div className="border-2 flex flex-col justify-center items-center p-4">
           <p className="underline text-red_first">Note:</p>
@@ -1669,6 +1655,38 @@ onChange={(event) => handleInputChange(index, event)}
               </QueryProvider>
             </ThemeProvider>
           </div>
+        </div>
+
+        <div className="m-4 mt-8 flex items-center justify-center flex-col">
+          <p>Got a discount code ?</p>
+          {/* <input
+            className="border-2 rounded-lg"
+            type="text"
+            placeholder="Code"
+            value={discountCode}
+            onChange={(event) => {
+              setDiscountCode(event.target.value);
+            }}
+          /> */}
+
+        <AuthCode 
+        onChange={(res) => {setDiscountCode(res)}} 
+        
+        
+        
+        inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md"
+        
+        />
+
+
+
+          <button
+            style={{ backgroundColor: "#0000ff", color: "#fff" }}
+            className="m-4 rounded-lg p-2"
+            onClick={donateWithCouponOnly}
+          >
+            Donate with coupon only
+          </button>
         </div>
 
         <Button
