@@ -1744,7 +1744,7 @@ onChange={(event) => handleInputChange(index, event)}
 
         <p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
 
-        <a href={urlForCampaign} className="underline">
+        <a href={urlForCampaign} className="underline mb-2">
           Check it out
         </a>
 
@@ -1771,7 +1771,7 @@ onChange={(event) => handleInputChange(index, event)}
           }}
         />
 
-        <QRCode value={urlForCampaign} size="150" />
+        <QRCode value={urlForCampaign} size="150" className="mt-2" />
 
         <p className="text-xl text-center mt-4 mb-6">
           Share on social networks:
