@@ -111,7 +111,7 @@ const Campaign = () => {
 
       <p className="text-3xl flex justify-center mb-4">List of all campaigns</p>
 
-      <div className="m-4 flex justify-between items-center">
+      <div className="m-4 ml-8 mr-8 flex justify-between items-center">
         <Popup
           ref={popupRef}
           trigger={

@@ -2,6 +2,10 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import Flag from "react-world-flags";
 
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+
+
 import "../../styles/campaign.scoped.scss";
 
 import { ThemeProvider } from "@mui/material/styles";
@@ -36,7 +40,13 @@ const ItemCampaign = () => {
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
 
-  const [textAthleteStatus, setTextAthleteStatus] = useState();
+  const [textAthleteStatus, setTextAthleteStatus] = useState(
+    "Has not logged in yet"
+  );
+
+  const [colorStatusGoing, setColorStatusGoing] = useState(
+    "rgba(128, 128, 128, 0.75)"
+  );
 
   const [amount, setAmount] = useState(10);
   const [supporterName, setSupporterName] = useState();
@@ -95,16 +105,23 @@ const ItemCampaign = () => {
         switch (response.data.thatAthlete.athleteStatus) {
           case "s1":
             setTextAthleteStatus("Has not logged in yet");
+            setColorStatusGoing("rgba(128, 128, 128, 0.75)");
           case "s2":
             setTextAthleteStatus("Logged in but no status");
+            setColorStatusGoing("rgba(128, 128, 128, 0.75)");
           case "s3":
             setTextAthleteStatus("I'm 99% taking the challenge and going");
+            setColorStatusGoing("rgba(58, 173, 84, 0.75)");
           case "s4":
-            setTextAthleteStatus("I'm most likely going");
+            setTextAthleteStatus("Most likely going");
+            setColorStatusGoing("rgba(233, 165, 6, 0.75)");
+
           case "s5":
             setTextAthleteStatus("I'm maybe going");
+            setColorStatusGoing("rgba(233, 165, 6, 0.75)");
           case "s6":
             setTextAthleteStatus("I'm definitely not going");
+            setColorStatusGoing("rgba(180, 55, 55, 0.75)");
         }
       }
 
@@ -171,29 +188,26 @@ const ItemCampaign = () => {
     }
   };
 
+  const popupRef = useRef(null);
+
+
   return (
     <>
       {campaign && athlete && (
         <>
-          <div className="flex"
-          
-          
-          
-        style={{backgroundImage: "url('/supporters/supporter5.png')", 
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-          
-         }}
-
-
+          <div
+            className="flex"
+            style={{
+              backgroundImage: "url('/supporters/supporter5.png')",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              zIndex: -1,
+              backgroundPosition: "center",
+            }}
           >
             <div
               className="flex  basis-8/12 justify-between pr-0"
-              style={{ backgroundColor: "green" }}
-
-
+              style={{ backgroundColor: `${colorStatusGoing}` }}
             >
               <div className="flex flex-col grow">
                 <div className="flex justify-center items-center">
@@ -214,7 +228,7 @@ const ItemCampaign = () => {
                 />
 
                 <div className="flex justify-center items-center flex-col">
-                  <p className="text-[#fff]" >
+                  <p className="text-[#fff]">
                     <span className="font-semibold">Gender:</span>{" "}
                     {athlete.gender === "M" ? "Male" : "Female"}
                   </p>
@@ -224,25 +238,24 @@ const ItemCampaign = () => {
                   </p>
                 </div>
 
-
                 <div className="flex justify-center items-center flex-col">
-                <p className="text-[#fff]">
-                  {" "}
-                  <span className="font-semibold"> Weight:</span>{" "}
-                  {athlete.weight} kg
-                </p>
+                  <p className="text-[#fff]">
+                    {" "}
+                    <span className="font-semibold"> Weight:</span>{" "}
+                    {athlete.weight} kg
+                  </p>
                 </div>
 
+                <div className="flex justify-center items-center flex-col mt-8 mb-8">
+                  <p className="text-[#fff]">
+                    <span className="font-semibold">Email:</span>{" "}
+                    {athlete.email}
+                  </p>
 
-<div className="flex justify-center items-center flex-col mt-8 mb-8">
-                <p className="text-[#fff]">
-                  <span className="font-semibold">Email:</span> {athlete.email}
-                </p>
-
-                <p className="text-[#fff]">
-                  <span className="font-semibold">Phone:</span> {athlete.phone}
-                </p>
-
+                  <p className="text-[#fff]">
+                    <span className="font-semibold">Phone:</span>{" "}
+                    {athlete.phone}
+                  </p>
                 </div>
 
                 <hr
@@ -250,91 +263,67 @@ const ItemCampaign = () => {
                   style={{ backgroundColor: "white", height: "1px" }}
                 />
 
-
-
                 <div className="flex justify-center items-center flex-col  ">
-
-                <p className="text-[#fff]">
-                  <span className="font-semibold">Crypto:</span>{" "}
-                  {athlete.cryptoaddress ? athlete.cryptoaddress : "0"}{" "}
-                  {athlete.cryptoaddress_type}
-                </p>
-</div>
-
-
+                  <p className="text-[#fff]">
+                    <span className="font-semibold">Crypto:</span>{" "}
+                    {athlete.cryptoaddress ? athlete.cryptoaddress : "0"}{" "}
+                    {athlete.cryptoaddress_type}
+                  </p>
+                </div>
               </div>
 
               <div className="basis-16">
-
                 <div className="flex items-start justify-start">
-                 
-                {/*   <hr
+                  {/*   <hr
                     className=" mb-8 w-8 h-full"
                     style={{ backgroundColor: "red"}}
                   /> */}
 
-                  
-      <hr className="vertical-line" />
-   
-
+                  <hr className="vertical-line" />
 
                   <p class="vertical-text text-3xl text-blue-500 text-[#fff] mt-12 font-bold uppercase whitespace-nowrap  ">
-                    I'm 99% taking the challenge and going{textAthleteStatus}
+                    {textAthleteStatus}
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="flex grow flex-col ">
-
-
-
               <div className="flex   mt-14 pb-6 flex-col gap-y-2">
-              
                 <div className="flex justify-around items-center  ">
+                  <p className="text-4xl">{athlete.name}</p>
 
-                
-                    <p className="text-4xl">{athlete.name}</p>
-
-                    <div className="flex flex-col justify-center ">
-                      <Flag className="flag-photo" code={athlete.nationality} />
-                    
-                    </div>
+                  <div className="flex flex-col justify-center ">
+                    <Flag className="flag-photo" code={athlete.nationality} />
                   </div>
+                </div>
 
-
-                  <div className="flex justify-center items-center">
-                        <p className="text-xl">{athlete.athleteStatement}</p>
-                  </div>
-
-
-
+                <div className="flex justify-center items-center">
+                  <p className="text-xl">{athlete.athleteStatement}</p>
+                </div>
               </div>
 
-
               <hr
-                  className=" mb-8 w-full"
-                  style={{ backgroundColor: "black", height: "2px" }}
-                />
-              
-              
-              
-        <div className="flex justify-center gap-16 items-center w-full">
-          <img className="w-12" src="/supporters/fb.svg" />
-          <img className="w-12" src="/supporters/ig.svg" />
-          <img className="w-12" src="/supporters/x.svg" />
-       
-        </div>
+                className=" mb-8 w-full"
+                style={{ backgroundColor: "black", height: "2px" }}
+              />
 
-        <a
-              /*   href={urlForCampaign} */
-               
+              <div className="flex justify-center gap-16 items-center w-full">
+                <img className="w-12" src="/supporters/fb.svg" />
+                <img className="w-12" src="/supporters/ig.svg" />
+                <img className="w-12" src="/supporters/x.svg" />
+              </div>
+
+              <a
+                /*   href={urlForCampaign} */
+
                 className="underline mt-4 flex justify-center mb-4 cursor-pointer select-none"
-                onClick={()=> {navigator.clipboard.writeText(urlForCampaign)}}
+                onClick={() => {
+                  navigator.clipboard.writeText(urlForCampaign);
+                }}
               >
                 Copy campaign link
               </a>
-
 
               {/* <div className="border-2 m-2">
                 <p className="text-2xl font-bold">Athlete statement</p>
@@ -342,7 +331,7 @@ const ItemCampaign = () => {
                 <p></p>
               </div> */}
 
-             {/*  <div className="border-2 m-2">
+              {/*  <div className="border-2 m-2">
                 <div className="flex justify-around">
                   <p className="text-2xl font-bold">Supporters</p>
                   <p className="font-semibold text-red_first pt-1">
@@ -367,31 +356,21 @@ const ItemCampaign = () => {
                 </p>
               </div> */}
 
-
-            <div className="flex  items-start ">
-
-                  <div className="basis-1/2 flex items-center justify-center gap-4">
+              <div className="flex  items-start ">
+                <div className="basis-1/2 flex items-center justify-center gap-4">
                   <p className="text-2xl font-bold uppercase">Supporters:</p>
-                  <p className="text-xl font-bold">
-                    {howManySupporters}
-                  </p>
-                  </div>
+                  <p className="text-xl font-bold">{howManySupporters}</p>
+                </div>
 
-
-
-                  <div className="basis-1/2 flex items-center justify-center gap-4">
-
+                <div className="basis-1/2 flex items-center justify-center gap-4">
                   <p className="text-2xl font-bold uppercase">Money raised:</p>
-                  <p className="text-xl font-bold">{athlete.donatedAmount / 100} $</p>
+                  <p className="text-xl font-bold">
+                    {athlete.donatedAmount / 100} $
+                  </p>
+                </div>
+              </div>
 
-                    
-                  </div>
-              
-            </div>
-
-
-
-              <div className="border-2 m-4 p-2">
+            {/*   <div className="border-2 m-4 p-2">
                 <div className="flex justify-around border-2 mt-2 ">
                   <p className="text-2xl font-bold">Campaign stats</p>
                   <p className="underline decoration-red_first text-red_first">
@@ -414,20 +393,62 @@ const ItemCampaign = () => {
                       </div>
                     </>
                   ))}
+              </div> */}
+
+              <div className="flex w-full ">
+                {lastTransactionsSupporters &&
+                  lastTransactionsSupporters.map((item, index) => (
+                    <>
+                      <div className="flex w-full flex-col justify-start items-start p-4 ">
+                       
+                       
+                        <div className="flex w-full border-l-2  items-center m-1 mb-0 pb-0 p-2 justify-between  ">
+                          <p key={index} className=" pl-2 ">
+                            <span className="font-semibold">
+                              Supporter #{index + 1}:
+                            </span>{" "}
+                            {item.supporterName}
+                          </p>
+
+                          <div className="flex ">
+                            <p>
+                              <span className="font-semibold"></span> $
+                              {item.amount / 100}
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="text-sm m-1 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">{item.supporterComment}</p>
+                      </div>
+                    </>
+                  ))}
               </div>
 
-              <p className="underline mt-4 flex justify-center border-2">
+              {/*  <p className="underline mt-4 flex justify-center border-2">
                 Help {athlete.name} improve{" "}
                 {athlete.gender === "M" ? "his" : "her"} stats !
-              </p>
+              </p> */}
 
-              <a
+              {/*  <a
                 href={urlForCampaign}
                 target="_blank"
                 className="underline mt-4 flex justify-center border-2 mb-4"
               >
                 Share campaign
               </a>
+ */}
+
+
+
+                <p className="flex justify-center items-center underline cursor-pointer select-none">Show all supporters</p>
+{/* 
+
+<p>Donate {lastTransactionsSupporters[].amount / 100}</p> */}
+
+
+
+                <p className="flex justify-center items-center underline cursor-pointer select-none">Donate</p>
+
 
               <div className="border-2">
                 <div className="flex justify-center items-center flex-col">
@@ -581,6 +602,8 @@ const ItemCampaign = () => {
                   </ThemeProvider>
                 </div>
               </div>
+
+
             </div>
           </div>
         </>
