@@ -468,7 +468,7 @@ const Supporters = () => {
 
       {firstIsVisible && (
         <>
-          <img
+         {/*  <img
             src="supporters/supporter1op.png"
             style={{
               position: "absolute",
@@ -479,13 +479,14 @@ const Supporters = () => {
               objectFit: "cover",
               zIndex: -1,
             }}
-          />
+          /> */}
         </>
       )}
 
       {secondIsVisible && (
         <>
-          <img
+
+         {/*  <img
             src="supporters/supporter2.png"
             style={{
               position: "absolute",
@@ -496,13 +497,14 @@ const Supporters = () => {
               objectFit: "cover",
               zIndex: -1,
             }}
-          />
-        </>
+
+          /> */}
+        </> 
       )}
 
       {thirdIsVisible && (
         <>
-          <img
+        {/*   <img
             src="supporters/supporter3.png"
             style={{
               position: "absolute",
@@ -513,13 +515,13 @@ const Supporters = () => {
               objectFit: "cover",
               zIndex: -1,
             }}
-          />
+          /> */}
         </>
       )}
 
       {fourthIsVisible && (
         <>
-          <img
+         {/*  <img
             src="supporters/supporter4.png"
             style={{
               position: "absolute",
@@ -530,13 +532,13 @@ const Supporters = () => {
               objectFit: "cover",
               zIndex: -1,
             }}
-          />
+          /> */}
         </>
       )}
 
       {fifthIsVisible && (
         <>
-          <img
+         {/*  <img
             src="supporters/supporter5.png"
             style={{
               position: "absolute",
@@ -547,7 +549,7 @@ const Supporters = () => {
               objectFit: "cover",
               zIndex: -1,
             }}
-          />
+          /> */}
         </>
       )}
 
@@ -556,9 +558,21 @@ const Supporters = () => {
       {/* prva */}
 
       <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
+        className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
         } `}
+      
+        style={{backgroundImage: "url('/supporters/supporter1op.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
+      
+      
+      
+      
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -603,7 +617,7 @@ const Supporters = () => {
             setSecondIsVisible(true);
           }}
           className="w-56"
-          style={{ marginTop: "80px" }}
+          style={{ marginTop: "80px", marginBottom: "35px" }}
           sx={{
             height: "50px",
             bgcolor: "#AF2626",
@@ -633,6 +647,16 @@ const Supporters = () => {
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           secondIsVisible ? "show" : "hide"
         } `}
+
+
+
+        style={{backgroundImage: "url('/supporters/supporter2.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -1136,7 +1160,7 @@ const Supporters = () => {
             setThirdIsVisible(true);
           }}
           className="w-56"
-          style={{ marginTop: "80px" }}
+          style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
             height: "50px",
             bgcolor: "#AF2626",
@@ -1161,6 +1185,17 @@ const Supporters = () => {
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           thirdIsVisible ? "show" : "hide"
         } `}
+
+
+        style={{backgroundImage: "url('/supporters/supporter3.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
+
+
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -1463,7 +1498,7 @@ onChange={(event) => handleInputChange(index, event)}
             makeCampaign();
           }}
           className="w-56"
-          style={{ marginTop: "80px" }}
+          style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
             height: "50px",
             bgcolor: "#AF2626",
@@ -1488,6 +1523,15 @@ onChange={(event) => handleInputChange(index, event)}
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           fourthIsVisible ? "show" : "hide"
         } `}
+
+        style={{backgroundImage: "url('/supporters/supporter4.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
+
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -1612,7 +1656,7 @@ onChange={(event) => handleInputChange(index, event)}
             setFifthIsVisible(true);
           }}
           className="w-56"
-          style={{ marginTop: "80px" }}
+          style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
             height: "50px",
             bgcolor: "#AF2626",
@@ -1637,6 +1681,16 @@ onChange={(event) => handleInputChange(index, event)}
         className={`flex justify-center items-center flex-col pt-28  first-content-container ${
           fifthIsVisible ? "show" : "hide"
         } `}
+
+        style={{backgroundImage: "url('/supporters/supporter5.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
+      
+
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
