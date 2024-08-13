@@ -4,10 +4,8 @@ import { CardContent, Grid, Typography, OutlinedInput, InputAdornment, Button, C
 const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error }) => (
     <CardContent>
         <Grid container spacing={2} justifyContent={"center"}>
-            <Grid item xs={12}>
-                <Typography>
-                    Donate
-                </Typography>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+                <Typography>Donate</Typography>
             </Grid>
             <Grid item xs={6}>
                 <Grid container spacing={2}>

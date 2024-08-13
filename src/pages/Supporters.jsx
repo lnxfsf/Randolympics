@@ -190,7 +190,7 @@ const Supporters = () => {
       );
 
       if (responseCampaign.status === 201) {
-        alert("created campaign in database");
+       /*  alert("created campaign in database"); */
       }
     } catch (error) {
       console.log(error);
@@ -239,7 +239,7 @@ const Supporters = () => {
           console.log("athleteId" + response.data.userId);
           athleteId = response.data.userId;
 
-          alert("athlete user created");
+         /*  alert("athlete user created"); */
 
           // ? creating user for supporter
           // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
@@ -276,7 +276,7 @@ const Supporters = () => {
           if (responseSupport.status === 201) {
             // navigate(`/campaign/${campaignId}`);
             // ovo u toj funkciji tek ipak !
-            alert("creates supporter account");
+          /*   alert("creates supporter account"); */
 
             supporterId = response.data.userId;
           }
@@ -1594,39 +1594,60 @@ onChange={(event) => handleInputChange(index, event)}
         {/* and this is for those 3 options */}
         <p className="mt-4 font-semibold">Select amount</p>
         <div className="flex justify-around mt-6 mb-6 gap-4">
+         
+         
           <div
-            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16 
+           `}
+            
+           style={{backgroundColor: ` ${
+          amount === 1 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
+        }`
+      }}
+
             onClick={() => {
               setAmount(1);
             }}
           >
-            <img className=" " src="supporters/1_dollar.png" />
+           {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
             <p>1 $</p>
           </div>
 
+
           <div
-            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
             onClick={() => {
               setAmount(10);
             }}
+            style={{backgroundColor: ` ${
+              amount === 10 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
+            }`
+          }}
+
           >
-            <img className=" " src="supporters/10_dollars.png" />
+           {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
             <p>10 $</p>
           </div>
 
           <div
-            className="border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
+            className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
             onClick={() => {
               setAmount(100);
             }}
+
+            style={{backgroundColor: ` ${
+              amount === 100 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
+            }`
+          }}
+
           >
-            <img className=" " src="supporters/100_dollars.png" />
+           {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
             <p>100 $</p>
           </div>
         </div>
 
         <div className="flex  w-[70%] justify-center items-center">
-          <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
+          <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
             {/*  <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
