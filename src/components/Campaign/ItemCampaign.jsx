@@ -191,6 +191,7 @@ const ItemCampaign = () => {
   const popupRef = useRef(null);
 
 
+  
   return (
     <>
       {campaign && athlete && (
@@ -440,14 +441,15 @@ const ItemCampaign = () => {
 
 
 
-                <p className="flex justify-center items-center underline cursor-pointer select-none">Show all supporters</p>
-{/* 
+                <p className="flex justify-center items-center underline cursor-pointer select-none mt-2 mb-2">Show all supporters</p>
 
-<p>Donate {lastTransactionsSupporters[].amount / 100}</p> */}
+                {lastTransactionsSupporters && (
+                <p className="flex justify-center mt-6 mb-6">Donate {(lastTransactionsSupporters[0].amount+100) / 100} USD to become the top supporter of this campaign !</p> 
+
+                )}
 
 
-
-                <p className="flex justify-center items-center underline cursor-pointer select-none">Donate</p>
+                <p className="flex justify-center items-center underline cursor-pointer select-none  mt-2 mb-2">Donate</p>
 
 
               <div className="border-2">
