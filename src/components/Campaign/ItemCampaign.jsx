@@ -27,7 +27,6 @@ function formatDate(dateString) {
 }
 
 const ItemCampaign = () => {
-
   const { campaignId } = useParams();
 
   const navigate = useNavigate();
@@ -46,41 +45,30 @@ const ItemCampaign = () => {
 
   const [howManySupporters, setHowManySupporters] = useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
-  const [lastTransactionsSupporters, setLastTransactionsSupporters] = useState();
+  const [lastTransactionsSupporters, setLastTransactionsSupporters] =
+    useState();
 
-  const [countryAthleteIsIn, setCountryAthleteIsIn ] = useState()
-  
+  const [countryAthleteIsIn, setCountryAthleteIsIn] = useState();
 
   const [discountCode, setDiscountCode] = useState();
 
-
-
-
   const donateWithCouponOnly = async () => {
-
-
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/listsData/donateOnlyWithDiscountCode`,
         {
-         
           discountCode: discountCode,
           campaignId: campaignId,
 
           supporterEmail: supporterEmail,
           supporterName: supporterName,
           supporterComment: supporterComment,
-         
         }
       );
     } catch (e) {
       console.log(e.stack);
     }
-
-
-  
-  }
-
+  };
 
   useEffect(() => {
     updateLatestData();
@@ -100,7 +88,6 @@ const ItemCampaign = () => {
       console.log(response.data.oneCampaign);
       console.log(response.data.thatAthlete);
 
-      
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
 
@@ -121,12 +108,9 @@ const ItemCampaign = () => {
         }
       }
 
-      if(response.data.thatAthlete){
+      if (response.data.thatAthlete) {
         setCountryAthleteIsIn(response.data.thatAthlete.nationality);
       }
-     
-
-
     } catch (error) {
       console.error(error);
     }
@@ -165,143 +149,238 @@ const ItemCampaign = () => {
     } catch (error) {
       console.error(error);
     }
- 
-
 
     // get last 3 transactions
-    
 
     try {
-        const response = await axios.get(
-          `${BACKEND_SERVER_BASE_URL}/listsData/lastTransactionsSupportersCampaign`,
-          {
-            params: {
-              campaignId: campaignId,
-            },
-          }
-        );
-  
-        console.log("saljes ti last coments");
-        console.log(response.data);
-  
-        setLastTransactionsSupporters(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/lastTransactionsSupportersCampaign`,
+        {
+          params: {
+            campaignId: campaignId,
+          },
+        }
+      );
 
+      console.log("saljes ti last coments");
+      console.log(response.data);
 
-
-
-};
+      setLastTransactionsSupporters(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
       {campaign && athlete && (
         <>
-          <div className="flex">
-            <div className="flex flex-col basis-1/2 p-16 pr-0">
-            
-              <img
-                className="w-32 mb-8"
-                src={
-                  BACKEND_SERVER_BASE_URL +
-                  "/imageUpload/profile_pics/" +
-                  athlete.picture
-                }
-              />
+          <div className="flex"
+          
+          
+          
+        style={{backgroundImage: "url('/supporters/supporter5.png')", 
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          backgroundPosition: "center",
+          
+         }}
 
-              <hr className=" mb-8" />
 
-              <p><span className="font-semibold">Gender:</span> {athlete.gender === "M" ? "Male" : "Female"}</p>
-              <p className="mb-12">
-              <span className="font-semibold">Birthdate:</span> {formatDate(athlete.birthdate)}
-              </p>
+          >
+            <div
+              className="flex  basis-8/12 justify-between pr-0"
+              style={{ backgroundColor: "green" }}
 
-              <p> <span className="font-semibold"> Weight:</span> {athlete.weight}</p>
 
-              <p><span className="font-semibold">Email:</span> {athlete.email}</p>
+            >
+              <div className="flex flex-col grow">
+                <div className="flex justify-center items-center">
+                  {/*   m-16  */}
+                  <img
+                    className="w-52 mb-8 mt-8  border-2 border-[#C37F7F]"
+                    src={
+                      BACKEND_SERVER_BASE_URL +
+                      "/imageUpload/profile_pics/" +
+                      athlete.picture
+                    }
+                  />
+                </div>
 
-              <p><span className="font-semibold">Phone:</span> {athlete.phone}</p>
+                <hr
+                  className=" mb-8 w-[100%]"
+                  style={{ backgroundColor: "white", height: "1px" }}
+                />
 
-              <p><span className="font-semibold">Crypto:</span>  {athlete.cryptoaddress ? athlete.cryptoaddress : '0'} {athlete.cryptoaddress_type}</p>
-            </div>
+                <div className="flex justify-center items-center flex-col">
+                  <p className="text-[#fff]" >
+                    <span className="font-semibold">Gender:</span>{" "}
+                    {athlete.gender === "M" ? "Male" : "Female"}
+                  </p>
+                  <p className="mb-12 text-[#fff]">
+                    <span className="font-semibold">Birthdate:</span>{" "}
+                    {formatDate(athlete.birthdate)}
+                  </p>
+                </div>
 
-            <p class="vertical-text text-lg text-blue-500 underline text-red_first pt-12 font-semibold">
-              {textAthleteStatus}
-            </p>
 
-            <div className="flex basis-1/2 flex-col ml-8">
-              <div className="flex justify-around items-center text-4xl mt-14 pb-6">
-                {athlete.name}
+                <div className="flex justify-center items-center flex-col">
+                <p className="text-[#fff]">
+                  {" "}
+                  <span className="font-semibold"> Weight:</span>{" "}
+                  {athlete.weight} kg
+                </p>
+                </div>
 
-                <div className="flex flex-col justify-center ">
-                  <Flag className="flag-photo" code={athlete.nationality} />
+
+<div className="flex justify-center items-center flex-col mt-8 mb-8">
+                <p className="text-[#fff]">
+                  <span className="font-semibold">Email:</span> {athlete.email}
+                </p>
+
+                <p className="text-[#fff]">
+                  <span className="font-semibold">Phone:</span> {athlete.phone}
+                </p>
+
+                </div>
+
+                <hr
+                  className=" mb-8 w-[100%]"
+                  style={{ backgroundColor: "white", height: "1px" }}
+                />
+
+
+
+                <div className="flex justify-center items-center flex-col  ">
+
+                <p className="text-[#fff]">
+                  <span className="font-semibold">Crypto:</span>{" "}
+                  {athlete.cryptoaddress ? athlete.cryptoaddress : "0"}{" "}
+                  {athlete.cryptoaddress_type}
+                </p>
+</div>
+
+
+              </div>
+
+              <div className="basis-16">
+
+                <div className="flex items-start justify-start">
+                 
+                {/*   <hr
+                    className=" mb-8 w-8 h-full"
+                    style={{ backgroundColor: "red"}}
+                  /> */}
+
+                  
+      <hr className="vertical-line" />
+   
+
+
+                  <p class="vertical-text text-3xl text-blue-500 text-[#fff] mt-12 font-bold uppercase whitespace-nowrap  ">
+                    I'm 99% taking the challenge and going{textAthleteStatus}
+                  </p>
                 </div>
               </div>
+            </div>
 
-              <hr />
+            <div className="flex grow flex-col ">
+
+
+
+              <div className="flex   mt-14 pb-6 flex-col gap-y-2">
+              
+                <div className="flex justify-around items-center  ">
+
+                
+                    <p className="text-4xl">{athlete.name}</p>
+
+                    <div className="flex flex-col justify-center ">
+                      <Flag className="flag-photo" code={athlete.nationality} />
+                    
+                    </div>
+                  </div>
+
+
+                  <div className="flex justify-center items-center">
+                        <p className="text-xl">{athlete.athleteStatement}</p>
+                  </div>
+
+
+
+              </div>
+
+
+              <hr
+                  className=" mb-8 w-full"
+                  style={{ backgroundColor: "black", height: "2px" }}
+                />
+              
+              
+              
+        <div className="flex justify-center gap-16 items-center w-full">
+          <img className="w-12" src="/supporters/fb.svg" />
+          <img className="w-12" src="/supporters/ig.svg" />
+          <img className="w-12" src="/supporters/x.svg" />
+       
+        </div>
 
               <div className="border-2 m-2">
-              <p className="text-2xl font-bold">Athlete statement</p>
+                <p className="text-2xl font-bold">Athlete statement</p>
 
-              <p>{athlete.athleteStatement}</p>
+                <p></p>
               </div>
 
+              <div className="border-2 m-2">
+                <div className="flex justify-around">
+                  <p className="text-2xl font-bold">Supporters</p>
+                  <p className="font-semibold text-red_first pt-1">
+                    {howManySupporters}
+                  </p>
+                </div>
 
-
-<div className="border-2 m-2">
-              <div className="flex justify-around">
-                <p className="text-2xl font-bold">Supporters</p>
-                <p className="font-semibold text-red_first pt-1">{howManySupporters}</p>
+                {lastCommentsSupporters &&
+                  lastCommentsSupporters.map((item, index) => (
+                    <>
+                      <div className="flex border-2 rounded-lg m-1 p-2 ">
+                        <p key={index}>{item.supporterComment}</p>
+                      </div>
+                    </>
+                  ))}
               </div>
-
-        
-
-              {lastCommentsSupporters &&
-                lastCommentsSupporters.map((item, index) => (
-                  <>
-                  <div className="flex border-2 rounded-lg m-1 p-2 ">
-                    <p key={index}>{item.supporterComment}</p>
-                  </div>
-                  </>
-                ))}
-
-
-</div>
 
               <div className="flex justify-around border-2">
                 <p className="text-2xl font-bold">Money raised</p>
-                <p className="text-red_first font-semibold mt-1">{athlete.donatedAmount / 100} $</p>
-              </div>
-
-
-
-<div className="border-2 m-4 p-2">
-              <div className="flex justify-around border-2 mt-2 ">
-                <p className="text-2xl font-bold">Campaign stats</p>
-                <p className="underline decoration-red_first text-red_first">
-                  further explanation needed
+                <p className="text-red_first font-semibold mt-1">
+                  {athlete.donatedAmount / 100} $
                 </p>
-
-
-                
-               
-
-
               </div>
 
-              {lastTransactionsSupporters &&
-                lastTransactionsSupporters.map((item, index) => (
-                  <>
-                  <div className="flex border-2 rounded-lg m-1 p-2 flex-col">
-                    <p key={index}><span className="font-semibold">Supporter name:</span> {item.supporterName}</p>
-                    <p><span className="font-semibold">Donated amount:</span> {item.amount / 100} $</p>
-                  </div>
-                  </>
-                ))}
-</div>
+              <div className="border-2 m-4 p-2">
+                <div className="flex justify-around border-2 mt-2 ">
+                  <p className="text-2xl font-bold">Campaign stats</p>
+                  <p className="underline decoration-red_first text-red_first">
+                    further explanation needed
+                  </p>
+                </div>
 
-
+                {lastTransactionsSupporters &&
+                  lastTransactionsSupporters.map((item, index) => (
+                    <>
+                      <div className="flex border-2 rounded-lg m-1 p-2 flex-col">
+                        <p key={index}>
+                          <span className="font-semibold">Supporter name:</span>{" "}
+                          {item.supporterName}
+                        </p>
+                        <p>
+                          <span className="font-semibold">Donated amount:</span>{" "}
+                          {item.amount / 100} $
+                        </p>
+                      </div>
+                    </>
+                  ))}
+              </div>
 
               <p className="underline mt-4 flex justify-center border-2">
                 Help {athlete.name} improve{" "}
@@ -352,38 +431,38 @@ const ItemCampaign = () => {
                     }}
                   />
 
-                 
- <p className="text-red_first text-sm w-[50%] mt-4">
+                  <p className="text-red_first text-sm w-[50%] mt-4">
                     if supporter (others) are donating to here, they don't need
                     account (and they don't get one). these fields are
-                    optional.. (for transaction). 
-                    <br/>
-                    But if supporter have account, transaction he makes will be displayed on his profile (or even if he later decides to make account), he just need to use same email address, he made transaction with
-</p>
-		
+                    optional.. (for transaction).
+                    <br />
+                    But if supporter have account, transaction he makes will be
+                    displayed on his profile (or even if he later decides to
+                    make account), he just need to use same email address, he
+                    made transaction with
+                  </p>
                 </div>
 
-
                 <div className="m-4 flex justify-center flex-col">
-                    <p>Discount codes</p>
-                    <input className="border-2 rounded-lg" 
+                  <p>Discount codes</p>
+                  <input
+                    className="border-2 rounded-lg"
                     type="text"
                     placeholder="Code"
                     value={discountCode}
-                    onChange={(event) => {setDiscountCode(event.target.value)}}
-                     />
+                    onChange={(event) => {
+                      setDiscountCode(event.target.value);
+                    }}
+                  />
 
-                     <button 
-                     style={{backgroundColor: "#0000ff", color: "#fff"}} className="m-4 rounded-lg p-2"
-                     
-                     onClick={donateWithCouponOnly}
-                     
-
-                     >
-                      
-                      Donate with coupon only</button>
-</div>  
-
+                  <button
+                    style={{ backgroundColor: "#0000ff", color: "#fff" }}
+                    className="m-4 rounded-lg p-2"
+                    onClick={donateWithCouponOnly}
+                  >
+                    Donate with coupon only
+                  </button>
+                </div>
 
                 <div className="border-2 flex flex-col justify-center items-center p-4">
                   <p className="underline text-red_first">Note:</p>
@@ -451,28 +530,21 @@ const ItemCampaign = () => {
                 </div>
 
                 <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
-                 
-                 
                   <ThemeProvider theme={theme}>
                     <QueryProvider>
                       <DonationFormItemCampaign
                         amount={amount}
                         setAmount={setAmount}
                         campaignId={campaignId}
-
                         supporterName={supporterName}
                         supporterEmail={supporterEmail}
                         supporterComment={supporterComment}
                         discountCode={discountCode}
                         countryAthleteIsIn={countryAthleteIsIn}
-
-                        
                         separateDonationThruPage={true}
                       />
                     </QueryProvider>
-                  </ThemeProvider> 
-
-
+                  </ThemeProvider>
                 </div>
               </div>
             </div>
