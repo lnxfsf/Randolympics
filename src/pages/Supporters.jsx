@@ -105,10 +105,10 @@ const inputLabelPropsTextField = {
 
 const sxTextField = {
   m: 1,
-  width: "280px",
+  width: "240px",
 
-  "& .MuiInputBase-input": { height: 39, padding: 1 },
-
+  /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
+   */
   "& .MuiOutlinedInput-root": {
     borderRadius: 3,
     backgroundColor: "white",
@@ -129,12 +129,8 @@ const Supporters = () => {
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
 
-
   console.log("sadaje");
   console.log(additionalSupportersFormData);
-
-
-
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -238,9 +234,6 @@ const Supporters = () => {
           }
         );
 
-
-
-       
         if (response.status === 201) {
           console.log("athleteId" + response.data.userId);
           athleteId = response.data.userId;
@@ -336,11 +329,8 @@ const Supporters = () => {
     // update supporterStats ! polja..
   };
 
+  console.log("urlForCampaign ------------>  " + urlForCampaign);
 
-  
-  console.log("urlForCampaign ------------>  "+urlForCampaign)
-
-  
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -356,6 +346,9 @@ const Supporters = () => {
   const [thirdIsVisible, setThirdIsVisible] = useState(false);
   const [fourthIsVisible, setFourthIsVisible] = useState(false);
   const [fifthIsVisible, setFifthIsVisible] = useState(false);
+
+  // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
+  const [isCelebrity, setIsCelebrity] = useState(false);
 
   // friend information
   const [friendName, setFriendName] = useState("");
@@ -569,13 +562,39 @@ const Supporters = () => {
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12">
-          Do you want to challenge your friend to experience a thrill of the{" "}
-          <br /> Randolympic games?
+          Do you want someone to get into <br />
+          the Randolympic games?
         </p>
 
-        <p className="text-xl text-center underline decoration-red_first mt-6">
-          Well, here is your chance!{" "}
-        </p>
+        <p className="text-lg text-center mt-6">I want to sign up </p>
+
+        <FormControl>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="friend"
+            name="radio-buttons-group"
+            onChange={(event) => {
+              const value = event.target.value;
+
+              if (value === "friend") {
+                setIsCelebrity(false);
+              } else if (value === "celebrity") {
+                setIsCelebrity(true);
+              }
+            }}
+          >
+            <FormControlLabel
+              value="friend"
+              control={<Radio />}
+              label={`Friend`}
+            />
+            <FormControlLabel
+              value="celebrity"
+              control={<Radio />}
+              label={`Celebrity`}
+            />
+          </RadioGroup>
+        </FormControl>
 
         <Button
           onClick={() => {
@@ -598,13 +617,13 @@ const Supporters = () => {
           }}
           id="join-the-fun-btn"
         >
-          <span className="popins-font">I am interested !</span>
+          <span className="popins-font">Create a campaign</span>
         </Button>
 
-        <p className="text-xl text-center underline decoration-red_first mt-8">
+        {/*   <p className="text-xl text-center underline decoration-red_first mt-8">
           Randolympics can bring your friend to the olympic games as a
           competitor !{" "}
-        </p>
+        </p> */}
       </div>
 
       {/* druga */}
@@ -616,254 +635,499 @@ const Supporters = () => {
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
-        <p className="text-xl text-center mt-8 mb-12">
-          Tell us a little bit more about your friend:
-        </p>
+        {!isCelebrity && (
+          <>
+            {/* signing up for a friend */}
+            <div>
+              <p className="text-xl text-center mt-8 mb-12">
+                Tell us a little bit more about your friend:
+              </p>
 
-        <div className="flex flex-col w-[70%]">
-          <div className="flex justify-around ">
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendName}
-                onChange={(e) => {
-                  setFriendName(e.target.value);
-                }}
-                label="Name"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
+              <div className="flex ">
 
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendMiddleName}
-                onChange={(e) => {
-                  setFriendMiddleName(e.target.value);
-                }}
-                label="Middle name"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
+                <div className="flex flex-col w-full">
+                  <div className="flex justify-start gap-2 items-center ">
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendName}
+                        onChange={(e) => {
+                          setFriendName(e.target.value);
+                        }}
+                        label="Name"
+                        placeholder="John"
+                        id="name"
+                        name="name"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
 
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendFamilyName}
-                onChange={(e) => {
-                  setFriendFamilyName(e.target.value);
-                }}
-                label="Family name"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendMiddleName}
+                        onChange={(e) => {
+                          setFriendMiddleName(e.target.value);
+                        }}
+                        label="Middle name"
+                        placeholder="John"
+                        id="name"
+                        name="name"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
 
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendLastName}
-                onChange={(e) => {
-                  setFriendLastName(e.target.value);
-                }}
-                label="Last name"
-                placeholder="Doe"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-          </div>
+                    {/*    <div className="flex flex-col justify-start">
+                <TextField
+                  value={friendFamilyName}
+                  onChange={(e) => {
+                    setFriendFamilyName(e.target.value);
+                  }}
+                  label="Family name"
+                  placeholder="John"
+                  id="name"
+                  name="name"
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  InputLabelProps={inputLabelPropsTextField}
+                  sx={sxTextField}
+                />
+              </div>
+ */}
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendLastName}
+                        onChange={(e) => {
+                          setFriendLastName(e.target.value);
+                        }}
+                        label="Last name"
+                        placeholder="Doe"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
+                  </div>
 
-          <div className="flex justify-around ">
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendEmail}
-                onChange={(e) => {
-                  setFriendEmail(e.target.value);
-                }}
-                label="Email"
-                placeholder="Email Address"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
+                  <div className="flex justify-start items-center gap-2">
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendEmail}
+                        onChange={(e) => {
+                          setFriendEmail(e.target.value);
+                        }}
+                        label="Email"
+                        placeholder="Email Address"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
 
-            <div className="flex flex-col justify-start">
-              <TextField
-                value={friendPhone}
-                onChange={(e) => {
-                  setFriendPhone(e.target.value);
-                }}
-                label="Phone number"
-                placeholder="+1 425 555 0123"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-          </div>
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendPhone}
+                        onChange={(e) => {
+                          setFriendPhone(e.target.value);
+                        }}
+                        label="Phone number"
+                        placeholder="+1 425 555 0123"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
+                  </div>
 
-          <div className="flex justify-around ">
-            <div className="flex mb-1 justify-center items-center flex-col ">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    style={{ backgroundColor: "#fff" }}
-                    className="w-[280px]"
-                    label="Birthdate"
-                    value={friendBirthdate}
-                    onChange={(date) => {
-                      setFriendBirthdate(date);
-                    }}
-                    format="MMMM DD, YYYY"
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        // backgroundColor: "#fff",
-                        // borderRadius: "15px", // or 5px, according to your design
+                  <div className="flex justify-start items-center gap-2 mt-2">
+                    <div className="flex mb-1 justify-center items-center flex-col ">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={["DatePicker"]}>
+                          <DatePicker
+                            style={{ backgroundColor: "#fff" }}
+                            className="w-[280px]"
+                            label="Birthdate"
+                            value={friendBirthdate}
+                            onChange={(date) => {
+                              setFriendBirthdate(date);
+                            }}
+                            format="MMMM DD, YYYY"
+                            sx={{
+                              "& .MuiOutlinedInput-root": {
+                                // backgroundColor: "#fff",
+                                // borderRadius: "15px", // or 5px, according to your design
+                              },
+
+                              /*  '& .MuiOutlinedInput-input': {
+                        backgroundColor: '#fff',
+                        borderRadius: 'inherit', // Ensures consistency
                       },
+                    */
+                            }}
+                          />
+                        </DemoContainer>
+                      </LocalizationProvider>
+                    </div>
 
-                      /*  '& .MuiOutlinedInput-input': {
-                      backgroundColor: '#fff',
-                      borderRadius: 'inherit', // Ensures consistency
-                    },
-                   */
-                    }}
+                    <div className="flex  justify-center items-center flex-col h-auto">
+                      <ReactFlagsSelect
+                        countries={supportedCountry}
+                        className="w-[280px] rounded-md p-0 "
+                        /*  bg-[#fff]  */
+
+                        // to fill it with the one, which user's is currently selected...
+                        selected={friendNationality}
+                        onSelect={(code) => {
+                          setFriendNationality(code);
+                        }}
+                        /*  className={classNameFlagsSelect} */
+                        searchable={true}
+                        id="nationality"
+                        name="nationality"
+                        placeholder="Nationality"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex mt-2 flex-col">
+                    <InputLabel id="roleDropdowns">Gender</InputLabel>
+                    <Select
+                    variant="standard"
+                      labelId="roleDropdowns"
+                      id="roleDropdown"
+                      label="gender"
+                      value={friendGender}
+                      onChange={(event) => {
+                        setFriendGender(event.target.value);
+                      }}
+                      className="w-[280px] "
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"M"}>Male</MenuItem>
+                      <MenuItem value={"F"}>Female</MenuItem>
+                    </Select>
+                  </div>
+
+
+                  <FormControl>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="send"
+                      name="radio-buttons-group"
+                      className="mt-4"
+                      onChange={(event) => {
+                        const value = event.target.value;
+
+                        if (value === "send") {
+                          setSendEmailToFriend(true);
+                        } else if (value === "dontsend") {
+                          setSendEmailToFriend(false);
+                        }
+                      }}
+                    >
+                      <FormControlLabel
+                        value="send"
+                        control={<Radio />}
+                        label={`Send email to ${friendName}`}
+                        sx={{ marginBottom: '0px' }}
+                      />
+                      <FormControlLabel
+                        value="dontsend"
+                        control={<Radio />}
+                        label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
+                        sx={{ marginTop: '0px' }}
+                     />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+
+
+
+                <div className="ml-2 flex mt-20">
+                  <FilePond
+                    className="filepond--root athlete"
+                    type="file"
+                    onupdatefiles={setFiles}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    server={server}
+                    name="image"
+                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                    accept="image/png, image/jpeg, image/gif"
+                    dropOnPage
+                    dropValidation
+                    allowPaste={true}
+                    allowReplace={true}
+                    credits={""}
+                    allowFileEncode={true}
+                    allowFileTypeValidation={true}
+                    allowImagePreview={true}
+                    allowImageCrop={false}
+                    allowImageResize={false}
+                    allowImageTransform={false}
+                    imagePreviewHeight={150}
+                    imageCropAspectRatio="1:1"
+                    imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100}
+                    stylePanelLayout="compact "
+                    styleLoadIndicatorPosition="center bottom"
+                    styleProgressIndicatorPosition="center bottom"
+                    styleButtonRemoveItemPosition="center  bottom"
+                    styleButtonProcessItemPosition="center bottom"
+                    imageEditAllowEdit={false}
                   />
-                </DemoContainer>
-              </LocalizationProvider>
+                </div>
+
+
+              </div>
+
+
             </div>
+          </>
+        )}
 
-            <div className="flex  justify-center items-center flex-col h-auto">
-              <ReactFlagsSelect
-                countries={supportedCountry}
-                className="w-[280px] rounded-md p-0 "
-                /*  bg-[#fff]  */
+        {isCelebrity && (
+          <>
+            <div className="flex w-full flex-col justify-center items-center">
+              <p className="text-xl text-center mt-8 mb-12">
+                Tell us more about that celebrity:
+              </p>
 
-                // to fill it with the one, which user's is currently selected...
-                selected={friendNationality}
-                onSelect={(code) => {
-                  setFriendNationality(code);
-                }}
-                /*  className={classNameFlagsSelect} */
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality"
-              />
+              <div className="flex flex-col w-[70%]">
+                <div className="flex justify-start gap-2">
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={friendName}
+                      onChange={(e) => {
+                        setFriendName(e.target.value);
+                      }}
+                      label="Name"
+                      placeholder="John"
+                      id="name"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={friendMiddleName}
+                      onChange={(e) => {
+                        setFriendMiddleName(e.target.value);
+                      }}
+                      label="Middle name"
+                      placeholder="John"
+                      id="name"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  {/*  <div className="flex flex-col justify-start">
+      <TextField
+        value={friendFamilyName}
+        onChange={(e) => {
+          setFriendFamilyName(e.target.value);
+        }}
+        label="Family name"
+        placeholder="John"
+        id="name"
+        name="name"
+        type="text"
+        inputProps={{
+          maxLength: 255,
+        }}
+        InputLabelProps={inputLabelPropsTextField}
+        sx={sxTextField}
+      />
+    </div> */}
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={friendLastName}
+                      onChange={(e) => {
+                        setFriendLastName(e.target.value);
+                      }}
+                      label="Last name"
+                      placeholder="Doe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-start gap-2 ">
+                  <div className="flex flex-col justify-start ">
+                    <TextField
+                      variant="standard"
+                      value={friendEmail}
+                      onChange={(e) => {
+                        setFriendEmail(e.target.value);
+                      }}
+                      label="Email"
+                      placeholder="Email Address"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+                </div>
+
+                {/* 
+  <div>
+    <FilePond
+      className="filepond--root athlete"
+      type="file"
+      onupdatefiles={setFiles}
+      allowMultiple={false}
+      maxFiles={1}
+      server={server}
+      name="image"
+      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+      accept="image/png, image/jpeg, image/gif"
+      dropOnPage
+      dropValidation
+      allowPaste={true}
+      allowReplace={true}
+      credits={""}
+      allowFileEncode={true}
+      allowFileTypeValidation={true}
+      allowImagePreview={true}
+      allowImageCrop={false}
+      allowImageResize={false}
+      allowImageTransform={false}
+      imagePreviewHeight={150}
+      imageCropAspectRatio="1:1"
+      imageResizeTargetWidth={100}
+      imageResizeTargetHeight={100}
+      stylePanelLayout="compact "
+      styleLoadIndicatorPosition="center bottom"
+      styleProgressIndicatorPosition="center bottom"
+      styleButtonRemoveItemPosition="center  bottom"
+      styleButtonProcessItemPosition="center bottom"
+      imageEditAllowEdit={false}
+    />
+  </div>
+ */}
+
+                <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
+               
+                  <div className="flex mt-0 mb-2 flex-col">
+                    <InputLabel id="roleDropdowns">Gender</InputLabel>
+                    <Select
+                    variant="standard"
+                      labelId="roleDropdowns"
+                      id="roleDropdown"
+                      label="gender"
+                      value={friendGender}
+                      onChange={(event) => {
+                        setFriendGender(event.target.value);
+                      }}
+                      className="w-[240px] "
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"M"}>Male</MenuItem>
+                      <MenuItem value={"F"}>Female</MenuItem>
+                    </Select>
+                  </div>
+
+                  <div className="flex  justify-center items-center flex-col h-auto mt-4 ">
+                    <ReactFlagsSelect
+                      countries={supportedCountry}
+                      className="w-[280px] rounded-md p-0 "
+                      /*  bg-[#fff]  */
+
+                      // to fill it with the one, which user's is currently selected...
+                      selected={friendNationality}
+                      onSelect={(code) => {
+                        setFriendNationality(code);
+                      }}
+                      /*  className={classNameFlagsSelect} */
+                      searchable={true}
+                      id="nationality"
+                      name="nationality"
+                      placeholder="Nationality"
+                    />
+                  </div>
+                </div>
+
+                {/* 
+  <FormControl>
+    <RadioGroup
+      aria-labelledby="demo-radio-buttons-group-label"
+      defaultValue="send"
+      name="radio-buttons-group"
+      onChange={(event) => {
+        const value = event.target.value;
+
+        if (value === "send") {
+          setSendEmailToFriend(true);
+        } else if (value === "dontsend") {
+          setSendEmailToFriend(false);
+        }
+      }}
+    >
+      <FormControlLabel
+        value="send"
+        control={<Radio />}
+        label={`Send email to ${friendName}`}
+      />
+      <FormControlLabel
+        value="dontsend"
+        control={<Radio />}
+        label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
+      />
+    </RadioGroup>
+  </FormControl>
+ */}
+              </div>
             </div>
-          </div>
-
-          <div>
-            <FilePond
-              className="filepond--root athlete"
-              type="file"
-              onupdatefiles={setFiles}
-              allowMultiple={false}
-              maxFiles={1}
-              server={server}
-              name="image"
-              labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-              accept="image/png, image/jpeg, image/gif"
-              dropOnPage
-              dropValidation
-              allowPaste={true}
-              allowReplace={true}
-              credits={""}
-              allowFileEncode={true}
-              allowFileTypeValidation={true}
-              allowImagePreview={true}
-              allowImageCrop={false}
-              allowImageResize={false}
-              allowImageTransform={false}
-              imagePreviewHeight={150}
-              imageCropAspectRatio="1:1"
-              imageResizeTargetWidth={100}
-              imageResizeTargetHeight={100}
-              stylePanelLayout="compact "
-              styleLoadIndicatorPosition="center bottom"
-              styleProgressIndicatorPosition="center bottom"
-              styleButtonRemoveItemPosition="center  bottom"
-              styleButtonProcessItemPosition="center bottom"
-              imageEditAllowEdit={false}
-            />
-          </div>
-
-          <div className="flex mt-0 mb-2 flex-col">
-            <InputLabel id="roleDropdowns">Gender</InputLabel>
-            <Select
-              labelId="roleDropdowns"
-              id="roleDropdown"
-              label="gender"
-              value={friendGender}
-              onChange={(event) => {
-                setFriendGender(event.target.value);
-              }}
-              className="w-[420px] h-10"
-              style={{ color: "#000" }}
-            >
-              <MenuItem value={"M"}>Male</MenuItem>
-              <MenuItem value={"F"}>Female</MenuItem>
-            </Select>
-          </div>
-
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="send"
-              name="radio-buttons-group"
-              onChange={(event) => {
-                const value = event.target.value;
-
-                if (value === "send") {
-                  setSendEmailToFriend(true);
-                } else if (value === "dontsend") {
-                  setSendEmailToFriend(false);
-                }
-              }}
-            >
-              <FormControlLabel
-                value="send"
-                control={<Radio />}
-                label={`Send email to ${friendName}`}
-              />
-              <FormControlLabel
-                value="dontsend"
-                control={<Radio />}
-                label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
+          </>
+        )}
 
         <Button
           onClick={() => {
@@ -907,6 +1171,7 @@ const Supporters = () => {
           <div className="flex justify-around ">
             <div className="flex flex-col justify-start">
               <TextField
+                variant="standard"
                 value={supporterName}
                 onChange={(e) => {
                   setSupporterName(e.target.value);
@@ -926,6 +1191,7 @@ const Supporters = () => {
 
             <div className="flex flex-col justify-start">
               <TextField
+                variant="standard"
                 value={supporterPhone}
                 onChange={(e) => {
                   setSupporterPhone(e.target.value);
@@ -945,6 +1211,7 @@ const Supporters = () => {
           <div className="flex justify-around mt-4 ">
             <div className="flex flex-col justify-start">
               <TextField
+                variant="standard"
                 value={supporterEmail}
                 onChange={(e) => {
                   setSupporterEmail(e.target.value);
@@ -963,6 +1230,7 @@ const Supporters = () => {
 
           <div className="flex gap-4">
             <TextField
+              variant="standard"
               value={supporterPassword}
               onChange={(event) => {
                 setSupporterPassword(event.target.value);
@@ -1009,6 +1277,7 @@ const Supporters = () => {
             />
 
             <TextField
+              variant="standard"
               value={supporterPasswordConfirmation}
               onChange={(event) => {
                 setSupporterPasswordConfirmation(event.target.value);
@@ -1057,6 +1326,7 @@ const Supporters = () => {
 
           <div className="flex flex-col justify-start">
             <TextField
+              variant="standard"
               value={supporterComment}
               onChange={(e) => {
                 setSupporterComment(e.target.value);
@@ -1257,8 +1527,7 @@ onChange={(event) => handleInputChange(index, event)}
             {/*  <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
-          
-             <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
               <QueryProvider>
                 {/*   <DonationForm   */}
                 <DonationFormItemCampaign
@@ -1274,9 +1543,7 @@ onChange={(event) => handleInputChange(index, event)}
                 />
                 {/*  /> */}
               </QueryProvider>
-            </ThemeProvider> 
-
-
+            </ThemeProvider>
           </div>
         </div>
 
@@ -1330,6 +1597,7 @@ onChange={(event) => handleInputChange(index, event)}
         </a>
 
         <TextField
+          variant="standard"
           value={urlForCampaign}
           InputLabelProps={inputLabelPropsTextField}
           sx={sxTextField}
