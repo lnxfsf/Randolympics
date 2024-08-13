@@ -1254,13 +1254,13 @@ onChange={(event) => handleInputChange(index, event)}
 
         <div className="flex  w-[70%] justify-center items-center">
           <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
-            {/*   <img className="w-12" src="/supporters/pay.svg" />
+            {/*  <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
 
           
-          {/*   <ThemeProvider theme={theme}>
+             <ThemeProvider theme={theme}>
               <QueryProvider>
-                {/*   <DonationForm  
+                {/*   <DonationForm   */}
                 <DonationFormItemCampaign
                   amount={amount}
                   setAmount={setAmount}
@@ -1272,9 +1272,9 @@ onChange={(event) => handleInputChange(index, event)}
                   countryAthleteIsIn={friendNationality}
                   separateDonationThruPage={false}
                 />
-                {/*  /> 
+                {/*  /> */}
               </QueryProvider>
-            </ThemeProvider> */}
+            </ThemeProvider> 
 
 
           </div>

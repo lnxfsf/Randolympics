@@ -292,6 +292,9 @@ const Randomize = () => {
       );
 
 
+      console.log("a sta jeste funkcija:")
+      console.log(response.data)
+      
       setScheduleData(response.data);
 
 
