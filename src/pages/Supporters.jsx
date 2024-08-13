@@ -1164,19 +1164,21 @@ const Supporters = () => {
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12 mb-6">
-          Tell us a little bit more about your yourself:
+        You are camapaign creator for {friendName} !
         </p>
 
         <div className="flex flex-col w-[70%]">
-          <div className="flex justify-around ">
+
+          <div className="flex justify-between ">
             <div className="flex flex-col justify-start">
+             
               <TextField
                 variant="standard"
                 value={supporterName}
                 onChange={(e) => {
                   setSupporterName(e.target.value);
                 }}
-                label="Name"
+                label="Your Name *"
                 placeholder="John"
                 id="name"
                 name="name"
@@ -1192,11 +1194,31 @@ const Supporters = () => {
             <div className="flex flex-col justify-start">
               <TextField
                 variant="standard"
+                helperText="(optional)"
+                value={supporterEmail}
+                onChange={(e) => {
+                  setSupporterEmail(e.target.value);
+                }}
+                label="Your Email"
+                placeholder="johndoe@gmail.com"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex flex-col justify-start">
+              <TextField
+                variant="standard"
                 value={supporterPhone}
+                helperText="(optional)"
                 onChange={(e) => {
                   setSupporterPhone(e.target.value);
                 }}
-                label="Phone number"
+                label="Your Phone "
                 placeholder="+1 425 555 0123"
                 type="text"
                 inputProps={{
@@ -1208,27 +1230,10 @@ const Supporters = () => {
             </div>
           </div>
 
-          <div className="flex justify-around mt-4 ">
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                value={supporterEmail}
-                onChange={(e) => {
-                  setSupporterEmail(e.target.value);
-                }}
-                label="Email"
-                placeholder="Email Address"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-          </div>
+        
+        
 
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-4">
             <TextField
               variant="standard"
               value={supporterPassword}
@@ -1242,7 +1247,7 @@ const Supporters = () => {
               type={showPassword ? "text" : "password"}
               sx={{
                 m: 1,
-                width: "420px",
+                width: "240px",
                 "& .MuiOutlinedInput-root": {
                   borderRadius: 5,
                 },
@@ -1275,7 +1280,7 @@ const Supporters = () => {
                 ),
               }}
             />
-
+{/* 
             <TextField
               variant="standard"
               value={supporterPasswordConfirmation}
@@ -1321,17 +1326,16 @@ const Supporters = () => {
                   </InputAdornment>
                 ),
               }}
-            />
-          </div>
+            /> */}
 
-          <div className="flex flex-col justify-start">
-            <TextField
+
+<TextField
               variant="standard"
               value={supporterComment}
               onChange={(e) => {
                 setSupporterComment(e.target.value);
               }}
-              label="Supporter comment"
+              label="Your (supporter) comment"
               placeholder="John"
               id="name"
               name="name"
@@ -1342,24 +1346,74 @@ const Supporters = () => {
               InputLabelProps={inputLabelPropsTextField}
               sx={sxTextField}
             />
+          </div>
+
+
+
+          <p className="text-xl text-center mt-12 mb-6">Inform additional supporters ?</p>
+
+          <div className="flex flex-col justify-start w-">
+           
 
             {additionalSupportersFormData.map((data, index) => (
-              <div key={index} style={{ marginBottom: "10px" }}>
-                <input
+              <div className="flex items-start justify-center" key={index} style={{ marginBottom: "10px" }}>
+              
+              
+               {/*  <input
                   type="text"
                   name="name"
                   placeholder="Name"
                   value={data.name}
                   onChange={(event) => handleInputChange(index, event)}
-                />
+                /> */}
 
+<TextField
+                variant="standard"
+                value={data.name}
+                onChange={(event) => handleInputChange(index, event)}
+                label="Their Name *"
+                placeholder="John"
+                
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+
+
+<TextField
+                variant="standard"
+                helperText="(optional)"
+                
+                value={data.email}
+                onChange={(event) => handleInputChange(index, event)}
+
+                label="Your Email"
+                placeholder="johndoe@gmail.com"
+               
+                 type="email"
+                  name="email"
+
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
+
+
+
+{/* 
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
                   value={data.email}
                   onChange={(event) => handleInputChange(index, event)}
-                />
+                /> */}
 
                 {/* 
 <select
@@ -1384,9 +1438,13 @@ onChange={(event) => handleInputChange(index, event)}
 </select>
 */}
 
-                <button type="button" onClick={() => removeInputSet(index)}>
+                <button className="self-center" type="button" onClick={() => removeInputSet(index)}>
                   Remove
                 </button>
+
+
+
+
               </div>
             ))}
 
