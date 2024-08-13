@@ -17,6 +17,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import RestoreIcon from '@mui/icons-material/Restore';
 
 import ReactFlagsSelect from "react-flags-select";
+import supportedCountry from "../../context/supportedCountry";
 
 import { FormControl, InputLabel, Select, MenuItem, Divider  } from "@mui/material";
 
@@ -214,6 +215,7 @@ const LgnTraffcHistory = () => {
               </FormControl>
 
               <ReactFlagsSelect
+              countries={supportedCountry}
                 selected={filterNationality_selected}
                 onSelect={(code) => setFilterNationality_selected(code)}
                 className="w-[300px]  "

@@ -126,6 +126,7 @@ const sxTextField = {
 const campaignId = uuidv4();
 
 const Supporters = () => {
+  
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
 

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from "@mkyy/mui-search-bar";
 
 import ReactFlagsSelect from "react-flags-select";
+import supportedCountry from "../context/supportedCountry";
 
 import { Button } from "@mui/material";
 
@@ -197,6 +198,7 @@ const Campaign = () => {
               </FormControl>
 
               <ReactFlagsSelect
+              countries={supportedCountry}
                 selected={filterNationality_selected}
                 onSelect={(code) => setFilterNationality_selected(code)}
                 className="w-[300px] "
