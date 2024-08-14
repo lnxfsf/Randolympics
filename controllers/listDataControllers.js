@@ -6854,16 +6854,32 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
     // treba, da odma matchujes i drzavu ovde u "where", da imas manje da trazis i kucas. da preko athlete odmah da ih imas sve tu..
 
-    // on nadje koji ima.. u Coupons
-    const oneCoupon = await Couponcodes.findOne({
-      where: {
-        couponCode: discountCode,
-        isCouponActive: 1,
-        country: oneAthlete.nationality,
-      },
-    });
+    try {
 
-    if (!oneCoupon) {
+       // on nadje koji ima.. u Coupons
+      var oneCoupon = await Couponcodes.findOne({
+           where: {
+           couponCode: discountCode, 
+          isCouponActive: 1,
+           country: oneAthlete.nationality.toUpperCase(), 
+        },  
+      });
+      console.log("OVDE NE RADI ")
+      console.log(discountCode)
+      console.log(oneAthlete.nationality.toUpperCase())
+      
+      console.log(oneCoupon)
+
+
+
+
+    } catch (e) {
+      console.log(e.stack);
+    }
+   
+
+
+    if (!oneCoupon || typeof oneCoupon === "undefined" ) {
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
