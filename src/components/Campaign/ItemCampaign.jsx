@@ -503,7 +503,17 @@ const ItemCampaign = () => {
 
           {payment && (
            
-           <div className="flex flex-col items-center ">
+           <div className="flex flex-col items-center "
+           style={{
+            backgroundImage: "url('/supporters/supporter5.png')",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            zIndex: -1,
+            backgroundPosition: "center",
+          }}
+
+           
+           >
               <div className="flex justify-center items-center flex-col mt-8">
                 <p className="text-2xl ">Supporter info</p>
 
