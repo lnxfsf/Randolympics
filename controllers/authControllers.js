@@ -214,10 +214,14 @@ const register = async (req, res) => {
 
     sendEmailToFriend, // should we send it to friend ! (invitation ! )
     additionalSupporterEmailsToSendTo,
+
+    signingAsSupporter, // then if those are empty, we avoid checking them.. (as we don't need to signup them (later on, if password is provided, then we make account, if not, then we don't. do it in backend here, so, no user can mess with this...)..)
   } = req.body;
 
-  
-  console.log("additionalSupporterEmailsToSendTo je:: "+additionalSupporterEmailsToSendTo)
+  console.log(
+    "additionalSupporterEmailsToSendTo je:: " +
+      additionalSupporterEmailsToSendTo
+  );
   console.log(additionalSupporterEmailsToSendTo);
 
   // if he's signedByFriend , then we generate password
@@ -229,45 +233,73 @@ const register = async (req, res) => {
 
   // validation !!
 
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-  if (!emailRegex.test(email)) {
-    res.status(409).json({ message: "Email is incorrect !" });
-    return;
-  }
-
+  // we do validate for name, on server, even for supporter. why not..
   if (name == "") {
     res.status(409).json({ message: "Name can't be empty !" });
     return;
   }
 
-  const phoneRegex =
-    /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
+  if (!signingAsSupporter) {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-  if (!phoneRegex.test(phone)) {
-    res.status(409).json({ message: "Phone is incorrect !" });
-    return;
+    if (!emailRegex.test(email)) {
+      res.status(409).json({ message: "Email is incorrect !" });
+      return;
+    }
+  } else if (signingAsSupporter && email !== "") {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+      res.status(409).json({ message: "Email is incorrect !" });
+      return;
+    }
   }
 
-  const passwordRegex = /^.{4,}$/;
+  if (!signingAsSupporter) {
+    const phoneRegex =
+      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
-  if (!passwordRegex.test(password)) {
-    res
-      .status(409)
-      .json({ message: "Password should be longer than 4 characters !" });
-    return;
+    if (!phoneRegex.test(phone)) {
+      res.status(409).json({ message: "Phone is incorrect !" });
+      return;
+    }
+  } else if (signingAsSupporter && phone !== "") {
+    // we can use, check, for supporter, but only if it's phone is not empty.. (as it can be empty..)
+
+    const phoneRegex =
+      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
+
+    if (!phoneRegex.test(phone)) {
+      res.status(409).json({ message: "Phone is incorrect !" });
+      return;
+    }
   }
 
-  // nationality
-  if (nationality === "") {
-    res.status(409).json({ message: "Select nationality !" });
-    return;
+  // TODO, jedino znaci, nema validacije za supporter sa campaign, kada kreira account. nema limit na 4 slova. al to kasnije..
+  if (!signingAsSupporter) {
+    const passwordRegex = /^.{4,}$/;
+
+    if (!passwordRegex.test(password)) {
+      res
+        .status(409)
+        .json({ message: "Password should be longer than 4 characters !" });
+      return;
+    }
   }
 
-  // last name
-  if (lastName === "") {
-    res.status(409).json({ message: "Last name can't be empty !" });
-    return;
+  // these two, we don't use for supporter accounts
+  if (!signingAsSupporter) {
+    // nationality
+    if (nationality === "") {
+      res.status(409).json({ message: "Select nationality !" });
+      return;
+    }
+
+    // last name
+    if (lastName === "") {
+      res.status(409).json({ message: "Last name can't be empty !" });
+      return;
+    }
   }
 
   //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
@@ -408,24 +440,22 @@ const register = async (req, res) => {
       }
 
       // this is for supporter (invitation.. )
-      // first send confirmation email, to current made supporter email !!! just to verify email address ! 
+      // first send confirmation email, to current made supporter email !!! just to verify email address !
       sendEmail(
         newUser.email,
         "Email Verification",
         `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
       );
 
-      console.log("daje li on nesto ovde alo additionalSupporterEmailsToSendTo")
-      console.log(additionalSupporterEmailsToSendTo)
+      console.log(
+        "daje li on nesto ovde alo additionalSupporterEmailsToSendTo"
+      );
+      console.log(additionalSupporterEmailsToSendTo);
 
-      // and then inform additional supporters.. 
+      // and then inform additional supporters..
       if (additionalSupporterEmailsToSendTo) {
-
-
         additionalSupporterEmailsToSendTo.forEach((user) => {
-          
-        console.log("salje li on nesto: "+user.email)
-
+          console.log("salje li on nesto: " + user.email);
 
           sendEmail(
             user.email,
@@ -444,19 +474,12 @@ const register = async (req, res) => {
           );
         });
       }
-
-
-
-
-
     }
 
-    res
-      .status(201)
-      .json({
-        message: "User created successfully!",
-        userId: user_data.userId,
-      });
+    res.status(201).json({
+      message: "User created successfully!",
+      userId: user_data.userId,
+    });
   } catch (error) {
     //console.log("error zasto je: ")
     //console.log(error.message)
@@ -780,6 +803,84 @@ const login = async (req, res) => {
   }
 };
 
+const campaignDoesUserExist = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const isUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    const isUserFound = !!isUser; // with this, we get boolean value
+
+    return res.json({ found: isUserFound });
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
+
+
+
+
+const campaignIsSupporterPassCorrect = async (req, res) => {
+  const { email, password } = req.query;
+
+  try {
+
+
+
+    const supporterUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+
+    // da problem je, sto on mozda i nema account napravljen  ! 
+    
+    console.log("sta radis ovde")
+    console.log(supporterUser)
+
+
+    if(supporterUser){
+
+
+      const passwordMatch = await bcrypt.compare(
+        password,
+        supporterUser.password
+      );
+      
+
+      
+
+      if(passwordMatch){
+
+        // it have email and password right, so we just return true, we can use it
+
+        // ispravna sifra vraca true
+        return res.json({ check: true });
+
+
+      } else {
+
+        // vraca true, ako je pogresna sifra
+        return res.json({ check: false });
+      }
+
+    }
+
+
+
+   
+
+
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -789,4 +890,6 @@ module.exports = {
   reset_password_token,
   reset_password,
   email_resend,
+  campaignDoesUserExist,
+  campaignIsSupporterPassCorrect,
 };

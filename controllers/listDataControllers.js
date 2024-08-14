@@ -6476,9 +6476,6 @@ const shareTableLandingPage = async (req, res) => {
       `
     );
   });
-
-
-  
 };
 
 const createCampaign = async (req, res) => {
@@ -6503,6 +6500,44 @@ const createCampaign = async (req, res) => {
 
   await db.sequelize.sync();
 
+  // you need to validate server side  ! because you can't allow empty values for some things...
+  if (friendName == "") {
+    res.status(409).json({ message: "First name can't be empty !" });
+    return;
+  }
+
+  if (friendLastName == "") {
+    res.status(409).json({ message: "Last name can't be empty !" });
+    return;
+  }
+
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+  if (!emailRegex.test(friendEmail)) {
+    res.status(409).json({ message: "Friend email is incorrect !" });
+    return;
+  }
+
+  if (friendNationality == "") {
+    res.status(409).json({ message: "Nationality name can't be empty !" });
+    return;
+  }
+
+  // za supporter (yes, this is all for campaign, what we absolutelly need, information to have..)
+  if (supporterName == "") {
+    res.status(409).json({ message: "Supporter name can't be empty !" });
+    return;
+  }
+
+  // we only check for validity of email, if it's inserted here
+  if (supporterEmail !== "") {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(supporterEmail)) {
+      res.status(409).json({ message: "Supporter email is incorrect !" });
+      return;
+    }
+  }
 
   const payment_status = "unpaid";
   const payment_id = "";
@@ -6531,21 +6566,14 @@ const createCampaign = async (req, res) => {
 
   const t = await db.sequelize.transaction();
 
-
   try {
-
-    
-
     const newCampaign = await Campaign.create(campaign, { transaction: t });
     await t.commit();
-  
+
     res.status(201).json({ message: "Campaign created successfully!" });
-  } catch(error){
-    console.log(error.stack)
+  } catch (error) {
+    console.log(error.stack);
   }
-
-
-
 };
 
 // TODO, put this somewhere else, but this, just so I can work with something
@@ -6667,17 +6695,16 @@ const makePayment = async (req, res) => {
       });
 
       try {
-        await oneCampaign.update({ payment_id: paymentIntent.id,
+        await oneCampaign.update({
+          payment_id: paymentIntent.id,
 
           couponDonationCode: discountCode,
           countryAthleteIsIn: countryAthleteIsIn,
+        }); // azurira samo taj
 
-         }); // azurira samo taj
+        // samo novi model za ove dve stvari upravo..
 
-
-      // samo novi model za ove dve stvari upravo..
- 
-         // ! 11.08 , i doda discountCode , countryAthleteIsIn, njih takodje azurira u database ! 
+        // ! 11.08 , i doda discountCode , countryAthleteIsIn, njih takodje azurira u database !
       } catch (error) {
         console.log(error.stack);
       }
@@ -6798,17 +6825,13 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
 
 // donate using only dicsount code
 const donateOnlyWithDiscountCode = async (req, res) => {
-  
-  
-
-  const { discountCode, campaignId,
+  const {
+    discountCode,
+    campaignId,
 
     supporterEmail,
     supporterName,
     supporterComment,
-         
-
-
   } = req.body;
 
   try {
@@ -6820,22 +6843,21 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       where: { campaignId: campaignId },
     });
 
-    console.log("---------> campaignId"+campaignId)
-    console.log(campaignViewed)
+    console.log("---------> campaignId" + campaignId);
+    console.log(campaignViewed);
 
     // sad nalazi athleteId po ovome... (treba da upise dodatno ovoliko !)
     const oneAthlete = await User.findOne({
       where: { email: campaignViewed.friendEmail },
     });
 
-    console.log("---------> oneAthlete "+campaignViewed.friendEmail)
-    console.log(oneAthlete)
-
+    console.log("---------> oneAthlete " + campaignViewed.friendEmail);
+    console.log(oneAthlete);
 
     // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId"
     // znaci izvrsi proveru, da li email supportera (isto je unique zar ne..), matchje neki koji postoji u database. cisto eto moze korisno imat ako treba (za njegovu listu, koga je on supportovao.. (a i fora je, da ako kreira nalog, vidis, isto ce imati pregled koga je supportovao..))
     // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje !
-   
+
     try {
       const oneSupporter = await User.findOne({
         where: { email: supporterEmail },
@@ -6847,39 +6869,31 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       } else {
         var supporterId = "";
       }
-    } catch(e) {
-      console.log(e.stack)
+    } catch (e) {
+      console.log(e.stack);
     }
-  
 
     // treba, da odma matchujes i drzavu ovde u "where", da imas manje da trazis i kucas. da preko athlete odmah da ih imas sve tu..
 
     try {
-
-       // on nadje koji ima.. u Coupons
+      // on nadje koji ima.. u Coupons
       var oneCoupon = await Couponcodes.findOne({
-           where: {
-           couponCode: discountCode, 
-           isCouponActive: 1,
-           country: oneAthlete.nationality.toUpperCase(), 
-        },  
+        where: {
+          couponCode: discountCode,
+          isCouponActive: 1,
+          country: oneAthlete.nationality.toUpperCase(),
+        },
       });
-      console.log("OVDE NE RADI ")
-      console.log(discountCode)
-      console.log(oneAthlete.nationality.toUpperCase())
-      
-      console.log(oneCoupon)
+      console.log("OVDE NE RADI ");
+      console.log(discountCode);
+      console.log(oneAthlete.nationality.toUpperCase());
 
-
-
-
+      console.log(oneCoupon);
     } catch (e) {
       console.log(e.stack);
     }
-   
 
-
-    if (!oneCoupon || typeof oneCoupon === "undefined" ) {
+    if (!oneCoupon || typeof oneCoupon === "undefined") {
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
@@ -6914,21 +6928,18 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
         ) {
           try {
-
             await oneCoupon.update({
               couponTimesUsed: oneCoupon.couponTimesUsed + 1,
               spentAmount: newSpentAmount,
             }); // azurira samo taj
 
-
             // i azurira status transakcije kao "success", eto da je full-ed
-            await campaignViewed.update({payment_status: "succeeded"})
-
+            await campaignViewed.update({ payment_status: "succeeded" });
 
             // i u athlete mora da azurira + tolko amount donated...
-            await oneAthlete.update({ donatedAmount: oneAthlete.donatedAmount + newAmount})
-
-
+            await oneAthlete.update({
+              donatedAmount: oneAthlete.donatedAmount + newAmount,
+            });
           } catch (error) {
             console.log(error.stack);
           }
@@ -6949,20 +6960,15 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         // ! evo ovde
         //  var amount = calculateDonateWithDiscountOnly(currentDate,expiryDate,newAmount,newSpentAmount);
 
-       
-
         const supporter_data = {
           campaignId,
           athleteId: oneAthlete.userId,
 
           supporterId,
 
-
           supporterEmail,
           supporterName,
           supporterComment,
-
-         
 
           countryAthleteIsIn: oneAthlete.nationality,
 
@@ -6971,52 +6977,37 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
         await Statscampaign.create(supporter_data);
 
-
         res.status(200).json({ message: "coupon confirmed" });
-
       } catch (e) {
         console.log(e.stack);
       }
     }
-
-   
   } catch (e) {
     console.log(e.stack);
   }
 };
 
-
-
-
 const listAllCampaigns = async (req, res) => {
   const campaignId = req.query.campaignId;
 
-
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
-
-
 
   const filterGender = req.query.filterGender;
   const filterNationality_selected = req.query.filterNationality_selected;
   const searchFirstNameText = req.query.searchFirstNameText;
   const searchFamilyNameText = req.query.searchFamilyNameText;
 
-  console.log("----------listAllCampaigns----------")
-  console.log(filterGender)
+  console.log("----------listAllCampaigns----------");
+  console.log(filterGender);
 
-  console.log(filterNationality_selected)
-  console.log(searchFirstNameText)
-  console.log(searchFamilyNameText)
-
+  console.log(filterNationality_selected);
+  console.log(searchFirstNameText);
+  console.log(searchFamilyNameText);
 
   try {
-
-
-
-
     const allCampaigns = await Campaign.findAll({
-    /*  where: {
+      /*  where: {
 
       friendGender: {
         [Op.like]: `${filterGender}`,  // Partial match for first name
@@ -7039,51 +7030,39 @@ const listAllCampaigns = async (req, res) => {
       },  */
 
       where: {
-
-         friendGender: {
+        friendGender: {
           [Op.like]: `%${filterGender}%`,
         },
         friendNationality: {
           [Op.like]: `%${filterNationality_selected}%`,
-        }, 
-
+        },
 
         friendName: {
           [Op.like]: `%${searchFirstNameText}%`,
         },
         friendFamilyName: {
           [Op.like]: `%${searchFamilyNameText}%`,
-        }, 
+        },
       },
-     order: [["updatedAt", "DESC"]],
-    limit: limit,
-    offset: offset,
+      order: [["updatedAt", "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
 
-
-  });
-
-    
-   /*  // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
+    /*  // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
     const thatAthlete = await User.findOne({
       where: {
         email: oneCampaign.friendEmail,
       },
     });  */
-   
 
+    res.json(allCampaigns);
 
-  res.json(allCampaigns);
-
-
-  //  return res.status(200).json({ oneCampaign, thatAthlete });
-
+    //  return res.status(200).json({ oneCampaign, thatAthlete });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
-
-
 };
-
 
 module.exports = {
   // update_rank_data,
@@ -7109,7 +7088,6 @@ module.exports = {
   lastTransactionsSupportersCampaign,
 
   donateOnlyWithDiscountCode,
-
 
   listAllCampaigns,
 };
