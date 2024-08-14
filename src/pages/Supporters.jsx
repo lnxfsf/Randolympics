@@ -324,6 +324,8 @@ const Supporters = () => {
     // makes it for them
     makeCampaign(tempDoCreateSupporterAccount);
 
+    informOtherSupporters();
+
     setThirdIsVisible(false);
     setFourthIsVisible(true);
 
@@ -479,7 +481,7 @@ const Supporters = () => {
                 // signedByFriend: true,
                 campaignURL: urlForCampaign,
     
-                additionalSupporterEmailsToSendTo: additionalSupportersFormData,
+              
                 signingAsSupporter: true,
               }
             );
@@ -599,6 +601,55 @@ const Supporters = () => {
 
     // update supporterStats ! polja..
   };
+
+  const informOtherSupporters = async () => {
+
+    console.log("on izvrsava ovaj informOtherSupporters")
+
+    console.log(JSON.stringify(additionalSupportersFormData));
+
+      try {
+
+        
+
+        const responseSupporterUser = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/listsData/informOtherSupporters`,
+          {
+           
+             additionalSupporterEmailsToSendTo: JSON.stringify(additionalSupportersFormData), 
+              campaignURL: urlForCampaign,
+              name: friendName,
+            
+          }
+        );
+
+
+
+      } catch (error) {
+        console.log(error)
+
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.status === 409) {
+            setSnackbarMessage(error.response.data.message);
+            setOpenSnackbarFailure(true);
+          } else {
+            setSnackbarMessage(
+              "An error occurred: " +
+                (error.response?.data?.message || error.message)
+            );
+            setOpenSnackbarFailure(true);
+          }
+        } else {
+          /*    alert("An unexpected error occurred: " + error.message); */
+          setSnackbarMessage(
+            "An unexpected error occurred: " + error.message
+          );
+          setOpenSnackbarFailure(true);
+        }
+      }
+
+
+  }
 
   console.log("urlForCampaign ------------>  " + urlForCampaign);
 
@@ -728,7 +779,7 @@ const Supporters = () => {
 
   const [amount, setAmount] = useState(10);
 
-  useEffect(() => {}, [amount]);
+  useEffect(() => {}, [amount, additionalSupportersFormData]);
 
   // ? for FilePond
   return (
@@ -1660,6 +1711,8 @@ const Supporters = () => {
             Inform additional supporters ?
           </p>
 
+          
+          
           <div className="flex flex-col justify-start w-">
             {additionalSupportersFormData.map((data, index) => (
               <div
