@@ -13,6 +13,8 @@ const { rankingTop50, otherUsers, lastInRank,
            donateOnlyWithDiscountCode,
 
            listAllCampaigns,
+
+           informOtherSupporters,
            
         
         } = require("../controllers/listDataControllers");
@@ -81,6 +83,9 @@ router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
 router.get("/listAllCampaigns",listAllCampaigns)
 
 
+
+// inform all those other supporters, of this link
+router.post("/informOtherSupporters", informOtherSupporters)
 
   
 

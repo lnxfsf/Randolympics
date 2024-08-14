@@ -7064,6 +7064,56 @@ const listAllCampaigns = async (req, res) => {
   }
 };
 
+
+
+
+
+const informOtherSupporters = async (req,res) => {
+
+  /* additionalSupporterEmailsToSendTo, */
+  const { campaignURL, name  } = req.body;
+
+  const additionalSupporterEmailsToSendTo = JSON.parse(req.body.additionalSupporterEmailsToSendTo);
+
+  
+  
+  
+
+  try {
+
+ 
+   if (additionalSupporterEmailsToSendTo) {
+    additionalSupporterEmailsToSendTo.forEach((user) => {
+      console.log("salje li on nesto: " + user.email);
+
+      sendEmail(
+        user.email,
+        "Invitation to participate in Randolympics",
+        `We're signing up ${name} to participate in campaign.
+
+        Check him <a href=${campaignURL}>out here</a>
+
+      
+      
+      
+      
+      
+      
+      `
+      );
+    });
+  } 
+
+} catch (e){
+  console.log(e.stack);
+}
+
+
+
+  
+} 
+
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -7090,4 +7140,7 @@ module.exports = {
   donateOnlyWithDiscountCode,
 
   listAllCampaigns,
+
+  informOtherSupporters,
+
 };

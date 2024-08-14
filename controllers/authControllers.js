@@ -213,16 +213,13 @@ const register = async (req, res) => {
     supporterComment,
 
     sendEmailToFriend, // should we send it to friend ! (invitation ! )
-    additionalSupporterEmailsToSendTo,
+    
 
     signingAsSupporter, // then if those are empty, we avoid checking them.. (as we don't need to signup them (later on, if password is provided, then we make account, if not, then we don't. do it in backend here, so, no user can mess with this...)..)
   } = req.body;
 
-  console.log(
-    "additionalSupporterEmailsToSendTo je:: " +
-      additionalSupporterEmailsToSendTo
-  );
-  console.log(additionalSupporterEmailsToSendTo);
+  
+  
 
   // if he's signedByFriend , then we generate password
   if (signedByFriend) {
@@ -447,33 +444,10 @@ const register = async (req, res) => {
         `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
       );
 
-      console.log(
-        "daje li on nesto ovde alo additionalSupporterEmailsToSendTo"
-      );
-      console.log(additionalSupporterEmailsToSendTo);
+      
+      
 
-      // and then inform additional supporters..
-      if (additionalSupporterEmailsToSendTo) {
-        additionalSupporterEmailsToSendTo.forEach((user) => {
-          console.log("salje li on nesto: " + user.email);
-
-          sendEmail(
-            user.email,
-            "Invitation to participate in Randolympics",
-            `We're signing up ${name} to participate in campaign.
-
-            Check him <a href=${campaignURL}>out here</a>
-
-          
-          
-          
-          
-          
-          
-          `
-          );
-        });
-      }
+     
     }
 
     res.status(201).json({
@@ -821,9 +795,6 @@ const campaignDoesUserExist = async (req, res) => {
   }
 };
 
-
-
-
 const campaignIsSupporterPassCorrect = async (req, res) => {
   const { email, password } = req.query;
 
@@ -880,6 +851,8 @@ const campaignIsSupporterPassCorrect = async (req, res) => {
     console.log(e.stack);
   }
 };
+
+
 
 module.exports = {
   register,
