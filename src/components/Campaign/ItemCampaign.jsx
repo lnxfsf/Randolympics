@@ -85,9 +85,9 @@ const ItemCampaign = () => {
   );
 
   const [amount, setAmount] = useState(10);
-  const [supporterName, setSupporterName] = useState();
-  const [supporterEmail, setSupporterEmail] = useState();
-  const [supporterComment, setSupporterComment] = useState();
+  const [supporterName, setSupporterName] = useState("");
+  const [supporterEmail, setSupporterEmail] = useState("");
+  const [supporterComment, setSupporterComment] = useState("");
 
   const [howManySupporters, setHowManySupporters] = useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
@@ -99,6 +99,8 @@ const ItemCampaign = () => {
   const [discountCode, setDiscountCode] = useState();
 
   const [payment, setPayment] = useState(false);
+
+  const [showAllSupporters, setShowAllSupporters] = useState(false);
 
   const donateWithCouponOnly = async () => {
     try {
@@ -113,6 +115,13 @@ const ItemCampaign = () => {
           supporterComment: supporterComment,
         }
       );
+
+
+      if (response.status === 200) {
+
+          alert("donated")
+      }
+
     } catch (e) {
       console.log(e.stack);
     }
@@ -232,7 +241,7 @@ const ItemCampaign = () => {
     <>
       {campaign && athlete && (
         <>
-          {!payment && (
+          {!payment && !showAllSupporters && (
             <div
               className="flex"
               style={{
@@ -478,7 +487,12 @@ const ItemCampaign = () => {
               </a>
  */}
 
-                <p className="flex justify-center items-center underline cursor-pointer select-none mt-2 mb-2">
+                <p
+                  onClick={() => {
+                    setShowAllSupporters(true);
+                  }}
+                  className="flex justify-center items-center underline cursor-pointer select-none mt-2 mb-2"
+                >
                   Show all supporters
                 </p>
 
@@ -501,19 +515,17 @@ const ItemCampaign = () => {
             </div>
           )}
 
-          {payment && (
-           
-           <div className="flex flex-col items-center "
-           style={{
-            backgroundImage: "url('/supporters/supporter5.png')",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            zIndex: -1,
-            backgroundPosition: "center",
-          }}
-
-           
-           >
+          {payment && !showAllSupporters && (
+            <div
+              className="flex flex-col items-center "
+              style={{
+                backgroundImage: "url('/supporters/supporter5.png')",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                zIndex: -1,
+                backgroundPosition: "center",
+              }}
+            >
               <div className="flex justify-center items-center flex-col mt-8">
                 <p className="text-2xl ">Supporter info</p>
 
@@ -610,8 +622,6 @@ const ItemCampaign = () => {
                   </p> */}
               </div>
 
-              
-
               <div className="border-2 flex flex-col justify-center items-center p-4 mt-8 w-[50%]">
                 <p className="underline text-red_first">Note:</p>
                 <p>
@@ -683,7 +693,9 @@ const ItemCampaign = () => {
                     }}
                     style={{
                       backgroundColor: ` ${
-                        amount === 100 ? "rgba(175, 38, 38, 0.5)" : "transparent"
+                        amount === 100
+                          ? "rgba(175, 38, 38, 0.5)"
+                          : "transparent"
                       }`,
                     }}
                   >
@@ -709,8 +721,6 @@ const ItemCampaign = () => {
                     </QueryProvider>
                   </ThemeProvider>
                 </div>
-
-             
               </div>
 
               <div className="m-4 flex justify-center  items-center flex-col">
@@ -737,34 +747,115 @@ const ItemCampaign = () => {
                   style={{ backgroundColor: "#0000ff", color: "#fff" }}
                   className="m-4 rounded-lg p-2"
                   onClick={donateWithCouponOnly}
+
                 >
                   Donate with coupon only
                 </button>
               </div>
 
               <Button
-                  onClick={() => {
-                    setPayment(false);
-                  }}
-                  className="w-56"
-                  style={{ marginTop: "25px", marginBottom: "25px" }}
-                  sx={{
-                    height: "50px",
-                    bgcolor: "#AF2626",
-                    color: "#fff",
-                    borderRadius: 4,
-                    border: `1px solid #FFF`,
-                    "&:hover": {
-                      background: "rgb(175, 38, 38)",
-                      color: "white",
-                      border: `1px solid rgb(175, 38, 38)`,
-                    },
-                  }}
-                  id="join-the-fun-btn"
-                >
-                  <span className="popins-font">Back</span>
-                </Button>
+                onClick={() => {
+                  setPayment(false);
+                }}
+                className="w-56"
+                style={{ marginTop: "25px", marginBottom: "25px" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 4,
+                  border: `1px solid #FFF`,
+                  "&:hover": {
+                    background: "rgb(175, 38, 38)",
+                    color: "white",
+                    border: `1px solid rgb(175, 38, 38)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <span className="popins-font">Back</span>
+              </Button>
             </div>
+          )}
+
+          {showAllSupporters && (
+            <>
+              <div
+                style={{
+                  backgroundImage: "url('/supporters/supporter5.png')",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  zIndex: -1,
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="flex justify-end p-4 ">
+                  <p
+                    className="underline cursor-pointer select-none"
+                    onClick={() => {
+                      setShowAllSupporters(false);
+                    }}
+                  >
+                    Back
+                  </p>
+                </div>
+
+
+
+             
+             
+                <div className="flex w-full justify-center items-center ">
+
+                  <div className="flex justify-center items-center flex-col w-[90%]">
+                    <p className="text-2xl">{athlete.name}'s supporters:</p>
+
+
+                    <div className="flex w-full flex-col mt-8">
+                    {lastTransactionsSupporters &&
+                      lastTransactionsSupporters.map((item, index) => (
+                        <>
+                          <div className="flex w-full flex-col justify-start items-start ">
+                            
+                            <div className="flex w-full border-l-2  items-center m-0 ml-1 mb-0 pb-0 p-0 justify-between  ">
+                              <p key={index} className=" pl-2 ">
+                                <span className="font-semibold">
+                                  Supporter #{index + 1}:
+                                </span>{" "}
+                                {item.supporterName}
+                              </p>
+
+                              <div className="flex ">
+                                <p>
+                                  <span className="font-semibold"></span> $
+                                  {item.amount / 100}
+                                </p>
+                              </div>
+                            </div>
+
+                            <p className="text-sm m-1 mb-0 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">
+                              {item.supporterComment}
+                            </p>
+                          </div>
+                        </>
+                      ))}
+                  </div>
+
+
+                  </div>
+
+
+
+                </div>
+                {lastTransactionsSupporters && (
+                  <p className="flex justify-center mt-6 mb-6">
+                    Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
+                    USD to become the top supporter of this campaign !
+                  </p>
+                )}
+
+
+              </div>
+            </>
           )}
         </>
       )}
