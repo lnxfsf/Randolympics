@@ -320,11 +320,13 @@ const Supporters = () => {
       return;
     }
 
+    
+    // makes it for them
+    makeCampaign(tempDoCreateSupporterAccount);
+
     setThirdIsVisible(false);
     setFourthIsVisible(true);
 
-    // makes it for them
-    makeCampaign(tempDoCreateSupporterAccount);
   };
 
   // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
@@ -412,103 +414,120 @@ const Supporters = () => {
 
       if (responseCampaign.status === 201) {
         /*  alert("created campaign in database"); */
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-    // and then makes those two accounts. athlete and supporter !
-    // signs up friend first !
-    try {
-      // this is for athlete register
-      var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/auth/register`,
-        {
-          user_type: "AH",
-          email: friendEmail,
-          email_private: true,
-          phone_private: true,
-          weight_private: true,
-          name: friendName,
-          middleName: friendMiddleName,
-          lastName: friendLastName,
-          phone: friendPhone,
-          nationality: friendNationality,
-          weight: "0",
-          cryptoaddress: "",
-          picture: friendImage,
-          cryptoaddress_type: "BTC",
-          bio: "",
-          gender: friendGender,
-
-          signedByFriend: true,
-          supporterName: supporterName,
-          campaignURL: urlForCampaign,
-
-          sendEmailToFriend: sendEmailToFriend,
-        }
-      );
-
-      if (response.status === 201) {
-        console.log("athleteId" + response.data.userId);
-        athleteId = response.data.userId;
-
-        /*  alert("athlete user created"); */
-
-        if(doCreateSupporterAccount || tempDoCreateSupporterAccount){
-
-        // ? creating user for supporter
-        // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
-        var responseSupport = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/auth/register`,
-          {
-            user_type: "SPT",
-            email: supporterEmail,
-            password: supporterPassword,
-            email_private: true,
-            phone_private: true,
-            weight_private: true,
-            name: supporterName,
-            /*  middleName: friendMiddleName,
-              lastName: friendLastName, */
-            phone: supporterPhone,
-            /*  nationality: friendNationality, */
-            weight: "0",
-            cryptoaddress: "",
-            /*  picture: friendImage, */
-            cryptoaddress_type: "BTC",
-            bio: "",
-            gender: "M", // we don't actually need gender for supporter
-            supporterComment,
-            // signedByFriend: true,
-            campaignURL: urlForCampaign,
-
-            additionalSupporterEmailsToSendTo: additionalSupportersFormData,
-            signingAsSupporter: true,
-          }
-        );
-
-        if (responseSupport.status === 201) {
-          supporterId = response.data.userId;
-
-          alert("PRAVIO JESTE SUPPORTER-A")
-
-
-          setSnackbarMessage("Created campaign");
-          setOpenSnackbarSuccess(true);
-        }
-      } else {
-
-        alert("NIJE PRAVIO SUPPORTER-A")
-        // if we don't create supporter account, but still we did created campaign.. with what we have
-        setSnackbarMessage("Created campaign");
-        setOpenSnackbarSuccess(true);
-      }
 
         try {
+          // this is for athlete register
+          var response = await axios.post(
+            `${BACKEND_SERVER_BASE_URL}/auth/register`,
+            {
+              user_type: "AH",
+              email: friendEmail,
+              email_private: true,
+              phone_private: true,
+              weight_private: true,
+              name: friendName,
+              middleName: friendMiddleName,
+              lastName: friendLastName,
+              phone: friendPhone,
+              nationality: friendNationality,
+              weight: "0",
+              cryptoaddress: "",
+              picture: friendImage,
+              cryptoaddress_type: "BTC",
+              bio: "",
+              gender: friendGender,
+    
+              signedByFriend: true,
+              supporterName: supporterName,
+              campaignURL: urlForCampaign,
+    
+              sendEmailToFriend: sendEmailToFriend,
+            }
+          );
+    
+          if (response.status === 201) {
+            console.log("athleteId" + response.data.userId);
+            athleteId = response.data.userId;
+    
+            /*  alert("athlete user created"); */
+    
+            if(doCreateSupporterAccount || tempDoCreateSupporterAccount){
+    
+            // ? creating user for supporter
+            // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
+            var responseSupport = await axios.post(
+              `${BACKEND_SERVER_BASE_URL}/auth/register`,
+              {
+                user_type: "SPT",
+                email: supporterEmail,
+                password: supporterPassword,
+                email_private: true,
+                phone_private: true,
+                weight_private: true,
+                name: supporterName,
+                /*  middleName: friendMiddleName,
+                  lastName: friendLastName, */
+                phone: supporterPhone,
+                /*  nationality: friendNationality, */
+                weight: "0",
+                cryptoaddress: "",
+                /*  picture: friendImage, */
+                cryptoaddress_type: "BTC",
+                bio: "",
+                gender: "M", // we don't actually need gender for supporter
+                supporterComment,
+                // signedByFriend: true,
+                campaignURL: urlForCampaign,
+    
+                additionalSupporterEmailsToSendTo: additionalSupportersFormData,
+                signingAsSupporter: true,
+              }
+            );
+    
+            if (responseSupport.status === 201) {
+              supporterId = response.data.userId;
+    
+              
+    
+    
+              setSnackbarMessage("Created campaign");
+              setOpenSnackbarSuccess(true);
+            }
+          } else {
+    
+            
+            // if we don't create supporter account, but still we did created campaign.. with what we have
+            setSnackbarMessage("Created campaign");
+            setOpenSnackbarSuccess(true);
+          }
+    
+            try {
+            } catch (error) {
+              console.log(error);
+    
+              if (axios.isAxiosError(error)) {
+                if (error.response && error.response.status === 409) {
+                  setSnackbarMessage(error.response.data.message);
+                  setOpenSnackbarFailure(true);
+                } else {
+                  setSnackbarMessage(
+                    "An error occurred: " +
+                      (error.response?.data?.message || error.message)
+                  );
+                  setOpenSnackbarFailure(true);
+                }
+              } else {
+                /*    alert("An unexpected error occurred: " + error.message); */
+                setSnackbarMessage(
+                  "An unexpected error occurred: " + error.message
+                );
+                setOpenSnackbarFailure(true);
+              }
+            }
+          }
         } catch (error) {
           console.log(error);
-
+    
           if (axios.isAxiosError(error)) {
             if (error.response && error.response.status === 409) {
               setSnackbarMessage(error.response.data.message);
@@ -522,33 +541,61 @@ const Supporters = () => {
             }
           } else {
             /*    alert("An unexpected error occurred: " + error.message); */
-            setSnackbarMessage(
-              "An unexpected error occurred: " + error.message
-            );
+            setSnackbarMessage("An unexpected error occurred: " + error.message);
             setOpenSnackbarFailure(true);
           }
         }
+
+
+
+
+
       }
     } catch (error) {
-      console.log(error);
+
 
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.status === 409) {
           setSnackbarMessage(error.response.data.message);
           setOpenSnackbarFailure(true);
+
+            // we stay at same page. 
+           setThirdIsVisible(true); 
+           setFourthIsVisible(false); 
+ 
+          return;
+
         } else {
           setSnackbarMessage(
             "An error occurred: " +
               (error.response?.data?.message || error.message)
           );
           setOpenSnackbarFailure(true);
+
+          // we stay at same page. 
+          setThirdIsVisible(true); 
+          setFourthIsVisible(false); 
+ 
+
+          return;
         }
       } else {
         /*    alert("An unexpected error occurred: " + error.message); */
         setSnackbarMessage("An unexpected error occurred: " + error.message);
         setOpenSnackbarFailure(true);
+
+         // we stay at same page. 
+         setThirdIsVisible(true); 
+         setFourthIsVisible(false);  
+
+        return true;
       }
+
     }
+
+    // and then makes those two accounts. athlete and supporter !
+    // signs up friend first !
+   
 
     // update supporterStats ! polja..
   };
