@@ -435,7 +435,7 @@ const ItemCampaign = () => {
                   ))}
               </div> */}
 
-                <div className="flex w-full ">
+                <div className="flex w-full flex-col ">
                   {lastTransactionsSupporters &&
                     lastTransactionsSupporters.map((item, index) => (
                       <>
