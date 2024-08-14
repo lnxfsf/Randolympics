@@ -199,6 +199,28 @@ const Supporters = () => {
   }
 
 
+  const validateSupporter = async () => {
+
+
+    
+    if(supporterName === ""){
+      setSnackbarMessage("Insert your name")
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+
+
+    
+    setThirdIsVisible(false);
+    setFourthIsVisible(true);
+
+
+    // makes it for them
+    makeCampaign();
+
+
+  }
 
 
 
@@ -1612,11 +1634,8 @@ onChange={(event) => handleInputChange(index, event)}
 
 <Button
           onClick={() => {
-
             setSecondIsVisible(true); 
-            setThirdIsVisible(false);
-
-          }}
+            setThirdIsVisible(false); }}
           className="w-56"
           style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
@@ -1638,12 +1657,7 @@ onChange={(event) => handleInputChange(index, event)}
 
 
         <Button
-          onClick={async () => {
-            setThirdIsVisible(false);
-            setFourthIsVisible(true);
-
-            makeCampaign();
-          }}
+          onClick={validateSupporter}
           className="w-56"
           style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
