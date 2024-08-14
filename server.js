@@ -24,7 +24,7 @@ const app = express();
 const Campaign = db.campaign;
 const User = db.users;
 const Statscampaign = db.statscampaign;
-const Couponcodes = db.couponcodes;
+const Couponcodes = db.couponcode;
 
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);

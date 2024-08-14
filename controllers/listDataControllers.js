@@ -5,7 +5,7 @@ const User = db.users;
 const Traffic = db.traffic;
 const Campaign = db.campaign;
 const Statscampaign = db.statscampaign;
-const Couponcodes = db.couponcodes;
+const Couponcodes = db.couponcode;
 
 const Sequelize = db.Sequelize;
 
@@ -6602,7 +6602,7 @@ const makePayment = async (req, res) => {
         // find athleteId (so we increase his donatedAmount when we confirm payment)
 
         // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
-        const campaignViewed = await Campaign.findOne({
+        var campaignViewed = await Campaign.findOne({
           where: { campaignId: campaignId },
         });
 
@@ -6823,7 +6823,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     console.log("---------> campaignId"+campaignId)
     console.log(campaignViewed)
 
-    // sad nalazi athleteId po ovome...
+    // sad nalazi athleteId po ovome... (treba da upise dodatno ovoliko !)
     const oneAthlete = await User.findOne({
       where: { email: campaignViewed.friendEmail },
     });
@@ -6860,7 +6860,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       var oneCoupon = await Couponcodes.findOne({
            where: {
            couponCode: discountCode, 
-          isCouponActive: 1,
+           isCouponActive: 1,
            country: oneAthlete.nationality.toUpperCase(), 
         },  
       });
@@ -6924,6 +6924,11 @@ const donateOnlyWithDiscountCode = async (req, res) => {
             // i azurira status transakcije kao "success", eto da je full-ed
             await campaignViewed.update({payment_status: "succeeded"})
 
+
+            // i u athlete mora da azurira + tolko amount donated...
+            await oneAthlete.update({ donatedAmount: oneAthlete.donatedAmount + newAmount})
+
+
           } catch (error) {
             console.log(error.stack);
           }
@@ -6967,12 +6972,14 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         await Statscampaign.create(supporter_data);
 
 
+        res.status(200).json({ message: "coupon confirmed" });
+
       } catch (e) {
         console.log(e.stack);
       }
     }
 
-    res.status(200).json({ message: "coupon confirmed" });
+   
   } catch (e) {
     console.log(e.stack);
   }

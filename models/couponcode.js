@@ -1,7 +1,7 @@
 
 
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define("couponcodes", {
+  return sequelize.define("couponcode", {
    
     couponId: {
       type: DataTypes.INTEGER,
@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
     },
 
     couponCode: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(6),
+
 
     },
     

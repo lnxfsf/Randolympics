@@ -14,6 +14,7 @@ module.exports = function (sequelize, DataTypes) {
 
     friendMiddleName: {
       type: DataTypes.STRING(255),
+      defaultValue: "",
     },
 
 
