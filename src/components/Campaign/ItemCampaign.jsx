@@ -244,7 +244,7 @@ const ItemCampaign = () => {
               }}
             >
               <div
-                className="flex  basis-8/12 justify-between pr-0"
+                className="flex  basis-5/12 justify-between pr-0"
                 style={{ backgroundColor: `${colorStatusGoing}` }}
               >
                 <div className="flex flex-col grow">
