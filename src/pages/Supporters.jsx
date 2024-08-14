@@ -1689,7 +1689,7 @@ onChange={(event) => handleInputChange(index, event)}
           </button>
         </div>
 
-        <But<ton
+        <Button
           onClick={() => {
             setFourthIsVisible(false);
             setFifthIsVisible(true);
