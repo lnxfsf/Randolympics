@@ -497,7 +497,7 @@ const ItemCampaign = () => {
                   Show all supporters
                 </p>
 
-                {lastTransactionsSupporters && lastTransactionsSupporters.length > 1 && (
+                {lastTransactionsSupporters && lastTransactionsSupporters.length >= 1 && (
                   <p className="flex justify-center mt-6 mb-6">
                     Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
                     USD to become the top supporter of this campaign !
