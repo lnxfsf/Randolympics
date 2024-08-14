@@ -13,11 +13,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 import TextField from "@mui/material/TextField";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef} from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
 import "../styles/supporters.scoped.scss";
+
+
 
 // MUI
 import IconButton from "@mui/material/IconButton";
@@ -32,6 +34,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 
 import dayjs from "dayjs";
@@ -73,6 +76,13 @@ import { QueryProvider } from "../QueryProvider";
 import DonationForm from "./DonationForm";
 import DonationFormItemCampaign from "./DonationFormItemCampaign";
 
+
+
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
+
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginFilePoster,
@@ -83,10 +93,7 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
-
-import AuthCode from 'react-auth-code-input';
-
-
+import AuthCode from "react-auth-code-input";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -131,7 +138,101 @@ const sxTextField = {
 const campaignId = uuidv4();
 
 const Supporters = () => {
+
+
+
   
+  const validateAthlete = () => {
+    
+
+        
+    if(friendName === ""){
+      setSnackbarMessage("Insert athlete first name")
+      setOpenSnackbarFailure(true);
+     
+      return;
+    }
+
+
+         
+    if(friendLastName === ""){
+      setSnackbarMessage("Insert athlete last name")
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+
+    
+
+    
+    if(friendEmail === ""){
+      setSnackbarMessage("Insert email")
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if(!emailRegex.test(friendEmail)){
+      setSnackbarMessage("Email is incorrect !")
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+
+    
+
+    if(friendNationality === ""){
+      setSnackbarMessage("Choose country")
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+
+
+    // ako je sve proslo onda ide okej ovde (nema return ..)
+      setSecondIsVisible(false);
+      setThirdIsVisible(true);
+
+
+
+  }
+
+
+
+
+
+
+
+  // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
+  const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
+  const [openSnackbarFailure, setOpenSnackbarFailure] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("")
+
+      
+      const handleSnackbarSuccessClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbarSuccess(false);
+    };
+
+
+
+        
+      const handleSnackbarFailureClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbarFailure(false);
+      };
+
+
+
+
+
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
 
@@ -195,7 +296,7 @@ const Supporters = () => {
       );
 
       if (responseCampaign.status === 201) {
-       /*  alert("created campaign in database"); */
+        /*  alert("created campaign in database"); */
       }
     } catch (error) {
       console.log(error);
@@ -244,7 +345,7 @@ const Supporters = () => {
           console.log("athleteId" + response.data.userId);
           athleteId = response.data.userId;
 
-         /*  alert("athlete user created"); */
+          /*  alert("athlete user created"); */
 
           // ? creating user for supporter
           // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
@@ -281,7 +382,7 @@ const Supporters = () => {
           if (responseSupport.status === 201) {
             // navigate(`/campaign/${campaignId}`);
             // ovo u toj funkciji tek ipak !
-          /*   alert("creates supporter account"); */
+            /*   alert("creates supporter account"); */
 
             supporterId = response.data.userId;
           }
@@ -334,6 +435,8 @@ const Supporters = () => {
 
     // update supporterStats ! polja..
   };
+
+
 
   console.log("urlForCampaign ------------>  " + urlForCampaign);
 
@@ -402,6 +505,8 @@ const Supporters = () => {
       console.log(e.stack);
     }
   };
+
+
 
   // ? for FilePond
 
@@ -473,7 +578,7 @@ const Supporters = () => {
 
       {firstIsVisible && (
         <>
-         {/*  <img
+          {/*  <img
             src="supporters/supporter1op.png"
             style={{
               position: "absolute",
@@ -490,8 +595,7 @@ const Supporters = () => {
 
       {secondIsVisible && (
         <>
-
-         {/*  <img
+          {/*  <img
             src="supporters/supporter2.png"
             style={{
               position: "absolute",
@@ -504,12 +608,12 @@ const Supporters = () => {
             }}
 
           /> */}
-        </> 
+        </>
       )}
 
       {thirdIsVisible && (
         <>
-        {/*   <img
+          {/*   <img
             src="supporters/supporter3.png"
             style={{
               position: "absolute",
@@ -526,7 +630,7 @@ const Supporters = () => {
 
       {fourthIsVisible && (
         <>
-         {/*  <img
+          {/*  <img
             src="supporters/supporter4.png"
             style={{
               position: "absolute",
@@ -543,7 +647,7 @@ const Supporters = () => {
 
       {fifthIsVisible && (
         <>
-         {/*  <img
+          {/*  <img
             src="supporters/supporter5.png"
             style={{
               position: "absolute",
@@ -566,18 +670,13 @@ const Supporters = () => {
         className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
         } `}
-      
-        style={{backgroundImage: "url('/supporters/supporter1op.png')", 
+        style={{
+          backgroundImage: "url('/supporters/supporter1op.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-          
-         }}
-      
-      
-      
-      
+        }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -652,16 +751,13 @@ const Supporters = () => {
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           secondIsVisible ? "show" : "hide"
         } `}
-
-
-
-        style={{backgroundImage: "url('/supporters/supporter2.png')", 
+        style={{
+          backgroundImage: "url('/supporters/supporter2.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-          
-         }}
+        }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -674,9 +770,8 @@ const Supporters = () => {
               </p>
 
               <div className="flex ">
-
                 <div className="flex flex-col w-full">
-                  <div className="flex justify-start gap-2 items-center ">
+                  <div className="flex justify-start gap-2 items-baseline ">
                     <div className="flex flex-col justify-start">
                       <TextField
                         variant="standard"
@@ -684,7 +779,7 @@ const Supporters = () => {
                         onChange={(e) => {
                           setFriendName(e.target.value);
                         }}
-                        label="Name"
+                        label="First Name *"
                         placeholder="John"
                         id="name"
                         name="name"
@@ -700,11 +795,12 @@ const Supporters = () => {
                     <div className="flex flex-col justify-start">
                       <TextField
                         variant="standard"
+                        helperText="(optional)"
                         value={friendMiddleName}
                         onChange={(e) => {
                           setFriendMiddleName(e.target.value);
                         }}
-                        label="Middle name"
+                        label="Middle Name"
                         placeholder="John"
                         id="name"
                         name="name"
@@ -743,7 +839,7 @@ const Supporters = () => {
                         onChange={(e) => {
                           setFriendLastName(e.target.value);
                         }}
-                        label="Last name"
+                        label="Last Name *"
                         placeholder="Doe"
                         type="text"
                         inputProps={{
@@ -755,7 +851,7 @@ const Supporters = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-start items-center gap-2">
+                  <div className="flex justify-start items-baseline gap-2">
                     <div className="flex flex-col justify-start">
                       <TextField
                         variant="standard"
@@ -763,9 +859,9 @@ const Supporters = () => {
                         onChange={(e) => {
                           setFriendEmail(e.target.value);
                         }}
-                        label="Email"
+                        label="Email *"
                         placeholder="Email Address"
-                        type="text"
+                        type="email"
                         inputProps={{
                           maxLength: 255,
                         }}
@@ -777,6 +873,7 @@ const Supporters = () => {
                     <div className="flex flex-col justify-start">
                       <TextField
                         variant="standard"
+                        helperText="(optional)"
                         value={friendPhone}
                         onChange={(e) => {
                           setFriendPhone(e.target.value);
@@ -793,34 +890,38 @@ const Supporters = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-start items-center gap-2 mt-2">
+                  <div className="flex justify-start items-baseline gap-2 mt-2">
                     <div className="flex mb-1 justify-center items-center flex-col ">
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={["DatePicker"]}>
-                          <DatePicker
-                            style={{ backgroundColor: "#fff" }}
-                            className="w-[280px]"
-                            label="Birthdate"
-                            value={friendBirthdate}
-                            onChange={(date) => {
-                              setFriendBirthdate(date);
-                            }}
-                            format="MMMM DD, YYYY"
-                            sx={{
-                              "& .MuiOutlinedInput-root": {
-                                // backgroundColor: "#fff",
-                                // borderRadius: "15px", // or 5px, according to your design
-                              },
+                      <FormControl>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <DatePicker
+                              style={{ backgroundColor: "#fff" }}
+                              className="w-[260px]"
+                              label="Birthdate"
+                              value={friendBirthdate}
+                              onChange={(date) => {
+                                setFriendBirthdate(date);
+                              }}
+                              format="MMMM DD, YYYY"
+                              sx={{
+                                "& .MuiOutlinedInput-root": {
+                                  // backgroundColor: "#fff",
+                                  // borderRadius: "15px", // or 5px, according to your design
+                                },
 
-                              /*  '& .MuiOutlinedInput-input': {
+                                /*  '& .MuiOutlinedInput-input': {
                         backgroundColor: '#fff',
                         borderRadius: 'inherit', // Ensures consistency
                       },
                     */
-                            }}
-                          />
-                        </DemoContainer>
-                      </LocalizationProvider>
+                              }}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+
+                        <FormHelperText>(optional)</FormHelperText>
+                      </FormControl>
                     </div>
 
                     <div className="flex  justify-center items-center flex-col h-auto">
@@ -838,7 +939,7 @@ const Supporters = () => {
                         searchable={true}
                         id="nationality"
                         name="nationality"
-                        placeholder="Nationality"
+                        placeholder="Nationality *"
                       />
                     </div>
                   </div>
@@ -846,7 +947,7 @@ const Supporters = () => {
                   <div className="flex mt-2 flex-col">
                     <InputLabel id="roleDropdowns">Gender</InputLabel>
                     <Select
-                    variant="standard"
+                      variant="standard"
                       labelId="roleDropdowns"
                       id="roleDropdown"
                       label="gender"
@@ -861,7 +962,6 @@ const Supporters = () => {
                       <MenuItem value={"F"}>Female</MenuItem>
                     </Select>
                   </div>
-
 
                   <FormControl>
                     <RadioGroup
@@ -883,19 +983,17 @@ const Supporters = () => {
                         value="send"
                         control={<Radio />}
                         label={`Send email to ${friendName}`}
-                        sx={{ marginBottom: '0px' }}
+                        sx={{ marginBottom: "0px" }}
                       />
                       <FormControlLabel
                         value="dontsend"
                         control={<Radio />}
                         label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
-                        sx={{ marginTop: '0px' }}
-                     />
+                        sx={{ marginTop: "0px" }}
+                      />
                     </RadioGroup>
                   </FormControl>
                 </div>
-
-
 
                 <div className="ml-2 flex mt-20">
                   <FilePond
@@ -931,11 +1029,7 @@ const Supporters = () => {
                     imageEditAllowEdit={false}
                   />
                 </div>
-
-
               </div>
-
-
             </div>
           </>
         )}
@@ -1085,11 +1179,10 @@ const Supporters = () => {
  */}
 
                 <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
-               
                   <div className="flex mt-0 mb-2 flex-col">
                     <InputLabel id="roleDropdowns">Gender</InputLabel>
                     <Select
-                    variant="standard"
+                      variant="standard"
                       labelId="roleDropdowns"
                       id="roleDropdown"
                       label="gender"
@@ -1159,11 +1252,42 @@ const Supporters = () => {
           </>
         )}
 
-        <Button
+
+<div className="flex gap-4">
+
+
+<Button
           onClick={() => {
+
+            
+            setFirstIsVisible(true);  
             setSecondIsVisible(false);
-            setThirdIsVisible(true);
+            
+
+
           }}
+          className="w-56"
+          style={{ marginTop: "80px", marginBottom: "25px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Previous step</span>
+        </Button>
+
+
+        <Button
+          onClick={validateAthlete}
           className="w-56"
           style={{ marginTop: "80px", marginBottom: "25px" }}
           sx={{
@@ -1182,6 +1306,11 @@ const Supporters = () => {
         >
           <span className="popins-font">Proceed</span>
         </Button>
+
+
+        </div>
+
+
       </div>
 
       {/* treca */}
@@ -1190,29 +1319,23 @@ const Supporters = () => {
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           thirdIsVisible ? "show" : "hide"
         } `}
-
-
-        style={{backgroundImage: "url('/supporters/supporter3.png')", 
+        style={{
+          backgroundImage: "url('/supporters/supporter3.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-          
-         }}
-
-
+        }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12 mb-6">
-        You are camapaign creator for {friendName} !
+          You are camapaign creator for {friendName} !
         </p>
 
         <div className="flex flex-col w-[70%]">
-
           <div className="flex justify-between ">
             <div className="flex flex-col justify-start">
-             
               <TextField
                 variant="standard"
                 value={supporterName}
@@ -1271,9 +1394,6 @@ const Supporters = () => {
             </div>
           </div>
 
-        
-        
-
           <div className="flex justify-center gap-4">
             <TextField
               variant="standard"
@@ -1321,7 +1441,7 @@ const Supporters = () => {
                 ),
               }}
             />
-{/* 
+            {/* 
             <TextField
               variant="standard"
               value={supporterPasswordConfirmation}
@@ -1369,8 +1489,7 @@ const Supporters = () => {
               }}
             /> */}
 
-
-<TextField
+            <TextField
               variant="standard"
               value={supporterComment}
               onChange={(e) => {
@@ -1389,18 +1508,18 @@ const Supporters = () => {
             />
           </div>
 
-
-
-          <p className="text-xl text-center mt-12 mb-6">Inform additional supporters ?</p>
+          <p className="text-xl text-center mt-12 mb-6">
+            Inform additional supporters ?
+          </p>
 
           <div className="flex flex-col justify-start w-">
-           
-
             {additionalSupportersFormData.map((data, index) => (
-              <div className="flex items-start justify-center" key={index} style={{ marginBottom: "10px" }}>
-              
-              
-               {/*  <input
+              <div
+                className="flex items-start justify-center"
+                key={index}
+                style={{ marginBottom: "10px" }}
+              >
+                {/*  <input
                   type="text"
                   name="name"
                   placeholder="Name"
@@ -1408,46 +1527,38 @@ const Supporters = () => {
                   onChange={(event) => handleInputChange(index, event)}
                 /> */}
 
-<TextField
-                variant="standard"
-                value={data.name}
-                onChange={(event) => handleInputChange(index, event)}
-                label="Their Name *"
-                placeholder="John"
-                
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
+                <TextField
+                  variant="standard"
+                  value={data.name}
+                  onChange={(event) => handleInputChange(index, event)}
+                  label="Their Name *"
+                  placeholder="John"
+                  name="name"
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  InputLabelProps={inputLabelPropsTextField}
+                  sx={sxTextField}
+                />
 
-
-<TextField
-                variant="standard"
-                helperText="(optional)"
-                
-                value={data.email}
-                onChange={(event) => handleInputChange(index, event)}
-
-                label="Your Email"
-                placeholder="johndoe@gmail.com"
-               
-                 type="email"
+                <TextField
+                  variant="standard"
+                  helperText="(optional)"
+                  value={data.email}
+                  onChange={(event) => handleInputChange(index, event)}
+                  label="Your Email"
+                  placeholder="johndoe@gmail.com"
+                  type="email"
                   name="email"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  InputLabelProps={inputLabelPropsTextField}
+                  sx={sxTextField}
+                />
 
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-
-
-
-{/* 
+                {/* 
                 <input
                   type="email"
                   name="email"
@@ -1479,13 +1590,13 @@ onChange={(event) => handleInputChange(index, event)}
 </select>
 */}
 
-                <button className="self-center" type="button" onClick={() => removeInputSet(index)}>
+                <button
+                  className="self-center"
+                  type="button"
+                  onClick={() => removeInputSet(index)}
+                >
                   Remove
                 </button>
-
-
-
-
               </div>
             ))}
 
@@ -1494,6 +1605,37 @@ onChange={(event) => handleInputChange(index, event)}
             </button>
           </div>
         </div>
+
+
+<div className="flex gap-4">
+
+
+<Button
+          onClick={() => {
+
+            setSecondIsVisible(true); 
+            setThirdIsVisible(false);
+
+          }}
+          className="w-56"
+          style={{ marginTop: "80px", marginBottom: "25px" }}
+          sx={{
+            height: "50px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Previous step</span>
+        </Button>
+
 
         <Button
           onClick={async () => {
@@ -1520,6 +1662,8 @@ onChange={(event) => handleInputChange(index, event)}
         >
           <span className="popins-font">Ultimate challenge !</span>
         </Button>
+
+    </div>    
       </div>
 
       {/* cetvrta */}
@@ -1528,15 +1672,13 @@ onChange={(event) => handleInputChange(index, event)}
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           fourthIsVisible ? "show" : "hide"
         } `}
-
-        style={{backgroundImage: "url('/supporters/supporter4.png')", 
+        style={{
+          backgroundImage: "url('/supporters/supporter4.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-          
-         }}
-
+        }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -1545,8 +1687,6 @@ onChange={(event) => handleInputChange(index, event)}
           Let’s see how you can support your <br />
           friend!
         </p>
-
-       
 
         <div className="border-2 flex flex-col justify-center items-center p-4">
           <p className="underline text-red_first">Note:</p>
@@ -1580,38 +1720,34 @@ onChange={(event) => handleInputChange(index, event)}
         {/* and this is for those 3 options */}
         <p className="mt-4 font-semibold">Select amount</p>
         <div className="flex justify-around mt-6 mb-6 gap-4">
-         
-         
           <div
             className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16 
            `}
-            
-           style={{backgroundColor: ` ${
-          amount === 1 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
-        }`
-      }}
-
+            style={{
+              backgroundColor: ` ${
+                amount === 1 ? "rgba(175, 38, 38, 0.5)" : "transparent"
+              }`,
+            }}
             onClick={() => {
               setAmount(1);
             }}
           >
-           {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
+            {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
             <p>1 $</p>
           </div>
-
 
           <div
             className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
             onClick={() => {
               setAmount(10);
             }}
-            style={{backgroundColor: ` ${
-              amount === 10 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
-            }`
-          }}
-
+            style={{
+              backgroundColor: ` ${
+                amount === 10 ? "rgba(175, 38, 38, 0.5)" : "transparent"
+              }`,
+            }}
           >
-           {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
+            {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
             <p>10 $</p>
           </div>
 
@@ -1620,14 +1756,13 @@ onChange={(event) => handleInputChange(index, event)}
             onClick={() => {
               setAmount(100);
             }}
-
-            style={{backgroundColor: ` ${
-              amount === 100 ? 'rgba(175, 38, 38, 0.5)' : 'transparent'
-            }`
-          }}
-
+            style={{
+              backgroundColor: ` ${
+                amount === 100 ? "rgba(175, 38, 38, 0.5)" : "transparent"
+              }`,
+            }}
           >
-           {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
+            {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
             <p>100 $</p>
           </div>
         </div>
@@ -1669,16 +1804,12 @@ onChange={(event) => handleInputChange(index, event)}
             }}
           /> */}
 
-        <AuthCode 
-        onChange={(res) => {setDiscountCode(res)}} 
-        
-        
-        
-        inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md"
-        
-        />
-
-
+          <AuthCode
+            onChange={(res) => {
+              setDiscountCode(res);
+            }}
+            inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md"
+          />
 
           <button
             style={{ backgroundColor: "#0000ff", color: "#fff" }}
@@ -1720,16 +1851,13 @@ onChange={(event) => handleInputChange(index, event)}
         className={`flex justify-center items-center flex-col pt-28  first-content-container ${
           fifthIsVisible ? "show" : "hide"
         } `}
-
-        style={{backgroundImage: "url('/supporters/supporter5.png')", 
+        style={{
+          backgroundImage: "url('/supporters/supporter5.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-          
-         }}
-      
-
+        }}
       >
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -1843,6 +1971,39 @@ onChange={(event) => handleInputChange(index, event)}
             <QRCode value="0x369244dD6F1EC5d9B7e3Ff0a5c95c11d917d13C0"
             size="150"
             /> */}
+
+
+
+
+          {/* snackbars */}
+          <Snackbar open={openSnackbarSuccess}
+                autoHideDuration={6000}
+                onClose={handleSnackbarSuccessClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert
+                    onClose={handleSnackbarSuccessClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >{snackbarMessage}</Alert>
+            </Snackbar>
+
+
+
+            <Snackbar open={openSnackbarFailure}
+                autoHideDuration={6000}
+                onClose={handleSnackbarFailureClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert
+                    onClose={handleSnackbarFailureClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >{snackbarMessage}</Alert>
+            </Snackbar>
+
     </>
   );
 };
