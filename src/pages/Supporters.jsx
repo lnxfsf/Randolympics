@@ -13,13 +13,11 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 import TextField from "@mui/material/TextField";
 
-import React, { useState, useEffect , useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
 import "../styles/supporters.scoped.scss";
-
-
 
 // MUI
 import IconButton from "@mui/material/IconButton";
@@ -76,12 +74,8 @@ import { QueryProvider } from "../QueryProvider";
 import DonationForm from "./DonationForm";
 import DonationFormItemCampaign from "./DonationFormItemCampaign";
 
-
-
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-
-
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -138,14 +132,7 @@ const sxTextField = {
 const campaignId = uuidv4();
 
 const Supporters = () => {
-
-
-
-  
   const validateAthlete = async () => {
-    
-    
-    
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
     const responseAthleteUser = await axios.get(
       `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
@@ -155,159 +142,211 @@ const Supporters = () => {
         },
       }
     );
-   
+
     // if it did, found already existing Athlete user, then it shows something else
-    if(responseAthleteUser.data.found){
-      setSnackbarMessage("User already exists")
+    if (responseAthleteUser.data.found) {
+      setSnackbarMessage("User already exists");
       setOpenSnackbarFailure(true);
       return;
     }
 
-
-
-    if(friendName === ""){
-      setSnackbarMessage("Insert athlete first name")
+    if (friendName === "") {
+      setSnackbarMessage("Insert athlete first name");
       setOpenSnackbarFailure(true);
-     
+
       return;
     }
 
-
-         
-    if(friendLastName === ""){
-      setSnackbarMessage("Insert athlete last name")
+    if (friendLastName === "") {
+      setSnackbarMessage("Insert athlete last name");
       setOpenSnackbarFailure(true);
       return;
     }
 
-
-    
-
-    
-    if(friendEmail === ""){
-      setSnackbarMessage("Insert email")
+    if (friendEmail === "") {
+      setSnackbarMessage("Insert email");
       setOpenSnackbarFailure(true);
       return;
     }
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    if(!emailRegex.test(friendEmail)){
-      setSnackbarMessage("Email is incorrect !")
+    if (!emailRegex.test(friendEmail)) {
+      setSnackbarMessage("Email is incorrect !");
       setOpenSnackbarFailure(true);
       return;
     }
 
-
-    
-
-    if(friendNationality === ""){
-      setSnackbarMessage("Choose country")
+    if (friendNationality === "") {
+      setSnackbarMessage("Choose country");
       setOpenSnackbarFailure(true);
       return;
     }
-
-
-
-  
-
 
     // ako je sve proslo onda ide okej ovde (nema return ..)
-      setSecondIsVisible(false);
-      setThirdIsVisible(true);
-
-
-
-  }
-
+    setSecondIsVisible(false);
+    setThirdIsVisible(true);
+  };
 
   const validateSupporter = async () => {
 
 
-/*  // TODO, za supporter radis drugacije. ako je uneo password, e onda ga koristis.. za novi nalog (to ovde mozes napraviti ..) (da na FE, vec, on i ne salje, koji je registracija... )
-    const responseSupporterUser = await axios.get(
-      `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
-      {
-        params: {
-          email: friendEmail,
-        },
-      }
-    );
-   
-    // if it did, found already existing Athlete user, then it shows something else
-    if(responseSupporterUser.data.found){
-      setSnackbarMessage("Supporter already exists")
-      setOpenSnackbarFailure(true);
-      return;
-    } */
-
-
-
-    
-    if(supporterName === ""){
-      setSnackbarMessage("Insert your name")
-      setOpenSnackbarFailure(true);
-      return;
-    }
-
-
-    
-    
+    // da odma izbaci za email, pre password-a.. da imas posle odma..
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    
-
-
-    if (supporterEmail !== "" && !emailRegex.test(supporterEmail) ){
-      setSnackbarMessage("Email is incorrect !")
+    if (supporterEmail !== "" && !emailRegex.test(supporterEmail)) {
+      setSnackbarMessage("Email is incorrect !");
       setOpenSnackbarFailure(true);
       return;
+    }
+
+
+    var tempDoCreateSupporterAccount = false;
+
+    // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
+    if (supporterPassword !== "" && supporterEmail !== "") {
+
+      // ALI AKO UNESE ŠIFRU ! 
+
+      // moras videti da li ima taj email prvo, da li postoji vec
+      
+      const responseSupporterUser = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
+        {
+          params: {
+            email: supporterEmail,
+          },
+        }
+      );
+
+      if (responseSupporterUser.data.found) {
+        // pronasao je tog user-a ! 
+
+
+        // ! treba SAMO DA PROVERIS, da li je password isti ! 
+        // ako nije, isto i dalje izbacuje, dok ne unese isparavnu 
+
+        const responseSupporterUserPasswordCheck = await axios.get(
+          `${BACKEND_SERVER_BASE_URL}/auth/campaignIsSupporterPassCorrect`,
+          {
+            params: {
+              email: supporterEmail,
+              password: supporterPassword,
+            },
+          }
+        );
+
+         // If the password is incorrect, show an error message
+        if (responseSupporterUserPasswordCheck.data.check === false) {
+              setSnackbarMessage("Wrong supporter password!");
+              setOpenSnackbarFailure(true);
+              return;
+
+
+        }
+
+        // ako je ispravna, nece se nista desiti, samo ce proci dalje..
+
+
+
+
+        // On ovde, dobije taj password, a i email 
+      /*   setSnackbarMessage("");
+        setOpenSnackbarFailure(true);
+        return;
+ */
+
+
+
+      } else {
+        // ako nije pronasao tog user-a. 
+        // E SADA DOZVOLJAVA DA KREIRA OVAJ NOVI, USER. jer sada ima i password i email ! (pa kreira novi account sa ovime (ovde nece biti errors. a onaj gde on dozvoli, samo sa email, on ne vrsi registraciju, pa tamo erroruje.. al uglv ostalo radi sve))
+
+        setDoCreateSupporterAccount(true);
+        tempDoCreateSupporterAccount = true;
+
+      }
+
+
+
+    } else if (supporterEmail !== "") {
+
+      
+      
+      const responseSupporterUser = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
+        {
+          params: {
+            email: supporterEmail,
+          },
+        }
+      );
+
+      if (responseSupporterUser.data.found) {
+        // If the supporter exists but no password was provided, prompt the user to enter a password
+        setSnackbarMessage("Supporter already exists. Type supporter password.");
+        setOpenSnackbarFailure(true);
+        return;
+      } else {
+
+        // If no supporter exists, allow account creation. ALI CEKAJ, NE MOZE DA KREIRA, AKO NEMA PASSWORD !
+        // okej, da, on NE treba, da unese password. on ce i dalje biti upisan kao donator ! sve ostalo ce raditi isto. kako cuva u bazi !
+        // zato ga ovde pustas.. 
+        setDoCreateSupporterAccount(true);
+        tempDoCreateSupporterAccount = true;
+      }
+    }  else if (supporterPassword !== ""){
+
+       setSnackbarMessage(" Type supporter email first !");
+        setOpenSnackbarFailure(true);
+        return;
 
     }
 
     
+   
+
+
+
+    
+    
+
+
+
+
+    if (supporterName === "") {
+      setSnackbarMessage("Insert your name");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
     setThirdIsVisible(false);
     setFourthIsVisible(true);
 
-
     // makes it for them
-    makeCampaign();
-
-
-  }
-
-
-
-
+    makeCampaign(tempDoCreateSupporterAccount);
+  };
 
   // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
   const [openSnackbarFailure, setOpenSnackbarFailure] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("")
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-      
-      const handleSnackbarSuccessClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+  const handleSnackbarSuccessClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-        setOpenSnackbarSuccess(false);
-    };
+    setOpenSnackbarSuccess(false);
+  };
 
+  const handleSnackbarFailureClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-
-        
-      const handleSnackbarFailureClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenSnackbarFailure(false);
-      };
-
-
-
-
+    setOpenSnackbarFailure(false);
+  };
 
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
@@ -341,7 +380,7 @@ const Supporters = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
-  const makeCampaign = async () => {
+  const makeCampaign = async (tempDoCreateSupporterAccount) => {
     var athleteId = "";
     var supporterId = "";
 
@@ -381,163 +420,138 @@ const Supporters = () => {
     // and then makes those two accounts. athlete and supporter !
     // signs up friend first !
     try {
-      if (
-        friendEmail &&
-        friendName &&
-        friendGender &&
-        friendNationality &&
-        friendPhone
-      ) {
-        // this is for athlete register
-        var response = await axios.post(
+      // this is for athlete register
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/auth/register`,
+        {
+          user_type: "AH",
+          email: friendEmail,
+          email_private: true,
+          phone_private: true,
+          weight_private: true,
+          name: friendName,
+          middleName: friendMiddleName,
+          lastName: friendLastName,
+          phone: friendPhone,
+          nationality: friendNationality,
+          weight: "0",
+          cryptoaddress: "",
+          picture: friendImage,
+          cryptoaddress_type: "BTC",
+          bio: "",
+          gender: friendGender,
+
+          signedByFriend: true,
+          supporterName: supporterName,
+          campaignURL: urlForCampaign,
+
+          sendEmailToFriend: sendEmailToFriend,
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("athleteId" + response.data.userId);
+        athleteId = response.data.userId;
+
+        /*  alert("athlete user created"); */
+
+        if(doCreateSupporterAccount || tempDoCreateSupporterAccount){
+
+        // ? creating user for supporter
+        // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
+        var responseSupport = await axios.post(
           `${BACKEND_SERVER_BASE_URL}/auth/register`,
           {
-            user_type: "AH",
-            email: friendEmail,
+            user_type: "SPT",
+            email: supporterEmail,
+            password: supporterPassword,
             email_private: true,
             phone_private: true,
             weight_private: true,
-            name: friendName,
-            middleName: friendMiddleName,
-            lastName: friendLastName,
-            phone: friendPhone,
-            nationality: friendNationality,
+            name: supporterName,
+            /*  middleName: friendMiddleName,
+              lastName: friendLastName, */
+            phone: supporterPhone,
+            /*  nationality: friendNationality, */
             weight: "0",
             cryptoaddress: "",
-            picture: friendImage,
+            /*  picture: friendImage, */
             cryptoaddress_type: "BTC",
             bio: "",
-            gender: friendGender,
-
-            signedByFriend: true,
-            supporterName: supporterName,
+            gender: "M", // we don't actually need gender for supporter
+            supporterComment,
+            // signedByFriend: true,
             campaignURL: urlForCampaign,
 
-            sendEmailToFriend: sendEmailToFriend,
+            additionalSupporterEmailsToSendTo: additionalSupportersFormData,
+            signingAsSupporter: true,
           }
         );
 
-        if (response.status === 201) {
-          console.log("athleteId" + response.data.userId);
-          athleteId = response.data.userId;
+        if (responseSupport.status === 201) {
+          supporterId = response.data.userId;
 
-          /*  alert("athlete user created"); */
+          alert("PRAVIO JESTE SUPPORTER-A")
 
-          // ? creating user for supporter
-          // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
-          var responseSupport = await axios.post(
-            `${BACKEND_SERVER_BASE_URL}/auth/register`,
-            {
-              user_type: "SPT",
-              email: supporterEmail,
-              password: supporterPassword,
-              email_private: true,
-              phone_private: true,
-              weight_private: true,
-              name: supporterName,
-              /*  middleName: friendMiddleName,
-              lastName: friendLastName, */
-              phone: supporterPhone,
-              /*  nationality: friendNationality, */
-              weight: "0",
-              cryptoaddress: "",
-              /*  picture: friendImage, */
-              cryptoaddress_type: "BTC",
-              bio: "",
-              gender: "M", // we don't actually need gender for supporter
-              supporterComment,
-              // signedByFriend: true,
-              campaignURL: urlForCampaign,
 
-              additionalSupporterEmailsToSendTo: additionalSupportersFormData,
-              //supporterName: supporterName,
-              // campaignURL: urlForCampaign,
-            }
-          );
-
-          if (responseSupport.status === 201) {
-            // navigate(`/campaign/${campaignId}`);
-            // ovo u toj funkciji tek ipak !
-            /*   alert("creates supporter account"); */
-
-            supporterId = response.data.userId;
-          }
-
-          try {
-          } catch (error) {
-            console.log(error);
-
-            if (axios.isAxiosError(error)) {
-              if (error.response && error.response.status === 409) {
-                //alert("");
-
-                
-               /*  alert(error.response.data.message); */
-                setSnackbarMessage(error.response.data.message)
-                setOpenSnackbarFailure(true);
-
-                //console.log(error)
-              } else {
-               /*  alert(
-                  "An error occurred: " +
-                    (error.response?.data?.message || error.message)
-                ); */
-
-                setSnackbarMessage( "An error occurred: " +
-                  (error.response?.data?.message || error.message))
-                setOpenSnackbarFailure(true);
-              }
-            } else {
-           /*    alert("An unexpected error occurred: " + error.message); */
-              setSnackbarMessage("An unexpected error occurred: " + error.message)
-              setOpenSnackbarFailure(true);
-
-            }
-          }
+          setSnackbarMessage("Created campaign");
+          setOpenSnackbarSuccess(true);
         }
       } else {
-      /*   alert("insert email for friend"); */
 
-         setSnackbarMessage("insert email for friend")
+        alert("NIJE PRAVIO SUPPORTER-A")
+        // if we don't create supporter account, but still we did created campaign.. with what we have
+        setSnackbarMessage("Created campaign");
+        setOpenSnackbarSuccess(true);
+      }
+
+        try {
+        } catch (error) {
+          console.log(error);
+
+          if (axios.isAxiosError(error)) {
+            if (error.response && error.response.status === 409) {
+              setSnackbarMessage(error.response.data.message);
               setOpenSnackbarFailure(true);
+            } else {
+              setSnackbarMessage(
+                "An error occurred: " +
+                  (error.response?.data?.message || error.message)
+              );
+              setOpenSnackbarFailure(true);
+            }
+          } else {
+            /*    alert("An unexpected error occurred: " + error.message); */
+            setSnackbarMessage(
+              "An unexpected error occurred: " + error.message
+            );
+            setOpenSnackbarFailure(true);
+          }
+        }
       }
     } catch (error) {
       console.log(error);
 
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.status === 409) {
-          //alert("");
-
-     /*      alert(error.response.data.message); */
-          setSnackbarMessage(error.response.data.message)
+          setSnackbarMessage(error.response.data.message);
           setOpenSnackbarFailure(true);
-
-          //console.log(error)
         } else {
-        /*   alert(
+          setSnackbarMessage(
             "An error occurred: " +
               (error.response?.data?.message || error.message)
-          ); */
-
-          setSnackbarMessage("An error occurred: " +
-              (error.response?.data?.message || error.message))
+          );
           setOpenSnackbarFailure(true);
-          
         }
       } else {
-     /*    alert("An unexpected error occurred: " + error.message); */
-        setSnackbarMessage("An unexpected error occurred: " + error.message)
-      setOpenSnackbarFailure(true);
-      
-
-
+        /*    alert("An unexpected error occurred: " + error.message); */
+        setSnackbarMessage("An unexpected error occurred: " + error.message);
+        setOpenSnackbarFailure(true);
       }
     }
 
     // update supporterStats ! polja..
   };
-
-
 
   console.log("urlForCampaign ------------>  " + urlForCampaign);
 
@@ -579,11 +593,12 @@ const Supporters = () => {
   const [supporterPhone, setSupporterPhone] = useState("");
   const [supporterEmail, setSupporterEmail] = useState("");
   const [supporterPassword, setSupporterPassword] = useState("");
-  const [supporterPasswordConfirmation, setSupporterPasswordConfirmation] =
-    useState("");
   const [supporterComment, setSupporterComment] = useState("");
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
+
+  // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
+  const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
 
   const navigate = useNavigate();
 
@@ -606,8 +621,6 @@ const Supporters = () => {
       console.log(e.stack);
     }
   };
-
-
 
   // ? for FilePond
 
@@ -1353,65 +1366,52 @@ const Supporters = () => {
           </>
         )}
 
+        <div className="flex gap-4">
+          <Button
+            onClick={() => {
+              setFirstIsVisible(true);
+              setSecondIsVisible(false);
+            }}
+            className="w-56"
+            style={{ marginTop: "80px", marginBottom: "25px" }}
+            sx={{
+              height: "50px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 4,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgb(175, 38, 38)",
+                color: "white",
+                border: `1px solid rgb(175, 38, 38)`,
+              },
+            }}
+            id="join-the-fun-btn"
+          >
+            <span className="popins-font">Previous step</span>
+          </Button>
 
-<div className="flex gap-4">
-
-
-<Button
-          onClick={() => {
-
-            
-            setFirstIsVisible(true);  
-            setSecondIsVisible(false);
-            
-
-
-          }}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "25px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Previous step</span>
-        </Button>
-
-
-        <Button
-          onClick={validateAthlete}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "25px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Proceed</span>
-        </Button>
-
-
+          <Button
+            onClick={validateAthlete}
+            className="w-56"
+            style={{ marginTop: "80px", marginBottom: "25px" }}
+            sx={{
+              height: "50px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 4,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgb(175, 38, 38)",
+                color: "white",
+                border: `1px solid rgb(175, 38, 38)`,
+              },
+            }}
+            id="join-the-fun-btn"
+          >
+            <span className="popins-font">Proceed</span>
+          </Button>
         </div>
-
-
       </div>
 
       {/* treca */}
@@ -1707,56 +1707,52 @@ onChange={(event) => handleInputChange(index, event)}
           </div>
         </div>
 
+        <div className="flex gap-4">
+          <Button
+            onClick={() => {
+              setSecondIsVisible(true);
+              setThirdIsVisible(false);
+            }}
+            className="w-56"
+            style={{ marginTop: "80px", marginBottom: "25px" }}
+            sx={{
+              height: "50px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 4,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgb(175, 38, 38)",
+                color: "white",
+                border: `1px solid rgb(175, 38, 38)`,
+              },
+            }}
+            id="join-the-fun-btn"
+          >
+            <span className="popins-font">Previous step</span>
+          </Button>
 
-<div className="flex gap-4">
-
-
-<Button
-          onClick={() => {
-            setSecondIsVisible(true); 
-            setThirdIsVisible(false); }}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "25px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Previous step</span>
-        </Button>
-
-
-        <Button
-          onClick={validateSupporter}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "25px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Ultimate challenge !</span>
-        </Button>
-
-    </div>    
+          <Button
+            onClick={validateSupporter}
+            className="w-56"
+            style={{ marginTop: "80px", marginBottom: "25px" }}
+            sx={{
+              height: "50px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 4,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgb(175, 38, 38)",
+                color: "white",
+                border: `1px solid rgb(175, 38, 38)`,
+              },
+            }}
+            id="join-the-fun-btn"
+          >
+            <span className="popins-font">Ultimate challenge !</span>
+          </Button>
+        </div>
       </div>
 
       {/* cetvrta */}
@@ -2065,38 +2061,38 @@ onChange={(event) => handleInputChange(index, event)}
             size="150"
             /> */}
 
+      {/* snackbars */}
+      <Snackbar
+        open={openSnackbarSuccess}
+        autoHideDuration={6000}
+        onClose={handleSnackbarSuccessClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarSuccessClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
-
-
-          {/* snackbars */}
-          <Snackbar open={openSnackbarSuccess}
-                autoHideDuration={6000}
-                onClose={handleSnackbarSuccessClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert
-                    onClose={handleSnackbarSuccessClose}
-                    severity="success"
-                    variant="filled"
-                    sx={{ width: '100%' }}
-
-                >{snackbarMessage}</Alert>
-            </Snackbar>
-
-
-
-            <Snackbar open={openSnackbarFailure}
-                autoHideDuration={6000}
-                onClose={handleSnackbarFailureClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert
-                    onClose={handleSnackbarFailureClose}
-                    severity="error"
-                    variant="filled"
-                    sx={{ width: '100%' }}
-
-                >{snackbarMessage}</Alert>
-            </Snackbar>
-
+      <Snackbar
+        open={openSnackbarFailure}
+        autoHideDuration={6000}
+        onClose={handleSnackbarFailureClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarFailureClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
