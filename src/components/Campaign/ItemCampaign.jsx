@@ -229,6 +229,7 @@ const ItemCampaign = () => {
       console.log("saljes ti last coments");
       console.log(response.data);
 
+
       setLastTransactionsSupporters(response.data);
     } catch (error) {
       console.error(error);
@@ -496,7 +497,7 @@ const ItemCampaign = () => {
                   Show all supporters
                 </p>
 
-                {lastTransactionsSupporters && (
+                {lastTransactionsSupporters && lastTransactionsSupporters.length > 1 && (
                   <p className="flex justify-center mt-6 mb-6">
                     Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
                     USD to become the top supporter of this campaign !
