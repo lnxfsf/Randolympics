@@ -687,11 +687,11 @@ const Register = () => {
 
               <div className="flex flex-col mb-1 justify-center mt-0">
                 <TextField
-                  value=""
+                 
                   label="Middle Name"
                   placeholder="Doe"
                   helperText="* Optional"
-                  id="name"
+                  id="middleName"
                   name="middleName"
                   
                   type="text"
@@ -726,7 +726,7 @@ const Register = () => {
                   label="Last Name"
                   placeholder="Doe"
                   helperText="* Optional"
-                  id="name"
+                  id="lastName"
                   name="lastName"
                   required
                   type="text"
