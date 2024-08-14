@@ -142,10 +142,29 @@ const Supporters = () => {
 
 
   
-  const validateAthlete = () => {
+  const validateAthlete = async () => {
     
+    
+    
+    // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
+    const responseAthleteUser = await axios.get(
+      `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
+      {
+        params: {
+          email: friendEmail,
+        },
+      }
+    );
+   
+    // if it did, found already existing Athlete user, then it shows something else
+    if(responseAthleteUser.data.found){
+      setSnackbarMessage("User already exists")
+      setOpenSnackbarFailure(true);
+      return;
+    }
 
-        
+
+
     if(friendName === ""){
       setSnackbarMessage("Insert athlete first name")
       setOpenSnackbarFailure(true);
@@ -190,6 +209,9 @@ const Supporters = () => {
 
 
 
+  
+
+
     // ako je sve proslo onda ide okej ovde (nema return ..)
       setSecondIsVisible(false);
       setThirdIsVisible(true);
@@ -202,6 +224,25 @@ const Supporters = () => {
   const validateSupporter = async () => {
 
 
+/*  // TODO, za supporter radis drugacije. ako je uneo password, e onda ga koristis.. za novi nalog (to ovde mozes napraviti ..) (da na FE, vec, on i ne salje, koji je registracija... )
+    const responseSupporterUser = await axios.get(
+      `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
+      {
+        params: {
+          email: friendEmail,
+        },
+      }
+    );
+   
+    // if it did, found already existing Athlete user, then it shows something else
+    if(responseSupporterUser.data.found){
+      setSnackbarMessage("Supporter already exists")
+      setOpenSnackbarFailure(true);
+      return;
+    } */
+
+
+
     
     if(supporterName === ""){
       setSnackbarMessage("Insert your name")
@@ -210,6 +251,19 @@ const Supporters = () => {
     }
 
 
+    
+    
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    
+
+
+    if (supporterEmail !== "" && !emailRegex.test(supporterEmail) ){
+      setSnackbarMessage("Email is incorrect !")
+      setOpenSnackbarFailure(true);
+      return;
+
+    }
 
     
     setThirdIsVisible(false);
@@ -417,22 +471,35 @@ const Supporters = () => {
               if (error.response && error.response.status === 409) {
                 //alert("");
 
-                alert(error.response.data.message);
+                
+               /*  alert(error.response.data.message); */
+                setSnackbarMessage(error.response.data.message)
+                setOpenSnackbarFailure(true);
 
                 //console.log(error)
               } else {
-                alert(
+               /*  alert(
                   "An error occurred: " +
                     (error.response?.data?.message || error.message)
-                );
+                ); */
+
+                setSnackbarMessage( "An error occurred: " +
+                  (error.response?.data?.message || error.message))
+                setOpenSnackbarFailure(true);
               }
             } else {
-              alert("An unexpected error occurred: " + error.message);
+           /*    alert("An unexpected error occurred: " + error.message); */
+              setSnackbarMessage("An unexpected error occurred: " + error.message)
+              setOpenSnackbarFailure(true);
+
             }
           }
         }
       } else {
-        alert("insert email for friend");
+      /*   alert("insert email for friend"); */
+
+         setSnackbarMessage("insert email for friend")
+              setOpenSnackbarFailure(true);
       }
     } catch (error) {
       console.log(error);
@@ -441,17 +508,29 @@ const Supporters = () => {
         if (error.response && error.response.status === 409) {
           //alert("");
 
-          alert(error.response.data.message);
+     /*      alert(error.response.data.message); */
+          setSnackbarMessage(error.response.data.message)
+          setOpenSnackbarFailure(true);
 
           //console.log(error)
         } else {
-          alert(
+        /*   alert(
             "An error occurred: " +
               (error.response?.data?.message || error.message)
-          );
+          ); */
+
+          setSnackbarMessage("An error occurred: " +
+              (error.response?.data?.message || error.message))
+          setOpenSnackbarFailure(true);
+          
         }
       } else {
-        alert("An unexpected error occurred: " + error.message);
+     /*    alert("An unexpected error occurred: " + error.message); */
+        setSnackbarMessage("An unexpected error occurred: " + error.message)
+      setOpenSnackbarFailure(true);
+      
+
+
       }
     }
 
