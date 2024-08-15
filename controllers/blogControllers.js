@@ -231,8 +231,13 @@ const updateUpcomingGamesBlog = async (req, res) => {
 
   try {
 
+    const t1 = await db.sequelize.transaction();
+
+
     const blogUpcomingGames = await Upcominggames.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -276,13 +281,18 @@ const updateUpcomingGamesBlog = async (req, res) => {
 
     console.log("needsUpdate" + needsUpdate)
     if (needsUpdate) {
+      
+      
+
       try {
-        await blogUpcomingGames.update(updatingObject);
+        await blogUpcomingGames.update(updatingObject,{ transaction: t1 });
+
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
-
+        await t1.rollback();
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
 
@@ -291,6 +301,7 @@ const updateUpcomingGamesBlog = async (req, res) => {
     }
 
   } catch (error) {
+   
     return res.status(500).json({ error: error.message });
   }
 
@@ -520,8 +531,13 @@ const updateNewsBlog = async (req, res) => {
 
   try {
 
+
+    const t1 = await db.sequelize.transaction();
+
     const blogNews = await News.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -561,11 +577,14 @@ const updateNewsBlog = async (req, res) => {
 
     if (needsUpdate) {
       try {
-        await blogNews.update(updatingObject);
+        await blogNews.update(updatingObject,{ transaction: t1 });
+
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
+        await t1.rollback();
 
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
@@ -750,8 +769,12 @@ const updateEconomicsBlog = async (req, res) => {
 
   try {
 
+    const t1 = await db.sequelize.transaction();
+
     const blogEconomics = await Economics.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -791,12 +814,14 @@ const updateEconomicsBlog = async (req, res) => {
 
     if (needsUpdate) {
       try {
-        await blogEconomics.update(updatingObject);
+        await blogEconomics.update(updatingObject,{ transaction: t1 });
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
-
+        await t1.rollback();
+        
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
 
