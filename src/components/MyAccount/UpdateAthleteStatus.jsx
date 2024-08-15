@@ -217,8 +217,8 @@ const UpdateAthleteStatus = () => {
 
       <Button
                 onClick={submitChangeStatus}
-                className="w-56"
-                style={{ marginTop: "25px", marginBottom: "25px" }}
+                className="w-56 "
+                style={{ marginTop: "45px", marginBottom: "25px" }}
                 sx={{
                   height: "50px",
                   bgcolor: "#AF2626",
