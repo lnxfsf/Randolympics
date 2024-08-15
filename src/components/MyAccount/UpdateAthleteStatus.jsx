@@ -6,12 +6,20 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import React, { useState, useEffect, useRef } from "react";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
+import { Button } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
+
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const UpdateAthleteStatus = () => {
+
+  const navigate = useNavigate();
+
+
   const [athleteStatus, setAthleteStatus] = useState(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -35,6 +43,9 @@ const UpdateAthleteStatus = () => {
     }
   });
 
+  const [name, setName] = useState();
+
+
   const [userData, setUserData] = useState(null);
 
   const [loaded, setLoaded] = useState(true); // just first time, as logged in..
@@ -46,6 +57,7 @@ const UpdateAthleteStatus = () => {
     if (storedData) {
       var userJson = JSON.parse(storedData);
       setAthleteEmail(userJson.data.email);
+      setName(userJson.data.name);
 
       setUserData(userJson);
     }
@@ -84,6 +96,8 @@ const UpdateAthleteStatus = () => {
           } else if (sessionStorage.getItem("authTokens")) {
             sessionStorage.setItem("authTokens", JSON.stringify(userData));
           }
+
+          navigate("/myaccount")
         }
       } catch (error) {
         console.log("ne radi nista");
@@ -135,12 +149,30 @@ const UpdateAthleteStatus = () => {
 
   return (
     <>
-      {athleteStatus}
+
+    <div className="flex justify-center items-center  flex-col min-h-screen "
+    
+
+    style={{
+        backgroundImage: "url('/supporters/supporter5.png')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        zIndex: -1,
+        backgroundPosition: "center",
+      }}
+    
+    
+    >
+
+
+        <p className="mb-12 text-lg">Hello {name} , how probably are you to attent the <br/>
+        Randolympic games in case you get an invitation ? </p>
+      
 
       <FormControl>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="friend"
+          defaultValue={athleteStatus}
           name="radio-buttons-group"
           onChange={(event) => {
             const value = event.target.value;
@@ -182,7 +214,29 @@ const UpdateAthleteStatus = () => {
         </RadioGroup>
       </FormControl>
 
-      <button onClick={submitChangeStatus}> update </button>
+
+      <Button
+                onClick={submitChangeStatus}
+                className="w-56"
+                style={{ marginTop: "25px", marginBottom: "25px" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 4,
+                  border: `1px solid #FFF`,
+                  "&:hover": {
+                    background: "rgb(175, 38, 38)",
+                    color: "white",
+                    border: `1px solid rgb(175, 38, 38)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              ><span className="popins-font">Proceed</span></Button>
+
+
+
+      </div>
     </>
   );
 };
