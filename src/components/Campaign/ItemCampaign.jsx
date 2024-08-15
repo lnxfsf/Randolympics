@@ -94,6 +94,8 @@ const ItemCampaign = () => {
   const [lastTransactionsSupporters, setLastTransactionsSupporters] =
     useState();
 
+  const [firstSupportersCampaign, setFirstSupportersCampaign] = useState();
+
   const [countryAthleteIsIn, setCountryAthleteIsIn] = useState();
 
   const [discountCode, setDiscountCode] = useState();
@@ -116,12 +118,9 @@ const ItemCampaign = () => {
         }
       );
 
-
       if (response.status === 200) {
-
-          alert("donated")
+        alert("donated");
       }
-
     } catch (e) {
       console.log(e.stack);
     }
@@ -148,13 +147,8 @@ const ItemCampaign = () => {
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
 
-
-
       if (response.data.thatAthlete) {
-        
         switch (response.data.thatAthlete.athleteStatus) {
-
-
           case "s1":
             setTextAthleteStatus("Has not logged in yet");
             setColorStatusGoing("rgba(128, 128, 128, 0.75)");
@@ -240,8 +234,27 @@ const ItemCampaign = () => {
       console.log("saljes ti last coments");
       console.log(response.data);
 
-
       setLastTransactionsSupporters(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+
+    // if available, get who was original supporter, and show him
+    // firstSupportersCampaign
+    try {
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/firstSupportersCampaign`,
+        {
+          params: {
+            campaignId: campaignId,
+          },
+        }
+      );
+
+      console.log("firstSupportersCampaign");
+      console.log(response.data);
+
+      setFirstSupportersCampaign(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -453,8 +466,37 @@ const ItemCampaign = () => {
                         </p>
                       </div>
                     </>
-                  ))}
+                  ))}lastTransactionsSupporters
               </div> */}
+
+                {firstSupportersCampaign &&
+                  firstSupportersCampaign.supporterName && (
+                    <div>
+                      <div className="flex w-full flex-col  pl-16 pr-16 pt-4 mt-4 ">
+                        <div className="flex items-center  justify-between">
+                          <p>
+                            <b>Creator:</b>{" "}
+                            {firstSupportersCampaign.supporterName}
+                          </p>
+
+                          <p>${firstSupportersCampaign.amount / 100} </p>
+                        </div>
+
+                        <div>
+                          <p className="text-sm">
+                            {firstSupportersCampaign.supporterComment}
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <div className="flex justify-center mt-2">
+        <div className="w-4/5 h-0.5 bg-[#000]"></div>
+      </div>
+
+
+                    </div>
+                  )}
 
                 <div className="flex w-full flex-col ">
                   {lastTransactionsSupporters &&
@@ -508,12 +550,14 @@ const ItemCampaign = () => {
                   Show all supporters
                 </p>
 
-                {lastTransactionsSupporters && lastTransactionsSupporters.length >= 1 && (
-                  <p className="flex justify-center mt-6 mb-6">
-                    Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
-                    USD to become the top supporter of this campaign !
-                  </p>
-                )}
+                {lastTransactionsSupporters &&
+                  lastTransactionsSupporters.length >= 1 && (
+                    <p className="flex justify-center mt-6 mb-6">
+                      Donate{" "}
+                      {(lastTransactionsSupporters[0].amount + 100) / 100} USD
+                      to become the top supporter of this campaign !
+                    </p>
+                  )}
 
                 <p
                   onClick={() => {
@@ -759,7 +803,6 @@ const ItemCampaign = () => {
                   style={{ backgroundColor: "#0000ff", color: "#fff" }}
                   className="m-4 rounded-lg p-2"
                   onClick={donateWithCouponOnly}
-
                 >
                   Donate with coupon only
                 </button>
@@ -812,51 +855,39 @@ const ItemCampaign = () => {
                   </p>
                 </div>
 
-
-
-             
-             
                 <div className="flex w-full justify-center items-center ">
-
                   <div className="flex justify-center items-center flex-col w-[90%]">
                     <p className="text-2xl">{athlete.name}'s supporters:</p>
 
-
                     <div className="flex w-full flex-col mt-8">
-                    {lastTransactionsSupporters &&
-                      lastTransactionsSupporters.map((item, index) => (
-                        <>
-                          <div className="flex w-full flex-col justify-start items-start ">
-                            
-                            <div className="flex w-full border-l-2  items-center m-0 ml-1 mb-0 pb-0 p-0 justify-between  ">
-                              <p key={index} className=" pl-2 ">
-                                <span className="font-semibold">
-                                  Supporter #{index + 1}:
-                                </span>{" "}
-                                {item.supporterName}
-                              </p>
-
-                              <div className="flex ">
-                                <p>
-                                  <span className="font-semibold"></span> $
-                                  {item.amount / 100}
+                      {lastTransactionsSupporters &&
+                        lastTransactionsSupporters.map((item, index) => (
+                          <>
+                            <div className="flex w-full flex-col justify-start items-start ">
+                              <div className="flex w-full border-l-2  items-center m-0 ml-1 mb-0 pb-0 p-0 justify-between  ">
+                                <p key={index} className=" pl-2 ">
+                                  <span className="font-semibold">
+                                    Supporter #{index + 1}:
+                                  </span>{" "}
+                                  {item.supporterName}
                                 </p>
+
+                                <div className="flex ">
+                                  <p>
+                                    <span className="font-semibold"></span> $
+                                    {item.amount / 100}
+                                  </p>
+                                </div>
                               </div>
+
+                              <p className="text-sm m-1 mb-0 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">
+                                {item.supporterComment}
+                              </p>
                             </div>
-
-                            <p className="text-sm m-1 mb-0 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">
-                              {item.supporterComment}
-                            </p>
-                          </div>
-                        </>
-                      ))}
+                          </>
+                        ))}
+                    </div>
                   </div>
-
-
-                  </div>
-
-
-
                 </div>
                 {lastTransactionsSupporters && (
                   <p className="flex justify-center mt-6 mb-6">
@@ -864,8 +895,6 @@ const ItemCampaign = () => {
                     USD to become the top supporter of this campaign !
                   </p>
                 )}
-
-
               </div>
             </>
           )}
