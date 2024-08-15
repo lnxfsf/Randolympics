@@ -37,9 +37,16 @@ app.use(cors());
 const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode, country) => {
   await db.sequelize.sync();
 
+  
+  const t1 = await db.sequelize.transaction();
+
   // on nadje koji ima.. 
   const oneCoupon = await Couponcodes.findOne({
     where: { couponCode: couponDonationCode, isCouponActive: 1 },
+
+    lock: true,
+    transaction: t1,
+
   });
 
 
@@ -47,12 +54,16 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
   // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
   if(!oneCoupon){
     console.log("coupon code is not valid");
+
+    await t1.rollback();
+
     return amountOriginal;
   }
 
   // da ga odma sad vratis..
   if(oneCoupon.isCouponActive === 0){
     console.log("coupon code is not active");
+    await t1.rollback();
     return amountOriginal;
   }
 
@@ -109,10 +120,13 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
       // spentAmount  (dodaj taj novi sto ima, + newAmount)
 
 
-            
       try {
-        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount }); // azurira samo taj
+
+        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount },{ transaction: t1 }); // azurira samo taj
+        await t1.commit();
+
       } catch (error) {
+        await t1.rollback();
         console.log(error.stack);
       }
 
@@ -125,9 +139,11 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
       try{
            // then it's expired, just set it so, so we don't check it anymore..
-    await oneCoupon.update({ isCouponActive: 0 }); 
+      await oneCoupon.update({ isCouponActive: 0 },{ transaction: t1 }); 
+      await t1.commit();
 
       } catch (e) {
+        await t1.rollback();
         console.log(e.stack)
       }
      
@@ -185,8 +201,12 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
             
       try {
-        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount }); // azurira samo taj
+
+        await oneCoupon.update({ couponTimesUsed: oneCoupon.couponTimesUsed + 1 , spentAmount: newSpentAmount },{ transaction: t1 }); // azurira samo taj
+        await t1.commit();
+
       } catch (error) {
+        await t1.rollback();
         console.log(error.stack);
       }
 
@@ -195,6 +215,7 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
       return newAmount;
 
     } else {
+      await t1.rollback();
       console.log("da vraca ovde")
       return amountOriginal;
     }
@@ -206,10 +227,13 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
 
       try {
+
         // then it's expired, just set it so, so we don't check it anymore..
-        await oneCoupon.update({ isCouponActive: 0 }); 
+        await oneCoupon.update({ isCouponActive: 0 },{ transaction: t1 }); 
+        await t1.commit();
 
       } catch (e) {
+        await t1.rollback();
         console.log(e.stack)
       }
 
@@ -240,19 +264,29 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
     await db.sequelize.sync();
 
+    const t2 = await db.sequelize.transaction();
+
     // make campaign as confirmed (so we keep it) // ! , e ako je ostavio za kasnije, vidis, isto mora da potvrdi ga 
     // on uvek dobija "campaignId" btw. tako da... prvo ides taj donacije 3 lice ! pa onda ovo .. 
     const oneCampaign = await Campaign.findOne({
       where: { payment_id: paymentIntentId },
+      lock: true,
+      transaction: t2,
+
     });
 
     // znaci ako je prazan, onda pogledaj u toj drugoj tabeli, (da li ima paymentId !! )
     // oneCampaignThirdParty, znaci neko drugo, osim originalni koji je napravio campaign.
     if(!oneCampaign){
 
+      const t5 = await db.sequelize.transaction();
+
       // znaci da nadje, onaj, koji ima Stats sa tom paymentId, (koji je sada uplatio neko vec..)
       const oneCampaignThirdParty = await Statscampaign.findOne({
         where: { payment_id: paymentIntentId },
+        lock: true,
+        transaction: t5,
+
       });
 
 
@@ -275,8 +309,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       // i treba amount da upise za tog supportera, i onda znamo kolko je taj supporter uplatio tacno.. 
 
       try {
-        await oneCampaignThirdParty.update({ payment_status: status, amount: amount }); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
+        await oneCampaignThirdParty.update({ payment_status: status, amount: amount },{ transaction: t5 }); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
+        await t5.commit();
       } catch (error) {
+        await t5.rollback();
         console.log(error.stack);
       }
 
@@ -294,9 +330,13 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
 
     // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
-  
+    const t6 = await db.sequelize.transaction();
+
     const oneAthlete = await User.findOne({
       where: { userId: oneCampaignThirdParty.athleteId },
+      lock: true,
+      transaction: t6,
+
     }); 
 
 
@@ -307,9 +347,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
     try {
      // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-      await oneAthlete.increment('donatedAmount', { by: amount });  // add (+) za toliko amount za taj athlete
-
+      await oneAthlete.increment('donatedAmount', { by: amount },{ transaction: t6 });  // add (+) za toliko amount za taj athlete
+      await t6.commit();
     } catch (error) {
+      await t6.rollback();
       console.log(error.stack);
     }
 
@@ -319,15 +360,21 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
 
     
-    
+    const t7 = await db.sequelize.transaction();
+
       const oneCampaign = await Campaign.findOne({
         where: { campaignId: oneCampaignThirdParty.campaignId },
+        lock: true,
+        transaction: t7,
+
       });
 
        // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
        try {
-        await oneCampaign.update({ payment_status: status}); // azurira samo taj
+        await oneCampaign.update({ payment_status: status},{ transaction: t7 }); // azurira samo taj
+        await t7.commit();
       } catch (error) {
+        await t7.rollback();
         console.log(error.stack);
       }
 
@@ -345,6 +392,9 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     } else {
 
 
+      // ovde koristi t2 transaction od prvog !
+      // jer nije prazan..
+
 // TODO evo ovde fali ta logika, za amount ja msm, samo..
       // ovde azurira amount, po discount code koji ima. 
       if(oneCampaign.couponDonationCode){
@@ -360,8 +410,12 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       
       // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
         try {
-          await oneCampaign.update({ payment_status: status}); // azurira samo taj
+
+          await oneCampaign.update({ payment_status: status},{ transaction: t2 }); // azurira samo taj
+          await t2.commit();
+
         } catch (error) {
+          await t2.rollback();
           console.log(error.stack);
         }
 
@@ -374,8 +428,13 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
     // da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
     // on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
+
+    const t3 = await db.sequelize.transaction();
+
     const oneAthlete = await User.findOne({
       where: { email: oneCampaign.friendEmail },
+      lock: true,
+      transaction: t3,
     });
 
 
@@ -386,9 +445,10 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
     try {
      // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-      await oneAthlete.increment('donatedAmount', { by: amount });  // add (+) za toliko amount za taj athlete
-
+      await oneAthlete.increment('donatedAmount', { by: amount },{ transaction: t3 });  // add (+) za toliko amount za taj athlete
+      await t3.commit();
     } catch (error) {
+      await t3.rollback();
       console.log(error.stack);
     }
 
@@ -432,18 +492,18 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
      }
 
 
-     const t = await db.sequelize.transaction();
+     const t4 = await db.sequelize.transaction();
 
      try {
       await db.sequelize.sync();
 
      
-      await Statscampaign.create(addSupporterToStats,{ transaction: t });
+      await Statscampaign.create(addSupporterToStats,{ transaction: t4 });
 
-      await t.commit();
+      await t4.commit();
    
      } catch (e) {
-      await t.rollback();
+      await t4.rollback();
       console.log(error.stack)
 
      }
