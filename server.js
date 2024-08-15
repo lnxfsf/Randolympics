@@ -436,26 +436,34 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
     // on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
 
-    const t3 = await db.sequelize.transaction();
+    /* lock: true,
+    transaction: t3z,
+    const t3z = await db.sequelize.transaction(); */
 
-    const oneAthlete = await User.findOne({
+    // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
+
+    const oneAthletez = await User.findOne({
       where: { email: oneCampaign.friendEmail },
-      lock: true,
-      transaction: t3,
+    
     });
 
 
  
     console.log(" on moze naci oneAthlete")
-    console.log(oneAthlete)
+    console.log(oneAthletez)
 
     // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
     try {
      // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-      await oneAthlete.increment('donatedAmount', { by: amount },{ transaction: t3 });  // add (+) za toliko amount za taj athlete
-      await t3.commit();
+      await oneAthletez.increment('donatedAmount', { by: amount });  // add (+) za toliko amount za taj athlete
+     
+
+     // await t3z.commit();
     } catch (error) {
-      await t3.rollback();
+
+    //  await t3z.rollback();
+    
+
       console.log(error.stack);
     }
 
@@ -483,7 +491,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 
       campaignId: oneCampaign.campaignId,
-      athleteId: oneAthlete.userId,
+      athleteId: oneAthletez.userId,
 
       supporterId: supporterUserId,
       supporterName: oneCampaign.supporterName,
