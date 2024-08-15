@@ -386,17 +386,18 @@ const register = async (req, res) => {
     }
 
 
-    const t = await db.sequelize.transaction();
+    /* const t = await db.sequelize.transaction(); */
 
-    try {
+   /*  try { */
     // Create a new user
-      const newUser = await User.create(user_data,{ transaction: t });
+      var newUser = await User.create(user_data);
 
-      await t.commit();
-    } catch (e){
+    /*   await t.commit(); */
+      
+    /* } catch (e){
       await t.rollback();
-    }
-
+    } */
+   /*  if(newUser){ */
     if (!signedByFriend) {
       sendEmail(
         newUser.email,
@@ -457,7 +458,8 @@ const register = async (req, res) => {
       
 
      
-    }
+   /*  } */
+  }
 
     res.status(201).json({
       message: "User created successfully!",

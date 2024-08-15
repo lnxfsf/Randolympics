@@ -80,8 +80,13 @@ const update_user_data = async (req, res) => {
 
     await db.sequelize.sync();
   
+    
+    const t1 = await db.sequelize.transaction();
+
     const user = await User.findOne({
       where: { email: original_email },
+      lock: true,
+      transaction: t1,
     });
   
     if (user) {
@@ -295,11 +300,15 @@ const update_user_data = async (req, res) => {
 
   
       if (needsUpdate) {
+
         try {
-          await user.update(updatingObject);
+
+          await user.update(updatingObject,{ transaction: t1 });
   
+          await t1.commit();
           return res.status(200).json({ message: "User details updated" });
         } catch (error) {
+          await t1.rollback();
           return res.status(500).json({ error: error.message });
         }
       }

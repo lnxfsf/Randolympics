@@ -278,6 +278,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // znaci ako je prazan, onda pogledaj u toj drugoj tabeli, (da li ima paymentId !! )
     // oneCampaignThirdParty, znaci neko drugo, osim originalni koji je napravio campaign.
     if(!oneCampaign){
+      // so we release lock for "Campaign", on this row, as we're gonna use another..
+      await t2.rollback();
 
       const t5 = await db.sequelize.transaction();
 
@@ -330,12 +332,14 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
 
     // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
-    const t6 = await db.sequelize.transaction();
+    
+    const t6u = await db.sequelize.transaction();
+   /*  lock: true,
+    transaction: t6, */
 
-    const oneAthlete = await User.findOne({
+    const oneAthleteU = await User.findOne({
       where: { userId: oneCampaignThirdParty.athleteId },
-      lock: true,
-      transaction: t6,
+    
 
     }); 
 
@@ -346,11 +350,14 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
     // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
     try {
-     // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-      await oneAthlete.increment('donatedAmount', { by: amount },{ transaction: t6 });  // add (+) za toliko amount za taj athlete
-      await t6.commit();
+    //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
+      await oneAthleteU.increment('donatedAmount', { by: amount }, {transaction: t6u});  // add (+) za toliko amount za taj athlete
+     
+      console.log("da li je nasao athlete !")
+      await t6u.commit();
+
     } catch (error) {
-      await t6.rollback();
+      await t6u.rollback();
       console.log(error.stack);
     }
 
@@ -560,7 +567,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
           console.log('PaymentIntent was successful!');
 
          
-          console.log(paymentIntent.id) // evo, on ga pogadja i nalazi u database koji ima za campaign... 
+          //console.log(paymentIntent.id) // evo, on ga pogadja i nalazi u database koji ima za campaign... 
 
           await updatePaymentStatus(paymentIntent.id, 'succeeded', paymentIntent.amount);
          
