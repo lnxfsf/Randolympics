@@ -791,6 +791,9 @@ const login = async (req, res) => {
 
           passport_expiry: existingUser.passport_expiry,
           passportStatus: existingUser.passportStatus,
+
+          athleteStatus: existingUser.athleteStatus,
+          
         });
       } else {
         res.status(401).json({ error: "Invalid credentials" });

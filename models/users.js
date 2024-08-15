@@ -279,6 +279,7 @@ module.exports = function (sequelize, DataTypes) {
 
     athleteStatus: {
       type: DataTypes.STRING(255),
+      defaultValue: "s1",
 
     },
     
