@@ -432,13 +432,20 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
      }
 
 
+     const t = await db.sequelize.transaction();
 
      try {
       await db.sequelize.sync();
 
-      await Statscampaign.create(addSupporterToStats);
+     
+      await Statscampaign.create(addSupporterToStats,{ transaction: t });
+
+      await t.commit();
+   
      } catch (e) {
+      await t.rollback();
       console.log(error.stack)
+
      }
    
 

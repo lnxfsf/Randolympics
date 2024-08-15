@@ -184,9 +184,18 @@ const creategamepost = async (req, res) => {
 
   await db.sequelize.sync();
 
-  // create new post
-  const newPost = await Upcominggames.create(post);
+  const t = await db.sequelize.transaction();
 
+  try {
+  // create new post
+  const newPost = await Upcominggames.create(post,{ transaction: t });
+
+  await t.commit();
+
+} catch (e) {
+  await t.rollback();
+
+}
 
   res.status(201).json({ message: "Post created successfully!" });
 
@@ -474,11 +483,20 @@ const createnewspost = async (req, res) => {
 
   await db.sequelize.sync();
 
-  // create new post
-  const newPost = await News.create(post);
+  const t = await db.sequelize.transaction();
 
+  try {
+  // create new post
+  const newPost = await News.create(post,{ transaction: t });
+
+  await t.commit();
 
   res.status(201).json({ message: "Post created successfully!" });
+
+
+} catch (e) {
+    await t.rollback();
+}
 
 
 
@@ -654,12 +672,19 @@ const createeconomicspost = async (req, res) => {
 
   await db.sequelize.sync();
 
+  const t = await db.sequelize.transaction();
+
   // create new post
-  const newPost = await Economics.create(post);
+  try {
+    const newPost = await Economics.create(post,{ transaction: t });
+    await t.commit();
 
-
-  res.status(201).json({ message: "Post created successfully!" });
-
+    res.status(201).json({ message: "Post created successfully!" });
+  
+  } catch(e) {
+    await t.rollback();
+  }
+ 
 
 
 

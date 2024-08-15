@@ -6572,6 +6572,7 @@ const createCampaign = async (req, res) => {
 
     res.status(201).json({ message: "Campaign created successfully!" });
   } catch (error) {
+    await t.rollback();
     console.log(error.stack);
   }
 };
@@ -6609,7 +6610,10 @@ const makePayment = async (req, res) => {
 
   console.log("passed once");
 
+
   try {
+
+    // ovde ne treba transaction, ovo je za stripe request
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,
       currency: "usd",
@@ -6623,7 +6627,13 @@ const makePayment = async (req, res) => {
 
     console.log("ono sto on prima je." + campaignId);
 
+
     if (separateDonationThruPage) {
+
+      
+      const t1 = await db.sequelize.transaction();
+
+
       try {
         await db.sequelize.sync();
 
@@ -6679,12 +6689,19 @@ const makePayment = async (req, res) => {
           countryAthleteIsIn: countryAthleteIsIn,
         };
 
-        await Statscampaign.create(supporter_data);
 
+
+        
+
+        await Statscampaign.create(supporter_data,{ transaction: t1 });
+
+
+        await t1.commit();
         // ! ali, ovo je kada neko dodaje, u vec kreirani campaignId ! radi transaction history (a isto tako, mozemo da čitamo svi komentari od supporters..)
 
         // supporterComment
       } catch (error) {
+        await t1.rollback();
         console.log(error.stack);
       }
     } else {
@@ -6709,7 +6726,12 @@ const makePayment = async (req, res) => {
         console.log(error.stack);
       }
     }
+
+
+    
+
   } catch (error) {
+    
     console.log(error);
     res.status(500).json({ error: error.message });
   }
@@ -6912,6 +6934,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         }); */
 
       // znaci kreiras jedan row .. (da, treba da upises, i u Athlete isto), i ovaj ce jedini biti odmah "success", jer on ne radi potvrdu..
+     
+      const t2 = await db.sequelize.transaction();
+     
       try {
         await db.sequelize.sync();
 
@@ -6975,10 +7000,13 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           amount: amount,
         };
 
-        await Statscampaign.create(supporter_data);
+        await Statscampaign.create(supporter_data,{ transaction: t2 });
+
+        await t2.commit();
 
         res.status(200).json({ message: "coupon confirmed" });
       } catch (e) {
+        await t2.rollback();
         console.log(e.stack);
       }
     }

@@ -385,8 +385,17 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
+
+    const t = await db.sequelize.transaction();
+
+    try {
     // Create a new user
-    const newUser = await User.create(user_data);
+      const newUser = await User.create(user_data,{ transaction: t });
+
+      await t.commit();
+    } catch (e){
+      await t.rollback();
+    }
 
     if (!signedByFriend) {
       sendEmail(
@@ -718,6 +727,12 @@ const login = async (req, res) => {
         if (loginEntry) {
           await loginEntry.increment("numberOfLogins", { by: 1 });
         } else {
+         
+          
+         
+          const t = await db.sequelize.transaction();
+
+          try {
           // create that entry, if there's no found..
           // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
           const newLoginEntry = await Traffic.create({
@@ -725,7 +740,16 @@ const login = async (req, res) => {
             user_type: existingUser.user_type,
             nationality: existingUser.nationality,
             numberOfLogins: 1, // we already put 1, as this is our first immediatelly..
-          });
+          }, { transaction: t });
+
+
+          await t.commit();
+        } catch (e) {
+          await t.rollback();
+        }
+
+
+
         }
 
         res.status(200).json({
