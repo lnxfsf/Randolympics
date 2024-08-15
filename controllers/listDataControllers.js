@@ -6810,6 +6810,7 @@ const howManySupportersCampaign = async (req, res) => {
 
 const lastCommentsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
+  
 
   // we don't show creator, on there..
   const firstSupporterCampaign = await Campaign.findOne({
@@ -7256,7 +7257,9 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
 
   const campaignId = req.query.campaignId;
-  const limit = req.query.limit || 10;  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+  const limitA = parseInt(req.query.limitA);  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+
+  console.log("limit je ------>" + limitA);
 
 
   // we don't show creator, on there..
@@ -7275,7 +7278,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
         supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
       },
 
-      limit: limit,
+      limit: limitA,
       attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
       order: [["amount", "DESC"]],
 
