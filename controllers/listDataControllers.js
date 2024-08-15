@@ -6811,6 +6811,15 @@ const howManySupportersCampaign = async (req, res) => {
 const lastCommentsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
+  // we don't show creator, on there..
+  const firstSupporterCampaign = await Campaign.findOne({
+    where: {
+      campaignId: campaignId,
+    },
+
+  });
+
+
   try {
     const lastCommentsSupporters = await Statscampaign.findAll({
       where: {
@@ -6818,6 +6827,7 @@ const lastCommentsSupportersCampaign = async (req, res) => {
         supporterComment: {
           [Sequelize.Op.ne]: null,
         },
+        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
       },
 
       limit: 3,
@@ -6836,15 +6846,25 @@ const lastCommentsSupportersCampaign = async (req, res) => {
 const lastTransactionsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
+   // we don't show creator, on there..
+   const firstSupporterCampaign = await Campaign.findOne({
+    where: {
+      campaignId: campaignId,
+    },
+
+  });
+
+
   try {
     const lastCommentsSupporters = await Statscampaign.findAll({
       where: {
         campaignId: campaignId,
+        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
       },
 
       limit: 3,
       attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
-      order: [["createdAt", "DESC"]],
+      order: [["amount", "DESC"]],
     });
 
     console.log(lastCommentsSupporters);
@@ -6889,7 +6909,7 @@ const firstSupportersCampaign = async (req, res) => {
 
 
 
-    
+
     res.json(firstSupporter);
 
   } catch (error) {
@@ -7230,6 +7250,45 @@ const informOtherSupporters = async (req,res) => {
 } 
 
 
+
+
+const allTransactionsSupportersCampaign = async (req, res) => {
+
+
+  const campaignId = req.query.campaignId;
+  const limit = req.query.limit || 10;  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+
+
+  // we don't show creator, on there..
+  const firstSupporterCampaign = await Campaign.findOne({
+    where: {
+      campaignId: campaignId,
+    },
+
+  });
+
+
+  try {
+    const allCommentsSupporters = await Statscampaign.findAll({
+      where: {
+        campaignId: campaignId,
+        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
+      },
+
+      limit: limit,
+      attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
+      order: [["amount", "DESC"]],
+
+    });
+
+    console.log(allCommentsSupporters);
+
+    res.json(allCommentsSupporters);
+  } catch (error) {
+    console.log(error.stack);
+  }
+};
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -7259,5 +7318,7 @@ module.exports = {
 
   informOtherSupporters,
   firstSupportersCampaign,
+
+  allTransactionsSupportersCampaign,
 
 };

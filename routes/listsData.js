@@ -16,6 +16,7 @@ const { rankingTop50, otherUsers, lastInRank,
 
            informOtherSupporters,
            firstSupportersCampaign,
+           allTransactionsSupportersCampaign,
         
         } = require("../controllers/listDataControllers");
 const router = express.Router();
@@ -75,6 +76,7 @@ router.get("/howManySupportersCampaign", howManySupportersCampaign)
 router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
 router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCampaign)
 router.get("/firstSupportersCampaign", firstSupportersCampaign)
+router.get("/allTransactionsSupportersCampaign",allTransactionsSupportersCampaign)
 
 // donate only with coupon codes
 router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
