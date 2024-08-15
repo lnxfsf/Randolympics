@@ -49,13 +49,7 @@ const UpdateAthleteStatus = () => {
 
       setUserData(userJson);
     }
-
-   
-    
   }, [athleteStatus]);
-
-
-
 
   const handleAthleteStatusChange = (event) => {
     setUserData((prevUserData) => ({
@@ -132,15 +126,13 @@ const UpdateAthleteStatus = () => {
     }
   };
 
-
-  
   if (loaded) {
     // if he logged in, but hasn't set this up, it goes in "s2", state..
     if (athleteStatus === "s1") {
       submitChangeStatus("s2", true);
     }
   }
-  
+
   return (
     <>
       {athleteStatus}
