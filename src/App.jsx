@@ -26,6 +26,7 @@ import { Campaign } from "./pages/Campaign";
 
 import { ItemCampaign } from "./components/Campaign/ItemCampaign";
 import { PageNotFound } from "./pages/PageNotFound";
+import { UpdateAthleteStatus } from "./components/MyAccount/UpdateAthleteStatus";
 
 
 
@@ -49,6 +50,9 @@ const App = () => {
 
         
         <Route path="/login" element={<Login />} />
+
+        <Route path="/updateAthleteStatus" element={<UpdateAthleteStatus />} />
+        
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passresetbyfriend" element={<RegisteredByFriend /> } />

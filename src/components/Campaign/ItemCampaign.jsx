@@ -148,27 +148,38 @@ const ItemCampaign = () => {
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
 
+
+
       if (response.data.thatAthlete) {
+        
         switch (response.data.thatAthlete.athleteStatus) {
+
+
           case "s1":
             setTextAthleteStatus("Has not logged in yet");
             setColorStatusGoing("rgba(128, 128, 128, 0.75)");
+            break;
           case "s2":
             setTextAthleteStatus("Logged in but no status");
             setColorStatusGoing("rgba(128, 128, 128, 0.75)");
+            break;
           case "s3":
             setTextAthleteStatus("I'm 99% taking the challenge and going");
             setColorStatusGoing("rgba(58, 173, 84, 0.75)");
+            break;
           case "s4":
             setTextAthleteStatus("Most likely going");
             setColorStatusGoing("rgba(233, 165, 6, 0.75)");
+            break;
 
           case "s5":
             setTextAthleteStatus("I'm maybe going");
             setColorStatusGoing("rgba(233, 165, 6, 0.75)");
+            break;
           case "s6":
             setTextAthleteStatus("I'm definitely not going");
             setColorStatusGoing("rgba(180, 55, 55, 0.75)");
+            break;
         }
       }
 

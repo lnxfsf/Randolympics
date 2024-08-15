@@ -86,7 +86,19 @@ export const AuthProvider = ({ children }) => {
 
       setUser(jwtDecode(response.data.access_token));
 
-      navigate("/");
+
+      // here check if athleteStatus is "s1" or "s2", then it redirects to that screen where user inserts status (on that, once it's filled, then, we redirect to home, or myprofile)
+      if(response.data.athleteStatus === "s1" || response.data.athleteStatus === "s2" ){
+          navigate("/updateAthleteStatus");
+
+          
+      } else {
+          navigate("/");
+        }
+      
+
+
+
     } else {
       console.log("Something went wrong while loggin in the user!");
     }

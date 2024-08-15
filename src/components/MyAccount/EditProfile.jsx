@@ -1417,9 +1417,9 @@ const EditProfile = () => {
                 
               >
 
-                <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
+              {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
 
-                <MenuItem value={"s2"}>Logged in but no status</MenuItem>
+                <MenuItem value={"s2"}>Logged in but no status</MenuItem> */}
 
                 <MenuItem value={"s3"}>I'm 99% taking the challenge and going</MenuItem>
 
