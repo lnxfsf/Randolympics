@@ -6705,10 +6705,16 @@ const makePayment = async (req, res) => {
         console.log(error.stack);
       }
     } else {
+
+      const t2 = await db.sequelize.transaction();
+
       // ! OVO JE OBICAN, ubaci u campaignId, trazi on ovde..
       // sad upisi u database (da, i vise puta ako je, ako nije uspeo, ide on dole u error ionako)
       const oneCampaign = await Campaign.findOne({
         where: { campaignId: campaignId },
+        lock: true,
+        transaction: t2,
+
       });
 
       try {
@@ -6717,12 +6723,16 @@ const makePayment = async (req, res) => {
 
           couponDonationCode: discountCode,
           countryAthleteIsIn: countryAthleteIsIn,
-        }); // azurira samo taj
+        },{ transaction: t2 }); // azurira samo taj
+
+        await t2.commit();
 
         // samo novi model za ove dve stvari upravo..
 
         // ! 11.08 , i doda discountCode , countryAthleteIsIn, njih takodje azurira u database !
       } catch (error) {
+        await t2.rollback();
+
         console.log(error.stack);
       }
     }
@@ -6861,16 +6871,24 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     await db.sequelize.sync();
 
     // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
+   
+    const t2 = await db.sequelize.transaction();
+
     const campaignViewed = await Campaign.findOne({
       where: { campaignId: campaignId },
+      lock: true,
+      transaction: t2,
     });
 
     console.log("---------> campaignId" + campaignId);
     console.log(campaignViewed);
 
+    const t3 = await db.sequelize.transaction();
     // sad nalazi athleteId po ovome... (treba da upise dodatno ovoliko !)
     const oneAthlete = await User.findOne({
       where: { email: campaignViewed.friendEmail },
+      lock: true,
+      transaction: t3,
     });
 
     console.log("---------> oneAthlete " + campaignViewed.friendEmail);
@@ -6897,6 +6915,8 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
     // treba, da odma matchujes i drzavu ovde u "where", da imas manje da trazis i kucas. da preko athlete odmah da ih imas sve tu..
 
+    const t1 = await db.sequelize.transaction();
+
     try {
       // on nadje koji ima.. u Coupons
       var oneCoupon = await Couponcodes.findOne({
@@ -6905,6 +6925,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           isCouponActive: 1,
           country: oneAthlete.nationality.toUpperCase(),
         },
+        
+        lock: true,
+        transaction: t1,
       });
       console.log("OVDE NE RADI ");
       console.log(discountCode);
@@ -6912,10 +6935,12 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
       console.log(oneCoupon);
     } catch (e) {
+      await t1.rollback();
       console.log(e.stack);
     }
 
     if (!oneCoupon || typeof oneCoupon === "undefined") {
+      await t1.rollback();
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
@@ -6935,7 +6960,6 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
       // znaci kreiras jedan row .. (da, treba da upises, i u Athlete isto), i ovaj ce jedini biti odmah "success", jer on ne radi potvrdu..
      
-      const t2 = await db.sequelize.transaction();
      
       try {
         await db.sequelize.sync();
@@ -6956,16 +6980,26 @@ const donateOnlyWithDiscountCode = async (req, res) => {
             await oneCoupon.update({
               couponTimesUsed: oneCoupon.couponTimesUsed + 1,
               spentAmount: newSpentAmount,
-            }); // azurira samo taj
+            },{ transaction: t1 }); // azurira samo taj
 
             // i azurira status transakcije kao "success", eto da je full-ed
-            await campaignViewed.update({ payment_status: "succeeded" });
+            await campaignViewed.update({ payment_status: "succeeded" } ,{ transaction: t2 });
 
             // i u athlete mora da azurira + tolko amount donated...
             await oneAthlete.update({
               donatedAmount: oneAthlete.donatedAmount + newAmount,
-            });
+            },{ transaction: t3 });
+
+
+
+            await t1.commit();
+            await t2.commit();
+            await t3.commit();
+
           } catch (error) {
+            await t1.rollback();
+            await t2.rollback();
+            await t3.rollback();
             console.log(error.stack);
           }
 
@@ -6973,8 +7007,10 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         } else {
           try {
             // then it's expired, just set it so, so we don't check it anymore..
-            await oneCoupon.update({ isCouponActive: 0 });
+            await oneCoupon.update({ isCouponActive: 0 },{ transaction: t1 });
+            await t1.commit();
           } catch (e) {
+            await t1.rollback();
             console.log(e.stack);
           }
 
@@ -7000,13 +7036,16 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           amount: amount,
         };
 
-        await Statscampaign.create(supporter_data,{ transaction: t2 });
+        // we create new record.
+        const t4 = await db.sequelize.transaction();
 
-        await t2.commit();
+        await Statscampaign.create(supporter_data, { transaction: t4 });
+
+        await t4.commit();
 
         res.status(200).json({ message: "coupon confirmed" });
       } catch (e) {
-        await t2.rollback();
+        await t4.rollback();
         console.log(e.stack);
       }
     }
