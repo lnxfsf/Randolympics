@@ -267,11 +267,14 @@ const ItemCampaign = () => {
 
 
     try {
+
+      console.log(" sto nece: "+limitAllTransactions)
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
         {
           params: {
             campaignId: campaignId,
+            limitA: limitAllTransactions,
           },
         }
       );
@@ -785,7 +788,7 @@ const ItemCampaign = () => {
                   </div>
                 </div>
 
-                <div className=" pay-container flex flex-col w-64 border-2 h-auto   rounded-lg  justify-center items-center">
+                <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                   <ThemeProvider theme={theme}>
                     <QueryProvider>
                       <DonationFormItemCampaign
@@ -946,9 +949,12 @@ const ItemCampaign = () => {
                             </div>
 
 
-                            <button onClick={() => {setLimitAllTransactions((prev) => prev + 10)}}>Show more</button>
+                           
                           </>
                         ))}
+
+                         <p>{limitAllTransactions}</p> 
+                         <button onClick={() => {setLimitAllTransactions((prev) => prev + 10)}}>Show more</button>
                     </div>
                   </div>
                 </div>
