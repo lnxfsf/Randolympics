@@ -6855,6 +6855,55 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
   }
 };
 
+
+const firstSupportersCampaign = async (req, res) => {
+
+  const campaignId = req.query.campaignId;
+
+
+
+  try {
+
+   
+    // firstSupporterCampaign.supporterEmail , is going to be original email of supporter who made campaign !
+    const firstSupporterCampaign = await Campaign.findOne({
+      where: {
+        campaignId: campaignId,
+      },
+
+    });
+
+    
+    // so we find him in transactions table ,to see how much he's donated
+    const firstSupporter = await Statscampaign.findOne({
+      where: {
+        supporterEmail: firstSupporterCampaign.supporterEmail,
+      },
+
+    
+      attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
+     
+    });
+
+    console.log(firstSupporter);
+
+
+
+    
+    res.json(firstSupporter);
+
+  } catch (error) {
+    console.log(error.stack);
+  }
+
+
+
+
+
+
+
+}
+
 // donate using only dicsount code
 const donateOnlyWithDiscountCode = async (req, res) => {
   const {
@@ -7209,5 +7258,6 @@ module.exports = {
   listAllCampaigns,
 
   informOtherSupporters,
+  firstSupportersCampaign,
 
 };
