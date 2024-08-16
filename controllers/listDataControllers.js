@@ -6496,6 +6496,13 @@ const createCampaign = async (req, res) => {
     supporterPhone,
     supporterEmail,
     supporterComment,
+
+    isCelebrity,
+
+    fb_link,
+    ig_link,
+    tw_link,
+
   } = req.body;
 
   await db.sequelize.sync();
@@ -6562,6 +6569,12 @@ const createCampaign = async (req, res) => {
 
     payment_status,
     payment_id,
+
+    isCelebrity,
+
+    fb_link,
+    ig_link,
+    tw_link,
   };
 
   const t = await db.sequelize.transaction();
