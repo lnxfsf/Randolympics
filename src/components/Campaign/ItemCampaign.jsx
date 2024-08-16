@@ -526,11 +526,14 @@ const ItemCampaign = () => {
                     </div>
                   )}
 
-                <div className="flex w-full flex-col ">
+                <div className="flex w-full flex-col mt-8">
                   {lastTransactionsSupporters &&
                     lastTransactionsSupporters.map((item, index) => (
                       <>
-                        <div className="flex w-full flex-col justify-start items-start p-4 ">
+
+                        <div className="flex w-full flex-col justify-start items-start p-0 pl-4 pr-4  " style={{marginTop: "-8px"}}>
+
+
                           <div className="flex w-full border-l-2  items-center m-1 mb-0 pb-0 p-2 justify-between  ">
                             <p key={index} className=" pl-2 ">
                               <span className="font-semibold">
@@ -841,7 +844,7 @@ const ItemCampaign = () => {
                   setPayment(false);
                 }}
                 className="w-56"
-                style={{ marginTop: "25px", marginBottom: "25px" }}
+                style={{ marginTop: "25px", marginBottom: "25px",  }}
                 sx={{
                   height: "50px",
                   bgcolor: "#AF2626",
@@ -875,7 +878,7 @@ const ItemCampaign = () => {
                   backgroundPosition: "center",
                 }}
               >
-                <div className="flex justify-end p-4 ">
+                <div className="flex justify-end p-4 mr-12 ">
                   <p
                     className="underline cursor-pointer select-none"
                     onClick={() => {
@@ -953,13 +956,13 @@ const ItemCampaign = () => {
                           </>
                         ))}
 
-                         <p>{limitAllTransactions}</p> 
-                         <button onClick={() => {setLimitAllTransactions((prev) => prev + 10)}}>Show more</button>
+                       
+                         <button className="underline" onClick={() => {setLimitAllTransactions((prev) => prev + 10)}}>Show more</button>
                     </div>
                   </div>
                 </div>
                 {lastTransactionsSupporters && (
-                  <p className="flex justify-center mt-6 mb-6">
+                  <p className="flex justify-center mt-6 pb-12">
                     Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
                     USD to become the top supporter of this campaign !
                   </p>
