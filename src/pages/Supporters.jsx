@@ -135,11 +135,11 @@ const sxTextField = {
 
 const campaignId = uuidv4();
 
-
 const generateRandomEmail = (usernameLength = 8) => {
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const domains = ["eee1", "eee2", "eee3", "eee4", "eee5"]; 
-  const tlds = [".com"]; 
+  const charset =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const domains = ["eee1", "eee2", "eee3", "eee4", "eee5"];
+  const tlds = [".com"];
 
   let username = "";
   for (let i = 0; i < usernameLength; i++) {
@@ -152,7 +152,6 @@ const generateRandomEmail = (usernameLength = 8) => {
 
   return `${username}@${randomDomain}${randomTLD}`;
 };
-
 
 const Supporters = () => {
   const validateAthlete = async () => {
@@ -186,25 +185,22 @@ const Supporters = () => {
       return;
     }
 
-
-    if (friendEmail === "" && !isCelebrity ) {
+    if (friendEmail === "" && !isCelebrity) {
       setSnackbarMessage("Insert email");
       setOpenSnackbarFailure(true);
       return;
     }
 
-    if(!isCelebrity){
-      console.log("on DA pokrece email konfirmaciju za friend mail")
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!isCelebrity) {
+      console.log("on DA pokrece email konfirmaciju za friend mail");
+      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    if (!emailRegex.test(friendEmail)) {
-      setSnackbarMessage("Email is incorrect !");
-      setOpenSnackbarFailure(true);
-      return;
+      if (!emailRegex.test(friendEmail)) {
+        setSnackbarMessage("Email is incorrect !");
+        setOpenSnackbarFailure(true);
+        return;
+      }
     }
-
-  }
-
 
     if (friendNationality === "") {
       setSnackbarMessage("Choose country");
@@ -220,8 +216,6 @@ const Supporters = () => {
   };
 
   const validateSupporter = async () => {
-
-   
     // da odma izbaci za email, pre password-a.. da imas posle odma..
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -230,9 +224,6 @@ const Supporters = () => {
       setOpenSnackbarFailure(true);
       return;
     }
-
-  
-
 
     var tempDoCreateSupporterAccount = false;
 
@@ -413,6 +404,12 @@ const Supporters = () => {
           supporterPhone,
           supporterEmail,
           supporterComment,
+
+
+          isCelebrity,
+          fb_link,
+          ig_link,
+          tw_link
         }
       );
 
@@ -442,7 +439,7 @@ const Supporters = () => {
               gender: friendGender,
 
               signedByFriend: true,
-              
+
               supporterName: supporterName,
               campaignURL: urlForCampaign,
 
@@ -650,12 +647,9 @@ const Supporters = () => {
   const [fourthIsVisible, setFourthIsVisible] = useState(false);
   const [fifthIsVisible, setFifthIsVisible] = useState(false);
 
-  
-
   const [fb_link, setFb_link] = useState("");
   const [ig_link, setIg_link] = useState("");
   const [tw_link, setTw_link] = useState("");
-
 
   // friend information
   const [friendName, setFriendName] = useState("");
@@ -680,21 +674,15 @@ const Supporters = () => {
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
 
-
-
-
-  
   // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
   const [isCelebrity, setIsCelebrity] = useState(() => {
     // treba da postavis i random email takodje ovde.. ako izabira vec (kada se vraca, onda prazni ovaj friendEmail, da unese za athlete koji je..)
-    setFriendEmail(() => {return generateRandomEmail()})
+    setFriendEmail(() => {
+      return generateRandomEmail();
+    });
 
     return false;
-  }
-);  // but this one you pass, and you don't change.. unless you go through friend page..
-
-
-
+  }); // but this one you pass, and you don't change.. unless you go through friend page..
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
@@ -725,7 +713,7 @@ const Supporters = () => {
   };
 
   const [popupWarning, setPopupWarning] = useState(false);
-  const [howItWorks, setHowItWorks] = useState(false)
+  const [howItWorks, setHowItWorks] = useState(false);
 
   // ? for FilePond
 
@@ -790,12 +778,8 @@ const Supporters = () => {
 
   // ? for FilePond
 
-
-
-  
   console.log("isCelebrity je sada:" + isCelebrity);
-  console.log("email je sada"+friendEmail);
-
+  console.log("email je sada" + friendEmail);
 
   return (
     <>
@@ -803,52 +787,54 @@ const Supporters = () => {
 
       <HorizontalLinearAlternativeLabelStepper />
 
-      
-      
-    <Popup open={howItWorks} onClose={() => setHowItWorks(false)}  position="right center" className="popup-content">
-    
-<div className="flex justify-center items-center flex-col">
+      <Popup
+        open={howItWorks}
+        onClose={() => setHowItWorks(false)}
+        position="right center"
+        className="popup-content"
+      >
+        <div className="flex justify-center items-center flex-col">
+          <p className="text-2xl font-semibold mt-2 mb-2">How it works</p>
 
-    <p className="text-2xl font-semibold mt-2 mb-2">How it works</p>
+          <p className="text-center mb-3  ">
+            Randolympics lets you sign up your friend or a celebrity to the
+            upcoming competition.
+          </p>
 
-    <p className="text-center mb-3  ">Randolympics lets you sign up your friend or a celebrity to the upcoming competition.
-    </p>
+          <p className="text-center mb-3  ">
+            After you sign someone up and donate - you become a Supporter !
+          </p>
 
-    <p className="text-center mb-3  ">After you sign someone up and donate - you become a Supporter !</p>
+          <p className="text-center   ">
+            The competitors will be selected randomly, but those who receive
+            more money through donations have a higher chance to get an
+            invitation !
+          </p>
 
-    <p className="text-center   ">The competitors will be selected randomly, but those who receive more money through donations have a higher chance to get an invitation !</p>
-
-
-
-    <Button
-          onClick={() => {
-           
-            
-            setHowItWorks(false); // then close this popup
-          }}
-          className="w-36"
-          style={{ marginTop: "25px", marginBottom: "25px" }}
-          sx={{
-            height: "40px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Back</span>
-        </Button>
-
+          <Button
+            onClick={() => {
+              setHowItWorks(false); // then close this popup
+            }}
+            className="w-36"
+            style={{ marginTop: "25px", marginBottom: "25px" }}
+            sx={{
+              height: "40px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 4,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgb(175, 38, 38)",
+                color: "white",
+                border: `1px solid rgb(175, 38, 38)`,
+              },
+            }}
+            id="join-the-fun-btn"
+          >
+            <span className="popins-font">Back</span>
+          </Button>
         </div>
-    </Popup>
-
-
+      </Popup>
 
       {firstIsVisible && (
         <>
@@ -940,10 +926,6 @@ const Supporters = () => {
 
       {/* prva */}
 
-
-
-      
-
       <div
         className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
@@ -956,15 +938,14 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
-
-
-
-
-
-      <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
-        <p className="underline ">How it works</p>
-      </div>
-
+        <div
+          className="how_it_works cursor-pointer select-none "
+          onClick={() => {
+            setHowItWorks(true);
+          }}
+        >
+          <p className="underline ">How it works</p>
+        </div>
 
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -984,8 +965,8 @@ const Supporters = () => {
               const value = event.target.value;
 
               if (value === "friend") {
-                setIsCelebrity(false);  // his is for that passing,you don't change this when going through pages
-                setFriendEmail("")  // here we just bring back normal value 
+                setIsCelebrity(false); // his is for that passing,you don't change this when going through pages
+                setFriendEmail(""); // here we just bring back normal value
               } else if (value === "celebrity") {
                 setIsCelebrity(true);
               }
@@ -1048,10 +1029,14 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
-
-        <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
-        <p className="underline ">How it works</p>
-      </div>
+        <div
+          className="how_it_works cursor-pointer select-none "
+          onClick={() => {
+            setHowItWorks(true);
+          }}
+        >
+          <p className="underline ">How it works</p>
+        </div>
         <img className="h-16" src="randolympics_logo.svg" />
 
         {!isCelebrity && (
@@ -1334,50 +1319,50 @@ const Supporters = () => {
                 Tell us more about that celebrity:
               </p>
 
-              <div className="flex flex-col w-[70%]">
-               
-                <div className="flex justify-start gap-2">
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={friendName}
-                      onChange={(e) => {
-                        setFriendName(e.target.value);
-                      }}
-                      label="Name"
-                      placeholder="John"
-                      id="name"
-                      name="name"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
+              <div className="flex">
+                <div className="flex flex-col w-[70%]">
+                  <div className="flex justify-start gap-2">
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendName}
+                        onChange={(e) => {
+                          setFriendName(e.target.value);
+                        }}
+                        label="Name"
+                        placeholder="John"
+                        id="name"
+                        name="name"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
 
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={friendMiddleName}
-                      onChange={(e) => {
-                        setFriendMiddleName(e.target.value);
-                      }}
-                      label="Middle name"
-                      placeholder="John"
-                      id="name"
-                      name="name"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendMiddleName}
+                        onChange={(e) => {
+                          setFriendMiddleName(e.target.value);
+                        }}
+                        label="Middle name"
+                        placeholder="John"
+                        id="name"
+                        name="name"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
 
-                  {/*  <div className="flex flex-col justify-start">
+                    {/*  <div className="flex flex-col justify-start">
       <TextField
         value={friendFamilyName}
         onChange={(e) => {
@@ -1396,233 +1381,161 @@ const Supporters = () => {
       />
     </div> */}
 
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={friendLastName}
-                      onChange={(e) => {
-                        setFriendLastName(e.target.value);
-                      }}
-                      label="Last name"
-                      placeholder="Doe"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={friendLastName}
+                        onChange={(e) => {
+                          setFriendLastName(e.target.value);
+                        }}
+                        label="Last name"
+                        placeholder="Doe"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
+                    <div className="flex mt-0 mb-2 flex-col">
+                      <InputLabel id="roleDropdowns">Gender</InputLabel>
+                      <Select
+                        variant="standard"
+                        labelId="roleDropdowns"
+                        id="roleDropdown"
+                        label="gender"
+                        value={friendGender}
+                        onChange={(event) => {
+                          setFriendGender(event.target.value);
+                        }}
+                        className="w-[240px] "
+                        style={{ color: "#000" }}
+                      >
+                        <MenuItem value={"M"}>Male</MenuItem>
+                        <MenuItem value={"F"}>Female</MenuItem>
+                      </Select>
+                    </div>
+
+                    <div className="flex  justify-center items-center flex-col h-auto mt-4 ">
+                      <ReactFlagsSelect
+                        countries={supportedCountry}
+                        className="w-[280px] rounded-md p-0 "
+                        /*  bg-[#fff]  */
+
+                        // to fill it with the one, which user's is currently selected...
+                        selected={friendNationality}
+                        onSelect={(code) => {
+                          setFriendNationality(code);
+                        }}
+                        /*  className={classNameFlagsSelect} */
+                        searchable={true}
+                        id="nationality"
+                        name="nationality"
+                        placeholder="Nationality"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-start gap-2">
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={fb_link}
+                        onChange={(e) => {
+                          setFb_link(e.target.value);
+                        }}
+                        label="Facebook link"
+                        placeholder="Facebook Link"
+                        id="fbl"
+                        name="fbl"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
+
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={ig_link}
+                        onChange={(e) => {
+                          setIg_link(e.target.value);
+                        }}
+                        label="Instagram Link"
+                        placeholder="Instagram Link"
+                        id="igl"
+                        name="name"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
+
+                    <div className="flex flex-col justify-start">
+                      <TextField
+                        variant="standard"
+                        value={tw_link}
+                        onChange={(e) => {
+                          setTw_link(e.target.value);
+                        }}
+                        label="Twitter Link"
+                        placeholder="Twitter Link"
+                        type="text"
+                        inputProps={{
+                          maxLength: 255,
+                        }}
+                        InputLabelProps={inputLabelPropsTextField}
+                        sx={sxTextField}
+                      />
+                    </div>
                   </div>
                 </div>
-
-                {/* <div className="flex justify-start gap-2 ">
-                  <div className="flex flex-col justify-start ">
-                    <TextField
-                      variant="standard"
-                      value={friendEmail}
-                      onChange={(e) => {
-                        setFriendEmail(e.target.value);
-                      }}
-                      label="Email"
-                      placeholder="Email Address"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
-                </div> */}
-
-                {/* 
-  <div>
-    <FilePond
-      className="filepond--root athlete"
-      type="file"
-      onupdatefiles={setFiles}
-      allowMultiple={false}
-      maxFiles={1}
-      server={server}
-      name="image"
-      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-      accept="image/png, image/jpeg, image/gif"
-      dropOnPage
-      dropValidation
-      allowPaste={true}
-      allowReplace={true}
-      credits={""}
-      allowFileEncode={true}
-      allowFileTypeValidation={true}
-      allowImagePreview={true}
-      allowImageCrop={false}
-      allowImageResize={false}
-      allowImageTransform={false}
-      imagePreviewHeight={150}
-      imageCropAspectRatio="1:1"
-      imageResizeTargetWidth={100}
-      imageResizeTargetHeight={100}
-      stylePanelLayout="compact "
-      styleLoadIndicatorPosition="center bottom"
-      styleProgressIndicatorPosition="center bottom"
-      styleButtonRemoveItemPosition="center  bottom"
-      styleButtonProcessItemPosition="center bottom"
-      imageEditAllowEdit={false}
-    />
-  </div>
- */}
-
- 
-
-                <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
-                  <div className="flex mt-0 mb-2 flex-col">
-                    <InputLabel id="roleDropdowns">Gender</InputLabel>
-                    <Select
-                      variant="standard"
-                      labelId="roleDropdowns"
-                      id="roleDropdown"
-                      label="gender"
-                      value={friendGender}
-                      onChange={(event) => {
-                        setFriendGender(event.target.value);
-                      }}
-                      className="w-[240px] "
-                      style={{ color: "#000" }}
-                    >
-                      <MenuItem value={"M"}>Male</MenuItem>
-                      <MenuItem value={"F"}>Female</MenuItem>
-                    </Select>
-                  </div>
-
-                  <div className="flex  justify-center items-center flex-col h-auto mt-4 ">
-                    <ReactFlagsSelect
-                      countries={supportedCountry}
-                      className="w-[280px] rounded-md p-0 "
-                      /*  bg-[#fff]  */
-
-                      // to fill it with the one, which user's is currently selected...
-                      selected={friendNationality}
-                      onSelect={(code) => {
-                        setFriendNationality(code);
-                      }}
-                      /*  className={classNameFlagsSelect} */
-                      searchable={true}
-                      id="nationality"
-                      name="nationality"
-                      placeholder="Nationality"
-                    />
-                  </div>
+              
+                <div className="ml-24 flex mt-0">
+                  <FilePond
+                    className="filepond--root athlete"
+                    type="file"
+                    onupdatefiles={setFiles}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    server={server}
+                    name="image"
+                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                    accept="image/png, image/jpeg, image/gif"
+                    dropOnPage
+                    dropValidation
+                    allowPaste={true}
+                    allowReplace={true}
+                    credits={""}
+                    allowFileEncode={true}
+                    allowFileTypeValidation={true}
+                    allowImagePreview={true}
+                    allowImageCrop={false}
+                    allowImageResize={false}
+                    allowImageTransform={false}
+                    imagePreviewHeight={150}
+                    imageCropAspectRatio="1:1"
+                    imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100}
+                    stylePanelLayout="compact "
+                    styleLoadIndicatorPosition="center bottom"
+                    styleProgressIndicatorPosition="center bottom"
+                    styleButtonRemoveItemPosition="center  bottom"
+                    styleButtonProcessItemPosition="center bottom"
+                    imageEditAllowEdit={false}
+                  />
                 </div>
-
-                <div className="flex justify-start gap-2">
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={fb_link}
-                      onChange={(e) => {
-                        setFb_link(e.target.value);
-                      }}
-                      label="Facebook link"
-                      placeholder="Facebook Link"
-                      id="fbl"
-                      name="fbl"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
-
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={ig_link}
-                      onChange={(e) => {
-                        setIg_link(e.target.value);
-                      }}
-                      label="Instagram Link"
-                      placeholder="Instagram Link"
-                      id="igl"
-                      name="name"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
-
-                  {/*  <div className="flex flex-col justify-start">
-      <TextField
-        value={friendFamilyName}
-        onChange={(e) => {
-          setFriendFamilyName(e.target.value);
-        }}
-        label="Family name"
-        placeholder="John"
-        id="name"
-        name="name"
-        type="text"
-        inputProps={{
-          maxLength: 255,
-        }}
-        InputLabelProps={inputLabelPropsTextField}
-        sx={sxTextField}
-      />
-    </div> */}
-
-                  <div className="flex flex-col justify-start">
-                    <TextField
-                      variant="standard"
-                      value={tw_link}
-                      onChange={(e) => {
-                        setTw_link(e.target.value);
-                      }}
-                      label="Twitter Link"
-                      placeholder="Twitter Link"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-                  </div>
-
-
-                </div>
-                {/* 
-  <FormControl>
-    <RadioGroup
-      aria-labelledby="demo-radio-buttons-group-label"
-      defaultValue="send"
-      name="radio-buttons-group"
-      onChange={(event) => {
-        const value = event.target.value;
-
-        if (value === "send") {
-          setSendEmailToFriend(true);
-        } else if (value === "dontsend") {
-          setSendEmailToFriend(false);
-        }
-      }}
-    >
-      <FormControlLabel
-        value="send"
-        control={<Radio />}
-        label={`Send email to ${friendName}`}
-      />
-      <FormControlLabel
-        value="dontsend"
-        control={<Radio />}
-        label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
-      />
-    </RadioGroup>
-  </FormControl>
- */}
+              
               </div>
             </div>
           </>
@@ -1704,9 +1617,14 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
-         <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
-        <p className="underline ">How it works</p>
-      </div>
+        <div
+          className="how_it_works cursor-pointer select-none "
+          onClick={() => {
+            setHowItWorks(true);
+          }}
+        >
+          <p className="underline ">How it works</p>
+        </div>
 
         <img className="h-16" src="randolympics_logo.svg" />
 
@@ -2035,8 +1953,6 @@ onChange={(event) => handleInputChange(index, event)}
         </div>
       </div>
 
-   
-
       {/* cetvrta */}
 
       <div
@@ -2051,11 +1967,14 @@ onChange={(event) => handleInputChange(index, event)}
           backgroundPosition: "center",
         }}
       >
-
-<div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
-        <p className="underline ">How it works</p>
-      </div>
-
+        <div
+          className="how_it_works cursor-pointer select-none "
+          onClick={() => {
+            setHowItWorks(true);
+          }}
+        >
+          <p className="underline ">How it works</p>
+        </div>
 
         <img className="h-16" src="randolympics_logo.svg" />
 

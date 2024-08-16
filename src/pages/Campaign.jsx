@@ -255,33 +255,38 @@ const Campaign = () => {
         <>
           {campaigns.map((item, index) => (
             <>
+              <div className="flex justify-center items-center ">
+             
+             
+                <div
+                  key={index}
+                  /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
+                  onClick={() => navigate(`/campaign/${item.campaignId}`)}
+                  className="p-4 w-[95%] h-20 bg-body_news  cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
+                >
+                  <div>
+                    <p>
+                      <b>Name:</b> {item.friendName} {item.friendMiddleName}{" "}
+                      {item.friendLastName}
+                    </p>
+                    <p>
+                      <b>Gender:</b>{" "}
+                      {item.friendGender === "M" ? "Male" : "Female"}
+                    </p>
+                  </div>
 
-<div className="flex justify-center items-center ">
-<div
-                key={index}
-              /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
-                onClick={() => navigate(`/campaign/${item.campaignId}`)}
-                className="p-4 w-[95%] h-20 bg-body_news  cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
-  
-              >
-                <div>
-                  <p>
-                    <b>First name:</b> {item.friendName}
-                  </p>
-                  <p>
-                    <b>Gender:</b>{" "}
-                    {item.friendGender === "M" ? "Male" : "Female"}
-                  </p>
+                {item.isCelebrity && (
+                  <img className=" ml-auto w-6 m-4" src="/supporters/celebrity_icon.svg"  />
+                )}
+
+                  <div>
+                    <Flag className="w-12 " code={item.friendNationality} />
+                  </div>
                 </div>
 
-                <div>
-                  <Flag className="w-12 " code={item.friendNationality} />
-                </div>
+
+
               </div>
-</div>
-            
-
-
             </>
           ))}
         </>

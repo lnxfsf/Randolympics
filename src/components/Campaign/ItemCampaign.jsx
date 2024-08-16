@@ -214,7 +214,7 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last coments");
+      console.log("saljes ti last coments lastCommentsSupportersCampaign");
       console.log(response.data);
 
       setLastCommentsSupporters(response.data);
@@ -274,7 +274,7 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last coments");
+      console.log("saljes ti last coments allTransactionsSupportersCampaign");
       console.log(response.data);
 
       setAllTransactionsSupporters(response.data);
@@ -341,17 +341,59 @@ const ItemCampaign = () => {
                     </p>
                   </div>
 
+
+                  {/* so, isVerified, means, that we truly know, if celebrity made account, or it was pre-filled already.. */}
+                  {!athlete.isCelebrity && !athlete.isVerified && (
                   <div className="flex justify-center items-center flex-col mt-8 mb-8">
-                    <p className="text-[#fff]">
-                      <span className="font-semibold">Email:</span>{" "}
-                      {athlete.email}
-                    </p>
+                    
+                      <p className="text-[#fff]">
+                        <span className="font-semibold">Email:</span>{" "}
+                        {athlete.email}
+                      </p>
+                    
 
                     <p className="text-[#fff]">
                       <span className="font-semibold">Phone:</span>{" "}
                       {athlete.phone}
                     </p>
                   </div>
+
+)}
+
+                  {/* show socials for celebrity */}
+                  {athlete.isCelebrity && (
+                    <div className="flex justify-center items-center flex-col mt-8 mb-8">
+                      {athlete.fb_link && (
+                        <a
+                          href={athlete.fb_link}
+                          target="_blank"
+                          className="text-[#fff] font-semibold underline cursor-pointer select-none"
+                        >
+                          Facebook
+                        </a>
+                      )}
+
+                      {athlete.ig_link && (
+                        <a
+                          href={athlete.ig_link}
+                          target="_blank"
+                          className="text-[#fff] font-semibold underline cursor-pointer select-none"
+                        >
+                          Instagram
+                        </a>
+                      )}
+
+                      {athlete.tw_link && (
+                        <a
+                          href={athlete.tw_link}
+                          target="_blank"
+                          className="text-[#fff] font-semibold underline cursor-pointer select-none"
+                        >
+                          Twitter
+                        </a>
+                      )}
+                    </div>
+                  )}
 
                   <hr
                     className=" mb-8 w-[100%]"
@@ -386,7 +428,9 @@ const ItemCampaign = () => {
               <div className="flex grow flex-col ">
                 <div className="flex   mt-14 pb-6 flex-col gap-y-2">
                   <div className="flex justify-around items-center  ">
-                    <p className="text-4xl">{athlete.name}</p>
+                    <p className="text-4xl">
+                      {athlete.name} {athlete.middleName} {athlete.lastName}
+                    </p>
 
                     <div className="flex flex-col justify-center ">
                       <Flag className="flag-photo" code={athlete.nationality} />
@@ -857,7 +901,7 @@ const ItemCampaign = () => {
           )}
 
           {/* this is for showing LIST OF ALL supporters !!! */}
-          {showAllSupporters && (
+          {showAllSupporters  && (
             <>
               <div
                 className="min-h-screen"
@@ -879,6 +923,7 @@ const ItemCampaign = () => {
                     Back
                   </p>
                 </div>
+
 
                 <div className="flex w-full justify-center items-center ">
                   <div className="flex justify-center items-center flex-col w-[90%]">
@@ -910,6 +955,8 @@ const ItemCampaign = () => {
                         </div>
                       )}
 
+
+            {allTransactionsSupporters.leng >= 1 && (
                     <div className="flex w-full flex-col mt-8">
                       {allTransactionsSupporters &&
                         allTransactionsSupporters.map((item, index) => (
@@ -947,14 +994,21 @@ const ItemCampaign = () => {
                         Show more
                       </button>
                     </div>
+)}
+
+
                   </div>
                 </div>
-                {lastTransactionsSupporters && (
+
+
+                {lastTransactionsSupporters.length >= 1 && (
                   <p className="flex justify-center mt-6 pb-12">
                     Donate {(lastTransactionsSupporters[0].amount + 100) / 100}{" "}
                     USD to become the top supporter of this campaign !
                   </p>
                 )}
+
+
               </div>
             </>
           )}
