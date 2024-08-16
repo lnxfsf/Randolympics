@@ -119,7 +119,7 @@ npm i @sequelize/mysql  (so mysql with sequelize could work)
 
 npm i body-parser jsdom
 
-
+npm install stripe
 
 -----------
 
