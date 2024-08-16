@@ -2,6 +2,7 @@ import { QRCode } from "react-qr-code";
 import { NavbarHome } from "../components/NavbarHome";
 import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
+import '@mui/material/styles/styled';
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";

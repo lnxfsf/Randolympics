@@ -2,6 +2,7 @@
 
 // ovo import
 import "animate.css";
+import '@mui/material/styles/styled';
 
 import { Footer } from "../components/Footer";
 import { Button } from "@mui/material";
