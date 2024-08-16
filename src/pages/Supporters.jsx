@@ -135,6 +135,25 @@ const sxTextField = {
 
 const campaignId = uuidv4();
 
+
+const generateRandomEmail = (usernameLength = 8) => {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const domains = ["eee1", "eee2", "eee3", "eee4", "eee5"]; 
+  const tlds = [".com"]; 
+
+  let username = "";
+  for (let i = 0; i < usernameLength; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    username += charset[randomIndex];
+  }
+
+  const randomDomain = domains[Math.floor(Math.random() * domains.length)];
+  const randomTLD = tlds[Math.floor(Math.random() * tlds.length)];
+
+  return `${username}@${randomDomain}${randomTLD}`;
+};
+
+
 const Supporters = () => {
   const validateAthlete = async () => {
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
@@ -167,12 +186,15 @@ const Supporters = () => {
       return;
     }
 
-    if (friendEmail === "") {
+
+    if (friendEmail === "" && !isCelebrity ) {
       setSnackbarMessage("Insert email");
       setOpenSnackbarFailure(true);
       return;
     }
 
+    if(!isCelebrity){
+      console.log("on DA pokrece email konfirmaciju za friend mail")
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(friendEmail)) {
@@ -180,6 +202,9 @@ const Supporters = () => {
       setOpenSnackbarFailure(true);
       return;
     }
+
+  }
+
 
     if (friendNationality === "") {
       setSnackbarMessage("Choose country");
@@ -195,6 +220,8 @@ const Supporters = () => {
   };
 
   const validateSupporter = async () => {
+
+   
     // da odma izbaci za email, pre password-a.. da imas posle odma..
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -203,6 +230,9 @@ const Supporters = () => {
       setOpenSnackbarFailure(true);
       return;
     }
+
+  
+
 
     var tempDoCreateSupporterAccount = false;
 
@@ -412,10 +442,16 @@ const Supporters = () => {
               gender: friendGender,
 
               signedByFriend: true,
+              
               supporterName: supporterName,
               campaignURL: urlForCampaign,
 
               sendEmailToFriend: sendEmailToFriend,
+
+              isCelebrity: isCelebrity, // we get these easily, from what we already have here.. as we need boolean after all..
+              fb_link: fb_link,
+              ig_link: ig_link,
+              tw_link: tw_link,
             }
           );
 
@@ -614,16 +650,22 @@ const Supporters = () => {
   const [fourthIsVisible, setFourthIsVisible] = useState(false);
   const [fifthIsVisible, setFifthIsVisible] = useState(false);
 
-  // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
-  const [isCelebrity, setIsCelebrity] = useState(false);
+  
+
+  const [fb_link, setFb_link] = useState("");
+  const [ig_link, setIg_link] = useState("");
+  const [tw_link, setTw_link] = useState("");
+
 
   // friend information
   const [friendName, setFriendName] = useState("");
   const [friendMiddleName, setFriendMiddleName] = useState("");
   const [friendFamilyName, setFriendFamilyName] = useState("");
   const [friendLastName, setFriendLastName] = useState("");
+
   const [friendEmail, setFriendEmail] = useState("");
   const [friendPhone, setFriendPhone] = useState("");
+
   const [friendBirthdate, setFriendBirthdate] = useState();
   const [friendNationality, setFriendNationality] = useState("");
   const [friendImage, setFriendImage] = useState();
@@ -637,6 +679,22 @@ const Supporters = () => {
   const [supporterEmail, setSupporterEmail] = useState("");
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
+
+
+
+
+  
+  // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
+  const [isCelebrity, setIsCelebrity] = useState(() => {
+    // treba da postavis i random email takodje ovde.. ako izabira vec (kada se vraca, onda prazni ovaj friendEmail, da unese za athlete koji je..)
+    setFriendEmail(() => {return generateRandomEmail()})
+
+    return false;
+  }
+);  // but this one you pass, and you don't change.. unless you go through friend page..
+
+
+
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
@@ -731,6 +789,14 @@ const Supporters = () => {
   useEffect(() => {}, [amount, additionalSupportersFormData]);
 
   // ? for FilePond
+
+
+
+  
+  console.log("isCelebrity je sada:" + isCelebrity);
+  console.log("email je sada"+friendEmail);
+
+
   return (
     <>
       <NavbarHomeCollapsed />
@@ -918,7 +984,8 @@ const Supporters = () => {
               const value = event.target.value;
 
               if (value === "friend") {
-                setIsCelebrity(false);
+                setIsCelebrity(false);  // his is for that passing,you don't change this when going through pages
+                setFriendEmail("")  // here we just bring back normal value 
               } else if (value === "celebrity") {
                 setIsCelebrity(true);
               }
@@ -1268,6 +1335,7 @@ const Supporters = () => {
               </p>
 
               <div className="flex flex-col w-[70%]">
+               
                 <div className="flex justify-start gap-2">
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -1347,7 +1415,7 @@ const Supporters = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-start gap-2 ">
+                {/* <div className="flex justify-start gap-2 ">
                   <div className="flex flex-col justify-start ">
                     <TextField
                       variant="standard"
@@ -1365,7 +1433,7 @@ const Supporters = () => {
                       sx={sxTextField}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 {/* 
   <div>
@@ -1403,6 +1471,8 @@ const Supporters = () => {
     />
   </div>
  */}
+
+ 
 
                 <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
                   <div className="flex mt-0 mb-2 flex-col">
@@ -1444,6 +1514,86 @@ const Supporters = () => {
                   </div>
                 </div>
 
+                <div className="flex justify-start gap-2">
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={fb_link}
+                      onChange={(e) => {
+                        setFb_link(e.target.value);
+                      }}
+                      label="Facebook link"
+                      placeholder="Facebook Link"
+                      id="fbl"
+                      name="fbl"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={ig_link}
+                      onChange={(e) => {
+                        setIg_link(e.target.value);
+                      }}
+                      label="Instagram Link"
+                      placeholder="Instagram Link"
+                      id="igl"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  {/*  <div className="flex flex-col justify-start">
+      <TextField
+        value={friendFamilyName}
+        onChange={(e) => {
+          setFriendFamilyName(e.target.value);
+        }}
+        label="Family name"
+        placeholder="John"
+        id="name"
+        name="name"
+        type="text"
+        inputProps={{
+          maxLength: 255,
+        }}
+        InputLabelProps={inputLabelPropsTextField}
+        sx={sxTextField}
+      />
+    </div> */}
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      variant="standard"
+                      value={tw_link}
+                      onChange={(e) => {
+                        setTw_link(e.target.value);
+                      }}
+                      label="Twitter Link"
+                      placeholder="Twitter Link"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+
+                </div>
                 {/* 
   <FormControl>
     <RadioGroup
@@ -1884,6 +2034,8 @@ onChange={(event) => handleInputChange(index, event)}
           </Button>
         </div>
       </div>
+
+   
 
       {/* cetvrta */}
 
