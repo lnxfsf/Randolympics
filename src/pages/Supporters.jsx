@@ -52,6 +52,10 @@ import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
+import Popup from 'reactjs-popup';
+
+
+
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -89,6 +93,7 @@ registerPlugin(
 );
 
 import AuthCode from "react-auth-code-input";
+import { WarningTextPopup } from "../components/Supporters/WarningTextPopup";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -184,9 +189,15 @@ const Supporters = () => {
       return;
     }
 
+    
+
+    setPopupWarning(true);
+
     // ako je sve proslo onda ide okej ovde (nema return ..)
-    setSecondIsVisible(false);
-    setThirdIsVisible(true);
+    // ! setSecondIsVisible(false);
+    // ! setThirdIsVisible(true);
+
+
   };
 
   const validateSupporter = async () => {
@@ -720,6 +731,9 @@ const Supporters = () => {
       console.log(e.stack);
     }
   };
+
+
+  const [popupWarning, setPopupWarning] = useState(false);
 
   // ? for FilePond
 
@@ -1464,6 +1478,11 @@ const Supporters = () => {
             </div>
           </>
         )}
+
+<Popup open={popupWarning}  position="right center" className="popup-content">
+    
+ <WarningTextPopup setSecondIsVisible={setSecondIsVisible} setThirdIsVisible={setThirdIsVisible} setPopupWarning={setPopupWarning} popupWarning={popupWarning} />
+  </Popup>
 
         <div className="flex gap-4">
           <Button

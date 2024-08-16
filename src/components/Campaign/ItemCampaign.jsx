@@ -76,10 +76,8 @@ const ItemCampaign = () => {
   const [campaign, setCampaign] = useState();
   const [athlete, setAthlete] = useState();
 
-
   const [limitAllTransactions, setLimitAllTransactions] = useState(10);
-  const [allTransactionsSupporters,setAllTransactionsSupporters] = useState();
-
+  const [allTransactionsSupporters, setAllTransactionsSupporters] = useState();
 
   const [textAthleteStatus, setTextAthleteStatus] = useState(
     "Has not logged in yet"
@@ -264,11 +262,8 @@ const ItemCampaign = () => {
       console.error(error);
     }
 
-
-
     try {
-
-      console.log(" sto nece: "+limitAllTransactions)
+      console.log(" sto nece: " + limitAllTransactions);
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
         {
@@ -286,8 +281,6 @@ const ItemCampaign = () => {
     } catch (error) {
       console.error(error);
     }
-
-
   };
 
   const popupRef = useRef(null);
@@ -519,10 +512,9 @@ const ItemCampaign = () => {
                         </div>
                       </div>
 
-
                       <div className="flex justify-center mt-2">
-        <div className="w-4/5 h-0.5 bg-[#000]"></div>
-      </div>
+                        <div className="w-4/5 h-0.5 bg-[#000]"></div>
+                      </div>
                     </div>
                   )}
 
@@ -530,10 +522,10 @@ const ItemCampaign = () => {
                   {lastTransactionsSupporters &&
                     lastTransactionsSupporters.map((item, index) => (
                       <>
-
-                        <div className="flex w-full flex-col justify-start items-start p-0 pl-4 pr-4  " style={{marginTop: "-8px"}}>
-
-
+                        <div
+                          className="flex w-full flex-col justify-start items-start p-0 pl-4 pr-4  "
+                          style={{ marginTop: "-8px" }}
+                        >
                           <div className="flex w-full border-l-2  items-center m-1 mb-0 pb-0 p-2 justify-between  ">
                             <p key={index} className=" pl-2 ">
                               <span className="font-semibold">
@@ -844,7 +836,7 @@ const ItemCampaign = () => {
                   setPayment(false);
                 }}
                 className="w-56"
-                style={{ marginTop: "25px", marginBottom: "25px",  }}
+                style={{ marginTop: "25px", marginBottom: "25px" }}
                 sx={{
                   height: "50px",
                   bgcolor: "#AF2626",
@@ -864,12 +856,11 @@ const ItemCampaign = () => {
             </div>
           )}
 
-
           {/* this is for showing LIST OF ALL supporters !!! */}
           {showAllSupporters && (
             <>
               <div
-              className="min-h-screen"
+                className="min-h-screen"
                 style={{
                   backgroundImage: "url('/supporters/supporter5.png')",
                   backgroundSize: "cover",
@@ -889,41 +880,35 @@ const ItemCampaign = () => {
                   </p>
                 </div>
 
-
-               
-
-
                 <div className="flex w-full justify-center items-center ">
                   <div className="flex justify-center items-center flex-col w-[90%]">
                     <p className="text-2xl">{athlete.name}'s supporters:</p>
 
-
                     {firstSupportersCampaign &&
-                  firstSupportersCampaign.supporterName && (
-                    <div>
-                      <div className="flex w-full flex-col  pl-16 pr-16 pt-4 mt-4 ">
-                        <div className="flex items-center  justify-between">
-                          <p>
-                            <b>Creator:</b>{" "}
-                            {firstSupportersCampaign.supporterName}
-                          </p>
-
-                          <p>${firstSupportersCampaign.amount / 100} </p>
-                        </div>
-
+                      firstSupportersCampaign.supporterName && (
                         <div>
-                          <p className="text-sm">
-                            {firstSupportersCampaign.supporterComment}
-                          </p>
+                          <div className="flex w-full flex-col  pl-16 pr-16 pt-4 mt-4 ">
+                            <div className="flex items-center  justify-between">
+                              <p>
+                                <b>Creator:</b>{" "}
+                                {firstSupportersCampaign.supporterName}
+                              </p>
+
+                              <p>${firstSupportersCampaign.amount / 100} </p>
+                            </div>
+
+                            <div>
+                              <p className="text-sm">
+                                {firstSupportersCampaign.supporterComment}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex justify-center mt-2">
+                            <div className="w-4/5 h-0.5 bg-[#000]"></div>
+                          </div>
                         </div>
-                      </div>
-
-
-                      <div className="flex justify-center mt-2">
-        <div className="w-4/5 h-0.5 bg-[#000]"></div>
-      </div>
-                    </div>
-                  )}
+                      )}
 
                     <div className="flex w-full flex-col mt-8">
                       {allTransactionsSupporters &&
@@ -950,14 +935,17 @@ const ItemCampaign = () => {
                                 {item.supporterComment}
                               </p>
                             </div>
-
-
-                           
                           </>
                         ))}
 
-                       
-                         <button className="underline" onClick={() => {setLimitAllTransactions((prev) => prev + 10)}}>Show more</button>
+                      <button
+                        className="underline"
+                        onClick={() => {
+                          setLimitAllTransactions((prev) => prev + 10);
+                        }}
+                      >
+                        Show more
+                      </button>
                     </div>
                   </div>
                 </div>
