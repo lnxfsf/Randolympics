@@ -2,7 +2,7 @@ import { QRCode } from "react-qr-code";
 import { NavbarHome } from "../components/NavbarHome";
 import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
-import '@mui/material/styles/styled';
+import "@mui/material/styles/styled";
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
@@ -52,9 +52,7 @@ import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
-import Popup from 'reactjs-popup';
-
-
+import Popup from "reactjs-popup";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -189,20 +187,14 @@ const Supporters = () => {
       return;
     }
 
-    
-
     setPopupWarning(true);
 
     // ako je sve proslo onda ide okej ovde (nema return ..)
     // ! setSecondIsVisible(false);
     // ! setThirdIsVisible(true);
-
-
   };
 
   const validateSupporter = async () => {
-
-
     // da odma izbaci za email, pre password-a.. da imas posle odma..
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -212,16 +204,14 @@ const Supporters = () => {
       return;
     }
 
-
     var tempDoCreateSupporterAccount = false;
 
     // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
     if (supporterPassword !== "" && supporterEmail !== "") {
-
-      // ALI AKO UNESE ŠIFRU ! 
+      // ALI AKO UNESE ŠIFRU !
 
       // moras videti da li ima taj email prvo, da li postoji vec
-      
+
       const responseSupporterUser = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
         {
@@ -232,11 +222,10 @@ const Supporters = () => {
       );
 
       if (responseSupporterUser.data.found) {
-        // pronasao je tog user-a ! 
+        // pronasao je tog user-a !
 
-
-        // ! treba SAMO DA PROVERIS, da li je password isti ! 
-        // ako nije, isto i dalje izbacuje, dok ne unese isparavnu 
+        // ! treba SAMO DA PROVERIS, da li je password isti !
+        // ako nije, isto i dalje izbacuje, dok ne unese isparavnu
 
         const responseSupporterUserPasswordCheck = await axios.get(
           `${BACKEND_SERVER_BASE_URL}/auth/campaignIsSupporterPassCorrect`,
@@ -248,43 +237,28 @@ const Supporters = () => {
           }
         );
 
-         // If the password is incorrect, show an error message
+        // If the password is incorrect, show an error message
         if (responseSupporterUserPasswordCheck.data.check === false) {
-              setSnackbarMessage("Wrong supporter password!");
-              setOpenSnackbarFailure(true);
-              return;
-
-
+          setSnackbarMessage("Wrong supporter password!");
+          setOpenSnackbarFailure(true);
+          return;
         }
 
         // ako je ispravna, nece se nista desiti, samo ce proci dalje..
 
-
-
-
-        // On ovde, dobije taj password, a i email 
-      /*   setSnackbarMessage("");
+        // On ovde, dobije taj password, a i email
+        /*   setSnackbarMessage("");
         setOpenSnackbarFailure(true);
         return;
  */
-
-
-
       } else {
-        // ako nije pronasao tog user-a. 
+        // ako nije pronasao tog user-a.
         // E SADA DOZVOLJAVA DA KREIRA OVAJ NOVI, USER. jer sada ima i password i email ! (pa kreira novi account sa ovime (ovde nece biti errors. a onaj gde on dozvoli, samo sa email, on ne vrsi registraciju, pa tamo erroruje.. al uglv ostalo radi sve))
 
         setDoCreateSupporterAccount(true);
         tempDoCreateSupporterAccount = true;
-
       }
-
-
-
     } else if (supporterEmail !== "") {
-
-      
-      
       const responseSupporterUser = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
         {
@@ -296,35 +270,23 @@ const Supporters = () => {
 
       if (responseSupporterUser.data.found) {
         // If the supporter exists but no password was provided, prompt the user to enter a password
-        setSnackbarMessage("Supporter already exists. Type supporter password.");
+        setSnackbarMessage(
+          "Supporter already exists. Type supporter password."
+        );
         setOpenSnackbarFailure(true);
         return;
       } else {
-
         // If no supporter exists, allow account creation. ALI CEKAJ, NE MOZE DA KREIRA, AKO NEMA PASSWORD !
         // okej, da, on NE treba, da unese password. on ce i dalje biti upisan kao donator ! sve ostalo ce raditi isto. kako cuva u bazi !
-        // zato ga ovde pustas.. 
+        // zato ga ovde pustas..
         setDoCreateSupporterAccount(true);
         tempDoCreateSupporterAccount = true;
       }
-    }  else if (supporterPassword !== ""){
-
-       setSnackbarMessage(" Type supporter email first !");
-        setOpenSnackbarFailure(true);
-        return;
-
+    } else if (supporterPassword !== "") {
+      setSnackbarMessage(" Type supporter email first !");
+      setOpenSnackbarFailure(true);
+      return;
     }
-
-    
-   
-
-
-
-    
-    
-
-
-
 
     if (supporterName === "") {
       setSnackbarMessage("Insert your name");
@@ -332,7 +294,6 @@ const Supporters = () => {
       return;
     }
 
-    
     // makes it for them
     makeCampaign(tempDoCreateSupporterAccount);
 
@@ -340,7 +301,6 @@ const Supporters = () => {
 
     setThirdIsVisible(false);
     setFourthIsVisible(true);
-
   };
 
   // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
@@ -450,75 +410,68 @@ const Supporters = () => {
               cryptoaddress_type: "BTC",
               bio: "",
               gender: friendGender,
-    
+
               signedByFriend: true,
               supporterName: supporterName,
               campaignURL: urlForCampaign,
-    
+
               sendEmailToFriend: sendEmailToFriend,
             }
           );
-    
+
           if (response.status === 201) {
             console.log("athleteId" + response.data.userId);
             athleteId = response.data.userId;
-    
+
             /*  alert("athlete user created"); */
-    
-            if(doCreateSupporterAccount || tempDoCreateSupporterAccount){
-    
-            // ? creating user for supporter
-            // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
-            var responseSupport = await axios.post(
-              `${BACKEND_SERVER_BASE_URL}/auth/register`,
-              {
-                user_type: "SPT",
-                email: supporterEmail,
-                password: supporterPassword,
-                email_private: true,
-                phone_private: true,
-                weight_private: true,
-                name: supporterName,
-                /*  middleName: friendMiddleName,
+
+            if (doCreateSupporterAccount || tempDoCreateSupporterAccount) {
+              // ? creating user for supporter
+              // TODO , za supporter, registracija ! mora proveriti ako postoji email, onda nece praviti account (samo preskoci ovo..)
+              var responseSupport = await axios.post(
+                `${BACKEND_SERVER_BASE_URL}/auth/register`,
+                {
+                  user_type: "SPT",
+                  email: supporterEmail,
+                  password: supporterPassword,
+                  email_private: true,
+                  phone_private: true,
+                  weight_private: true,
+                  name: supporterName,
+                  /*  middleName: friendMiddleName,
                   lastName: friendLastName, */
-                phone: supporterPhone,
-                /*  nationality: friendNationality, */
-                weight: "0",
-                cryptoaddress: "",
-                /*  picture: friendImage, */
-                cryptoaddress_type: "BTC",
-                bio: "",
-                gender: "M", // we don't actually need gender for supporter
-                supporterComment,
-                // signedByFriend: true,
-                campaignURL: urlForCampaign,
-    
-              
-                signingAsSupporter: true,
+                  phone: supporterPhone,
+                  /*  nationality: friendNationality, */
+                  weight: "0",
+                  cryptoaddress: "",
+                  /*  picture: friendImage, */
+                  cryptoaddress_type: "BTC",
+                  bio: "",
+                  gender: "M", // we don't actually need gender for supporter
+                  supporterComment,
+                  // signedByFriend: true,
+                  campaignURL: urlForCampaign,
+
+                  signingAsSupporter: true,
+                }
+              );
+
+              if (responseSupport.status === 201) {
+                supporterId = response.data.userId;
+
+                setSnackbarMessage("Created campaign");
+                setOpenSnackbarSuccess(true);
               }
-            );
-    
-            if (responseSupport.status === 201) {
-              supporterId = response.data.userId;
-    
-              
-    
-    
+            } else {
+              // if we don't create supporter account, but still we did created campaign.. with what we have
               setSnackbarMessage("Created campaign");
               setOpenSnackbarSuccess(true);
             }
-          } else {
-    
-            
-            // if we don't create supporter account, but still we did created campaign.. with what we have
-            setSnackbarMessage("Created campaign");
-            setOpenSnackbarSuccess(true);
-          }
-    
+
             try {
             } catch (error) {
               console.log(error);
-    
+
               if (axios.isAxiosError(error)) {
                 if (error.response && error.response.status === 409) {
                   setSnackbarMessage(error.response.data.message);
@@ -541,7 +494,7 @@ const Supporters = () => {
           }
         } catch (error) {
           console.log(error);
-    
+
           if (axios.isAxiosError(error)) {
             if (error.response && error.response.status === 409) {
               setSnackbarMessage(error.response.data.message);
@@ -555,30 +508,24 @@ const Supporters = () => {
             }
           } else {
             /*    alert("An unexpected error occurred: " + error.message); */
-            setSnackbarMessage("An unexpected error occurred: " + error.message);
+            setSnackbarMessage(
+              "An unexpected error occurred: " + error.message
+            );
             setOpenSnackbarFailure(true);
           }
         }
-
-
-
-
-
       }
     } catch (error) {
-
-
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.status === 409) {
           setSnackbarMessage(error.response.data.message);
           setOpenSnackbarFailure(true);
 
-            // we stay at same page. 
-           setThirdIsVisible(true); 
-           setFourthIsVisible(false); 
- 
-          return;
+          // we stay at same page.
+          setThirdIsVisible(true);
+          setFourthIsVisible(false);
 
+          return;
         } else {
           setSnackbarMessage(
             "An error occurred: " +
@@ -586,10 +533,9 @@ const Supporters = () => {
           );
           setOpenSnackbarFailure(true);
 
-          // we stay at same page. 
-          setThirdIsVisible(true); 
-          setFourthIsVisible(false); 
- 
+          // we stay at same page.
+          setThirdIsVisible(true);
+          setFourthIsVisible(false);
 
           return;
         }
@@ -598,70 +544,57 @@ const Supporters = () => {
         setSnackbarMessage("An unexpected error occurred: " + error.message);
         setOpenSnackbarFailure(true);
 
-         // we stay at same page. 
-         setThirdIsVisible(true); 
-         setFourthIsVisible(false);  
+        // we stay at same page.
+        setThirdIsVisible(true);
+        setFourthIsVisible(false);
 
         return true;
       }
-
     }
 
     // and then makes those two accounts. athlete and supporter !
     // signs up friend first !
-   
 
     // update supporterStats ! polja..
   };
 
   const informOtherSupporters = async () => {
-
-    console.log("on izvrsava ovaj informOtherSupporters")
+    console.log("on izvrsava ovaj informOtherSupporters");
 
     console.log(JSON.stringify(additionalSupportersFormData));
 
-      try {
+    try {
+      const responseSupporterUser = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/listsData/informOtherSupporters`,
+        {
+          additionalSupporterEmailsToSendTo: JSON.stringify(
+            additionalSupportersFormData
+          ),
+          campaignURL: urlForCampaign,
+          name: friendName,
+        }
+      );
+    } catch (error) {
+      console.log(error);
 
-        
-
-        const responseSupporterUser = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/listsData/informOtherSupporters`,
-          {
-           
-             additionalSupporterEmailsToSendTo: JSON.stringify(additionalSupportersFormData), 
-              campaignURL: urlForCampaign,
-              name: friendName,
-            
-          }
-        );
-
-
-
-      } catch (error) {
-        console.log(error)
-
-        if (axios.isAxiosError(error)) {
-          if (error.response && error.response.status === 409) {
-            setSnackbarMessage(error.response.data.message);
-            setOpenSnackbarFailure(true);
-          } else {
-            setSnackbarMessage(
-              "An error occurred: " +
-                (error.response?.data?.message || error.message)
-            );
-            setOpenSnackbarFailure(true);
-          }
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 409) {
+          setSnackbarMessage(error.response.data.message);
+          setOpenSnackbarFailure(true);
         } else {
-          /*    alert("An unexpected error occurred: " + error.message); */
           setSnackbarMessage(
-            "An unexpected error occurred: " + error.message
+            "An error occurred: " +
+              (error.response?.data?.message || error.message)
           );
           setOpenSnackbarFailure(true);
         }
+      } else {
+        /*    alert("An unexpected error occurred: " + error.message); */
+        setSnackbarMessage("An unexpected error occurred: " + error.message);
+        setOpenSnackbarFailure(true);
       }
-
-
-  }
+    }
+  };
 
   console.log("urlForCampaign ------------>  " + urlForCampaign);
 
@@ -708,7 +641,8 @@ const Supporters = () => {
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
   // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
-  const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
+  const [doCreateSupporterAccount, setDoCreateSupporterAccount] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -732,8 +666,8 @@ const Supporters = () => {
     }
   };
 
-
   const [popupWarning, setPopupWarning] = useState(false);
+  const [howItWorks, setHowItWorks] = useState(false)
 
   // ? for FilePond
 
@@ -802,6 +736,53 @@ const Supporters = () => {
       <NavbarHomeCollapsed />
 
       <HorizontalLinearAlternativeLabelStepper />
+
+      
+      
+    <Popup open={howItWorks} onClose={() => setHowItWorks(false)}  position="right center" className="popup-content">
+    
+<div className="flex justify-center items-center flex-col">
+
+    <p className="text-2xl font-semibold mt-2 mb-2">How it works</p>
+
+    <p className="text-center mb-3  ">Randolympics lets you sign up your friend or a celebrity to the upcoming competition.
+    </p>
+
+    <p className="text-center mb-3  ">After you sign someone up and donate - you become a Supporter !</p>
+
+    <p className="text-center   ">The competitors will be selected randomly, but those who receive more money through donations have a higher chance to get an invitation !</p>
+
+
+
+    <Button
+          onClick={() => {
+           
+            
+            setHowItWorks(false); // then close this popup
+          }}
+          className="w-36"
+          style={{ marginTop: "25px", marginBottom: "25px" }}
+          sx={{
+            height: "40px",
+            bgcolor: "#AF2626",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgb(175, 38, 38)",
+              color: "white",
+              border: `1px solid rgb(175, 38, 38)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="popins-font">Back</span>
+        </Button>
+
+        </div>
+    </Popup>
+
+
 
       {firstIsVisible && (
         <>
@@ -893,6 +874,10 @@ const Supporters = () => {
 
       {/* prva */}
 
+
+
+      
+
       <div
         className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
@@ -905,6 +890,16 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
+
+
+
+
+
+      <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
+        <p className="underline ">How it works</p>
+      </div>
+
+
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12">
@@ -986,6 +981,10 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
+
+        <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
+        <p className="underline ">How it works</p>
+      </div>
         <img className="h-16" src="randolympics_logo.svg" />
 
         {!isCelebrity && (
@@ -1479,10 +1478,19 @@ const Supporters = () => {
           </>
         )}
 
-<Popup open={popupWarning}  position="right center" className="popup-content">
-    
- <WarningTextPopup setSecondIsVisible={setSecondIsVisible} setThirdIsVisible={setThirdIsVisible} setPopupWarning={setPopupWarning} popupWarning={popupWarning} />
-  </Popup>
+        <Popup
+          open={popupWarning}
+          onClose={() => setPopupWarning(false)}
+          position="right center"
+          className="popup-content"
+        >
+          <WarningTextPopup
+            setSecondIsVisible={setSecondIsVisible}
+            setThirdIsVisible={setThirdIsVisible}
+            setPopupWarning={setPopupWarning}
+            popupWarning={popupWarning}
+          />
+        </Popup>
 
         <div className="flex gap-4">
           <Button
@@ -1546,6 +1554,10 @@ const Supporters = () => {
           backgroundPosition: "center",
         }}
       >
+         <div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
+        <p className="underline ">How it works</p>
+      </div>
+
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12 mb-6">
@@ -1731,8 +1743,6 @@ const Supporters = () => {
             Inform additional supporters ?
           </p>
 
-          
-          
           <div className="flex flex-col justify-start w-">
             {additionalSupportersFormData.map((data, index) => (
               <div
@@ -1889,6 +1899,12 @@ onChange={(event) => handleInputChange(index, event)}
           backgroundPosition: "center",
         }}
       >
+
+<div className="how_it_works cursor-pointer select-none " onClick={() => {setHowItWorks(true)}}>
+        <p className="underline ">How it works</p>
+      </div>
+
+
         <img className="h-16" src="randolympics_logo.svg" />
 
         <p className="text-xl text-center mt-12 mb-6">

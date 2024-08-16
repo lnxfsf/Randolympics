@@ -82,7 +82,26 @@
       box-shadow: 0 0 500px rgba(241, 241, 241, 0);
     }
   }
-  .popup-content {
-    -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
-    border: 2px black solid;
-  }
+
+
+.popup-content {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  border: 2px black solid;
+}
+
+
+
+
+
+.how_it_works {
+  position: fixed; 
+  top: 0;        
+  right: 0;      
+  padding: 10px; 
+ // background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent background */
+ // color: white;   
+  z-index: 999;   
+
+
+
+}
