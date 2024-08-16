@@ -26,7 +26,9 @@ const generateAccessToken = (userId) => {
 
 
 const update_user_data = async (req, res) => {
-    // get data from FE
+  
+  
+  // get data from FE
     const {
       original_email,
   
@@ -59,14 +61,32 @@ const update_user_data = async (req, res) => {
       passport_expiry,
   
       passportLastValidatedRejected,
+
+
+      athleteStatement,
+      athleteStatus,
+
+
+      
+      familyName,
+      lastName, 
+
   
       isRejected, // then sets all 4 fields to null... (false)
     } = req.body;
   
+
+
+
     await db.sequelize.sync();
   
+    
+    const t1 = await db.sequelize.transaction();
+
     const user = await User.findOne({
       where: { email: original_email },
+      lock: true,
+      transaction: t1,
     });
   
     if (user) {
@@ -78,6 +98,8 @@ const update_user_data = async (req, res) => {
         needsUpdate = true;
       }
   
+
+
       // ? so this is for passport
   
       if (passportLastValidatedRejected !== user.passportLastValidatedRejected) {
@@ -132,6 +154,7 @@ const update_user_data = async (req, res) => {
         updatingObject.birthdate_verify = birthdate_verify;
         needsUpdate = true;
       }
+
   
       if (nationality_verify !== user.nationality_verify) {
         updatingObject.nationality_verify = nationality_verify;
@@ -155,6 +178,22 @@ const update_user_data = async (req, res) => {
         updatingObject.name = name;
         needsUpdate = true;
       }
+
+
+      
+      if (lastName && lastName !== user.lastName) {
+        updatingObject.lastName = lastName;
+        needsUpdate = true;
+      }
+      
+
+
+      if (familyName && familyName !== user.familyName) {
+        updatingObject.familyName = familyName;
+        needsUpdate = true;
+      }
+
+
   
       if (phone && phone !== user.phone) {
         updatingObject.phone = phone;
@@ -220,13 +259,56 @@ const update_user_data = async (req, res) => {
         updatingObject.picture = picture;
         needsUpdate = true;
       }
+
+
+      // da ne obrise prethodno..
+      if (athleteStatement && athleteStatement !== user.athleteStatement) {
+        updatingObject.athleteStatement = athleteStatement;
+        needsUpdate = true;
+      }
+
+
+      if (athleteStatus && athleteStatus !== user.athleteStatus) {
+
+
+     /*    var textAthleteStatus = "";
+
+        switch (athleteStatus) {
+          case "s1":
+            textAthleteStatus = "Has not logged in yet";
+          case "s2":
+            textAthleteStatus = "Logged in but no status";
+          case "s3":
+            textAthleteStatus = "I'm 99% taking the challenge and going";
+          case "s4":
+            textAthleteStatus = "I'm most likely going";
+          case "s5":
+            textAthleteStatus = "I'm maybe going";
+          case "s6":
+            textAthleteStatus = "I'm definitely not going";
+        }
+           */
+
+
+        
+        updatingObject.athleteStatus = athleteStatus;
+        needsUpdate = true;
+      }
+
+
+
+
   
       if (needsUpdate) {
+
         try {
-          await user.update(updatingObject);
+
+          await user.update(updatingObject,{ transaction: t1 });
   
+          await t1.commit();
           return res.status(200).json({ message: "User details updated" });
         } catch (error) {
+          await t1.rollback();
           return res.status(500).json({ error: error.message });
         }
       }
@@ -290,6 +372,15 @@ const update_user_data = async (req, res) => {
           passport_expiry: existingUser.passport_expiry,
   
           passportStatus: existingUser.passportStatus,
+
+          athleteStatement: existingUser.athleteStatement,
+          athleteStatus: existingUser.athleteStatus,
+
+
+          lastName: existingUser.lastName,
+          familyName: existingUser.familyName,
+
+
         });
       }
     } catch (error) {

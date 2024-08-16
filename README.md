@@ -62,8 +62,12 @@ PASS_email="xxxxxxxxxxx"  // and use app_passwords, yahoo gives you
 
 
 
+
+
+# Deletes logins, every 1 day
+
 ```
-SET GLOBAL event_scheduler = ON;
+SET GLOBAL event_scheduler = ON; // in case you don't have it enabled
 
 
 
@@ -74,11 +78,33 @@ DO
   
   
   
--- verify, it's there.. event that will run every 1 hour.. 
+-- verify, it's there.. event that will run every 1 hour..  (so, we select ? )
 SELECT * FROM information_schema.EVENTS WHERE EVENT_NAME = 'delete_all_rows_event';
 ```
 
 
+
+### This is for deleting old campaigns that weren't paid, after 7 days.
+
+```
+
+SET GLOBAL event_scheduler = ON;  // in case you don't have it enabled
+
+
+
+CREATE EVENT delete_old_unpaid_campaigns
+ON SCHEDULE EVERY 1 DAY
+DO
+  DELETE FROM campaign
+  WHERE payment_status = 'unpaid'
+  AND createdAt < NOW() - INTERVAL 7 DAY;
+
+
+
+
+-- verify, it's there.. event that will run every 1 hour..  (so, we select ? )
+SELECT * FROM information_schema.EVENTS WHERE EVENT_NAME = 'delete_old_unpaid_campaigns';
+```
 
 
 

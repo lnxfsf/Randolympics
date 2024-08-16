@@ -184,9 +184,18 @@ const creategamepost = async (req, res) => {
 
   await db.sequelize.sync();
 
-  // create new post
-  const newPost = await Upcominggames.create(post);
+  const t = await db.sequelize.transaction();
 
+  try {
+  // create new post
+  const newPost = await Upcominggames.create(post,{ transaction: t });
+
+  await t.commit();
+
+} catch (e) {
+  await t.rollback();
+
+}
 
   res.status(201).json({ message: "Post created successfully!" });
 
@@ -222,8 +231,13 @@ const updateUpcomingGamesBlog = async (req, res) => {
 
   try {
 
+    const t1 = await db.sequelize.transaction();
+
+
     const blogUpcomingGames = await Upcominggames.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -267,13 +281,18 @@ const updateUpcomingGamesBlog = async (req, res) => {
 
     console.log("needsUpdate" + needsUpdate)
     if (needsUpdate) {
+      
+      
+
       try {
-        await blogUpcomingGames.update(updatingObject);
+        await blogUpcomingGames.update(updatingObject,{ transaction: t1 });
+
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
-
+        await t1.rollback();
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
 
@@ -282,6 +301,7 @@ const updateUpcomingGamesBlog = async (req, res) => {
     }
 
   } catch (error) {
+   
     return res.status(500).json({ error: error.message });
   }
 
@@ -474,11 +494,20 @@ const createnewspost = async (req, res) => {
 
   await db.sequelize.sync();
 
-  // create new post
-  const newPost = await News.create(post);
+  const t = await db.sequelize.transaction();
 
+  try {
+  // create new post
+  const newPost = await News.create(post,{ transaction: t });
+
+  await t.commit();
 
   res.status(201).json({ message: "Post created successfully!" });
+
+
+} catch (e) {
+    await t.rollback();
+}
 
 
 
@@ -502,8 +531,13 @@ const updateNewsBlog = async (req, res) => {
 
   try {
 
+
+    const t1 = await db.sequelize.transaction();
+
     const blogNews = await News.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -543,11 +577,14 @@ const updateNewsBlog = async (req, res) => {
 
     if (needsUpdate) {
       try {
-        await blogNews.update(updatingObject);
+        await blogNews.update(updatingObject,{ transaction: t1 });
+
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
+        await t1.rollback();
 
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
@@ -654,12 +691,19 @@ const createeconomicspost = async (req, res) => {
 
   await db.sequelize.sync();
 
+  const t = await db.sequelize.transaction();
+
   // create new post
-  const newPost = await Economics.create(post);
+  try {
+    const newPost = await Economics.create(post,{ transaction: t });
+    await t.commit();
 
-
-  res.status(201).json({ message: "Post created successfully!" });
-
+    res.status(201).json({ message: "Post created successfully!" });
+  
+  } catch(e) {
+    await t.rollback();
+  }
+ 
 
 
 
@@ -725,8 +769,12 @@ const updateEconomicsBlog = async (req, res) => {
 
   try {
 
+    const t1 = await db.sequelize.transaction();
+
     const blogEconomics = await Economics.findOne({
       where: { postId: postId },
+      lock: true,
+      transaction: t1,
     });
 
 
@@ -766,12 +814,14 @@ const updateEconomicsBlog = async (req, res) => {
 
     if (needsUpdate) {
       try {
-        await blogEconomics.update(updatingObject);
+        await blogEconomics.update(updatingObject,{ transaction: t1 });
+        await t1.commit();
 
         return res.status(200).json({ message: "Blog updated" });
 
       } catch (error) {
-
+        await t1.rollback();
+        
         console.log(error.stack)
         return res.status(500).json({ error: error.message });
 

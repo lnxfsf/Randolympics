@@ -43,8 +43,9 @@ db.economics = require('./economics')(sequelize,DataTypes)
 
 db.campaign = require('./campaign')(sequelize,DataTypes)  
 
+db.statscampaign = require('./statscampaign')(sequelize,DataTypes)  
 
-
+db.couponcode = require('./couponcode')(sequelize,DataTypes) 
 // model for News
 
 

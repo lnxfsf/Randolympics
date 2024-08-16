@@ -1,5 +1,24 @@
 const express = require("express");
-const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize, shareTableLandingPage, makePayment, createCampaign } = require("../controllers/listDataControllers");
+const { rankingTop50, otherUsers, lastInRank,
+         team, currentNP , 
+         listLoginTrafficHistory, 
+         landingPageRandomize, shareTableLandingPage,
+          makePayment,
+           createCampaign,
+           campaignDetails,
+           howManySupportersCampaign,
+           lastCommentsSupportersCampaign,
+           lastTransactionsSupportersCampaign,
+
+           donateOnlyWithDiscountCode,
+
+           listAllCampaigns,
+
+           informOtherSupporters,
+           firstSupportersCampaign,
+           allTransactionsSupportersCampaign,
+        
+        } = require("../controllers/listDataControllers");
 const router = express.Router();
 
 
@@ -44,14 +63,31 @@ router.get("/landingPageRandomize", landingPageRandomize)
 router.post("/shareTableLandingPage", shareTableLandingPage)
 
 
-
+// ! from here, organize later, where these routes should be better suited
 //TODO put this payment somewhere else. maybe just route for payments.. see it how to do... 
 router.post("/makePayment",makePayment)
 router.post("/createCampaign", createCampaign)
 
 
 
+// for reading campaign info 
+router.get("/campaignDetails", campaignDetails)
+router.get("/howManySupportersCampaign", howManySupportersCampaign)
+router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
+router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCampaign)
+router.get("/firstSupportersCampaign", firstSupportersCampaign)
+router.get("/allTransactionsSupportersCampaign",allTransactionsSupportersCampaign)
 
+// donate only with coupon codes
+router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
+
+// list all campaigns
+router.get("/listAllCampaigns",listAllCampaigns)
+
+
+
+// inform all those other supporters, of this link
+router.post("/informOtherSupporters", informOtherSupporters)
 
   
 

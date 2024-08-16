@@ -19,6 +19,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING(255),
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING(255),
@@ -38,6 +39,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
     },
 
+
+    familyName: {
+      type: DataTypes.STRING(255),
+    },
 
     birthdate: {
       type: DataTypes.DATEONLY,
@@ -264,8 +269,20 @@ module.exports = function (sequelize, DataTypes) {
     donatedAmount: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-    }
+    },
 
+
+    athleteStatement: {
+      type: DataTypes.STRING(255),
+    },
+
+
+    athleteStatus: {
+      type: DataTypes.STRING(255),
+      defaultValue: "s1",
+
+    },
+    
 
 
     

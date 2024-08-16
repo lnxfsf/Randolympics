@@ -9,10 +9,18 @@ module.exports = function (sequelize, DataTypes) {
     friendName: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      defaultValue: "",
     },
 
     friendMiddleName: {
       type: DataTypes.STRING(255),
+      defaultValue: "",
+    },
+
+
+    friendFamilyName: {
+      type: DataTypes.STRING(255),
+      defaultValue: "",
     },
 
     friendLastName: {
@@ -44,6 +52,7 @@ module.exports = function (sequelize, DataTypes) {
 
     friendGender: {
       type: DataTypes.CHAR(1),
+      defaultValue: "",
     },
 
     supporterName: {
@@ -72,6 +81,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(600),
     },
 
+    couponDonationCode: {
+      type: DataTypes.STRING(255),
+
+    },
+
+
+    countryAthleteIsIn: {
+      type: DataTypes.STRING(100),
+      defaultValue: "US",
+    },
 
 
   });
