@@ -44,6 +44,8 @@ const generatePassword = (length = 8) => {
   return password;
 };
 
+
+
 const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
   console.log("tip user-a je:");
   console.log(user_type);
@@ -216,7 +218,17 @@ const register = async (req, res) => {
     
 
     signingAsSupporter, // then if those are empty, we avoid checking them.. (as we don't need to signup them (later on, if password is provided, then we make account, if not, then we don't. do it in backend here, so, no user can mess with this...)..)
+  
+
+
+    isCelebrity, 
+    fb_link,
+    ig_link,
+    tw_link,
+  
   } = req.body;
+
+
 
   
   
@@ -224,6 +236,8 @@ const register = async (req, res) => {
   // if he's signedByFriend , then we generate password
   if (signedByFriend) {
     var password = generatePassword();
+
+
   } else {
     var { password } = req.body;
   }
@@ -236,14 +250,23 @@ const register = async (req, res) => {
     return;
   }
 
-  if (!signingAsSupporter) {
+
+  console.log("----------> !isCelebrity   je: " + !isCelebrity)
+  console.log("----> !signingAsSupporter" + !signingAsSupporter)
+
+
+  // we don't verify email, for celebrity, just use it as placeholder, it need to be fake email after all..
+  if (!signingAsSupporter && !isCelebrity) {
+
+
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
       res.status(409).json({ message: "Email is incorrect !" });
       return;
     }
-  } else if (signingAsSupporter && email !== "") {
+
+  } else if (signingAsSupporter && email !== "" && !isCelebrity) {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
@@ -252,7 +275,7 @@ const register = async (req, res) => {
     }
   }
 
-  if (!signingAsSupporter) {
+  if (!signingAsSupporter && !isCelebrity) {
     const phoneRegex =
       /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
@@ -260,7 +283,7 @@ const register = async (req, res) => {
       res.status(409).json({ message: "Phone is incorrect !" });
       return;
     }
-  } else if (signingAsSupporter && phone !== "") {
+  } else if (signingAsSupporter && phone !== "" && !isCelebrity) {
     // we can use, check, for supporter, but only if it's phone is not empty.. (as it can be empty..)
 
     const phoneRegex =
@@ -372,6 +395,13 @@ const register = async (req, res) => {
     votes, // in mysql, default value is 0 , if this is empty..
 
     supporterComment,
+
+
+    // yes, also put these in database.. for case when we have celebrity
+    isCelebrity,  // we will need this, later on, to give them higher priority probably..
+    fb_link,
+    ig_link,
+    tw_link,
   };
 
   try {

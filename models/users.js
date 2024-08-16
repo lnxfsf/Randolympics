@@ -285,6 +285,33 @@ module.exports = function (sequelize, DataTypes) {
     
 
 
+
+
+
+    isCelebrity: {
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
+    },
+
+
+    fb_link: {
+      type: DataTypes.STRING(255),
+    },
+
+    ig_link: {
+      type: DataTypes.STRING(255),
+    },
+
+    tw_link: {
+      type: DataTypes.STRING(255),
+    },
+    
+
+
+
+
+
+
     
   });
 };
