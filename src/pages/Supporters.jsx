@@ -675,14 +675,10 @@ const Supporters = () => {
   const [supporterComment, setSupporterComment] = useState("");
 
   // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
-  const [isCelebrity, setIsCelebrity] = useState(() => {
-    // treba da postavis i random email takodje ovde.. ako izabira vec (kada se vraca, onda prazni ovaj friendEmail, da unese za athlete koji je..)
-    setFriendEmail(() => {
-      return generateRandomEmail();
-    });
+  const [isCelebrity, setIsCelebrity] = useState(false); // but this one you pass, and you don't change.. unless you go through friend page..
 
-    return false;
-  }); // but this one you pass, and you don't change.. unless you go through friend page..
+
+  console.log("mora biti celebrity false na pocetak:"+isCelebrity)
 
   /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
@@ -774,12 +770,15 @@ const Supporters = () => {
 
   const [amount, setAmount] = useState(10);
 
-  useEffect(() => {}, [amount, additionalSupportersFormData]);
-
-  // ? for FilePond
+  useEffect(() => {
+    
 
   console.log("isCelebrity je sada:" + isCelebrity);
   console.log("email je sada" + friendEmail);
+  
+  }, [amount, additionalSupportersFormData]);
+
+  // ? for FilePond
 
   return (
     <>
@@ -968,6 +967,7 @@ const Supporters = () => {
                 setIsCelebrity(false); // his is for that passing,you don't change this when going through pages
                 setFriendEmail(""); // here we just bring back normal value
               } else if (value === "celebrity") {
+                setFriendEmail(() => {return generateRandomEmail()})
                 setIsCelebrity(true);
               }
             }}

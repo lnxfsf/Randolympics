@@ -277,7 +277,12 @@ const ItemCampaign = () => {
       console.log("saljes ti last coments allTransactionsSupportersCampaign");
       console.log(response.data);
 
+
+      
       setAllTransactionsSupporters(response.data);
+
+
+
     } catch (error) {
       console.error(error);
     }
@@ -956,7 +961,7 @@ const ItemCampaign = () => {
                       )}
 
 
-            {allTransactionsSupporters.leng >= 1 && (
+            {allTransactionsSupporters.length >= 1 && (
                     <div className="flex w-full flex-col mt-8">
                       {allTransactionsSupporters &&
                         allTransactionsSupporters.map((item, index) => (
