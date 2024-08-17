@@ -6869,8 +6869,11 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
   });
 
 
+
+
   try {
     const lastCommentsSupporters = await Statscampaign.findAll({
+
       where: {
         campaignId: campaignId,
         supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
@@ -6881,6 +6884,8 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
     });
 
+    console.log("------> AJDE MORE VISE lastTransactionsSupportersCampaign")
+    console.log(campaignId)
     console.log(lastCommentsSupporters);
 
     res.json(lastCommentsSupporters);
@@ -7283,6 +7288,8 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
   });
 
+  console.log("---ADADA NALAZI PRVI BOLAN")
+  console.log(firstSupporterCampaign)
 
   try {
     const allCommentsSupporters = await Statscampaign.findAll({
@@ -7296,10 +7303,14 @@ const allTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
 
     });
-
+ 
+    console.log("stamp aon ovde: allTransactionsSupportersCampaign: ")
+    console.log("campaignId: "+campaignId)
     console.log(allCommentsSupporters);
 
     res.json(allCommentsSupporters);
+
+    
   } catch (error) {
     console.log(error.stack);
   }
