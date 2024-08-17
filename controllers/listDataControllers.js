@@ -7006,6 +7006,11 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     const t1 = await db.sequelize.transaction();
 
     try {
+
+
+      
+
+
       // on nadje koji ima.. u Coupons
       var oneCoupon = await Couponcodes.findOne({
         where: {
