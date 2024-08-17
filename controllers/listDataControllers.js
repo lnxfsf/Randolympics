@@ -7178,6 +7178,14 @@ const listAllCampaigns = async (req, res) => {
   const searchFirstNameText = req.query.searchFirstNameText;
   const searchFamilyNameText = req.query.searchFamilyNameText;
 
+
+  const isCelebrity = parseInt(req.query.isCelebrity);
+
+  const fb_link = req.query.fb_link;
+  const ig_link = req.query.ig_link;
+  const tw_link = req.query.tw_link;
+
+
   console.log("----------listAllCampaigns----------");
   console.log(filterGender);
 
@@ -7223,6 +7231,22 @@ const listAllCampaigns = async (req, res) => {
         friendFamilyName: {
           [Op.like]: `%${searchFamilyNameText}%`,
         },
+
+
+        isCelebrity: isCelebrity,
+        
+        fb_link: {
+          [Op.like]: `%${fb_link}%`,
+        },
+
+        ig_link: {
+          [Op.like]: `%${ig_link}%`,
+        },
+
+        tw_link: {
+          [Op.like]: `%${tw_link}%`,
+        },
+
       },
       order: [["updatedAt", "DESC"]],
       limit: limit,
