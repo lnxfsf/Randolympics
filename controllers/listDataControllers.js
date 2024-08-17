@@ -7017,6 +7017,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         lock: true,
         transaction: t1,
       });
+
       console.log("OVDE NE RADI ");
       console.log(discountCode);
       console.log(oneAthlete.nationality.toUpperCase());
@@ -7028,12 +7029,30 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     }
 
     if (!oneCoupon || typeof oneCoupon === "undefined") {
+
       await t1.rollback();
+      await t2.rollback();
+      await t3.rollback();
+
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
       res.status(200).json({ message: "coupon code is not valid" });
+      return;
     }
+
+    // we don't allow "GLOBAL" codes to be used like this
+   /*  if(oneCoupon.country === "GLOBAL"){
+
+      await t1.rollback();
+
+      // don't use it, there's nothing in Couponcodes ?
+    } */
+/* 
+        console.log("drzava je: ")
+        //console.log(oneCoupon.country)
+        console.log(oneCoupon) */
+
 
     // sada proveri 'Coupons.js'  sa 'statsCampaign.js'
     if (oneCoupon.couponCode) {
@@ -7137,6 +7156,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         console.log(e.stack);
       }
     }
+
   } catch (e) {
     console.log(e.stack);
   }

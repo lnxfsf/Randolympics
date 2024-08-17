@@ -69,7 +69,7 @@ const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonation
 
 
 
-  // i sada, PRVO gleda jel "GLOBAL" (pa onda za national) 
+  // i sada, PRVO gleda jel "GLOBAL" (pa onda za national)  (znaci, mora da ima amountOriginal !)
   if(oneCoupon.country === "GLOBAL"){
     // e sada, ovde ces da definises , sta on radi ovde jos..
     
