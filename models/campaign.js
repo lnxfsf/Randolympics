@@ -35,6 +35,7 @@ module.exports = function (sequelize, DataTypes) {
 
     friendPhone: {
       type: DataTypes.STRING(15),
+      defaultValue: "",
     },
 
     friendBirthdate: {
@@ -61,6 +62,7 @@ module.exports = function (sequelize, DataTypes) {
 
     supporterPhone: {
       type: DataTypes.STRING(15),
+      defaultValue: "",
     },
 
     supporterEmail: {
