@@ -49,18 +49,18 @@ const Footer = () => {
                 <span className="popins-font">Join the fun</span>
               </Button>
 
-              <img className="pt-16 pl-16 w-64 	" src="footer/logo_footer.svg" />
+              <img className="pt-16 pl-16 w-64 	" src="/footer/logo_footer.svg" />
 
               <div className="flex pl-16 gap-2">
-                <img className="pt-8  w-32" src="footer/app_store.svg" />
-                <img className="pt-8  w-32 " src="footer/google_play.svg" />
+                <img className="pt-8  w-32" src="/footer/app_store.svg" />
+                <img className="pt-8  w-32 " src="/footer/google_play.svg" />
               </div>
             </div>
           </div>
 
           <div className="basis-1/2 flex-col wrap footer-basic">
             <div className="footer_img">
-              <img className="main_img" src="footer/footer_img.png" />
+              <img className="main_img" src="/footer/footer_img.png" />
             </div>
 
             <div className="social">
