@@ -85,6 +85,7 @@ module.exports = function (sequelize, DataTypes) {
 
     couponDonationCode: {
       type: DataTypes.STRING(255),
+      defaultValue: "",
 
     },
 
