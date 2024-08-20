@@ -78,16 +78,54 @@ const Home = () => {
       <NavbarHome />
 
       {/* first div */}
-      <div className="firstHhomeImage flex justify-center items-center flex-col">
-        <p className="text-4xl mt-32" style={{ color: "white" }}>
-          From Couch Potato to Gold Medalist
+      <div className="firstHhomeImage flex justify-center items-center flex-col ">
+        <p className="text-4xl mt-56" style={{ color: "white" }}>
+        Real People. Randomly Selected.<br/>
+Competing in Olympic Sports
+
         </p>
 
-        <p className="text-xl w-[45em] text-center mt-4" style={{ color: "white" }}>
-          Randolympics is a global competition where randomly selected
-          participants face extraordinary athletic challenges, transforming
-          everyday individuals into potential gold medalists.
-        </p>
+        <div className="flex items-center justify-center  flex-col pt-8">
+        
+
+
+      
+
+          <p className="text-xl pb-4" style={{ color: "white" }}>
+          Curious about possible schedules? 
+          </p>
+
+          <Button
+            onClick={() => {
+              navigate("/randomize");
+            }}
+            className="w-44 "
+            style={{ marginTop: "0px" }}
+            sx={{
+              height: "45px",
+              bgcolor: "#AF2626",
+              color: "#fff",
+              borderRadius: 3,
+              border: `1px solid #AF2626`,
+              "&:hover": {
+                background: "rgb(202, 67, 67)",
+                color: "white",
+                border: `1px solid rgb(202, 67, 67)`,
+              },
+            }}
+            id="randomize-btn"
+            type="submit"
+          >
+            <span className="popins-font" style={{ textTransform: "none" }}>
+              Randomize
+            </span>
+          </Button>
+        
+      
+
+
+
+        </div>
 
         <div className="countdown-timer  flex items-center justify-center ">
           <p className="basis-1/2 p-8  ">
@@ -119,14 +157,20 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center pt-16 gap-8">
-          <p className="text-4xl" style={{ color: "white" }}>
-            Stockholm 2028 Games
+    {/*     <p className="text-xl w-[45em] text-center mt-4" style={{ color: "white" }}>
+          Randolympics is a global competition where randomly selected
+          participants face extraordinary athletic challenges, transforming
+          everyday individuals into potential gold medalists.
+        </p> */}
+
+        <div className="flex items-center justify-center pt-16 gap-4 flex-col">
+          <p className="text-xl text-center w-[70%]" style={{ color: "white" }}>
+          Transform your friend from couch potato to gold medalist—sign them up by starting their Randolympic campaign!
           </p>
 
           <Button
             onClick={() => {
-              navigate("/randomize");
+              navigate("/supporters");
             }}
             className="w-44 "
             style={{ marginTop: "0px" }}
@@ -146,19 +190,21 @@ const Home = () => {
             type="submit"
           >
             <span className="popins-font" style={{ textTransform: "none" }}>
-              Randomize
+              Sign up a friend
             </span>
           </Button>
         </div>
 
+
+
+       
+
+       
+
         <div className="flex items-center justify-center pt-8 pl-24  pr-24  ">
           <p style={{ color: "white" }}>
-            The Randomolympics is an innovative and exciting event that
-            reimagines traditional sports competitions by randomly assigning
-            athletes to various events. This new format addresses several
-            critical issues often associated with major sports events today,
-            promoting a fairer, more inclusive, and sustainable sporting
-            experience.
+          Is your friend more of a couch potato than an athlete? Deep down, there's a great sports spirit waiting to emerge. Sign them up for a chance to win a gold medal—it’ll be a huge surprise and a big compliment, showing that you believe in their potential. By launching this campaign, you’re not just getting them off the couch; you’re giving them a fitness program that finally works. You’ll be by their side every step of the way—motivating them, managing their progress, and cheering them on all the way to the games. And best of all, this journey will be a lot of fun for everyone involved!
+
           </p>
         </div>
       </div>

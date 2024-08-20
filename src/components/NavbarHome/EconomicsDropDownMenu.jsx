@@ -14,16 +14,22 @@ const EconomicsDropDownMenu = ({ scrolled }) => {
 
 
 
+
+
                     <div className="flex flex-col mt-2 ">
 
                         <hr />
-                        <p className=" text-black font-semibold text-base mt-1 mb-1">Loans</p>
-                        <p className="text-xs">Loans are a source of income for the Randolympics organization where they receive funding from loan givers. These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the loan agreement. The general rule is that 20% of all revenues are paid back to existing loan contracts in equal ratios.</p>
+                        <p className=" text-black font-semibold text-base mt-1 mb-1">Campaign Donations</p>
+                        <p className="text-xs">Income generated from donations made by supporters to campaigns for athletes. Even if athletes do not make it to the games, whether due to injury, a personal decision, or simply not being randomly selected, these funds contribute to the overall success of the Randolympics. These donations help to cover organizational costs and ensure that the spirit of competition and participation continues to thrive.</p>
 
 
 
 
                     </div>
+
+
+
+                  
 
 
                     <div className="flex flex-col   mt-2 ">
@@ -59,7 +65,16 @@ const EconomicsDropDownMenu = ({ scrolled }) => {
                         </p>
 
                     </div>
+                    <div className="flex flex-col mt-2 ">
 
+<hr />
+<p className=" text-black font-semibold text-base mt-1 mb-1">Loans</p>
+<p className="text-xs">Loans are a source of income for the Randolympics organization where they receive funding from loan givers. These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the loan agreement. The general rule is that 20% of all revenues are paid back to existing loan contracts in equal ratios.</p>
+
+
+
+
+</div>
 
                 </div>
 

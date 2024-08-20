@@ -153,10 +153,10 @@ const NavbarHome = () => {
         <a
           className="flex justify-center items-center select-none cursor-pointer"
           onClick={() => {
-            navigate("/supporters");
+            navigate("/jointeam");
           }}
         >
-          Sign up a friend
+          Join the team
         </a>
       </div>
     </nav>

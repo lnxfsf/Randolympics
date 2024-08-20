@@ -128,7 +128,7 @@ const NavbarHomeCollapsed = () => {
 
 
 
-                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/supporters"); }}>Sign up a friend</a>
+                <a className='flex justify-center items-center select-none cursor-pointer' onClick={() => { navigate("/jointeam"); }}>Join the team</a>
 
             </div>
         </nav>
