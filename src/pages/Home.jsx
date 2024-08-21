@@ -2,7 +2,7 @@
 
 // ovo import
 import "animate.css";
-import '@mui/material/styles/styled';
+import "@mui/material/styles/styled";
 
 import { Footer } from "../components/Footer";
 import { Button } from "@mui/material";
@@ -80,19 +80,14 @@ const Home = () => {
       {/* first div */}
       <div className="firstHhomeImage flex justify-center items-center flex-col ">
         <p className="text-4xl mt-56" style={{ color: "white" }}>
-        Real People. Randomly Selected.<br/>
-Competing in Olympic Sports
-
+          Real People. Randomly Selected.
+          <br />
+          Competing in Olympic Sports
         </p>
 
         <div className="flex items-center justify-center  flex-col pt-8">
-        
-
-
-      
-
           <p className="text-xl pb-4" style={{ color: "white" }}>
-          Curious about possible schedules? 
+            Curious about possible schedules?
           </p>
 
           <Button
@@ -120,15 +115,10 @@ Competing in Olympic Sports
               Randomize
             </span>
           </Button>
-        
-      
-
-
-
         </div>
 
         <div className="countdown-timer  flex items-center justify-center ">
-          <p className="basis-1/2 p-8  ">
+          <p className="text-center">
             Stockholm, Sweden <br /> June 25th - July 2nd 2028
           </p>
 
@@ -157,7 +147,7 @@ Competing in Olympic Sports
           </div>
         </div>
 
-    {/*     <p className="text-xl w-[45em] text-center mt-4" style={{ color: "white" }}>
+        {/*     <p className="text-xl w-[45em] text-center mt-4" style={{ color: "white" }}>
           Randolympics is a global competition where randomly selected
           participants face extraordinary athletic challenges, transforming
           everyday individuals into potential gold medalists.
@@ -165,7 +155,8 @@ Competing in Olympic Sports
 
         <div className="flex items-center justify-center pt-16 gap-4 flex-col">
           <p className="text-xl text-center w-[70%]" style={{ color: "white" }}>
-          Transform your friend from couch potato to gold medalist—sign them up by starting their Randolympic campaign!
+            Transform your friend from couch potato to gold medalist—sign them
+            up by starting their Randolympic campaign!
           </p>
 
           <Button
@@ -195,16 +186,17 @@ Competing in Olympic Sports
           </Button>
         </div>
 
-
-
-       
-
-       
-
-        <div className="flex items-center justify-center pt-8 pl-24  pr-24  ">
+        <div className="flex items-center text-center justify-center pt-8 pl-24  pr-24 w-[80%]  ">
           <p style={{ color: "white" }}>
-          Is your friend more of a couch potato than an athlete? Deep down, there's a great sports spirit waiting to emerge. Sign them up for a chance to win a gold medal—it’ll be a huge surprise and a big compliment, showing that you believe in their potential. By launching this campaign, you’re not just getting them off the couch; you’re giving them a fitness program that finally works. You’ll be by their side every step of the way—motivating them, managing their progress, and cheering them on all the way to the games. And best of all, this journey will be a lot of fun for everyone involved!
-
+            Is your friend more of a couch potato than an athlete? Deep down,
+            there's a great sports spirit waiting to emerge. Sign them up for a
+            chance to win a gold medal—it’ll be a huge surprise and a big
+            compliment, showing that you believe in their potential. By
+            launching this campaign, you’re not just getting them off the couch;
+            you’re giving them a fitness program that finally works. You’ll be
+            by their side every step of the way—motivating them, managing their
+            progress, and cheering them on all the way to the games. And best of
+            all, this journey will be a lot of fun for everyone involved!
           </p>
         </div>
       </div>
@@ -351,113 +343,75 @@ Competing in Olympic Sports
         </div>
       </div>
 
+      <div
+        className="flex justify-center items-center mt-12 flex-col "
+        id="how_it_works"
+      >
+        <p className="text-3xl bold">How it works</p>
 
-      <div className="flex justify-center items-center mt-12 flex-col " id="how_it_works">
-        <p className="text-3xl bold" >How it works</p>
-
-
-
-
-
-        <p className="text-xl semibold mt-12" id="how_it_works">1. Campaign Phase: Nominate and Support
+        <p className="text-xl semibold mt-12" id="how_it_works">
+          Starting now Campaign Phase: Nominate and Support
         </p>
 
-        <p>At Randolympics, the journey starts with friends, family members, or fans initiating campaigns for those they believe have the potential to become Randolympians. During this phase, gathering as much support as possible is crucial—whether through financial contributions or spreading the word to build a strong backing for your nominee. The stronger the campaign, the better the athlete’s chances of securing a top spot in the final rankings.
-        </p>
-
-<p className="text-[#0000FF]">Key to Success: Building Momentum
-</p>
-
-
-
-
-
-<p className="text-xl semibold mt-12" id="how_it_works">2. Final Ranking and Selection
-<p className="bold underline">June 25th 2026
-</p>
-        </p>
-
-        <p>On June 25th, 2026, the camp  ment of randomness to ensure a fair and unpredictable outcome:
-        </p>
-
-<p className="text-[#0000FF]">Final Ranking Number = Random Multiplier x Number of Supporters x USD Raised
-
-</p>
-
-
-
-
-
-<p className="text-xl semibold mt-12" id="how_it_works">3. Two-Year Preparation Period
-
+        <p className="w-[50%] text-center mt-4">
+        At Randolympics, the journey starts with friends, family members, or fans initiating campaigns for those they believe have the potential to become Randolympians. During this phase, gathering as much support as possible is crucial—whether through financial contributions or spreading the word to build a strong backing for your nominee. The stronger the campaign, the better the athlete’s chances of securing a top spot in the final rankings.
 
         </p>
 
-        <p>Once the final rankings are announced, the selected athletes enter a rigorous two-year preparation period. During this time, the National President of each participating country assembles their team, choosing the top 50 male and top 50 female athletes. This period is vital for athletes to train, build their skills, and prepare mentally and physically for the challenges ahead. Should any athlete drop out or suffer an injury, they will be replaced by the next highest-ranked athlete from their country.
+
+
+        <div className="flex justify-start gap-2 mt-8 ">
+          <p className="semibold text-xl">June 25th 2026: </p>
+          <p className="text-xl semibold " id="how_it_works">Final Ranking and Selection</p>
+        </div>
+
+        <p>All campaigns receive their final ranking scores:</p>
+
+        <p className=" mt-4">
+          Final Ranking Number = Random Multiplier x Number of Supporters x USD
+          Raised
         </p>
 
-<p className="text-[#0000FF]">Key Activities: Team Assembly and Intensive Preparation
-
-</p>
-
-
-
-
-
-<p className="text-xl semibold mt-12" id="how_it_works">4. Opening Ceremony
-<p className="bold underline">June 25th 2028
-
-</p>
-
-
+        <p className="text-xl semibold mt-12" id="how_it_works">
+          Two-Year Preparation Period
         </p>
 
-        <p>The excitement culminates on June 25th, 2028, with the grand opening ceremony in Stockholm. During this event, each athlete is randomly assigned their sports, typically ranging from three to seven different competitions. This moment marks the beginning of the Randolympics, setting the stage for a week of intense competition where anything can happen.
-        </p>
-
-<p className="text-[#0000FF]">Event: Athletes receive their randomly assigned sports.
-
-</p>
-
-
-
-
-<p className="text-xl semibold mt-12" id="how_it_works">5. Games: The Ultimate Test
-
-
-
+        <p className="w-[70%] text-center mt-4">
+        Once the final rankings are announced, the selected athletes enter a rigorous two-year preparation period. During this time, the National President of each participating country assembles their team, choosing the top 50 male and top 50 female athletes. This period is vital for athletes to train, build their skills, and prepare mentally and physically for the challenges ahead. Should any athlete drop out or suffer an injury, they will be replaced by the next highest-ranked athlete from their country.
 
         </p>
 
-        <p>Following the opening ceremony, the competition begins in earnest. Over the course of the week, athletes will face a series of challenges across various disciplines, testing every aspect of their physical and mental endurance. From track and field events to endurance challenges, each competition is designed to push the participants to their limits.
-        </p>
+        <div className="flex justify-start gap-2 mt-8 ">
+          <p className="semibold text-xl ">June 25th 2028</p>
+          <p className="text-xl semibold " id="how_it_works">Opening Ceremony - Athletes receive their randomly assigned sports</p>
+        </div>
 
-<p className="text-[#0000FF]">Dates: June 25th to July 2nd, 2028
-
-</p>
-
-
-
-
-<p className="text-xl semibold mt-12" id="how_it_works">6. Closing Ceremony
-
-<p className="bold underline">July 2nd 2028
-
-
-</p>
-
-
+        <p className="w-[70%] text-center mt-4">
+        The excitement culminates on June 25th, 2028, with the grand opening ceremony in Stockholm. During this event, each athlete is randomly assigned their sports, typically ranging from three to seven different competitions. This moment marks the beginning of the Randolympics, setting the stage for a week of intense competition where anything can happen.
 
         </p>
+{/* 
+        <p className="text-[#0000FF] mt-4">
+          Event: Athletes receive their randomly assigned sports.
+        </p> */}
 
-        <p>The Randolympics culminates on July 2nd, 2028, with the closing ceremony. This event celebrates the achievements of all participants, recognizing both the triumphs and the efforts of those who gave it their all. Whether they win or walk away with a story, every Randolympian is honored for their courage, determination, and participation in this extraordinary event.
+
+        <div className="flex justify-start gap-2 mt-8 ">
+        <p className="text-xl">June 25th to July 2nd, 2028: </p>
+        <p className="text-xl semibold" id="how_it_works">
+          Games: The Ultimate Test
+        </p>
+        </div>
+
+        <p className="w-[70%] text-center mt-4">
+        Following the opening ceremony, the competition begins in earnest. Over the course of the week, athletes will face a series of challenges across various disciplines, testing every aspect of their physical and mental endurance. From track and field events to endurance challenges, each competition is designed to push the participants to their limits.
+
         </p>
 
-<p className="text-[#0000FF]">Event: Celebrating all who competed, with special recognition for those who triumphed in their events.
 
 
-</p>
 
+       
       </div>
 
       {/* FAQ */}
