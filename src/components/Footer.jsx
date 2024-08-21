@@ -13,7 +13,7 @@ const Footer = () => {
 
   
   const handleToMainHome = () => {
-    navigate("/login");
+    navigate("/supporters");
   };
 
 
@@ -46,7 +46,7 @@ const Footer = () => {
                 }}
                 id="join-the-fun-btn"
               >
-                <span className="popins-font">Join the fun</span>
+                <span className="popins-font">Sign up a friend</span>
               </Button>
 
               <img className="pt-16 pl-16 w-64 	" src="/footer/logo_footer.svg" />
