@@ -90,7 +90,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -129,7 +129,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -168,7 +168,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -207,7 +207,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -246,7 +246,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -285,7 +285,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -323,7 +323,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -361,7 +361,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -400,7 +400,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
@@ -438,7 +438,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p>familijo</p>
+                                <p></p>
                             </div>
 
                         </Collapse>
