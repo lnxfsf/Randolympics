@@ -355,7 +355,7 @@ const Home = () => {
             athletes. Even if athletes do not make it to the games, whether due
             to injury, a personal decision, or simply not being randomly
             selected, these funds contribute to the overall success of the
-            Randolympics. These donations help to cover organizational costs and
+            Randolympics. <br/>These donations help to cover organizational costs and
             ensure that the spirit of competition and participation continues to
             thrive.
           </p>
