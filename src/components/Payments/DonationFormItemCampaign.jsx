@@ -1,6 +1,6 @@
 import { Card, Fade, Container } from "@mui/material";
 import { useEffect, useState, useCallback } from "react";
-import { useCreatePaymentIntent } from "../hooks/useCreatePaymentIntent";
+import { useCreatePaymentIntent } from "../../hooks/useCreatePaymentIntent";
 import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
 
@@ -15,7 +15,7 @@ import {
   } from "@mui/material";
 
   import React, { useContext } from 'react'
-  import AuthContext from '../context/AuthContext';
+  import AuthContext from '../../context/AuthContext';
 
 
 export default function DonationFormItemCampaign({amount, setAmount, campaignId, supporterName, supporterEmail, separateDonationThruPage, supporterComment, discountCode, countryAthleteIsIn}) {

@@ -11,10 +11,10 @@ import "../../styles/campaign.scoped.scss";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../themes/theme";
 import { QueryProvider } from "../../QueryProvider";
-import DonationForm from "../../pages/DonationForm";
+import DonationForm from "../Payments/DonationForm";
 
 import { useParams, useNavigate } from "react-router-dom";
-import DonationFormItemCampaign from "../../pages/DonationFormItemCampaign";
+import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import { PaymentPage } from "../Supporters/PaymentPage";
 
 import AuthCode from "react-auth-code-input";

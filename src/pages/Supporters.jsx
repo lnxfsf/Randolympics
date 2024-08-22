@@ -74,8 +74,8 @@ import zIndex from "@mui/material/styles/zIndex";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../themes/theme";
 import { QueryProvider } from "../QueryProvider";
-import DonationForm from "./DonationForm";
-import DonationFormItemCampaign from "./DonationFormItemCampaign";
+import DonationForm from "../components/Payments/DonationForm";
+import DonationFormItemCampaign from "../components/Payments/DonationFormItemCampaign";
 
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";

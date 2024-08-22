@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../themes/theme";
 import { QueryProvider } from "../../QueryProvider";
-import DonationForm from "../../pages/DonationForm";
-import DonationFormItemCampaign from "../../pages/DonationFormItemCampaign";
+import DonationForm from "../Payments/DonationForm";
+import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import AuthCode from 'react-auth-code-input';
 import { Button } from "@mui/material";
 

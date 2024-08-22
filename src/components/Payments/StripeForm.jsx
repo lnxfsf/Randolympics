@@ -9,7 +9,7 @@ import {
 import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-import { useSubmitPayment } from "../hooks/useCapturePayment";
+import { useSubmitPayment } from "../../hooks/useCapturePayment";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 
 import { useState, useEffect } from "react";
