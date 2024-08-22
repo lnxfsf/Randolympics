@@ -1066,6 +1066,7 @@ const EditProfile = () => {
             </div>
 
 
+            <div className="flex items-end col-span-2">
                       <TextField
                                 value={userData && userData.data.familyName}
                                 onChange={handlefamilyNameChange}
@@ -1092,10 +1093,6 @@ const EditProfile = () => {
                                 }}
 
                               />
-
-
-                              
-
                       <TextField
                                 value={userData && userData.data.lastName}
                                 onChange={handlelastNameChange}
@@ -1122,7 +1119,7 @@ const EditProfile = () => {
                                 }}
 
                               />
-
+</div>
 
 
 
@@ -1341,7 +1338,7 @@ const EditProfile = () => {
             </div>
 
             <div className="flex items-end col-span-2">
-              <div className="flex flex-col ml-0 mt-6 w-[280px]">
+              <div className="flex flex-col ml-0 mt-0  w-[280px]">
                 <div className="flex mb-1 justify-end items-end flex-col">
                   <FormControl
                     className="h-5"
@@ -1397,15 +1394,19 @@ const EditProfile = () => {
           </div>
 
 
+
+          <div className="flex items-baseline col-span-2 mt-4 ml-4 gap-2">
           <div className="flex m-0 flex-col">
-              <InputLabel id="roleDropdowns">Athlete status:</InputLabel>
+          <FormControl>
+
+              <InputLabel id="athleteStatus-label">Athlete status:</InputLabel>
               <Select
 
 
                 value={userData && userData.data.athleteStatus}
                 onChange={handleathleteStatusChange}
 
-                labelId="athleteStatus"
+                labelId="athleteStatus-label"
                 id="athleteStatus"
                 name="athleteStatus"
               
@@ -1434,6 +1435,7 @@ const EditProfile = () => {
 
 
               </Select>
+              </FormControl>
             </div>
 
             <div className="flex   flex-col">
@@ -1472,7 +1474,7 @@ const EditProfile = () => {
                   }}
                 />
               </div>
-
+</div>
 
 
 
