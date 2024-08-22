@@ -14,6 +14,7 @@ const votingRoutes = require("./routes/votingRoutes");
 
 const userRoutes = require("./routes/userRoutes")
 
+const paymentRoutes = require("./routes/paymentRoutes")
 
 
 
@@ -630,6 +631,7 @@ app.use("/user", userRoutes)
 app.use("/blog", blogRoutes);
 
 
+app.use("/payment", paymentRoutes);
 
 
 db.sequelize.sync().then(() => {

@@ -3,14 +3,12 @@ const { rankingTop50, otherUsers, lastInRank,
          team, currentNP , 
          listLoginTrafficHistory, 
          landingPageRandomize, shareTableLandingPage,
-          makePayment,
            createCampaign,
            campaignDetails,
            howManySupportersCampaign,
            lastCommentsSupportersCampaign,
            lastTransactionsSupportersCampaign,
 
-           donateOnlyWithDiscountCode,
 
            listAllCampaigns,
 
@@ -63,11 +61,6 @@ router.get("/landingPageRandomize", landingPageRandomize)
 router.post("/shareTableLandingPage", shareTableLandingPage)
 
 
-// ! from here, organize later, where these routes should be better suited
-//TODO put this payment somewhere else. maybe just route for payments.. see it how to do... 
-router.post("/makePayment",makePayment)
-router.post("/createCampaign", createCampaign)
-
 
 
 // for reading campaign info 
@@ -78,8 +71,6 @@ router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCamp
 router.get("/firstSupportersCampaign", firstSupportersCampaign)
 router.get("/allTransactionsSupportersCampaign",allTransactionsSupportersCampaign)
 
-// donate only with coupon codes
-router.post("/donateOnlyWithDiscountCode", donateOnlyWithDiscountCode)
 
 // list all campaigns
 router.get("/listAllCampaigns",listAllCampaigns)
@@ -90,6 +81,12 @@ router.get("/listAllCampaigns",listAllCampaigns)
 router.post("/informOtherSupporters", informOtherSupporters)
 
   
+
+
+
+// create campaign
+router.post("/createCampaign", createCampaign) 
+
 
 
 module.exports = router;
