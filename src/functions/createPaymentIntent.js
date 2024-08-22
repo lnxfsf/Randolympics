@@ -16,7 +16,7 @@ export const createPaymentIntent = async (amount, campaignId, supporterName, sup
   
 
     try{
-        const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/listsData/makePayment`, {
+        const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/payment/makePayment`, {
             amount: amount,
            campaignId,
            supporterName, 
@@ -54,6 +54,6 @@ export const createPaymentIntent = async (amount, campaignId, supporterName, sup
 
 
  /*  var response = await axios.post(
-    `${BACKEND_SERVER_BASE_URL}/listsData/makePayment`
+    `${BACKEND_SERVER_BASE_URL}/payment/makePayment`
     
   ); */

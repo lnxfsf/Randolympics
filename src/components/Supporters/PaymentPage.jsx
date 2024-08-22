@@ -24,7 +24,7 @@ const PaymentPage = ({campaignId, supporterName, supporterEmail, supporterCommen
     const donateWithCouponOnly = async () => {
         try {
           const response = await axios.post(
-            `${BACKEND_SERVER_BASE_URL}/listsData/donateOnlyWithDiscountCode`,
+            `${BACKEND_SERVER_BASE_URL}/payment/donateOnlyWithDiscountCode`,
             {
               discountCode: discountCode,
               campaignId: campaignId,
