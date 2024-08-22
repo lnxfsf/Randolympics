@@ -770,13 +770,13 @@ const ItemCampaign = () => {
                   Date: <b>12/34</b> (it can be any date){" "}
                 </p>
 
-                <p className="underline font-bold text-red_first">
+              {/*   <p className="underline font-bold text-red_first">
                   Disable adblocker{" "}
                 </p>
                 <p>
                   (or it will block request to stripe, as this is HTTP (insecure
                   chanel))
-                </p>
+                </p> */}
               </div>
 
               <div className="m-4 flex justify-center  items-center flex-col">

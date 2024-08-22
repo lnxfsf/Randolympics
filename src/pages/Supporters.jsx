@@ -2004,13 +2004,13 @@ onChange={(event) => handleInputChange(index, event)}
             Date: <b>12/34</b> (it can be any date){" "}
           </p>
 
-          <p className="underline font-bold text-red_first">
+      {/*     <p className="underline font-bold text-red_first">
             Disable adblocker{" "}
           </p>
           <p>
             (or it will block request to stripe, as this is HTTP (insecure
             chanel))
-          </p>
+          </p> */}
         </div>
 
         {/* and this is for those 3 options */}
