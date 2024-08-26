@@ -269,7 +269,7 @@ const Supporters = () => {
     setFourthIsVisible(true);
   };
 
-  // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
+  // for snackbar message. 
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
   const [openSnackbarFailure, setOpenSnackbarFailure] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -322,6 +322,8 @@ const Supporters = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
+
+  // function to make campaign, once everything is good. it creates campaign, then creates user accounts as user_type AH (athlete), SPT (supporter) 
   const makeCampaign = async (tempDoCreateSupporterAccount) => {
     var athleteId = "";
     var supporterId = "";
@@ -530,10 +532,7 @@ const Supporters = () => {
       }
     }
 
-    // and then makes those two accounts. athlete and supporter !
-    // signs up friend first !
-
-    // update supporterStats ! polja..
+   
   };
 
   const informOtherSupporters = async () => {
@@ -567,7 +566,6 @@ const Supporters = () => {
           setOpenSnackbarFailure(true);
         }
       } else {
-        /*    alert("An unexpected error occurred: " + error.message); */
         setSnackbarMessage("An unexpected error occurred: " + error.message);
         setOpenSnackbarFailure(true);
       }
@@ -619,17 +617,11 @@ const Supporters = () => {
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
 
-  // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
-  const [isCelebrity, setIsCelebrity] = useState(false); // but this one you pass, and you don't change.. unless you go through friend page..
+  const [isCelebrity, setIsCelebrity] = useState(false); 
 
-
-  console.log("mora biti celebrity false na pocetak:"+isCelebrity)
-
-  /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
   // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
-  const [doCreateSupporterAccount, setDoCreateSupporterAccount] =
-    useState(false);
+  const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
 
   const navigate = useNavigate();
 
@@ -657,10 +649,9 @@ const Supporters = () => {
   const [howItWorks, setHowItWorks] = useState(false);
 
   // ? for FilePond
-
   const [files, setFiles] = useState([]);
 
-  // TODO yes, we upload this as profile directly ! (as we create athlete with this information (so, we need a check, if this is supporter, so we can allow without password))
+  // we upload this as profile picture for athlete. We are creating athlete account, using this as his profile picture.
   const server = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
@@ -712,22 +703,17 @@ const Supporters = () => {
         });
     },
   };
+  // ? for FilePond
+
 
   const [amount, setAmount] = useState(10);
 
   useEffect(() => {
-    
-
-  console.log("isCelebrity je sada:" + isCelebrity);
-  console.log("email je sada" + friendEmail);
-  
   }, [amount, additionalSupportersFormData]);
 
-  // ? for FilePond
 
   return (
     <>
-      {/* <NavbarHomeCollapsed /> */}
 
       <NavbarClean />
 
@@ -792,7 +778,6 @@ const Supporters = () => {
    
 
       {/* second */}
-
       <SupporterSecondPart secondIsVisible={secondIsVisible} setHowItWorks={setHowItWorks} isCelebrity={isCelebrity} 
       friendName={friendName} setFriendName={setFriendName}
       friendMiddleName={friendMiddleName} setFriendMiddleName={setFriendMiddleName}
@@ -812,16 +797,9 @@ const Supporters = () => {
       setSecondIsVisible={setSecondIsVisible} 
       setThirdIsVisible={setThirdIsVisible}
       setFirstIsVisible={setFirstIsVisible}
-
       files={files}
        setFiles={setFiles}
-       server={server}
-
-
-
-
-      
-      />
+       server={server} />
    
 
       {/* treca */}

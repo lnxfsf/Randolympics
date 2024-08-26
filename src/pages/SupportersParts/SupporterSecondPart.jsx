@@ -1,14 +1,10 @@
-
 import React, { useState, useEffect, useRef } from "react";
 
-
 import { Button } from "@mui/material";
-
 
 import axios from "axios";
 
 import { WarningTextPopup } from "../../components/Supporters/WarningTextPopup";
-
 
 import Popup from "reactjs-popup";
 
@@ -16,8 +12,6 @@ import Radio from "@mui/material/Radio";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
-
 
 // date picker
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -37,7 +31,6 @@ import supportedCountry from "../../context/supportedCountry";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 
-
 import MenuItem from "@mui/material/MenuItem";
 
 // FilePond
@@ -49,7 +42,6 @@ import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
 
-
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
@@ -57,10 +49,6 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 import zIndex from "@mui/material/styles/zIndex";
-
-
-
-
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -70,36 +58,44 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
+const SupporterSecondPart = ({
+  secondIsVisible,
+  setHowItWorks,
+  isCelebrity,
+  friendName,
+  setFriendName,
+  friendMiddleName,
+  setFriendMiddleName,
+  inputLabelPropsTextField,
+  sxTextField,
+  friendLastName,
+  setFriendLastName,
+  friendEmail,
+  setFriendEmail,
+  friendPhone,
+  setFriendPhone,
+  friendBirthdate,
+  setFriendBirthdate,
+  friendNationality,
+  setFriendNationality,
+  friendGender,
+  setFriendGender,
+  setSendEmailToFriend,
+  fb_link,
+  setFb_link,
+  ig_link,
+  setIg_link,
+  tw_link,
+  setTw_link,
+  setSecondIsVisible,
+  setThirdIsVisible,
+  setFirstIsVisible,
+  files,
+  setFiles,
+  server,
+}) => {
+  const [popupWarning, setPopupWarning] = useState(false);
 
-const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
-    isCelebrity, friendName, setFriendName, friendMiddleName,
-    setFriendMiddleName, inputLabelPropsTextField, sxTextField,
-    friendLastName, setFriendLastName,
-    friendEmail, setFriendEmail,
-    friendPhone, setFriendPhone,
-    friendBirthdate, setFriendBirthdate,
-    friendNationality, setFriendNationality,
-    friendGender, setFriendGender,
-    setSendEmailToFriend,
-    fb_link, setFb_link,
-    ig_link, setIg_link,
-    tw_link, setTw_link,
-    setSecondIsVisible, setThirdIsVisible, setFirstIsVisible,
-    files,
-    setFiles,
-    server,
-
-
- }) => {
-
-
-    
-    const [popupWarning, setPopupWarning] = useState(false);
-
-
-
-
-    
   const validateAthlete = async () => {
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
     const responseAthleteUser = await axios.get(
@@ -161,13 +157,13 @@ const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
     // ! setThirdIsVisible(true);
   };
 
-
-    return (<>
-    <div
+  return (
+    <>
+      <div
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           secondIsVisible ? "show" : "hide"
         } `}
-       /*  style={{
+        /*  style={{
           backgroundImage: "url('/supporters/supporter2.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -458,8 +454,6 @@ const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
           </>
         )}
 
-
-
         {/* for case of celebrity !  */}
         {isCelebrity && (
           <>
@@ -649,7 +643,7 @@ const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
                     </div>
                   </div>
                 </div>
-              
+
                 <div className="ml-24 flex mt-0">
                   <FilePond
                     className="filepond--root athlete"
@@ -684,7 +678,6 @@ const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
                     imageEditAllowEdit={false}
                   />
                 </div>
-              
               </div>
             </div>
           </>
@@ -751,10 +744,8 @@ const SupporterSecondPart = ({secondIsVisible,setHowItWorks,
           </Button>
         </div>
       </div>
+    </>
+  );
+};
 
-    
-    </>)
-}
-
-
-export {SupporterSecondPart}
+export { SupporterSecondPart };
