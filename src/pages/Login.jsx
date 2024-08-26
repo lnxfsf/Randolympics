@@ -108,11 +108,11 @@ const Login = () => {
       <div className="flex ">
        
        
-        <div className="basis-1/2 justify-center items-center ">
-          <img src="login/1.png" className="image_login" />
+        <div className="basis-1/2 justify-center items-center hidden lg:block ">
+          <img src="login/1.jpg" className="image_login" />
         </div>
 
-        <div className="basis-1/2 flex flex-wrap flex-col items-start m-16 text-black_second" >
+        <div className="basis-1/2 flex flex-wrap flex-col justify-center items-start m-16 text-black_second" >
          {/*  <img src="login/logo.svg" /> */}
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
@@ -140,10 +140,13 @@ const Login = () => {
                   maxLength: 80,
                 }}
                 sx={{
+                  
                   mt: 0.5,
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
+                    fontFamily: "'Lexend', sans-serif",
                     borderRadius: 2,
+                   
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -152,6 +155,8 @@ const Login = () => {
                     },
 
                   "& .MuiInputLabel-root": {
+                    fontFamily: "'Lexend', sans-serif",
+
                     "&.Mui-focused": {
                       color: "black",
                     },
@@ -165,7 +170,7 @@ const Login = () => {
               <TextField
               
                /*  label="Password" */
-                placeholder="password"
+                placeholder="****"
                 id="pass"
                 name="pass"
                 required
@@ -177,6 +182,7 @@ const Login = () => {
                   mt: 0.5,
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
+                    fontFamily: "'Lexend', sans-serif",
                     borderRadius: 2,
                   },
 
@@ -186,6 +192,7 @@ const Login = () => {
                     },
 
                   "& .MuiInputLabel-root": {
+                    fontFamily: "'Lexend', sans-serif",
                     "&.Mui-focused": {
                       color: "black",
                     },
@@ -211,6 +218,9 @@ const Login = () => {
             {/* ---------------- */}
 
             {/*  this is for checkbox and forgot password*/}
+
+
+            
             <div className="flex w-[420px] flex items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
                 <FormControlLabel
@@ -245,22 +255,7 @@ const Login = () => {
          
            
 
-          {/*   <div className="flex basis-1/2 justify-end mt-4">
-                <Link
-                  to="/passresetbyfriend"
 
-                    state={{ email: emailFriend }}
-
-                
-                  
-
-                  className="bg-white  "
-                  
-                >
-                  <u>I got registered by a friend,I don’t have a password yet!</u>
-                </Link>
-              </div> */}
-                 
 
 
             <div className="flex justify-center mt-2 flex-col items-center">
