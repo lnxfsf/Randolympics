@@ -20,6 +20,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { NavbarClean } from "../components/NavbarClean";
+import { FooterClean } from "../components/FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -100,21 +102,35 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex m-16">
-        <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
-          <img src="login/logo.svg" />
+
+    <NavbarClean />
+
+      <div className="flex ">
+       
+       
+        <div className="basis-1/2 justify-center items-center ">
+          <img src="login/1.png" className="image_login" />
+        </div>
+
+        <div className="basis-1/2 flex flex-wrap flex-col items-start m-16 text-black_second" >
+         {/*  <img src="login/logo.svg" /> */}
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
+
+          <p className="text-2xl lexend-font font-bold">Log In</p>
+
           <form
             action="#"
-            className="sign-in-form flex flex-col wrap justify-start items-center"
+            className="sign-in-form flex flex-col wrap justify-start items-start"
             onSubmit={handleSubmit}
           >
-            <div className="flex flex-col mb-1 justify-center mt-8">
+            <div className="flex flex-col mb-1 justify-start mt-8 w-full">
+
+              <label for="email" className=" lexend-font">Email</label>
               <TextField
                 onChange={(event) => {setEmailFriend(event.target.value)}}
-                label="Email"
+               /*  label="Email" */
                 placeholder="johndoe@gmail.com"
                 id="email"
                 name="email"
@@ -124,10 +140,10 @@ const Login = () => {
                   maxLength: 80,
                 }}
                 sx={{
-                  m: 1,
-                  width: "420px",
+                  mt: 0.5,
+                  width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
+                    borderRadius: 2,
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -144,9 +160,11 @@ const Login = () => {
               />
             </div>
 
-            <div className="flex flex-col mb-2.5 justify-center mt-2">
+            <div className="flex flex-col mb-2.5 justify-start mt-2 w-full">
+            <label for="pass" className=" lexend-font">Password</label>
               <TextField
-                label="Password"
+              
+               /*  label="Password" */
                 placeholder="password"
                 id="pass"
                 name="pass"
@@ -156,10 +174,10 @@ const Login = () => {
                   maxLength: 255,
                 }}
                 sx={{
-                  m: 1,
-                  width: "420px",
+                  mt: 0.5,
+                  width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: 5,
+                    borderRadius: 2,
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -247,18 +265,19 @@ const Login = () => {
 
             <div className="flex justify-center mt-2 flex-col items-center">
               <Button
-                className="w-[420px]"
-                style={{ marginTop: "20px" }}
+                className="w-[420px] "
+                style={{ marginTop: "20px", textTransform: 'none' }}
                 sx={{
                   height: "50px",
-                  bgcolor: "#AF2626",
+                  bgcolor: "#D24949",
+
                   color: "#fff",
-                  borderRadius: 15,
-                  border: `1px solid #AF2626`,
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
                   "&:hover": {
-                    background: "rgb(196, 43, 43)",
+                    background: "rgba(210, 73, 73, 1)",
                     color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
+                    border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
                 type="submit"
@@ -266,7 +285,7 @@ const Login = () => {
                 value="Login"
                 id="login-btn"
               >
-                <span className="popins-font">Login</span>
+                <img src="/home/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
               </Button>
 
               {/*   */}
@@ -292,42 +311,42 @@ const Login = () => {
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
-          <div className="flex justify-center mt-2">
+          <div className="flex justify-center mt-0">
             <Button
               onClick={handleSignUp}
               className="w-[420px]"
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: "10px", textTransform: 'none' }}
               sx={{
                 height: "50px",
                 bgcolor: "#fff",
-                color: "#AF2626",
-                borderRadius: 15,
-                border: `1px solid #AF2626`,
+                color: "#D24949",
+                borderRadius: 3,
+                border: `1px solid #D24949`,
                 "&:hover": {
-                  background: "rgb(196, 43, 43)",
+                  background: "rgba(210, 73, 73, 1)",
                   color: "white",
-                  border: `1px solid rgb(196, 43, 43)`,
+                  border: `1px solid rgba(210, 73, 73, 1)`,
                 },
               }}
               id="signup-btn"
             >
-              <span className="popins-font">Sign Up</span>
+              <span className="lexend-font font-semibold" > Sign Up</span>
             </Button>
           </div>
 
-          <div className="flex justify-center mt-12">
+         {/*  <div className="flex justify-center mt-12">
             <img src="login/other_sign_in.svg" />
-          </div>
+          </div> */}
 
          
           
         </div>
 
-        <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">
-          <img src="login/1.png" className="image_login" />
-        </div>
       </div>
+
+      <FooterClean />
     </>
+
   );
 };
 

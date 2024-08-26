@@ -93,6 +93,17 @@ const SupporterSecondPart = ({
   files,
   setFiles,
   server,
+
+  openSnackbarFailure,
+  handleSnackbarFailureClose,
+  openSnackbarSuccess,
+  handleSnackbarSuccessClose,
+  snackbarMessage,
+  setSnackbarMessage,
+
+  setOpenSnackbarFailure, 
+  setOpenSnackbarSuccess,
+
 }) => {
   const [popupWarning, setPopupWarning] = useState(false);
 

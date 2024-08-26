@@ -718,7 +718,7 @@ const Supporters = () => {
       <NavbarClean />
 
 
-    {/*   <Popup
+     <Popup
         open={howItWorks}
         onClose={() => setHowItWorks(false)}
         position="right center"
@@ -765,7 +765,7 @@ const Supporters = () => {
             <span className="popins-font">Back</span>
           </Button>
         </div>
-      </Popup> */}
+      </Popup> 
 
      
 
@@ -799,7 +799,20 @@ const Supporters = () => {
       setFirstIsVisible={setFirstIsVisible}
       files={files}
        setFiles={setFiles}
-       server={server} />
+       server={server} 
+       
+       setOpenSnackbarFailure={setOpenSnackbarFailure}
+       setOpenSnackbarSuccess={setOpenSnackbarSuccess}
+
+       openSnackbarFailure={openSnackbarFailure}
+       handleSnackbarFailureClose={handleSnackbarFailureClose}
+       openSnackbarSuccess={openSnackbarSuccess}
+       handleSnackbarSuccessClose={handleSnackbarSuccessClose}
+
+       snackbarMessage={snackbarMessage}
+       setSnackbarMessage={setSnackbarMessage}
+       
+       />
    
 
       {/* treca */}
