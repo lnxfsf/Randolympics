@@ -782,11 +782,11 @@ const Supporters = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      {/* <NavbarHomeCollapsed /> */}
 
-      <HorizontalLinearAlternativeLabelStepper />
+      {/* <HorizontalLinearAlternativeLabelStepper /> */}
 
-      <Popup
+    {/*   <Popup
         open={howItWorks}
         onClose={() => setHowItWorks(false)}
         position="right center"
@@ -833,7 +833,7 @@ const Supporters = () => {
             <span className="popins-font">Back</span>
           </Button>
         </div>
-      </Popup>
+      </Popup> */}
 
       {firstIsVisible && (
         <>
@@ -929,32 +929,32 @@ const Supporters = () => {
         className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
           firstIsVisible ? "show" : "hide"
         } `}
-        style={{
+       /*  style={{
           backgroundImage: "url('/supporters/supporter1op.png')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
           backgroundPosition: "center",
-        }}
+        }} */
       >
-        <div
+      {/*   <div
           className="how_it_works cursor-pointer select-none "
           onClick={() => {
             setHowItWorks(true);
           }}
         >
           <p className="underline ">How it works</p>
-        </div>
+        </div> */}
+{/* 
+        <img className="h-16" src="randolympics_logo.svg" /> */}
 
-        <img className="h-16" src="randolympics_logo.svg" />
-
-        <p className="text-xl text-center mt-12">
-          Do you want someone to get into <br />
-          the Randolympic games?
+        <p className="text-3xl text-center mt-12 font-bold lexend-font">
+          Do you want someone to get into the<br />
+          Randolympic Games?
         </p>
 
-        <p className="text-lg text-center mt-6">I want to sign up </p>
-
+        {/* <p className="text-lg text-center mt-6">I want to sign up </p> */}
+{/* 
         <FormControl>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
@@ -984,7 +984,80 @@ const Supporters = () => {
             />
           </RadioGroup>
         </FormControl>
+ */}
 
+        <div className="flex gap-4 mt-16">
+          
+        <Button
+          onClick={() => {
+           
+           
+            setIsCelebrity(false); 
+            setFriendEmail(""); 
+        
+
+            setFirstIsVisible(false);
+            setSecondIsVisible(true);
+        
+          }}
+          className="w-64"
+          style={{ textTransform: 'none' }}
+          sx={{
+            height: "50px",
+            bgcolor: "rgba(210, 73, 73, 1)",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="lexend-font "   >I want to sign up a friend</span>
+        </Button>
+
+
+
+        <Button
+          onClick={() => {
+           
+           
+            setFriendEmail(() => {return generateRandomEmail()})
+            setIsCelebrity(true);
+        
+
+            setFirstIsVisible(false);
+            setSecondIsVisible(true);
+        
+          }}
+          className="w-64"
+          style={{ textTransform: 'none' }}
+          sx={{
+            height: "50px",
+            bgcolor: "rgba(210, 73, 73, 1)",
+            color: "#fff",
+            borderRadius: 4,
+            border: `1px solid #FFF`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <span className="lexend-font">I want to sign up a celebrity</span>
+        </Button>
+
+
+        </div>
+       
+
+
+{/* 
         <Button
           onClick={() => {
             setFirstIsVisible(false);
@@ -1008,7 +1081,7 @@ const Supporters = () => {
         >
           <span className="popins-font">Create a campaign</span>
         </Button>
-
+ */}
         {/*   <p className="text-xl text-center underline decoration-red_first mt-8">
           Randolympics can bring your friend to the olympic games as a
           competitor !{" "}
