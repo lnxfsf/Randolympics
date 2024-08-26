@@ -217,9 +217,9 @@ const Login = () => {
                   control={
                     <Checkbox
                       sx={{
-                        color: "#FF0000",
+                        color: "#D24949",
                         "&.Mui-checked": {
-                          color: "#FF0000",
+                          color: "#D24949",
                         },
                       }}
                       id="remember"
@@ -235,7 +235,7 @@ const Login = () => {
               <div className="flex basis-1/2 justify-end">
                 <Link
                   to="/forgotpassword"
-                  className="bg-white text-red_first  "
+                  className="bg-white text-red_second  "
                 >
                   Forgot Password?
                 </Link>
@@ -285,7 +285,7 @@ const Login = () => {
                 value="Login"
                 id="login-btn"
               >
-                <img src="/home/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
+                <img src="/login/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
               </Button>
 
               {/*   */}
