@@ -12,7 +12,7 @@ const NavbarClean = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: '#000000', boxShadow: 'none'  }} >
           <Toolbar>
-            <img src="/randolympics_logo.svg" className="w-64 ml-4" />
+            <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
           </Toolbar>
         </AppBar>
       </Box>

@@ -952,7 +952,7 @@ const Supporters = () => {
 {/* 
         <img className="h-16" src="randolympics_logo.svg" /> */}
 
-        <p className="text-3xl text-center font-bold lexend-font">
+        <p className="text-3xl text-center font-bold lexend-font p-4 pb-0">
           Do you want someone to get into the<br />
           Randolympic Games?
         </p>
@@ -990,7 +990,7 @@ const Supporters = () => {
         </FormControl>
  */}
 
-        <div className="flex gap-4 mt-16">
+        <div className="flex gap-4 mt-6 md:mt-10 flex-col md:flex-row">
           
         <Button
           onClick={() => {
@@ -1004,8 +1004,8 @@ const Supporters = () => {
             setSecondIsVisible(true);
         
           }}
-          className="w-64"
-          style={{ textTransform: 'none' }}
+          className="w-64 "
+          style={{ textTransform: 'none', fontWeight: 'bold' }}
           sx={{
             height: "50px",
             bgcolor: "rgba(210, 73, 73, 1)",
@@ -1038,7 +1038,7 @@ const Supporters = () => {
         
           }}
           className="w-64"
-          style={{ textTransform: 'none' }}
+          style={{ textTransform: 'none', fontWeight: 'bold' }}
           sx={{
             height: "50px",
             bgcolor: "rgba(210, 73, 73, 1)",
