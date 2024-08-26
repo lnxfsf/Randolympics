@@ -92,6 +92,8 @@ registerPlugin(
 
 import AuthCode from "react-auth-code-input";
 import { WarningTextPopup } from "../components/Supporters/WarningTextPopup";
+import { NavbarClean } from "../components/NavbarClean";
+import { FooterClean } from "../components/FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -784,6 +786,8 @@ const Supporters = () => {
     <>
       {/* <NavbarHomeCollapsed /> */}
 
+      <NavbarClean />
+
       {/* <HorizontalLinearAlternativeLabelStepper /> */}
 
     {/*   <Popup
@@ -926,7 +930,7 @@ const Supporters = () => {
       {/* prva */}
 
       <div
-        className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
+        className={`flex justify-center w-full items-center flex-col first-content-container  min-h-screen ${
           firstIsVisible ? "show" : "hide"
         } `}
        /*  style={{
@@ -948,7 +952,7 @@ const Supporters = () => {
 {/* 
         <img className="h-16" src="randolympics_logo.svg" /> */}
 
-        <p className="text-3xl text-center mt-12 font-bold lexend-font">
+        <p className="text-3xl text-center font-bold lexend-font">
           Do you want someone to get into the<br />
           Randolympic Games?
         </p>
@@ -1006,7 +1010,7 @@ const Supporters = () => {
             height: "50px",
             bgcolor: "rgba(210, 73, 73, 1)",
             color: "#fff",
-            borderRadius: 4,
+            borderRadius: 3,
             border: `1px solid #FFF`,
             "&:hover": {
               background: "rgba(210, 73, 73, 1)",
@@ -1039,7 +1043,7 @@ const Supporters = () => {
             height: "50px",
             bgcolor: "rgba(210, 73, 73, 1)",
             color: "#fff",
-            borderRadius: 4,
+            borderRadius: 3,
             border: `1px solid #FFF`,
             "&:hover": {
               background: "rgba(210, 73, 73, 1)",
@@ -2373,6 +2377,11 @@ onChange={(event) => handleInputChange(index, event)}
           {snackbarMessage}
         </Alert>
       </Snackbar>
+
+
+
+
+      <FooterClean />
     </>
   );
 };
