@@ -160,15 +160,15 @@ const UpdateAthleteStatus = () => {
       <img
       /*  mr-8 */
         className="w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] object-cover rounded-full"
-        src="/ariana_profile.jpg"
-
-
-       /*  src={
+        /* src="/ariana_profile.jpg"
+ */
+        src={
           BACKEND_SERVER_BASE_URL +
           "/imageUpload/profile_pics/" +
           profilePicture
-        } */
+        }
 
+      
       />
 
     
