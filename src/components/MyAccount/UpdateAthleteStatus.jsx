@@ -153,8 +153,13 @@ const UpdateAthleteStatus = () => {
     <NavbarClean />
 
     <div className="flex flex-col items-start sm:items-center justify-start sm:justify-center min-h-screen p-4 lexend-font text-black_second w-full">
+    
+    
+    
+    <div className="flex gap-2 items-center mb-4 sm:mb-8">
       <img
-        className="w-[45px] h-[45px] sm:w-[97px] sm:h-[97px] object-cover mr-8 rounded-full"
+      /*  mr-8 */
+        className="w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] object-cover rounded-full"
         src="/ariana_profile.jpg"
 
 
@@ -168,15 +173,18 @@ const UpdateAthleteStatus = () => {
 
     
 
-      <p className="text-2xl font-bold mt-4 sm:m-8 text-start sm:text-center break-words">
+
+{/* mt-4 */}
+      <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-words">
           Hello {name} 👋
         </p>
-
+        </div>
 
 
       <p className="text-start sm:text-start  text-xl font-semibold break-words mt-4 sm:mt-0 mb-8">
-        How probable are you to attend the Randolympics Games
+        How probable are you to attend the <br/>Randolympics Games
       </p>
+    
 
       <FormControl>
         <RadioGroup
