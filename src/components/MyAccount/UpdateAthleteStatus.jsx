@@ -9,16 +9,15 @@ import axios from "axios";
 import { Button } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
-
+import { FooterClean } from "../FooterClean";
+import { NavbarClean } from "../NavbarClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const UpdateAthleteStatus = () => {
-
   const navigate = useNavigate();
-
 
   const [athleteStatus, setAthleteStatus] = useState(() => {
     const storedData =
@@ -44,7 +43,7 @@ const UpdateAthleteStatus = () => {
   });
 
   const [name, setName] = useState();
-
+  const [profilePicture, setProfilePicture] = useState();
 
   const [userData, setUserData] = useState(null);
 
@@ -58,6 +57,8 @@ const UpdateAthleteStatus = () => {
       var userJson = JSON.parse(storedData);
       setAthleteEmail(userJson.data.email);
       setName(userJson.data.name);
+
+      setProfilePicture(userJson.data.picture);
 
       setUserData(userJson);
     }
@@ -97,7 +98,7 @@ const UpdateAthleteStatus = () => {
             sessionStorage.setItem("authTokens", JSON.stringify(userData));
           }
 
-          navigate("/myaccount")
+          navigate("/myaccount");
         }
       } catch (error) {
         console.log("ne radi nista");
@@ -149,94 +150,186 @@ const UpdateAthleteStatus = () => {
 
   return (
     <>
+      <NavbarClean />
 
-    <div className="flex justify-center items-center  flex-col min-h-screen "
-    
-
-    style={{
-        backgroundImage: "url('/supporters/supporter5.png')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        zIndex: -1,
-        backgroundPosition: "center",
-      }}
-    
-    
-    >
+      <div className="flex justify-center items-start sm:items-center flex-col min-h-screen p-4 lexend-font text-black_second w-full">
+        <img
+          className="w-[45px] h-[45px] md:w-[97px] md:h-[97px] object-cover mr-8  rounded-full "
+          src="/ariana_profile.jpg"
+          /*   src={
+                BACKEND_SERVER_BASE_URL +
+                "/imageUpload/profile_pics/" +
+                profilePicture
+              } */
+        />
 
 
-        <p className="mb-12 text-lg">Hello {name} , how probably are you to attent the <br/>
-        Randolympic games in case you get an invitation ? </p>
-      
 
-      <FormControl>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={athleteStatus}
-          name="radio-buttons-group"
-          onChange={(event) => {
-            const value = event.target.value;
+        {/* <div className=" flex  items-center mb-4 ">
+          <div className="p-2 w-[45px]">
+            <img
+              className="w-[45px] h-[45px] md:w-[97px] md:h-[97px] object-cover mr-8  rounded-full "
+              src={
+                BACKEND_SERVER_BASE_URL +
+                "/imageUpload/profile_pics/" +
+                profilePicture
+              }
+            />
+          </div> */}
 
-            if (value === "s3") {
-              setAthleteStatus("s3");
-            } else if (value === "s4") {
-              setAthleteStatus("s4");
-            } else if (value === "s5") {
-              setAthleteStatus("s5");
-            } else if (value === "s6") {
-              setAthleteStatus("s6");
-            }
+          <div className="flex flex-wrap max-w-[3px]">
+            <p className=" text-2xl font-bold max-sm:mt-4 sm:m-8  text-start sm:text-center ">
+              Hello {name} 👋
+              HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+            </p>
+          </div>
 
-            handleAthleteStatusChange(event);
+          {/* 
+        </div> */}
+
+        {/* sm:text-center */}
+        <p className=" text-start  mb-12 text-xl font-semibold">
+          How probable are you to attend the How probable are you to attend
+          theHow probable are you to attend theHow probable are you to attend
+          theHow probable are you to attend theHow probable are you to attend
+          theHow probable are you to attend the
+          <br />
+          Randolympics Games
+        </p>
+
+        <FormControl>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue={athleteStatus}
+            name="radio-buttons-group"
+            onChange={(event) => {
+              const value = event.target.value;
+
+              if (value === "s3") {
+                setAthleteStatus("s3");
+              } else if (value === "s4") {
+                setAthleteStatus("s4");
+              } else if (value === "s5") {
+                setAthleteStatus("s5");
+              } else if (value === "s6") {
+                setAthleteStatus("s6");
+              }
+
+              handleAthleteStatusChange(event);
+            }}
+          >
+            <FormControlLabel
+              value="s3"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444", // Color for the unchecked state
+                    "&.Mui-checked": {
+                      color: "#444444", // Color for the checked state
+                    },
+                  }}
+                />
+              }
+              label={`I'm 99% taking the challenge and going 💪`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+            <FormControlLabel
+              value="s4"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444", // Color for the unchecked state
+                    "&.Mui-checked": {
+                      color: "#444444", // Color for the checked state
+                    },
+                  }}
+                />
+              }
+              label={`Most likely going 😄`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+            <FormControlLabel
+              value="s5"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444", // Color for the unchecked state
+                    "&.Mui-checked": {
+                      color: "#444444", // Color for the checked state
+                    },
+                  }}
+                />
+              }
+              label={`I'm maybe going 🤔`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+
+            <FormControlLabel
+              value="s6"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444", // Color for the unchecked state
+                    "&.Mui-checked": {
+                      color: "#444444", // Color for the checked state
+                    },
+                  }}
+                />
+              }
+              label={`I'm definitely not going 👎`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+          </RadioGroup>
+        </FormControl>
+
+        <Button
+          onClick={submitChangeStatus}
+          className="w-full sm:w-56 "
+          style={{
+            marginTop: "45px",
+            marginBottom: "25px",
+            textTransform: "none",
           }}
+          sx={{
+            height: "50px",
+            bgcolor: "#D24949",
+            color: "#fff",
+            borderRadius: 3,
+            border: `1px solid #D24949`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
         >
-          <FormControlLabel
-            value="s3"
-            control={<Radio />}
-            label={`I'm 99% taking the challenge and going`}
-          />
-          <FormControlLabel
-            value="s4"
-            control={<Radio />}
-            label={`Most likely going`}
-          />
-          <FormControlLabel
-            value="s5"
-            control={<Radio />}
-            label={`I'm maybe going`}
-          />
-
-          <FormControlLabel
-            value="s6"
-            control={<Radio />}
-            label={`I'm definitely not going`}
-          />
-        </RadioGroup>
-      </FormControl>
-
-
-      <Button
-                onClick={submitChangeStatus}
-                className="w-56 "
-                style={{ marginTop: "45px", marginBottom: "25px" }}
-                sx={{
-                  height: "50px",
-                  bgcolor: "#AF2626",
-                  color: "#fff",
-                  borderRadius: 4,
-                  border: `1px solid #FFF`,
-                  "&:hover": {
-                    background: "rgb(175, 38, 38)",
-                    color: "white",
-                    border: `1px solid rgb(175, 38, 38)`,
-                  },
-                }}
-                id="join-the-fun-btn"
-              ><span className="popins-font">Proceed</span></Button>
-
-
-
+          <img src="/myaccount/continue.svg" className="mr-2 w-4" />{" "}
+          <span className="lexend-font font-semibold">Continue</span>
+        </Button>
       </div>
+
+      <FooterClean />
     </>
   );
 };
