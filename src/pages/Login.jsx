@@ -260,13 +260,14 @@ const Login = () => {
 
 
 
-          {/*   <div className="flex justify-center mt-2 flex-col items-center">
+            <div className="flex justify-center mt-2 flex-col items-center max-md:w-full">
               <Button
-                className="w-[420px] "
+                className="w-full  md:w-[420px] "
                 style={{ marginTop: "20px", textTransform: 'none' }}
                 sx={{
                   height: "50px",
                   bgcolor: "#D24949",
+                
 
                   color: "#fff",
                   borderRadius: 3,
@@ -304,7 +305,10 @@ const Login = () => {
                   Resend verification email ?
                 </p>
               )}
-            </div> */}
+                */}
+
+
+            </div> 
 
 
           </form>
