@@ -149,174 +149,165 @@ const UpdateAthleteStatus = () => {
   }
 
   return (
-  <>
-    <NavbarClean />
+    <>
+      <NavbarClean />
 
-    <div className="flex flex-col items-start sm:items-center justify-start sm:justify-center min-h-screen p-4 lexend-font text-black_second w-full">
-    
-    
-    
-    <div className="flex gap-2 items-center mb-4 sm:mb-8">
-      <img
-      /*  mr-8 */
-        className="w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] object-cover rounded-full"
-        /* src="/ariana_profile.jpg"
- */
-        src={
-          BACKEND_SERVER_BASE_URL +
-          "/imageUpload/profile_pics/" +
-          profilePicture
-        }
+      <div className="flex flex-col items-start sm:items-center justify-start sm:justify-center min-h-screen p-4 lexend-font text-black_second w-full">
+        <div className="flex gap-2 items-center mb-4 sm:mb-8">
+          <img
+            /*  mr-8 */
+            className="w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] object-cover rounded-full"
+            /* src="/ariana_profile.jpg"
+             */
+            src={
+              BACKEND_SERVER_BASE_URL +
+              "/imageUpload/profile_pics/" +
+              profilePicture
+            }
+          />
 
-      
-      />
-
-    
-
-
-{/* mt-4 */}
-      <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-words">
-          Hello {name} 👋
-        </p>
+          {/* mt-4 */}
+          <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-words">
+            Hello {name} 👋
+          </p>
         </div>
 
+        <p className="text-start sm:text-start  text-xl font-semibold break-words mt-4 sm:mt-0 mb-8">
+          How probable are you to attend the <br />
+          Randolympics Games
+        </p>
 
-      <p className="text-start sm:text-start  text-xl font-semibold break-words mt-4 sm:mt-0 mb-8">
-        How probable are you to attend the <br/>Randolympics Games
-      </p>
-    
+        <FormControl>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue={athleteStatus}
+            name="radio-buttons-group"
+            onChange={(event) => {
+              const value = event.target.value;
+              if (value === "s3") {
+                setAthleteStatus("s3");
+              } else if (value === "s4") {
+                setAthleteStatus("s4");
+              } else if (value === "s5") {
+                setAthleteStatus("s5");
+              } else if (value === "s6") {
+                setAthleteStatus("s6");
+              }
+              handleAthleteStatusChange(event);
+            }}
+          >
+            <FormControlLabel
+              value="s3"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444",
+                    "&.Mui-checked": {
+                      color: "#444444",
+                    },
+                  }}
+                />
+              }
+              label={`I'm 99% taking the challenge and going 💪`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+            <FormControlLabel
+              value="s4"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444",
+                    "&.Mui-checked": {
+                      color: "#444444",
+                    },
+                  }}
+                />
+              }
+              label={`Most likely going 😄`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+            <FormControlLabel
+              value="s5"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444",
+                    "&.Mui-checked": {
+                      color: "#444444",
+                    },
+                  }}
+                />
+              }
+              label={`I'm maybe going 🤔`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+            <FormControlLabel
+              value="s6"
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444",
+                    "&.Mui-checked": {
+                      color: "#444444",
+                    },
+                  }}
+                />
+              }
+              label={`I'm definitely not going 👎`}
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+          </RadioGroup>
+        </FormControl>
 
-      <FormControl>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={athleteStatus}
-          name="radio-buttons-group"
-          onChange={(event) => {
-            const value = event.target.value;
-            if (value === "s3") {
-              setAthleteStatus("s3");
-            } else if (value === "s4") {
-              setAthleteStatus("s4");
-            } else if (value === "s5") {
-              setAthleteStatus("s5");
-            } else if (value === "s6") {
-              setAthleteStatus("s6");
-            }
-            handleAthleteStatusChange(event);
+        <Button
+          onClick={submitChangeStatus}
+          className="w-full sm:w-56"
+          style={{
+            marginTop: "45px",
+            marginBottom: "25px",
+            textTransform: "none",
           }}
+          sx={{
+            height: "50px",
+            bgcolor: "#D24949",
+            color: "#fff",
+            borderRadius: 3,
+            border: `1px solid #D24949`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
         >
-          <FormControlLabel
-            value="s3"
-            control={
-              <Radio
-                sx={{
-                  color: "#444444", 
-                  "&.Mui-checked": {
-                    color: "#444444", 
-                  },
-                }}
-              />
-            }
-            label={`I'm 99% taking the challenge and going 💪`}
-            sx={{
-              "& .MuiTypography-root": {
-                fontFamily: "'Lexend', sans-serif",
-                fontWeight: 500,
-              },
-            }}
-          />
-          <FormControlLabel
-            value="s4"
-            control={
-              <Radio
-                sx={{
-                  color: "#444444", 
-                  "&.Mui-checked": {
-                    color: "#444444", 
-                  },
-                }}
-              />
-            }
-            label={`Most likely going 😄`}
-            sx={{
-              "& .MuiTypography-root": {
-                fontFamily: "'Lexend', sans-serif",
-                fontWeight: 500,
-              },
-            }}
-          />
-          <FormControlLabel
-            value="s5"
-            control={
-              <Radio
-                sx={{
-                  color: "#444444", 
-                  "&.Mui-checked": {
-                    color: "#444444", 
-                  },
-                }}
-              />
-            }
-            label={`I'm maybe going 🤔`}
-            sx={{
-              "& .MuiTypography-root": {
-                fontFamily: "'Lexend', sans-serif",
-                fontWeight: 500,
-              },
-            }}
-          />
-          <FormControlLabel
-            value="s6"
-            control={
-              <Radio
-                sx={{
-                  color: "#444444", 
-                  "&.Mui-checked": {
-                    color: "#444444", 
-                  },
-                }}
-              />
-            }
-            label={`I'm definitely not going 👎`}
-            sx={{
-              "& .MuiTypography-root": {
-                fontFamily: "'Lexend', sans-serif",
-                fontWeight: 500,
-              },
-            }}
-          />
-        </RadioGroup>
-      </FormControl>
+          <img src="/myaccount/continue.svg" className="mr-2 w-4" />
+          <span className="lexend-font font-semibold">Continue</span>
+        </Button>
+      </div>
 
-      <Button
-        onClick={submitChangeStatus}
-        className="w-full sm:w-56"
-        style={{
-          marginTop: "45px",
-          marginBottom: "25px",
-          textTransform: "none",
-        }}
-        sx={{
-          height: "50px",
-          bgcolor: "#D24949",
-          color: "#fff",
-          borderRadius: 3,
-          border: `1px solid #D24949`,
-          "&:hover": {
-            background: "rgba(210, 73, 73, 1)",
-            color: "white",
-            border: `1px solid rgba(210, 73, 73, 1)`,
-          },
-        }}
-        id="join-the-fun-btn"
-      >
-        <img src="/myaccount/continue.svg" className="mr-2 w-4" />
-        <span className="lexend-font font-semibold">Continue</span>
-      </Button>
-    </div>
-
-    <FooterClean />
-  </>
+      <FooterClean />
+    </>
   );
 };
 
