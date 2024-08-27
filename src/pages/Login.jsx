@@ -105,29 +105,32 @@ const Login = () => {
 
     <NavbarClean />
 
-      <div className="flex ">
+      <div className="flex items-center  justify-start md:justify-center w-full">
        
        
         <div className="basis-1/2 justify-center items-center hidden lg:block ">
           <img src="login/1.jpg" className="image_login" />
         </div>
 
-        <div className="basis-1/2 flex flex-wrap flex-col justify-center items-start m-16 text-black_second" >
+        <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow" >
          {/*  <img src="login/logo.svg" /> */}
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
-
-          <p className="text-2xl lexend-font font-bold">Log In</p>
+       
+            <p className="text-2xl lexend-font font-bold text-start">Log In</p>
+         
+          
 
           <form
             action="#"
-            className="sign-in-form flex flex-col wrap justify-start items-start"
+            className="sign-in-form flex flex-col wrap justify-start items-start max-md:w-full"
             onSubmit={handleSubmit}
           >
-            <div className="flex flex-col mb-1 justify-start mt-8 w-full">
 
-              <label for="email" className=" lexend-font">Email</label>
+            <div className="flex flex-col mb-1 justify-start mt-8 w-full ">
+
+              <label for="email" className="lexend-font">Email</label>
               <TextField
                 onChange={(event) => {setEmailFriend(event.target.value)}}
                /*  label="Email" */
@@ -140,7 +143,6 @@ const Login = () => {
                   maxLength: 80,
                 }}
                 sx={{
-                  
                   mt: 0.5,
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
@@ -220,7 +222,7 @@ const Login = () => {
             {/*  this is for checkbox and forgot password*/}
 
 
-            
+           {/*  
             <div className="flex w-[420px] flex items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
                 <FormControlLabel
@@ -250,7 +252,7 @@ const Login = () => {
                   Forgot Password?
                 </Link>
               </div>
-            </div>
+            </div> */}
 
          
            
@@ -258,7 +260,7 @@ const Login = () => {
 
 
 
-            <div className="flex justify-center mt-2 flex-col items-center">
+          {/*   <div className="flex justify-center mt-2 flex-col items-center">
               <Button
                 className="w-[420px] "
                 style={{ marginTop: "20px", textTransform: 'none' }}
@@ -283,7 +285,7 @@ const Login = () => {
                 <img src="/login/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
               </Button>
 
-              {/*   */}
+              {/*   
               <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
                 {resultText}
               </p>
@@ -302,11 +304,14 @@ const Login = () => {
                   Resend verification email ?
                 </p>
               )}
-            </div>
+            </div> */}
+
+
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
-          <div className="flex justify-center mt-0">
+
+         {/*  <div className="flex justify-center mt-0">
             <Button
               onClick={handleSignUp}
               className="w-[420px]"
@@ -327,7 +332,7 @@ const Login = () => {
             >
               <span className="lexend-font font-semibold" > Sign Up</span>
             </Button>
-          </div>
+          </div> 
 
          {/*  <div className="flex justify-center mt-12">
             <img src="login/other_sign_in.svg" />
