@@ -315,10 +315,10 @@ const Login = () => {
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
 
-         {/*  <div className="flex justify-center mt-0">
+          <div className="flex justify-center mt-0 max-md:w-full ">
             <Button
               onClick={handleSignUp}
-              className="w-[420px]"
+              className="w-full md:w-[420px]"
               style={{ marginTop: "10px", textTransform: 'none' }}
               sx={{
                 height: "50px",
