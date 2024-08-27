@@ -4,6 +4,10 @@ import React, { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import {NavbarClean} from "../NavbarClean"
+import {FooterClean} from "../FooterClean"
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -48,19 +52,26 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="flex m-16">
-        <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
-          <img src="login/logo.svg" className="mb-16" />
+
+
+      <NavbarClean />
+
+    
+        <div className="flex flex-wrap flex-col m-12 items-center text-black_second lexend-font">
+         
+         
 
           <form
             action="#"
-            className="sign-in-form flex flex-col wrap justify-start items-center"
+            className="sign-in-form flex flex-col wrap justify-start items-center max-md:w-full"
             onSubmit={handleSubmit}
           >
             {!show && (
               <>
+
+                <label for="email" className="lexend-font self-start">Email</label>
                 <TextField
-                  label="Email"
+                  /* label="Email" */
                   placeholder="johndoe@gmail.com"
                   id="email"
                   name="email"
@@ -70,10 +81,11 @@ const ForgotPassword = () => {
                     maxLength: 80,
                   }}
                   sx={{
-                    m: 1,
-                    width: "420px",
+                    mt: 0.5,
+                    width: "100%",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      fontFamily: "'Lexend', sans-serif",
+                      borderRadius: 2,
                     },
 
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -82,6 +94,7 @@ const ForgotPassword = () => {
                       },
 
                     "& .MuiInputLabel-root": {
+                      fontFamily: "'Lexend', sans-serif",
                       "&.Mui-focused": {
                         color: "black",
                       },
@@ -89,19 +102,21 @@ const ForgotPassword = () => {
                   }}
                 />
 
+
+
                 <Button
-                  className="w-[420px]"
-                  style={{ marginTop: "20px" }}
+                  className="w-full  md:w-[420px] "
+                  style={{ marginTop: "20px", textTransform: 'none' }}
                   sx={{
                     height: "50px",
-                    bgcolor: "#AF2626",
+                    bgcolor: "#D24949",
                     color: "#fff",
-                    borderRadius: 15,
-                    border: `1px solid #AF2626`,
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
                     "&:hover": {
-                      background: "rgb(196, 43, 43)",
+                      background: "rgba(210, 73, 73, 1)",
                       color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
+                      border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
                   type="submit"
@@ -109,46 +124,44 @@ const ForgotPassword = () => {
                   value="Login"
                   id="login-btn"
                 >
-                  <span className="popins-font">Reset password</span>
+                  <span className="lexend-font font-semibold">Reset password</span>
                 </Button>
               </>
             )}
 
             {show && (
               <>
-                <p>{resultText}</p>
+                <p className="lexend-font ">{resultText}</p>
 
                 <Button
-                  className="w-[420px]"
-                  style={{ marginTop: "20px" }}
+                  className="w-full  md:w-[420px]"
+                  style={{ marginTop: "20px", textTransform: 'none' }}
                   sx={{
                     height: "50px",
-                    bgcolor: "#AF2626",
+                    bgcolor: "#D24949",
                     color: "#fff",
-                    borderRadius: 15,
-                    border: `1px solid #AF2626`,
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
                     "&:hover": {
-                      background: "rgb(196, 43, 43)",
+                      background: "rgba(210, 73, 73, 1)",
                       color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
+                      border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
                   type="submit"
                   variant="text"
-                  value="Login"
-                  id="login-btn"
+                
                 >
-                  <span className="popins-font">Back to sign in</span>
+                  <span className="lexend-font font-semibold">Back to sign in</span>
                 </Button>
               </>
             )}
           </form>
         </div>
 
-        <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0">
-          <img src="login/1.png" className="image_login" />
-        </div>
-      </div>
+   
+
+      <FooterClean />
     </>
   );
 };

@@ -247,7 +247,7 @@ const Login = () => {
               <div className="flex basis-1/2 justify-end">
                 <Link
                   to="/forgotpassword"
-                  className="bg-white text-red_second  "
+                  className="bg-white text-red_second "
                 >
                   Forgot Password?
                 </Link>
