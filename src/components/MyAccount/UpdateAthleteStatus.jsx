@@ -167,12 +167,12 @@ const UpdateAthleteStatus = () => {
           />
 
           {/* mt-4 */}
-          <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-words">
-            Hello {name} 👋
+          <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-all ">
+            Hello {name} dddddddddddddddddddddd ddd 👋
           </p>
         </div>
 
-        <p className="text-start sm:text-start  text-xl font-semibold break-words mt-4 sm:mt-0 mb-8">
+        <p className="text-start sm:text-start  text-xl font-semibold break-all mt-4 sm:mt-0 mb-8">
           How probable are you to attend the <br />
           Randolympics Games
         </p>
