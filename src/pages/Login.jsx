@@ -286,7 +286,7 @@ const Login = () => {
                 <img src="/login/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
               </Button>
 
-              {/*   
+                 
               <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
                 {resultText}
               </p>
@@ -305,7 +305,7 @@ const Login = () => {
                   Resend verification email ?
                 </p>
               )}
-                */}
+                
 
 
             </div> 
@@ -338,9 +338,7 @@ const Login = () => {
             </Button>
           </div> 
 
-         {/*  <div className="flex justify-center mt-12">
-            <img src="login/other_sign_in.svg" />
-          </div> */}
+
 
          
           
