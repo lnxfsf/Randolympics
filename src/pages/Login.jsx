@@ -222,8 +222,8 @@ const Login = () => {
             {/*  this is for checkbox and forgot password*/}
 
 
-           {/*  
-            <div className="flex w-[420px] flex items-center justify-center mt-4 ">
+           
+            <div className="flex w-full md:w-[420px] items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
                 <FormControlLabel
                   control={
@@ -252,7 +252,7 @@ const Login = () => {
                   Forgot Password?
                 </Link>
               </div>
-            </div> */}
+            </div> 
 
          
            
