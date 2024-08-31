@@ -108,7 +108,7 @@ const Login = () => {
       <div className="flex items-center  justify-start md:justify-center w-full">
        
        
-        <div className="basis-1/2 justify-center items-center hidden lg:block ">
+        <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 ">
           <img src="login/1.jpg" className="image_login" />
         </div>
 

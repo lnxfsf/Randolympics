@@ -26,6 +26,8 @@ import dayjs from "dayjs";
 
 import ReactFlagsSelect from "react-flags-select";
 
+import "../../styles/supporters.scoped.scss";
+
 import supportedCountry from "../../context/supportedCountry";
 
 import TextField from "@mui/material/TextField";
@@ -49,6 +51,8 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 import zIndex from "@mui/material/styles/zIndex";
+import { NavbarClean } from "../../components/NavbarClean";
+import { FooterClean } from "../../components/FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -101,9 +105,8 @@ const SupporterSecondPart = ({
   snackbarMessage,
   setSnackbarMessage,
 
-  setOpenSnackbarFailure, 
+  setOpenSnackbarFailure,
   setOpenSnackbarSuccess,
-
 }) => {
   const [popupWarning, setPopupWarning] = useState(false);
 
@@ -174,225 +177,285 @@ const SupporterSecondPart = ({
         className={`flex justify-center items-center flex-col pt-28 first-content-container ${
           secondIsVisible ? "show" : "hide"
         } `}
-        /*  style={{
-          backgroundImage: "url('/supporters/supporter2.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }} */
       >
-        <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div>
-        <img className="h-16" src="randolympics_logo.svg" />
-
         {!isCelebrity && (
           <>
-            {/* signing up for a friend */}
-            <div>
-              <p className="text-xl text-center mt-8 mb-12">
-                Tell us a little bit more about your friend:
-              </p>
+            {/* // ! signing up for a friend  */}
 
-              <div className="flex ">
-                <div className="flex flex-col w-full">
-                  <div className="flex justify-start gap-2 items-baseline ">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendName}
-                        onChange={(e) => {
-                          setFriendName(e.target.value);
-                        }}
-                        label="First Name *"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+            <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
+             
+            
+              <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
+                
+              
+                 <img src="supporters/2.jpg" className="image_supporter"/> 
+              
 
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        helperText="(optional)"
-                        value={friendMiddleName}
-                        onChange={(e) => {
-                          setFriendMiddleName(e.target.value);
-                        }}
-                        label="Middle Name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    {/*    <div className="flex flex-col justify-start">
-                <TextField
-                  value={friendFamilyName}
-                  onChange={(e) => {
-                    setFriendFamilyName(e.target.value);
-                  }}
-                  label="Family name"
-                  placeholder="John"
-                  id="name"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
               </div>
- */}
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendLastName}
-                        onChange={(e) => {
-                          setFriendLastName(e.target.value);
-                        }}
-                        label="Last Name *"
-                        placeholder="Doe"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+
+              <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
+             
+
+              <div className="flex justify-around w-full text-[#D24949] lexend-font">
+                
+
+                <div className="flex flex-col items-center">
+                  <div className="w-[100px] h-[100px] flex justify-center items-center" style={{ backgroundImage: "url('/supporters/red_circle.svg')", }}>
+                {/*    <img src="/supporters/red_circle.svg"/> */}
+                      <p className="text-sm font-bold " >1</p>
+
+                  </div>
+                
+                  <p  className="text-sm font-medium text-center ">Your friend's information</p>
+
+                </div>
+
+
+                <p>Your information</p>
+
+                <p>Donate</p>
+
+              </div>
+
+                <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
+                  Tell us more about your friend
+                </p>
+
+                <div className="flex flex-col w-full">
+                  <div className="ml-2 flex ">
+                    <FilePond
+                      className="filepond--root athlete"
+                      type="file"
+                      onupdatefiles={setFiles}
+                      allowMultiple={false}
+                      maxFiles={1}
+                      server={server}
+                      name="image"
+                      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                      accept="image/png, image/jpeg, image/gif"
+                      dropOnPage
+                      dropValidation
+                      allowPaste={true}
+                      allowReplace={true}
+                      credits={""}
+                      allowFileEncode={true}
+                      allowFileTypeValidation={true}
+                      allowImagePreview={true}
+                      allowImageCrop={false}
+                      allowImageResize={false}
+                      allowImageTransform={false}
+                      imagePreviewHeight={150}
+                      imageCropAspectRatio="1:1"
+                      imageResizeTargetWidth={100}
+                      imageResizeTargetHeight={100}
+                      stylePanelLayout="compact circle "
+                      styleLoadIndicatorPosition="center bottom"
+                      styleProgressIndicatorPosition="center bottom"
+                      styleButtonRemoveItemPosition="center  bottom"
+                      styleButtonProcessItemPosition="center bottom"
+                      imageEditAllowEdit={false}
+                    />
                   </div>
 
-                  <div className="flex justify-start items-baseline gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendEmail}
-                        onChange={(e) => {
-                          setFriendEmail(e.target.value);
-                        }}
-                        label="Email *"
-                        placeholder="Email Address"
-                        type="email"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+                  <label
+                    htmlFor="friendName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    First Name *
+                  </label>
 
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        helperText="(optional)"
-                        value={friendPhone}
-                        onChange={(e) => {
-                          setFriendPhone(e.target.value);
-                        }}
-                        label="Phone number"
-                        placeholder="+1 425 555 0123"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-                  </div>
+                  <TextField
+                    value={friendName}
+                    onChange={(e) => {
+                      setFriendName(e.target.value);
+                    }}
+                    placeholder="John"
+                    id="friendName"
+                    name="friendName"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                  />
 
-                  <div className="flex justify-start items-baseline gap-2 mt-2">
-                    <div className="flex mb-1 justify-center items-center flex-col ">
-                      <FormControl>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              style={{ backgroundColor: "#fff" }}
-                              className="w-[260px]"
-                              label="Birthdate"
-                              value={friendBirthdate}
-                              onChange={(date) => {
-                                setFriendBirthdate(date);
-                              }}
-                              format="MMMM DD, YYYY"
-                              sx={{
-                                "& .MuiOutlinedInput-root": {
-                                  // backgroundColor: "#fff",
-                                  // borderRadius: "15px", // or 5px, according to your design
-                                },
+                  <label
+                    htmlFor="friendMiddleName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Middle Name (optional)
+                  </label>
 
-                                /*  '& .MuiOutlinedInput-input': {
-                        backgroundColor: '#fff',
-                        borderRadius: 'inherit', // Ensures consistency
+                  <TextField
+                    value={friendMiddleName}
+                    onChange={(e) => {
+                      setFriendMiddleName(e.target.value);
+                    }}
+                    placeholder="Johnson"
+                    id="friendMiddleName"
+                    name="friendMiddleName"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                  />
+
+                  <label
+                    htmlFor="friendLastName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Last Name *
+                  </label>
+
+                  <TextField
+                    value={friendLastName}
+                    onChange={(e) => {
+                      setFriendLastName(e.target.value);
+                    }}
+                    id="friendLastName"
+                    placeholder="Doe"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                  />
+
+                  <label
+                    htmlFor="gender"
+                    className="lexend-font mt-1 font-medium text-sm"
+                  >
+                    Gender
+                  </label>
+
+                  <Select
+                    labelId="roleDropdowns"
+                    id="gender"
+                    /*  label="gender" */
+                    value={friendGender}
+                    onChange={(event) => {
+                      setFriendGender(event.target.value);
+                    }}
+                    className="w-full mb-2"
+                    sx={{
+                      fontFamily: "'Lexend', sans-serif",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2, // Adjust the radius as needed
+                        fontFamily: "'Lexend', sans-serif",
                       },
-                    */
-                              }}
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
+                      "& fieldset": {
+                        borderRadius: 2, // Ensure the fieldset has the same border-radius
+                      },
+                    }}
+                  >
+                    <MenuItem value={"M"}>Male</MenuItem>
+                    <MenuItem value={"F"}>Female</MenuItem>
+                  </Select>
 
-                        <FormHelperText>(optional)</FormHelperText>
-                      </FormControl>
-                    </div>
+                  <label
+                    htmlFor="friendEmail"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Email *
+                  </label>
 
-                    <div className="flex  justify-center items-center flex-col h-auto">
-                      <ReactFlagsSelect
-                        countries={supportedCountry}
-                        className="w-[280px] rounded-md p-0 "
-                        /*  bg-[#fff]  */
+                  <TextField
+                    value={friendEmail}
+                    onChange={(e) => {
+                      setFriendEmail(e.target.value);
+                    }}
+                    placeholder="Email Address"
+                    id="friendEmail"
+                    type="email"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                  />
 
-                        // to fill it with the one, which user's is currently selected...
-                        selected={friendNationality}
-                        onSelect={(code) => {
-                          setFriendNationality(code);
-                        }}
-                        /*  className={classNameFlagsSelect} */
-                        searchable={true}
-                        id="nationality"
-                        name="nationality"
-                        placeholder="Nationality *"
-                      />
-                    </div>
-                  </div>
+                  <label
+                    htmlFor="friendPhone"
+                    className="lexend-font mb-1  mt-1 font-medium text-sm"
+                  >
+                    Phone number (optional)
+                  </label>
 
-                  <div className="flex mt-2 flex-col">
-                    <InputLabel id="roleDropdowns">Gender</InputLabel>
-                    <Select
-                      variant="standard"
-                      labelId="roleDropdowns"
-                      id="roleDropdown"
-                      label="gender"
-                      value={friendGender}
-                      onChange={(event) => {
-                        setFriendGender(event.target.value);
-                      }}
-                      className="w-[280px] "
-                      style={{ color: "#000" }}
-                    >
-                      <MenuItem value={"M"}>Male</MenuItem>
-                      <MenuItem value={"F"}>Female</MenuItem>
-                    </Select>
-                  </div>
+                  <TextField
+                    value={friendPhone}
+                    onChange={(e) => {
+                      setFriendPhone(e.target.value);
+                    }}
+                    id="friendPhone"
+                    placeholder="+1 425 555 0123"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                  />
+
+                  <label
+                    htmlFor="birthdate"
+                    className="lexend-font mt-1 font-medium text-sm"
+                  >
+                    Birthdate (optional)
+                  </label>
+
+                  <FormControl>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoContainer components={["DatePicker"]}>
+                        <DatePicker
+                          style={{ backgroundColor: "#fff" }}
+                          className="w-full"
+                          id="birthdate"
+                          value={friendBirthdate}
+                          onChange={(date) => {
+                            setFriendBirthdate(date);
+                          }}
+                          format="MMMM DD, YYYY"
+                          sx={{
+                            "& .MuiOutlinedInput-root": {
+                              fontFamily: "'Lexend', sans-serif",
+                              borderRadius: 2,
+                              // backgroundColor: "#fff",
+                              // borderRadius: "15px", // or 5px, according to your design
+                            },
+
+                            /*  '& .MuiOutlinedInput-input': {
+                              backgroundColor: '#fff',
+                              borderRadius: 'inherit', // Ensures consistency
+                            },
+                          */
+                          }}
+                        />
+                      </DemoContainer>
+                    </LocalizationProvider>
+                  </FormControl>
+
+                  <label
+                    htmlFor="nationality"
+                    className="lexend-font mb-1  mt-4 font-medium text-sm"
+                  >
+                    Nationality *
+                  </label>
+
+                  <ReactFlagsSelect
+                    countries={supportedCountry}
+                    className="w-full p-0 lexend-font rounded-lg"
+                    selected={friendNationality}
+                    onSelect={(code) => {
+                      setFriendNationality(code);
+                    }}
+                    searchable={true}
+                    id="nationality"
+                    name="nationality"
+                  />
 
                   <FormControl>
                     <RadioGroup
@@ -412,53 +475,98 @@ const SupporterSecondPart = ({
                     >
                       <FormControlLabel
                         value="send"
-                        control={<Radio />}
-                        label={`Send email to ${friendName}`}
-                        sx={{ marginBottom: "0px" }}
+                        control={
+                          <Radio
+                            sx={{
+                              color: "#444444",
+                              "&.Mui-checked": {
+                                color: "#444444",
+                              },
+                            }}
+                          />
+                        }
+                        label={`Send email too`}
+                        sx={{
+                          marginBottom: "0px",
+                          "& .MuiTypography-root": {
+                            fontFamily: "'Lexend', sans-serif",
+                            fontWeight: 500,
+                          },
+                        }}
                       />
                       <FormControlLabel
                         value="dontsend"
-                        control={<Radio />}
-                        label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
-                        sx={{ marginTop: "0px" }}
+                        control={
+                          <Radio
+                            sx={{
+                              color: "#444444",
+                              "&.Mui-checked": {
+                                color: "#444444",
+                              },
+                            }}
+                          />
+                        }
+                        label={`Don't send an email, let's keep campaign secret !`}
+                        sx={{
+                          marginTop: "0px",
+                          "& .MuiTypography-root": {
+                            fontFamily: "'Lexend', sans-serif",
+                            fontWeight: 500,
+                          },
+                        }}
                       />
                     </RadioGroup>
                   </FormControl>
                 </div>
 
-                <div className="ml-2 flex mt-20">
-                  <FilePond
-                    className="filepond--root athlete"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={150}
-                    imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
-                    stylePanelLayout="compact "
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
+                <div className="flex flex-col gap-2 w-full mt-8">
+                  <Button
+                    onClick={validateAthlete}
+                    className="w-full md:w-50%"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "50px",
+                      bgcolor: "#D24949",
+
+                      color: "#fff",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
+                    <span className="lexend-font">Next</span>
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      setFirstIsVisible(true);
+                      setSecondIsVisible(false);
+                    }}
+                    className="w-full md:w-50%"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "50px",
+                      bgcolor: "#fff",
+                      color: "#D24949",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+                    <span className="lexend-font">Go Back</span>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -468,226 +576,309 @@ const SupporterSecondPart = ({
         {/* for case of celebrity !  */}
         {isCelebrity && (
           <>
-            <div className="flex w-full flex-col justify-center items-center">
-              <p className="text-xl text-center mt-8 mb-12">
-                Tell us more about that celebrity:
-              </p>
+            <div className="flex items-center  justify-start md:justify-center w-full">
+              <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 ">
+                <img src="supporters/2.jpg" className="image_login" />
+              </div>
 
-              <div className="flex">
-                <div className="flex flex-col w-[70%]">
-                  <div className="flex justify-start gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendName}
-                        onChange={(e) => {
-                          setFriendName(e.target.value);
-                        }}
-                        label="Name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+              <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
+                <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
+                  Tell us more about your celebrity
+                </p>
 
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendMiddleName}
-                        onChange={(e) => {
-                          setFriendMiddleName(e.target.value);
-                        }}
-                        label="Middle name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    {/*  <div className="flex flex-col justify-start">
-      <TextField
-        value={friendFamilyName}
-        onChange={(e) => {
-          setFriendFamilyName(e.target.value);
-        }}
-        label="Family name"
-        placeholder="John"
-        id="name"
-        name="name"
-        type="text"
-        inputProps={{
-          maxLength: 255,
-        }}
-        InputLabelProps={inputLabelPropsTextField}
-        sx={sxTextField}
-      />
-    </div> */}
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendLastName}
-                        onChange={(e) => {
-                          setFriendLastName(e.target.value);
-                        }}
-                        label="Last name"
-                        placeholder="Doe"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+                <div className="flex flex-col w-full">
+                  <div className="ml-2 flex ">
+                    <FilePond
+                      className="filepond--root athlete"
+                      type="file"
+                      onupdatefiles={setFiles}
+                      allowMultiple={false}
+                      maxFiles={1}
+                      server={server}
+                      name="image"
+                      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                      accept="image/png, image/jpeg, image/gif"
+                      dropOnPage
+                      dropValidation
+                      allowPaste={true}
+                      allowReplace={true}
+                      credits={""}
+                      allowFileEncode={true}
+                      allowFileTypeValidation={true}
+                      allowImagePreview={true}
+                      allowImageCrop={false}
+                      allowImageResize={false}
+                      allowImageTransform={false}
+                      imagePreviewHeight={150}
+                      imageCropAspectRatio="1:1"
+                      imageResizeTargetWidth={100}
+                      imageResizeTargetHeight={100}
+                      stylePanelLayout="compact circle "
+                      styleLoadIndicatorPosition="center bottom"
+                      styleProgressIndicatorPosition="center bottom"
+                      styleButtonRemoveItemPosition="center  bottom"
+                      styleButtonProcessItemPosition="center bottom"
+                      imageEditAllowEdit={false}
+                    />
                   </div>
 
-                  <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
-                    <div className="flex mt-0 mb-2 flex-col">
-                      <InputLabel id="roleDropdowns">Gender</InputLabel>
-                      <Select
-                        variant="standard"
-                        labelId="roleDropdowns"
-                        id="roleDropdown"
-                        label="gender"
-                        value={friendGender}
-                        onChange={(event) => {
-                          setFriendGender(event.target.value);
-                        }}
-                        className="w-[240px] "
-                        style={{ color: "#000" }}
-                      >
-                        <MenuItem value={"M"}>Male</MenuItem>
-                        <MenuItem value={"F"}>Female</MenuItem>
-                      </Select>
-                    </div>
+                  <label
+                    htmlFor="friendName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    First name
+                  </label>
 
-                    <div className="flex  justify-center items-center flex-col h-auto mt-4 ">
-                      <ReactFlagsSelect
-                        countries={supportedCountry}
-                        className="w-[280px] rounded-md p-0 "
-                        /*  bg-[#fff]  */
-
-                        // to fill it with the one, which user's is currently selected...
-                        selected={friendNationality}
-                        onSelect={(code) => {
-                          setFriendNationality(code);
-                        }}
-                        /*  className={classNameFlagsSelect} */
-                        searchable={true}
-                        id="nationality"
-                        name="nationality"
-                        placeholder="Nationality"
-                      />
-                    </div>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={friendName}
+                      onChange={(e) => {
+                        setFriendName(e.target.value);
+                      }}
+                      label="Name"
+                      placeholder="John"
+                      id="friendName"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
                   </div>
 
-                  <div className="flex justify-start gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={fb_link}
-                        onChange={(e) => {
-                          setFb_link(e.target.value);
-                        }}
-                        label="Facebook link"
-                        placeholder="Facebook Link"
-                        id="fbl"
-                        name="fbl"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+                  <label
+                    htmlFor="friendMiddleName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Middle name
+                  </label>
 
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={ig_link}
-                        onChange={(e) => {
-                          setIg_link(e.target.value);
-                        }}
-                        label="Instagram Link"
-                        placeholder="Instagram Link"
-                        id="igl"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={tw_link}
-                        onChange={(e) => {
-                          setTw_link(e.target.value);
-                        }}
-                        label="Twitter Link"
-                        placeholder="Twitter Link"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={friendMiddleName}
+                      onChange={(e) => {
+                        setFriendMiddleName(e.target.value);
+                      }}
+                      placeholder="John"
+                      id="friendMiddleName"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
                   </div>
+
+                  <label
+                    htmlFor="friendLastName"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Last name
+                  </label>
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={friendLastName}
+                      onChange={(e) => {
+                        setFriendLastName(e.target.value);
+                      }}
+                      id="friendLastName"
+                      placeholder="Doe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <div className="flex mt-0 mb-2 flex-col">
+                    <label
+                      htmlFor="gender"
+                      className="lexend-font mt-1 font-medium text-sm text-sm"
+                    >
+                      Gender
+                    </label>
+                    <Select
+                      labelId="roleDropdowns"
+                      id="gender"
+                      value={friendGender}
+                      onChange={(event) => {
+                        setFriendGender(event.target.value);
+                      }}
+                      className="w-full"
+                      sx={{
+                        fontFamily: "'Lexend', sans-serif",
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2, // Adjust the radius as needed
+                          fontFamily: "'Lexend', sans-serif",
+                        },
+
+                        "& fieldset": {
+                          borderRadius: 2, // Ensure the fieldset has the same border-radius
+                        },
+                      }}
+                    >
+                      <MenuItem value={"M"}>Male</MenuItem>
+                      <MenuItem value={"F"}>Female</MenuItem>
+                    </Select>
+                  </div>
+
+                  <label
+                    htmlFor="nationality"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Nationality{" "}
+                  </label>
+
+                  <ReactFlagsSelect
+                    countries={supportedCountry}
+                    className="w-full rounded-md p-0 lexend-font"
+                    /*  bg-[#fff]  */
+
+                    // to fill it with the one, which user's is currently selected...
+                    selected={friendNationality}
+                    onSelect={(code) => {
+                      setFriendNationality(code);
+                    }}
+                    /*  className={classNameFlagsSelect} */
+                    searchable={true}
+                    id="nationality"
+                    name="nationality"
+                  />
+
+                  <p className="lexend-font text-2xl font-semibold mb-1 mt-3">
+                    Social media
+                  </p>
+                  <label
+                    htmlFor="fbl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Facebook{" "}
+                  </label>
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={fb_link}
+                      onChange={(e) => {
+                        setFb_link(e.target.value);
+                      }}
+                      placeholder="/officialjohndoe"
+                      id="fbl"
+                      name="fbl"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <label
+                    htmlFor="igl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    Instagram
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={ig_link}
+                      onChange={(e) => {
+                        setIg_link(e.target.value);
+                      }}
+                      placeholder="@officialjohndoe"
+                      id="igl"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <label
+                    htmlFor="igl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    X (Twitter)
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={tw_link}
+                      onChange={(e) => {
+                        setTw_link(e.target.value);
+                      }}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
+
+                  <label className="lexend-font  font-medium text-sm text-[#82889e]">
+                    Provide at least one social media profile
+                  </label>
                 </div>
 
-                <div className="ml-24 flex mt-0">
-                  <FilePond
-                    className="filepond--root athlete"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={150}
-                    imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
-                    stylePanelLayout="compact "
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
+                <div className="flex flex-col gap-2 w-full mt-8">
+                  <Button
+                    onClick={validateAthlete}
+                    className="w-full md:w-50%"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "50px",
+                      bgcolor: "#D24949",
+
+                      color: "#fff",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
+                    <span className="lexend-font">Next</span>
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      setFirstIsVisible(true);
+                      setSecondIsVisible(false);
+                    }}
+                    className="w-full md:w-50%"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "50px",
+                      bgcolor: "#fff",
+                      color: "#D24949",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+                    <span className="lexend-font">Go Back</span>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -707,53 +898,6 @@ const SupporterSecondPart = ({
             popupWarning={popupWarning}
           />
         </Popup>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              setFirstIsVisible(true);
-              setSecondIsVisible(false);
-            }}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Previous step</span>
-          </Button>
-
-          <Button
-            onClick={validateAthlete}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Proceed</span>
-          </Button>
-        </div>
       </div>
     </>
   );

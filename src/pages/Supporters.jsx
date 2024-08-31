@@ -117,22 +117,32 @@ const inputLabelPropsTextField = {
 };
 
 const sxTextField = {
-  m: 1,
-  width: "240px",
+ 
+  mb: 1,
+  mr: 1,
+
+  width: "100%",
 
   /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
    */
   "& .MuiOutlinedInput-root": {
-    borderRadius: 3,
-    backgroundColor: "white",
+    borderRadius: 2,
+    fontFamily: "'Lexend', sans-serif",
   },
   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
     borderColor: "red",
   },
   "& .MuiInputLabel-root": {
+    fontFamily: "'Lexend', sans-serif",
+    
     "&.Mui-focused": {
       color: "black",
     },
+
+
+
+
+    
   },
 };
 
