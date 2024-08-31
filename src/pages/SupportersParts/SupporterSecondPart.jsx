@@ -174,7 +174,7 @@ const SupporterSecondPart = ({
   return (
     <>
       <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
+        className={`flex justify-center items-center flex-col first-content-container ${
           secondIsVisible ? "show" : "hide"
         } `}
       >
@@ -196,24 +196,50 @@ const SupporterSecondPart = ({
               <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
              
 
-              <div className="flex justify-around w-full text-[#D24949] lexend-font">
+              <div className="flex justify-around w-full  lexend-font">
                 
 
                 <div className="flex flex-col items-center">
-                  <div className="w-[100px] h-[100px] flex justify-center items-center" style={{ backgroundImage: "url('/supporters/red_circle.svg')", }}>
-                {/*    <img src="/supporters/red_circle.svg"/> */}
-                      <p className="text-sm font-bold " >1</p>
+
+                  <div style={{backgroundColor: "#ffeaea", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer">
+                  <p className="text-sm font-bold text-[#D24949]" >1</p>
 
                   </div>
                 
-                  <p  className="text-sm font-medium text-center ">Your friend's information</p>
+                  <p  className="text-sm font-medium text-center mt-3 text-[#D24949]">Your friend's<br/> information</p>
 
                 </div>
 
 
-                <p>Your information</p>
+                
+                
 
-                <p>Donate</p>
+                <div className="flex flex-col items-center w-15">
+
+                  <div style={{backgroundColor: "#F5F5F5", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer">
+                  <p className="text-sm font-bold text-[#82889E]" >2</p>
+
+                  </div>
+
+                  <p  className="text-sm font-medium text-center mt-3 text-[#82889E] ">Your information</p>
+
+                </div>
+
+
+             
+             
+                
+
+                <div className="flex flex-col items-center w-15">
+
+                  <div style={{backgroundColor: "#F5F5F5", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer" >
+                  <p className="text-sm font-bold text-[#82889E]" >3</p>
+
+                  </div>
+
+                  <p  className="text-sm font-medium text-center mt-3 text-[#82889E] ">Donate</p>
+
+                </div>
 
               </div>
 
@@ -577,11 +603,66 @@ const SupporterSecondPart = ({
         {isCelebrity && (
           <>
             <div className="flex items-center  justify-start md:justify-center w-full">
-              <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 ">
-                <img src="supporters/2.jpg" className="image_login" />
-              </div>
+           
+           
+           
+            <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
+                
+              
+                <img src="supporters/2.jpg" className="image_supporter"/> 
+             
+
+             </div>
 
               <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
+              <div className="flex justify-around w-full  lexend-font">
+                
+
+                <div className="flex flex-col items-center">
+
+                  <div style={{backgroundColor: "#ffeaea", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer">
+                  <p className="text-sm font-bold text-[#D24949]" >1</p>
+
+                  </div>
+                
+                  <p  className="text-sm font-medium text-center mt-3 text-[#D24949]">Your friend's<br/> information</p>
+
+                </div>
+
+
+                
+                
+
+                <div className="flex flex-col items-center w-15">
+
+                  <div style={{backgroundColor: "#F5F5F5", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer">
+                  <p className="text-sm font-bold text-[#82889E]" >2</p>
+
+                  </div>
+
+                  <p  className="text-sm font-medium text-center mt-3 text-[#82889E] ">Your information</p>
+
+                </div>
+
+
+             
+             
+                
+
+                <div className="flex flex-col items-center w-15">
+
+                  <div style={{backgroundColor: "#F5F5F5", borderRadius: "50%"}} className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer" >
+                  <p className="text-sm font-bold text-[#82889E]" >3</p>
+
+                  </div>
+
+                  <p  className="text-sm font-medium text-center mt-3 text-[#82889E] ">Donate</p>
+
+                </div>
+
+              </div>
+
+              
                 <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
                   Tell us more about your celebrity
                 </p>
