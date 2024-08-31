@@ -584,7 +584,7 @@ const SupporterSecondPart = ({
                     sx={{
                       height: "50px",
                       bgcolor: "#fff",
-                      color: "#D24949",
+                      color: "#444444",
                       borderRadius: 3,
                       border: `1px solid #D24949`,
                       "&:hover": {
@@ -951,13 +951,17 @@ const SupporterSecondPart = ({
                     sx={{
                       height: "50px",
                       bgcolor: "#fff",
-                      color: "#D24949",
+                      color: "#444444",
                       borderRadius: 3,
                       border: `1px solid #D24949`,
                       "&:hover": {
                         background: "rgba(210, 73, 73, 1)",
                         color: "white",
                         border: `1px solid rgba(210, 73, 73, 1)`,
+                        filter: 'brightness(0) invert(1)', // Applies a white filter to the SVG
+                       
+                      
+
                       },
                     }}
                     id="go_back_btn"
@@ -965,7 +969,9 @@ const SupporterSecondPart = ({
                   >
 
 
-                    <img  src="/supporters/left_arrow.svg" className="mr-2 " />{" "}
+
+                   
+                    <img src="/supporters/left_arrow.svg"  className="mr-2 " />{" "}
                     <span className="lexend-font">Go Back</span>
                   </Button>
                 </div>
