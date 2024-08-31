@@ -110,7 +110,12 @@ const SupporterSecondPart = ({
 }) => {
   const [popupWarning, setPopupWarning] = useState(false);
 
+
   const validateAthlete = async () => {
+    
+
+ 
+ 
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
     const responseAthleteUser = await axios.get(
       `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
@@ -955,9 +960,12 @@ const SupporterSecondPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    id="go_back_btn"
+
                   >
-                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+
+
+                    <img  src="/supporters/left_arrow.svg" className="mr-2 " />{" "}
                     <span className="lexend-font">Go Back</span>
                   </Button>
                 </div>
