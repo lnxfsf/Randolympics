@@ -786,7 +786,7 @@ const SupporterSecondPart = ({
                   <div className="flex mt-0 mb-2 flex-col">
                     <label
                       htmlFor="gender"
-                      className="lexend-font mt-1 font-medium text-sm text-sm"
+                      className="lexend-font mt-1 font-medium text-sm"
                     >
                       Gender
                     </label>
