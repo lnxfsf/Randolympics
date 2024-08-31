@@ -958,7 +958,7 @@ const SupporterSecondPart = ({
                         background: "rgba(210, 73, 73, 1)",
                         color: "white",
                         border: `1px solid rgba(210, 73, 73, 1)`,
-                        filter: 'brightness(0) invert(1)', // Applies a white filter to the SVG
+                        
                        
                       
 
