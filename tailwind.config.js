@@ -22,6 +22,7 @@ export default {
        red_first: "#AF2626",
 
        red_second: "#D24949",  /* rgba(210, 73, 73, 1) */ 
+       
 
 
       
