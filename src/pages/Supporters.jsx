@@ -95,6 +95,7 @@ import { NavbarClean } from "../components/NavbarClean";
 import { FooterClean } from "../components/FooterClean";
 import { SupporterFirstPart } from "./SupportersParts/SupporterFirstPart";
 import { SupporterSecondPart } from "./SupportersParts/SupporterSecondPart";
+import { SupporterThirdPart } from "./SupportersParts/SupporterThirdPart";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -826,354 +827,38 @@ const Supporters = () => {
    
 
       {/* treca */}
+            <SupporterThirdPart 
+            
+            
 
-      <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
-          thirdIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter3.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div>
-
-        <img className="h-16" src="randolympics_logo.svg" />
-
-        <p className="text-xl text-center mt-12 mb-6">
-          You are camapaign creator for {friendName} !
-        </p>
-
-        <div className="flex flex-col w-[70%]">
-          <div className="flex justify-between ">
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                value={supporterName}
-                onChange={(e) => {
-                  setSupporterName(e.target.value);
-                }}
-                label="Your Name *"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                helperText="(optional)"
-                value={supporterEmail}
-                onChange={(e) => {
-                  setSupporterEmail(e.target.value);
-                }}
-                label="Your Email"
-                placeholder="johndoe@gmail.com"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                value={supporterPhone}
-                helperText="(optional)"
-                onChange={(e) => {
-                  setSupporterPhone(e.target.value);
-                }}
-                label="Your Phone "
-                placeholder="+1 425 555 0123"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-4">
-            <TextField
-              variant="standard"
-              value={supporterPassword}
-              onChange={(event) => {
-                setSupporterPassword(event.target.value);
-              }}
-              label="Password"
-              placeholder="password"
-              id="pass"
-              name="pass"
-              type={showPassword ? "text" : "password"}
-              sx={{
-                m: 1,
-                width: "240px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "red",
-                  },
-
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-              InputProps={{
-                maxLength: 255,
-
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+            thirdIsVisible={thirdIsVisible}
+            friendName={friendName}
+        supporterName={supporterName}
+        setSupporterName={setSupporterName}
+        supporterEmail={supporterEmail}
+        setSupporterEmail={setSupporterEmail}
+        inputLabelPropsTextField={inputLabelPropsTextField}
+        sxTextField={sxTextField}
+        supporterPhone={supporterPhone}
+        setSupporterPhone={setSupporterPhone}
+        supporterPassword={supporterPassword}
+        setSupporterPassword={setSupporterPassword}
+        showPassword={showPassword}
+        handleClickShowPassword={handleClickShowPassword}
+        handleMouseDownPassword={handleMouseDownPassword}
+        supporterComment={supporterComment}
+        setSupporterComment={setSupporterComment}
+        additionalSupportersFormData={additionalSupportersFormData}
+        handleInputChange={handleInputChange}
+        removeInputSet={removeInputSet}
+        addInputSet={addInputSet}
+        setSecondIsVisible={setSecondIsVisible}
+        setThirdIsVisible={setThirdIsVisible}
+        validateSupporter={validateSupporter}
+            
             />
-            {/* 
-            <TextField
-              variant="standard"
-              value={supporterPasswordConfirmation}
-              onChange={(event) => {
-                setSupporterPasswordConfirmation(event.target.value);
-              }}
-              label="Confirm password"
-              placeholder="password"
-              id="pass"
-              name="pass"
-              type={showPassword ? "text" : "password"}
-              sx={{
-                m: 1,
-                width: "420px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
 
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "red",
-                  },
 
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-              InputProps={{
-                maxLength: 255,
-
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
-
-            <TextField
-              variant="standard"
-              value={supporterComment}
-              onChange={(e) => {
-                setSupporterComment(e.target.value);
-              }}
-              label="Your (supporter) comment"
-              placeholder="John"
-              id="name"
-              name="name"
-              type="text"
-              inputProps={{
-                maxLength: 255,
-              }}
-              InputLabelProps={inputLabelPropsTextField}
-              sx={sxTextField}
-            />
-          </div>
-
-          <p className="text-xl text-center mt-12 mb-6">
-            Inform additional supporters ?
-          </p>
-
-          <div className="flex flex-col justify-start w-">
-            {additionalSupportersFormData.map((data, index) => (
-              <div
-                className="flex items-start justify-center"
-                key={index}
-                style={{ marginBottom: "10px" }}
-              >
-                {/*  <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={data.name}
-                  onChange={(event) => handleInputChange(index, event)}
-                /> */}
-
-                <TextField
-                  variant="standard"
-                  value={data.name}
-                  onChange={(event) => handleInputChange(index, event)}
-                  label="Their Name *"
-                  placeholder="John"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-
-                <TextField
-                  variant="standard"
-                  helperText="(optional)"
-                  value={data.email}
-                  onChange={(event) => handleInputChange(index, event)}
-                  label="Your Email"
-                  placeholder="johndoe@gmail.com"
-                  type="email"
-                  name="email"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-
-                {/* 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={data.email}
-                  onChange={(event) => handleInputChange(index, event)}
-                /> */}
-
-                {/* 
-<select
-name="weightCategory"
-value={data.weightCategory}
-onChange={(event) => handleInputChange(index, event)}
->
-<option value="light">Light</option>
-<option value="medium">Medium</option>
-<option value="heavy">Heavy</option>
-</select> */}
-
-                {/* 
-<select
-name="gender"
-value={data.gender}
-onChange={(event) => handleInputChange(index, event)}
->
-<option value="M">Man</option>
-<option value="F">Woman</option>
-
-</select>
-*/}
-
-                <button
-                  className="self-center"
-                  type="button"
-                  onClick={() => removeInputSet(index)}
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-
-            <button type="button" onClick={addInputSet}>
-              Add Another Supporter
-            </button>
-          </div>
-        </div>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              setSecondIsVisible(true);
-              setThirdIsVisible(false);
-            }}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Previous step</span>
-          </Button>
-
-          <Button
-            onClick={validateSupporter}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Ultimate challenge !</span>
-          </Button>
-        </div>
-      </div>
 
       {/* cetvrta */}
 

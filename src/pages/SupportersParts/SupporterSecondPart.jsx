@@ -183,6 +183,8 @@ const SupporterSecondPart = ({
           secondIsVisible ? "show" : "hide"
         } `}
       >
+    
+    
         {!isCelebrity && (
           <>
             {/* // ! signing up for a friend  */}
@@ -682,7 +684,7 @@ const SupporterSecondPart = ({
                       maxFiles={1}
                       server={server}
                       name="image"
-                      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                      labelIdle={`Drag & Drop celebrity's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
                       accept="image/png, image/jpeg, image/gif"
                       dropOnPage
                       dropValidation
@@ -712,7 +714,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    First name
+                    First name *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -721,7 +723,7 @@ const SupporterSecondPart = ({
                       onChange={(e) => {
                         setFriendName(e.target.value);
                       }}
-                      label="Name"
+                     
                       placeholder="John"
                       id="friendName"
                       name="name"
@@ -747,7 +749,7 @@ const SupporterSecondPart = ({
                       onChange={(e) => {
                         setFriendMiddleName(e.target.value);
                       }}
-                      placeholder="John"
+                      placeholder="Johnson"
                       id="friendMiddleName"
                       name="name"
                       type="text"
@@ -763,7 +765,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendLastName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Last name
+                    Last name *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -819,7 +821,7 @@ const SupporterSecondPart = ({
                     htmlFor="nationality"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Nationality{" "}
+                    Nationality *{" "}
                   </label>
 
                   <ReactFlagsSelect
