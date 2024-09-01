@@ -25,7 +25,7 @@ const WarningTextPopup = ({
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col ">
+      <div className="flex justify-center items-center flex-col lexend-font text-black_second">
       
         <p className="text-center w-[50%] font-semibold text-2xl mb-2 mt-2">{randomTitle}</p>
         <p className="text-center w-[75%] font-semibold text-xl">{randomText}</p>
@@ -38,22 +38,25 @@ const WarningTextPopup = ({
             setPopupWarning(false); // then close this popup
           }}
           className="w-56"
-          style={{ marginTop: "25px", marginBottom: "25px" }}
+          style={{ marginTop: "25px", marginBottom: "25px", textTransform: "none" }}
+         
           sx={{
             height: "50px",
-            bgcolor: "#AF2626",
+            bgcolor: "#D24949",
+
             color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
+            borderRadius: 3,
+            border: `1px solid #D24949`,
             "&:hover": {
-              background: "rgb(175, 38, 38)",
+              background: "rgba(210, 73, 73, 1)",
               color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
+              border: `1px solid rgba(210, 73, 73, 1)`,
             },
           }}
+
           id="join-the-fun-btn"
         >
-          <span className="popins-font">Proceed anyways</span>
+          <span className="lexend-font">Proceed anyways</span>
         </Button>
       </div>
     </>
