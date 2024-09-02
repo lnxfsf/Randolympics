@@ -40,7 +40,7 @@ const SupporterFifthPart = ({
 
             <p className="text-3xl lexend-font text-black_second font-bold mb-2">Congratulations !</p>
           
-            <p className=" lexend-font text-black_second font-medium mb-4">You have created {friendName}'s Randolimpycs Campaign!</p>
+            <p className=" lexend-font text-black_second font-medium mb-4">You have created {friendName}'s Randolimpycs Campaign !</p>
 
 
             <p className="text-xl lexend-font text-black_second font-semibold mb-3">Share on social media</p>
