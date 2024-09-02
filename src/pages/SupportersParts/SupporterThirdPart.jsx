@@ -83,6 +83,8 @@ const SupporterThirdPart = ({
         } `}
       >
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
+        
+        
           <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
             <img src="supporters/5.png" className="image_supporter" />
           </div>

@@ -97,6 +97,7 @@ import { SupporterFirstPart } from "./SupportersParts/SupporterFirstPart";
 import { SupporterSecondPart } from "./SupportersParts/SupporterSecondPart";
 import { SupporterThirdPart } from "./SupportersParts/SupporterThirdPart";
 import { SupporterFourthPart } from "./SupportersParts/SupporterFourthPart";
+import { SupporterFifthPart } from "./SupportersParts/SupporterFifthPart";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -884,122 +885,23 @@ setFifthIsVisible={setFifthIsVisible}
 
       {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
 
-      <div
-        className={`flex justify-center items-center flex-col pt-28  first-content-container ${
-          fifthIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter5.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <img className="h-16" src="randolympics_logo.svg" />
+            <SupporterFifthPart
+            
+            fifthIsVisible={fifthIsVisible}
+            urlForCampaign={urlForCampaign}
+            inputLabelPropsTextField={inputLabelPropsTextField}
+            sxTextField={sxTextField}
 
-        <p className="text-xl text-center mt-12 mb-6">
-          You have successfully supported your <br />
-          friend in this campaign!
-        </p>
+            setOpenSnackbarSuccess={setOpenSnackbarSuccess}
+            setSnackbarMessage={setSnackbarMessage}
 
-        <p className="text-xl text-center mt-4 mb-6">
-          Do you want to invite someone else to <br /> join our campaign?
-        </p>
+            friendName={friendName}
 
-        <p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
+            />
 
-        <a href={urlForCampaign} className="underline mb-2">
-          Check it out
-        </a>
 
-        <TextField
-          variant="standard"
-          value={urlForCampaign}
-          InputLabelProps={inputLabelPropsTextField}
-          sx={sxTextField}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip title="Copy to clipboard">
-                  <IconButton
-                    onClick={() => {
-                      navigator.clipboard.writeText(urlForCampaign);
-                    }}
-                    edge="end"
-                  >
-                    <ContentCopyIcon />
-                  </IconButton>
-                </Tooltip>
-              </InputAdornment>
-            ),
-          }}
-        />
 
-        <QRCode value={urlForCampaign} size="150" className="mt-2" />
 
-        <p className="text-xl text-center mt-4 mb-6">
-          Share on social networks:
-        </p>
-
-        <div className="flex justify-center gap-16 items-center w-[70%]">
-          <img className="w-20" src="supporters/fb.svg" />
-          <img className="w-20" src="supporters/ig.svg" />
-          <img className="w-20" src="supporters/x.svg" />
-          <img className="w-20" src="supporters/ln.svg" />
-        </div>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              navigate("/");
-            }}
-            className="w-56"
-            style={{ marginTop: "80px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Home</span>
-          </Button>
-
-          <Button
-            onClick={() => {
-              navigate("/supporters", { replace: true });
-              window.location.reload();
-            }}
-            className="w-56"
-            style={{ marginTop: "80px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Add another friend</span>
-          </Button>
-        </div>
-
-        <div className="pb-12"></div>
-      </div>
 
       {/* <p>Crypto currency: <b>USDT (ERC 20)</b></p>
             <p>Ethereum blockchain</p><br/>
