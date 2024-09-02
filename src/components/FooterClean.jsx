@@ -1,4 +1,12 @@
+
+
+import { useNavigate } from "react-router-dom";
+
 const FooterClean = () => {
+
+  const navigate = useNavigate();
+
+
   return (
     <>
       <div className="flex flex-col m-12">
@@ -12,13 +20,13 @@ const FooterClean = () => {
           </div>
 
           <div className="flex gap-4 text-[#d24949] lexend-font font-bold flex-col lg:flex-row mt-4 lg:mt-0">
-            <p>Privacy policy</p>
-            <p>Terms of service</p>
+            <p className="cursor-pointer select-none ">Privacy policy</p>
+            <p className="cursor-pointer select-none" onClick={() => {navigate("/tos")}}>Terms of service</p>
 
             {/* as for now, we don't yet use non-essential cookies. https://law.stackexchange.com/questions/81602/why-does-the-gdpr-matter-to-me-a-us-citizen-with-no-property-in-europe/81624#81624 
             https://law.stackexchange.com/questions/94052/if-website-uses-cookies-only-after-users-login-can-i-ask-for-cookie-consent-dur
             */}
-            <p>Cookies settings</p>
+            <p className="cursor-pointer select-none">Cookies settings</p>
           </div>
         </div>
       </div>
