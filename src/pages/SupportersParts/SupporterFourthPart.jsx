@@ -151,34 +151,7 @@ const SupporterFourthPart = ({
 
 
 
-            <div className="border-2 flex flex-col justify-center items-center p-4 w-full">
-              <p className="underline text-red_first">Note:</p>
-              <p>
-                You can use{" "}
-                <a
-                  className="underline text-[#0000ff]"
-                  href="https://docs.stripe.com/testing"
-                  target="_blank"
-                >
-                  test card
-                </a>
-                : <b>4242 4242 4242 4242</b>
-              </p>
-              <p>
-                CVC: <b>567</b> (it can be any 3 digits){" "}
-              </p>
-              <p className="mb-4">
-                Date: <b>12/34</b> (it can be any date){" "}
-              </p>
-
-              {/*     <p className="underline font-bold text-red_first">
-            Disable adblocker{" "}
-          </p>
-          <p>
-            (or it will block request to stripe, as this is HTTP (insecure
-            chanel))
-          </p> */}
-            </div>
+       
 
             {/* and this is for those 3 options */}
             <p className="mt-4 font-semibold w-full text-center">Become the first donator</p>
@@ -303,7 +276,7 @@ const SupporterFourthPart = ({
                       "&:hover": {
                         background: "#FFEAEA",
                         color: "#D24949",
-                        border: `1px solid #FFEAEA`,
+                        border: `1px solid #D24949`,
                       },
                     }}
                     id="join-the-fun-btn"

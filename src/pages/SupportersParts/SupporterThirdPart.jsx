@@ -84,7 +84,7 @@ const SupporterThirdPart = ({
       >
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
           <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
-            <img src="supporters/3.jpg" className="image_supporter" />
+            <img src="supporters/5.png" className="image_supporter" />
           </div>
 
           <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">

@@ -616,7 +616,7 @@ const SupporterSecondPart = ({
             <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
                 
               
-                <img src="supporters/2.jpg" className="image_supporter"/> 
+                <img src="supporters/3.jpg" className="image_supporter"/> 
              
 
              </div>
