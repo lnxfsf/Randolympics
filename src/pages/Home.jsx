@@ -22,36 +22,20 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { GridOfSportsHome } from "../components/Home/GridOfSportsHome";
 import { FAQ } from "../components/Home/FAQ";
+import { NavbarClean } from "../components/NavbarClean";
+import { FirstScreenHome } from "./Home/FirstScreenHome";
+import { FooterClean } from "../components/FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-// for countdown
-const calculateTimeLeft = (targetDate) => {
-  const now = new Date();
-  const difference = targetDate - now;
-  let timeLeft = {};
 
-  if (difference > 0) {
-    timeLeft = {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      ),
-      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000),
-    };
-  }
-
-  return timeLeft;
-};
 
 // okej, ovo radi (ovo je sigurniji način da fetch-ujes, nego axios API... )
 
 const Home = () => {
-  const targetDate = new Date("2028-06-25T00:00:00");
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
+ 
 
   const navigate = useNavigate();
 
@@ -59,107 +43,19 @@ const Home = () => {
     AOS.init();
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(targetDate));
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // we need in format: 1 Jan 2024
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
 
   return (
     <>
-      <NavbarHome />
+      <NavbarClean />
 
       {/* first div */}
-      <div className="firstHhomeImage flex justify-center items-center flex-col ">
-        <p className="text-4xl mt-56" style={{ color: "white" }}>
-          Real People. Randomly Selected.
-          <br />
-          Competing in Olympic Sports
-        </p>
+     
 
-        <div className="flex items-center justify-center  flex-col pt-8">
-          <p className="text-xl pb-4" style={{ color: "white" }}>
-            Curious about possible schedules?
-          </p>
+      <FirstScreenHome />
 
-          <Button
-            onClick={() => {
-              navigate("/randomize");
-            }}
-            className="w-44 "
-            style={{ marginTop: "0px" }}
-            sx={{
-              height: "45px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 3,
-              border: `1px solid #AF2626`,
-              "&:hover": {
-                background: "rgb(202, 67, 67)",
-                color: "white",
-                border: `1px solid rgb(202, 67, 67)`,
-              },
-            }}
-            id="randomize-btn"
-            type="submit"
-          >
-            <span className="popins-font" style={{ textTransform: "none" }}>
-              Randomize
-            </span>
-          </Button>
-        </div>
 
-        <div className="countdown-timer  flex items-center justify-center ">
-          <p className="text-center">
-            Stockholm, Sweden <br /> June 25th - July 2nd 2028
-          </p>
 
-          <div className="flex space-x-8 p-4">
-            <div className="flex flex-col items-center">
-              <p className="text-4xl">
-                <b>{timeLeft.days ?? 0}</b>
-              </p>
-              <p>Days</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <p className="text-4xl">{timeLeft.hours ?? 0}</p>
-              <p>Hours</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <p className="text-4xl">{timeLeft.minutes ?? 0}</p>
-              <p>Minutes</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <p className="text-4xl">{timeLeft.seconds ?? 0}</p>
-              <p>Sec</p>
-            </div>
-          </div>
-        </div>
-
-        {/*     <p className="text-xl w-[45em] text-center mt-4" style={{ color: "white" }}>
-          Randolympics is a global competition where randomly selected
-          participants face extraordinary athletic challenges, transforming
-          everyday individuals into potential gold medalists.
-        </p> */}
-
-        <div className="flex items-center justify-center pt-16 gap-4 flex-col">
-          <p className="text-xl text-center w-[70%]" style={{ color: "white" }}>
-            Transform your friend from couch potato to gold medalist—sign them
-            up by starting their Randolympic campaign!
-          </p>
-
-          <Button
+      <Button
             onClick={() => {
               navigate("/supporters");
             }}
@@ -184,24 +80,9 @@ const Home = () => {
               Sign up a friend
             </span>
           </Button>
-        </div>
 
-        <div className="flex items-center text-center justify-center pt-8 pl-24  pr-24 w-[80%]  ">
-          <p style={{ color: "white" }}>
-            Is your friend more of a couch potato than an athlete? Deep down,
-            there's a great sports spirit waiting to emerge. Sign them up for a
-            chance to win a gold medal—it’ll be a huge surprise and a big
-            compliment, showing that you believe in their potential. By
-            launching this campaign, you’re not just getting them off the couch;
-            you’re giving them a fitness program that finally works. You’ll be
-            by their side every step of the way—motivating them, managing their
-            progress, and cheering them on all the way to the games. And best of
-            all, this journey will be a lot of fun for everyone involved!
-          </p>
-        </div>
-      </div>
 
-      {/* Our Competitions */}
+      {/* Our Competitions 
       <div
         className="flex justify-center items-center flex-col"
         data-aos="fade-up"
@@ -211,11 +92,13 @@ const Home = () => {
           <b>Our Competitions</b>
         </p>
 
-        {/* outer box  */}
+        {/* outer box  
         <GridOfSportsHome />
       </div>
+*/}
 
-      {/* Our Beliefs */}
+
+      {/* Our Beliefs 
       <div className="flex justify-center items-start overflow-x-hidden">
         <div
           data-aos="fade-right"
@@ -251,8 +134,10 @@ const Home = () => {
           </p>
         </div>
       </div>
+*/}
 
-      {/* Economics */}
+
+      {/* Economics 
       <div
         className="flex justify-center items-start bg-[#F7FAFA] mt-8"
         data-aos="fade-up"
@@ -278,7 +163,7 @@ const Home = () => {
               <p className="font-semibold">1</p>
               <p className="text-lg font-semibold text-red_first">Loans</p>
 
-              {/* <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img> */}
+              {/* <img src="home/ellipse.svg" alt="Ellipse" className="ellipse-image"></img> 
 
               <svg
                 width="100"
@@ -302,7 +187,7 @@ const Home = () => {
               <p className="text-lg font-semibold text-red_first text-center">
                 Broadcasting rights
               </p>
-              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> 
 
               <svg
                 width="100"
@@ -326,7 +211,7 @@ const Home = () => {
               <p className="text-lg font-semibold text-red_first text-center">
                 Sponsorship
               </p>
-              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> */}
+              {/* <img src="home/ellipse.svg" alt="Ellipse" class="ellipse-image"></img> 
 
               <svg
                 width="100"
@@ -498,7 +383,8 @@ const Home = () => {
         {/* 
         <p className="text-[#0000FF] mt-4">
           Event: Athletes receive their randomly assigned sports.
-        </p> */}
+        </p> 
+        
 
         <div className="flex justify-start gap-2 mt-8 ">
           <p className="text-xl">June 25th to July 2nd, 2028: </p>
@@ -515,13 +401,16 @@ const Home = () => {
           each competition is designed to push the participants to their limits.
         </p>
       </div>
+      */}
 
-      {/* FAQ */}
+      {/* FAQ 
       <FAQ />
+      */}
 
       <div className="h-96"></div>
 
-      <Footer />
+      <FooterClean />
+
     </>
   );
 };

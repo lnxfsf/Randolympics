@@ -1,136 +1,111 @@
-
-
 ul li {
-    font-size: 14px;
-    margin-left: 10px;
-    list-style-type: disc;
- }
+  font-size: 14px;
+  margin-left: 10px;
+  list-style-type: disc;
+}
 
+ol li {
+  font-size: 14px;
+  margin-left: 10px;
+  list-style-type: decimal;
+}
 
- ol li {
-    font-size: 14px;
-    margin-left: 10px;
-    list-style-type: decimal;
- }
-
-
-
-
- // these are all images in containter
+// these are all images in containter
 .image_part {
-   
-/*    background-size: cover;
+  /*    background-size: cover;
 
    background-position: center; */
-   object-fit: cover;
-
-   
-
-
-
-
-   
-
+  object-fit: cover;
 }
- 
 
 //-----------------
 
-
 .firstHhomeImage {
-
-   /*  background-image: url('/home/home1.jpg'), linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%); 
+  /*  background-image: url('/home/home1.jpg'), linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%); 
     */
-/* 
+  /* 
   
    background: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%);
     */
 
-    background-image: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
-       url('/home/home3.webp'); 
+  background-image: linear-gradient(
+      180deg,
+      rgba(41, 41, 41, 0) 0%,
+      #671212 100%
+    ),
+    url("/home/home3.webp");
 
+  background-size: cover;
+  background-position: center;
+  /* height: 100vh; */
 
-      
+  height: 60vh;
 
-   background-size: cover;
-   background-position: center;
-   /* height: 100vh; */
-
-   height: 180vh;
-
-   
-
-}  
-
-
-
-
-
-.countdown-timer {
-
-   color: white;
-   background-color: rgba(38, 25, 25, 0.8);
-   
-   /* width: 650px; */
-   width: 600px;
-   height: 100px;
-
-   border-radius: 20px;
-
-   /* margin-left: 20%; */
-
-   margin-top: 5%
-/*    margin-top: 15%; */
-
-   
-
-
-
+  @media screen and (min-width: 1024px) {
+    height: 110vh;
+  }
 }
 
+.countdown-timer {
+  color: white;
+  // background-color: rgba(38, 25, 25, 0.8);
+  background-color: #332f2f;
+  width: 80%;
 
+  height: 165px;
 
+  /* height: 135px; */
 
+  @media screen and (min-width: 1024px) {
+    height: 135px;
+    width: 45%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    height: 155px;
+  }
+
+  @media screen and (min-width: 1440px) and (max-width: 2559px) {
+    width: 35%;
+  }
+
+  @media screen and (min-width: 2560px) {
+    width: 23%;
+  }
+
+  border-radius: 20px;
+
+  /* margin-left: 20%; */
+
+  margin-top: 5%;
+  /*    margin-top: 15%; */
+}
 
 .secondHhomeImage {
+  background-image: linear-gradient(0deg, rgba(41, 41, 41, 0) 0%, #671212 100%),
+    url("/home/home2.jpg");
 
+  background-size: cover;
+  background-position: center;
+  /* height: 100vh; */
 
-    background-image: linear-gradient(0deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
-       url('/home/home2.jpg'); 
-
-
-   background-size: cover;
-   background-position: center;
-   /* height: 100vh; */
-
-   height: 350px;
-
-   
-
-}  
- 
-
+  height: 350px;
+}
 
 // the round <div>
 
 .economicsItem {
-   
-   position: relative;
+  position: relative;
 
-   /* width: 150px;
+  /* width: 150px;
    height: 150px; */
 
-   width: 150px;
-   height: 150px;
+  width: 150px;
+  height: 150px;
 
-   border-radius: 50%;  
-   background: white;
-
-
+  border-radius: 50%;
+  background: white;
 }
-
-
-
 
 /*  
 
@@ -148,97 +123,74 @@ tako imas na hover animation
 
 */
 
-
-
 .economicsItem:hover {
-   -webkit-animation: pulse infinite 1s;
-   animation: pulse infinite 1s; 
-
-  
+  -webkit-animation: pulse infinite 1s;
+  animation: pulse infinite 1s;
 }
 
+.ellipse-image {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  bottom: 0;
+  right: 0;
+  --size: 100px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --progress: 25;
+}
 
- .ellipse-image {
-   position: absolute;
-   width: 150px;
-   height: 150px;
-   bottom: 0;
-   right: 0;
-   --size: 100px;
-   --half-size: calc(var(--size) / 2);
-   --stroke-width: 5px;
-   --radius: calc((var(--size) - var(--stroke-width)) / 2);
-   --circumference: calc(var(--radius) * pi * 2);
-   --dash: calc((var(--progress) * var(--circumference)) / 100);
-   --progress: 25;
- }
- 
- .fillme {
-   cx: var(--half-size);
-   cy: var(--half-size);
-   r: var(--radius);
-   stroke-width: var(--stroke-width);
-   fill: none;
-   stroke-linecap: round;
-   stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
-   stroke: #af2626;
-   transition: stroke-dasharray 0.3s linear 0s;
- }
- 
- .ellipse-image:hover {
-   --progress: 100;
- }
- 
+.fillme {
+  cx: var(--half-size);
+  cy: var(--half-size);
+  r: var(--radius);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+  stroke: #af2626;
+  transition: stroke-dasharray 0.3s linear 0s;
+}
 
+.ellipse-image:hover {
+  --progress: 100;
+}
 
+// for smaller icons, competitions..
 
- // for smaller icons, competitions..
-
- 
 .competitionItem {
+  position: relative;
 
-   position: relative;
+  width: 50px;
+  height: 50px;
 
-   width: 50px;
-   height: 50px;
-
-   border-radius: 50%;  
-   background: white;
-
-
+  border-radius: 50%;
+  background: white;
 }
-
 
 .competitionItem:hover {
-   -webkit-animation: pulse infinite 1s;
-   animation: pulse infinite 1s; 
-
-  
+  -webkit-animation: pulse infinite 1s;
+  animation: pulse infinite 1s;
 }
 
+.ellipse-image-competitions {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 0;
+  right: 0;
+  --size: 100px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --progress: 25;
+}
 
- .ellipse-image-competitions {
-   position: absolute;
-   width: 50px;
-   height: 50px;
-   bottom: 0;
-   right: 0;
-   --size: 100px;
-   --half-size: calc(var(--size) / 2);
-   --stroke-width: 5px;
-   --radius: calc((var(--size) - var(--stroke-width)) / 2);
-   --circumference: calc(var(--radius) * pi * 2);
-   --dash: calc((var(--progress) * var(--circumference)) / 100);
-   --progress: 25;
-
- }
-
- 
- .ellipse-image-competitions:hover {
-   --progress: 100;
- }
-
-
-
-
- 
+.ellipse-image-competitions:hover {
+  --progress: 100;
+}

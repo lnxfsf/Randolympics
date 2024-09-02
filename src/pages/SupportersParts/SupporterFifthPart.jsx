@@ -73,7 +73,7 @@ const SupporterFifthPart = ({
                 id="join-the-fun-btn"
               >
                 <img src="supporters/right_arrow.svg" className="mr-2" />
-                <span className="lexend-font">Go to campaign</span>
+                <span className="lexend-font">See The Campaign</span>
               </Button>
 
               <Button
