@@ -1,66 +1,62 @@
-
-
-
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-
 import { useNavigate } from "react-router-dom";
 
-
 const SecondScreenHome = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  return (
+    <>
+      {/* min-h-screen */}
+      <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
+        <div className="lg:basis-1/2 flex items-center justify-end">
+          <div className="">
+            {/* //! lg:p-12 */}
 
+            <p className="text-2xl md:text-4xl font-bold mb-4">
+              From Couch Potato to <br />
+              Gold Medalist !
+            </p>
 
-    return (
-        <>
+            <p className="font-medium mb-4">
+              Transform your friend from couch potato to gold medalist - sign
+              them up by starting their Randolympic campaign!
+            </p>
 
-        {/* min-h-screen */}
-        <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
+            <ul className="pl-4 font-medium  ">
+              <li className="text-base">
+                Show them you believe in their potential, it will be a big
+                surprise and a huge compliment.{" "}
+              </li>
 
-            <div className="lg:basis-1/2 flex items-center justify-end">
+              <li className="text-base">
+                Get them out the couch, giving them a fitness program that
+                finally works.
+              </li>
 
+              <li className="text-base">
+                Motivate them, managing their progress and cheering them on all
+                the way.
+              </li>
 
-               <div className="">
-               {/* //! lg:p-12 */}
-               
-                <p className="text-2xl md:text-4xl font-bold mb-4">From Couch Potato to <br/>
-                Gold Medalist !</p>
+              <li className="text-base">
+                The best of all: a lot of fun for everyone involved !
+              </li>
+            </ul>
 
+            {/* buttons */}
 
-                <p className="font-medium mb-4">Transform your friend from couch potato to gold medalist - sign them up by starting their Randolympic campaign!</p>
-
-                <ul className="pl-4 font-medium  ">
-
-                    <li className="text-base">Show them you believe in their potential, it will be a big surprise and a huge compliment. </li>
-                    
-                    <li className="text-base">Get them out the couch, giving them a fitness program that finally works.</li>
-
-                    <li className="text-base">Motivate them, managing their progress and cheering them on all the way.</li>
-
-                    <li className="text-base">The best of all: a lot of fun for everyone involved !</li>
-
-
-                </ul>
-
-
-
-                        {/* buttons */}
-
-                    <div className="flex gap-4 mt-8 ">
-
-
-
-                    <Button
-                    onClick={() => {navigate("/supporters")}}
+            <div className="flex gap-4 mt-8 ">
+              <Button
+                onClick={() => {
+                  navigate("/supporters");
+                }}
                 className="w-full  "
-                style={{  textTransform: 'none' }}
+                style={{ textTransform: "none" }}
                 sx={{
                   height: "50px",
                   bgcolor: "#D24949",
-                
 
                   color: "#fff",
                   borderRadius: 3,
@@ -71,55 +67,45 @@ const SecondScreenHome = () => {
                     border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
-               
                 variant="text"
-             
               >
-                 <span className="lexend-font font-semibold" >Sign Up A Friend</span>
+                <span className="lexend-font font-semibold">
+                  Sign Up A Friend
+                </span>
               </Button>
-
 
               <Button
-                    onClick={() => {navigate("/login")}}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 className="w-full  "
-                style={{ textTransform: 'none' }}
-              
-              
+                style={{ textTransform: "none" }}
                 sx={{
-                    height: "50px",
-                    bgcolor: "#fff",
-                    color: "#444444",
-                    borderRadius: 3,
-                    border: `1px solid #D24949`,
-                    "&:hover": {
-                      background: "rgba(210, 73, 73, 1)",
-                      color: "white",
-                      border: `1px solid rgba(210, 73, 73, 1)`,
-                    },
-                  }}
-               
+                  height: "50px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
                 variant="text"
-             
               >
-                 <span className="lexend-font font-semibold" >Log In</span>
+                <span className="lexend-font font-semibold">Log In</span>
               </Button>
-
-
-                    </div>
-                </div>
-
             </div>
-
-
-            <div className="hidden basis-1/2 lg:flex justify-start items-center ">
-                <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%]"/>
-            </div>
-
-
+          </div>
         </div>
-        
-        </>
-    )
-}
 
-export {SecondScreenHome}
+        <div className="hidden basis-1/2 lg:flex justify-start items-center ">
+          <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%] rounded-2xl" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export { SecondScreenHome };

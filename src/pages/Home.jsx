@@ -26,6 +26,7 @@ import { NavbarClean } from "../components/NavbarClean";
 import { FirstScreenHome } from "./Home/FirstScreenHome";
 import { FooterClean } from "../components/FooterClean";
 import { SecondScreenHome } from "./Home/SecondScreenHome";
+import { Navbar } from "../components/Navbar";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -47,7 +48,7 @@ const Home = () => {
 
   return (
     <>
-      <NavbarClean />
+      <Navbar />
 
       {/* first div */}
      
@@ -59,43 +60,16 @@ const Home = () => {
       <SecondScreenHome />
 
 
-      <Button
-            onClick={() => {
-              navigate("/supporters");
-            }}
-            className="w-44 "
-            style={{ marginTop: "0px" }}
-            sx={{
-              height: "45px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 3,
-              border: `1px solid #AF2626`,
-              "&:hover": {
-                background: "rgb(202, 67, 67)",
-                color: "white",
-                border: `1px solid rgb(202, 67, 67)`,
-              },
-            }}
-            id="randomize-btn"
-            type="submit"
-          >
-            <span className="popins-font" style={{ textTransform: "none" }}>
-              Sign up a friend
-            </span>
-          </Button>
-
-
+    
 
 
 
       {/* Our Competitions */}
       <div
-        className="flex justify-center items-center flex-col"
-        data-aos="fade-up"
-        data-aos-offset="300"
+        className="flex justify-center items-center flex-col lexend-font text-black_second"
+     
       >
-        <p className="text-[30px] text-red_first mt-8 ">
+        <p className="text-2xl md:text-4xl mt-8 font-bold ">
           <b>Our Competitions</b>
         </p>
 

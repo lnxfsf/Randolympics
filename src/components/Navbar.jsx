@@ -1,61 +1,162 @@
-import "../styles/navbar.scoped.scss";
+
+
+
+
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  ListItem,
+  Hidden,
+  Avatar,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Divider,
+  Tooltip,
+  SwipeableDrawer,
+  Box,
+} from "@mui/material";
+
+import {
+  Settings,
+  Logout,
+  Star as StarIcon,
+  Home as HomeIcon,
+  Explore as ExploreIcon,
+  LiveTv as LiveTvIcon,
+  MenuBook as MenuBookIcon,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
+
+
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { AppBar, Toolbar } from "@mui/material";
+import "../styles/navbar.scoped.scss";
+
+import { useNavigate } from "react-router-dom";
 
 
-import { useContext } from 'react'
-import AuthContext from '../context/AuthContext';
 
 
 const Navbar = () => {
 
-  let { user } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar sx={{ bgcolor: "#AF2626" }}>
-          <Link className="first_h2 nav_btns" to="/">
-            <img src="logo_randolymics_nav.png" />
-          </Link>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: '#000000', boxShadow: 'none'  }} >
+        
+         
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
 
-          <nav className="flex flex-wrap gap-8 justify-end items-center hidden sm:flex bg-red_first">
-            <Link to="/" className="nav_btns ">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={() => setOpen(true)}
+            sx={{ display: { md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+
+            <Link className="hidden lg:flex" to="/">
+              <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
+            </Link>
+          
+
+
+            <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-24">
+            <Link to="/" className="nav_btns">
               Home
             </Link>
-
-          {/*   <Link to="/schedule" className="nav_btns">
-              Schedule
-            </Link> */}
-          <Link to="/" className="nav_btns">
-              Schedule
-            </Link> 
-
-
-
-
-            {user ? (
-              <>
-            <Link to="/myaccount" className="nav_btns mr-16">
-              My account
+            <Link to="/anime" className="nav_btns">
+              Anime
             </Link>
-            </>
-
-            ) : (
-
-              <>
-              <Link to="/login" className="nav_btns mr-16">
-                Login
-              </Link>
-              </>
-
-            )}
-
+            <Link to="/manga" className="nav_btns">
+              Manga
+            </Link>
+            <Link to="/explore" className="nav_btns">
+              Explore
+            </Link>
+            {/* Conditional user elements */}
           </nav>
-        </Toolbar>
-      </AppBar>
+
+
+
+      
+
+
+    <div className="flex gap-2">
+            <Button
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="w-12 md:w-24 "
+                style={{ textTransform: "none" }}
+                sx={{
+                  height: "40px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                variant="text"
+              >
+                <span className="lexend-font font-semibold text-xs">Log In</span>
+              </Button>
+            
+
+            
+              <Button  
+          onClick={() => {
+            navigate("/supporters");
+          }}
+          className="w-24 md:w-36  "
+
+          style={{ textTransform: "none" }}
+                sx={{
+                 
+
+                  height: "40px",
+                  bgcolor: "#D24949",
+
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                variant="text"
+          
+          >
+              <span className="lexend-font font-semibold text-xs ">Sign Up Your Friend</span>
+            </Button>
+            </div>
+          
+          
+
+            
+          </Toolbar>
+
+
+        </AppBar>
+      </Box>
     </>
   );
 };

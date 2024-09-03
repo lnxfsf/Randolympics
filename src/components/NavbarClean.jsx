@@ -6,13 +6,24 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import { Link } from "react-router-dom";
+
 const NavbarClean = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: '#000000', boxShadow: 'none'  }} >
           <Toolbar>
-            <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
+            
+            
+            {/* <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
+ */}
+            
+            <Link className="hidden md:flex" to="/">
+              <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
+              </Link>
+
+
           </Toolbar>
         </AppBar>
       </Box>
