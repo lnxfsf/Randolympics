@@ -61,30 +61,40 @@ const Navbar = () => {
             color="inherit"
             aria-label="open drawer"
             onClick={() => setOpen(true)}
-            sx={{ display: { md: "none" } }}
+
+             sx={{ display: { md: "none" } }} 
+        
+
+
+         
+            
+
           >
             <MenuIcon />
           </IconButton>
 
 
-            <Link className="hidden lg:flex" to="/">
+            <Link className="hidden  min-[900px]:flex" to="/">
               <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
             </Link>
           
 
 
-            <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-24">
+            <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-16">
             <Link to="/" className="nav_btns">
-              Home
+            Sports
             </Link>
-            <Link to="/anime" className="nav_btns">
-              Anime
+            <Link to="/#beliefs" className="nav_btns">
+            Our beliefs
             </Link>
-            <Link to="/manga" className="nav_btns">
-              Manga
+            <Link to="/#economics" className="nav_btns">
+            Economics
             </Link>
-            <Link to="/explore" className="nav_btns">
-              Explore
+            <Link to="/#how_it_works" className="nav_btns">
+            How it works
+            </Link>
+            <Link to="/#faq" className="nav_btns">
+            FAQ
             </Link>
             {/* Conditional user elements */}
           </nav>
@@ -102,7 +112,7 @@ const Navbar = () => {
                 className="w-12 md:w-24 "
                 style={{ textTransform: "none" }}
                 sx={{
-                  height: "40px",
+                  height: "45px",
                   bgcolor: "#fff",
                   color: "#444444",
                   borderRadius: 3,
@@ -130,7 +140,7 @@ const Navbar = () => {
                 sx={{
                  
 
-                  height: "40px",
+                  height: "45px",
                   bgcolor: "#D24949",
 
                   color: "#fff",
