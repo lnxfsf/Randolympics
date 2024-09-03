@@ -25,6 +25,7 @@ import { FAQ } from "../components/Home/FAQ";
 import { NavbarClean } from "../components/NavbarClean";
 import { FirstScreenHome } from "./Home/FirstScreenHome";
 import { FooterClean } from "../components/FooterClean";
+import { SecondScreenHome } from "./Home/SecondScreenHome";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -54,6 +55,9 @@ const Home = () => {
       <FirstScreenHome />
 
 
+    
+      <SecondScreenHome />
+
 
       <Button
             onClick={() => {
@@ -80,6 +84,9 @@ const Home = () => {
               Sign up a friend
             </span>
           </Button>
+
+
+
 
 
       {/* Our Competitions */}

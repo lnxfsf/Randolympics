@@ -37,9 +37,13 @@ ol li {
 
   background-size: cover;
   background-position: center;
-  /* height: 100vh; */
+  
 
-  height: 60vh;
+  /* height: 60vh; */
+
+  height: 85vh;
+
+
 
   @media screen and (min-width: 1024px) {
     height: 110vh;
@@ -52,7 +56,8 @@ ol li {
   background-color: #332f2f;
   width: 80%;
 
-  height: 170px;
+
+  height: 155px;
   padding-bottom: 5px;
 
   

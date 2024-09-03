@@ -697,18 +697,16 @@ const Register = () => {
 
                 style={{ color: "#000" }}
               >
-                <MenuItem value={"AH"} sx={lexend_font} >AH - Athlete</MenuItem>
-                <MenuItem value={"GP"} sx={lexend_font}>GP - Global President</MenuItem>
-                <MenuItem value={"NP"} sx={lexend_font}>NP - National President</MenuItem>
-                <MenuItem value={"EM"} sx={lexend_font}>EM - Event Manager</MenuItem>
-                <MenuItem value={"ITM"} sx={lexend_font}>
-                  ITM - IT Manager Page Editor (for adding news articles)
-                </MenuItem>
-                <MenuItem value={"MM"} sx={lexend_font}>MM - Marketing Manager</MenuItem>
-                <MenuItem value={"SM"} sx={lexend_font}>SM - Sales Manager</MenuItem>
-                <MenuItem value={"VM"} sx={lexend_font}>VM - Validation Manager</MenuItem>
-                <MenuItem value={"LM"} sx={lexend_font}>LM - Legal Manager</MenuItem>
-                <MenuItem value={"RS"} sx={lexend_font}>RS - Referee & support</MenuItem>
+                <MenuItem value={"AH"} sx={lexend_font} >Athlete</MenuItem>
+                <MenuItem value={"GP"} sx={lexend_font}>Global President</MenuItem>
+                <MenuItem value={"NP"} sx={lexend_font}>National President</MenuItem>
+                <MenuItem value={"EM"} sx={lexend_font}>Event Manager</MenuItem>
+                <MenuItem value={"ITM"} sx={lexend_font}>IT Manager Page Editor</MenuItem>
+                <MenuItem value={"MM"} sx={lexend_font}>Marketing Manager</MenuItem>
+                <MenuItem value={"SM"} sx={lexend_font}>Sales Manager</MenuItem>
+                <MenuItem value={"VM"} sx={lexend_font}>Validation Manager</MenuItem>
+                <MenuItem value={"LM"} sx={lexend_font}>Legal Manager</MenuItem>
+                <MenuItem value={"RS"} sx={lexend_font}>Referee & support</MenuItem>
               </Select>
             </div>
 
