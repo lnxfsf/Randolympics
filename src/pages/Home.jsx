@@ -29,6 +29,7 @@ import { FooterClean } from "../components/FooterClean";
 import { SecondScreenHome } from "./Home/SecondScreenHome";
 import { Navbar } from "../components/Navbar";
 import { ThirdScreenHome } from "./Home/ThirdScreenHome";
+import { FourthScreenHome } from "./Home/FourthScreenHome";
 
 
 const Home = () => {
@@ -56,16 +57,16 @@ const Home = () => {
       <SecondScreenHome />
 
 
-    
+
 
 
 
       {/* Our Competitions */}
       <div
         className="flex justify-center items-center flex-col lexend-font text-black_second"
-     
+       
       >
-        <p className="text-2xl md:text-4xl mt-8 font-bold ">
+        <p className="text-2xl md:text-4xl mt-8 font-bold "  >
           <b>Our Competitions</b>
         </p>
 
@@ -77,11 +78,14 @@ const Home = () => {
       <ThirdScreenHome />
 
      
+      <FourthScreenHome />
+    
 
 
       {/* FAQ 
-      <FAQ />
+      <FAQ /> 
       */}
+      
 
       <div className="h-96"></div>
 

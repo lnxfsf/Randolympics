@@ -259,3 +259,49 @@ tako imas na hover animation
   
 }
 
+
+
+
+.fourth_screen {
+
+  background-image: linear-gradient(
+    180deg,
+    rgba(210, 73, 73, 0),
+    rgba(210, 73, 73, 0.1)
+  );
+
+}
+
+
+
+@media (max-width: 767px) {
+
+  .limit_lines_mobile {
+
+
+    display: -webkit-box;         
+    -webkit-line-clamp: 6;       
+    -webkit-box-orient: vertical; 
+    overflow: hidden;             
+    text-overflow: ellipsis;      
+  }
+
+}
+
+
+
+
+
+@media (min-width: 768px) {
+
+  .limit_lines_PC {
+
+
+    display: -webkit-box;        
+    -webkit-line-clamp: 10;        
+    -webkit-box-orient: vertical;  
+    overflow: hidden;             
+    text-overflow: ellipsis;       
+  }
+
+}

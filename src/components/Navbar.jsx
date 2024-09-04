@@ -81,7 +81,7 @@ const Navbar = () => {
 
 
             <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-16">
-            <Link to="/" className="nav_btns">
+            <Link to="/#sports" className="nav_btns">
             Sports
             </Link>
             <Link to="/#beliefs" className="nav_btns">
