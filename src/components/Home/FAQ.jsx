@@ -1,5 +1,4 @@
 
-import 'animate.css';
 
 
 import React, { useState, useEffect } from "react";
@@ -8,6 +7,7 @@ import { Collapse } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { FAQComponent } from "./FAQComponent";
 
 
 
@@ -48,12 +48,12 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
     return (
         <>
 
-            <div className="flex justify-center items-center mt-8 flex-col" data-aos="fade-up" id="FAQ">
+            <div className="flex justify-center items-center mt-8 flex-col lexend-font text-black_second " data-aos="fade-up" id="FAQ">
 
                 <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
 
 
-                <div className='w-1/2'>
+                <div className='w-[90%]  md:w-1/2'>
 
 
                     {/* <div className=" flex justify-around items-center w-full bg-black_first">
@@ -63,9 +63,9 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
                     <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFirstText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-4`}>
 
 
-                        <p className="text-red_first font-semibold pl-2 select-none">1.</p>
+                        
                         <p expand={expandedFirstText}
-                            onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none flex-grow pl-4  ">What is Randolympics ?</p>
+                            onClick={() => { setExpandedFirstText(!expandedFirstText) }} className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second  ">Campaigns and Fundraising</p>
 
 
 
@@ -85,16 +85,35 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
 
                     </div>
+
+
                     <div className="">
                         <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p></p>
+                                
+                                
+                            <FAQComponent title={"Can a supporter of a campaign attend the Randolympics ?"} 
+                            
+                            content={"Yes, absolutely! Everyone is welcome to join and be a part of this incredible adventure. Supporters, friends, and fans are all encouraged to come and cheer on their athletes, experience the excitement, and enjoy the community atmosphere."} />
+
+
+<FAQComponent title={"Who can start a campaign ?"} 
+                            
+                            content={"Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals "} />
+
+
+                            
                             </div>
 
                         </Collapse>
                     </div>
+
+
+
+                    
+
 
 
 

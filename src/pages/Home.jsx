@@ -82,9 +82,9 @@ const Home = () => {
     
 
 
-      {/* FAQ 
+      {/* FAQ   */}
       <FAQ /> 
-      */}
+    
       
 
       <div className="h-96"></div>

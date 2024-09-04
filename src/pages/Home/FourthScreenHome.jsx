@@ -48,7 +48,7 @@ const FourthScreenHome = () => {
                 <div className="flex gap-2 items-center cursor-pointer select-none">
 
                     <img src="/home/right_arrow.svg" />
-                    <p className="font-bold text-red_second">Read more</p>
+                    <p className="font-bold text-red_second text-sm md:text-base">Read more</p>
                 </div>
 
             </div>
@@ -79,7 +79,7 @@ const FourthScreenHome = () => {
                 <div className="flex gap-2 items-center cursor-pointer select-none">
 
 <img src="/home/right_arrow.svg" />
-<p className="font-bold text-red_second">Read more</p>
+<p className="font-bold text-red_second text-sm md:text-base">Read more</p>
 </div>
 
             </div>
@@ -106,7 +106,7 @@ const FourthScreenHome = () => {
                 <div className="flex gap-2 items-center cursor-pointer select-none">
 
 <img src="/home/right_arrow.svg" />
-<p className="font-bold text-red_second">Read more</p>
+<p className="font-bold text-red_second text-sm md:text-base">Read more</p>
 </div>
 
 
@@ -134,7 +134,7 @@ const FourthScreenHome = () => {
                 <div className="flex gap-2 items-center cursor-pointer select-none">
 
 <img src="/home/right_arrow.svg" />
-<p className="font-bold text-red_second">Read more</p>
+<p className="font-bold text-red_second text-sm md:text-base">Read more</p>
 </div>
 
             </div>
