@@ -1,3 +1,10 @@
+
+
+const https = require("https");
+const fs = require("fs");
+
+
+
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -29,6 +36,27 @@ const Couponcodes = db.couponcode;
 
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+
+
+var isProduction = process.env.PRODUCTION;
+
+
+console.log("isProduction je")
+
+console.log(isProduction)
+
+if(isProduction === "true"){
+
+  var options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/randolympics.games/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/randolympics.games/fullchain.pem'),
+  };
+
+
+}
+
+
 
 
 
@@ -635,7 +663,20 @@ app.use("/payment", paymentRoutes);
 
 
 db.sequelize.sync().then(() => {
-  app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
-  });
+ 
+ 
+  if(isProduction  === "true"){
+    https.createServer(options, app)
+        .listen(port, function () {
+            console.log(`HTTPS Server running on port: ${port}`);
+        });
+  } else {
+    app.listen(port, () => {
+      console.log(`Server running on port: ${port}`);
+    });
+  }
+ 
+
+
+
 });
