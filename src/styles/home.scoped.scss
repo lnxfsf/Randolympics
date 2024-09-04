@@ -221,3 +221,41 @@ tako imas na hover animation
 .ellipse-image-competitions:hover {
   --progress: 100;
 }
+
+
+
+// image_beliefs
+
+
+.container_beliefs {
+  position: relative;
+  width: 100%; 
+
+
+   
+ 
+
+
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+.image_beliefs {
+ /*  width: 100%;
+
+  min-height: "screen";
+  
+ */
+ 
+ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  
+}
+

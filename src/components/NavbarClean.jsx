@@ -15,13 +15,11 @@ const NavbarClean = () => {
         <AppBar position="static" sx={{ backgroundColor: '#FFFFFF', color: '#000000', boxShadow: 'none'  }} >
           <Toolbar>
             
-            
-            {/* <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
- */}
-            
-            <Link className="hidden md:flex" to="/">
-              <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
+              <Link  to="/" >
+                <img src="/randolympics_logo.svg" className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 " />
               </Link>
+           
+
 
 
           </Toolbar>

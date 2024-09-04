@@ -28,6 +28,7 @@ import { FirstScreenHome } from "./Home/FirstScreenHome";
 import { FooterClean } from "../components/FooterClean";
 import { SecondScreenHome } from "./Home/SecondScreenHome";
 import { Navbar } from "../components/Navbar";
+import { ThirdScreenHome } from "./Home/ThirdScreenHome";
 
 
 const Home = () => {
@@ -73,6 +74,7 @@ const Home = () => {
       </div>
 
 
+      <ThirdScreenHome />
 
      
 
