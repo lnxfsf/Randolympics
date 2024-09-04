@@ -29,7 +29,7 @@ const FAQComponent = ({title, content}) => {
       <div>
        
         <div
-          className={`flex justify-between items-center w-full bg-black text-white ${
+          className={`flex justify-between items-center w-full bg-black text-white mt-4 ${
             expanded ? "rounded-t-lg" : "rounded-lg"
           }  bg-[#F7FAFA] pl-2 pr-2`}
         >
