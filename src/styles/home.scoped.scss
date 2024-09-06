@@ -317,7 +317,7 @@ tako imas na hover animation
   position: relative;
   width: 2px; /* Width of the border */
   height: 100px; /* Adjust as needed */
-  background-color: #D85A52; /* Color of the border */
+  background-color: #D24949; /* Color of the border */
   margin: 0 auto;
 }
 
@@ -328,7 +328,7 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D85A52; /* Same color as the border */
+  background-color: #D24949; /* Same color as the border */
   border-radius: 50%;
 }
 
@@ -340,7 +340,7 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 0px; /* Width of the dash */  /* 4px  */
   height: 2px; /* Height of the dash */
-  background-color: #D85A52; /* Same color as the border */
+  background-color: #D24949; /* Same color as the border */
 }
 
 
@@ -353,7 +353,7 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D85A52; /* Same color as the border */
+  background-color: #D24949; /* Same color as the border */
   border-radius: 50%;
 }
 
@@ -361,12 +361,12 @@ tako imas na hover animation
 
 .dot3 {
   position: absolute;
-  top: 104%;
+  top: 105%;
   left: 50%;
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D85A52; /* Same color as the border */
+  background-color: #D24949; /* Same color as the border */
   border-radius: 50%;
 }
 
@@ -374,7 +374,17 @@ tako imas na hover animation
 /* when there's more lines on subtitle.. so this need thicker.. */
 .custom-border2 {
   position: relative;
-  width: 3px; /* Width of the border */
+
+
+  width: 3px ; /* Width of the border */  /* 3px na blize sto je  */
+
+  
+  /* @media screen and (min-width: 1536px) {
+    width: 2px;
+  } */
+
+
+
   height: 100px; /* Adjust as needed */
   background-color: #D85A52; /* Color of the border */
   margin: 0 auto;
@@ -383,7 +393,18 @@ tako imas na hover animation
 
 .custom-borderEnd {
   position: relative;
-  width: 2px; /* Width of the border */
+  width: 2px ; /* Width of the border */
+  
+/* 
+  // jer ovaj se crashuje u gornji
+  @media screen and (min-width: 1536px) {
+    width: 2px;
+  }  */
+
+
+
+
+
   height: 30px; /* Adjust as needed */
   background-color: #D85A52; /* Color of the border */
   margin: 0 auto;

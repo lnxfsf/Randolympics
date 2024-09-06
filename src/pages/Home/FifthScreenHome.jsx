@@ -88,12 +88,15 @@ const FifthScreenHome = () => {
               {/*  <div class="dash"></div> */}
             </div>
 
+
+
             
           </div>
 
 
 
           <div className="flex">
+
             <div class=" ml-[4rem] mr-8 flex ">
               
               {/*  <div class="dash"></div> */}
