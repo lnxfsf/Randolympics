@@ -33,16 +33,9 @@ const FAQ = () => {
     
 
 const [expandedFirstText, setExpandedFirstText] = useState(false);
-
 const [expandedSecondText, setExpandedSecondText] = useState(false);
 const [expandedThirdText, setExpandedThirdText] = useState(false);
 const [expandedFourthText, setExpandedFourthText] = useState(false);
-const [expandedFifthText, setExpandedFifthText] = useState(false);
-const [expandedSixthText, setExpandedSixthText] = useState(false);
-const [expandedSeventhText, setExpandedSeventhText] = useState(false);
-const [expandedEighthText, setExpandedEighthText] = useState(false);
-const [expandedNinethText, setExpandedNinethText] = useState(false);
-const [expandedTenthText, setExpandedTenthText] = useState(false);
 
 
     return (
@@ -50,7 +43,7 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
             <div className="flex justify-center items-center mt-8 flex-col lexend-font text-black_second " data-aos="fade-up" id="FAQ">
 
-                <p className="text-[30px] text-red_first mt-8  "><b>FAQ</b></p>
+                <p className="text-2xl md:text-4xl text-red_second mt-8 mb-4  "><b>FAQ</b></p>
 
 
                 <div className='w-[90%]  md:w-1/2'>
@@ -104,6 +97,169 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
                             content={"Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals "} />
 
 
+
+
+<FAQComponent title={"Who can participate as an athlete?"} 
+                            
+ content={"Anyone can participate as an athlete! The only requirements are that you have a valid passport and are at least 12 years old. There’s no upper age limit, so no one is too old or too young to join!"} />
+
+<FAQComponent title={"How can I get more supporters for my campaign ?"} 
+                            
+ content="
+To gather more supporters, share your campaign on social media, send personalized messages to your network on WhatsApp, and spread the word in your gym, sports club, or community. The more people know, the more they can support! 
+ " />
+
+
+
+ 
+
+
+
+<FAQComponent title="
+
+Why is there a minimum support amount of USD 1?
+
+"
+                            
+ content="
+
+This small minimum amount is a safeguard against fake or automated accounts. It helps ensure that each supporter is a real, unique person genuinely interested in backing an athlete.
+ " />
+
+
+
+
+
+
+<FAQComponent title="
+
+How do you verify that each supporter is unique?
+"
+                            
+ content="
+
+We verify each athlete through their valid passport, ensuring that there is no way to manipulate the system or create duplicate entries.
+
+
+ " />
+
+
+
+
+
+
+<FAQComponent title="
+
+Can I create more than one campaign?
+
+
+"
+                            
+ content="
+
+Yes, you can create as many campaigns as you want! Starting a campaign is a huge compliment to a friend—a sign that you believe in their potential to achieve extraordinary things. Campaigns also make a thoughtful and inspiring gift for special occasions, like birthdays.
+
+ " />
+
+
+
+
+
+ 
+
+
+<FAQComponent title="
+
+Can I be both an athlete and a supporter at the same time?
+
+
+"
+                            
+ content="
+Yes, you can! You can participate as an athlete in a campaign set up by your friend while also creating multiple campaigns yourself to support others. Your involvement can be as broad and supportive as you want it to be.
+ " />
+
+
+ 
+<FAQComponent title="
+
+What happens to the money raised through donations?
+
+"
+                            
+ content="
+
+If the campaign is successful, the raised money will be transferred to the athlete to support their journey to the Randolympics, including training, equipment, and other preparation expenses. Additionally, if supporters wish to attend the event, up to three supporters from the campaign will receive a contribution towards their flight tickets to help them be part of the experience. If the campaign does not succeed in getting the athlete into an event, the donations will be used to ensure the event runs smoothly and is well-funded.
+ 
+ " />
+
+
+
+ 
+<FAQComponent title="
+
+How does a celebrity campaign differ from a normal campaign?
+
+"
+                            
+ content="
+
+A celebrity campaign is similar to a normal campaign, but with a few key differences. Unlike regular campaigns, the contact details and email address of the celebrity may not be known to the person creating the campaign. If the celebrity decides to consider attending the Randolympics and wants to log in to their account, they need to announce their interest on social media and then contact both the National President and the campaign creator. They will coordinate and provide a secure login method for the celebrity to access their campaign account safely.
+ " />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+What campaign will succeed? How does the National Ranking work?
+
+
+"
+                            
+ content="
+A campaign's success depends on its position in the National Ranking, which is determined through a randomized ranking process. Each campaign is ranked based on three factors: the total amount of money raised, the number of unique supporters, and a random number between 0 and 1. These factors are combined to generate a final ranking for each campaign. To form each National Team, the top 50 men and top 50 women with the highest rankings are selected. However, teams must be balanced regarding weight categories, with each of the three weight groups equally represented. This balance requirement means that a campaign ranked 48th might not make the team if that weight category is already filled, while a campaign ranked 53rd could be included if that weight group is underrepresented.
+ " />
+ 
+ 
+ 
+<FAQComponent title="
+
+What happens if athletes cannot attend due to injury or personal reasons?
+
+
+"
+                            
+ content="
+ 
+ If an athlete in the top 50 cannot attend the Randolympics due to injury, personal reasons, or other circumstances, they will be replaced by the next highest-ranked athlete from their weight category. This ensures that the team remains balanced and filled. Athletes ranked just above 50 still have a chance to participate if there are dropouts or changes in the roster, providing opportunities for those with a slightly lower ranking to make it to the games.
+
+ " />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+Can an athlete get rich?
+
+
+"
+                            
+ content="
+ Not directly from the Randolympics organization, but each athlete is free to sign sponsorship agreements. Unlike other events, there are no restrictions on how athletes dress or what brands they can display and when. Some events might go viral, and an athlete could become famous for a specific competition, opening up more sponsorship and earning opportunities.
+ " />
+ 
+ 
+ 
+
+
+
+
+
                             
                             </div>
 
@@ -121,9 +277,9 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
                     <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSecondText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-                        <p className="text-red_first font-semibold pl-2 select-none">2.</p>
+                       
                         <p expand={expandedSecondText}
-                            onClick={() => { setExpandedSecondText(!expandedSecondText) }} className="cursor-pointer select-none flex-grow pl-4  ">How does Randolympics work ?</p>
+                            onClick={() => { setExpandedSecondText(!expandedSecondText) }} className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second ">Events and Competitions</p>
 
 
 
@@ -148,7 +304,209 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p></p>
+
+                                
+<FAQComponent title="
+
+Can athletes request to change their assigned sports?
+
+
+"
+                            
+ content="
+
+No, once sports are assigned during the opening ceremony, they cannot be changed. The random assignment is part of the challenge and spirit of the Randolympics.
+
+ " />
+ 
+ 
+ 
+<FAQComponent title="
+
+Am I forced to compete?
+
+
+"
+                            
+ content="
+
+No, participation in any competition is entirely voluntary. We prioritize the safety and well-being of all athletes. If an athlete feels uncomfortable or unprepared for any assigned sport, they are not required to compete. Our goal is to encourage participation and challenge limits, but never at the cost of an athlete's comfort or safety.
+ " />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+How many sports are assigned to an athlete?
+
+
+"
+                            
+ content="
+
+It depends, but typically an athlete will be assigned between 4 to 6 sports to compete in during the Randolympics.
+
+
+
+ " />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+What types of sports will be included in the Randolympics?
+
+
+"
+                            
+ content="
+
+The event will feature a wide range of sports, including endurance, strength, team-based, and individual competitions. The list on our webpage here might change as we get closer to the event.
+
+
+ " />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+What kind of training support is provided to athletes before the competition?
+
+
+"
+                            
+ content="
+
+Each athlete is responsible for their own training. Support from their campaign and community is encouraged.
+
+ " />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+
+Are there any specific rules that athletes need to follow during competitions?
+
+"
+                            
+ content="
+
+Yes, each sport has its own set of rules and regulations that must be followed to ensure fair play. These rules will be explained in detail before each competition.
+
+
+ " />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+
+What is the event structure or setup?
+
+
+"
+                            
+ content={
+ 
+ <>
+ In every competition, each country is represented by one team or athlete. There are three types of events:<br/>
+ Races like marathons: These allow up to 64 competitors in one race, resulting in a single winner. <br/>
+ Team sports like football or tennis: These are structured in a knockout format where winners advance to the next round until only four teams or athletes remain. <br/>
+ Races with heats like swimming: These involve multiple rounds with heats, leading to a final race to determine the winner. <br/>
+ 
+ </>
+ 
+ }
+
+
+
+
+
+
+ />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+What safety measures are in place for competitions?
+
+
+"
+                            
+ content="
+ 
+ 
+ All competitions are overseen by referees and safety officers. There will be medical staff on-site, and equipment will be inspected to ensure it meets safety standards.
+ 
+ 
+ "
+
+ />
+ 
+
+ 
+<FAQComponent title="
+
+Can supporters participate in any events or activities?
+
+"
+                            
+ content="
+ 
+ Supporters are encouraged to participate in designated fan events and activities during the Randolympics. However, they cannot compete in the official sports events unless they are registered athletes.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+ 
+<FAQComponent title="
+
+What about tight schedules?
+
+"
+                            
+ content="
+ We aim to plan sufficient time between two competitions to ensure athletes have time to rest and prepare. However, in extreme situations—such as a delay in the first competition and a traffic jam between venues—it is theoretically possible that an athlete may not be able to compete in the second event. Having good support can help manage such situations by quickly finding the venue and organizing transportation to minimize disruptions in such unlikely events.
+ 
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
                             </div>
 
                         </Collapse>
@@ -160,9 +518,8 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
                     <div className={`flex justify-between items-center w-full bg-black text-white ${expandedThirdText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-                        <p className="text-red_first font-semibold pl-2 select-none">3.</p>
                         <p expand={expandedThirdText}
-                            onClick={() => { setExpandedThirdText(!expandedThirdText) }} className="cursor-pointer select-none flex-grow pl-4  ">Who can participate ?</p>
+                            onClick={() => { setExpandedThirdText(!expandedThirdText) }} className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second  ">Sponsorship, Partners, and Media</p>
 
 
 
@@ -187,7 +544,126 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p></p>
+                               
+                               
+<FAQComponent title="
+
+Who will have the broadcasting rights?
+
+"
+                            
+ content="
+ 
+ 
+ The broadcasting rights for the Randolympics will soon be sold in an online auction. This auction will sell the rights for each event in the main languages. After purchasing, the entity or person who acquires these rights will have the exclusive ability to report in that language from the event.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+<FAQComponent title="
+
+How can I become a partner or sponsor?
+
+"
+                            
+ content="
+ 
+ We welcome potential partners and sponsors to join us in making the Randolympics a global success. If you are interested, please contact us through our Partner Inquiry Page for more information and to discuss opportunities.
+ 
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+What sponsorship opportunities are available?
+
+"
+                            
+ content="
+ Sponsorship opportunities range from event sponsorships and digital content integration to on-site activations. We offer flexible packages tailored to the needs and goals of each sponsor. Contact us to explore how we can create a unique sponsorship package for your brand.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+Can sponsors have exclusive rights to specific events?
+
+"
+                            
+ content="
+ 
+ Yes, sponsors can secure exclusive rights to specific events within the Randolympics. This includes branding, digital presence, and other unique promotional opportunities during the event. However, athletes retain the right to have their own sponsorships and display personal branding on their gear and uniforms.
+ 
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+<FAQComponent title="
+
+What branding opportunities are available for sponsors?
+
+"
+                            
+ content="
+ Sponsors can showcase their brands through event banners, digital streams, and social media channels. While event branding is available, keep in mind that athletes can feature their own sponsors and brands on their uniforms and during personal media appearances.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+<FAQComponent title="
+
+Can media outlets report on the Randolympics without purchasing broadcasting rights?
+
+"
+                            
+ content="
+ Media outlets are welcome to cover the Randolympics through general news reporting. However, for live broadcasts or detailed event coverage in a specific language, they must acquire broadcasting rights through the auction process.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+
+
+
+
+
+                               
+
+
                             </div>
 
                         </Collapse>
@@ -199,9 +675,9 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
                     <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFourthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-                        <p className="text-red_first font-semibold pl-2 select-none">4.</p>
+                       
                         <p expand={expandedFourthText}
-                            onClick={() => { setExpandedFourthText(!expandedFourthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are athletes selected ?</p>
+                            onClick={() => { setExpandedFourthText(!expandedFourthText) }} className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second ">Legal, Compliance, and Governance</p>
 
 
 
@@ -226,7 +702,161 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
                             <div className="bg-[#F7FAFA] rounded-b-lg p-4">
 
-                                <p></p>
+                                
+                                
+<FAQComponent title="
+
+How are National Presidents elected?
+
+"
+                            
+ content="
+ 
+ 
+ 
+ 
+ National Presidents are elected by athletes with an ongoing campaign and a valid passport for that country. If a candidate receives more than 120% of the votes compared to the current National President, the new candidate takes over the position.
+ 
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+How is the Global President elected?
+
+"
+                            
+ content="
+ 
+ 
+ 
+ The Global President is elected similarly to the National Presidents, but in this case, the electors are the National Presidents from each country. A candidate must receive a vote total exceeding 120% of the current Global President's votes to be elected.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+How are managers selected?
+
+"
+                            
+ content="
+ 
+ 
+ 
+ Managers are selected by the Global President. The President appoints managers to various roles within the organization based on their expertise and the needs of Randolympics.
+ 
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+ 
+<FAQComponent title="
+
+How are athletes selected for the Randolympics?
+
+"
+                            
+ content="
+ 
+ 
+ 
+ Athletes are selected through a randomized national ranking system. This ranking considers the total amount of money raised, the number of unique supporters, and a random number to ensure a fair and balanced selection process.
+ 
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+How do we try to avoid corruption?
+
+"
+                            
+ content="
+ 
+ 
+ 
+ We aim to prevent corruption by ensuring maximum transparency. All payments, contracts, and financial agreements are made open and accessible to the public to maintain trust and accountability.
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+What is the governance structure of Randolympics?
+
+"
+                            
+ content="
+ 
+ 
+ The governance structure of Randolympics includes the Global President, National Presidents, and appointed managers who oversee various functions of the organization. This structure ensures both global oversight and local representation, fostering fair and transparent management.
+
+ "
+
+
+ />
+ 
+ 
+ 
+
+
+ 
+<FAQComponent title="
+
+How is compliance maintained within Randolympics?
+
+"
+                            
+ content="
+ 
+ Compliance is maintained through a set of established rules and guidelines that all participants, managers, and officials must follow. Regular audits and reviews are conducted to ensure adherence to these rules and to uphold the integrity of the Randolympics.
+
+ "
+
+
+ />
+ 
+ 
+ 
+
+ 
+                                
+
+
+
                             </div>
 
                         </Collapse>
@@ -234,234 +864,16 @@ const [expandedTenthText, setExpandedTenthText] = useState(false);
 
 
 
-                    {/* peti  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedFifthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
 
 
-                        <p className="text-red_first font-semibold pl-2 select-none">5.</p>
-                        <p expand={expandedFifthText}
-                            onClick={() => { setExpandedFifthText(!expandedFifthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are weight categories organized ?</p>
 
 
 
 
 
-                        <ExpandMore
 
-                            expand={expandedFifthText}
-                            onClick={() => { setExpandedFifthText(!expandedFifthText) }}
-                            aria-expanded={expandedFifthText}
-                            aria-label="show more"
-                        >
 
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedFifthText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
-
-
-
-                    {/* sesti  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSixthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
-
-
-                        <p className="text-red_first font-semibold pl-2 select-none">6.</p>
-                        <p expand={expandedSixthText}
-                            onClick={() => { setExpandedSixthText(!expandedSixthText) }} className="cursor-pointer select-none flex-grow pl-4  ">What sports are included in Randolympics ?</p>
-
-
-
-
-
-                        <ExpandMore
-
-                            expand={expandedSixthText}
-                            onClick={() => { setExpandedSixthText(!expandedSixthText) }}
-                            aria-expanded={expandedSixthText}
-                            aria-label="show more"
-                        >
-
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedSixthText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
-
-
-                    {/* sedmi  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedSeventhText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
-
-
-                        <p className="text-red_first font-semibold pl-2 select-none">7.</p>
-                        <p expand={expandedSeventhText}
-                            onClick={() => { setExpandedSeventhText(!expandedSeventhText) }} className="cursor-pointer select-none flex-grow pl-4  ">How are travel costs covered ?</p>
-
-
-
-
-
-                        <ExpandMore
-
-                            expand={expandedSeventhText}
-                            onClick={() => { setExpandedSeventhText(!expandedSeventhText) }}
-                            aria-expanded={expandedSeventhText}
-                            aria-label="show more"
-                        >
-
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedSeventhText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
-
-
-                    {/* osmi  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedEighthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
-
-
-                        <p className="text-red_first font-semibold pl-2 select-none">8.</p>
-                        <p expand={expandedEighthText}
-                            onClick={() => { setExpandedEighthText(!expandedEighthText) }} className="cursor-pointer select-none flex-grow pl-4  ">How can I sign up to participate ?</p>
-
-
-
-
-
-                        <ExpandMore
-
-                            expand={expandedEighthText}
-                            onClick={() => { setExpandedEighthText(!expandedEighthText) }}
-                            aria-expanded={expandedEighthText}
-                            aria-label="show more"
-                        >
-
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedEighthText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
-
-
-
-                    {/* deveti  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedNinethText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
-
-
-                        <p className="text-red_first font-semibold pl-2 select-none">9.</p>
-                        <p expand={expandedNinethText}
-                            onClick={() => { setExpandedNinethText(!expandedNinethText) }} className="cursor-pointer select-none flex-grow pl-4  ">How can my company become a sponsor ?</p>
-
-
-
-
-
-                        <ExpandMore
-
-                            expand={expandedNinethText}
-                            onClick={() => { setExpandedNinethText(!expandedNinethText) }}
-                            aria-expanded={expandedNinethText}
-                            aria-label="show more"
-                        >
-
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedNinethText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
-
-
-                    {/* deseti  */}
-                    <div className={`flex justify-between items-center w-full bg-black text-white ${expandedTenthText ? 'rounded-t-lg' : 'rounded-lg'}  bg-[#F7FAFA] pl-2 pr-2 mt-2`}>
-
-
-                        <p className="text-red_first font-semibold pl-2 select-none">10.</p>
-                        <p expand={expandedTenthText}
-                            onClick={() => { setExpandedTenthText(!expandedTenthText) }} className="cursor-pointer select-none flex-grow pl-4  ">Where can I find more information about Randolympics ?</p>
-
-
-
-
-
-                        <ExpandMore
-
-                            expand={expandedTenthText}
-                            onClick={() => { setExpandedTenthText(!expandedTenthText) }}
-                            aria-expanded={expandedTenthText}
-                            aria-label="show more"
-                        >
-
-                            <ExpandMoreIcon />
-
-                        </ExpandMore>
-
-
-                    </div>
-                    <div className="">
-                        <Collapse in={expandedTenthText} timeout="auto" unmountOnExit>
-
-                            <div className="bg-[#F7FAFA] rounded-b-lg p-4">
-
-                                <p></p>
-                            </div>
-
-                        </Collapse>
-                    </div>
+                 
 
 
 
