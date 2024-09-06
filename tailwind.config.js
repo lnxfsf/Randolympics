@@ -23,7 +23,7 @@ export default {
 
        red_second: "#D24949",  /* rgba(210, 73, 73, 1) */ 
        
-
+      red_third: "#FFE9E9",
 
       
 
