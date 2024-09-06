@@ -30,6 +30,8 @@ import { SecondScreenHome } from "./Home/SecondScreenHome";
 import { Navbar } from "../components/Navbar";
 import { ThirdScreenHome } from "./Home/ThirdScreenHome";
 import { FourthScreenHome } from "./Home/FourthScreenHome";
+import { FifthScreenHome } from "./Home/FifthScreenHome";
+import { SixthScreenHome } from "./Home/SixthScreenHome";
 
 
 const Home = () => {
@@ -80,11 +82,15 @@ const Home = () => {
      
       <FourthScreenHome />
     
+      <FifthScreenHome />
 
 
       {/* FAQ   */}
       <FAQ /> 
     
+
+
+      <SixthScreenHome />
       
 
       <div className="h-96"></div>
