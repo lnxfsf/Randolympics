@@ -632,6 +632,33 @@ const Randomize = () => {
             >
               <span className="popins-font">Randomize</span>
             </Button>
+
+
+            <Button
+                    onClick={() => {
+                     navigate(-1)
+                    }}
+                    className="w-full "
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      mt: 1,
+                      height: "50px",
+                      bgcolor: "#fff",
+                      color: "#444444",
+                      borderRadius: 3,
+                      border: `1px solid #444444`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+                    <span className="lexend-font">Go Back</span>
+                  </Button>
+
           </div>
         </div>
 
@@ -639,6 +666,13 @@ const Randomize = () => {
           {/* before table is rendered */}
         </>
       )}
+
+
+
+
+
+
+
 
       {selectedGender && selectedWeightCategory && showTable && (
         <>
