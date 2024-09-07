@@ -975,7 +975,7 @@ const SupporterSecondPart = ({
           open={popupWarning}
           onClose={() => setPopupWarning(false)}
           position="right center"
-          className="popup-content"
+          className="popup-content "
         >
           <WarningTextPopup
             setSecondIsVisible={setSecondIsVisible}

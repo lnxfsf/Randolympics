@@ -27,9 +27,11 @@ const WarningTextPopup = ({
     <>
       <div className="flex justify-center items-center flex-col lexend-font text-black_second">
       
-        <p className="text-center w-[50%] font-semibold text-2xl mb-2 mt-2">{randomTitle}</p>
-        <p className="text-center w-[75%] font-semibold text-xl">{randomText}</p>
+        <p className="text-center w-[80%] md:w-[50%] font-semibold text-2xl mb-2 mt-2">{randomTitle}</p>
+        <p className="text-center w-[95%] md:w-[75%] font-semibold text-xl">{randomText}</p>
 
+
+<div className="w-full p-2 flex items-center justify-center">
         <Button
           onClick={() => {
             setSecondIsVisible(false);
@@ -37,10 +39,11 @@ const WarningTextPopup = ({
             
             setPopupWarning(false); // then close this popup
           }}
-          className="w-56"
+          className="w-full md:w-56"
           style={{ marginTop: "25px", marginBottom: "25px", textTransform: "none" }}
          
           sx={{
+
             height: "50px",
             bgcolor: "#D24949",
 
@@ -58,6 +61,8 @@ const WarningTextPopup = ({
         >
           <span className="lexend-font">Proceed anyways</span>
         </Button>
+        </div>
+
       </div>
     </>
   );
