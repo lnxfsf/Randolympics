@@ -63,7 +63,6 @@ const Navbar = () => {
   const open1 = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    // ovo ako kliknes sa strane
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
