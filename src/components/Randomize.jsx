@@ -395,7 +395,7 @@ const Randomize = () => {
         email: "first@gmail.com",
         weightCategory: "medium",
         gender: "M",
-        sportName: "Opening ceremony",
+        sportName: "Opdceremony",
         howMuchAthletesMakeATeam: 1,
         locations: 1,
         firstDayHowMuchTimeSlotsExpandBy: 1,
@@ -413,14 +413,20 @@ const Randomize = () => {
     };
 
     // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th") {
+    // ! WE ‚avoid, those who have opening and closing ceremony, to allow space, for another, on this day.. Backend, always gives us single, so it get off that load..
+    if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th" && data.sportName !== "Opening ceremony" ) {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
+        
         // Combine and display in <p> element
         return (
-            <p>{startSlot} - {endSlot}</p>
+            <>
+            <p>{startSlot} - {endSlot}</p> 
+
+            <p>{data.sportName}</p>
+            </>
         );
     }
 
@@ -626,18 +632,40 @@ return dataS.map((data, index) => { */
               {/* //TODO table for mobile */}
               <div>
                 <div className="flex gap-4">
+                  
+
                   <p>Saturday 24th</p>
                   
-                  {satMob24()}
-
-                </div>
-
-                <div className="flex gap-4">
-                  <p>Sunday 25th</p>
                   
-                  {sunMob25()}
+                  <div className="bg-gray_first flex gap-4 p-1">
+                    <p>6 - 9</p>
+                    <p>Opening ceremony</p>
+                  </div>
+
+                  <div className="bg-gray_first flex gap-4 p-1">{satMob24()}</div>
 
                 </div>
+
+
+                {/* // TODO, and one more thing, is to HIDE, if there is NO , in that function. you can create quick check { } with that function, if that returns anything (make sure to return null, if there's no match), so, we don't show this day then..  */}
+                <div className="flex gap-4">
+                  
+
+                  <p>Sunday 2nd</p>
+                  
+                
+                 
+                 
+
+
+                  <div className="bg-gray_first flex gap-4 p-1">
+                    <p>12 - 15</p>
+                    <p>Closing ceremony</p>
+                  </div>
+
+
+                </div>
+
 
 
               </div>
