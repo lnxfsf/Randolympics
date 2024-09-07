@@ -356,7 +356,7 @@ const Randomize = () => {
       <Navbar />
 
       <div className="lexend-font text-black_second">
-        <h1 className="flex text-2xl md:text-4xl mt-8 justify-center font-bold">
+        <h1 className="flex text-2xl text-center md:text-4xl mt-8 justify-center font-bold">
           Let’s see your schedule for June 2028
         </h1>
       </div>
@@ -366,21 +366,16 @@ const Randomize = () => {
       {!showTable && (
         <>
           <div className="w-full flex justify-center items-center flex-col">
+           
+           
+            <div className="flex w-full p-4 md:w-[50%] 2xl:w-[30%]  mt-8 text-black_second lexend-font flex-col ">
+              <p className="text-xl md:text-2xl font-medium ">Select your gender</p>
 
-
-
-            <div className="flex w-[50%] mt-8 text-black_second lexend-font flex-col ">
-             
-              <p className="text-2xl font-medium ">Select your gender</p>
-
-             
               <div className="flex w-full gap-4 mt-4 ">
                 <div
-                 onClick={() => {
-                  setSelectedGender("M");
-                }}
-
-
+                  onClick={() => {
+                    setSelectedGender("M");
+                  }}
                   className={`border-2 ${
                     selectedGender === "M"
                       ? "border-red_second"
@@ -405,16 +400,16 @@ const Randomize = () => {
                       selectedGender === "M"
                         ? "text-red_second"
                         : "text-black_second"
-                    } lexend-font m-4 mt-2`}
+                    } lexend-font m-4 mt-2 `}
                   >
                     Male
                   </p>
                 </div>
 
                 <div
-                onClick={() => {
-                  setSelectedGender("F");
-                }}
+                  onClick={() => {
+                    setSelectedGender("F");
+                  }}
                   className={`border-2 ${
                     selectedGender === "F"
                       ? "border-red_second"
@@ -445,27 +440,19 @@ const Randomize = () => {
                   </p>
                 </div>
               </div>
-
             </div>
 
-
-
-
-
-
-
- {/* weight category */}
- <div className="flex w-[50%] mt-8 text-black_second lexend-font flex-col ">
-              <p className="text-2xl font-medium ">Select your weight category</p>
+            {/* weight category */}
+            <div className="flex w-full p-4  md:w-[50%] 2xl:w-[30%] mt-8 text-black_second lexend-font flex-col ">
+              <p className="text-xl md:text-2xl font-medium ">
+                Select your weight category
+              </p>
 
               <div className="flex w-full gap-4 mt-4 ">
                 <div
-                
-                onClick={() => {
-                  setSelectedWeightCategory("light");
-                }}
-
-
+                  onClick={() => {
+                    setSelectedWeightCategory("light");
+                  }}
                   className={`border-2 ${
                     selectedWeightCategory === "light"
                       ? "border-red_second"
@@ -497,9 +484,9 @@ const Randomize = () => {
                 </div>
 
                 <div
-                onClick={() => {
-                  setSelectedWeightCategory("medium");
-                }}
+                  onClick={() => {
+                    setSelectedWeightCategory("medium");
+                  }}
                   className={`border-2 ${
                     selectedWeightCategory === "medium"
                       ? "border-red_second"
@@ -530,11 +517,10 @@ const Randomize = () => {
                   </p>
                 </div>
 
-                
                 <div
-                onClick={() => {
-                  setSelectedWeightCategory("heavy");
-                }}
+                  onClick={() => {
+                    setSelectedWeightCategory("heavy");
+                  }}
                   className={`border-2 ${
                     selectedWeightCategory === "heavy"
                       ? "border-red_second"
@@ -566,57 +552,13 @@ const Randomize = () => {
                 </div>
               </div>
             </div>
-
-
-
-             
-
-
           </div>
 
-          
 
-          <div className="flex justify-around items-around">
-            <div className="basis-1/2 flex gap-8 ">
-              {/* <label htmlFor="gender">Gender:</label> */}
-              <p>Gender</p>
-
-              <select
-                className="overflow-hidden"
-                id="gender"
-                name="gender"
-                size="2"
-                value={selectedGender}
-                onChange={(event) => {
-                  setSelectedGender(event.target.value);
-                }}
-              >
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-              </select>
-            </div>
-
-            <div className="basis-1/2 flex gap-8 ">
-              <p>Weight category:</p>
-
-              <select
-                className="overflow-hidden"
-                id="weightCategory"
-                name="weightCategory"
-                size="3"
-                value={selectedWeightCategory}
-                onChange={(event) => {
-                  setSelectedWeightCategory(event.target.value);
-                }}
-              >
-                <option value="light">Light</option>
-                <option value="medium">Medium</option>
-                <option value="heavy">Heavy</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex justify-center items-center m-8">
+        <div className="flex  justify-center items-center m-8">
+          <div className=" md:w-[50%] w-[100%] 2xl:w-[30%] ">
+            
+            
             <Button
               onClick={() => {
                 if (selectedGender && selectedWeightCategory) {
@@ -630,18 +572,19 @@ const Randomize = () => {
                   }
                 }
               }}
-              className="w-44 "
-              style={{ marginTop: "20px" }}
+              className="w-full "
+              style={{ textTransform: "none" }}
               sx={{
-                height: "60px",
-                bgcolor: "#AF2626",
+                height: "50px",
+                bgcolor: "#D24949",
+
                 color: "#fff",
-                borderRadius: 25,
-                border: `1px solid #AF2626`,
+                borderRadius: 3,
+                border: `1px solid #D24949`,
                 "&:hover": {
-                  background: "rgb(196, 43, 43)",
+                  background: "rgba(210, 73, 73, 1)",
                   color: "white",
-                  border: `1px solid rgb(196, 43, 43)`,
+                  border: `1px solid rgba(210, 73, 73, 1)`,
                 },
               }}
               id="randomize-btn"
@@ -649,6 +592,9 @@ const Randomize = () => {
               <span className="popins-font">Randomize</span>
             </Button>
           </div>
+        </div>
+
+
           {/* before table is rendered */}
         </>
       )}
