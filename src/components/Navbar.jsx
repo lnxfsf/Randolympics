@@ -308,17 +308,10 @@ const Navbar = () => {
           },
         }}
       >
-        {/* <Link to="/" className="nav_btns">Home</Link>
-          <Link to="/anime" className="nav_btns">Anime</Link>
-          <Link to="/manga" className="nav_btns">Manga</Link>
-          <Link to="/explore" className="nav_btns">Explore</Link> */}
+       
 
         <ListItem sx={{ mt: 1 }}>
-          {/* <Link to="/" className="nav_btns" onClick={() => setOpen(false)}>
-            <HomeIcon sx={{ mr: 1, mb: 0.5 }} />
-            Home
-          </Link> */}
-
+        
           <Link to="/#sports" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               Our competitions
