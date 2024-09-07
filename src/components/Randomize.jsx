@@ -19,6 +19,12 @@ import { RandomizeItem } from "../components/Randomize/RandomizeItem";
 import axios from "axios";
 import { FooterClean } from "./FooterClean";
 
+
+
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -43,6 +49,51 @@ const days = [
 ];
 
 const Randomize = () => {
+
+
+
+  const checkBeforeRandomize = () => {
+    if (selectedGender && selectedWeightCategory) {
+      handleRandomize();
+      setShowTable(true);
+    } else {
+      if (!selectedGender) {
+
+  
+      setSnackbarText("Choose gender")
+        setOpenSnackbarError(true);
+       
+
+
+      } else if (!selectedWeightCategory) {
+       
+        
+        setSnackbarText("Choose weight category")
+        setOpenSnackbarError(true);
+
+        
+      }
+    }
+  }
+
+  // za toast 
+  const [openSnackbarError, setOpenSnackbarError] = useState(false);
+
+  const handleSnackbarErrorClose = (event, reason) => {
+      if (reason === 'clickaway') {
+          return;
+      }
+
+      setOpenSnackbarError(false);
+  };
+
+
+  const [snackbarText, setSnackbarText] = useState("");
+
+
+  // ---------
+
+
   const [randomizeFormData, setRandomizeFormData] = useState([
     { name: "", email: "", weightCategory: "light", gender: "M" },
   ]);
@@ -560,18 +611,8 @@ const Randomize = () => {
             
             
             <Button
-              onClick={() => {
-                if (selectedGender && selectedWeightCategory) {
-                  handleRandomize();
-                  setShowTable(true);
-                } else {
-                  if (!selectedGender) {
-                    alert("Choose gender");
-                  } else if (!selectedWeightCategory) {
-                    alert("Choose weight category");
-                  }
-                }
-              }}
+              onClick={checkBeforeRandomize}
+
               className="w-full "
               style={{ textTransform: "none" }}
               sx={{
@@ -782,6 +823,22 @@ const Randomize = () => {
         </>
       )}
 
+
+
+<Snackbar open={openSnackbarError}
+                autoHideDuration={6000}
+                onClose={handleSnackbarErrorClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                <Alert
+                    onClose={handleSnackbarErrorClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >
+                    {snackbarText}
+                </Alert>
+            </Snackbar>
       <FooterClean />
     </>
   );
