@@ -48,7 +48,7 @@ const SixthScreenHome = () => {
             <div className="grow lg:basis-1/2 flex flex-col p-8 md:p-16 pl-6 md:pl-10  justify-center">
 
 
-                <p className="text-2xl md:text-4xl font-bold">Ready to get started ?</p>
+                <p className="text-2xl md:text-4xl font-bold">Ready to get started?</p>
 
 
                 <p className=" font-medium mt-4" >Sign Up today and start living the adventure.</p>
@@ -99,8 +99,9 @@ const SixthScreenHome = () => {
               }}
               id="join-the-fun-btn"
             >
+              
               <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-              <span className="lexend-font">Sign Up</span>
+              <span className="lexend-font" onClick={()=>{navigate("/register")}}>Sign Up</span>
             </Button>
 
 
