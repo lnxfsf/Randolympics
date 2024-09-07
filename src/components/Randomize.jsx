@@ -19,11 +19,9 @@ import { RandomizeItem } from "../components/Randomize/RandomizeItem";
 import axios from "axios";
 import { FooterClean } from "./FooterClean";
 
-
-
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { MockupRandomizerSelect } from "./MockupRandomizer/MockupRandomizerSelect";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -49,50 +47,35 @@ const days = [
 ];
 
 const Randomize = () => {
-
-
-
   const checkBeforeRandomize = () => {
     if (selectedGender && selectedWeightCategory) {
       handleRandomize();
       setShowTable(true);
     } else {
       if (!selectedGender) {
-
-  
-      setSnackbarText("Choose gender")
+        setSnackbarText("Choose gender");
         setOpenSnackbarError(true);
-       
-
-
       } else if (!selectedWeightCategory) {
-       
-        
-        setSnackbarText("Choose weight category")
+        setSnackbarText("Choose weight category");
         setOpenSnackbarError(true);
-
-        
       }
     }
-  }
+  };
 
-  // za toast 
+  // za toast
   const [openSnackbarError, setOpenSnackbarError] = useState(false);
 
   const handleSnackbarErrorClose = (event, reason) => {
-      if (reason === 'clickaway') {
-          return;
-      }
+    if (reason === "clickaway") {
+      return;
+    }
 
-      setOpenSnackbarError(false);
+    setOpenSnackbarError(false);
   };
-
 
   const [snackbarText, setSnackbarText] = useState("");
 
-
   // ---------
-
 
   const [randomizeFormData, setRandomizeFormData] = useState([
     { name: "", email: "", weightCategory: "light", gender: "M" },
@@ -416,263 +399,15 @@ const Randomize = () => {
 
       {!showTable && (
         <>
-          <div className="w-full flex justify-center items-center flex-col">
-           
-           
-            <div className="flex w-full p-4 md:w-[50%] 2xl:w-[30%]  mt-8 text-black_second lexend-font flex-col ">
-              <p className="text-xl md:text-2xl font-medium ">Select your gender</p>
-
-              <div className="flex w-full gap-4 mt-4 ">
-                <div
-                  onClick={() => {
-                    setSelectedGender("M");
-                  }}
-                  className={`border-2 ${
-                    selectedGender === "M"
-                      ? "border-red_second"
-                      : "border-black_second"
-                  } basis-1/2 justify-center items-center flex flex-col rounded-lg cursor-pointer select-none`}
-                >
-                  {selectedGender === "M" ? (
-                    <>
-                      <img
-                        src="/randomizer/male_selected.svg"
-                        className="m-4 mb-0"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <img src="/randomizer/male.svg" className="m-4 mb-0" />
-                    </>
-                  )}
-
-                  <p
-                    className={`${
-                      selectedGender === "M"
-                        ? "text-red_second"
-                        : "text-black_second"
-                    } lexend-font m-4 mt-2 `}
-                  >
-                    Male
-                  </p>
-                </div>
-
-                <div
-                  onClick={() => {
-                    setSelectedGender("F");
-                  }}
-                  className={`border-2 ${
-                    selectedGender === "F"
-                      ? "border-red_second"
-                      : "border-black_second"
-                  } basis-1/2 justify-center items-center flex flex-col rounded-lg cursor-pointer select-none`}
-                >
-                  {selectedGender === "F" ? (
-                    <>
-                      <img
-                        src="/randomizer/female_selected.svg"
-                        className="m-4 mb-0"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <img src="/randomizer/female.svg" className="m-4 mb-0" />
-                    </>
-                  )}
-
-                  <p
-                    className={`${
-                      selectedGender === "F"
-                        ? "text-red_second"
-                        : "text-black_second"
-                    } lexend-font m-4 mt-2`}
-                  >
-                    Female
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* weight category */}
-            <div className="flex w-full p-4  md:w-[50%] 2xl:w-[30%] mt-8 text-black_second lexend-font flex-col ">
-              <p className="text-xl md:text-2xl font-medium ">
-                Select your weight category
-              </p>
-
-              <div className="flex w-full gap-4 mt-4 ">
-                <div
-                  onClick={() => {
-                    setSelectedWeightCategory("light");
-                  }}
-                  className={`border-2 ${
-                    selectedWeightCategory === "light"
-                      ? "border-red_second"
-                      : "border-black_second"
-                  } basis-1/2 justify-center items-center flex flex-col rounded-lg cursor-pointer select-none`}
-                >
-                  {selectedWeightCategory === "light" ? (
-                    <>
-                      <img
-                        src="/randomizer/light_selected.svg"
-                        className="m-4 mb-0"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <img src="/randomizer/light.svg" className="m-4 mb-0" />
-                    </>
-                  )}
-
-                  <p
-                    className={`${
-                      selectedWeightCategory === "light"
-                        ? "text-red_second"
-                        : "text-black_second"
-                    } lexend-font m-4 mt-2`}
-                  >
-                    Light
-                  </p>
-                </div>
-
-                <div
-                  onClick={() => {
-                    setSelectedWeightCategory("medium");
-                  }}
-                  className={`border-2 ${
-                    selectedWeightCategory === "medium"
-                      ? "border-red_second"
-                      : "border-black_second"
-                  } basis-1/2 justify-center items-center flex flex-col rounded-lg cursor-pointer select-none`}
-                >
-                  {selectedWeightCategory === "medium" ? (
-                    <>
-                      <img
-                        src="/randomizer/medium_selected.svg"
-                        className="m-4 mb-0"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <img src="/randomizer/medium.svg" className="m-4 mb-0" />
-                    </>
-                  )}
-
-                  <p
-                    className={`${
-                      selectedWeightCategory === "medium"
-                        ? "text-red_second"
-                        : "text-black_second"
-                    } lexend-font m-4 mt-2`}
-                  >
-                    Medium
-                  </p>
-                </div>
-
-                <div
-                  onClick={() => {
-                    setSelectedWeightCategory("heavy");
-                  }}
-                  className={`border-2 ${
-                    selectedWeightCategory === "heavy"
-                      ? "border-red_second"
-                      : "border-black_second"
-                  } basis-1/2 justify-center items-center flex flex-col rounded-lg cursor-pointer select-none`}
-                >
-                  {selectedWeightCategory === "heavy" ? (
-                    <>
-                      <img
-                        src="/randomizer/heavy_selected.svg"
-                        className="m-4 mb-0"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <img src="/randomizer/heavy.svg" className="m-4 mb-0" />
-                    </>
-                  )}
-
-                  <p
-                    className={`${
-                      selectedWeightCategory === "heavy"
-                        ? "text-red_second"
-                        : "text-black_second"
-                    } lexend-font m-4 mt-2`}
-                  >
-                    Heavy
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        <div className="flex  justify-center items-center m-8">
-          <div className=" md:w-[50%] w-[100%] 2xl:w-[30%] ">
-            
-            
-            <Button
-              onClick={checkBeforeRandomize}
-
-              className="w-full "
-              style={{ textTransform: "none" }}
-              sx={{
-                height: "50px",
-                bgcolor: "#D24949",
-
-                color: "#fff",
-                borderRadius: 3,
-                border: `1px solid #D24949`,
-                "&:hover": {
-                  background: "rgba(210, 73, 73, 1)",
-                  color: "white",
-                  border: `1px solid rgba(210, 73, 73, 1)`,
-                },
-              }}
-              id="randomize-btn"
-            >
-              <span className="popins-font">Randomize</span>
-            </Button>
-
-
-            <Button
-                    onClick={() => {
-                     navigate(-1)
-                    }}
-                    className="w-full "
-                    style={{ textTransform: "none" }}
-                    sx={{
-                      mt: 1,
-                      height: "50px",
-                      bgcolor: "#fff",
-                      color: "#444444",
-                      borderRadius: 3,
-                      border: `1px solid #444444`,
-                      "&:hover": {
-                        background: "rgba(210, 73, 73, 1)",
-                        color: "white",
-                        border: `1px solid rgba(210, 73, 73, 1)`,
-                      },
-                    }}
-                    id="join-the-fun-btn"
-                  >
-                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Go Back</span>
-                  </Button>
-
-          </div>
-        </div>
-
-
-          {/* before table is rendered */}
+          <MockupRandomizerSelect
+            setSelectedGender={setSelectedGender}
+            selectedGender={selectedGender}
+            setSelectedWeightCategory={setSelectedWeightCategory}
+            selectedWeightCategory={selectedWeightCategory}
+            checkBeforeRandomize={checkBeforeRandomize}
+          />
         </>
       )}
-
-
-
-
-
-
-
 
       {selectedGender && selectedWeightCategory && showTable && (
         <>
@@ -751,76 +486,64 @@ const Randomize = () => {
         
         */}
 
+            <div className="flex justify-center w-full flex-col md:flex-row items-center p-8 gap-2">
+              <Button
+                onClick={handleRandomize}
+                className="w-full "
+                style={{ textTransform: "none" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 3,
+                  border: `1px solid #444444`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="randomize-btn"
+                type="submit"
+              >
+                <span className="lexend-font">Randomize again</span>
+              </Button>
 
-                <div className="flex justify-center w-full flex-col md:flex-row items-center p-8 gap-2">
-              
-                <Button
-                                onClick={handleRandomize}
-                                className="w-full "
-                                style={{ textTransform: "none"  }}
-                                sx={{
-                                  height: "50px",
-                                  bgcolor: "#fff",
-                                  color: "#444444",
-                                  borderRadius: 3,
-                                  border: `1px solid #444444`,
-                                  "&:hover": {
-                                    background: "rgba(210, 73, 73, 1)",
-                                    color: "white",
-                                    border: `1px solid rgba(210, 73, 73, 1)`,
-                                  },
-                                }}
-                                id="randomize-btn"
-                                type="submit"
-                              >
-                                <span className="lexend-font">Randomize again</span>
-                              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/register");
+                }}
+                className="w-full"
+                style={{ textTransform: "none" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#D24949",
 
-
-                              <Button
-                                onClick={() => {navigate("/register")}}
-                                className="w-full"
-                                style={{  textTransform: "none"  }}
-                                sx={{
-                                  height: "50px",
-                                  bgcolor: "#D24949",
-            
-                                  color: "#fff",
-                                  borderRadius: 3,
-                                  border: `1px solid #D24949`,
-                                  "&:hover": {
-                                    background: "rgba(210, 73, 73, 1)",
-                                    color: "white",
-                                    border: `1px solid rgba(210, 73, 73, 1)`,
-                                  },
-                                }}
-                                id="randomize-btn"
-                                type="submit"
-                              >
-                                <span className="lexend-font">Sign Up</span>
-                              </Button>
-
-
-
-
-
-                </div>
-           
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="randomize-btn"
+                type="submit"
+              >
+                <span className="lexend-font">Sign Up</span>
+              </Button>
+            </div>
           </div>
 
-
-
-
-
           <form
-              action="#"
-              className="sign-in-form flex flex-col wrap justify-start items-center"
-              onSubmit={sendToFriends}
-            >
-             
-             {randomizeFormData.map((data, index) => (
-                <div key={index} style={{ marginBottom: "10px" }}>
-                  {/*   <input
+            action="#"
+            className="sign-in-form flex flex-col wrap justify-start items-center"
+            onSubmit={sendToFriends}
+          >
+            {randomizeFormData.map((data, index) => (
+              <div key={index} style={{ marginBottom: "10px" }}>
+                {/*   <input
                 type="text"
                 name="name"
                 placeholder="Name"
@@ -828,15 +551,15 @@ const Randomize = () => {
                 onChange={(event) => handleInputChange(index, event)}
               /> */}
 
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={data.email}
-                    onChange={(event) => handleInputChange(index, event)}
-                  />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={data.email}
+                  onChange={(event) => handleInputChange(index, event)}
+                />
 
-                  {/* 
+                {/* 
               <select
                 name="weightCategory"
                 value={data.weightCategory}
@@ -847,7 +570,7 @@ const Randomize = () => {
                 <option value="heavy">Heavy</option>
               </select> */}
 
-                  {/* 
+                {/* 
               <select
                 name="gender"
                 value={data.gender}
@@ -859,68 +582,58 @@ const Randomize = () => {
               </select>
  */}
 
-                  {/*    <button type="button" onClick={() => removeInputSet(index)}>
+                {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
  */}
-                </div>
-              ))}
-
-              <button type="button" onClick={addInputSet}>
-                Add Another
-              </button>
-
-
-              
-
-              <div>
-                <Button
-                  onClick={sendToFriends}
-                  className="w-44 "
-                  style={{ marginTop: "20px" }}
-                  sx={{
-                    height: "60px",
-                    bgcolor: "#AF2626",
-                    color: "#fff",
-                    borderRadius: 25,
-                    border: `1px solid #AF2626`,
-                    "&:hover": {
-                      background: "rgb(196, 43, 43)",
-                      color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
-                    },
-                  }}
-                  type="submit"
-                >
-                  <span className="popins-font">Send to friends</span>
-                </Button>
               </div>
+            ))}
 
+            <button type="button" onClick={addInputSet}>
+              Add Another
+            </button>
 
-
-            </form>
-          
-          
-
+            <div>
+              <Button
+                onClick={sendToFriends}
+                className="w-44 "
+                style={{ marginTop: "20px" }}
+                sx={{
+                  height: "60px",
+                  bgcolor: "#AF2626",
+                  color: "#fff",
+                  borderRadius: 25,
+                  border: `1px solid #AF2626`,
+                  "&:hover": {
+                    background: "rgb(196, 43, 43)",
+                    color: "white",
+                    border: `1px solid rgb(196, 43, 43)`,
+                  },
+                }}
+                type="submit"
+              >
+                <span className="popins-font">Send to friends</span>
+              </Button>
+            </div>
+          </form>
         </>
       )}
 
-
-
-<Snackbar open={openSnackbarError}
-                autoHideDuration={6000}
-                onClose={handleSnackbarErrorClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                <Alert
-                    onClose={handleSnackbarErrorClose}
-                    severity="error"
-                    variant="filled"
-                    sx={{ width: '100%' }}
-
-                >
-                    {snackbarText}
-                </Alert>
-            </Snackbar>
+      <Snackbar
+        open={openSnackbarError}
+        autoHideDuration={6000}
+        onClose={handleSnackbarErrorClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarErrorClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarText}
+        </Alert>
+      </Snackbar>
       <FooterClean />
     </>
   );
