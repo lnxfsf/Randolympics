@@ -676,9 +676,9 @@ const Randomize = () => {
 
       {selectedGender && selectedWeightCategory && showTable && (
         <>
-          <p>
-            Congratulations: You would compete in six disciplines -{" "}
-            {howManyMedals} chances to win a gold medal and eternal fame!
+          <p className="font-medium text-black_second lexend-font text-center m-4">
+            Congratulations: You would compete in {howManyMedals} disciplines -{" "}
+            {howManyMedals} chances to win a gold medal and eternal fame. 🤩
           </p>
 
           <table className="tablez">
@@ -751,34 +751,74 @@ const Randomize = () => {
         
         */}
 
-            <form
+
+                <div className="flex justify-center w-full flex-col md:flex-row items-center p-8 gap-2">
+              
+                <Button
+                                onClick={handleRandomize}
+                                className="w-full "
+                                style={{ textTransform: "none"  }}
+                                sx={{
+                                  height: "50px",
+                                  bgcolor: "#fff",
+                                  color: "#444444",
+                                  borderRadius: 3,
+                                  border: `1px solid #444444`,
+                                  "&:hover": {
+                                    background: "rgba(210, 73, 73, 1)",
+                                    color: "white",
+                                    border: `1px solid rgba(210, 73, 73, 1)`,
+                                  },
+                                }}
+                                id="randomize-btn"
+                                type="submit"
+                              >
+                                <span className="lexend-font">Randomize again</span>
+                              </Button>
+
+
+                              <Button
+                                onClick={() => {navigate("/register")}}
+                                className="w-full"
+                                style={{  textTransform: "none"  }}
+                                sx={{
+                                  height: "50px",
+                                  bgcolor: "#D24949",
+            
+                                  color: "#fff",
+                                  borderRadius: 3,
+                                  border: `1px solid #D24949`,
+                                  "&:hover": {
+                                    background: "rgba(210, 73, 73, 1)",
+                                    color: "white",
+                                    border: `1px solid rgba(210, 73, 73, 1)`,
+                                  },
+                                }}
+                                id="randomize-btn"
+                                type="submit"
+                              >
+                                <span className="lexend-font">Sign Up</span>
+                              </Button>
+
+
+
+
+
+                </div>
+           
+          </div>
+
+
+
+
+
+          <form
               action="#"
               className="sign-in-form flex flex-col wrap justify-start items-center"
               onSubmit={sendToFriends}
             >
-              <Button
-                onClick={handleRandomize}
-                className="w-44 "
-                style={{ marginTop: "20px" }}
-                sx={{
-                  height: "60px",
-                  bgcolor: "#AF2626",
-                  color: "#fff",
-                  borderRadius: 25,
-                  border: `1px solid #AF2626`,
-                  "&:hover": {
-                    background: "rgb(196, 43, 43)",
-                    color: "white",
-                    border: `1px solid rgb(196, 43, 43)`,
-                  },
-                }}
-                id="randomize-btn"
-                type="submit"
-              >
-                <span className="popins-font">Randomize again</span>
-              </Button>
-
-              {randomizeFormData.map((data, index) => (
+             
+             {randomizeFormData.map((data, index) => (
                 <div key={index} style={{ marginBottom: "10px" }}>
                   {/*   <input
                 type="text"
@@ -830,6 +870,9 @@ const Randomize = () => {
                 Add Another
               </button>
 
+
+              
+
               <div>
                 <Button
                   onClick={sendToFriends}
@@ -852,8 +895,13 @@ const Randomize = () => {
                   <span className="popins-font">Send to friends</span>
                 </Button>
               </div>
+
+
+
             </form>
-          </div>
+          
+          
+
         </>
       )}
 
