@@ -36,6 +36,13 @@ import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../context/AuthContext";
 
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -138,7 +145,15 @@ const Navbar = () => {
                     {profile_image  ? (
                        <Avatar
                        sx={{ width: 32, height: 32 }}
-                       src={profile_image}
+
+
+                       src={
+                        BACKEND_SERVER_BASE_URL +
+                        "/imageUpload/profile_pics/" +
+                        profile_image
+                      }
+
+
                      />
                      
                     ) : (
@@ -182,6 +197,7 @@ const Navbar = () => {
                   }}
                   transformOrigin={{ horizontal: "right", vertical: "top" }}
                   anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  
                 >
                   <MenuItem
                    
@@ -191,8 +207,14 @@ const Navbar = () => {
                     {profile_image  ? (
                        <Avatar
                        sx={{ width: 32, height: 32 }}
-                       src={profile_image}
-                     />
+
+
+                       src={
+                        BACKEND_SERVER_BASE_URL +
+                        "/imageUpload/profile_pics/" +
+                        profile_image
+                      }  />
+                     
                      
                     ) : (
                       <Avatar sx={{ width: 32, height: 32 }}>
@@ -200,34 +222,54 @@ const Navbar = () => {
                       </Avatar>
                     )}
 
-                    {username}
+<span className="lexend-font text-black_second ">{username}</span>
                   </MenuItem>
                   <Divider />
+               
+               
+                 
+
                   <MenuItem
                     onClick={handleClose}
-                    to="/userprofile"
-                    component={Link}
-                  >
-                    <ListItemIcon>
-                      <StarIcon fontSize="small" />
-                    </ListItemIcon>
-                    Favorites
-                  </MenuItem>
-                  <MenuItem
-                    onClick={handleClose}
-                    to="/edituserprofile"
+                    to="/"
                     component={Link}
                   >
                     <ListItemIcon>
                       <Settings fontSize="small" />
                     </ListItemIcon>
-                    Settings
+                    <span className="lexend-font text-black_second ">Settings</span>
                   </MenuItem>
+
+
+                  <MenuItem
+                    onClick={handleClose}
+                    to="/"
+                    component={Link}
+                  >
+                    <ListItemIcon>
+                      <StarIcon fontSize="small" />
+                    </ListItemIcon>
+                    <span className="lexend-font text-black_second ">Elections</span>
+                  </MenuItem>
+
+                  
+                  <MenuItem
+                    onClick={handleClose}
+                    to="/"
+                    component={Link}
+                  >
+                    <ListItemIcon>
+                      <StarIcon fontSize="small" />
+                    </ListItemIcon>
+                    <span className="lexend-font text-black_second ">Teams</span>
+                  </MenuItem>
+
+
                   <MenuItem onClick={logoutUser}>
                     <ListItemIcon>
-                      <Logout fontSize="small" />
+                      <Logout fontSize="small" style={{ color: '#D24949' }} />
                     </ListItemIcon>
-                    Logout
+                    <span className="lexend-font text-red_second ">Logout</span>
                   </MenuItem>
                 </Menu>
               </Tooltip>
