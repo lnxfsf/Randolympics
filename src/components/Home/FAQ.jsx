@@ -31,7 +31,7 @@ const FAQ = () => {
   return (
     <>
       <div
-        className="flex justify-center items-center mt-8 flex-col lexend-font text-black_second "
+        className="flex justify-center items-center  flex-col lexend-font text-black_second "
         data-aos="fade-up"
         id="FAQ"
       >

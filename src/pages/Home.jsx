@@ -93,7 +93,6 @@ const Home = () => {
       <SixthScreenHome />
       
 
-      <div className="h-96"></div>
 
       <FooterClean />
 

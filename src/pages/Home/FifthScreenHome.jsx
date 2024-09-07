@@ -7,7 +7,7 @@ const FifthScreenHome = () => {
         How it works
       </p>
 
-      <div className="flex w-full min-h-screen lexend-font text-black_second ">
+      <div className="flex w-full lexend-font text-black_second ">
 
 
 
