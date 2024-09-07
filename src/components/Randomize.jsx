@@ -385,6 +385,147 @@ const Randomize = () => {
     // slots je samo array. i on ako ima array=[0]  (prvi element), onda i to ispada kao da je tu o u time, 0_3, 3_6.. a ne treba tako..
   };
 
+
+
+  /* table for mobile */
+  const satMob24 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
+    const data = {
+        name: "first",
+        email: "first@gmail.com",
+        weightCategory: "medium",
+        gender: "M",
+        sportName: "Opening ceremony",
+        howMuchAthletesMakeATeam: 1,
+        locations: 1,
+        firstDayHowMuchTimeSlotsExpandBy: 1,
+        secondDayHowMuchTimeSlotsExpandBy: 0,
+        thirdDayHowMuchTimeSlotsExpandBy: 0,
+        firstDayStartGameTimeSlot: "6_9",
+        firstDayEndGameTimeSlot: "6_9",
+        secondDayStartGameTimeSlot: "",
+        secondDayEndGameTimeSlot: "",
+        thirdDayStartGameTimeSlot: "",
+        thirdDayEndGameTimeSlot: "",
+        dayOfStart: "Saturday",
+        dateOfStart: "June 24th",
+        icon: "olympic_flame"
+    };
+
+    // Check for match on dayOfStart and dateOfStart
+    if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th") {
+        // Extract start and end time slots
+        const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
+
+        // Combine and display in <p> element
+        return (
+            <p>{startSlot} - {endSlot}</p>
+        );
+    }
+
+
+
+    // If no match, return null
+    return null;
+};
+
+
+const dataS = [{
+  name: "first",
+  email: "first@gmail.com",
+  weightCategory: "medium",
+  gender: "M",
+  sportName: "game",
+  howMuchAthletesMakeATeam: 1,
+  locations: 1,
+  firstDayHowMuchTimeSlotsExpandBy: 1,
+  secondDayHowMuchTimeSlotsExpandBy: 0,
+  thirdDayHowMuchTimeSlotsExpandBy: 0,
+  firstDayStartGameTimeSlot: "6_9",
+  firstDayEndGameTimeSlot: "6_9",
+  secondDayStartGameTimeSlot: "",
+  secondDayEndGameTimeSlot: "",
+  thirdDayStartGameTimeSlot: "",
+  thirdDayEndGameTimeSlot: "",
+  dayOfStart: "Sundy",
+  dateOfStart: "June 25th",
+  icon: "olympic_flame"
+}, 
+{
+name: "first",
+email: "first@gmail.com",
+weightCategory: "medium",
+gender: "M",
+sportName: "Opening ceremony",
+howMuchAthletesMakeATeam: 1,
+locations: 1,
+firstDayHowMuchTimeSlotsExpandBy: 1,
+secondDayHowMuchTimeSlotsExpandBy: 1,
+thirdDayHowMuchTimeSlotsExpandBy: 0,
+firstDayStartGameTimeSlot: "6_9",
+firstDayEndGameTimeSlot: "6_9",
+secondDayStartGameTimeSlot: "8_9",
+secondDayEndGameTimeSlot: "22_23",
+thirdDayStartGameTimeSlot: "",
+thirdDayEndGameTimeSlot: "",
+dayOfStart: "Saturday",
+dateOfStart: "June 24th",
+icon: "olympic_flame"
+}
+];
+
+
+const sunMob25 = () => {
+  // Data object (you'll likely receive this as a prop or from state)
+
+
+/* 
+return dataS.map((data, index) => { */
+
+  for (let i = 0; i < dataS.length; i++) {
+
+
+    const data = dataS[i];
+
+
+    // Check for match on dayOfStart and dateOfStart
+    if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th") {
+        // Extract start and end time slots
+        const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
+
+        console.log("stampa ovaj prvi  ? ")
+
+        // Combine and display in <p> element
+        return (
+            <p>{startSlot} - {endSlot}</p>
+        );
+        
+    }else if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
+      // and this is to check for previous day, if there's no entry for current one ! 
+      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+      console.log("stampa ovaj drugo ? ")
+
+      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
+
+      // Combine and display in <p> element
+      return (
+          <p>{startSlot} - {endSlot}</p>
+      );
+
+
+    }
+
+  }
+
+  // If no match, return null
+  return null;
+};
+
+
   return (
     <>
       <Navbar />
@@ -409,6 +550,7 @@ const Randomize = () => {
         </>
       )}
 
+      {/* table of results */}
       {selectedGender && selectedWeightCategory && showTable && (
         <>
           <p className="font-medium text-black_second lexend-font text-center m-4">
@@ -478,6 +620,32 @@ const Randomize = () => {
             </tbody>
           </table>
 
+
+
+
+              {/* //TODO table for mobile */}
+              <div>
+                <div className="flex gap-4">
+                  <p>Saturday 24th</p>
+                  
+                  {satMob24()}
+
+                </div>
+
+                <div className="flex gap-4">
+                  <p>Sunday 25th</p>
+                  
+                  {sunMob25()}
+
+                </div>
+
+
+              </div>
+
+
+
+
+          {/* buttons */}
           <div>
             {/* // da, znaci, kada selektuje i gender i weight category, onda, moze da prikaze ovaj dole "form". 
         
@@ -536,6 +704,7 @@ const Randomize = () => {
             </div>
           </div>
 
+          {/* share to friends */}
           <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
