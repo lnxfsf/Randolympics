@@ -987,8 +987,10 @@ return dataS.map((data, index) => { */
         </h1>
       </div>
 
-      {/* before table is rendered */}
 
+
+
+      {/* before table is rendered */}
       {!showTable && (
         <>
           <MockupRandomizerSelect
@@ -1009,6 +1011,76 @@ return dataS.map((data, index) => { */
             {howManyMedals} chances to win a gold medal and eternal fame. 🤩
           </p>
 
+
+
+          <div className="flex justify-center items-center
+
+flex-wrap
+
+gap-8
+
+xl:gap-12
+
+2xl:gap-16
+
+text-black_second
+lexend-font
+font-bold
+
+text-sm
+
+md:text-base
+
+text-center
+
+w-full
+
+
+
+
+mt-8
+
+
+
+
+p-4
+
+"
+
+>
+
+
+      {scheduleData.map((data, index) => {
+        
+     /*    data.icon
+        data.sportName 
+        
+        let icon_url = "randomize/" + icon + ".svg";
+        
+        */
+
+        if(data.sportName === ("Opening ceremony" ) || data.sportName === "Closing ceremony" ){
+          return null;
+        }
+        
+        return (<>
+        
+
+        <div className="flex flex-col justify-center items-center ">
+          <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
+            <img
+              width={"30px"}
+              height={"30px"}
+              src={`randomize/${data.icon}.svg`}
+            />
+          </div>
+
+          <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
+        </div>
+
+        </>)
+      })}
+</div>
 
 
           {/* table for PC */}
@@ -1333,6 +1405,10 @@ return dataS.map((data, index) => { */
           </form>
         </>
       )}
+
+
+
+
 
       <Snackbar
         open={openSnackbarError}
