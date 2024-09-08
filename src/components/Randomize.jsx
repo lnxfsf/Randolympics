@@ -47,6 +47,9 @@ const days = [
 ];
 
 const Randomize = () => {
+  // with this, you can change any svg, color, so it appears better on hover..
+  const [isHovered, setIsHovered] = useState(false);
+
   const checkBeforeRandomize = () => {
     if (selectedGender && selectedWeightCategory) {
       handleRandomize();
@@ -385,650 +388,594 @@ const Randomize = () => {
     // slots je samo array. i on ako ima array=[0]  (prvi element), onda i to ispada kao da je tu o u time, 0_3, 3_6.. a ne treba tako..
   };
 
-
-
   /* table for mobile */
   const satMob24 = () => {
-   
-
     // Check for match on dayOfStart and dateOfStart
     // ! WE ‚avoid, those who have opening and closing ceremony, to allow space, for another, on this day.. Backend, always gives us single, so it get off that load..
-    if (scheduleData.dayOfStart === "Saturday" && scheduleData.dateOfStart === "June 24th" && scheduleData.sportName !== "Opening ceremony" ) {
-        // Extract start and end time slots
-        const startSlot = scheduleData.firstDayStartGameTimeSlot.split("_")[0];
-        const endSlot = scheduleData.firstDayEndGameTimeSlot.split("_").pop();
+    if (
+      scheduleData.dayOfStart === "Saturday" &&
+      scheduleData.dateOfStart === "June 24th" &&
+      scheduleData.sportName !== "Opening ceremony"
+    ) {
+      // Extract start and end time slots
+      const startSlot = scheduleData.firstDayStartGameTimeSlot.split("_")[0];
+      const endSlot = scheduleData.firstDayEndGameTimeSlot.split("_").pop();
 
-        
-        // Combine and display in <p> element
-        return (
-            <>
-        
-
-            <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{scheduleData.sportName}</p>
-        </div>
-            </>
-        );
+      // Combine and display in <p> element
+      return (
+        <>
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{scheduleData.sportName}</p>
+          </div>
+        </>
+      );
     }
-
-
 
     // If no match, return null
     return null;
-};
+  };
 
+  const sunMob25 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-const sunMob25 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-        console.log("stampa ovaj prvi  ? ")
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Saturday" &&
+        data.dateOfStart === "June 24th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    }else if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony")) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-      console.log("stampa ovaj drugo ? ")
-
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
-          
-      );
-
-
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const monMob26 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const monMob26 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Monday" && data.dateOfStart === "June 26th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Monday" && data.dateOfStart === "June 26th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Sunday" &&
+        data.dateOfStart === "June 25th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Saturday" &&
+        data.dateOfStart === "June 24th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Saturday" && data.dateOfStart === "June 24th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const tueMob27 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-const tueMob27 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Tuesday" && data.dateOfStart === "June 27th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Tuesday" && data.dateOfStart === "June 27th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Monday" &&
+        data.dateOfStart === "June 26th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Monday" && data.dateOfStart === "June 26th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Sunday" &&
+        data.dateOfStart === "June 25th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const wedMob28 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const wedMob28 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Wednesday" && data.dateOfStart === "June 28th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Wednesday" && data.dateOfStart === "June 28th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Tuesday" &&
+        data.dateOfStart === "June 27th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Tuesday" && data.dateOfStart === "June 27th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Monday" &&
+        data.dateOfStart === "June 26th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Monday" && data.dateOfStart === "June 26th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const thuMob29 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const thuMob29 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Thursday" && data.dateOfStart === "June 29th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Thursday" && data.dateOfStart === "June 29th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Wednesday" &&
+        data.dateOfStart === "June 28th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Wednesday" && data.dateOfStart === "June 28th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Tuesday" &&
+        data.dateOfStart === "June 27th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Tuesday" && data.dateOfStart === "June 27th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const friMob30 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const friMob30 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Friday" && data.dateOfStart === "June 30th") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Friday" && data.dateOfStart === "June 30th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Thursday" &&
+        data.dateOfStart === "June 29th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Thursday" && data.dateOfStart === "June 29th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Wednesday" &&
+        data.dateOfStart === "June 28th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Wednesday" && data.dateOfStart === "June 28th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const satJulMob1 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const satJulMob1 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Saturday" && data.dateOfStart === "July 1st") {
+      // Check for match on dayOfStart and dateOfStart
+      if (data.dayOfStart === "Saturday" && data.dateOfStart === "July 1st") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Friday" &&
+        data.dateOfStart === "June 30th" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Friday" && data.dateOfStart === "June 30th" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Thursday" &&
+        data.dateOfStart === "June 29th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
+        data.sportName !== "Opening ceremony"
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Thursday" && data.dateOfStart === "June 29th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) && (data.sportName !== "Opening ceremony") ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
+    // If no match, return null
+    return null;
+  };
 
-  // If no match, return null
-  return null;
-};
+  const sunJulMob2 = () => {
+    // Data object (you'll likely receive this as a prop or from state)
 
-
-
-const sunJulMob2 = () => {
-  // Data object (you'll likely receive this as a prop or from state)
-
-
-/* 
+    /* 
 return dataS.map((data, index) => { */
 
-  for (let i = 0; i < scheduleData.length; i++) {
+    for (let i = 0; i < scheduleData.length; i++) {
+      const data = scheduleData[i];
 
-
-    const data = scheduleData[i];
-
-
-    // Check for match on dayOfStart and dateOfStart
-    if (data.dayOfStart === "Sunday" && data.dateOfStart === "July 2nd" && (data.sportName !== "Closing ceremony") ) {
+      // Check for match on dayOfStart and dateOfStart
+      if (
+        data.dayOfStart === "Sunday" &&
+        data.dateOfStart === "July 2nd" &&
+        data.sportName !== "Closing ceremony"
+      ) {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
 
-       
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      } else if (
+        data.dayOfStart === "Saturday" &&
+        data.dateOfStart === "July 1st" &&
+        data.secondDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+
+        const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
 
         // Combine and display in <p> element
         return (
           <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-          <p className="font-medium" >{startSlot} - {endSlot}</p>
-          <p>{data.sportName}</p>
-        </div>
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
         );
-        
-    } else if (data.dayOfStart === "Saturday" && data.dateOfStart === "July 1st" && (data.secondDayHowMuchTimeSlotsExpandBy > 0)) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
+      } else if (
+        data.dayOfStart === "Friday" &&
+        data.dateOfStart === "June 30th" &&
+        data.thirdDayHowMuchTimeSlotsExpandBy > 0
+      ) {
+        // and this is to check for previous day, if there's no entry for current one !
+        // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
 
-      
+        const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
+        const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
 
-      const startSlot = data.secondDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.secondDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
-    }
-    
-    
-    
-    else if (data.dayOfStart === "Friday" && data.dateOfStart === "June 30th" && (data.thirdDayHowMuchTimeSlotsExpandBy > 0) ) {
-      // and this is to check for previous day, if there's no entry for current one ! 
-      // only difference is that, it checks different dates, i.e. from that previous day ! so in this way, it continues on this day... the one from previous sport (you can easily get it's name as well)
-
-    
-
-      const startSlot = data.thirdDayStartGameTimeSlot.split("_")[0];
-      const endSlot = data.thirdDayEndGameTimeSlot.split("_").pop();
-
-      // Combine and display in <p> element
-      return (
-        <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-        <p className="font-medium" >{startSlot} - {endSlot}</p>
-        <p>{data.sportName}</p>
-      </div>
-      );
-
-
+        // Combine and display in <p> element
+        return (
+          <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
+            <p className="font-medium">
+              {startSlot} - {endSlot}
+            </p>
+            <p>{data.sportName}</p>
+          </div>
+        );
+      }
     }
 
-  }
-
-  // If no match, return null
-  return null;
-};
-
-
+    // If no match, return null
+    return null;
+  };
 
   return (
     <>
@@ -1064,9 +1011,8 @@ return dataS.map((data, index) => { */
 
 
 
-{/* table for PC */}
+          {/* table for PC */}
           <div className="hidden lg:flex justify-center items-center  w-full p-16">
-          
             <table className="tablez lexend-font text-black_second xl:w-[90%] 2xl:w-[70%] ">
               <thead>
                 <tr>
@@ -1087,7 +1033,7 @@ return dataS.map((data, index) => { */
                     </th>
 
                     {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
-                    */}
+                     */}
                     {timeSlots.map((slot, index) => {
                       // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
 
@@ -1104,7 +1050,7 @@ return dataS.map((data, index) => { */
                         <td
                           key={slot}
                           className="tdz"
-                        /*  style={{
+                          /*  style={{
                             backgroundColor:
                               (event && event.icon) === "olympic_flame"
                                 ? "yellow"
@@ -1121,10 +1067,7 @@ return dataS.map((data, index) => { */
                           */
                         >
                           {event ? (
-                            <RandomizeItem
-                            
-                              name={event.sportName}
-                            />
+                            <RandomizeItem name={event.sportName} />
                           ) : (
                             ""
                           )}
@@ -1135,127 +1078,105 @@ return dataS.map((data, index) => { */
                 ))}
               </tbody>
             </table>
-
           </div>
 
+          {/* //TODO table for mobile */}
+          <div className=" flex flex-col p-4 md:p-16 lexend-font text-black_second lg:hidden">
+            <div className="flex  flex-col">
+              <p className="m-2 ml-0 mt-4">Saturday 24th</p>
 
+              <div className="bg-gray_second mb-2 flex gap-4 p-1 rounded-md">
+                <p className="font-medium">6 - 9</p>
+                <p>Opening ceremony</p>
+              </div>
 
+              {satMob24()}
+            </div>
 
-              {/* //TODO table for mobile */}
-              <div className="lexend-font text-black_second">
-              
-              
+            {sunMob25 && (
+              <>
                 <div className="flex  flex-col">
-                  
-
-                  <p className="m-2 ml-0 mt-4">Saturday 24th</p>
-                  
-                  
-                  <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-                    <p className="font-medium" >6 - 9</p>
-                    <p>Opening ceremony</p>
-                  </div>
-
-                  {satMob24()}
-
-                  
-
-                </div>
-
-
-
-                <div className="flex  flex-col">
-
                   <p className="m-2 ml-0 mt-4">Sunday 25th</p>
 
                   {sunMob25()}
-
                 </div>
+              </>
+            )}
 
-
-
+            {monMob26 && (
+              <>
                 <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Monday 26th</p>
 
-                  <p className="m-2 ml-0 mt-4" >Monday 26th</p>
-  
-                 {monMob26()}
+                  {monMob26()}
                 </div>
+              </>
+            )}
 
-
-
+            {tueMob27 && (
+              <>
                 <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Tuesday 27th</p>
 
-                <p className="m-2 ml-0 mt-4" >Tuesday 27th</p>
-
-                {tueMob27()}
+                  {tueMob27()}
                 </div>
+              </>
+            )}
 
-
-                
+            {wedMob28 && (
+              <>
                 <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Wednesday 28th</p>
 
-<p className="m-2 ml-0 mt-4" >Wednesday 28th</p>
-
-{wedMob28()}
-</div>
-
-
-
-<div className="flex  flex-col">
-
-<p className="m-2 ml-0 mt-4" >Thursday 29th</p>
-
-{thuMob29()}
-</div>
-
-
-
-
-
-<div className="flex  flex-col">
-
-<p className="m-2 ml-0 mt-4" >Friday 30th</p>
-
-{friMob30()}
-</div>
-
-
-
-<div className="flex  flex-col">
-
-<p className="m-2 ml-0 mt-4" >Saturday 1st</p>
-
-{satJulMob1()}
-</div>
-
-
-
-
-
-
-
-                {/* // TODO, and one more thing, is to HIDE, if there is NO , in that function. you can create quick check { } with that function, if that returns anything (make sure to return null, if there's no match), so, we don't show this day then..  */}
-                <div className="flex  flex-col">
-                  
-
-                  <p className="m-2 ml-0 mt-4">Sunday 2nd</p>
-                  
-
-                  {sunJulMob2()}
-                  
-                  <div className="bg-gray_second  flex gap-4 p-1 rounded-md">
-                    <p className="font-medium" >12 - 15</p>
-                    <p>Closing ceremony</p>
-                  </div>
-
-
+                  {wedMob28()}
                 </div>
+              </>
+            )}
 
+            {thuMob29 && (
+              <>
+                <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Thursday 29th</p>
 
+                  {thuMob29()}
+                </div>
+              </>
+            )}
 
+            {friMob30 && (
+              <>
+                <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Friday 30th</p>
 
+                  {friMob30()}
+                </div>
+              </>
+            )}
 
+            {satJulMob1 && (
+              <>
+                <div className="flex  flex-col">
+                  <p className="m-2 ml-0 mt-4">Saturday 1st</p>
+
+                  {satJulMob1()}
+                </div>
+              </>
+            )}
+
+            {/* // TODO, and one more thing, is to HIDE, if there is NO , in that function. you can create quick check { } with that function, if that returns anything (make sure to return null, if there's no match), so, we don't show this day then..  */}
+            <div className="flex  flex-col">
+              <p className="m-2 ml-0 mt-4">Sunday 2nd</p>
+
+              {sunJulMob2()}
+
+              <div className="bg-gray_second mt-2 flex gap-4 p-1 rounded-md">
+                <p className="font-medium">12 - 15</p>
+                <p>Closing ceremony</p>
               </div>
+            </div>
+          </div>
+
+
 
 
 
@@ -1288,7 +1209,17 @@ return dataS.map((data, index) => { */
                 }}
                 id="randomize-btn"
                 type="submit"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
+                <img
+                  src={
+                    isHovered
+                      ? "randomizer/dice_hover.svg"
+                      : "randomizer/dice.svg"
+                  }
+                  className="w-6  mr-2 mb-1"
+                />
                 <span className="lexend-font">Randomize again</span>
               </Button>
 
