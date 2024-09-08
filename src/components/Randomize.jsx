@@ -116,44 +116,7 @@ const Randomize = () => {
   };
 
   const [scheduleData, setScheduleData] = useState([
-    {
-      name: "first",
-      email: "first@gmail.com",
-      weightCategory: "light",
-      gender: "F",
-      sportName: "Men's 50m Freestyle Swimming",
-      howMuchAthletesMakeATeam: 1,
-      locations: 1,
-      firstDayHowMuchTimeSlotsExpandBy: 1,
-      secondDayHowMuchTimeSlotsExpandBy: 1,
-      thirdDayHowMuchTimeSlotsExpandBy: 0,
-      firstDayStartGameTimeSlot: "12_15",
-      firstDayEndGameTimeSlot: "12_15",
-      secondDayStartGameTimeSlot: "9_12",
-      secondDayEndGameTimeSlot: "9_12",
-      thirdDayStartGameTimeSlot: "",
-      thirdDayEndGameTimeSlot: "",
-      dayOfStart: "Sunday",
-    },
-    {
-      name: "first",
-      email: "first@gmail.com",
-      weightCategory: "light",
-      gender: "F",
-      sportName: "Men's Team All-Around Artistic Gymnastics",
-      howMuchAthletesMakeATeam: 5,
-      locations: 1,
-      firstDayHowMuchTimeSlotsExpandBy: 4,
-      secondDayHowMuchTimeSlotsExpandBy: 2,
-      thirdDayHowMuchTimeSlotsExpandBy: 0,
-      firstDayStartGameTimeSlot: "6_9",
-      firstDayEndGameTimeSlot: "15_18",
-      secondDayStartGameTimeSlot: "6_9",
-      secondDayEndGameTimeSlot: "9_12",
-      thirdDayStartGameTimeSlot: "",
-      thirdDayEndGameTimeSlot: "",
-      dayOfStart: "Wednesday",
-    },
+   
   ]);
 
   useEffect(() => {
@@ -1013,7 +976,14 @@ return dataS.map((data, index) => { */
 
 
 
-          <div className="flex justify-center items-center
+          <div className="grid
+          
+          grid-cols-2
+
+          md:grid-cols-3
+
+         
+          justify-center items-center
 
 flex-wrap
 
