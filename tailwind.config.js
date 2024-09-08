@@ -28,6 +28,8 @@ export default {
       
 
       gray_first: "#C6C6C6",
+      gray_second: "#F8F8F8",
+      
       body_news: "#F7FAFA",
 
       text_news: "#716363",
