@@ -564,68 +564,82 @@ return dataS.map((data, index) => { */
             {howManyMedals} chances to win a gold medal and eternal fame. 🤩
           </p>
 
-          <table className="tablez">
-            <thead>
-              <tr>
-                <th className="thz">Date</th>
-                {timeSlots.map((slot) => (
-                  <th key={slot} className="thz">
-                    {slot.replace("_", "-")}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {days.map(({ day, date }) => (
-                /* ovo je jedan row ! */
-                <tr key={date}>
-                  <th className="thz">
-                    {day} ({date})
-                  </th>
 
-                  {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
-                   */}
-                  {timeSlots.map((slot, index) => {
-                    // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
 
-                    const event = scheduleData.find((event) =>
-                      getEventSlots(event).some(
-                        (slotData) =>
-                          slotData.dayIndex ===
-                            days.findIndex((d) => d.date === date) &&
-                          slotData.slotIndex === index
-                      )
-                    );
-
-                    return (
-                      <td
-                        key={slot}
-                        className="tdz"
-                        style={{
-                          backgroundColor:
-                            (event && event.icon) === "olympic_flame"
-                              ? "yellow"
-                              : event
-                              ? "#BB9A9A"
-                              : "",
-                        }}
-                      >
-                        {event ? (
-                          <RandomizeItem
-                            icon={event.icon}
-                            name={event.sportName}
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </td>
-                    );
-                  })}
+{/* table for PC */}
+          <div className="hidden lg:flex justify-center items-center  w-full p-16">
+          
+            <table className="tablez lexend-font text-black_second xl:w-[90%] 2xl:w-[70%] ">
+              <thead>
+                <tr>
+                  <th className="thz font-medium">Date / Time </th>
+                  {timeSlots.map((slot) => (
+                    <th key={slot} className="thz font-medium">
+                      {slot.replace("_", "-")}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {days.map(({ day, date }) => (
+                  /* ovo je jedan row ! */
+                  <tr key={date}>
+                    <th className="thz font-medium">
+                      {day} {date.slice(-4)}
+                    </th>
 
+                    {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
+                    */}
+                    {timeSlots.map((slot, index) => {
+                      // ako ima nesto u ovome, da vraca, taj event, taj entry da ga ima... uopste onda prikazuje ovde dole
+
+                      const event = scheduleData.find((event) =>
+                        getEventSlots(event).some(
+                          (slotData) =>
+                            slotData.dayIndex ===
+                              days.findIndex((d) => d.date === date) &&
+                            slotData.slotIndex === index
+                        )
+                      );
+
+                      return (
+                        <td
+                          key={slot}
+                          className="tdz"
+                        /*  style={{
+                            backgroundColor:
+                              (event && event.icon) === "olympic_flame"
+                                ? "yellow"
+                                : event
+                                ? "#BB9A9A"
+                                : "",
+                          }}
+                                
+                          
+
+                          icon={event.icon}
+
+                          
+                          */
+                        >
+                          {event ? (
+                            <RandomizeItem
+                            
+                              name={event.sportName}
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
+          
 
 
 
