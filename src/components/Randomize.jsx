@@ -28,7 +28,12 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 // we just removed  '0_3' , from here, not to show it everything looks fine
-const timeSlots = ["3_6", "6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
+// const timeSlots = ["3_6", "6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
+
+const timeSlots = [ "6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
+
+
+
 
 /*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
 const days = [
@@ -1061,7 +1066,7 @@ p-4
                   <th className="thz font-medium">Date / Time </th>
                   {timeSlots.map((slot) => (
                     <th key={slot} className="thz font-medium">
-                      {slot.replace("_", "-")}
+                      {slot.replace("_", "-")} h
                     </th>
                   ))}
                 </tr>
