@@ -12,7 +12,7 @@ import "./index.css";
 import '@mui/material/styles/styled';
 
 
-
+/* 
 const app = (
   <Router>
     <AuthProvider>
@@ -27,7 +27,7 @@ if (rootElement.hasChildNodes()) {
   hydrate(app, rootElement);
 } else {
   render(app, rootElement);
-}
+} */
 
 
 /* before  installing  react-snap (for SEO)
@@ -37,7 +37,7 @@ this is in: package.json:
 
 / ----- 
 
-
+*/
 ReactDOM.createRoot(document.getElementById("root")).render(
 
   <Router>
@@ -46,4 +46,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </AuthProvider>
   </Router>
 ); 
- */
+
