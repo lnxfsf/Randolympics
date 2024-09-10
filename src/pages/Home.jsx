@@ -32,6 +32,7 @@ import { ThirdScreenHome } from "./Home/ThirdScreenHome";
 import { FourthScreenHome } from "./Home/FourthScreenHome";
 import { FifthScreenHome } from "./Home/FifthScreenHome";
 import { SixthScreenHome } from "./Home/SixthScreenHome";
+import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
@@ -47,6 +48,17 @@ const Home = () => {
 
   return (
     <>
+
+
+    <Helmet>
+      <title>Home</title>
+      <meta name="description" content="Real People. Randomly Selected. Competing in Olympic Sports" />
+      <link rel="canonical" href="/" />
+    </Helmet>
+
+
+
+
       <Navbar />
 
     

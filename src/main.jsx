@@ -10,6 +10,7 @@ import { App } from "./App";
 import "./index.css";
 
 import '@mui/material/styles/styled';
+import { HelmetProvider } from "react-helmet-async";
 
 
 /* 
@@ -41,9 +42,12 @@ this is in: package.json:
 ReactDOM.createRoot(document.getElementById("root")).render(
 
   <Router>
+    <HelmetProvider>
     <AuthProvider>
+    
       <App />
     </AuthProvider>
+    </HelmetProvider> 
   </Router>
 ); 
 
