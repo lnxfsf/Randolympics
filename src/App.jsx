@@ -30,6 +30,20 @@ import { UpdateAthleteStatus } from "./components/MyAccount/UpdateAthleteStatus"
 import { JoinTeam } from "./pages/JoinTeam";
 
 
+import ReactGA from 'react-ga';
+
+let GTAG_ID =
+  import.meta.env.VITE_GTAG_ID ||
+  process.env.VITE_GTAG_ID;
+
+
+const TRACKING_ID = GTAG_ID;
+
+ReactGA.initialize(TRACKING_ID);
+
+
+
+
 
 
 const App = () => {

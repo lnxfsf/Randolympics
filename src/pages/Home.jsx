@@ -35,9 +35,31 @@ import { SixthScreenHome } from "./Home/SixthScreenHome";
 import { Helmet } from "react-helmet-async";
 
 
+
+
+
+import ReactGA from 'react-ga';
+
+let GTAG_ID =
+  import.meta.env.VITE_GTAG_ID ||
+  process.env.VITE_GTAG_ID;
+
+
+const TRACKING_ID = GTAG_ID;
+
+
+ReactGA.initialize(TRACKING_ID);
+
+
+
+
 const Home = () => {
  
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
+  
   const navigate = useNavigate();
 
 /* 
