@@ -27,7 +27,7 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "../styles/navbar.scoped.scss";
@@ -58,6 +58,20 @@ const Navbar = () => {
     var username = tokens.data.name;
     var profile_image = tokens.data.picture;
   }
+
+  const [userData, setUserData] = useState(()=> {
+
+    
+    const storedOriginalData =
+      localStorage.getItem("authTokens") ||
+      sessionStorage.getItem("authTokens");
+
+    let parsed = JSON.parse(storedOriginalData);
+
+    return parsed
+  });
+
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -203,32 +217,84 @@ const Navbar = () => {
                     </MenuItem>
                     <Divider />
 
-                    <MenuItem onClick={handleClose} to="/" component={Link}>
+                    <MenuItem  to="/myaccount#settings" component={Link}>
                       <ListItemIcon>
-                        <Settings fontSize="small" />
+                       
+
+                        <img src="/myaccount/settings_dark.svg" className="icon" />
                       </ListItemIcon>
                       <span className="lexend-font text-black_second ">
                         Settings
                       </span>
                     </MenuItem>
 
-                    <MenuItem onClick={handleClose} to="/" component={Link}>
+                    
+
+                    <MenuItem  to="/myaccount#team" component={Link}>
                       <ListItemIcon>
-                        <StarIcon fontSize="small" />
+                      <img src="/myaccount/team_dark.svg" className="icon" />
                       </ListItemIcon>
                       <span className="lexend-font text-black_second ">
-                        Elections
+                        Team
                       </span>
                     </MenuItem>
 
-                    <MenuItem onClick={handleClose} to="/" component={Link}>
+
+
+                    {userData.data.user_type !== "VM" && (
+                    <MenuItem  
+                    to="/myaccount#elections"
+                    component={Link}
+                    >
+
                       <ListItemIcon>
-                        <StarIcon fontSize="small" />
+
+                        <img src="/myaccount/ballot_dark.png" className="icon" />
                       </ListItemIcon>
                       <span className="lexend-font text-black_second ">
-                        Teams
+                        Elections
+                      </span>     
+                    </MenuItem>
+
+                    )}
+
+
+                    
+                    <MenuItem  to="/myaccount#news" component={Link}>
+                      <ListItemIcon>
+                      <img src="/myaccount/news_dark.svg" className="icon" />
+                      </ListItemIcon>
+                      <span className="lexend-font text-black_second ">
+                        News
                       </span>
                     </MenuItem>
+
+
+
+
+                    
+                    <MenuItem  to="/myaccount#passportVerification" component={Link}>
+                      <ListItemIcon>
+                      <img src="/myaccount/passport_dark.svg" className="icon" />
+                      </ListItemIcon>
+                      <span className="lexend-font text-black_second ">
+                      Passport Verification
+                      </span>
+                    </MenuItem>
+
+                    
+                    <MenuItem  to="/myaccount#loginTrafficHistory" component={Link}>
+                      <ListItemIcon>
+                      <img src="/myaccount/login_history_dark.svg" className="icon" />
+                      </ListItemIcon>
+                      <span className="lexend-font text-black_second ">
+                      Login & Traffic History
+                      </span>
+                    </MenuItem>
+
+
+                    
+
 
                     <MenuItem onClick={logoutUser}>
                       <ListItemIcon>
@@ -238,6 +304,8 @@ const Navbar = () => {
                         Logout
                       </span>
                     </MenuItem>
+
+
                   </Menu>
                 </Tooltip>
               </>

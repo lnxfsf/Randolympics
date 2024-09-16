@@ -16,8 +16,20 @@ import AuthContext from "../context/AuthContext";
 
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
+import { useLocation } from 'react-router-dom';
+
 
 const MyAccount = () => {
+
+ 
+  
+
+
+  const location = useLocation();
+  const hash = location.hash.replace("#", ""); ; 
+  
+  
+
   let { logoutUser } = useContext(AuthContext);
 
   const [user_type, setUserType] = useState("");
@@ -44,14 +56,64 @@ const MyAccount = () => {
       setBirthdate(userJson.data.birthdate); */
     }
 
+
     warningBoxFunc(
       userJson.data.passportStatus,
       userJson.data.birthdate,
       userJson.data.passport_photo
     );
-  }, [isRejected, warningMessage]);
 
-  const [selectedItem, setSelectedItem] = useState("myAccount");
+
+
+  // you get like "elections" extracted from URL ".. #elections"
+  // and now, you choose something to be selected
+    switch (hash) {
+
+
+      case "elections":
+          setSelectedItem("elections");
+        break;
+      case "team":
+        setSelectedItem("team");
+        break;
+
+
+
+      case "settings":
+          setSelectedItem("settings");
+          break;
+
+      case "news":
+        setSelectedItem("news");
+        break;
+
+
+        
+      case "loginTrafficHistory":
+        setSelectedItem("loginTrafficHistory");
+        break;
+
+
+        
+      case "passportVerification":
+        setSelectedItem("passportVerification");
+        break;
+
+        
+      
+  
+  
+    }
+
+  }, [isRejected, warningMessage, hash]);
+
+  const [selectedItem, setSelectedItem] = useState(
+    
+    "myAccount"
+
+
+
+  );
 
   // Create refs for each list item
   const myAccountRef = useRef(null);
@@ -106,6 +168,14 @@ const MyAccount = () => {
     }
   };
 
+
+
+
+
+
+      
+
+
   return (
     <>
       <Navbar />
@@ -115,6 +185,7 @@ const MyAccount = () => {
         <div className="basis-1/4 hidden lg:block  ">
        
           <ul className="list flex flex-col lexend-font">
+           
             <li
               style={{ listStyleType: "none" }}
               ref={myAccountRef}
@@ -142,6 +213,8 @@ const MyAccount = () => {
                 <img src="/myaccount/settings.svg" className="icon" />
               </div>
             </li>
+
+
             <li
               style={{ listStyleType: "none" }}
               ref={teamRef}
@@ -156,6 +229,8 @@ const MyAccount = () => {
                 <img src="/myaccount/team.svg" className="icon" />
               </div>
             </li>
+
+
 
             {user_type !== "VM" && (
               <li
