@@ -195,7 +195,7 @@ const Navbar = () => {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <MenuItem to="/myaccount" component={Link}>
+                    <MenuItem to="/myaccount#myAccount" component={Link}>
                       {profile_image ? (
                         <Avatar
                           sx={{ width: 32, height: 32 }}
@@ -259,7 +259,13 @@ const Navbar = () => {
                     )}
 
 
-                    
+{(userData.data.user_type === "EM" ||
+              userData.data.user_type === "ITM" ||
+              userData.data.user_type === "GP" ||
+              userData.data.user_type === "ITM" ||
+              userData.data.user_type === "SM" ||
+              userData.data.user_type === "MM") &&
+              userData.data.passportStatus === "validated" && (
                     <MenuItem  to="/myaccount#news" component={Link}>
                       <ListItemIcon>
                       <img src="/myaccount/news_dark.svg" className="icon" />
@@ -268,11 +274,11 @@ const Navbar = () => {
                         News
                       </span>
                     </MenuItem>
+              )}
 
 
 
-
-                    
+{(userData.data.user_type === "VM" || userData.data.user_type === "GP") && (
                     <MenuItem  to="/myaccount#passportVerification" component={Link}>
                       <ListItemIcon>
                       <img src="/myaccount/passport_dark.svg" className="icon" />
@@ -281,8 +287,16 @@ const Navbar = () => {
                       Passport Verification
                       </span>
                     </MenuItem>
+)}
 
-                    
+
+{(userData.data.user_type === "VM" ||
+              userData.data.user_type === "EM" ||
+              userData.data.user_type === "ITM" ||
+              userData.data.user_type === "MM" ||
+              userData.data.user_type === "SM" ||
+              userData.data.user_type === "LM" ||
+              userData.data.user_type === "GP") && (
                     <MenuItem  to="/myaccount#loginTrafficHistory" component={Link}>
                       <ListItemIcon>
                       <img src="/myaccount/login_history_dark.svg" className="icon" />
@@ -291,7 +305,7 @@ const Navbar = () => {
                       Login & Traffic History
                       </span>
                     </MenuItem>
-
+              )}
 
                     
 

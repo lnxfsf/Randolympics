@@ -70,6 +70,10 @@ const MyAccount = () => {
     switch (hash) {
 
 
+      case "myAccount":
+        setSelectedItem("myAccount");
+        break;
+
       case "elections":
           setSelectedItem("elections");
         break;
@@ -107,13 +111,7 @@ const MyAccount = () => {
 
   }, [isRejected, warningMessage, hash]);
 
-  const [selectedItem, setSelectedItem] = useState(
-    
-    "myAccount"
-
-
-
-  );
+  const [selectedItem, setSelectedItem] = useState("myAccount");
 
   // Create refs for each list item
   const myAccountRef = useRef(null);
