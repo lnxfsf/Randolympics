@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       if (error.response.status === 401) {
         alert(error.response.data.message);
-        console.log("ovde treba uzeti token da salje ti na email opet" + email);
       } else {
         console.log(error);
       }
@@ -82,22 +81,16 @@ export const AuthProvider = ({ children }) => {
 
       setAuthTokens(response);
 
-      //console.log("token is:" + response.data.access_token);
 
       setUser(jwtDecode(response.data.access_token));
 
 
-      // here check if athleteStatus is "s1" or "s2", then it redirects to that screen where user inserts status (on that, once it's filled, then, we redirect to home, or myprofile)
-      if(response.data.athleteStatus === "s1" || response.data.athleteStatus === "s2" ){
+      // here check if athleteStatus is "s1" or "s2", then it redirects to that screen where user inserts status (on that, once it's filled, then, we redirect to home, or myprofile). and this screen is shown only for athlete user type ! 
+      if((response.data.athleteStatus === "s1" || response.data.athleteStatus === "s2") && response.data.user_type === "AH" ){
           navigate("/updateAthleteStatus");
-
-          
       } else {
           navigate("/");
         }
-      
-
-
 
     } else {
       console.log("Something went wrong while loggin in the user!");
@@ -123,7 +116,7 @@ export const AuthProvider = ({ children }) => {
 
 
   // TODO for campaignID ! I should've moved in separate context
- 
+
   let settingCampaignId = useCallback((id) => {
     setCampaignId(id);
   }, [campaignId]);
