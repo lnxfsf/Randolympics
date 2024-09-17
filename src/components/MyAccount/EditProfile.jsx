@@ -107,6 +107,18 @@ const EditProfile = () => {
 
 
 
+  const handleBioChange = (event) => {
+    setBio(event.target.value);
+
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        bio: event.target.value,
+      },
+    }));
+  };
+
 
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -240,8 +252,10 @@ const EditProfile = () => {
 
       setBio(userJson.data.bio);
 
-      setPassportImage(userJson.data.passport_photo);
-      /* setProfileImage(userJson.data.picture); */
+      if(!passportUpload){
+        setPassportImage(userJson.data.passport_photo);
+      }
+      
 
       setSelectedDate(dayjs(userJson.data.birthdate));
 
@@ -587,10 +601,13 @@ const EditProfile = () => {
   // this is for toggle
   const [passportUpload, setPassportUpload] = useState(false);
 
-  const tooglePassportUpload = async () => {
-    setPassportUpload(!passportUpload);
 
-    // TODO, this doesn't (sometimes) save passportImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
+
+
+  const sendPassportUpload = async () => {
+  // it's absolutely normal, on refresh, it doesnt show new profile picture, but maybe old. that's because it takes time to write to database. 
+  // so it's not a bug, that's way most websites function as well. github for instance, takes some time, to load new profile picture, it shows old for few minutes. And yours is just few seconds..  
+
     // this is so we can  set in session/localStorage as well
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -615,11 +632,17 @@ const EditProfile = () => {
 
       // to update in localStorage
       if (response.status === 200) {
+
         if (localStorage.getItem("authTokens")) {
           localStorage.setItem("authTokens", JSON.stringify(userData));
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
+
+        
+        fetchLatestInLocalStorage(userData.userId);
+        setPassportUpload(!passportUpload);
+
       }
 
       setResultText("Profile details saved successfully !");
@@ -704,7 +727,7 @@ const EditProfile = () => {
 
 
 
-          // bio,
+          bio: bio,
         }
       );
 
@@ -765,6 +788,8 @@ const EditProfile = () => {
   return (
     <>
       <div>
+       
+       
         <HeaderMyProfile ShowEditProfile={true} />
 
         {/*  <div className="flex justify-start">
@@ -859,12 +884,56 @@ const EditProfile = () => {
 
         {/* -------------- */}
 
-        <div className="mt-4 mb-4">
+        <div className="mt-4 mb-4 lexend-font text-black_second  ">
           <p className="text-lg ">
-            <b>About Me</b>
+            <b className="text-2xl font-bold ">Your presentation</b>
           </p>
-          <p className="text-base">{bio}</p>
+          
+          <div className="flex flex-col w-full min-h-32 pr-4 mt-2 h-full">
+            <p className="font-medium mb-2">About me</p>
+            <TextField
+            
+              value={userData && userData.data.bio}
+              onChange={handleBioChange}
+              placeholder="Bio"
+              id="bio"
+              name="bio"
+              multiline
+              rows={4}
+              className="w-full h-full rounded-md border border-gray-900"
+              type="text"
+              sx={{
+                
+                /* width: "2px",  */
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 3, 
+                },
+
+                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "red", 
+                  },
+
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused": {
+                    color: "black", 
+                  },
+                },
+              }}
+              inputProps={{
+                maxLength: 255,
+                style: {
+                  resize: "vertical", 
+                },
+              }}
+            />
+          </div>
+
+
         </div>
+
+
+
 
         <form action="#" onSubmit={handleSubmit}>
           <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
@@ -976,7 +1045,7 @@ const EditProfile = () => {
                       Passport expires: <b>{passportExpiryDate}</b>
                     </p>
                   )}
-                  <p className="edit-photo" onClick={tooglePassportUpload}>
+                  <p className="edit-photo" onClick={() => {setPassportUpload(!passportUpload);}}>
                     <u>Edit passport photo</u>
                   </p>
                 </>
@@ -1020,7 +1089,7 @@ const EditProfile = () => {
                     imageEditAllowEdit={false}
                   />
 
-                  <p className="edit-photo" onClick={tooglePassportUpload}>
+                  <p className="edit-photo" onClick={sendPassportUpload}>
                     <u>Save passport photo</u>
                   </p>
                 </>

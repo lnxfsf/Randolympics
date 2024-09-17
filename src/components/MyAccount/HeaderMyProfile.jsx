@@ -3,6 +3,8 @@ import "../../styles/headermyprofile.scoped.scss";
 import React, { useState, useEffect } from "react";
 import Flag from "react-world-flags";
 import axios from "axios";
+import { Button } from "@mui/material";
+
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -34,6 +36,9 @@ registerPlugin(
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+
+
 
 const HeaderMyProfile = ({ ShowEditProfile }) => {
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
@@ -99,21 +104,64 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
     },
   };
 
-  const toogleProfileUpload = async () => {
-    setToogleProfilePic(!toogleProfilePic);
 
+  const fetchLatestInLocalStorage = async (userId) => {
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/user/fetchLatestData`,
+        { userId: userId }
+      );
+
+      if (response.status === 200) {
+        setUserData(response); //we update it again.. yes.. but this is latest btw..
+
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(response));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(response));
+        }
+
+        console.log(response);
+        return 1
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const profileUpload = async () => {
+
+  
     try {
       // we just upload profile_image URL, in database !
+
+      console.log("da li on uopste i salje ! ")
+      console.log(profileImage)
+
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email,
-          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
-          picture: profileImage, // on salje u backend ! kako treba, al local nece
+          name: userData.name,
+          picture: profileImage, 
         }
+
+       
+
       );
 
-      // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
+
+      if (response.status === 200) {
+        fetchLatestInLocalStorage(userData.userId);
+        
+        
+        setToogleProfilePic(!toogleProfilePic);
+        
+
+      }
+
+
       setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
@@ -121,6 +169,8 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
           picture: profileImage,
         },
       }));
+
+
 
       // to update in localStorage
       if (response.status === 200) {
@@ -133,10 +183,13 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
     } catch (error) {
       console.log(error);
     }
+ 
+
+
+
   };
 
   useEffect(() => {
-    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
@@ -147,7 +200,11 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
       setUserData(userJson);
 
       setOriginalEmail(userJson.data.email);
+     
+     
+      if(!toogleProfilePic){
       setProfileImage(userJson.data.picture);
+    }
 
       setNameHeader(userJson.data.name);
       settingUserType(userJson.data.user_type);
@@ -199,8 +256,16 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
 
   return (
     <>
-      <div className="flex justify-start">
-        <div className="flex justify-center items-center">
+    <p className="lexend-font font-medium text-black_second text-xl">My account</p>
+      <div className="flex justify-start mt-4 lexend-font text-black_second">
+       
+
+        
+       <div className="flex flex-col items-start">
+        <div className="flex justify-center items-center ">
+
+
+
           {!toogleProfilePic && (
             <>
 
@@ -265,32 +330,77 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
             </>
           )}
         </div>
+      
+        <h1 className="text-lg font-medium">{name_header}</h1>
+        </div>
+
 
         <div className="flex flex-grow">
+
+
           <div className="flex flex-col justify-center pl-4">
-            <h1 className="text-[25px]">{name_header}</h1>
+           
 
             {!toogleProfilePic && (
               <>
-                <p className="edit-photo" onClick={toogleProfileUpload}>
-                  {ShowEditProfile && <u>Edit photo</u>}
-                </p>
+                <Button
+                className="w-28   "
+                style={{  textTransform: 'none' }}
+               
+                sx={{
+                  height: "40px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 2,
+                  border: `1px solid #444444`,
+          
+                }}
+                onClick={() => {setToogleProfilePic(!toogleProfilePic);}}
+
+              >
+                <img src="/myaccount/upload.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Change</span>
+              </Button>
               </>
             )}
             {toogleProfilePic && (
               <>
-                <p className="edit-photo" onClick={toogleProfileUpload}>
+                {/* <p className="edit-photo" onClick={profileUpload}>
                   <u>Save photo</u>
-                </p>
+
+
+                </p> */}
+
+                <Button
+                className="w-36"
+                style={{  textTransform: 'none' }}
+               
+                sx={{
+                  height: "40px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 2,
+                  border: `1px solid #444444`,
+          
+                }}
+                onClick={profileUpload}
+
+              >
+                <img src="/myaccount/save.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Save photo</span>
+              </Button>
               </>
             )}
           </div>
+
+          
         </div>
 
-        <div className="flex justify-self-end">
+
+
+
+        <div className="flex justify-self-end mr-4">
           <div className="flex flex-col justify-center pl-4">
-            <p className="text-base text-right">User Type</p>
-            <h1 className="text-[25px] text-right">{user_typeText}</h1>
+           
+            <h1 className="text-lg font-medium text-right text-gray_third">{user_typeText}</h1>
           </div>
           <div className="flex flex-col justify-center pl-4">
             <Flag className="flag-photo" code={code} />
@@ -298,7 +408,7 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
         </div>
       </div>
 
-      <hr className="mt-4" />
+     
     </>
   );
 };

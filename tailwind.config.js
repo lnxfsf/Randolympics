@@ -17,6 +17,7 @@ export default {
       black_first: "#232323",
       black_second: "#444444",
 
+
       blue_first: "#315FB7",
 
        red_first: "#AF2626",
@@ -29,6 +30,7 @@ export default {
 
       gray_first: "#C6C6C6",
       gray_second: "#F8F8F8",
+      gray_third: "#616673",
       
       body_news: "#F7FAFA",
 
