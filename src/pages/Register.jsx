@@ -755,8 +755,8 @@ const Register = () => {
                     }}
 
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={true} sx={{fontFamily: "'Lexend', sans-serif"}}>Private</MenuItem>
+                    <MenuItem value={false} sx={{fontFamily: "'Lexend', sans-serif"}}>Public</MenuItem>
                   </Select>
                 </FormControl>
               </div>

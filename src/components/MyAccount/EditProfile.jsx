@@ -1,9 +1,5 @@
 import "../../styles/editprofile.scoped.scss";
 
-
-
-
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -73,14 +69,43 @@ let BACKEND_SERVER_BASE_URL =
 
 import moment from "moment";
 
+
+
+
+const sxTextField = {
+
+  m:1,
+  mt:0,
+  ml: 0,
+
+  width: "w-full",
+
+  /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
+   */
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 2,
+    fontFamily: "'Lexend', sans-serif",
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "red",
+  },
+  "& .MuiInputLabel-root": {
+    fontFamily: "'Lexend', sans-serif",
+    
+    "&.Mui-focused": {
+      color: "black",
+    },
+
+
+  },
+};
+
+
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
   const [userData, setUserData] = useState(null);
 
-
-
-  
   const handleathleteStatementChange = (event) => {
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
@@ -92,7 +117,6 @@ const EditProfile = () => {
     }));
   };
 
-
   const handleathleteStatusChange = (event) => {
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
@@ -103,9 +127,6 @@ const EditProfile = () => {
       },
     }));
   };
-
-
-
 
   const handleBioChange = (event) => {
     setBio(event.target.value);
@@ -119,7 +140,6 @@ const EditProfile = () => {
     }));
   };
 
-
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
@@ -130,7 +150,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handleNameChange = (event) => {
     setUserData((prevUserData) => ({
@@ -221,11 +240,6 @@ const EditProfile = () => {
 
   const [passportExpiryDate, setPassportExpiryDate] = useState(null);
 
-
-  
-
-
-
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
@@ -252,10 +266,9 @@ const EditProfile = () => {
 
       setBio(userJson.data.bio);
 
-      if(!passportUpload){
+      if (!passportUpload) {
         setPassportImage(userJson.data.passport_photo);
       }
-      
 
       setSelectedDate(dayjs(userJson.data.birthdate));
 
@@ -369,15 +382,7 @@ const EditProfile = () => {
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
 
-
-
-
-  
-
   const handlelastNameChange = (event) => {
-   
-    
-
     // and also update the object..
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -388,14 +393,7 @@ const EditProfile = () => {
     }));
   };
 
-
-
-  
-
   const handlefamilyNameChange = (event) => {
-   
-    
-
     // and also update the object..
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -405,7 +403,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handleEmailPrivacyChange = (event) => {
     setEmail_private(event.target.value);
@@ -601,12 +598,9 @@ const EditProfile = () => {
   // this is for toggle
   const [passportUpload, setPassportUpload] = useState(false);
 
-
-
-
   const sendPassportUpload = async () => {
-  // it's absolutely normal, on refresh, it doesnt show new profile picture, but maybe old. that's because it takes time to write to database. 
-  // so it's not a bug, that's way most websites function as well. github for instance, takes some time, to load new profile picture, it shows old for few minutes. And yours is just few seconds..  
+    // it's absolutely normal, on refresh, it doesnt show new profile picture, but maybe old. that's because it takes time to write to database.
+    // so it's not a bug, that's way most websites function as well. github for instance, takes some time, to load new profile picture, it shows old for few minutes. And yours is just few seconds..
 
     // this is so we can  set in session/localStorage as well
     setUserData((prevUserData) => ({
@@ -632,17 +626,14 @@ const EditProfile = () => {
 
       // to update in localStorage
       if (response.status === 200) {
-
         if (localStorage.getItem("authTokens")) {
           localStorage.setItem("authTokens", JSON.stringify(userData));
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-        
         fetchLatestInLocalStorage(userData.userId);
         setPassportUpload(!passportUpload);
-
       }
 
       setResultText("Profile details saved successfully !");
@@ -659,11 +650,9 @@ const EditProfile = () => {
 
     var name = e.target.name.value;
 
-    
     var familyName = e.target.familyName.value;
-    
+
     var lastName = e.target.lastName.value;
-    
 
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
@@ -720,12 +709,9 @@ const EditProfile = () => {
 
           athleteStatement: athleteStatement,
           athleteStatus: athleteStatus,
-          
 
           familyName,
-          lastName, 
-
-
+          lastName,
 
           bio: bio,
         }
@@ -788,8 +774,6 @@ const EditProfile = () => {
   return (
     <>
       <div>
-       
-       
         <HeaderMyProfile ShowEditProfile={true} />
 
         {/*  <div className="flex justify-start">
@@ -888,11 +872,10 @@ const EditProfile = () => {
           <p className="text-lg ">
             <b className="text-2xl font-bold ">Your presentation</b>
           </p>
-          
+
           <div className="flex flex-col w-full min-h-32 pr-4 mt-2 h-full">
             <p className="font-medium mb-2">About me</p>
             <TextField
-            
               value={userData && userData.data.bio}
               onChange={handleBioChange}
               placeholder="Bio"
@@ -903,199 +886,255 @@ const EditProfile = () => {
               className="w-full h-full rounded-md border border-gray-900"
               type="text"
               sx={{
-                
                 /* width: "2px",  */
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: 3, 
+                  borderRadius: 3,
                 },
 
                 "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                   {
-                    borderColor: "red", 
+                    borderColor: "red",
                   },
 
                 "& .MuiInputLabel-root": {
                   "&.Mui-focused": {
-                    color: "black", 
+                    color: "black",
                   },
                 },
               }}
               inputProps={{
                 maxLength: 255,
                 style: {
-                  resize: "vertical", 
+                  resize: "vertical",
                 },
               }}
             />
           </div>
-
-
         </div>
 
+        <form
+          action="#"
+          onSubmit={handleSubmit}
+          className="lexend-font text-black_second"
+        >
+          <p className="text-lg mb-4 ">
+            <b className="text-2xl font-bold ">Personal Information</b>
+          </p>
+
+          <div className="flex flex-col w-[80%]">
 
 
+          <div className="flex flex-col w-full">
+          <p className="text-sm font-medium">Name</p>
+            <TextField
+              value={userData && userData.data.name}
+              /*  onChange={handleNameChange} */
+             
+              disabled
+              placeholder="John Doe"
+              id="name"
+              name="name"
+              type="text"
+              inputProps={{
+                maxLength: 255,
+              }}
+              sx={sxTextField}
 
-        <form action="#" onSubmit={handleSubmit}>
-          <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col mb-1 justify-center mt-0">
-                <TextField
-                  value={userData && userData.data.name}
-                  /*  onChange={handleNameChange} */
-                  label="Name"
-                  disabled
-                  placeholder="John Doe"
-                  id="name"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
+            />
+          </div>
+
+
+            <div className="flex gap-2 w-full">
+             
+             <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">Email</p>
+              <TextField
+                // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
+                // now on change, needs to update values, so it can edit it
+                value={userData && userData.data.email}
+                onChange={handleEmailChange}
+                
+                className="w-full"
+                placeholder="johndoe@gmail.com"
+                id="email"
+                name="email"
+                type="email"
+                disabled
+                inputProps={{
+                  maxLength: 80,
+                }}
+               
+
+                sx={sxTextField}
+
+              />
+
               </div>
-              <div className="flex mb-1 justify-end items-end flex-col">
-                <FormControl
-                  className="h-5"
-                  variant="standard"
-                  sx={{ m: 1, minWidth: 120 }}
+
+              <FormControl
+                className="h-5"
+
+                sx={{ minWidth: 120 }}
+              >
+                <Select
+                  name="email_private"
+                  id="email_private"
+                  value={email_private}
+                  disableUnderline
+                  onChange={handleEmailPrivacyChange}
+                  sx={{
+                    mt: 2.5,
+                    fontFamily: "'Lexend', sans-serif",
+  
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2, 
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
                 >
-                  <Select
-                    name="email_private"
-                    id="email_private"
-                    value={email_private}
-                    disableUnderline
-                    onChange={handleEmailPrivacyChange}
-                    sx={{
-                      boxShadow: "none",
-                      height: 32,
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    }}
-                  >
-                    <MenuItem value={1}>Private</MenuItem>
-                    <MenuItem value={0}>Public</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
-                  // now on change, needs to update values, so it can edit it
-                  value={userData && userData.data.email}
-                  onChange={handleEmailChange}
-                  label="Email"
-                  placeholder="johndoe@gmail.com"
-                  id="email"
-                  name="email"
-                  type="email"
-                  disabled
-                  inputProps={{
-                    maxLength: 80,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
+                  <MenuItem value={1} sx={{fontFamily: "'Lexend', sans-serif"}} >Private</MenuItem>
+                  <MenuItem value={0} sx={{fontFamily: "'Lexend', sans-serif"}} >Public</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
-            <div className="row-span-3 flex items-start justify-start flex-col">
-              {!passportUpload && (
-                <>
-                  <p className="pb-2">
-                    <b>Passport photo</b>
-                  </p>
-                  <img
-                    src={
-                      BACKEND_SERVER_BASE_URL +
-                      "/imageUpload/passport_pics/" +
-                      passportImage
-                    }
-                    alt="Profile"
-                    className="w-[331px] h-[222px] object-fit  passport-photo"
-                  />
-                  {passportExpiryDate && (
-                    <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-                      Passport expires: <b>{passportExpiryDate}</b>
-                    </p>
-                  )}
-                  <p className="edit-photo" onClick={() => {setPassportUpload(!passportUpload);}}>
-                    <u>Edit passport photo</u>
-                  </p>
-                </>
-              )}
 
-              {passportUpload && (
-                <>
-                  <FilePond
-                    className="filepond--root large"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+            <div className="flex flex-col w-full">
+             
+            <div className="flex gap-2 w-full">
+ <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">Phone number</p>
+              <TextField
+                value={userData && userData.data.phone}
+                onChange={handlePhoneChange}
+               
+                placeholder="+1 212 456 7890"
+                id="phone"
+                name="phone"
+                type="tel"
+                inputProps={{
+                  maxLength: 15,
+                }}
+                sx={sxTextField}
+              />
+              </div>
+
+              <FormControl
+                className="h-5"
+
+                sx={{ minWidth: 120 }}
+              >
+                <Select
+                 
+                  name="phone_private"
+                  id="phone_private"
+                  value={phone_private}
+                  disableUnderline
+                  onChange={handlePhonePrivacyChange}
+                  sx={{
+                    mt: 2.5,
+                    fontFamily: "'Lexend', sans-serif",
+  
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2, 
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
+                >
+                  <MenuItem value={1}>Private</MenuItem>
+                  <MenuItem value={0}>Public</MenuItem>
+                </Select>
+              </FormControl>
+
+
+              
+            </div>
+</div>
+
+          </div>
+
+          <div className="row-span-3 flex items-start justify-start flex-col">
+            {!passportUpload && (
+              <>
+                <p className="pb-2">
+                  <b>Passport photo</b>
+                </p>
+                <img
+                  src={
+                    BACKEND_SERVER_BASE_URL +
+                    "/imageUpload/passport_pics/" +
+                    passportImage
+                  }
+                  alt="Profile"
+                  className="w-[331px] h-[222px] object-fit  passport-photo"
+                />
+                {passportExpiryDate && (
+                  <p className="pt-2 " style={{ color: "#DEDEDE" }}>
+                    Passport expires: <b>{passportExpiryDate}</b>
+                  </p>
+                )}
+                <p
+                  className="edit-photo"
+                  onClick={() => {
+                    setPassportUpload(!passportUpload);
+                  }}
+                >
+                  <u>Edit passport photo</u>
+                </p>
+              </>
+            )}
+
+            {passportUpload && (
+              <>
+                <FilePond
+                  className="filepond--root large"
+                  type="file"
+                  onupdatefiles={setFiles}
+                  allowMultiple={false}
+                  maxFiles={1}
+                  server={server}
+                  name="image"
+                  labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
+                  accept="image/png, image/jpeg, image/gif"
+                  dropOnPage
+                  dropValidation
+                  allowPaste={true}
+                  allowReplace={true}
+                  credits={""}
+                  allowFileEncode={true}
+                  allowFileTypeValidation={true}
+                  allowImagePreview={true}
+                  /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
                    for now, we keep it original resolution, until I know what max resolution we should support 
                  */
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={222}
-                    imageCropAspectRatio="1:1"
-                    /*            imageResizeTargetWidth={100}
+                  allowImageCrop={false}
+                  allowImageResize={false}
+                  allowImageTransform={false}
+                  imagePreviewHeight={222}
+                  imageCropAspectRatio="1:1"
+                  /*            imageResizeTargetWidth={100}
                     imageResizeTargetHeight={100} */
-                    stylePanelLayout="compact"
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
+                  stylePanelLayout="compact"
+                  styleLoadIndicatorPosition="center bottom"
+                  styleProgressIndicatorPosition="center bottom"
+                  styleButtonRemoveItemPosition="center  bottom"
+                  styleButtonProcessItemPosition="center bottom"
+                  imageEditAllowEdit={false}
+                />
 
-                  <p className="edit-photo" onClick={sendPassportUpload}>
-                    <u>Save passport photo</u>
-                  </p>
-                </>
-              )}
+                <p className="edit-photo" onClick={sendPassportUpload}>
+                  <u>Save passport photo</u>
+                </p>
+              </>
+            )}
 
-              {/* 
+            {/* 
 
               <FilePond
                 type="file"
@@ -1132,297 +1171,136 @@ const EditProfile = () => {
 
               />
               */}
-            </div>
+          </div>
 
+          <div className="flex items-end col-span-2">
+            <TextField
+              value={userData && userData.data.familyName}
+              onChange={handlefamilyNameChange}
+              label="Family name"
+              id="familyName"
+              name="familyName"
+              type="text"
+              placeholder="Family name"
+              sx={{
+                m: 1,
+                width: "280px",
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 5,
+                },
+                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "red",
+                  },
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused": {
+                    color: "black",
+                  },
+                },
+              }}
+            />
+            <TextField
+              value={userData && userData.data.lastName}
+              onChange={handlelastNameChange}
+              label="Last name"
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="Last name"
+              sx={{
+                m: 1,
+                width: "280px",
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 5,
+                },
+                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "red",
+                  },
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused": {
+                    color: "black",
+                  },
+                },
+              }}
+            />
+          </div>
 
-            <div className="flex items-end col-span-2">
-                      <TextField
-                                value={userData && userData.data.familyName}
-                                onChange={handlefamilyNameChange}
-                                label="Family name"
-                                id="familyName"
-                                name="familyName"
-                                type="text"
-                                placeholder="Family name"
-                                sx={{
-                                  m: 1,
-                                  width: "280px",
-                                  "& .MuiOutlinedInput-root": {
-                                    borderRadius: 5,
-                                  },
-                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                    {
-                                      borderColor: "red",
-                                    },
-                                  "& .MuiInputLabel-root": {
-                                    "&.Mui-focused": {
-                                      color: "black",
-                                    },
-                                  },
-                                }}
-
-                              />
-                      <TextField
-                                value={userData && userData.data.lastName}
-                                onChange={handlelastNameChange}
-                                label="Last name"
-                                id="lastName"
-                                name="lastName"
-                                type="text"
-                                placeholder="Last name"
-                                sx={{
-                                  m: 1,
-                                  width: "280px",
-                                  "& .MuiOutlinedInput-root": {
-                                    borderRadius: 5,
-                                  },
-                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                    {
-                                      borderColor: "red",
-                                    },
-                                  "& .MuiInputLabel-root": {
-                                    "&.Mui-focused": {
-                                      color: "black",
-                                    },
-                                  },
-                                }}
-
-                              />
-</div>
-
-
-
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col justify-center">
-                <TextField
-                  value={userData && userData.data.cryptoaddress}
-                  onChange={handleCryptoChange}
-                  label="Crypto"
-                  id="cryptoaddr"
-                  name="cryptoaddr"
-                  placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+          <div className="flex items-end col-span-2">
+            <div className="flex flex-col justify-center">
+              <TextField
+                value={userData && userData.data.cryptoaddress}
+                onChange={handleCryptoChange}
+                label="Crypto"
+                id="cryptoaddr"
+                name="cryptoaddr"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                sx={{
+                  m: 1,
+                  width: "280px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5,
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
                     },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black",
                     },
-                  }}
-                  InputProps={{
-                    maxLength: 150,
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle BTC/ETH/XMR"
-                          onClick={handleCryptoMenuClick}
-                          edge="end"
-                        >
-                          {selectedCrypto}
-                        </IconButton>
-                        <Menu
-                          id="crypto-menu"
-                          anchorEl={cryptoMenuAnchorEl}
-                          open={Boolean(cryptoMenuAnchorEl)}
-                          onClose={handleCryptoMenuClose}
-                        >
-                          {cryptoOptions.map((option) => (
-                            <MenuItem
-                              key={option}
-                              onClick={() => handleCryptoOptionSelect(option)}
-                              selected={option === selectedCrypto}
-                            >
-                              {option}
-                            </MenuItem>
-                          ))}
-                        </Menu>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-              <div className="flex justify-end items-end flex-col">
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    className="h-5"
-                    name="phone_private"
-                    id="phone_private"
-                    value={phone_private}
-                    disableUnderline
-                    onChange={handlePhonePrivacyChange}
-                    sx={{
-                      boxShadow: "none",
-                      height: 15,
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    }}
-                  >
-                    <MenuItem value={1}>Private</MenuItem>
-                    <MenuItem value={0}>Public</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  value={userData && userData.data.phone}
-                  onChange={handlePhoneChange}
-                  label="Phone number"
-                  placeholder="+1 212 456 7890"
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  inputProps={{
-                    maxLength: 15,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col justify-center">
-                {selectedRole === "AH" && (
-                  <div className="flex justify-end items-end flex-col">
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 120 }}
-                    >
-                      <Select
-                        className="h-5"
-                        name="weight_private"
-                        id="weight_private"
-                        value={weight_private}
-                        onChange={handleWeightPrivacyChange}
-                        disableUnderline
-                        sx={{
-                          boxShadow: "none",
-                          height: 15,
-                          ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                        }}
+                  },
+                }}
+                InputProps={{
+                  maxLength: 150,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle BTC/ETH/XMR"
+                        onClick={handleCryptoMenuClick}
+                        edge="end"
                       >
-                        <MenuItem value={1}>Private</MenuItem>
-                        <MenuItem value={0}>Public</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <TextField
-                      value={userData && userData.data.weight}
-                      onChange={handleWeightChange}
-                      label="Weight"
-                      id="weight"
-                      name="weight"
-                      type="number"
-                      placeholder="85 kg/185 lb"
-                      sx={{
-                        m: 1,
-                        width: "280px",
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 5,
-                        },
-                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                          {
-                            borderColor: "red",
-                          },
-                        "& .MuiInputLabel-root": {
-                          "&.Mui-focused": {
-                            color: "black",
-                          },
-                        },
-                      }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle kg / lb"
-                              onClick={handleWeightMenuClick}
-                              edge="end"
-                            >
-                              {selectedWeight}
-                            </IconButton>
-                            <Menu
-                              id="weight-menu"
-                              anchorEl={weightMenuAnchorEl}
-                              open={Boolean(weightMenuAnchorEl)}
-                              onClose={handleWeightMenuClose}
-                            >
-                              {weightOptions.map((option) => (
-                                <MenuItem
-                                  key={option}
-                                  onClick={() =>
-                                    handleWeightOptionSelect(option)
-                                  }
-                                  selected={option === selectedWeight}
-                                >
-                                  {option}
-                                </MenuItem>
-                              ))}
-                            </Menu>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="flex justify-end items-end pb-2">
-                <ReactFlagsSelect
-                  countries={supportedCountry}
-                  disabled
-                  // to fill it with the one, which user's is currently selected...
-                  selected={
-                    nationality_selected ||
-                    (userData && userData.data.nationality)
-                  }
-                  onSelect={(code) => {
-                    setNationality_selected(code);
-                    handleNationalityChange(code);
-                  }}
-                  className={classNameFlagsSelect}
-                  searchable={true}
-                  id="nationality"
-                  name="nationality"
-                  placeholder="Nationality"
-               
-               />
-              </div>
+                        {selectedCrypto}
+                      </IconButton>
+                      <Menu
+                        id="crypto-menu"
+                        anchorEl={cryptoMenuAnchorEl}
+                        open={Boolean(cryptoMenuAnchorEl)}
+                        onClose={handleCryptoMenuClose}
+                      >
+                        {cryptoOptions.map((option) => (
+                          <MenuItem
+                            key={option}
+                            onClick={() => handleCryptoOptionSelect(option)}
+                            selected={option === selectedCrypto}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </InputAdornment>
+                  ),
+                }}
+              />
             </div>
+           
+          </div>
 
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col ml-0 mt-0  w-[280px]">
-                <div className="flex mb-1 justify-end items-end flex-col">
-                  <FormControl
-                    className="h-5"
-                    variant="standard"
-                    sx={{ m: 1, minWidth: 120 }}
-                  >
+          <div className="flex items-end col-span-2">
+            <div className="flex flex-col justify-center">
+              {selectedRole === "AH" && (
+                <div className="flex justify-end items-end flex-col">
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <Select
-                      name="birthdate_private"
-                      id="birthdate_private"
-                      value={birthdate_private}
+                      className="h-5"
+                      name="weight_private"
+                      id="weight_private"
+                      value={weight_private}
+                      onChange={handleWeightPrivacyChange}
                       disableUnderline
-                      onChange={handleBirthdatePrivacyChange}
                       sx={{
                         boxShadow: "none",
-                        height: 32,
+                        height: 15,
                         ".MuiOutlinedInput-notchedOutline": { border: 0 },
                       }}
                     >
@@ -1430,123 +1308,188 @@ const EditProfile = () => {
                       <MenuItem value={0}>Public</MenuItem>
                     </Select>
                   </FormControl>
-
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={["DatePicker"]}>
-                      <DatePicker
-                        className="w-full"
-                        label="Birthdate"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        format="MMMM DD, YYYY"
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
+                  <TextField
+                    value={userData && userData.data.weight}
+                    onChange={handleWeightChange}
+                    label="Weight"
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    placeholder="85 kg/185 lb"
+                    sx={{
+                      m: 1,
+                      width: "280px",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 5,
+                      },
+                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "red",
+                        },
+                      "& .MuiInputLabel-root": {
+                        "&.Mui-focused": {
+                          color: "black",
+                        },
+                      },
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle kg / lb"
+                            onClick={handleWeightMenuClick}
+                            edge="end"
+                          >
+                            {selectedWeight}
+                          </IconButton>
+                          <Menu
+                            id="weight-menu"
+                            anchorEl={weightMenuAnchorEl}
+                            open={Boolean(weightMenuAnchorEl)}
+                            onClose={handleWeightMenuClose}
+                          >
+                            {weightOptions.map((option) => (
+                              <MenuItem
+                                key={option}
+                                onClick={() => handleWeightOptionSelect(option)}
+                                selected={option === selectedWeight}
+                              >
+                                {option}
+                              </MenuItem>
+                            ))}
+                          </Menu>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 </div>
-              </div>
+              )}
             </div>
-
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
+            <div className="flex justify-end items-end pb-2">
+              <ReactFlagsSelect
+                countries={supportedCountry}
+                disabled
+                // to fill it with the one, which user's is currently selected...
+                selected={
+                  nationality_selected ||
+                  (userData && userData.data.nationality)
+                }
+                onSelect={(code) => {
+                  setNationality_selected(code);
+                  handleNationalityChange(code);
+                }}
+                className={classNameFlagsSelect}
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder="Nationality"
+              />
+            </div>
           </div>
 
+          <div className="flex items-end col-span-2">
+            <div className="flex flex-col ml-0 mt-0  w-[280px]">
+              <div className="flex mb-1 justify-end items-end flex-col">
+                <FormControl
+                  className="h-5"
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 120 }}
+                >
+                  <Select
+                    name="birthdate_private"
+                    id="birthdate_private"
+                    value={birthdate_private}
+                    disableUnderline
+                    onChange={handleBirthdatePrivacyChange}
+                    sx={{
+                      boxShadow: "none",
+                      height: 32,
+                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    }}
+                  >
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
+                  </Select>
+                </FormControl>
 
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DatePicker
+                      className="w-full"
+                      label="Birthdate"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      format="MMMM DD, YYYY"
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </div>
+            </div>
+          </div>
 
           <div className="flex items-baseline col-span-2 mt-4 ml-4 gap-2">
-          <div className="flex m-0 flex-col">
-          <FormControl>
-
-              <InputLabel id="athleteStatus-label">Athlete status:</InputLabel>
-              <Select
-
-
-                value={userData && userData.data.athleteStatus}
-                onChange={handleathleteStatusChange}
-
-                labelId="athleteStatus-label"
-                id="athleteStatus"
-                name="athleteStatus"
-              
-                label="Athlete status:"
-              
-               
-                className="w-[280px]"
-                style={{ color: "#000" }}
-                
-              >
-
-              {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
+            <div className="flex m-0 flex-col">
+              <FormControl>
+                <InputLabel id="athleteStatus-label">
+                  Athlete status:
+                </InputLabel>
+                <Select
+                  value={userData && userData.data.athleteStatus}
+                  onChange={handleathleteStatusChange}
+                  labelId="athleteStatus-label"
+                  id="athleteStatus"
+                  name="athleteStatus"
+                  label="Athlete status:"
+                  className="w-[280px]"
+                  style={{ color: "#000" }}
+                >
+                  {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
 
                 <MenuItem value={"s2"}>Logged in but no status</MenuItem> */}
 
-                <MenuItem value={"s3"}>I'm 99% taking the challenge and going</MenuItem>
+                  <MenuItem value={"s3"}>
+                    I'm 99% taking the challenge and going
+                  </MenuItem>
 
-                <MenuItem value={"s4"}>I'm most likely going</MenuItem>
+                  <MenuItem value={"s4"}>I'm most likely going</MenuItem>
 
-                <MenuItem value={"s5"}>
-                I'm maybe going
-                </MenuItem>
+                  <MenuItem value={"s5"}>I'm maybe going</MenuItem>
 
-                <MenuItem value={"s6"}>I'm definitely not going</MenuItem>
-             
-
-
-              </Select>
+                  <MenuItem value={"s6"}>I'm definitely not going</MenuItem>
+                </Select>
               </FormControl>
             </div>
 
             <div className="flex   flex-col">
-             
-                <TextField
-            
-            value={userData && userData.data.athleteStatement}
-                
-            onChange={handleathleteStatementChange}
-
-              name="athleteStatement"
-
-                  label="Athlete statement"
-                  placeholder="I can't wait to go"
-                 
-                  
-                  type="text"
-                  inputProps={{
-                    maxLength: 15,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+              <TextField
+                value={userData && userData.data.athleteStatement}
+                onChange={handleathleteStatementChange}
+                name="athleteStatement"
+                label="Athlete statement"
+                placeholder="I can't wait to go"
+                type="text"
+                inputProps={{
+                  maxLength: 15,
+                }}
+                sx={{
+                  m: 1,
+                  width: "280px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 5,
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
                     },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black",
                     },
-                  }}
-                />
-              </div>
-</div>
-
-
-
+                  },
+                }}
+              />
+            </div>
+          </div>
 
           <div className="flex justify-end mt-2 gap-2 items-end">
             <Button
