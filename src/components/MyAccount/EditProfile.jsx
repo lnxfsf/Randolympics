@@ -69,13 +69,9 @@ let BACKEND_SERVER_BASE_URL =
 
 import moment from "moment";
 
-
-
-
 const sxTextField = {
-
-  m:1,
-  mt:0,
+  m: 1,
+  mt: 0,
   ml: 0,
 
   width: "w-full",
@@ -91,15 +87,12 @@ const sxTextField = {
   },
   "& .MuiInputLabel-root": {
     fontFamily: "'Lexend', sans-serif",
-    
+
     "&.Mui-focused": {
       color: "black",
     },
-
-
   },
 };
-
 
 const EditProfile = () => {
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
@@ -457,10 +450,6 @@ const EditProfile = () => {
     }));
   };
 
-  // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[280px] ml-2 ${
-    selectedRole !== "AH" ? "mt-8" : ""
-  }`;
 
   // ? HERE, for crypto..
 
@@ -922,60 +911,46 @@ const EditProfile = () => {
           </p>
 
           <div className="flex flex-col w-[80%]">
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">Name</p>
+              <TextField
+                value={userData && userData.data.name}
+                /*  onChange={handleNameChange} */
 
-
-          <div className="flex flex-col w-full">
-          <p className="text-sm font-medium">Name</p>
-            <TextField
-              value={userData && userData.data.name}
-              /*  onChange={handleNameChange} */
-             
-              disabled
-              placeholder="John Doe"
-              id="name"
-              name="name"
-              type="text"
-              inputProps={{
-                maxLength: 255,
-              }}
-              sx={sxTextField}
-
-            />
-          </div>
-
+                disabled
+                placeholder="John Doe"
+                id="name"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                sx={sxTextField}
+              />
+            </div>
 
             <div className="flex gap-2 w-full">
-             
-             <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Email</p>
-              <TextField
-                // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
-                // now on change, needs to update values, so it can edit it
-                value={userData && userData.data.email}
-                onChange={handleEmailChange}
-                
-                className="w-full"
-                placeholder="johndoe@gmail.com"
-                id="email"
-                name="email"
-                type="email"
-                disabled
-                inputProps={{
-                  maxLength: 80,
-                }}
-               
-
-                sx={sxTextField}
-
-              />
-
+              <div className="flex flex-col w-full">
+                <p className="text-sm font-medium">Email</p>
+                <TextField
+                  // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
+                  // now on change, needs to update values, so it can edit it
+                  value={userData && userData.data.email}
+                  onChange={handleEmailChange}
+                  className="w-full"
+                  placeholder="johndoe@gmail.com"
+                  id="email"
+                  name="email"
+                  type="email"
+                  disabled
+                  inputProps={{
+                    maxLength: 80,
+                  }}
+                  sx={sxTextField}
+                />
               </div>
 
-              <FormControl
-                className="h-5"
-
-                sx={{ minWidth: 120 }}
-              >
+              <FormControl className="h-5" sx={{ minWidth: 120 }}>
                 <Select
                   name="email_private"
                   id="email_private"
@@ -985,9 +960,9 @@ const EditProfile = () => {
                   sx={{
                     mt: 2.5,
                     fontFamily: "'Lexend', sans-serif",
-  
+
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 2, 
+                      borderRadius: 2,
                       fontFamily: "'Lexend', sans-serif",
                     },
                     "& fieldset": {
@@ -995,76 +970,156 @@ const EditProfile = () => {
                     },
                   }}
                 >
-                  <MenuItem value={1} sx={{fontFamily: "'Lexend', sans-serif"}} >Private</MenuItem>
-                  <MenuItem value={0} sx={{fontFamily: "'Lexend', sans-serif"}} >Public</MenuItem>
+                  <MenuItem
+                    value={1}
+                    sx={{ fontFamily: "'Lexend', sans-serif" }}
+                  >
+                    Private
+                  </MenuItem>
+                  <MenuItem
+                    value={0}
+                    sx={{ fontFamily: "'Lexend', sans-serif" }}
+                  >
+                    Public
+                  </MenuItem>
                 </Select>
               </FormControl>
             </div>
-
 
             <div className="flex flex-col w-full">
-             
-            <div className="flex gap-2 w-full">
- <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Phone number</p>
-              <TextField
-                value={userData && userData.data.phone}
-                onChange={handlePhoneChange}
-               
-                placeholder="+1 212 456 7890"
-                id="phone"
-                name="phone"
-                type="tel"
-                inputProps={{
-                  maxLength: 15,
-                }}
-                sx={sxTextField}
-              />
-              </div>
+              <div className="flex gap-2 w-full">
+                <div className="flex flex-col w-full">
+                  <p className="text-sm font-medium">Phone number</p>
+                  <TextField
+                    value={userData && userData.data.phone}
+                    onChange={handlePhoneChange}
+                    placeholder="+1 212 456 7890"
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputProps={{
+                      maxLength: 15,
+                    }}
+                    sx={sxTextField}
+                  />
+                </div>
 
-              <FormControl
-                className="h-5"
-
-                sx={{ minWidth: 120 }}
-              >
-                <Select
-                 
-                  name="phone_private"
-                  id="phone_private"
-                  value={phone_private}
-                  disableUnderline
-                  onChange={handlePhonePrivacyChange}
-                  sx={{
-                    mt: 2.5,
-                    fontFamily: "'Lexend', sans-serif",
-  
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2, 
+                <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                  <Select
+                    name="phone_private"
+                    id="phone_private"
+                    value={phone_private}
+                    disableUnderline
+                    onChange={handlePhonePrivacyChange}
+                    sx={{
+                      mt: 2.5,
                       fontFamily: "'Lexend', sans-serif",
-                    },
-                    "& fieldset": {
-                      borderRadius: 2,
-                    },
-                  }}
-                >
-                  <MenuItem value={1}>Private</MenuItem>
-                  <MenuItem value={0}>Public</MenuItem>
-                </Select>
-              </FormControl>
 
-
-              
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        fontFamily: "'Lexend', sans-serif",
+                      },
+                      "& fieldset": {
+                        borderRadius: 2,
+                      },
+                    }}
+                  >
+                    <MenuItem value={1}>Private</MenuItem>
+                    <MenuItem value={0}>Public</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
             </div>
-</div>
 
+            
+
+ <div className="flex gap-2 w-full">
+          
+          <div className="flex flex-col w-full ">
+           <p className="text-sm font-medium">Birthdate</p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["DatePicker"]}>
+                            <DatePicker
+                              className="w-full"
+                           
+                              value={selectedDate}
+                              onChange={handleDateChange}
+                              format="MMMM DD, YYYY"
+
+                             
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                
+               </div>	
+                
+                
+                
+                      <FormControl
+                          className="h-5"
+                         
+                          sx={{ minWidth: 120 }}
+                        >
+                          <Select
+                            name="birthdate_private"
+                            id="birthdate_private"
+                            value={birthdate_private}
+                            disableUnderline
+                            onChange={handleBirthdatePrivacyChange}
+                           sx={{
+                              mt: 3.4,
+                              fontFamily: "'Lexend', sans-serif",
+        
+                              "& .MuiOutlinedInput-root": {
+                                borderRadius: 2,
+                                fontFamily: "'Lexend', sans-serif",
+                              },
+                              "& fieldset": {
+                                borderRadius: 2,
+                              },
+                            }}
+                          >
+                            <MenuItem value={1}>Private</MenuItem>
+                            <MenuItem value={0}>Public</MenuItem>
+                          </Select>
+                        </FormControl>
+                
+                
+                      </div>
+
+
+       <div className="flex flex-col w-full mt-4">
+       <p className="text-sm font-medium">Country</p>
+              <ReactFlagsSelect
+                countries={supportedCountry}
+                disabled
+                // to fill it with the one, which user's is currently selected...
+                selected={
+                  nationality_selected ||
+                  (userData && userData.data.nationality)
+                }
+                onSelect={(code) => {
+                  setNationality_selected(code);
+                  handleNationalityChange(code);
+                }}
+                className="w-full"
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder="Nationality"
+              />
+            </div>
+                
+                
           </div>
 
-          <div className="row-span-3 flex items-start justify-start flex-col">
-            {!passportUpload && (
-              <>
-                <p className="pb-2">
+          <p className="pb-2 mt-2">
                   <b>Passport photo</b>
                 </p>
+          <div className="row-span-3 flex items-center justify-start gap-2">
+            {!passportUpload && (
+              <>
+               
                 <img
                   src={
                     BACKEND_SERVER_BASE_URL +
@@ -1072,21 +1127,43 @@ const EditProfile = () => {
                     passportImage
                   }
                   alt="Profile"
-                  className="w-[331px] h-[222px] object-fit  passport-photo"
+                  className="w-[120px] h-[90px] object-fit  passport-photo"
                 />
                 {passportExpiryDate && (
                   <p className="pt-2 " style={{ color: "#DEDEDE" }}>
                     Passport expires: <b>{passportExpiryDate}</b>
                   </p>
                 )}
-                <p
+               
+               
+               {/*  <p
                   className="edit-photo"
                   onClick={() => {
                     setPassportUpload(!passportUpload);
                   }}
                 >
                   <u>Edit passport photo</u>
-                </p>
+                </p> */}
+
+                <Button
+                className="w-28   "
+                style={{  textTransform: 'none' }}
+               
+                sx={{
+                  height: "40px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 2,
+                  border: `1px solid #444444`,
+          
+                }}
+                onClick={() => {setPassportUpload(!passportUpload);}}
+
+              >
+                <img src="/myaccount/upload.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Change</span>
+              </Button>
+
+
               </>
             )}
 
@@ -1116,7 +1193,7 @@ const EditProfile = () => {
                   allowImageCrop={false}
                   allowImageResize={false}
                   allowImageTransform={false}
-                  imagePreviewHeight={222}
+                  imagePreviewHeight={90}
                   imageCropAspectRatio="1:1"
                   /*            imageResizeTargetWidth={100}
                     imageResizeTargetHeight={100} */
@@ -1128,9 +1205,31 @@ const EditProfile = () => {
                   imageEditAllowEdit={false}
                 />
 
-                <p className="edit-photo" onClick={sendPassportUpload}>
+              {/*   <p className="edit-photo" onClick={sendPassportUpload}>
                   <u>Save passport photo</u>
-                </p>
+                </p> */}
+
+
+                <Button
+                className="w-28   "
+                style={{  textTransform: 'none' }}
+               
+                sx={{
+                  height: "40px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 2,
+                  border: `1px solid #444444`,
+          
+                }}
+                onClick={sendPassportUpload}
+
+              >
+                <img src="/myaccount/save.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Save</span>
+              </Button>
+
+
+
               </>
             )}
 
@@ -1283,7 +1382,6 @@ const EditProfile = () => {
                 }}
               />
             </div>
-           
           </div>
 
           <div className="flex items-end col-span-2">
@@ -1365,26 +1463,7 @@ const EditProfile = () => {
                 </div>
               )}
             </div>
-            <div className="flex justify-end items-end pb-2">
-              <ReactFlagsSelect
-                countries={supportedCountry}
-                disabled
-                // to fill it with the one, which user's is currently selected...
-                selected={
-                  nationality_selected ||
-                  (userData && userData.data.nationality)
-                }
-                onSelect={(code) => {
-                  setNationality_selected(code);
-                  handleNationalityChange(code);
-                }}
-                className={classNameFlagsSelect}
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality"
-              />
-            </div>
+           
           </div>
 
           <div className="flex items-end col-span-2">
