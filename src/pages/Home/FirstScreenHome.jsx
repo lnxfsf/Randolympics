@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { CountDownTimerHome } from "../../components/Home/CountDownTimerHome";
 
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 
 // for countdown
@@ -65,11 +65,10 @@ const FirstScreenHome = () => {
 
    
         <p className="text-2xl md:text-4xl p-2 font-bold  text-center" style={{ color: "white" }}>
-          Real People. 
-           {t('welcomeMessage')} 
-          <br />Randomly Selected.
-          <br />
-          Competing in Olympic Sports
+          {t('home.firstScreen.title1')} 
+          <br />{t('home.firstScreen.title2')} 
+          <br />{t('home.firstScreen.title3')} 
+          
         </p>
        
        
@@ -77,14 +76,11 @@ const FirstScreenHome = () => {
 
 
 
-           {/* // TODO, treba da izvadis u component ovo.. */} 
-        
-
         <CountDownTimerHome />
 
         <div className="flex items-center justify-center  flex-col pt-8">
           <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
-            Curious about possible schedules?
+          {t('home.firstScreen.subtitle1')} 
           </p>
 
           <Button
@@ -111,7 +107,7 @@ const FirstScreenHome = () => {
             type="submit"
           >
             <span className="popins-font" style={{ textTransform: "none" }}>
-              Randomize
+              {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>
         </div>

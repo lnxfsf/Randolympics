@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FAQComponent } from "./FAQComponent";
+import {useTranslation} from "react-i18next";
 
 // ? expand more, arrow icon transformation
 
@@ -23,6 +24,9 @@ const ExpandMore = styled((props) => {
 // ? expand more
 
 const FAQ = () => {
+  const { t } = useTranslation();
+
+
   const [expandedFirstText, setExpandedFirstText] = useState(false);
   const [expandedSecondText, setExpandedSecondText] = useState(false);
   const [expandedThirdText, setExpandedThirdText] = useState(false);
@@ -36,7 +40,7 @@ const FAQ = () => {
         id="FAQ"
       >
         <p className="text-2xl md:text-4xl text-red_second mt-8 mb-4  ">
-          <b>FAQ</b>
+          <b>{t('home.faq.title1')}</b>
         </p>
 
         <div className="w-[90%]  md:w-1/2">
@@ -56,7 +60,7 @@ const FAQ = () => {
               }}
               className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second  "
             >
-              Campaigns and Fundraising
+            {t('home.faq.title4')}
             </p>
 
             <ExpandMore
@@ -75,48 +79,41 @@ const FAQ = () => {
             <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
               <div className="bg-[#F7FAFA] rounded-b-lg p-4">
                 <FAQComponent
-                  title={
-                    "Can a supporter of a campaign attend the Randolympics ?"
-                  }
-                  content={
-                    "Yes, absolutely! Everyone is welcome to join and be a part of this incredible adventure. Supporters, friends, and fans are all encouraged to come and cheer on their athletes, experience the excitement, and enjoy the community atmosphere."
-                  }
+                  title={t('home.faq.title2')}
+                 
+
+                  content={t('home.faq.content1')}
+
+
                 />
 
                 <FAQComponent
-                  title={"Who can start a campaign ?"}
-                  content={
-                    "Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals "
-                  }
+
+                  title={t('home.faq.title3')}
+                  
+                  
+                  content={t('home.faq.content2')}
                 />
 
                 <FAQComponent
-                  title={"Who can participate as an athlete?"}
-                  content={
-                    "Anyone can participate as an athlete! The only requirements are that you have a valid passport and are at least 12 years old. There’s no upper age limit, so no one is too old or too young to join!"
-                  }
+                  title={t('home.faq.title5')}
+                  content={t('home.faq.content3')}
                 />
 
                 <FAQComponent
-                  title={"How can I get more supporters for my campaign ?"}
-                  content="
-To gather more supporters, share your campaign on social media, send personalized messages to your network on WhatsApp, and spread the word in your gym, sports club, or community. The more people know, the more they can support! 
- "
+                  title={t('home.faq.title6')}
+                  content={t('home.faq.content4')}
+              
+              />
+
+                <FAQComponent
+                  title={t('home.faq.title7')}
+                  content={t('home.faq.content5')}
+
                 />
 
                 <FAQComponent
-                  title="
-
-Why is there a minimum support amount of USD 1?
-
-"
-                  content="
-
-This small minimum amount is a safeguard against fake or automated accounts. It helps ensure that each supporter is a real, unique person genuinely interested in backing an athlete.
- "
-                />
-
-                <FAQComponent
+                
                   title="
 
 How do you verify that each supporter is unique?

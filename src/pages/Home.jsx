@@ -55,7 +55,7 @@ ReactGA.initialize(TRACKING_ID);
 
 
 const Home = () => {
- 
+  const { t } = useTranslation();
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
@@ -104,7 +104,7 @@ const Home = () => {
        
       >
         <p className="text-2xl md:text-4xl mt-8 font-bold "  >
-          <b>Our Competitions</b>
+          <b> {t('home.ourCompetitions.title1')}</b>
         </p>
 
         {/* outer box   */}

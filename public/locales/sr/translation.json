@@ -1,4 +1,41 @@
 {
-  "welcomeMessage": "SERBIAN",
-  "instructions": "Click here to see intruction"
+  "home": {
+    "firstScreen": {
+      "title1": "Pravi ljudi.",
+      "title2": "Nasumično odabrani.",
+      "title3": "Takmiče se u olimpijskim sportovima",
+
+      "countdown1": "Dani",
+      "countdown2": "Sati",
+      "countdown3": "Minuti",
+      "countdown4": "Sekunde",
+      "countdown5": "Stokholm, Švedska",
+      "countdown6": "25. jun - 2. jul 2028",
+
+      "subtitle1": "Zanima vas mogući raspored?",
+      "subtitle2": "Nasumično"
+    },
+
+    "secondScreen": {
+      "title1": "Od kauč krompira do",
+      "title2": "Olimpijskog šampiona!",
+
+      "content1": "Pretvorite svog prijatelja iz kauč krompira u osvajača zlatne medalje - prijavite ga započinjući njegovu Randolimpijsku kampanju!",
+      "content2": "Pokažite mu da verujete u njegov potencijal, to će biti veliko iznenađenje i ogroman kompliment.",
+      "content3": "Podignite ih sa kauča, dajući im fitnes program koji zaista funkcioniše.",
+      "content4": "Motivišite ih, upravljajući njihovim napretkom i bodreći ih na svakom koraku.",
+      "content5": "Najbolje od svega: mnogo zabave za sve uključene!",
+
+      "button1": "Prijavi prijatelja",
+      "button2": "Prijavi se"
+    },
+
+    "ourCompetitions": {
+      "title1": "Naša takmičenja",
+
+      "sport1": "Streljaštvo",
+      "sport2": "Atletika",
+      "sport3": "Atletika"
+    }
+  }
 }

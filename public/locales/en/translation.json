@@ -1,4 +1,173 @@
 {
-  "welcomeMessage": "ENGLISH",
-  "instructions": "ENGLISH todo Real People.\nRandomly Selected.\nCompeting in Olympic Sports"
+  "home": {
+    "firstScreen": {
+      "title1": "Real People.",
+      "title2": "Randomly Selected.",
+      "title3": "Competing in Olympic Sports",
+
+      "countdown1": "Days",
+      "countdown2": "Hours",
+      "countdown3": "Minutes",
+      "countdown4": "Sec",
+      "countdown5": "Stockholm, Sweden",
+      "countdown6": "June 25th - July 2nd 2028",
+
+      "subtitle1": "Curious about possible schedules?",
+      "subtitle2": "Randomize"
+    },
+
+    "secondScreen": {
+      "title1": "From Couch Potato to",
+      "title2": "Gold Medalist !",
+
+      "content1": "Transform your friend from couch potato to gold medalist - sign them up by starting their Randolympic campaign!",
+      "content2": "Show them you believe in their potential, it will be a big surprise and a huge compliment.",
+      "content3": "Get them out the couch, giving them a fitness program that finally works.",
+      "content4": "Motivate them, managing their progress and cheering them on all the way.",
+      "content5": "The best of all: a lot of fun for everyone involved !",
+
+      "button1": "Sign Up A Friend",
+      "button2": "Log In"
+    },
+
+    "ourCompetitions": {
+      "title1": "Our Competitions",
+
+      "sport1": "Archery",
+      "sport2": "Athletics",
+      "sport3": "Badmington",
+      "sport4": "Gymnastics",
+      "sport5": "Skateboard",
+      "sport6": "Weightlifting",
+      "sport7": "Fencing",
+      "sport8": "Field Hockey",
+
+      "sport9": "Golf",
+      "sport10": "Shooting",
+      "sport11": "Volleyball",
+      "sport12": "Diving",
+      "sport13": "Modern Pentathlon",
+      "sport14": "Rowing",
+      "sport15": "Football",
+      "sport16": "Sailing",
+      "sport17": "Thriatlon",
+      "sport18": "Cycling",
+      "sport19": "Karate",
+      "sport20": "Swimming",
+      "sport21": "Table Tennis",
+      "sport22": "Rugby Sevens",
+      "sport23": "Tennis",
+      "sport24": "Cannoening",
+      "sport25": "Judo",
+      "sport26": "Surfing",
+      "sport27": "Swimrun",
+      "sport28": "Swimrun Sprint",
+      "sport29": "Taekwondo",
+      "sport30": "Basketball",
+      "sport31": "Handball",
+      "sport32": "Sport Climbing",
+      "sport33": "Wrestling"
+    },
+
+    "ourBeliefs": {
+
+      "title1": "Our Beliefs",
+
+
+      "content1": "We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.",
+      "content2": "In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. We stand against any political pressure to exclude athletes based on their identity or beliefs.",
+      "content3": "Transparency is our commitment, using open-source technology for payments and communication. Our democratic approach guarantees equal rights and voting power for every nation and citizen.",
+      "content4": "We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values.",
+
+      "subtitle1": "Global Inclusion and Support",
+      "subtitle2": "Commitment to Transparency",
+      "subtitle3": "Adherence to Core Values"
+
+
+
+    },
+
+    "economics": {
+      "title1": "Economics: Four types of income",
+
+      "title2": "Campaign donations",
+      "title3": "Broadcasting Rights",
+      "title4": "Sponsorship",
+    "title5": "Loans", 
+
+      "subtitle1": "Our organization has four types of income sources.",
+      "subtitle2": "Most payments are published on the blockchain.",
+
+
+      "content1": "Income generated from donations made by supporters to campaigns for athletes.",
+      "content2": "Even if athletes do not make it to the games, whether due to injury, a personal decision, or simply not being randomly selected, these funds contribute to the overall success of the Randolympics. These donations help to cover organizational costs and ensure...",
+      "content3": "Broadcasting Rights involve granting media entities the permission to cover and report on Randolympics events.",
+      "content4": "These rights can be acquired by various media platforms, such as:",
+      "content5": "YouTube Channels: Independent or corporate channels that wish to broadcast the events online.",
+      "content6": "TikTok Influencers: Content creators on TikTok who want to provide live...",
+      "content7": "Sponsorship is a significant source of income where various entities can sponsor different aspects of the Randolympics. This includes: ",
+      "content8": "Events: Companies or brands can sponsor individual events within the Randolympics.",
+      "content9": "National Teams: Sponsorship deals can be made with national teams, allowing sponsors to have their...",
+      "content10": "Loans are a source of income for the Randolympics organization where they receive funding from loan givers.",
+      "content11": "These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the...",
+
+
+
+      "text1": "Read more"
+
+
+
+    },
+
+    "howItWorks": {
+      "title1": "How it works",
+      "title2": "Now",
+      "title3": "Campaign Phase: Nominate and Support",
+      "title4": "June 25th 2026",
+      "title5": "Final Ranking and Selection",
+      "title6": "June 2026 - June 2028",
+      "title7": "Two-Year Preparation Period",
+      "title8": "June 25th 2028",
+
+
+      "title9": "Opening Ceremony: Athletes receive their randomly assigned sports",
+
+      "title10": "June 25th to July 2nd, 2028",
+
+
+      "title11": "Games: The Ultimate Test"
+
+
+
+    },
+
+    "faq": {
+      "title1": "FAQ",
+      "title2": "Can a supporter of a campaign attend the Randolympics ?",
+      "title3": "Who can start a campaign ?",
+      "title4": "Campaigns and Fundraising",
+      "title5": "Who can participate as an athlete?",
+      "title6": "How can I get more supporters for my campaign ?",
+
+
+      "title7": "Why is there a minimum support amount of USD 1?",
+      
+
+
+      "content1": "Yes, absolutely! Everyone is welcome to join and be a part of this incredible adventure. Supporters, friends, and fans are all encouraged to come and cheer on their athletes, experience the excitement, and enjoy the community atmosphere.",
+      "content2": "Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals",
+      "content3": "Anyone can participate as an athlete! The only requirements are that you have a valid passport and are at least 12 years old. There’s no upper age limit, so no one is too old or too young to join!",
+      "content4": "To gather more supporters, share your campaign on social media, send personalized messages to your network on WhatsApp, and spread the word in your gym, sports club, or community. The more people know, the more they can support!",
+
+      "content5": "This small minimum amount is a safeguard against fake or automated accounts. It helps ensure that each supporter is a real, unique person genuinely interested in backing an athlete."
+
+
+
+
+
+
+
+    }
+
+  }
 }

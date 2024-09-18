@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
+import {useTranslation} from "react-i18next";
+
+
 const SecondScreenHome = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -12,36 +16,36 @@ const SecondScreenHome = () => {
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
         <div className="lg:basis-1/2 flex items-center justify-end">
           <div className="">
-            {/* //! lg:p-12 */}
+            {/* // lg:p-12 */}
 
             <p className="text-2xl md:text-4xl font-bold mb-4">
-              From Couch Potato to <br />
-              Gold Medalist !
+            {t('home.secondScreen.title1')} <br />
+            {t('home.secondScreen.title2')}
             </p>
 
             <p className="font-medium mb-4">
-              Transform your friend from couch potato to gold medalist - sign
-              them up by starting their Randolympic campaign!
+            {t('home.secondScreen.content1')}
             </p>
 
             <ul className="pl-4 font-medium  ">
               <li className="text-base">
-                Show them you believe in their potential, it will be a big
-                surprise and a huge compliment.{" "}
+              {t('home.secondScreen.content2')}
+                
               </li>
 
               <li className="text-base">
-                Get them out the couch, giving them a fitness program that
-                finally works.
+              {t('home.secondScreen.content3')}
+                
               </li>
 
               <li className="text-base">
-                Motivate them, managing their progress and cheering them on all
-                the way.
+              {t('home.secondScreen.content4')}
+                
               </li>
 
               <li className="text-base">
-                The best of all: a lot of fun for everyone involved !
+              {t('home.secondScreen.content5')}
+                
               </li>
             </ul>
 
@@ -70,7 +74,7 @@ const SecondScreenHome = () => {
                 variant="text"
               >
                 <span className="lexend-font font-semibold">
-                  Sign Up A Friend
+                {t('home.secondScreen.button1')}
                 </span>
               </Button>
 
@@ -94,7 +98,7 @@ const SecondScreenHome = () => {
                 }}
                 variant="text"
               >
-                <span className="lexend-font font-semibold">Log In</span>
+                <span className="lexend-font font-semibold">{t('home.secondScreen.button2')}</span>
               </Button>
             </div>
           </div>

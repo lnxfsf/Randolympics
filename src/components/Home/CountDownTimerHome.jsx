@@ -1,6 +1,10 @@
 
 import React, { useState, useEffect } from "react";
 
+import {useTranslation} from "react-i18next";
+
+
+
 // for countdown
 const calculateTimeLeft = (targetDate) => {
     const now = new Date();
@@ -33,6 +37,7 @@ const formatDate = (dateString) => {
 
 
 const CountDownTimerHome = () => {
+  const { t } = useTranslation();
 
     const targetDate = new Date("2028-06-25T00:00:00");
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
@@ -62,7 +67,7 @@ const CountDownTimerHome = () => {
              <p className="text-2xl md:text-4xl ">
                <b>{timeLeft.days ?? 0}</b>
              </p>
-             <p>Days</p>
+             <p>{t('home.firstScreen.countdown1')}</p>
            </div>
 
            <div className="flex flex-col justify-center items-center">
@@ -74,7 +79,7 @@ const CountDownTimerHome = () => {
 
            <div className="flex flex-col items-center">
              <p className="text-2xl md:text-4xl">{timeLeft.hours ?? 0}</p>
-             <p>Hours</p>
+             <p>{t('home.firstScreen.countdown2')}</p>
            </div>
 
            <div className="flex flex-col justify-center items-center">
@@ -86,7 +91,7 @@ const CountDownTimerHome = () => {
 
            <div className="flex flex-col items-center">
              <p className="text-2xl md:text-4xl">{timeLeft.minutes ?? 0}</p>
-             <p>Minutes</p>
+             <p>{t('home.firstScreen.countdown3')}</p>
            </div>
 
 
@@ -99,7 +104,7 @@ const CountDownTimerHome = () => {
 
            <div className="flex flex-col items-center md:mr-4">
              <p className="text-2xl md:text-4xl">{timeLeft.seconds ?? 0}</p>
-             <p>Sec</p>
+             <p>{t('home.firstScreen.countdown4')}</p>
            </div>
 
          </div>
@@ -112,11 +117,11 @@ const CountDownTimerHome = () => {
           
            <div className="flex gap-2">
              <img src="/home/location.svg" />
-             <p className="text-sm md:text-normal font-bold ">Stockholm, Sweden</p>
+             <p className="text-sm md:text-normal font-bold ">{t('home.firstScreen.countdown5')}</p>
            </div>
 
 
-           <p className="max-md:text-xs md:text-normal  font-medium  ">June 25th - July 2nd 2028</p>
+           <p className="max-md:text-xs md:text-normal  font-medium  ">{t('home.firstScreen.countdown6')}</p>
          </p>
 
 

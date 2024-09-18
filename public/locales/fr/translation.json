@@ -1,4 +1,8 @@
 {
-  "welcomeMessage": "FRANCE ",
-  "instructions": "Click here to see intruction"
+
+
+  "home": {
+    "welcomeMessage": "SERBIAN",
+    "instructions": "Click here to see instruction"
+  }
 }
