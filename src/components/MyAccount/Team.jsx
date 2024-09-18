@@ -441,7 +441,7 @@ const Team = () => {
             onChange={handlePaginationChange}
             color="primary"
             sx={{
-              color: "#000000",
+             
               "& .MuiPaginationItem-root": {
                 "&.Mui-selected": {
                   backgroundColor: "#FFEAEA",

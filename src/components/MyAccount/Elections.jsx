@@ -525,7 +525,7 @@ const Elections = () => {
 
   return (
     <>
-      <HeaderMyProfile />
+
       <div className="flex m-0 flex justify-start items-center gap-4">
         <FormControl
           variant="standard"
