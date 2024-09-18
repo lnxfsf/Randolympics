@@ -18,10 +18,14 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
 import { useLocation } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
+
+
 
 const MyAccount = () => {
 
- 
+  const { t } = useTranslation();
   
 
 
@@ -193,7 +197,7 @@ const MyAccount = () => {
               onClick={() => handleClick("myAccount")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">My Account</p>
+                <p className="text-red_second font-medium "> My Account  {t('welcomeMessage')}</p>
                 <img src="/myaccount/user.svg" className="icon" />
               </div>
             </li>

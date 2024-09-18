@@ -5,6 +5,8 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { CountDownTimerHome } from "../../components/Home/CountDownTimerHome";
 
+import {useTranslation, Trans} from "react-i18next";
+
 
 // for countdown
 const calculateTimeLeft = (targetDate) => {
@@ -37,7 +39,7 @@ const formatDate = (dateString) => {
 
 
 const FirstScreenHome = () => {
-
+  const { t } = useTranslation();
 
   const targetDate = new Date("2028-06-25T00:00:00");
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
@@ -61,13 +63,16 @@ const FirstScreenHome = () => {
 
 
 
+   
         <p className="text-2xl md:text-4xl p-2 font-bold  text-center" style={{ color: "white" }}>
           Real People. 
+           {t('welcomeMessage')} 
           <br />Randomly Selected.
           <br />
           Competing in Olympic Sports
         </p>
-
+       
+       
        
 
 

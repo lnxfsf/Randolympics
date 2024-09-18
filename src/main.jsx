@@ -13,6 +13,8 @@ import '@mui/material/styles/styled';
 import { HelmetProvider } from "react-helmet-async";
 
 
+import '../i18n';
+
 /* 
 const app = (
   <Router>
