@@ -7,35 +7,30 @@ import "reactjs-popup/dist/index.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
+import "../../../styles/editprofile.scoped.scss";
+
 import moment from "moment";
 
 const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
 
-
   function calculateAge(birthdate) {
     // if birthdate is empty, or invalid..
     if (!birthdate || !moment(birthdate).isValid()) {
-      return '-';
+      return "-";
     }
 
-  
     const today = moment();
-    console.log("danas"+today)
+    console.log("danas" + today);
 
     const birthDate = moment(birthdate);
-    console.log("rodjendan"+birthDate)
+    console.log("rodjendan" + birthDate);
 
-    const years = today.diff(birthDate, 'years');
-    console.log("razlika god"+years)
+    const years = today.diff(birthDate, "years");
+    console.log("razlika god" + years);
 
-  
     return years;
   }
-
-
-
-
 
   // ranking, also depends on user type..
   if (selectedRole == "AH") {
@@ -62,34 +57,21 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
 
   const name = user.name;
 
-
-  
-
-  
-
-  
-  if(user.birthdate_private == 1){
+  if (user.birthdate_private == 1) {
     var age = "private";
   } else {
     var age = calculateAge(user.birthdate);
   }
 
-
-
-  
-
-  if(user.email_private == 1){
+  if (user.email_private == 1) {
     var email = "private";
   } else {
     var email = user.email;
   }
 
-
-
-
-  // private je 1 
-  // public je 0 
-  if(user.phone_private == 1){
+  // private je 1
+  // public je 0
+  if (user.phone_private == 1) {
     var phone = "private";
   } else {
     var phone = user.phone;
@@ -101,18 +83,58 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
     <>
       <tr key={index}>
         {selectedRole === "AH" ? (
-          <p>
+          <p className="tdt">
             {gender} {rank}
           </p>
         ) : (
-          <p>{rank}</p>
+          <p className="tdt">{rank}</p>
         )}
 
-        <td>{name}</td>
-        <td>{age}</td>
+        <td className="tdt">{name}</td>
 
-        <td>{email}</td>
-        <td>{phone}</td>
+        {/* <td className="tdt" >{age}</td> */}
+
+        {/* if it's private */}
+        <td className="tdt">
+          <div className="flex gap-2">
+            {age === "private" && (
+              <img
+                className=" bg-[#EAEAEA] p-1 "
+                src="editprofile/private_lock.svg"
+              />
+            )}
+            {age}
+          </div>
+
+        </td>
+
+        <td className="tdt">
+        <div className="flex gap-2">
+            {email === "private" && (
+              <img
+                className=" bg-[#EAEAEA] p-1 "
+                src="editprofile/private_lock.svg"
+              />
+            )}
+            {email}
+          </div>
+          
+
+        </td>
+        <td className="tdt">
+        <div className="flex gap-2">
+            {phone === "private" && (
+              <img
+                className=" bg-[#EAEAEA] p-1"
+                src="editprofile/private_lock.svg"
+              />
+            )}
+            {phone}
+          </div>
+          
+
+          
+          </td>
       </tr>
     </>
   );

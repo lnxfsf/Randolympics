@@ -161,55 +161,54 @@ const Team = () => {
 
   const fetchTeamMates = async () => {
     try {
-      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
-        params: {
-          limit: 10,
-          offset: (otherPage - 1) * 10,
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
+        {
+          params: {
+            limit: 10,
+            offset: (otherPage - 1) * 10,
 
-          searchText: searchText,
+            searchText: searchText,
 
-          userId: userId,
-          user_type: selectedRole, // and that's by dropdown, what's selected to show
-          genderFilter: genderFilter,
-          categoryFilter: categoryFilter,
-          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
+            userId: userId,
+            user_type: selectedRole, // and that's by dropdown, what's selected to show
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
 
-          needGender: needGender,
+            needGender: needGender,
 
-          nationality: code, // we show only from this user country
-        },
-      });
+            nationality: code, // we show only from this user country
+          },
+        }
+      );
 
       console.log("salje userid:" + userId);
 
       setOtherUsers(response.data);
 
-
-
-
-
-
-
       // for next page, to check if there's more !
-      const isThereNextPage = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
-        params: {
-          limit: 10,
-          offset: (otherPage) * 10,
+      const isThereNextPage = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
+        {
+          params: {
+            limit: 10,
+            offset: otherPage * 10,
 
-          searchText: searchText,
+            searchText: searchText,
 
-          userId: userId,
-          user_type: selectedRole, // and that's by dropdown, what's selected to show
-          genderFilter: genderFilter,
-          categoryFilter: categoryFilter,
-          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
+            userId: userId,
+            user_type: selectedRole, // and that's by dropdown, what's selected to show
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
 
-          needGender: needGender,
+            needGender: needGender,
 
-          nationality: code, // we show only from this user country
-        },
-      });
-
+            nationality: code, // we show only from this user country
+          },
+        }
+      );
 
       if (isThereNextPage.data.length == 0) {
         setHasMoreOthers(false);
@@ -222,15 +221,13 @@ const Team = () => {
   };
 
   const getCurrentNP = async () => {
-
-
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/currentNP`,
-         {params: {
-          nationality: code,  // this is, if NP is from DZ "algeria", then, he will be NP for these athletes... 
-         },
-
+        {
+          params: {
+            nationality: code, // this is, if NP is from DZ "algeria", then, he will be NP for these athletes...
+          },
         }
       );
 
@@ -258,8 +255,6 @@ const Team = () => {
 
   return (
     <>
-      <HeaderMyProfile />
-
       {currentUserType === "AH" && (
         <div className="flex gap-16">
           <div className="m-4 ml-0">
@@ -277,7 +272,6 @@ const Team = () => {
           </div>
         </div>
       )}
-
 
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end mt-8">
@@ -339,23 +333,42 @@ const Team = () => {
         />
       </div>
 
-      <div className="mt-8">
-        <table className="w-full">
-          <thead>
-            <tr>
-              <th className="w-[15%]">Rank</th>
-              <th className="w-[25%]">Name</th>
-              <th className="w-[8%]">Age</th>
-              <th className="w-[26%]">Email</th>
-              <th className="w-[15%]">Phone</th>
-            </tr>
-          </thead>
-          <tbody>
-            {otherUsers.map((user, index) => (
-              <TeamList user={user} index={index} selectedRole={selectedRole} currentUserType={currentUserType} />
-            ))}
-          </tbody>
-        </table>
+      {/* table */}
+      <div className="mt-8 p-4 lexend-font text-black_second">
+
+       
+
+
+          <table className="w-full">
+            <thead>
+              <tr>
+                
+                
+                <th className="w-[15%] tht">Rank</th>
+              
+                
+
+                <th className="w-[25%] tht">Name</th>
+                <th className="w-[10%] tht">Age</th>
+                <th className="w-[24%] tht">Email</th>
+                <th className="w-[15%] tht">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              {otherUsers.map((user, index) => (
+                <TeamList
+                  user={user}
+                  index={index}
+                  selectedRole={selectedRole}
+                  currentUserType={currentUserType}
+                />
+              ))}
+            </tbody>
+          </table>
+
+       
+
+
       </div>
 
       <div className="flex justify-center mt-4">
