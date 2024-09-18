@@ -205,8 +205,12 @@ const Team = () => {
         `${BACKEND_SERVER_BASE_URL}/listsData/team`,
         {
           params: {
+
+
             limit: 10,
             offset: (otherPage - 1) * 10,
+
+            
 
             searchText: searchText,
 
@@ -433,15 +437,16 @@ const Team = () => {
 
       {/* pagination */}
 
-      <div className="flex justify-center mt-4 w-full ">
+      <div className="flex justify-center items-start mt-4    w-full ">
+      
+    
         <Stack>
           <Pagination
-            count={maxPages}
+            count={maxPages} 
             page={otherPage}
             onChange={handlePaginationChange}
-            color="primary"
+         
             sx={{
-             
               "& .MuiPaginationItem-root": {
                 "&.Mui-selected": {
                   backgroundColor: "#FFEAEA",
@@ -451,6 +456,13 @@ const Team = () => {
             }}
           />
         </Stack>
+        
+        
+        
+        
+         
+
+       
       </div>
 
       {currentUserType === "NP" && selectedRole == "AH" && (
