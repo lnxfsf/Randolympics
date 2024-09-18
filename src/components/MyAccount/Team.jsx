@@ -14,6 +14,12 @@ import countryList from "react-select-country-list";
 import "../../styles/editprofile.scoped.scss";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
+
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -253,12 +259,15 @@ const Team = () => {
     }
   };
 
+  const handleChange = (event, value) => {
+    setOtherPage(value);
+  };
+
   return (
     <>
       {currentUserType === "AH" && (
         <div className="flex gap-16 lexend-font text-black_second">
-         
-          <div className="m-4 ml-0 grow ">
+          <div className="p-4 ml-0 grow ">
             <p>Your National President</p>
             <p className="text-xl mt-1 font-bold">{currentNP}</p>
           </div>
@@ -267,7 +276,9 @@ const Team = () => {
             <p>Country</p>
 
             <div className="flex justify-center items-center gap-3 mr-4">
-              <p className="text-xl font-bold">{countryList().getLabel(code)}</p>
+              <p className="text-xl font-bold">
+                {countryList().getLabel(code)}
+              </p>
               <Flag className="flag-photo-team " code={code} />
             </div>
           </div>
@@ -276,57 +287,51 @@ const Team = () => {
 
       {/* div's, for Search bar and Filter */}
       <div className="flex flex-col w-full sm:flex-row justify-end mt-8 pl-4 pr-4 lexend-font text-black_second">
-      
-      
         <div style={{ marginTop: "-27px", marginRight: "20px" }}>
-
-
           {(currentUserType === "NP" || currentUserType === "GP") && (
+            <>
+              <p className="ml-2 font-bold text-sm">Display</p>
 
-<>
+              <FormControl
+                className="max-sm:w-full "
+                sx={{ m: 1, minWidth: 120 }}
+              >
+                {currentUserType === "NP" && (
+                  <>
+                    <Select
+                      labelId="roleDropdowns"
+                      value={selectedRole}
+                      onChange={handleChangeRole}
+                      className="w-full sm:w-[200px] h-10"
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"AH"}>Athletes</MenuItem>
+                      <MenuItem value={"RS"}>Referee & Support</MenuItem>
+                    </Select>
+                  </>
+                )}
 
-            <p className="ml-2 font-bold text-sm">Display</p>
+                {currentUserType === "GP" && (
+                  <>
+                    <Select
+                      labelId="roleDropdowns"
+                      value={selectedRole}
+                      onChange={handleChangeRole}
+                      className="w-full sm:w-[200px]"
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"LM"}>Legal Manager</MenuItem>
+                      <MenuItem value={"ITM"}>IT Manager</MenuItem>
 
-            <FormControl className="max-sm:w-full "  sx={{ m: 1, minWidth: 120 }}>
-             
-              {currentUserType === "NP" && (
-                <>
-                  <Select
-                    labelId="roleDropdowns"
-                    value={selectedRole}
-                    onChange={handleChangeRole}
-                    className="w-full sm:w-[200px] h-10"
-                    style={{ color: "#000" }}
-                  >
-                    <MenuItem value={"AH"}>Athletes</MenuItem>
-                    <MenuItem value={"RS"}>Referee & Support</MenuItem>
-                  </Select>
-                </>
-              )}
-
-              {currentUserType === "GP" && (
-                <>
-                  <Select
-                    labelId="roleDropdowns"
-                    value={selectedRole}
-                    onChange={handleChangeRole}
-                    className="w-full sm:w-[200px]"
-                    style={{ color: "#000" }}
-                  >
-                    <MenuItem value={"LM"}>Legal Manager</MenuItem>
-                    <MenuItem value={"ITM"}>IT Manager</MenuItem>
-
-                    <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-                    <MenuItem value={"SM"}>Sales Manager</MenuItem>
-                    <MenuItem value={"VM"}>Validation Manager</MenuItem>
-                    <MenuItem value={"EM"}>Event Manager</MenuItem>
-                  </Select>
-                </>
-              )}
-            </FormControl>
-
+                      <MenuItem value={"MM"}>Marketing Manager</MenuItem>
+                      <MenuItem value={"SM"}>Sales Manager</MenuItem>
+                      <MenuItem value={"VM"}>Validation Manager</MenuItem>
+                      <MenuItem value={"EM"}>Event Manager</MenuItem>
+                    </Select>
+                  </>
+                )}
+              </FormControl>
             </>
-
           )}
         </div>
 
@@ -335,38 +340,23 @@ const Team = () => {
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
           placeholder={"Find " + searchPlaceholderText}
-         
           width="100%"
-
           onSearch={handleSearch}
           style={{
-            border: "1px solid #C6C6C6", 
+            border: "1px solid #C6C6C6",
             borderRadius: "10px",
-            
           }}
-         
         />
       </div>
 
       {/* table */}
 
-<div className="container-table-mobile">
-      
-      <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
-
-       
-
-
+      <div className="container-table-mobile">
+        <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
           <table className="w-full ">
-
-
             <thead>
               <tr>
-                
-                
                 <th className="w-[15%] tht">Rank</th>
-              
-                
 
                 <th className="w-[25%] tht">Name</th>
                 <th className="w-[10%] tht">Age</th>
@@ -385,12 +375,10 @@ const Team = () => {
               ))}
             </tbody>
           </table>
-
-       
-
-
+        </div>
       </div>
-</div>
+
+      {/* pagination */}
 
       <div className="flex justify-center mt-4">
         <button
@@ -414,6 +402,16 @@ and if it's actually first page, (it won't actually reflect new state in useStat
           Next Page
         </button>
       </div>
+
+      <div className="flex justify-center mt-4 w-full ">
+        <Stack>
+          <Pagination count={10} page={otherPage} onChange={handleChange} />
+
+         
+        </Stack>
+      </div>
+
+ 
 
       {currentUserType === "NP" && selectedRole == "AH" && (
         <>
