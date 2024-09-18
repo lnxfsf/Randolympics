@@ -256,17 +256,18 @@ const Team = () => {
   return (
     <>
       {currentUserType === "AH" && (
-        <div className="flex gap-16">
-          <div className="m-4 ml-0">
+        <div className="flex gap-16 lexend-font text-black_second">
+         
+          <div className="m-4 ml-0 grow ">
             <p>Your National President</p>
-            <p className="text-xl mt-1">{currentNP}</p>
+            <p className="text-xl mt-1 font-bold">{currentNP}</p>
           </div>
 
           <div className="flex flex-col justify-center items-start pl-4 ">
             <p>Country</p>
 
-            <div className="flex justify-center items-center gap-3">
-              <p className="text-xl">{countryList().getLabel(code)}</p>
+            <div className="flex justify-center items-center gap-3 mr-4">
+              <p className="text-xl font-bold">{countryList().getLabel(code)}</p>
               <Flag className="flag-photo-team " code={code} />
             </div>
           </div>
@@ -274,21 +275,27 @@ const Team = () => {
       )}
 
       {/* div's, for Search bar and Filter */}
-      <div className="flex justify-end mt-8">
-        <div style={{ marginTop: "-17px", marginRight: "20px" }}>
-          {(currentUserType === "NP" || currentUserType === "GP") && (
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Display</b>
-              </InputLabel>
+      <div className="flex flex-col w-full sm:flex-row justify-end mt-8 pl-4 pr-4 lexend-font text-black_second">
+      
+      
+        <div style={{ marginTop: "-27px", marginRight: "20px" }}>
 
+
+          {(currentUserType === "NP" || currentUserType === "GP") && (
+
+<>
+
+            <p className="ml-2 font-bold text-sm">Display</p>
+
+            <FormControl className="max-sm:w-full "  sx={{ m: 1, minWidth: 120 }}>
+             
               {currentUserType === "NP" && (
                 <>
                   <Select
                     labelId="roleDropdowns"
                     value={selectedRole}
                     onChange={handleChangeRole}
-                    className="w-[200px]"
+                    className="w-full sm:w-[200px] h-10"
                     style={{ color: "#000" }}
                   >
                     <MenuItem value={"AH"}>Athletes</MenuItem>
@@ -303,7 +310,7 @@ const Team = () => {
                     labelId="roleDropdowns"
                     value={selectedRole}
                     onChange={handleChangeRole}
-                    className="w-[200px]"
+                    className="w-full sm:w-[200px]"
                     style={{ color: "#000" }}
                   >
                     <MenuItem value={"LM"}>Legal Manager</MenuItem>
@@ -317,6 +324,9 @@ const Team = () => {
                 </>
               )}
             </FormControl>
+
+            </>
+
           )}
         </div>
 
@@ -325,11 +335,16 @@ const Team = () => {
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
           placeholder={"Find " + searchPlaceholderText}
+         
+          width="100%"
+
           onSearch={handleSearch}
           style={{
-            border: "1px solid #C6C6C6", // Border color and thickness
-            borderRadius: "20px", // Border radius
+            border: "1px solid #C6C6C6", 
+            borderRadius: "10px",
+            
           }}
+         
         />
       </div>
 
