@@ -17,9 +17,6 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-
-
-
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -29,8 +26,6 @@ const Team = () => {
 
   const [otherUsers, setOtherUsers] = useState([]);
   const [otherPage, setOtherPage] = useState(1);
-
-  const [hasMoreOthers, setHasMoreOthers] = useState(true);
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -60,7 +55,10 @@ const Team = () => {
       return userJson.data.gender;
     }
   });
+
   const [categoryFilter, setCategoryFilter] = useState("medium");
+
+  const [maxPages, setMaxPages] = useState(0);
 
   const handleGenderFilter = (gender) => {
     setGenderFilter(gender);
@@ -148,6 +146,10 @@ const Team = () => {
     changedSearchPlaceholderText();
     changedNeedGender();
 
+    if (maxPages === 0) {
+      getMaxPages();
+    }
+
     if (userId) {
       fetchTeamMates();
     }
@@ -163,6 +165,38 @@ const Team = () => {
 
   const handleChangeRole = (event) => {
     setSelectedRole(event.target.value);
+  };
+
+  const getMaxPages = async () => {
+    try {
+      // TODO, you find out what's max num of pages available, in Backend. So you don't have to fetch whole list , in order not to slow down website !
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
+        {
+          params: {
+            limit: 100000,
+
+            // offset: (page - 1) * 10,
+
+            searchText: searchText,
+
+            userId: userId,
+            user_type: selectedRole, // and that's by dropdown, what's selected to show
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
+
+            needGender: needGender,
+
+            nationality: code, // we show only from this user country
+          },
+        }
+      );
+
+      setMaxPages(Math.ceil(response.data.length / 10));
+    } catch (error) {
+      console.error("Error fetching other users:", error);
+    }
   };
 
   const fetchTeamMates = async () => {
@@ -189,17 +223,28 @@ const Team = () => {
         }
       );
 
-      console.log("salje userid:" + userId);
-
       setOtherUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching other users:", error);
+    }
 
-      // for next page, to check if there's more !
-      const isThereNextPage = await axios.get(
+    // ----------------
+
+    /*   try {
+
+      let hasMorePages = true;
+
+
+      for(let page = 0; hasMorePages; page++){
+        
+
+      
+      const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/team`,
         {
           params: {
             limit: 10,
-            offset: otherPage * 10,
+            offset: (page - 1) * 10,
 
             searchText: searchText,
 
@@ -216,14 +261,34 @@ const Team = () => {
         }
       );
 
-      if (isThereNextPage.data.length == 0) {
-        setHasMoreOthers(false);
-      } else {
-        setHasMoreOthers(true);
+
+
+      setMaxPages((prev) => prev + 1 )
+      //page = page + 1;
+
+      
+      if(response.data.length === 0){
+
+       
+        hasMorePages = false;
+
+      } else { 
+        setMaxPages((prev) => prev + 1 )
+       // page = page + 1;
       }
+
+
+
+      console.log("maxpages je")
+      console.log(maxPages)
+
+    }
+     
+
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
+ */
   };
 
   const getCurrentNP = async () => {
@@ -247,19 +312,7 @@ const Team = () => {
     // Fired when enter button is pressed.
   };
 
-  const handleNextPage = () => {
-    if (hasMoreOthers) {
-      setOtherPage((prev) => prev + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (otherPage > 1) {
-      setOtherPage((prev) => prev - 1);
-    }
-  };
-
-  const handleChange = (event, value) => {
+  const handlePaginationChange = (event, value) => {
     setOtherPage(value);
   };
 
@@ -380,38 +433,25 @@ const Team = () => {
 
       {/* pagination */}
 
-      <div className="flex justify-center mt-4">
-        <button
-          /* only when on first page
-and if it's actually first page, (it won't actually reflect new state in useState, so I think it's useless to mess with this anyways.. )
-
-|| (!showingTop50 && hasMoreOthers)
-
-*/
-          disabled={otherPage === 1}
-          onClick={handlePreviousPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-        >
-          Previous
-        </button>
-        <button
-          disabled={!hasMoreOthers}
-          onClick={handleNextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Next Page
-        </button>
-      </div>
-
       <div className="flex justify-center mt-4 w-full ">
         <Stack>
-          <Pagination count={10} page={otherPage} onChange={handleChange} />
-
-         
+          <Pagination
+            count={maxPages}
+            page={otherPage}
+            onChange={handlePaginationChange}
+            color="primary"
+            sx={{
+              color: "#000000",
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
         </Stack>
       </div>
-
- 
 
       {currentUserType === "NP" && selectedRole == "AH" && (
         <>
