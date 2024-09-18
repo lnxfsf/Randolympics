@@ -71,11 +71,14 @@ const update_user_data = async (req, res) => {
       familyName,
       lastName, 
 
+      middleName,
   
       isRejected, // then sets all 4 fields to null... (false)
     } = req.body;
   
 
+
+    console.log("on dobija profile pic kao:"+picture)
 
 
     await db.sequelize.sync();
@@ -89,6 +92,8 @@ const update_user_data = async (req, res) => {
       transaction: t1,
     });
   
+
+    
     if (user) {
       let needsUpdate = false; // used as indicator, if we need to update or not
       const updatingObject = {};
@@ -193,6 +198,13 @@ const update_user_data = async (req, res) => {
         needsUpdate = true;
       }
 
+
+      
+      
+      if (middleName && middleName !== user.middleName) {
+        updatingObject.middleName = middleName;
+        needsUpdate = true;
+      }
 
   
       if (phone && phone !== user.phone) {
@@ -325,6 +337,8 @@ const update_user_data = async (req, res) => {
     const { userId } = req.body;
     // only if it's logged in, we will know it's userId, hence nobody can guess this route..
   
+
+
     try {
       await db.sequelize.sync();
   
@@ -332,6 +346,12 @@ const update_user_data = async (req, res) => {
         where: { userId: userId },
       });
   
+
+      console.log("user id fetch latest je: "+userId)
+      console.log(existingUser)
+
+
+
       if (existingUser) {
         res.status(200).json({
           userId: existingUser.userId,
@@ -342,6 +362,7 @@ const update_user_data = async (req, res) => {
   
           name: existingUser.name,
           birthdate: existingUser.birthdate,
+          middleName: existingUser.middleName,
   
           phone: existingUser.phone,
           nationality: existingUser.nationality,

@@ -797,6 +797,9 @@ const login = async (req, res) => {
           access_token: generateAccessToken(existingUser.userId),
 
           name: existingUser.name,
+
+          middleName: existingUser.middleName,
+
           birthdate: existingUser.birthdate,
 
           phone: existingUser.phone,

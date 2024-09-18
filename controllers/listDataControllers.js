@@ -682,7 +682,7 @@ const currentNP = async (req, res) => {
 };
 
 const team = async (req, res) => {
-  const limit = parseInt(req.query.limit) || 10; // Default limit to 10
+  const limit = parseInt(req.query.limit) || 10; 
   const offset = parseInt(req.query.offset) || 0;
 
   const searchText = req.query.searchText;
@@ -809,6 +809,8 @@ const team = async (req, res) => {
 
     res.json(teamMates);
   } catch (error) {}
+
+
 };
 
 const listLoginTrafficHistory = async (req, res) => {
