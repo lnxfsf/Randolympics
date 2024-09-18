@@ -334,12 +334,17 @@ const Team = () => {
       </div>
 
       {/* table */}
-      <div className="mt-8 p-4 lexend-font text-black_second">
+
+<div className="container-table-mobile">
+      
+      <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
 
        
 
 
-          <table className="w-full">
+          <table className="w-full ">
+
+
             <thead>
               <tr>
                 
@@ -370,6 +375,7 @@ const Team = () => {
 
 
       </div>
+</div>
 
       <div className="flex justify-center mt-4">
         <button

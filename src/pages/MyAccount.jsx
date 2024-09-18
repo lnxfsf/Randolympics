@@ -334,7 +334,7 @@ const MyAccount = () => {
           {warningMessage && (
             <>
               <div
-                className={`flex flex-col p-2 mt-4 pl-2 ${
+                className={`flex flex-col p-2 mt-4 m-4 pl-2 ${
                   isRejected === true ? "error_box_rejected" : "error_box"
                 } `}
               >

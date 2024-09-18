@@ -75,3 +75,23 @@ hr {
     border-bottom: 1px solid #DEE2E6;
   
   }
+
+  @media screen and (max-width: 1022px) {
+.container-table-mobile {
+
+  width:100%;
+  height:auto;
+  min-height:100px;
+  overflow-x:auto;
+
+
+}
+}
+
+@media screen and (max-width: 1022px) {
+
+.table-mobile {
+  width:55rem;
+  height:auto;
+}
+}
