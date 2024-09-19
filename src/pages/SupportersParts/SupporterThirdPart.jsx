@@ -41,6 +41,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InformAdditionalSupporter } from "./InformAdditionalSupporter";
 
+import { useTranslation } from "react-i18next";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -75,6 +77,8 @@ const SupporterThirdPart = ({
   setThirdIsVisible,
   validateSupporter,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div
@@ -83,22 +87,14 @@ const SupporterThirdPart = ({
         } `}
       >
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
-        
-        
           <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
             <img src="supporters/5.png" className="image_supporter" />
           </div>
 
           <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
-           
-           
-           {/* navigation rounded buttons */} 
+            {/* navigation rounded buttons */}
             <div className="flex justify-around w-full  lexend-font">
-           
-           
               <div className="flex flex-col items-center">
-               
-               
                 <div
                   style={{ backgroundColor: "#F5F5F5", borderRadius: "50%" }}
                   className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
@@ -107,13 +103,11 @@ const SupporterThirdPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-                  Your friend's
-                  <br /> information
+                  {t("campaign.content15")}
+                  <br /> {t("campaign.content16")}
                 </p>
               </div>
 
-
-                
               <div className="flex flex-col items-center w-15">
                 <div
                   style={{ backgroundColor: "#ffeaea", borderRadius: "50%" }}
@@ -123,12 +117,9 @@ const SupporterThirdPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#D24949] ">
-                  Your information
+                  {t("campaign.content17")}
                 </p>
               </div>
-
-
-
 
               <div className="flex flex-col items-center w-15">
                 <div
@@ -139,160 +130,31 @@ const SupporterThirdPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                  Donate
+                  {t("campaign.content18")}
                 </p>
               </div>
             </div>
 
-
-
-
             <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
-              Now, tell us about you the creator of the campaign for{" "}
-              {friendName}
+              {t("campaign.content46")} {friendName}
             </p>
-
 
             {/* main fields */}
             <div className="flex flex-col w-full">
-
-              
-            <label
-                    htmlFor="name"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
-                  >
-                   Your Name *
-                  </label>
-                <div className="flex flex-col justify-start">
-                  <TextField
-                  
-                    value={supporterName}
-                    onChange={(e) => {
-                      setSupporterName(e.target.value);
-                    }}
-                   
-                    placeholder="John"
-                    id="name"
-                    name="name"
-                    type="text"
-                    inputProps={{
-                      maxLength: 255,
-                    }}
-                    InputLabelProps={inputLabelPropsTextField}
-                    sx={sxTextField}
-                  />
-                </div>
-
-
-                <label
-                    htmlFor="supporterEmail"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
-                  >
-                    Your Email (optional)
-                  </label>
-                <div className="flex flex-col justify-start">
-                  <TextField
-                   
-                 
-                    value={supporterEmail}
-                    onChange={(e) => {
-                      setSupporterEmail(e.target.value);
-                    }}
-                    id="supporterEmail"
-                    placeholder="johndoe@gmail.com"
-                    type="text"
-                    inputProps={{
-                      maxLength: 255,
-                    }}
-                    InputLabelProps={inputLabelPropsTextField}
-                    sx={sxTextField}
-                  />
-                </div>
-
-
-
-     
-                <label
-                    htmlFor="supporterPhone"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
-                  >
-                    Your Phone (optional)
-                  </label>
-                <div className="flex flex-col justify-start">
-                  <TextField
-                    
-                    value={supporterPhone}
-                  
-                    onChange={(e) => {
-                      setSupporterPhone(e.target.value);
-                    }}
-                   
-                    placeholder="+1 425 555 0123"
-                    type="text"
-                    id="supporterPhone"
-                    inputProps={{
-                      maxLength: 255,
-                    }}
-                    InputLabelProps={inputLabelPropsTextField}
-                    sx={sxTextField}
-                  />
-                </div>
-            
-
-              
-<label
-                    htmlFor="pass"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
-                  >
-                    Supporter (your) password
-                  </label>
+              <label
+                htmlFor="name"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("campaign.content47")} *
+              </label>
+              <div className="flex flex-col justify-start">
                 <TextField
-                  
-                  value={supporterPassword}
-                  onChange={(event) => {
-                    setSupporterPassword(event.target.value);
-                  }}
-                
-                  placeholder="****"
-                  id="pass"
-                  name="pass"
-                  type={showPassword ? "text" : "password"}
-                  sx={sxTextField}
-                  InputProps={{
-                    maxLength: 255,
-
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-
-
-
-<label
-                    htmlFor="supporterComment"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
-                  >
-                    Your (supporter) comment
-                  </label>
-                <TextField
-                
-                  value={supporterComment}
+                  value={supporterName}
                   onChange={(e) => {
-                    setSupporterComment(e.target.value);
+                    setSupporterName(e.target.value);
                   }}
-                
-                  placeholder="Good luck :)"
-                  id="supporterComment"
+                  placeholder="John"
+                  id="name"
                   name="name"
                   type="text"
                   inputProps={{
@@ -301,94 +163,175 @@ const SupporterThirdPart = ({
                   InputLabelProps={inputLabelPropsTextField}
                   sx={sxTextField}
                 />
-           
+              </div>
+
+              <label
+                htmlFor="supporterEmail"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("campaign.content48")}
+              </label>
+              <div className="flex flex-col justify-start">
+                <TextField
+                  value={supporterEmail}
+                  onChange={(e) => {
+                    setSupporterEmail(e.target.value);
+                  }}
+                  id="supporterEmail"
+                  placeholder="johndoe@gmail.com"
+                  type="text"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  InputLabelProps={inputLabelPropsTextField}
+                  sx={sxTextField}
+                />
+              </div>
+
+              <label
+                htmlFor="supporterPhone"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("campaign.content49")}
+              </label>
+              <div className="flex flex-col justify-start">
+                <TextField
+                  value={supporterPhone}
+                  onChange={(e) => {
+                    setSupporterPhone(e.target.value);
+                  }}
+                  placeholder="+1 425 555 0123"
+                  type="text"
+                  id="supporterPhone"
+                  inputProps={{
+                    maxLength: 255,
+                  }}
+                  InputLabelProps={inputLabelPropsTextField}
+                  sx={sxTextField}
+                />
+              </div>
+
+              <label
+                htmlFor="pass"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("campaign.content50")}
+              </label>
+              <TextField
+                value={supporterPassword}
+                onChange={(event) => {
+                  setSupporterPassword(event.target.value);
+                }}
+                placeholder="****"
+                id="pass"
+                name="pass"
+                type={showPassword ? "text" : "password"}
+                sx={sxTextField}
+                InputProps={{
+                  maxLength: 255,
+
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label={t("campaign.content51")}
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+
+              <label
+                htmlFor="supporterComment"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("campaign.content52")}
+              </label>
+              <TextField
+                value={supporterComment}
+                onChange={(e) => {
+                  setSupporterComment(e.target.value);
+                }}
+                placeholder="Good luck :)"
+                id="supporterComment"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+              />
 
               <p className="text-xl text-start mt-6 mb-6 text-black_second font-semibold lexend-font">
-                Inform additional supporters ?
+                {t("campaign.content53")}
               </p>
 
-
-
-                
               {/* inform additional supporters */}
-            
-            <InformAdditionalSupporter 
-additionalSupportersFormData={additionalSupportersFormData}
 
-handleInputChange={handleInputChange}
-removeInputSet={removeInputSet}
-addInputSet={addInputSet} 
-
-
-
-inputLabelPropsTextField={inputLabelPropsTextField}
-sxTextField={sxTextField}
-/>
-
-
-
+              <InformAdditionalSupporter
+                additionalSupportersFormData={additionalSupportersFormData}
+                handleInputChange={handleInputChange}
+                removeInputSet={removeInputSet}
+                addInputSet={addInputSet}
+                inputLabelPropsTextField={inputLabelPropsTextField}
+                sxTextField={sxTextField}
+              />
             </div>
 
-
-
-
-
-
-
-
-
             <div className="flex flex-col gap-2 w-full mt-8">
-                  <Button
-                    onClick={validateSupporter}
-                    className="w-full md:w-50%"
-                    style={{ textTransform: "none" }}
-                    sx={{
-                      height: "50px",
-                      bgcolor: "#D24949",
+              <Button
+                onClick={validateSupporter}
+                className="w-full md:w-50%"
+                style={{ textTransform: "none" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#D24949",
 
-                      color: "#fff",
-                      borderRadius: 3,
-                      border: `1px solid #D24949`,
-                      "&:hover": {
-                        background: "rgba(210, 73, 73, 1)",
-                        color: "white",
-                        border: `1px solid rgba(210, 73, 73, 1)`,
-                      },
-                    }}
-                    id="join-the-fun-btn"
-                  >
-                    <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Next</span>
-                  </Button>
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
+                <span className="lexend-font">{t("campaign.content23")}</span>
+              </Button>
 
-                  <Button
-                    onClick={() => {
-                        setSecondIsVisible(true);
-                        setThirdIsVisible(false);
-                    }}
-                    className="w-full md:w-50%"
-                    style={{ textTransform: "none" }}
-                    sx={{
-                      height: "50px",
-                      bgcolor: "#fff",
-                      color: "#444444",
-                      borderRadius: 3,
-                      border: `1px solid #D24949`,
-                      "&:hover": {
-                        background: "rgba(210, 73, 73, 1)",
-                        color: "white",
-                        border: `1px solid rgba(210, 73, 73, 1)`,
-                      },
-                    }}
-                    id="join-the-fun-btn"
-                  >
-                    <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Go Back</span>
-                  </Button>
-                </div>
-
-
-
+              <Button
+                onClick={() => {
+                  setSecondIsVisible(true);
+                  setThirdIsVisible(false);
+                }}
+                className="w-full md:w-50%"
+                style={{ textTransform: "none" }}
+                sx={{
+                  height: "50px",
+                  bgcolor: "#fff",
+                  color: "#444444",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+                <span className="lexend-font">{t("campaign.content37")}</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

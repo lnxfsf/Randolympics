@@ -5,6 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useTranslation } from "react-i18next";
 
 const SupporterFifthPart = ({
   fifthIsVisible,
@@ -16,6 +17,7 @@ const SupporterFifthPart = ({
   friendName,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -24,30 +26,29 @@ const SupporterFifthPart = ({
           fifthIsVisible ? "show" : "hide"
         } `}
       >
-
-
-{/* height: 90rem;  */}
+        {/* height: 90rem;  */}
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
-         
-          <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen"
-          style={{height: "0rem"}}
+          <div
+            className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen"
+            style={{ height: "0rem" }}
           >
             <img src="supporters/6.jpg" className="image_supporter" />
           </div>
 
           <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start p-4 md:p-16 text-black_second grow">
-          
+            <p className="text-3xl lexend-font text-black_second font-bold mb-2">
+              {t("campaign.content4")}
+            </p>
 
-            <p className="text-3xl lexend-font text-black_second font-bold mb-2">Congratulations !</p>
-          
-            <p className=" lexend-font text-black_second font-medium mb-4">You have created {friendName}'s Randolimpycs Campaign !</p>
+            <p className=" lexend-font text-black_second font-medium mb-4">
+              {t("campaign.content5")} {friendName}
+              {t("campaign.content6")}
+            </p>
 
+            <p className="text-xl lexend-font text-black_second font-semibold mb-3">
+              {t("campaign.content7")}
+            </p>
 
-            <p className="text-xl lexend-font text-black_second font-semibold mb-3">Share on social media</p>
-          
-
-         
-         
             <div className="flex w-full  gap-4">
               <Button
                 onClick={() => {
@@ -73,7 +74,7 @@ const SupporterFifthPart = ({
                 id="join-the-fun-btn"
               >
                 <img src="supporters/right_arrow.svg" className="mr-2" />
-                <span className="lexend-font">See The Campaign</span>
+                <span className="lexend-font">{t("campaign.content8")}</span>
               </Button>
 
               <Button
@@ -82,7 +83,7 @@ const SupporterFifthPart = ({
 
                   if (copied) {
                     setOpenSnackbarSuccess(true);
-                    setSnackbarMessage("Copied to clipboard");
+                    setSnackbarMessage(t("campaign.content9"));
                   }
                 }}
                 className="w-full"
@@ -103,7 +104,7 @@ const SupporterFifthPart = ({
                 id="join-the-fun-btn"
               >
                 <img src="supporters/share.svg" className="mr-2" />
-                <span className="lexend-font">Share</span>
+                <span className="lexend-font">{t("campaign.content10")}</span>
               </Button>
             </div>
 

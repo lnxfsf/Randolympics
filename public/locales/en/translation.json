@@ -238,6 +238,132 @@
         "content39": "The governance structure of Randolympics includes the Global President, National Presidents, and appointed managers who oversee various functions of the organization. This structure ensures both global oversight and local representation, fostering fair and transparent management.",
         "content40": "Compliance is maintained through a set of established rules and guidelines that all participants, managers, and officials must follow. Regular audits and reviews are conducted to ensure adherence to these rules and to uphold the integrity of the Randolympics."
       }
+    },
+
+    "sixthScreen": {
+      "title1": "Ready to get started?",
+
+      "title2": "Sign Up today and start living the adventure.",
+
+      "btn1": "Sign Up",
+
+      "text1": "By clicking Sign Up you're confirming that you agree with our",
+      "text2": "Terms and Conditions"
     }
+  },
+
+  "footer": {
+    "copyright": "All rights reserved.",
+    "privacy": "Privacy policy",
+    "tos": "Terms of service",
+    "cookie": "Cookies settings"
+  },
+
+  "navbar": {
+    "btn1": "Sports",
+    "btn2": "Our beliefs",
+    "btn3": "Economics",
+    "btn4": "How it works",
+    "btn5": "FAQ",
+    "btn6": "Our competitions",
+
+    "profile1": "Settings",
+    "profile2": "Team",
+    "profile3": "Elections",
+    "profile4": "News",
+    "profile5": "Passport Verification",
+    "profile6": "Login & Traffic History",
+    "profile7": "Logout",
+    "profile8": "Log In",
+    "profile9": "Sign Up Your Friend"
+  },
+
+  "campaign": {
+    "content1": "Their Name *",
+    "content2": "Their Email (optional)",
+    "content3": "Add Another Supporter",
+
+    "content4": "Congratulations !",
+    "content5": "You have created",
+    "content6": "'s Randolimpycs Campaign !",
+    "content7": "Share on social media",
+    "content8": "See The Campaign",
+    "content9": "Copied to clipboard",
+    "content10": "Share",
+
+    "content11": "Do you want someone to get into the",
+    "content12": "Randolympic Games?",
+    "content13": "I want to sign up a friend",
+    "content14": "I want to sign up a celebrity",
+
+    "content15": "Your friend's",
+    "content16": "information",
+    "content17": "Your information",
+    "content18": "Donate",
+
+    "content19": "Let's raise some money !",
+
+    "content20": "Become the first donator",
+    "content21": "Got a discount code ?",
+    "content22": "Donate with coupon only",
+
+    "content24": "Tell us more about your friend",
+
+    "content25": "First Name",
+    "content26": "Middle Name (optional)",
+    "content27": "Last Name",
+    "content28": "Gender",
+    "content29": "Male",
+    "content30": "Female",
+    "content31": "Email",
+
+    "content32": "Phone number (optional)",
+    "content33": "Birthdate (optional)",
+
+    "content34": "Nationality",
+
+    "content35": "Send email too",
+    "content36": "Don't send an email, let's keep campaign secret !",
+
+    "content23": "Next",
+    "content37": "Go Back",
+
+    "content38": "Tell us more about your celebrity",
+    "content39": "Drag & Drop celebrity's image or <span class=\"filepond--label-action\">Browse</span> <br/>(optional)",
+    "content40": "Drag & Drop your friend's image or <span class=\"filepond--label-action\">Browse</span> <br/>(optional)",
+
+    "content41": "Social media",
+    "content42": "Facebook",
+    "content43": "Instagram",
+    "content44": "X (Twitter)",
+    "content45": "Provide at least one social media profile",
+
+    "content46": "Now, tell us about you the creator of the campaign for",
+
+    "content47": "Your Name",
+    "content48": "Your Email (optional)",
+    "content49": "Your Phone (optional)",
+    "content50": "Supporter (your) password",
+    "content51": "toggle password visibility",
+    "content52": "Your (supporter) comment",
+    "content53": "Inform additional supporters ?",
+
+    "content54": "List of all campaigns",
+    "content55": "Filter",
+    "content56": "Reset fields",
+    "content57": "None",
+
+    "content58": "Family name",
+
+    "content59": "Facebook link",
+    "content60": "Instagram link",
+    "content61": "Twitter (X) link",
+
+    "content62": "Name"
   }
+
+
+
+
+  
 }

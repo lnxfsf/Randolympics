@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
-
+import {useTranslation} from "react-i18next";
 
 
 import Radio from "@mui/material/Radio";
@@ -99,6 +99,9 @@ const Campaign = () => {
     searchtw_link,
   ]);
 
+  const { t } = useTranslation();
+
+
   const updateLatestData = async () => {
     try {
       const response = await axios.get(
@@ -146,7 +149,7 @@ const Campaign = () => {
 
       <div className="mb-32"></div>
 
-      <p className="text-3xl flex justify-center mb-4">List of all campaigns</p>
+      <p className="text-3xl flex justify-center mb-4">{t('campaign.content54')}</p>
 
       <div className="m-4 ml-8 mr-8 flex justify-between items-center">
         <Popup
@@ -174,7 +177,7 @@ const Campaign = () => {
                 },
               }}
             >
-              <span className="popins-font">Filter</span>
+              <span className="popins-font">{t('campaign.content55')}</span>
             </Button>
           }
           position="bottom left"
@@ -203,7 +206,7 @@ const Campaign = () => {
                 },
               }}
             >
-              <span className="popins-font">Reset fields</span>
+              <span className="popins-font">{t('campaign.content56')}</span>
             </Button>
 
 
@@ -246,7 +249,7 @@ const Campaign = () => {
               className="m-4 ml-0 mb-1"
             >
               <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Gender</b>
+                <b>{t('campaign.content28')}</b>
               </InputLabel>
 
               <Select
@@ -258,10 +261,10 @@ const Campaign = () => {
                 className="w-[300px]"
                 style={{ color: "#000" }}
               >
-                <MenuItem value="">None</MenuItem>
+                <MenuItem value="">{t('campaign.content57')}</MenuItem>
                 <Divider />
-                <MenuItem value="M">Male</MenuItem>
-                <MenuItem value="F">Female</MenuItem>
+                <MenuItem value="M">{t('campaign.content29')}</MenuItem>
+                <MenuItem value="F">{t('campaign.content30')}</MenuItem>
               </Select>
             </FormControl>
 
@@ -281,7 +284,7 @@ const Campaign = () => {
       {filterIsCelebrity === 0 && (
       <div>
             <div className="flex items-start flex-col">
-              <p>First name</p>
+              <p>{t('campaign.content25')}</p>
               <SearchBar
                 value={searchFirstNameText}
                 onChange={(newValue) => setSearchFirstNameText(newValue)}
@@ -296,7 +299,7 @@ const Campaign = () => {
             </div>
 
             <div className="flex items-start flex-col">
-              <p>Family name</p>
+              <p>{t('campaign.content58')}</p>
               <SearchBar
                 value={searchFamilyNameText}
                 onChange={(newValue) => setSearchFamilyNameText(newValue)}
@@ -318,7 +321,7 @@ const Campaign = () => {
       <div>
 
 <div className="flex items-start flex-col">
-              <p>First name</p>
+              <p>{t('campaign.content25')}</p>
               <SearchBar
                 value={searchFirstNameText}
                 onChange={(newValue) => setSearchFirstNameText(newValue)}
@@ -334,7 +337,7 @@ const Campaign = () => {
 
 
             <div className="flex items-start flex-col">
-              <p>Facebook link</p>
+              <p>{t('campaign.content59')}</p>
               <SearchBar
                 value={searchfb_link}
                 onChange={(newValue) => setSearchfb_link(newValue)}
@@ -350,7 +353,7 @@ const Campaign = () => {
 
 
             <div className="flex items-start flex-col">
-              <p>Instagram link</p>
+              <p>{t('campaign.content60')}</p>
               <SearchBar
                 value={searchig_link}
                 onChange={(newValue) => setSearchig_link(newValue)}
@@ -366,7 +369,7 @@ const Campaign = () => {
 
 
             <div className="flex items-start flex-col">
-              <p>Twitter (X) link</p>
+              <p>{t('campaign.content61')}</p>
               <SearchBar
                 value={searchtw_link}
                 onChange={(newValue) => setSearchtw_link(newValue)}
@@ -413,11 +416,11 @@ const Campaign = () => {
                 >
                   <div>
                     <p>
-                      <b>Name:</b> {item.friendName} {item.friendMiddleName}{" "}
+                      <b>{t('campaign.content62')}:</b> {item.friendName} {item.friendMiddleName}{" "}
                       {item.friendLastName}
                     </p>
                     <p>
-                      <b>Gender:</b>{" "}
+                      <b>{t('campaign.content28')}:</b>{" "}
                       {item.friendGender === "M" ? "Male" : "Female"}
                     </p>
                   </div>

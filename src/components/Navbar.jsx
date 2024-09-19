@@ -27,6 +27,8 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 
+import { useTranslation } from "react-i18next";
+
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -40,15 +42,13 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-
-  
-
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   let { user, logoutUser } = useContext(AuthContext);
+
+  const { t } = useTranslation();
 
   let tokens = JSON.parse(
     localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens")
@@ -59,19 +59,15 @@ const Navbar = () => {
     var profile_image = tokens.data.picture;
   }
 
-  const [userData, setUserData] = useState(()=> {
-
-    
+  const [userData, setUserData] = useState(() => {
     const storedOriginalData =
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
 
     let parsed = JSON.parse(storedOriginalData);
 
-    return parsed
+    return parsed;
   });
-
-
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -114,19 +110,19 @@ const Navbar = () => {
 
             <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-16">
               <Link to="/#sports" className="nav_btns">
-                Sports
+                {t("navbar.btn1")}
               </Link>
               <Link to="/#beliefs" className="nav_btns">
-                Our beliefs
+                {t("navbar.btn2")}
               </Link>
               <Link to="/#economics" className="nav_btns">
-                Economics
+                {t("navbar.btn3")}
               </Link>
               <Link to="/#how_it_works" className="nav_btns">
-                How it works
+                {t("navbar.btn4")}
               </Link>
               <Link to="/#faq" className="nav_btns">
-                FAQ
+                {t("navbar.btn5")}
               </Link>
               {/* Conditional user elements */}
             </nav>
@@ -217,109 +213,110 @@ const Navbar = () => {
                     </MenuItem>
                     <Divider />
 
-                    <MenuItem  to="/myaccount#settings" component={Link}>
+                    <MenuItem to="/myaccount#settings" component={Link}>
                       <ListItemIcon>
-                       
-
-                        <img src="/myaccount/settings_dark.svg" className="icon" />
+                        <img
+                          src="/myaccount/settings_dark.svg"
+                          className="icon"
+                        />
                       </ListItemIcon>
                       <span className="lexend-font text-black_second ">
-                        Settings
+                        {t("navbar.profile1")}
                       </span>
                     </MenuItem>
 
-                    
-
-                    <MenuItem  to="/myaccount#team" component={Link}>
+                    <MenuItem to="/myaccount#team" component={Link}>
                       <ListItemIcon>
-                      <img src="/myaccount/team_dark.svg" className="icon" />
+                        <img src="/myaccount/team_dark.svg" className="icon" />
                       </ListItemIcon>
                       <span className="lexend-font text-black_second ">
-                        Team
+                        {t("navbar.profile2")}
                       </span>
                     </MenuItem>
-
-
 
                     {userData.data.user_type !== "VM" && (
-                    <MenuItem  
-                    to="/myaccount#elections"
-                    component={Link}
-                    >
-
-                      <ListItemIcon>
-
-                        <img src="/myaccount/ballot_dark.png" className="icon" />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
-                        Elections
-                      </span>     
-                    </MenuItem>
-
+                      <MenuItem to="/myaccount#elections" component={Link}>
+                        <ListItemIcon>
+                          <img
+                            src="/myaccount/ballot_dark.png"
+                            className="icon"
+                          />
+                        </ListItemIcon>
+                        <span className="lexend-font text-black_second ">
+                          {t("navbar.profile3")}
+                        </span>
+                      </MenuItem>
                     )}
 
+                    {(userData.data.user_type === "EM" ||
+                      userData.data.user_type === "ITM" ||
+                      userData.data.user_type === "GP" ||
+                      userData.data.user_type === "ITM" ||
+                      userData.data.user_type === "SM" ||
+                      userData.data.user_type === "MM") &&
+                      userData.data.passportStatus === "validated" && (
+                        <MenuItem to="/myaccount#news" component={Link}>
+                          <ListItemIcon>
+                            <img
+                              src="/myaccount/news_dark.svg"
+                              className="icon"
+                            />
+                          </ListItemIcon>
+                          <span className="lexend-font text-black_second ">
+                            {t("navbar.profile4")}
+                          </span>
+                        </MenuItem>
+                      )}
 
-{(userData.data.user_type === "EM" ||
-              userData.data.user_type === "ITM" ||
-              userData.data.user_type === "GP" ||
-              userData.data.user_type === "ITM" ||
-              userData.data.user_type === "SM" ||
-              userData.data.user_type === "MM") &&
-              userData.data.passportStatus === "validated" && (
-                    <MenuItem  to="/myaccount#news" component={Link}>
-                      <ListItemIcon>
-                      <img src="/myaccount/news_dark.svg" className="icon" />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
-                        News
-                      </span>
-                    </MenuItem>
-              )}
+                    {(userData.data.user_type === "VM" ||
+                      userData.data.user_type === "GP") && (
+                      <MenuItem
+                        to="/myaccount#passportVerification"
+                        component={Link}
+                      >
+                        <ListItemIcon>
+                          <img
+                            src="/myaccount/passport_dark.svg"
+                            className="icon"
+                          />
+                        </ListItemIcon>
+                        <span className="lexend-font text-black_second ">
+                          {t("navbar.profile5")}
+                        </span>
+                      </MenuItem>
+                    )}
 
-
-
-{(userData.data.user_type === "VM" || userData.data.user_type === "GP") && (
-                    <MenuItem  to="/myaccount#passportVerification" component={Link}>
-                      <ListItemIcon>
-                      <img src="/myaccount/passport_dark.svg" className="icon" />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
-                      Passport Verification
-                      </span>
-                    </MenuItem>
-)}
-
-
-{(userData.data.user_type === "VM" ||
-              userData.data.user_type === "EM" ||
-              userData.data.user_type === "ITM" ||
-              userData.data.user_type === "MM" ||
-              userData.data.user_type === "SM" ||
-              userData.data.user_type === "LM" ||
-              userData.data.user_type === "GP") && (
-                    <MenuItem  to="/myaccount#loginTrafficHistory" component={Link}>
-                      <ListItemIcon>
-                      <img src="/myaccount/login_history_dark.svg" className="icon" />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
-                      Login & Traffic History
-                      </span>
-                    </MenuItem>
-              )}
-
-                    
-
+                    {(userData.data.user_type === "VM" ||
+                      userData.data.user_type === "EM" ||
+                      userData.data.user_type === "ITM" ||
+                      userData.data.user_type === "MM" ||
+                      userData.data.user_type === "SM" ||
+                      userData.data.user_type === "LM" ||
+                      userData.data.user_type === "GP") && (
+                      <MenuItem
+                        to="/myaccount#loginTrafficHistory"
+                        component={Link}
+                      >
+                        <ListItemIcon>
+                          <img
+                            src="/myaccount/login_history_dark.svg"
+                            className="icon"
+                          />
+                        </ListItemIcon>
+                        <span className="lexend-font text-black_second ">
+                          {t("navbar.profile6")}
+                        </span>
+                      </MenuItem>
+                    )}
 
                     <MenuItem onClick={logoutUser}>
                       <ListItemIcon>
                         <Logout fontSize="small" style={{ color: "#D24949" }} />
                       </ListItemIcon>
                       <span className="lexend-font text-red_second ">
-                        Logout
+                        {t("navbar.profile7")}
                       </span>
                     </MenuItem>
-
-
                   </Menu>
                 </Tooltip>
               </>
@@ -347,7 +344,7 @@ const Navbar = () => {
                     variant="text"
                   >
                     <span className="lexend-font font-semibold text-xs">
-                      Log In
+                      {t("navbar.profile8")}
                     </span>
                   </Button>
 
@@ -373,7 +370,7 @@ const Navbar = () => {
                     variant="text"
                   >
                     <span className="lexend-font font-semibold text-xs ">
-                      Sign Up Your Friend
+                      {t("navbar.profile9")}
                     </span>
                   </Button>
                 </div>
@@ -394,13 +391,10 @@ const Navbar = () => {
           },
         }}
       >
-       
-
         <ListItem sx={{ mt: 1 }}>
-        
           <Link to="/#sports" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
-              Our competitions
+              {t("navbar.btn6")}
             </span>
           </Link>
         </ListItem>
@@ -408,7 +402,7 @@ const Navbar = () => {
         <ListItem>
           <Link to="/#beliefs" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
-              Our beliefs
+              {t("navbar.btn2")}
             </span>
           </Link>
         </ListItem>
@@ -416,7 +410,7 @@ const Navbar = () => {
         <ListItem>
           <Link to="/#economics" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
-              Economics
+              {t("navbar.btn3")}
             </span>
           </Link>
         </ListItem>
@@ -424,14 +418,16 @@ const Navbar = () => {
         <ListItem>
           <Link to="/#how_it_works" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
-              How It Works
+              {t("navbar.btn4")}
             </span>
           </Link>
         </ListItem>
 
         <ListItem>
           <Link to="/#faq" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">FAQ</span>
+            <span className="font-bold text-red_second lexend-font">
+              {t("navbar.btn5")}
+            </span>
           </Link>
         </ListItem>
 
@@ -459,7 +455,7 @@ const Navbar = () => {
           >
             <img src="supporters/right_arrow.svg" className="mr-2" />
             <span className="lexend-font font-semibold text-xs ">
-              Sign Up Your Friend
+              {t("navbar.profile9")}
             </span>
           </Button>
         </ListItem>
@@ -486,7 +482,9 @@ const Navbar = () => {
             variant="text"
           >
             <img src="supporters/right_arrow_black.svg" className="mr-2" />
-            <span className="lexend-font font-semibold text-xs">Log In</span>
+            <span className="lexend-font font-semibold text-xs">
+              {t("navbar.profile8")}
+            </span>
           </Button>
         </ListItem>
       </Drawer>

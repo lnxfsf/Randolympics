@@ -54,6 +54,9 @@ import zIndex from "@mui/material/styles/zIndex";
 import { NavbarClean } from "../../components/NavbarClean";
 import { FooterClean } from "../../components/FooterClean";
 
+import {useTranslation} from "react-i18next";
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -109,6 +112,8 @@ const SupporterSecondPart = ({
   setOpenSnackbarSuccess,
 }) => {
   const [popupWarning, setPopupWarning] = useState(false);
+  const { t } = useTranslation();
+
 
   const validateAthlete = async () => {
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
@@ -201,8 +206,8 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                      Your friend's
-                      <br /> information
+                      {t('campaign.content15')}
+                      <br /> {t('campaign.content16')}
                     </p>
                   </div>
 
@@ -218,7 +223,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      Your information
+                    {t('campaign.content17')}
                     </p>
                   </div>
 
@@ -234,13 +239,13 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      Donate
+                    {t('campaign.content18')}
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
-                  Tell us more about your friend
+                {t('campaign.content24')}
                 </p>
 
                 <div className="flex flex-col w-full">
@@ -253,7 +258,7 @@ const SupporterSecondPart = ({
                       maxFiles={1}
                       server={server}
                       name="image"
-                      labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                      labelIdle={t('campaign.content40')}
                       accept="image/png, image/jpeg, image/gif"
                       dropOnPage
                       dropValidation
@@ -283,7 +288,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    First Name *
+                    {t('campaign.content25')} *
                   </label>
 
                   <TextField
@@ -306,7 +311,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendMiddleName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Middle Name (optional)
+                    {t('campaign.content26')}
                   </label>
 
                   <TextField
@@ -329,7 +334,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendLastName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Last Name *
+                    {t('campaign.content27')} *
                   </label>
 
                   <TextField
@@ -351,7 +356,7 @@ const SupporterSecondPart = ({
                     htmlFor="gender"
                     className="lexend-font mt-1 font-medium text-sm"
                   >
-                    Gender
+                    {t('campaign.content28')}
                   </label>
 
                   <Select
@@ -380,7 +385,7 @@ const SupporterSecondPart = ({
                         fontFamily: "'Lexend', sans-serif",
                       }}
                     >
-                      Male
+                      {t('campaign.content29')}
                     </MenuItem>
                     <MenuItem
                       value={"F"}
@@ -388,7 +393,7 @@ const SupporterSecondPart = ({
                         fontFamily: "'Lexend', sans-serif",
                       }}
                     >
-                      Female
+                      {t('campaign.content30')}
                     </MenuItem>
                   </Select>
 
@@ -396,7 +401,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendEmail"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Email *
+                    {t('campaign.content31')} *
                   </label>
 
                   <TextField
@@ -418,7 +423,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendPhone"
                     className="lexend-font mb-1  mt-1 font-medium text-sm"
                   >
-                    Phone number (optional)
+                    {t('campaign.content32')}
                   </label>
 
                   <TextField
@@ -440,7 +445,7 @@ const SupporterSecondPart = ({
                     htmlFor="birthdate"
                     className="lexend-font mt-1 font-medium text-sm"
                   >
-                    Birthdate (optional)
+                    {t('campaign.content33')}
                   </label>
 
                   <FormControl>
@@ -478,7 +483,7 @@ const SupporterSecondPart = ({
                     htmlFor="nationality"
                     className="lexend-font mb-1  mt-4 font-medium text-sm"
                   >
-                    Nationality *
+                    {t('campaign.content34')} *
                   </label>
 
                   <ReactFlagsSelect
@@ -521,7 +526,7 @@ const SupporterSecondPart = ({
                             }}
                           />
                         }
-                        label={`Send email too`}
+                        label={t('campaign.content35')}
                         sx={{
                           marginBottom: "0px",
                           "& .MuiTypography-root": {
@@ -542,7 +547,7 @@ const SupporterSecondPart = ({
                             }}
                           />
                         }
-                        label={`Don't send an email, let's keep campaign secret !`}
+                        label={t('campaign.content36')}
                         sx={{
                           marginTop: "0px",
                           "& .MuiTypography-root": {
@@ -576,7 +581,7 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Next</span>
+                    <span className="lexend-font">{t('campaign.content23')}</span>
                   </Button>
 
                   <Button
@@ -601,7 +606,7 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Go Back</span>
+                    <span className="lexend-font">{t('campaign.content37')}</span>
                   </Button>
                 </div>
               </div>
@@ -631,8 +636,8 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                      Your friend's
-                      <br /> information
+                    {t('campaign.content15')}
+                      <br /> {t('campaign.content16')}
                     </p>
                   </div>
 
@@ -648,7 +653,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      Your information
+                    {t('campaign.content17')}
                     </p>
                   </div>
 
@@ -664,13 +669,13 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      Donate
+                    {t('campaign.content18')}
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
-                  Tell us more about your celebrity
+                {t('campaign.content38')}
                 </p>
 
                 <div className="flex flex-col w-full">
@@ -683,7 +688,7 @@ const SupporterSecondPart = ({
                       maxFiles={1}
                       server={server}
                       name="image"
-                      labelIdle={`Drag & Drop celebrity's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
+                      labelIdle={t('campaign.content39')}
                       accept="image/png, image/jpeg, image/gif"
                       dropOnPage
                       dropValidation
@@ -713,7 +718,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    First name *
+                   {t('campaign.content25')} *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -738,7 +743,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendMiddleName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Middle name
+                    {t('campaign.content26')}
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -763,7 +768,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendLastName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Last name *
+                    {t('campaign.content27')} *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -788,7 +793,7 @@ const SupporterSecondPart = ({
                       htmlFor="gender"
                       className="lexend-font mt-1 font-medium text-sm"
                     >
-                      Gender
+                      {t('campaign.content28')}
                     </label>
                     <Select
                       labelId="roleDropdowns"
@@ -810,8 +815,8 @@ const SupporterSecondPart = ({
                         },
                       }}
                     >
-                      <MenuItem value={"M"}>Male</MenuItem>
-                      <MenuItem value={"F"}>Female</MenuItem>
+                      <MenuItem value={"M"}>{t('campaign.content29')}</MenuItem>
+                      <MenuItem value={"F"}>{t('campaign.content30')}</MenuItem>
                     </Select>
                   </div>
 
@@ -819,7 +824,7 @@ const SupporterSecondPart = ({
                     htmlFor="nationality"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Nationality *{" "}
+                    {t('campaign.content34')} *
                   </label>
 
                   <ReactFlagsSelect
@@ -839,13 +844,13 @@ const SupporterSecondPart = ({
                   />
 
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">
-                    Social media
+                  {t('campaign.content41')}
                   </p>
                   <label
                     htmlFor="fbl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Facebook{" "}
+                     {t('campaign.content42')}
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -870,7 +875,7 @@ const SupporterSecondPart = ({
                     htmlFor="igl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    Instagram
+                    {t('campaign.content43')}
                   </label>
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -894,7 +899,7 @@ const SupporterSecondPart = ({
                     htmlFor="igl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    X (Twitter)
+                    {t('campaign.content44')}
                   </label>
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -913,7 +918,7 @@ const SupporterSecondPart = ({
                   </div>
 
                   <label className="lexend-font  font-medium text-sm text-[#82889e]">
-                    Provide at least one social media profile
+                  {t('campaign.content45')}
                   </label>
                 </div>
 
@@ -938,7 +943,7 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">Next</span>
+                    <span className="lexend-font">{t('campaign.content23')}</span>
                   </Button>
 
                   <Button
@@ -963,7 +968,7 @@ const SupporterSecondPart = ({
                     id="go_back_btn"
                   >
                     <img src="/supporters/left_arrow.svg" className="mr-2 " />{" "}
-                    <span className="lexend-font">Go Back</span>
+                    <span className="lexend-font">{t('campaign.content37')}</span>
                   </Button>
                 </div>
               </div>

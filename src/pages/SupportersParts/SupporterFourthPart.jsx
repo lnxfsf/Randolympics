@@ -42,6 +42,7 @@ import { QueryProvider } from "../../QueryProvider";
 import DonationForm from "../../components/Payments/DonationForm";
 import DonationFormItemCampaign from "../../components/Payments/DonationFormItemCampaign";
 
+import {useTranslation} from "react-i18next";
 
 
 const SupporterFourthPart = ({
@@ -64,6 +65,10 @@ const SupporterFourthPart = ({
   setFourthIsVisible,
   setFifthIsVisible,
 }) => {
+
+  const { t } = useTranslation();
+
+
   return (
     <>
       <div
@@ -104,8 +109,8 @@ const SupporterFourthPart = ({
              </div>
 
              <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-               Your friend's
-               <br /> information
+             {t('campaign.content15')}
+               <br /> {t('campaign.content16')}
              </p>
            </div>
 
@@ -120,7 +125,7 @@ const SupporterFourthPart = ({
              </div>
 
              <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-               Your information
+             {t('campaign.content17')}
              </p>
            </div>
 
@@ -136,7 +141,7 @@ const SupporterFourthPart = ({
              </div>
 
              <p className="text-sm font-medium text-center mt-3 text-[#D24949] ">
-               Donate
+             {t('campaign.content18')}
              </p>
            </div>
             </div>
@@ -146,7 +151,7 @@ const SupporterFourthPart = ({
          
 
             <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font w-full">
-                  Let's raise some money ! 
+            {t('campaign.content19')} 
                 </p>
 
 
@@ -154,7 +159,7 @@ const SupporterFourthPart = ({
        
 
             {/* and this is for those 3 options */}
-            <p className="mt-4 font-semibold w-full text-center">Become the first donator</p>
+            <p className="mt-4 font-semibold w-full text-center">{t('campaign.content20')}</p>
           
 
             <div className="flex justify-center mt-6 mb-6 gap-4 w-full">
@@ -237,7 +242,7 @@ const SupporterFourthPart = ({
             </div>
 
             <div className=" mt-8 flex items-center justify-center flex-col w-full">
-              <p className="font-semibold w-full text-center">Got a discount code ?</p>
+              <p className="font-semibold w-full text-center">{t('campaign.content21')}</p>
               {/* <input
             className="border-2 rounded-lg"
             type="text"
@@ -281,7 +286,7 @@ const SupporterFourthPart = ({
                     }}
                     id="join-the-fun-btn"
                   >
-                    <span className="lexend-font">Donate with coupon only</span>
+                    <span className="lexend-font">{t('campaign.content22')}</span>
                     </Button>
 
 
@@ -316,7 +321,7 @@ const SupporterFourthPart = ({
               id="join-the-fun-btn"
             >
               <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-              <span className="lexend-font">Next</span>
+              <span className="lexend-font">{t('campaign.content23')}</span>
             </Button>
 
 
