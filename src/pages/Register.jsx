@@ -922,6 +922,7 @@ const Register = () => {
                   id="nationality"
                   name="nationality"
                   placeholder="Nationality *"
+                
                 />
               
 

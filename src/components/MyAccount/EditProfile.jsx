@@ -1239,6 +1239,7 @@ const EditProfile = () => {
        <div className="flex flex-col w-full mt-4">
        <p className="text-sm font-medium">Country</p>
               <ReactFlagsSelect
+              
                 countries={supportedCountry}
                 disabled
                 // to fill it with the one, which user's is currently selected...

@@ -487,6 +487,7 @@ const SupporterSecondPart = ({
                   </label>
 
                   <ReactFlagsSelect
+                  placeholder={t('campaign.content63')}
                     countries={supportedCountry}
                     className="w-full p-0 lexend-font rounded-lg"
                     selected={friendNationality}
@@ -828,6 +829,7 @@ const SupporterSecondPart = ({
                   </label>
 
                   <ReactFlagsSelect
+                    placeholder={t('campaign.content63')}
                     countries={supportedCountry}
                     className="w-full rounded-md p-0 lexend-font"
                     /*  bg-[#fff]  */
