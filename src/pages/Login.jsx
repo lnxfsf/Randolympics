@@ -119,17 +119,14 @@ const Login = () => {
     // ? this is just to pass to store auth in (local|session) storage
     let login = await loginUser(email, password, rememberChecked);
 
-    console.log("ovo salj elogin user")
-    console.log(login)
-
     if(login === 1){
-      setSnackbarText("Login success");
+      setSnackbarText(t('login.content11'));
 
       setOpenSnackbar(true);
 
     }else if (login === 0){
 
-      setSnackbarText("Login failed");
+      setSnackbarText(t('login.content12'));
       setSnackbarSeverity("error")
       setOpenSnackbar(true);
 

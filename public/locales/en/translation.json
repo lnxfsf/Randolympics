@@ -403,7 +403,6 @@
   },
 
   "login": {
-
     "content1": "Log In",
     "content2": "Email",
     "content3": "Password",
@@ -413,33 +412,68 @@
     "content7": "Login",
     "content8": "Resend verification email ?",
     "content9": "Sign Up",
+    "content10": "Please enter a valid email address",
+    "content11": "Login success",
+    "content12": "Login failed",
 
-    "content10": "Please enter a valid email address"
-
-
+    "content13": "If an account with this email exists, a password reset email has been sent.",
+    "content14": "Please enter a valid email address",
+    "content15": "Reset password",
+    "content16": "Back to sign in"
   },
 
-
   "register": {
-
     "content1": "Enter a valid email address",
     "content2": "Enter valid phone number",
     "content3": "Password should be longer than 4 characters",
-    "content4": "Please verify the reCAPTCHA!", 
+    "content4": "Please verify the reCAPTCHA!",
     "content5": "Signed up ! Email verification sent.",
     "content6": "reCAPTCHA validation failed!",
     "content7": "Insert nationality !",
     "content8": "Email is not valid !",
     "content9": "Phone is not valid !",
     "content10": "Password should be longer than 4 characters ! ",
+    "content11": "Drag & Drop profile picture or <span class=\"filepond--label-action\">Browse</span> <br/>(optional)",
+    "content12": "Register as",
 
-    "content11": ""
+    "content13": "Email",
+    "content14": "First Name",
+    "content15": "Middle Name (optional)",
+    "content16": "Last Name (optional)",
+    "content17": "Password",
+    "content18": "Phone number",
+    "content19": "Gender",
+    "content20": "Male",
+    "content21": "Female",
 
+    "content22": "Weight",
 
+    "content23": "Crypto (optional)",
 
+    "content24": "Create account",
 
+    "user_type1": "Athlete",
+    "user_type2": "Global President",
+    "user_type3": "National President",
+    "user_type4": "Event Manager",
+    "user_type5": "IT Manager Page Editor",
+    "user_type6": "Marketing Manager",
+    "user_type7": "Sales Manager",
+    "user_type8": "Validation Manager",
+    "user_type9": "Legal Manager",
+    "user_type10": "Referee & support",
 
+    "private": "Private",
+    "public": "Public",
+
+    "tos1": "I have read and understood the",
+    "tos2": "Terms of Service"
+  },
+
+  "myprofile": {
+    
   }
+
 
 
 
