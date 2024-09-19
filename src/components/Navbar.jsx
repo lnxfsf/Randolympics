@@ -42,6 +42,53 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+
+  const settingUserType = (user_type) => {
+    switch (user_type) {
+      case "AH":
+        return "Athlete";
+        
+      case "GP":
+        return "Global President";
+        
+      case "NP":
+        return "National President";
+        
+      case "EM":
+        return "Event Manager";
+        
+      case "ITM":
+        return "IT Manager";
+        
+      case "IME":
+        return "IT Manager Page Editor"; // Note: Corrected from "ITM"
+        
+      case "MM":
+        return "Marketing Manager";
+        
+      case "SM":
+        return "Sales Manager";
+        
+      case "VM":
+        return "Validation Manager";
+        
+      case "LM":
+        return "Legal Manager";
+        
+      case "RS":
+        return "Referee & support";
+        
+      default:
+        return "Guest";
+
+        
+    }
+  };
+
+  
+
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +103,10 @@ const Navbar = () => {
 
   if (tokens) {
     var username = tokens.data.name;
+    
     var profile_image = tokens.data.picture;
+
+    var user_type = tokens.data.user_type;
   }
 
   const [userData, setUserData] = useState(() => {
@@ -68,6 +118,9 @@ const Navbar = () => {
 
     return parsed;
   });
+
+
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -108,7 +161,7 @@ const Navbar = () => {
               />
             </Link>
 
-            <nav className="hidden lg:flex  gap-8 justify-center items-center   lexend-font pl-16">
+            <nav className="hidden lg:flex  gap-8 justify-center items-center lexend-font pl-16">
               <Link to="/#sports" className="nav_btns">
                 {t("navbar.btn1")}
               </Link>
@@ -132,6 +185,8 @@ const Navbar = () => {
                 {/* // when logged in */}
 
                 <Tooltip title="Account settings">
+                
+                <div className="flex gap-2 items-center justify-center">
                   <IconButton
                     onClick={handleClick}
                     size="small"
@@ -154,7 +209,11 @@ const Navbar = () => {
                         {username.charAt(0).toUpperCase()}
                       </Avatar>
                     )}
+
+                    
                   </IconButton>
+                  <p onClick={handleClick} className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer">{settingUserType(user_type)}</p>
+                  </div>
 
                   <Menu
                     anchorEl={anchorEl}

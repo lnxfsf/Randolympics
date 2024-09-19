@@ -197,7 +197,7 @@ const MyAccount = () => {
               onClick={() => handleClick("myAccount")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium "> My Account  {t('welcomeMessage')}</p>
+                <p className="text-red_second font-medium ">My Account</p>
                 <img src="/myaccount/user.svg" className="icon" />
               </div>
             </li>
