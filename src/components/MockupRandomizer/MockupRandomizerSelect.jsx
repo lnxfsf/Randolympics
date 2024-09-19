@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 
-
+import { useTranslation } from "react-i18next";
 
 const MockupRandomizerSelect = ({
   setSelectedGender,
@@ -13,6 +13,7 @@ const MockupRandomizerSelect = ({
   checkBeforeRandomize,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -20,8 +21,7 @@ const MockupRandomizerSelect = ({
         <div className="flex w-full p-4 md:w-[50%] 2xl:w-[30%]  mt-8 text-black_second lexend-font flex-col ">
           <p className="text-xl md:text-2xl font-medium ">Select your gender</p>
 
-
-        {/* gender */}
+          {/* gender */}
           <div className="flex w-full gap-4 mt-4 ">
             <div
               onClick={() => {
@@ -53,7 +53,7 @@ const MockupRandomizerSelect = ({
                     : "text-black_second"
                 } lexend-font m-4 mt-2 `}
               >
-                Male
+                {t("mockupRandomizer.select1")}
               </p>
             </div>
 
@@ -87,7 +87,7 @@ const MockupRandomizerSelect = ({
                     : "text-black_second"
                 } lexend-font m-4 mt-2`}
               >
-                Female
+                {t("mockupRandomizer.select2")}
               </p>
             </div>
           </div>
@@ -95,66 +95,61 @@ const MockupRandomizerSelect = ({
 
         {/* weight category */}
         <div className="flex w-full p-4  md:w-[50%] 2xl:w-[30%] mt-8 text-black_second lexend-font flex-col ">
-        
-        <div className="flex justify-between">
-          <p className="text-xl md:text-2xl font-medium ">
-            Select your weight category
-          </p>
+          <div className="flex justify-between">
+            <p className="text-xl md:text-2xl font-medium ">
+              {t("mockupRandomizer.select3")}
+            </p>
 
-          
-
-        <Popup
-          trigger={<img src="/randomizer/info.svg" className="cursor-pointer select-none"/>}
-          
-          position="right center"
-          className="popup-content "
-          modal
-          closeOnDocumentClick
-        >
-            <div className="p-4">
-            
+            <Popup
+              trigger={
+                <img
+                  src="/randomizer/info.svg"
+                  className="cursor-pointer select-none"
+                />
+              }
+              position="right center"
+              className="popup-content "
+              modal
+              closeOnDocumentClick
+            >
+              <div className="p-4">
                 <div>
-
-
-                   <p className="text-2xl md:text-3xl  lexend-font text-black_second text-center font-bold">Weight category</p>
+                  <p className="text-2xl md:text-3xl  lexend-font text-black_second text-center font-bold">
+                    {t("mockupRandomizer.select4")}
+                  </p>
                 </div>
-
 
                 <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4 mb-4">
-                    <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">Male</p>
+                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
+                    {t("mockupRandomizer.select1")}
+                  </p>
 
-                    <p>Light category is below 74 kg / 163 lbs</p> 
+                  <p>{t("mockupRandomizer.select5")}</p>
 
-                    <p>Medium category is in between of 74 kg / 163 lbs and 90 kg / 198 lbs</p>
+                  <p>{t("mockupRandomizer.select6")}</p>
 
-                    <p>Heavy category is above 90 kg / 198 lbs</p>
-
+                  <p>{t("mockupRandomizer.select7")}</p>
                 </div>
 
-               
-                <div className="w-full flex justify-center" >
-                    <hr className="w-[80%]"/>
+                <div className="w-full flex justify-center">
+                  <hr className="w-[80%]" />
                 </div>
 
                 <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4">
-                    <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">Female</p>
+                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
+                    {t("mockupRandomizer.select2")}
+                  </p>
 
-                    <p>Light category is below 62 kg / 137 lbs</p> 
+                  <p>{t("mockupRandomizer.select8")}</p>
 
-                    <p>Medium category is in between of 62 kg / 137 lbs and 76 kg / 168 lbs</p>
+                  <p>{t("mockupRandomizer.select9")}</p>
 
-                    <p>Heavy category is above 76 kg / 168 lbs</p>
-
-
+                  <p>{t("mockupRandomizer.select10")}</p>
                 </div>
-            
-            </div>
-            
-        </Popup>
+              </div>
+            </Popup>
+          </div>
 
-       
-        </div>
-        
           <div className="flex w-full gap-4 mt-4 ">
             <div
               onClick={() => {
@@ -186,7 +181,7 @@ const MockupRandomizerSelect = ({
                     : "text-black_second"
                 } lexend-font m-4 mt-2`}
               >
-                Light
+                {t("mockupRandomizer.select11")}
               </p>
             </div>
 
@@ -220,7 +215,7 @@ const MockupRandomizerSelect = ({
                     : "text-black_second"
                 } lexend-font m-4 mt-2`}
               >
-                Medium
+                {t("mockupRandomizer.select12")}
               </p>
             </div>
 
@@ -254,7 +249,7 @@ const MockupRandomizerSelect = ({
                     : "text-black_second"
                 } lexend-font m-4 mt-2`}
               >
-                Heavy
+                {t("mockupRandomizer.select13")}
               </p>
             </div>
           </div>
@@ -282,7 +277,9 @@ const MockupRandomizerSelect = ({
             }}
             id="randomize-btn"
           >
-            <span className="lexend-font">Randomize</span>
+            <span className="lexend-font">
+              {t("mockupRandomizer.select14")}
+            </span>
           </Button>
 
           <Button
@@ -307,7 +304,9 @@ const MockupRandomizerSelect = ({
             id="join-the-fun-btn"
           >
             <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-            <span className="lexend-font">Go Back</span>
+            <span className="lexend-font">
+              {t("mockupRandomizer.select15")}
+            </span>
           </Button>
         </div>
       </div>

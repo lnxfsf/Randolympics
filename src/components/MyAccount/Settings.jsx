@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+import {useTranslation} from "react-i18next";
+
+
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 
@@ -22,6 +25,9 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Settings = () => {
+
+  const { t } = useTranslation();
+
   let { logoutUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -133,7 +139,7 @@ const Settings = () => {
       );
 
       if (response.status === 200) {
-        setSnackbarText("You resigned successfully");
+        setSnackbarText(t('myprofile.settings.content1'));
         setOpenSnackbarSuccess(true);
 
         popupRefResign.current.close();
@@ -146,7 +152,7 @@ const Settings = () => {
   return (
     <>
       <p className="lexend-font text-black_second font-bold text-xl md:text-2xl p-2">
-        Settings
+      {t('myprofile.settings.content2')}
       </p>
 
 
@@ -162,7 +168,7 @@ const Settings = () => {
             }}
           >
             <img src="/editprofile/withdraw.svg" className="w-5 ml-4" />
-            <p>Withdraw Candidacy</p>
+            <p>{t('myprofile.settings.content3')}</p>
           </div>
 
           <hr style={{ border: "1px solid #C6C6C6" }} />
@@ -174,7 +180,7 @@ const Settings = () => {
             }}
           >
             <img src="/editprofile/resign.svg" className="w-4 ml-4" />
-            <p>Resign from this position</p>
+            <p>{t('myprofile.settings.content4')}</p>
           </div>
 
           <hr style={{ border: "1px solid #C6C6C6" }} />
@@ -186,7 +192,7 @@ const Settings = () => {
             }}
           >
             <img src="/editprofile/delete.svg" className="w-4 ml-4" />
-            <p className="text-[#FD5757]">Delete Account</p>
+            <p className="text-[#FD5757]">{t('myprofile.settings.content5')}</p>
           </div>
         </div>
 
@@ -208,9 +214,9 @@ const Settings = () => {
         <div className="m-4">
           <div className="flex gap-2 mb-2 justify-center lexend-font flex-col ">
             <p className="font-bold text-xl md:text-2xl">
-              Are you sure you want to resign from this position?
+            {t('myprofile.settings.content6')}
             </p>
-            <p>If you resign now you won’t be able to recover your profile.</p>
+            <p>{t('myprofile.settings.content7')}</p>
           </div>
 
           <div className="flex justify-center items-center gap-2 m-4">
@@ -231,7 +237,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="lexend-font font-semibold">Yes</span>
+              <span className="lexend-font font-semibold">{t('myprofile.settings.yes')}</span>
             </Button>
 
             <Button
@@ -252,7 +258,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="lexend-font font-semibold">No</span>
+              <span className="lexend-font font-semibold">{t('myprofile.settings.no')}</span>
             </Button>
           </div>
         </div>
@@ -271,9 +277,9 @@ const Settings = () => {
         <div className="m-4">
           <div className="flex gap-2 mb-2 justify-center lexend-font flex-col ">
             <p className="font-bold text-xl md:text-2xl">
-              Are you sure you want to withdraw candidacy?
+            {t('myprofile.settings.content8')}
             </p>
-            <p>If you resign now you won’t be able to recover your profile.</p>
+            <p>{t('myprofile.settings.content9')}</p>
           </div>
 
           <div className="flex justify-center items-center gap-2 m-4">
@@ -294,7 +300,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="lexend-font font-semibold">Yes</span>
+              <span className="lexend-font font-semibold">{t('myprofile.settings.yes')}</span>
             </Button>
 
             <Button
@@ -317,7 +323,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="lexend-font font-semibold">No</span>
+              <span className="lexend-font font-semibold">{t('myprofile.settings.no')}</span>
             </Button>
           </div>
         </div>
@@ -336,11 +342,10 @@ const Settings = () => {
         <div className="m-4">
           <div className="flex gap-2 mb-2 justify-center lexend-font flex-col ">
             <p className="font-bold text-xl md:text-2xl">
-              Are you sure you want to delete your account?
+            {t('myprofile.settings.content10')}
             </p>
             <p>
-              If you delete your account now you won’t be able to recover your
-              profile.
+            {t('myprofile.settings.content11')}
             </p>
           </div>
 
@@ -362,7 +367,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="lexend-font font-semibold">Yes</span>
+              <span className="lexend-font font-semibold">{t('myprofile.settings.yes')}</span>
             </Button>
 
             <Button
@@ -383,7 +388,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="popins-font">No</span>
+              <span className="popins-font">{t('myprofile.settings.no')}</span>
             </Button>
           </div>
         </div>

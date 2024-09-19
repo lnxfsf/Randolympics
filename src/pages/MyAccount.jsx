@@ -16,23 +16,15 @@ import AuthContext from "../context/AuthContext";
 
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-import { useTranslation } from 'react-i18next';
-
-
-
+import { useTranslation } from "react-i18next";
 
 const MyAccount = () => {
-
   const { t } = useTranslation();
-  
-
 
   const location = useLocation();
-  const hash = location.hash.replace("#", ""); ; 
-  
-  
+  const hash = location.hash.replace("#", "");
 
   let { logoutUser } = useContext(AuthContext);
 
@@ -60,59 +52,42 @@ const MyAccount = () => {
       setBirthdate(userJson.data.birthdate); */
     }
 
-
     warningBoxFunc(
       userJson.data.passportStatus,
       userJson.data.birthdate,
       userJson.data.passport_photo
     );
 
-
-
-  // you get like "elections" extracted from URL ".. #elections"
-  // and now, you choose something to be selected
+    // you get like "elections" extracted from URL ".. #elections"
+    // and now, you choose something to be selected
     switch (hash) {
-
-
       case "myAccount":
         setSelectedItem("myAccount");
         break;
 
       case "elections":
-          setSelectedItem("elections");
+        setSelectedItem("elections");
         break;
       case "team":
         setSelectedItem("team");
         break;
 
-
-
       case "settings":
-          setSelectedItem("settings");
-          break;
+        setSelectedItem("settings");
+        break;
 
       case "news":
         setSelectedItem("news");
         break;
 
-
-        
       case "loginTrafficHistory":
         setSelectedItem("loginTrafficHistory");
         break;
 
-
-        
       case "passportVerification":
         setSelectedItem("passportVerification");
         break;
-
-        
-      
-  
-  
     }
-
   }, [isRejected, warningMessage, hash]);
 
   const [selectedItem, setSelectedItem] = useState("myAccount");
@@ -141,53 +116,33 @@ const MyAccount = () => {
   const warningBoxFunc = (passportStatus, birthdate, passport_photo) => {
     if (passportStatus === "unvalidated") {
       if (birthdate == null && passport_photo == null) {
-        setWarningMessage(
-          "Your passport is not verified. Upload passport photo and birthdate to get verified."
-        );
+        setWarningMessage(t("myprofile.side_nav.passport1"));
       } else if (birthdate == null && passport_photo !== null) {
-        setWarningMessage(
-          "Your passport is not verified. Insert your birthdate to get verified."
-        );
+        setWarningMessage(t("myprofile.side_nav.passport2"));
       } else if (birthdate !== null && passport_photo == null) {
-        setWarningMessage(
-          "Your passport is not verified. Upload passport photo to get verified."
-        );
+        setWarningMessage(t("myprofile.side_nav.passport3"));
       } else {
-        setWarningMessage(
-          "Your passport is not yet verified. Waiting for approval.."
-        );
+        setWarningMessage(t("myprofile.side_nav.passport4"));
       }
     } else if (passportStatus === "rejected") {
       setWarningMessage(
-        "Your passport is rejected. Reupload passport and birthdate."
+        t('myprofile.side_nav.passport5')
       );
       setIsRejected(true);
 
-      // TODO, red warning box, ! izgleda interesantnije ovaj scenario !
-    } else if (passportStatus === "validted") {
+    } else if (passportStatus === "validated") {
       setWarningMessage("");
       setIsRejected(false);
     }
   };
-
-
-
-
-
-
-      
-
 
   return (
     <>
       <Navbar />
 
       <div className="  gap-7 mt-6 flex">
-      
         <div className="basis-1/4 hidden lg:block  ">
-       
           <ul className="list flex flex-col lexend-font">
-           
             <li
               style={{ listStyleType: "none" }}
               ref={myAccountRef}
@@ -197,7 +152,7 @@ const MyAccount = () => {
               onClick={() => handleClick("myAccount")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">My Account</p>
+                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav1')}</p>
                 <img src="/myaccount/user.svg" className="icon" />
               </div>
             </li>
@@ -211,11 +166,10 @@ const MyAccount = () => {
               onClick={() => handleClick("settings")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">Settings</p>
+                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav2')}</p>
                 <img src="/myaccount/settings.svg" className="icon" />
               </div>
             </li>
-
 
             <li
               style={{ listStyleType: "none" }}
@@ -226,13 +180,11 @@ const MyAccount = () => {
               onClick={() => handleClick("team")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">Team</p>
+                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav3')}</p>
 
                 <img src="/myaccount/team.svg" className="icon" />
               </div>
             </li>
-
-
 
             {user_type !== "VM" && (
               <li
@@ -244,7 +196,7 @@ const MyAccount = () => {
                 onClick={() => handleClick("elections")}
               >
                 <div className="flex justify-between">
-                  <p className="text-red_second font-medium ">Elections</p>
+                  <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav4')}</p>
                   <img src="/myaccount/ballot.svg" className="icon" />
                 </div>
               </li>
@@ -266,7 +218,7 @@ const MyAccount = () => {
                   onClick={() => handleClick("news")}
                 >
                   <div className="flex justify-between">
-                    <p className="text-red_second font-medium ">News</p>
+                    <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav5')}</p>
 
                     <img src="/myaccount/news.svg" className="icon" />
                   </div>
@@ -285,7 +237,7 @@ const MyAccount = () => {
               >
                 <div className="flex justify-between">
                   <p className="text-red_second font-medium ">
-                    Passport Verification
+                  {t('myprofile.side_nav.side_nav6')}
                   </p>
 
                   <img src="/myaccount/passport.svg" className="icon" />
@@ -311,7 +263,7 @@ const MyAccount = () => {
               >
                 <div className="flex justify-between">
                   <p className="text-red_second font-medium ">
-                    Login & Traffic History
+                  {t('myprofile.side_nav.side_nav7')}
                   </p>
 
                   <img src="/myaccount/login_history.svg" className="icon" />
@@ -328,7 +280,7 @@ const MyAccount = () => {
               onClick={() => handleClick("logout")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">Logout</p>
+                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav8')}</p>
 
                 <img src="/myaccount/exit.svg" className="icon" />
               </div>
@@ -345,20 +297,18 @@ const MyAccount = () => {
                 <div className="flex">
                   {/*  <img src="/myaccount/triangle-exclamation.svg" /> */}
                   <WarningAmberIcon />
-                  <p className="pl-2">Warning !</p>
+                  <p className="pl-2">{t('myprofile.side_nav.passport6')}</p>
                 </div>
 
                 <div className="pl-8 pt-2">{warningMessage}</div>
 
                 <div className="pl-8 pt-4">
                   {" "}
-                  <p>You can't vote until your passport is verified.</p>
+                  <p>{t('myprofile.side_nav.passport7')}</p>
                 </div>
               </div>
             </>
           )}
-
-
         </div>
 
         <div className="w-full">

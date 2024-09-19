@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import { useTranslation } from "react-i18next";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
@@ -12,6 +14,8 @@ import "../../../styles/editprofile.scoped.scss";
 import moment from "moment";
 
 const TeamList = ({ user, index, selectedRole, currentUserType }) => {
+  const { t } = useTranslation();
+
   // set up, (and also depends on user_type, as we won't use all of it)
 
   function calculateAge(birthdate) {
@@ -21,13 +25,10 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
     }
 
     const today = moment();
-    console.log("danas" + today);
 
     const birthDate = moment(birthdate);
-    console.log("rodjendan" + birthDate);
 
     const years = today.diff(birthDate, "years");
-    console.log("razlika god" + years);
 
     return years;
   }
@@ -58,13 +59,13 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   const name = user.name;
 
   if (user.birthdate_private == 1) {
-    var age = "private";
+    var age = t("myprofile.team.private");
   } else {
     var age = calculateAge(user.birthdate);
   }
 
   if (user.email_private == 1) {
-    var email = "private";
+    var email = t("myprofile.team.private");
   } else {
     var email = user.email;
   }
@@ -72,7 +73,7 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
   // private je 1
   // public je 0
   if (user.phone_private == 1) {
-    var phone = "private";
+    var phone = t("myprofile.team.private");
   } else {
     var phone = user.phone;
   }
@@ -105,11 +106,10 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             )}
             {age}
           </div>
-
         </td>
 
         <td className="tdt">
-        <div className="flex gap-2">
+          <div className="flex gap-2">
             {email === "private" && (
               <img
                 className=" bg-[#EAEAEA] p-1 "
@@ -118,11 +118,9 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             )}
             {email}
           </div>
-          
-
         </td>
         <td className="tdt">
-        <div className="flex gap-2">
+          <div className="flex gap-2">
             {phone === "private" && (
               <img
                 className=" bg-[#EAEAEA] p-1"
@@ -131,10 +129,7 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             )}
             {phone}
           </div>
-          
-
-          
-          </td>
+        </td>
       </tr>
     </>
   );

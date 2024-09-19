@@ -5,6 +5,8 @@ import Flag from "react-world-flags";
 import axios from "axios";
 import { Button } from "@mui/material";
 
+import { useTranslation } from "react-i18next";
+
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -32,11 +34,15 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+import { settingUserType } from "../../context/user_types";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const HeaderMyProfile = ({ ShowEditProfile }) => {
+  const { t } = useTranslation();
+
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
   const [user_typeText, setUserTypeText] = useState("");
@@ -128,9 +134,6 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
     try {
       // we just upload profile_image URL, in database !
 
-      console.log("da li on uopste i salje ! ");
-      console.log(profileImage);
-
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
@@ -184,60 +187,17 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
       }
 
       setNameHeader(userJson.data.name);
-      settingUserType(userJson.data.user_type);
+      setUserTypeText(settingUserType(userJson.data.user_type));
       setCode(userJson.data.nationality);
     }
   }, []);
 
-  const settingUserType = (user_type) => {
-    switch (user_type) {
-      case "AH":
-        setUserTypeText("Athlete");
-        break;
-      case "GP":
-        setUserTypeText("Global President");
-        break;
-      case "NP":
-        setUserTypeText("National President");
-        break;
-      case "EM":
-        setUserTypeText("Event Manager");
-        break;
-      case "ITM":
-        setUserTypeText("IT Manager");
-        break;
-      case "IME":
-        setUserTypeText("IT Manager Page Editor"); // Note: Corrected from "ITM"
-        break;
-      case "MM":
-        setUserTypeText("Marketing Manager");
-        break;
-      case "SM":
-        setUserTypeText("Sales Manager");
-        break;
-      case "VM":
-        setUserTypeText("Validation Manager");
-        break;
-      case "LM":
-        setUserTypeText("Legal Manager");
-        break;
-      case "RS":
-        setUserTypeText("Referee & support");
-        break;
-      default:
-        setUserTypeText("Guest");
-
-        break;
-    }
-  };
-
   return (
     <>
       <p className="lexend-font font-medium text-black_second text-xl p-2">
-        My account
+        {t("myprofile.myaccount.content30")}
       </p>
       <div className="flex flex-col md:flex-row justify-start mt-4 lexend-font text-black_second p-2 md:w-[80%]">
-        
         <div className="flex grow">
           <div className="flex flex-col items-start">
             <div className="flex justify-center items-center ">
@@ -267,7 +227,7 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
                     maxFiles={1}
                     server={serverProfile}
                     name="image"
-                    labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
+                    labelIdle={t("myprofile.myaccount.content31")}
                     accept="image/png, image/jpeg, image/gif"
                     dropOnPage
                     dropValidation
@@ -317,7 +277,9 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
                     }}
                   >
                     <img src="/myaccount/upload.svg" className="w-4 mr-2" />{" "}
-                    <span className="lexend-font font-semibold ">Change</span>
+                    <span className="lexend-font font-semibold ">
+                      {t("myprofile.myaccount.content32")}
+                    </span>
                   </Button>
                 </>
               )}
@@ -342,7 +304,9 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
                     onClick={profileUpload}
                   >
                     <img src="/myaccount/save.svg" className="w-4 mr-2" />{" "}
-                    <span className="lexend-font font-semibold ">Save photo</span>
+                    <span className="lexend-font font-semibold ">
+                      {t("myprofile.myaccount.content33")}
+                    </span>
                   </Button>
                 </>
               )}
@@ -350,23 +314,17 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
           </div>
         </div>
 
-
         <div className="flex justify-self-end mr-4">
-         
-         
           <div className="flex flex-col justify-center md:pl-4">
             <h1 className="text-lg font-medium text-right text-gray_third">
               {user_typeText}
             </h1>
           </div>
 
-
           <div className="flex flex-col justify-center pl-4">
             <Flag className="flag-photo" code={code} />
           </div>
         </div>
-
-
       </div>
     </>
   );

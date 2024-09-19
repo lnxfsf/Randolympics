@@ -50,6 +50,8 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 
+import { settingUserType } from "../../context/user_types";
+
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginFilePoster,
@@ -60,6 +62,8 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+import { useTranslation } from "react-i18next";
+
 import { useRef, useEffect } from "react";
 import { useRouteError } from "react-router-dom";
 
@@ -69,15 +73,11 @@ let BACKEND_SERVER_BASE_URL =
 
 import moment from "moment";
 
-
-
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 // for image zoom
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
-
 
 const sxTextField = {
   m: 1,
@@ -110,7 +110,7 @@ const EditProfile = () => {
   const [userData, setUserData] = useState(null);
   const popupPassportRef = useRef(null); // popup for showing passport image
 
-
+  const { t } = useTranslation();
 
   const handleathleteStatementChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -266,7 +266,7 @@ const EditProfile = () => {
       setCode(userJson.data.nationality); //this is for big flag in upper part ..
       setNameHeader(userJson.data.name);
 
-      settingUserType(userJson.data.user_type);
+      setUserTypeText(settingUserType(userJson.data.user_type));
 
       setSelectedCrypto(userJson.data.cryptoaddress_type);
 
@@ -320,48 +320,6 @@ const EditProfile = () => {
     }
   };
 
-  const settingUserType = (user_type) => {
-    switch (user_type) {
-      case "AH":
-        setUserTypeText("Athlete");
-        break;
-      case "GP":
-        setUserTypeText("Global President");
-        break;
-      case "NP":
-        setUserTypeText("National President");
-        break;
-      case "EM":
-        setUserTypeText("Event Manager");
-        break;
-      case "ITM":
-        setUserTypeText("IT Manager");
-        break;
-      case "IME":
-        setUserTypeText("IT Manager Page Editor"); // Note: Corrected from "ITM"
-        break;
-      case "MM":
-        setUserTypeText("Marketing Manager");
-        break;
-      case "SM":
-        setUserTypeText("Sales Manager");
-        break;
-      case "VM":
-        setUserTypeText("Validation Manager");
-        break;
-      case "LM":
-        setUserTypeText("Legal Manager");
-        break;
-      case "RS":
-        setUserTypeText("Referee & support");
-        break;
-      default:
-        setUserTypeText("Guest");
-
-        break;
-    }
-  };
-
   //so we can find that user in database.. (if later on, user changes, his email )
 
   //console.log("json user data (only when logged in): " + userData.data.email)
@@ -409,7 +367,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handlemiddleNameChange = (event) => {
     // and also update the object..
@@ -474,7 +431,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   // ? HERE, for crypto..
 
@@ -765,7 +721,6 @@ const EditProfile = () => {
         }
       );
 
-      // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
       setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
@@ -886,22 +841,22 @@ const EditProfile = () => {
 
         {/* -------------- */}
 
-    
-
         <form
           action="#"
           onSubmit={handleSubmit}
           className="lexend-font text-black_second p-2"
         >
           <p className="text-lg mb-4 mt-4 ">
-            <b className="text-2xl font-bold ">Personal Information</b>
+            <b className="text-2xl font-bold ">
+              {t("myprofile.myaccount.content1")}
+            </b>
           </p>
 
           <div className="flex flex-col w-full md:w-[80%]">
-            
-            
             <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Name</p>
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content2")}
+              </p>
               <TextField
                 value={userData && userData.data.name}
                 /*  onChange={handleNameChange} */
@@ -918,77 +873,59 @@ const EditProfile = () => {
               />
             </div>
 
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content3")}
+              </p>
 
+              <TextField
+                value={userData && userData.data.middleName}
+                onChange={handlemiddleNameChange}
+                id="middleName"
+                name="middleName"
+                type="text"
+                placeholder="Middle name"
+                sx={sxTextField}
+              />
+            </div>
 
             <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Middle name</p>
-			  
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content4")}
+              </p>
 
-
-
-  <TextField
-              value={userData && userData.data.middleName}
-              onChange={handlemiddleNameChange}
-             
-              id="middleName"
-              name="middleName"
-              type="text"
-              placeholder="Middle name"
-             sx={sxTextField}
-            />
-			
-			</div>
-			
-			
-           
-
+              <TextField
+                value={userData && userData.data.familyName}
+                onChange={handlefamilyNameChange}
+                id="familyName"
+                name="familyName"
+                type="text"
+                placeholder="Family name"
+                sx={sxTextField}
+              />
+            </div>
 
             <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Family name</p>
-			  
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content5")}
+              </p>
 
-
-
-  <TextField
-              value={userData && userData.data.familyName}
-              onChange={handlefamilyNameChange}
-             
-              id="familyName"
-              name="familyName"
-              type="text"
-              placeholder="Family name"
-             sx={sxTextField}
-            />
-			
-			</div>
-
-
-
-      <div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Last name</p>
-
-            <TextField
-              value={userData && userData.data.lastName}
-              onChange={handlelastNameChange}
-              
-              id="lastName"
-              name="lastName"
-              type="text"
-              placeholder="Last name"
-               sx={sxTextField}
-			   
-			   
-            />
-		
-	
-			
-</div>
-			
-
+              <TextField
+                value={userData && userData.data.lastName}
+                onChange={handlelastNameChange}
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+                sx={sxTextField}
+              />
+            </div>
 
             <div className="flex gap-2 w-full">
               <div className="flex flex-col w-full">
-                <p className="text-sm font-medium">Email</p>
+                <p className="text-sm font-medium">
+                  {t("myprofile.myaccount.content6")}
+                </p>
                 <TextField
                   // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
                   // now on change, needs to update values, so it can edit it
@@ -1031,13 +968,13 @@ const EditProfile = () => {
                     value={1}
                     sx={{ fontFamily: "'Lexend', sans-serif" }}
                   >
-                    Private
+                    {t("myprofile.myaccount.private")}
                   </MenuItem>
                   <MenuItem
                     value={0}
                     sx={{ fontFamily: "'Lexend', sans-serif" }}
                   >
-                    Public
+                    {t("myprofile.myaccount.public")}
                   </MenuItem>
                 </Select>
               </FormControl>
@@ -1046,7 +983,9 @@ const EditProfile = () => {
             <div className="flex flex-col w-full">
               <div className="flex gap-2 w-full">
                 <div className="flex flex-col w-full">
-                  <p className="text-sm font-medium">Phone number</p>
+                  <p className="text-sm font-medium">
+                    {t("myprofile.myaccount.content7")}
+                  </p>
                   <TextField
                     value={userData && userData.data.phone}
                     onChange={handlePhoneChange}
@@ -1081,165 +1020,152 @@ const EditProfile = () => {
                       },
                     }}
                   >
-                    <MenuItem value={1}>Private</MenuItem>
-                    <MenuItem value={0}>Public</MenuItem>
+                    <MenuItem value={1}>
+                      {t("myprofile.myaccount.private")}
+                    </MenuItem>
+                    <MenuItem value={0}>
+                      {t("myprofile.myaccount.public")}
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
             </div>
 
-            
+            <div className="flex gap-2 w-full">
+              <div className="flex flex-col w-full ">
+                <p className="text-sm font-medium">
+                  {t("myprofile.myaccount.content8")}
+                </p>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DatePicker
+                      className="w-full"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      format="MMMM DD, YYYY"
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </div>
 
- <div className="flex gap-2 w-full">
-          
-          <div className="flex flex-col w-full ">
-           <p className="text-sm font-medium">Birthdate</p>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              className="w-full"
-                           
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              format="MMMM DD, YYYY"
+              <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                <Select
+                  name="birthdate_private"
+                  id="birthdate_private"
+                  value={birthdate_private}
+                  disableUnderline
+                  onChange={handleBirthdatePrivacyChange}
+                  sx={{
+                    mt: 3.4,
+                    fontFamily: "'Lexend', sans-serif",
 
-                             
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
-                
-               </div>	
-                
-                
-                
-                      <FormControl
-                          className="h-5"
-                         
-                          sx={{ minWidth: 120 }}
-                        >
-                          <Select
-                            name="birthdate_private"
-                            id="birthdate_private"
-                            value={birthdate_private}
-                            disableUnderline
-                            onChange={handleBirthdatePrivacyChange}
-                           sx={{
-                              mt: 3.4,
-                              fontFamily: "'Lexend', sans-serif",
-        
-                              "& .MuiOutlinedInput-root": {
-                                borderRadius: 2,
-                                fontFamily: "'Lexend', sans-serif",
-                              },
-                              "& fieldset": {
-                                borderRadius: 2,
-                              },
-                            }}
-                          >
-                            <MenuItem value={1}>Private</MenuItem>
-                            <MenuItem value={0}>Public</MenuItem>
-                          </Select>
-                        </FormControl>
-                
-                
-                      </div>
-
-
-
-
-
-                      <div className="flex items-end col-span-2 w-full">
-            <div className="flex flex-col justify-center w-full">
-              {selectedRole === "AH" && (
-
-
-                <div className="flex mt-2  ">
-                 
-
-                 
-<div className="flex flex-col w-full">
-              <p className="text-sm font-medium">Weight</p>
-                  <TextField
-                    value={userData && userData.data.weight}
-                    onChange={handleWeightChange}
-                   
-                    id="weight"
-                    name="weight"
-                    type="number"
-                    placeholder="85 kg/185 lb"
-                    sx={sxTextField}
-
-
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle kg / lb"
-                            onClick={handleWeightMenuClick}
-                            edge="end"
-                          >
-                            {selectedWeight}
-                          </IconButton>
-                          <Menu
-                            id="weight-menu"
-                            anchorEl={weightMenuAnchorEl}
-                            open={Boolean(weightMenuAnchorEl)}
-                            onClose={handleWeightMenuClose}
-                          >
-                            {weightOptions.map((option) => (
-                              <MenuItem
-                                key={option}
-                                onClick={() => handleWeightOptionSelect(option)}
-                                selected={option === selectedWeight}
-                              >
-                                {option}
-                              </MenuItem>
-                            ))}
-                          </Menu>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
-                  </div>
-
-                  <FormControl className="h-5"  sx={{  minWidth: 120 }}>
-                    <Select
-                      
-                      name="weight_private"
-                      id="weight_private"
-                      value={weight_private}
-                      onChange={handleWeightPrivacyChange}
-                      disableUnderline
-                      sx={{
-                        mt: 2.5,
-                        fontFamily: "'Lexend', sans-serif",
-    
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          fontFamily: "'Lexend', sans-serif",
-                        },
-                        "& fieldset": {
-                          borderRadius: 2,
-                        },
-                      }}
-                    >
-                      <MenuItem value={1} >Private</MenuItem>
-                      <MenuItem value={0}>Public</MenuItem>
-                    </Select>
-                  </FormControl>
-
-                </div>
-              )}
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
+                >
+                  <MenuItem value={1}>
+                    {t("myprofile.myaccount.private")}
+                  </MenuItem>
+                  <MenuItem value={0}>
+                    {t("myprofile.myaccount.public")}
+                  </MenuItem>
+                </Select>
+              </FormControl>
             </div>
-           
-          </div>
 
+            <div className="flex items-end col-span-2 w-full">
+              <div className="flex flex-col justify-center w-full">
+                {selectedRole === "AH" && (
+                  <div className="flex mt-2  ">
+                    <div className="flex flex-col w-full">
+                      <p className="text-sm font-medium">
+                        {t("myprofile.myaccount.content9")}
+                      </p>
+                      <TextField
+                        value={userData && userData.data.weight}
+                        onChange={handleWeightChange}
+                        id="weight"
+                        name="weight"
+                        type="number"
+                        placeholder="85 kg/185 lb"
+                        sx={sxTextField}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle kg / lb"
+                                onClick={handleWeightMenuClick}
+                                edge="end"
+                              >
+                                {selectedWeight}
+                              </IconButton>
+                              <Menu
+                                id="weight-menu"
+                                anchorEl={weightMenuAnchorEl}
+                                open={Boolean(weightMenuAnchorEl)}
+                                onClose={handleWeightMenuClose}
+                              >
+                                {weightOptions.map((option) => (
+                                  <MenuItem
+                                    key={option}
+                                    onClick={() =>
+                                      handleWeightOptionSelect(option)
+                                    }
+                                    selected={option === selectedWeight}
+                                  >
+                                    {option}
+                                  </MenuItem>
+                                ))}
+                              </Menu>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
 
-       <div className="flex flex-col w-full mt-4">
-       <p className="text-sm font-medium">Country</p>
+                    <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                      <Select
+                        name="weight_private"
+                        id="weight_private"
+                        value={weight_private}
+                        onChange={handleWeightPrivacyChange}
+                        disableUnderline
+                        sx={{
+                          mt: 2.5,
+                          fontFamily: "'Lexend', sans-serif",
+
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: 2,
+                            fontFamily: "'Lexend', sans-serif",
+                          },
+                          "& fieldset": {
+                            borderRadius: 2,
+                          },
+                        }}
+                      >
+                        <MenuItem value={1}>
+                          {t("myprofile.myaccount.private")}
+                        </MenuItem>
+                        <MenuItem value={0}>
+                          {t("myprofile.myaccount.public")}
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col w-full mt-4">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content10")}
+              </p>
               <ReactFlagsSelect
-              
                 countries={supportedCountry}
                 disabled
                 // to fill it with the one, which user's is currently selected...
@@ -1255,75 +1181,60 @@ const EditProfile = () => {
                 searchable={true}
                 id="nationality"
                 name="nationality"
-                placeholder="Nationality"
+                placeholder={t("myprofile.myaccount.content11")}
               />
             </div>
-                
-                
           </div>
 
           <p className="pb-2 mt-2">
-                  <b>Passport photo</b>
-                </p>
+            <b>{t("myprofile.myaccount.content12")}</b>
+          </p>
           <div className="row-span-3 flex items-center justify-start gap-2">
             {!passportUpload && (
               <>
-               <div className="flex flex-col justify-start">
-                
-                
-               
+                <div className="flex flex-col justify-start">
+                  <Popup
+                    ref={popupPassportRef}
+                    trigger={
+                      <img
+                        src={
+                          BACKEND_SERVER_BASE_URL +
+                          "/imageUpload/passport_pics/" +
+                          passportImage
+                        }
+                        alt="Profile"
+                        className="w-[120px] h-[90px] object-fit  passport-photo cursor-pointer"
+                      />
+                    }
+                    position="right center"
+                    contentStyle={{ width: "auto" }}
+                    modal
+                    nested
+                  >
+                    <TransformWrapper>
+                      <TransformComponent>
+                        <img
+                          src={
+                            BACKEND_SERVER_BASE_URL +
+                            "/imageUpload/passport_pics/" +
+                            passportImage
+                          }
+                          alt="Profile"
+                          className="w-[500px] h-96 object-fit "
+                        />
+                      </TransformComponent>
+                    </TransformWrapper>
+                  </Popup>
 
+                  {passportExpiryDate && (
+                    <p className="pt-2 " style={{ color: "#DEDEDE" }}>
+                      {t("myprofile.myaccount.content13")}:{" "}
+                      <b>{passportExpiryDate}</b>
+                    </p>
+                  )}
+                </div>
 
-<Popup
-            ref={popupPassportRef}
-            trigger={
-			
-			
-            <img
-                  src={
-                    BACKEND_SERVER_BASE_URL +
-                    "/imageUpload/passport_pics/" +
-                    passportImage
-                  }
-                  alt="Profile"
-                  className="w-[120px] h-[90px] object-fit  passport-photo cursor-pointer"
-                />
-			  
-			  
-            }
-            position="right center"
-            contentStyle={{ width: "auto" }}
-            modal
-            nested
-          >
-            <TransformWrapper>
-              <TransformComponent>
-                <img
-                 src={
-                    BACKEND_SERVER_BASE_URL +
-                    "/imageUpload/passport_pics/" +
-                    passportImage
-                  }
-                  alt="Profile"
-                  className="w-[500px] h-96 object-fit "
-                />
-              </TransformComponent>
-            </TransformWrapper>
-          </Popup>
-
-
-
-
-
-                {passportExpiryDate && (
-                  <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-                    Passport expires: <b>{passportExpiryDate}</b>
-                  </p>
-                )}
-               
-               </div>
-               
-               {/*  <p
+                {/*  <p
                   className="edit-photo"
                   onClick={() => {
                     setPassportUpload(!passportUpload);
@@ -1333,24 +1244,24 @@ const EditProfile = () => {
                 </p> */}
 
                 <Button
-                className="w-28   "
-                style={{  textTransform: 'none' }}
-               
-                sx={{
-                  height: "40px",
-                  bgcolor: "#fff",
-                  color: "#444444",
-                  borderRadius: 2,
-                  border: `1px solid #444444`,
-          
-                }}
-                onClick={() => {setPassportUpload(!passportUpload);}}
-
-              >
-                <img src="/myaccount/upload.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Change</span>
-              </Button>
-
-
+                  className="w-28   "
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "40px",
+                    bgcolor: "#fff",
+                    color: "#444444",
+                    borderRadius: 2,
+                    border: `1px solid #444444`,
+                  }}
+                  onClick={() => {
+                    setPassportUpload(!passportUpload);
+                  }}
+                >
+                  <img src="/myaccount/upload.svg" className="w-4 mr-2" />{" "}
+                  <span className="lexend-font font-semibold ">
+                    {t("myprofile.myaccount.content14")}
+                  </span>
+                </Button>
               </>
             )}
 
@@ -1364,7 +1275,7 @@ const EditProfile = () => {
                   maxFiles={1}
                   server={server}
                   name="image"
-                  labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
+                  labelIdle={t("myprofile.myaccount.content15")}
                   accept="image/png, image/jpeg, image/gif"
                   dropOnPage
                   dropValidation
@@ -1392,31 +1303,27 @@ const EditProfile = () => {
                   imageEditAllowEdit={false}
                 />
 
-              {/*   <p className="edit-photo" onClick={sendPassportUpload}>
+                {/*   <p className="edit-photo" onClick={sendPassportUpload}>
                   <u>Save passport photo</u>
                 </p> */}
 
-
                 <Button
-                className="w-28   "
-                style={{  textTransform: 'none' }}
-               
-                sx={{
-                  height: "40px",
-                  bgcolor: "#fff",
-                  color: "#444444",
-                  borderRadius: 2,
-                  border: `1px solid #444444`,
-          
-                }}
-                onClick={sendPassportUpload}
-
-              >
-                <img src="/myaccount/save.svg" className="w-4 mr-2" /> <span className="lexend-font font-semibold " >Save</span>
-              </Button>
-
-
-
+                  className="w-28"
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "40px",
+                    bgcolor: "#fff",
+                    color: "#444444",
+                    borderRadius: 2,
+                    border: `1px solid #444444`,
+                  }}
+                  onClick={sendPassportUpload}
+                >
+                  <img src="/myaccount/save.svg" className="w-4 mr-2" />{" "}
+                  <span className="lexend-font font-semibold ">
+                    {t("myprofile.myaccount.content16")}
+                  </span>
+                </Button>
               </>
             )}
 
@@ -1459,103 +1366,112 @@ const EditProfile = () => {
               */}
           </div>
 
-
           <div className="mt-8 mb-4 lexend-font text-black_second  ">
-          <p className="text-lg ">
-            <b className="text-2xl font-bold ">Your presentation</b>
-          </p>
+            <p className="text-lg ">
+              <b className="text-2xl font-bold ">
+                {t("myprofile.myaccount.content17")}
+              </b>
+            </p>
 
-          <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
-            <p className="font-medium mb-2">About me</p>
-            <TextField
-              value={userData && userData.data.bio}
-              onChange={handleBioChange}
-              placeholder="Bio"
-              id="bio"
-              name="bio"
-              multiline
-              rows={4}
-              className="w-full h-full rounded-md border border-gray-900"
-              type="text"
-              sx={{
-                /* width: "2px",  */
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 3,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "red",
+            <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
+              <p className="font-medium mb-2">
+                {t("myprofile.myaccount.content18")}
+              </p>
+              <TextField
+                value={userData && userData.data.bio}
+                onChange={handleBioChange}
+                placeholder="Bio"
+                id="bio"
+                name="bio"
+                multiline
+                rows={4}
+                className="w-full h-full rounded-md border border-gray-900"
+                type="text"
+                sx={{
+                  /* width: "2px",  */
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 3,
                   },
 
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black",
+                    },
                   },
-                },
-              }}
-              inputProps={{
-                maxLength: 255,
-                style: {
-                  resize: "vertical",
-                },
-              }}
-            />
+                }}
+                inputProps={{
+                  maxLength: 255,
+                  style: {
+                    resize: "vertical",
+                  },
+                }}
+              />
+            </div>
           </div>
-        </div>
 
-
-         
-
-       
-
-         
-
-         
-
-          
-            <div className="flex m-0 flex-col">
-
-            <p className="text-sm font-medium mt-2">Athlete status</p>
-              <FormControl>
-                <Select
-                  value={userData && userData.data.athleteStatus}
-                  onChange={handleathleteStatusChange}
-                  labelId="athleteStatus-label"
-                  id="athleteStatus"
-                  name="athleteStatus"
-              
-                  className="w-full md:w-[80%]"
-                  style={{ color: "#000" }}
-                  sx={{ fontFamily: "'Lexend', sans-serif" }}
-                >
-                  {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
+          <div className="flex m-0 flex-col">
+            <p className="text-sm font-medium mt-2">
+              {t("myprofile.myaccount.content19")}
+            </p>
+            <FormControl>
+              <Select
+                value={userData && userData.data.athleteStatus}
+                onChange={handleathleteStatusChange}
+                labelId="athleteStatus-label"
+                id="athleteStatus"
+                name="athleteStatus"
+                className="w-full md:w-[80%]"
+                style={{ color: "#000" }}
+                sx={{ fontFamily: "'Lexend', sans-serif" }}
+              >
+                {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
 
                 <MenuItem value={"s2"}>Logged in but no status</MenuItem> */}
 
-                  <MenuItem value={"s3"} sx={{ fontFamily: "'Lexend', sans-serif" }}>
-                    I'm 99% taking the challenge and going
-                  </MenuItem>
+                <MenuItem
+                  value={"s3"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content20")}
+                </MenuItem>
 
-                  <MenuItem value={"s4"} sx={{ fontFamily: "'Lexend', sans-serif" }}>I'm most likely going</MenuItem>
+                <MenuItem
+                  value={"s4"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content21")}
+                </MenuItem>
 
-                  <MenuItem value={"s5"} sx={{ fontFamily: "'Lexend', sans-serif" }}>I'm maybe going</MenuItem>
+                <MenuItem
+                  value={"s5"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content22")}
+                </MenuItem>
 
-                  <MenuItem value={"s6"} sx={{ fontFamily: "'Lexend', sans-serif" }}>I'm definitely not going</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+                <MenuItem
+                  value={"s6"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content23")}
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </div>
 
-           
-
-            <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
-            <p className="font-medium mb-2">Athlete statement</p>
+          <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
+            <p className="font-medium mb-2">
+              {t("myprofile.myaccount.content24")}
+            </p>
             <TextField
-               value={userData && userData.data.athleteStatement}
-                onChange={handleathleteStatementChange}
-				
-                placeholder="I can't wait to go"
-             
+              value={userData && userData.data.athleteStatement}
+              onChange={handleathleteStatementChange}
+              placeholder={t("myprofile.myaccount.content25")}
               multiline
               rows={3}
               className="w-full h-full rounded-md border border-gray-900"
@@ -1586,18 +1502,19 @@ const EditProfile = () => {
             />
           </div>
 
-
           <p className="text-lg mt-6">
-            <b className="text-2xl font-bold ">Payment method</b>
+            <b className="text-2xl font-bold ">
+              {t("myprofile.myaccount.content26")}
+            </b>
           </p>
           <div className="flex items-end col-span-2">
             <div className="flex w-full md:w-[80%] flex-col justify-center">
-
-            <p className="font-medium  mt-2 text-sm">Cryptocurrency</p>
+              <p className="font-medium  mt-2 text-sm">
+                {t("myprofile.myaccount.content27")}
+              </p>
               <TextField
                 value={userData && userData.data.cryptoaddress}
                 onChange={handleCryptoChange}
-               
                 id="cryptoaddr"
                 name="cryptoaddr"
                 placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
@@ -1635,18 +1552,14 @@ const EditProfile = () => {
               />
             </div>
           </div>
-          
 
           <div className="flex flex-col mt-8 w-full md:w-[80%] gap-2 ">
-           
-
             <Button
               className="w-full"
-              style={{ textTransform: 'none' }}
+              style={{ textTransform: "none" }}
               sx={{
                 height: "50px",
                 bgcolor: "#D24949",
-              
 
                 color: "#fff",
                 borderRadius: 3,
@@ -1660,14 +1573,15 @@ const EditProfile = () => {
               type="submit"
               variant="text"
             >
-              <span className="popins-font">Save</span>
+              <span className="popins-font">
+                {t("myprofile.myaccount.content28")}
+              </span>
             </Button>
-
 
             <Button
               onClick={handleCancel}
               className="w-full"
-              style={{ textTransform: 'none' }}
+              style={{ textTransform: "none" }}
               sx={{
                 height: "50px",
                 bgcolor: "#fff",
@@ -1682,7 +1596,9 @@ const EditProfile = () => {
               }}
               variant="text"
             >
-              <span className="popins-font">Cancel</span>
+              <span className="popins-font">
+                {t("myprofile.myaccount.content29")}
+              </span>
             </Button>
           </div>
 

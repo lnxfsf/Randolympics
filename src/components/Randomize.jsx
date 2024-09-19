@@ -238,7 +238,7 @@ const Randomize = () => {
       slotIndex === startSlotIndex &&
       slotIndex <= endSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} />;
+      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName} />;
     }
 
     const secondDayStartSlotIndex = timeSlots.indexOf(
@@ -253,7 +253,7 @@ const Randomize = () => {
       slotIndex === secondDayStartSlotIndex &&
       slotIndex <= secondDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} />;
+      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
     }
 
     const thirdDayStartSlotIndex = timeSlots.indexOf(
@@ -268,7 +268,7 @@ const Randomize = () => {
       slotIndex === thirdDayStartSlotIndex &&
       slotIndex <= thirdDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} />;
+      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
     }
 
     return null;
@@ -1065,7 +1065,7 @@ return dataS.map((data, index) => { */
                           */
                         >
                           {event ? (
-                            <RandomizeItem name={event.sportName} />
+                            <RandomizeItem name={event.sportName} translatedName={event.translatedSportName} />
                           ) : (
                             ""
                           )}

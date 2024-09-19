@@ -1,5 +1,6 @@
 import { HeaderMyProfile } from "./HeaderMyProfile";
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import Flag from "react-world-flags";
 
@@ -22,6 +23,8 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Team = () => {
+  const { t } = useTranslation();
+
   // more simple pagination
 
   const [otherUsers, setOtherUsers] = useState([]);
@@ -109,21 +112,21 @@ const Team = () => {
 
   const changedSearchPlaceholderText = () => {
     if (selectedRole === "AH" || currentUserType === "AH") {
-      setSearchPlaceholderText("Athlete");
+      setSearchPlaceholderText(t("userTypes.user_type1"));
     } else if (selectedRole === "RS") {
-      setSearchPlaceholderText("Referee & Support");
+      setSearchPlaceholderText(t("userTypes.user_type11"));
     } else if (selectedRole === "LM") {
-      setSearchPlaceholderText("Legal Manager");
+      setSearchPlaceholderText(t("userTypes.user_type10"));
     } else if (selectedRole === "ITM") {
-      setSearchPlaceholderText("IT Manager");
+      setSearchPlaceholderText(t("userTypes.user_type5"));
     } else if (selectedRole === "MM") {
-      setSearchPlaceholderText("Marketing Manager");
+      setSearchPlaceholderText(t("userTypes.user_type7"));
     } else if (selectedRole === "SM") {
-      setSearchPlaceholderText("Sales Manager");
+      setSearchPlaceholderText(t("userTypes.user_type8"));
     } else if (selectedRole === "VM") {
-      setSearchPlaceholderText("Validation Manager");
+      setSearchPlaceholderText(t("userTypes.user_type9"));
     } else if (selectedRole === "EM") {
-      setSearchPlaceholderText("Event Manager");
+      setSearchPlaceholderText(t("userTypes.user_type4"));
     }
   };
 
@@ -169,7 +172,6 @@ const Team = () => {
 
   const getMaxPages = async () => {
     try {
-      // TODO, you find out what's max num of pages available, in Backend. So you don't have to fetch whole list , in order not to slow down website !
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/team`,
         {
@@ -205,12 +207,8 @@ const Team = () => {
         `${BACKEND_SERVER_BASE_URL}/listsData/team`,
         {
           params: {
-
-
             limit: 10,
             offset: (otherPage - 1) * 10,
-
-            
 
             searchText: searchText,
 
@@ -325,12 +323,12 @@ const Team = () => {
       {currentUserType === "AH" && (
         <div className="flex gap-16 lexend-font text-black_second">
           <div className="p-4 ml-0 grow ">
-            <p>Your National President</p>
+            <p>{t("myprofile.team.content1")}</p>
             <p className="text-xl mt-1 font-bold">{currentNP}</p>
           </div>
 
           <div className="flex flex-col justify-center items-start pl-4 ">
-            <p>Country</p>
+            <p>{t("myprofile.team.content2")}</p>
 
             <div className="flex justify-center items-center gap-3 mr-4">
               <p className="text-xl font-bold">
@@ -347,7 +345,9 @@ const Team = () => {
         <div style={{ marginTop: "-27px", marginRight: "20px" }}>
           {(currentUserType === "NP" || currentUserType === "GP") && (
             <>
-              <p className="ml-2 font-bold text-sm">Display</p>
+              <p className="ml-2 font-bold text-sm">
+                {t("myprofile.team.content3")}
+              </p>
 
               <FormControl
                 className="max-sm:w-full "
@@ -362,8 +362,12 @@ const Team = () => {
                       className="w-full sm:w-[200px] h-10"
                       style={{ color: "#000" }}
                     >
-                      <MenuItem value={"AH"}>Athletes</MenuItem>
-                      <MenuItem value={"RS"}>Referee & Support</MenuItem>
+                      <MenuItem value={"AH"}>
+                        {t("userTypes.user_type1")}
+                      </MenuItem>
+                      <MenuItem value={"RS"}>
+                        {t("userTypes.user_type11")}
+                      </MenuItem>
                     </Select>
                   </>
                 )}
@@ -377,13 +381,25 @@ const Team = () => {
                       className="w-full sm:w-[200px]"
                       style={{ color: "#000" }}
                     >
-                      <MenuItem value={"LM"}>Legal Manager</MenuItem>
-                      <MenuItem value={"ITM"}>IT Manager</MenuItem>
+                      <MenuItem value={"LM"}>
+                        {t("userTypes.user_type10")}
+                      </MenuItem>
+                      <MenuItem value={"ITM"}>
+                        {t("userTypes.user_type5")}
+                      </MenuItem>
 
-                      <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-                      <MenuItem value={"SM"}>Sales Manager</MenuItem>
-                      <MenuItem value={"VM"}>Validation Manager</MenuItem>
-                      <MenuItem value={"EM"}>Event Manager</MenuItem>
+                      <MenuItem value={"MM"}>
+                        {t("userTypes.user_type7")}
+                      </MenuItem>
+                      <MenuItem value={"SM"}>
+                        {t("userTypes.user_type8")}
+                      </MenuItem>
+                      <MenuItem value={"VM"}>
+                        {t("userTypes.user_type9")}
+                      </MenuItem>
+                      <MenuItem value={"EM"}>
+                        {t("userTypes.user_type4")}
+                      </MenuItem>
                     </Select>
                   </>
                 )}
@@ -396,7 +412,9 @@ const Team = () => {
           value={searchText}
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
-          placeholder={"Find " + searchPlaceholderText}
+          placeholder={
+            t("myprofile.team.content4") + " " + searchPlaceholderText
+          }
           width="100%"
           onSearch={handleSearch}
           style={{
@@ -413,12 +431,12 @@ const Team = () => {
           <table className="w-full ">
             <thead>
               <tr>
-                <th className="w-[15%] tht">Rank</th>
+                <th className="w-[15%] tht">{t("myprofile.team.table4")}</th>
 
-                <th className="w-[25%] tht">Name</th>
-                <th className="w-[10%] tht">Age</th>
-                <th className="w-[24%] tht">Email</th>
-                <th className="w-[15%] tht">Phone</th>
+                <th className="w-[25%] tht">{t("myprofile.team.table1")}</th>
+                <th className="w-[10%] tht">{t("myprofile.team.table2")}</th>
+                <th className="w-[24%] tht">{t("myprofile.team.table3")}</th>
+                <th className="w-[15%] tht">{t("myprofile.team.table5")}</th>
               </tr>
             </thead>
             <tbody>
@@ -438,14 +456,11 @@ const Team = () => {
       {/* pagination */}
 
       <div className="flex justify-center items-start mt-4    w-full ">
-      
-    
         <Stack>
           <Pagination
-            count={maxPages} 
+            count={maxPages}
             page={otherPage}
             onChange={handlePaginationChange}
-         
             sx={{
               "& .MuiPaginationItem-root": {
                 "&.Mui-selected": {
@@ -456,20 +471,13 @@ const Team = () => {
             }}
           />
         </Stack>
-        
-        
-        
-        
-         
-
-       
       </div>
 
       {currentUserType === "NP" && selectedRole == "AH" && (
         <>
           <div>
             <div>
-              <h2>Gender:</h2>
+              <h2>{t("myprofile.team.table6")}:</h2>
               <div>
                 <button
                   className={`gender-button ${
@@ -478,7 +486,7 @@ const Team = () => {
                   onClick={() => handleGenderFilter("M")}
                   disabled={genderFilter === "M"}
                 >
-                  M
+                  {t("myprofile.team.table8")}
                 </button>
                 <button
                   className={`gender-button ${
@@ -487,13 +495,13 @@ const Team = () => {
                   onClick={() => handleGenderFilter("F")}
                   disabled={genderFilter === "F"}
                 >
-                  F
+                  {t("myprofile.team.table9")}
                 </button>
               </div>
             </div>
 
             <div className="button-container">
-              <h2>Category:</h2>
+              <h2>{t("myprofile.team.table7")}:</h2>
               <div>
                 <button
                   className={`category-button ${
@@ -502,7 +510,7 @@ const Team = () => {
                   onClick={() => handleCategoryFilter("heavy")}
                   disabled={categoryFilter === "heavy"}
                 >
-                  Heavy
+                  {t("myprofile.team.table10")}
                 </button>
                 <button
                   className={`category-button ${
@@ -511,7 +519,7 @@ const Team = () => {
                   onClick={() => handleCategoryFilter("medium")}
                   disabled={categoryFilter === "medium"}
                 >
-                  Medium
+                  {t("myprofile.team.table11")}
                 </button>
                 <button
                   className={`category-button ${
@@ -520,7 +528,7 @@ const Team = () => {
                   onClick={() => handleCategoryFilter("light")}
                   disabled={categoryFilter === "light"}
                 >
-                  Light
+                  {t("myprofile.team.table12")}
                 </button>
               </div>
             </div>
