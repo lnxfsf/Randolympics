@@ -70,9 +70,7 @@
     },
 
     "ourBeliefs": {
-
       "title1": "Our Beliefs",
-
 
       "content1": "We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.",
       "content2": "In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. We stand against any political pressure to exclude athletes based on their identity or beliefs.",
@@ -82,9 +80,6 @@
       "subtitle1": "Global Inclusion and Support",
       "subtitle2": "Commitment to Transparency",
       "subtitle3": "Adherence to Core Values"
-
-
-
     },
 
     "economics": {
@@ -93,11 +88,10 @@
       "title2": "Campaign donations",
       "title3": "Broadcasting Rights",
       "title4": "Sponsorship",
-    "title5": "Loans", 
+      "title5": "Loans",
 
       "subtitle1": "Our organization has four types of income sources.",
       "subtitle2": "Most payments are published on the blockchain.",
-
 
       "content1": "Income generated from donations made by supporters to campaigns for athletes.",
       "content2": "Even if athletes do not make it to the games, whether due to injury, a personal decision, or simply not being randomly selected, these funds contribute to the overall success of the Randolympics. These donations help to cover organizational costs and ensure...",
@@ -111,12 +105,7 @@
       "content10": "Loans are a source of income for the Randolympics organization where they receive funding from loan givers.",
       "content11": "These loans are provided with the expectation that the loan givers will receive their money back along with yearly interest. The terms and conditions of the loan, including the interest rate and repayment schedule, are agreed upon at the time of the...",
 
-
-
       "text1": "Read more"
-
-
-
     },
 
     "howItWorks": {
@@ -129,45 +118,126 @@
       "title7": "Two-Year Preparation Period",
       "title8": "June 25th 2028",
 
-
       "title9": "Opening Ceremony: Athletes receive their randomly assigned sports",
 
       "title10": "June 25th to July 2nd, 2028",
 
-
       "title11": "Games: The Ultimate Test"
-
-
-
     },
 
     "faq": {
       "title1": "FAQ",
-      "title2": "Can a supporter of a campaign attend the Randolympics ?",
-      "title3": "Who can start a campaign ?",
-      "title4": "Campaigns and Fundraising",
-      "title5": "Who can participate as an athlete?",
-      "title6": "How can I get more supporters for my campaign ?",
 
+      "CFR": {
+        "title1": "Campaigns and Fundraising",
 
-      "title7": "Why is there a minimum support amount of USD 1?",
-      
+        "title2": "Can a supporter of a campaign attend the Randolympics ?",
+        "title3": "Who can start a campaign ?",
 
+        "title5": "Who can participate as an athlete?",
+        "title6": "How can I get more supporters for my campaign ?",
+        "title7": "Why is there a minimum support amount of USD 1?",
+        "title8": "How do you verify that each supporter is unique?",
+        "title9": "Can I create more than one campaign?",
 
-      "content1": "Yes, absolutely! Everyone is welcome to join and be a part of this incredible adventure. Supporters, friends, and fans are all encouraged to come and cheer on their athletes, experience the excitement, and enjoy the community atmosphere.",
-      "content2": "Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals",
-      "content3": "Anyone can participate as an athlete! The only requirements are that you have a valid passport and are at least 12 years old. There’s no upper age limit, so no one is too old or too young to join!",
-      "content4": "To gather more supporters, share your campaign on social media, send personalized messages to your network on WhatsApp, and spread the word in your gym, sports club, or community. The more people know, the more they can support!",
+        "title10": "Can I be both an athlete and a supporter at the same time?",
 
-      "content5": "This small minimum amount is a safeguard against fake or automated accounts. It helps ensure that each supporter is a real, unique person genuinely interested in backing an athlete."
+        "title11": "What happens to the money raised through donations?",
 
+        "title12": "How does a celebrity campaign differ from a normal campaign?",
+        "title13": "What campaign will succeed? How does the National Ranking work?",
+        "title14": "What happens if athletes cannot attend due to injury or personal reasons?",
+        "title15": "Can an athlete get rich?",
 
+        "content1": "Yes, absolutely! Everyone is welcome to join and be a part of this incredible adventure. Supporters, friends, and fans are all encouraged to come and cheer on their athletes, experience the excitement, and enjoy the community atmosphere.",
+        "content2": "Anyone can start a campaign! All you need is a friend who believes in you and at least one dollar to get started. It's a simple way to motivate someone to achieve extraordinary goals",
+        "content3": "Anyone can participate as an athlete! The only requirements are that you have a valid passport and are at least 12 years old. There’s no upper age limit, so no one is too old or too young to join!",
+        "content4": "To gather more supporters, share your campaign on social media, send personalized messages to your network on WhatsApp, and spread the word in your gym, sports club, or community. The more people know, the more they can support!",
 
+        "content5": "This small minimum amount is a safeguard against fake or automated accounts. It helps ensure that each supporter is a real, unique person genuinely interested in backing an athlete.",
+        "content6": "We verify each athlete through their valid passport, ensuring that there is no way to manipulate the system or create duplicate entries.",
+        "content7": "Yes, you can create as many campaigns as you want! Starting a campaign is a huge compliment to a friend—a sign that you believe in their potential to achieve extraordinary things. Campaigns also make a thoughtful and inspiring gift for special occasions, like birthdays.",
 
+        "content8": "Yes, you can! You can participate as an athlete in a campaign set up by your friend while also creating multiple campaigns yourself to support others. Your involvement can be as broad and supportive as you want it to be.",
 
+        "content9": "If the campaign is successful, the raised money will be transferred to the athlete to support their journey to the Randolympics, including training, equipment, and other preparation expenses. Additionally, if supporters wish to attend the event, up to three supporters from the campaign will receive a contribution towards their flight tickets to help them be part of the experience. If the campaign does not succeed in getting the athlete into an event, the donations will be used to ensure the event runs smoothly and is well-funded.",
 
+        "content10": "A celebrity campaign is similar to a normal campaign, but with a few key differences. Unlike regular campaigns, the contact details and email address of the celebrity may not be known to the person creating the campaign. If the celebrity decides to consider attending the Randolympics and wants to log in to their account, they need to announce their interest on social media and then contact both the National President and the campaign creator. They will coordinate and provide a secure login method for the celebrity to access their campaign account safely.",
+        "content11": "A campaign's success depends on its position in the National Ranking, which is determined through a randomized ranking process. Each campaign is ranked based on three factors: the total amount of money raised, the number of unique supporters, and a random number between 0 and 1. These factors are combined to generate a final ranking for each campaign. To form each National Team, the top 50 men and top 50 women with the highest rankings are selected. However, teams must be balanced regarding weight categories, with each of the three weight groups equally represented. This balance requirement means that a campaign ranked 48th might not make the team if that weight category is already filled, while a campaign ranked 53rd could be included if that weight group is underrepresented.",
+        "content12": "If an athlete in the top 50 cannot attend the Randolympics due to injury, personal reasons, or other circumstances, they will be replaced by the next highest-ranked athlete from their weight category. This ensures that the team remains balanced and filled. Athletes ranked just above 50 still have a chance to participate if there are dropouts or changes in the roster, providing opportunities for those with a slightly lower ranking to make it to the games.",
+        "content13": "Not directly from the Randolympics organization, but each athlete is free to sign sponsorship agreements. Unlike other events, there are no restrictions on how athletes dress or what brands they can display and when. Some events might go viral, and an athlete could become famous for a specific competition, opening up more sponsorship and earning opportunities."
+      },
 
+      "EC": {
+        "title1": "Events and Competitions",
+
+        "title16": "Can athletes request to change their assigned sports?",
+        "title17": "Am I forced to compete?",
+        "title18": "How many sports are assigned to an athlete?",
+        "title19": "What types of sports will be included in the Randolympics?",
+        "title20": "What kind of training support is provided to athletes before the competition?",
+        "title21": "Are there any specific rules that athletes need to follow during competitions?",
+        "title22": "What is the event structure or setup?",
+        "title23": "What safety measures are in place for competitions?",
+        "title24": "Can supporters participate in any events or activities?",
+        "title25": "What about tight schedules?",
+
+        "content14": "No, once sports are assigned during the opening ceremony, they cannot be changed. The random assignment is part of the challenge and spirit of the Randolympics.",
+        "content15": "No, participation in any competition is entirely voluntary. We prioritize the safety and well-being of all athletes. If an athlete feels uncomfortable or unprepared for any assigned sport, they are not required to compete. Our goal is to encourage participation and challenge limits, but never at the cost of an athlete's comfort or safety.",
+        "content16": "It depends, but typically an athlete will be assigned between 4 to 6 sports to compete in during the Randolympics.",
+        "content17": "The event will feature a wide range of sports, including endurance, strength, team-based, and individual competitions. The list on our webpage here might change as we get closer to the event.",
+        "content18": "Each athlete is responsible for their own training. Support from their campaign and community is encouraged.",
+        "content19": "Yes, each sport has its own set of rules and regulations that must be followed to ensure fair play. These rules will be explained in detail before each competition.",
+
+        "content20": "In every competition, each country is represented by one team or athlete. There are three types of events:",
+        "content21": "Races like marathons: These allow up to 64 competitors in one race, resulting in a single winner.",
+        "content22": "Team sports like football or tennis: These are structured in a knockout format where winners advance to the next round until only four teams or athletes remain.",
+        "content23": "Races with heats like swimming: These involve multiple rounds with heats, leading to a final race to determine the winner.",
+
+        "content24": "All competitions are overseen by referees and safety officers. There will be medical staff on-site, and equipment will be inspected to ensure it meets safety standards.",
+        "content25": "Supporters are encouraged to participate in designated fan events and activities during the Randolympics. However, they cannot compete in the official sports events unless they are registered athletes.",
+        "content26": "We aim to plan sufficient time between two competitions to ensure athletes have time to rest and prepare. However, in extreme situations—such as a delay in the first competition and a traffic jam between venues—it is theoretically possible that an athlete may not be able to compete in the second event. Having good support can help manage such situations by quickly finding the venue and organizing transportation to minimize disruptions in such unlikely events."
+      },
+
+      "SPM": {
+        "title1": "Sponsorship, Partners, and Media",
+
+        "title26": "Who will have the broadcasting rights?",
+        "title27": "How can I become a partner or sponsor?",
+        "title28": "What sponsorship opportunities are available?",
+        "title29": "Can sponsors have exclusive rights to specific events?",
+        "title30": "What branding opportunities are available for sponsors?",
+        "title31": "Can media outlets report on the Randolympics without purchasing broadcasting rights?",
+
+        "content27": "The broadcasting rights for the Randolympics will soon be sold in an online auction. This auction will sell the rights for each event in the main languages. After purchasing, the entity or person who acquires these rights will have the exclusive ability to report in that language from the event.",
+        "content28": "We welcome potential partners and sponsors to join us in making the Randolympics a global success. If you are interested, please contact us through our Partner Inquiry Page for more information and to discuss opportunities.",
+        "content29": "Sponsorship opportunities range from event sponsorships and digital content integration to on-site activations. We offer flexible packages tailored to the needs and goals of each sponsor. Contact us to explore how we can create a unique sponsorship package for your brand.",
+        "content30": "Yes, sponsors can secure exclusive rights to specific events within the Randolympics. This includes branding, digital presence, and other unique promotional opportunities during the event. However, athletes retain the right to have their own sponsorships and display personal branding on their gear and uniforms.",
+        "content31": "Sponsors can showcase their brands through event banners, digital streams, and social media channels. While event branding is available, keep in mind that athletes can feature their own sponsors and brands on their uniforms and during personal media appearances.",
+        "content32": "Media outlets are welcome to cover the Randolympics through general news reporting. However, for live broadcasts or detailed event coverage in a specific language, they must acquire broadcasting rights through the auction process."
+      },
+
+      "LCG": {
+        "title1": "Legal, Compliance, and Governance",
+
+        "title32": "How are National Presidents elected?",
+        "title33": "How is the Global President elected?",
+        "title34": "How are managers selected?",
+        "title35": "How are athletes selected for the Randolympics?",
+        "title36": "How do we try to avoid corruption?",
+        "title37": "How are transactions made transparent?",
+        "title38": "What is the governance structure of Randolympics?",
+        "title39": "How is compliance maintained within Randolympics?",
+
+        "content33": "National Presidents are elected by athletes with an ongoing campaign and a valid passport for that country. If a candidate receives more than 120% of the votes compared to the current National President, the new candidate takes over the position.",
+        "content34": "The Global President is elected similarly to the National Presidents, but in this case, the electors are the National Presidents from each country. A candidate must receive a vote total exceeding 120% of the current Global President's votes to be elected.",
+        "content35": "Managers are selected by the Global President. The President appoints managers to various roles within the organization based on their expertise and the needs of Randolympics.",
+        "content36": "Athletes are selected through a randomized national ranking system. This ranking considers the total amount of money raised, the number of unique supporters, and a random number to ensure a fair and balanced selection process.",
+        "content37": "We aim to prevent corruption by ensuring maximum transparency. All payments, contracts, and financial agreements are made open and accessible to the public to maintain trust and accountability.",
+        "content38": "We strive to execute as many transactions as possible via a blockchain. This ensures that all financial movements are traceable, verifiable, and secure, providing a high level of transparency.",
+        "content39": "The governance structure of Randolympics includes the Global President, National Presidents, and appointed managers who oversee various functions of the organization. This structure ensures both global oversight and local representation, fostering fair and transparent management.",
+        "content40": "Compliance is maintained through a set of established rules and guidelines that all participants, managers, and officials must follow. Regular audits and reviews are conducted to ensure adherence to these rules and to uphold the integrity of the Randolympics."
+      }
     }
-
   }
 }

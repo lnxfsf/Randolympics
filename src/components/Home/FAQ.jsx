@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FAQComponent } from "./FAQComponent";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 // ? expand more, arrow icon transformation
 
@@ -26,7 +26,6 @@ const ExpandMore = styled((props) => {
 const FAQ = () => {
   const { t } = useTranslation();
 
-
   const [expandedFirstText, setExpandedFirstText] = useState(false);
   const [expandedSecondText, setExpandedSecondText] = useState(false);
   const [expandedThirdText, setExpandedThirdText] = useState(false);
@@ -40,7 +39,7 @@ const FAQ = () => {
         id="FAQ"
       >
         <p className="text-2xl md:text-4xl text-red_second mt-8 mb-4  ">
-          <b>{t('home.faq.title1')}</b>
+          <b>{t("home.faq.title1")}</b>
         </p>
 
         <div className="w-[90%]  md:w-1/2">
@@ -60,7 +59,7 @@ const FAQ = () => {
               }}
               className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second  "
             >
-            {t('home.faq.title4')}
+              {t("home.faq.CFR.title1")}
             </p>
 
             <ExpandMore
@@ -79,140 +78,68 @@ const FAQ = () => {
             <Collapse in={expandedFirstText} timeout="auto" unmountOnExit>
               <div className="bg-[#F7FAFA] rounded-b-lg p-4">
                 <FAQComponent
-                  title={t('home.faq.title2')}
-                 
-
-                  content={t('home.faq.content1')}
-
-
+                  title={t("home.faq.CFR.title2")}
+                  content={t("home.faq.CFR.content1")}
                 />
 
                 <FAQComponent
-
-                  title={t('home.faq.title3')}
-                  
-                  
-                  content={t('home.faq.content2')}
+                  title={t("home.faq.CFR.title3")}
+                  content={t("home.faq.CFR.content2")}
                 />
 
                 <FAQComponent
-                  title={t('home.faq.title5')}
-                  content={t('home.faq.content3')}
+                  title={t("home.faq.CFR.title5")}
+                  content={t("home.faq.CFR.content3")}
                 />
 
                 <FAQComponent
-                  title={t('home.faq.title6')}
-                  content={t('home.faq.content4')}
-              
-              />
-
-                <FAQComponent
-                  title={t('home.faq.title7')}
-                  content={t('home.faq.content5')}
-
+                  title={t("home.faq.CFR.title6")}
+                  content={t("home.faq.CFR.content4")}
                 />
 
                 <FAQComponent
-                
-                  title="
-
-How do you verify that each supporter is unique?
-"
-                  content="
-
-We verify each athlete through their valid passport, ensuring that there is no way to manipulate the system or create duplicate entries.
-
-
- "
+                  title={t("home.faq.CFR.title7")}
+                  content={t("home.faq.CFR.content5")}
                 />
 
                 <FAQComponent
-                  title="
-
-Can I create more than one campaign?
-
-
-"
-                  content="
-
-Yes, you can create as many campaigns as you want! Starting a campaign is a huge compliment to a friend—a sign that you believe in their potential to achieve extraordinary things. Campaigns also make a thoughtful and inspiring gift for special occasions, like birthdays.
-
- "
+                  title={t("home.faq.CFR.title8")}
+                  content={t("home.faq.CFR.content6")}
                 />
 
                 <FAQComponent
-                  title="
-
-Can I be both an athlete and a supporter at the same time?
-
-
-"
-                  content="
-Yes, you can! You can participate as an athlete in a campaign set up by your friend while also creating multiple campaigns yourself to support others. Your involvement can be as broad and supportive as you want it to be.
- "
+                  title={t("home.faq.CFR.title9")}
+                  content={t("home.faq.CFR.content7")}
                 />
 
                 <FAQComponent
-                  title="
-
-What happens to the money raised through donations?
-
-"
-                  content="
-
-If the campaign is successful, the raised money will be transferred to the athlete to support their journey to the Randolympics, including training, equipment, and other preparation expenses. Additionally, if supporters wish to attend the event, up to three supporters from the campaign will receive a contribution towards their flight tickets to help them be part of the experience. If the campaign does not succeed in getting the athlete into an event, the donations will be used to ensure the event runs smoothly and is well-funded.
- 
- "
+                  title={t("home.faq.CFR.title10")}
+                  content={t("home.faq.CFR.content8")}
                 />
 
                 <FAQComponent
-                  title="
-
-How does a celebrity campaign differ from a normal campaign?
-
-"
-                  content="
-
-A celebrity campaign is similar to a normal campaign, but with a few key differences. Unlike regular campaigns, the contact details and email address of the celebrity may not be known to the person creating the campaign. If the celebrity decides to consider attending the Randolympics and wants to log in to their account, they need to announce their interest on social media and then contact both the National President and the campaign creator. They will coordinate and provide a secure login method for the celebrity to access their campaign account safely.
- "
+                  title={t("home.faq.CFR.title11")}
+                  content={t("home.faq.CFR.content9")}
                 />
 
                 <FAQComponent
-                  title="
-
-What campaign will succeed? How does the National Ranking work?
-
-
-"
-                  content="
-A campaign's success depends on its position in the National Ranking, which is determined through a randomized ranking process. Each campaign is ranked based on three factors: the total amount of money raised, the number of unique supporters, and a random number between 0 and 1. These factors are combined to generate a final ranking for each campaign. To form each National Team, the top 50 men and top 50 women with the highest rankings are selected. However, teams must be balanced regarding weight categories, with each of the three weight groups equally represented. This balance requirement means that a campaign ranked 48th might not make the team if that weight category is already filled, while a campaign ranked 53rd could be included if that weight group is underrepresented.
- "
+                  title={t("home.faq.CFR.title12")}
+                  content={t("home.faq.CFR.content10")}
                 />
 
                 <FAQComponent
-                  title="
-
-What happens if athletes cannot attend due to injury or personal reasons?
-
-
-"
-                  content="
- 
- If an athlete in the top 50 cannot attend the Randolympics due to injury, personal reasons, or other circumstances, they will be replaced by the next highest-ranked athlete from their weight category. This ensures that the team remains balanced and filled. Athletes ranked just above 50 still have a chance to participate if there are dropouts or changes in the roster, providing opportunities for those with a slightly lower ranking to make it to the games.
-
- "
+                  title={t("home.faq.CFR.title13")}
+                  content={t("home.faq.CFR.content11")}
                 />
 
                 <FAQComponent
-                  title="
+                  title={t("home.faq.CFR.title14")}
+                  content={t("home.faq.CFR.content12")}
+                />
 
-Can an athlete get rich?
-
-
-"
-                  content="
- Not directly from the Randolympics organization, but each athlete is free to sign sponsorship agreements. Unlike other events, there are no restrictions on how athletes dress or what brands they can display and when. Some events might go viral, and an athlete could become famous for a specific competition, opening up more sponsorship and earning opportunities.
- "
+                <FAQComponent
+                  title={t("home.faq.CFR.title15")}
+                  content={t("home.faq.CFR.content13")}
                 />
               </div>
             </Collapse>
@@ -231,7 +158,7 @@ Can an athlete get rich?
               }}
               className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second "
             >
-              Events and Competitions
+              {t("home.faq.EC.title1")}
             </p>
 
             <ExpandMore
@@ -249,157 +176,61 @@ Can an athlete get rich?
             <Collapse in={expandedSecondText} timeout="auto" unmountOnExit>
               <div className="bg-[#F7FAFA] rounded-b-lg p-4">
                 <FAQComponent
-                  title="
-
-Can athletes request to change their assigned sports?
-
-
-"
-                  content="
-
-No, once sports are assigned during the opening ceremony, they cannot be changed. The random assignment is part of the challenge and spirit of the Randolympics.
-
- "
+                  title={t("home.faq.EC.title16")}
+                  content={t("home.faq.EC.content14")}
                 />
 
                 <FAQComponent
-                  title="
-
-Am I forced to compete?
-
-
-"
-                  content="
-
-No, participation in any competition is entirely voluntary. We prioritize the safety and well-being of all athletes. If an athlete feels uncomfortable or unprepared for any assigned sport, they are not required to compete. Our goal is to encourage participation and challenge limits, but never at the cost of an athlete's comfort or safety.
- "
+                  title={t("home.faq.EC.title16")}
+                  content={t("home.faq.EC.content14")}
                 />
 
                 <FAQComponent
-                  title="
-
-How many sports are assigned to an athlete?
-
-
-"
-                  content="
-
-It depends, but typically an athlete will be assigned between 4 to 6 sports to compete in during the Randolympics.
-
-
-
- "
+                  title={t("home.faq.EC.title18")}
+                  content={t("home.faq.EC.content16")}
                 />
 
                 <FAQComponent
-                  title="
-
-What types of sports will be included in the Randolympics?
-
-
-"
-                  content="
-
-The event will feature a wide range of sports, including endurance, strength, team-based, and individual competitions. The list on our webpage here might change as we get closer to the event.
-
-
- "
+                  title={t("home.faq.EC.title19")}
+                  content={t("home.faq.EC.content17")}
                 />
 
                 <FAQComponent
-                  title="
-
-What kind of training support is provided to athletes before the competition?
-
-
-"
-                  content="
-
-Each athlete is responsible for their own training. Support from their campaign and community is encouraged.
-
- "
+                  title={t("home.faq.EC.title20")}
+                  content={t("home.faq.EC.content18")}
                 />
 
                 <FAQComponent
-                  title="
-
-
-Are there any specific rules that athletes need to follow during competitions?
-
-"
-                  content="
-
-Yes, each sport has its own set of rules and regulations that must be followed to ensure fair play. These rules will be explained in detail before each competition.
-
-
- "
+                  title={t("home.faq.EC.title21")}
+                  content={t("home.faq.EC.content19")}
                 />
 
                 <FAQComponent
-                  title="
-
-
-What is the event structure or setup?
-
-
-"
+                  title={t("home.faq.EC.title22")}
                   content={
                     <>
-                      In every competition, each country is represented by one
-                      team or athlete. There are three types of events:
-                      <br />
-                      Races like marathons: These allow up to 64 competitors in
-                      one race, resulting in a single winner. <br />
-                      Team sports like football or tennis: These are structured
-                      in a knockout format where winners advance to the next
-                      round until only four teams or athletes remain. <br />
-                      Races with heats like swimming: These involve multiple
-                      rounds with heats, leading to a final race to determine
-                      the winner. <br />
+                      {<p>{t("home.faq.EC.content20")}</p>}
+
+                      {<p>{t("home.faq.EC.content21")}</p>}
+                      {<p>{t("home.faq.EC.content22")}</p>}
+                      {<p>{t("home.faq.EC.content23")}</p>}
                     </>
                   }
                 />
 
                 <FAQComponent
-                  title="
-
-What safety measures are in place for competitions?
-
-
-"
-                  content="
- 
- 
- All competitions are overseen by referees and safety officers. There will be medical staff on-site, and equipment will be inspected to ensure it meets safety standards.
- 
- 
- "
+                  title={t("home.faq.EC.title23")}
+                  content={t("home.faq.EC.content24")}
                 />
 
                 <FAQComponent
-                  title="
-
-Can supporters participate in any events or activities?
-
-"
-                  content="
- 
- Supporters are encouraged to participate in designated fan events and activities during the Randolympics. However, they cannot compete in the official sports events unless they are registered athletes.
- 
- "
+                  title={t("home.faq.EC.title24")}
+                  content={t("home.faq.EC.content25")}
                 />
 
                 <FAQComponent
-                  title="
-
-What about tight schedules?
-
-"
-                  content="
- We aim to plan sufficient time between two competitions to ensure athletes have time to rest and prepare. However, in extreme situations—such as a delay in the first competition and a traffic jam between venues—it is theoretically possible that an athlete may not be able to compete in the second event. Having good support can help manage such situations by quickly finding the venue and organizing transportation to minimize disruptions in such unlikely events.
- 
- 
- "
+                  title={t("home.faq.EC.title25")}
+                  content={t("home.faq.EC.content26")}
                 />
               </div>
             </Collapse>
@@ -418,7 +249,7 @@ What about tight schedules?
               }}
               className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second  "
             >
-              Sponsorship, Partners, and Media
+              {t("home.faq.SPM.title1")}
             </p>
 
             <ExpandMore
@@ -436,81 +267,33 @@ What about tight schedules?
             <Collapse in={expandedThirdText} timeout="auto" unmountOnExit>
               <div className="bg-[#F7FAFA] rounded-b-lg p-4">
                 <FAQComponent
-                  title="
-
-Who will have the broadcasting rights?
-
-"
-                  content="
- 
- 
- The broadcasting rights for the Randolympics will soon be sold in an online auction. This auction will sell the rights for each event in the main languages. After purchasing, the entity or person who acquires these rights will have the exclusive ability to report in that language from the event.
- 
- "
+                  title={t("home.faq.SPM.title26")}
+                  content={t("home.faq.SPM.content27")}
                 />
 
                 <FAQComponent
-                  title="
-
-How can I become a partner or sponsor?
-
-"
-                  content="
- 
- We welcome potential partners and sponsors to join us in making the Randolympics a global success. If you are interested, please contact us through our Partner Inquiry Page for more information and to discuss opportunities.
- 
- 
- "
+                  title={t("home.faq.SPM.title27")}
+                  content={t("home.faq.SPM.content28")}
                 />
 
                 <FAQComponent
-                  title="
-
-What sponsorship opportunities are available?
-
-"
-                  content="
- Sponsorship opportunities range from event sponsorships and digital content integration to on-site activations. We offer flexible packages tailored to the needs and goals of each sponsor. Contact us to explore how we can create a unique sponsorship package for your brand.
- 
- "
+                  title={t("home.faq.SPM.title28")}
+                  content={t("home.faq.SPM.content29")}
                 />
 
                 <FAQComponent
-                  title="
-
-Can sponsors have exclusive rights to specific events?
-
-"
-                  content="
- 
- Yes, sponsors can secure exclusive rights to specific events within the Randolympics. This includes branding, digital presence, and other unique promotional opportunities during the event. However, athletes retain the right to have their own sponsorships and display personal branding on their gear and uniforms.
- 
- 
- "
+                  title={t("home.faq.SPM.title29")}
+                  content={t("home.faq.SPM.content30")}
                 />
 
                 <FAQComponent
-                  title="
-
-What branding opportunities are available for sponsors?
-
-"
-                  content="
- Sponsors can showcase their brands through event banners, digital streams, and social media channels. While event branding is available, keep in mind that athletes can feature their own sponsors and brands on their uniforms and during personal media appearances.
- 
- "
+                  title={t("home.faq.SPM.title30")}
+                  content={t("home.faq.SPM.content31")}
                 />
 
                 <FAQComponent
-                  title="
-
-Can media outlets report on the Randolympics without purchasing broadcasting rights?
-
-"
-                  content="
- Media outlets are welcome to cover the Randolympics through general news reporting. However, for live broadcasts or detailed event coverage in a specific language, they must acquire broadcasting rights through the auction process.
- 
- "
+                  title={t("home.faq.SPM.title31")}
+                  content={t("home.faq.SPM.content32")}
                 />
               </div>
             </Collapse>
@@ -529,7 +312,7 @@ Can media outlets report on the Randolympics without purchasing broadcasting rig
               }}
               className="cursor-pointer select-none flex-grow pl-4 font-semibold text-red_second "
             >
-              Legal, Compliance, and Governance
+              {t("home.faq.LCG.title1")}
             </p>
 
             <ExpandMore
@@ -547,107 +330,43 @@ Can media outlets report on the Randolympics without purchasing broadcasting rig
             <Collapse in={expandedFourthText} timeout="auto" unmountOnExit>
               <div className="bg-[#F7FAFA] rounded-b-lg p-4">
                 <FAQComponent
-                  title="
-
-How are National Presidents elected?
-
-"
-                  content="
- 
- 
- 
- 
- National Presidents are elected by athletes with an ongoing campaign and a valid passport for that country. If a candidate receives more than 120% of the votes compared to the current National President, the new candidate takes over the position.
- 
- 
- "
+                  title={t("home.faq.LCG.title32")}
+                  content={t("home.faq.LCG.content33")}
                 />
 
                 <FAQComponent
-                  title="
-
-How is the Global President elected?
-
-"
-                  content="
- 
- 
- 
- The Global President is elected similarly to the National Presidents, but in this case, the electors are the National Presidents from each country. A candidate must receive a vote total exceeding 120% of the current Global President's votes to be elected.
- 
- "
+                  title={t("home.faq.LCG.title33")}
+                  content={t("home.faq.LCG.content34")}
                 />
 
                 <FAQComponent
-                  title="
-
-How are managers selected?
-
-"
-                  content="
- 
- 
- 
- Managers are selected by the Global President. The President appoints managers to various roles within the organization based on their expertise and the needs of Randolympics.
- 
- 
- "
+                  title={t("home.faq.LCG.title34")}
+                  content={t("home.faq.LCG.content35")}
                 />
 
                 <FAQComponent
-                  title="
-
-How are athletes selected for the Randolympics?
-
-"
-                  content="
- 
- 
- 
- Athletes are selected through a randomized national ranking system. This ranking considers the total amount of money raised, the number of unique supporters, and a random number to ensure a fair and balanced selection process.
- 
- "
+                  title={t("home.faq.LCG.title35")}
+                  content={t("home.faq.LCG.content36")}
                 />
 
                 <FAQComponent
-                  title="
-
-How do we try to avoid corruption?
-
-"
-                  content="
- 
- 
- 
- We aim to prevent corruption by ensuring maximum transparency. All payments, contracts, and financial agreements are made open and accessible to the public to maintain trust and accountability.
- "
+                  title={t("home.faq.LCG.title36")}
+                  content={t("home.faq.LCG.content37")}
                 />
 
                 <FAQComponent
-                  title="
-
-What is the governance structure of Randolympics?
-
-"
-                  content="
- 
- 
- The governance structure of Randolympics includes the Global President, National Presidents, and appointed managers who oversee various functions of the organization. This structure ensures both global oversight and local representation, fostering fair and transparent management.
-
- "
+                  title={t("home.faq.LCG.title37")}
+                  content={t("home.faq.LCG.content38")}
                 />
 
                 <FAQComponent
-                  title="
+                  title={t("home.faq.LCG.title38")}
+                  content={t("home.faq.LCG.content39")}
+                />
 
-How is compliance maintained within Randolympics?
-
-"
-                  content="
- 
- Compliance is maintained through a set of established rules and guidelines that all participants, managers, and officials must follow. Regular audits and reviews are conducted to ensure adherence to these rules and to uphold the integrity of the Randolympics.
-
- "
+                <FAQComponent
+                  title={t("home.faq.LCG.title39")}
+                  content={t("home.faq.LCG.content40")}
                 />
               </div>
             </Collapse>
