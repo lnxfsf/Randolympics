@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import "../styles/register.scoped.scss";
+import {useTranslation} from "react-i18next";
 
 import { useRef, useState, useEffect } from "react";
 import React, { useContext } from "react";
@@ -118,6 +119,7 @@ let BACKEND_SERVER_BASE_URL =
 const Register = () => {
 
 
+  const { t } = useTranslation();
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
@@ -410,7 +412,7 @@ const Register = () => {
 
     if (!emailRegex.test(email)) {
       setIsEmailError(true);
-      setIsEmailErrorHelper("Enter a valid email address");
+      setIsEmailErrorHelpert(t('register.content1'));
     }
 
 
@@ -418,7 +420,7 @@ const Register = () => {
 
     if (!phoneRegex.test(phone)) {
       setIsPhoneError(true);
-      setIsPhoneErrorHelper("Enter valid phone number");
+      setIsPhoneErrorHelper(t('register.content2'));
 
 
     } else {
@@ -431,7 +433,7 @@ const Register = () => {
 
     if (!passwordRegex.test(password)) {
       setIsPasswordError(true);
-      setIsPasswordErrorHelper("Password should be longer than 4 characters");
+      setIsPasswordErrorHelper(t('register.content3'));
 
 
     } else {
@@ -447,13 +449,11 @@ const Register = () => {
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
-      setResultText("Please verify the reCAPTCHA!");
+      setResultText(t('register.content4'));
     } else {
 
 
-      console.log("isEmailEror vrednost: " + isEmailError)
-
-      // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
+     
       if (nationality_selected && isEmailError === false && isPhoneError === false && isPasswordError === false) {
 
 
@@ -475,8 +475,7 @@ const Register = () => {
 
 
 
-          // ! e ovde ne moze da pusta, ako ova varijable nije na true (tj. string bolje da je.. da bi mogao da ga menjas, i prikazujes errors u polja gde appropriate i takodje, "focus" na to polje !!!)
-
+          
 
           try {
             var response = await axios.post(
@@ -536,26 +535,26 @@ const Register = () => {
 
 
           if (response) {
-            setResultText("Signed up ! Email verification sent.");
+            setResultText(t('register.content5'));
             setResultTextColor("black");
           }
         } else {
-          setResultText("reCAPTCHA validation failed!");
+          setResultText(t('register.content6'));
           setResultTextColor("red");
         }
       } else {
 
         if (nationality_selected === "") {
-          setResultText("Insert nationality !");
+          setResultText(t('register.content7'));
           setResultTextColor("red");
         } else if (isEmailError === true) {
-          setResultText("Email is not valid !");
+          setResultText(t('register.content8'));
           setResultTextColor("red");
         } else if (isPhoneError === true) {
-          setResultText("Phone is not valid !");
+          setResultText(t('register.content9'));
           setResultTextColor("red");
         } else if (isPasswordError === true) {
-          setResultText("Password should be longer than 4 characters ! ");
+          setResultText(t('register.content10'));
           setResultTextColor("red");
         }
 

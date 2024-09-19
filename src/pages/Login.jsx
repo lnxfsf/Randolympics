@@ -12,6 +12,10 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
+
 // MUI
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -23,11 +27,15 @@ import Checkbox from "@mui/material/Checkbox";
 import { NavbarClean } from "../components/NavbarClean";
 import { FooterClean } from "../components/FooterClean";
 
+import { useTranslation } from "react-i18next";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Login = () => {
+  const { t } = useTranslation();
+
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -71,6 +79,25 @@ const Login = () => {
     }
   };
 
+
+  // snackbar
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const [snackbarText, setSnackbarText] = useState("");
+
+	//"error", "success"
+	const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  // snackbar
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,13 +111,30 @@ const Login = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      setResultText("Please enter a valid email address");
+      setResultText(t('login.content10'));
       setResultTextColor("red");
     }
 
     // ? here you call authContext
     // ? this is just to pass to store auth in (local|session) storage
-    loginUser(email, password, rememberChecked);
+    let login = await loginUser(email, password, rememberChecked);
+
+    console.log("ovo salj elogin user")
+    console.log(login)
+
+    if(login === 1){
+      setSnackbarText("Login success");
+
+      setOpenSnackbar(true);
+
+    }else if (login === 0){
+
+      setSnackbarText("Login failed");
+      setSnackbarSeverity("error")
+      setOpenSnackbar(true);
+
+    }
+
   };
 
   const handleSignUp = () => {
@@ -102,39 +146,36 @@ const Login = () => {
 
   return (
     <>
-
-    <NavbarClean />
+      <NavbarClean />
 
       <div className="flex items-center  justify-start md:justify-center w-full">
-       
-       
         <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 ">
           <img src="login/1.jpg" className="image_login" />
-
         </div>
 
-        <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow" >
-         {/*  <img src="login/logo.svg" /> */}
+        <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
+          {/*  <img src="login/logo.svg" /> */}
 
           {/* START FORM SUBMISSION (login), FOR LOGIN */}
 
-       
-            <p className="text-2xl lexend-font font-bold text-start">Log In</p>
-         
-          
+          <p className="text-2xl lexend-font font-bold text-start">
+            {t("login.content1")}
+          </p>
 
           <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-start max-md:w-full"
             onSubmit={handleSubmit}
           >
-
             <div className="flex flex-col mb-1 justify-start mt-8 w-full ">
-
-              <label for="email" className="lexend-font">Email</label>
+              <label for="email" className="lexend-font">
+                {t("login.content2")}
+              </label>
               <TextField
-                onChange={(event) => {setEmailFriend(event.target.value)}}
-               /*  label="Email" */
+                onChange={(event) => {
+                  setEmailFriend(event.target.value);
+                }}
+                /*  label="Email" */
                 placeholder="johndoe@gmail.com"
                 id="email"
                 name="email"
@@ -149,7 +190,6 @@ const Login = () => {
                   "& .MuiOutlinedInput-root": {
                     fontFamily: "'Lexend', sans-serif",
                     borderRadius: 2,
-                   
                   },
 
                   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -169,10 +209,11 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col mb-2.5 justify-start mt-2 w-full">
-            <label for="pass" className=" lexend-font">Password</label>
+              <label for="pass" className=" lexend-font">
+                {t("login.content3")}
+              </label>
               <TextField
-              
-               /*  label="Password" */
+                /*  label="Password" */
                 placeholder="****"
                 id="pass"
                 name="pass"
@@ -205,7 +246,7 @@ const Login = () => {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
+                        aria-label={t("login.content4")}
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
@@ -222,8 +263,6 @@ const Login = () => {
 
             {/*  this is for checkbox and forgot password*/}
 
-
-           
             <div className="flex w-full md:w-[420px] items-center justify-center mt-4 ">
               <div className="basis-1/2 justify-end">
                 <FormControlLabel
@@ -241,7 +280,7 @@ const Login = () => {
                       onChange={handleCheckboxRemember}
                     />
                   }
-                  label="Remember me"
+                  label={t("login.content5")}
                 />
               </div>
 
@@ -250,25 +289,18 @@ const Login = () => {
                   to="/forgotpassword"
                   className="bg-white text-red_second "
                 >
-                  Forgot Password?
+                  {t("login.content6")}
                 </Link>
               </div>
-            </div> 
-
-         
-           
-
-
-
+            </div>
 
             <div className="flex justify-center mt-2 flex-col items-center max-md:w-full">
               <Button
                 className="w-full  md:w-[420px] "
-                style={{ marginTop: "20px", textTransform: 'none' }}
+                style={{ marginTop: "20px", textTransform: "none" }}
                 sx={{
                   height: "50px",
                   bgcolor: "#D24949",
-                
 
                   color: "#fff",
                   borderRadius: 3,
@@ -284,10 +316,12 @@ const Login = () => {
                 value="Login"
                 id="login-btn"
               >
-                <img src="/login/login.svg" className="mr-2" /> <span className="lexend-font font-semibold" >Login</span>
+                <img src="/login/login.svg" className="mr-2" />{" "}
+                <span className="lexend-font font-semibold">
+                  {t("login.content7")}
+                </span>
               </Button>
 
-                 
               <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
                 {resultText}
               </p>
@@ -303,24 +337,18 @@ const Login = () => {
                     userSelect: "none",
                   }}
                 >
-                  Resend verification email ?
+                  {t("login.content8")}
                 </p>
               )}
-                
-
-
-            </div> 
-
-
+            </div>
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
-
 
           <div className="flex justify-center mt-0 max-md:w-full ">
             <Button
               onClick={handleSignUp}
               className="w-full md:w-[420px]"
-              style={{ marginTop: "10px", textTransform: 'none' }}
+              style={{ marginTop: "10px", textTransform: "none" }}
               sx={{
                 height: "50px",
                 bgcolor: "#fff",
@@ -335,21 +363,33 @@ const Login = () => {
               }}
               id="signup-btn"
             >
-              <span className="lexend-font font-semibold" > Sign Up</span>
+              <span className="lexend-font font-semibold">
+                {t("login.content9")}
+              </span>
             </Button>
-          </div> 
-
-
-
-         
-          
+          </div>
         </div>
-
       </div>
+
+      
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarText}
+        </Alert>
+      </Snackbar>
 
       <FooterClean />
     </>
-
   );
 };
 

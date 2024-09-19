@@ -362,10 +362,84 @@
     "content62": "Name",
 
     "content63": "Select a country"
+  },
+
+  "mockupRandomizer": {
+    "medals1": "one",
+    "medals2": "two",
+    "medals3": "three",
+    "medals4": "four",
+    "medals5": "five",
+    "medals6": "six",
+    "medals7": "seven",
+    "medals8": "eight",
+
+    "content1": "Choose gender",
+    "content2": "Choose weight category",
+    "content3": "Let’s see your schedule for June 2028",
+    "content4": "Congratulations: You would compete in",
+    "content5": "disciplines",
+    "content6": "chances to win a gold medal and eternal fame",
+    "content7": "Randomize again",
+    "content8": "Sign Up",
+    "content9": "Add Another",
+    "content10": "Send to friends",
+
+    "table1": "Date / Time",
+    "table2": "Saturday 24th",
+
+    "table3": "Sunday 25th",
+    "table4": "Monday 26th",
+    "table5": "Tuesday 27th",
+    "table6": "Wednesday 28th",
+    "table7": "Thursday 29th",
+    "table8": "Friday 30th",
+
+    "table9": "Saturday 1st",
+    "table10": "Sunday 2nd",
+
+    "sport1": "Opening ceremony",
+    "sport2": "Closing ceremony"
+  },
+
+  "login": {
+
+    "content1": "Log In",
+    "content2": "Email",
+    "content3": "Password",
+    "content4": "toggle password visibility",
+    "content5": "Remember me",
+    "content6": "Forgot Password?",
+    "content7": "Login",
+    "content8": "Resend verification email ?",
+    "content9": "Sign Up",
+
+    "content10": "Please enter a valid email address"
+
+
+  },
+
+
+  "register": {
+
+    "content1": "Enter a valid email address",
+    "content2": "Enter valid phone number",
+    "content3": "Password should be longer than 4 characters",
+    "content4": "Please verify the reCAPTCHA!", 
+    "content5": "Signed up ! Email verification sent.",
+    "content6": "reCAPTCHA validation failed!",
+    "content7": "Insert nationality !",
+    "content8": "Email is not valid !",
+    "content9": "Phone is not valid !",
+    "content10": "Password should be longer than 4 characters ! ",
+
+    "content11": ""
+
+
+
+
+
   }
-
-
-  
 
 
 

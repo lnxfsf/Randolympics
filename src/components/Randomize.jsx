@@ -23,6 +23,8 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { MockupRandomizerSelect } from "./MockupRandomizer/MockupRandomizerSelect";
 
+import { useTranslation } from "react-i18next";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -30,10 +32,7 @@ let BACKEND_SERVER_BASE_URL =
 // we just removed  '0_3' , from here, not to show it everything looks fine
 // const timeSlots = ["3_6", "6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
 
-const timeSlots = [ "6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
-
-
-
+const timeSlots = ["6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
 
 /*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
 const days = [
@@ -52,6 +51,8 @@ const days = [
 ];
 
 const Randomize = () => {
+  const { t } = useTranslation();
+
   // with this, you can change any svg, color, so it appears better on hover..
   const [isHovered, setIsHovered] = useState(false);
 
@@ -61,10 +62,10 @@ const Randomize = () => {
       setShowTable(true);
     } else {
       if (!selectedGender) {
-        setSnackbarText("Choose gender");
+        setSnackbarText(t("mockupRandomizer.content1"));
         setOpenSnackbarError(true);
       } else if (!selectedWeightCategory) {
-        setSnackbarText("Choose weight category");
+        setSnackbarText(t("mockupRandomizer.content2"));
         setOpenSnackbarError(true);
       }
     }
@@ -120,9 +121,7 @@ const Randomize = () => {
     setRandomizeFormData(randomizeFormData.filter((_, idx) => idx !== index));
   };
 
-  const [scheduleData, setScheduleData] = useState([
-   
-  ]);
+  const [scheduleData, setScheduleData] = useState([]);
 
   useEffect(() => {
     changeTextHowManyMedals();
@@ -146,28 +145,28 @@ const Randomize = () => {
   const changeTextHowManyMedals = () => {
     switch (scheduleData.length - 2) {
       case 1:
-        setHowManyMedals("one");
+        setHowManyMedals(t("mockupRandomizer.medals1"));
         break;
       case 2:
-        setHowManyMedals("two");
+        setHowManyMedals(t("mockupRandomizer.medals2"));
         break;
       case 3:
-        setHowManyMedals("three");
+        setHowManyMedals(t("mockupRandomizer.medals3"));
         break;
       case 4:
-        setHowManyMedals("four");
+        setHowManyMedals(t("mockupRandomizer.medals4"));
         break;
       case 5:
-        setHowManyMedals("five");
+        setHowManyMedals(t("mockupRandomizer.medals5"));
         break;
       case 6:
-        setHowManyMedals("six");
+        setHowManyMedals(t("mockupRandomizer.medals6"));
         break;
       case 7:
-        setHowManyMedals("seven");
+        setHowManyMedals(t("mockupRandomizer.medals7"));
         break;
       case 8:
-        setHowManyMedals("eight");
+        setHowManyMedals(t("mockupRandomizer.medals8"));
         break;
     }
   };
@@ -249,8 +248,6 @@ const Randomize = () => {
       event.secondDayEndGameTimeSlot
     );
 
-    // ! znaci, start slot, mora da ima.. uvek pocetno vrv..
-    // samo, na ovaj sledeci dan, (row) to prikaze.. dan..  da.. (uh, samo slot, time table treba ). jer on ce ovako, i prikazivati podatke ..
     if (
       dayIndex + 1 === days.findIndex((d) => d.day === day) &&
       slotIndex === secondDayStartSlotIndex &&
@@ -301,7 +298,7 @@ const Randomize = () => {
   const getEventSlots = (event) => {
     const slots = [];
 
-    // ! const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
+    // const startDayIndex = days.findIndex(d => d.day === event.dayOfStart);
     const startDateIndex = days.findIndex((d) => d.date === event.dateOfStart);
 
     const addSlots = (startDayIndex, startSlot, expandBy) => {
@@ -314,7 +311,6 @@ const Randomize = () => {
       }
       /*  } else {
  
-         // ! ovde je bio <= , ali je izgleda izbacivao dodatni jedan..
          for (let i = 0; i < expandBy; i++) {
            slots.push({ dayIndex: startDayIndex, slotIndex: startSlotIndex + i });
          }
@@ -359,7 +355,7 @@ const Randomize = () => {
   /* table for mobile */
   const satMob24 = () => {
     // Check for match on dayOfStart and dateOfStart
-    // ! WE ‚avoid, those who have opening and closing ceremony, to allow space, for another, on this day.. Backend, always gives us single, so it get off that load..
+    // WE ‚avoid, those who have opening and closing ceremony, to allow space, for another, on this day.. Backend, always gives us single, so it get off that load..
     if (
       scheduleData.dayOfStart === "Saturday" &&
       scheduleData.dateOfStart === "June 24th" &&
@@ -951,12 +947,9 @@ return dataS.map((data, index) => { */
 
       <div className="lexend-font text-black_second">
         <h1 className="flex text-2xl text-center md:text-4xl mt-8 justify-center font-bold">
-          Let’s see your schedule for June 2028
+          {t("mockupRandomizer.content3")}
         </h1>
       </div>
-
-
-
 
       {/* before table is rendered */}
       {!showTable && (
@@ -975,95 +968,53 @@ return dataS.map((data, index) => { */
       {selectedGender && selectedWeightCategory && showTable && (
         <>
           <p className="font-medium text-black_second lexend-font text-center m-4">
-            Congratulations: You would compete in {howManyMedals} disciplines -{" "}
-            {howManyMedals} chances to win a gold medal and eternal fame. 🤩
+            {t("mockupRandomizer.content4")} {howManyMedals}{" "}
+            {t("mockupRandomizer.content5")} - {howManyMedals}{" "}
+            {t("mockupRandomizer.content6")}. 🤩
           </p>
 
-
-
-          <div className="grid
-          
-          grid-cols-2
-
-          md:grid-cols-3
-
-         
-          justify-center items-center
-
-flex-wrap
-
-gap-8
-
-xl:gap-12
-
-2xl:gap-16
-
-text-black_second
-lexend-font
-font-bold
-
-text-sm
-
-md:text-base
-
-text-center
-
-w-full
-
-
-
-
-mt-8
-
-
-
-
-p-4
-
-"
-
->
-
-
-      {scheduleData.map((data, index) => {
-        
-     /*    data.icon
+          <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full mt-8 p-4">
+            {scheduleData.map((data, index) => {
+              /*    data.icon
         data.sportName 
         
         let icon_url = "randomize/" + icon + ".svg";
         
         */
 
-        if(data.sportName === ("Opening ceremony" ) || data.sportName === "Closing ceremony" ){
-          return null;
-        }
-        
-        return (<>
-        
+              if (
+                data.sportName === "Opening ceremony" ||
+                data.sportName === "Closing ceremony"
+              ) {
+                return null;
+              }
 
-        <div className="flex flex-col justify-center items-center ">
-          <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
-            <img
-              width={"30px"}
-              height={"30px"}
-              src={`randomize/${data.icon}.svg`}
-            />
+              return (
+                <>
+                  <div className="flex flex-col justify-center items-center ">
+                    <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
+                      <img
+                        width={"30px"}
+                        height={"30px"}
+                        src={`randomize/${data.icon}.svg`}
+                      />
+                    </div>
+
+                    <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
+                  </div>
+                </>
+              );
+            })}
           </div>
-
-          <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
-        </div>
-
-        </>)
-      })}
-</div>
-
 
           {/* table for PC */}
           <div className="hidden lg:flex justify-center items-center  w-full p-16">
             <table className="tablez lexend-font text-black_second xl:w-[90%] 2xl:w-[70%] ">
               <thead>
                 <tr>
-                  <th className="thz font-medium">Date / Time </th>
+                  <th className="thz font-medium">
+                    {t("mockupRandomizer.table1")}
+                  </th>
                   {timeSlots.map((slot) => (
                     <th key={slot} className="thz font-medium">
                       {slot.replace("_", "-")} h
@@ -1130,11 +1081,11 @@ p-4
           {/* //TODO table for mobile */}
           <div className=" flex flex-col p-4 md:p-16 lexend-font text-black_second lg:hidden">
             <div className="flex  flex-col">
-              <p className="m-2 ml-0 mt-4">Saturday 24th</p>
+              <p className="m-2 ml-0 mt-4">{t("mockupRandomizer.table2")}</p>
 
               <div className="bg-gray_second mb-2 flex gap-4 p-1 rounded-md">
                 <p className="font-medium">6 - 9</p>
-                <p>Opening ceremony</p>
+                <p>{t("mockupRandomizer.sport1")}</p>
               </div>
 
               {satMob24()}
@@ -1143,7 +1094,9 @@ p-4
             {sunMob25 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Sunday 25th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table3")}
+                  </p>
 
                   {sunMob25()}
                 </div>
@@ -1153,7 +1106,9 @@ p-4
             {monMob26 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Monday 26th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table4")}
+                  </p>
 
                   {monMob26()}
                 </div>
@@ -1163,7 +1118,9 @@ p-4
             {tueMob27 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Tuesday 27th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table5")}
+                  </p>
 
                   {tueMob27()}
                 </div>
@@ -1173,7 +1130,9 @@ p-4
             {wedMob28 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Wednesday 28th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table6")}
+                  </p>
 
                   {wedMob28()}
                 </div>
@@ -1183,7 +1142,9 @@ p-4
             {thuMob29 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Thursday 29th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table7")}
+                  </p>
 
                   {thuMob29()}
                 </div>
@@ -1193,7 +1154,9 @@ p-4
             {friMob30 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Friday 30th</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table8")}
+                  </p>
 
                   {friMob30()}
                 </div>
@@ -1203,7 +1166,9 @@ p-4
             {satJulMob1 && (
               <>
                 <div className="flex  flex-col">
-                  <p className="m-2 ml-0 mt-4">Saturday 1st</p>
+                  <p className="m-2 ml-0 mt-4">
+                    {t("mockupRandomizer.table9")}
+                  </p>
 
                   {satJulMob1()}
                 </div>
@@ -1212,21 +1177,16 @@ p-4
 
             {/* // TODO, and one more thing, is to HIDE, if there is NO , in that function. you can create quick check { } with that function, if that returns anything (make sure to return null, if there's no match), so, we don't show this day then..  */}
             <div className="flex  flex-col">
-              <p className="m-2 ml-0 mt-4">Sunday 2nd</p>
+              <p className="m-2 ml-0 mt-4">{t("mockupRandomizer.table10")}</p>
 
               {sunJulMob2()}
 
               <div className="bg-gray_second mt-2 flex gap-4 p-1 rounded-md">
                 <p className="font-medium">12 - 15</p>
-                <p>Closing ceremony</p>
+                <p>{t("mockupRandomizer.sport2")}</p>
               </div>
             </div>
           </div>
-
-
-
-
-
 
           {/* buttons */}
           <div>
@@ -1267,7 +1227,9 @@ p-4
                   }
                   className="w-6  mr-2 mb-1"
                 />
-                <span className="lexend-font">Randomize again</span>
+                <span className="lexend-font">
+                  {t("mockupRandomizer.content7")}
+                </span>
               </Button>
 
               <Button
@@ -1292,7 +1254,9 @@ p-4
                 id="randomize-btn"
                 type="submit"
               >
-                <span className="lexend-font">Sign Up</span>
+                <span className="lexend-font">
+                  {t("mockupRandomizer.content8")}
+                </span>
               </Button>
             </div>
           </div>
@@ -1352,7 +1316,7 @@ p-4
             ))}
 
             <button type="button" onClick={addInputSet}>
-              Add Another
+              {t("mockupRandomizer.content9")}
             </button>
 
             <div>
@@ -1374,16 +1338,14 @@ p-4
                 }}
                 type="submit"
               >
-                <span className="popins-font">Send to friends</span>
+                <span className="popins-font">
+                  {t("mockupRandomizer.content10")}
+                </span>
               </Button>
             </div>
           </form>
         </>
       )}
-
-
-
-
 
       <Snackbar
         open={openSnackbarError}
