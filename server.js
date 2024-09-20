@@ -88,7 +88,7 @@ app.use("/blog", blogRoutes);
 app.use("/payment", paymentRoutes);
 
 
-db.sequelize.sync().then(() => {
+db.sequelize.authenticate().then(() => {
  
  
   if(isProduction  === "true"){

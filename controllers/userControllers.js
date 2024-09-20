@@ -81,7 +81,7 @@ const update_user_data = async (req, res) => {
     console.log("on dobija profile pic kao:"+picture)
 
 
-    await db.sequelize.sync();
+    
   
     
     const t1 = await db.sequelize.transaction();
@@ -340,7 +340,7 @@ const update_user_data = async (req, res) => {
 
 
     try {
-      await db.sequelize.sync();
+      
   
       const existingUser = await User.findOne({
         where: { userId: userId },
@@ -492,7 +492,7 @@ const update_user_data = async (req, res) => {
 
     try {
 
-      await db.sequelize.sync();
+      
 
 
       await User.destroy({

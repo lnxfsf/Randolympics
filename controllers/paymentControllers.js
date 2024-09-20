@@ -75,7 +75,7 @@ const makePayment = async (req, res) => {
       const t1 = await db.sequelize.transaction();
 
       try {
-        await db.sequelize.sync();
+        
 
         // find athleteId (so we increase his donatedAmount when we confirm payment)
 
@@ -210,7 +210,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
   try {
     // ima li koji odgovara tome..
-    await db.sequelize.sync();
+    
 
     // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
 
@@ -320,7 +320,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       // znaci kreiras jedan row .. (da, treba da upises, i u Athlete isto), i ovaj ce jedini biti odmah "success", jer on ne radi potvrdu..
 
       try {
-        await db.sequelize.sync();
+        
 
         const currentDate = new Date();
         const expiryDate = new Date(oneCoupon.expiryDate);

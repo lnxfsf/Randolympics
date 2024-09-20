@@ -6507,7 +6507,7 @@ const createCampaign = async (req, res) => {
 
   } = req.body;
 
-  await db.sequelize.sync();
+  
 
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {

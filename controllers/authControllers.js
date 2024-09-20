@@ -411,7 +411,7 @@ const register = async (req, res) => {
   };
 
   try {
-    await db.sequelize.sync();
+    
 
     const userAlreadyExists = await User.findOne({
       where: { email: user_data.email },
@@ -514,7 +514,7 @@ const email_resend = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -540,7 +540,7 @@ const verify_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -567,7 +567,7 @@ const forgot_password = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -602,7 +602,7 @@ const reset_password_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     // Check if the token exists and is still valid
     const user = await User.findOne({ where: { verificationToken: token } });
@@ -684,7 +684,7 @@ const reset_password = async (req, res) => {
   const { token, password } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -722,7 +722,7 @@ const login = async (req, res) => {
   }
 
   try {
-    await db.sequelize.sync();
+    
 
     const existingUser = await User.findOne({
       where: { email: email },

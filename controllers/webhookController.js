@@ -25,7 +25,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 
 const calculateNewAmountWithDiscountCode = async (amountOriginal, couponDonationCode, country) => {
-    await db.sequelize.sync();
+    
   
     
     const t1 = await db.sequelize.transaction();
@@ -245,7 +245,7 @@ const webhookController = async (req, res) => {
     // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
     // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
 
-    await db.sequelize.sync();
+    
 
     const t2 = await db.sequelize.transaction();
 
@@ -453,7 +453,7 @@ const webhookController = async (req, res) => {
       const t4 = await db.sequelize.transaction();
 
       try {
-        await db.sequelize.sync();
+        
 
         await Statscampaign.create(addSupporterToStats, { transaction: t4 });
 
