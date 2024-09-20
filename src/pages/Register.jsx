@@ -217,7 +217,7 @@ const Register = () => {
     /*this is for nationality */
   }
   const [nationality_selected, setNationality_selected] = useState("");
-  const [selectedRole, setSelectedRole] = useState("AH");
+  const [selectedRole, setSelectedRole] = useState("GP");
 
   const [selectedGender, setSelectedGender] = useState("M");
 
@@ -576,9 +576,9 @@ const Register = () => {
                   }}
                   style={{ color: "#000" }}
                 >
-                  <MenuItem value={"AH"} sx={lexend_font}>
+                 {/* <MenuItem value={"AH"} sx={lexend_font}>
                     {t("register.user_type1")}
-                  </MenuItem>
+                  </MenuItem>*/}
                   <MenuItem value={"GP"} sx={lexend_font}>
                     {t("register.user_type2")}
                   </MenuItem>
