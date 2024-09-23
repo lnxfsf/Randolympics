@@ -12,6 +12,8 @@ import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -67,7 +69,7 @@ const DetailsNewsBlock = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      <Navbar />
       <div className="relative ">
         <div className="mt-32">
 
@@ -136,6 +138,8 @@ const DetailsNewsBlock = () => {
 
         </div>
       </div>
+
+      <FooterClean />
     </>
   );
 };

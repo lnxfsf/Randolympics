@@ -11,6 +11,7 @@ const ThirdScreenHome = () => {
   return (
     <>
       <div className="flex bg-[#F8F8F8] min-h-screen flex-col md:flex-row">
+      
         <div className="md:basis-1/2 xl:basis-1/3  justify-center items-center lg:block 2xl:m-16  container_beliefs min-h-screen">
           <img src="/home/beliefs.jpg" className="image_beliefs rounded-xl" />
         </div>

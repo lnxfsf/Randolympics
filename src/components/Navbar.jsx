@@ -42,52 +42,45 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+const settingUserType = (user_type) => {
+  switch (user_type) {
+    case "AH":
+      return "Athlete";
 
+    case "GP":
+      return "Global President";
 
-  const settingUserType = (user_type) => {
-    switch (user_type) {
-      case "AH":
-        return "Athlete";
-        
-      case "GP":
-        return "Global President";
-        
-      case "NP":
-        return "National President";
-        
-      case "EM":
-        return "Event Manager";
-        
-      case "ITM":
-        return "IT Manager";
-        
-      case "IME":
-        return "IT Manager Page Editor"; // Note: Corrected from "ITM"
-        
-      case "MM":
-        return "Marketing Manager";
-        
-      case "SM":
-        return "Sales Manager";
-        
-      case "VM":
-        return "Validation Manager";
-        
-      case "LM":
-        return "Legal Manager";
-        
-      case "RS":
-        return "Referee & support";
-        
-      default:
-        return "Guest";
+    case "NP":
+      return "National President";
 
-        
-    }
-  };
+    case "EM":
+      return "Event Manager";
 
-  
+    case "ITM":
+      return "IT Manager";
 
+    case "IME":
+      return "IT Manager Page Editor"; // Note: Corrected from "ITM"
+
+    case "MM":
+      return "Marketing Manager";
+
+    case "SM":
+      return "Sales Manager";
+
+    case "VM":
+      return "Validation Manager";
+
+    case "LM":
+      return "Legal Manager";
+
+    case "RS":
+      return "Referee & support";
+
+    default:
+      return "Guest";
+  }
+};
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -103,7 +96,7 @@ const Navbar = () => {
 
   if (tokens) {
     var username = tokens.data.name;
-    
+
     var profile_image = tokens.data.picture;
 
     var user_type = tokens.data.user_type;
@@ -118,9 +111,6 @@ const Navbar = () => {
 
     return parsed;
   });
-
-
-
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -162,22 +152,28 @@ const Navbar = () => {
             </Link>
 
             <nav className="hidden lg:flex  gap-8 justify-center items-center lexend-font pl-16">
-              <Link to="/#sports" className="nav_btns">
+              <Link to="/about" className="nav_btns">
                 {t("navbar.btn1")}
               </Link>
-              <Link to="/#beliefs" className="nav_btns">
+              <Link to="/campaign" className="nav_btns">
                 {t("navbar.btn2")}
               </Link>
-              <Link to="/#economics" className="nav_btns">
+
+              <Link to="/competitions" className="nav_btns">
+                {t("navbar.btn6")}
+              </Link>
+
+              <Link to="/news" className="nav_btns">
                 {t("navbar.btn3")}
               </Link>
-              <Link to="/#how_it_works" className="nav_btns">
+
+              <Link to="/faq" className="nav_btns">
                 {t("navbar.btn4")}
               </Link>
-              <Link to="/#faq" className="nav_btns">
+
+              <Link to="/contact" className="nav_btns">
                 {t("navbar.btn5")}
               </Link>
-              {/* Conditional user elements */}
             </nav>
 
             {user ? (
@@ -185,34 +181,36 @@ const Navbar = () => {
                 {/* // when logged in */}
 
                 <Tooltip title="Account settings">
-                
-                <div className="flex gap-2 items-center justify-center">
-                  <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={open1 ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open1 ? "true" : undefined}
-                  >
-                    {profile_image ? (
-                      <Avatar
-                        sx={{ width: 32, height: 32 }}
-                        src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/profile_pics/" +
-                          profile_image
-                        }
-                      />
-                    ) : (
-                      <Avatar sx={{ width: 32, height: 32 }}>
-                        {username.charAt(0).toUpperCase()}
-                      </Avatar>
-                    )}
-
-                    
-                  </IconButton>
-                  <p onClick={handleClick} className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer">{settingUserType(user_type)}</p>
+                  <div className="flex gap-2 items-center justify-center">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                      aria-controls={open1 ? "account-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open1 ? "true" : undefined}
+                    >
+                      {profile_image ? (
+                        <Avatar
+                          sx={{ width: 32, height: 32 }}
+                          src={
+                            BACKEND_SERVER_BASE_URL +
+                            "/imageUpload/profile_pics/" +
+                            profile_image
+                          }
+                        />
+                      ) : (
+                        <Avatar sx={{ width: 32, height: 32 }}>
+                          {username.charAt(0).toUpperCase()}
+                        </Avatar>
+                      )}
+                    </IconButton>
+                    <p
+                      onClick={handleClick}
+                      className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer"
+                    >
+                      {settingUserType(user_type)}
+                    </p>
                   </div>
 
                   <Menu
@@ -451,15 +449,15 @@ const Navbar = () => {
         }}
       >
         <ListItem sx={{ mt: 1 }}>
-          <Link to="/#sports" className="nav_btns">
+          <Link to="/about" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
-              {t("navbar.btn6")}
+              {t("navbar.btn1")}
             </span>
           </Link>
         </ListItem>
 
         <ListItem>
-          <Link to="/#beliefs" className="nav_btns">
+          <Link to="/campaign" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn2")}
             </span>
@@ -467,7 +465,15 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/#economics" className="nav_btns">
+          <Link to="/competitions" className="nav_btns">
+            <span className="font-bold text-red_second lexend-font">
+              {t("navbar.btn6")}
+            </span>
+          </Link>
+        </ListItem>
+
+        <ListItem>
+          <Link to="/news" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn3")}
             </span>
@@ -475,7 +481,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/#how_it_works" className="nav_btns">
+          <Link to="/faq" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn4")}
             </span>
@@ -483,7 +489,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/#faq" className="nav_btns">
+          <Link to="/contact" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn5")}
             </span>

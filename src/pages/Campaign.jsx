@@ -32,6 +32,8 @@ import FormGroup from "@mui/material/FormGroup";
 
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { Navbar } from "../components/Navbar";
+import { FooterClean } from "../components/FooterClean";
 
 
 
@@ -145,7 +147,7 @@ const Campaign = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+     <Navbar />
 
       <div className="mb-32"></div>
 
@@ -444,6 +446,8 @@ const Campaign = () => {
           ))}
         </>
       )}
+
+      <FooterClean />
     </>
   );
 };

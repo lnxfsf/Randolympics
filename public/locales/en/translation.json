@@ -72,14 +72,14 @@
     "ourBeliefs": {
       "title1": "Our Beliefs",
 
-      "content1": "We welcome everyone to participate and compete, regardless of nationality, race, values, religion, political views, gender, sexual orientation, or age.",
-      "content2": "In times of tension, the world needs us more than ever. Our host cities will ensure everyone can join, arranging necessary visas for all participants. We stand against any political pressure to exclude athletes based on their identity or beliefs.",
-      "content3": "Transparency is our commitment, using open-source technology for payments and communication. Our democratic approach guarantees equal rights and voting power for every nation and citizen.",
-      "content4": "We may not always have luxury, sometimes staying in tents or using old equipment, but we will never compromise on our core values.",
+      "content1": "",
+      "content2": "We believe that the random nature of sports has a unique power to bring people together. In a world filled with conflicts and divisions, our events offer a chance to unite humankind. By competing together, we demonstrate that athletic challenges can bridge cultures, nations, and beliefs, showing that competition can foster connection instead of division.",
+      "content3": "Everyone is welcome to participate, regardless of nationality, race, values, religion, political views, gender, or sexual orientation. Our host cities ensure that all participants can join by providing the necessary support, including visas. We stand firmly against any form of exclusion based on identity, beliefs, religion, race, gender, or any other defining trait, ensuring equal opportunity for everyone.",
+      "content4": "Transparency is at the heart of everything we do. As far as possible, we use open-source technology for payments and communication to ensure openness and security. Our democratic system gives equal rights and voting power to every nation and participant, fostering a fair, accountable, and inclusive environment for all.",
 
-      "subtitle1": "Global Inclusion and Support",
-      "subtitle2": "Commitment to Transparency",
-      "subtitle3": "Adherence to Core Values"
+      "subtitle1": "Unite Humanity through Random Sport",
+      "subtitle2": "Inclusiveness",
+      "subtitle3": "Transparency"
     },
 
     "economics": {
@@ -111,18 +111,26 @@
     "howItWorks": {
       "title1": "How it works",
       "title2": "Now",
-      "title3": "Campaign Phase: Nominate and Support",
+      "title3": "Sign Up Phase",
       "title4": "June 25th 2026",
-      "title5": "Final Ranking and Selection",
+      "title5": "National Randomization",
       "title6": "June 2026 - June 2028",
       "title7": "Two-Year Preparation Period",
       "title8": "June 25th 2028",
-
-      "title9": "Opening Ceremony: Athletes receive their randomly assigned sports",
-
+      "title9": "Opening Ceremony",
       "title10": "June 25th to July 2nd, 2028",
+      "title11": "Games: The Ultimate Test",
 
-      "title11": "Games: The Ultimate Test"
+
+      "content1": "Help your friend get back into the shape they had years ago! They'll appreciate the push - and the confidence you have in them - to take on such a HUGE challenge. Nominate a friend or even a celebrity to compete, and rally supporters and donations to boost their chances!",
+      "content2": "One hundred athletes are randomly selected in each country based on campaign success and support. The top 50 men and 50 women form the national teams.",
+      "content3": "During the ceremony, each athlete is randomly assigned between three and seven different sports to compete in. Let the games begin!",
+
+
+      "content4": "Sign up your friend",
+"content5": "Randomization"
+
+
     },
 
     "faq": {
@@ -241,13 +249,13 @@
     },
 
     "sixthScreen": {
-      "title1": "Ready to get started?",
+      "title1": "Join as National President or Manager",
 
-      "title2": "Sign Up today and start living the adventure.",
+      "title2": "Are you passionate about sports and leadership? We are seeking motivated individuals to become National Presidents and Global Managers for Randolympics. This is your chance to represent your country or take on a global role in shaping the future of this movement.",
 
-      "btn1": "Sign Up",
+      "btn1": "Apply Now",
 
-      "text1": "By clicking Sign Up you're confirming that you agree with our",
+      "text1": "By signing up you're confirming that you agree with our ",
       "text2": "Terms and Conditions"
     }
   },
@@ -260,12 +268,12 @@
   },
 
   "navbar": {
-    "btn1": "Sports",
-    "btn2": "Our beliefs",
-    "btn3": "Economics",
-    "btn4": "How it works",
-    "btn5": "FAQ",
-    "btn6": "Our competitions",
+    "btn1": "About us",
+    "btn2": "Campaigns ",
+    "btn3": "News",
+    "btn4": "FAQ",
+    "btn5": "Contact",
+    "btn6": "Competitions",
 
     "profile1": "Settings",
     "profile2": "Team",
@@ -747,5 +755,21 @@
     "sport131": "Individual Dressage",
     "sport132": "Team Dressage",
     "sport133": "Men's Triathlon"
+  },
+
+
+  "contact": {
+    "title1": "General Inquiries",
+    "title2": "Have a question or need more information?",
+
+    "title3": "Fill out the form below with your inquiry, and one of our team members will get back to you as soon as possible.",
+    "title4": "We’re here to help.",
+
+    "content1": "Name",
+    "content2": "Email",
+    "content3": "Subject",
+    "content4": "Text"
+
+
   }
 }

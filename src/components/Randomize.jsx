@@ -1262,7 +1262,7 @@ return dataS.map((data, index) => { */
           </div>
 
           {/* share to friends */}
-          <form
+        {/*   <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
             onSubmit={sendToFriends}
@@ -1275,7 +1275,7 @@ return dataS.map((data, index) => { */
                 placeholder="Name"
                 value={data.name}
                 onChange={(event) => handleInputChange(index, event)}
-              /> */}
+              /> 
 
                 <input
                   type="email"
@@ -1311,7 +1311,7 @@ return dataS.map((data, index) => { */
                 {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
- */}
+ 
               </div>
             ))}
 
@@ -1343,7 +1343,7 @@ return dataS.map((data, index) => { */
                 </span>
               </Button>
             </div>
-          </form>
+          </form> */}
         </>
       )}
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { CountDownTimerHome } from "../../components/Home/CountDownTimerHome";
 
 import {useTranslation} from "react-i18next";
+import { FifthScreenHome } from "./FifthScreenHome";
 
 
 // for countdown
@@ -78,7 +79,7 @@ const FirstScreenHome = () => {
 
         <CountDownTimerHome />
 
-        <div className="flex items-center justify-center  flex-col pt-8">
+     {/*    <div className="flex items-center justify-center  flex-col pt-8">
           <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
           {t('home.firstScreen.subtitle1')} 
           </p>
@@ -110,7 +111,12 @@ const FirstScreenHome = () => {
               {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>
-        </div>
+        </div> */}
+
+
+  
+  
+
 
        
        

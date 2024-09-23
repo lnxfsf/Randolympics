@@ -40,6 +40,7 @@ import { Helmet } from "react-helmet-async";
 
 
 import ReactGA from 'react-ga';
+import { SeventhScreenHome } from "./Home/SeventhScreenHome";
 
 let GTAG_ID =
   import.meta.env.VITE_GTAG_ID ||
@@ -88,10 +89,12 @@ const Home = () => {
      
 
       <FirstScreenHome />
+    <FifthScreenHome />
 
 
-    
-      <SecondScreenHome />
+
+    {/* 
+      <SecondScreenHome /> */}
 
 
 
@@ -117,14 +120,16 @@ const Home = () => {
      
       <FourthScreenHome />
     
-      <FifthScreenHome />
+
+      
 
 
       {/* FAQ   */}
-      <FAQ /> 
+      {/* <FAQ />  */}
     
 
 
+     {/*  <SeventhScreenHome /> */}
       <SixthScreenHome />
       
 

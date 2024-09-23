@@ -11,6 +11,8 @@ import { ItemEconomicsList } from "../../NewsAdmin/Economics/ItemEconomicsList";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -73,7 +75,7 @@ const ReadMoreNewsEconomics = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      <Navbar />
 
       <div className="mb-32"></div>
 
@@ -120,6 +122,8 @@ const ReadMoreNewsEconomics = () => {
           Next Page
         </button>
       </div>
+
+      <FooterClean />
     </>
   );
 };

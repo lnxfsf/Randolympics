@@ -15,6 +15,8 @@ let BACKEND_SERVER_BASE_URL =
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 const readingTime = (text) => {
   const wpm = 225;
@@ -65,7 +67,8 @@ const DetailsUpcomingGames = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      
+      <Navbar />
       <div className="relative ">
         <div className="mt-32">
 
@@ -131,6 +134,8 @@ const DetailsUpcomingGames = () => {
           )}
         </div>
       </div>
+
+      <FooterClean />
     </>
   );
 };

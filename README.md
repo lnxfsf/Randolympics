@@ -106,3 +106,11 @@ npm install react-query
 npm install --save react-auth-code-input
 
 npm i i18next-http-backend
+
+
+
+
+npm install react-slick
+npm install embla-carousel-react
+
+npm install keen-slider

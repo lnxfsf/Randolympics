@@ -325,6 +325,21 @@ tako imas na hover animation
 
 }
 
+
+.custom-border1 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 300px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+
+  
+
+}
+
+
+
 .dot {
   position: absolute;
   top: -15px;
@@ -395,6 +410,35 @@ tako imas na hover animation
 }
 
 
+
+
+.custom-border3 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 150px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+
+  
+
+}
+
+
+
+
+
+
+.custom-border4 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 230px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+}
+
+
 .custom-borderEnd {
   position: relative;
   width: 2px ; /* Width of the border */
@@ -421,11 +465,12 @@ tako imas na hover animation
 
 .end_text_games {
 
-  margin-top: -15px;
+   margin-top: -15px; 
+
 }
 
 .text_games {
-  margin-top: -35px;
+ /*  margin-top: -35px; */
 }
 
 
@@ -471,3 +516,45 @@ tako imas na hover animation
 }
 
 
+
+
+
+.container_first_screen {
+  position: relative;
+  width: 100%;
+  
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+.image_first_screen {
+ /*  width: 100%;
+
+  min-height: "screen";
+  
+ */
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  
+}
+
+
+
+
+
+/* 
+
+.item_div {
+  width: 100%;
+  height: 60%;
+
+ 
+  overflow: hidden;
+} */

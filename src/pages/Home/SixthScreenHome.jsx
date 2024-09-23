@@ -42,13 +42,13 @@ const SixthScreenHome = () => {
             <p className=" font-medium mt-4">{t("home.sixthScreen.title2")}</p>
 
             <div className="mt-2 mb-2 flex flex-col md:flex-row gap-2">
-              <TextField
+              {/* <TextField
                 className="grow"
                 /*  value={signUpEmail} */
 
                 /*     onChange={(event) => {
                       setSupporterName(event.target.value);
-                    }} */
+                    }} 
 
                 placeholder="example@email.com"
                 type="text"
@@ -56,10 +56,12 @@ const SixthScreenHome = () => {
                   maxLength: 255,
                 }}
                 sx={sxTextField}
-              />
+              /> */}
 
+
+{/* md:basis-1/2 */}
               <Button
-                className="self-center w-full md:basis-1/2"
+                className="self-center w-full "
                 /* w-full md:w-50% */
                 style={{ textTransform: "none" }}
                 sx={{

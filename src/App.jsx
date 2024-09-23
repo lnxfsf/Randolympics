@@ -31,6 +31,10 @@ import { JoinTeam } from "./pages/JoinTeam";
 
 
 import ReactGA from 'react-ga';
+import { FAQPage } from "./pages/FAQPage";
+import { AboutUs } from "./pages/AboutUs";
+import { ContactUs } from "./pages/ContactUs";
+import { Competitions } from "./pages/Competitions";
 
 let GTAG_ID =
   import.meta.env.VITE_GTAG_ID ||
@@ -58,6 +62,9 @@ const App = () => {
       <Routes>
 
 
+
+
+
         <Route path="/landingpage" element={<LandingPage />} />
         <Route path="/" element={<Home />} />
 
@@ -71,6 +78,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/jointeam" element={<JoinTeam/>} />
 
+
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passresetbyfriend" element={<RegisteredByFriend /> } />
         <Route path="/tos" element={<ToS />} />
@@ -78,6 +86,11 @@ const App = () => {
 
         <Route path="/myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
 
+        
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/competitions" element={<Competitions />} />
 
 
         <Route path="/economicsloan" element={<EconomiscLoansHome />} />
