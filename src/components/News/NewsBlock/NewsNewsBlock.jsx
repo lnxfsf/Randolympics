@@ -95,7 +95,7 @@ const NewsNewsBlock = () => {
                 >
 
                     <div className="grow">
-                        <div className="w-1/3 h-9 bg-red_first text-[#fff] flex justify-start items-start p-2 pl-10 rounded-tl-lg">
+                        <div className="w-1/3 h-9 bg-red_second text-[#fff] flex justify-start items-start p-2 pl-10 rounded-tl-lg">
                             <p className="text-sm">Featured story</p></div>
                     </div>
 
@@ -120,10 +120,10 @@ const NewsNewsBlock = () => {
             {/* top stories header and read more */}
             <div className="flex justify-between items-center w-[70%] mt-8">
 
-                <p className="text-3xl text-red_first font-semibold">Top stories</p>
+                <p className="text-3xl text-red_second font-semibold">Top stories</p>
 
                 <div className="flex gap-4 cursor-pointer select-none" onClick={() => { navigate("/news/news") }}>
-                    <p className="text-lg text-red_first font-medium ">See all</p>
+                    <p className="text-lg text-red_second font-medium ">See all</p>
                     <img className="w-5 " src="news/arrow_right.svg" />
                 </div>
 

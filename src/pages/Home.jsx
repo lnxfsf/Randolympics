@@ -4,23 +4,16 @@
 /* import "animate.css";
 import "@mui/material/styles/styled"; */
 
-
-
 import React, { useState, useEffect } from "react";
-import { useTranslation } from 'react-i18next';
-
-
+import { useTranslation } from "react-i18next";
 
 import "../styles/home.scoped.scss";
-
 
 import { useNavigate } from "react-router-dom";
 
 /* 
 import AOS from "aos";
 import "aos/dist/aos.css"; */
-
-
 
 import { GridOfSportsHome } from "../components/Home/GridOfSportsHome";
 import { FAQ } from "../components/Home/FAQ";
@@ -35,25 +28,16 @@ import { FifthScreenHome } from "./Home/FifthScreenHome";
 import { SixthScreenHome } from "./Home/SixthScreenHome";
 import { Helmet } from "react-helmet-async";
 
-
-
-
-
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 import { SeventhScreenHome } from "./Home/SeventhScreenHome";
+import { NewsNewsBlock } from "../components/News/NewsBlock/NewsNewsBlock";
+import { ContactUsForm } from "./Contact/ContactUsForm";
 
-let GTAG_ID =
-  import.meta.env.VITE_GTAG_ID ||
-  process.env.VITE_GTAG_ID;
-
+let GTAG_ID = import.meta.env.VITE_GTAG_ID || process.env.VITE_GTAG_ID;
 
 const TRACKING_ID = GTAG_ID;
 
-
 ReactGA.initialize(TRACKING_ID);
-
-
-
 
 const Home = () => {
   const { t } = useTranslation();
@@ -61,81 +45,68 @@ const Home = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
-  
   const navigate = useNavigate();
 
-/* 
+  /* 
   useEffect(() => {
     AOS.init();
   }, []); */
 
-
   return (
     <>
-
-
-    <Helmet>
-      <title>Home</title>
-      <meta name="description" content="Real People. Randomly Selected. Competing in Olympic Sports" />
-      <link rel="canonical" href="/" />
-    </Helmet>
-
-
-
+      <Helmet>
+        <title>Home</title>
+        <meta
+          name="description"
+          content="Real People. Randomly Selected. Competing in Olympic Sports"
+        />
+        <link rel="canonical" href="/" />
+      </Helmet>
 
       <Navbar />
 
-    
-     
-
       <FirstScreenHome />
-    <FifthScreenHome />
+      <FifthScreenHome />
 
-
-
-    {/* 
+      {/* 
       <SecondScreenHome /> */}
 
-
-
-
-
-
       {/* Our Competitions */}
-      <div
-        className="flex justify-center items-center flex-col lexend-font text-black_second"
-       
-      >
-        <p className="text-2xl md:text-4xl mt-8 font-bold "  >
-          <b> {t('home.ourCompetitions.title1')}</b>
+      <div className="flex justify-center items-center flex-col lexend-font text-black_second">
+        <p className="text-2xl md:text-4xl mt-8 font-bold ">
+          <b> {t("home.ourCompetitions.title1")}</b>
         </p>
 
         {/* outer box   */}
         <GridOfSportsHome />
       </div>
 
+      <div className="flex justify-center mt-16 mb-16 flex-col items-center">
+                <p className="text-4xl font-semibold  text-red_second self-start ml-48">News</p>
+             
+                <NewsNewsBlock />
+
+            </div>
+
 
       <ThirdScreenHome />
+      <FourthScreenHome /> 
 
      
-      <FourthScreenHome />
-    
-
       
 
-
-      {/* FAQ   */}
-      {/* <FAQ />  */}
-    
-
-
-     {/*  <SeventhScreenHome /> */}
+        <SeventhScreenHome />
       <SixthScreenHome />
-      
+
+
+
+      <FAQ /> 
+
+      <ContactUsForm />
+   
 
 
       <FooterClean />
-
     </>
   );
 };

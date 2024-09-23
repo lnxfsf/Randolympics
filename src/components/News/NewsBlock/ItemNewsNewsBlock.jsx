@@ -104,7 +104,7 @@ const ItemNewsNewsBlock = ({ number }) => {
 
 
                     <div className="flex justify-between items-center">
-                        <p className="text-red_first text-xs font-medium">Randolympics</p>
+                        <p className="text-red_second text-xs font-medium">Randolympics</p>
                         <img src="news/mdi_dot.svg" />
                         <p className=" text-xs">{formatDate(gamesPosts[number].updatedAt) || "Date not available"}</p>
 
@@ -123,7 +123,7 @@ const ItemNewsNewsBlock = ({ number }) => {
 
                     <div className="flex justify-between items-center">
                         <p className="text-xs  text-[#9D9A9A]">{readingTime(gamesPosts[number].content)} min read</p>
-                        <p className="text-xs  text-red_first font-semibold">Read More</p>
+                        <p className="text-xs  text-red_second font-semibold">Read More</p>
                     </div>
 
 
