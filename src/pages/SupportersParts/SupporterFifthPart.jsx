@@ -52,7 +52,10 @@ const SupporterFifthPart = ({
             <div className="flex w-full  gap-4">
               <Button
                 onClick={() => {
-                  navigate("/");
+                  const relativePath = new URL(urlForCampaign).pathname;
+
+                  navigate(relativePath);
+
                 }}
                 className="w-full"
                 style={{ textTransform: "none" }}
