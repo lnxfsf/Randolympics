@@ -73,7 +73,7 @@ const DetailsNewsBlock = () => {
 
 
       <div className="relative ">
-        <div className="mt-32">
+        <div className="mt-32 ">
 
 
           <div className=" flex justify-center items-center">
@@ -96,6 +96,7 @@ const DetailsNewsBlock = () => {
           {post && (
             <>
               <br />
+              
 
               
                 <img
@@ -119,13 +120,13 @@ const DetailsNewsBlock = () => {
               <div className=" flex justify-center items-center ">
                 <div className="bg-body_news m-16 mt-24 w-[90%] md:w-[70%] rounded-lg p-8 pt-0">
 
-                  <div className="flex justify-between pt-20 sm:pt-36 md:pt-64">
+                  <div className="flex flex-col justify-start sm:flex-row sm:justify-between pt-20 sm:pt-36 md:pt-64">
 
                     <h1 className=" text-3xl font-semibold w-[80%] ">
                       {post.title}
                     </h1>
 
-                    <div className="flex flex-col justify-start items-end gap-2">
+                    <div className="flex flex-col justify-start sm:items-end gap-2">
                       <p className="text-text_news text-sm font-medium">
                         {formatDate(post.createdAt)}
                       </p>
@@ -133,6 +134,7 @@ const DetailsNewsBlock = () => {
                         {readingTime(post.content)} min read
                       </p>
                     </div>
+
                   </div>
 
                   <p className=" text-lg text-text_news font-medium w-[35em]">
