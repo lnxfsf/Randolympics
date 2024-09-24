@@ -542,7 +542,7 @@ const Campaign = () => {
         </div>
       </div>
 
-      {resultsAmount && (
+      {resultsAmount > 0 && (
         <>
           <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
             {resultsAmount} results
