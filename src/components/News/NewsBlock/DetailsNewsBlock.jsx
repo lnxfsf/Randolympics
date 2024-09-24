@@ -117,7 +117,7 @@ const DetailsNewsBlock = () => {
                 /> 
              
 
-              <div className=" flex justify-center items-center ">
+              <div className=" flex justify-center items-center w-full grow ">
                 <div className="bg-body_news m-16 mt-24 w-[90%] md:w-[70%] rounded-lg p-8 pt-0">
 
                   <div className="flex flex-col justify-start sm:flex-row sm:justify-between pt-20 sm:pt-36 md:pt-64">
