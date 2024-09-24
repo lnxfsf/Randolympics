@@ -342,7 +342,7 @@ const blogNews = async (req, res) => {
 
 const newsToUser = async (req, res) => {
 
-  const limit = parseInt(req.query.limit) || 4;
+  const limit = parseInt(req.query.limit) || 7;
   const offset = parseInt(req.query.offset) || 0;
 
 
