@@ -122,11 +122,11 @@ const DetailsNewsBlock = () => {
 
                   <div className="flex flex-col justify-start sm:flex-row sm:justify-between pt-20 sm:pt-36 md:pt-64">
 
-                    <h1 className=" text-3xl font-semibold w-[80%] ">
+                    <h1 className=" text-3xl font-semibold w-full sm:w-[80%] ">
                       {post.title}
                     </h1>
 
-                    <div className="flex flex-col justify-start sm:items-end gap-2">
+                    <div className="flex flex-col justify-start mt-2 sm:mt-0 sm:items-end gap-2">
                       <p className="text-text_news text-sm font-medium">
                         {formatDate(post.createdAt)}
                       </p>
@@ -137,7 +137,7 @@ const DetailsNewsBlock = () => {
 
                   </div>
 
-                  <p className=" text-lg text-text_news font-medium w-[35em]">
+                  <p className=" text-lg text-text_news font-medium mt-2 sm:mt-0 w-full lg:w-[35em]">
                     {post.subtitle}
                   </p>
 
