@@ -82,7 +82,7 @@ const Home = () => {
       </div>
 
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
-                <p className="text-4xl font-semibold  text-red_second self-start ml-48">News</p>
+                <p className="text-4xl font-semibold  text-red_second ">News</p>
              
                 <NewsNewsBlock />
 
