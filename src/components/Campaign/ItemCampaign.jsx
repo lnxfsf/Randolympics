@@ -2,6 +2,10 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import Flag from "react-world-flags";
 
+
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import TextField from "@mui/material/TextField";
@@ -24,6 +28,9 @@ import { Navbar } from "../Navbar";
 import { FooterClean } from "../FooterClean";
 
 import { Avatar } from "@mui/material";
+
+import { useTranslation } from "react-i18next";
+
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -96,6 +103,9 @@ function statusImage(athleteStatus) {
 }
 
 const ItemCampaign = () => {
+
+  const { t } = useTranslation();
+
   const { campaignId } = useParams();
 
   const navigate = useNavigate();
@@ -315,6 +325,27 @@ const ItemCampaign = () => {
 
   const popupRef = useRef(null);
 
+
+
+   // for snackbar message. 
+   const [openSnackbar, setOpenSnackbar] = useState(false);
+   const [snackbarMessage, setSnackbarMessage] = useState("");
+   
+   // error, "success"
+   const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+ 
+   const handleSnackbar = (event, reason) => {
+     if (reason === "clickaway") {
+       return;
+     }
+ 
+     setOpenSnackbar(false);
+   };
+ 
+
+   
+
   return (
     <>
       <Navbar />
@@ -369,7 +400,63 @@ const ItemCampaign = () => {
             />
           </>
         )}
+       
       </div>
+
+
+<div className="flex justify-end">
+      <Button
+                onClick={() => {
+                  const copied = navigator.clipboard.writeText(window.location.href);
+
+                  if (copied) {
+                    setOpenSnackbar(true);
+                    setSnackbarMessage(t("campaign.content9"));
+                  }
+                }}
+                className="w-[110px] "
+                style={{ textTransform: "none", marginRight: "10px" }}
+                sx={{
+                  p: 2,
+
+                  height: "50px",
+                  bgcolor: "#D24949",
+
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <img src="/supporters/share_white.svg" className="mr-2" />
+                <span className="lexend-font">{t("campaign.content10")}</span>
+              </Button>
+              </div>
+
+
+
+
+              <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
 
       <FooterClean />
     </>
