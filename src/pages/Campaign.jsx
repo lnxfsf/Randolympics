@@ -8,7 +8,7 @@ import SearchBar from "@mkyy/mui-search-bar";
 import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../context/supportedCountry";
 
-import { Button } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 
 import TuneIcon from "@mui/icons-material/Tune";
 import RestoreIcon from "@mui/icons-material/Restore";
@@ -42,10 +42,24 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
+
 const Campaign = () => {
+
+  
+
+  const [maxPages, setMaxPages] = useState(0);
+
+  const [resultsAmount ,setResultsAmount] = useState();
+
+  
   const [campaigns, setCampaigns] = useState();
 
   const [campaignsPage, setCampaignsPage] = useState(1);
+
   const [hasMoreCampaigns, setHasMoreCampaigns] = useState(true);
 
   const [limit, setLimit] = useState(10);
@@ -81,6 +95,17 @@ const Campaign = () => {
 
   useEffect(() => {
     updateLatestData();
+
+    
+    if (maxPages === 0) {
+      getMaxPages();
+    }
+
+   /*  //TODO, this should go on BACKEND_SERVER_BASE_URL, and here you get number of max which is . so  */
+    getMaxPages();
+   
+    
+
   }, [
     filterGender,
     filterNationality_selected,
@@ -90,9 +115,55 @@ const Campaign = () => {
     searchfb_link,
     searchig_link,
     searchtw_link,
+    campaignsPage,
+    filterIsCelebrity,
+    
   ]);
 
   const { t } = useTranslation();
+
+
+  
+
+
+
+  const getMaxPages = async () => {
+    try {
+     
+
+	 const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/listAllCampaigns`,
+        {
+          params: {
+            limit: 100000,
+            // offset: (campaignsPage - 1) * 10,
+
+            filterGender: filterGender,
+            filterNationality_selected: filterNationality_selected,
+            searchFirstNameText: searchFirstNameText,
+            searchFamilyNameText: searchFamilyNameText,
+
+            isCelebrity: filterIsCelebrity,
+            fb_link: searchfb_link,
+            ig_link: searchig_link,
+            tw_link: searchtw_link,
+          },
+        }
+      );
+	  
+      setMaxPages(Math.ceil(response.data.length / 10));
+      setResultsAmount(response.data.length);
+	  
+    } catch (error) {
+      console.error("Error fetching other users:", error);
+    }
+  };
+  
+  
+  
+  const handlePaginationChange = (event, value) => {
+    setCampaignsPage(value);
+  };
 
   const updateLatestData = async () => {
     try {
@@ -132,6 +203,9 @@ const Campaign = () => {
     setFilterIsCelebrity(0);
   };
 
+
+
+
   return (
     <>
       <Navbar />
@@ -139,7 +213,7 @@ const Campaign = () => {
       <div className="mb-32"></div>
 
       <div className="flex justify-center items-center ">
-        <div className="w-full md:w-[50%] flex justify-between items-center gap-6 p-2">
+        <div className="w-full md:w-[50%] flex justify-between  items-center gap-6 p-2">
           <p className="text-xl md:text-3xl flex justify-center  lexend-font text-black_second font-bold">
             {t("campaign.content54")}
           </p>
@@ -190,7 +264,6 @@ const Campaign = () => {
                   color: "#232323",
                   borderRadius: 2,
                   border: `1px solid #000`,
-                 
                 }}
               >
                 <span className="popins-font">{t("campaign.content56")}</span>
@@ -212,30 +285,40 @@ const Campaign = () => {
 
                     if (value === "yes") {
                       setFilterIsCelebrity(1);
+                      getMaxPages();
                     } else if (value === "no") {
                       setFilterIsCelebrity(0);
+                      getMaxPages();
                     }
                   }}
                 >
                   <FormGroup row>
                     <FormControlLabel
                       value="yes"
-                      control={<Radio sx={{
-                        color: "#444444",
-                        "&.Mui-checked": {
-                          color: "#444444",
-                        },
-                      }} />}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "#444444",
+                            "&.Mui-checked": {
+                              color: "#444444",
+                            },
+                          }}
+                        />
+                      }
                       label={`Celebrity`}
                     />
                     <FormControlLabel
                       value="no"
-                      control={<Radio sx={{
-                        color: "#444444",
-                        "&.Mui-checked": {
-                          color: "#444444",
-                        },
-                      }} />}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "#444444",
+                            "&.Mui-checked": {
+                              color: "#444444",
+                            },
+                          }}
+                        />
+                      }
                       label={`Athlete`}
                     />
                   </FormGroup>
@@ -405,102 +488,137 @@ const Campaign = () => {
           />
         </div>
 
+        <div>
+          <FormControl>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue={() => {
+                if (filterIsCelebrity === 0) {
+                  return "no";
+                } else {
+                  return "yes";
+                }
+              }}
+              name="radio-buttons-group"
+              onChange={(event) => {
+                const value = event.target.value;
 
-          <div >
-        <FormControl >
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue={()=> {if(filterIsCelebrity===0){
-                    return "no"
-                  }else {
-                    return "yes"
-                  }}}
-                  name="radio-buttons-group"
-                  onChange={(event) => {
-                    const value = event.target.value;
-
-                    if (value === "yes") {
-                      setFilterIsCelebrity(1);
-                      
-                    } else if (value === "no") {
-                      setFilterIsCelebrity(0);
-                    
-                    }
-                  }}
-                >
-                  <FormGroup row>
-                    <FormControlLabel
-                      value="yes"
-                      control={<Radio sx={{
+                if (value === "yes") {
+                  setFilterIsCelebrity(1);
+                  getMaxPages();
+                } else if (value === "no") {
+                  setFilterIsCelebrity(0);
+                  getMaxPages();
+                }
+              }}
+            >
+              <FormGroup row>
+                <FormControlLabel
+                  value="yes"
+                  control={
+                    <Radio
+                      sx={{
                         color: "#444444",
                         "&.Mui-checked": {
                           color: "#444444",
                         },
                       }}
-                      />}
+                    />
+                  }
+                  sx={{
+                    marginTop: "0px",
+                    "& .MuiTypography-root": {
+                      fontFamily: "'Lexend', sans-serif",
+                      fontWeight: 500,
+                    },
+                  }}
+                  label={`Celebrity`}
+                />
+                <FormControlLabel
+                  value="no"
+                  control={
+                    <Radio
                       sx={{
-                        marginTop: "0px",
-                        "& .MuiTypography-root": {
-                          fontFamily: "'Lexend', sans-serif",
-                          fontWeight: 500,
+                        color: "#444444",
+                        "&.Mui-checked": {
+                          color: "#444444",
                         },
                       }}
-
-                      label={`Celebrity`}
                     />
-                    <FormControlLabel value="no" control={<Radio sx={{
-                              color: "#444444",
-                              "&.Mui-checked": {
-                                color: "#444444",
-                              },
-                            }} />} 
-                            
-                            sx={{
-                              marginTop: "0px",
-                              "& .MuiTypography-root": {
-                                fontFamily: "'Lexend', sans-serif",
-                                fontWeight: 500,
-                              },
-                            }}
-                            
-                            label={`Athlete`} />
-                  </FormGroup>
-                </RadioGroup>
-              </FormControl>
-              </div>
-
+                  }
+                  sx={{
+                    marginTop: "0px",
+                    "& .MuiTypography-root": {
+                      fontFamily: "'Lexend', sans-serif",
+                      fontWeight: 500,
+                    },
+                  }}
+                  label={`Athlete`}
+                />
+              </FormGroup>
+            </RadioGroup>
+          </FormControl>
+        </div>
       </div>
+
+    
+
+{resultsAmount && (<>
+  <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">{resultsAmount} results</p>
+</>)}
+      
+
 
       {campaigns && (
         <>
+          
           {campaigns.map((item, index) => (
             <>
-              <div className="flex justify-center items-center ">
+              <div className="flex justify-center items-center  ">
+                
                 <div
                   key={index}
                   /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
                   onClick={() => navigate(`/campaign/${item.campaignId}`)}
-                  className="p-4 w-[95%] h-20 bg-body_news  cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
+                  className="p-4 w-[95%] h-20   cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
                 >
-                  <div>
-                    <p>
-                      <b>{t("campaign.content62")}:</b> {item.friendName}{" "}
-                      {item.friendMiddleName} {item.friendLastName}
+                  {/* //TODO, there should be profile image, of current athlete. If there's none, then you need to use avatar based on name initials
+                  
+                  // TODO, as it seems, even names or similar, should be connected to athlete, so if he updates profile, campaign also updates as well...
+                  */}
+
+
+<div className="flex gap-4 items-center">
+
+<Avatar sx={{ width: 55, height: 55 }}>
+                          {item.friendName.charAt(0).toUpperCase()}
+                        </Avatar>
+                  <div className="lexend-font text-black_second">
+                 
+
+
+                    <p className="font-bold">
+                      {item.friendName}{" "}
+                      {item.friendMiddleName && <>({item.friendMiddleName})</>}{" "}
+                      {item.friendLastName}
                     </p>
-                    <p>
+
+                  {/*   <p>
                       <b>{t("campaign.content28")}:</b>{" "}
                       {item.friendGender === "M" ? "Male" : "Female"}
-                    </p>
+                    </p> */}
+                    <p className="text-red_second font-medium">See Profile</p>
+                  </div>
                   </div>
 
-                  {item.isCelebrity ? (
+                {/*   {item.isCelebrity ? (
                     <img
                       className=" ml-auto w-6 m-4"
                       src="/supporters/celebrity_icon.svg"
                     />
                   ) : (
                     <></>
-                  )}
+                  )} */}
 
                   <div>
                     <Flag className="w-12 " code={item.friendNationality} />
@@ -512,6 +630,26 @@ const Campaign = () => {
         </>
       )}
 
+
+<div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+
+            count={maxPages}
+            page={campaignsPage}
+
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
+      </div>
       <FooterClean />
     </>
   );
