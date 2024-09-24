@@ -121,16 +121,12 @@
       "title10": "June 25th to July 2nd, 2028",
       "title11": "Games: The Ultimate Test",
 
-
       "content1": "Help your friend get back into the shape they had years ago! They'll appreciate the push - and the confidence you have in them - to take on such a HUGE challenge. Nominate a friend or even a celebrity to compete, and rally supporters and donations to boost their chances!",
       "content2": "One hundred athletes are randomly selected in each country based on campaign success and support. The top 50 men and 50 women form the national teams.",
       "content3": "During the ceremony, each athlete is randomly assigned between three and seven different sports to compete in. Let the games begin!",
 
-
       "content4": "Sign up your friend",
-"content5": "Randomization"
-
-
+      "content5": "Randomization"
     },
 
     "faq": {
@@ -757,7 +753,6 @@
     "sport133": "Men's Triathlon"
   },
 
-
   "contact": {
     "title1": "General Inquiries",
     "title2": "Have a question or need more information?",
@@ -769,7 +764,5 @@
     "content2": "Email",
     "content3": "Subject",
     "content4": "Text"
-
-
   }
 }

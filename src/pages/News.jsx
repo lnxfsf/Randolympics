@@ -32,7 +32,7 @@ const News = () => {
 
 
             <div className="flex justify-center mt-16 flex-col items-center">
-                <p className="text-4xl font-semibold  text-red_first ">News</p>
+                <p className="text-3xl md:text-4xl font-semibold  text-red_first ">News</p>
                 <NewsNewsBlock />
 
             </div>
