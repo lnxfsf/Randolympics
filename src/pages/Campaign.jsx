@@ -42,20 +42,14 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-
 const Campaign = () => {
-
-  
-
   const [maxPages, setMaxPages] = useState(0);
 
-  const [resultsAmount ,setResultsAmount] = useState();
+  const [resultsAmount, setResultsAmount] = useState();
 
-  
   const [campaigns, setCampaigns] = useState();
 
   const [campaignsPage, setCampaignsPage] = useState(1);
@@ -96,16 +90,12 @@ const Campaign = () => {
   useEffect(() => {
     updateLatestData();
 
-    
     if (maxPages === 0) {
       getMaxPages();
     }
 
-   /*  //TODO, this should go on BACKEND_SERVER_BASE_URL, and here you get number of max which is . so  */
+    /*  //TODO, this should go on BACKEND_SERVER_BASE_URL, and here you get number of max which is . so  */
     getMaxPages();
-   
-    
-
   }, [
     filterGender,
     filterNationality_selected,
@@ -117,21 +107,13 @@ const Campaign = () => {
     searchtw_link,
     campaignsPage,
     filterIsCelebrity,
-    
   ]);
 
   const { t } = useTranslation();
 
-
-  
-
-
-
   const getMaxPages = async () => {
     try {
-     
-
-	 const response = await axios.get(
+      const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/listAllCampaigns`,
         {
           params: {
@@ -150,17 +132,14 @@ const Campaign = () => {
           },
         }
       );
-	  
+
       setMaxPages(Math.ceil(response.data.length / 10));
       setResultsAmount(response.data.length);
-	  
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
   };
-  
-  
-  
+
   const handlePaginationChange = (event, value) => {
     setCampaignsPage(value);
   };
@@ -203,16 +182,13 @@ const Campaign = () => {
     setFilterIsCelebrity(0);
   };
 
-
-
-
   return (
     <>
       <Navbar />
 
-      <div className="mb-32"></div>
 
-      <div className="flex justify-center items-center ">
+<div className="min-h-screen">
+      <div className="flex justify-center items-center mt-4 ">
         <div className="w-full md:w-[50%] flex justify-between  items-center gap-6 p-2">
           <p className="text-xl md:text-3xl flex justify-center  lexend-font text-black_second font-bold">
             {t("campaign.content54")}
@@ -285,9 +261,12 @@ const Campaign = () => {
 
                     if (value === "yes") {
                       setFilterIsCelebrity(1);
+                      setCampaignsPage(1);
                       getMaxPages();
+
                     } else if (value === "no") {
                       setFilterIsCelebrity(0);
+                      setCampaignsPage(1);
                       getMaxPages();
                     }
                   }}
@@ -505,9 +484,11 @@ const Campaign = () => {
 
                 if (value === "yes") {
                   setFilterIsCelebrity(1);
+                  setCampaignsPage(1);
                   getMaxPages();
                 } else if (value === "no") {
                   setFilterIsCelebrity(0);
+                  setCampaignsPage(1);
                   getMaxPages();
                 }
               }}
@@ -561,21 +542,19 @@ const Campaign = () => {
         </div>
       </div>
 
-    
-
-{resultsAmount && (<>
-  <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">{resultsAmount} results</p>
-</>)}
-      
-
+      {resultsAmount && (
+        <>
+          <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
+            {resultsAmount} results
+          </p>
+        </>
+      )}
 
       {campaigns && (
         <>
-          
           {campaigns.map((item, index) => (
             <>
               <div className="flex justify-center items-center  ">
-                
                 <div
                   key={index}
                   /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
@@ -587,31 +566,28 @@ const Campaign = () => {
                   // TODO, as it seems, even names or similar, should be connected to athlete, so if he updates profile, campaign also updates as well...
                   */}
 
+                  <div className="flex gap-4 items-center">
+                    <Avatar sx={{ width: 55, height: 55 }}>
+                      {item.friendName.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <div className="lexend-font text-black_second">
+                      <p className="font-bold">
+                        {item.friendName}{" "}
+                        {item.friendMiddleName && (
+                          <>({item.friendMiddleName})</>
+                        )}{" "}
+                        {item.friendLastName}
+                      </p>
 
-<div className="flex gap-4 items-center">
-
-<Avatar sx={{ width: 55, height: 55 }}>
-                          {item.friendName.charAt(0).toUpperCase()}
-                        </Avatar>
-                  <div className="lexend-font text-black_second">
-                 
-
-
-                    <p className="font-bold">
-                      {item.friendName}{" "}
-                      {item.friendMiddleName && <>({item.friendMiddleName})</>}{" "}
-                      {item.friendLastName}
-                    </p>
-
-                  {/*   <p>
+                      {/*   <p>
                       <b>{t("campaign.content28")}:</b>{" "}
                       {item.friendGender === "M" ? "Male" : "Female"}
                     </p> */}
-                    <p className="text-red_second font-medium">See Profile</p>
-                  </div>
+                      <p className="text-red_second font-medium">See Profile</p>
+                    </div>
                   </div>
 
-                {/*   {item.isCelebrity ? (
+                  {/*   {item.isCelebrity ? (
                     <img
                       className=" ml-auto w-6 m-4"
                       src="/supporters/celebrity_icon.svg"
@@ -630,14 +606,11 @@ const Campaign = () => {
         </>
       )}
 
-
-<div className="flex justify-center items-start mt-4    w-full ">
+      <div className="flex justify-center items-start mt-4    w-full ">
         <Stack>
           <Pagination
-
             count={maxPages}
             page={campaignsPage}
-
             onChange={handlePaginationChange}
             sx={{
               "& .MuiPaginationItem-root": {
@@ -649,6 +622,8 @@ const Campaign = () => {
             }}
           />
         </Stack>
+      </div>
+
       </div>
       <FooterClean />
     </>
