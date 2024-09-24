@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import Flag from "react-world-flags";
-
 
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Flag from "react-world-flags";
 
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -27,10 +26,11 @@ import { Button } from "@mui/material";
 import { Navbar } from "../Navbar";
 import { FooterClean } from "../FooterClean";
 
-import { Avatar } from "@mui/material";
+import { Avatar , AvatarGroup} from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 
+import { settingUserType } from "../../context/user_types";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -103,7 +103,6 @@ function statusImage(athleteStatus) {
 }
 
 const ItemCampaign = () => {
-
   const { t } = useTranslation();
 
   const { campaignId } = useParams();
@@ -325,26 +324,20 @@ const ItemCampaign = () => {
 
   const popupRef = useRef(null);
 
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
 
-   // for snackbar message. 
-   const [openSnackbar, setOpenSnackbar] = useState(false);
-   const [snackbarMessage, setSnackbarMessage] = useState("");
-   
-   // error, "success"
-   const [snackbarStatus, setSnackbarStatus] = useState("success");
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
- 
-   const handleSnackbar = (event, reason) => {
-     if (reason === "clickaway") {
-       return;
-     }
- 
-     setOpenSnackbar(false);
-   };
- 
-
-   
+    setOpenSnackbar(false);
+  };
 
   return (
     <>
@@ -400,48 +393,115 @@ const ItemCampaign = () => {
             />
           </>
         )}
-       
       </div>
 
+      <div className="flex justify-end">
+        <Button
+          onClick={() => {
+            const copied = navigator.clipboard.writeText(window.location.href);
 
-<div className="flex justify-end">
-      <Button
-                onClick={() => {
-                  const copied = navigator.clipboard.writeText(window.location.href);
+            if (copied) {
+              setOpenSnackbar(true);
+              setSnackbarMessage(t("campaign.content9"));
+            }
+          }}
+          className="w-[110px] "
+          style={{ textTransform: "none", marginRight: "10px" }}
+          sx={{
+            p: 2,
 
-                  if (copied) {
-                    setOpenSnackbar(true);
-                    setSnackbarMessage(t("campaign.content9"));
-                  }
-                }}
-                className="w-[110px] "
-                style={{ textTransform: "none", marginRight: "10px" }}
-                sx={{
-                  p: 2,
+            height: "50px",
+            bgcolor: "#D24949",
 
-                  height: "50px",
-                  bgcolor: "#D24949",
+            color: "#fff",
+            borderRadius: 3,
+            border: `1px solid #D24949`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          <img src="/supporters/share_white.svg" className="mr-2" />
+          <span className="lexend-font">{t("campaign.content10")}</span>
+        </Button>
+      </div>
 
-                  color: "#fff",
-                  borderRadius: 3,
-                  border: `1px solid #D24949`,
-                  "&:hover": {
-                    background: "rgba(210, 73, 73, 1)",
-                    color: "white",
-                    border: `1px solid rgba(210, 73, 73, 1)`,
-                  },
-                }}
-                id="join-the-fun-btn"
-              >
-                <img src="/supporters/share_white.svg" className="mr-2" />
-                <span className="lexend-font">{t("campaign.content10")}</span>
-              </Button>
+      {athlete && campaign && (
+        <>
+          <div className="lexend-font text-black_second mt-8 m-6 md:m-8 flex-col md:flex-row">
+            <div className="flex gap-4   mt-0 items-center">
+              <p className="text-2xl font-bold">
+                {athlete.name}{" "}
+                {athlete.middleName && <> ({athlete.middleName}) </>}
+                {athlete.lastName}{" "}
+              </p>
+
+              <div>
+                <Flag className="w-4 md:w-8 " code={athlete.nationality} />
               </div>
+            </div>
+
+            <p className="text-[#616673] font-medium">
+              {settingUserType(athlete.user_type)}
+            </p>
+
+            <p className="mt-1">{athlete.athleteStatement}</p>
+
+            <p className="mt-1">{howManySupporters} supporters</p>
+
+        <div className="flex justify-start mt-2">
+            <AvatarGroup max={5}  
+            
+            
+            sx={{
+              '& .MuiAvatar-root': {
+                width: { xs: 35, md: 40 },  // Ensuring all avatars have the correct size
+                height: { xs: 35, md: 40 },
+              },
+             
+            }}
+
+            
+            >
+            <Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+            <Avatar sx={{ width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+            <Avatar sx={{ width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+            <Avatar sx={{ width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+            <Avatar sx={{ width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+                 <Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+                 <Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+
+<Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+                 <Avatar sx={{  width: { xs: 30, md: 40 },
+                height: { xs: 30, md: 40 },
+                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
+            </AvatarGroup>
+            </div>
 
 
+          </div>
+        </>
+      )}
 
-
-              <Snackbar
+      <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleSnackbar}
@@ -456,7 +516,6 @@ const ItemCampaign = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-
 
       <FooterClean />
     </>
