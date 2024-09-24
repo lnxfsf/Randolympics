@@ -70,12 +70,14 @@ const DetailsNewsBlock = () => {
   return (
     <>
       <Navbar />
+
+
       <div className="relative ">
         <div className="mt-32">
 
 
           <div className=" flex justify-center items-center">
-            <div className="w-[70%]">
+            <div className="w-[90%] sm:w-[90%] md:w-[70%]">
               <IconButton
                 className="back-icon"
                 aria-label="back"
@@ -95,19 +97,30 @@ const DetailsNewsBlock = () => {
             <>
               <br />
 
-             
+              
                 <img
                   /*  className="w-full h-64" */
-                  /*  ml-auto mr-auto */
-                  className="absolute top-10 left-0 right-0 h-80 object-cover z-10 rounded-lg ml-auto mr-auto "
-                  style={{ objectFit: "contain", boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' }}
+                  /*  ml-auto mr-auto 
+                  
+                  object-cover
+                  
+                  */
+                  className="absolute top-10 left-0 right-0 h-40 sm:h-60 md:h-80 object-contain  z-10 rounded-lg ml-auto mr-auto  "
+                 
+                  /* style={{ objectFit: "contain", boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' }} */
+
+                  style={{boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' }}
+
+                  
                   src={getImageUrl(post.cover_image)}
-                />
+                /> 
              
 
               <div className=" flex justify-center items-center ">
-                <div className="bg-body_news m-16 mt-24 w-[70%] rounded-lg p-8 pt-0">
-                  <div className="flex justify-between pt-64">
+                <div className="bg-body_news m-16 mt-24 w-[90%] md:w-[70%] rounded-lg p-8 pt-0">
+
+                  <div className="flex justify-between pt-20 sm:pt-36 md:pt-64">
+
                     <h1 className=" text-3xl font-semibold w-[80%] ">
                       {post.title}
                     </h1>
@@ -131,7 +144,7 @@ const DetailsNewsBlock = () => {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                 </div>
-              </div>
+              </div> 
             </>
           )}
 

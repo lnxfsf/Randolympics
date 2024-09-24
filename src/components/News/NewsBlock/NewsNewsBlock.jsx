@@ -82,7 +82,9 @@ const NewsNewsBlock = () => {
 
       {/* top stories header and read more */}
       <div className="flex justify-between items-center w-[90%] md:w-[70%] mt-8">
-        <p className="text-2xl md:text-3xl text-red_second font-semibold">Top stories</p>
+        <p className="text-2xl md:text-3xl text-red_second font-semibold">
+          Top stories
+        </p>
 
         <div
           className="flex gap-4 cursor-pointer select-none"
@@ -100,6 +102,12 @@ const NewsNewsBlock = () => {
         <ItemNewsNewsBlock number={1} />
         <ItemNewsNewsBlock number={2} />
         <ItemNewsNewsBlock number={3} />
+      </div>
+
+      <div className="flex w-[90%] sm:w-[70%] lg:justify-between flex-col items-center  lg:flex-row ">
+        <ItemNewsNewsBlock number={4} />
+        <ItemNewsNewsBlock number={5} />
+        <ItemNewsNewsBlock number={6} />
       </div>
     </>
   );

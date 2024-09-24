@@ -28,7 +28,7 @@ const EconomicsNewsBlock = () => {
         <div className="flex gap-4 cursor-pointer select-none mt-6 mb-16" onClick={() => { navigate("/news/economics") }}>
 
 
-            <p className="text-red_first text-lg font-medium">Read more</p>
+            <p className="text-red_first text-lg font-medium ">Read more</p>
             <img className="w-4 " src="news/arrow_down.svg" />
 
         </div>
