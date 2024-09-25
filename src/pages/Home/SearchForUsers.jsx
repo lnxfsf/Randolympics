@@ -30,7 +30,8 @@ const SearchForUsers = () => {
     const [maxPages, setMaxPages] = useState(0);
 
     const [usersPage, setUsersPage] = useState(1);
-
+    
+    const [limit, setLimit] = useState(3);
 
     const { t } = useTranslation();
 
@@ -39,13 +40,15 @@ const SearchForUsers = () => {
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
 
+    setUsersPage(1);
     updateLatestData();
+
   };
 
 
 
   useEffect(()=> {
-    updateLatestData();
+    
 
     /* if (maxPages === 0) {
         getMaxPages();
@@ -76,7 +79,7 @@ const SearchForUsers = () => {
         }
       );
 
-      setMaxPages(Math.ceil(response.data.length / 3));
+      setMaxPages(Math.ceil(response.data.length / limit));
       setResultsAmount(response.data.length);
 	  
     } catch (error) {
@@ -94,10 +97,8 @@ const SearchForUsers = () => {
 		  
             limit: 3,
 			
-            offset: (usersPage - 1) * 3,
+            offset: (usersPage - 1) * limit,
 
-           
-			
             searchFirstNameText: searchFirstNameText,
 			
            
@@ -120,6 +121,7 @@ const SearchForUsers = () => {
   
   const handlePaginationChange = (event, value) => {
     setUsersPage(value);
+    updateLatestData();
   };
 
 
@@ -127,7 +129,7 @@ const SearchForUsers = () => {
     <>
       <div className="min-h-screen">
        
-        <div className="p-6 md:p-24   flex justify-center items-center flex-col gap-4">
+        <div className="p-6 md:pl-24 md:pr-24 pt-6 pb-6   flex justify-center items-center flex-col gap-4">
 
         <p className="text-xl md:text-3xl self-start  lexend-font text-black_second font-bold">
             {t("campaign.content64")}
@@ -155,14 +157,7 @@ const SearchForUsers = () => {
           
       <div className="flex w-full ">
         <Button
-         /*  onClick={() => {
-            const copied = navigator.clipboard.writeText(window.location.href);
-
-            if (copied) {
-              setOpenSnackbar(true);
-              setSnackbarMessage(t("campaign.content9"));
-            }
-          }} */
+        onClick={()=> {setUsersPage(1); updateLatestData(); }}
           className="w-full "
           style={{ textTransform: "none" }}
           sx={{
@@ -191,7 +186,7 @@ const SearchForUsers = () => {
 
         </div>
 
-        {resultsAmount > 0 && (
+        {resultsAmount > 0 && results && (
         <>
           <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
             {resultsAmount} results
