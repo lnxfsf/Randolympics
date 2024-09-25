@@ -6857,6 +6857,48 @@ const listAllCampaigns = async (req, res) => {
 
 
 
+const listAllUsers = async (req, res) => {
+
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+  const searchFirstNameText = req.query.searchFirstNameText;
+
+
+
+
+  try {
+
+
+    const allUsers = await User.findAll({
+
+
+      where: {
+        name: {
+          [Op.like]: `%${searchFirstNameText}%`,
+        },
+      },
+
+
+      order: [["name", "ASC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+
+    res.json(allUsers);
+
+    //  return res.status(200).json({ oneCampaign, thatAthlete });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+
+
+
+};
+
+
 
 const informOtherSupporters = async (req,res) => {
 
@@ -6974,6 +7016,7 @@ module.exports = {
   lastTransactionsSupportersCampaign,
 
   listAllCampaigns,
+  listAllUsers,
 
   informOtherSupporters,
   firstSupportersCampaign,
