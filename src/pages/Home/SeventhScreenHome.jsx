@@ -562,6 +562,7 @@ const SeventhScreenHome = () => {
 
           <div className="">
             <Collapse in={expanded} timeout="auto" unmountOnExit>
+            
               <div className=" rounded-b-lg p-4 text-black_second lexend-font ">
                 <div className="mt-4 mb-4">
                   <p className="text-2xl font-bold">Global President</p>
@@ -625,8 +626,12 @@ const SeventhScreenHome = () => {
                   </p>
                 </div>
               </div>
+
+
             </Collapse>
           </div>
+
+          
         </div>
       </div>
     </>

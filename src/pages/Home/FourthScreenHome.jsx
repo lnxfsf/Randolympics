@@ -2,12 +2,25 @@ import "../../styles/home.scoped.scss";
 
 import { useTranslation } from "react-i18next";
 
+
+
+
+
 const FourthScreenHome = () => {
   const { t } = useTranslation();
+
+
+
 
   return (
     <>
       <div className="flex flex-col min-h-screen fourth_screen text-black_second lexend-font  p-8 md:p-16 justify-start">
+        
+    
+
+
+         
+        
         <div>
           <p className="text-3xl md:text-4xl font-bold mb-4">
             {t("home.economics.title1")}
@@ -119,6 +132,8 @@ const FourthScreenHome = () => {
             </div>
           </div>
         </div>
+              
+
       </div>
     </>
   );

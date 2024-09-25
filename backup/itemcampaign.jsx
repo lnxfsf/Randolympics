@@ -114,9 +114,14 @@
 
               <div className="flex justify-center items-center flex-col  ">
                 <p className="text-[#fff]">
+
+
                   <span className="font-semibold">Crypto:</span>{" "}
                   {athlete.cryptoaddress ? athlete.cryptoaddress : "0"}{" "}
                   {athlete.cryptoaddress_type}
+               
+               
+               
                 </p>
               </div>
             </div>

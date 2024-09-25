@@ -21,7 +21,7 @@ const FifthScreenHome = () => {
       <div className="flex w-full lexend-font text-[#fff] ">
        
       <div className="hidden  lg:basis-1/3 xl:basis-1/3 m-12 justify-center items-center lg:block 2xl:m-16  container_first_screen min-h-screen">
-          <img src="/home/beliefs.jpg" className="image_first_screen rounded-xl" />
+          <img src="/home/golf.png" className="image_first_screen rounded-xl" />
         </div>
        
        

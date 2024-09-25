@@ -39,8 +39,32 @@ const TRACKING_ID = GTAG_ID;
 
 ReactGA.initialize(TRACKING_ID);
 
+import { Collapse } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { SearchForUsers } from "./Home/SearchForUsers";
+
+// ? expand more, arrow icon transformation
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "5px",
+
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+// ? expand more
+
 const Home = () => {
   const { t } = useTranslation();
+  const [expanded, setExpanded] = useState(false);
+
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
@@ -67,9 +91,50 @@ const Home = () => {
 
       <FirstScreenHome />
       <FifthScreenHome />
+      <SeventhScreenHome />
 
       {/* 
       <SecondScreenHome /> */}
+
+      <ThirdScreenHome />
+
+      <div
+        className={`flex  items-center w-full bg-black text-white mt-4 ${
+          expanded ? "rounded-t-lg" : "rounded-lg"
+        }   pl-2 pr-2`}
+      >
+        <p
+          expand={expanded}
+          onClick={() => {
+            setExpanded(!expanded);
+          }}
+          className="cursor-pointer select-none  pl-2 font-semibold text-red_second lexend-font "
+        >
+          Read more about our four types of income
+        </p>
+
+        <ExpandMore
+          expand={expanded}
+          onClick={() => {
+            setExpanded(!expanded);
+          }}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon sx={{ color: "#D24949" }} />
+        </ExpandMore>
+      </div>
+
+      <div className="">
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <FourthScreenHome />
+        </Collapse>
+      </div>
+
+      <SixthScreenHome />
+
+
+      <SearchForUsers />
 
       {/* Our Competitions */}
       <div className="flex justify-center items-center flex-col lexend-font text-black_second">
@@ -82,29 +147,14 @@ const Home = () => {
       </div>
 
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
-                <p className="text-4xl font-semibold  text-red_second ">News</p>
-             
-                <NewsNewsBlock />
+        <p className="text-4xl font-semibold  text-red_second ">News</p>
 
-            </div>
+        <NewsNewsBlock />
+      </div>
 
-
-      <ThirdScreenHome />
-      <FourthScreenHome /> 
-
-     
-      
-
-        <SeventhScreenHome />
-      <SixthScreenHome />
-
-
-
-      <FAQ /> 
+      <FAQ />
 
       <ContactUsForm />
-   
-
 
       <FooterClean />
     </>
