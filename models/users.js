@@ -273,7 +273,7 @@ module.exports = function (sequelize, DataTypes) {
 
 
     athleteStatement: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT('medium'),
     },
 
 

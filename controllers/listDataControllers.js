@@ -6779,13 +6779,6 @@ const listAllCampaigns = async (req, res) => {
   const tw_link = req.query.tw_link;
 
 
-  console.log("----------listAllCampaigns----------");
-  console.log(filterGender);
-
-  console.log(filterNationality_selected);
-  console.log(searchFirstNameText);
-  console.log(searchFamilyNameText);
-
   try {
     const allCampaigns = await Campaign.findAll({
       /*  where: {
