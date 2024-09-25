@@ -127,7 +127,7 @@ const SearchForUsers = () => {
 
   return (
     <>
-      <div className="">
+      <div >
        
         <div className="p-6 md:pl-24 md:pr-24 pt-6 pb-6   flex justify-center items-center flex-col gap-4">
 

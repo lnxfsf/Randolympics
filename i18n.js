@@ -36,6 +36,7 @@ i18n
     fr: { translation: frTranslations },
   }, */
  /*  lng: "en", */
+  lng: "en",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
