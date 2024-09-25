@@ -26,7 +26,7 @@ import { Button } from "@mui/material";
 import { Navbar } from "../Navbar";
 import { FooterClean } from "../FooterClean";
 
-import { Avatar , AvatarGroup} from "@mui/material";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 
@@ -452,49 +452,122 @@ const ItemCampaign = () => {
 
             <p className="mt-1">{howManySupporters} supporters</p>
 
-        <div className="flex justify-start mt-2">
-            <AvatarGroup max={5}  
-            
-            
-            sx={{
-              '& .MuiAvatar-root': {
-                width: { xs: 35, md: 40 },  // Ensuring all avatars have the correct size
-                height: { xs: 35, md: 40 },
-              },
-             
-            }}
+            <div className="flex justify-start mt-2">
+              <AvatarGroup
+                max={5}
+                sx={{
+                  "& .MuiAvatar-root": {
+                    width: { xs: 35, md: 40 }, // Ensuring all avatars have the correct size
+                    height: { xs: 35, md: 40 },
+                  },
+                }}
+              >
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
 
-            
-            >
-            <Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-            <Avatar sx={{ width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-            <Avatar sx={{ width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-            <Avatar sx={{ width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-            <Avatar sx={{ width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 }, }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-                <Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-                 <Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-                 <Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-
-<Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-                 <Avatar sx={{  width: { xs: 30, md: 40 },
-                height: { xs: 30, md: 40 },
-                 }}>{athlete.name.charAt(0).toUpperCase()}</Avatar>
-            </AvatarGroup>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <Avatar
+                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
+                >
+                  {athlete.name.charAt(0).toUpperCase()}
+                </Avatar>
+              </AvatarGroup>
             </div>
+
+
+
+          </div>
+
+          <div className="lexend-font text-black_second mt-8 m-2 md:m-8 flex-col  rounded-2xl p-6 md:p-8" 
+        
+          style={{ boxShadow: '4px 4px 10px 0px #0000001A'}}
+          >
+                <p className="font-bold text-xl md:text-2xl">About the Campaign</p>
+                
+                <div className="flex justify-between mt-4">
+                  <div>
+                    <p className="text-[#616673]">Money raised</p>
+                    <p className="text-xl font-medium">${athlete.donatedAmount / 100}</p>
+
+                  </div>
+
+                  <div>
+                    <p className="text-[#616673]">Campaign creator</p>
+                    <p className="text-xl font-medium">{campaign.supporterName}</p>
+
+                  </div>
+
+                </div>
+
+
+                <div className="flex mt-4">
+        <Button
+         
+          className="w-full "
+          style={{ textTransform: "none", marginRight: "10px" }}
+          sx={{
+            p: 2,
+
+            height: "50px",
+            bgcolor: "#D24949",
+
+            color: "#fff",
+            borderRadius: 3,
+            border: `1px solid #D24949`,
+            "&:hover": {
+              background: "rgba(210, 73, 73, 1)",
+              color: "white",
+              border: `1px solid rgba(210, 73, 73, 1)`,
+            },
+          }}
+          id="join-the-fun-btn"
+        >
+          
+          <span className="lexend-font">Donate</span>
+        </Button>
+      </div>
 
 
           </div>
