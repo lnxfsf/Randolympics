@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-
+import { QRCode } from "react-qrcode-logo";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Flag from "react-world-flags";
@@ -576,45 +576,108 @@ const ItemCampaign = () => {
                 {athlete.gender === "M" ? "Male" : "Female"}
               </p>
 
-             
-
               {!athlete.isCelebrity && !athlete.isVerified && (
                 <>
+                  <>
+                    <p className="text-lg font-medium mt-2">Birthdate</p>
 
-{athlete.birthdate && (<>
-<p className="text-lg font-medium mt-2">Birthdate</p>
-              <p className="text-lg font-medium text-[#616673]">
-                {formatDate(athlete.birthdate)}
-              </p>
-              </>)}
+                    {athlete.birthdate_private === 1 ? (
+                      <>
+                        <div className="flex gap-2">
+                          <img
+                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                            src="/editprofile/private_lock.svg"
+                          />
+                          <p className="text-lg font-medium text-[#616673] break-all">
+                            Private
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg font-medium text-[#616673]">
+                          {formatDate(athlete.birthdate)}
+                        </p>
+                      </>
+                    )}
+                  </>
 
-                 {userData.email && (<>
-                  <p className="text-lg font-medium mt-2">Email</p>
-                  <p className="text-lg font-medium text-[#616673] break-all">
-                    {athlete.email}
-                  </p>
-                  </>)}
+                  <>
+                    <p className="text-lg font-medium mt-2">Email</p>
 
-                  {userData.phone && (<>
-                  <p className="text-lg font-medium mt-2">Phone Number</p>
-                  <p className="text-lg font-medium text-[#616673] break-all">
-                    {athlete.phone}
-                  </p>
+                    {athlete.email_private === 1 ? (
+                      <>
+                        <div className="flex gap-2">
+                          <img
+                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                            src="/editprofile/private_lock.svg"
+                          />
+                          <p className="text-lg font-medium text-[#616673] break-all">
+                            Private
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg font-medium text-[#616673] break-all">
+                          {athlete.email}
+                        </p>
+                      </>
+                    )}
+                  </>
 
-                  </>)}
+                  <>
+                    <p className="text-lg font-medium mt-2">Phone Number</p>
+                    {athlete.phone_private === 1 ? (
+                      <>
+                        <div className="flex gap-2">
+                          <img
+                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                            src="/editprofile/private_lock.svg"
+                          />
+                          <p className="text-lg font-medium text-[#616673] break-all">
+                            Private
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg font-medium text-[#616673] break-all">
+                          {athlete.phone}
+                        </p>
+                      </>
+                    )}
+                  </>
                 </>
               )}
 
               {athlete.weight !== 0 && (
                 <>
                   <p className="text-lg font-medium mt-2">Weight</p>
-                  <p className="text-lg font-medium text-[#616673]">
-                    {athlete.weight} kg
-                  </p>
+
+                  {athlete.weight_private === 1 ? (
+                    <>
+                      <div className="flex gap-2">
+                        <img
+                          className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                          src="/editprofile/private_lock.svg"
+                        />
+                        <p className="text-lg font-medium text-[#616673] break-all">
+                          Private
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg font-medium text-[#616673] break-all">
+                        {athlete.weight} kg
+                      </p>
+                    </>
+                  )}
                 </>
               )}
 
-              {athlete.isCelebrity && (
+              {athlete.isCelebrity == true  && (
                 <>
                   <p className="text-lg font-medium mt-2">Socials</p>
 
@@ -650,13 +713,26 @@ const ItemCampaign = () => {
                 </>
               )}
 
-              {athlete.cryptoaddress && (
+              {athlete.cryptoaddress && ( 
+              
                 <>
-                  <p className="text-lg font-medium mt-2">Crypto</p>
+                  <p className="text-lg font-medium mt-2">Crypto </p>
 
                   <p className="text-lg font-medium text-[#616673] break-all">
                     {athlete.cryptoaddress} {athlete.cryptoaddress_type}
                   </p>
+
+                  <div className=" mt-4 flex justify-center items-center">
+                    <QRCode
+                      value={athlete.cryptoaddress} 
+                     
+                      bgColor="#F8F8F8"
+                      eyeRadius={100}
+                      qrStyle="dots"
+                    />
+                  </div>
+
+
                 </>
               )}
             </div>
@@ -668,9 +744,6 @@ const ItemCampaign = () => {
               style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
             >
               <p className="font-bold text-xl md:text-2xl">Activity</p>
-
-
-
             </div>
           </div>
         </>

@@ -101,7 +101,7 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             {age === "private" && (
               <img
                 className=" bg-[#EAEAEA] p-1 "
-                src="editprofile/private_lock.svg"
+                src="/editprofile/private_lock.svg"
               />
             )}
             {age}
@@ -113,7 +113,7 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             {email === "private" && (
               <img
                 className=" bg-[#EAEAEA] p-1 "
-                src="editprofile/private_lock.svg"
+                src="/editprofile/private_lock.svg"
               />
             )}
             {email}
@@ -124,7 +124,7 @@ const TeamList = ({ user, index, selectedRole, currentUserType }) => {
             {phone === "private" && (
               <img
                 className=" bg-[#EAEAEA] p-1"
-                src="editprofile/private_lock.svg"
+                src="/editprofile/private_lock.svg"
               />
             )}
             {phone}
