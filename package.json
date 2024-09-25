@@ -57,6 +57,7 @@
     "react-i18next": "^15.0.2",
     "react-moment": "^1.1.3",
     "react-qr-code": "^2.0.15",
+    "react-qrcode-logo": "^3.0.0",
     "react-query": "^3.39.3",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",

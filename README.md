@@ -114,3 +114,7 @@ npm install react-slick
 npm install embla-carousel-react
 
 npm install keen-slider
+
+
+npm install --save react-qrcode-logo
+

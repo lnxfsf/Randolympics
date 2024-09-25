@@ -576,22 +576,32 @@ const ItemCampaign = () => {
                 {athlete.gender === "M" ? "Male" : "Female"}
               </p>
 
-              <p className="text-lg font-medium mt-2">Birthdate</p>
-              <p className="text-lg font-medium text-[#616673]">
-                {formatDate(athlete.birthdate)}
-              </p>
+             
 
               {!athlete.isCelebrity && !athlete.isVerified && (
                 <>
+
+{athlete.birthdate && (<>
+<p className="text-lg font-medium mt-2">Birthdate</p>
+              <p className="text-lg font-medium text-[#616673]">
+                {formatDate(athlete.birthdate)}
+              </p>
+              </>)}
+
+                 {userData.email && (<>
                   <p className="text-lg font-medium mt-2">Email</p>
-                  <p className="text-lg font-medium text-[#616673]">
+                  <p className="text-lg font-medium text-[#616673] break-all">
                     {athlete.email}
                   </p>
+                  </>)}
 
+                  {userData.phone && (<>
                   <p className="text-lg font-medium mt-2">Phone Number</p>
-                  <p className="text-lg font-medium text-[#616673]">
+                  <p className="text-lg font-medium text-[#616673] break-all">
                     {athlete.phone}
                   </p>
+
+                  </>)}
                 </>
               )}
 
@@ -644,7 +654,7 @@ const ItemCampaign = () => {
                 <>
                   <p className="text-lg font-medium mt-2">Crypto</p>
 
-                  <p className="text-lg font-medium text-[#616673]">
+                  <p className="text-lg font-medium text-[#616673] break-all">
                     {athlete.cryptoaddress} {athlete.cryptoaddress_type}
                   </p>
                 </>
@@ -659,7 +669,7 @@ const ItemCampaign = () => {
             >
               <p className="font-bold text-xl md:text-2xl">Activity</p>
 
-              
+
 
             </div>
           </div>

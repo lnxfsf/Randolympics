@@ -35,6 +35,7 @@ import { FAQPage } from "./pages/FAQPage";
 import { AboutUs } from "./pages/AboutUs";
 import { ContactUs } from "./pages/ContactUs";
 import { Competitions } from "./pages/Competitions";
+import { UserProfilePublicView } from "./components/Home/UserProfilePublicView";
 
 let GTAG_ID =
   import.meta.env.VITE_GTAG_ID ||
@@ -124,6 +125,8 @@ const App = () => {
         <Route path="/campaign" element={<Campaign /> } />
         <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
 
+
+        <Route path="/user/:userId" element={<UserProfilePublicView /> } />
 
 
 
