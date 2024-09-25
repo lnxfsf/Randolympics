@@ -76,7 +76,7 @@ const UserProfilePublicView = () => {
           </ Avatar>
 
           <div className="lexend-font text-black_second">
-            <p className="text-end text-2xl md:text-3xl  font-bold" >{userData.name}</p>
+            <p className="text-end text-2xl md:text-3xl  font-bold" >{userData.name} {userData.middleName && (<>({userData.middleName})</>)} {userData.lastName}</p>
             <p className="text-end font-medium">{settingUserType(userData.user_type)}</p>
           </div>
           </div>
