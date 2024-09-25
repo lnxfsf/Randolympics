@@ -131,9 +131,7 @@ const SearchForUsers = () => {
        
         <div className="p-6 md:pl-24 md:pr-24 pt-6 pb-6   flex justify-center items-center flex-col gap-4">
 
-        <p className="text-xl md:text-3xl self-start  lexend-font text-black_second font-bold">
-            {t("campaign.content64")}
-          </p>
+        <p className="text-xl md:text-3xl self-start  lexend-font text-black_second font-bold">{t("campaign.content64")}</p>
 
           <div className="w-full  ">
             <SearchBar
