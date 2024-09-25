@@ -168,7 +168,7 @@ const SearchForUsers = () => {
                     key={index}
                     /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
 
-                    onClick={() => navigate(`/users/${item.userId}`)}
+                    onClick={() => navigate(`/profile/${item.userId}`)}
 
                     className="p-4 w-[95%] h-20   cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
                   >

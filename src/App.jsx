@@ -126,7 +126,7 @@ const App = () => {
         <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
 
 
-        <Route path="/users/:userId" element={<UserProfilePublicView /> } />
+        <Route path="/profile/:userId" element={<UserProfilePublicView /> } />
 
 
 
