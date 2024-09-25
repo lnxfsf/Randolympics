@@ -515,62 +515,83 @@ const ItemCampaign = () => {
                 </Avatar>
               </AvatarGroup>
             </div>
-
-
-
           </div>
 
-          <div className="lexend-font text-black_second mt-8 m-2 md:m-8 flex-col  rounded-2xl p-6 md:p-8" 
-        
-          style={{ boxShadow: '4px 4px 10px 0px #0000001A'}}
+
+        <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
+
+          <div
+            className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full h-54 md:h-56"
+            style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
           >
-                <p className="font-bold text-xl md:text-2xl">About the Campaign</p>
-                
-                <div className="flex justify-between mt-4">
-                  <div>
-                    <p className="text-[#616673]">Money raised</p>
-                    <p className="text-xl font-medium">${athlete.donatedAmount / 100}</p>
+            <p className="font-bold text-xl md:text-2xl">About the Campaign</p>
 
-                  </div>
+            <div className="flex justify-between mt-4">
+              <div>
+                <p className="text-[#616673]">Money raised</p>
+                <p className="text-xl font-medium">
+                  ${athlete.donatedAmount / 100}
+                </p>
+              </div>
 
-                  <div>
-                    <p className="text-[#616673]">Campaign creator</p>
-                    <p className="text-xl font-medium">{campaign.supporterName}</p>
+              <div>
+                <p className="text-[#616673]">Campaign creator</p>
+                <p className="text-xl font-medium">{campaign.supporterName}</p>
+              </div>
+            </div>
 
-                  </div>
+            <div className="flex mt-4">
+              <Button
+                className="w-full "
+                style={{ textTransform: "none", marginRight: "10px" }}
+                sx={{
+                  p: 2,
 
-                </div>
+                  height: "50px",
+                  bgcolor: "#D24949",
 
-
-                <div className="flex mt-4">
-        <Button
-         
-          className="w-full "
-          style={{ textTransform: "none", marginRight: "10px" }}
-          sx={{
-            p: 2,
-
-            height: "50px",
-            bgcolor: "#D24949",
-
-            color: "#fff",
-            borderRadius: 3,
-            border: `1px solid #D24949`,
-            "&:hover": {
-              background: "rgba(210, 73, 73, 1)",
-              color: "white",
-              border: `1px solid rgba(210, 73, 73, 1)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          
-          <span className="lexend-font">Donate</span>
-        </Button>
-      </div>
-
-
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <span className="lexend-font">Donate</span>
+              </Button>
+            </div>
           </div>
+
+          <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full">
+            <p className="font-bold text-xl md:text-2xl">Information</p>
+
+            <p className="text-lg font-medium mt-2">Gender</p>
+            <p className="text-lg font-medium text-[#616673]">
+              {athlete.gender === "M" ? "Male" : "Female"}
+            </p>
+
+            <p className="text-lg font-medium mt-2">Birthdate</p>
+            <p className="text-lg font-medium text-[#616673]">
+              {formatDate(athlete.birthdate)}
+            </p>
+
+            <p className="text-lg font-medium mt-2">Email</p>
+            <p className="text-lg font-medium text-[#616673]">
+              {athlete.email}
+            </p>
+
+            <p className="text-lg font-medium mt-2">Phone Number</p>
+            <p className="text-lg font-medium text-[#616673]">
+              {athlete.phone}
+            </p>
+          </div>
+
+        </div>
+
         </>
       )}
 
