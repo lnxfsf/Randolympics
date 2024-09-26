@@ -283,14 +283,17 @@ const webhookController = async (req, res) => {
 
           // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
 
-          const t6u = await db.sequelize.transaction();
+        //  const t6u = await db.sequelize.transaction();
           /*  lock: true,
           transaction: t6, */
+          // TODO, ali MORAS , da imas lock-in !
+
+          // TODO drugo, je ako nece da radi, na firstSupporter.. to ne mora toliko  "lock", jer on je jedini ionako, i to jedini scenario.. to je samo za to.. ovo ce uvek biti 3rd party.. nije glavni supporter
 
           const oneAthleteU = await User.findOne({
             where: { userId: oneCampaignThirdParty.athleteId },
-            lock: true,
-            transaction: t6u,
+          //  lock: true,
+          //  transaction: t6u,
           });
 
           console.log(" on moze naci oneAthlete");
@@ -302,13 +305,15 @@ const webhookController = async (req, res) => {
             await oneAthleteU.increment(
               "donatedAmount",
               { by: amount },
-              { transaction: t6u }
+              
             ); // add (+) za toliko amount za taj athlete
+           /*  { transaction: t6u } */
+
 
             console.log("da li je nasao athlete !");
-            await t6u.commit();
+           // await t6u.commit();
           } catch (error) {
-            await t6u.rollback();
+           // await t6u.rollback();
             console.log(error.stack);
           }
 
