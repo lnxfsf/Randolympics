@@ -238,100 +238,105 @@ const webhookController = async (req, res) => {
         transaction: t5,
       });
 
-      try {
-        // ovde azurira amount, po discount code koji ima.
-        if (oneCampaignThirdParty.couponDonationCode) {
-          // znaci ako ima neki coupon
-          var amount = await calculateNewAmountWithDiscountCode(
-            amountOriginal,
-            oneCampaignThirdParty.couponDonationCode,
-            oneCampaignThirdParty.countryAthleteIsIn
-          );
-          console.log("novi amount sa discount: " + amount);
-        } else {
-          // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
-          var amount = amountOriginal;
+      if(oneCampaignThirdParty){
+          try {
+            // ovde azurira amount, po discount code koji ima.
+            if (oneCampaignThirdParty.couponDonationCode) {
+              // znaci ako ima neki coupon
+              var amount = await calculateNewAmountWithDiscountCode(
+                amountOriginal,
+                oneCampaignThirdParty.couponDonationCode,
+                oneCampaignThirdParty.countryAthleteIsIn
+              );
+              console.log("novi amount sa discount: " + amount);
+            } else {
+              // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
+              var amount = amountOriginal;
+            }
+          } catch (error) {
+            console.log(error.stack);
+          }
+
+          console.log("paymentIntentId je: " + paymentIntentId);
+          console.log("--------------oneCampaignThirdParty je--------------");
+          console.log(oneCampaignThirdParty);
+
+          // i treba amount da upise za tog supportera, i onda znamo kolko je taj supporter uplatio tacno..
+
+          try {
+            await oneCampaignThirdParty.update(
+              { payment_status: status, amount: amount },
+              { transaction: t5 }
+            ); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
+            await t5.commit();
+          } catch (error) {
+            await t5.rollback();
+            console.log(error.stack);
+          }
+
+          // we update value in that athlete (it's campaign for one athlete..)
+          //  ovde pravi error ti, za konfirmaciju sada ! ,
+
+          // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
+          // ! da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
+          // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
+
+          // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
+
+          const t6u = await db.sequelize.transaction();
+          /*  lock: true,
+          transaction: t6, */
+
+          const oneAthleteU = await User.findOne({
+            where: { userId: oneCampaignThirdParty.athleteId },
+            lock: true,
+            transaction: t6u,
+          });
+
+          console.log(" on moze naci oneAthlete");
+          // console.log(oneAthlete)
+
+          // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
+          try {
+            //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
+            await oneAthleteU.increment(
+              "donatedAmount",
+              { by: amount },
+              { transaction: t6u }
+            ); // add (+) za toliko amount za taj athlete
+
+            console.log("da li je nasao athlete !");
+            await t6u.commit();
+          } catch (error) {
+            await t6u.rollback();
+            console.log(error.stack);
+          }
+
+          // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
+
+          const t7 = await db.sequelize.transaction();
+
+          const oneCampaign = await Campaign.findOne({
+            where: { campaignId: oneCampaignThirdParty.campaignId },
+            lock: true,
+            transaction: t7,
+          });
+
+          // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
+          try {
+            await oneCampaign.update(
+              { payment_status: status },
+              { transaction: t7 }
+            ); // azurira samo taj
+            await t7.commit();
+          } catch (error) {
+            await t7.rollback();
+            console.log(error.stack);
+          }
+
         }
-      } catch (error) {
-        console.log(error.stack);
-      }
+          
 
-      console.log("paymentIntentId je: " + paymentIntentId);
-      console.log("--------------oneCampaignThirdParty je--------------");
-      console.log(oneCampaignThirdParty);
-
-      // i treba amount da upise za tog supportera, i onda znamo kolko je taj supporter uplatio tacno..
-
-      try {
-        await oneCampaignThirdParty.update(
-          { payment_status: status, amount: amount },
-          { transaction: t5 }
-        ); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
-        await t5.commit();
-      } catch (error) {
-        await t5.rollback();
-        console.log(error.stack);
-      }
-
-      // we update value in that athlete (it's campaign for one athlete..)
-      //  ovde pravi error ti, za konfirmaciju sada ! ,
-
-      // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
-      // ! da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
-      // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
-
-      // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
-
-      const t6u = await db.sequelize.transaction();
-      /*  lock: true,
-      transaction: t6, */
-
-      const oneAthleteU = await User.findOne({
-        where: { userId: oneCampaignThirdParty.athleteId },
-        lock: true,
-        transaction: t6u,
-      });
-
-      console.log(" on moze naci oneAthlete");
-      // console.log(oneAthlete)
-
-      // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
-      try {
-        //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
-        await oneAthleteU.increment(
-          "donatedAmount",
-          { by: amount },
-          { transaction: t6u }
-        ); // add (+) za toliko amount za taj athlete
-
-        console.log("da li je nasao athlete !");
-        await t6u.commit();
-      } catch (error) {
-        await t6u.rollback();
-        console.log(error.stack);
-      }
-
-      // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
-
-      const t7 = await db.sequelize.transaction();
-
-      const oneCampaign = await Campaign.findOne({
-        where: { campaignId: oneCampaignThirdParty.campaignId },
-        lock: true,
-        transaction: t7,
-      });
-
-      // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
-      try {
-        await oneCampaign.update(
-          { payment_status: status },
-          { transaction: t7 }
-        ); // azurira samo taj
-        await t7.commit();
-      } catch (error) {
-        await t7.rollback();
-        console.log(error.stack);
-      }
     } else {
       // ovde koristi t2 transaction od prvog !
       // jer nije prazan..
@@ -375,12 +380,11 @@ const webhookController = async (req, res) => {
 
       // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
 
-      const tAthleteZ = await db.sequelize.transaction();
+      //const tAthleteZ = await db.sequelize.transaction();
 
       const oneAthletez = await User.findOne({
         where: { email: oneCampaign.friendEmail },
-        lock: true,
-        transaction: tAthleteZ,
+       
 
       });
 
@@ -393,15 +397,15 @@ const webhookController = async (req, res) => {
       // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
       try {
         // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-        await oneAthletez.increment("donatedAmount", { by: amount }, {transaction: tAthleteZ}); // add (+) za toliko amount za taj athlete
+        await oneAthletez.increment("donatedAmount", { by: amount }); // add (+) za toliko amount za taj athlete
 
-        await tAthleteZ.commit();
+        //await tAthleteZ.commit();
         
         // await t3z.commit();
       } catch (error) {
         //  await t3z.rollback();
-        
-        await tAthleteZ.rollback();
+
+       // await tAthleteZ.rollback();
         console.log(error.stack);
       }
 
