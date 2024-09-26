@@ -61,6 +61,9 @@ const SixthScreenHome = () => {
 
 {/* md:basis-1/2 */}
               <Button
+              onClick={() => {
+                navigate("/register");
+              }}
                 className="self-center w-full "
                 /* w-full md:w-50% */
                 style={{ textTransform: "none" }}
@@ -83,9 +86,7 @@ const SixthScreenHome = () => {
                 <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
                 <span
                   className="lexend-font"
-                  onClick={() => {
-                    navigate("/register");
-                  }}
+                  
                 >
                   {t("home.sixthScreen.btn1")}
                 </span>

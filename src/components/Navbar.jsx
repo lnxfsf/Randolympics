@@ -41,7 +41,7 @@ import AuthContext from "../context/AuthContext";
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
-
+/* 
 const settingUserType = (user_type) => {
   switch (user_type) {
     case "AH":
@@ -80,7 +80,9 @@ const settingUserType = (user_type) => {
     default:
       return "Guest";
   }
-};
+}; */
+
+import {settingUserType} from "../context/user_types";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -144,7 +146,7 @@ const Navbar = () => {
               <MenuIcon />
             </IconButton>
 
-            <Link className="hidden  min-[900px]:flex" to="/">
+            <Link className="hidden  min-[900px]:flex" to="/" href="/">
               <img
                 src="/randolympics_logo.svg"
                 className="w-32 sm:w-44 md:w-52 lg:w-64  ml-4 "
@@ -152,26 +154,26 @@ const Navbar = () => {
             </Link>
 
             <nav className="hidden lg:flex  gap-8 justify-center items-center lexend-font pl-16">
-              <Link to="/about" className="nav_btns">
+              <Link to="/about" href="/about" className="nav_btns">
                 {t("navbar.btn1")}
               </Link>
-              <Link to="/campaign" className="nav_btns">
+              <Link to="/campaign" href="/campaign" className="nav_btns">
                 {t("navbar.btn2")}
               </Link>
 
-              <Link to="/competitions" className="nav_btns">
+              <Link to="/competitions" href="/competitions" className="nav_btns">
                 {t("navbar.btn6")}
               </Link>
 
-              <Link to="/news" className="nav_btns">
+              <Link to="/news"  href="/news" className="nav_btns">
                 {t("navbar.btn3")}
               </Link>
 
-              <Link to="/faq" className="nav_btns">
+              <Link to="/faq" href="/faq"  className="nav_btns">
                 {t("navbar.btn4")}
               </Link>
 
-              <Link to="/contact" className="nav_btns">
+              <Link to="/contact" href="/contact" className="nav_btns">
                 {t("navbar.btn5")}
               </Link>
             </nav>
@@ -457,7 +459,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/campaign" className="nav_btns">
+          <Link to="/campaign"  href="/campaign" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn2")}
             </span>
@@ -465,7 +467,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/competitions" className="nav_btns">
+          <Link to="/competitions" href="/competitions" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn6")}
             </span>
@@ -473,7 +475,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/news" className="nav_btns">
+          <Link to="/news" href="/news" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn3")}
             </span>
@@ -481,7 +483,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/faq" className="nav_btns">
+          <Link to="/faq" href="/faq" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn4")}
             </span>
@@ -489,7 +491,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/contact" className="nav_btns">
+          <Link to="/contact" href="/contact" className="nav_btns">
             <span className="font-bold text-red_second lexend-font">
               {t("navbar.btn5")}
             </span>
@@ -498,6 +500,7 @@ const Navbar = () => {
 
         <ListItem>
           <Button
+            
             onClick={() => {
               navigate("/supporters");
             }}
@@ -527,6 +530,7 @@ const Navbar = () => {
 
         <ListItem>
           <Button
+          
             onClick={() => {
               navigate("/login");
             }}

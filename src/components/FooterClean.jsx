@@ -46,6 +46,7 @@ const FooterClean = () => {
               <p className="cursor-pointer select-none">{t("footer.cookie")}</p>
             </div>
 
+
             <div className="lg:self-end mt-4 ">
               <Select
                 labelId="language-switcher"
@@ -61,8 +62,35 @@ const FooterClean = () => {
                 ))}
               </Select>
             </div>
+
+
           </div>
         </div>
+
+
+
+        <div className="lexend-font text-black_second flex flex-col mt-4">
+          <p className="text-red_second font-bold mb-2 ">Sitemap</p>
+          
+          <a href="/campaign" >Campaigns</a>
+          <a href="/competitions">Competitions</a>
+          <a href="/news">News</a>
+          <a href="/faq">FAQ</a>
+          <a href="/contact">Contact us</a>
+          
+
+          <a href="/supporters">Create campaign for friend/celebrity/yourself</a>
+          <a href="/randomize">Test mock-up randomizer</a>
+          
+
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+
+
+        </div>
+
+
+
       </div>
     </>
   );
