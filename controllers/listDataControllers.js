@@ -6691,7 +6691,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
 
       where: {
         campaignId: campaignId,
-        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
+       /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
       limit: 3,
@@ -6974,7 +6974,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
     const allCommentsSupporters = await Statscampaign.findAll({
       where: {
         campaignId: campaignId,
-        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
+        /* supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
       limit: limitA,
