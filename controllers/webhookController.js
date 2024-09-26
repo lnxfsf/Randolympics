@@ -272,6 +272,9 @@ const webhookController = async (req, res) => {
         transaction: t5,
       });
 
+      try{
+
+     
       // ovde azurira amount, po discount code koji ima.
       if (oneCampaignThirdParty.couponDonationCode) {
         // znaci ako ima neki coupon
@@ -285,6 +288,9 @@ const webhookController = async (req, res) => {
         // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
         var amount = amountOriginal;
       }
+    } catch (error){
+      console.log(error.stack);
+    }
 
       console.log("paymentIntentId je: " + paymentIntentId);
       console.log("--------------oneCampaignThirdParty je--------------");
