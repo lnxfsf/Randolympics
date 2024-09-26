@@ -337,7 +337,7 @@ const webhookController = async (req, res) => {
         } else {
 
           await t5.rollback();
-          console.log("you need to release it as well ! ")
+          console.log("you need to release it as well, if there's not proper payment_id ! ")
           console.log("couldn't find proper payment_id, just send back to stripe as confirmed.. ");
         }
 
