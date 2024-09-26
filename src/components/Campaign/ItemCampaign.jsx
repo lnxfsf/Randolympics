@@ -53,8 +53,7 @@ const inputLabelPropsTextField = {
 };
 
 const sxTextField = {
-  m: 1,
-  width: "240px",
+  width: "w-full",
 
   /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
    */
@@ -120,6 +119,8 @@ const ItemCampaign = () => {
   const [textAthleteStatus, setTextAthleteStatus] = useState(
     "Has not logged in yet"
   );
+
+  const [wantToDonate, setWantToDonate] = useState(false);
 
   const [colorStatusGoing, setColorStatusGoing] = useState(
     "rgba(128, 128, 128, 0.75)"
@@ -518,8 +519,9 @@ const ItemCampaign = () => {
           </div>
 
           <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
+            {/* h-54 md:h-56 */}
             <div
-              className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full h-54 md:h-56"
+              className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
               style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
             >
               <p className="font-bold text-xl md:text-2xl">
@@ -544,6 +546,9 @@ const ItemCampaign = () => {
 
               <div className="flex mt-4">
                 <Button
+                  onClick={() => {
+                    setWantToDonate((prev) => !prev);
+                  }}
                   className="w-full "
                   style={{ textTransform: "none", marginRight: "10px" }}
                   sx={{
@@ -566,6 +571,81 @@ const ItemCampaign = () => {
                   <span className="lexend-font">Donate</span>
                 </Button>
               </div>
+
+              {wantToDonate && (
+                <>
+                  <div className="flex flex-col ">
+                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
+                      Supporter name
+                    </p>
+                    <TextField
+                      value={supporterName}
+                      onChange={(event) => {
+                        setSupporterName(event.target.value);
+                      }}
+                      placeholder="John"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+
+                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
+                      Supporter email
+                    </p>
+                    <TextField
+                      value={supporterEmail}
+                      onChange={(event) => {
+                        setSupporterEmail(event.target.value);
+                      }}
+                      placeholder="example@gmail.com"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+
+                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
+                      Supporter comment
+                    </p>
+                    <TextField
+                      value={supporterComment}
+                      onChange={(event) => {
+                        setSupporterComment(event.target.value);
+                      }}
+                      placeholder="Good luck 😉"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+
+                    <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
+                      <ThemeProvider theme={theme}>
+                        <QueryProvider>
+                          <DonationFormItemCampaign
+                            amount={amount}
+                            setAmount={setAmount}
+                            campaignId={campaignId}
+                            supporterName={supporterName}
+                            supporterEmail={supporterEmail}
+                            supporterComment={supporterComment}
+                            discountCode={discountCode}
+                            countryAthleteIsIn={countryAthleteIsIn}
+                            separateDonationThruPage={true}
+                          />
+                        </QueryProvider>
+                      </ThemeProvider>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full">
@@ -677,7 +757,7 @@ const ItemCampaign = () => {
                 </>
               )}
 
-              {athlete.isCelebrity == true  && (
+              {athlete.isCelebrity == true && (
                 <>
                   <p className="text-lg font-medium mt-2">Socials</p>
 
@@ -713,8 +793,7 @@ const ItemCampaign = () => {
                 </>
               )}
 
-              {athlete.cryptoaddress && ( 
-              
+              {athlete.cryptoaddress && (
                 <>
                   <p className="text-lg font-medium mt-2">Crypto </p>
 
@@ -724,15 +803,12 @@ const ItemCampaign = () => {
 
                   <div className=" mt-4 flex justify-center items-center">
                     <QRCode
-                      value={athlete.cryptoaddress} 
-                     
+                      value={athlete.cryptoaddress}
                       bgColor="#F8F8F8"
                       eyeRadius={100}
                       qrStyle="dots"
                     />
                   </div>
-
-
                 </>
               )}
             </div>
@@ -744,6 +820,38 @@ const ItemCampaign = () => {
               style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
             >
               <p className="font-bold text-xl md:text-2xl">Activity</p>
+
+              <div className="flex w-full flex-col mt-8">
+                {lastTransactionsSupporters &&
+                  lastTransactionsSupporters.map((item, index) => (
+                    <>
+                      <div
+                        className="flex w-full flex-col justify-start items-start p-0 pl-4 pr-4  "
+                        style={{ marginTop: "-8px" }}
+                      >
+                        <div className="flex w-full border-l-2  items-center m-1 mb-0 pb-0 p-2 justify-between  ">
+                          <p key={index} className=" pl-2 ">
+                            <span className="font-semibold">
+                              Supporter #{index + 1}:
+                            </span>{" "}
+                            {item.supporterName}
+                          </p>
+
+                          <div className="flex ">
+                            <p>
+                              <span className="font-semibold"></span> $
+                              {item.amount / 100}
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="text-sm m-1 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">
+                          {item.supporterComment}
+                        </p>
+                      </div>
+                    </>
+                  ))}
+              </div>
             </div>
           </div>
         </>
