@@ -312,14 +312,14 @@ const webhookController = async (req, res) => {
           
            // Add the amount to the current value
            // this way, we can update it... as it seemd .increment doesn't support transactions that well.
-          await oneAthleteU.update({
+        /*   await oneAthleteU.update({
               donatedAmount: db.sequelize.literal(`donatedAmount + ${amount}`), }, {transaction: t6u,}
-          );
+          ); */
 
 
           await oneAthleteU.update({
             donatedAmount: 3, });
-
+ 
           
 
           /*  { transaction: t6u } */
