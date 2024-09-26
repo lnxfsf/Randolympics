@@ -653,6 +653,17 @@ const Supporters = () => {
           supporterComment: supporterComment,
         }
       );
+
+      if (response.status === 200) {
+
+       
+        setSnackbarMessage("Donated");
+        setOpenSnackbarSuccess(true);
+
+
+      }
+
+
     } catch (e) {
       console.log(e.stack);
     }

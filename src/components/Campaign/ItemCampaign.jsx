@@ -31,6 +31,12 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { settingUserType } from "../../context/user_types";
+import { DonatePart } from "./DonatePart";
+import { InformationPart } from "./InformationPart";
+import { ActivityPart } from "./ActivityPart";
+import { HeaderPart } from "./HeaderPart";
+import { SubHeaderPart } from "./SubHeaderPart";
+import { ViewFullActivity } from "./ViewFullActivity";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -39,37 +45,6 @@ let BACKEND_SERVER_BASE_URL =
 let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
-
-const inputLabelPropsTextField = {
-  sx: {
-    // Styles when the input is not focused and has no value
-    top: "0px", // Adjust this to move the label closer to the input
-    left: "0px", // Adjust to control horizontal position
-    "&.MuiInputLabel-shrink": {
-      top: "0px", // Position when the label shrinks (focus or input has value)
-      left: "0px",
-    },
-  },
-};
-
-const sxTextField = {
-  width: "w-full",
-
-  /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
-   */
-  "& .MuiOutlinedInput-root": {
-    borderRadius: 3,
-    backgroundColor: "white",
-  },
-  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: "red",
-  },
-  "& .MuiInputLabel-root": {
-    "&.Mui-focused": {
-      color: "black",
-    },
-  },
-};
 
 function getImageUrl(coverImage) {
   return coverImage
@@ -126,7 +101,6 @@ const ItemCampaign = () => {
     "rgba(128, 128, 128, 0.75)"
   );
 
-  const [amount, setAmount] = useState(10);
   const [supporterName, setSupporterName] = useState("");
   const [supporterEmail, setSupporterEmail] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
@@ -161,7 +135,8 @@ const ItemCampaign = () => {
       );
 
       if (response.status === 200) {
-        alert("donated");
+        setSnackbarMessage("Donated");
+        setOpenSnackbar(true);
       }
     } catch (e) {
       console.log(e.stack);
@@ -274,7 +249,7 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last coments");
+      console.log("saljes ti last transaction suporters");
       console.log(response.data);
 
       setLastTransactionsSupporters(response.data);
@@ -340,520 +315,85 @@ const ItemCampaign = () => {
     setOpenSnackbar(false);
   };
 
+  const [viewFullActivity, setViewFullActivity] = useState(false);
+
   return (
     <>
       <Navbar />
 
-      <div className="relative ">
-        {/* <div className="bg-[#F5F5F5] h-32 sm:h-40 md:h-52"></div> */}
-
-        {/* 
-        <div className="image_editProfile">
-
-          <img
-        
-            className="image_editProfile absolute top-10 left-0 right-0 h-40 sm:h-60 md:h-80 object-contain  z-10 rounded-full ml-4 mr-auto  "
-            /*  src={getImageUrl(post.cover_image)} 
-            style={{ position: "relative", zIndex: "-1" }}
-
-            src="/supporters/profile_placeholder.jpeg"
-          />
-
-
-
-        </div> */}
-        {athlete && (
-          <>
-            <Avatar
-              sx={{
-                width: { xs: 80, md: 120 },
-                height: { xs: 80, md: 120 },
-              }}
-              /*  src="/supporters/profile_placeholder.jpeg"
-               */
-
-              src={
-                BACKEND_SERVER_BASE_URL +
-                "/imageUpload/profile_pics/" +
-                athlete.picture
-              }
-              className=" absolute top-10 left-5 right-0 ml-4 md:ml-8 mr-auto  "
-            >
-              {athlete.name.charAt(0).toUpperCase()}
-            </Avatar>
-
-            {/*   {athlete && (<>
-          <p>
-            {athlete.name}
-          </p>
-          */}
-
-            <img /* src="/supporters/likely_going.svg"  */
-              src={statusImage(athlete.athleteStatus)}
-              className=" absolute top-7 min-[900px]:top-6 left-[0.45rem] min-[900px]:left-1 right-0 ml-4 md:ml-8 mr-auto w-[6.5rem] min-[900px]:w-[9.5rem] "
-            />
-          </>
-        )}
-      </div>
-
-      <div className="flex justify-end">
-        <Button
-          onClick={() => {
-            const copied = navigator.clipboard.writeText(window.location.href);
-
-            if (copied) {
-              setOpenSnackbar(true);
-              setSnackbarMessage(t("campaign.content9"));
-            }
-          }}
-          className="w-[110px] "
-          style={{ textTransform: "none", marginRight: "10px" }}
-          sx={{
-            p: 2,
-
-            height: "50px",
-            bgcolor: "#D24949",
-
-            color: "#fff",
-            borderRadius: 3,
-            border: `1px solid #D24949`,
-            "&:hover": {
-              background: "rgba(210, 73, 73, 1)",
-              color: "white",
-              border: `1px solid rgba(210, 73, 73, 1)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <img src="/supporters/share_white.svg" className="mr-2" />
-          <span className="lexend-font">{t("campaign.content10")}</span>
-        </Button>
-      </div>
+      {!viewFullActivity ? (
+        <HeaderPart
+          athlete={athlete}
+          statusImage={statusImage}
+          setOpenSnackbar={setOpenSnackbar}
+          setSnackbarMessage={setSnackbarMessage}
+        />
+      ) : (
+        <></>
+      )}
 
       {athlete && campaign && (
         <>
-          <div className="lexend-font text-black_second mt-8 m-6 md:m-8 flex-col md:flex-row">
-            <div className="flex gap-4   mt-0 items-center">
-              <p className="text-2xl font-bold">
-                {athlete.name}{" "}
-                {athlete.middleName && <> ({athlete.middleName}) </>}
-                {athlete.lastName}{" "}
-              </p>
+          {!viewFullActivity ? (
+            <>
+              <SubHeaderPart
+                athlete={athlete}
+                howManySupporters={howManySupporters}
+              />
 
-              <div>
-                <Flag className="w-4 md:w-8 " code={athlete.nationality} />
-              </div>
-            </div>
+              <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
+                <DonatePart
+                  wantToDonate={wantToDonate}
+                  setWantToDonate={setWantToDonate}
+                  campaign={campaign}
+                  athlete={athlete}
+                  supporterName={supporterName}
+                  setSupporterName={setSupporterName}
+                  supporterEmail={supporterEmail}
+                  setSupporterEmail={setSupporterEmail}
+                  supporterComment={supporterComment}
+                  setSupporterComment={setSupporterComment}
+                  campaignId={campaignId}
+                  discountCode={discountCode}
+                  countryAthleteIsIn={countryAthleteIsIn}
+                  setDiscountCode={setDiscountCode}
+                  donateWithCouponOnly={donateWithCouponOnly}
+                  viewFullActivity={viewFullActivity}
+                  howManySupporters={howManySupporters}
+                />
 
-            <p className="text-[#616673] font-medium">
-              {settingUserType(athlete.user_type)}
-            </p>
-
-            <p className="mt-1">{athlete.athleteStatement}</p>
-
-            <p className="mt-1">{howManySupporters} supporters</p>
-
-            <div className="flex justify-start mt-2">
-              <AvatarGroup
-                max={5}
-                sx={{
-                  "& .MuiAvatar-root": {
-                    width: { xs: 35, md: 40 }, // Ensuring all avatars have the correct size
-                    height: { xs: 35, md: 40 },
-                  },
-                }}
-              >
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Avatar
-                  sx={{ width: { xs: 30, md: 40 }, height: { xs: 30, md: 40 } }}
-                >
-                  {athlete.name.charAt(0).toUpperCase()}
-                </Avatar>
-              </AvatarGroup>
-            </div>
-          </div>
-
-          <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
-            {/* h-54 md:h-56 */}
-            <div
-              className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
-              style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
-            >
-              <p className="font-bold text-xl md:text-2xl">
-                About the Campaign
-              </p>
-
-              <div className="flex justify-between mt-4">
-                <div>
-                  <p className="text-[#616673]">Money raised</p>
-                  <p className="text-xl font-medium">
-                    ${athlete.donatedAmount / 100}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-[#616673]">Campaign creator</p>
-                  <p className="text-xl font-medium">
-                    {campaign.supporterName}
-                  </p>
-                </div>
+                <InformationPart athlete={athlete} formatDate={formatDate} />
               </div>
 
-              <div className="flex mt-4">
-                <Button
-                  onClick={() => {
-                    setWantToDonate((prev) => !prev);
-                  }}
-                  className="w-full "
-                  style={{ textTransform: "none", marginRight: "10px" }}
-                  sx={{
-                    p: 2,
-
-                    height: "50px",
-                    bgcolor: "#D24949",
-
-                    color: "#fff",
-                    borderRadius: 3,
-                    border: `1px solid #D24949`,
-                    "&:hover": {
-                      background: "rgba(210, 73, 73, 1)",
-                      color: "white",
-                      border: `1px solid rgba(210, 73, 73, 1)`,
-                    },
-                  }}
-                  id="join-the-fun-btn"
-                >
-                  <span className="lexend-font">Donate</span>
-                </Button>
-              </div>
-
-              {wantToDonate && (
-                <>
-                  <div className="flex flex-col ">
-                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                      Supporter name
-                    </p>
-                    <TextField
-                      value={supporterName}
-                      onChange={(event) => {
-                        setSupporterName(event.target.value);
-                      }}
-                      placeholder="John"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-
-                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                      Supporter email
-                    </p>
-                    <TextField
-                      value={supporterEmail}
-                      onChange={(event) => {
-                        setSupporterEmail(event.target.value);
-                      }}
-                      placeholder="example@gmail.com"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-
-                    <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                      Supporter comment
-                    </p>
-                    <TextField
-                      value={supporterComment}
-                      onChange={(event) => {
-                        setSupporterComment(event.target.value);
-                      }}
-                      placeholder="Good luck 😉"
-                      type="text"
-                      inputProps={{
-                        maxLength: 255,
-                      }}
-                      InputLabelProps={inputLabelPropsTextField}
-                      sx={sxTextField}
-                    />
-
-                    <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
-                      <ThemeProvider theme={theme}>
-                        <QueryProvider>
-                          <DonationFormItemCampaign
-                            amount={amount}
-                            setAmount={setAmount}
-                            campaignId={campaignId}
-                            supporterName={supporterName}
-                            supporterEmail={supporterEmail}
-                            supporterComment={supporterComment}
-                            discountCode={discountCode}
-                            countryAthleteIsIn={countryAthleteIsIn}
-                            separateDonationThruPage={true}
-                          />
-                        </QueryProvider>
-                      </ThemeProvider>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full">
-              <p className="font-bold text-xl md:text-2xl">Information</p>
-
-              <p className="text-lg font-medium mt-2">Gender</p>
-              <p className="text-lg font-medium text-[#616673]">
-                {athlete.gender === "M" ? "Male" : "Female"}
-              </p>
-
-              {!athlete.isCelebrity && !athlete.isVerified && (
-                <>
-                  <>
-                    <p className="text-lg font-medium mt-2">Birthdate</p>
-
-                    {athlete.birthdate_private === 1 ? (
-                      <>
-                        <div className="flex gap-2">
-                          <img
-                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
-                            src="/editprofile/private_lock.svg"
-                          />
-                          <p className="text-lg font-medium text-[#616673] break-all">
-                            Private
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="text-lg font-medium text-[#616673]">
-                          {formatDate(athlete.birthdate)}
-                        </p>
-                      </>
-                    )}
-                  </>
-
-                  <>
-                    <p className="text-lg font-medium mt-2">Email</p>
-
-                    {athlete.email_private === 1 ? (
-                      <>
-                        <div className="flex gap-2">
-                          <img
-                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
-                            src="/editprofile/private_lock.svg"
-                          />
-                          <p className="text-lg font-medium text-[#616673] break-all">
-                            Private
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="text-lg font-medium text-[#616673] break-all">
-                          {athlete.email}
-                        </p>
-                      </>
-                    )}
-                  </>
-
-                  <>
-                    <p className="text-lg font-medium mt-2">Phone Number</p>
-                    {athlete.phone_private === 1 ? (
-                      <>
-                        <div className="flex gap-2">
-                          <img
-                            className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
-                            src="/editprofile/private_lock.svg"
-                          />
-                          <p className="text-lg font-medium text-[#616673] break-all">
-                            Private
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="text-lg font-medium text-[#616673] break-all">
-                          {athlete.phone}
-                        </p>
-                      </>
-                    )}
-                  </>
-                </>
-              )}
-
-              {athlete.weight !== 0 && (
-                <>
-                  <p className="text-lg font-medium mt-2">Weight</p>
-
-                  {athlete.weight_private === 1 ? (
-                    <>
-                      <div className="flex gap-2">
-                        <img
-                          className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
-                          src="/editprofile/private_lock.svg"
-                        />
-                        <p className="text-lg font-medium text-[#616673] break-all">
-                          Private
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-lg font-medium text-[#616673] break-all">
-                        {athlete.weight} kg
-                      </p>
-                    </>
-                  )}
-                </>
-              )}
-
-              {athlete.isCelebrity == true && (
-                <>
-                  <p className="text-lg font-medium mt-2">Socials</p>
-
-                  {athlete.fb_link && (
-                    <a
-                      href={`https://facebook.com/${athlete.fb_link}`}
-                      target="_blank"
-                      className="text-[#616673] font-semibold underline cursor-pointer select-none"
-                    >
-                      Facebook
-                    </a>
-                  )}
-
-                  {athlete.ig_link && (
-                    <a
-                      href={`https://instagram.com/${athlete.ig_link}`}
-                      target="_blank"
-                      className="text-[#616673] font-semibold underline cursor-pointer select-none"
-                    >
-                      Instagram
-                    </a>
-                  )}
-
-                  {athlete.tw_link && (
-                    <a
-                      href={`https://x.com/${athlete.tw_link}`}
-                      target="_blank"
-                      className="text-[#616673] font-semibold underline cursor-pointer select-none"
-                    >
-                      Twitter
-                    </a>
-                  )}
-                </>
-              )}
-
-              {athlete.cryptoaddress && (
-                <>
-                  <p className="text-lg font-medium mt-2">Crypto </p>
-
-                  <p className="text-lg font-medium text-[#616673] break-all">
-                    {athlete.cryptoaddress} {athlete.cryptoaddress_type}
-                  </p>
-
-                  <div className=" mt-4 flex justify-center items-center">
-                    <QRCode
-                      value={athlete.cryptoaddress}
-                      bgColor="#F8F8F8"
-                      eyeRadius={100}
-                      qrStyle="dots"
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
-            <div
-              className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full h-54 md:h-56"
-              style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
-            >
-              <p className="font-bold text-xl md:text-2xl">Activity</p>
-
-              <div className="flex w-full flex-col mt-8">
-                {lastTransactionsSupporters &&
-                  lastTransactionsSupporters.map((item, index) => (
-                    <>
-                      <div
-                        className="flex w-full flex-col justify-start items-start p-0 pl-4 pr-4  "
-                        style={{ marginTop: "-8px" }}
-                      >
-                        <div className="flex w-full border-l-2  items-center m-1 mb-0 pb-0 p-2 justify-between  ">
-                          <p key={index} className=" pl-2 ">
-                            <span className="font-semibold">
-                              Supporter #{index + 1}:
-                            </span>{" "}
-                            {item.supporterName}
-                          </p>
-
-                          <div className="flex ">
-                            <p>
-                              <span className="font-semibold"></span> $
-                              {item.amount / 100}
-                            </p>
-                          </div>
-                        </div>
-
-                        <p className="text-sm m-1 ml-1 p-2 pl-4 pt-0 border-l-2 mt-0 ">
-                          {item.supporterComment}
-                        </p>
-                      </div>
-                    </>
-                  ))}
-              </div>
-            </div>
-          </div>
+              <ActivityPart
+                lastTransactionsSupporters={lastTransactionsSupporters}
+                setViewFullActivity={setViewFullActivity}
+              />
+            </>
+          ) : (
+            <>
+              <ViewFullActivity
+                wantToDonate={wantToDonate}
+                setWantToDonate={setWantToDonate}
+                campaign={campaign}
+                athlete={athlete}
+                supporterName={supporterName}
+                setSupporterName={setSupporterName}
+                supporterEmail={supporterEmail}
+                setSupporterEmail={setSupporterEmail}
+                supporterComment={supporterComment}
+                setSupporterComment={setSupporterComment}
+                campaignId={campaignId}
+                discountCode={discountCode}
+                countryAthleteIsIn={countryAthleteIsIn}
+                setDiscountCode={setDiscountCode}
+                donateWithCouponOnly={donateWithCouponOnly}
+                setViewFullActivity={setViewFullActivity}
+                viewFullActivity={viewFullActivity}
+                howManySupporters={howManySupporters}
+              />
+            </>
+          )}
         </>
       )}
 
