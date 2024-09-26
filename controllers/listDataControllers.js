@@ -6699,7 +6699,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
     });
 
-    console.log("------> AJDE MORE VISE lastTransactionsSupportersCampaign")
+    console.log("------> lastTransactionsSupportersCampaign")
     console.log(campaignId)
     console.log(lastCommentsSupporters);
 
@@ -6953,6 +6953,8 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
   const campaignId = req.query.campaignId;
   const limitA = parseInt(req.query.limitA);  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+  const offset = parseInt(req.query.offset);
+
 
   console.log("limit je ------>" + limitA);
 
@@ -6965,8 +6967,8 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
   });
 
-  console.log("---ADADA NALAZI PRVI BOLAN")
-  console.log(firstSupporterCampaign)
+  
+  
 
   try {
     const allCommentsSupporters = await Statscampaign.findAll({
@@ -6976,7 +6978,9 @@ const allTransactionsSupportersCampaign = async (req, res) => {
       },
 
       limit: limitA,
-      attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
+      offset: offset,
+
+      attributes: ["supporterName", "amount", "supporterComment", "createdAt"], // only this row in database retrieve
       order: [["amount", "DESC"]],
 
     });
