@@ -391,6 +391,8 @@ const ItemCampaign = () => {
                 setViewFullActivity={setViewFullActivity}
                 viewFullActivity={viewFullActivity}
                 howManySupporters={howManySupporters}
+
+                allTransactionsSupporters={allTransactionsSupporters}
               />
             </>
           )}

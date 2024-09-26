@@ -118,3 +118,5 @@ npm install keen-slider
 
 npm install --save react-qrcode-logo
 
+npm install date-fns
+
