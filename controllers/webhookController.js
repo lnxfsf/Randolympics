@@ -286,6 +286,7 @@ const webhookController = async (req, res) => {
         // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
 
         const t6u = await db.sequelize.transaction();
+        console.log("nece ni t6u transakciju da pravi")
         /*  lock: true,
           transaction: t6, */
         // TODO, ali MORAS , da imas lock-in !
