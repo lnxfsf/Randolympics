@@ -295,7 +295,7 @@ const webhookController = async (req, res) => {
         try {
           const oneAthleteU = await User.findOne({
             where: { userId: oneCampaignThirdParty.athleteId },
-            lock: LOCK.UPDATE, // This adds the row-level lock (and then it will work for this)
+            lock: t6u.LOCK.UPDATE, // This adds the row-level lock (and then it will work for this)
             transaction: t6u,
 
             //  lock: true,
