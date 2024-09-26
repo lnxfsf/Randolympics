@@ -509,6 +509,7 @@ const webhookController = async (req, res) => {
       console.log(`Unhandled event type ${event.type}`);
   }
 
+  console.log("we received, thanks");
   res.send({ received: true });
 };
 
