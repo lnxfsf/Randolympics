@@ -318,7 +318,7 @@ const webhookController = async (req, res) => {
 
 
           await oneAthleteU.update({
-            donatedAmount: 3, }, {transaction: t6u,});
+            donatedAmount: 3, });
 
           
 
