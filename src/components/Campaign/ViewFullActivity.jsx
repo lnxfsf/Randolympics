@@ -108,7 +108,7 @@ const ViewFullActivity = ({
                         
                         <div className="flex flex-col">
                         <p key={index} className="font-bold text-lg  ">
-                        {item.supporterName}
+                          {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>Anonymous</>)}
                       </p>
                     
                       <p className="text-sm  break-all pr-4">

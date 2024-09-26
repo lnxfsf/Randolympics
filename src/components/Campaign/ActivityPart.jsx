@@ -17,9 +17,13 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
                 <>
                   {/* pl-4 pr-4 */}
                   <div className="flex w-full flex-col justify-start items-start mt-1 mb-1   ">
-                    <div className="flex w-full  items-center justify-between  ">
+                    <div className="flex w-full  items-center justify-between">
+                     
                       <p key={index} className="  ">
-                        {item.supporterName}
+                        
+                       
+                        {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>Anonymous</>)}
+
                       </p>
 
                       <div className="flex ">
