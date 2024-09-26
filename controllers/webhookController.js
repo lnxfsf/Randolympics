@@ -286,12 +286,10 @@ const webhookController = async (req, res) => {
         // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
 
         const t6u = await db.sequelize.transaction();
-        console.log("nece ni t6u transakciju da pravi")
+        console.log(" t6u transakciju");
         /*  lock: true,
           transaction: t6, */
-        // TODO, ali MORAS , da imas lock-in !
 
-        // TODO drugo, je ako nece da radi, na firstSupporter.. to ne mora toliko  "lock", jer on je jedini ionako, i to jedini scenario.. to je samo za to.. ovo ce uvek biti 3rd party.. nije glavni supporter
         try {
           const oneAthleteU = await User.findOne({
             where: { userId: oneCampaignThirdParty.athleteId },
@@ -308,16 +306,17 @@ const webhookController = async (req, res) => {
           // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
 
           //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
-          
-          await oneAthleteU.increment("donatedAmount", { by: amount, transaction: t6u}); // add (+) za toliko amount za taj athlete
-          
-           // Add the amount to the current value
-           // this way, we can update it... as it seemd .increment doesn't support transactions that well.
-        /*   await oneAthleteU.update({
+
+          await oneAthleteU.increment("donatedAmount", {
+            by: amount,
+            transaction: t6u,
+          }); // add (+) za toliko amount za taj athlete
+
+          // Add the amount to the current value
+          // this way, we can update it... as it seemd .increment doesn't support transactions that well.
+          /*   await oneAthleteU.update({
               donatedAmount: db.sequelize.literal(`donatedAmount + ${amount}`), }, {transaction: t6u,}
           ); */
-
-          
 
           /*  { transaction: t6u } */
 
@@ -401,30 +400,36 @@ const webhookController = async (req, res) => {
 
       // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
 
-      //const tAthleteZ = await db.sequelize.transaction();
+      const tAthleteZ = await db.sequelize.transaction();
 
-      const oneAthletez = await User.findOne({
-        where: { email: oneCampaign.friendEmail },
-      });
-
-      console.log(" on moze naci oneAthlete");
-      console.log(oneAthletez);
-
-      console.log("uvecava tog athlete-a donation amount");
-      console.log(oneAthletez);
-
-      // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
       try {
-        // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-        await oneAthletez.increment("donatedAmount", { by: amount }); // add (+) za toliko amount za taj athlete
+        const oneAthletez = await User.findOne({
+          where: { email: oneCampaign.friendEmail },
+          lock: tAthleteZ.LOCK.UPDATE,
+          transaction: tAthleteZ,
+        });
 
-        //await tAthleteZ.commit();
+        console.log(" on moze naci oneAthlete");
+        console.log(oneAthletez);
+
+        console.log("uvecava tog athlete-a donation amount");
+        console.log(oneAthletez);
+
+        // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
+
+        // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
+        await oneAthletez.increment("donatedAmount", {
+          by: amount,
+          transaction: tAthleteZ,
+        }); // add (+) za toliko amount za taj athlete
+
+        await tAthleteZ.commit();
 
         // await t3z.commit();
       } catch (error) {
         //  await t3z.rollback();
 
-        // await tAthleteZ.rollback();
+        await tAthleteZ.rollback();
         console.log(error.stack);
       }
 
