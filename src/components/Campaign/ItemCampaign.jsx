@@ -143,9 +143,20 @@ const ItemCampaign = () => {
     }
   };
 
+  
+  const [allTransactionsPage, setAllTransactionsPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(0);
+
   useEffect(() => {
     updateLatestData();
-  }, [limitAllTransactions]);
+
+    getMaxPages();
+  }, [limitAllTransactions, allTransactionsPage]);
+
+  
+  const handlePaginationChangeAllTransactions = (event, value) => {
+    setAllTransactionsPage(value);
+  };
 
   const updateLatestData = async () => {
     try {
@@ -278,13 +289,14 @@ const ItemCampaign = () => {
     }
 
     try {
-      console.log(" sto nece: " + limitAllTransactions);
+      
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
         {
           params: {
             campaignId: campaignId,
-            limitA: limitAllTransactions,
+            limitA: 10,
+            offset: (allTransactionsPage-1) * 10,
           },
         }
       );
@@ -293,10 +305,44 @@ const ItemCampaign = () => {
       console.log(response.data);
 
       setAllTransactionsSupporters(response.data);
+      
     } catch (error) {
       console.error(error);
     }
   };
+
+  
+
+  const getMaxPages = async () => {
+    try {
+     
+      
+        const response = await axios.get(
+          `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
+          {
+            params: {
+              campaignId: campaignId,
+              limitA: 100000,
+              offset: 0,
+            },
+          }
+        );
+  
+        
+  
+        console.log("max pages dobija kao");
+
+        console.log(response.data)
+        setMaxPages(Math.ceil(response.data.length / 10));
+        
+     
+
+     
+    } catch (error) {
+      console.error("Error fetching other users:", error);
+    }
+  };
+
 
   const popupRef = useRef(null);
 
@@ -393,6 +439,10 @@ const ItemCampaign = () => {
                 howManySupporters={howManySupporters}
 
                 allTransactionsSupporters={allTransactionsSupporters}
+
+                handlePaginationChangeAllTransactions={handlePaginationChangeAllTransactions}
+                allTransactionsPage={allTransactionsPage}
+                maxPages={maxPages}
               />
             </>
           )}

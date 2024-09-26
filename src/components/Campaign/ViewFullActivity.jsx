@@ -4,6 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Avatar } from "@mui/material";
 import { formatDistanceToNow } from 'date-fns';
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const ViewFullActivity = ({
   wantToDonate,
@@ -26,7 +28,15 @@ const ViewFullActivity = ({
   howManySupporters,
 
   allTransactionsSupporters,
+
+
+  handlePaginationChangeAllTransactions,
+  allTransactionsPage,
+  maxPages,
+
 }) => {
+
+
   return (
     <>
       <div className=" flex justify-center items-center">
@@ -40,7 +50,7 @@ const ViewFullActivity = ({
             <ArrowBackIcon />
           </IconButton>
           <p className="lexend-font font-bold text-black_second text-xl md:text-2xl">
-            Campaign Activity
+            Campaign Activity 
           </p>
         </div>
       </div>
@@ -138,6 +148,24 @@ const ViewFullActivity = ({
                 </div>
               </>
             )}
+
+<div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={allTransactionsPage}
+            onChange={handlePaginationChangeAllTransactions}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
+      </div>
         </div>
       </div>
     </>
