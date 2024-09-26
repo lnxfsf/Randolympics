@@ -315,7 +315,13 @@ const webhookController = async (req, res) => {
           await oneAthleteU.update({
               donatedAmount: db.sequelize.literal(`donatedAmount + ${amount}`), }, {transaction: t6u,}
           );
+
+
+          await oneAthleteU.update({
+            donatedAmount: 3, }, {transaction: t6u,});
+
           
+
           /*  { transaction: t6u } */
 
           console.log("da li je nasao athlete !");
