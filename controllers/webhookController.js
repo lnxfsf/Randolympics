@@ -288,6 +288,8 @@ const webhookController = async (req, res) => {
 
       const oneAthleteU = await User.findOne({
         where: { userId: oneCampaignThirdParty.athleteId },
+        lock: true,
+        transaction: t6u,
       });
 
       console.log(" on moze naci oneAthlete");
