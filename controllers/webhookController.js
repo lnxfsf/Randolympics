@@ -334,7 +334,12 @@ const webhookController = async (req, res) => {
             console.log(error.stack);
           }
 
+        } else {
+
+          console.log("couldn't find proper payment_id, just send back to stripe as confirmed.. ");
         }
+
+
           
 
     } else {
@@ -477,6 +482,8 @@ const webhookController = async (req, res) => {
         "succeeded",
         paymentIntent.amount
       );
+
+
 
       console.log(event.data.object); // drzi ga u centima da, nema sta da konvertujes ipak !
       // 10030  , je 100.30 $ ! zadnja dve cifre su broj
