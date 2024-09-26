@@ -307,7 +307,7 @@ const webhookController = async (req, res) => {
           // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
 
           //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
-          await oneAthleteU.increment("donatedAmount", { by: amount }, {transaction: t6u}); // add (+) za toliko amount za taj athlete
+          await oneAthleteU.increment("donatedAmount", { by: amount, transaction: t6u }); // add (+) za toliko amount za taj athlete
           /*  { transaction: t6u } */
 
           console.log("da li je nasao athlete !");
