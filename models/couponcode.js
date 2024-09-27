@@ -65,5 +65,14 @@ module.exports = function (sequelize, DataTypes) {
     }
 
 
+  }, {
+
+    indexes: [
+      { fields: ['couponCode'] },
+      { fields: ['isCouponActive'] },
+      { fields: ['country'] },
+    
+    ]
+
   });
 };

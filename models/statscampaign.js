@@ -74,5 +74,13 @@ module.exports = function (sequelize, DataTypes) {
 
 
 
+  }, {
+
+    indexes: [
+      { fields: ['campaignId'] },
+      { fields: ['payment_id'] },
+    
+    ]
+
   });
 };

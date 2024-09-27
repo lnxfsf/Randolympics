@@ -116,5 +116,14 @@ module.exports = function (sequelize, DataTypes) {
 
     
 
+  }, {
+
+    indexes: [
+      { fields: ['friendEmail'] },
+      { fields: ['supporterEmail'] },
+      { fields: ['payment_id'] },
+    
+    ]
+
   });
 };

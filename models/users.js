@@ -313,5 +313,15 @@ module.exports = function (sequelize, DataTypes) {
 
 
     
+  }, {
+
+    indexes: [
+      { fields: ['name'] },
+      { fields: ['email'] },
+      { fields: ['user_type'] },
+      { fields: ['gender'] },
+      { fields: ['nationality'] },
+    ]
+
   });
 };
