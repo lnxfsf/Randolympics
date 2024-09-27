@@ -798,7 +798,7 @@ const team = async (req, res) => {
     }
 
     // based, on same country..
-    const teamMates = await User.findAll({
+    const teamMates = await User.findAndCountAll({
       where: filterConditions,
 
       order: orderRankingByCurrentUser, // Sort by ranking ascending. also depends on currentUserType
@@ -6780,7 +6780,7 @@ const listAllCampaigns = async (req, res) => {
 
 
   try {
-    const allCampaigns = await Campaign.findAll({
+    const allCampaigns = await Campaign.findAndCountAll({
       /*  where: {
 
       friendGender: {
@@ -6870,12 +6870,12 @@ const listAllUsers = async (req, res) => {
   try {
 
 
-    const allUsers = await User.findAll({
+    const allUsers = await User.findAndCountAll({
 
 
       where: {
         name: {
-          [Op.like]: `%${searchFirstNameText}%`,
+          [Op.like]: `${searchFirstNameText}%`,
         },
       },
 
@@ -6971,7 +6971,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
   
 
   try {
-    const allCommentsSupporters = await Statscampaign.findAll({
+    const allCommentsSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
         /* supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
