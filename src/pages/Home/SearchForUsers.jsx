@@ -48,7 +48,7 @@ const SearchForUsers = () => {
     
 
  
-  }, [usersPage, searched]);
+  }, [usersPage, searched, results]);
 
  
 
