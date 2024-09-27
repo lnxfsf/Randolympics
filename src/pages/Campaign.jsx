@@ -90,12 +90,7 @@ const Campaign = () => {
   useEffect(() => {
     updateLatestData();
 
-    if (maxPages === 0) {
-      getMaxPages();
-    }
-
-    /*  //TODO, this should go on BACKEND_SERVER_BASE_URL, and here you get number of max which is . so  */
-    getMaxPages();
+   
   }, [
     filterGender,
     filterNationality_selected,
@@ -111,34 +106,7 @@ const Campaign = () => {
 
   const { t } = useTranslation();
 
-  const getMaxPages = async () => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/listAllCampaigns`,
-        {
-          params: {
-            limit: 100000,
-            // offset: (campaignsPage - 1) * 10,
-
-            filterGender: filterGender,
-            filterNationality_selected: filterNationality_selected,
-            searchFirstNameText: searchFirstNameText,
-            searchFamilyNameText: searchFamilyNameText,
-
-            isCelebrity: filterIsCelebrity,
-            fb_link: searchfb_link,
-            ig_link: searchig_link,
-            tw_link: searchtw_link,
-          },
-        }
-      );
-
-      setMaxPages(Math.ceil(response.data.length / 10));
-      setResultsAmount(response.data.length);
-    } catch (error) {
-      console.error("Error fetching other users:", error);
-    }
-  };
+  
 
   const handlePaginationChange = (event, value) => {
     setCampaignsPage(value);
@@ -166,8 +134,12 @@ const Campaign = () => {
         }
       );
 
-      console.log(response.data);
-      setCampaigns(response.data);
+     
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setResultsAmount(response.data.count);
+
+      setCampaigns(response.data.rows);
+
     } catch (e) {
       console.log(e.stack);
     }
@@ -262,12 +234,12 @@ const Campaign = () => {
                     if (value === "yes") {
                       setFilterIsCelebrity(1);
                       setCampaignsPage(1);
-                      getMaxPages();
+                    
 
                     } else if (value === "no") {
                       setFilterIsCelebrity(0);
                       setCampaignsPage(1);
-                      getMaxPages();
+                     
                     }
                   }}
                 >
@@ -485,11 +457,11 @@ const Campaign = () => {
                 if (value === "yes") {
                   setFilterIsCelebrity(1);
                   setCampaignsPage(1);
-                  getMaxPages();
+                
                 } else if (value === "no") {
                   setFilterIsCelebrity(0);
                   setCampaignsPage(1);
-                  getMaxPages();
+                
                 }
               }}
             >

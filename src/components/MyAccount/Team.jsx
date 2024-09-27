@@ -149,9 +149,6 @@ const Team = () => {
     changedSearchPlaceholderText();
     changedNeedGender();
 
-    if (maxPages === 0) {
-      getMaxPages();
-    }
 
     if (userId) {
       fetchTeamMates();
@@ -170,36 +167,7 @@ const Team = () => {
     setSelectedRole(event.target.value);
   };
 
-  const getMaxPages = async () => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
-        {
-          params: {
-            limit: 100000,
-
-            // offset: (page - 1) * 10,
-
-            searchText: searchText,
-
-            userId: userId,
-            user_type: selectedRole, // and that's by dropdown, what's selected to show
-            genderFilter: genderFilter,
-            categoryFilter: categoryFilter,
-            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
-
-            needGender: needGender,
-
-            nationality: code, // we show only from this user country
-          },
-        }
-      );
-
-      setMaxPages(Math.ceil(response.data.length / 10));
-    } catch (error) {
-      console.error("Error fetching other users:", error);
-    }
-  };
+ 
 
   const fetchTeamMates = async () => {
     try {
@@ -225,72 +193,20 @@ const Team = () => {
         }
       );
 
-      setOtherUsers(response.data);
+      console.log("team, does it get count");
+      console.log(response);
+
+
+      
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setOtherUsers(response.data.rows);
+
+
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
 
-    // ----------------
-
-    /*   try {
-
-      let hasMorePages = true;
-
-
-      for(let page = 0; hasMorePages; page++){
-        
-
-      
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
-        {
-          params: {
-            limit: 10,
-            offset: (page - 1) * 10,
-
-            searchText: searchText,
-
-            userId: userId,
-            user_type: selectedRole, // and that's by dropdown, what's selected to show
-            genderFilter: genderFilter,
-            categoryFilter: categoryFilter,
-            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
-
-            needGender: needGender,
-
-            nationality: code, // we show only from this user country
-          },
-        }
-      );
-
-
-
-      setMaxPages((prev) => prev + 1 )
-      //page = page + 1;
-
-      
-      if(response.data.length === 0){
-
-       
-        hasMorePages = false;
-
-      } else { 
-        setMaxPages((prev) => prev + 1 )
-       // page = page + 1;
-      }
-
-
-
-      console.log("maxpages je")
-      console.log(maxPages)
-
-    }
-     
-
-    } catch (error) {
-      console.error("Error fetching other users:", error);
-    }
- */
+   
   };
 
   const getCurrentNP = async () => {

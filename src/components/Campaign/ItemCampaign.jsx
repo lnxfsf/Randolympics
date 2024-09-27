@@ -150,7 +150,7 @@ const ItemCampaign = () => {
   useEffect(() => {
     updateLatestData();
 
-    getMaxPages();
+   
   }, [limitAllTransactions, allTransactionsPage]);
 
   
@@ -288,6 +288,7 @@ const ItemCampaign = () => {
       console.error(error);
     }
 
+    /* all transactions , activity */
     try {
       
       const response = await axios.get(
@@ -301,10 +302,12 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last coments allTransactionsSupportersCampaign");
-      console.log(response.data);
+     /*  console.log("saljes ti last coments allTransactionsSupportersCampaign");
+      console.log(response.data.rows);
+ */
 
-      setAllTransactionsSupporters(response.data);
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setAllTransactionsSupporters(response.data.rows);
       
     } catch (error) {
       console.error(error);
@@ -312,36 +315,6 @@ const ItemCampaign = () => {
   };
 
   
-
-  const getMaxPages = async () => {
-    try {
-     
-      
-        const response = await axios.get(
-          `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
-          {
-            params: {
-              campaignId: campaignId,
-              limitA: 100000,
-              offset: 0,
-            },
-          }
-        );
-  
-        
-  
-        console.log("max pages dobija kao");
-
-        console.log(response.data)
-        setMaxPages(Math.ceil(response.data.length / 10));
-        
-     
-
-     
-    } catch (error) {
-      console.error("Error fetching other users:", error);
-    }
-  };
 
 
   const popupRef = useRef(null);

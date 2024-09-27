@@ -84,7 +84,7 @@ const SeventhScreenHome = () => {
       },
 
       slideChanged() {
-        console.log("slide changed");
+        
       },
     },
 
@@ -175,7 +175,7 @@ const SeventhScreenHome = () => {
       },
 
       slideChanged() {
-        console.log("slide changed");
+        
       },
     },
 

@@ -22,7 +22,7 @@ const SearchForUsers = () => {
   const [resultsAmount, setResultsAmount] = useState();
 
   const [results, setResults] = useState();
-
+  const [searched, setSearched] = useState(false);
   const [maxPages, setMaxPages] = useState(0);
 
   const [usersPage, setUsersPage] = useState(1);
@@ -35,39 +35,22 @@ const SearchForUsers = () => {
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
-
+    setSearched(true);
     setUsersPage(1);
     updateLatestData();
   };
 
   useEffect(() => {
-    /* if (maxPages === 0) {
-        getMaxPages();
-      } */
-
-    getMaxPages();
-  }, [results]);
-
-  const getMaxPages = async () => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/listAllUsers`,
-        {
-          params: {
-            limit: 100000,
-
-            // offset: (usersPage - 1) * 10,
-            searchFirstNameText: searchFirstNameText,
-          },
-        }
-      );
-
-      setMaxPages(Math.ceil(response.data.length / limit));
-      setResultsAmount(response.data.length);
-    } catch (error) {
-      console.error("Error fetching other users:", error);
+  
+    if(searched){
+      updateLatestData();
     }
-  };
+    
+
+ 
+  }, [usersPage, searched]);
+
+ 
 
   const updateLatestData = async () => {
     try {
@@ -84,22 +67,35 @@ const SearchForUsers = () => {
         }
       );
 
-      console.log(response.data);
+      
 
-      setResults(response.data);
+
+      setMaxPages(Math.ceil(response.data.count / limit));
+      setResultsAmount(response.data.count);
+	  
+
+      setResults(response.data.rows);
+
+
     } catch (e) {
       console.log(e.stack);
     }
   };
 
   const handlePaginationChange = (event, value) => {
+   
     setUsersPage(value);
     updateLatestData();
+    
+ 
+
   };
 
   return (
     <>
+   
       <div>
+      
         <div className="p-6 md:pl-24 md:pr-24 pt-6 pb-6   flex justify-center items-center flex-col gap-4">
           <p className="text-xl md:text-3xl self-start  lexend-font text-black_second font-bold">
             {t("campaign.content64")}
@@ -124,8 +120,11 @@ const SearchForUsers = () => {
           <div className="flex w-full ">
             <Button
               onClick={() => {
+                setSearched(true);
                 setUsersPage(1);
                 updateLatestData();
+                
+              
               }}
               className="w-full "
               style={{ textTransform: "none" }}
