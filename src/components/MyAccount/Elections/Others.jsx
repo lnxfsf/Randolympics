@@ -4,6 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 import Flag from "react-world-flags";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -19,7 +22,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 
 const Others = ({
   user,
- 
+
   currentUserPassportStatus,
   user_type,
   index,
@@ -29,7 +32,6 @@ const Others = ({
   whichVotedFor,
   lastRank,
   setWhichVotedFor,
- 
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
@@ -61,29 +63,26 @@ const Others = ({
     rank = 1;
   }
 
-
-
   const name = user.name;
-
-
 
   const nationality = user.nationality;
 
-
-  if (user.email_private == 1) {
+/*   if (user.email_private == 1) {
     var email = "private";
   } else {
     var email = user.email;
-  }
+  } */
 
+    var email = user.email;
+    var phone = user.phone;
 
-  // private je 1 
-  // public je 0 
-  if (user.phone_private == 1) {
+  // private je 1
+  // public je 0
+/*   if (user.phone_private == 1) {
     var phone = "private";
   } else {
     var phone = user.phone;
-  }
+  } */
 
   const gender = user.gender;
 
@@ -93,39 +92,30 @@ const Others = ({
     var votes = user.votesGP;
   }
 
-
-
-
   // we calculate age on the fly..
-  function calculateAge(birthdate) {
+  /*  function calculateAge(birthdate) {
     // if birthdate is empty, or invalid..
     if (!birthdate || !moment(birthdate).isValid()) {
-      return '-';
+      return "-";
     }
 
-
     const today = moment();
-    console.log("danas" + today)
+    console.log("danas" + today);
 
     const birthDate = moment(birthdate);
-    console.log("rodjendan" + birthDate)
+    console.log("rodjendan" + birthDate);
 
-    const years = today.diff(birthDate, 'years');
-    console.log("razlika god" + years)
-
+    const years = today.diff(birthDate, "years");
+    console.log("razlika god" + years);
 
     return years;
   }
-
 
   if (user.birthdate_private == 1) {
     var age = "private";
   } else {
     var age = calculateAge(user.birthdate);
-  }
-
-
-
+  } */
 
   //const userNPPercentage = user.userNPPercentage;
 
@@ -139,196 +129,135 @@ const Others = ({
     status_date = status_date.format("(HH:mm MMMM Do YYYY)");
   }
 
-  //console.log("userid je: " + userId);
+  // za toast
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const [currentRank, setCurrentRank] = useState(rank);
-
-  // original rank will be "rank", use that ! it won't change
-
-  const popupRef = useRef(null);
-
-  let BACKEND_SERVER_BASE_URL =
-    import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
-    process.env.VITE_BACKEND_SERVER_BASE_URL;
-
-  // just once, you save in
-  const [userData, setUserData] = useState(null);
-  const [original_email, setOriginalEmail] = useState(null);
-
-  useEffect(() => {
-    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
-    if (storedData) {
-      var userJson = JSON.parse(storedData);
-
-      setUserData(userJson);
-
-      setOriginalEmail(userJson.data.email);
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
-  }, []);
 
-  const increaseRank = () => {
-
-    if (currentRank !== lastRank) {
-      setCurrentRank(currentRank + 1);
-    }
+    setOpenSnackbar(false);
   };
 
-  const decreaseRank = () => {
-    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1));
-    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..)
-    // for resigning, he's becoming last in rank
-  };
-
-  const cancel = () => {
-    setCurrentRank(rank); // just revert it
-
-    // and exit popup
-    popupRef.current.close();
-  };
-
-  const saveChanges = async () => {
-    try {
-      var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/voting/update_rank_data`,
-        {
-          userId,
-
-          originalRank: rank,
-          goingToRank: currentRank,
-
-          user_type: selectedRole,  // yes, this is , the logged in user_type !!! 
-          nationality: nationality,
-        }
-      );
-
-      if (response.status === 200) {
-        // setRankUpdated((prev) => !prev);  //this is so we can update list now ..
-        //console.log("sent (going to rank): " + currentRank)
-        //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
-        setRankUpdated((prev) => !prev);
-        popupRef.current.close();
-      }
-    } catch (error) {
-      
-      console.log(error);
-    }
-  };
+  const [snackbarText, setSnackbarText] = useState("");
 
   return (
     <>
+      <tr
+        key={index}
+        className="border-b-[1px] border-t-[1px] border-[#DEE2E6]"
+      >
+        {(user_type === "AH" || user_type === "RS" || user_type === "NP") &&
+          currentUserPassportStatus === "validated" && (
+            <>
+              <td style={{ textAlign: "center" }}>
+                <FormControlLabel
+                  value={whichVotedFor === user.userId}
+                  checked={whichVotedFor === user.userId}
+                  onChange={() => {
+                    setWhichVotedFor(user.userId);
 
-      {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
-      <tr key={index}>
-        {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
-         */}
+                    setOpenSnackbar(true);
+                    setSnackbarText(
+                      "Congratulations! Your vote has been sent."
+                    );
+                  }}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#444444",
+                        "&.Mui-checked": {
+                          color: "#444444",
+                        },
 
-        {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
-         */}
-        {(user_type === "AH" || user_type === "RS" || user_type === "NP") && (currentUserPassportStatus === "validated") && (
-          <>
-            <td style={{ textAlign: "center" }}>
-               {/* 
-               <Checkbox
-                sx={{
-                  color: "#FF0000",
-                  "&.Mui-checked": {
-                    color: "#FF0000",
-                  },
-                }}
-                checked={votedForNPuserIdBOOLEAN}
-                
-              />  */}
-
-<FormControlLabel
-             /*  value="s5" */
-
-
-/*              try, and match, which one userId (NP or GP, doesnt matter), it matches, so that's active radio button now.. */
-            
-/* 
-checked={whichVotedFor === user.votedForNPuserId || whichVotedFor === user.votedForGPuserId }
- */
-
-
-              value={whichVotedFor === user.userId}
-              checked={whichVotedFor === user.userId}
-
-             /* onChange={() => {setSelectRadio((prev) => !prev )}} */
-
-                onChange={() => {setWhichVotedFor(user.userId)}}
-
-              control={
-                <Radio
+                        margin: 0,
+                        padding: 0,
+                      }}
+                    />
+                  }
                   sx={{
-                    color: "#444444",
-                    "&.Mui-checked": {
-                      color: "#444444",
+                    "& .MuiTypography-root": {
+                      fontFamily: "'Lexend', sans-serif",
+                      fontWeight: 500,
                     },
+                    margin: 0,
+                    padding: 0,
                   }}
                 />
-              }
+              </td>
+            </>
+          )}
+
+        <td>{votes}</td>
+
+        <td>{name}</td>
+
         
-              sx={{
-                "& .MuiTypography-root": {
-                  fontFamily: "'Lexend', sans-serif",
-                  fontWeight: 500,
-                },
-              }}
-            />
 
-
-
-             {/*   {whichVotedFor == userId ? <p>1</p> : <p>-</p>}  */}
-
-             
+        {user.email_private === 1 ? (
+          <>
+            <td>
+              <div className="flex gap-2">
+                <img
+                  className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                  src="/editprofile/private_lock.svg"
+                />
+                <p className="text-lg font-medium text-[#616673] break-all">
+                  Private
+                </p>
+              </div>
             </td>
+          </>
+        ) : (
+          <>
+            <td>{email}</td>
           </>
         )}
 
-  <td className="flex gap-2 justify-start">
-                  <p>
-                    <b>{votes}</b>
-                  </p>
-                </td>
-
-        <td>{name}</td>
-        <td>{age}</td>
-        <td><Flag className="flag-photo-team " code={nationality} /></td>
-        <td>{email}</td>
-        <td>{phone}</td>
-
-        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
-          <td>
-            <p>
-              {status} <br />
-              {status_date}
-            </p>
-          </td>
+        {user.phone_private === 1 ? (
+          <>
+            <td>
+              <div className="flex gap-2">
+                <img
+                  className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                  src="/editprofile/private_lock.svg"
+                />
+                <p className="text-lg font-medium text-[#616673] break-all">
+                  Private
+                </p>
+              </div>
+            </td>
+          </>
+        ) : (
+          <>
+            <td>{phone}</td>
+          </>
         )}
-      </tr>
 
-      <tr>
-
-
-
-
-        {selectedRole == "NP" && (
-          <td colSpan="8">
-            <hr />
-          </td>
-        )
-        }
-
-        <td colSpan="6">
-          <hr />
+        <td>
+          <p>
+            {status} <br />
+            {status_date}
+          </p>
         </td>
-
-
       </tr>
 
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarText}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
