@@ -82,6 +82,15 @@ const UserProfilePublicView = () => {
                 Personal Information
               </p>
 
+
+
+
+              <p className="text-lg font-medium mt-2">About me</p>
+              <p className="text-lg font-medium text-[#616673]">
+                {userData.bio}
+              </p>
+
+
               <p className="text-lg font-medium mt-2">Gender</p>
               <p className="text-lg font-medium text-[#616673]">
                 {userData.gender === "M" ? "Male" : "Female"}

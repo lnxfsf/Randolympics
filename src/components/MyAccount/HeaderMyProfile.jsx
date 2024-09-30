@@ -45,6 +45,10 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
+
+  const [lastName_header, setLastName_Header] = useState("");
+  const [middleName_header, setMiddleNameHeader] = useState("");
+
   const [user_typeText, setUserTypeText] = useState("");
   const [code, setCode] = useState("");
   const [original_email, setOriginalEmail] = useState(null);
@@ -187,6 +191,11 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
       }
 
       setNameHeader(userJson.data.name);
+      setMiddleNameHeader(userJson.data.middleName);
+      setLastName_Header(userJson.data.lastName);
+
+
+
       setUserTypeText(settingUserType(userJson.data.user_type));
       setCode(userJson.data.nationality);
     }
@@ -255,7 +264,8 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
               )}
             </div>
 
-            <h1 className="text-lg font-medium">{name_header}</h1>
+            <h1 className="text-lg font-medium">{name_header} {middleName_header && ( <>({middleName_header}) </> )} {lastName_header}</h1>
+         
           </div>
 
           <div className="flex flex-grow">

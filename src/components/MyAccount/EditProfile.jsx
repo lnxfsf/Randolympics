@@ -25,6 +25,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Menu from "@mui/material/Menu";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
+
 //we display it as fragment, inside MyProfile...
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -105,6 +109,26 @@ const sxTextField = {
 };
 
 const EditProfile = () => {
+
+
+  
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+
+
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
   const [userData, setUserData] = useState(null);
@@ -606,7 +630,10 @@ const EditProfile = () => {
         setPassportUpload(!passportUpload);
       }
 
-      setResultText("Profile details saved successfully !");
+     
+      setSnackbarMessage("Profile details saved successfully !");
+        setOpenSnackbar(true);
+
     } catch (error) {
       console.log(error);
     }
@@ -698,12 +725,22 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-        setResultText("Profile details saved successfully !");
+       
+
+        setSnackbarMessage("Profile details saved successfully !");
+        setOpenSnackbar(true);
+
       }
     } catch (error) {
       console.log(error);
-      setResultText("There was some error !");
-      setResultTextColor("red");
+     
+
+      setSnackbarMessage("There was some error !");
+      setSnackbarStatus("error");
+
+        setOpenSnackbar(true);
+
+
     }
   };
 
@@ -738,7 +775,12 @@ const EditProfile = () => {
         }
       }
 
-      setResultText("Profile details saved successfully !");
+      
+
+      setSnackbarMessage("Profile details saved successfully !");
+      setOpenSnackbar(true);
+
+
     } catch (error) {
       console.log(error);
     }
@@ -859,9 +901,9 @@ const EditProfile = () => {
               </p>
               <TextField
                 value={userData && userData.data.name}
-                /*  onChange={handleNameChange} */
+               onChange={handleNameChange}
 
-                disabled
+                
                 placeholder="John Doe"
                 id="name"
                 name="name"
@@ -1476,6 +1518,7 @@ const EditProfile = () => {
               rows={3}
               className="w-full h-full rounded-md border border-gray-900"
               type="text"
+              name="athleteStatement"
               sx={{
                 /* width: "2px",  */
                 "& .MuiOutlinedInput-root": {
@@ -1602,14 +1645,28 @@ const EditProfile = () => {
             </Button>
           </div>
 
-          <p
-            className="mt-4 flex justify-end "
-            style={{ color: `${resultTextColor}` }}
-          >
-            {resultText}
-          </p>
+        
         </form>
       </div>
+
+
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
     </>
   );
 };
