@@ -1,4 +1,16 @@
+import { QRCode } from "react-qrcode-logo";
+
 const InformationPart = ({ athlete, formatDate }) => {
+ 
+
+  console.log("!athlete.isCelebrity")
+  console.log(!athlete.isCelebrity)
+
+  console.log("!athlete.isVerified")
+  console.log(!athlete.isVerified)
+
+
+ 
   return (
     <>
       <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full">
@@ -9,7 +21,9 @@ const InformationPart = ({ athlete, formatDate }) => {
           {athlete.gender === "M" ? "Male" : "Female"}
         </p>
 
-        {!athlete.isCelebrity && !athlete.isVerified && (
+
+
+        {!athlete.isCelebrity && athlete.isVerified && (
           <>
             <>
               <p className="text-lg font-medium mt-2">Birthdate</p>

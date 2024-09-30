@@ -55,7 +55,7 @@
 
 
               {/* so, isVerified, means, that we truly know, if celebrity made account, or it was pre-filled already.. */}
-              {!athlete.isCelebrity && !athlete.isVerified && (
+              {!athlete.isCelebrity && athlete.isVerified && (
               <div className="flex justify-center items-center flex-col mt-8 mb-8">
                 
                   <p className="text-[#fff]">
