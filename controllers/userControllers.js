@@ -2,7 +2,7 @@
 
 const db = require("../models/database");
 const User = db.users;
-const Token = db.token;
+const Campaign = db.campaign;
 
 const Op = db.Sequelize.Op;
 
@@ -78,8 +78,7 @@ const update_user_data = async (req, res) => {
   
 
 
-    console.log("on dobija profile pic kao:"+picture)
-
+    
 
     
   
@@ -88,9 +87,53 @@ const update_user_data = async (req, res) => {
 
     const user = await User.findOne({
       where: { email: original_email },
-      lock: true,
+      lock: t1.LOCK.UPDATE,
       transaction: t1,
     });
+
+
+    const t2 = await db.sequelize.transaction();
+
+    // first you search for athlete, if it's athlete, by trying User email, with friendEmail in Campaigns
+    // original_email, when athlete tries to update for himself. 
+    // so, right now, we consider scenario, where we only update for athlete one, and we update his details in campaign 
+    
+    
+    let campaignUser;
+    
+    if(user.user_type === "AH"){
+      campaignUser = await Campaign.findOne({
+      where: { friendEmail: original_email },
+
+      lock: t2.LOCK.UPDATE,
+      transaction: t2,
+    });
+  } else if (user.user_type === "SPT"){
+
+
+    // find, all that matches in all campaigns, we update only supporter information, when that supporter updates something on his profile..
+    campaignUser = await Campaign.findAll({
+      where: { supporterEmail: original_email },
+
+      lock: t2.LOCK.UPDATE,
+      transaction: t2,
+    });
+
+
+    
+     // TODO And another scenario, is nothing to do with athlete, but supporter which is another user, changes his profile details, so, we update it here as well
+    // TODO way to handle this scenario, is that, Supporter have their user_type SPT anyways, so we check if it's supporter or not, trying to update his profile details
+    // TODO it will be found, for that user, but ... 
+    // TODO so not yet, we just have for athlete. we need to make multi-login, and then when SPT gets to login, we solve above problem here
+
+
+    // TODO, something like this could work..
+
+
+    // TODO, I tried something, with if cases, get back to this, later on... for SPT, if it works as expected 
+  }
+
+
   
 
     
@@ -315,12 +358,72 @@ const update_user_data = async (req, res) => {
 
         try {
 
+
           await user.update(updatingObject,{ transaction: t1 });
+
+
+          if (user.user_type === "AH"){
+          
+            // Only include fields with valid values
+            const validUpdatingObject = Object.entries(updatingObject).reduce((acc, [key, value]) => {
+              if (value !== undefined && value !== null && value !== "") {
+                acc[key] = value; 
+              }
+              return acc;
+            }, {});
+
+/* // TODO, left to include in myprofile, to update these fields, when it's celebrity, but low priority, as we don't have celebrity, so no worry about this much 
+            fb_link
+            ig_link
+            tw_link
+ */
+            await campaignUser.update({
+              friendName: validUpdatingObject.name,
+              friendMiddleName: validUpdatingObject.middleName,
+              friendFamilyName: validUpdatingObject.familyName,
+              friendLastName: validUpdatingObject.lastName,
+              friendPhone: validUpdatingObject.phone,
+              friendBirthdate: validUpdatingObject.birthdate,
+              friendNationality: validUpdatingObject.nationality,
+              friendImage: validUpdatingObject.picture,
+
+            },{ transaction: t2 });
+
+          } else if (user.user_type === "SPT"){
+
+
+             // Only include fields with valid values
+             const validUpdatingObject = Object.entries(updatingObject).reduce((acc, [key, value]) => {
+              if (value !== undefined && value !== null && value !== "") {
+                acc[key] = value; 
+              }
+              return acc;
+            }, {});
+
+
+
+            // TODO: supporterComment:  , not yet implemented, will implement once you make supporter account, and deal with it. so you add field for it
+
+            // It will iterate over each campaign user and update it
+            for (const campaignUserT of campaignUser) {
+              await campaignUserT.update({
+                supporterName: validUpdatingObject.name,
+                supporterPhone: validUpdatingObject.phone,
+
+              },{ transaction: t2 });
+            }
+
+          }
+
   
+
           await t1.commit();
+          await t2.commit();
+
           return res.status(200).json({ message: "User details updated" });
         } catch (error) {
           await t1.rollback();
+          await t2.rollback();
           return res.status(500).json({ error: error.message });
         }
       }
