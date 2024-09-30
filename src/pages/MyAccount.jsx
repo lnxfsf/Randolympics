@@ -186,7 +186,11 @@ const MyAccount = () => {
               </div>
             </li>
 
-            {user_type !== "VM" && (
+            {(
+              user_type === "AH" ||
+              user_type === "NP" 
+             
+            ) && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={electionsRef}

@@ -4,6 +4,8 @@ import { HeaderMyProfile } from "./HeaderMyProfile";
 import { Others } from "./Elections/Others";
 import { Top50 } from "./Elections/Top50";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 import "../../styles/elections.scoped.scss";
 
@@ -43,26 +45,34 @@ const Elections = () => {
   const [top50Users, setTop50Users] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
 
-  const [top50Page, setTop50Page] = useState(1);
+  const [maxPages, setMaxPages] = useState(0);
+
   const [otherPage, setOtherPage] = useState(1);
+  const [top50Page, setTop50Page] = useState(1);
+
+  
+  
+
+
 
   const [showingTop50, setShowingTop50] = useState(true);
 
-  const [hasMoreTop50, setHasMoreTop50] = useState(true);
-  const [hasMoreOthers, setHasMoreOthers] = useState(true);
 
   const [rankUpdated, setRankUpdated] = useState(false);
 
   const [selectedRole, setSelectedRole] = useState(() => {
+
     if (currentUserType === "NP") {
-      return "AH";
+      return "GP";
+      // if it's NP, they can vote on Global president
     } else if (currentUserType === "AH") {
       return "NP";
-    } else if (currentUserType === "GP") {
-      return "LM";
+      // if it's Athlete, they can vote on National president
+
     } else if (currentUserType === "RS") {
       return "NP";
-    }
+      // if it's Referee & Support, they can also vote on National president
+    } 
   });
 
   const [searchText, setSearchText] = useState(""); //search box
@@ -118,6 +128,20 @@ const Elections = () => {
 
   const [lastRank, setLastRank] = useState();
 
+
+
+
+  
+
+ // TODO sada, to kada se azurira, drugaciji je, nego original, treba to da odes i azuriras ! za tog user-a !
+ const [whichVotedFor, setWhichVotedFor] = useState (() => {
+  if (currentUserType === "AH"){
+    return votedFor;
+  } else if (selectedRole === "GP"){
+    return votedForGP;
+  }
+})
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -126,25 +150,24 @@ const Elections = () => {
       const userJson = JSON.parse(storedData);
       setUserData(userJson);
       setCurrentUserType(userJson.data.user_type);
-      
       setPassportStatus(userJson.data.passportStatus);
-
-     
-
     }
 
 
-    lastInRank() // this is for both Others, and Top. for that one (doesn't cut ranking by some number.. )
-    
     fetchTop50Users();
+   fetchOtherUsers();
 
 
+   if((whichVotedFor !== votedFor ) && (currentUserType === "AH")  ){
+    handleVotedFor();
+   } else if(( whichVotedFor !== votedForGP) && (currentUserType === "NP")){
 
-    if (!showingTop50) {
-      fetchOtherUsers();
-    }
+    handleVotedForGP();
+    
+  }
+   
   }, [
-    top50Page,
+  
     otherPage,
 
     rankUpdated,
@@ -156,6 +179,9 @@ const Elections = () => {
     categoryFilter,
     votedFor,
     votedForGP,
+
+    whichVotedFor,
+
   ]);
 
  
@@ -166,7 +192,11 @@ const Elections = () => {
     console.log("ovo ne radi");
   };
 
+  const handlePaginationChange = (event, value) => {
+    setOtherPage(value);
+  };
 
+/* 
   const lastInRank = async () => { 
 
     try {
@@ -194,7 +224,7 @@ const Elections = () => {
 
 
   }
-
+ */
 
 
 
@@ -222,52 +252,21 @@ const Elections = () => {
           },
         }
       );
+
+      console.log("top selected ");
+      console.log(response.data);
+
       setTop50Users(response.data);
 
 
 
 
-      const isThereNextPage = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/rankingTop50`,
-        {
-          params: {
-            limit: 10,
-            offset: (top50Page) * 10,
-            user_type: selectedRole,
-            searchText: searchText,
-            genderFilter: genderFilter,
-            categoryFilter: categoryFilter,
-            
-            votedFor: votedFor, // sends selected NP for our user. this is showing then. so we display above red line selected by user... 
-            votedForGP: votedForGP, // this same as for votedFor, just for GP.. so we can discern..
-         
-
-            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
-          },
-        }
-      );
-
-
-
-
-      // Check if we should switch to showing other users
-      if (isThereNextPage.data.length == 0) {
-        setHasMoreTop50(false);
-        setShowingTop50(false);
-
-       
-
-      
-      } else {
-        setHasMoreTop50(true);
-        setShowingTop50(true);
-      }
 
 
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
-  };
+  }; 
 
   const fetchOtherUsers = async () => {
     try {
@@ -289,116 +288,35 @@ const Elections = () => {
           },
         }
       );
-      setOtherUsers(response.data);
+
+      console.log("elections")
+      console.log(response)
+
+
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setOtherUsers(response.data.rows);
 
 
 
 
 
-      const isThereNextPage = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/otherUsers`,
-        {
-          params: {
-            limit: 10,
-            offset: (otherPage) * 10,
-            user_type: selectedRole,
-            searchText: searchText,
-            genderFilter: genderFilter,
-            categoryFilter: categoryFilter,
-
-            votedFor: votedFor, // send this, so to know which one to AVOID 
-            votedForGP: votedForGP, // so he can avoid this one just..
-
-            countryOfcurrentUserOnFrontend: countryOfcurrentUserOnFrontend,
-          },
-        }
-      );
-
-      if (isThereNextPage.data.length == 0) {
-        setHasMoreOthers(false);
-      } else {
-        setHasMoreOthers(true);
-      }
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
   };
 
-  
-  const handleNextPage = () => {
+ 
 
 
 
 
-
-
-
-    if (showingTop50) {
-      
-      if (hasMoreTop50) {
-        setTop50Page((prev) => prev + 1);
-      } else {
-        setShowingTop50(false);
-        setOtherPage(1);
-      }
-    } else if (hasMoreOthers) {
-        setTop50Page((prev) => prev + 1);
-
-        setOtherPage((prev) => prev + 1);
-      }
-
-
-
-    
-  };
-
-
-
-
-  // previous page
-  const handlePreviousPage = () => {
-
-
-    if (showingTop50 && top50Page > 1) {
-
-      setTop50Page((prev) => prev - 1);
-
-
-    } else if (!showingTop50 && otherPage > 1) {
-      //  e ovde, vracas ga samo.. za top50, ono, da bi prikazao jos.. 
-      setTop50Page((prev) => prev - 1);
-
-      setOtherPage((prev) => prev - 1);
-      
-    } else if (!showingTop50 && otherPage === 1) {
-
-      setShowingTop50(true); // was "true"
-      setTop50Page(Math.max(1, top50Page - 1));
-    }
-
-
-  };
-
-
-
-  const [whichVotedFor, setWhichVotedFor] = useState (() => {
-    if (currentUserType === "AH"){
-      return votedFor;
-    } else if (selectedRole === "GP"){
-      return votedForGP;
-    }
-  })
-
-
-
-
-  const handleChangeRole = (event) => {
-    setSelectedRole(event.target.value);
-  };
 
   //  for NP's selection (by Athletes ! )
   const handleVotedFor = async (event) => {
-    setVotedFor(event.target.value);
+    /* setVotedFor(event.target.value); */
+
+    
+
 
     // treba da imas POST route, samo za ovo ipak (eto, imas .get, ali .post treba imas... )
     try {
@@ -406,7 +324,7 @@ const Elections = () => {
         `${BACKEND_SERVER_BASE_URL}/voting/votingForNP`,
         {
         
-          NPuserId: event.target.value,  // NP userId we're voting for
+          NPuserId: whichVotedFor,  // NP userId we're voting for
           current_user_userId: userData.data.userId,  // current User, userId
 
         }
@@ -424,14 +342,14 @@ const Elections = () => {
           ...prevUserData,
           data: {
             ...prevUserData.data,
-            votedForNPuserId: event.target.value,
+            votedForNPuserId: whichVotedFor,
           },
         
         }));
 
 
         // this is new object, so we can insert it directly (faster, we don't wait for next re-render..)
-        var updatedUserData = { ...userData, data: { ...userData.data , votedForNPuserId: event.target.value, } 
+        var updatedUserData = { ...userData, data: { ...userData.data , votedForNPuserId: whichVotedFor, } 
         }
        
 
@@ -452,9 +370,12 @@ const Elections = () => {
 
 
     } catch (error) {
-      //console.log(error);
-      setResultText(error.response.data.message);
+      console.log(error.response);
+
+      //console.log(error.response.data.message);
     }
+
+
   };
 
 
@@ -463,14 +384,14 @@ const Elections = () => {
 
   // for GP's selection (by NP's )
   const handleVotedForGP = async (event) => {
-    setVotedForGP(event.target.value);
+    //setVotedForGP(event.target.value);
 
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/voting/votingForGP`,
         {
         
-          GPuserId: event.target.value,
+          GPuserId: whichVotedFor,
           current_user_userId: userData.data.userId,
         }
       );
@@ -487,14 +408,14 @@ const Elections = () => {
           ...prevUserData,
           data: {
             ...prevUserData.data,
-            votedForNPuserId: event.target.value,
+            votedForNPuserId: whichVotedFor,
           },
         
         }));
 
 
         // this is new object, so we can insert it directly (faster, we don't wait for next re-render..)
-        var updatedUserData = { ...userData, data: { ...userData.data , votedForGPuserId: event.target.value, } 
+        var updatedUserData = { ...userData, data: { ...userData.data , votedForGPuserId: whichVotedFor, } 
         }
        
 
@@ -516,7 +437,7 @@ const Elections = () => {
 
     } catch (error) {
       //console.log(error);
-      setResultText(error.response.data.message);
+      console.log(error.response.data.message);
     }
 
 
@@ -526,73 +447,11 @@ const Elections = () => {
   return (
     <>
 
-      <div className="flex m-0 flex justify-start items-center gap-4">
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, minWidth: 120 }}
-          className="m-4 ml-0 mb-1"
-        >
-          <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-            <b>Selecting</b>
-          </InputLabel>
-          {/* this is what NP can select  */}
-          {currentUserType === "NP" && (
-            <>
-              <Select
-                labelId="roleDropdowns"
-                value={selectedRole}
-                onChange={handleChangeRole}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-                <MenuItem value={"AH"}>Athletes</MenuItem>
-                <MenuItem value={"GP"}>Global President</MenuItem>
-                <MenuItem value={"RS"}>Referee & support</MenuItem>
-              </Select>
-            </>
-          )}
 
-          {/* this is what athlete and "referee & support" can select  */}
-          {(currentUserType === "AH" || currentUserType == "RS") && (
-            <>
-              <>
-                <Select
-                  labelId="roleDropdowns"
-                  value={selectedRole}
-                  onChange={handleChangeRole}
-                  className="w-[200px]"
-                  style={{ color: "#000" }}
-                >
-                  <MenuItem value={"NP"}>National President</MenuItem>
-                </Select>
-              </>
-            </>
-          )}
-
-          {/* this is what Global President can select  */}
-          {currentUserType === "GP" && (
-            <>
-              <>
-                <Select
-                  labelId="roleDropdowns"
-                  value={selectedRole}
-                  onChange={handleChangeRole}
-                  className="w-[200px]"
-                  style={{ color: "#000" }}
-                >
-                  <MenuItem value={"LM"}>Legal Manager</MenuItem>
-                  <MenuItem value={"ITM"}>IT Manager</MenuItem>
-
-                  <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-                  <MenuItem value={"SM"}>Sales Manager</MenuItem>
-                  <MenuItem value={"VM"}>Validation Manager</MenuItem>
-                  <MenuItem value={"EM"}>Event Manager</MenuItem>
-                </Select>
-              </>
-            </>
-          )}
-        </FormControl>
-
+{/* selection, you put logic for if to show.., in <Radio Button ! */}
+   {/*    <div className="flex m-0 justify-start items-center gap-4">
+    
+        {/* AH and RS selecting NP 
         {((currentUserType === "AH" || currentUserType === "RS" ) && passportStatus === "validated") && (
           <>
             <FormControl
@@ -627,7 +486,7 @@ const Elections = () => {
           </>
         )}
 
-        {/* we have same selection for GP (for GP, it's if one tops another 120% more) */}
+        {/*  NP's selecting GP.  we have same selection for GP (for GP, it's if one tops another 120% more). 
         {(
           selectedRole === "GP" && passportStatus === "validated" ) && (
           <>
@@ -664,8 +523,9 @@ const Elections = () => {
         )}
 
 
-        <></>
-      </div>
+      </div> */}
+
+
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-end">
         <SearchBar
@@ -681,6 +541,7 @@ const Elections = () => {
         />
       </div>
 
+
       <div className="mt-8">
         <table className="w-full">
           <thead>
@@ -693,7 +554,7 @@ const Elections = () => {
 
               {((currentUserType === "AH" || currentUserType === "RS" ) || selectedRole == "GP" ) ? (
                 <>
-                  <th className="w-[10%]">All votes</th>
+                  <th className="w-[10%]">Votes</th>
                 </>
               ) : (
                 <>
@@ -701,10 +562,11 @@ const Elections = () => {
                 </>
               )}
 
-              <th className="w-[15%]">Name</th>
-              <th className="w-[8%]">Age</th>
-              <th className="w-[12%]">Country</th>
+              <th className="w-[35%]">Name</th>
               <th className="w-[27%]">Email</th>
+              
+            
+              
 
 
 
@@ -732,7 +594,10 @@ const Elections = () => {
             </tr>
           </thead>
           <tbody>
+
+           {/*  here, it will go currently selected, and it will be green color.. */}
             {top50Users.map((user, index) => (
+         
               <Top50
 /* 
                 userId={user.userId}
@@ -744,8 +609,8 @@ const Elections = () => {
                 phone={user.phone}
                 gender={user.gender}
                 votes={user.votes}
-                userNPPercentage={user.userNPPercentage} */
-
+                userNPPercentage={user.userNPPercentage} 
+*/
                 user={user}
 
                 currentUserPassportStatus={passportStatus}
@@ -764,177 +629,73 @@ const Elections = () => {
 
 
               />
-            ))}
+            ))} 
 
-            { ( (!showingTop50 && top50Users.length !== 0 && otherUsers.length > 0) || (top50Users.length === 10 && top50Page === 5)  ) && (
-              <>
-                <tr
-                  className="border-b-2 border-red_first "
-                  style={{ padding: "0px", paddingTop: "-5px" }}
-                >
-                  <td colSpan="100%"></td>
-                </tr>
-              </>
-            )}
+           
 
-            {!showingTop50 &&
-              otherUsers.map((user, index) => (
+
+
+
+            {otherUsers.map((user, index) => (
+
+
+
+
                 <Others
-
-
-                
-
-                /* 
-                userId={user.userId}
-                rank={user.ranking}
-                name={user.name}
-                age={user.age}
-                country={user.country}
-                email={user.email}
-                phone={user.phone}
-
-
-                gender={user.gender}
-                votes={user.votes}
-                userNPPercentage={user.userNPPercentage} */
-
-                
                 user={user}
-
+               
                 currentUserPassportStatus={passportStatus}
                   user_type={currentUserType}
                   index={index}
                   lastIndex={otherUsers.length - 1}
                   setRankUpdated={setRankUpdated}
-                 
                   selectedRole={selectedRole}
-                  
-                 
-                  votedForUserId={whichVotedFor}
 
+                  whichVotedFor={whichVotedFor}
+                  setWhichVotedFor={setWhichVotedFor}
                   lastRank={lastRank}
 
-
+                 
                 />
+
+              
+
+
+
               ))}
+
+
+
+
+
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center mt-4">
-        <button
 
 
-
-/* only when on first page
-and if it's actually first page, (it won't actually reflect new state in useState, so I think it's useless to mess with this anyways.. )
-
-|| (!showingTop50 && hasMoreOthers)
-
-*/
-            disabled={
-            (showingTop50 && top50Page === 1) 
-          }  
-
-
-          onClick={handlePreviousPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-        >
-          Previous
-        </button>
-        <button
-       /*  showingTop ce biti false (jer nema vise). hasmoretop isto false ! */
-        /*  showingTop ce biti false , ali hasMore others, IMA (true) */
-          disabled={
-            (showingTop50 && !hasMoreTop50) || (!showingTop50 && !hasMoreOthers)
-          }
-          onClick={handleNextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Next Page
-        </button>
+      <div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={otherPage}
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
       </div>
 
-      {currentUserType === "NP" && (
-        <>
-          <div>
-            <div>
-              <h2>Gender:</h2>
-              <div>
-                <button
-                  className={`gender-button ${
-                    genderFilter === "M" ? "male active" : ""
-                  }`}
-                  onClick={() => handleGenderFilter("M")}
-                  disabled={genderFilter === "M"}
-                >
-                  M
-                </button>
-                <button
-                  className={`gender-button ${
-                    genderFilter === "F" ? "female active" : ""
-                  }`}
-                  onClick={() => handleGenderFilter("F")}
-                  disabled={genderFilter === "F"}
-                >
-                  F
-                </button>
-              </div>
-            </div>
+    
 
-            <div className="button-container">
-              <h2>Category:</h2>
-              <div>
-                <button
-                  className={`category-button ${
-                    categoryFilter === "heavy" ? "heavy active" : ""
-                  }`}
-                  onClick={() => handleCategoryFilter("heavy")}
-                  disabled={categoryFilter === "heavy"}
-                >
-                  Heavy
-                </button>
-                <button
-                  className={`category-button ${
-                    categoryFilter === "medium" ? "medium active" : ""
-                  }`}
-                  onClick={() => handleCategoryFilter("medium")}
-                  disabled={categoryFilter === "medium"}
-                >
-                  Medium
-                </button>
-                <button
-                  className={`category-button ${
-                    categoryFilter === "light" ? "light active" : ""
-                  }`}
-                  onClick={() => handleCategoryFilter("light")}
-                  disabled={categoryFilter === "light"}
-                >
-                  Light
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+    
 
-      {currentUserType === "AH" ? (
-        <>
-          <p className="m-2">
-            You are selecting the National President. <br />
-            Current National President will be replaced if there's 130% more
-            votes than for current one. 
-          </p>
-        </>
-      ) : (
-        <>
-          <p className="m-2">
-            You are selecting the athletes to compete in the next games. The{" "}
-            <span className="text-red_first">top 50</span> athletes in the list
-            will be chosen to participate in the games. Use the Update Rank
-            feature to increase or decrease the rank of each athlete.
-          </p>
-        </>
-      )}
+      
     </>
   );
 };

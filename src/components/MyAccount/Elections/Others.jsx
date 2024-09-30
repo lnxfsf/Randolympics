@@ -13,17 +13,23 @@ import moment from "moment";
 
 import { Others50Popup } from "./Others50Popup";
 
+import Radio from "@mui/material/Radio";
+import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
 
 const Others = ({
   user,
+ 
   currentUserPassportStatus,
   user_type,
   index,
   lastIndex,
   setRankUpdated,
   selectedRole,
-  votedForUserId,
+  whichVotedFor,
   lastRank,
+  setWhichVotedFor,
+ 
 }) => {
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
@@ -206,7 +212,7 @@ const Others = ({
         popupRef.current.close();
       }
     } catch (error) {
-      console.log("sta je");
+      
       console.log(error);
     }
   };
@@ -221,10 +227,11 @@ const Others = ({
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
+        {(user_type === "AH" || user_type === "RS" || user_type === "NP") && (currentUserPassportStatus === "validated") && (
           <>
             <td style={{ textAlign: "center" }}>
-              {/*  <Checkbox
+               {/* 
+               <Checkbox
                 sx={{
                   color: "#FF0000",
                   "&.Mui-checked": {
@@ -232,183 +239,60 @@ const Others = ({
                   },
                 }}
                 checked={votedForNPuserIdBOOLEAN}
-                disabled
-              /> */}
+                
+              />  */}
 
-              {votedForUserId == userId ? <p>1</p> : <p>-</p>}
+<FormControlLabel
+             /*  value="s5" */
+
+
+/*              try, and match, which one userId (NP or GP, doesnt matter), it matches, so that's active radio button now.. */
+            
+/* 
+checked={whichVotedFor === user.votedForNPuserId || whichVotedFor === user.votedForGPuserId }
+ */
+
+
+              value={whichVotedFor === user.userId}
+              checked={whichVotedFor === user.userId}
+
+             /* onChange={() => {setSelectRadio((prev) => !prev )}} */
+
+                onChange={() => {setWhichVotedFor(user.userId)}}
+
+              control={
+                <Radio
+                  sx={{
+                    color: "#444444",
+                    "&.Mui-checked": {
+                      color: "#444444",
+                    },
+                  }}
+                />
+              }
+        
+              sx={{
+                "& .MuiTypography-root": {
+                  fontFamily: "'Lexend', sans-serif",
+                  fontWeight: 500,
+                },
+              }}
+            />
+
+
+
+             {/*   {whichVotedFor == userId ? <p>1</p> : <p>-</p>}  */}
+
+             
             </td>
           </>
         )}
 
-        {(user_type === "NP" && selectedRole !== "GP") || user_type === "GP" ? (
-          <>
-            {/* <div className="flex justify-between items-center gap-2"> */}
-
-            <td className="flex gap-2 justify-start items-center">
-              <div>
-                {/* only for Athletes, it shows, M, F, category...  */}
-                {selectedRole !== "AH" ? (
-                  <p>{rank}</p>
-                ) : (
+  <td className="flex gap-2 justify-start">
                   <p>
-                    {gender} {rank}
+                    <b>{votes}</b>
                   </p>
-                )}
-              </div>
-              <div>
-                {/*     <p className="cursor-pointer select-none text-gray_first">
-                  Update Rank <img src="myaccount/pencil.svg" style={{width: "10px", height: "10px", display: "inline-block", marginBottom: "5px"}} />
-                </p> */}
-                {(currentUserPassportStatus === "validated") && (
-
-                  <>
-                    <Popup
-                      ref={popupRef}
-                      trigger={
-                        <p className="cursor-pointer select-none text-gray_first">
-                          Update Rank{" "}
-                          <img
-                            src="/myaccount/pencil.svg"
-                            style={{
-                              width: "10px",
-                              height: "10px",
-                              display: "inline-block",
-                              marginBottom: "5px",
-                            }}
-                          />
-                        </p>
-                      }
-                      position="right center"
-                      contentStyle={{ width: "auto" }}
-                    >
-                      {/*   <div className="m-4">
-                    <div className="flex gap-2 mb-2">
-                      <p>Current rank</p>
-                      <p>
-                        <b>{currentRank}</b>
-                      </p>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <p>Update rank</p>
-
-                      <div className="flex justify-center items-center gap-2">
-                        <Button
-                          onClick={increaseRank}
-                          className="w-[15px]"
-                          style={{ marginTop: "0px", padding: "0px" }}
-                          sx={{
-                            height: "15px",
-                            bgcolor: "#fff",
-                            color: "#232323",
-                            borderRadius: 15,
-                            border: `1px solid #AF2626`,
-                            "&:hover": {
-                              background: "rgb(196, 43, 43)",
-                              color: "white",
-                              border: `1px solid rgb(196, 43, 43)`,
-                            },
-                          }}
-                        >
-                          <span className="popins-font">+</span>
-                        </Button>
-                        <Button
-                          onClick={decreaseRank}
-                          className="w-[15px]"
-                          style={{ marginTop: "0px", padding: "0px" }}
-                          sx={{
-                            height: "15px",
-                            bgcolor: "#fff",
-                            color: "#232323",
-                            borderRadius: 15,
-                            border: `1px solid #AF2626`,
-                            "&:hover": {
-                              background: "rgb(196, 43, 43)",
-                              color: "white",
-                              border: `1px solid rgb(196, 43, 43)`,
-                            },
-                          }}
-                        >
-                          <span className="popins-font">-</span>
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-center items-center gap-2 m-4">
-                      <Button
-                        onClick={cancel}
-                        className="w-[85px]"
-                        style={{ marginTop: "0px", padding: "0px" }}
-                        sx={{
-                          fontSize: "8pt",
-                          height: "30px",
-                          bgcolor: "#fff",
-                          color: "#232323",
-                          borderRadius: 15,
-                          border: `1px solid #fff`,
-                          "&:hover": {
-                            background: "rgb(196, 43, 43)",
-                            color: "white",
-                            border: `1px solid rgb(196, 43, 43)`,
-                          },
-                        }}
-                      >
-                        <span className="popins-font">Cancel</span>
-                      </Button>
-
-                      <Button
-                        onClick={saveChanges}
-                        className="w-[120px]"
-                        style={{ marginTop: "0px", padding: "0px" }}
-                        sx={{
-                          fontSize: "8pt",
-                          height: "30px",
-                          bgcolor: "#AF2626",
-                          color: "#fff",
-                          borderRadius: 15,
-                          border: `1px solid #AF2626`,
-                          "&:hover": {
-                            background: "rgb(196, 43, 43)",
-                            color: "white",
-                            border: `1px solid rgb(196, 43, 43)`,
-                          },
-                        }}
-                      >
-                        <span className="popins-font">Save changes</span>
-                      </Button>
-                    </div>
-                  </div> */}
-
-
-                      <Others50Popup increaseRank={increaseRank} currentRank={currentRank} decreaseRank={decreaseRank} cancel={cancel} saveChanges={saveChanges} />
-
-
-                    </Popup>
-                  </>
-
-                )}
-
-              </div>
-            </td>
-            {/* </div> */}
-          </>
-        ) : (
-          <>
-            {/* <div className="flex justify-between items-center gap-2"> */}
-            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") ? (
-              <td className="flex gap-2 justify-start">
-                <p>
-                  <b>{votes}</b>
-                </p>
-              </td>
-            ) : (
-              <td className="flex gap-2 justify-start">
-                <p>{rank}</p>
-              </td>
-            )}
-            {/* </div> */}
-          </>
-        )}
+                </td>
 
         <td>{name}</td>
         <td>{age}</td>

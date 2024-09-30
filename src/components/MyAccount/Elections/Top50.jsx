@@ -251,15 +251,15 @@ const Top50 = ({
       {/*ovo je ispod, samo da probas: border-b-2 border-red-500 */}
 
       {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
-      <tr key={index}>
+      <tr key={index} className="bg-[#f2fff3]">
         {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
          */}
 
         {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
          */}
-        {(user_type === "AH" || user_type === "RS"  || selectedRole === "GP")  && (
+        {(user_type === "AH" || user_type === "RS"  || user_type === "NP")  && (
           <>  
-            <td style={{ textAlign: "center" }}>
+            <td /* style={{ textAlign: "center" }} */>
               {/*   <Checkbox
                 sx={{
                   color: "#FF0000",
@@ -272,6 +272,8 @@ const Top50 = ({
               /> */}
 
               {votedForUserId == userId ? <p>1</p> : <p>-</p>}
+
+              
               
             </td>
           </>
@@ -291,7 +293,8 @@ const Top50 = ({
                 </>
               )} */}
 
-            <td className="flex gap-2 justify-start items-center">
+            <td /* className="flex gap-2 justify-start items-center" */ >
+              
               <div>
                 {(selectedRole !== "AH" ) ? (
                   <p>{rank}</p>
@@ -301,6 +304,7 @@ const Top50 = ({
                   </p>
                 )}
               </div>
+
               <div>
                 {/*     <p className="cursor-pointer select-none text-gray_first">
                   Update Rank <img src="myaccount/pencil.svg" style={{width: "10px", height: "10px", display: "inline-block", marginBottom: "5px"}} />
@@ -345,13 +349,13 @@ const Top50 = ({
 
             {/* if it's Athlete, then it shows "Votes", for those "NP" */}
             {(user_type === "AH" || user_type === "RS" || selectedRole === "GP" ) ? (
-              <td className="flex gap-2 justify-start">
+              <td /* className="flex gap-2 justify-start" */>
                 <p>
                   <b>{votes}</b> {" "}
                 </p>
               </td>
             ) : (
-              <td className="flex gap-2 justify-start">
+              <td /* className="flex gap-2 justify-start" */>
                 <p>{rank}</p>
               </td>
             )}
