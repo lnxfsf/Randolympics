@@ -25,6 +25,11 @@ const dayjs = require("dayjs");
 var weekday = require("dayjs/plugin/isoWeek");
 dayjs.extend(weekday);
 
+
+
+
+
+
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0; //parseInt, is because we want it as integer
@@ -347,7 +352,7 @@ const otherUsers = async (req, res) => {
 
   if (user_type === "EM") {
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingEM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 1
@@ -375,7 +380,7 @@ const otherUsers = async (req, res) => {
 
     if (countryOfcurrentUserOnFrontend) {
       try {
-        const otherUsers = await User.findAll({
+        const otherUsers = await User.findAndCountAll({
           where: {
             rankingRS: {
               [Op.gt]: 50, // Fetch users with ranking greater than 50
@@ -403,7 +408,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "LM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingLM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -429,7 +434,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "ITM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingITM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -455,7 +460,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "MM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingMM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -481,7 +486,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "SM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingSM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -507,7 +512,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "VM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingVM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -533,7 +538,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "GP") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           /* rankingGP: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -563,7 +568,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "NP") {
     // ! this, is also, for NP, we need it's own route, as we will handle other stuff...
     try {
-      const otherNPs = await User.findAll({
+      const otherNPs = await User.findAndCountAll({
         where: {
           // everything that's not NP..  (as we don't go by ranking.. at all)
           // currentNP: false,
@@ -590,17 +595,17 @@ const otherUsers = async (req, res) => {
       });
 
       // we need to find percentage, for votes, how much each one have
-      const npUsers = await User.findAll({
+    /*   const npUsers = await User.findAndCountAll({
         where: {
           user_type: user_type,
         },
-      });
+      }); */
 
       // Calculate total votes, in all NPs
-      const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
-
-      const WithPercentage = otherNPs.map((user) => {
-        const currentUser = npUsers.find(
+      /* const totalVotes = npUsers.rows.reduce((sum, user) => sum + user.votes, 0);
+ */
+   /*    const WithPercentage = otherNPs.rows.map((user) => {
+        const currentUser = npUsers.rows.find(
           (npUser) => npUser.userId === user.userId
         );
 
@@ -617,8 +622,11 @@ const otherUsers = async (req, res) => {
           userNPPercentage: percentage.toFixed(2),
         };
       });
+ */
+    
+      res.json(otherNPs);
 
-      res.json(WithPercentage);
+
 
       // res.json(otherNPs);
     } catch (error) {
@@ -628,7 +636,7 @@ const otherUsers = async (req, res) => {
   } else {
     if (countryOfcurrentUserOnFrontend) {
       try {
-        const otherUsers = await User.findAll({
+        const otherUsers = await User.findAndCountAll({
           where: {
             ranking: {
               [Op.gt]: 50, // Fetch users with ranking greater than 50
@@ -880,6 +888,7 @@ const lastInRank = async (req, res) => {
     console.log(latestUser);
 
     res.json(latestUser.ranking);
+
   } catch (error) {
     console.error("Error fetching top users:", error);
     res.status(500).json({ error: "Internal server error" });
