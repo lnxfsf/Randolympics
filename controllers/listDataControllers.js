@@ -849,7 +849,7 @@ const listLoginTrafficHistory = async (req, res) => {
   }
 
   try {
-    const listLoginTrafficHistory = await Traffic.findAll({
+    const listLoginTrafficHistory = await Traffic.findAndCountAll({
       where: filterCondition,
 
       // "unvalidated", have more priority, shows first. then "rejected", second.. and then "validated"
@@ -859,7 +859,7 @@ const listLoginTrafficHistory = async (req, res) => {
       offset: offset,
     });
 
-    console.log(listLoginTrafficHistory);
+  
 
     res.json(listLoginTrafficHistory);
   } catch (error) {
