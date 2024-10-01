@@ -79,7 +79,7 @@ const ReadMoreNewsNewsBlock = () => {
       <div className="mb-32"></div>
 
       <div className=" flex justify-center items-center">
-        <div className="w-[70%]">
+        <div className="w-[97%]">
           <IconButton
             className="back-icon"
             aria-label="back"
