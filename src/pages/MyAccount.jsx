@@ -19,6 +19,7 @@ import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
 import { useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
+import { WarningPassportMessage } from "../components/MyAccount/WarningPassportMessage";
 
 const MyAccount = () => {
   const { t } = useTranslation();
@@ -29,12 +30,6 @@ const MyAccount = () => {
   let { logoutUser } = useContext(AuthContext);
 
   const [user_type, setUserType] = useState("");
-  /*   const [passportStatus, setPassportStatus] = useState();
-  const [birthdate, setBirthdate] = useState(); */
-
-  const [warningMessage, setWarningMessage] = useState();
-  const [isRejected, setIsRejected] = useState(false);
-
   const [passportStatus, setPassportStatus] = useState();
 
   useEffect(() => {
@@ -47,16 +42,7 @@ const MyAccount = () => {
       setUserType(userJson.data.user_type);
 
       setPassportStatus(userJson.data.passportStatus);
-
-      /* setPassportStatus(userJson.data.setPassportStatus);
-      setBirthdate(userJson.data.birthdate); */
     }
-
-    warningBoxFunc(
-      userJson.data.passportStatus,
-      userJson.data.birthdate,
-      userJson.data.passport_photo
-    );
 
     // you get like "elections" extracted from URL ".. #elections"
     // and now, you choose something to be selected
@@ -88,7 +74,7 @@ const MyAccount = () => {
         setSelectedItem("passportVerification");
         break;
     }
-  }, [isRejected, warningMessage, hash]);
+  }, [hash]);
 
   const [selectedItem, setSelectedItem] = useState("myAccount");
 
@@ -113,29 +99,6 @@ const MyAccount = () => {
     }
   };
 
-  const warningBoxFunc = (passportStatus, birthdate, passport_photo) => {
-    if (passportStatus === "unvalidated") {
-      if (birthdate == null && passport_photo == null) {
-        setWarningMessage(t("myprofile.side_nav.passport1"));
-      } else if (birthdate == null && passport_photo !== null) {
-        setWarningMessage(t("myprofile.side_nav.passport2"));
-      } else if (birthdate !== null && passport_photo == null) {
-        setWarningMessage(t("myprofile.side_nav.passport3"));
-      } else {
-        setWarningMessage(t("myprofile.side_nav.passport4"));
-      }
-    } else if (passportStatus === "rejected") {
-      setWarningMessage(
-        t('myprofile.side_nav.passport5')
-      );
-      setIsRejected(true);
-
-    } else if (passportStatus === "validated") {
-      setWarningMessage("");
-      setIsRejected(false);
-    }
-  };
-
   return (
     <>
       <Navbar />
@@ -152,7 +115,9 @@ const MyAccount = () => {
               onClick={() => handleClick("myAccount")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav1')}</p>
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav1")}
+                </p>
                 <img src="/myaccount/user.svg" className="icon" />
               </div>
             </li>
@@ -166,7 +131,9 @@ const MyAccount = () => {
               onClick={() => handleClick("settings")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav2')}</p>
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav2")}
+                </p>
                 <img src="/myaccount/settings.svg" className="icon" />
               </div>
             </li>
@@ -180,17 +147,15 @@ const MyAccount = () => {
               onClick={() => handleClick("team")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav3')}</p>
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav3")}
+                </p>
 
                 <img src="/myaccount/team.svg" className="icon" />
               </div>
             </li>
 
-            {(
-              user_type === "AH" ||
-              user_type === "NP" 
-             
-            ) && (
+            {(user_type === "AH" || user_type === "NP") && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={electionsRef}
@@ -200,7 +165,9 @@ const MyAccount = () => {
                 onClick={() => handleClick("elections")}
               >
                 <div className="flex justify-between">
-                  <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav4')}</p>
+                  <p className="text-red_second font-medium ">
+                    {t("myprofile.side_nav.side_nav4")}
+                  </p>
                   <img src="/myaccount/ballot.svg" className="icon" />
                 </div>
               </li>
@@ -222,7 +189,9 @@ const MyAccount = () => {
                   onClick={() => handleClick("news")}
                 >
                   <div className="flex justify-between">
-                    <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav5')}</p>
+                    <p className="text-red_second font-medium ">
+                      {t("myprofile.side_nav.side_nav5")}
+                    </p>
 
                     <img src="/myaccount/news.svg" className="icon" />
                   </div>
@@ -241,7 +210,7 @@ const MyAccount = () => {
               >
                 <div className="flex justify-between">
                   <p className="text-red_second font-medium ">
-                  {t('myprofile.side_nav.side_nav6')}
+                    {t("myprofile.side_nav.side_nav6")}
                   </p>
 
                   <img src="/myaccount/passport.svg" className="icon" />
@@ -267,7 +236,7 @@ const MyAccount = () => {
               >
                 <div className="flex justify-between">
                   <p className="text-red_second font-medium ">
-                  {t('myprofile.side_nav.side_nav7')}
+                    {t("myprofile.side_nav.side_nav7")}
                   </p>
 
                   <img src="/myaccount/login_history.svg" className="icon" />
@@ -284,35 +253,16 @@ const MyAccount = () => {
               onClick={() => handleClick("logout")}
             >
               <div className="flex justify-between">
-                <p className="text-red_second font-medium ">{t('myprofile.side_nav.side_nav8')}</p>
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav8")}
+                </p>
 
                 <img src="/myaccount/exit.svg" className="icon" />
               </div>
             </li>
           </ul>
 
-          {warningMessage && (
-            <>
-              <div
-                className={`flex flex-col p-2 mt-4 m-4 pl-2 ${
-                  isRejected === true ? "error_box_rejected" : "error_box"
-                } `}
-              >
-                <div className="flex">
-                  {/*  <img src="/myaccount/triangle-exclamation.svg" /> */}
-                  <WarningAmberIcon />
-                  <p className="pl-2">{t('myprofile.side_nav.passport6')}</p>
-                </div>
-
-                <div className="pl-8 pt-2">{warningMessage}</div>
-
-                <div className="pl-8 pt-4">
-                  {" "}
-                  <p>{t('myprofile.side_nav.passport7')}</p>
-                </div>
-              </div>
-            </>
-          )}
+          <WarningPassportMessage />
         </div>
 
         <div className="w-full">

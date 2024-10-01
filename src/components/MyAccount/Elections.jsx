@@ -6,16 +6,23 @@ import { Top50 } from "./Elections/Top50";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import moment from "moment";
 
 import "../../styles/elections.scoped.scss";
 
+import { useTranslation } from "react-i18next";
 import SearchBar from "@mkyy/mui-search-bar";
+import { WarningPassportMessage } from "./WarningPassportMessage";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Elections = () => {
+  const { t } = useTranslation();
+
+  const [passportStatus, setPassportStatus] = useState();
+
   // with this, we also need to send to backend, so we can filter, based on gender, and later on category..
   // we listen on changes, send to backend, and filter by it..
   const [genderFilter, setGenderFilter] = useState("M");
@@ -92,8 +99,6 @@ const Elections = () => {
     }
   }); // UserID of GP , we voted for...
 
-  const [passportStatus, setPassportStatus] = useState();
-
   //this is used, for filtering, for .get operations..
   const [countryOfcurrentUserOnFrontend, setCountryOfcurrentUserOnFrontend] =
     useState(() => {
@@ -118,6 +123,10 @@ const Elections = () => {
     }
   });
 
+  const [gvotedForId, setGVotedForId] = useState(null);
+  const [gname, setGName] = useState("");
+  const [glastName, setGLastName] = useState("");
+
   useEffect(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -129,9 +138,7 @@ const Elections = () => {
       setPassportStatus(userJson.data.passportStatus);
     }
 
-    fetchTop50Users(); 
-  
-    
+    fetchTop50Users();
 
     fetchOtherUsers();
 
@@ -140,6 +147,8 @@ const Elections = () => {
     } else if (whichVotedFor !== votedForGP && currentUserType === "NP") {
       handleVotedForGP();
     }
+
+    
   }, [
     otherPage,
 
@@ -154,47 +163,24 @@ const Elections = () => {
     votedForGP,
 
     whichVotedFor,
+
   ]);
+
+  const getUserVotedFor = () => {
+    if (userData) {
+      return userData.data.votedForNPuserId || userData.data.votedForGPuserId;
+    }
+
+  };
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
-
     console.log("ovo ne radi");
   };
 
   const handlePaginationChange = (event, value) => {
     setOtherPage(value);
   };
-
-  /* 
-  const lastInRank = async () => { 
-
-    try {
-
-      const response = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/listsData/lastInRank`,
-        {
-          params: {
-            user_type: selectedRole,
-            nationality: countryOfcurrentUserOnFrontend,
-            gender: genderFilter,
-            
-          },
-        }
-      );
-
-      
-     console.log(response.data)
-      setLastRank(response.data)
-
-    } catch (error) {
-      console.error("Error fetching top users:", error);
-    }
-
-
-
-  }
- */
 
   const fetchTop50Users = async () => {
     // this params: , is actually a variables to send to server !
@@ -258,6 +244,7 @@ const Elections = () => {
       console.error("Error fetching other users:", error);
     }
   };
+
 
   //  for NP's selection (by Athletes ! )
   const handleVotedFor = async (event) => {
@@ -347,85 +334,60 @@ const Elections = () => {
 
   return (
     <>
-      {/* selection, you put logic for if to show.., in <Radio Button ! */}
-      {/*    <div className="flex m-0 justify-start items-center gap-4">
-    
-        {/* AH and RS selecting NP 
-        {((currentUserType === "AH" || currentUserType === "RS" ) && passportStatus === "validated") && (
-          <>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1, minWidth: 120 }}
-              className="m-4 ml-0 mb-1"
+      <WarningPassportMessage />
+
+      <div className="w-full flex justify-center flex-col gap-4 lexend-font text-black_second">
+        <div className="bg-gray_second p-4 flex gap-2 w-[97%] justify-start  ">
+          <img src="/myaccount/ballot.svg" />
+
+          <p>
+            You voted for{" "}
+            <a
+              className="text-red_second font-medium"
+              href={`profile/${getUserVotedFor()}`}
             >
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Vote for</b>
-              </InputLabel>
+             {top50Users[0] && (<>{top50Users[0].name} {top50Users[0].lastName}</>)}
+            </a>
+            . You can update your vote anytime by repeating the process.
+          </p>
 
-              <Select
-                labelId="roleDropdowns"
-                value={votedFor}
-                onChange={handleVotedFor}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-                {top50Users.map((user) => (
-                  <MenuItem key={user.userId} value={user.userId}>
-                    {user.name}
-                  </MenuItem>
-                ))}
+          <p></p>
+        </div>
 
-                {otherUsers.map((user) => (
-                  <MenuItem key={user.userId} value={user.userId}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </>
-        )}
+        <div className="elections_header  w-[97%] rounded-xl  p-4">
+          <p className="font-semibold text-lg md:text-xl mb-2">
+            National President Elections
+          </p>
 
-        {/*  NP's selecting GP.  we have same selection for GP (for GP, it's if one tops another 120% more). 
-        {(
-          selectedRole === "GP" && passportStatus === "validated" ) && (
-          <>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1, minWidth: 120 }}
-              className="m-4 ml-0 mb-1"
-            >
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Vote for</b>
-              </InputLabel>
+          <div className="flex gap-4 flex-col md:flex-row">
+            <div className="w-full flex items-start gap-2">
+              <img src="/myaccount/info.svg" className="mt-2" />
 
-              <Select
-                labelId="roleDropdowns"
-                value={votedForGP}
-                onChange={handleVotedForGP}
-                className="w-[200px]"
-                style={{ color: "#000" }}
-              >
-                {top50Users.map((user) => (
-                  <MenuItem key={user.userId} value={user.userId}>
-                    {user.name}
-                  </MenuItem>
-                ))}
+              <div className="grow mt-1">
+                <p className="font-bold">What are you voting for</p>
+                <p>
+                  You are voting for the National President who will represent
+                  your team and country.
+                </p>
+              </div>
+            </div>
 
-                {otherUsers.map((user) => (
-                  <MenuItem key={user.userId} value={user.userId}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </>
-        )}
+            <div className="w-full flex items-start gap-2">
+              <img src="/myaccount/vote.svg" className="mt-2" />
 
-
-      </div> */}
+              <div className="grow mt-1">
+                <p className="font-bold">How To Vote</p>
+                <p>
+                  Select first button on left side, of table, to cast your vote.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* div's, for Search bar and Filter */}
-      <div className="flex justify-end">
+      <div className="flex flex-col w-full sm:flex-row justify-end mt-8 pl-4 pr-4 lexend-font text-black_second">
         <SearchBar
           value={searchText}
           onChange={(newValue) => setSearchText(newValue)}
@@ -433,36 +395,36 @@ const Elections = () => {
           onSearch={handleSearch}
           style={{
             border: "1px solid #C6C6C6", // Border color and thickness
-            borderRadius: "20px", // Border radius
+            borderRadius: "10px", // Border radius
           }}
+          width="100%"
         />
       </div>
 
-      <div className="mt-8 lexend-font text-black_second">
-        <table className="w-full">
-          <thead>
-            <tr>
-             
-              <th className="w-[5%]"></th>
-              
+      {/* table */}
+      <div className="container-table-mobile">
+        <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th className="w-[5%]"></th>
 
-              <th className="w-[8%]">Votes</th>
+                <th className="w-[8%]">Votes</th>
 
-              <th className="w-[20%]">Name</th>
+                <th className="w-[20%]">Name</th>
 
-              <th className="w-[27%]">Email</th>
+                <th className="w-[27%]">Email</th>
 
-              <th className="w-[20%]">Phone</th>
+                <th className="w-[20%]">Phone</th>
 
-              <th className="w-[20%]">Status</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {/*  here, it will go currently selected, and it will be green color.. */}
-            {top50Users.map((user, index) => (
-              <Top50
-                /* 
+                <th className="w-[20%]">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/*  here, it will go currently selected, and it will be green color.. */}
+              {top50Users.map((user, index) => (
+                <Top50
+                  /* 
                 userId={user.userId}
                 rank={user.ranking}
                 name={user.name}
@@ -474,36 +436,38 @@ const Elections = () => {
                 votes={user.votes}
                 userNPPercentage={user.userNPPercentage} 
 */
-                user={user}
-                currentUserPassportStatus={passportStatus}
-                user_type={currentUserType}
-                index={index}
-                lastIndex={top50Users.length - 1}
-                setRankUpdated={setRankUpdated}
-                selectedRole={selectedRole}
-                whichVotedFor={whichVotedFor}
-                lastRank={lastRank}
-              />
-            ))}
+                  user={user}
+                  currentUserPassportStatus={passportStatus}
+                  user_type={currentUserType}
+                  index={index}
+                  lastIndex={top50Users.length - 1}
+                  setRankUpdated={setRankUpdated}
+                  selectedRole={selectedRole}
+                  whichVotedFor={whichVotedFor}
+                  lastRank={lastRank}
+                />
+              ))}
 
-            {otherUsers.map((user, index) => (
-              <Others
-                user={user}
-                currentUserPassportStatus={passportStatus}
-                user_type={currentUserType}
-                index={index}
-                lastIndex={otherUsers.length - 1}
-                setRankUpdated={setRankUpdated}
-                selectedRole={selectedRole}
-                whichVotedFor={whichVotedFor}
-                setWhichVotedFor={setWhichVotedFor}
-                lastRank={lastRank}
-              />
-            ))}
-          </tbody>
-        </table>
+              {otherUsers.map((user, index) => (
+                <Others
+                  user={user}
+                  currentUserPassportStatus={passportStatus}
+                  user_type={currentUserType}
+                  index={index}
+                  lastIndex={otherUsers.length - 1}
+                  setRankUpdated={setRankUpdated}
+                  selectedRole={selectedRole}
+                  whichVotedFor={whichVotedFor}
+                  setWhichVotedFor={setWhichVotedFor}
+                  lastRank={lastRank}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
+      {/* pagination */}
       <div className="flex justify-center items-start mt-4    w-full ">
         <Stack>
           <Pagination
