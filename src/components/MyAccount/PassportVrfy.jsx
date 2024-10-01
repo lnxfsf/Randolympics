@@ -17,6 +17,7 @@ import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../../context/supportedCountry";
 
 import { FormControl, InputLabel, Select, MenuItem, Divider  } from "@mui/material";
+import { WarningPassportMessage } from "./WarningPassportMessage";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -123,7 +124,7 @@ const PassportVrfy = () => {
 
   return (
     <>
-      <HeaderMyProfile />
+      <WarningPassportMessage />
 
       {/* div's, for Search bar and Filter */}
       <div className="flex justify-between">

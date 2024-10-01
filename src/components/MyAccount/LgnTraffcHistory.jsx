@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { LoginAndTraffic } from "./Elections/LoginAndTraffic";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -30,9 +32,9 @@ const LgnTraffcHistory = () => {
   const [listOfLogins, setListOfUsers] = useState([]);
 
   const [listOfLoginsPage, setListOfUsersPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(0);
 
-  const [hasMoreListOfLogins, setHasMoreListOfLogins] = useState(true);
-
+  
 
   const [filterRole, setFilterRole] = useState();
   const [filterNationality_selected, setFilterNationality_selected] = useState(() => {
@@ -88,48 +90,39 @@ const LgnTraffcHistory = () => {
           },
         }
       );
-      setListOfUsers(response.data);
 
-      console.log(response.data);
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setListOfUsers(response.data.rows);
 
-      // Check if we should switch to showing other users
-      if (response.data.length < 10) {
-        setHasMoreListOfLogins(false);
-      } else {
-        setHasMoreListOfLogins(true);
-      }
+    
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
   };
 
 
-
-
-  const handleNextPage = () => {
-    if (hasMoreListOfLogins) {
-        setListOfUsersPage((prev) => prev + 1);
-    }
+  
+  const handlePaginationChange = (event, value) => {
+    setListOfUsersPage(value);
   };
 
-  const handlePreviousPage = () => {
-    if (listOfLoginsPage > 1) {
-        setListOfUsersPage((prev) => prev - 1);
-    }
-  };
+  
 
   return (
     <>
-      <HeaderMyProfile />
+    
+    
 
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center lexend-font text-black_second p-2">
+        <p className="text-lg md:text-xl font-medium">Login & Traffic History</p>
         <div className="m-4 flex justify-center items-center">
+       
           <Popup
             ref={popupRef}
             trigger={
               <Button
                 startIcon={<TuneIcon />}
-                className="w-[90px] "
+                className="w-full md:w-[90px] "
                 style={{
                   margin: "0px",
                   paddingLeft: "20px",
@@ -152,15 +145,15 @@ const LgnTraffcHistory = () => {
                 <span className="popins-font">Filter</span>
               </Button>
             }
-            position="bottom center"
+            position="bottom right"
             contentStyle={{ width: "auto" }}
             closeOnDocumentClick={false}
           >
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center w-full">
               <Button
                 onClick={resetFilterFields}
                 startIcon={<RestoreIcon />}
-                className="w-[150px] "
+                className="w-full md:w-[150px] "
                 style={{
                   marginTop: "10px",
                 }}
@@ -194,7 +187,7 @@ const LgnTraffcHistory = () => {
                   labelId="roleDropdowns"
                   value={filterRole}
                   onChange={handleFilterRole}
-                  className="w-[300px]"
+                  className="w-full md:w-[300px]"
                   style={{ color: "#000" }}
                 >
                   <MenuItem value="">None</MenuItem>
@@ -219,7 +212,7 @@ const LgnTraffcHistory = () => {
               countries={supportedCountry}
                 selected={filterNationality_selected}
                 onSelect={(code) => setFilterNationality_selected(code)}
-                className="w-[300px]  "
+                className="w-full md:w-[300px]  "
                 searchable={true}
                 id="nationality"
                 name="nationality"
@@ -232,8 +225,9 @@ const LgnTraffcHistory = () => {
         </div>
       </div>
 
+
       <div className="mt-8">
-        <table className="w-full">
+        <table className="w-full lexend-font text-black_second">
           <thead>
             <tr>
               <th className="w-[15%]">Role</th>
@@ -250,22 +244,27 @@ const LgnTraffcHistory = () => {
       </div>
 
 
-      <div className="flex justify-center mt-4">
-        <button
-          disabled={listOfLoginsPage === 1}
-          onClick={handlePreviousPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-        >
-          Previous
-        </button>
-        <button
-          disabled={!hasMoreListOfLogins}
-          onClick={handleNextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Next Page
-        </button>
+
+
+      
+      <div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={listOfLoginsPage}
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
       </div>
+
 
 
     </>
