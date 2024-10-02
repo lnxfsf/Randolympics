@@ -35,9 +35,8 @@
 
       "sport1": "Archery",
       "sport2": "Athletics",
-      "sport3": "Badmington",
+      "sport3": "Badminton",
       "sport4": "Gymnastics",
-      "sport5": "Skateboard",
       "sport6": "Weightlifting",
       "sport7": "Fencing",
       "sport8": "Field Hockey",
@@ -50,22 +49,20 @@
       "sport14": "Rowing",
       "sport15": "Football",
       "sport16": "Sailing",
-      "sport17": "Thriatlon",
+      "sport17": "Triathlon",
       "sport18": "Cycling",
-      "sport19": "Karate",
+      "sport19": "Boxing",
       "sport20": "Swimming",
       "sport21": "Table Tennis",
       "sport22": "Rugby Sevens",
       "sport23": "Tennis",
       "sport24": "Cannoening",
       "sport25": "Judo",
-      "sport26": "Surfing",
       "sport27": "Swimrun",
-      "sport28": "Swimrun Sprint",
+      "sport28": "Synchronized Swimming",
       "sport29": "Taekwondo",
       "sport30": "Basketball",
       "sport31": "Handball",
-      "sport32": "Sport Climbing",
       "sport33": "Wrestling"
     },
 
@@ -488,6 +485,8 @@
     "user_type8": "Validation Manager",
     "user_type9": "Legal Manager",
     "user_type10": "Referee & support",
+    "user_type11": "IT Manager",
+
 
     "private": "Private",
     "public": "Public",
@@ -766,5 +765,17 @@
     "content2": "Email",
     "content3": "Subject",
     "content4": "Text"
+  },
+
+
+  "sportDetails": {
+    "archery" : {
+      "subtitle1": "Tests precision, focus, and technique in both individual and team formats.",
+      
+      "title1": "Brief Overview of the Basic Rules for Archery"
+   
+   
+    }
+
   }
 }

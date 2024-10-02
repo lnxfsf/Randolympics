@@ -1,5 +1,6 @@
 import "../../styles/home.scoped.scss";
 
+import { useNavigate } from "react-router-dom";
 
 
 import {useTranslation} from "react-i18next";
@@ -19,7 +20,7 @@ import {useTranslation} from "react-i18next";
 const GridOfSportsHome = () => {
 
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
 
   return (
     <>
@@ -87,8 +88,12 @@ const GridOfSportsHome = () => {
             "
       >
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
-          <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
+        <div className="flex flex-col justify-center items-center ">
+          <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none"
+          
+          onClick={() => {navigate("/competitions/archery")}}
+          
+          >
             <img
               width={"30px"}
               height={"30px"}
@@ -139,18 +144,7 @@ const GridOfSportsHome = () => {
           <p className="mt-7">{t('home.ourCompetitions.sport4')}</p>
         </div>
 
-        {/* one item */}
-        <div className="flex flex-col justify-center items-center">
-          {" "}
-          <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
-            <img
-              width={"30px"}
-              height={"30px"}
-              src="home/competitions/skateboarding.svg"
-            />
-          </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport5')}</p>
-        </div>
+       
 
         {/* one item */}
         <div className="flex flex-col justify-center items-center">
@@ -328,7 +322,7 @@ const GridOfSportsHome = () => {
             <img
               width={"30px"}
               height={"30px"}
-              src="home/competitions/karate.svg"
+              src="home/competitions/boxing.svg"
             />
           </div>
           <p className="mt-7">{t('home.ourCompetitions.sport19')}</p>
@@ -412,18 +406,6 @@ const GridOfSportsHome = () => {
           <p className="mt-7">{t('home.ourCompetitions.sport25')}</p>
         </div>
 
-        {/* one item */}
-        <div className="flex flex-col justify-center items-center">
-          {" "}
-          <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
-            <img
-              width={"30px"}
-              height={"30px"}
-              src="home/competitions/surfing.svg"
-            />
-          </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport26')}</p>
-        </div>
 
         {/* one item */}
         <div className="flex flex-col justify-center items-center">
@@ -445,7 +427,7 @@ const GridOfSportsHome = () => {
             <img
               width={"30px"}
               height={"30px"}
-              src="home/competitions/swimrun.svg"
+              src="home/competitions/synchronized_swimming.svg"
             />
           </div>
           <p className="mt-2 text-center">{t('home.ourCompetitions.sport28')}</p>
@@ -490,18 +472,6 @@ const GridOfSportsHome = () => {
           <p className="mt-7">{t('home.ourCompetitions.sport31')}</p>
         </div>
 
-        {/* one item */}
-        <div className="flex flex-col justify-center items-center">
-          {" "}
-          <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
-            <img
-              width={"30px"}
-              height={"30px"}
-              src="home/competitions/climbing.svg"
-            />
-          </div>
-          <p className="mt-2 text-center">{t('home.ourCompetitions.sport32')}</p>
-        </div>
 
         {/* one item */}
         <div className="flex flex-col justify-center items-center">

@@ -334,7 +334,7 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold ">Noah Bennett</p>
-            <p className="text-[#616673]">{t("userTypes.user_type1")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type2")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -347,7 +347,7 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold">Ethan Brooks</p>
-            <p className="text-[#616673]">{t("userTypes.user_type2")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type6")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -360,7 +360,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Henry Foster</p>
-            <p className="text-[#616673]">{t("userTypes.user_type3")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type11")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -373,7 +373,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Mia Cooper</p>
-            <p className="text-[#616673]">{t("userTypes.user_type4")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -389,7 +389,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Amelia Ross</p>
-            <p className="text-[#616673]">{t("userTypes.user_type5")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type7")}</p>
           </div>
 
 
@@ -402,7 +402,7 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold ">Noah Bennett</p>
-            <p className="text-[#616673]">{t("userTypes.user_type6")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type9")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -415,84 +415,10 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold">Ethan Brooks</p>
-            <p className="text-[#616673]">{t("userTypes.user_type7")}</p>
-          </div>
-
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
-            {/* <div className="flex justify-center "> */}
-            <img src="/home/about/8.jpg" className="h-48 mb-4 object-contain" />
-            {/*  </div> */}
-
-            {/*  <div className="item_div">
-                   <img src="/home/about/1.jpg" />
-           </div> */}
-
-            <p className="font-bold">Henry Foster</p>
-            <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
-          </div>
-
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
-            {/* <div className="flex justify-center "> */}
-            <img src="/home/about/9.jpg" className="h-48 mb-4 object-contain" />
-            {/*  </div> */}
-
-            {/*  <div className="item_div">
-                   <img src="/home/about/1.jpg" />
-           </div> */}
-
-            <p className="font-bold">Mia Cooper</p>
-            <p className="text-[#616673]">{t("userTypes.user_type9")}</p>
-          </div>
-
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
-            {/* <div className="flex justify-center "> */}
-            <img
-              src="/home/about/10.jpg"
-              className="h-48 mb-4 object-contain"
-            />
-            {/*  </div> */}
-
-            {/*  <div className="item_div">
-                   <img src="/home/about/1.jpg" />
-           </div> */}
-
-            <p className="font-bold">Amelia Ross</p>
-            <p className="text-[#616673]">{t("userTypes.user_type10")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type4")}</p>
           </div>
 
 
-
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
-            {/* <div className="flex justify-center "> */}
-            <img
-              src="/home/about/10.jpg"
-              className="h-48 mb-4 object-contain"
-            />
-            {/*  </div> */}
-
-            {/*  <div className="item_div">
-                   <img src="/home/about/1.jpg" />
-           </div> */}
-
-            <p className="font-bold">Amelia Ross</p>
-            <p className="text-[#616673]">{t("userTypes.user_type11")}</p>
-          </div>
-
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
-            {/* <div className="flex justify-center "> */}
-            <img
-              src="/home/about/10.jpg"
-              className="h-48 mb-4 object-contain"
-            />
-            {/*  </div> */}
-
-            {/*  <div className="item_div">
-                   <img src="/home/about/1.jpg" />
-           </div> */}
-
-            <p className="font-bold">Amelia Ross</p>
-            <p className="text-[#616673]">{t("userTypes.user_type12")}</p>
-          </div>
           
         </div>
 

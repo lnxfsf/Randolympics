@@ -316,7 +316,9 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       : passportStatus === "unvalidated"
                       ? "text-[#616673]"
                       : "text-[#FD5757]"
-                  }`}
+                  }
+                  capitalize
+                  `}
                 >
                   {passportStatus}
                 </p>
@@ -379,7 +381,9 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
                       : passportStatus === "unvalidated"
                       ? "text-[#616673]"
                       : "text-[#FD5757]"
-                  }`}
+                  }
+                  capitalize
+                  `}
                 >
                   {passportStatus}
                 </p>
