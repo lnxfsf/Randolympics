@@ -499,7 +499,7 @@ const listAllUsers = async (req, res) => {
   ];
 
   try {
-    const listAllUsers = await User.findAll({
+    const listAllUsers = await User.findAndCountAll({
       where: filterConditions,
 
       // "unvalidated", have more priority, shows first. then "rejected", second.. and then "validated"
