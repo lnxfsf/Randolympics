@@ -485,7 +485,7 @@
     "user_type8": "Validation Manager",
     "user_type9": "Legal Manager",
     "user_type10": "Referee & support",
-    "user_type11": "IT Manager",
+    
 
 
     "private": "Private",
@@ -616,6 +616,7 @@
     "user_type10": "Legal Manager",
     "user_type11": "Referee & support",
     "user_type12": "Guest"
+    
   },
 
   "sports": {

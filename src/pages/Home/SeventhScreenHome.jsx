@@ -347,7 +347,7 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold">Ethan Brooks</p>
-            <p className="text-[#616673]">{t("userTypes.user_type6")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type7")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -360,7 +360,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Henry Foster</p>
-            <p className="text-[#616673]">{t("userTypes.user_type11")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type5")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -373,7 +373,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Mia Cooper</p>
-            <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type9")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
@@ -389,7 +389,7 @@ const SeventhScreenHome = () => {
            </div> */}
 
             <p className="font-bold">Amelia Ross</p>
-            <p className="text-[#616673]">{t("userTypes.user_type7")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
           </div>
 
 
@@ -402,7 +402,7 @@ const SeventhScreenHome = () => {
             </div> */}
 
             <p className="font-bold ">Noah Bennett</p>
-            <p className="text-[#616673]">{t("userTypes.user_type9")}</p>
+            <p className="text-[#616673]">{t("userTypes.user_type10")}</p>
           </div>
 
           <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
