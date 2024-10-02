@@ -370,7 +370,6 @@ const Team = () => {
       </div>
 
       {/* pagination */}
-
       <div className="flex justify-center items-start mt-4    w-full ">
         <Stack>
           <Pagination

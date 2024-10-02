@@ -1,6 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 import axios from "axios";
 
@@ -28,10 +30,12 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
+const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) => {
+
+  const [open1, setOpen1] = useState(false);
 
 
-    const name = user.name;
+  const name = user.name;
   const nationality = user.nationality;
   const user_type = user.user_type;
   var accountCreatedAt = user.createdAt;
@@ -39,31 +43,25 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
   var passportUploadedDate = user.passportUploadedDate;
   var passportLastValidatedRejected = user.passportLastValidatedRejected;
 
-
-
-  
   if (accountCreatedAt) {
     accountCreatedAt = moment(accountCreatedAt, "YYYY-MM-DD  HH:mm:ss");
-    accountCreatedAt = accountCreatedAt.format("YYYY-MM-DD  HH:mm:ss");
+    accountCreatedAt = accountCreatedAt.format("YYYY/MM/DD  HH:mm");
   }
 
   if (passportUploadedDate) {
     passportUploadedDate = moment(passportUploadedDate, "YYYY-MM-DD  HH:mm:ss");
-    passportUploadedDate = passportUploadedDate.format("YYYY-MM-DD  HH:mm:ss");
+    passportUploadedDate = passportUploadedDate.format("YYYY/MM/DD  HH:mm");
   }
 
   if (passportLastValidatedRejected) {
     passportLastValidatedRejected = moment(
       passportLastValidatedRejected,
-      "YYYY-MM-DD  HH:mm:ss"
+      "YYYY/MM/DD  HH:mm"
     );
     passportLastValidatedRejected = passportLastValidatedRejected.format(
-      "YYYY-MM-DD  HH:mm:ss"
+      "YYYY/MM/DD  HH:mm"
     );
   }
-
-
-
 
   const [birhdateDate, setBirhdateDate] = useState(() => {
     if (user.birthdate) {
@@ -74,23 +72,14 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
     }
   });
 
-
-  
-
   const [profileLastUpdatedAt, setProfileLastUpdatedAt] = useState(() => {
     let lastUpdatedAt = moment(user.updatedAt, "YYYY-MM-DD HH:mm:ss");
-    return lastUpdatedAt.format("YYYY-MM-DD HH:mm:ss");
+    return lastUpdatedAt.format("YYYY/MM/DD HH:mm");
   });
 
-
-
-  
   const handlePassportExpiryDateChange = (date) => {
     setPassportExpiryDate(date);
   };
-
-
-
 
   const [nameVerify, setNameVerify] = useState(user.name_verify);
   const [birthdateVerify, setBirthdateVerify] = useState(user.birthdate_verify);
@@ -110,9 +99,6 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
     dayjs(user.passport_expiry)
   ); // okay, directly passed from user,
 
-
-
-  
   const [currentUserTypeLoggedIn, setCurrentUserTypeLoggedIn] = useState(() => {
     const storedData =
       localStorage.getItem("authTokens") ||
@@ -122,11 +108,6 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
       return userJson.data.user_type;
     }
   });
-
-
-  
-
-
 
   // -------------------
   const reject = async () => {
@@ -154,21 +135,23 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passportLastValidatedRejected: passportLastValidatedRejected,
 
           isRejected: true,
-          updating_from_VM: true,  // this is, only for Validation Manager type anyways..
+          updating_from_VM: true, // this is, only for Validation Manager type anyways..
         }
       );
 
       if (response.status === 200) {
-
         setUpdatedPassportPopup((prev) => !prev);
 
-        popupRef.current.close();
+       // popupRef.current.close();
+        setOpen(false);
       }
     } catch (error) {
-      popupRef.current.close();
+      //popupRef.current.close();
+      setOpen(false);
     }
 
-    popupRef.current.close();
+   // popupRef.current.close();
+    setOpen(false);
   };
 
   const cancel = () => {
@@ -181,7 +164,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
     setPassportExpiryDate(dayjs(user.passport_expiry));
 
     // and exit popup
-    popupRef.current.close();
+  //  popupRef.current.close();
+    setOpen(false);
   };
 
   const saveChanges = async () => {
@@ -201,21 +185,18 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           passport_expiry: passportExpiryDate,
 
           passportLastValidatedRejected: passportLastValidatedRejected,
-          updating_from_VM: true, 
-          
+          updating_from_VM: true,
         }
       );
 
-
-
       if (response.status === 200) {
         setUpdatedPassportPopup((prev) => !prev);
-        console.log("poslao je dobro on..")
-        popupRef.current.close();
+        console.log("poslao je dobro on..");
+       // popupRef.current.close();
+        setOpen(false);
       }
     } catch (error) {
-       
-      console.log(error)
+      console.log(error);
       //popupRef.current.close();
     }
   };
@@ -223,21 +204,32 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
 
   return (
     <>
-      <div className="m-4">
+      <div className="m-4 lexend-font text-black_second">
+        
+        
         <div className="flex justify-between items-center gap-16 mt-2">
-          <img
+          {/* <img
             src={
               BACKEND_SERVER_BASE_URL +
               "/imageUpload/profile_pics/" +
               user.picture
             }
             className="ProfileImagePassVerify"
+          /> */}
+
+          <Avatar
+            sx={{ width: 97, height: 97 }}
+            src={
+              BACKEND_SERVER_BASE_URL +
+              "/imageUpload/profile_pics/" +
+              user.picture
+            }
           />
 
-          <Popup
-            ref={popupPassportRef}
-            trigger={
-              <img
+
+
+
+          <img
                 src={
                   BACKEND_SERVER_BASE_URL +
                   "/imageUpload/passport_pics/" +
@@ -245,14 +237,27 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
                 }
                 alt="Profile"
                 className="w-32 h-20 object-fit cursor-pointer"
+                onClick={() => {setOpen1(true);}}
               />
-            }
-            position="right center"
-            contentStyle={{ width: "auto" }}
-            modal
-            nested
+
+
+
+          <Dialog
+          open={open1}
+          onClose={() => {
+            setOpen1(false);
+          }}
+          scroll="paper" // Or "body" for a different scrolling behavior
+          maxWidth="sm" // Adjust the width as needed
+          fullWidth
+        >
+          
+
+          <DialogContent
+            dividers={true}
+            style={{ maxHeight: "80vh", overflow: "auto" }}
           >
-            <TransformWrapper>
+           <TransformWrapper>
               <TransformComponent>
                 <img
                   src={
@@ -265,11 +270,20 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
                 />
               </TransformComponent>
             </TransformWrapper>
-          </Popup>
+
+          </DialogContent>
+        </Dialog>
+
+
         </div>
 
+
+
+
         <div className="flex justify-between items-center gap-16 mt-2">
-          <p>Name: {user.name}</p>
+          <p>
+            <span className="font-semibold">Name: </span> {user.name}
+          </p>
           <FormControlLabel
             control={
               <Checkbox
@@ -293,19 +307,28 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
         {/* e, ovde pored njega samo check !  */}
 
         <div className="mt-2 mb-2">
-          <p>Email: {user.email}</p>
+          <p>
+            <span className="font-semibold">Email:</span> {user.email}
+          </p>
         </div>
 
         <div className="mt-2 mb-2">
-          <p>Phone: {user.phone}</p>
+          <p>
+            <span className="font-semibold">Phone:</span> {user.phone}
+          </p>
         </div>
 
         <div className="mt-2 mb-2">
-          <p>Cryptoaddress: {user.crypto}</p>
+          <p>
+            <span className="font-semibold">Cryptoaddress:</span> {user.crypto}
+          </p>
         </div>
 
         <div className="flex justify-between items-center gap-16">
-          <p>Country: {countryList().getLabel(user.nationality)} </p>
+          <p>
+            <span className="font-semibold">Country:</span>{" "}
+            {countryList().getLabel(user.nationality)}{" "}
+          </p>
           <FormControlLabel
             control={
               <Checkbox
@@ -328,7 +351,9 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
         </div>
 
         <div className="flex justify-between items-center gap-16">
-          <p>Birthdate {birhdateDate}</p>
+          <p>
+            <span className="font-semibold">Birthdate</span> {birhdateDate}
+          </p>
           <FormControlLabel
             control={
               <Checkbox
@@ -351,7 +376,19 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
         </div>
 
         <div className="mt-2 mb-2">
-          <p>Profile last edited: {profileLastUpdatedAt}</p>
+          <p className="text-xl font-bold mb-2">Account status</p>
+          <p>
+            <span className="font-semibold">Profile last edited:</span>{" "}
+            {profileLastUpdatedAt}
+          </p>
+          <p>
+            <span className="font-semibold">Passport Uploaded:</span>{" "}
+            {passportUploadedDate}
+          </p>
+          <p>
+            <span className="font-semibold">Last Validated/Rejected Date:</span>{" "}
+            {passportLastValidatedRejected}
+          </p>
         </div>
 
         {user_type === "AH" && (
@@ -362,12 +399,12 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef }) => {
           </>
         )}
 
-        <div className="flex justify-between items-center gap-16">
+        <div className="flex justify-between items-center md:gap-16">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["DatePicker"]}>
               <DatePicker
                 disabled={currentUserTypeLoggedIn === "GP"}
-                className="w-32"
+                className="w-full md:w-32"
                 label="Passport Expiry Date"
                 value={passportExpiryDate}
                 onChange={handlePassportExpiryDateChange}
