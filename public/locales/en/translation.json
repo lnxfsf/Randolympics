@@ -485,8 +485,6 @@
     "user_type8": "Validation Manager",
     "user_type9": "Legal Manager",
     "user_type10": "Referee & support",
-    
-
 
     "private": "Private",
     "public": "Public",
@@ -616,7 +614,6 @@
     "user_type10": "Legal Manager",
     "user_type11": "Referee & support",
     "user_type12": "Guest"
-    
   },
 
   "sports": {
@@ -768,15 +765,455 @@
     "content4": "Text"
   },
 
-
   "sportDetails": {
-    "archery" : {
+    "common1": "General Rules",
+
+    "archery": {
+      "maintitle": "Archery",
       "subtitle1": "Tests precision, focus, and technique in both individual and team formats.",
-      
-      "title1": "Brief Overview of the Basic Rules for Archery"
-   
-   
+
+      "title1": "Brief Overview of the Basic Rules for Archery",
+
+      "desc1": "<b>Distance:</b> Shooting distances vary depending on the competition format and category. <br/><br/><b>Equipment:</b> Archers must use approved bows and arrows. Equipment must meet specific regulations regarding size and materials. <br/><br/> <b>Safety:</b> Archers must follow safety protocols, including proper handling of equipment and maintaining a safe distance from the target area. <br/><br/>These rules ensure accuracy, fairness, and safety in archery competitions.",
+
+      "image1": "/sportDetails/archery/1.jpg",
+
+      "variations": [
+        {
+          "title": "Individual Archery",
+
+          "desc": "<b>Event:</b> Archers compete individually to shoot arrows at a target from a set distance.<br/><b>Competition Method:</b> Each archer takes a series of shots at the target, aiming for the highest score based on accuracy. Points are awarded based on where the arrows land on the target, with the bullseye earning the highest points.",
+
+          "yt_link": "rzj4FFi7wt8"
+        },
+
+        {
+          "title": "Team Archery",
+
+          "desc": "<b>Event:</b> Teams of archers compete together, with each team member taking shots to accumulate a combined score.<br/><b>Competition Method:</b> Teams shoot in rounds, with each member contributing to the total team score. The team with the highest combined score wins.<br/><b>Scoring:</b> Each team's score is the sum of the individual scores from each member’s shots.",
+
+          "yt_link": "x5G3eheCDbc"
+        }
+      ]
+    },
+
+    "swimming": {
+      "maintitle": "Swimming",
+      "subtitle1": "Swimming test speed, technique, and endurance across different distances and strokes.",
+
+      "title1": "Brief Overview of the Basic Rules for competitive swimming",
+
+      "desc1": "<b>False Starts:</b> A swimmer who leaves the starting block before the signal will be disqualified. <br/><br/><b>Turns and Finishes:</b> Proper technique for turns and finishes must be followed for each stroke.<br/><br/><b>Underwater Distance:</b> Swimmers cannot stay underwater beyond 15 meters after the start and each turn.<br/><br/>These rules ensure fairness, safety, and consistency in swimming competitions.<br/><br/><b>1. Freestyle:</b> Any stroke is allowed, but the front crawl is typically used. <br/>Swimmers must touch the wall at each turn and finish.<br/>Part of the swimmer's body must break the surface throughout the race, except at the start and turns.<br/><br/><b>2. Backstroke:</b> Swimmers must stay on their back except during turns.<br/>They start in the water and push off the wall.<br/>Flip turns are allowed, but swimmers must touch the wall on their back at the finish.<br/><br/><b>3. Breaststroke:</b> Swimmers use simultaneous arm and leg movements (frog kick).<br/>Both hands must touch the wall at the same time during turns and finishes.<br/>The head must break the surface of the water during each stroke cycle.<br/><br/><b>4. Butterfly</b> Both arms must move forward simultaneously over the water, with a dolphin kick.<br/>Both hands must touch the wall at the same time during turns and finishes.<br/><br/><b>5. Individual Medley (IM)</b> Swimmers perform each stroke (butterfly, backstroke, breaststroke, freestyle) in the correct order.<br/>They must touch the wall at each stroke transition.<br/><br/><b>6. Relays</b> The swimmer in the pool must touch the wall before the next swimmer can start.<br/>In medley relays, the stroke order is backstroke, breaststroke, butterfly, and freestyle.",
+
+      "image1": "/sportDetails/swim/2.jpg",
+
+      "variations": [
+        {
+          "title": "50m Freestyle",
+
+          "desc": "A sprint race covering one pool length in a freestyle stroke, typically front crawl. Speed is critical.",
+
+          "yt_link": "UwvnXFUcFSE"
+        },
+
+        {
+          "title": "100m Freestyle",
+
+          "desc": "Two lengths using freestyle stroke, a balance of speed and endurance.",
+
+          "yt_link": "q14W1uCJag4"
+        },
+
+        {
+          "title": "200m Freestyle",
+
+          "desc": "Four pool lengths in freestyle, requiring strong pacing and efficient turns.",
+
+          "yt_link": "XpwUwDGo9Ds"
+        },
+
+        {
+          "title": "400m Freestyle",
+
+          "desc": "Eight lengths of the pool, emphasising endurance in freestyle.",
+
+          "yt_link": "AdtvRpUYuhg"
+        },
+
+        {
+          "title": "1500m Freestyle",
+
+          "desc": "A long-distance event (30 lengths) in freestyle, requiring consistent pacing and stamina.",
+
+          "yt_link": "4Uw-zg0Xtys"
+        },
+
+        {
+          "title": "100m Backstroke",
+
+          "desc": "Two lengths of the pool in backstroke, where swimmers must start in the water facing the wall, using an alternating arm motion.",
+
+          "yt_link": "RlegXqiq85Q"
+        },
+        {
+          "title": "200m Backstroke",
+          "desc": "Four pool lengths using backstroke, focusing on maintaining strong technique and endurance.",
+          "yt_link": "D4uiv6K8WMI"
+        },
+        {
+          "title": "100m Breaststroke",
+          "desc": "Two lengths using the breaststroke technique, with a frog-like kick and glide, emphasizing power and timing.",
+          "yt_link": "qDC3r94NmvQ"
+        },
+        {
+          "title": "200m Breaststroke",
+          "desc": "Four lengths of breaststroke, demanding endurance while maintaining a smooth and powerful stroke.",
+          "yt_link": "BhLrutqkG_8"
+        },
+        {
+          "title": "100m Butterfly",
+          "desc": "Two lengths using butterfly stroke, characterized by simultaneous arm movements and a dolphin-like kick.",
+          "yt_link": "RQs-zSVIm_M"
+        },
+        {
+          "title": "200m Butterfly",
+          "desc": "A longer event of four pool lengths in butterfly, requiring excellent rhythm and endurance.",
+          "yt_link": "nOiHyA6K0HU"
+        },
+        {
+          "title": "200m Individual Medley",
+          "desc": "Four pool lengths where each stroke is swum for 50 meters: butterfly, backstroke, breaststroke, and freestyle.",
+          "yt_link": "7Ded59MVtQY"
+        },
+        {
+          "title": "400m Individual Medley",
+          "desc": "Eight lengths of the pool with each stroke swum for 100 meters in the same order: butterfly, backstroke, breaststroke, and freestyle.",
+          "yt_link": "C5n0BCzzdF8"
+        },
+        {
+          "title": "4x100m Freestyle Relay",
+          "desc": "Four swimmers each swim 100m in freestyle. The next swimmer can start when the previous swimmer touches the wall.",
+          "yt_link": "0_gXQTveQBQ"
+        },
+        {
+          "title": "4x200m Freestyle Relay",
+          "desc": "A longer relay where each swimmer swims 200m in freestyle.",
+          "yt_link": "mEcE-9ucmD8"
+        },
+        {
+          "title": "4x100m Medley Relay",
+          "desc": "Four swimmers, each swimming one of the strokes in this order: backstroke, breaststroke, butterfly, and freestyle.",
+          "yt_link": "9gt1mSp-1Tw"
+        }
+      ]
+    },
+
+    "diving": {
+      "maintitle": "Diving",
+      "subtitle1": "<b>Diving</b> is a sport that combines athleticism, precision, and grace as athletes perform acrobatic jumps and flips from springboards or platforms, entering the water with minimal splash. The sport requires control, body awareness, and impeccable timing.",
+
+      "title1": "",
+
+      "desc1": " Divers are scored based on the difficulty of their dive and how well they execute it, considering factors like takeoff, flight, and entry into the water.<br/><br/><b>Dive Difficulty:</b> Divers choose a list of dives, each assigned a degree of difficulty (DD) based on complexity. More difficult dives offer the potential for higher scores but also carry greater risk.<br/><br/><b>Judging:</b> A panel of judges scores each dive based on execution and technique. Points are awarded for the takeoff, the aerial phase, and entry into the water.<br/><br/><b>Splash Control:</b> A key element in diving is the entry into the water. A well-executed dive minimizes splash, as a cleaner entry is considered more controlled and aesthetically pleasing.<br/><br/>Diving is a test of both physical prowess and artistic presentation, with athletes combining athletic jumps, flips, and twists in a captivating display of skill.",
+
+      "image1": "/sportDetails/swim/2.jpg",
+
+      "variations": [
+        {
+          "title": "3m Springboard Diving",
+
+          "desc": "Athletes dive from a flexible board 3 meters above the water. The board allows divers to gain height with their jump, adding complexity to their dive.<br/><b>Key Skills:</b> Balance, precision, and control during takeoff and mid-air maneuvers.<br/><b>Scoring:</b> Judges evaluate the approach, execution of twists and somersaults, and entry into the water with minimal splash.",
+
+          "yt_link": "tJ4FiSpvEXo"
+        },
+        {
+          "title": "10m Platform Diving",
+
+          "desc": "Athletes dive from a solid platform 10 meters above the water. With no spring action, height is generated purely by the athlete's push-off.<br/><b>Key Skills:</b> Power, precision, and body control to execute flips and twists from a greater height.<br/> <b>Scoring:</b> Judges focus on form during takeoff, aerial execution, and clean water entry.",
+
+          "yt_link": "SBssmtYTJpM"
+        },
+        {
+          "title": "Synchronized 3m Springboard Diving",
+
+          "desc": "Two divers perform the same dive from separate springboards, aiming for perfect synchronization.<br/><b>Key Skills:</b> Timing, coordination, and synchronization between the divers, along with individual dive technique.<br/><b>Scoring:</b> Scores reflect both the execution of the dive and the synchronization of the athletes.",
+
+          "yt_link": "G37RMN-FaYk"
+        },
+        {
+          "title": "Synchronized 10m Platform Diving:",
+
+          "desc": "Similar to the synchronized springboard event, but performed from the 10m platform.<br/><b>Key Skills:</b> Timing and synchronization in a high-difficulty event, with emphasis on both athletes mirroring each other's movements in the air.<br/><b>Scoring:</b> Judges evaluate synchronization and individual execution of the dive.",
+
+          "yt_link": "wavpWlizyUY"
+        }
+      ]
+    },
+
+    "synchronized_swim": {
+      "maintitle": "Synchronized swimming",
+      "subtitle1": "<b>Synchronized Swimming</b> (now called <b>Artistic Swimming</b>) combines swimming, dance, and gymnastics, where athletes perform intricate, choreographed routines in the water to music. The sport demands strength, endurance, flexibility, grace, and precise timing, with athletes needing to perform both underwater and above the surface.",
+
+      "title1": "",
+
+      "desc1": "<b>Synchronized Swimming</b> (now called <b>Artistic Swimming</b>) combines swimming, dance, and gymnastics, where athletes perform intricate, choreographed routines in the water to music. The sport demands strength, endurance, flexibility, grace, and precise timing, with athletes needing to perform both underwater and above the surface.<br/><br/><b>Routines</b>: Both events consist of technical and free routines. The technical routine includes required elements, while the free routine allows more creativity and expression.<br/><br/><b>Judging:</b> Judges award points for technical execution (precision of movements, difficulty) and artistic impression (creativity, choreography, and synchronization with the music).<br/><br/><b>Underwater Skills:</b> Athletes must hold their breath for extended periods while maintaining graceful movements underwater.<br/><br/>Synchronized swimming demands exceptional athleticism, with athletes needing to master both endurance and artistry to execute flawless routines.",
+
+      "image1": "/sportDetails/swim/2.jpg",
+
+      "variations": [
+        {
+          "title": "Synchronized Swimming (Duet) - 2",
+
+          "desc": "Two swimmers perform a choreographed routine set to music, showcasing synchronization and artistry.<br/><b>Key Skills:</b> Precise synchronization between the swimmers, strong technical execution, flexibility, and creative expression.<br/> <b>Scoring:</b> Judges score based on technical merit (execution of movements, lifts, and transitions) and artistic impression (choreography, creativity, and musical interpretation). Synchronization between the two swimmers is crucial.",
+
+          "yt_link": "m5QgmCGoTmU"
+        },
+        {
+          "title": "Synchronized Swimming (Team) - 8",
+
+          "desc": "A team of eight swimmers performs a routine set to music, often featuring complex patterns, lifts, and formations.<br/><b>Key Skills:</b> Perfect coordination among all team members, strength in executing lifts and stunts, endurance, and synchronization in both large and small groups.<br/> <b>Scoring:</b> Teams are judged on their technical execution, synchronization, and artistic impression. The complexity of formations, transitions, and lifts adds to the difficulty and potential scoring.",
+
+          "yt_link": "Nd65ziXTv6s"
+        }
+      ]
+    },
+
+    "athletics": {
+      "maintitle": "Athletics",
+      "subtitle1": "<b>Athletics</b> is a collection of sporting events that involve running, jumping, throwing, and walking. It is one of the most popular and diverse categories in the world of sports, featuring events that test speed, strength, endurance, and technique. Athletics competitions can be held both indoors and outdoors, with the Olympics and World Championships being the premier events.",
+
+      "title1": "",
+
+      "desc1": "<b>False Starts:</b> In sprints, a false start occurs when an athlete leaves the starting blocks before the gun sounds, resulting in disqualification.<br/><br/><b>Throws and Jumps:</b> Athletes must perform within designated areas. In jumps, they must not cross the takeoff board, and in throws, they must not step outside the circle or foul line.<br/><br/><b>Relays:</b> The baton must be passed within a specific exchange zone.<br/><br/><b>Scoring</b><br/>Most track events are decided by time, with the fastest finisher winning the race.<br/>In field events, the winner is determined by the longest valid throw or jump.<br/>In combined events, points are awarded for performance in each event, and the athlete with the highest total score wins.<br/><br/>Athletics tests a wide range of physical attributes, including speed, endurance, power, and agility, making it a core part of major global sporting competitions.<br/><br/><b>Main Categories of Athletics</b><br/><br/><b>Track Events</b><br/><b>Sprints</b> (e.g., 100m, 200m, 400m): <b>Short-distance</b> races that focus on speed.<br/>Middle-Distance Races (e.g., 800m, 1500m): Races that test a combination of speed and endurance.<br/><b>Long-Distance Races</b> (e.g., 5000m, 10000m, Marathon): Endurance races over longer distances.<br/><b>Hurdles</b> (e.g., 100m hurdles, 400m hurdles): Runners must clear obstacles placed at regular intervals on the track.<br/><b>Relays</b> (e.g., 4x100m, 4x400m): Teams of four runners each complete part of the distance before passing the baton to the next runner.<br/><br/><b>Field Events</b><br/><br/><b>Jumps</b><br/><b>Long Jump</b> and <b>Triple Jump:</b> Athletes jump for distance after a running start.<br/><b>High Jump</b> and <b>Pole Vault</b>: Athletes must clear a bar set at increasing heights.<br/><br/><b>Throws</b><br/><b>Shot Put</b>, <b>Discus Throw</b>, <b>Javelin Throw</b>, and <b>Hammer Throw</b>: Athletes aim to throw an object as far as possible.<br/><br/><br/><b>Combined Events</b><br/><b>Decathlon</b> (Men) and <b>Heptathlon</b> (Women): Multi-event competitions that include a combination of track and field events testing overall athletic ability.<br/><br/><b>Race Walking</b>: Athletes must walk as fast as possible over long distances (e.g., 20km, 50km), maintaining contact with the ground at all times.",
+
+      "image1": "/sportDetails/athletics/3.jpg",
+
+      "variations": [
+        {
+          "title": "Sprint 100m",
+
+          "desc": "The shortest sprint race, requiring explosive speed over a straight 100 meters.",
+
+          "yt_link": "EMdLySCAwY8"
+        },
+        {
+          "title": "Sprint 200m",
+
+          "desc": "A sprint around half the track, combining speed with the ability to navigate the curve.",
+
+          "yt_link": "MeJqZErROcM"
+        },
+        {
+          "title": "Sprint 400m",
+
+          "desc": "A full lap sprint, balancing speed and endurance.",
+
+          "yt_link": "C05vAdxXXEI"
+        },
+        {
+          "title": "Middle-Distance Race 800m",
+
+          "desc": "A middle-distance race, typically run in two laps with a focus on speed and strategy.",
+
+          "yt_link": "WPNM-W4YhGQ"
+        },
+        {
+          "title": "Middle-Distance Race 1500m",
+
+          "desc": "A \"metric mile\" requiring endurance, strategy, and a strong finish.",
+
+          "yt_link": "IQcTd4xZ44o"
+        },
+        {
+          "title": "Long-Distance Race 5000m",
+
+          "desc": "A long-distance race of 12.5 laps, focusing on endurance and pacing.",
+
+          "yt_link": "Vc5MNJ-uPDw"
+        },
+        {
+          "title": "Long-Distance Race 10 000m",
+
+          "desc": "A 25-lap race demanding exceptional endurance and strategic pacing.",
+
+          "yt_link": "eqpsvgrfW68"
+        },
+        {
+          "title": "Marathon",
+
+          "desc": "A 42.195 km race, testing long-distance endurance over varied terrain.",
+
+          "yt_link": "SGQ4A3m1efw"
+        },
+        {
+          "title": "110m Hurdles",
+
+          "desc": "A sprint with 10 hurdles spaced evenly over 110 meters, requiring speed and precise technique.",
+
+          "yt_link": "XbfraKkipS8"
+        },
+        {
+          "title": "400m Hurdles",
+
+          "desc": "A full lap race with 10 hurdles, combining sprinting with hurdle technique.",
+
+          "yt_link": "OxoADMYr-5E"
+        },
+        {
+          "title": "3000m Steeplechase",
+
+          "desc": "A race involving barriers and water jumps, testing agility and endurance.",
+
+          "yt_link": "ufvcbMNixec"
+        },
+        {
+          "title": "4x100m Relay",
+
+          "desc": "A team event with four runners, each sprinting 100 meters, requiring efficient baton exchanges.",
+
+          "yt_link": "R8ytlI2ohS4"
+        },
+        {
+          "title": "4x400m Relay",
+
+          "desc": "A team relay where each runner covers 400 meters, with a focus on speed and strategic handovers.",
+
+          "yt_link": "G2Gtn-4OwF8"
+        },
+        {
+          "title": "20km Race Walk",
+
+          "desc": "A long-distance event where walkers must keep one foot in contact with the ground at all times.",
+
+          "yt_link": "H7s5BZTUWXg"
+        },
+        {
+          "title": "50km Race Walk",
+
+          "desc": "An extended race walk requiring significant stamina and technique.",
+
+          "yt_link": "MeHc7KI-PTU"
+        },
+        {
+          "title": "High Jump",
+
+          "desc": "Athletes leap over a horizontal bar using a Fosbury Flop or other technique.",
+
+          "yt_link": "4B3eKb1_Ioo"
+        },
+        {
+          "title": "Pole Vault",
+
+          "desc": "Competitors use a pole to vault over a bar, requiring strength, speed, and technique.",
+
+          "yt_link": "P0HLeKJBqJk"
+        },
+        {
+          "title": "Long Jump",
+
+          "desc": "Athletes perform a running leap for maximum horizontal distance.",
+
+          "yt_link": "mGjANZAx45k"
+        },
+        {
+          "title": "Triple Jump",
+
+          "desc": "A sequence of three phases (hop, step, jump) aiming for the longest distance.",
+
+          "yt_link": "p3F-GAo7ycs"
+        },
+        {
+          "title": "Shot Put",
+
+          "desc": "A throwing event where athletes propel a heavy ball for maximum distance.",
+
+          "yt_link": "zs97EQNJTFA"
+        },
+        {
+          "title": "Discus Throw",
+
+          "desc": "Competitors throw a disc for maximum distance using a rotational technique.",
+
+          "yt_link": "HjQkmpDmunE"
+        },
+        {
+          "title": "Hammer Throw",
+
+          "desc": "Athletes spin and throw a heavy weight attached to a wire for distance.",
+
+          "yt_link": "LQcEjeKDby4"
+        },
+        {
+          "title": "Javelin Throw",
+
+          "desc": "A spear-like javelin is thrown for maximum distance, emphasizing technique and speed.",
+
+          "yt_link": "e2e_VbAjx5g"
+        },
+        {
+          "title": "Decathlon",
+
+          "desc": "A ten-event competition combining sprints, jumps, throws, and distance events.",
+
+          "yt_link": "2c4Lm3M2RJI"
+        }
+      ]
+    },
+
+    "badminton": {
+      "maintitle": "Badminton",
+      "subtitle1": "<p><strong>Badminton</strong><span style=\"font-weight: 400;\"> is a fast-paced racket sport played either in singles (one player per side) or doubles (two players per side). The objective is to hit the shuttlecock over the net and land it in the opponent&rsquo;s court, scoring points when the opponent fails to return the shuttlecock within the boundaries.</span></p>",
+
+      "title1": "",
+
+      "desc1": "<p><strong>Scoring</strong><span style=\"font-weight: 400;\">: Matches are typically best-of-three games. Each game is played to 21 points, with players scoring a point on every rally (rally scoring system). A two-point lead is required to win a game, with a cap at 30 points.</span></p> <p><strong>Serve</strong><span style=\"font-weight: 400;\">: The server must hit the shuttlecock diagonally into the opponent&rsquo;s service box. The serve must be delivered below the waist, and in singles, the serve must land in the narrower service area.</span></p> <p><strong>Rallies</strong><span style=\"font-weight: 400;\">: Players rally by hitting the shuttlecock back and forth. The rally ends when the shuttlecock touches the ground, goes out of bounds, or fails to cross the net.</span></p> <p><strong>Faults</strong><span style=\"font-weight: 400;\">: A fault occurs if the shuttlecock is hit into the net, out of bounds, or if the player makes an illegal shot, such as a double hit or carrying the shuttle.</span></p><br/><br/><p><strong>Types of Shots:</strong></p> <ul> <li style=\"font-weight: 400;\"><strong>Smash</strong><span style=\"font-weight: 400;\">: A powerful downward shot aimed at winning the point.</span></li> <li style=\"font-weight: 400;\"><strong>Drop Shot</strong><span style=\"font-weight: 400;\">: A delicate shot that just clears the net and drops into the opponent's court.</span></li> <li style=\"font-weight: 400;\"><strong>Clear</strong><span style=\"font-weight: 400;\">: A high, deep shot that forces the opponent to the back of the court.</span></li> <li style=\"font-weight: 400;\"><strong>Drive</strong><span style=\"font-weight: 400;\">: A fast, flat shot parallel to the ground.</span></li> </ul><br/><br/><p><strong>Singles vs Doubles:</strong></p> <ul> <li style=\"font-weight: 400;\"><strong>Singles</strong><span style=\"font-weight: 400;\">: Played one-on-one, focusing on speed, stamina, and court coverage.</span></li> <li style=\"font-weight: 400;\"><strong>Doubles</strong><span style=\"font-weight: 400;\">: Played two-on-two, with greater emphasis on teamwork, strategy, and quick reflexes. The court is wider, and players often specialize in either front or backcourt play.</span></li> </ul><br/><br/><ul> <li style=\"font-weight: 400;\"> <ul> <li style=\"font-weight: 400;\"> <p><strong>Court and Equipment:</strong></p> <ul> <li style=\"font-weight: 400;\"><strong>Court</strong><span style=\"font-weight: 400;\">: A rectangular court divided by a net. Singles courts are narrower (5.18 meters wide), while doubles courts are wider (6.1 meters).</span></li> <li style=\"font-weight: 400;\"><strong>Net</strong><span style=\"font-weight: 400;\">: Positioned at the center, 1.55 meters high.</span></li> <li style=\"font-weight: 400;\"><strong>Shuttlecock</strong><span style=\"font-weight: 400;\">: A feathered or synthetic projectile used in place of a ball, designed to decelerate quickly when hit.</span></li> </ul> <strong>Racket</strong><span style=\"font-weight: 400;\">: Lightweight rackets are used to strike the shuttlecock.</span></li> </ul> </li> </ul><br/><br/>Badminton requires agility, quick reflexes, and excellent hand-eye coordination. It is played internationally at events such as the Olympics, World Championships, and the prestigious All England Open.",
+
+      "image1": "/sportDetails/archery/1.jpg",
+
+      "variations": [
+        {
+          "title": "Singles Badminton",
+
+          "desc": "<ul> <li style=\"font-weight: 400;\"><strong>Event</strong><span style=\"font-weight: 400;\">: One player competes against another player.</span></li> <li style=\"font-weight: 400;\"><strong>Competition Method</strong><span style=\"font-weight: 400;\">: Each player uses a racket to hit the shuttlecock over the net, aiming to land it within the opponent&rsquo;s court. The match is played in a best-of-three games format, with each game played to 21 points. Players must win by at least 2 points.</span></li> <li style=\"font-weight: 400;\"><strong>Key Rules</strong><span style=\"font-weight: 400;\">:</span></li> <ul> <li style=\"font-weight: 400;\"><strong>Serving</strong><span style=\"font-weight: 400;\">: The serve must be diagonal and hit below the server's waist.</span></li> <li style=\"font-weight: 400;\"><strong>Scoring</strong><span style=\"font-weight: 400;\">: Points are awarded when the opponent fails to return the shuttlecock or hits it out of bounds.</span></li> </ul> </ul> <p><strong>Court</strong><span style=\"font-weight: 400;\">: The court for singles is 13.4 meters long and 5.18 meters wide.</span></p>",
+
+          "yt_link": "FTv7VrJ1Sc0"
+        },
+
+        {
+          "title": "Doubles Badminton",
+
+          "desc": "<ul> <li style=\"font-weight: 400;\"> <ul> <li style=\"font-weight: 400;\"><strong>Event</strong><span style=\"font-weight: 400;\">: Two teams of two players each compete against each other.</span></li> <li style=\"font-weight: 400;\"><strong>Competition Method</strong><span style=\"font-weight: 400;\">: Teams use rackets to hit the shuttlecock over the net, aiming to land it within the opponent&rsquo;s court. Matches are played in a best-of-three games format, with each game played to 21 points. Teams must win by at least 2 points.</span></li> <li style=\"font-weight: 400;\"><strong>Key Rules</strong><span style=\"font-weight: 400;\">:</span></li> <ul> <li style=\"font-weight: 400;\"><strong>Serving</strong><span style=\"font-weight: 400;\">: The serve must be diagonal and hit below the server's waist. Players alternate serving within their team.</span></li> <li style=\"font-weight: 400;\"><strong>Scoring</strong><span style=\"font-weight: 400;\">: Points are awarded when the opposing team fails to return the shuttlecock or hits it out of bounds.</span></li> <li style=\"font-weight: 400;\"><strong>Court</strong><span style=\"font-weight: 400;\">: The court for doubles is 13.4 meters long and 6.1 meters wide. The wider width accommodates the extra player on each side.</span></li> </ul> </ul> </li> </ul>",
+
+          "yt_link": "hMvKVcATYJI"
+        }
+      ]
+    },
+
+    "basketball": {
+      "maintitle": "Basketball",
+      "subtitle1": "<p><strong>Basketball</strong><span style=\"font-weight: 400;\">&nbsp;is a fast-paced team sport played on a rectangular court, where two teams of five players each aim to score points by shooting a ball through the opponent's hoop, which is mounted 10 feet high. The team with the most points at the end of the game wins</span></p>",
+
+      "title1": "",
+
+      "desc1": "<span id=\"docs-internal-guid-a924f6fb-7fff-02f0-fe76-1dd5d3ec8290\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size: 10pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Court and Equipment:</span></p><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Court</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: A rectangular surface with two baskets located at each end. Key areas include the three-point line, free-throw line, and the paint (key area).</span></p></li><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Basket</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: A metal rim with a net, elevated 10 feet off the ground.</span></p></li><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Ball</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: An orange, leather or composite basketball used for dribbling, passing, and shooting.</span></p></li></ul><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size: 10pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Key Rules:</span></p><ol style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Scoring</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Field Goals</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Worth 2 points when made inside the three-point line.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Three-Pointers</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Worth 3 points when made from beyond the three-point line.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Free Throws</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Worth 1 point each, awarded for fouls committed during shooting attempts.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Game Duration</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Typically four quarters, each lasting 12 minutes (NBA) or 10 minutes (FIBA), with overtime played if the score is tied at the end of regulation.</span></p></li><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Possession and Play</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Dribbling</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Players must dribble the ball while moving; failure to do so results in a traveling violation.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Passing</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Players can pass the ball to teammates to advance it or set up scoring opportunities.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Shot Clock</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Teams must attempt a shot within a specific time (24 seconds in the NBA, 30 seconds in FIBA).</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Fouls</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Personal Fouls</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Committed when illegal physical contact occurs, leading to free throws or ball possession for the opponent.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size: 8pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Technical Fouls</span><span style=\"font-size: 8pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Given for unsportsmanlike behavior or rule infractions.</span></p></li></ul></ol><span style=\"font-size: 8pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Team Fouls</span><span style=\"font-size: 8pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">: When a team commits too many fouls in a period, the opposing team gets free throws.</span></span>",
+
+      "image1": "OGiBcHF-wOU"
+    }, 
+
+    
+
+    "boxing": {
+      "maintitle": "Boxing",
+      "subtitle1": "<span id=\"docs-internal-guid-de9e61b2-7fff-a475-37bb-d023d0b7dc33\"><span style=\"font-size: 9pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Boxing</span><span style=\"font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\"> is a combat sport where two athletes, known as boxers, compete in a ring using only their fists to land punches on their opponent while following a set of strict rules. The primary goal is to outscore the opponent by landing clean punches or to win by knockout (KO), where one boxer is unable to continue.</span></span>.",
+
+      "title1": "",
+
+      "desc1": "<span id=\"docs-internal-guid-c2d007c0-7fff-d89f-e8da-7a4423decb63\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size: 11pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Key Aspects of Boxing:</span></p><ol style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Rounds and Duration</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Professional boxing typically consists of 12 rounds, each lasting 3 minutes, with a 1-minute rest between rounds.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Amateur matches often consist of 3 to 4 rounds.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Scoring</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Judges score each round based on clean, effective punches landed, defensive skills, and ring control. The boxer with the higher score at the end of the match wins, unless the fight ends by knockout or technical knockout.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Knockout (KO) and Technical Knockout (TKO)</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">A KO occurs when a boxer is knocked down and cannot rise before the referee counts to ten.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">A TKO happens when the referee deems a boxer unable to continue the fight, even if they are still on their feet.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Protective Gear</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Boxers wear padded gloves to protect their hands and limit injury to their opponents.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Mouthguards are required to protect the teeth and jaws.</span></p></li><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Headgear is worn in amateur boxing for additional protection.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type: decimal; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Weight Classes</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: circle; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Boxers compete in weight divisions to ensure fair competition, ranging from lightweight to heavyweight, each with a specific weight limit.</span></p></li></ul></ol><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size: 11pt; font-family: Arial, sans-serif; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Tactics and Skills:</span></p><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Offensive Skills</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Boxers use jabs, hooks, uppercuts, and body shots to target their opponent.</span></p></li><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Defense</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Effective boxing includes blocking, slipping punches, and footwork to evade strikes.</span></p></li><li dir=\"ltr\" style=\"list-style-type: disc; font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size: 9pt; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">Strategy</span><span style=\"font-size: 9pt; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; text-wrap: wrap;\">: Boxers must balance aggression with defense, adapting their style to outmaneuver their opponent.</span></p></li></ul><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:12pt;\"><span style=\"font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\">Boxing requires a blend of physical fitness, mental toughness, and tactical thinking, making it a highly disciplined and strategic sport.</span></p><div><span style=\"font-size: 9pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;\"><br></span></div></span> <span id=\"docs-internal-guid-c2d007c0-7fff-d89f-e8da-7a4423decb63\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size:13pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Weight Classes:</span></p><ol style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type:decimal;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Lightweight (&lt; TBD kg)</span><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type:circle;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Boxers in this class are known for their speed, agility, and stamina. They rely on quick footwork, fast combinations, and endurance to outpoint or overwhelm their opponents.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type:decimal;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Mediumweight (&lt; TBD kg)</span><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type:circle;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">A balance of speed and power defines this class. Boxers here combine tactical precision with the ability to land heavier punches, making their bouts a mix of skill and strength.</span></p></li></ul><li dir=\"ltr\" style=\"list-style-type:decimal;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Heavyweight (&gt; TBD kg)</span><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">:</span></p></li><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type:circle;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"2\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Known for their size and knockout power, heavyweights rely on strength and powerful blows. These boxers may be slower compared to lighter categories, but their punches are extremely forceful, often deciding bouts with fewer hits.</span></p></li></ul></ol><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span style=\"font-size:13pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Boxing Rules:</span></p><ul style=\"margin-top:0;margin-bottom:0;padding-inline-start:48px;\"><li dir=\"ltr\" style=\"list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Matches consist of a series of rounds, typically 3 minutes each, with a 1-minute rest between rounds.</span></p></li><li dir=\"ltr\" style=\"list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:0pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">A bout can end by knockout (KO), technical knockout (TKO), or by decision, where judges score based on the number of clean punches landed, defense, and ring control.</span></p></li><li dir=\"ltr\" style=\"list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;\" aria-level=\"1\"><p dir=\"ltr\" style=\"line-height:1.38;margin-top:0pt;margin-bottom:12pt;\" role=\"presentation\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Boxers must wear protective gear such as gloves, mouthguards, and sometimes headgear (in amateur boxing).</span></p></li></ul><p dir=\"ltr\" style=\"line-height:1.38;margin-top:14pt;margin-bottom:4pt;\"><span id=\"docs-internal-guid-646f73e5-7fff-a3be-652f-d6ce73778f95\"></span></p><p dir=\"ltr\" style=\"line-height:1.38;margin-top:12pt;margin-bottom:12pt;\"><span style=\"font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;\">Boxing tests endurance, strategy, and precision, with each weight class bringing its own unique style of competition.</span></p></span>",
+
+      "image1": "VMAz_-wqH9U"
+
     }
+
 
   }
 }
