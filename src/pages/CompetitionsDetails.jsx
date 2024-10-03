@@ -10,11 +10,16 @@ const CompetitionsDetails = () => {
 
   let variations = 0;
 
-  if (t(sportName, { returnObjects: true })) {
+  if (t(`sportDetails.${sportName}.variations`, { returnObjects: true })) {
+   
+    
     variations = t(`sportDetails.${sportName}.variations`, {
       returnObjects: true,
     });
+
   }
+
+  console.log(variations)
 
   return (
     <>
@@ -74,7 +79,7 @@ const CompetitionsDetails = () => {
 
         {/* all variations of sport */}
 
-        {variations === 0 && (
+        {variations !== `sportDetails.${sportName}.variations` && (
           <>
             {variations.map((variation, index) => (
               <div key={index} className="m-8">

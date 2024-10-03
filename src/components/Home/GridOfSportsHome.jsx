@@ -2,10 +2,7 @@ import "../../styles/home.scoped.scss";
 
 import { useNavigate } from "react-router-dom";
 
-
-import {useTranslation} from "react-i18next";
-
-
+import { useTranslation } from "react-i18next";
 
 /* 
 
@@ -18,7 +15,6 @@ import {useTranslation} from "react-i18next";
  */
 
 const GridOfSportsHome = () => {
-
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -89,10 +85,11 @@ const GridOfSportsHome = () => {
       >
         {/* one item */}
         <div className="flex flex-col justify-center items-center ">
-          <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none"
-          
-          onClick={() => {navigate("/competitions/archery")}}
-          
+          <div
+            className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none"
+            onClick={() => {
+              navigate("/competitions/archery");
+            }}
           >
             <img
               width={"30px"}
@@ -101,14 +98,15 @@ const GridOfSportsHome = () => {
             />
           </div>
 
-          <p className="mt-7">{t('home.ourCompetitions.sport1')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport1")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/athletics")}}
-        
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/athletics");
+          }}
         >
           <div className="flex flex-col justify-center items-center">
             {" "}
@@ -119,13 +117,15 @@ const GridOfSportsHome = () => {
                 src="home/competitions/JavelinThrow.svg"
               />
             </div>
-            <p className="mt-7">{t('home.ourCompetitions.sport2')}</p>
+            <p className="mt-7">{t("home.ourCompetitions.sport2")}</p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/badminton")}}
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/badminton");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -135,11 +135,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/badminton.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport3')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport3")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/gymnastics");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -148,13 +153,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/gymnastics.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport4')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport4")}</p>
         </div>
 
-       
-
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/weightlifting");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -163,11 +171,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/weightlifting.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport6')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport6")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/fencing");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -176,11 +189,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/fencing.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport7')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport7")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center  items-center">
+        <div
+          className="flex flex-col justify-center  items-center"
+          onClick={() => {
+            navigate("/competitions/fieldHockey");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -189,11 +207,18 @@ const GridOfSportsHome = () => {
               src="home/competitions/fieldHockey.svg"
             />
           </div>
-          <p className="mt-2  text-center">{t('home.ourCompetitions.sport8')}</p>
+          <p className="mt-2  text-center">
+            {t("home.ourCompetitions.sport8")}
+          </p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/golf");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -202,11 +227,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/golf.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport9')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport9")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/shooting");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -215,11 +245,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/shooting.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport10')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport10")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/volleyball");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -228,14 +263,15 @@ const GridOfSportsHome = () => {
               src="home/competitions/volleyball.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport11')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport11")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/diving")}}
-        
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/diving");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -245,11 +281,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/diving.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport12')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport12")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/modernPentathlon");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -258,11 +299,18 @@ const GridOfSportsHome = () => {
               src="home/competitions/modernPentathlon.svg"
             />
           </div>
-          <p className="mt-2 text-center">{t('home.ourCompetitions.sport13')}</p>
+          <p className="mt-2 text-center">
+            {t("home.ourCompetitions.sport13")}
+          </p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/rowing");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -271,11 +319,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/rowing.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport14')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport14")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/football");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -284,11 +337,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/football.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport15')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport15")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/sailing");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -297,11 +355,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/sailing.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport16')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport16")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/triathlon");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -310,11 +373,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/triathlon.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport17')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport17")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/cycling");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -323,13 +391,15 @@ const GridOfSportsHome = () => {
               src="home/competitions/cycling.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport18')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport18")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/boxing")}}
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/boxing");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -339,14 +409,15 @@ const GridOfSportsHome = () => {
               src="home/competitions/boxing.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport19')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport19")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        
-          onClick={() => {navigate("/competitions/swimming")}}
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/swimming");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -354,14 +425,18 @@ const GridOfSportsHome = () => {
               width={"30px"}
               height={"30px"}
               src="home/competitions/swim.svg"
-
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport20')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport20")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/tableTenis");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -370,24 +445,38 @@ const GridOfSportsHome = () => {
               src="home/competitions/tableTenis.svg"
             />
           </div>
-          <p className="mt-2 text-center">{t('home.ourCompetitions.sport21')}</p>
+          <p className="mt-2 text-center">
+            {t("home.ourCompetitions.sport21")}
+          </p>
         </div>
 
         {/* one item */}
         <div className="flex flex-col justify-center items-center">
           {" "}
-          <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
+          <div
+            className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none"
+            onClick={() => {
+              navigate("/competitions/rugby");
+            }}
+          >
             <img
               width={"30px"}
               height={"30px"}
               src="home/competitions/rugby.svg"
             />
           </div>
-          <p className="mt-2 text-center">{t('home.ourCompetitions.sport22')}</p>
+          <p className="mt-2 text-center">
+            {t("home.ourCompetitions.sport22")}
+          </p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/tennis");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -396,11 +485,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/tennis.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport23')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport23")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/canoeing");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -409,11 +503,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/cannoening.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport24')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport24")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/judo");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -422,12 +521,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/judo.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport25')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport25")}</p>
         </div>
 
-
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/swimrun");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -436,14 +539,15 @@ const GridOfSportsHome = () => {
               src="home/competitions/swimrun.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport27')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport27")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/synchronized_swim")}}
-        
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/synchronized_swim");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -453,11 +557,18 @@ const GridOfSportsHome = () => {
               src="home/competitions/synchronized_swimming.svg"
             />
           </div>
-          <p className="mt-2 text-center">{t('home.ourCompetitions.sport28')}</p>
+          <p className="mt-2 text-center">
+            {t("home.ourCompetitions.sport28")}
+          </p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/taekwondo");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -466,15 +577,15 @@ const GridOfSportsHome = () => {
               src="home/competitions/taekwondo.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport29')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport29")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center"
-        
-        onClick={() => {navigate("/competitions/basketball")}}
-
-        
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/basketball");
+          }}
         >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
@@ -484,11 +595,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/basketball.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport30')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport30")}</p>
         </div>
 
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/handball");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -497,12 +613,16 @@ const GridOfSportsHome = () => {
               src="home/competitions/handball.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport31')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport31")}</p>
         </div>
 
-
         {/* one item */}
-        <div className="flex flex-col justify-center items-center">
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={() => {
+            navigate("/competitions/wrestling");
+          }}
+        >
           {" "}
           <div className="  flex justify-center items-center flex-col  competitionItem cursor-pointer select-none">
             <img
@@ -511,10 +631,8 @@ const GridOfSportsHome = () => {
               src="home/competitions/wrestling.svg"
             />
           </div>
-          <p className="mt-7">{t('home.ourCompetitions.sport33')}</p>
+          <p className="mt-7">{t("home.ourCompetitions.sport33")}</p>
         </div>
-
-       
       </div>
     </>
   );
