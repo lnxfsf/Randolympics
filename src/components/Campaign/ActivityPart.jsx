@@ -1,6 +1,12 @@
 import Button from "@mui/material/Button";
+import { useTranslation } from "react-i18next";
+
 
 const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
+
+  const { t } = useTranslation();
+
+
   return (
     <>
       <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
@@ -9,7 +15,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
           className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
           style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
         >
-          <p className="font-bold text-xl md:text-2xl">Activity</p>
+          <p className="font-bold text-xl md:text-2xl">{t("campaign.content65")}</p>
 
           <div className="flex w-full flex-col mt-4">
             {lastTransactionsSupporters &&
@@ -22,7 +28,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
                       <p key={index} className="  ">
                         
                        
-                        {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>Anonymous</>)}
+                        {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>{t("campaign.content66")}</>)}
 
                       </p>
 
@@ -46,8 +52,8 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
             lastTransactionsSupporters.length === 0 && (
               <>
                 <div className="lexend-font text-black_second">
-                  <p className="text-1xl md:text-2xl font-bold">None</p>
-                  <p className="font-medium">Be first to donate 💰 🙌</p>
+                  <p className="text-1xl md:text-2xl font-bold">{t("campaign.content67")}</p>
+                  <p className="font-medium">{t("campaign.content68")}</p>
                 </div>
               </>
             )}
@@ -71,7 +77,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
               },
             }}
           >
-            <span className="lexend-font">Show All</span>
+            <span className="lexend-font">{t("campaign.content69")}</span>
           </Button>
         </div>
       </div>

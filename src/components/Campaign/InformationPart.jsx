@@ -1,22 +1,21 @@
 import { QRCode } from "react-qrcode-logo";
+import { useTranslation } from "react-i18next";
 
 const InformationPart = ({ athlete, formatDate }) => {
  
 
-  console.log("!athlete.isCelebrity")
-  console.log(!athlete.isCelebrity)
 
-  console.log("!athlete.isVerified")
-  console.log(!athlete.isVerified)
-
+  const { t } = useTranslation();
+  
+  
 
  
   return (
     <>
       <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full">
-        <p className="font-bold text-xl md:text-2xl">Information</p>
+        <p className="font-bold text-xl md:text-2xl">{t("campaign.content80")}</p>
 
-        <p className="text-lg font-medium mt-2">Gender</p>
+        <p className="text-lg font-medium mt-2">{t("campaign.content28")}</p>
         <p className="text-lg font-medium text-[#616673]">
           {athlete.gender === "M" ? "Male" : "Female"}
         </p>
@@ -26,7 +25,7 @@ const InformationPart = ({ athlete, formatDate }) => {
         {!athlete.isCelebrity && athlete.isVerified && (
           <>
             <>
-              <p className="text-lg font-medium mt-2">Birthdate</p>
+              <p className="text-lg font-medium mt-2">{t("campaign.content81")}</p>
 
               {athlete.birthdate_private === 1 ? (
                 <>
@@ -36,7 +35,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                       src="/editprofile/private_lock.svg"
                     />
                     <p className="text-lg font-medium text-[#616673] break-all">
-                      Private
+                    {t("campaign.content82")}
                     </p>
                   </div>
                 </>
@@ -50,7 +49,7 @@ const InformationPart = ({ athlete, formatDate }) => {
             </>
 
             <>
-              <p className="text-lg font-medium mt-2">Email</p>
+              <p className="text-lg font-medium mt-2">{t("campaign.content31")}</p>
 
               {athlete.email_private === 1 ? (
                 <>
@@ -60,7 +59,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                       src="/editprofile/private_lock.svg"
                     />
                     <p className="text-lg font-medium text-[#616673] break-all">
-                      Private
+                    {t("campaign.content82")}
                     </p>
                   </div>
                 </>
@@ -74,7 +73,7 @@ const InformationPart = ({ athlete, formatDate }) => {
             </>
 
             <>
-              <p className="text-lg font-medium mt-2">Phone Number</p>
+              <p className="text-lg font-medium mt-2">{t("campaign.content83")}</p>
               {athlete.phone_private === 1 ? (
                 <>
                   <div className="flex gap-2">
@@ -83,7 +82,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                       src="/editprofile/private_lock.svg"
                     />
                     <p className="text-lg font-medium text-[#616673] break-all">
-                      Private
+                    {t("campaign.content82")}
                     </p>
                   </div>
                 </>
@@ -100,7 +99,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
         {athlete.weight !== 0 && (
           <>
-            <p className="text-lg font-medium mt-2">Weight</p>
+            <p className="text-lg font-medium mt-2">{t("campaign.content84")}</p>
 
             {athlete.weight_private === 1 ? (
               <>
@@ -110,7 +109,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                     src="/editprofile/private_lock.svg"
                   />
                   <p className="text-lg font-medium text-[#616673] break-all">
-                    Private
+                  {t("campaign.content82")}
                   </p>
                 </div>
               </>
@@ -126,7 +125,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
         {athlete.isCelebrity == true && (
           <>
-            <p className="text-lg font-medium mt-2">Socials</p>
+            <p className="text-lg font-medium mt-2">{t("campaign.content85")}</p>
 
             {athlete.fb_link && (
               <a
@@ -134,7 +133,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                 target="_blank"
                 className="text-[#616673] font-semibold underline cursor-pointer select-none"
               >
-                Facebook
+                {t("campaign.content86")}
               </a>
             )}
 
@@ -144,7 +143,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                 target="_blank"
                 className="text-[#616673] font-semibold underline cursor-pointer select-none"
               >
-                Instagram
+                {t("campaign.content87")}
               </a>
             )}
 
@@ -154,7 +153,7 @@ const InformationPart = ({ athlete, formatDate }) => {
                 target="_blank"
                 className="text-[#616673] font-semibold underline cursor-pointer select-none"
               >
-                Twitter
+                {t("campaign.content88")}
               </a>
             )}
           </>
@@ -162,7 +161,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
         {athlete.cryptoaddress && (
           <>
-            <p className="text-lg font-medium mt-2">Crypto </p>
+            <p className="text-lg font-medium mt-2">{t("campaign.content89")}</p>
 
             <p className="text-lg font-medium text-[#616673] break-all">
               {athlete.cryptoaddress} {athlete.cryptoaddress_type}

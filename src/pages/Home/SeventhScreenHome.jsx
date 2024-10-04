@@ -5,6 +5,7 @@ import "../../styles/home.scoped.scss";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
+
 import { Collapse } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
@@ -236,9 +237,9 @@ const SeventhScreenHome = () => {
   return (
     <>
       <div className="flex items-start lexend-font text-black_second flex-col">
-        <p className="text-4xl font-bold ml-6 mt-6">About us</p>
+        <p className="text-4xl font-bold ml-6 mt-6">{t("home.seventhScreen.content1")}</p>
 
-        <p className="text-3xl font-bold ml-6 mt-8 mb-8">Our Advisory Board</p>
+        <p className="text-3xl font-bold ml-6 mt-8 mb-8">{t("home.seventhScreen.content2")}</p>
 
         <div ref={sliderRef} className="keen-slider w-32">
           <div className="keen-slider__slide    flex flex-col justify-center items-center">
@@ -322,7 +323,7 @@ const SeventhScreenHome = () => {
           </button>
         </div>
 
-        <p className="text-3xl font-bold ml-6 mt-8 mb-8">Our Management Team</p>
+        <p className="text-3xl font-bold ml-6 mt-8 mb-8">{t("home.seventhScreen.content3")}</p>
 
         <div ref={sliderRef2} className="keen-slider w-32">
       
@@ -450,7 +451,7 @@ const SeventhScreenHome = () => {
               }}
               className="cursor-pointer select-none  pl-2 font-semibold text-red_second lexend-font "
             >
-              Read more about management structure
+              {t("home.seventhScreen.content4")}
             </p>
 
             <ExpandMore
@@ -470,65 +471,40 @@ const SeventhScreenHome = () => {
             
               <div className=" rounded-b-lg p-4 text-black_second lexend-font ">
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Global President</p>
-                  <p>
-                    The Global President selects the management team and
-                    oversees all operations, ensuring Randolympics' vision is
-                    executed effectively worldwide.
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content5")}</p>
+                  <p>{t("home.seventhScreen.content6")}
+                    
                   </p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Marketing Manager</p>
-                  <p>
-                    Develops and executes global marketing strategies, ensuring
-                    strong engagement and visibility for the Randolympics
-                    movement.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content7")}</p>
+                  <p>{t("home.seventhScreen.content8")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Sales Manager</p>
-                  <p>
-                    Responsible for securing sponsorships, partnerships, and
-                    deals that support the growth and financial health of
-                    Randolympics.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content9")}</p>
+                  <p>{t("home.seventhScreen.content10")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">IT Manager</p>
-                  <p>
-                    Oversees the technical infrastructure and digital platforms,
-                    ensuring seamless experiences for participants and
-                    supporters globally.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content11")}</p>
+                  <p>{t("home.seventhScreen.content12")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Legal Manager</p>
-                  <p>
-                    Manages all legal aspects, ensuring that Randolympics
-                    complies with international regulations and protects the
-                    interests of the organization.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content13")}</p>
+                  <p>{t("home.seventhScreen.content14")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Validation Manager</p>
-                  <p>
-                    Verifies accounts, donations, and transactions to maintain
-                    the transparency and security of our platform.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content15")}</p>
+                  <p>{t("home.seventhScreen.content16")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">Event Manager</p>
-                  <p>
-                    Organizes key events like the Stockholm 2028 Games, ensuring
-                    everything runs smoothly, from logistics to athlete
-                    management.
-                  </p>
+                  <p className="text-2xl font-bold">{t("home.seventhScreen.content17")}</p>
+                  <p>{t("home.seventhScreen.content18")}</p>
                 </div>
               </div>
 

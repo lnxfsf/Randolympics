@@ -21,7 +21,7 @@ const CompetitionsHome = () => {
 
                 <div className="flex ">
                     <img className="w-10 h-10 mr-4" src="home/competitions/archery.png" />
-                    <p><b>Badminton</b>: Embrace the fast-paced excitement of badminton! Susan will enjoy playing with you and marvel at your quick reflexes, always ready for a friendly match. It's a fun way to improve agility and coordination while enjoying intense rallies.                </p>
+                    <p><b>Badminton</b>: Embrace the fast-paced excitement of badminton! Susan will enjoy playing with you and marvel at your quick reflexes, always ready for a friendly match. It's a fun way to improve agility and coordination while enjoying intense rallies.</p>
                 </div>
 
 

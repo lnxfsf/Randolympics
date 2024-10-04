@@ -240,8 +240,7 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last coments lastCommentsSupportersCampaign");
-      console.log(response.data);
+      
 
       setLastCommentsSupporters(response.data);
     } catch (error) {
@@ -260,9 +259,7 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("saljes ti last transaction suporters");
-      console.log(response.data);
-
+      
       setLastTransactionsSupporters(response.data);
     } catch (error) {
       console.error(error);

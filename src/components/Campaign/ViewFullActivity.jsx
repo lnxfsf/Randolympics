@@ -4,6 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Avatar } from "@mui/material";
 import { formatDistanceToNow } from 'date-fns';
 
+import { useTranslation } from "react-i18next";
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -37,6 +39,9 @@ const ViewFullActivity = ({
 }) => {
 
 
+  const { t } = useTranslation();
+
+
   return (
     <>
       <div className=" flex justify-center items-center">
@@ -49,8 +54,7 @@ const ViewFullActivity = ({
           >
             <ArrowBackIcon />
           </IconButton>
-          <p className="lexend-font font-bold text-black_second text-xl md:text-2xl">
-            Campaign Activity 
+          <p className="lexend-font font-bold text-black_second text-xl md:text-2xl">{t("campaign.content90")} 
           </p>
         </div>
       </div>
@@ -83,7 +87,7 @@ const ViewFullActivity = ({
           className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
           style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
         >
-          <p className="font-bold text-xl md:text-2xl">Activity</p>
+          <p className="font-bold text-xl md:text-2xl">{t("campaign.content65")}</p>
 
           <div className="flex w-full flex-col mt-4">
             {allTransactionsSupporters &&
@@ -108,7 +112,7 @@ const ViewFullActivity = ({
                         
                         <div className="flex flex-col">
                         <p key={index} className="font-bold text-lg  ">
-                          {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>Anonymous</>)}
+                          {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>{t("campaign.content66")}</>)}
                       </p>
                     
                       <p className="text-sm  break-all pr-4">
@@ -143,13 +147,13 @@ const ViewFullActivity = ({
             allTransactionsSupporters.length === 0 && (
               <>
                 <div className="lexend-font text-black_second">
-                  <p className="text-1xl md:text-2xl font-bold">None</p>
-                  <p className="font-medium">Be first to donate 💰 🙌</p>
+                  <p className="text-1xl md:text-2xl font-bold">{t("campaign.content67")}</p>
+                  <p className="font-medium">{t("campaign.content68")}</p>
                 </div>
               </>
             )}
 
-<div className="flex justify-center items-start mt-4    w-full ">
+<div className="flex justify-center items-start mt-4 w-full ">
         <Stack>
           <Pagination
             count={maxPages}

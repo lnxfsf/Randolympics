@@ -7,6 +7,9 @@ import { settingUserType } from "../../context/user_types";
 import { Navbar } from "../Navbar";
 import { FooterClean } from "../FooterClean";
 
+
+import { useTranslation } from "react-i18next";
+
 import { QRCode } from "react-qrcode-logo";
 
 let BACKEND_SERVER_BASE_URL =
@@ -22,6 +25,7 @@ function formatDate(dateString) {
 const UserProfilePublicView = () => {
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
   const { userId } = useParams();
 
   const [userData, setUserData] = useState();
@@ -79,19 +83,19 @@ const UserProfilePublicView = () => {
 
             <div className="lexend-font text-black_second   flex-col bg-gray_second rounded-2xl p-3 md:p-4 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%]">
               <p className="font-bold text-xl md:text-2xl">
-                Personal Information
+              {t("userprofile.content1")}
               </p>
 
 
 
 
-              <p className="text-lg font-medium mt-2">About me</p>
+              <p className="text-lg font-medium mt-2">{t("userprofile.content2")}</p>
               <p className="text-lg font-medium text-[#616673]">
                 {userData.bio}
               </p>
 
 
-              <p className="text-lg font-medium mt-2">Gender</p>
+              <p className="text-lg font-medium mt-2">{t("userprofile.content3")}</p>
               <p className="text-lg font-medium text-[#616673]">
                 {userData.gender === "M" ? "Male" : "Female"}
               </p>
@@ -100,7 +104,7 @@ const UserProfilePublicView = () => {
                 <>
                   {userData.birthdate && (
                     <>
-                      <p className="text-lg font-medium mt-2">Birthdate</p>
+                      <p className="text-lg font-medium mt-2">{t("userprofile.content4")}</p>
 
                       {userData.birthdate_private === 1 ? (
                         <>
@@ -110,7 +114,7 @@ const UserProfilePublicView = () => {
                               src="/editprofile/private_lock.svg"
                             />
                             <p className="text-lg font-medium text-[#616673] break-all">
-                              Private
+                            {t("userprofile.content5")}
                             </p>
                           </div>
                         </>
@@ -126,7 +130,7 @@ const UserProfilePublicView = () => {
 
                   {userData.email && (
                     <>
-                      <p className="text-lg font-medium mt-2">Email</p>
+                      <p className="text-lg font-medium mt-2">{t("userprofile.content6")}</p>
 
                       {userData.email_private === 1 ? (
                         <>
@@ -136,7 +140,7 @@ const UserProfilePublicView = () => {
                               src="/editprofile/private_lock.svg"
                             />
                             <p className="text-lg font-medium text-[#616673] break-all">
-                              Private
+                            {t("userprofile.content5")}
                             </p>
                           </div>
                         </>
@@ -152,7 +156,7 @@ const UserProfilePublicView = () => {
 
                   {userData.phone && (
                     <>
-                      <p className="text-lg font-medium mt-2">Phone Number</p>
+                      <p className="text-lg font-medium mt-2">{t("userprofile.content7")}</p>
 
                       {userData.phone_private === 1 ? (
                         <>
@@ -162,7 +166,7 @@ const UserProfilePublicView = () => {
                               src="/editprofile/private_lock.svg"
                             />
                             <p className="text-lg font-medium text-[#616673] break-all">
-                              Private
+                            {t("userprofile.content5")}
                             </p>
                           </div>
                         </>
@@ -180,7 +184,7 @@ const UserProfilePublicView = () => {
 
               {userData.weight !== 0 && (
                 <>
-                  <p className="text-lg font-medium mt-2">Weight</p>
+                  <p className="text-lg font-medium mt-2">{t("userprofile.content8")}</p>
                   {userData.weight_private === 1 ? (
                     <>
                       <div className="flex gap-2">
@@ -189,7 +193,7 @@ const UserProfilePublicView = () => {
                           src="/editprofile/private_lock.svg"
                         />
                         <p className="text-lg font-medium text-[#616673] break-all">
-                          Private
+                        {t("userprofile.content5")}
                         </p>
                       </div>
                     </>
@@ -205,7 +209,7 @@ const UserProfilePublicView = () => {
 
               {userData.isCelebrity && (
                 <>
-                  <p className="text-lg font-medium mt-2">Socials</p>
+                  <p className="text-lg font-medium mt-2">{t("userprofile.content9")}</p>
 
                   {userData.fb_link && (
                     <a
@@ -213,7 +217,7 @@ const UserProfilePublicView = () => {
                       target="_blank"
                       className="text-[#616673] font-semibold underline cursor-pointer select-none"
                     >
-                      Facebook
+                      {t("userprofile.content10")}
                     </a>
                   )}
 
@@ -223,7 +227,7 @@ const UserProfilePublicView = () => {
                       target="_blank"
                       className="text-[#616673] font-semibold underline cursor-pointer select-none"
                     >
-                      Instagram
+                      {t("userprofile.content11")}
                     </a>
                   )}
 
@@ -233,7 +237,7 @@ const UserProfilePublicView = () => {
                       target="_blank"
                       className="text-[#616673] font-semibold underline cursor-pointer select-none"
                     >
-                      Twitter
+                      {t("userprofile.content12")}
                     </a>
                   )}
                 </>
@@ -241,7 +245,7 @@ const UserProfilePublicView = () => {
 
               {userData.cryptoaddress && (
                 <>
-                  <p className="text-lg font-medium mt-2">Crypto</p>
+                  <p className="text-lg font-medium mt-2">{t("userprofile.content13")}</p>
 
                   <p className="text-lg font-medium text-[#616673] break-all ">
                     {userData.cryptoaddress} {userData.cryptoaddress_type}

@@ -9,6 +9,8 @@ import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import { PaymentPage } from "../Supporters/PaymentPage";
 import AuthCode from "react-auth-code-input";
 
+import { useTranslation } from "react-i18next";
+
 import { useEffect, useState, useRef } from "react";
 
 const inputLabelPropsTextField = {
@@ -63,6 +65,8 @@ const DonatePart = ({
   howManySupporters,
 }) => {
   const [amount, setAmount] = useState(10);
+  const { t } = useTranslation();
+
 
   return (
     <>
@@ -70,11 +74,11 @@ const DonatePart = ({
         className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
         style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
       >
-        <p className="font-bold text-xl md:text-2xl">About the Campaign</p>
+        <p className="font-bold text-xl md:text-2xl">{t("campaign.content70")}</p>
 
         <div className="flex justify-between mt-4">
           <div>
-            <p className="text-[#616673]">Money raised</p>
+            <p className="text-[#616673]">{t("campaign.content71")}</p>
             <p className="text-xl font-medium">
               ${athlete.donatedAmount / 100}
             </p>
@@ -84,7 +88,7 @@ const DonatePart = ({
            {viewFullActivity && (
             <>
               <div>
-              <p className="text-[#616673]">Supporters Number</p>
+              <p className="text-[#616673]">{t("campaign.content72")}</p>
             <p className="text-xl font-medium">
               {howManySupporters}
             </p>
@@ -95,7 +99,7 @@ const DonatePart = ({
 
 
           <div>
-            <p className="text-[#616673]">Campaign creator</p>
+            <p className="text-[#616673]">{t("campaign.content73")}</p>
             <p className="text-xl font-medium">{campaign.supporterName}</p>
           </div>
         </div>
@@ -134,7 +138,7 @@ const DonatePart = ({
           <>
             <div className="flex flex-col ">
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                Supporter name
+              {t("campaign.content74")}
               </p>
               <TextField
                 value={supporterName}
@@ -151,7 +155,7 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                Supporter email
+              {t("campaign.content75")}
               </p>
               <TextField
                 value={supporterEmail}
@@ -168,14 +172,14 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-                Supporter comment
+              {t("campaign.content76")}
               </p>
               <TextField
                 value={supporterComment}
                 onChange={(event) => {
                   setSupporterComment(event.target.value);
                 }}
-                placeholder="Good luck 😉"
+                placeholder={t("campaign.content77")}
                 type="text"
                 inputProps={{
                   maxLength: 255,
@@ -203,7 +207,7 @@ const DonatePart = ({
               </div>
 
               <div className="m-4 flex justify-center  items-center flex-col">
-                <p>Discount codes</p>
+                <p>{t("campaign.content78")}</p>
 
                 {/*   <input
                 className="border-2 rounded-lg"
@@ -241,7 +245,7 @@ const DonatePart = ({
                     },
                   }}
                 >
-                  <span className="lexend-font">Donate with coupon only</span>
+                  <span className="lexend-font">{t("campaign.content79")}</span>
                 </Button>
               </div>
             </div>

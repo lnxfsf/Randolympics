@@ -88,7 +88,7 @@ const ContactUsForm = () => {
             {t("contact.content3")}
           </label>
           <TextField
-            placeholder="Subject"
+            placeholder={t("contact.content5")}
             id="name"
             name="name"
             required
@@ -103,7 +103,7 @@ const ContactUsForm = () => {
             {t("contact.content4")}
           </label>
           <TextField
-            placeholder="Write your message..."
+            placeholder={t("contact.content6")}
             id="name"
             name="name"
             required

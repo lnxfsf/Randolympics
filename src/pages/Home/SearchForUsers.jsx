@@ -107,7 +107,7 @@ const SearchForUsers = () => {
               value={searchFirstNameText}
               onChange={(newValue) => setSearchFirstNameText(newValue)}
               onCancelResearch={(newValue) => setSearchFirstNameText("")}
-              placeholder={"Enter a name"}
+              placeholder={t("campaign.content92")}
               onSearch={handleSearch}
               style={{
                 border: "1px solid #C6C6C6",
@@ -145,7 +145,7 @@ const SearchForUsers = () => {
               }}
               id="join-the-fun-btn"
             >
-              <span className="lexend-font">Search</span>
+              <span className="lexend-font">{t("campaign.content91")}</span>
             </Button>
           </div>
         </div>
@@ -153,7 +153,7 @@ const SearchForUsers = () => {
         {resultsAmount > 0 && results && (
           <>
             <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
-              {resultsAmount} results
+              {resultsAmount} {t("campaign.content93")}
             </p>
           </>
         )}
