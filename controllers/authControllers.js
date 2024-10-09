@@ -835,10 +835,10 @@ const login = async (req, res) => {
           
         });
       } else {
-        res.status(401).json({ error: "Invalid credentials" });
+        res.status(401).json({ message: "Invalid credentials" });
       }
     } else {
-      res.status(401).json({ error: "Invalid credentials" });
+      res.status(401).json({ message: "Invalid credentials" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
