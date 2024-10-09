@@ -147,6 +147,13 @@ npm i body-parser jsdom
 
 npm install stripe
 
+npm install jest
+npm install supertest
+npm install chai
+
+npm install superagent
+
+
 -----------
 
 

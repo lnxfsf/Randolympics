@@ -12,7 +12,6 @@ router.post("/login", login);
 
 
 
-
 // email confirmation 
 router.get('/verify/:token', verify_token);
 router.get('/verification-success', verification_success)
