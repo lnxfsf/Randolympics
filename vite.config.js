@@ -8,5 +8,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@mui/material/Tooltip'],
   },
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
+
 })
 

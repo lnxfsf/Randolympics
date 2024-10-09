@@ -9,11 +9,11 @@ import { AuthProvider } from "./context/AuthContext";
 import { App } from "./App";
 import "./index.css";
 
-import '@mui/material/styles/styled';
+import "@mui/material/styles/styled";
 import { HelmetProvider } from "react-helmet-async";
 
+import "../i18n";
 
-import '../i18n';
 
 /* 
 const app = (
@@ -32,7 +32,6 @@ if (rootElement.hasChildNodes()) {
   render(app, rootElement);
 } */
 
-
 /* before  installing  react-snap (for SEO)
 
 this is in: package.json:
@@ -42,14 +41,11 @@ this is in: package.json:
 
 */
 ReactDOM.createRoot(document.getElementById("root")).render(
-
   <Router>
     <HelmetProvider>
-    <AuthProvider>
-    
-      <App />
-    </AuthProvider>
-    </HelmetProvider> 
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </HelmetProvider>
   </Router>
-); 
-
+);
