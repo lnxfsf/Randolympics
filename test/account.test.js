@@ -130,6 +130,10 @@ describe("login", () => {
   });
 });
 
+
+
+
+
 describe("registration", () => {
   let randomEmail;
 
@@ -177,7 +181,7 @@ describe("registration", () => {
   });
 
 
-  
+
   it("should not allow duplicate email registration", function (done) {
     superagent
       .post("http://localhost:5000/auth/register")
@@ -216,4 +220,212 @@ describe("registration", () => {
         }
       });
   });
+
+
+
+
+
+  it("should return 409 when name is empty", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: randomEmail,
+        password: "12345678",
+        user_type: "AH",
+        name: "",
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for empty name"));
+        }
+      });
+  });
+
+  it("should return 409 when email is invalid", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: "invalid-email",
+        password: "12345678",
+        user_type: "AH",
+        name: "John",
+        lastName: "Doe",
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for invalid email"));
+        }
+      });
+  });
+
+  it("should return 409 when password is less than 4 characters", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: randomEmail,
+        password: "123",
+        user_type: "AH",
+        name: "John",
+        lastName: "Doe",
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for short password"));
+        }
+      });
+  });
+
+  it("should return 409 when last name is empty", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: randomEmail,
+        password: "12345678",
+        user_type: "AH",
+        name: "John",
+        lastName: "", // Missing last name
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for empty last name"));
+        }
+      });
+  });
+
+  it("should return 409 when nationality is not selected", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: randomEmail,
+        password: "12345678",
+        user_type: "AH",
+        name: "John",
+        lastName: "Doe",
+        nationality: "", // Missing nationality
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for missing nationality"));
+        }
+      });
+  });
+
+  it("should return 409 when weight is not provided for user_type 'AH'", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: randomEmail,
+        password: "12345678",
+        user_type: "AH",
+        name: "John",
+        lastName: "Doe",
+        nationality: "American",
+        // Weight is missing
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          done();
+        } else {
+          done(new Error("Expected status code 409 for missing weight"));
+        }
+      });
+  });
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+// integration test
+describe("test registration and logging in", () => {
+  let randomEmail;
+
+  before(() => {
+    // Generate a new random email every time we run test
+    randomEmail = generateRandomEmail();
+  });
+
+
+
+  it("should register new user and also verify it", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({ email: randomEmail, password: "12345678", user_type: "AH" })
+      .end(function (err, res) {
+        if (res.status === 201 && res.body.verificationToken) {
+          superagent
+            .get(
+              `http://localhost:5000/auth/verify/${res.body.verificationToken}`
+            )
+
+            .end(function (err, verifyRes) {
+              if (err) return done(err); // Handle any errors during verification
+
+              // Check if the verification was successful
+              if (verifyRes.status === 200) {
+                // Optionally, you can check the body of the response here
+                done(); // Finish the test
+              } else {
+                done(
+                  new Error(
+                    `Verification failed with status: ${verifyRes.status}`
+                  )
+                );
+              }
+            });
+
+          /*  done(); */
+        } else if (err) {
+          // Fail if any other error occurs
+          done(err);
+        } else {
+          done(new Error("Status code not 201"));
+        }
+      });
+  });
+
+
+
+  it("logs in successfully to that new created account", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/login")
+      .send({
+        email: randomEmail,
+        password: "12345678",
+      })
+      .end(function (err, res) {
+        if (res.status === 200) {
+          done();
+        } else {
+          done(new Error("Status code not 200"));
+        }
+      });
+  });
+
+
+
+
+
+
+
+
 });

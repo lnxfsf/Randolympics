@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
-    "test": "npx mocha"
+    "test": "npx mocha --ignore test/emailService.test.js ",
+    "test:jest": "npx jest -- test/emailService.test.js"
   },
   "keywords": [],
   "author": "",
