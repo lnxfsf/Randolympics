@@ -500,6 +500,7 @@ const register = async (req, res) => {
     res.status(201).json({
       message: "User created successfully!",
       userId: user_data.userId,
+      verificationToken: newUser.verificationToken
     });
   } catch (error) {
     //console.log("error zasto je: ")

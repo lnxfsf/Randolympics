@@ -3,22 +3,17 @@ require("dotenv").config();
 const superagent = require("superagent");
 
 const generateRandomEmail = () => {
-  const timestamp = Date.now(); 
-  return `user${timestamp}@example.com`; 
+  const timestamp = Date.now();
+  return `user${timestamp}@example.com`;
 };
 
-
-
-
 describe("login", () => {
-
   let randomEmail;
 
   before(() => {
     // Generate a new random email every time we run test
     randomEmail = generateRandomEmail();
   });
-
 
   it("should return 200 for successful login", function (done) {
     superagent
@@ -58,17 +53,17 @@ describe("login", () => {
   it("should return 401 when email is not verified", function (done) {
     superagent
       .post("http://localhost:5000/auth/login")
-      .send({ email: "unverified@gmail.com", password: "12345678" })  // use a test case where the email is unverified
+      .send({ email: "unverified@gmail.com", password: "12345678" }) // use a test case where the email is unverified
       .end(function (err, res) {
         if (res.status === 401) {
           done();
         } else {
-          done(new Error("Did not return the expected error for unverified email"));
+          done(
+            new Error("Did not return the expected error for unverified email")
+          );
         }
       });
   });
-  
-
 
   it("should return 400 when email is missing", function (done) {
     superagent
@@ -78,13 +73,14 @@ describe("login", () => {
         if (res.status === 400) {
           done();
         } else {
-          done(new Error("Did not return the expected error for missing email or password"));
+          done(
+            new Error(
+              "Did not return the expected error for missing email or password"
+            )
+          );
         }
       });
   });
-  
-
-  
 
   it("should return 400 when password is missing (email provided)", function (done) {
     superagent
@@ -94,13 +90,14 @@ describe("login", () => {
         if (res.status === 400) {
           done();
         } else {
-          done(new Error("Did not return the expected error for missing email or password"));
+          done(
+            new Error(
+              "Did not return the expected error for missing email or password"
+            )
+          );
         }
       });
   });
-
-
-
 
   it("should return 401 for incorrect password", function (done) {
     superagent
@@ -110,12 +107,12 @@ describe("login", () => {
         if (res.status === 401) {
           done();
         } else {
-          done(new Error("Did not return expected error for incorrect password"));
+          done(
+            new Error("Did not return expected error for incorrect password")
+          );
         }
       });
   });
-
-
 
   it("should return 401 for non-existing user", function (done) {
     superagent
@@ -125,31 +122,15 @@ describe("login", () => {
         if (res.status === 401) {
           done();
         } else {
-          done(new Error("Did not return expected error for non-existing user"));
+          done(
+            new Error("Did not return expected error for non-existing user")
+          );
         }
       });
   });
-  
-  
-
-
-
-
-
-
-
-
-
-
-
 });
 
-
-
-
 describe("registration", () => {
-
-  
   let randomEmail;
 
   before(() => {
@@ -157,12 +138,52 @@ describe("registration", () => {
     randomEmail = generateRandomEmail();
   });
 
-  it("register new user", function (done) {
+  // so both in same time, define it here.. just url (it doesn't verify if email was actually sent ! )
+  it("should register new user and also verify it have verification url", function (done) {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({ email: randomEmail, password: "12345678", user_type: "AH" })
       .end(function (err, res) {
-        if (res.status === 201) {
+        if (res.status === 201 && res.body.verificationToken) {
+          superagent
+            .get(
+              `http://localhost:5000/auth/verify/${res.body.verificationToken}`
+            )
+
+            .end(function (err, verifyRes) {
+              if (err) return done(err); // Handle any errors during verification
+
+              // Check if the verification was successful
+              if (verifyRes.status === 200) {
+                // Optionally, you can check the body of the response here
+                done(); // Finish the test
+              } else {
+                done(
+                  new Error(
+                    `Verification failed with status: ${verifyRes.status}`
+                  )
+                );
+              }
+            });
+
+          /*  done(); */
+        } else if (err) {
+          // Fail if any other error occurs
+          done(err);
+        } else {
+          done(new Error("Status code not 201"));
+        }
+      });
+  });
+
+
+  
+  it("should not allow duplicate email registration", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({ email: randomEmail, password: "12345678", user_type: "AH" })
+      .end(function (err, res) {
+        if (res.status === 409) {
           // Expected outcome, user already exists
           done();
         } else if (err) {
@@ -174,4 +195,25 @@ describe("registration", () => {
       });
   });
 
-})
+  // validation
+  it("should return an error for invalid email format", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/register")
+      .send({
+        email: "invalid-email-format",
+        password: "12345678",
+        user_type: "AH",
+      })
+      .end(function (err, res) {
+        if (res.status === 409) {
+          // Expected outcome, user already exists
+          done();
+        } else if (err) {
+          // Fail if any other error occurs
+          done(err);
+        } else {
+          done(new Error("Status code not 201"));
+        }
+      });
+  });
+});
