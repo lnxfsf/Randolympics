@@ -900,7 +900,7 @@ const landingPageRandomize = async (req, res) => {
   // !  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
   // ! vrati ovo samo za frontend... ovo eto, lakse objekat imas da radi..
 
-  const randomizeFormData = req.query.randomizeFormData;
+  const randomizeFormData = JSON.parse(req.query.randomizeFormData);
 
   console.log("gender je");
 

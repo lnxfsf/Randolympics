@@ -79,7 +79,7 @@ app.use("/listsData", listsData);
 app.use("/voting", votingRoutes);
 
 
-app.use("/user", userRoutes)
+app.use("/user", userRoutes);
 
 // this is for blog and news, that users add to..
 app.use("/blog", blogRoutes);

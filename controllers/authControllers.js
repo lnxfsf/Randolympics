@@ -590,6 +590,9 @@ const forgot_password = async (req, res) => {
         `<p>Click <a href="http://localhost:5000/auth/reset_password/${token}">here</a> to reset your password.</p>`
       );
 
+      res.status(200).json({ message: "Password reset link sent to corresponding email" });
+
+
       //res.redirect(`/auth/reset_password/${token}`);
     } else {
       res.status(500).json({ message: "User didn't verified email !" });

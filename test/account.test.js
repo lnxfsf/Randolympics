@@ -4,7 +4,9 @@ const superagent = require("superagent");
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
-  return `user${timestamp}@example.com`;
+  const randomString = Math.random().toString(36).substring(2, 4); 
+
+  return `user${randomString}${timestamp}@example.com`;
 };
 
 describe("login", () => {
@@ -26,7 +28,7 @@ describe("login", () => {
         if (res.status === 200) {
           done();
         } else {
-          done(new Error("Status code not 200"));
+          done(err);
         }
       });
   });
@@ -44,7 +46,7 @@ describe("login", () => {
           // Fail if any other error occurs
           done(err);
         } else {
-          done(new Error("Status code not 201"));
+          done(err);
         }
       });
   });
@@ -130,10 +132,6 @@ describe("login", () => {
   });
 });
 
-
-
-
-
 describe("registration", () => {
   let randomEmail;
 
@@ -175,12 +173,10 @@ describe("registration", () => {
           // Fail if any other error occurs
           done(err);
         } else {
-          done(new Error("Status code not 201"));
+          done(err);
         }
       });
   });
-
-
 
   it("should not allow duplicate email registration", function (done) {
     superagent
@@ -194,7 +190,7 @@ describe("registration", () => {
           // Fail if any other error occurs
           done(err);
         } else {
-          done(new Error("Status code not 201"));
+          done(err);
         }
       });
   });
@@ -216,14 +212,10 @@ describe("registration", () => {
           // Fail if any other error occurs
           done(err);
         } else {
-          done(new Error("Status code not 201"));
+          done(err);
         }
       });
   });
-
-
-
-
 
   it("should return 409 when name is empty", function (done) {
     superagent
@@ -238,7 +230,7 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for empty name"));
+          done(err);
         }
       });
   });
@@ -257,7 +249,7 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for invalid email"));
+          done(err);
         }
       });
   });
@@ -276,7 +268,7 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for short password"));
+          done(err);
         }
       });
   });
@@ -295,7 +287,7 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for empty last name"));
+          done(err);
         }
       });
   });
@@ -315,7 +307,7 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for missing nationality"));
+          done(err);
         }
       });
   });
@@ -336,24 +328,11 @@ describe("registration", () => {
         if (res.status === 409) {
           done();
         } else {
-          done(new Error("Expected status code 409 for missing weight"));
+          done(err);
         }
       });
   });
-
-
-
-
-
-
-
-
-
-
-
 });
-
-
 
 // integration test
 describe("test registration and logging in", () => {
@@ -363,8 +342,6 @@ describe("test registration and logging in", () => {
     // Generate a new random email every time we run test
     randomEmail = generateRandomEmail();
   });
-
-
 
   it("should register new user and also verify it", function (done) {
     superagent
@@ -398,12 +375,10 @@ describe("test registration and logging in", () => {
           // Fail if any other error occurs
           done(err);
         } else {
-          done(new Error("Status code not 201"));
+          done(err);
         }
       });
   });
-
-
 
   it("logs in successfully to that new created account", function (done) {
     superagent
@@ -416,16 +391,40 @@ describe("test registration and logging in", () => {
         if (res.status === 200) {
           done();
         } else {
-          done(new Error("Status code not 200"));
+          done(err);
+        }
+      });
+  });
+});
+
+describe("test whether resend email verification & password recovery works", () => {
+  it("should resend verification email", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/email_resend")
+      .send({
+        email: "ah-1-F-us@gmail.com",
+      })
+      .end(function (err, res) {
+        if (res.status === 200) {
+          done();
+        } else {
+          done(err);
         }
       });
   });
 
-
-
-
-
-
-
-
+  it("should send (on email) link to insert new password", function (done) {
+    superagent
+      .post("http://localhost:5000/auth/forgot_password")
+      .send({
+        email: "ah-1-F-us@gmail.com",
+      })
+      .end(function (err, res) {
+        if (res.status === 200) {
+          done();
+        } else {
+          done(err);
+        }
+      });
+  });
 });
