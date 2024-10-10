@@ -131,14 +131,14 @@ const Randomize = () => {
       // TODO, this one is for gender, so it uses F or M (we used below one, just so backend can work for M for now..)
       // setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
 
-      setOneLandingPageUser([
-        {
-          name: "first",
-          email: "first@gmail.com",
-          weightCategory: selectedWeightCategory,
-          gender: "M",
-        },
-      ]);
+        setOneLandingPageUser([
+          {
+            name: "first",
+            email: "first@gmail.com",
+            weightCategory: selectedWeightCategory,
+            gender: "M",
+          },
+        ]);
     }
   }, [scheduleData, selectedWeightCategory, selectedGender]);
 
@@ -209,13 +209,13 @@ const Randomize = () => {
         `${BACKEND_SERVER_BASE_URL}/listsData/landingPageRandomize`,
         {
           params: {
-            randomizeFormData: oneLandingPageUser,
+            randomizeFormData: JSON.stringify(oneLandingPageUser),
           },
         }
       );
 
       console.log("a sta jeste funkcija:");
-      console.log(response.data);
+      console.log(response);
 
       setScheduleData(response.data);
     } catch (error) {
