@@ -19,14 +19,31 @@ module.exports = function (sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING(255),
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING(255),
     },
+  
     name_verify: {
       type: DataTypes.TINYINT(1),
       defaultValue: 0,
     },
+
+
+    middleName: {
+      type: DataTypes.STRING(255),
+    },
+
+    lastName: {
+      type: DataTypes.STRING(255),
+    },
+
+
+    familyName: {
+      type: DataTypes.STRING(255),
+    },
+
     birthdate: {
       type: DataTypes.DATEONLY,
     },
@@ -244,6 +261,51 @@ module.exports = function (sequelize, DataTypes) {
     },
 
 
+    supporterComment: {
+      type: DataTypes.STRING(255),
+    },
+
+
+    donatedAmount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
+
+    athleteStatement: {
+      type: DataTypes.TEXT('medium'),
+    },
+
+
+    athleteStatus: {
+      type: DataTypes.STRING(255),
+      defaultValue: "s1",
+
+    },
+    
+
+
+
+
+
+    isCelebrity: {
+      type: DataTypes.TINYINT(1),
+      defaultValue: 0,
+    },
+
+
+    fb_link: {
+      type: DataTypes.STRING(255),
+    },
+
+    ig_link: {
+      type: DataTypes.STRING(255),
+    },
+
+    tw_link: {
+      type: DataTypes.STRING(255),
+    },
+    
 
 
 
@@ -251,5 +313,15 @@ module.exports = function (sequelize, DataTypes) {
 
 
     
+  }, {
+
+    indexes: [
+      { fields: ['name'] },
+      { fields: ['email'] },
+      { fields: ['user_type'] },
+      { fields: ['gender'] },
+      { fields: ['nationality'] },
+    ]
+
   });
 };

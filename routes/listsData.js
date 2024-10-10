@@ -1,6 +1,25 @@
 const express = require("express");
-const { rankingTop50, otherUsers, lastInRank,     team, currentNP , listLoginTrafficHistory, landingPageRandomize, shareTableLandingPage } = require("../controllers/listDataControllers");
+const { rankingTop50, otherUsers, lastInRank,
+         team, currentNP , 
+         listLoginTrafficHistory, 
+         landingPageRandomize, shareTableLandingPage,
+           createCampaign,
+           campaignDetails,
+           howManySupportersCampaign,
+           lastCommentsSupportersCampaign,
+           lastTransactionsSupportersCampaign,
+
+
+           listAllCampaigns,
+           listAllUsers,
+
+           informOtherSupporters,
+           firstSupportersCampaign,
+           allTransactionsSupportersCampaign,
+        
+        } = require("../controllers/listDataControllers");
 const router = express.Router();
+
 
 
 
@@ -41,6 +60,39 @@ router.get("/landingPageRandomize", landingPageRandomize)
 
 // place, to insert <table className="tablez", whole, that was rendered, so we send to all those friend lists.. (just email)
 router.post("/shareTableLandingPage", shareTableLandingPage)
+
+
+
+
+// for reading campaign info 
+router.get("/campaignDetails", campaignDetails)
+router.get("/howManySupportersCampaign", howManySupportersCampaign)
+router.get("/lastCommentsSupportersCampaign", lastCommentsSupportersCampaign)
+router.get("/lastTransactionsSupportersCampaign", lastTransactionsSupportersCampaign)
+router.get("/firstSupportersCampaign", firstSupportersCampaign)
+router.get("/allTransactionsSupportersCampaign",allTransactionsSupportersCampaign)
+
+
+// list all campaigns
+router.get("/listAllCampaigns",listAllCampaigns)
+
+// list all users
+router.get("/listAllUsers",listAllUsers)
+
+
+
+
+// inform all those other supporters, of this link
+router.post("/informOtherSupporters", informOtherSupporters)
+
+  
+
+
+
+// create campaign
+router.post("/createCampaign", createCampaign) 
+
+
 
 module.exports = router;
 

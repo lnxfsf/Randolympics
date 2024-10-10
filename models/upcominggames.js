@@ -2,11 +2,11 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    return sequelize.define("news", {
+    return sequelize.define("upcominggames", {
         postId: {
-          type: DataTypes.INTEGER,
-          autoIncrement: true,
-          primaryKey: true,
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
           },
 
           title: {
@@ -31,11 +31,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT('medium'), 
             
           },
-
-          views: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-          }
 
 
 

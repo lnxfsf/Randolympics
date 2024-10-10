@@ -1,6 +1,43 @@
 const express = require("express");
-const { blogGames, blogNews, blogEconomics } = require("../controllers/blogControllers");
+const { 
+   
 
+    blogGames, 
+    deletegamepost,
+    updateUpcomingGamesBlog,
+    gamesDetails,
+    creategamepost,
+    blogGamesToUser, // for News main page ! so it's given as filtered 
+
+
+
+
+
+    blogNews, 
+    deletenewspost,
+    createnewspost,
+    newsDetails,
+    updateNewsBlog,
+    newsToUser,
+    readingnewsDetails,
+
+
+
+    blogEconomics,
+    deleteeconomicspost,
+    createeconomicspost,
+    economicsDetails,
+    updateEconomicsBlog,
+    economicsToUser,
+
+
+
+
+
+
+
+ } = require("../controllers/blogControllers");
+const path = require('path');
 
 const router = express.Router();
 
@@ -19,9 +56,66 @@ const router = express.Router();
 
 
 
-router.get('/games', blogGames)  //   route:  /blog/games  , for "Stockholm 2028 Games"
-router.get('/news', blogNews)   //   route:  /blog/news  , for "News"
-router.get('/economics', blogEconomics)   //   route:  /blog/economics  , for "Economics"
+
+
+
+
+
+
+// route:  /blog/games  , for "Stockholm 2028 Games"
+router.get('/games', blogGames)  
+router.post("/deletegamepost", deletegamepost)
+router.post("/creategamepost", creategamepost)
+router.get("/gamesDetails", gamesDetails )  // get only ONE post, by postId (this is, to see changes immediatelly. )
+router.post("/updateUpcomingGamesBlog", updateUpcomingGamesBlog)  // update upcominggames blogs
+
+
+router.use("/upcominggames", express.static("uploads/blogs/upcominggames"));  // for static files "Stockholm 2028 Games"
+
+
+router.get('/gamesToUser', blogGamesToUser) // this is for 3 elements at News main page 
+
+
+
+
+
+
+
+
+
+
+//   route:  /blog/news  , for "News"
+router.get('/news', blogNews)  
+router.post("/deletenewspost", deletenewspost) 
+router.post("/createnewspost", createnewspost)
+router.get("/newsDetails", newsDetails )  
+router.post("/updateNewsBlog", updateNewsBlog)  
+
+router.use("/news", express.static("uploads/blogs/news"));
+
+router.get('/newsToUser', newsToUser) // this is for 4 elements at News main page.  it sorts based on views (i.e. popularity)
+router.get('/readingnewsDetails', readingnewsDetails)  // and this is special route, for when regular user views details of news, it shows how many views are there (and based on that, it's filtered out, most popular..) 
+
+
+//   route:  /blog/economics  , for "Economics"
+router.get('/economics', blogEconomics)   
+router.post("/deleteeconomicspost", deleteeconomicspost) 
+router.post("/createeconomicspost", createeconomicspost)
+router.get("/economicsDetails", economicsDetails )  
+router.post("/updateEconomicsBlog", updateEconomicsBlog)  
+
+router.use("/economics", express.static("uploads/blogs/economics"));
+
+router.get('/economicsToUser', economicsToUser) // this is for 3 elements at News main page 
+
+
+
+
+
+
+
+
+
 
 
 

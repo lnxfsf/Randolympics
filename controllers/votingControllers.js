@@ -16,7 +16,7 @@ const update_rank_data = async (req, res) => {
     console.log("primasssssssssss" + user_type) // OVO JE PROBLEM ! on dobija, current user_type ! ali treba ipak da prima, sa selected value !! dropdown !!
    */
 
-  await db.sequelize.sync();
+  
 
   //this is the selected user... find by userId..
   const user = await User.findOne({
@@ -308,7 +308,7 @@ const votingForNP = async (req, res) => {
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
-      await db.sequelize.sync();
+      
 
       // ovo je current User da nadjes.. da samo kolonu azuriras mu
       const currentUser = await User.findOne({
@@ -541,7 +541,7 @@ const resignFromCurrentPosition = async (req, res) => {
   const { userId, user_type } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
 
 
@@ -1199,7 +1199,7 @@ const votingForGP = async (req, res) => {
     const { GPuserId, current_user_userId } = req.body;
 
     try {
-      await db.sequelize.sync();
+      
 
       // ovo je current User da nadjes.. da samo kolonu azuriras mu
       const currentUser = await User.findOne({

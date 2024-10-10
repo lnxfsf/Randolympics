@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    return sequelize.define("news", {
+    return sequelize.define("economics", {
         postId: {
           type: DataTypes.INTEGER,
           autoIncrement: true,
@@ -31,11 +31,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT('medium'), 
             
           },
-
-          views: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-          }
 
 
 

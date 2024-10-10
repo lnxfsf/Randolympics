@@ -33,6 +33,19 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(16).toString("hex");
 };
 
+const generatePassword = (length = 8) => {
+  const charset =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+};
+
+
+
 const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
   console.log("tip user-a je:");
   console.log(user_type);
@@ -62,7 +75,7 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
           where: {
             nationality: nationality,
             gender: gender,
-            user_type: user_type
+            user_type: user_type,
           },
           order: [["ranking", "DESC"]],
         });
@@ -173,19 +186,19 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
-
-
-
   var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
-
 
   // on ovde uzima varijable
   const {
     user_type,
     email,
     email_private,
-    password,
+
     name,
+
+    middleName,
+    lastName,
+
     phone,
     phone_private,
     nationality,
@@ -196,69 +209,124 @@ const register = async (req, res) => {
     cryptoaddress_type,
     picture,
     gender,
+    signedByFriend,
+    supporterName, // this is only for sending invite email, so they have name who made it
+    campaignURL,
+    supporterComment,
+
+    sendEmailToFriend, // should we send it to friend ! (invitation ! )
+    
+
+    signingAsSupporter, // then if those are empty, we avoid checking them.. (as we don't need to signup them (later on, if password is provided, then we make account, if not, then we don't. do it in backend here, so, no user can mess with this...)..)
+  
+
+
+    isCelebrity, 
+    fb_link,
+    ig_link,
+    tw_link,
+  
   } = req.body;
 
 
 
+  
+  
+
+  // if he's signedByFriend , then we generate password
+  if (signedByFriend) {
+    var password = generatePassword();
+
+
+  } else {
+    var { password } = req.body;
+  }
 
   // validation !!
 
-
-
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-  if (!emailRegex.test(email)) {
-    res.status(409).json({ message: "Email is incorrect !" });
-    return;
-
-  }
-
-
+  // we do validate for name, on server, even for supporter. why not..
   if (name == "") {
     res.status(409).json({ message: "Name can't be empty !" });
     return;
   }
 
 
+  console.log("----------> !isCelebrity   je: " + !isCelebrity)
+  console.log("----> !signingAsSupporter" + !signingAsSupporter)
 
 
+  // we don't verify email, for celebrity, just use it as placeholder, it need to be fake email after all..
+  if (!signingAsSupporter && !isCelebrity) {
 
-  const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
 
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
+    if (!emailRegex.test(email)) {
+      res.status(409).json({ message: "Email is incorrect !" });
+      return;
+    }
 
-  if (!phoneRegex.test(phone)) {
-    res.status(409).json({ message: "Phone is incorrect !" });
-    return;
+  } else if (signingAsSupporter && email !== "" && !isCelebrity) {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+      res.status(409).json({ message: "Email is incorrect !" });
+      return;
+    }
   }
 
 
 
+/* 
+  if (!signingAsSupporter  && phone !== "" && !isCelebrity) {
 
+   
 
+    const phoneRegex =
+      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
+    if (!phoneRegex.test(phone)) {
+      res.status(409).json({ message: "Phone is incorrect !" });
+      return;
+    }
+  } else if (signingAsSupporter && phone !== "" && !isCelebrity) {
+    // we can use, check, for supporter, but only if it's phone is not empty.. (as it can be empty..)
 
+    const phoneRegex =
+      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
+    if (!phoneRegex.test(phone)) {
+      res.status(409).json({ message: "Phone is incorrect !" });
+      return;
+    }
+  } */
 
-  const passwordRegex = /^.{4,}$/;
+  // TODO, jedino znaci, nema validacije za supporter sa campaign, kada kreira account. nema limit na 4 slova. al to kasnije..
+  if (!signingAsSupporter) {
+    const passwordRegex = /^.{4,}$/;
 
-  if (!passwordRegex.test(password)) {
-    res.status(409).json({ message: "Password should be longer than 4 characters !" });
-    return;
+    if (!passwordRegex.test(password)) {
+      res
+        .status(409)
+        .json({ message: "Password should be longer than 4 characters !" });
+      return;
+    }
   }
 
+  // these two, we don't use for supporter accounts
+  if (!signingAsSupporter) {
+    // nationality
+    if (nationality === "") {
+      res.status(409).json({ message: "Select nationality !" });
+      return;
+    }
 
-
-
-  // nationality
-  if (nationality === "") {
-    res.status(409).json({ message: "Select nationality !" });
-    return;
+    // last name
+    if (lastName === "") {
+      res.status(409).json({ message: "Last name can't be empty !" });
+      return;
+    }
   }
-
-
-
-
 
   //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
   if (user_type === "AH") {
@@ -267,15 +335,6 @@ const register = async (req, res) => {
       return;
     }
   }
-
-
-
-
-
-
-
-
-
 
   // hash password
   const salt = await bcrypt.genSalt(10);
@@ -291,6 +350,10 @@ const register = async (req, res) => {
     email_private,
     password: hashedPassword,
     name,
+
+    middleName,
+    lastName,
+
     name_verify: null,
     birthdate: null,
     birthdate_private: 1,
@@ -307,7 +370,12 @@ const register = async (req, res) => {
     passport_expiry_verify: null,
     bio,
     achievements: null,
-    ranking: await lastInRank(user_type, user_type == "AH", nationality, gender), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
+    ranking: await lastInRank(
+      user_type,
+      user_type == "AH",
+      nationality,
+      gender
+    ), // he needs this, to complete this function, and return value.. E, jer ga čuva u "ranking". || da, ovo treba samo ti za "Athletes, da NP's mogu birati po drzavi koja i ide.. ". KREIRA. (da, počinje sa 1, ako nema entry za taj country.. ) || we only need nationality, for "AH", so we could use special ranking
     ranking_heavy: null,
     ranking_medium: null,
     ranking_low: null,
@@ -331,10 +399,19 @@ const register = async (req, res) => {
     verificationToken: generateVerificationToken(),
     gender,
     votes, // in mysql, default value is 0 , if this is empty..
+
+    supporterComment,
+
+
+    // yes, also put these in database.. for case when we have celebrity
+    isCelebrity,  // we will need this, later on, to give them higher priority probably..
+    fb_link,
+    ig_link,
+    tw_link,
   };
 
   try {
-    await db.sequelize.sync();
+    
 
     const userAlreadyExists = await User.findOne({
       where: { email: user_data.email },
@@ -344,33 +421,101 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
+
+    /* const t = await db.sequelize.transaction(); */
+
+   /*  try { */
     // Create a new user
-    const newUser = await User.create(user_data);
+      var newUser = await User.create(user_data);
 
-    sendEmail(
-      newUser.email,
-      "Email Verification",
-      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
-    );
+    /*   await t.commit(); */
+      
+    /* } catch (e){
+      await t.rollback();
+    } */
+   /*  if(newUser){ */
+    if (!signedByFriend) {
+      sendEmail(
+        newUser.email,
+        "Email Verification",
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+      );
+    } else {
+      // maybe we want to keep it a secret.. (then he have to confirm email and receive new password, when trying to get it.. (but it's unusual scenario maybe.. ))
+      if (sendEmailToFriend) {
+        sendEmail(
+          newUser.email,
+          "Invitation to participate in Randolympics",
 
-    res.status(201).json({ message: "User created successfully!" });
+          `
+            
+          
+    <p>
+      ${
+        supporterName ? supporterName : "someone"
+      } invited you to participate in Randolympics !
+      
+      
+    </p>
+
+    <p>
+      He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
+    </p>
+    <p>
+      Your email: <b>${email}</b>  <br/>
+      Your password: <b>${password}</b>
+      
+    </p>
+
+    <p>You can access your campaign in: <a href=${campaignURL}>here</a></p>
+
+    <br/>
+    <p>But first you need to verify your account as well </p>
+    <p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
+            newUser.verificationToken
+          }">here</a> to verify your email.</p>
+
+
+            
+            
+            `
+        );
+      }
+
+      // this is for supporter (invitation.. )
+      // first send confirmation email, to current made supporter email !!! just to verify email address !
+      sendEmail(
+        newUser.email,
+        "Email Verification",
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+      );
+
+      
+      
+
+     
+   /*  } */
+  }
+
+    res.status(201).json({
+      message: "User created successfully!",
+      userId: user_data.userId,
+      verificationToken: newUser.verificationToken
+    });
   } catch (error) {
-
     //console.log("error zasto je: ")
     //console.log(error.message)
 
+    console.log(error.stack);
     res.status(500).json({ error: error.message });
-
-
   }
 };
-
 
 const email_resend = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -396,7 +541,7 @@ const verify_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -423,7 +568,7 @@ const forgot_password = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -445,6 +590,9 @@ const forgot_password = async (req, res) => {
         `<p>Click <a href="http://localhost:5000/auth/reset_password/${token}">here</a> to reset your password.</p>`
       );
 
+      res.status(200).json({ message: "Password reset link sent to corresponding email" });
+
+
       //res.redirect(`/auth/reset_password/${token}`);
     } else {
       res.status(500).json({ message: "User didn't verified email !" });
@@ -458,7 +606,7 @@ const reset_password_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     // Check if the token exists and is still valid
     const user = await User.findOne({ where: { verificationToken: token } });
@@ -540,7 +688,7 @@ const reset_password = async (req, res) => {
   const { token, password } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -578,7 +726,7 @@ const login = async (req, res) => {
   }
 
   try {
-    await db.sequelize.sync();
+    
 
     const existingUser = await User.findOne({
       where: { email: email },
@@ -621,6 +769,12 @@ const login = async (req, res) => {
         if (loginEntry) {
           await loginEntry.increment("numberOfLogins", { by: 1 });
         } else {
+         
+          
+         
+          const t = await db.sequelize.transaction();
+
+          try {
           // create that entry, if there's no found..
           // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
           const newLoginEntry = await Traffic.create({
@@ -628,7 +782,16 @@ const login = async (req, res) => {
             user_type: existingUser.user_type,
             nationality: existingUser.nationality,
             numberOfLogins: 1, // we already put 1, as this is our first immediatelly..
-          });
+          }, { transaction: t });
+
+
+          await t.commit();
+        } catch (e) {
+          await t.rollback();
+        }
+
+
+
         }
 
         res.status(200).json({
@@ -638,6 +801,9 @@ const login = async (req, res) => {
           access_token: generateAccessToken(existingUser.userId),
 
           name: existingUser.name,
+
+          middleName: existingUser.middleName,
+
           birthdate: existingUser.birthdate,
 
           phone: existingUser.phone,
@@ -668,18 +834,95 @@ const login = async (req, res) => {
 
           passport_expiry: existingUser.passport_expiry,
           passportStatus: existingUser.passportStatus,
+
+          athleteStatus: existingUser.athleteStatus,
+          
         });
       } else {
-        res.status(401).json({ error: "Invalid credentials" });
+        res.status(401).json({ message: "Invalid credentials" });
       }
     } else {
-      res.status(401).json({ error: "Invalid credentials" });
+      res.status(401).json({ message: "Invalid credentials" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+const campaignDoesUserExist = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const isUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    const isUserFound = !!isUser; // with this, we get boolean value
+
+    return res.json({ found: isUserFound });
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
+
+const campaignIsSupporterPassCorrect = async (req, res) => {
+  const { email, password } = req.query;
+
+  try {
+
+
+
+    const supporterUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+
+    // da problem je, sto on mozda i nema account napravljen  ! 
+    
+    console.log("sta radis ovde")
+    console.log(supporterUser)
+
+
+    if(supporterUser){
+
+
+      const passwordMatch = await bcrypt.compare(
+        password,
+        supporterUser.password
+      );
+      
+
+      
+
+      if(passwordMatch){
+
+        // it have email and password right, so we just return true, we can use it
+
+        // ispravna sifra vraca true
+        return res.json({ check: true });
+
+
+      } else {
+
+        // vraca true, ako je pogresna sifra
+        return res.json({ check: false });
+      }
+
+    }
+
+
+
+   
+
+
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
 
 
 
@@ -692,8 +935,6 @@ module.exports = {
   reset_password_token,
   reset_password,
   email_resend,
+  campaignDoesUserExist,
+  campaignIsSupporterPassCorrect,
 };
-
-
-
-
