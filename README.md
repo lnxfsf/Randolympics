@@ -82,3 +82,46 @@ npm i moment react-moment
 npm install react-select-country-list
 
  npm install react-zoom-pan-pinch
+npm install aos
+npm install animate.css
+
+
+npm i react-swipeable-views-react-18-fix
+npm install --save --legacy-peer-deps react-swipeable-views 
+
+
+npm install --save react-tabs
+
+npm install react-quill
+npm i react-qr-code
+
+npm install uuid
+
+
+npm install @stripe/react-stripe-js @stripe/stripe-js
+
+
+npm install react-query
+
+npm install --save react-auth-code-input
+
+npm i i18next-http-backend
+
+
+
+
+npm install react-slick
+npm install embla-carousel-react
+
+npm install keen-slider
+
+
+npm install --save react-qrcode-logo
+
+npm install date-fns
+
+npm install react-youtube
+
+
+
+

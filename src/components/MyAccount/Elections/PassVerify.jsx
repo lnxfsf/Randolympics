@@ -7,7 +7,9 @@ import moment from "moment";
 import Flag from "react-world-flags";
 import countryList from "react-select-country-list";
 
-import { PopupPassVerify } from "./PopupPassVerify"
+import { PopupPassVerify } from "./PopupPassVerify";
+
+import { Dialog, DialogContent, DialogTitle, Box } from "@mui/material";
 
 import React, { useState, useEffect, useRef } from "react";
 
@@ -33,13 +35,11 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const PassVerify = ({ user, index, setUpdatedPassport }) => {
+  const [open, setOpen] = useState(false);
 
-//-------------
+  //-------------
 
-const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
-
-
-
+  const [updatedPassportPopup, setUpdatedPassportPopup] = useState(false);
 
   //--------------
   const name = user.name;
@@ -52,38 +52,31 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
 
   if (accountCreatedAt) {
     accountCreatedAt = moment(accountCreatedAt, "YYYY-MM-DD  HH:mm:ss");
-    accountCreatedAt = accountCreatedAt.format("YYYY-MM-DD  HH:mm:ss");
+    accountCreatedAt = accountCreatedAt.format("YYYY/MM/DD  HH:mm");
   }
 
   if (passportUploadedDate) {
     passportUploadedDate = moment(passportUploadedDate, "YYYY-MM-DD  HH:mm:ss");
-    passportUploadedDate = passportUploadedDate.format("YYYY-MM-DD  HH:mm:ss");
+    passportUploadedDate = passportUploadedDate.format("YYYY/MM/DD  HH:mm");
   }
 
   if (passportLastValidatedRejected) {
     passportLastValidatedRejected = moment(
       passportLastValidatedRejected,
-      "YYYY-MM-DD  HH:mm:ss"
+      "YYYY-MM-DD  HH:mm"
     );
-    passportLastValidatedRejected = passportLastValidatedRejected.format(
-      "YYYY-MM-DD  HH:mm:ss"
-    );
+    passportLastValidatedRejected =
+      passportLastValidatedRejected.format("YYYY-MM-DD  HH:mm");
   }
-
 
   const [birhdateDate, setBirhdateDate] = useState(() => {
-    
-    if(user.birthdate){
+    if (user.birthdate) {
       let birthdate = moment(user.birthdate, "YYYY-MM-DD");
       return birthdate.format("YYYY-MM-DD");
-  }else {
-    return "Not entered";
-  }
-
-
+    } else {
+      return "Not entered";
+    }
   });
-
-  
 
   const [nameVerify, setNameVerify] = useState(user.name_verify);
   const [birthdateVerify, setBirthdateVerify] = useState(user.birthdate_verify);
@@ -102,9 +95,6 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
   const [passportExpiryDate, setPassportExpiryDate] = useState(
     dayjs(user.passport_expiry)
   ); // okay, directly passed from user,
-
-
-
 
   // -------------------
   const reject = async () => {
@@ -136,10 +126,8 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
       );
 
       if (response.status === 200) {
-
         setUpdatedPassport((prev) => !prev);
 
-       
         popupRef.current.close();
       }
     } catch (error) {
@@ -183,16 +171,14 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
       );
 
       if (response.status === 200) {
-
         setUpdatedPassport((prev) => !prev);
         popupRef.current.close();
       }
     } catch (error) {
-     // popupRef.current.close();
+      // popupRef.current.close();
     }
   };
   // -------------------
-
 
   // ovo se ne azurira ! svaki put ! treba u useEffect da ga stavis vrv..
   const [userTypeText, setUserTypeText] = useState();
@@ -210,16 +196,12 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
   useEffect(() => {
     functionSetUserTypeText();
 
-
     updateAnotherUpdatedPassport();
-
   }, [user_type, updatedPassportPopup]);
 
-
-
   const updateAnotherUpdatedPassport = () => {
-  setUpdatedPassport(updatedPassportPopup);
-}
+    setUpdatedPassport(updatedPassportPopup);
+  };
 
   const functionSetUserTypeText = () => {
     if (user_type === "AH") {
@@ -256,283 +238,166 @@ const [ updatedPassportPopup , setUpdatedPassportPopup] = useState(false);
 
   return (
     <>
-      <tr key={index}>
-        <Popup
+      <tr
+        key={index}
+        className="border-t-[1px] border-b-[1px] border-[#DEE2E6]"
+      >
+        {/*  <Popup
           ref={popupRef}
-          trigger={
-            <td className="cursor-pointer select-none underline">{name}</td>
-          }
+          trigger={<td className="cursor-pointer select-none">{name}</td>}
           position="right center"
           contentStyle={{ width: "auto" }}
           modal
           nested
         >
-
-        <PopupPassVerify user={user} setUpdatedPassportPopup={setUpdatedPassportPopup} popupRef={popupRef}/>
-         {/*  <div className="m-4">
-            <div className="flex justify-between items-center gap-16 mt-2">
-              <img
-                src={
-                  BACKEND_SERVER_BASE_URL +
-                  "/imageUpload/profile_pics/" +
-                  user.picture
-                }
-                className="ProfileImagePassVerify"
-              />
-
-              <Popup
-                ref={popupPassportRef}
-                trigger={
-                  <img
-                    src={
-                      BACKEND_SERVER_BASE_URL +
-                      "/imageUpload/passport_pics/" +
-                      user.passport_photo
-                    }
-                    alt="Profile"
-                    className="w-32 h-20 object-fit cursor-pointer"
-                  />
-                }
-                position="right center"
-                contentStyle={{ width: "auto" }}
-                modal
-                nested
-              >
-                <TransformWrapper>
-                  <TransformComponent>
-                    <img
-                      src={
-                        BACKEND_SERVER_BASE_URL +
-                        "/imageUpload/passport_pics/" +
-                        user.passport_photo
-                      }
-                      alt="Profile"
-                      className="w-[500px] h-96 object-fit "
-                    />
-                  </TransformComponent>
-                </TransformWrapper>
-              </Popup>
-            </div>
-
-            <div className="flex justify-between items-center gap-16 mt-2">
-              <p>Name: {user.name}</p>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#FF0000",
-                      "&.Mui-checked": {
-                        color: "#FF0000",
-                      },
-                    }}
-                    checked={nameVerify}
-                    disabled={currentUserTypeLoggedIn === "GP"}
-                    onChange={() => {
-                      setNameVerify(!nameVerify);
-                    }}
-                  />
-                }
-                label={<span>Verify name</span>}
-                labelPlacement="start"
-              />
-            </div>
-            {/* e, ovde pored njega samo check !  
-
-            <div className="mt-2 mb-2">
-              <p>Email: {user.email}</p>
-            </div>
-
-            <div className="mt-2 mb-2">
-              <p>Phone: {user.phone}</p>
-            </div>
-
-            <div className="mt-2 mb-2">
-              <p>Cryptoaddress: {user.crypto}</p>
-            </div>
-
-            <div className="flex justify-between items-center gap-16">
-              <p>Country: {countryList().getLabel(user.nationality)} </p>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#FF0000",
-                      "&.Mui-checked": {
-                        color: "#FF0000",
-                      },
-                    }}
-                    checked={nationalityVerify}
-                    disabled={currentUserTypeLoggedIn === "GP"}
-                    onChange={() => {
-                      setNationalityVerify(!nationalityVerify);
-                    }}
-                  />
-                }
-                label={<span>Verify nationality</span>}
-                labelPlacement="start"
-              />
-            </div>
-
-            <div className="flex justify-between items-center gap-16">
-              <p>Birthdate {birhdateDate}</p>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#FF0000",
-                      "&.Mui-checked": {
-                        color: "#FF0000",
-                      },
-                    }}
-                    checked={birthdateVerify}
-                    disabled={currentUserTypeLoggedIn === "GP"}
-                    onChange={() => {
-                      setBirthdateVerify(!birthdateVerify);
-                    }}
-                  />
-                }
-                label={<span>Verify birthdate</span>}
-                labelPlacement="start"
-              />
-            </div>
-
-            <div className="mt-2 mb-2">
-              <p>Profile last edited: {profileLastUpdatedAt}</p>
-            </div>
-
-            {user_type === "AH" && (
-              <>
-                <div className="mt-2 mb-4">
-                  <p>Weight: {user.weight}</p>
-                </div>
-              </>
-            )}
-
-            <div className="flex justify-between items-center gap-16">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    disabled={currentUserTypeLoggedIn === "GP"}
-                    className="w-32"
-                    label="Passport Expiry Date"
-                    value={passportExpiryDate}
-                    onChange={handlePassportExpiryDateChange}
-                    format="MMMM DD, YYYY"
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#FF0000",
-                      "&.Mui-checked": {
-                        color: "#FF0000",
-                      },
-                    }}
-                    checked={passportExpiryVerify}
-                    disabled={currentUserTypeLoggedIn === "GP"}
-                    onChange={() => {
-                      setPassportExpiryVerify(!passportExpiryVerify);
-                    }}
-                  />
-                }
-                label={<span>Verify passport expiry date</span>}
-                labelPlacement="start"
-              />
-            </div>
-
-            {currentUserTypeLoggedIn !== "GP" && (
-              <>
-                <div className="flex justify-around items-center gap-2 m-4">
-                  <div>
-                    <Button
-                      onClick={reject}
-                      className="w-[85px]"
-                      style={{ marginTop: "0px", padding: "0px" }}
-                      sx={{
-                        fontSize: "8pt",
-                        height: "30px",
-                        bgcolor: "#fff",
-                        color: "#232323",
-                        borderRadius: 15,
-                        border: `1px solid #fff`,
-                        "&:hover": {
-                          background: "rgb(196, 43, 43)",
-                          color: "white",
-                          border: `1px solid rgb(196, 43, 43)`,
-                        },
-                      }}
-                    >
-                      <span className="popins-font">Reject</span>
-                    </Button>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={cancel}
-                      className="w-[85px]"
-                      style={{ marginTop: "0px", padding: "0px" }}
-                      sx={{
-                        fontSize: "8pt",
-                        height: "30px",
-                        bgcolor: "#fff",
-                        color: "#232323",
-                        borderRadius: 15,
-                        border: `1px solid #fff`,
-                        "&:hover": {
-                          background: "rgb(196, 43, 43)",
-                          color: "white",
-                          border: `1px solid rgb(196, 43, 43)`,
-                        },
-                      }}
-                    >
-                      <span className="popins-font">Cancel</span>
-                    </Button>
-
-                    <Button
-                      onClick={saveChanges}
-                      className="w-[120px]"
-                      style={{ marginTop: "0px", padding: "0px" }}
-                      sx={{
-                        fontSize: "8pt",
-                        height: "30px",
-                        bgcolor: "#AF2626",
-                        color: "#fff",
-                        borderRadius: 15,
-                        border: `1px solid #AF2626`,
-                        "&:hover": {
-                          background: "rgb(196, 43, 43)",
-                          color: "white",
-                          border: `1px solid rgb(196, 43, 43)`,
-                        },
-                      }}
-                    >
-                      <span className="popins-font">Save changes</span>
-                    </Button>
-                  </div>
-                </div>
-              </>
-            )}
-          </div> */}
-
-          
+          <PopupPassVerify
+            user={user}
+            setUpdatedPassportPopup={setUpdatedPassportPopup}
+            popupRef={popupRef}
+          />
+         
         </Popup>
+ */}
+        <td
+          className="cursor-pointer select-none "
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          {name}
+        </td>
+
+        <Dialog
+          open={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+          scroll="paper" // Or "body" for a different scrolling behavior
+          maxWidth="sm" // Adjust the width as needed
+          fullWidth
+        >
+
+<Box display="flex" justifyContent="space-between" alignItems="center">
+          <DialogTitle>{name} </DialogTitle>
+
+
+{/* chip for validation */}
+<div
+              className={`${
+                passportStatus === "validated"
+                  ? "bg-[#44BC491A]"
+                  : passportStatus === "unvalidated"
+                  ? "bg-[#6166731A]"
+                  : "bg-[#FD57571A]"
+              }
+            
+             p-1
+             pl-4
+             pr-4
+            rounded-3xl
+            mr-4
+            
+            `}
+            >
+              <div className="flex gap-2">
+                <img /* src="/myaccount/unvalidated.svg"  */
+                  src={`${
+                    passportStatus === "validated"
+                      ? "/myaccount/validated.svg"
+                      : passportStatus === "unvalidated"
+                      ? "/myaccount/unvalidated.svg"
+                      : "/myaccount/rejected.svg"
+                  }`}
+                />
+                <p
+                  className={`${
+                    passportStatus === "validated"
+                      ? "text-[#44BC49]"
+                      : passportStatus === "unvalidated"
+                      ? "text-[#616673]"
+                      : "text-[#FD5757]"
+                  }
+                  capitalize
+                  `}
+                >
+                  {passportStatus}
+                </p>
+              </div>
+            </div>
+          </Box>
+
+          <DialogContent
+            dividers={true}
+            style={{ maxHeight: "80vh", overflow: "auto" }}
+          >
+            <PopupPassVerify
+              user={user}
+              setUpdatedPassportPopup={setUpdatedPassportPopup}
+              popupRef={popupRef}
+              setOpen={setOpen}
+            />
+          </DialogContent>
+        </Dialog>
 
         <td>
           <Flag className="flag-photo-pass-verify" code={nationality} />
         </td>
 
-        {/* i ovo, u imenima ! (samo gore rasporedis.. koje ime ide..) */}
         <td>{userTypeText}</td>
 
-        <td>{passportStatus}</td>
+        <td>
+          <div className="flex justify-center items-center ">
+          {/* chip for validation */}
+            <div
+              className={`${
+                passportStatus === "validated"
+                  ? "bg-[#44BC491A]"
+                  : passportStatus === "unvalidated"
+                  ? "bg-[#6166731A]"
+                  : "bg-[#FD57571A]"
+              }
+            
+             p-1
+             pl-4
+             pr-4
+            rounded-3xl
+            
+            `}
+            >
+              <div className="flex gap-2">
+                <img /* src="/myaccount/unvalidated.svg"  */
+                  src={`${
+                    passportStatus === "validated"
+                      ? "/myaccount/validated.svg"
+                      : passportStatus === "unvalidated"
+                      ? "/myaccount/unvalidated.svg"
+                      : "/myaccount/rejected.svg"
+                  }`}
+                />
+                <p
+                  className={`${
+                    passportStatus === "validated"
+                      ? "text-[#44BC49]"
+                      : passportStatus === "unvalidated"
+                      ? "text-[#616673]"
+                      : "text-[#FD5757]"
+                  }
+                  capitalize
+                  `}
+                >
+                  {passportStatus}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </td>
 
         <td>{accountCreatedAt}</td>
 
-        <td>{passportUploadedDate}</td>
+        {/*  <td>{passportUploadedDate}</td>
 
-        <td>{passportLastValidatedRejected}</td>
+        <td>{passportLastValidatedRejected}</td> */}
       </tr>
     </>
   );

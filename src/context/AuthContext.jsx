@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
+import { useCallback } from 'react';
 
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -12,6 +13,12 @@ let BACKEND_SERVER_BASE_URL =
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+
+  
+  
+  let [campaignId, setCampaignId] = useState("");
+  
+
   const [user, setUser] = useState(() => {
     const tokenString =
       localStorage.getItem("authTokens") ||
@@ -44,6 +51,9 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+
+
+
   let loginUser = async (email, password, remember_me) => {
     try {
       var response = await axios.post(`${BACKEND_SERVER_BASE_URL}/auth/login`, {
@@ -53,14 +63,15 @@ export const AuthProvider = ({ children }) => {
       console.log("damn" + response);
     } catch (error) {
       if (error.response.status === 401) {
-        alert(error.response.data.message);
-        console.log("ovde treba uzeti token da salje ti na email opet" + email);
+       // alert(error.response.data.message);
+       return 0;
       } else {
         console.log(error);
+        return 0;
       }
     }
 
-    console.log(response);
+   
 
     // AND HERE, YOU CAN DECIDE WHETHER IT IS local or session storage, depending on whether "remember me" is selected or not..
     if (response) {
@@ -72,20 +83,29 @@ export const AuthProvider = ({ children }) => {
 
       setAuthTokens(response);
 
-      //console.log("token is:" + response.data.access_token);
 
       setUser(jwtDecode(response.data.access_token));
 
-      navigate("/");
+
+      // here check if athleteStatus is "s1" or "s2", then it redirects to that screen where user inserts status (on that, once it's filled, then, we redirect to home, or myprofile). and this screen is shown only for athlete user type ! 
+      if((response.data.athleteStatus === "s1" || response.data.athleteStatus === "s2") && response.data.user_type === "AH" ){
+        
+        navigate("/updateAthleteStatus");
+        
+      } else {
+        
+          navigate("/");
+          
+        }
+
     } else {
       console.log("Something went wrong while loggin in the user!");
+      return 0;
     }
 
-    if (response) {
-      alert("Login success ");
-    } else {
-      alert("Login failed");
-    }
+   
+
+    
   };
 
   // just call this function, for logout, and you're done
@@ -95,17 +115,40 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.removeItem("authTokens");
     setAuthTokens(null);
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
+
+
+
+  // TODO for campaignID ! I should've moved in separate context
+
+  let settingCampaignId = useCallback((id) => {
+    setCampaignId(id);
+  }, [campaignId]);
+
+  let thisNow = (id) => {
+    settingCampaignId(id);
+  }
+
 
   let contextData = {
     user: user,
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
+
+   // campaignId: campaignId,
+    //setCampaignId: setCampaignId,
+  //  settingCampaignId: thisNow,
+
+    
   };
+
+
 
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+
+
   );
 };

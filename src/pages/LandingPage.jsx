@@ -3,7 +3,7 @@
 
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
-
+import '@mui/material/styles/styled';
 import "../styles/landingPage.scoped.scss";
 
 import { Button } from "@mui/material";

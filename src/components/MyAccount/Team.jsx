@@ -1,5 +1,6 @@
 import { HeaderMyProfile } from "./HeaderMyProfile";
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import Flag from "react-world-flags";
 
@@ -14,17 +15,20 @@ import countryList from "react-select-country-list";
 import "../../styles/editprofile.scoped.scss";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Team = () => {
+  const { t } = useTranslation();
+
   // more simple pagination
 
   const [otherUsers, setOtherUsers] = useState([]);
   const [otherPage, setOtherPage] = useState(1);
-
-  const [hasMoreOthers, setHasMoreOthers] = useState(true);
 
   const [searchText, setSearchText] = useState(""); //search box
 
@@ -54,7 +58,10 @@ const Team = () => {
       return userJson.data.gender;
     }
   });
+
   const [categoryFilter, setCategoryFilter] = useState("medium");
+
+  const [maxPages, setMaxPages] = useState(0);
 
   const handleGenderFilter = (gender) => {
     setGenderFilter(gender);
@@ -105,21 +112,21 @@ const Team = () => {
 
   const changedSearchPlaceholderText = () => {
     if (selectedRole === "AH" || currentUserType === "AH") {
-      setSearchPlaceholderText("Athlete");
+      setSearchPlaceholderText(t("userTypes.user_type1"));
     } else if (selectedRole === "RS") {
-      setSearchPlaceholderText("Referee & Support");
+      setSearchPlaceholderText(t("userTypes.user_type11"));
     } else if (selectedRole === "LM") {
-      setSearchPlaceholderText("Legal Manager");
+      setSearchPlaceholderText(t("userTypes.user_type10"));
     } else if (selectedRole === "ITM") {
-      setSearchPlaceholderText("IT Manager");
+      setSearchPlaceholderText(t("userTypes.user_type5"));
     } else if (selectedRole === "MM") {
-      setSearchPlaceholderText("Marketing Manager");
+      setSearchPlaceholderText(t("userTypes.user_type7"));
     } else if (selectedRole === "SM") {
-      setSearchPlaceholderText("Sales Manager");
+      setSearchPlaceholderText(t("userTypes.user_type8"));
     } else if (selectedRole === "VM") {
-      setSearchPlaceholderText("Validation Manager");
+      setSearchPlaceholderText(t("userTypes.user_type9"));
     } else if (selectedRole === "EM") {
-      setSearchPlaceholderText("Event Manager");
+      setSearchPlaceholderText(t("userTypes.user_type4"));
     }
   };
 
@@ -142,6 +149,7 @@ const Team = () => {
     changedSearchPlaceholderText();
     changedNeedGender();
 
+
     if (userId) {
       fetchTeamMates();
     }
@@ -159,78 +167,56 @@ const Team = () => {
     setSelectedRole(event.target.value);
   };
 
+ 
+
   const fetchTeamMates = async () => {
     try {
-      const response = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
-        params: {
-          limit: 10,
-          offset: (otherPage - 1) * 10,
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/team`,
+        {
+          params: {
+            limit: 10,
+            offset: (otherPage - 1) * 10,
 
-          searchText: searchText,
+            searchText: searchText,
 
-          userId: userId,
-          user_type: selectedRole, // and that's by dropdown, what's selected to show
-          genderFilter: genderFilter,
-          categoryFilter: categoryFilter,
-          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
+            userId: userId,
+            user_type: selectedRole, // and that's by dropdown, what's selected to show
+            genderFilter: genderFilter,
+            categoryFilter: categoryFilter,
+            currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
 
-          needGender: needGender,
+            needGender: needGender,
 
-          nationality: code, // we show only from this user country
-        },
-      });
+            nationality: code, // we show only from this user country
+          },
+        }
+      );
 
-      console.log("salje userid:" + userId);
-
-      setOtherUsers(response.data);
-
-
-
-
+      console.log("team, does it get count");
+      console.log(response);
 
 
-
-      // for next page, to check if there's more !
-      const isThereNextPage = await axios.get(`${BACKEND_SERVER_BASE_URL}/listsData/team`, {
-        params: {
-          limit: 10,
-          offset: (otherPage) * 10,
-
-          searchText: searchText,
-
-          userId: userId,
-          user_type: selectedRole, // and that's by dropdown, what's selected to show
-          genderFilter: genderFilter,
-          categoryFilter: categoryFilter,
-          currentUserType: currentUserType, // if we need to filter by nationality, or see it as globally
-
-          needGender: needGender,
-
-          nationality: code, // we show only from this user country
-        },
-      });
+      
+      setMaxPages(Math.ceil(response.data.count / 10));
+      setOtherUsers(response.data.rows);
 
 
-      if (isThereNextPage.data.length == 0) {
-        setHasMoreOthers(false);
-      } else {
-        setHasMoreOthers(true);
-      }
     } catch (error) {
       console.error("Error fetching other users:", error);
     }
+
+   
   };
 
   const getCurrentNP = async () => {
-
-
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/currentNP`,
-         {params: {
-          nationality: code,  // this is, if NP is from DZ "algeria", then, he will be NP for these athletes... 
-         },
-
+        {
+          params: {
+            nationality: code, // this is, if NP is from DZ "algeria", then, he will be NP for these athletes...
+          },
         }
       );
 
@@ -244,85 +230,97 @@ const Team = () => {
     // Fired when enter button is pressed.
   };
 
-  const handleNextPage = () => {
-    if (hasMoreOthers) {
-      setOtherPage((prev) => prev + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (otherPage > 1) {
-      setOtherPage((prev) => prev - 1);
-    }
+  const handlePaginationChange = (event, value) => {
+    setOtherPage(value);
   };
 
   return (
     <>
-      <HeaderMyProfile />
-
       {currentUserType === "AH" && (
-        <div className="flex gap-16">
-          <div className="m-4 ml-0">
-            <p>Your National President</p>
-            <p className="text-xl mt-1">{currentNP}</p>
+        <div className="flex gap-16 lexend-font text-black_second">
+          <div className="p-4 ml-0 grow ">
+            <p>{t("myprofile.team.content1")}</p>
+            <p className="text-xl mt-1 font-bold">{currentNP}</p>
           </div>
 
           <div className="flex flex-col justify-center items-start pl-4 ">
-            <p>Country</p>
+            <p>{t("myprofile.team.content2")}</p>
 
-            <div className="flex justify-center items-center gap-3">
-              <p className="text-xl">{countryList().getLabel(code)}</p>
+            <div className="flex justify-center items-center gap-3 mr-4">
+              <p className="text-xl font-bold">
+                {countryList().getLabel(code)}
+              </p>
               <Flag className="flag-photo-team " code={code} />
             </div>
           </div>
         </div>
       )}
 
-
       {/* div's, for Search bar and Filter */}
-      <div className="flex justify-end mt-8">
-        <div style={{ marginTop: "-17px", marginRight: "20px" }}>
+      <div className="flex flex-col w-full sm:flex-row justify-end mt-8 pl-4 pr-4 lexend-font text-black_second">
+        <div style={{ marginTop: "-27px", marginRight: "20px" }}>
           {(currentUserType === "NP" || currentUserType === "GP") && (
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                <b>Display</b>
-              </InputLabel>
+            <>
+              <p className="ml-2 font-bold text-sm">
+                {t("myprofile.team.content3")}
+              </p>
 
-              {currentUserType === "NP" && (
-                <>
-                  <Select
-                    labelId="roleDropdowns"
-                    value={selectedRole}
-                    onChange={handleChangeRole}
-                    className="w-[200px]"
-                    style={{ color: "#000" }}
-                  >
-                    <MenuItem value={"AH"}>Athletes</MenuItem>
-                    <MenuItem value={"RS"}>Referee & Support</MenuItem>
-                  </Select>
-                </>
-              )}
+              <FormControl
+                className="max-sm:w-full "
+                sx={{ m: 1, minWidth: 120 }}
+              >
+                {currentUserType === "NP" && (
+                  <>
+                    <Select
+                      labelId="roleDropdowns"
+                      value={selectedRole}
+                      onChange={handleChangeRole}
+                      className="w-full sm:w-[200px] h-10"
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"AH"}>
+                        {t("userTypes.user_type1")}
+                      </MenuItem>
+                      <MenuItem value={"RS"}>
+                        {t("userTypes.user_type11")}
+                      </MenuItem>
+                    </Select>
+                  </>
+                )}
 
-              {currentUserType === "GP" && (
-                <>
-                  <Select
-                    labelId="roleDropdowns"
-                    value={selectedRole}
-                    onChange={handleChangeRole}
-                    className="w-[200px]"
-                    style={{ color: "#000" }}
-                  >
-                    <MenuItem value={"LM"}>Legal Manager</MenuItem>
-                    <MenuItem value={"ITM"}>IT Manager</MenuItem>
+                {currentUserType === "GP" && (
+                  <>
+                    <Select
+                      labelId="roleDropdowns"
+                      value={selectedRole}
+                      onChange={handleChangeRole}
+                      className="w-full sm:w-[200px]"
+                      style={{ color: "#000" }}
+                    >
+                      <MenuItem value={"LM"}>
+                        {t("userTypes.user_type10")}
+                      </MenuItem>
+                      <MenuItem value={"ITM"}>
+                        {t("userTypes.user_type5")}
+                      </MenuItem>
 
-                    <MenuItem value={"MM"}>Marketing Manager</MenuItem>
-                    <MenuItem value={"SM"}>Sales Manager</MenuItem>
-                    <MenuItem value={"VM"}>Validation Manager</MenuItem>
-                    <MenuItem value={"EM"}>Event Manager</MenuItem>
-                  </Select>
-                </>
-              )}
-            </FormControl>
+                      <MenuItem value={"MM"}>
+                        {t("userTypes.user_type7")}
+                      </MenuItem>
+                      <MenuItem value={"SM"}>
+                        {t("userTypes.user_type8")}
+                      </MenuItem>
+                      <MenuItem value={"VM"}>
+                        {t("userTypes.user_type9")}
+                      </MenuItem>
+                      <MenuItem value={"EM"}>
+                        {t("userTypes.user_type4")}
+                      </MenuItem>
+                    </Select>
+                  </>
+                )}
+              </FormControl>
+            </>
           )}
         </div>
 
@@ -330,62 +328,71 @@ const Team = () => {
           value={searchText}
           onChange={(newValue) => setSearchText(newValue)}
           onCancelResearch={(newValue) => setSearchText("")}
-          placeholder={"Find " + searchPlaceholderText}
+          placeholder={
+            t("myprofile.team.content4") + " " + searchPlaceholderText
+          }
+          width="100%"
           onSearch={handleSearch}
           style={{
-            border: "1px solid #C6C6C6", // Border color and thickness
-            borderRadius: "20px", // Border radius
+            border: "1px solid #C6C6C6",
+            borderRadius: "10px",
           }}
         />
       </div>
 
-      <div className="mt-8">
-        <table className="w-full">
-          <thead>
-            <tr>
-              <th className="w-[15%]">Rank</th>
-              <th className="w-[25%]">Name</th>
-              <th className="w-[8%]">Age</th>
-              <th className="w-[26%]">Email</th>
-              <th className="w-[15%]">Phone</th>
-            </tr>
-          </thead>
-          <tbody>
-            {otherUsers.map((user, index) => (
-              <TeamList user={user} index={index} selectedRole={selectedRole} currentUserType={currentUserType} />
-            ))}
-          </tbody>
-        </table>
+      {/* table */}
+
+      <div className="container-table-mobile">
+        <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
+          <table className="w-full ">
+            <thead>
+              <tr>
+                <th className="w-[15%] tht">{t("myprofile.team.table4")}</th>
+
+                <th className="w-[25%] tht">{t("myprofile.team.table1")}</th>
+                <th className="w-[10%] tht">{t("myprofile.team.table2")}</th>
+                <th className="w-[24%] tht">{t("myprofile.team.table3")}</th>
+                <th className="w-[15%] tht">{t("myprofile.team.table5")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {otherUsers.map((user, index) => (
+                <TeamList
+                  user={user}
+                  index={index}
+                  selectedRole={selectedRole}
+                  currentUserType={currentUserType}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <button
-          /* only when on first page
-and if it's actually first page, (it won't actually reflect new state in useState, so I think it's useless to mess with this anyways.. )
-
-|| (!showingTop50 && hasMoreOthers)
-
-*/
-          disabled={otherPage === 1}
-          onClick={handlePreviousPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-        >
-          Previous
-        </button>
-        <button
-          disabled={!hasMoreOthers}
-          onClick={handleNextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Next Page
-        </button>
+      {/* pagination */}
+      <div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={otherPage}
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
       </div>
 
       {currentUserType === "NP" && selectedRole == "AH" && (
         <>
           <div>
             <div>
-              <h2>Gender:</h2>
+              <h2>{t("myprofile.team.table6")}:</h2>
               <div>
                 <button
                   className={`gender-button ${
@@ -394,7 +401,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
                   onClick={() => handleGenderFilter("M")}
                   disabled={genderFilter === "M"}
                 >
-                  M
+                  {t("myprofile.team.table8")}
                 </button>
                 <button
                   className={`gender-button ${
@@ -403,13 +410,13 @@ and if it's actually first page, (it won't actually reflect new state in useStat
                   onClick={() => handleGenderFilter("F")}
                   disabled={genderFilter === "F"}
                 >
-                  F
+                  {t("myprofile.team.table9")}
                 </button>
               </div>
             </div>
 
             <div className="button-container">
-              <h2>Category:</h2>
+              <h2>{t("myprofile.team.table7")}:</h2>
               <div>
                 <button
                   className={`category-button ${
@@ -418,7 +425,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
                   onClick={() => handleCategoryFilter("heavy")}
                   disabled={categoryFilter === "heavy"}
                 >
-                  Heavy
+                  {t("myprofile.team.table10")}
                 </button>
                 <button
                   className={`category-button ${
@@ -427,7 +434,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
                   onClick={() => handleCategoryFilter("medium")}
                   disabled={categoryFilter === "medium"}
                 >
-                  Medium
+                  {t("myprofile.team.table11")}
                 </button>
                 <button
                   className={`category-button ${
@@ -436,7 +443,7 @@ and if it's actually first page, (it won't actually reflect new state in useStat
                   onClick={() => handleCategoryFilter("light")}
                   disabled={categoryFilter === "light"}
                 >
-                  Light
+                  {t("myprofile.team.table12")}
                 </button>
               </div>
             </div>

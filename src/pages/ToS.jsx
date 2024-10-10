@@ -1,9 +1,11 @@
+import { FooterClean } from "../components/FooterClean";
 import { Navbar } from "../components/Navbar";
+import { NavbarClean } from "../components/NavbarClean";
 
 const ToS = () => {
   return (
     <>
-      <Navbar />
+      <NavbarClean />
 
       <div className="m-8">
         <br />
@@ -248,6 +250,8 @@ const ToS = () => {
           respect to such use.
         </p>
       </div>
+
+      <FooterClean />
     </>
   );
 };

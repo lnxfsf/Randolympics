@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import "../styles/register.scoped.scss";
+import { useTranslation } from "react-i18next";
 
 import { useRef, useState, useEffect } from "react";
 import React, { useContext } from "react";
@@ -15,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import ReactFlagsSelect from "react-flags-select";
+import supportedCountry from "../context/supportedCountry";
 
 // MUI
 import IconButton from "@mui/material/IconButton";
@@ -47,6 +49,9 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
+import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
+import { NavbarClean } from "../components/NavbarClean";
+import { FooterClean } from "../components/FooterClean";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -60,6 +65,34 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+const lexend_font = {
+  fontFamily: "'Lexend', sans-serif",
+};
+
+const sxTextField = {
+  mb: 1,
+  mr: 1,
+
+  width: "100%",
+
+  /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
+   */
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 2,
+    fontFamily: "'Lexend', sans-serif",
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "red",
+  },
+  "& .MuiInputLabel-root": {
+    fontFamily: "'Lexend', sans-serif",
+
+    "&.Mui-focused": {
+      color: "black",
+    },
+  },
+};
+
 let APP_SITE_KEY =
   import.meta.env.VITE_APP_SITE_KEY || process.env.VITE_APP_SITE_KEY;
 
@@ -67,36 +100,22 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-
-
-
-
-
-
 const Register = () => {
-
-
+  const { t } = useTranslation();
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
-  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
   const isPhoneErrorFocus = useRef(null);
 
-
-   // ? this is for password  Password
-   const [isPasswordError, setIsPasswordError] = useState(false);
-   const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
-   const isPasswordErrorFocus = useRef(null);
- 
-
-
-
-
+  // ? this is for password  Password
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("* Required");
+  const isPasswordErrorFocus = useRef(null);
 
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
   const isEmailErrorFocus = useRef(null);
 
   const [resultText, setResultText] = useState("");
@@ -126,19 +145,16 @@ const Register = () => {
 
   const [uploadedFile, setUploadedFile] = useState(null);
 
-
-
   const server = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
     process: {
       url: `${BACKEND_SERVER_BASE_URL}/imageUpload/profilePicture`,
-      method: 'POST',
+      method: "POST",
       headers: {},
       withCredentials: false,
 
       onload: (response) => {
-
         // Parse the JSON response to get the filename
 
         const jsonResponse = JSON.parse(response);
@@ -146,17 +162,38 @@ const Register = () => {
 
         console.log("Uploaded filename:", filename);
         setUploadedFile(filename);
-        // return filename; 
+        // return filename;
       },
       onerror: (response) => {
-        console.error('Error uploading file:', response);
+        console.error("Error uploading file:", response);
         return response;
       },
     },
+
+    revert: (uniqueFileId, load, error) => {
+      // console.log("ovo mu je" + editCoverImage)
+
+      // Send request to the server to delete the file with the uniqueFileId
+      fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ filename: uploadedFile }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            load(); // Signal that the file has been reverted successfully
+          } else {
+            response.json().then((errorData) => error(errorData.message));
+          }
+        })
+        .catch((err) => {
+          console.error("Error reverting file:", err);
+          error("Error reverting file");
+        });
+    },
   };
-
-
-
 
   // ? image upload
 
@@ -180,22 +217,15 @@ const Register = () => {
     /*this is for nationality */
   }
   const [nationality_selected, setNationality_selected] = useState("");
-  const [selectedRole, setSelectedRole] = useState("AH");
-
+  const [selectedRole, setSelectedRole] = useState("GP");
 
   const [selectedGender, setSelectedGender] = useState("M");
 
-
-
   // ? captcha
-
-
 
   const recaptcha = useRef();
 
-
   // ? captcha
-
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -228,16 +258,7 @@ const Register = () => {
 
   // ? HERE
 
-
-
-
-
-
   // ? HERE, for weight..
-
-  
-
-
 
   const weightOptions = ["Kg", "Lb"]; // supported cryptos
 
@@ -257,8 +278,6 @@ const Register = () => {
     setWeightMenuAnchorEl(null); // Close the menu after selection (optional)
   };
 
-
-
   // ? HERE, for weight..
 
   useEffect(() => {
@@ -270,24 +289,18 @@ const Register = () => {
       }
     });
 
-
-
     if (isEmailError && isEmailErrorFocus.current) {
       isEmailErrorFocus.current.focus();
     }
 
-    
     if (isPhoneError && isPhoneErrorFocus.current) {
       isPhoneErrorFocus.current.focus();
     }
 
-    
     if (isPasswordError && isPasswordErrorFocus.current) {
       isPasswordErrorFocus.current.focus();
     }
-
-
-  }, [isEmailError, isPhoneError, isPasswordError ]);
+  }, [isEmailError, isPhoneError, isPasswordError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -312,6 +325,9 @@ const Register = () => {
     var email = e.target.email.value;
     var password = e.target.pass.value;
     var name = e.target.name.value;
+    var middleName = e.target.middleName.value;
+    var lastName = e.target.lastName.value;
+
     var phone = e.target.phone.value;
     var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
@@ -322,7 +338,7 @@ const Register = () => {
 
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
-        var weight = (e.target.weight * 0.45359237);
+        var weight = e.target.weight * 0.45359237;
 
         //console.log(weight);
       }
@@ -335,53 +351,40 @@ const Register = () => {
 
     if (!emailRegex.test(email)) {
       setIsEmailError(true);
-      setIsEmailErrorHelper("Enter a valid email address");
+      setIsEmailErrorHelpert(t("register.content1"));
     }
 
-
-    const phoneRegex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/
+    const phoneRegex =
+      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
     if (!phoneRegex.test(phone)) {
       setIsPhoneError(true);
-      setIsPhoneErrorHelper("Enter valid phone number");
- 
-
-    }else {
+      setIsPhoneErrorHelper(t("register.content2"));
+    } else {
       setIsPhoneError(false);
     }
-  
-  
-  
+
     const passwordRegex = /^.{4,}$/;
-  
+
     if (!passwordRegex.test(password)) {
       setIsPasswordError(true);
-      setIsPasswordErrorHelper("Password should be longer than 4 characters");
- 
-
+      setIsPasswordErrorHelper(t("register.content3"));
     } else {
       setIsPasswordError(false);
     }
-  
-
-
-
-
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
-      setResultText("Please verify the reCAPTCHA!");
+      setResultText(t("register.content4"));
     } else {
-
-
-      console.log("isEmailEror vrednost: "+isEmailError)
-
-      // ! TODO, ne samo taj, nego bilo koji element ! (samo proveri, svi elementi, da nisu prazni, da imaju. i onda ne salje captcha u server uzalud..)
-      if (nationality_selected && isEmailError === false &&  isPhoneError === false && isPasswordError === false ) {
-
-
+      if (
+        nationality_selected &&
+        isEmailError === false &&
+        isPhoneError === false &&
+        isPasswordError === false
+      ) {
         const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
           method: "POST",
           body: JSON.stringify({ captchaValue }),
@@ -396,13 +399,6 @@ const Register = () => {
         if (data.success) {
           // make form submission
 
-
-
-
-
-          // ! e ovde ne moze da pusta, ako ova varijable nije na true (tj. string bolje da je.. da bi mogao da ga menjas, i prikazujes errors u polja gde appropriate i takodje, "focus" na to polje !!!)
-
-
           try {
             var response = await axios.post(
               `${BACKEND_SERVER_BASE_URL}/auth/register`,
@@ -414,6 +410,8 @@ const Register = () => {
                 phone_private,
                 weight_private,
                 name,
+                middleName,
+                lastName,
                 phone,
                 nationality: nationality_selected,
                 weight,
@@ -432,17 +430,15 @@ const Register = () => {
               if (error.response && error.response.status === 409) {
                 //alert("");
 
-
                 setResultText(error.response.data.message);
 
                 //console.log(error)
-
 
                 setResultTextColor("red");
               } else {
                 setResultText(
                   "An error occurred: " +
-                  (error.response?.data?.message || error.message)
+                    (error.response?.data?.message || error.message)
                 );
               }
             } else {
@@ -450,39 +446,29 @@ const Register = () => {
             }
           }
 
-
-
-
-
-
-
           if (response) {
-            setResultText("Signed up ! Email verification sent.");
+            setResultText(t("register.content5"));
             setResultTextColor("black");
           }
         } else {
-          setResultText("reCAPTCHA validation failed!");
+          setResultText(t("register.content6"));
           setResultTextColor("red");
         }
       } else {
-
         if (nationality_selected === "") {
-          setResultText("Insert nationality !");
+          setResultText(t("register.content7"));
           setResultTextColor("red");
         } else if (isEmailError === true) {
-          setResultText("Email is not valid !");
+          setResultText(t("register.content8"));
           setResultTextColor("red");
-        } else if (isPhoneError === true){
-          setResultText("Phone is not valid !");
+        } else if (isPhoneError === true) {
+          setResultText(t("register.content9"));
           setResultTextColor("red");
-        } else if (isPasswordError === true){
-          setResultText("Password should be longer than 4 characters ! ");
+        } else if (isPasswordError === true) {
+          setResultText(t("register.content10"));
           setResultTextColor("red");
         }
-
-
       }
-
     }
   };
 
@@ -493,7 +479,6 @@ const Register = () => {
   const handleChangeGender = (event) => {
     setSelectedGender(event.target.value);
   };
-
 
   // ? for dropdown menu
   // Get the current year,
@@ -509,89 +494,144 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex justify-center mt-32">
-        <img src="login/logo.svg" />
-      </div>
+      <NavbarClean />
 
       <form
         action="#"
-        className="sign-in-form flex flex-col wrap justify-start items-center"
+        className=" flex flex-col wrap justify-start items-center"
         onSubmit={handleSubmit}
       >
-        <div className="flex m-16">
-          <div className="basis-1/2 flex flex-wrap flex-col m-12 items-center">
+        <div className="flex flex-col justify-start w-full">
+          <div className=" flex  flex-col p-8 items-center  ">
             {/* START FORM SUBMISSION (login), FOR LOGIN */}
-
-            <div className="flex m-0 flex-col">
-              <InputLabel id="roleDropdowns">Register as:</InputLabel>
-              <Select
-                labelId="roleDropdowns"
-                id="roleDropdown"
-                label="Sign up as:"
-                value={selectedRole}
-                onChange={handleChangeRole}
-                className="w-[420px]"
-                style={{ color: "#000" }}
-              >
-                <MenuItem value={"AH"}>AH - Athlete</MenuItem>
-                <MenuItem value={"GP"}>GP - Global President</MenuItem>
-                <MenuItem value={"NP"}>NP - National President</MenuItem>
-                <MenuItem value={"EM"}>EM - Event Manager</MenuItem>
-                <MenuItem value={"ITM"}>
-                  ITM - IT Manager Page Editor (for adding news articles)
-                </MenuItem>
-                <MenuItem value={"MM"}>MM - Marketing Manager</MenuItem>
-                <MenuItem value={"SM"}>SM - Sales Manager</MenuItem>
-                <MenuItem value={"VM"}>VM - Validation Manager</MenuItem>
-                <MenuItem value={"LM"}>LM - Legal Manager</MenuItem>
-                <MenuItem value={"RS"}>RS - Referee & support</MenuItem>
-              </Select>
-            </div>
-
-
 
             <div
               action="#"
-              className="sign-in-form flex flex-col wrap justify-start items-center"
+              className="sign-in-form flex flex-col wrap justify-start items-start "
             >
-              <div className="flex mb-1 justify-center items-center mt-4">
-                <TextField
-                  error={isEmailError}
-                  helperText={isEmailErrorHelper}
+              <div className="">
+                {/* server="http://localhost:5000/profile_photo/upload" */}
 
-                  inputRef={isEmailErrorFocus}
-
-                  label="Email"
-                  placeholder="johndoe@gmail.com"
-                  id="email"
-                  name="email"
-                  required
-                  type="email"
-                  maxLength="80"
-                  inputProps={{
-                    maxLength: 80,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
+                <FilePond
+                  type="file"
+                  /* className={"profile_pic_upload"} */
+                  className="filepond--root athlete"
+                  onupdatefiles={setFiles}
+                  allowMultiple={false}
+                  maxFiles={1}
+                  server={server}
+                  name="image"
+                  labelIdle={t("register.content11")}
+                  accept="image/png, image/jpeg, image/gif"
+                  dropOnPage
+                  dropValidation
+                  allowPaste={true}
+                  allowReplace={true}
+                  credits={""}
+                  allowFileEncode={true}
+                  allowFileTypeValidation={true}
+                  allowImagePreview={true}
+                  allowImageCrop={true}
+                  allowImageResize={true}
+                  allowImageTransform={true}
+                  imagePreviewHeight={150}
+                  imageCropAspectRatio="1:1"
+                  imageResizeTargetWidth={150}
+                  imageResizeTargetHeight={150}
+                  /*  rectangle or circle  */
+                  /*                  stylePanelLayout="compact circle "
+                   */
+                  stylePanelLayout="compact circle"
+                  styleLoadIndicatorPosition="center bottom"
+                  styleProgressIndicatorPosition="center bottom"
+                  styleButtonRemoveItemPosition="center  bottom"
+                  styleButtonProcessItemPosition="center bottom"
+                  imageEditAllowEdit={false}
                 />
+              </div>
 
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <div className="flex m-0 flex-col w-full">
+                <label
+                  htmlFor="roleDropdowns"
+                  className="lexend-font mb-1 mt-1 font-medium text-sm"
+                >
+                  {t("register.content12")}
+                </label>
+                <Select
+                  labelId="roleDropdowns"
+                  id="roleDropdown"
+                  value={selectedRole}
+                  onChange={handleChangeRole}
+                  className="w-full"
+                  sx={{
+                    fontFamily: "'Lexend', sans-serif",
+
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
+                  style={{ color: "#000" }}
+                >
+                 {/* <MenuItem value={"AH"} sx={lexend_font}>
+                    {t("register.user_type1")}
+                  </MenuItem>*/}
+                  <MenuItem value={"GP"} sx={lexend_font}>
+                    {t("register.user_type2")}
+                  </MenuItem>
+                  <MenuItem value={"NP"} sx={lexend_font}>
+                    {t("register.user_type3")}
+                  </MenuItem>
+                  <MenuItem value={"EM"} sx={lexend_font}>
+                    {t("register.user_type4")}
+                  </MenuItem>
+                  <MenuItem value={"ITM"} sx={lexend_font}>
+                    {t("register.user_type5")}
+                  </MenuItem>
+                  <MenuItem value={"MM"} sx={lexend_font}>
+                    {t("register.user_type6")}
+                  </MenuItem>
+                  <MenuItem value={"SM"} sx={lexend_font}>
+                    {t("register.user_type7")}
+                  </MenuItem>
+                  <MenuItem value={"VM"} sx={lexend_font}>
+                    {t("register.user_type8")}
+                  </MenuItem>
+                  <MenuItem value={"LM"} sx={lexend_font}>
+                    {t("register.user_type9")}
+                  </MenuItem>
+                  <MenuItem value={"RS"} sx={lexend_font}>
+                    {t("register.user_type10")}
+                  </MenuItem>
+                </Select>
+              </div>
+
+              <div className="flex mb-1 justify-around items-center mt-4 gap-2 w-full ">
+                <div className="flex flex-col grow ">
+                  <label
+                    htmlFor="email"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("register.content13")} *
+                  </label>
+                  <TextField
+                    placeholder="johndoe@gmail.com"
+                    id="email"
+                    name="email"
+                    required
+                    type="email"
+                    maxLength="80"
+                    inputProps={{
+                      maxLength: 80,
+                    }}
+                    sx={sxTextField}
+                  />
+                </div>
+
+                <FormControl sx={{ minWidth: 120 }}>
                   <Select
                     name="email_private"
                     id="email_private"
@@ -599,148 +639,142 @@ const Register = () => {
                     disableUnderline
                     onChange={handleEmailPrivacyChange}
                     sx={{
-                      boxShadow: "none",
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                      mt: 2.2,
+                      fontFamily: "'Lexend', sans-serif",
+
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        fontFamily: "'Lexend', sans-serif",
+                      },
+                      "& fieldset": {
+                        borderRadius: 2,
+                      },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem
+                      value={true}
+                      sx={{ fontFamily: "'Lexend', sans-serif" }}
+                    >
+                      {t("register.private")}
+                    </MenuItem>
+                    <MenuItem
+                      value={false}
+                      sx={{ fontFamily: "'Lexend', sans-serif" }}
+                    >
+                      {t("register.public")}
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
 
-              <div className="flex flex-col mb-1 justify-center mt-0">
-                <TextField
-                  label="Name"
-                  placeholder="John Doe"
-                  id="name"
-                  name="name"
-                  required
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "420px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
+              <label
+                htmlFor="friendMiddleName"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content14")} *
+              </label>
+              <TextField
+                placeholder="John"
+                id="name"
+                name="name"
+                required
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                sx={sxTextField}
+              />
 
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
+              <label
+                htmlFor="middleName"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content15")}
+              </label>
 
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
+              <TextField
+                placeholder="Johnson"
+                id="middleName"
+                name="middleName"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                sx={sxTextField}
+              />
 
-              <div className="flex flex-col mb-2.5 justify-center mt-0">
-                <TextField
-                  label="Password"
-                  placeholder="password"
-                  id="pass"
-                  name="pass"
-                  required
+              <label
+                htmlFor="lastName"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content16")}
+              </label>
+              <TextField
+                placeholder="Doe"
+                id="lastName"
+                name="lastName"
+                required
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                sx={sxTextField}
+              />
 
+              <label
+                htmlFor="pass"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content17")}
+              </label>
+              <TextField
+                placeholder="****"
+                id="pass"
+                name="pass"
+                required
+                type={showPassword ? "text" : "password"}
+                sx={sxTextField}
+                InputProps={{
+                  maxLength: 255,
 
-                  
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
-                  error={isPasswordError}
-                  helperText={isPasswordHelper}
+              <div className="flex mb-2.5 justify-around w-full items-center mt-0 gap-2">
+                <div className="flex flex-col grow">
+                  <label
+                    htmlFor="phone"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("register.content18")} *
+                  </label>
+                  <TextField
+                    placeholder="+1 212 456 7890"
+                    id="phone"
+                    name="phone"
+                    required
+                    type="tel"
+                    inputProps={{
+                      maxLength: 15,
+                    }}
+                    sx={sxTextField}
+                  />
+                </div>
 
-                  inputRef={isPasswordErrorFocus}
-
-
-                  type={showPassword ? "text" : "password"}
-                  sx={{
-                    m: 1,
-                    width: "420px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                  InputProps={{
-                    maxLength: 255,
-
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-
-              <div className="flex mb-2.5 justify-center items-center mt-0">
-                <TextField
-                  label="Phone number"
-                  placeholder="+1 212 456 7890"
-                  id="phone"
-                  name="phone"
-                  required
-                  type="tel"
-
-
-                  error={isPhoneError}
-                  helperText={isPhonerHelper}
-
-                  inputRef={isPhoneErrorFocus}
-
-
-
-
-                  inputProps={{
-                    maxLength: 15,
-
-
-
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                {/* sx={{ m: 1, minWidth: 120 }} */}
+                <FormControl sx={{ minWidth: 120, mt: 2.2 }}>
                   <Select
                     name="phone_private"
                     id="phone_private"
@@ -748,127 +782,135 @@ const Register = () => {
                     disableUnderline
                     onChange={handlePhonePrivacyChange}
                     sx={{
-                      boxShadow: "none",
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                      minWidth: 120,
+                      fontFamily: "'Lexend', sans-serif",
+
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        fontFamily: "'Lexend', sans-serif",
+                      },
+                      "& fieldset": {
+                        borderRadius: 2,
+                      },
                     }}
                   >
-                    <MenuItem value={true}>Private</MenuItem>
-                    <MenuItem value={false}>Public</MenuItem>
+                    <MenuItem value={true} sx={lexend_font}>
+                      {t("register.private")}
+                    </MenuItem>
+                    <MenuItem value={false} sx={lexend_font}>
+                      {t("register.public")}
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
 
-              <div className="flex flex-col mb-2.5 justify-center  mt-2">
-                <ReactFlagsSelect
+              <ReactFlagsSelect
+                countries={supportedCountry}
+                selected={nationality_selected}
+                onSelect={(code) => setNationality_selected(code)}
+                className="w-full lexend-font "
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder="Nationality *"
+              />
 
-                  selected={nationality_selected}
-                  onSelect={(code) => setNationality_selected(code)}
-                  className="w-[420px]  "
-                  searchable={true}
-                  id="nationality"
-                  name="nationality"
-                  placeholder="Nationality *"
-                />
-              </div>
+              <label
+                htmlFor="roleDropdowns"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content19")}
+              </label>
 
-              <div className="flex mt-0 mb-2 flex-col">
-                <InputLabel id="roleDropdowns">Gender</InputLabel>
-                <Select
-                  labelId="roleDropdowns"
-                  id="roleDropdown"
-                  label="gender"
-                  value={selectedGender}
-                  onChange={handleChangeGender}
-                  className="w-[420px] h-10"
-                  style={{ color: "#000" }}
-                >
-                  <MenuItem value={"M"}>Male</MenuItem>
-                  <MenuItem value={"F"}>Female</MenuItem>
+              <Select
+                labelId="roleDropdowns"
+                id="roleDropdown"
+                value={selectedGender}
+                onChange={handleChangeGender}
+                className="w-full "
+                sx={{
+                  minWidth: 120,
+                  fontFamily: "'Lexend', sans-serif",
 
-                </Select>
-              </div>
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 2,
+                    fontFamily: "'Lexend', sans-serif",
+                  },
+                  "& fieldset": {
+                    borderRadius: 2,
+                  },
+                }}
+              >
+                <MenuItem value={"M"} sx={lexend_font}>
+                  {t("register.content20")}
+                </MenuItem>
+                <MenuItem value={"F"} sx={lexend_font}>
+                  {t("register.content21")}
+                </MenuItem>
+              </Select>
 
               {selectedRole === "AH" && (
-                <div className="flex mb-2.5 justify-center items-center mt-2">
-                  <TextField
-                    label="Weight"
-                    id="weight"
-                    name="weight"
-                    required
+                <div className="flex mb-2.5 justify-around w-full items-center mt-2 gap-2">
+                  <div className="flex flex-col grow">
+                    <label
+                      htmlFor="weight"
+                      className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    >
+                      {t("register.content22")} *
+                    </label>
 
-
-
-
-                    type="number"
-                    
-                    onChange={(event) =>
-                      event.target.value < 0
+                    <TextField
+                      id="weight"
+                      name="weight"
+                      required
+                      type="number"
+                      onChange={(event) =>
+                        event.target.value < 0
                           ? (event.target.value = 0)
                           : event.target.value
-                  }
+                      }
+                      placeholder="85 kg/185 lb"
+                      sx={sxTextField}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle kg / lb"
+                              onClick={handleWeightMenuClick}
+                              edge="end"
+                            >
+                              {/* Icon for dropdown, e.g., a downward arrow */}
+                              {selectedWeight}
+                            </IconButton>
+                            <Menu
+                              id="weight-menu"
+                              anchorEl={weightMenuAnchorEl}
+                              open={Boolean(weightMenuAnchorEl)}
+                              onClose={handleWeightMenuClose}
+                            >
+                              {weightOptions.map((option) => (
+                                <MenuItem
+                                  key={option}
+                                  onClick={() =>
+                                    handleWeightOptionSelect(option)
+                                  }
+                                  selected={option === selectedWeight}
+                                  sx={lexend_font}
+                                >
+                                  {option}
+                                </MenuItem>
+                              ))}
+                            </Menu>
+                          </InputAdornment>
+                        ),
 
+                        inputMode: "numeric",
+                        pattern: "[0-9]*",
+                      }}
+                    />
+                  </div>
 
-                    placeholder="85 kg/185 lb"
-                    sx={{
-                      m: 1,
-                      width: "280px",
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 5,
-                      },
-
-                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-
-                      "& .MuiInputLabel-root": {
-                        "&.Mui-focused": {
-                          color: "black",
-                        },
-                      },
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle kg / lb"
-                            onClick={handleWeightMenuClick}
-                            edge="end"
-                          >
-                            {/* Icon for dropdown, e.g., a downward arrow */}
-                            {selectedWeight}
-                          </IconButton>
-                          <Menu
-                            id="weight-menu"
-                            anchorEl={weightMenuAnchorEl}
-                            open={Boolean(weightMenuAnchorEl)}
-                            onClose={handleWeightMenuClose}
-                          >
-                            {weightOptions.map((option) => (
-                              <MenuItem
-                                key={option}
-                                onClick={() => handleWeightOptionSelect(option)}
-                                selected={option === selectedWeight}
-                              >
-                                {option}
-                              </MenuItem>
-                            ))}
-                          </Menu>
-                        </InputAdornment>
-                      ),
-
-                      inputMode: 'numeric',
-                      pattern: '[0-9]*',
-                      
-                      
-                      
-
-
-
-                    }}
-                  />
-
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <FormControl sx={{ minWidth: 120 }}>
                     <Select
                       name="weight_private"
                       id="weight_private"
@@ -876,83 +918,82 @@ const Register = () => {
                       onChange={handleWeightPrivacyChange}
                       disableUnderline
                       sx={{
-                        boxShadow: "none",
-                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                        mt: 2.2,
+                        fontFamily: "'Lexend', sans-serif",
+
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2,
+                          fontFamily: "'Lexend', sans-serif",
+                        },
+                        "& fieldset": {
+                          borderRadius: 2,
+                        },
                       }}
                     >
-                      <MenuItem value={true}>Private</MenuItem>
-                      <MenuItem value={false}>Public</MenuItem>
+                      <MenuItem value={true} sx={lexend_font}>
+                        {t("register.private")}
+                      </MenuItem>
+                      <MenuItem value={false} sx={lexend_font}>
+                        {t("register.public")}
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </div>
               )}
 
-              <div className="flex flex-col mb-2.5 justify-center mt-4">
-                <TextField
-                  label="Crypto"
-                  id="cryptoaddr"
-                  name="cryptoaddr"
-                  placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                  sx={{
-                    m: 1,
-                    width: "420px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
+              <label
+                htmlFor="cryptoaddr"
+                className="lexend-font mb-1 mt-1 font-medium text-sm"
+              >
+                {t("register.content23")}
+              </label>
 
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red",
-                    },
-
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                  InputProps={{
-                    maxLength: 150,
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle BTC/ETH/XMR"
-                          onClick={handleCryptoMenuClick}
-                          edge="end"
-                        >
-                          {/* Icon for dropdown, e.g., a downward arrow */}
-                          {selectedCrypto}
-                        </IconButton>
-                        <Menu
-                          id="crypto-menu"
-                          anchorEl={cryptoMenuAnchorEl}
-                          open={Boolean(cryptoMenuAnchorEl)}
-                          onClose={handleCryptoMenuClose}
-                        >
-                          {cryptoOptions.map((option) => (
-                            <MenuItem
-                              key={option}
-                              onClick={() => handleCryptoOptionSelect(option)}
-                              selected={option === selectedCrypto}
-                            >
-                              {option}
-                            </MenuItem>
-                          ))}
-                        </Menu>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
+              <TextField
+                id="cryptoaddr"
+                name="cryptoaddr"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                sx={sxTextField}
+                InputProps={{
+                  maxLength: 150,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle BTC/ETH/XMR"
+                        onClick={handleCryptoMenuClick}
+                        edge="end"
+                      >
+                        {/* Icon for dropdown, e.g., a downward arrow */}
+                        {selectedCrypto}
+                      </IconButton>
+                      <Menu
+                        id="crypto-menu"
+                        anchorEl={cryptoMenuAnchorEl}
+                        open={Boolean(cryptoMenuAnchorEl)}
+                        onClose={handleCryptoMenuClose}
+                      >
+                        {cryptoOptions.map((option) => (
+                          <MenuItem
+                            key={option}
+                            onClick={() => handleCryptoOptionSelect(option)}
+                            selected={option === selectedCrypto}
+                            sx={lexend_font}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
               <ReCAPTCHA
                 ref={recaptcha}
-
                 sitekey={APP_SITE_KEY}
-
-                onExpired={() => { recaptcha.reset(); }}
-
-                className="mt-2 g-recaptcha-response"
+                onExpired={() => {
+                  recaptcha.reset();
+                }}
+                className="mt-2 g-recaptcha-response self-center "
               />
 
               <div className="flex self-start mt-2">
@@ -960,9 +1001,9 @@ const Register = () => {
                   control={
                     <Checkbox
                       sx={{
-                        color: "#FF0000",
+                        color: "#D24949",
                         "&.Mui-checked": {
-                          color: "#FF0000",
+                          color: "#D24949",
                         },
                       }}
                       id="tos"
@@ -971,13 +1012,10 @@ const Register = () => {
                     />
                   }
                   label={
-                    <span>
-                      I have read and understood the{" "}
-                      <Link
-                        to="/tos"
-                        className="text-red_first font-bold underline decoration-red_first"
-                      >
-                        Terms of Service
+                    <span className="lexend-font">
+                      {t("register.tos1")}{" "}
+                      <Link to="/tos" className="text-red_second font-bold ">
+                        {t("register.tos2")}
                       </Link>
                     </span>
                   }
@@ -987,122 +1025,23 @@ const Register = () => {
 
             {/* END FORM SUBMISSION (login), FOR LOGIN */}
           </div>
-
-          <div className="flex flex-col justify-start">
-            <div className="basis-1/2 justify-center items-center rounded-md p-8 pl-0 w-auto mt-8 h-auto mb-6">
-
-
-
-              {/* server="http://localhost:5000/profile_photo/upload" */}
-
-
-              <FilePond
-                type="file"
-                className={"profile_pic_upload"}
-                onupdatefiles={setFiles}
-                allowMultiple={false}
-                maxFiles={1}
-                server={server}
-
-                name="image"
-                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(not mandatory)'
-                accept="image/png, image/jpeg, image/gif"
-                dropOnPage
-                dropValidation
-                allowPaste={true}
-                allowReplace={true}
-                credits={""}
-                allowFileEncode={true}
-                allowFileTypeValidation={true}
-                allowImagePreview={true}
-                allowImageCrop={true}
-                allowImageResize={true}
-                allowImageTransform={true}
-                imagePreviewHeight={360}
-                imageCropAspectRatio="1:1"
-                imageResizeTargetWidth={360}
-                imageResizeTargetHeight={360}
-                /*  rectangle or circle  */
-                /*                  stylePanelLayout="compact circle "
-                 */
-                stylePanelLayout="compact circle"
-                styleLoadIndicatorPosition="center bottom"
-                styleProgressIndicatorPosition="center bottom"
-                styleButtonRemoveItemPosition="center  bottom"
-                styleButtonProcessItemPosition="center bottom"
-                imageEditAllowEdit={false}
-
-              />
-            </div>
-
-            <div className="flex flex-col w-[420px]">
-              {/*   <label for="bio">Tell us about yourself:</label> */}
-
-              {/*     <textarea
-              type="text"
-              id="bio"
-              name="bio"
-              className="w-full h-32 rounded-md border border-gray-900"
-            ></textarea> */}
-              {/*     
-<TextField
-  placeholder="Tell us about yourself:"
-  multiline
-  rows={2}
-  maxRows={4}
-/>  */}
-              {/* 
-               <TextField
-                label="Tell us about yourself"
-                placeholder="Bio"
-                id="bio"
-                name="bio"
-                multiline
-                rows={5}
-                maxRows={8}
-                className="w-full h-32 rounded-md border border-gray-900"
-                type="text"
-                sx={{
-                  m: 1,
-                  width: "420px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: 5, // Rounded corners
-                  },
-
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "red", // Red border on focus
-                    },
-
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused": {
-                      color: "black", // Set label color to black when focused
-                    },
-                  },
-                }}
-                inputProps={{
-                  maxLength: 255,
-                }}
-              /> */}
-            </div>
-          </div>
         </div>
 
-        <div className="flex justify-center items-center mb-32 flex-col">
+        <div className="flex justify-center items-center mb-32 flex-col w-full">
           <Button
-
-            className="w-[420px]"
-            style={{ marginTop: "20px" }}
+            className="w-[80%] md:w-[50%] lg:w-[40%] xl:w-[30%] 2xl:w-[20%]"
+            style={{ textTransform: "none" }}
             sx={{
               height: "50px",
-              bgcolor: "#AF2626",
+              bgcolor: "#D24949",
+
               color: "#fff",
-              borderRadius: 15,
-              border: `1px solid #AF2626`,
+              borderRadius: 3,
+              border: `1px solid #D24949`,
               "&:hover": {
-                background: "rgb(196, 43, 43)",
+                background: "rgba(210, 73, 73, 1)",
                 color: "white",
-                border: `1px solid rgb(196, 43, 43)`,
+                border: `1px solid rgba(210, 73, 73, 1)`,
               },
             }}
             type="submit"
@@ -1110,7 +1049,7 @@ const Register = () => {
             value="Login"
             id="login-btn"
           >
-            <span className="popins-font">Create account</span>
+            <span className="popins-font">{t("register.content24")}</span>
           </Button>
 
           {/* resultTextColor */}
@@ -1119,6 +1058,8 @@ const Register = () => {
           </p>
         </div>
       </form>
+
+      <FooterClean />
     </>
   );
 };
