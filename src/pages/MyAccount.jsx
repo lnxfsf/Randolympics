@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import { FooterClean } from "../components/FooterClean";
 import "../styles/myaccount.scoped.scss";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -16,18 +16,21 @@ import AuthContext from "../context/AuthContext";
 
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { NewsAdmin } from "../components/NewsAdmin/NewsAdmin";
+import { useLocation } from "react-router-dom";
+
+import { useTranslation } from "react-i18next";
+import { WarningPassportMessage } from "../components/MyAccount/WarningPassportMessage";
 
 const MyAccount = () => {
+  const { t } = useTranslation();
+
+  const location = useLocation();
+  const hash = location.hash.replace("#", "");
+
   let { logoutUser } = useContext(AuthContext);
 
   const [user_type, setUserType] = useState("");
-  /*   const [passportStatus, setPassportStatus] = useState();
-  const [birthdate, setBirthdate] = useState(); */
-
-  const [warningMessage, setWarningMessage] = useState();
-  const [isRejected, setIsRejected] = useState(false);
-
-  const [passportStatus, setPassportStatus] = useState()
+  const [passportStatus, setPassportStatus] = useState();
 
   useEffect(() => {
     const storedData =
@@ -38,23 +41,40 @@ const MyAccount = () => {
 
       setUserType(userJson.data.user_type);
 
-      setPassportStatus(userJson.data.passportStatus)
-
-
-
-      /* setPassportStatus(userJson.data.setPassportStatus);
-      setBirthdate(userJson.data.birthdate); */
+      setPassportStatus(userJson.data.passportStatus);
     }
 
+    // you get like "elections" extracted from URL ".. #elections"
+    // and now, you choose something to be selected
+    switch (hash) {
+      case "myAccount":
+        setSelectedItem("myAccount");
+        break;
 
-    warningBoxFunc(
-      userJson.data.passportStatus,
-      userJson.data.birthdate,
-      userJson.data.passport_photo
-    );
+      case "elections":
+        setSelectedItem("elections");
+        break;
+      case "team":
+        setSelectedItem("team");
+        break;
 
+      case "settings":
+        setSelectedItem("settings");
+        break;
 
-  }, [isRejected, warningMessage]);
+      case "news":
+        setSelectedItem("news");
+        break;
+
+      case "loginTrafficHistory":
+        setSelectedItem("loginTrafficHistory");
+        break;
+
+      case "passportVerification":
+        setSelectedItem("passportVerification");
+        break;
+    }
+  }, [hash]);
 
   const [selectedItem, setSelectedItem] = useState("myAccount");
 
@@ -79,131 +99,124 @@ const MyAccount = () => {
     }
   };
 
-  const warningBoxFunc = (passportStatus, birthdate, passport_photo) => {
-
-
-
-    if (passportStatus === "unvalidated") {
-      if (birthdate == null && passport_photo == null) {
-        setWarningMessage(
-          "Your passport is not verified. Upload passport photo and birthdate to get verified."
-        );
-      } else if (birthdate == null && passport_photo !== null) {
-        setWarningMessage(
-          "Your passport is not verified. Insert your birthdate to get verified."
-        );
-      } else if (birthdate !== null && passport_photo == null) {
-        setWarningMessage(
-          "Your passport is not verified. Upload passport photo to get verified."
-        );
-      } else {
-        setWarningMessage(
-          "Your passport is not yet verified. Waiting for approval.."
-        );
-      }
-    } else if (passportStatus === "rejected") {
-      setWarningMessage("Your passport is rejected. Reupload passport and birthdate.");
-      setIsRejected(true)
-
-      // TODO, red warning box, ! izgleda interesantnije ovaj scenario !
-    } else if (passportStatus === "validted") {
-      setWarningMessage("");
-      setIsRejected(false)
-    }
-  };
   return (
     <>
       <Navbar />
 
-      <div className="flex pl-8 pt-8 text-[35px] ">My Account</div>
-
-      <div className="flex p-12 pl-2  pt-12 gap-4">
-
-        <div className="basis-1/3 side_nav p-4 ">
-          <ul className="list flex flex-col">
-
-
-            
+      <div className="  gap-7 mt-6 flex">
+        <div className="basis-1/4 hidden lg:block  ">
+          <ul className="list flex flex-col lexend-font">
             <li
               style={{ listStyleType: "none" }}
               ref={myAccountRef}
-              className={`list-item ${selectedItem === "myAccount" ? "selected" : ""
-                }`}
+              className={`list-item ${
+                selectedItem === "myAccount" ? "selected" : ""
+              }`}
               onClick={() => handleClick("myAccount")}
             >
-              <img src="/myaccount/user.svg" className="icon" />
-              My Account
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav1")}
+                </p>
+                <img src="/myaccount/user.svg" className="icon" />
+              </div>
             </li>
-
 
             <li
               style={{ listStyleType: "none" }}
               ref={settingsRef}
-              className={`list-item ${selectedItem === "settings" ? "selected" : ""
-                }`}
+              className={`list-item ${
+                selectedItem === "settings" ? "selected" : ""
+              }`}
               onClick={() => handleClick("settings")}
             >
-              <img src="/myaccount/settings.svg" className="icon" />
-              Settings
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav2")}
+                </p>
+                <img src="/myaccount/settings.svg" className="icon" />
+              </div>
             </li>
+
             <li
               style={{ listStyleType: "none" }}
               ref={teamRef}
-              className={`list-item ${selectedItem === "team" ? "selected" : ""
-                }`}
+              className={`list-item ${
+                selectedItem === "team" ? "selected" : ""
+              }`}
               onClick={() => handleClick("team")}
             >
-              <img src="/myaccount/team.svg" className="icon" />
-              Team
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav3")}
+                </p>
+
+                <img src="/myaccount/team.svg" className="icon" />
+              </div>
             </li>
 
-            {user_type !== "VM" && (
+            {(user_type === "AH" || user_type === "NP") && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={electionsRef}
-                className={`list-item ${selectedItem === "elections" ? "selected" : ""
-                  }`}
+                className={`list-item ${
+                  selectedItem === "elections" ? "selected" : ""
+                }`}
                 onClick={() => handleClick("elections")}
               >
-                <img src="/myaccount/team.svg" className="icon" />
-                Elections
+                <div className="flex justify-between">
+                  <p className="text-red_second font-medium ">
+                    {t("myprofile.side_nav.side_nav4")}
+                  </p>
+                  <img src="/myaccount/ballot.svg" className="icon" />
+                </div>
               </li>
             )}
 
+            {(user_type === "EM" ||
+              user_type === "ITM" ||
+              user_type === "GP" ||
+              user_type === "ITM" ||
+              user_type === "SM" ||
+              user_type === "MM") &&
+              passportStatus === "validated" && (
+                <li
+                  style={{ listStyleType: "none" }}
+                  ref={newsBlogRef}
+                  className={`list-item ${
+                    selectedItem === "news" ? "selected" : ""
+                  }`}
+                  onClick={() => handleClick("news")}
+                >
+                  <div className="flex justify-between">
+                    <p className="text-red_second font-medium ">
+                      {t("myprofile.side_nav.side_nav5")}
+                    </p>
 
-
-
-            {((user_type === "EM" || user_type === "ITM" || user_type === "GP" || user_type === "ITM" || user_type === "SM" || user_type === "MM" ) && ( passportStatus === "validated"  ) ) && (
-              <li
-                style={{ listStyleType: "none" }}
-                ref={newsBlogRef}
-                className={`list-item ${selectedItem === "news" ? "selected" : ""
-                }`}
-                onClick={() => handleClick("news")}
-              >
-                <img src="/myaccount/news.svg" className="icon" />
-                News
-              </li>
-            )}
-
-            {/* // TODO when you do this, you also need to set up, for each voting system, that they can't vote unless they have verified passport !
-             */}
+                    <img src="/myaccount/news.svg" className="icon" />
+                  </div>
+                </li>
+              )}
             {/* GP, can only view, but can't approve, or edit passports */}
             {/* //? passport validation (GP and VM) */}
             {(user_type === "VM" || user_type === "GP") && (
               <li
                 style={{ listStyleType: "none" }}
                 ref={passportVerificationRef}
-                className={`list-item ${selectedItem === "passportVerification" ? "selected" : ""
-                  }`}
+                className={`list-item ${
+                  selectedItem === "passportVerification" ? "selected" : ""
+                }`}
                 onClick={() => handleClick("passportVerification")}
               >
-                <img src="/myaccount/passport.svg" className="icon" />
-                Passport Verification
+                <div className="flex justify-between">
+                  <p className="text-red_second font-medium ">
+                    {t("myprofile.side_nav.side_nav6")}
+                  </p>
+
+                  <img src="/myaccount/passport.svg" className="icon" />
+                </div>
               </li>
             )}
-
-
 
             {/*  Show Login & Traffic History (for all managers , can see it ! ) */}
             {(user_type === "VM" ||
@@ -213,52 +226,43 @@ const MyAccount = () => {
               user_type === "SM" ||
               user_type === "LM" ||
               user_type === "GP") && (
-                <li
-                  style={{ listStyleType: "none" }}
-                  ref={loginTrafficHisRef}
-                  className={`list-item ${selectedItem === "loginTrafficHistory" ? "selected" : ""
-                    }`}
-                  onClick={() => handleClick("loginTrafficHistory")}
-                >
+              <li
+                style={{ listStyleType: "none" }}
+                ref={loginTrafficHisRef}
+                className={`list-item ${
+                  selectedItem === "loginTrafficHistory" ? "selected" : ""
+                }`}
+                onClick={() => handleClick("loginTrafficHistory")}
+              >
+                <div className="flex justify-between">
+                  <p className="text-red_second font-medium ">
+                    {t("myprofile.side_nav.side_nav7")}
+                  </p>
+
                   <img src="/myaccount/login_history.svg" className="icon" />
-                  Login & Traffic History
-                </li>
-              )}
+                </div>
+              </li>
+            )}
 
             <li
               style={{ listStyleType: "none" }}
               ref={logoutRef}
-              className={`list-item ${selectedItem === "logout" ? "selected" : ""
-                }`}
+              className={`list-item ${
+                selectedItem === "logout" ? "selected" : ""
+              }`}
               onClick={() => handleClick("logout")}
             >
-              <img src="/myaccount/exit.svg" className="icon" />
-              Logout
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav8")}
+                </p>
+
+                <img src="/myaccount/exit.svg" className="icon" />
+              </div>
             </li>
-
-
-
-            
           </ul>
 
-          {warningMessage && (
-            <>
-              <div className={`flex flex-col p-2 mt-4 pl-2 ${isRejected === true ? 'error_box_rejected' : 'error_box'} `}  >
-
-
-
-                <div className="flex">
-                  {/*  <img src="/myaccount/triangle-exclamation.svg" /> */}
-                  <WarningAmberIcon />
-                  <p className="pl-2">Warning !</p>
-                </div>
-
-                <div className="pl-8 pt-2">{warningMessage}</div>
-
-                <div className="pl-8 pt-4"> <p>You can't vote until your passport is verified.</p></div>
-              </div>
-            </>
-          )}
+          <WarningPassportMessage />
         </div>
 
         <div className="w-full">
@@ -275,8 +279,9 @@ const MyAccount = () => {
         </div>
       </div>
 
+      {/*   <Footer /> */}
 
-    {/*   <Footer /> */}
+      <FooterClean />
     </>
   );
 };

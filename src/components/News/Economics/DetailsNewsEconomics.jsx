@@ -12,6 +12,8 @@ import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 
 
@@ -70,7 +72,7 @@ const DetailsNewsEconomics = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      <Navbar />
 
       <div className="relative ">
       <div className="mt-32">
@@ -133,6 +135,8 @@ const DetailsNewsEconomics = () => {
           )}
         </div>
       </div>
+
+      <FooterClean />
     </>
   );
 };

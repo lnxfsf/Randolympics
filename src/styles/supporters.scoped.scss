@@ -86,7 +86,22 @@
 
 .popup-content {
   -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
-  border: 2px black solid;
+  /* border: 2px black solid; */
+
+  border-radius: 5px;
+
+
+
+  
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+
+  
+
+
+
 }
 
 
@@ -105,4 +120,42 @@
 
 
 }
+
+
+
+
+
+
+// image
+
+.image-container {
+  position: relative;
+  width: 100%; 
+
+
+   height: 90rem; 
+ 
+
+
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+
+
+.image_supporter {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  
+  
+  
+}
+
 

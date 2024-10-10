@@ -17,10 +17,10 @@ hr {
 
 
 .passport-photo {
-    border: 3px solid #AF2626;
-    border-radius: 11px;
+   // border: 3px solid #AF2626;
+    border-radius: 5px;
 
-    //object-fit , it needs to show whole passport in whole.. 
+    //object-fit //, it needs to show whole passport in whole.. 
 }
 /* 
 ! ovaj radi valjda
@@ -58,4 +58,40 @@ hr {
   border-radius: 2px;
   object-fit: cover;
 
+}
+
+
+
+
+
+
+.tht, .tdt {
+  //  border: 1px solid #ddd;
+  
+    padding: 8px;
+    text-align: start !important; // don't know why but it needs !important
+    vertical-align: middle;
+  
+    border-bottom: 1px solid #DEE2E6;
+  
+  }
+
+  @media screen and (max-width: 1022px) {
+.container-table-mobile {
+
+  width:100%;
+  height:auto;
+  min-height:100px;
+  overflow-x:auto;
+
+
+}
+}
+
+@media screen and (max-width: 1022px) {
+
+.table-mobile {
+  width:55rem;
+  height:auto;
+}
 }

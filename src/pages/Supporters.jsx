@@ -43,7 +43,6 @@ import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../context/supportedCountry";
 
 import { useNavigate } from "react-router-dom";
-import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
 
 import MenuItem from "@mui/material/MenuItem";
 
@@ -92,6 +91,13 @@ registerPlugin(
 
 import AuthCode from "react-auth-code-input";
 import { WarningTextPopup } from "../components/Supporters/WarningTextPopup";
+import { NavbarClean } from "../components/NavbarClean";
+import { FooterClean } from "../components/FooterClean";
+import { SupporterFirstPart } from "./SupportersParts/SupporterFirstPart";
+import { SupporterSecondPart } from "./SupportersParts/SupporterSecondPart";
+import { SupporterThirdPart } from "./SupportersParts/SupporterThirdPart";
+import { SupporterFourthPart } from "./SupportersParts/SupporterFourthPart";
+import { SupporterFifthPart } from "./SupportersParts/SupporterFifthPart";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -114,22 +120,32 @@ const inputLabelPropsTextField = {
 };
 
 const sxTextField = {
-  m: 1,
-  width: "240px",
+ 
+  mb: 1,
+  mr: 1,
+
+  width: "100%",
 
   /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
    */
   "& .MuiOutlinedInput-root": {
-    borderRadius: 3,
-    backgroundColor: "white",
+    borderRadius: 2,
+    fontFamily: "'Lexend', sans-serif",
   },
   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
     borderColor: "red",
   },
   "& .MuiInputLabel-root": {
+    fontFamily: "'Lexend', sans-serif",
+    
     "&.Mui-focused": {
       color: "black",
     },
+
+
+
+
+    
   },
 };
 
@@ -154,66 +170,8 @@ const generateRandomEmail = (usernameLength = 8) => {
 };
 
 const Supporters = () => {
-  const validateAthlete = async () => {
-    // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
-    const responseAthleteUser = await axios.get(
-      `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
-      {
-        params: {
-          email: friendEmail,
-        },
-      }
-    );
 
-    // if it did, found already existing Athlete user, then it shows something else
-    if (responseAthleteUser.data.found) {
-      setSnackbarMessage("User already exists");
-      setOpenSnackbarFailure(true);
-      return;
-    }
 
-    if (friendName === "") {
-      setSnackbarMessage("Insert athlete first name");
-      setOpenSnackbarFailure(true);
-
-      return;
-    }
-
-    if (friendLastName === "") {
-      setSnackbarMessage("Insert athlete last name");
-      setOpenSnackbarFailure(true);
-      return;
-    }
-
-    if (friendEmail === "" && !isCelebrity) {
-      setSnackbarMessage("Insert email");
-      setOpenSnackbarFailure(true);
-      return;
-    }
-
-    if (!isCelebrity) {
-      console.log("on DA pokrece email konfirmaciju za friend mail");
-      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-      if (!emailRegex.test(friendEmail)) {
-        setSnackbarMessage("Email is incorrect !");
-        setOpenSnackbarFailure(true);
-        return;
-      }
-    }
-
-    if (friendNationality === "") {
-      setSnackbarMessage("Choose country");
-      setOpenSnackbarFailure(true);
-      return;
-    }
-
-    setPopupWarning(true);
-
-    // ako je sve proslo onda ide okej ovde (nema return ..)
-    // ! setSecondIsVisible(false);
-    // ! setThirdIsVisible(true);
-  };
 
   const validateSupporter = async () => {
     // da odma izbaci za email, pre password-a.. da imas posle odma..
@@ -324,7 +282,7 @@ const Supporters = () => {
     setFourthIsVisible(true);
   };
 
-  // za toast , bilo sta treba. prvi je success, drugi je error ! (da mozes oba koristiti, ovako osnovno, (jer, necu da dodajem zakljucne izmene u sami TextField, da on ima errors na sebi, jer to zahteva puno posla da se napravi sto meni treba..))
+  // for snackbar message. 
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
   const [openSnackbarFailure, setOpenSnackbarFailure] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -377,6 +335,8 @@ const Supporters = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
+
+  // function to make campaign, once everything is good. it creates campaign, then creates user accounts as user_type AH (athlete), SPT (supporter) 
   const makeCampaign = async (tempDoCreateSupporterAccount) => {
     var athleteId = "";
     var supporterId = "";
@@ -585,10 +545,7 @@ const Supporters = () => {
       }
     }
 
-    // and then makes those two accounts. athlete and supporter !
-    // signs up friend first !
-
-    // update supporterStats ! polja..
+   
   };
 
   const informOtherSupporters = async () => {
@@ -622,7 +579,6 @@ const Supporters = () => {
           setOpenSnackbarFailure(true);
         }
       } else {
-        /*    alert("An unexpected error occurred: " + error.message); */
         setSnackbarMessage("An unexpected error occurred: " + error.message);
         setOpenSnackbarFailure(true);
       }
@@ -674,17 +630,11 @@ const Supporters = () => {
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
 
-  // apply for celebrities (that's what we use.. (and we store in database, can use this as well...))
-  const [isCelebrity, setIsCelebrity] = useState(false); // but this one you pass, and you don't change.. unless you go through friend page..
+  const [isCelebrity, setIsCelebrity] = useState(false); 
 
-
-  console.log("mora biti celebrity false na pocetak:"+isCelebrity)
-
-  /* setSelectedDate(dayjs(userJson.data.birthdate)); */
 
   // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
-  const [doCreateSupporterAccount, setDoCreateSupporterAccount] =
-    useState(false);
+  const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
 
   const navigate = useNavigate();
 
@@ -703,6 +653,17 @@ const Supporters = () => {
           supporterComment: supporterComment,
         }
       );
+
+      if (response.status === 200) {
+
+       
+        setSnackbarMessage("Donated");
+        setOpenSnackbarSuccess(true);
+
+
+      }
+
+
     } catch (e) {
       console.log(e.stack);
     }
@@ -712,10 +673,9 @@ const Supporters = () => {
   const [howItWorks, setHowItWorks] = useState(false);
 
   // ? for FilePond
-
   const [files, setFiles] = useState([]);
 
-  // TODO yes, we upload this as profile directly ! (as we create athlete with this information (so, we need a check, if this is supporter, so we can allow without password))
+  // we upload this as profile picture for athlete. We are creating athlete account, using this as his profile picture.
   const server = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
@@ -767,26 +727,22 @@ const Supporters = () => {
         });
     },
   };
+  // ? for FilePond
+
 
   const [amount, setAmount] = useState(10);
 
   useEffect(() => {
-    
-
-  console.log("isCelebrity je sada:" + isCelebrity);
-  console.log("email je sada" + friendEmail);
-  
   }, [amount, additionalSupportersFormData]);
 
-  // ? for FilePond
 
   return (
     <>
-      {/* <NavbarHomeCollapsed /> */}
 
-      {/* <HorizontalLinearAlternativeLabelStepper /> */}
+      <NavbarClean />
 
-    {/*   <Popup
+
+     <Popup
         open={howItWorks}
         onClose={() => setHowItWorks(false)}
         position="right center"
@@ -833,1505 +789,130 @@ const Supporters = () => {
             <span className="popins-font">Back</span>
           </Button>
         </div>
-      </Popup> */}
+      </Popup> 
 
-      {firstIsVisible && (
-        <>
-          {/*  <img
-            src="supporters/supporter1op.png"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "40rem",
-              objectFit: "cover",
-              zIndex: -1,
-            }}
-          /> */}
-        </>
-      )}
+     
 
-      {secondIsVisible && (
-        <>
-          {/*  <img
-            src="supporters/supporter2.png"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "45rem",
-              objectFit: "cover",
-              zIndex: -1,
-            }}
-
-          /> */}
-        </>
-      )}
-
-      {thirdIsVisible && (
-        <>
-          {/*   <img
-            src="supporters/supporter3.png"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "45rem",
-              objectFit: "cover",
-              zIndex: -1,
-            }}
-          /> */}
-        </>
-      )}
-
-      {fourthIsVisible && (
-        <>
-          {/*  <img
-            src="supporters/supporter4.png"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "45rem",
-              objectFit: "cover",
-              zIndex: -1,
-            }}
-          /> */}
-        </>
-      )}
-
-      {fifthIsVisible && (
-        <>
-          {/*  <img
-            src="supporters/supporter5.png"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "55rem",
-              objectFit: "cover",
-              zIndex: -1,
-            }}
-          /> */}
-        </>
-      )}
-
-      {/* style={{display: `${firstShow}`}} */}
-
-      {/* prva */}
-
-      <div
-        className={`flex justify-center w-full items-center flex-col pt-28 first-content-container ${
-          firstIsVisible ? "show" : "hide"
-        } `}
-       /*  style={{
-          backgroundImage: "url('/supporters/supporter1op.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }} */
-      >
-      {/*   <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div> */}
-{/* 
-        <img className="h-16" src="randolympics_logo.svg" /> */}
-
-        <p className="text-3xl text-center mt-12 font-bold lexend-font">
-          Do you want someone to get into the<br />
-          Randolympic Games?
-        </p>
-
-        {/* <p className="text-lg text-center mt-6">I want to sign up </p> */}
-{/* 
-        <FormControl>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="friend"
-            name="radio-buttons-group"
-            onChange={(event) => {
-              const value = event.target.value;
-
-              if (value === "friend") {
-                setIsCelebrity(false); // his is for that passing,you don't change this when going through pages
-                setFriendEmail(""); // here we just bring back normal value
-              } else if (value === "celebrity") {
-                setFriendEmail(() => {return generateRandomEmail()})
-                setIsCelebrity(true);
-              }
-            }}
-          >
-            <FormControlLabel
-              value="friend"
-              control={<Radio />}
-              label={`Friend`}
-            />
-            <FormControlLabel
-              value="celebrity"
-              control={<Radio />}
-              label={`Celebrity`}
-            />
-          </RadioGroup>
-        </FormControl>
- */}
-
-        <div className="flex gap-4 mt-16">
-          
-        <Button
-          onClick={() => {
-           
-           
-            setIsCelebrity(false); 
-            setFriendEmail(""); 
-        
-
-            setFirstIsVisible(false);
-            setSecondIsVisible(true);
-        
-          }}
-          className="w-64"
-          style={{ textTransform: 'none' }}
-          sx={{
-            height: "50px",
-            bgcolor: "rgba(210, 73, 73, 1)",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgba(210, 73, 73, 1)",
-              color: "white",
-              border: `1px solid rgba(210, 73, 73, 1)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="lexend-font "   >I want to sign up a friend</span>
-        </Button>
+    
 
 
 
-        <Button
-          onClick={() => {
-           
-           
-            setFriendEmail(() => {return generateRandomEmail()})
-            setIsCelebrity(true);
-        
+      {/* first */}
+      <SupporterFirstPart firstIsVisible={firstIsVisible} setIsCelebrity={setIsCelebrity} setFriendEmail={setFriendEmail} setFirstIsVisible={setFirstIsVisible} setSecondIsVisible={setSecondIsVisible} generateRandomEmail={generateRandomEmail}    />
+   
 
-            setFirstIsVisible(false);
-            setSecondIsVisible(true);
-        
-          }}
-          className="w-64"
-          style={{ textTransform: 'none' }}
-          sx={{
-            height: "50px",
-            bgcolor: "rgba(210, 73, 73, 1)",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgba(210, 73, 73, 1)",
-              color: "white",
-              border: `1px solid rgba(210, 73, 73, 1)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="lexend-font">I want to sign up a celebrity</span>
-        </Button>
+      {/* second */}
+      <SupporterSecondPart secondIsVisible={secondIsVisible} setHowItWorks={setHowItWorks} isCelebrity={isCelebrity} 
+      friendName={friendName} setFriendName={setFriendName}
+      friendMiddleName={friendMiddleName} setFriendMiddleName={setFriendMiddleName}
+      inputLabelPropsTextField={inputLabelPropsTextField}
+      sxTextField={sxTextField}
+      friendLastName={friendLastName} setFriendLastName={setFriendLastName}
+      friendEmail={friendEmail} setFriendEmail={setFriendEmail}
+      friendPhone={friendPhone} setFriendPhone={setFriendPhone}
+      friendBirthdate={friendBirthdate} setFriendBirthdate={setFriendBirthdate}
+      friendNationality={friendNationality} setFriendNationality={setFriendNationality}
+      friendGender={friendGender} setFriendGender={setFriendGender}
+      setSendEmailToFriend={setSendEmailToFriend}
+      fb_link={fb_link} setFb_link={setFb_link}
+      ig_link={ig_link} setIg_link={setIg_link}
+      tw_link={tw_link} setTw_link={setTw_link}
 
-
-        </div>
+      setSecondIsVisible={setSecondIsVisible} 
+      setThirdIsVisible={setThirdIsVisible}
+      setFirstIsVisible={setFirstIsVisible}
+      files={files}
+       setFiles={setFiles}
+       server={server} 
        
+       setOpenSnackbarFailure={setOpenSnackbarFailure}
+       setOpenSnackbarSuccess={setOpenSnackbarSuccess}
 
+       openSnackbarFailure={openSnackbarFailure}
+       handleSnackbarFailureClose={handleSnackbarFailureClose}
+       openSnackbarSuccess={openSnackbarSuccess}
+       handleSnackbarSuccessClose={handleSnackbarSuccessClose}
 
-{/* 
-        <Button
-          onClick={() => {
-            setFirstIsVisible(false);
-            setSecondIsVisible(true);
-          }}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "35px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Create a campaign</span>
-        </Button>
- */}
-        {/*   <p className="text-xl text-center underline decoration-red_first mt-8">
-          Randolympics can bring your friend to the olympic games as a
-          competitor !{" "}
-        </p> */}
-      </div>
-
-      {/* druga */}
-
-      <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
-          secondIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter2.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div>
-        <img className="h-16" src="randolympics_logo.svg" />
-
-        {!isCelebrity && (
-          <>
-            {/* signing up for a friend */}
-            <div>
-              <p className="text-xl text-center mt-8 mb-12">
-                Tell us a little bit more about your friend:
-              </p>
-
-              <div className="flex ">
-                <div className="flex flex-col w-full">
-                  <div className="flex justify-start gap-2 items-baseline ">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendName}
-                        onChange={(e) => {
-                          setFriendName(e.target.value);
-                        }}
-                        label="First Name *"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        helperText="(optional)"
-                        value={friendMiddleName}
-                        onChange={(e) => {
-                          setFriendMiddleName(e.target.value);
-                        }}
-                        label="Middle Name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    {/*    <div className="flex flex-col justify-start">
-                <TextField
-                  value={friendFamilyName}
-                  onChange={(e) => {
-                    setFriendFamilyName(e.target.value);
-                  }}
-                  label="Family name"
-                  placeholder="John"
-                  id="name"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-              </div>
- */}
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendLastName}
-                        onChange={(e) => {
-                          setFriendLastName(e.target.value);
-                        }}
-                        label="Last Name *"
-                        placeholder="Doe"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex justify-start items-baseline gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendEmail}
-                        onChange={(e) => {
-                          setFriendEmail(e.target.value);
-                        }}
-                        label="Email *"
-                        placeholder="Email Address"
-                        type="email"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        helperText="(optional)"
-                        value={friendPhone}
-                        onChange={(e) => {
-                          setFriendPhone(e.target.value);
-                        }}
-                        label="Phone number"
-                        placeholder="+1 425 555 0123"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex justify-start items-baseline gap-2 mt-2">
-                    <div className="flex mb-1 justify-center items-center flex-col ">
-                      <FormControl>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              style={{ backgroundColor: "#fff" }}
-                              className="w-[260px]"
-                              label="Birthdate"
-                              value={friendBirthdate}
-                              onChange={(date) => {
-                                setFriendBirthdate(date);
-                              }}
-                              format="MMMM DD, YYYY"
-                              sx={{
-                                "& .MuiOutlinedInput-root": {
-                                  // backgroundColor: "#fff",
-                                  // borderRadius: "15px", // or 5px, according to your design
-                                },
-
-                                /*  '& .MuiOutlinedInput-input': {
-                        backgroundColor: '#fff',
-                        borderRadius: 'inherit', // Ensures consistency
-                      },
-                    */
-                              }}
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
-
-                        <FormHelperText>(optional)</FormHelperText>
-                      </FormControl>
-                    </div>
-
-                    <div className="flex  justify-center items-center flex-col h-auto">
-                      <ReactFlagsSelect
-                        countries={supportedCountry}
-                        className="w-[280px] rounded-md p-0 "
-                        /*  bg-[#fff]  */
-
-                        // to fill it with the one, which user's is currently selected...
-                        selected={friendNationality}
-                        onSelect={(code) => {
-                          setFriendNationality(code);
-                        }}
-                        /*  className={classNameFlagsSelect} */
-                        searchable={true}
-                        id="nationality"
-                        name="nationality"
-                        placeholder="Nationality *"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex mt-2 flex-col">
-                    <InputLabel id="roleDropdowns">Gender</InputLabel>
-                    <Select
-                      variant="standard"
-                      labelId="roleDropdowns"
-                      id="roleDropdown"
-                      label="gender"
-                      value={friendGender}
-                      onChange={(event) => {
-                        setFriendGender(event.target.value);
-                      }}
-                      className="w-[280px] "
-                      style={{ color: "#000" }}
-                    >
-                      <MenuItem value={"M"}>Male</MenuItem>
-                      <MenuItem value={"F"}>Female</MenuItem>
-                    </Select>
-                  </div>
-
-                  <FormControl>
-                    <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="send"
-                      name="radio-buttons-group"
-                      className="mt-4"
-                      onChange={(event) => {
-                        const value = event.target.value;
-
-                        if (value === "send") {
-                          setSendEmailToFriend(true);
-                        } else if (value === "dontsend") {
-                          setSendEmailToFriend(false);
-                        }
-                      }}
-                    >
-                      <FormControlLabel
-                        value="send"
-                        control={<Radio />}
-                        label={`Send email to ${friendName}`}
-                        sx={{ marginBottom: "0px" }}
-                      />
-                      <FormControlLabel
-                        value="dontsend"
-                        control={<Radio />}
-                        label={`Let's keep campaign secret: Do NOT send an email to ${friendName}`}
-                        sx={{ marginTop: "0px" }}
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </div>
-
-                <div className="ml-2 flex mt-20">
-                  <FilePond
-                    className="filepond--root athlete"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={150}
-                    imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
-                    stylePanelLayout="compact "
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {isCelebrity && (
-          <>
-            <div className="flex w-full flex-col justify-center items-center">
-              <p className="text-xl text-center mt-8 mb-12">
-                Tell us more about that celebrity:
-              </p>
-
-              <div className="flex">
-                <div className="flex flex-col w-[70%]">
-                  <div className="flex justify-start gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendName}
-                        onChange={(e) => {
-                          setFriendName(e.target.value);
-                        }}
-                        label="Name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendMiddleName}
-                        onChange={(e) => {
-                          setFriendMiddleName(e.target.value);
-                        }}
-                        label="Middle name"
-                        placeholder="John"
-                        id="name"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    {/*  <div className="flex flex-col justify-start">
-      <TextField
-        value={friendFamilyName}
-        onChange={(e) => {
-          setFriendFamilyName(e.target.value);
-        }}
-        label="Family name"
-        placeholder="John"
-        id="name"
-        name="name"
-        type="text"
-        inputProps={{
-          maxLength: 255,
-        }}
-        InputLabelProps={inputLabelPropsTextField}
-        sx={sxTextField}
-      />
-    </div> */}
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={friendLastName}
-                        onChange={(e) => {
-                          setFriendLastName(e.target.value);
-                        }}
-                        label="Last name"
-                        placeholder="Doe"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-start w-full ml-2 mt-2 gap-5">
-                    <div className="flex mt-0 mb-2 flex-col">
-                      <InputLabel id="roleDropdowns">Gender</InputLabel>
-                      <Select
-                        variant="standard"
-                        labelId="roleDropdowns"
-                        id="roleDropdown"
-                        label="gender"
-                        value={friendGender}
-                        onChange={(event) => {
-                          setFriendGender(event.target.value);
-                        }}
-                        className="w-[240px] "
-                        style={{ color: "#000" }}
-                      >
-                        <MenuItem value={"M"}>Male</MenuItem>
-                        <MenuItem value={"F"}>Female</MenuItem>
-                      </Select>
-                    </div>
-
-                    <div className="flex  justify-center items-center flex-col h-auto mt-4 ">
-                      <ReactFlagsSelect
-                        countries={supportedCountry}
-                        className="w-[280px] rounded-md p-0 "
-                        /*  bg-[#fff]  */
-
-                        // to fill it with the one, which user's is currently selected...
-                        selected={friendNationality}
-                        onSelect={(code) => {
-                          setFriendNationality(code);
-                        }}
-                        /*  className={classNameFlagsSelect} */
-                        searchable={true}
-                        id="nationality"
-                        name="nationality"
-                        placeholder="Nationality"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex justify-start gap-2">
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={fb_link}
-                        onChange={(e) => {
-                          setFb_link(e.target.value);
-                        }}
-                        label="Facebook link"
-                        placeholder="Facebook Link"
-                        id="fbl"
-                        name="fbl"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={ig_link}
-                        onChange={(e) => {
-                          setIg_link(e.target.value);
-                        }}
-                        label="Instagram Link"
-                        placeholder="Instagram Link"
-                        id="igl"
-                        name="name"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-
-                    <div className="flex flex-col justify-start">
-                      <TextField
-                        variant="standard"
-                        value={tw_link}
-                        onChange={(e) => {
-                          setTw_link(e.target.value);
-                        }}
-                        label="Twitter Link"
-                        placeholder="Twitter Link"
-                        type="text"
-                        inputProps={{
-                          maxLength: 255,
-                        }}
-                        InputLabelProps={inputLabelPropsTextField}
-                        sx={sxTextField}
-                      />
-                    </div>
-                  </div>
-                </div>
-              
-                <div className="ml-24 flex mt-0">
-                  <FilePond
-                    className="filepond--root athlete"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle={`Drag & Drop your friend's image or <span class="filepond--label-action">Browse</span> <br/>(optional)`}
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={150}
-                    imageCropAspectRatio="1:1"
-                    imageResizeTargetWidth={100}
-                    imageResizeTargetHeight={100}
-                    stylePanelLayout="compact "
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
-                </div>
-              
-              </div>
-            </div>
-          </>
-        )}
-
-        <Popup
-          open={popupWarning}
-          onClose={() => setPopupWarning(false)}
-          position="right center"
-          className="popup-content"
-        >
-          <WarningTextPopup
-            setSecondIsVisible={setSecondIsVisible}
-            setThirdIsVisible={setThirdIsVisible}
-            setPopupWarning={setPopupWarning}
-            popupWarning={popupWarning}
-          />
-        </Popup>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              setFirstIsVisible(true);
-              setSecondIsVisible(false);
-            }}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Previous step</span>
-          </Button>
-
-          <Button
-            onClick={validateAthlete}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Proceed</span>
-          </Button>
-        </div>
-      </div>
+       snackbarMessage={snackbarMessage}
+       setSnackbarMessage={setSnackbarMessage}
+       
+       />
+   
 
       {/* treca */}
+            <SupporterThirdPart 
+            
+            
 
-      <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
-          thirdIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter3.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div>
-
-        <img className="h-16" src="randolympics_logo.svg" />
-
-        <p className="text-xl text-center mt-12 mb-6">
-          You are camapaign creator for {friendName} !
-        </p>
-
-        <div className="flex flex-col w-[70%]">
-          <div className="flex justify-between ">
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                value={supporterName}
-                onChange={(e) => {
-                  setSupporterName(e.target.value);
-                }}
-                label="Your Name *"
-                placeholder="John"
-                id="name"
-                name="name"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                helperText="(optional)"
-                value={supporterEmail}
-                onChange={(e) => {
-                  setSupporterEmail(e.target.value);
-                }}
-                label="Your Email"
-                placeholder="johndoe@gmail.com"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-
-            <div className="flex flex-col justify-start">
-              <TextField
-                variant="standard"
-                value={supporterPhone}
-                helperText="(optional)"
-                onChange={(e) => {
-                  setSupporterPhone(e.target.value);
-                }}
-                label="Your Phone "
-                placeholder="+1 425 555 0123"
-                type="text"
-                inputProps={{
-                  maxLength: 255,
-                }}
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-4">
-            <TextField
-              variant="standard"
-              value={supporterPassword}
-              onChange={(event) => {
-                setSupporterPassword(event.target.value);
-              }}
-              label="Password"
-              placeholder="password"
-              id="pass"
-              name="pass"
-              type={showPassword ? "text" : "password"}
-              sx={{
-                m: 1,
-                width: "240px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
-
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "red",
-                  },
-
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-              InputProps={{
-                maxLength: 255,
-
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+            thirdIsVisible={thirdIsVisible}
+            friendName={friendName}
+        supporterName={supporterName}
+        setSupporterName={setSupporterName}
+        supporterEmail={supporterEmail}
+        setSupporterEmail={setSupporterEmail}
+        inputLabelPropsTextField={inputLabelPropsTextField}
+        sxTextField={sxTextField}
+        supporterPhone={supporterPhone}
+        setSupporterPhone={setSupporterPhone}
+        supporterPassword={supporterPassword}
+        setSupporterPassword={setSupporterPassword}
+        showPassword={showPassword}
+        handleClickShowPassword={handleClickShowPassword}
+        handleMouseDownPassword={handleMouseDownPassword}
+        supporterComment={supporterComment}
+        setSupporterComment={setSupporterComment}
+        additionalSupportersFormData={additionalSupportersFormData}
+        handleInputChange={handleInputChange}
+        removeInputSet={removeInputSet}
+        addInputSet={addInputSet}
+        setSecondIsVisible={setSecondIsVisible}
+        setThirdIsVisible={setThirdIsVisible}
+        validateSupporter={validateSupporter}
+            
             />
-            {/* 
-            <TextField
-              variant="standard"
-              value={supporterPasswordConfirmation}
-              onChange={(event) => {
-                setSupporterPasswordConfirmation(event.target.value);
-              }}
-              label="Confirm password"
-              placeholder="password"
-              id="pass"
-              name="pass"
-              type={showPassword ? "text" : "password"}
-              sx={{
-                m: 1,
-                width: "420px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 5,
-                },
 
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "red",
-                  },
 
-                "& .MuiInputLabel-root": {
-                  "&.Mui-focused": {
-                    color: "black",
-                  },
-                },
-              }}
-              InputProps={{
-                maxLength: 255,
-
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
-
-            <TextField
-              variant="standard"
-              value={supporterComment}
-              onChange={(e) => {
-                setSupporterComment(e.target.value);
-              }}
-              label="Your (supporter) comment"
-              placeholder="John"
-              id="name"
-              name="name"
-              type="text"
-              inputProps={{
-                maxLength: 255,
-              }}
-              InputLabelProps={inputLabelPropsTextField}
-              sx={sxTextField}
-            />
-          </div>
-
-          <p className="text-xl text-center mt-12 mb-6">
-            Inform additional supporters ?
-          </p>
-
-          <div className="flex flex-col justify-start w-">
-            {additionalSupportersFormData.map((data, index) => (
-              <div
-                className="flex items-start justify-center"
-                key={index}
-                style={{ marginBottom: "10px" }}
-              >
-                {/*  <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={data.name}
-                  onChange={(event) => handleInputChange(index, event)}
-                /> */}
-
-                <TextField
-                  variant="standard"
-                  value={data.name}
-                  onChange={(event) => handleInputChange(index, event)}
-                  label="Their Name *"
-                  placeholder="John"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-
-                <TextField
-                  variant="standard"
-                  helperText="(optional)"
-                  value={data.email}
-                  onChange={(event) => handleInputChange(index, event)}
-                  label="Your Email"
-                  placeholder="johndoe@gmail.com"
-                  type="email"
-                  name="email"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-
-                {/* 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={data.email}
-                  onChange={(event) => handleInputChange(index, event)}
-                /> */}
-
-                {/* 
-<select
-name="weightCategory"
-value={data.weightCategory}
-onChange={(event) => handleInputChange(index, event)}
->
-<option value="light">Light</option>
-<option value="medium">Medium</option>
-<option value="heavy">Heavy</option>
-</select> */}
-
-                {/* 
-<select
-name="gender"
-value={data.gender}
-onChange={(event) => handleInputChange(index, event)}
->
-<option value="M">Man</option>
-<option value="F">Woman</option>
-
-</select>
-*/}
-
-                <button
-                  className="self-center"
-                  type="button"
-                  onClick={() => removeInputSet(index)}
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-
-            <button type="button" onClick={addInputSet}>
-              Add Another Supporter
-            </button>
-          </div>
-        </div>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              setSecondIsVisible(true);
-              setThirdIsVisible(false);
-            }}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Previous step</span>
-          </Button>
-
-          <Button
-            onClick={validateSupporter}
-            className="w-56"
-            style={{ marginTop: "80px", marginBottom: "25px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Ultimate challenge !</span>
-          </Button>
-        </div>
-      </div>
 
       {/* cetvrta */}
+        <SupporterFourthPart 
+        
+fourthIsVisible={fourthIsVisible}
+amount={amount}
+setAmount={setAmount}
+campaignId={campaignId}
+supporterName={supporterName}
+supporterEmail={supporterEmail}
+supporterComment={supporterComment}
+discountCode={discountCode}
+friendNationality={friendNationality}
+setDiscountCode={setDiscountCode}
+donateWithCouponOnly={donateWithCouponOnly}
+setFourthIsVisible={setFourthIsVisible}
+setFifthIsVisible={setFifthIsVisible}
+ />
 
-      <div
-        className={`flex justify-center items-center flex-col pt-28 first-content-container ${
-          fourthIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter4.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          className="how_it_works cursor-pointer select-none "
-          onClick={() => {
-            setHowItWorks(true);
-          }}
-        >
-          <p className="underline ">How it works</p>
-        </div>
 
-        <img className="h-16" src="randolympics_logo.svg" />
 
-        <p className="text-xl text-center mt-12 mb-6">
-          Want to keep this campaign running? <br />
-          Let’s see how you can support your <br />
-          friend!
-        </p>
-
-        <div className="border-2 flex flex-col justify-center items-center p-4">
-          <p className="underline text-red_first">Note:</p>
-          <p>
-            You can use{" "}
-            <a
-              className="underline text-[#0000ff]"
-              href="https://docs.stripe.com/testing"
-              target="_blank"
-            >
-              test card
-            </a>
-            : <b>4242 4242 4242 4242</b>
-          </p>
-          <p>
-            CVC: <b>567</b> (it can be any 3 digits){" "}
-          </p>
-          <p className="mb-4">
-            Date: <b>12/34</b> (it can be any date){" "}
-          </p>
-
-      {/*     <p className="underline font-bold text-red_first">
-            Disable adblocker{" "}
-          </p>
-          <p>
-            (or it will block request to stripe, as this is HTTP (insecure
-            chanel))
-          </p> */}
-        </div>
-
-        {/* and this is for those 3 options */}
-        <p className="mt-4 font-semibold">Select amount</p>
-        <div className="flex justify-around mt-6 mb-6 gap-4">
-          <div
-            className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16 
-           `}
-            style={{
-              backgroundColor: ` ${
-                amount === 1 ? "rgba(175, 38, 38, 0.5)" : "transparent"
-              }`,
-            }}
-            onClick={() => {
-              setAmount(1);
-            }}
-          >
-            {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
-            <p>1 $</p>
-          </div>
-
-          <div
-            className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
-            onClick={() => {
-              setAmount(10);
-            }}
-            style={{
-              backgroundColor: ` ${
-                amount === 10 ? "rgba(175, 38, 38, 0.5)" : "transparent"
-              }`,
-            }}
-          >
-            {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
-            <p>10 $</p>
-          </div>
-
-          <div
-            className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-16"
-            onClick={() => {
-              setAmount(100);
-            }}
-            style={{
-              backgroundColor: ` ${
-                amount === 100 ? "rgba(175, 38, 38, 0.5)" : "transparent"
-              }`,
-            }}
-          >
-            {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
-            <p>100 $</p>
-          </div>
-        </div>
-
-        <div className="flex  w-[70%] justify-center items-center">
-          <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
-            {/*  <img className="w-12" src="/supporters/pay.svg" />
-            <p>Pay with credit card</p> */}
-
-            <ThemeProvider theme={theme}>
-              <QueryProvider>
-                {/*   <DonationForm   */}
-                <DonationFormItemCampaign
-                  amount={amount}
-                  setAmount={setAmount}
-                  campaignId={campaignId}
-                  supporterName={supporterName}
-                  supporterEmail={supporterEmail}
-                  supporterComment={supporterComment}
-                  discountCode={discountCode}
-                  countryAthleteIsIn={friendNationality}
-                  separateDonationThruPage={false}
-                />
-                {/*  /> */}
-              </QueryProvider>
-            </ThemeProvider>
-          </div>
-        </div>
-
-        <div className="m-4 mt-8 flex items-center justify-center flex-col">
-          <p>Got a discount code ?</p>
-          {/* <input
-            className="border-2 rounded-lg"
-            type="text"
-            placeholder="Code"
-            value={discountCode}
-            onChange={(event) => {
-              setDiscountCode(event.target.value);
-            }}
-          /> */}
-
-          <AuthCode
-            onChange={(res) => {
-              setDiscountCode(res);
-            }}
-            inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md"
-          />
-
-          <button
-            style={{ backgroundColor: "#0000ff", color: "#fff" }}
-            className="m-4 rounded-lg p-2"
-            onClick={donateWithCouponOnly}
-          >
-            Donate with coupon only
-          </button>
-        </div>
-
-        <Button
-          onClick={() => {
-            setFourthIsVisible(false);
-            setFifthIsVisible(true);
-          }}
-          className="w-56"
-          style={{ marginTop: "80px", marginBottom: "25px" }}
-          sx={{
-            height: "50px",
-            bgcolor: "#AF2626",
-            color: "#fff",
-            borderRadius: 4,
-            border: `1px solid #FFF`,
-            "&:hover": {
-              background: "rgb(175, 38, 38)",
-              color: "white",
-              border: `1px solid rgb(175, 38, 38)`,
-            },
-          }}
-          id="join-the-fun-btn"
-        >
-          <span className="popins-font">Proceed</span>
-        </Button>
-      </div>
 
       {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
 
-      <div
-        className={`flex justify-center items-center flex-col pt-28  first-content-container ${
-          fifthIsVisible ? "show" : "hide"
-        } `}
-        style={{
-          backgroundImage: "url('/supporters/supporter5.png')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-          backgroundPosition: "center",
-        }}
-      >
-        <img className="h-16" src="randolympics_logo.svg" />
+            <SupporterFifthPart
+            
+            fifthIsVisible={fifthIsVisible}
+            urlForCampaign={urlForCampaign}
+            inputLabelPropsTextField={inputLabelPropsTextField}
+            sxTextField={sxTextField}
 
-        <p className="text-xl text-center mt-12 mb-6">
-          You have successfully supported your <br />
-          friend in this campaign!
-        </p>
+            setOpenSnackbarSuccess={setOpenSnackbarSuccess}
+            setSnackbarMessage={setSnackbarMessage}
 
-        <p className="text-xl text-center mt-4 mb-6">
-          Do you want to invite someone else to <br /> join our campaign?
-        </p>
+            friendName={friendName}
 
-        <p className="text-4xl text-center  mt-6 mb-2">Invite:</p>
+            />
 
-        <a href={urlForCampaign} className="underline mb-2">
-          Check it out
-        </a>
 
-        <TextField
-          variant="standard"
-          value={urlForCampaign}
-          InputLabelProps={inputLabelPropsTextField}
-          sx={sxTextField}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip title="Copy to clipboard">
-                  <IconButton
-                    onClick={() => {
-                      navigator.clipboard.writeText(urlForCampaign);
-                    }}
-                    edge="end"
-                  >
-                    <ContentCopyIcon />
-                  </IconButton>
-                </Tooltip>
-              </InputAdornment>
-            ),
-          }}
-        />
 
-        <QRCode value={urlForCampaign} size="150" className="mt-2" />
 
-        <p className="text-xl text-center mt-4 mb-6">
-          Share on social networks:
-        </p>
-
-        <div className="flex justify-center gap-16 items-center w-[70%]">
-          <img className="w-20" src="supporters/fb.svg" />
-          <img className="w-20" src="supporters/ig.svg" />
-          <img className="w-20" src="supporters/x.svg" />
-          <img className="w-20" src="supporters/ln.svg" />
-        </div>
-
-        <div className="flex gap-4">
-          <Button
-            onClick={() => {
-              navigate("/");
-            }}
-            className="w-56"
-            style={{ marginTop: "80px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Home</span>
-          </Button>
-
-          <Button
-            onClick={() => {
-              navigate("/supporters", { replace: true });
-              window.location.reload();
-            }}
-            className="w-56"
-            style={{ marginTop: "80px" }}
-            sx={{
-              height: "50px",
-              bgcolor: "#AF2626",
-              color: "#fff",
-              borderRadius: 4,
-              border: `1px solid #FFF`,
-              "&:hover": {
-                background: "rgb(175, 38, 38)",
-                color: "white",
-                border: `1px solid rgb(175, 38, 38)`,
-              },
-            }}
-            id="join-the-fun-btn"
-          >
-            <span className="popins-font">Add another friend</span>
-          </Button>
-        </div>
-
-        <div className="pb-12"></div>
-      </div>
 
       {/* <p>Crypto currency: <b>USDT (ERC 20)</b></p>
             <p>Ethereum blockchain</p><br/>
@@ -2373,6 +954,11 @@ onChange={(event) => handleInputChange(index, event)}
           {snackbarMessage}
         </Alert>
       </Snackbar>
+
+
+
+
+      <FooterClean />
     </>
   );
 };

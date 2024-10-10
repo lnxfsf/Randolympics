@@ -3,6 +3,13 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
+ 
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+
 import "../../../styles/blogPosts.scoped.scss"
 
 
@@ -157,7 +164,7 @@ const GameDetails = ({ postZ, onBack }) => {
         setEditContent(post.content)
         // setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
 
-
+        if(tempEditCoverImage){
         // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
         fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_upcominggames_picture_upload`, {
             method: 'DELETE',
@@ -175,7 +182,7 @@ const GameDetails = ({ postZ, onBack }) => {
             console.error('Error reverting file:', err);
 
         });
-
+    }
 
 
         setTempEditCoverImage(null);
@@ -417,18 +424,40 @@ const GameDetails = ({ postZ, onBack }) => {
                 <div className="flex justify-between">
 
 
-                    <button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { onBack(false, false) }}>Back to list</button>
+                
+
+                    <IconButton
+            className="back-icon"
+            aria-label="back"
+            onClick={() => { onBack(false,false) }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
 
                     <div className="flex gap-2 m-2" >
 
-                        <img className="blogControlsIcon cursor-pointer" src={editingImage} onClick={() => { setIsEditing(!isEditing) }} />
+                       {/*  <img className="blogControlsIcon cursor-pointer" src={editingImage} onClick={() => { setIsEditing(!isEditing) }} />
+                        */}
+                        <div
+            className="cursor-pointer"
+            onClick={() => {
+                setIsEditing(!isEditing);
+              }}
+              >
+                <BorderColorIcon />
 
+            </div>
 
                         <Popup
                             ref={popupRef}
                             trigger={
 
-                                <img className="blogControlsIcon cursor-pointer" src="/blogs/trash.svg" onClick={deletePost} />
+                               /*  <img className="blogControlsIcon cursor-pointer" src="/blogs/trash.svg" onClick={deletePost} />
+ */
+                                <div className="cursor-pointer" onClick={deletePost}>
+                                <DeleteIcon />
+                              </div>
+
                             }
                             position="left center"
                             contentStyle={{ width: "auto" }}

@@ -1,9 +1,5 @@
 import "../../styles/editprofile.scoped.scss";
 
-
-
-
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -28,6 +24,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Menu from "@mui/material/Menu";
+
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 
 //we display it as fragment, inside MyProfile...
 
@@ -54,6 +54,8 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 
+import { settingUserType } from "../../context/user_types";
+
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginFilePoster,
@@ -64,6 +66,8 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+import { useTranslation } from "react-i18next";
+
 import { useRef, useEffect } from "react";
 import { useRouteError } from "react-router-dom";
 
@@ -73,14 +77,65 @@ let BACKEND_SERVER_BASE_URL =
 
 import moment from "moment";
 
-const EditProfile = () => {
-  /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
-   */
-  const [userData, setUserData] = useState(null);
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
+// for image zoom
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
+const sxTextField = {
+  m: 1,
+  mt: 0,
+  ml: 0,
+
+  width: "w-full",
+
+  /*  "& .MuiInputBase-input": { height: 39, padding: 1 },
+   */
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 2,
+    fontFamily: "'Lexend', sans-serif",
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "red",
+  },
+  "& .MuiInputLabel-root": {
+    fontFamily: "'Lexend', sans-serif",
+
+    "&.Mui-focused": {
+      color: "black",
+    },
+  },
+};
+
+const EditProfile = () => {
 
 
   
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+
+
+  /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
+   */
+  const [userData, setUserData] = useState(null);
+  const popupPassportRef = useRef(null); // popup for showing passport image
+
+  const { t } = useTranslation();
+
   const handleathleteStatementChange = (event) => {
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
@@ -91,7 +146,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handleathleteStatusChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -104,9 +158,17 @@ const EditProfile = () => {
     }));
   };
 
+  const handleBioChange = (event) => {
+    setBio(event.target.value);
 
-
-
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        bio: event.target.value,
+      },
+    }));
+  };
 
   const handleEmailChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -118,7 +180,6 @@ const EditProfile = () => {
       },
     }));
   };
-
 
   const handleNameChange = (event) => {
     setUserData((prevUserData) => ({
@@ -209,11 +270,6 @@ const EditProfile = () => {
 
   const [passportExpiryDate, setPassportExpiryDate] = useState(null);
 
-
-  
-
-
-
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
@@ -234,14 +290,15 @@ const EditProfile = () => {
       setCode(userJson.data.nationality); //this is for big flag in upper part ..
       setNameHeader(userJson.data.name);
 
-      settingUserType(userJson.data.user_type);
+      setUserTypeText(settingUserType(userJson.data.user_type));
 
       setSelectedCrypto(userJson.data.cryptoaddress_type);
 
       setBio(userJson.data.bio);
 
-      setPassportImage(userJson.data.passport_photo);
-      /* setProfileImage(userJson.data.picture); */
+      if (!passportUpload) {
+        setPassportImage(userJson.data.passport_photo);
+      }
 
       setSelectedDate(dayjs(userJson.data.birthdate));
 
@@ -287,48 +344,6 @@ const EditProfile = () => {
     }
   };
 
-  const settingUserType = (user_type) => {
-    switch (user_type) {
-      case "AH":
-        setUserTypeText("Athlete");
-        break;
-      case "GP":
-        setUserTypeText("Global President");
-        break;
-      case "NP":
-        setUserTypeText("National President");
-        break;
-      case "EM":
-        setUserTypeText("Event Manager");
-        break;
-      case "ITM":
-        setUserTypeText("IT Manager");
-        break;
-      case "IME":
-        setUserTypeText("IT Manager Page Editor"); // Note: Corrected from "ITM"
-        break;
-      case "MM":
-        setUserTypeText("Marketing Manager");
-        break;
-      case "SM":
-        setUserTypeText("Sales Manager");
-        break;
-      case "VM":
-        setUserTypeText("Validation Manager");
-        break;
-      case "LM":
-        setUserTypeText("Legal Manager");
-        break;
-      case "RS":
-        setUserTypeText("Referee & support");
-        break;
-      default:
-        setUserTypeText("Guest");
-
-        break;
-    }
-  };
-
   //so we can find that user in database.. (if later on, user changes, his email )
 
   //console.log("json user data (only when logged in): " + userData.data.email)
@@ -355,15 +370,7 @@ const EditProfile = () => {
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
 
-
-
-
-  
-
   const handlelastNameChange = (event) => {
-   
-    
-
     // and also update the object..
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -374,14 +381,7 @@ const EditProfile = () => {
     }));
   };
 
-
-
-  
-
   const handlefamilyNameChange = (event) => {
-   
-    
-
     // and also update the object..
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -392,6 +392,16 @@ const EditProfile = () => {
     }));
   };
 
+  const handlemiddleNameChange = (event) => {
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        middleName: event.target.value,
+      },
+    }));
+  };
 
   const handleEmailPrivacyChange = (event) => {
     setEmail_private(event.target.value);
@@ -445,11 +455,6 @@ const EditProfile = () => {
       },
     }));
   };
-
-  // if it's NOT "athlete" user type, then , it removes "weight" input !
-  let classNameFlagsSelect = `w-[280px] ml-2 ${
-    selectedRole !== "AH" ? "mt-8" : ""
-  }`;
 
   // ? HERE, for crypto..
 
@@ -587,10 +592,10 @@ const EditProfile = () => {
   // this is for toggle
   const [passportUpload, setPassportUpload] = useState(false);
 
-  const tooglePassportUpload = async () => {
-    setPassportUpload(!passportUpload);
+  const sendPassportUpload = async () => {
+    // it's absolutely normal, on refresh, it doesnt show new profile picture, but maybe old. that's because it takes time to write to database.
+    // so it's not a bug, that's way most websites function as well. github for instance, takes some time, to load new profile picture, it shows old for few minutes. And yours is just few seconds..
 
-    // TODO, this doesn't (sometimes) save passportImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
     // this is so we can  set in session/localStorage as well
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -620,9 +625,15 @@ const EditProfile = () => {
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
+
+        fetchLatestInLocalStorage(userData.userId);
+        setPassportUpload(!passportUpload);
       }
 
-      setResultText("Profile details saved successfully !");
+     
+      setSnackbarMessage("Profile details saved successfully !");
+        setOpenSnackbar(true);
+
     } catch (error) {
       console.log(error);
     }
@@ -636,11 +647,11 @@ const EditProfile = () => {
 
     var name = e.target.name.value;
 
-    
+    var middleName = e.target.middleName.value;
+
     var familyName = e.target.familyName.value;
-    
+
     var lastName = e.target.lastName.value;
-    
 
     var phone = e.target.phone.value;
     var cryptoaddr = e.target.cryptoaddr.value;
@@ -697,14 +708,13 @@ const EditProfile = () => {
 
           athleteStatement: athleteStatement,
           athleteStatus: athleteStatus,
-          
 
           familyName,
-          lastName, 
+          lastName,
 
+          middleName,
 
-
-          // bio,
+          bio: bio,
         }
       );
 
@@ -715,12 +725,22 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-        setResultText("Profile details saved successfully !");
+       
+
+        setSnackbarMessage("Profile details saved successfully !");
+        setOpenSnackbar(true);
+
       }
     } catch (error) {
       console.log(error);
-      setResultText("There was some error !");
-      setResultTextColor("red");
+     
+
+      setSnackbarMessage("There was some error !");
+      setSnackbarStatus("error");
+
+        setOpenSnackbar(true);
+
+
     }
   };
 
@@ -738,7 +758,6 @@ const EditProfile = () => {
         }
       );
 
-      // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
       setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
@@ -756,7 +775,12 @@ const EditProfile = () => {
         }
       }
 
-      setResultText("Profile details saved successfully !");
+      
+
+      setSnackbarMessage("Profile details saved successfully !");
+      setOpenSnackbar(true);
+
+
     } catch (error) {
       console.log(error);
     }
@@ -859,75 +883,97 @@ const EditProfile = () => {
 
         {/* -------------- */}
 
-        <div className="mt-4 mb-4">
-          <p className="text-lg ">
-            <b>About Me</b>
+        <form
+          action="#"
+          onSubmit={handleSubmit}
+          className="lexend-font text-black_second p-2"
+        >
+          <p className="text-lg mb-4 mt-4 ">
+            <b className="text-2xl font-bold ">
+              {t("myprofile.myaccount.content1")}
+            </b>
           </p>
-          <p className="text-base">{bio}</p>
-        </div>
 
-        <form action="#" onSubmit={handleSubmit}>
-          <div className="editProfileFields mt-4 grid grid-cols-3 gap-4">
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col mb-1 justify-center mt-0">
-                <TextField
-                  value={userData && userData.data.name}
-                  /*  onChange={handleNameChange} */
-                  label="Name"
-                  disabled
-                  placeholder="John Doe"
-                  id="name"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
-              <div className="flex mb-1 justify-end items-end flex-col">
-                <FormControl
-                  className="h-5"
-                  variant="standard"
-                  sx={{ m: 1, minWidth: 120 }}
-                >
-                  <Select
-                    name="email_private"
-                    id="email_private"
-                    value={email_private}
-                    disableUnderline
-                    onChange={handleEmailPrivacyChange}
-                    sx={{
-                      boxShadow: "none",
-                      height: 32,
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    }}
-                  >
-                    <MenuItem value={1}>Private</MenuItem>
-                    <MenuItem value={0}>Public</MenuItem>
-                  </Select>
-                </FormControl>
+          <div className="flex flex-col w-full md:w-[80%]">
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content2")}
+              </p>
+              <TextField
+                value={userData && userData.data.name}
+               onChange={handleNameChange}
+
+                
+                placeholder="John Doe"
+                id="name"
+                name="name"
+                type="text"
+                inputProps={{
+                  maxLength: 255,
+                }}
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content3")}
+              </p>
+
+              <TextField
+                value={userData && userData.data.middleName}
+                onChange={handlemiddleNameChange}
+                id="middleName"
+                name="middleName"
+                type="text"
+                placeholder="Middle name"
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content4")}
+              </p>
+
+              <TextField
+                value={userData && userData.data.familyName}
+                onChange={handlefamilyNameChange}
+                id="familyName"
+                name="familyName"
+                type="text"
+                placeholder="Family name"
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content5")}
+              </p>
+
+              <TextField
+                value={userData && userData.data.lastName}
+                onChange={handlelastNameChange}
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+                sx={sxTextField}
+              />
+            </div>
+
+            <div className="flex gap-2 w-full">
+              <div className="flex flex-col w-full">
+                <p className="text-sm font-medium">
+                  {t("myprofile.myaccount.content6")}
+                </p>
                 <TextField
                   // TODO if we change email, then we need to send confirmation email to that new (and not allow sign in, if not confirmed that new email...)
                   // now on change, needs to update values, so it can edit it
                   value={userData && userData.data.email}
                   onChange={handleEmailChange}
-                  label="Email"
+                  className="w-full"
                   placeholder="johndoe@gmail.com"
                   id="email"
                   name="email"
@@ -936,97 +982,394 @@ const EditProfile = () => {
                   inputProps={{
                     maxLength: 80,
                   }}
+                  sx={sxTextField}
+                />
+              </div>
+
+              <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                <Select
+                  name="email_private"
+                  id="email_private"
+                  value={email_private}
+                  disableUnderline
+                  onChange={handleEmailPrivacyChange}
                   sx={{
-                    m: 1,
-                    width: "280px",
+                    mt: 2.5,
+                    fontFamily: "'Lexend', sans-serif",
+
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
                     },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
+                    "& fieldset": {
+                      borderRadius: 2,
                     },
                   }}
-                />
+                >
+                  <MenuItem
+                    value={1}
+                    sx={{ fontFamily: "'Lexend', sans-serif" }}
+                  >
+                    {t("myprofile.myaccount.private")}
+                  </MenuItem>
+                  <MenuItem
+                    value={0}
+                    sx={{ fontFamily: "'Lexend', sans-serif" }}
+                  >
+                    {t("myprofile.myaccount.public")}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="flex flex-col w-full">
+              <div className="flex gap-2 w-full">
+                <div className="flex flex-col w-full">
+                  <p className="text-sm font-medium">
+                    {t("myprofile.myaccount.content7")}
+                  </p>
+                  <TextField
+                    value={userData && userData.data.phone}
+                    onChange={handlePhoneChange}
+                    placeholder="+1 212 456 7890"
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputProps={{
+                      maxLength: 15,
+                    }}
+                    sx={sxTextField}
+                  />
+                </div>
+
+                <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                  <Select
+                    name="phone_private"
+                    id="phone_private"
+                    value={phone_private}
+                    disableUnderline
+                    onChange={handlePhonePrivacyChange}
+                    sx={{
+                      mt: 2.5,
+                      fontFamily: "'Lexend', sans-serif",
+
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                        fontFamily: "'Lexend', sans-serif",
+                      },
+                      "& fieldset": {
+                        borderRadius: 2,
+                      },
+                    }}
+                  >
+                    <MenuItem value={1}>
+                      {t("myprofile.myaccount.private")}
+                    </MenuItem>
+                    <MenuItem value={0}>
+                      {t("myprofile.myaccount.public")}
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             </div>
 
-            <div className="row-span-3 flex items-start justify-start flex-col">
-              {!passportUpload && (
-                <>
-                  <p className="pb-2">
-                    <b>Passport photo</b>
-                  </p>
-                  <img
-                    src={
-                      BACKEND_SERVER_BASE_URL +
-                      "/imageUpload/passport_pics/" +
-                      passportImage
+            <div className="flex gap-2 w-full">
+              <div className="flex flex-col w-full ">
+                <p className="text-sm font-medium">
+                  {t("myprofile.myaccount.content8")}
+                </p>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DatePicker
+                      className="w-full"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      format="MMMM DD, YYYY"
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </div>
+
+              <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                <Select
+                  name="birthdate_private"
+                  id="birthdate_private"
+                  value={birthdate_private}
+                  disableUnderline
+                  onChange={handleBirthdatePrivacyChange}
+                  sx={{
+                    mt: 3.4,
+                    fontFamily: "'Lexend', sans-serif",
+
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
+                >
+                  <MenuItem value={1}>
+                    {t("myprofile.myaccount.private")}
+                  </MenuItem>
+                  <MenuItem value={0}>
+                    {t("myprofile.myaccount.public")}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="flex items-end col-span-2 w-full">
+              <div className="flex flex-col justify-center w-full">
+                {selectedRole === "AH" && (
+                  <div className="flex mt-2  ">
+                    <div className="flex flex-col w-full">
+                      <p className="text-sm font-medium">
+                        {t("myprofile.myaccount.content9")}
+                      </p>
+                      <TextField
+                        value={userData && userData.data.weight}
+                        onChange={handleWeightChange}
+                        id="weight"
+                        name="weight"
+                        type="number"
+                        placeholder="85 kg/185 lb"
+                        sx={sxTextField}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle kg / lb"
+                                onClick={handleWeightMenuClick}
+                                edge="end"
+                              >
+                                {selectedWeight}
+                              </IconButton>
+                              <Menu
+                                id="weight-menu"
+                                anchorEl={weightMenuAnchorEl}
+                                open={Boolean(weightMenuAnchorEl)}
+                                onClose={handleWeightMenuClose}
+                              >
+                                {weightOptions.map((option) => (
+                                  <MenuItem
+                                    key={option}
+                                    onClick={() =>
+                                      handleWeightOptionSelect(option)
+                                    }
+                                    selected={option === selectedWeight}
+                                  >
+                                    {option}
+                                  </MenuItem>
+                                ))}
+                              </Menu>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+
+                    <FormControl className="h-5" sx={{ minWidth: 120 }}>
+                      <Select
+                        name="weight_private"
+                        id="weight_private"
+                        value={weight_private}
+                        onChange={handleWeightPrivacyChange}
+                        disableUnderline
+                        sx={{
+                          mt: 2.5,
+                          fontFamily: "'Lexend', sans-serif",
+
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: 2,
+                            fontFamily: "'Lexend', sans-serif",
+                          },
+                          "& fieldset": {
+                            borderRadius: 2,
+                          },
+                        }}
+                      >
+                        <MenuItem value={1}>
+                          {t("myprofile.myaccount.private")}
+                        </MenuItem>
+                        <MenuItem value={0}>
+                          {t("myprofile.myaccount.public")}
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col w-full mt-4">
+              <p className="text-sm font-medium">
+                {t("myprofile.myaccount.content10")}
+              </p>
+              <ReactFlagsSelect
+                countries={supportedCountry}
+                disabled
+                // to fill it with the one, which user's is currently selected...
+                selected={
+                  nationality_selected ||
+                  (userData && userData.data.nationality)
+                }
+                onSelect={(code) => {
+                  setNationality_selected(code);
+                  handleNationalityChange(code);
+                }}
+                className="w-full"
+                searchable={true}
+                id="nationality"
+                name="nationality"
+                placeholder={t("myprofile.myaccount.content11")}
+              />
+            </div>
+          </div>
+
+          <p className="pb-2 mt-2">
+            <b>{t("myprofile.myaccount.content12")}</b>
+          </p>
+          <div className="row-span-3 flex items-center justify-start gap-2">
+            {!passportUpload && (
+              <>
+                <div className="flex flex-col justify-start">
+                  <Popup
+                    ref={popupPassportRef}
+                    trigger={
+                      <img
+                        src={
+                          BACKEND_SERVER_BASE_URL +
+                          "/imageUpload/passport_pics/" +
+                          passportImage
+                        }
+                        alt="Profile"
+                        className="w-[120px] h-[90px] object-fit  passport-photo cursor-pointer"
+                      />
                     }
-                    alt="Profile"
-                    className="w-[331px] h-[222px] object-fit  passport-photo"
-                  />
+                    position="right center"
+                    contentStyle={{ width: "auto" }}
+                    modal
+                    nested
+                  >
+                    <TransformWrapper>
+                      <TransformComponent>
+                        <img
+                          src={
+                            BACKEND_SERVER_BASE_URL +
+                            "/imageUpload/passport_pics/" +
+                            passportImage
+                          }
+                          alt="Profile"
+                          className="w-[500px] h-96 object-fit "
+                        />
+                      </TransformComponent>
+                    </TransformWrapper>
+                  </Popup>
+
                   {passportExpiryDate && (
                     <p className="pt-2 " style={{ color: "#DEDEDE" }}>
-                      Passport expires: <b>{passportExpiryDate}</b>
+                      {t("myprofile.myaccount.content13")}:{" "}
+                      <b>{passportExpiryDate}</b>
                     </p>
                   )}
-                  <p className="edit-photo" onClick={tooglePassportUpload}>
-                    <u>Edit passport photo</u>
-                  </p>
-                </>
-              )}
+                </div>
 
-              {passportUpload && (
-                <>
-                  <FilePond
-                    className="filepond--root large"
-                    type="file"
-                    onupdatefiles={setFiles}
-                    allowMultiple={false}
-                    maxFiles={1}
-                    server={server}
-                    name="image"
-                    labelIdle='Drag & Drop passport picture or <span class="filepond--label-action">Browse</span> <br/>(mandatory !)'
-                    accept="image/png, image/jpeg, image/gif"
-                    dropOnPage
-                    dropValidation
-                    allowPaste={true}
-                    allowReplace={true}
-                    credits={""}
-                    allowFileEncode={true}
-                    allowFileTypeValidation={true}
-                    allowImagePreview={true}
-                    /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
+                {/*  <p
+                  className="edit-photo"
+                  onClick={() => {
+                    setPassportUpload(!passportUpload);
+                  }}
+                >
+                  <u>Edit passport photo</u>
+                </p> */}
+
+                <Button
+                  className="w-28   "
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "40px",
+                    bgcolor: "#fff",
+                    color: "#444444",
+                    borderRadius: 2,
+                    border: `1px solid #444444`,
+                  }}
+                  onClick={() => {
+                    setPassportUpload(!passportUpload);
+                  }}
+                >
+                  <img src="/myaccount/upload.svg" className="w-4 mr-2" />{" "}
+                  <span className="lexend-font font-semibold ">
+                    {t("myprofile.myaccount.content14")}
+                  </span>
+                </Button>
+              </>
+            )}
+
+            {passportUpload && (
+              <>
+                <FilePond
+                  className="filepond--root large"
+                  type="file"
+                  onupdatefiles={setFiles}
+                  allowMultiple={false}
+                  maxFiles={1}
+                  server={server}
+                  name="image"
+                  labelIdle={t("myprofile.myaccount.content15")}
+                  accept="image/png, image/jpeg, image/gif"
+                  dropOnPage
+                  dropValidation
+                  allowPaste={true}
+                  allowReplace={true}
+                  credits={""}
+                  allowFileEncode={true}
+                  allowFileTypeValidation={true}
+                  allowImagePreview={true}
+                  /* so, with this "allowImageCrop", "allowImageResize" , user can upload a picture, and even if too high resolution, here you can scale it down ! before it's sent to backend to store
                    for now, we keep it original resolution, until I know what max resolution we should support 
                  */
-                    allowImageCrop={false}
-                    allowImageResize={false}
-                    allowImageTransform={false}
-                    imagePreviewHeight={222}
-                    imageCropAspectRatio="1:1"
-                    /*            imageResizeTargetWidth={100}
+                  allowImageCrop={false}
+                  allowImageResize={false}
+                  allowImageTransform={false}
+                  imagePreviewHeight={90}
+                  imageCropAspectRatio="1:1"
+                  /*            imageResizeTargetWidth={100}
                     imageResizeTargetHeight={100} */
-                    stylePanelLayout="compact"
-                    styleLoadIndicatorPosition="center bottom"
-                    styleProgressIndicatorPosition="center bottom"
-                    styleButtonRemoveItemPosition="center  bottom"
-                    styleButtonProcessItemPosition="center bottom"
-                    imageEditAllowEdit={false}
-                  />
+                  stylePanelLayout="compact"
+                  styleLoadIndicatorPosition="center bottom"
+                  styleProgressIndicatorPosition="center bottom"
+                  styleButtonRemoveItemPosition="center  bottom"
+                  styleButtonProcessItemPosition="center bottom"
+                  imageEditAllowEdit={false}
+                />
 
-                  <p className="edit-photo" onClick={tooglePassportUpload}>
-                    <u>Save passport photo</u>
-                  </p>
-                </>
-              )}
+                {/*   <p className="edit-photo" onClick={sendPassportUpload}>
+                  <u>Save passport photo</u>
+                </p> */}
 
-              {/* 
+                <Button
+                  className="w-28"
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "40px",
+                    bgcolor: "#fff",
+                    color: "#444444",
+                    borderRadius: 2,
+                    border: `1px solid #444444`,
+                  }}
+                  onClick={sendPassportUpload}
+                >
+                  <img src="/myaccount/save.svg" className="w-4 mr-2" />{" "}
+                  <span className="lexend-font font-semibold ">
+                    {t("myprofile.myaccount.content16")}
+                  </span>
+                </Button>
+              </>
+            )}
+
+            {/* 
 
               <FilePond
                 type="file"
@@ -1063,474 +1406,267 @@ const EditProfile = () => {
 
               />
               */}
-            </div>
-
-
-            <div className="flex items-end col-span-2">
-                      <TextField
-                                value={userData && userData.data.familyName}
-                                onChange={handlefamilyNameChange}
-                                label="Family name"
-                                id="familyName"
-                                name="familyName"
-                                type="text"
-                                placeholder="Family name"
-                                sx={{
-                                  m: 1,
-                                  width: "280px",
-                                  "& .MuiOutlinedInput-root": {
-                                    borderRadius: 5,
-                                  },
-                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                    {
-                                      borderColor: "red",
-                                    },
-                                  "& .MuiInputLabel-root": {
-                                    "&.Mui-focused": {
-                                      color: "black",
-                                    },
-                                  },
-                                }}
-
-                              />
-                      <TextField
-                                value={userData && userData.data.lastName}
-                                onChange={handlelastNameChange}
-                                label="Last name"
-                                id="lastName"
-                                name="lastName"
-                                type="text"
-                                placeholder="Last name"
-                                sx={{
-                                  m: 1,
-                                  width: "280px",
-                                  "& .MuiOutlinedInput-root": {
-                                    borderRadius: 5,
-                                  },
-                                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                    {
-                                      borderColor: "red",
-                                    },
-                                  "& .MuiInputLabel-root": {
-                                    "&.Mui-focused": {
-                                      color: "black",
-                                    },
-                                  },
-                                }}
-
-                              />
-</div>
-
-
-
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col justify-center">
-                <TextField
-                  value={userData && userData.data.cryptoaddress}
-                  onChange={handleCryptoChange}
-                  label="Crypto"
-                  id="cryptoaddr"
-                  name="cryptoaddr"
-                  placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                  InputProps={{
-                    maxLength: 150,
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle BTC/ETH/XMR"
-                          onClick={handleCryptoMenuClick}
-                          edge="end"
-                        >
-                          {selectedCrypto}
-                        </IconButton>
-                        <Menu
-                          id="crypto-menu"
-                          anchorEl={cryptoMenuAnchorEl}
-                          open={Boolean(cryptoMenuAnchorEl)}
-                          onClose={handleCryptoMenuClose}
-                        >
-                          {cryptoOptions.map((option) => (
-                            <MenuItem
-                              key={option}
-                              onClick={() => handleCryptoOptionSelect(option)}
-                              selected={option === selectedCrypto}
-                            >
-                              {option}
-                            </MenuItem>
-                          ))}
-                        </Menu>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-              <div className="flex justify-end items-end flex-col">
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    className="h-5"
-                    name="phone_private"
-                    id="phone_private"
-                    value={phone_private}
-                    disableUnderline
-                    onChange={handlePhonePrivacyChange}
-                    sx={{
-                      boxShadow: "none",
-                      height: 15,
-                      ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    }}
-                  >
-                    <MenuItem value={1}>Private</MenuItem>
-                    <MenuItem value={0}>Public</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  value={userData && userData.data.phone}
-                  onChange={handlePhoneChange}
-                  label="Phone number"
-                  placeholder="+1 212 456 7890"
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  inputProps={{
-                    maxLength: 15,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col justify-center">
-                {selectedRole === "AH" && (
-                  <div className="flex justify-end items-end flex-col">
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 120 }}
-                    >
-                      <Select
-                        className="h-5"
-                        name="weight_private"
-                        id="weight_private"
-                        value={weight_private}
-                        onChange={handleWeightPrivacyChange}
-                        disableUnderline
-                        sx={{
-                          boxShadow: "none",
-                          height: 15,
-                          ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                        }}
-                      >
-                        <MenuItem value={1}>Private</MenuItem>
-                        <MenuItem value={0}>Public</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <TextField
-                      value={userData && userData.data.weight}
-                      onChange={handleWeightChange}
-                      label="Weight"
-                      id="weight"
-                      name="weight"
-                      type="number"
-                      placeholder="85 kg/185 lb"
-                      sx={{
-                        m: 1,
-                        width: "280px",
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 5,
-                        },
-                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                          {
-                            borderColor: "red",
-                          },
-                        "& .MuiInputLabel-root": {
-                          "&.Mui-focused": {
-                            color: "black",
-                          },
-                        },
-                      }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle kg / lb"
-                              onClick={handleWeightMenuClick}
-                              edge="end"
-                            >
-                              {selectedWeight}
-                            </IconButton>
-                            <Menu
-                              id="weight-menu"
-                              anchorEl={weightMenuAnchorEl}
-                              open={Boolean(weightMenuAnchorEl)}
-                              onClose={handleWeightMenuClose}
-                            >
-                              {weightOptions.map((option) => (
-                                <MenuItem
-                                  key={option}
-                                  onClick={() =>
-                                    handleWeightOptionSelect(option)
-                                  }
-                                  selected={option === selectedWeight}
-                                >
-                                  {option}
-                                </MenuItem>
-                              ))}
-                            </Menu>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="flex justify-end items-end pb-2">
-                <ReactFlagsSelect
-                  countries={supportedCountry}
-                  disabled
-                  // to fill it with the one, which user's is currently selected...
-                  selected={
-                    nationality_selected ||
-                    (userData && userData.data.nationality)
-                  }
-                  onSelect={(code) => {
-                    setNationality_selected(code);
-                    handleNationalityChange(code);
-                  }}
-                  className={classNameFlagsSelect}
-                  searchable={true}
-                  id="nationality"
-                  name="nationality"
-                  placeholder="Nationality"
-               
-               />
-              </div>
-            </div>
-
-            <div className="flex items-end col-span-2">
-              <div className="flex flex-col ml-0 mt-0  w-[280px]">
-                <div className="flex mb-1 justify-end items-end flex-col">
-                  <FormControl
-                    className="h-5"
-                    variant="standard"
-                    sx={{ m: 1, minWidth: 120 }}
-                  >
-                    <Select
-                      name="birthdate_private"
-                      id="birthdate_private"
-                      value={birthdate_private}
-                      disableUnderline
-                      onChange={handleBirthdatePrivacyChange}
-                      sx={{
-                        boxShadow: "none",
-                        height: 32,
-                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                      }}
-                    >
-                      <MenuItem value={1}>Private</MenuItem>
-                      <MenuItem value={0}>Public</MenuItem>
-                    </Select>
-                  </FormControl>
-
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={["DatePicker"]}>
-                      <DatePicker
-                        className="w-full"
-                        label="Birthdate"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        format="MMMM DD, YYYY"
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </div>
-              </div>
-            </div>
-
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
 
+          <div className="mt-8 mb-4 lexend-font text-black_second  ">
+            <p className="text-lg ">
+              <b className="text-2xl font-bold ">
+                {t("myprofile.myaccount.content17")}
+              </b>
+            </p>
 
+            <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
+              <p className="font-medium mb-2">
+                {t("myprofile.myaccount.content18")}
+              </p>
+              <TextField
+                value={userData && userData.data.bio}
+                onChange={handleBioChange}
+                placeholder="Bio"
+                id="bio"
+                name="bio"
+                multiline
+                rows={4}
+                className="w-full h-full rounded-md border border-gray-900"
+                type="text"
+                sx={{
+                  /* width: "2px",  */
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 3,
+                  },
 
-          <div className="flex items-baseline col-span-2 mt-4 ml-4 gap-2">
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "red",
+                    },
+
+                  "& .MuiInputLabel-root": {
+                    "&.Mui-focused": {
+                      color: "black",
+                    },
+                  },
+                }}
+                inputProps={{
+                  maxLength: 255,
+                  style: {
+                    resize: "vertical",
+                  },
+                }}
+              />
+            </div>
+          </div>
+
           <div className="flex m-0 flex-col">
-          <FormControl>
-
-              <InputLabel id="athleteStatus-label">Athlete status:</InputLabel>
+            <p className="text-sm font-medium mt-2">
+              {t("myprofile.myaccount.content19")}
+            </p>
+            <FormControl>
               <Select
-
-
                 value={userData && userData.data.athleteStatus}
                 onChange={handleathleteStatusChange}
-
                 labelId="athleteStatus-label"
                 id="athleteStatus"
                 name="athleteStatus"
-              
-                label="Athlete status:"
-              
-               
-                className="w-[280px]"
+                className="w-full md:w-[80%]"
                 style={{ color: "#000" }}
-                
+                sx={{ fontFamily: "'Lexend', sans-serif" }}
               >
-
-              {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
+                {/*   <MenuItem value={"s1"}>Has not logged in yet</MenuItem>
 
                 <MenuItem value={"s2"}>Logged in but no status</MenuItem> */}
 
-                <MenuItem value={"s3"}>I'm 99% taking the challenge and going</MenuItem>
-
-                <MenuItem value={"s4"}>I'm most likely going</MenuItem>
-
-                <MenuItem value={"s5"}>
-                I'm maybe going
+                <MenuItem
+                  value={"s3"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content20")}
                 </MenuItem>
 
-                <MenuItem value={"s6"}>I'm definitely not going</MenuItem>
-             
+                <MenuItem
+                  value={"s4"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content21")}
+                </MenuItem>
 
+                <MenuItem
+                  value={"s5"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content22")}
+                </MenuItem>
 
+                <MenuItem
+                  value={"s6"}
+                  sx={{ fontFamily: "'Lexend', sans-serif" }}
+                >
+                  {t("myprofile.myaccount.content23")}
+                </MenuItem>
               </Select>
-              </FormControl>
-            </div>
+            </FormControl>
+          </div>
 
-            <div className="flex   flex-col">
-             
-                <TextField
-            
-            value={userData && userData.data.athleteStatement}
-                
-            onChange={handleathleteStatementChange}
-
+          <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
+            <p className="font-medium mb-2">
+              {t("myprofile.myaccount.content24")}
+            </p>
+            <TextField
+              value={userData && userData.data.athleteStatement}
+              onChange={handleathleteStatementChange}
+              placeholder={t("myprofile.myaccount.content25")}
+              multiline
+              rows={3}
+              className="w-full h-full rounded-md border border-gray-900"
+              type="text"
               name="athleteStatement"
-
-                  label="Athlete statement"
-                  placeholder="I can't wait to go"
-                 
-                  
-                  type="text"
-                  inputProps={{
-                    maxLength: 15,
-                  }}
-                  sx={{
-                    m: 1,
-                    width: "280px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
-                    },
-                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        borderColor: "red",
-                      },
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused": {
-                        color: "black",
-                      },
-                    },
-                  }}
-                />
-              </div>
-</div>
-
-
-
-
-          <div className="flex justify-end mt-2 gap-2 items-end">
-            <Button
-              onClick={handleCancel}
-              className="w-[200px]"
-              style={{ marginTop: "20px" }}
               sx={{
-                height: "50px",
-                bgcolor: "#fff",
-                color: "#000",
-                borderRadius: 15,
-                border: `1px solid #AF2626`,
-                "&:hover": {
-                  background: "rgb(196, 43, 43)",
-                  color: "white",
-                  border: `1px solid rgb(196, 43, 43)`,
+                /* width: "2px",  */
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 3,
+                },
+
+                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "red",
+                  },
+
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused": {
+                    color: "black",
+                  },
                 },
               }}
-              variant="text"
-            >
-              <span className="popins-font">Cancel</span>
-            </Button>
+              inputProps={{
+                maxLength: 255,
+                style: {
+                  resize: "vertical",
+                },
+              }}
+            />
+          </div>
 
+          <p className="text-lg mt-6">
+            <b className="text-2xl font-bold ">
+              {t("myprofile.myaccount.content26")}
+            </b>
+          </p>
+          <div className="flex items-end col-span-2">
+            <div className="flex w-full md:w-[80%] flex-col justify-center">
+              <p className="font-medium  mt-2 text-sm">
+                {t("myprofile.myaccount.content27")}
+              </p>
+              <TextField
+                value={userData && userData.data.cryptoaddress}
+                onChange={handleCryptoChange}
+                id="cryptoaddr"
+                name="cryptoaddr"
+                placeholder="1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71"
+                sx={sxTextField}
+                InputProps={{
+                  maxLength: 150,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle BTC/ETH/XMR"
+                        onClick={handleCryptoMenuClick}
+                        edge="end"
+                      >
+                        {selectedCrypto}
+                      </IconButton>
+                      <Menu
+                        id="crypto-menu"
+                        anchorEl={cryptoMenuAnchorEl}
+                        open={Boolean(cryptoMenuAnchorEl)}
+                        onClose={handleCryptoMenuClose}
+                      >
+                        {cryptoOptions.map((option) => (
+                          <MenuItem
+                            key={option}
+                            onClick={() => handleCryptoOptionSelect(option)}
+                            selected={option === selectedCrypto}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col mt-8 w-full md:w-[80%] gap-2 ">
             <Button
-              className="w-[200px]"
-              style={{ marginTop: "20px" }}
+              className="w-full"
+              style={{ textTransform: "none" }}
               sx={{
                 height: "50px",
-                bgcolor: "#AF2626",
+                bgcolor: "#D24949",
+
                 color: "#fff",
-                borderRadius: 15,
-                border: `1px solid #AF2626`,
+                borderRadius: 3,
+                border: `1px solid #D24949`,
                 "&:hover": {
-                  background: "rgb(196, 43, 43)",
+                  background: "rgba(210, 73, 73, 1)",
                   color: "white",
-                  border: `1px solid rgb(196, 43, 43)`,
+                  border: `1px solid rgba(210, 73, 73, 1)`,
                 },
               }}
               type="submit"
               variant="text"
             >
-              <span className="popins-font">Save</span>
+              <span className="popins-font">
+                {t("myprofile.myaccount.content28")}
+              </span>
+            </Button>
+
+            <Button
+              onClick={handleCancel}
+              className="w-full"
+              style={{ textTransform: "none" }}
+              sx={{
+                height: "50px",
+                bgcolor: "#fff",
+                color: "#444444",
+                borderRadius: 3,
+                border: `1px solid #444444`,
+                "&:hover": {
+                  background: "rgba(210, 73, 73, 1)",
+                  color: "white",
+                  border: `1px solid rgba(210, 73, 73, 1)`,
+                },
+              }}
+              variant="text"
+            >
+              <span className="popins-font">
+                {t("myprofile.myaccount.content29")}
+              </span>
             </Button>
           </div>
 
-          <p
-            className="mt-4 flex justify-end "
-            style={{ color: `${resultTextColor}` }}
-          >
-            {resultText}
-          </p>
+        
         </form>
       </div>
+
+
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
     </>
   );
 };

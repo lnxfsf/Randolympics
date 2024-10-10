@@ -1,136 +1,133 @@
-
-
 ul li {
-    font-size: 14px;
-    margin-left: 10px;
-    list-style-type: disc;
- }
+  font-size: 14px;
+  margin-left: 10px;
+  list-style-type: disc;
+}
 
+ol li {
+  font-size: 14px;
+  margin-left: 10px;
+  list-style-type: decimal;
+}
 
- ol li {
-    font-size: 14px;
-    margin-left: 10px;
-    list-style-type: decimal;
- }
-
-
-
-
- // these are all images in containter
+// these are all images in containter
 .image_part {
-   
-/*    background-size: cover;
+  /*    background-size: cover;
 
    background-position: center; */
-   object-fit: cover;
-
-   
-
-
-
-
-   
-
+  object-fit: cover;
 }
- 
 
 //-----------------
 
-
 .firstHhomeImage {
-
-   /*  background-image: url('/home/home1.jpg'), linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%); 
+  /*  background-image: url('/home/home1.jpg'), linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%); 
     */
-/* 
+  /* 
   
    background: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%);
     */
 
-    background-image: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
-       url('/home/home3.webp'); 
 
+/* 
+  background-image: linear-gradient(
+      180deg,
+      rgba(41, 41, 41, 0) 0%,
+      #671212 100%
+    ),
+    url("/home/home3.webp");
+ */
 
-      
+    
 
-   background-size: cover;
-   background-position: center;
-   /* height: 100vh; */
-
-   height: 180vh;
-
-   
-
-}  
-
-
-
-
-
-.countdown-timer {
-
-   color: white;
-   background-color: rgba(38, 25, 25, 0.8);
-   
-   /* width: 650px; */
-   width: 600px;
-   height: 100px;
-
-   border-radius: 20px;
-
-   /* margin-left: 20%; */
-
-   margin-top: 5%
-/*    margin-top: 15%; */
-
-   
+    
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ),
+  url("/home/home_cover.jpg");
 
 
 
+
+  background-size: cover;
+  background-position: center;
+  
+
+  /* height: 60vh; */
+
+  height: 85vh;
+
+
+
+  @media screen and (min-width: 1024px) {
+    height: 110vh;
+  }
 }
 
+.countdown-timer {
+  color: white;
+  // background-color: rgba(38, 25, 25, 0.8);
+  background-color: #332f2f;
+  width: 80%;
 
 
+  height: 155px;
+  padding-bottom: 5px;
 
+  
+
+  border-radius: 20px;
+
+  /* margin-left: 20%; */
+
+  margin-top: 5%;
+  /*    margin-top: 15%; */
+  /* height: 135px; */
+
+  @media screen and (min-width: 1024px) {
+    height: 135px;
+    width: 45%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    height: 155px;
+  }
+
+  @media screen and (min-width: 1440px) and (max-width: 2559px) {
+    width: 35%;
+  }
+
+  @media screen and (min-width: 2560px) {
+    width: 23%;
+  }
+}
 
 .secondHhomeImage {
+  background-image: linear-gradient(0deg, rgba(41, 41, 41, 0) 0%, #671212 100%),
+    url("/home/home2.jpg");
 
+  background-size: cover;
+  background-position: center;
+  /* height: 100vh; */
 
-    background-image: linear-gradient(0deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%),
-       url('/home/home2.jpg'); 
-
-
-   background-size: cover;
-   background-position: center;
-   /* height: 100vh; */
-
-   height: 350px;
-
-   
-
-}  
- 
-
+  height: 350px;
+}
 
 // the round <div>
 
 .economicsItem {
-   
-   position: relative;
+  position: relative;
 
-   /* width: 150px;
+  /* width: 150px;
    height: 150px; */
 
-   width: 150px;
-   height: 150px;
+  width: 150px;
+  height: 150px;
 
-   border-radius: 50%;  
-   background: white;
-
-
+  border-radius: 50%;
+  background: white;
 }
-
-
-
 
 /*  
 
@@ -148,97 +145,410 @@ tako imas na hover animation
 
 */
 
-
-
+/* 
 .economicsItem:hover {
-   -webkit-animation: pulse infinite 1s;
-   animation: pulse infinite 1s; 
+  -webkit-animation: pulse infinite 1s;
+  animation: pulse infinite 1s;
+} */
 
-  
+
+
+.ellipse-image {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  bottom: 0;
+  right: 0;
+  --size: 100px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --progress: 25;
 }
 
+.fillme {
+  cx: var(--half-size);
+  cy: var(--half-size);
+  r: var(--radius);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+  stroke: #af2626;
+  transition: stroke-dasharray 0.3s linear 0s;
+}
 
- .ellipse-image {
-   position: absolute;
-   width: 150px;
-   height: 150px;
-   bottom: 0;
-   right: 0;
-   --size: 100px;
-   --half-size: calc(var(--size) / 2);
-   --stroke-width: 5px;
-   --radius: calc((var(--size) - var(--stroke-width)) / 2);
-   --circumference: calc(var(--radius) * pi * 2);
-   --dash: calc((var(--progress) * var(--circumference)) / 100);
-   --progress: 25;
- }
- 
- .fillme {
-   cx: var(--half-size);
-   cy: var(--half-size);
-   r: var(--radius);
-   stroke-width: var(--stroke-width);
-   fill: none;
-   stroke-linecap: round;
-   stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
-   stroke: #af2626;
-   transition: stroke-dasharray 0.3s linear 0s;
- }
- 
- .ellipse-image:hover {
-   --progress: 100;
- }
- 
+.ellipse-image:hover {
+  --progress: 100;
+}
 
+// for smaller icons, competitions..
 
-
- // for smaller icons, competitions..
-
- 
 .competitionItem {
+  position: relative;
 
-   position: relative;
+  width: 75px;
+  height: 75px;
 
-   width: 50px;
-   height: 50px;
+  border-radius: 50%;
 
-   border-radius: 50%;  
-   background: white;
+  background: #FFE9E9;
 
+}
+/* 
+.competitionItem:hover {
+  -webkit-animation: pulse infinite 1s;
+  animation: pulse infinite 1s;
+} */
 
+.ellipse-image-competitions {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 0;
+  right: 0;
+  --size: 100px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --progress: 25;
+}
+
+.ellipse-image-competitions:hover {
+  --progress: 100;
 }
 
 
-.competitionItem:hover {
-   -webkit-animation: pulse infinite 1s;
-   animation: pulse infinite 1s; 
+
+// image_beliefs
+
+
+.container_beliefs {
+  position: relative;
+  width: 100%; 
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+.image_beliefs {
+ /*  width: 100%;
+
+  min-height: "screen";
+  
+ */
+ 
+ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 
   
 }
 
 
- .ellipse-image-competitions {
-   position: absolute;
-   width: 50px;
-   height: 50px;
-   bottom: 0;
-   right: 0;
-   --size: 100px;
-   --half-size: calc(var(--size) / 2);
-   --stroke-width: 5px;
-   --radius: calc((var(--size) - var(--stroke-width)) / 2);
-   --circumference: calc(var(--radius) * pi * 2);
-   --dash: calc((var(--progress) * var(--circumference)) / 100);
-   --progress: 25;
 
- }
+
+.fourth_screen {
+
+  background-image: linear-gradient(
+    180deg,
+    rgba(210, 73, 73, 0),
+    rgba(210, 73, 73, 0.1)
+  );
+
+}
+
+
+
+@media (max-width: 767px) {
+
+  .limit_lines_mobile {
+
+
+    display: -webkit-box;         
+    -webkit-line-clamp: 6;       
+    -webkit-box-orient: vertical; 
+    overflow: hidden;             
+    text-overflow: ellipsis;      
+  }
+
+}
+
+
+
+
+
+@media (min-width: 768px) {
+
+  .limit_lines_PC {
+
+
+    display: -webkit-box;        
+    -webkit-line-clamp: 10;        
+    -webkit-box-orient: vertical;  
+    overflow: hidden;             
+    text-overflow: ellipsis;       
+  }
+
+}
+
+
+
+
+
+
+// custom border ? 
+
+.custom-border {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 100px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+
+  
+
+}
+
+
+.custom-border1 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 300px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+
+  
+
+}
+
+
+
+.dot {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px; /* Diameter of the dot */
+  height: 10px;
+  background-color: #D24949; /* Same color as the border */
+  border-radius: 50%;
+}
+
+
+.dash {
+  position: absolute;
+  bottom: 5px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0px; /* Width of the dash */  /* 4px  */
+  height: 2px; /* Height of the dash */
+  background-color: #D24949; /* Same color as the border */
+}
+
+
+
+
+.dot2 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px; /* Diameter of the dot */
+  height: 10px;
+  background-color: #D24949; /* Same color as the border */
+  border-radius: 50%;
+}
+
+
+
+.dot3 {
+  position: absolute;
+  top: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px; /* Diameter of the dot */
+  height: 10px;
+  background-color: #D24949; /* Same color as the border */
+  border-radius: 50%;
+}
+
+
+/* when there's more lines on subtitle.. so this need thicker.. */
+.custom-border2 {
+  position: relative;
+
+
+  width: 3px ; /* Width of the border */  /* 3px na blize sto je  */
+
+  
+  /* @media screen and (min-width: 1536px) {
+    width: 2px;
+  } */
+
+
+
+  height: 100px; /* Adjust as needed */
+  background-color: #D85A52; /* Color of the border */
+  margin: 0 auto;
+}
+
+
+
+
+.custom-border3 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 150px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+
+  
+
+}
+
+
+
+
+
+
+.custom-border4 {
+  position: relative;
+  width: 2px; /* Width of the border */
+  height: 230px; /* Adjust as needed */
+  background-color: #D24949; /* Color of the border */
+  margin: 0 auto;
+
+}
+
+
+.custom-borderEnd {
+  position: relative;
+  width: 2px ; /* Width of the border */
+  
+/* 
+  // jer ovaj se crashuje u gornji
+  @media screen and (min-width: 1536px) {
+    width: 2px;
+  }  */
+
+
+
+
+
+  height: 30px; /* Adjust as needed */
+  background-color: #D85A52; /* Color of the border */
+  margin: 0 auto;
+}
+
+
+
+
+// for fixing text, placement !!! it needs to be at specific height.. so, you make it with this.. it will work... 
+
+.end_text_games {
+
+   margin-top: -15px; 
+
+}
+
+.text_games {
+ /*  margin-top: -35px; */
+}
+
+
+
+
+
+// join us, section end
+
+
+// image_beliefs
+
+
+.container_join_us {
+  position: relative;
+  width: 100%; 
+
+
+   
+ 
+
+
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+.image_join_us {
+ /*  width: 100%;
+
+  min-height: "screen";
+  
+ */
+ 
+ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  
+}
+
+
+
+
+
+.container_first_screen {
+  position: relative;
+  width: 100%;
+  
+  overflow: hidden; /* Hide any overflow of the image */
+}
+
+
+
+.image_first_screen {
+ /*  width: 100%;
+
+  min-height: "screen";
+  
+ */
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  
+}
+
+
+
+
+
+/* 
+
+.item_div {
+  width: 100%;
+  height: 60%;
 
  
- .ellipse-image-competitions:hover {
-   --progress: 100;
- }
-
-
-
-
- 
+  overflow: hidden;
+} */

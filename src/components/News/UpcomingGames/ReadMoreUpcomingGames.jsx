@@ -10,6 +10,8 @@ import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -69,7 +71,8 @@ const ReadMoreUpcomingGames = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      
+      <Navbar />
 
       <div className="mb-32"></div>
 
@@ -118,6 +121,8 @@ const ReadMoreUpcomingGames = () => {
           Next Page
         </button>
       </div>
+
+      <FooterClean />
     </>
   );
 };

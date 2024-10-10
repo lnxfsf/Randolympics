@@ -27,7 +27,7 @@ export default function DonationFormItemCampaign({amount, setAmount, campaignId,
 
  //let { campaignId } = useContext(AuthContext);
   // console.log(user)
- console.log("a iz state-a je: "+campaignId)
+/*  console.log("a iz state-a je: "+campaignId) */
 
  // var campaignId = "haha0";
 
@@ -67,8 +67,8 @@ export default function DonationFormItemCampaign({amount, setAmount, campaignId,
           setConfirmedPayment(payment);
 
 
-          console.log("imas ovo payment: ")
-          console.log(payment)
+         
+          
           handleClear(); // Clear the payment intent
           
           // Using a Promise-based delay to clear confirmedPayment after 5 seconds
@@ -85,8 +85,7 @@ export default function DonationFormItemCampaign({amount, setAmount, campaignId,
     if (data) setPaymentIntent(data);
   }, [data]);
 
-  console.log("paymentIntent");
-  console.log(paymentIntent);
+  
 
   return (
     <Card>

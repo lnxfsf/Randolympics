@@ -26,9 +26,9 @@ const stripePromise = loadStripe(`${STRIPE_PUBLIC_KEY}`);
 
 const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
   const [confirmData, updateConfirmData] = useState(null);
-
+/* 
   console.log("handle clear je");
-  console.log(handleCancel);
+  console.log(handleCancel); */
 
   const stripe = useStripe(`${STRIPE_PUBLIC_KEY}`);
 
@@ -52,49 +52,51 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
 
   return (
     <CardContent>
-        <Typography variant="h6" pb={3} color='primary'>Thanks for your support!</Typography>
+        <p className="text-lg text-red_second font-semibold mb-4">Thanks for your support !</p>
         <PaymentElement/>
         <CardActions sx={{ mt: 3, display: 'flex', justifyContent: 'space-between' }}>
-            <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
-            <Button variant="contained" onClick={handleSubmit} disabled={isLoading}>{isLoading ? <CircularProgress/> :`Donate ${paymentIntent.amount / 100}`} $</Button>
+            <Button variant="outlined" onClick={handleCancel} 
+              style={{ textTransform: "none" }}
+
+            sx={{
+              height: "50px",
+              bgcolor: "#fff",
+              color: "#444444",
+              borderRadius: 3,
+              border: `1px solid #D24949`,
+              "&:hover": {
+                background: "rgba(210, 73, 73, 1)",
+                color: "white",
+                border: `1px solid rgba(210, 73, 73, 1)`,
+              },
+            }}
+
+
+            ><span className="lexend-font ">Cancel</span></Button>
+            <Button variant="contained" onClick={handleSubmit} disabled={isLoading}
+            
+            style={{ textTransform: "none" }}
+
+            sx={{
+              height: "50px",
+              bgcolor: "#D24949",
+
+              color: "#fff",
+              borderRadius: 3,
+              border: `1px solid #D24949`,
+              "&:hover": {
+                background: "rgba(210, 73, 73, 1)",
+                color: "white",
+                border: `1px solid rgba(210, 73, 73, 1)`,
+              },
+            }}
+            
+            ><span className="lexend-font ">{isLoading ? <CircularProgress/> :`Donate ${paymentIntent.amount / 100}`} $</span></Button>
         </CardActions>
     </CardContent>
   );
 };
 
-/* 
-const StripeForm = ({ paymentIntent , handleClear }) => {
-
-    const [confirmData, updateConfirmData] = useState(null);
-
-
-    const stripe = useStripe();
-
-    const elements = useElements();
-
-    const { mutate, isLoading, data, error } = useSubmitPayment(elements, stripe, paymentIntent.client_secret);
-
-    const handleSubmit = async (e) => {
-      //  elements.submit();
-        e.preventDefault();
-        mutate();
-    };
-
-    return (
-        <CardContent>
-            <Typography variant="h6" pb={3} color='primary'>Thanks for your support!</Typography>
-          
-		  <Elements stripe={stripePromise} options={{ clientSecret: paymentIntent.client_secret }}>
-                <PaymentElement options={{ mode: 'payment' }} />
-            </Elements>
-			
-                <CardActions sx={{mt:3, display:'flex', justifyContent:'space-between'}}>
-                    <Button  variant="outlined" >Cancel</Button>
-                    <Button variant="contained">Donate ${paymentIntent.amount / 100}</Button>
-                </CardActions>
-        </CardContent>
-    )
-} */
 
 const StripeForm = (props) => {
    console.log("sta ima u props sve");

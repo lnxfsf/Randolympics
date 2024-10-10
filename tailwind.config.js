@@ -12,11 +12,26 @@ export default {
   theme: {
     colors: {
 
-
+    
+      
       black_first: "#232323",
+      black_second: "#444444",
+
+
       blue_first: "#315FB7",
-      red_first: "#AF2626",
+
+       red_first: "#AF2626",
+
+       red_second: "#D24949",  /* rgba(210, 73, 73, 1) */ 
+       
+      red_third: "#FFE9E9",
+
+      
+
       gray_first: "#C6C6C6",
+      gray_second: "#F8F8F8",
+      gray_third: "#616673",
+      
       body_news: "#F7FAFA",
 
       text_news: "#716363",

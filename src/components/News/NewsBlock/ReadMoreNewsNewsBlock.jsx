@@ -12,6 +12,8 @@ import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
+import { Navbar } from "../../Navbar";
+import { FooterClean } from "../../FooterClean";
 
 
 let BACKEND_SERVER_BASE_URL =
@@ -72,12 +74,13 @@ const ReadMoreNewsNewsBlock = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      <Navbar />
 
       <div className="mb-32"></div>
 
       <div className=" flex justify-center items-center">
-        <div className="w-[70%]">
+        
+        <div className="w-[97%]">
           <IconButton
             className="back-icon"
             aria-label="back"
@@ -119,6 +122,8 @@ const ReadMoreNewsNewsBlock = () => {
           Next Page
         </button>
       </div>
+
+      <FooterClean />
     </>
   );
 };

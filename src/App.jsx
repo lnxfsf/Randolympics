@@ -30,6 +30,26 @@ import { UpdateAthleteStatus } from "./components/MyAccount/UpdateAthleteStatus"
 import { JoinTeam } from "./pages/JoinTeam";
 
 
+import ReactGA from 'react-ga';
+import { FAQPage } from "./pages/FAQPage";
+import { AboutUs } from "./pages/AboutUs";
+import { ContactUs } from "./pages/ContactUs";
+import { Competitions } from "./pages/Competitions";
+import { UserProfilePublicView } from "./components/Home/UserProfilePublicView";
+import { CompetitionsDetails } from "./pages/CompetitionsDetails";
+
+let GTAG_ID =
+  import.meta.env.VITE_GTAG_ID ||
+  process.env.VITE_GTAG_ID;
+
+
+const TRACKING_ID = GTAG_ID;
+
+ReactGA.initialize(TRACKING_ID);
+
+
+
+
 
 
 const App = () => {
@@ -42,6 +62,9 @@ const App = () => {
   return (
     <>
       <Routes>
+
+
+
 
 
         <Route path="/landingpage" element={<LandingPage />} />
@@ -57,12 +80,22 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/jointeam" element={<JoinTeam/>} />
 
+
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passresetbyfriend" element={<RegisteredByFriend /> } />
         <Route path="/tos" element={<ToS />} />
         <Route path="/randomize" element={<Randomize />} />
 
         <Route path="/myaccount" element={<PrivateRoute><MyAccount /></PrivateRoute>} />
+
+        
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+
+        <Route path="/competitions" element={<Competitions />} />
+
+        <Route path="/competitions/:sportName" element={<CompetitionsDetails />} />
 
 
 
@@ -97,6 +130,8 @@ const App = () => {
         <Route path="/campaign" element={<Campaign /> } />
         <Route path="/campaign/:campaignId" element={<ItemCampaign /> } />
 
+
+        <Route path="/profile/:userId" element={<UserProfilePublicView /> } />
 
 
 

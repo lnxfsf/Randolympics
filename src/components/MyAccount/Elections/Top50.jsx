@@ -4,12 +4,11 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 
 import Flag from "react-world-flags";
-
-
 
 import moment from "moment";
 
@@ -18,35 +17,25 @@ import { Top50Popup } from "./Top50Popup";
 const Top50 = ({
   user, // we just send one big object, and get properties (as they change depending on user_type)
   currentUserPassportStatus,
-  user_type,  // yes, this is , the logged in user_type !!! 
+  user_type, // yes, this is , the logged in user_type !!!
   index,
   lastIndex,
   setRankUpdated,
   selectedRole,
-  votedForUserId, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user.. 
+  whichVotedFor, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user..
   lastRank,
-
 }) => {
-
-
-
-  
-
-
   // set up, (and also depends on user_type, as we won't use all of it)
-  const userId = user.userId;  // userId, of user in question (you're changing.. about.. )
+  const userId = user.userId; // userId, of user in question (you're changing.. about.. )
 
   // should be able to get his passportStatus, to check if he can vote (if he have verified passport), every other state is not allowed to vote etc..
   const passportStatus = user.passportStatus;
-  
 
-
-  if (selectedRole == "AH"){
+  if (selectedRole == "AH") {
     var rank = user.ranking;
   } else if (selectedRole == "GP") {
     var rank = user.rankingGP;
-    var currentGP_UpToDate = user.currentGP_UpToDate;  // this is to show, if we're not yet able to show, until 4yrs have passed..
-
+    var currentGP_UpToDate = user.currentGP_UpToDate; // this is to show, if we're not yet able to show, until 4yrs have passed..
   } else if (selectedRole == "NP") {
     var rank = user.rankingNP;
   } else if (selectedRole == "EM") {
@@ -65,69 +54,57 @@ const Top50 = ({
     var rank = user.rankingRS;
   }
 
-  
   // you can't have it like 0
-  if (rank == 0){
+  if (rank == 0) {
     rank = 1;
   }
-  
 
   const name = user.name;
-
-
-  if(user.birthdate_private == 1){
+/* 
+  if (user.birthdate_private == 1) {
     var age = "private";
   } else {
     var age = calculateAge(user.birthdate);
-  }
+  } */
 
-  
-
-  if(user.email_private == 1){
+/*   if (user.email_private == 1) {
     var email = "private";
   } else {
     var email = user.email;
-  }
+  } */
 
-
-   // private je 1 
-  // public je 0 
-  if(user.phone_private == 1){
+  // private je 1
+  // public je 0
+/*   if (user.phone_private == 1) {
     var phone = "private";
   } else {
     var phone = user.phone;
-  }
+  } */
+
+    var email = user.email;
+    var phone = user.phone;
 
   const gender = user.gender;
   const nationality = user.nationality;
 
-  if(user_type === "AH" || user_type === "RS"){
+  if (user_type === "AH" || user_type === "RS") {
     var votes = user.votes;
-  } else if ( selectedRole === "GP" ){
+  } else if (selectedRole === "GP") {
     var votes = user.votesGP;
   }
-  
 
-
-  
   // we calculate age on the fly..
-  function calculateAge(birthdate) {
+/*   function calculateAge(birthdate) {
     // if birthdate is empty, or invalid..
     if (!birthdate || !moment(birthdate).isValid()) {
-      return '-';
+      return "-";
     }
-  
     const today = moment();
     const birthDate = moment(birthdate);
-    const years = today.diff(birthDate, 'years');
-  
+    const years = today.diff(birthDate, "years");
+
     return years;
-  }
-  
-  
-
-
-  // const userNPPercentage = user.userNPPercentage;
+  } */
 
   // we use this, only if we're showing "NP", i.e. when current user_type is "AH" or "RS"
   const status = user.status;
@@ -141,251 +118,103 @@ const Top50 = ({
 
 
 
-  const [currentRank, setCurrentRank] = useState(rank);
-
-  // original rank will be "rank", use that ! it won't change
-
-  const popupRef = useRef(null);
-
-  let BACKEND_SERVER_BASE_URL =
-    import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
-    process.env.VITE_BACKEND_SERVER_BASE_URL;
-
-  // just once, you save in
-  const [userData, setUserData] = useState(null);
-  const [original_email, setOriginalEmail] = useState(null);
-
-
-  
-
-
-
   useEffect(() => {
-    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
-    if (storedData) {
-      var userJson = JSON.parse(storedData);
 
-      setUserData(userJson);
-
-      setOriginalEmail(userJson.data.email);
-    }
-  }, []);
-
-  const increaseRank = () => {
-
-    // so, it won't go above, latest rank available. so this way, everything is in order. 
-    if(currentRank !== lastRank){
-      setCurrentRank(currentRank + 1);
-    }
-
-
-  };
-
-  const decreaseRank = () => {
-    setCurrentRank((prevRank) => (prevRank > 1 ? prevRank - 1 : 1));
-    // setCurrentRank receives the previous state value (prevRank). and we check if it's safe to go below. as we don't want to go below 1 (unless there's some resign options..)
-    // for resigning, he's becoming last in rank
-  };
-
-  const cancel = () => {
-    setCurrentRank(rank); // just revert it
-
-    // and exit popup
-    popupRef.current.close();
-  };
-
-  const saveChanges = async () => {
-    try {
-      var response = await axios.post(
-        `${BACKEND_SERVER_BASE_URL}/voting/update_rank_data`,
-        {
-          userId,  // userId, of user in question (you're changing.. about.. )
-
-          originalRank: rank,
-          goingToRank: currentRank,
-
-          user_type: selectedRole,  // this must be, the selected value from dropdown !!! if we select "AH", or "RS " !! that's what you have in backend after all 
-          nationality: nationality,
-
-        }
-      );
-
-
-
-      console.log(response)
-
-      if (response.status === 200) {
-        // setRankUpdated((prev) => !prev);  //this is so we can update list now ..
-        //console.log("sent (going to rank): " + currentRank)
-        //TODO - nesto sa rank, jer on filtira po user-email.. a ti saljes samo id od svoga ! ZATO ON NECE ZA DRUGE USER-S.. nego samo za tvoj ariana grande.. al aj, dovrsi taj drugi feature.. pa onda ces..
-        setRankUpdated((prev) => !prev);
-        setCurrentRank(rank); //bring it back to original...
-        popupRef.current.close();
-
-
-
-      } else if (response.status === 408) { 
-          console.log(error.response.data.error)
-         
-
-          
-          alert("You can change global president on: "+ error.response.data.error)
-          popupRef.current.close();
-      }
-      
-
-    } catch (error) {
-      alert("You can change global president on: "+ error.response.data.error)
-      popupRef.current.close();
-
-
-      
-    }
-  };
+  }, [whichVotedFor])
 
   return (
     <>
-      {/*ovo je ispod, samo da probas: border-b-2 border-red-500 */}
-
-      {/* if user is NP, then show "edit field". so we can reuse this same component for all that... */}
-      <tr key={index}>
-        {/* // ? showing checkbox, which one user, selected.. (just display it as disabled, and true.. so user can't check / uncheck there.. ). it's just indicator..
-         */}
-
-        {/*  // ! it also, need to check, if currentUser, have this one, as selected.. (just, go on votedFor), by name, or userId, just to be sure...
-         */}
-        {(user_type === "AH" || user_type === "RS"  || selectedRole === "GP")  && (
-          <>  
-            <td style={{ textAlign: "center" }}>
-              {/*   <Checkbox
-                sx={{
-                  color: "#FF0000",
-                  "&.Mui-checked": {
-                    color: "#FF0000",
-                  },
-                }}
-                checked={votedForNPuserIdBOOLEAN}
-                disabled
-              /> */}
-
-              {votedForUserId == userId ? <p>1</p> : <p>-</p>}
-              
-            </td>
-          </>
-        )}
-
-        { (user_type === "NP" && selectedRole !== "GP" ) || user_type === "GP" ? (
-          <>
-            {/* <div className="flex justify-between items-center gap-2"> */}
-
-            {/*   {currentUserType === "AH" ? (
-                <>
-                  <th className="w-[8%]">hello</th>
-                </>
-              ) : (
-                <>
-                  
-                </>
-              )} */}
-
-            <td className="flex gap-2 justify-start items-center">
-              <div>
-                {(selectedRole !== "AH" ) ? (
-                  <p>{rank}</p>
-                ) : (
-                  <p>
-                    {gender} {rank}
-                  </p>
-                )}
-              </div>
-              <div>
-                {/*     <p className="cursor-pointer select-none text-gray_first">
-                  Update Rank <img src="myaccount/pencil.svg" style={{width: "10px", height: "10px", display: "inline-block", marginBottom: "5px"}} />
-                </p> */}
-               
-               {(currentUserPassportStatus === "validated") && (
-                <>
-                <Popup
-                  ref={popupRef}
-                  trigger={
-                    <p className="cursor-pointer select-none text-gray_first">
-                      Update Rank{" "}
-                      <img
-                        src="/myaccount/pencil.svg"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          display: "inline-block",
-                          marginBottom: "5px",
-                        }}
-                      />
-                    </p>
+    
+      <tr
+        key={index}
+        className="bg-[#f2fff3] border-b-[1px] border-t-[1px] border-[#DEE2E6]"
+      >
+        {(user_type === "AH" || user_type === "RS" || user_type === "NP") &&
+          currentUserPassportStatus === "validated" && (
+            <>
+              <td style={{ textAlign: "center" }}>
+                <FormControlLabel
+                  checked={true}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#444444",
+                        "&.Mui-checked": {
+                          color: "#444444",
+                        },
+                        margin: 0,
+                        padding: 0,
+                      }}
+                    />
                   }
-                  position="right center"
-                  contentStyle={{ width: "auto" }}
-                >
-              
-                  <Top50Popup increaseRank={increaseRank} currentRank={currentRank} decreaseRank={decreaseRank} cancel={cancel} saveChanges={saveChanges}/>
-                  
+                  sx={{
+                    "& .MuiTypography-root": {
+                      fontFamily: "'Lexend', sans-serif",
+                      fontWeight: 500,
+                    },
+                    margin: 0,
+                    padding: 0,
+                  }}
+                />
+              </td>
+            </>
+          )}
 
-                </Popup>
-                </>
-               )}
+        <td /* className="flex gap-2 justify-start" */>{votes}</td>
 
+        <td>{name}</td>
+
+      
+        {user.email_private === 1 ? (
+          <>
+            <td>
+              <div className="flex gap-2">
+                <img
+                  className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                  src="/editprofile/private_lock.svg"
+                />
+                <p className="text-lg font-medium text-[#616673] break-all">
+                  Private
+                </p>
               </div>
             </td>
-            {/* </div> */}
           </>
         ) : (
           <>
-            {/* <div className="flex justify-between items-center gap-2"> */}
-
-            {/* if it's Athlete, then it shows "Votes", for those "NP" */}
-            {(user_type === "AH" || user_type === "RS" || selectedRole === "GP" ) ? (
-              <td className="flex gap-2 justify-start">
-                <p>
-                  <b>{votes}</b> {" "}
-                </p>
-              </td>
-            ) : (
-              <td className="flex gap-2 justify-start">
-                <p>{rank}</p>
-              </td>
-            )}
-
-            {/* </div> */}
+            <td>{email}</td>
           </>
         )}
 
-        <td>{name}</td>
-        <td>{age}</td>
-        <td><Flag className="flag-photo-team " code={nationality} /></td>
-        <td>{email}</td>
-        <td>{phone}</td>
 
-        {(user_type === "AH" || user_type === "RS" || selectedRole === "GP") && (
-          <td>
-            <p>
-              {status} <br />
-              {status_date}
-            </p>
-          </td>
+        
+
+        {user.phone_private === 1 ? (
+          <>
+            <td>
+              <div className="flex gap-2">
+                <img
+                  className=" bg-[#EAEAEA] p-2 rounded-lg items-center "
+                  src="/editprofile/private_lock.svg"
+                />
+                <p className="text-lg font-medium text-[#616673] break-all">
+                  Private
+                </p>
+              </div>
+            </td>
+          </>
+        ) : (
+          <>
+            <td>{phone}</td>
+          </>
         )}
-      </tr>
 
-      {/*       it doesn't render on last element, so it can properly show red line..
-       */}
-      {index !== lastIndex && (
-        <tr>
-          <td colSpan="6">
-            <hr />
-          </td>
-        </tr>
-      )}
-      {/* <hr /> */}
+        <td>
+          <p>
+            {status} <br />
+            {status_date}
+          </p>
+        </td>
+      </tr>
     </>
   );
 };

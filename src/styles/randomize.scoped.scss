@@ -30,19 +30,26 @@
 
 .thz, .tdz {
 //  border: 1px solid #ddd;
+
   padding: 8px;
-  text-align: center !important; // don't know why but it needs !important
+  text-align: start !important; // don't know why but it needs !important
   vertical-align: middle;
 
+  border-bottom: 1px solid #DEE2E6;
 
 }
 
 
 .thz {
-  background-color: #f2f2f2;
+
+  // background-color: #f2f2f2;
+  border-bottom: 1px solid #DEE2E6;
   
 }
 
 .time-slot {
   font-weight: bold;
 } 
+
+
+

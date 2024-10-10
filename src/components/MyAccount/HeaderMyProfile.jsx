@@ -3,6 +3,9 @@ import "../../styles/headermyprofile.scoped.scss";
 import React, { useState, useEffect } from "react";
 import Flag from "react-world-flags";
 import axios from "axios";
+import { Button } from "@mui/material";
+
+import { useTranslation } from "react-i18next";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -31,13 +34,21 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
+import { settingUserType } from "../../context/user_types";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const HeaderMyProfile = ({ ShowEditProfile }) => {
+  const { t } = useTranslation();
+
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
+
+  const [lastName_header, setLastName_Header] = useState("");
+  const [middleName_header, setMiddleNameHeader] = useState("");
+
   const [user_typeText, setUserTypeText] = useState("");
   const [code, setCode] = useState("");
   const [original_email, setOriginalEmail] = useState(null);
@@ -99,21 +110,49 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
     },
   };
 
-  const toogleProfileUpload = async () => {
-    setToogleProfilePic(!toogleProfilePic);
+  const fetchLatestInLocalStorage = async (userId) => {
+    try {
+      var response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/user/fetchLatestData`,
+        { userId: userId }
+      );
 
+      if (response.status === 200) {
+        setUserData(response); //we update it again.. yes.. but this is latest btw..
+
+        if (localStorage.getItem("authTokens")) {
+          localStorage.setItem("authTokens", JSON.stringify(response));
+        } else if (sessionStorage.getItem("authTokens")) {
+          sessionStorage.setItem("authTokens", JSON.stringify(response));
+        }
+
+        console.log(response);
+        return 1;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const profileUpload = async () => {
     try {
       // we just upload profile_image URL, in database !
+
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
         {
           original_email,
-          // this one, is used, just, to upload passport photo ... (on backend, he won't mind, he just receives this one field, and updates it.. )
-          picture: profileImage, // on salje u backend ! kako treba, al local nece
+          name: userData.name,
+          picture: profileImage,
         }
       );
 
-      // TODO, this doesn't (sometimes) save profileImage in userData (so we could save in localStorage , whole userData object ). IT'S only when we click big button "Save", that it save to localstorage. Even though it should save it with below code
+      if (response.status === 200) {
+        fetchLatestInLocalStorage(userData.userId);
+
+        setToogleProfilePic(!toogleProfilePic);
+      }
+
       setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
@@ -136,7 +175,6 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
   };
 
   useEffect(() => {
-    // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
       localStorage.getItem("authTokens") ||
       sessionStorage.getItem("authTokens");
@@ -147,158 +185,157 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
       setUserData(userJson);
 
       setOriginalEmail(userJson.data.email);
-      setProfileImage(userJson.data.picture);
+
+      if (!toogleProfilePic) {
+        setProfileImage(userJson.data.picture);
+      }
 
       setNameHeader(userJson.data.name);
-      settingUserType(userJson.data.user_type);
+      setMiddleNameHeader(userJson.data.middleName);
+      setLastName_Header(userJson.data.lastName);
+
+
+
+      setUserTypeText(settingUserType(userJson.data.user_type));
       setCode(userJson.data.nationality);
     }
   }, []);
 
-  const settingUserType = (user_type) => {
-    switch (user_type) {
-      case "AH":
-        setUserTypeText("Athlete");
-        break;
-      case "GP":
-        setUserTypeText("Global President");
-        break;
-      case "NP":
-        setUserTypeText("National President");
-        break;
-      case "EM":
-        setUserTypeText("Event Manager");
-        break;
-      case "ITM":
-        setUserTypeText("IT Manager");
-        break;
-      case "IME":
-        setUserTypeText("IT Manager Page Editor"); // Note: Corrected from "ITM"
-        break;
-      case "MM":
-        setUserTypeText("Marketing Manager");
-        break;
-      case "SM":
-        setUserTypeText("Sales Manager");
-        break;
-      case "VM":
-        setUserTypeText("Validation Manager");
-        break;
-      case "LM":
-        setUserTypeText("Legal Manager");
-        break;
-      case "RS":
-        setUserTypeText("Referee & support");
-        break;
-      default:
-        setUserTypeText("Guest");
-
-        break;
-    }
-  };
-
   return (
     <>
-      <div className="flex justify-start">
-        <div className="flex justify-center items-center">
-          {!toogleProfilePic && (
-            <>
+      <p className="lexend-font font-medium text-black_second text-xl p-2">
+        {t("myprofile.myaccount.content30")}
+      </p>
+      <div className="flex flex-col md:flex-row justify-start mt-4 lexend-font text-black_second p-2 md:w-[80%]">
+        <div className="flex grow">
+          <div className="flex flex-col items-start">
+            <div className="flex justify-center items-center ">
+              {!toogleProfilePic && (
+                <>
+                  <div className="image_editProfile">
+                    <img
+                      src={
+                        BACKEND_SERVER_BASE_URL +
+                        "/imageUpload/profile_pics/" +
+                        profileImage
+                      }
+                      className="image_editProfile"
+                      style={{ position: "relative", zIndex: "-1" }}
+                    />
+                  </div>
+                </>
+              )}
+
+              {toogleProfilePic && (
+                <>
+                  <FilePond
+                    className="filepond--root small"
+                    type="file"
+                    onupdatefiles={setFiles}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    server={serverProfile}
+                    name="image"
+                    labelIdle={t("myprofile.myaccount.content31")}
+                    accept="image/png, image/jpeg, image/gif"
+                    dropOnPage
+                    dropValidation
+                    allowPaste={true}
+                    allowReplace={true}
+                    credits={""}
+                    allowFileEncode={true}
+                    allowFileTypeValidation={true}
+                    allowImagePreview={true}
+                    allowImageCrop={false}
+                    allowImageResize={false}
+                    allowImageTransform={false}
+                    imagePreviewHeight={100}
+                    imageCropAspectRatio="1:1"
+                    imageResizeTargetWidth={100}
+                    imageResizeTargetHeight={100}
+                    stylePanelLayout="compact circle"
+                    styleLoadIndicatorPosition="center bottom"
+                    styleProgressIndicatorPosition="center bottom"
+                    styleButtonRemoveItemPosition="center  bottom"
+                    styleButtonProcessItemPosition="center bottom"
+                    imageEditAllowEdit={false}
+                  />
+                </>
+              )}
+            </div>
+
+            <h1 className="text-lg font-medium">{name_header} {middleName_header && ( <>({middleName_header}) </> )} {lastName_header}</h1>
+         
+          </div>
+
+          <div className="flex flex-grow">
+            <div className="flex flex-col justify-center pl-4">
+              {!toogleProfilePic && (
+                <>
+                  <Button
+                    className="w-28   "
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "40px",
+                      bgcolor: "#fff",
+                      color: "#444444",
+                      borderRadius: 2,
+                      border: `1px solid #444444`,
+                    }}
+                    onClick={() => {
+                      setToogleProfilePic(!toogleProfilePic);
+                    }}
+                  >
+                    <img src="/myaccount/upload.svg" className="w-4 mr-2" />{" "}
+                    <span className="lexend-font font-semibold ">
+                      {t("myprofile.myaccount.content32")}
+                    </span>
+                  </Button>
+                </>
+              )}
+              {toogleProfilePic && (
+                <>
+                  {/* <p className="edit-photo" onClick={profileUpload}>
+                    <u>Save photo</u>
 
 
-              <div className="image_editProfile" >
+                  </p> */}
 
-
-                <img
-                  src={
-                    BACKEND_SERVER_BASE_URL +
-                    "/imageUpload/profile_pics/" +
-                    profileImage
-                  }
-
-                  className="image_editProfile"
-                  
-                  
-                  style={{ position: "relative", zIndex: "-1" }}
-                />
-
-
-              </div>
-
-
-            </>
-          )}
-
-          {toogleProfilePic && (
-            <>
-              <FilePond
-                className="filepond--root small"
-                type="file"
-                onupdatefiles={setFiles}
-                allowMultiple={false}
-                maxFiles={1}
-                server={serverProfile}
-                name="image"
-                labelIdle='Drag & Drop profile picture or <span class="filepond--label-action">Browse</span> <br/>(optional)'
-                accept="image/png, image/jpeg, image/gif"
-                dropOnPage
-                dropValidation
-                allowPaste={true}
-                allowReplace={true}
-                credits={""}
-                allowFileEncode={true}
-                allowFileTypeValidation={true}
-                allowImagePreview={true}
-                allowImageCrop={false}
-                allowImageResize={false}
-                allowImageTransform={false}
-                imagePreviewHeight={100}
-                imageCropAspectRatio="1:1"
-                imageResizeTargetWidth={100}
-                imageResizeTargetHeight={100}
-                stylePanelLayout="compact circle"
-                styleLoadIndicatorPosition="center bottom"
-                styleProgressIndicatorPosition="center bottom"
-                styleButtonRemoveItemPosition="center  bottom"
-                styleButtonProcessItemPosition="center bottom"
-                imageEditAllowEdit={false}
-              />
-            </>
-          )}
-        </div>
-
-        <div className="flex flex-grow">
-          <div className="flex flex-col justify-center pl-4">
-            <h1 className="text-[25px]">{name_header}</h1>
-
-            {!toogleProfilePic && (
-              <>
-                <p className="edit-photo" onClick={toogleProfileUpload}>
-                  {ShowEditProfile && <u>Edit photo</u>}
-                </p>
-              </>
-            )}
-            {toogleProfilePic && (
-              <>
-                <p className="edit-photo" onClick={toogleProfileUpload}>
-                  <u>Save photo</u>
-                </p>
-              </>
-            )}
+                  <Button
+                    className="w-36"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "40px",
+                      bgcolor: "#fff",
+                      color: "#444444",
+                      borderRadius: 2,
+                      border: `1px solid #444444`,
+                    }}
+                    onClick={profileUpload}
+                  >
+                    <img src="/myaccount/save.svg" className="w-4 mr-2" />{" "}
+                    <span className="lexend-font font-semibold ">
+                      {t("myprofile.myaccount.content33")}
+                    </span>
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className="flex justify-self-end">
-          <div className="flex flex-col justify-center pl-4">
-            <p className="text-base text-right">User Type</p>
-            <h1 className="text-[25px] text-right">{user_typeText}</h1>
+        <div className="flex justify-self-end mr-4">
+          <div className="flex flex-col justify-center md:pl-4">
+            <h1 className="text-lg font-medium text-right text-gray_third">
+              {user_typeText}
+            </h1>
           </div>
+
           <div className="flex flex-col justify-center pl-4">
             <Flag className="flag-photo" code={code} />
           </div>
         </div>
       </div>
-
-      <hr className="mt-4" />
     </>
   );
 };
