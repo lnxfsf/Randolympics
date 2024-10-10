@@ -411,7 +411,7 @@ const register = async (req, res) => {
   };
 
   try {
-    await db.sequelize.sync();
+    
 
     const userAlreadyExists = await User.findOne({
       where: { email: user_data.email },
@@ -500,6 +500,7 @@ const register = async (req, res) => {
     res.status(201).json({
       message: "User created successfully!",
       userId: user_data.userId,
+      verificationToken: newUser.verificationToken
     });
   } catch (error) {
     //console.log("error zasto je: ")
@@ -514,7 +515,7 @@ const email_resend = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -540,7 +541,7 @@ const verify_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -567,7 +568,7 @@ const forgot_password = async (req, res) => {
   const { email } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({
       where: { email: email },
@@ -589,6 +590,9 @@ const forgot_password = async (req, res) => {
         `<p>Click <a href="http://localhost:5000/auth/reset_password/${token}">here</a> to reset your password.</p>`
       );
 
+      res.status(200).json({ message: "Password reset link sent to corresponding email" });
+
+
       //res.redirect(`/auth/reset_password/${token}`);
     } else {
       res.status(500).json({ message: "User didn't verified email !" });
@@ -602,7 +606,7 @@ const reset_password_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    await db.sequelize.sync();
+    
 
     // Check if the token exists and is still valid
     const user = await User.findOne({ where: { verificationToken: token } });
@@ -684,7 +688,7 @@ const reset_password = async (req, res) => {
   const { token, password } = req.body;
 
   try {
-    await db.sequelize.sync();
+    
 
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -722,7 +726,7 @@ const login = async (req, res) => {
   }
 
   try {
-    await db.sequelize.sync();
+    
 
     const existingUser = await User.findOne({
       where: { email: email },
@@ -797,6 +801,9 @@ const login = async (req, res) => {
           access_token: generateAccessToken(existingUser.userId),
 
           name: existingUser.name,
+
+          middleName: existingUser.middleName,
+
           birthdate: existingUser.birthdate,
 
           phone: existingUser.phone,
@@ -832,10 +839,10 @@ const login = async (req, res) => {
           
         });
       } else {
-        res.status(401).json({ error: "Invalid credentials" });
+        res.status(401).json({ message: "Invalid credentials" });
       }
     } else {
-      res.status(401).json({ error: "Invalid credentials" });
+      res.status(401).json({ message: "Invalid credentials" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

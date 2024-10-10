@@ -134,7 +134,7 @@ const deletegamepost = async (req, res) => {
 
 
 
-    await db.sequelize.sync();
+    
 
 
     await Upcominggames.destroy({
@@ -182,7 +182,7 @@ const creategamepost = async (req, res) => {
   }
 
 
-  await db.sequelize.sync();
+  
 
   const t = await db.sequelize.transaction();
 
@@ -217,7 +217,7 @@ const updateUpcomingGamesBlog = async (req, res) => {
     cover_image,
   } = req.body;
 
-  await db.sequelize.sync();
+  
 
 
   console.log("dobija" + postId)
@@ -342,7 +342,7 @@ const blogNews = async (req, res) => {
 
 const newsToUser = async (req, res) => {
 
-  const limit = parseInt(req.query.limit) || 4;
+  const limit = parseInt(req.query.limit) || 7;
   const offset = parseInt(req.query.offset) || 0;
 
 
@@ -384,7 +384,7 @@ const deletenewspost = async (req, res) => {
 
 
 
-    await db.sequelize.sync();
+    
 
 
     await News.destroy({
@@ -492,7 +492,7 @@ const createnewspost = async (req, res) => {
     cover_image
   }
 
-  await db.sequelize.sync();
+  
 
   const t = await db.sequelize.transaction();
 
@@ -525,7 +525,7 @@ const updateNewsBlog = async (req, res) => {
   } = req.body;
 
 
-  await db.sequelize.sync();
+  
 
 
 
@@ -646,7 +646,7 @@ const deleteeconomicspost = async (req, res) => {
 
 
 
-    await db.sequelize.sync();
+    
 
 
     await Economics.destroy({
@@ -689,7 +689,7 @@ const createeconomicspost = async (req, res) => {
     cover_image
   }
 
-  await db.sequelize.sync();
+  
 
   const t = await db.sequelize.transaction();
 
@@ -763,7 +763,7 @@ const updateEconomicsBlog = async (req, res) => {
   } = req.body;
 
 
-  await db.sequelize.sync();
+  
 
 
 

@@ -25,6 +25,11 @@ const dayjs = require("dayjs");
 var weekday = require("dayjs/plugin/isoWeek");
 dayjs.extend(weekday);
 
+
+
+
+
+
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0; //parseInt, is because we want it as integer
@@ -347,7 +352,7 @@ const otherUsers = async (req, res) => {
 
   if (user_type === "EM") {
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingEM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 1
@@ -375,7 +380,7 @@ const otherUsers = async (req, res) => {
 
     if (countryOfcurrentUserOnFrontend) {
       try {
-        const otherUsers = await User.findAll({
+        const otherUsers = await User.findAndCountAll({
           where: {
             rankingRS: {
               [Op.gt]: 50, // Fetch users with ranking greater than 50
@@ -403,7 +408,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "LM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingLM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -429,7 +434,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "ITM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingITM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -455,7 +460,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "MM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingMM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -481,7 +486,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "SM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingSM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -507,7 +512,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "VM") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           rankingVM: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -533,7 +538,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "GP") {
     // for "Referee & support", we also use number, and don't discern between male and female ...
     try {
-      const otherUsers = await User.findAll({
+      const otherUsers = await User.findAndCountAll({
         where: {
           /* rankingGP: {
             [Op.gt]: 1, // Fetch users with ranking greater than 50
@@ -563,7 +568,7 @@ const otherUsers = async (req, res) => {
   } else if (user_type === "NP") {
     // ! this, is also, for NP, we need it's own route, as we will handle other stuff...
     try {
-      const otherNPs = await User.findAll({
+      const otherNPs = await User.findAndCountAll({
         where: {
           // everything that's not NP..  (as we don't go by ranking.. at all)
           // currentNP: false,
@@ -590,17 +595,17 @@ const otherUsers = async (req, res) => {
       });
 
       // we need to find percentage, for votes, how much each one have
-      const npUsers = await User.findAll({
+    /*   const npUsers = await User.findAndCountAll({
         where: {
           user_type: user_type,
         },
-      });
+      }); */
 
       // Calculate total votes, in all NPs
-      const totalVotes = npUsers.reduce((sum, user) => sum + user.votes, 0);
-
-      const WithPercentage = otherNPs.map((user) => {
-        const currentUser = npUsers.find(
+      /* const totalVotes = npUsers.rows.reduce((sum, user) => sum + user.votes, 0);
+ */
+   /*    const WithPercentage = otherNPs.rows.map((user) => {
+        const currentUser = npUsers.rows.find(
           (npUser) => npUser.userId === user.userId
         );
 
@@ -617,8 +622,11 @@ const otherUsers = async (req, res) => {
           userNPPercentage: percentage.toFixed(2),
         };
       });
+ */
+    
+      res.json(otherNPs);
 
-      res.json(WithPercentage);
+
 
       // res.json(otherNPs);
     } catch (error) {
@@ -628,7 +636,7 @@ const otherUsers = async (req, res) => {
   } else {
     if (countryOfcurrentUserOnFrontend) {
       try {
-        const otherUsers = await User.findAll({
+        const otherUsers = await User.findAndCountAll({
           where: {
             ranking: {
               [Op.gt]: 50, // Fetch users with ranking greater than 50
@@ -682,7 +690,7 @@ const currentNP = async (req, res) => {
 };
 
 const team = async (req, res) => {
-  const limit = parseInt(req.query.limit) || 10; // Default limit to 10
+  const limit = parseInt(req.query.limit) || 10; 
   const offset = parseInt(req.query.offset) || 0;
 
   const searchText = req.query.searchText;
@@ -798,7 +806,7 @@ const team = async (req, res) => {
     }
 
     // based, on same country..
-    const teamMates = await User.findAll({
+    const teamMates = await User.findAndCountAll({
       where: filterConditions,
 
       order: orderRankingByCurrentUser, // Sort by ranking ascending. also depends on currentUserType
@@ -809,6 +817,8 @@ const team = async (req, res) => {
 
     res.json(teamMates);
   } catch (error) {}
+
+
 };
 
 const listLoginTrafficHistory = async (req, res) => {
@@ -839,7 +849,7 @@ const listLoginTrafficHistory = async (req, res) => {
   }
 
   try {
-    const listLoginTrafficHistory = await Traffic.findAll({
+    const listLoginTrafficHistory = await Traffic.findAndCountAll({
       where: filterCondition,
 
       // "unvalidated", have more priority, shows first. then "rejected", second.. and then "validated"
@@ -849,7 +859,7 @@ const listLoginTrafficHistory = async (req, res) => {
       offset: offset,
     });
 
-    console.log(listLoginTrafficHistory);
+  
 
     res.json(listLoginTrafficHistory);
   } catch (error) {
@@ -878,6 +888,7 @@ const lastInRank = async (req, res) => {
     console.log(latestUser);
 
     res.json(latestUser.ranking);
+
   } catch (error) {
     console.error("Error fetching top users:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -889,7 +900,7 @@ const landingPageRandomize = async (req, res) => {
   // !  const randomizeFormData = req.query.randomizeFormData;  // ovo je celi objekat znaci iz frontenda..
   // ! vrati ovo samo za frontend... ovo eto, lakse objekat imas da radi..
 
-  const randomizeFormData = req.query.randomizeFormData;
+  const randomizeFormData = JSON.parse(req.query.randomizeFormData);
 
   console.log("gender je");
 
@@ -6505,7 +6516,7 @@ const createCampaign = async (req, res) => {
 
   } = req.body;
 
-  await db.sequelize.sync();
+  
 
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {
@@ -6689,7 +6700,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
 
       where: {
         campaignId: campaignId,
-        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
+       /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
       limit: 3,
@@ -6697,7 +6708,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
     });
 
-    console.log("------> AJDE MORE VISE lastTransactionsSupportersCampaign")
+    console.log("------> lastTransactionsSupportersCampaign")
     console.log(campaignId)
     console.log(lastCommentsSupporters);
 
@@ -6777,15 +6788,8 @@ const listAllCampaigns = async (req, res) => {
   const tw_link = req.query.tw_link;
 
 
-  console.log("----------listAllCampaigns----------");
-  console.log(filterGender);
-
-  console.log(filterNationality_selected);
-  console.log(searchFirstNameText);
-  console.log(searchFamilyNameText);
-
   try {
-    const allCampaigns = await Campaign.findAll({
+    const allCampaigns = await Campaign.findAndCountAll({
       /*  where: {
 
       friendGender: {
@@ -6862,6 +6866,48 @@ const listAllCampaigns = async (req, res) => {
 
 
 
+const listAllUsers = async (req, res) => {
+
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+  const searchFirstNameText = req.query.searchFirstNameText;
+
+
+
+
+  try {
+
+
+    const allUsers = await User.findAndCountAll({
+
+
+      where: {
+        name: {
+          [Op.like]: `${searchFirstNameText}%`,
+        },
+      },
+
+
+      order: [["name", "ASC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+
+    res.json(allUsers);
+
+    //  return res.status(200).json({ oneCampaign, thatAthlete });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+
+
+
+};
+
+
 
 const informOtherSupporters = async (req,res) => {
 
@@ -6916,6 +6962,8 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
   const campaignId = req.query.campaignId;
   const limitA = parseInt(req.query.limitA);  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+  const offset = parseInt(req.query.offset);
+
 
   console.log("limit je ------>" + limitA);
 
@@ -6928,18 +6976,20 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
   });
 
-  console.log("---ADADA NALAZI PRVI BOLAN")
-  console.log(firstSupporterCampaign)
+  
+  
 
   try {
-    const allCommentsSupporters = await Statscampaign.findAll({
+    const allCommentsSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
-        supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail },
+        /* supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
       limit: limitA,
-      attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
+      offset: offset,
+
+      attributes: ["supporterName", "amount", "supporterComment", "createdAt"], // only this row in database retrieve
       order: [["amount", "DESC"]],
 
     });
@@ -6979,6 +7029,7 @@ module.exports = {
   lastTransactionsSupportersCampaign,
 
   listAllCampaigns,
+  listAllUsers,
 
   informOtherSupporters,
   firstSupportersCampaign,
