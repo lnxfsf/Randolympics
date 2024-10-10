@@ -38,7 +38,7 @@ describe('Email Service', () => {
       const subject = 'Test Subject';
       const text = '<p>This is a test email</p>';
   
-      await expect(sendEmail(email, subject, text)).resolves.toBeUndefined(); // Change according to your implementation
+      await expect(sendEmail(email, subject, text)).resolves.toBeUndefined(); 
   
       // Verify sendMail was called
       expect(sendMailMock).toHaveBeenCalled();

@@ -4,7 +4,7 @@ const superagent = require("superagent");
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
-  const randomString = Math.random().toString(36).substring(2, 4); 
+  const randomString = Math.random().toString(36).substring(2, 4);
 
   return `user${randomString}${timestamp}@example.com`;
 };
@@ -13,7 +13,6 @@ describe("login", () => {
   let randomEmail;
 
   before(() => {
-    // Generate a new random email every time we run test
     randomEmail = generateRandomEmail();
   });
 
@@ -40,10 +39,8 @@ describe("login", () => {
       .send({ email: randomEmail, password: "12345678", user_type: "AH" })
       .end(function (err, res) {
         if (res.status === 201) {
-          // Expected outcome, user already exists
           done();
         } else if (err) {
-          // Fail if any other error occurs
           done(err);
         } else {
           done(err);
@@ -136,7 +133,6 @@ describe("registration", () => {
   let randomEmail;
 
   before(() => {
-    // Generate a new random email every time we run test
     randomEmail = generateRandomEmail();
   });
 
@@ -153,12 +149,10 @@ describe("registration", () => {
             )
 
             .end(function (err, verifyRes) {
-              if (err) return done(err); // Handle any errors during verification
+              if (err) return done(err);
 
-              // Check if the verification was successful
               if (verifyRes.status === 200) {
-                // Optionally, you can check the body of the response here
-                done(); // Finish the test
+                done();
               } else {
                 done(
                   new Error(
@@ -170,7 +164,6 @@ describe("registration", () => {
 
           /*  done(); */
         } else if (err) {
-          // Fail if any other error occurs
           done(err);
         } else {
           done(err);
@@ -184,10 +177,8 @@ describe("registration", () => {
       .send({ email: randomEmail, password: "12345678", user_type: "AH" })
       .end(function (err, res) {
         if (res.status === 409) {
-          // Expected outcome, user already exists
           done();
         } else if (err) {
-          // Fail if any other error occurs
           done(err);
         } else {
           done(err);
@@ -206,10 +197,8 @@ describe("registration", () => {
       })
       .end(function (err, res) {
         if (res.status === 409) {
-          // Expected outcome, user already exists
           done();
         } else if (err) {
-          // Fail if any other error occurs
           done(err);
         } else {
           done(err);
@@ -339,7 +328,6 @@ describe("test registration and logging in", () => {
   let randomEmail;
 
   before(() => {
-    // Generate a new random email every time we run test
     randomEmail = generateRandomEmail();
   });
 
@@ -355,12 +343,10 @@ describe("test registration and logging in", () => {
             )
 
             .end(function (err, verifyRes) {
-              if (err) return done(err); // Handle any errors during verification
+              if (err) return done(err);
 
-              // Check if the verification was successful
               if (verifyRes.status === 200) {
-                // Optionally, you can check the body of the response here
-                done(); // Finish the test
+                done();
               } else {
                 done(
                   new Error(
@@ -369,10 +355,7 @@ describe("test registration and logging in", () => {
                 );
               }
             });
-
-          /*  done(); */
         } else if (err) {
-          // Fail if any other error occurs
           done(err);
         } else {
           done(err);

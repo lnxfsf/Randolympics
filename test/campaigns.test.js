@@ -5,7 +5,7 @@ const superagent = require("superagent");
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
-  const randomString = Math.random().toString(36).substring(2, 4); 
+  const randomString = Math.random().toString(36).substring(2, 4);
 
   return `user${randomString}${timestamp}@example.com`;
 };
@@ -18,12 +18,9 @@ describe("test creating campaign", () => {
     let supporterEmail;
 
     before(() => {
-      // Generate a new random email every time we run test
       friendEmail = generateRandomEmail();
       supporterEmail = generateRandomEmail();
     });
-
-
 
     it("should make campaign for friend (saved in 'Campaigns' table)", function (done) {
       superagent
@@ -61,85 +58,75 @@ describe("test creating campaign", () => {
     });
 
     it("after creating campaign (for friend), it should create (register) account as well (as there's none, and campaign can't be created if (athlete) account exists)", function (done) {
-    
-        
-    
-        superagent
-          .post("http://localhost:5000/auth/register")
-          .send({
-            email: friendEmail,
-            password: "12345678",
-            user_type: "AH",
-            name: "test_name_friend",
-            middleName: "test_middleName_friend",
-            lastName: "test_friendLastName_friend",
-            phone: "+36285921926",
-            nationality: "US",
-            weight: "53",
-            cryptoaddress: "fsfdsklčcx43242sfsad",
-            picture: "ariana_profile.jpg",
-            cryptoaddress_type: "BTC",
-            bio: "Test bio athlete campaign",
-            gender: "F",
+      superagent
+        .post("http://localhost:5000/auth/register")
+        .send({
+          email: friendEmail,
+          password: "12345678",
+          user_type: "AH",
+          name: "test_name_friend",
+          middleName: "test_middleName_friend",
+          lastName: "test_friendLastName_friend",
+          phone: "+36285921926",
+          nationality: "US",
+          weight: "53",
+          cryptoaddress: "fsfdsklčcx43242sfsad",
+          picture: "ariana_profile.jpg",
+          cryptoaddress_type: "BTC",
+          bio: "Test bio athlete campaign",
+          gender: "F",
 
-            signedByFriend: true,
+          signedByFriend: true,
 
-            supporterName: "test_name_supporter",
-            campaignURL: `http://localhost:5000/campaign/${campaignId}`,
+          supporterName: "test_name_supporter",
+          campaignURL: `http://localhost:5000/campaign/${campaignId}`,
 
-            sendEmailToFriend: true,
+          sendEmailToFriend: true,
 
-            isCelebrity: false,
-            fb_link: "",
-            ig_link: "",
-            tw_link: "",
-          })
-          .end(function (err, res) {
-            if (res.status === 201) {
-              done();
-            } else {
-              done(err);
-            }
-          });
-      });
+          isCelebrity: false,
+          fb_link: "",
+          ig_link: "",
+          tw_link: "",
+        })
+        .end(function (err, res) {
+          if (res.status === 201) {
+            done();
+          } else {
+            done(err);
+          }
+        });
+    });
 
-
-
-
- 
-      it("also, when supporter inserts his info in campaign, that gets saved. And we create supporter account, with user_type='SPT'", function (done) {
-        superagent
-          .post("http://localhost:5000/auth/register")
-          .send({
-            email: supporterEmail,
-            password: "12345678",
-            user_type: "SPT",
-            name: "test_name_supporter",
-            phone: "+36285921926",
-            weight: "55",
-            cryptoaddress: "",
-            picture: "ariana_profile.jpg",
-            cryptoaddress_type: "BTC",
-            bio: "",
-            gender: "F",
-            supporterComment: "Go go go (supporter comment test)",
-            campaignURL: `http://localhost:5000/campaign/${campaignId}`,
-            signingAsSupporter: true,
-          })
-          .end(function (err, res) {
-           
-            if (res.status === 201) {
-              done();
-            } else {
-                done(err)
-             /*  done(new Error("Status code not 201")); */
-            }
-          });
-      }); 
+    it("also, when supporter inserts his info in campaign, that gets saved. And we create supporter account, with user_type='SPT'", function (done) {
+      superagent
+        .post("http://localhost:5000/auth/register")
+        .send({
+          email: supporterEmail,
+          password: "12345678",
+          user_type: "SPT",
+          name: "test_name_supporter",
+          phone: "+36285921926",
+          weight: "55",
+          cryptoaddress: "",
+          picture: "ariana_profile.jpg",
+          cryptoaddress_type: "BTC",
+          bio: "",
+          gender: "F",
+          supporterComment: "Go go go (supporter comment test)",
+          campaignURL: `http://localhost:5000/campaign/${campaignId}`,
+          signingAsSupporter: true,
+        })
+        .end(function (err, res) {
+          if (res.status === 201) {
+            done();
+          } else {
+            done(err);
+            
+          }
+        });
+    });
 
     describe("test validation for campaign", () => {
-     
-
       it("when email is wrong format (campaign for friend (saved in 'Campaigns' table))", function (done) {
         superagent
           .post("http://localhost:5000/listsData/createCampaign")
@@ -350,6 +337,8 @@ describe("test creating campaign", () => {
           });
       });
     });
+
+    // test for payment is better suited for E2E testing. Because StripeForm, gets id from stripe directly... so you can't really just submit request to backend and expect payment to be tested
   });
 
   describe("creating campaign for celebrity", () => {
@@ -359,7 +348,6 @@ describe("test creating campaign", () => {
     let supporterEmail;
 
     before(() => {
-      // Generate a new random email every time we run test
       friendEmail = generateRandomEmail();
       supporterEmail = generateRandomEmail();
     });
@@ -439,70 +427,34 @@ describe("test creating campaign", () => {
         });
     });
 
-
     it("also, when supporter inserts his info in campaign, that gets saved. And we create supporter account, with user_type='SPT'", function (done) {
-        superagent
-          .post("http://localhost:5000/auth/register")
-          .send({
-            email: supporterEmail,
-            password: "12345678",
-            user_type: "SPT",
-            name: "test_name_supporter",
-            phone: "+36285921926",
-            weight: "55",
-            cryptoaddress: "",
-            picture: "ariana_profile.jpg",
-            cryptoaddress_type: "BTC",
-            bio: "",
-            gender: "F",
-            supporterComment: "Go go go (supporter comment test)",
-            campaignURL: `http://localhost:5000/campaign/${campaignId}`,
-            signingAsSupporter: true,
-          })
-          .end(function (err, res) {
-            if (res.status === 201) {
-              done();
-            } else {
-              done(err);
-            }
-          });
-      }); 
-
-
+      superagent
+        .post("http://localhost:5000/auth/register")
+        .send({
+          email: supporterEmail,
+          password: "12345678",
+          user_type: "SPT",
+          name: "test_name_supporter",
+          phone: "+36285921926",
+          weight: "55",
+          cryptoaddress: "",
+          picture: "ariana_profile.jpg",
+          cryptoaddress_type: "BTC",
+          bio: "",
+          gender: "F",
+          supporterComment: "Go go go (supporter comment test)",
+          campaignURL: `http://localhost:5000/campaign/${campaignId}`,
+          signingAsSupporter: true,
+        })
+        .end(function (err, res) {
+          if (res.status === 201) {
+            done();
+          } else {
+            done(err);
+          }
+        });
+    });
   });
 
-  /* 
-    it("check if this supporter account exists, shouldn't proceed if it exists.", function (done) {
-        superagent
-          .post("http://localhost:5000/auth/login")
-          .send({
-            email: "ah-1-F-us@gmail.com",
-            password: "12345678",
-          })
-          .end(function (err, res) {
-            if (res.status === 200) {
-              done();
-            } else {
-              done(err);
-            }
-          });
-      });
-
-
-      
-    it("check if this supporter account exists, should proceed if it doesn't exist.", function (done) {
-        superagent
-          .post("http://localhost:5000/auth/login")
-          .send({
-            email: "ah-1-F-us@gmail.com",
-            password: "12345678",
-          })
-          .end(function (err, res) {
-            if (res.status === 200) {
-              done();
-            } else {
-              done(err);
-            }
-          });
-      }); */
+  
 });
