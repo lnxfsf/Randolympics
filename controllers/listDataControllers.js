@@ -6775,17 +6775,17 @@ const listAllCampaigns = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
-  const filterGender = req.query.filterGender;
-  const filterNationality_selected = req.query.filterNationality_selected;
-  const searchFirstNameText = req.query.searchFirstNameText;
-  const searchFamilyNameText = req.query.searchFamilyNameText;
+  const filterGender = req.query.filterGender || "";
+  const filterNationality_selected = req.query.filterNationality_selected || "";
+  const searchFirstNameText = req.query.searchFirstNameText || "";
+  const searchFamilyNameText = req.query.searchFamilyNameText || "";
 
 
   const isCelebrity = parseInt(req.query.isCelebrity);
 
-  const fb_link = req.query.fb_link;
-  const ig_link = req.query.ig_link;
-  const tw_link = req.query.tw_link;
+  const fb_link = req.query.fb_link || "";
+  const ig_link = req.query.ig_link || "";
+  const tw_link = req.query.tw_link || "";
 
 
   try {
