@@ -36,6 +36,10 @@ const makePayment = async (req, res) => {
     countryAthleteIsIn,
   } = req.body;
 
+
+  
+
+
   console.log(campaignId);
   console.log(amount);
 
