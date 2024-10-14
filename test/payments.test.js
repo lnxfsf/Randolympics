@@ -1511,3 +1511,86 @@ describe("payments", () => {
     return;
   });
 });
+
+// now with these new payments, we can check transaction history API endpoints
+describe("check transaction history", () => {
+
+
+  it("Get Campaign Details",  function (done) {
+
+
+     superagent
+      .get("http://localhost:5000/listsData/campaignDetails")
+      .set("Content-Type", "application/json")
+      .query({
+        
+        campaignId,
+       
+      })
+      .end(function (err, res) {
+        if (res.status !== 200) {
+
+          done(err);
+          
+        }else {
+          done();
+        }
+      });
+
+
+
+  });
+
+  it("Check Number of Supporters",  function (done) {
+
+
+    superagent
+     .get("http://localhost:5000/listsData/howManySupportersCampaign")
+     .set("Content-Type", "application/json")
+     .query({
+       
+       campaignId,
+      
+     })
+     .end(function (err, res) {
+       if (res.status === 200 && res.body.count === 10) {
+        done();
+       } else if (res.body.count < 10) {
+        throw new Error(`There's not 10 supporter, like it should be. It's: ${res.body.count} `)
+
+       } else {
+         
+         done(err);
+       }
+     });
+
+
+
+ });
+
+
+ it("Get Last 3 Comments by Supporters",  function (done) {
+
+
+  superagent
+   .get("http://localhost:5000/listsData/lastCommentsSupportersCampaign")
+   .set("Content-Type", "application/json")
+   .query({
+     
+     campaignId,
+    
+   })
+   .end(function (err, res) {
+     if (res.status === 200 && res.body.length <= 3 ) {
+      done();
+     } else {
+       done(err);
+     }
+   });
+
+
+
+});
+
+
+});

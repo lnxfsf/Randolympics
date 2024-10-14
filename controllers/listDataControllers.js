@@ -6637,7 +6637,7 @@ const howManySupportersCampaign = async (req, res) => {
       },
     });
 
-    res.json({ count: countOfSupporters });
+    res.status(200).json({ count: countOfSupporters });
   } catch (error) {
     console.log(error.stack);
   }
@@ -6675,7 +6675,7 @@ const lastCommentsSupportersCampaign = async (req, res) => {
 
     console.log(lastCommentsSupporters);
 
-    res.json(lastCommentsSupporters);
+    res.status(200).json(lastCommentsSupporters);
   } catch (error) {
     console.log(error.stack);
   }
