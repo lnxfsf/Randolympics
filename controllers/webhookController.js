@@ -401,9 +401,10 @@ const webhookController = async (req, res) => {
       // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
 
       const tAthleteZ = await db.sequelize.transaction();
-
+      let oneAthletez;
+      
       try {
-        const oneAthletez = await User.findOne({
+        oneAthletez = await User.findOne({
           where: { email: oneCampaign.friendEmail },
           lock: tAthleteZ.LOCK.UPDATE,
           transaction: tAthleteZ,

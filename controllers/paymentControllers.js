@@ -214,7 +214,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
   try {
     // ima li koji odgovara tome..
-    
+    var oneCoupon;
 
     // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
 
@@ -265,7 +265,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
     try {
       // on nadje koji ima.. u Coupons
-      var oneCoupon = await Couponcodes.findOne({
+      oneCoupon = await Couponcodes.findOne({
         where: {
           couponCode: discountCode,
           isCouponActive: 1,
@@ -294,7 +294,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
-      res.status(200).json({ message: "coupon code is not valid" });
+      res.status(400).json({ message: "coupon code is not valid" });
       return;
     }
 
