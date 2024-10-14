@@ -9,6 +9,7 @@ const db = require("../models/database");
 const Statscampaign = db.statscampaign;
 const Campaign = db.campaign;
 const Users = db.users;
+const Couponcode = db.couponcode;
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
@@ -138,6 +139,16 @@ describe("creating campaign for friend, that will be used for all payments tests
         }
       });
   });
+
+  it("create coupon codes that will be used in throughout tests", async function () {
+
+
+    // national coupons ("US"), are fixed price. Addedd to donations, or as sole payment. 
+    // US of 10$. Can be used up to 100$ (so 10 users)
+    await Couponcode.create({couponCode: 'TESTUS',country: 'US', expiryDate: '2035-09-09', couponValue: 1000, maxSpentLimit: 10000, maxCouponTimesUsed: '10'});
+    
+    return;
+  })
 
 });
 

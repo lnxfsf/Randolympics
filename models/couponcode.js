@@ -56,6 +56,9 @@ module.exports = function (sequelize, DataTypes) {
     // For national, we don't check this value (but you can add to it, why not ofc.. )
     couponTimesUsed: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+
     },
 
 
