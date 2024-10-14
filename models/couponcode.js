@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
 
     couponCode: {
       type: DataTypes.STRING(6),
-
+      unique: true,  
 
     },
     
