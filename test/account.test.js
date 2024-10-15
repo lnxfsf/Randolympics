@@ -5,7 +5,11 @@ const db = require("../models/database");
 
 const Users = db.users;
 
+const { format } = require('date-fns');
 
+
+// Function to create a delay
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
@@ -134,11 +138,8 @@ describe("login", () => {
   });
 });
 
-
 let randomEmailRe;
 describe("registration", () => {
- 
-
   before(() => {
     randomEmailRe = generateRandomEmail();
   });
@@ -419,25 +420,385 @@ describe("test whether resend email verification & password recovery works", () 
   });
 });
 
-/* // ! nastavi
-describe("user functions"), () => {
+describe("user functions", () => {
+  it("updating/(editing profile info) user data as (athlete) normal user", async function () {
+    this.timeout(15000);
 
-
-  it("Update User Data", async function () {
-
-
-
-    const res = await superagent
-      .post("http://localhost:5000/user/update_user_data")
-      .set("Content-Type", "application/json")
-      .query({
-        original_email: randomEmailRe,
-        updating_from_VM: false, 
-        
+    try {
+      const isUserCreated = await Users.findOne({
+        where: { email: randomEmailRe },
       });
 
+      if (isUserCreated) {
+        console.log("ide u res. updating user data");
+        const res = await superagent
+          .post("http://localhost:5000/user/update_user_data")
+          .set("Content-Type", "application/json")
+          .send({
+            original_email: randomEmailRe,
+            /*  updating_from_VM: false, */
+            name: "new_name",
+            familyName: "new family name",
+            lastName: "new last name",
+            middleName: "new middle name",
+            phone: "+36285900000",
+            weight: 43,
+            cryptoaddress: "new_crypto_addressDMPTfTL5",
+            cryptoaddress_type: "DOGE",
+            email_private: 0,
+            phone_private: 0,
+            weight_private: 0,
+            passport_photo: "new_pass_photo.jpg",
+            birthdate: "2002-10-14",
+            birthdate_private: 0,
+            picture: "new_profi_pic",
+            bio: "new bio info",
+            athleteStatement: "new athlete statement",
+            athleteStatus: "s3",
+          });
 
+        await delay(5000);
 
+        if (res.status === 200) {
+          // then check in actual database
+          const updatedUser = await Users.findOne({
+            where: { email: randomEmailRe },
+          });
+
+          if (updatedUser.name !== "new_name") {
+            throw new Error("Name doesn't match in database");
+          }
+
+          if (updatedUser.familyName !== "new family name") {
+            throw new Error("familyName doesn't match in database");
+          }
+
+          if (updatedUser.lastName !== "new last name") {
+            throw new Error("lastName doesn't match in database");
+          }
+
+          if (updatedUser.middleName !== "new middle name") {
+            throw new Error("middleName doesn't match in database");
+          }
+
+          if (updatedUser.phone !== "+36285900000") {
+            throw new Error("phone doesn't match in database");
+          }
+
+          if (updatedUser.weight !== 43) {
+            throw new Error("weight doesn't match in database");
+          }
+
+          if (updatedUser.cryptoaddress !== "new_crypto_addressDMPTfTL5") {
+            throw new Error("cryptoaddress doesn't match in database");
+          }
+
+          if (updatedUser.cryptoaddress_type !== "DOGE") {
+            throw new Error("cryptoaddress_type doesn't match in database");
+          }
+
+          if (updatedUser.email_private !== 0) {
+            throw new Error("email_private doesn't match in database");
+          }
+
+          if (updatedUser.phone_private !== 0) {
+            throw new Error("phone_private doesn't match in database");
+          }
+
+          if (updatedUser.weight_private !== 0) {
+            throw new Error("weight_private doesn't match in database");
+          }
+
+          if (updatedUser.passport_photo !== "new_pass_photo.jpg") {
+            throw new Error("passport_photo doesn't match in database");
+          }
+
+          if (updatedUser.birthdate !== "2002-10-14") {
+            throw new Error("birthdate doesn't match in database");
+          }
+
+          if (updatedUser.birthdate_private !== 0) {
+            throw new Error("birthdate_private doesn't match in database");
+          }
+
+          if (updatedUser.picture !== "new_profi_pic") {
+            throw new Error("picture doesn't match in database");
+          }
+
+          if (updatedUser.bio !== "new bio info") {
+            throw new Error("bio doesn't match in database");
+          }
+
+          if (updatedUser.athleteStatement !== "new athlete statement") {
+            throw new Error("athleteStatement doesn't match in database");
+          }
+
+          if (updatedUser.athleteStatus !== "s3") {
+            throw new Error("athleteStatus doesn't match in database");
+          }
+        }
+
+        return;
+      }
+    } catch (error) {
+      throw new Error(error.message || error);
+    }
   });
 
-} */
+
+
+  it("passport should be validated (all fields checked) - validating user data as Validation Manager", async function () {
+    this.timeout(15000);
+
+    let dateUpdatedTimePassport = format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+
+
+
+    try {
+      const isUserCreated = await Users.findOne({
+        where: { email: randomEmailRe },
+      });
+
+      if (isUserCreated) {
+        console.log("ide u res. updating user data");
+        const res = await superagent
+          .post("http://localhost:5000/user/update_user_data")
+          .set("Content-Type", "application/json")
+          .send({
+            original_email: randomEmailRe,
+             updating_from_VM: true, 
+
+             name_verify: true,
+             birthdate_verify: true,
+             nationality_verify: true,
+             passport_expiry_verify: true,
+
+             passport_expiry: "2028-10-14",
+             passportLastValidatedRejected: dateUpdatedTimePassport,
+
+           
+
+          });
+
+        await delay(5000);
+
+        if (res.status === 200) {
+          // then check in actual database
+          const updatedUser = await Users.findOne({
+            where: { email: randomEmailRe },
+          });
+
+
+
+          if (updatedUser.passportStatus !== "validated") {
+            throw new Error("passportStatus isn't validated");
+          }
+
+         
+          
+          if (updatedUser.name_verify !== 1) {
+            throw new Error("name_verify isn't true");
+          }
+
+          if (updatedUser.birthdate_verify !== 1) {
+            throw new Error("birthdate_verify isn't true");
+          }
+
+          if (updatedUser.nationality_verify !== 1) {
+            throw new Error("nationality_verify isn't true");
+          }
+
+          if (updatedUser.passport_expiry_verify !== 1) {
+            throw new Error("passport_expiry_verify isn't true");
+          }
+
+          if (updatedUser.passport_expiry !== "2028-10-14") {
+            throw new Error("passport_expiry isn't 2028-10-14");
+          }
+
+
+
+
+          console.log("dateUpdatedTimePassport je:"+dateUpdatedTimePassport);
+          console.log("updatedUser.passportLastValidatedRejected je: "+format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss'));
+
+          if (format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss')  !== dateUpdatedTimePassport ) {
+            throw new Error(`passportLastValidatedRejected isn't ${dateUpdatedTimePassport}`);
+          }
+        
+
+
+        }
+
+        return;
+      }
+    } catch (error) {
+      throw new Error(error.message || error);
+    }
+  });
+
+
+
+  it("passport should NOT be validated (not some fields are unchecked) - validating user data as Validation Manager", async function () {
+    this.timeout(15000);
+
+    let dateUpdatedTimePassport = format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+
+
+
+    try {
+      const isUserCreated = await Users.findOne({
+        where: { email: randomEmailRe },
+      });
+
+      if (isUserCreated) {
+        console.log("ide u res. updating user data");
+        const res = await superagent
+          .post("http://localhost:5000/user/update_user_data")
+          .set("Content-Type", "application/json")
+          .send({
+            original_email: randomEmailRe,
+             updating_from_VM: true, 
+
+             name_verify: true,
+             birthdate_verify: false,
+             nationality_verify: true,
+             passport_expiry_verify: true,
+
+             passport_expiry: "2028-10-14",
+             passportLastValidatedRejected: dateUpdatedTimePassport,
+
+           
+
+          });
+
+        await delay(5000);
+
+        if (res.status === 200) {
+          // then check in actual database
+          const updatedUser = await Users.findOne({
+            where: { email: randomEmailRe },
+          });
+
+
+
+          if (updatedUser.passportStatus !== "unvalidated") {
+            throw new Error("passportStatus isn't unvalidated");
+          }
+
+         
+          
+          if (updatedUser.name_verify !== 1) {
+            throw new Error("name_verify isn't true");
+          }
+
+          if (updatedUser.birthdate_verify !== 0) {
+            throw new Error("birthdate_verify isn't true");
+          }
+
+          if (updatedUser.nationality_verify !== 1) {
+            throw new Error("nationality_verify isn't true");
+          }
+
+          if (updatedUser.passport_expiry_verify !== 1) {
+            throw new Error("passport_expiry_verify isn't true");
+          }
+
+          if (updatedUser.passport_expiry !== "2028-10-14") {
+            throw new Error("passport_expiry isn't 2028-10-14");
+          }
+
+
+
+
+          console.log("dateUpdatedTimePassport je:"+dateUpdatedTimePassport);
+          console.log("updatedUser.passportLastValidatedRejected je: "+format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss'));
+
+          if (format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss')  !== dateUpdatedTimePassport ) {
+            throw new Error(`passportLastValidatedRejected isn't ${dateUpdatedTimePassport}`);
+          }
+        
+
+
+        }
+
+        return;
+      }
+    } catch (error) {
+      throw new Error(error.message || error);
+    }
+  });
+
+
+
+  it("passport should be rejected - validating user data as Validation Manager", async function () {
+    this.timeout(15000);
+
+    let dateUpdatedTimePassport = format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+
+
+
+    try {
+      const isUserCreated = await Users.findOne({
+        where: { email: randomEmailRe },
+      });
+
+      if (isUserCreated) {
+        console.log("ide u res. updating user data");
+        const res = await superagent
+          .post("http://localhost:5000/user/update_user_data")
+          .set("Content-Type", "application/json")
+          .send({
+            original_email: randomEmailRe,
+             updating_from_VM: true, 
+
+            
+             isRejected: true,
+             
+
+             passportLastValidatedRejected: dateUpdatedTimePassport,
+
+           
+
+          });
+
+        await delay(5000);
+
+        if (res.status === 200) {
+          // then check in actual database
+          const updatedUser = await Users.findOne({
+            where: { email: randomEmailRe },
+          });
+
+
+
+          if (updatedUser.passportStatus !== "rejected") {
+            throw new Error("passportStatus isn't rejected");
+          }
+
+
+
+          console.log("dateUpdatedTimePassport je:"+dateUpdatedTimePassport);
+          console.log("updatedUser.passportLastValidatedRejected je: "+format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss'));
+
+          if (format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss')  !== dateUpdatedTimePassport ) {
+            throw new Error(`passportLastValidatedRejected isn't ${dateUpdatedTimePassport}`);
+          }
+        
+
+
+        }
+
+        return;
+      }
+    } catch (error) {
+      throw new Error(error.message || error);
+    }
+  });
+
+
+
+});
+
+
+

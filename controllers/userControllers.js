@@ -64,6 +64,8 @@ const update_user_data = async (req, res) => {
     isRejected, // then sets all 4 fields to null... (false)
   } = req.body;
 
+
+
   const t1 = await db.sequelize.transaction();
 
   const user = await User.findOne({

@@ -153,6 +153,7 @@ npm install chai
 
 npm install superagent
 
+npm install date-fns
 
 -----------
 
