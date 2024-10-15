@@ -1,6 +1,11 @@
 require("dotenv").config();
 
 const superagent = require("superagent");
+const db = require("../models/database");
+
+const Users = db.users;
+
+
 
 const generateRandomEmail = () => {
   const timestamp = Date.now();
@@ -129,18 +134,20 @@ describe("login", () => {
   });
 });
 
+
+let randomEmailRe;
 describe("registration", () => {
-  let randomEmail;
+ 
 
   before(() => {
-    randomEmail = generateRandomEmail();
+    randomEmailRe = generateRandomEmail();
   });
 
   // so both in same time, define it here.. just url (it doesn't verify if email was actually sent ! )
   it("should register new user and also verify it have verification url", function (done) {
     superagent
       .post("http://localhost:5000/auth/register")
-      .send({ email: randomEmail, password: "12345678", user_type: "AH" })
+      .send({ email: randomEmailRe, password: "12345678", user_type: "AH" })
       .end(function (err, res) {
         if (res.status === 201 && res.body.verificationToken) {
           superagent
@@ -174,7 +181,7 @@ describe("registration", () => {
   it("should not allow duplicate email registration", function (done) {
     superagent
       .post("http://localhost:5000/auth/register")
-      .send({ email: randomEmail, password: "12345678", user_type: "AH" })
+      .send({ email: randomEmailRe, password: "12345678", user_type: "AH" })
       .end(function (err, res) {
         if (res.status === 409) {
           done();
@@ -210,7 +217,7 @@ describe("registration", () => {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({
-        email: randomEmail,
+        email: randomEmailRe,
         password: "12345678",
         user_type: "AH",
         name: "",
@@ -247,7 +254,7 @@ describe("registration", () => {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({
-        email: randomEmail,
+        email: randomEmailRe,
         password: "123",
         user_type: "AH",
         name: "John",
@@ -266,7 +273,7 @@ describe("registration", () => {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({
-        email: randomEmail,
+        email: randomEmailRe,
         password: "12345678",
         user_type: "AH",
         name: "John",
@@ -285,7 +292,7 @@ describe("registration", () => {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({
-        email: randomEmail,
+        email: randomEmailRe,
         password: "12345678",
         user_type: "AH",
         name: "John",
@@ -305,7 +312,7 @@ describe("registration", () => {
     superagent
       .post("http://localhost:5000/auth/register")
       .send({
-        email: randomEmail,
+        email: randomEmailRe,
         password: "12345678",
         user_type: "AH",
         name: "John",
@@ -411,3 +418,26 @@ describe("test whether resend email verification & password recovery works", () 
       });
   });
 });
+
+/* // ! nastavi
+describe("user functions"), () => {
+
+
+  it("Update User Data", async function () {
+
+
+
+    const res = await superagent
+      .post("http://localhost:5000/user/update_user_data")
+      .set("Content-Type", "application/json")
+      .query({
+        original_email: randomEmailRe,
+        updating_from_VM: false, 
+        
+      });
+
+
+
+  });
+
+} */

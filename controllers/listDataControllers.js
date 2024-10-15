@@ -6855,7 +6855,7 @@ const listAllCampaigns = async (req, res) => {
       },
     });  */
 
-    res.json(allCampaigns);
+    res.status(200).json(allCampaigns);
 
     //  return res.status(200).json({ oneCampaign, thatAthlete });
   } catch (error) {
@@ -6998,7 +6998,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
     console.log("campaignId: "+campaignId)
     console.log(allCommentsSupporters);
 
-    res.json(allCommentsSupporters);
+    res.status(200).json(allCommentsSupporters);
 
     
   } catch (error) {

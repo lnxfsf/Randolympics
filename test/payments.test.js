@@ -1514,83 +1514,140 @@ describe("payments", () => {
 
 // now with these new payments, we can check transaction history API endpoints
 describe("check transaction history", () => {
-
-
-  it("Get Campaign Details",  function (done) {
-
-
-     superagent
+  it("Get Campaign Details", function (done) {
+    superagent
       .get("http://localhost:5000/listsData/campaignDetails")
       .set("Content-Type", "application/json")
       .query({
-        
         campaignId,
-       
       })
       .end(function (err, res) {
         if (res.status !== 200) {
-
           done(err);
-          
-        }else {
+        } else {
           done();
         }
       });
+  });
+
+  it("Check Number of Supporters", function (done) {
+    superagent
+      .get("http://localhost:5000/listsData/howManySupportersCampaign")
+      .set("Content-Type", "application/json")
+      .query({
+        campaignId,
+      })
+      .end(function (err, res) {
+        if (res.status === 200 && res.body.count === 10) {
+          done();
+        } else if (res.body.count < 10) {
+          throw new Error(
+            `There's not 10 supporter, like it should be. It's: ${res.body.count} `
+          );
+        } else {
+          done(err);
+        }
+      });
+  });
+
+  it("Get Last 3 Comments by Supporters", function (done) {
+    superagent
+      .get("http://localhost:5000/listsData/lastCommentsSupportersCampaign")
+      .set("Content-Type", "application/json")
+      .query({
+        campaignId,
+      })
+      .end(function (err, res) {
+        if (res.status === 200 && res.body.length <= 3) {
+          done();
+        } else {
+          done(err);
+        }
+      });
+  });
+
+  it("Get Last 3 Transactions by Supporters", function (done) {
+    superagent
+      .get("http://localhost:5000/listsData/lastTransactionsSupportersCampaign")
+      .set("Content-Type", "application/json")
+      .query({
+        campaignId,
+      })
+      .end(function (err, res) {
+        if (res.status === 200 && res.body.length <= 3) {
+          done();
+        } else {
+          done(err);
+        }
+      });
+  });
+
+  it("Get All Transactions", function (done) {
+    superagent
+      .get("http://localhost:5000/listsData/allTransactionsSupportersCampaign")
+      .set("Content-Type", "application/json")
+      .query({
+        campaignId,
+        limitA: 10,
+        offset: 0,
+      })
+      .end(function (err, res) {
+        if (res.status === 200) {
+          console.log(`Number of transaction is: ${res.body.count}`);
+          done();
+        } else {
+          done(err);
+        }
+      });
+  });
+
+  it("List All Campaigns", async function () {
+    try {
+      const res1 = await superagent
+        .get("http://localhost:5000/listsData/listAllCampaigns")
+        .set("Content-Type", "application/json")
+        .query({
+          isCelebrity: 0,
+          campaignId,
+          limitA: 10,
+          offset: 0,
+        });
+
+      if (res1.status === 200) {
+        console.log(
+          `Number of campaigns for non-celebrity is: ${res1.body.count}`
+        );
+      } else {
+        throw new Error("Error for number of campaigns for non-celebrity");
+      }
+    } catch (error) {
+      throw new Error(error.message || error);
+    }
+
+
+      try {
+        const res2 = await superagent
+          .get("http://localhost:5000/listsData/listAllCampaigns")
+          .set("Content-Type", "application/json")
+          .query({
+            isCelebrity: 1,
+            campaignId,
+            limitA: 10,
+            offset: 0,
+          });
+  
+        if (res2.status === 200) {
+          console.log(
+            `Number of campaigns for celebrity is: ${res2.body.count}`
+          );
+        } else {
+          throw new Error("Error for number of campaigns for celebrity");
+        }
+      } catch (error) {
+        throw new Error(error.message || error);
+      }
 
 
 
   });
-
-  it("Check Number of Supporters",  function (done) {
-
-
-    superagent
-     .get("http://localhost:5000/listsData/howManySupportersCampaign")
-     .set("Content-Type", "application/json")
-     .query({
-       
-       campaignId,
-      
-     })
-     .end(function (err, res) {
-       if (res.status === 200 && res.body.count === 10) {
-        done();
-       } else if (res.body.count < 10) {
-        throw new Error(`There's not 10 supporter, like it should be. It's: ${res.body.count} `)
-
-       } else {
-         
-         done(err);
-       }
-     });
-
-
-
- });
-
-
- it("Get Last 3 Comments by Supporters",  function (done) {
-
-
-  superagent
-   .get("http://localhost:5000/listsData/lastCommentsSupportersCampaign")
-   .set("Content-Type", "application/json")
-   .query({
-     
-     campaignId,
-    
-   })
-   .end(function (err, res) {
-     if (res.status === 200 && res.body.length <= 3 ) {
-      done();
-     } else {
-       done(err);
-     }
-   });
-
-
-
-});
-
-
 });
