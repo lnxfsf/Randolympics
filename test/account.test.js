@@ -779,7 +779,7 @@ describe("user functions", () => {
 
 
           console.log("dateUpdatedTimePassport je:"+dateUpdatedTimePassport);
-          console.log("updatedUser.passportLastValidatedRejected je: "+format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss'));
+          console.log("updatedUser.passportLastValidatedRejected je: " + format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss'));
 
           if (format(updatedUser.passportLastValidatedRejected, 'yyyy-MM-dd HH:mm:ss')  !== dateUpdatedTimePassport ) {
             throw new Error(`passportLastValidatedRejected isn't ${dateUpdatedTimePassport}`);
@@ -796,6 +796,70 @@ describe("user functions", () => {
     }
   });
 
+
+ 
+  it("Fetch latest data", async () => {
+
+  try {
+
+
+    const fetchUser = await Users.findOne({
+      where: { email: randomEmailRe },
+    });
+
+
+    console.log("fetchUser.userId"+fetchUser.userId);
+
+    const res = await superagent
+          .post("http://localhost:5000/user/fetchLatestData")
+          .set("Content-Type", "application/json")
+          .send({
+            userId: fetchUser.userId,
+          });
+
+
+        if(res.status !== 200 && res.body.userId !== fetchUser.userId){
+          throw new Error("Doesn't give back same data in json response for fetching latest data")
+        }
+
+  } catch (error){
+    throw new Error(error || error.message)
+  }
+
+  }) 
+
+
+
+
+  it("List All Users", async () => {
+
+    try {
+  
+  
+      const fetchUser = await Users.findOne({
+        where: { email: randomEmailRe },
+      });
+  
+  
+      
+  
+      const res = await superagent
+            .get("http://localhost:5000/user/listAllUsers")
+            .set("Content-Type", "application/json")
+            .query({
+              userId: fetchUser.userId,
+            });
+  
+  
+          if(res.status !== 200 ){
+            throw new Error("Doesn't give back same data in json response for fetching latest data")
+          }
+  
+    } catch (error){
+      throw new Error(error || error.message)
+    }
+  
+    })
 
 
 });
