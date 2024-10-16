@@ -4,6 +4,9 @@ const superagent = require("superagent");
 /* const mysql = require("mysql2/promise");
 const dbConfig = require("../data/config"); */
 
+const { format } = require('date-fns');
+
+
 const db = require("../models/database");
 
 const Statscampaign = db.statscampaign;
@@ -27,7 +30,7 @@ let friendEmail;
 let supporterEmail;
 
 describe("creating campaign for friend, that will be used for all payments tests", () => {
-  before(() => {
+  before(async () => {
     friendEmail = generateRandomEmail();
     supporterEmail = generateRandomEmail();
   });
@@ -323,6 +326,8 @@ describe("payments", () => {
     }
   });
 
+
+
   it("Stripe - 10.34$ payment without any coupon codes (regular pay with credit card) (campaignId is not of real campaign)", async function () {
     this.timeout(15000);
 
@@ -340,8 +345,8 @@ describe("payments", () => {
       .send({
         amount: "10.34",
         campaignId,
-        supporterName: `supporterName${new Date()}`,
-        supporterEmail: `${generateRandomEmail}`,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
         supporterComment: "Go go go suporter coment test",
         separateDonationThruPage: true,
         discountCode: "",
@@ -457,8 +462,8 @@ describe("payments", () => {
       .send({
         amount: "348749.32",
         campaignId,
-        supporterName: `supporterName${new Date()}`,
-        supporterEmail: `${generateRandomEmail}`,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
         supporterComment: "Go go go suporter coment test",
         separateDonationThruPage: true,
         discountCode: "",
@@ -575,8 +580,8 @@ describe("payments", () => {
       .send({
         amount: "10.34",
         campaignId,
-        supporterName: `supporterName${new Date()}`,
-        supporterEmail: `${generateRandomEmail}`,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
         supporterComment: "Go go go suporter coment test",
         separateDonationThruPage: true,
         discountCode: "TESTU1",
@@ -711,7 +716,7 @@ describe("payments", () => {
         amount: "349.32",
         campaignId,
         supporterName: `supporterName${new Date()}`,
-        supporterEmail: `${generateRandomEmail}`,
+        supporterEmail: `${generateRandomEmail()}`,
         supporterComment: "Go go go suporter coment test",
         separateDonationThruPage: true,
         discountCode: "TESTGL",
@@ -843,8 +848,8 @@ describe("payments", () => {
         .send({
           amount: "10.34",
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TEU1",
@@ -976,8 +981,8 @@ describe("payments", () => {
         .send({
           amount: "349.32",
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TETL",
@@ -1108,8 +1113,8 @@ describe("payments", () => {
         .send({
           amount: "10.34",
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TEUFA1",
@@ -1241,8 +1246,8 @@ describe("payments", () => {
         .send({
           amount: "349.32",
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TET75L",
@@ -1384,8 +1389,8 @@ describe("payments", () => {
         .set("Content-Type", "application/json")
         .send({
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TESTU2",
@@ -1428,8 +1433,8 @@ describe("payments", () => {
         .set("Content-Type", "application/json")
         .send({
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TESU1",
@@ -1451,8 +1456,8 @@ describe("payments", () => {
         .set("Content-Type", "application/json")
         .send({
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TE5WW1",
@@ -1474,8 +1479,8 @@ describe("payments", () => {
         .set("Content-Type", "application/json")
         .send({
           campaignId,
-          supporterName: `supporterName${new Date()}`,
-          supporterEmail: `${generateRandomEmail}`,
+          supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+          supporterEmail: `${generateRandomEmail()}`,
           supporterComment: "Go go go suporter coment test",
           separateDonationThruPage: true,
           discountCode: "TESTGL",
@@ -1495,6 +1500,638 @@ describe("payments", () => {
         });
     });
   });
+
+
+  describe("paying as first supporter (right after (that same supporter who made campaign) making campaign)", ()=> {
+
+
+      
+    it("Paying as first supporter (right after making campaign) - Stripe - Anonymous 10$ payment without any coupon codes (regular pay with credit card) (campaignId is not of real campaign)", async function () {
+      this.timeout(15000);
+
+      // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+      const prevHowManySupporters = await Statscampaign.count({
+        where: { campaignId: campaignId },
+      });
+
+      const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+      // Make the request to create the payment
+      const res = await superagent
+        .post("http://localhost:5000/payment/makePayment")
+        .set("Content-Type", "application/json")
+        .send({
+          amount: "10",
+          campaignId,
+          supporterName: "",
+          supporterEmail: "",
+          supporterComment: "Paying as first supporter comment ",
+          separateDonationThruPage: false,
+          discountCode: "",
+        });
+
+      const { paymentIntent } = res.body;
+
+      if (!paymentIntent.id) {
+        throw new Error(
+          "paymentIntent not received. Have you run Stripe CLI in background? `stripe listen --forward-to localhost:5000/webhook` "
+        );
+      }
+
+      // Confirm the payment intent
+      const confirmedIntent = await stripe.paymentIntents.confirm(
+        paymentIntent.id,
+        {
+          payment_method: "pm_card_visa",
+          return_url: "http://example.com/payment-success", // Dummy URL
+        }
+      );
+
+      // also check in athlete itself, if amount calculated is right one?
+      // first find the campaign
+      const campaignCheck = await Campaign.findOne({
+        where: { campaignId: campaignId },
+      });
+
+      // and then extract friendEmail, that's that athlete email used
+      const athleteCheck = await Users.findOne({
+        where: { email: campaignCheck.friendEmail },
+      });
+
+      let prevDonatedAmountAH = athleteCheck.donatedAmount;
+
+      // Query the database to check if paymentIntent.id is saved
+      // first, check if payment_id is written (so immediatelly)
+      // ! it should create even for first supporter ! 
+      const paymentIdCheck = await Campaign.findOne({
+        where: { payment_id: paymentIntent.id },
+      });
+
+      if (!paymentIdCheck) {
+        throw new Error(
+          "payment_id not found in database. So payment will fail further."
+        );
+      }
+
+      // and then wait for some time, and check database again,
+      await delay(5000);
+
+      // and then, check again if payment proceed through (it's local, so database shouldn't be occupied, should go fast)
+      const paymentCheckProcessed = await Campaign.findOne({
+        where: { payment_id: paymentIntent.id },
+      });
+
+      // it needs to check database again, for newest data
+      const athleteCheckAgain = await Users.findOne({
+        where: { email: campaignCheck.friendEmail },
+      });
+
+      // console.log("ss"+athleteCheck.donatedAmount)
+
+      // now, confirm, that donatedAmount (current previous), is same as one you get after
+      // only if this is NOT the case, it throws error, and fails test
+      if (!(prevDonatedAmountAH + 1000 === athleteCheckAgain.donatedAmount)) {
+        // 10$, you see it as 1000 (last 2 digits are cents)
+        throw new Error(
+          `Previous amount '${prevDonatedAmountAH}' in athlete (table Users) is not same calculation what it should be. It's ${athleteCheck.donatedAmount}`
+        );
+      }
+
+      // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+      const howManySupporters = await Statscampaign.count({
+        where: { campaignId: campaignId },
+      });
+
+      if (prevHowManySupporters === howManySupporters) {
+        throw new Error(
+          "'how many supporters', doesn't work. transaction is not written in 'Statcampaign' table, and/or campaignId is not used to indentify for which campaign transaction is connected to. "
+        );
+      }
+
+      // so payment_status === "payment_status" && amount > 0, to know payment really worked fine
+      try {
+      if (
+
+        paymentCheckProcessed.payment_status === "succeeded" &&
+        athleteCheckAgain.donatedAmount > 35001919 // ! ovo samo. treba uvecati  (35001919, bude, kada sračuna sve prethodne). Da, > , jer ne treba biti isti..
+      ) {
+        console.log(
+          `payment of ${athleteCheckAgain.amount}$, ${paymentCheckProcessed.payment_status}!`
+        );
+        return;
+      }
+    } catch(error) {
+      console.log(`payment didn't proceed through (not written in database). payment_id is '${paymentIdCheck.payment_id}' , so check it directly in MySQL database once again 'select * from statscampaigns where payment_id="<payment_id>";'. Delay in database is 5 seconds, before checking database once again, if payment went through. `)
+        throw new Error(error || error.message);
+      }
+    });
+
+
+    
+
+  it("Paying as first supporter (right after making campaign) - Stripe - 10.34$ payment without any coupon codes (regular pay with credit card) (campaignId is not of real campaign)", async function () {
+    this.timeout(15000);
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const prevHowManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+    // Make the request to create the payment
+    const res = await superagent
+      .post("http://localhost:5000/payment/makePayment")
+      .set("Content-Type", "application/json")
+      .send({
+        amount: "10.34",
+        campaignId,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
+        supporterComment: "Go go go suporter coment test",
+        separateDonationThruPage: false,
+        discountCode: "",
+      });
+
+    const { paymentIntent } = res.body;
+
+    if (!paymentIntent.id) {
+      throw new Error(
+        "paymentIntent not received. Have you run Stripe CLI in background? `stripe listen --forward-to localhost:5000/webhook` "
+      );
+    }
+
+    // Confirm the payment intent
+    const confirmedIntent = await stripe.paymentIntents.confirm(
+      paymentIntent.id,
+      {
+        payment_method: "pm_card_visa",
+        return_url: "http://example.com/payment-success", // Dummy URL
+      }
+    );
+
+    // also check in athlete itself, if amount calculated is right one?
+    // first find the campaign
+    const campaignCheck = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+
+    // and then extract friendEmail, that's that athlete email used
+    const athleteCheck = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    let prevDonatedAmountAH = athleteCheck.donatedAmount;
+
+    // Query the database to check if paymentIntent.id is saved
+    // first, check if payment_id is written (so immediatelly)
+    const paymentIdCheck = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    if (!paymentIdCheck) {
+      throw new Error(
+        "payment_id not found in database. So payment will fail further."
+      );
+    }
+
+    // and then wait for some time, and check database again,
+    await delay(5000);
+
+    // and then, check again if payment proceed through (it's local, so database shouldn't be occupied, should go fast)
+    const paymentCheckProcessed = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    // it needs to check database again, for newest data
+    const athleteCheckAgain = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    // console.log("ss"+athleteCheck.donatedAmount)
+
+    // now, confirm, that donatedAmount (current previous), is same as one you get after
+    // only if this is NOT the case, it throws error, and fails test
+    if (!(prevDonatedAmountAH + 1034 === athleteCheckAgain.donatedAmount)) {
+      // 10$, you see it as 1000 (last 2 digits are cents)
+      throw new Error(
+        `Previous amount '${prevDonatedAmountAH}' in athlete (table Users) is not same calculation what it should be. It's ${athleteCheck.donatedAmount}`
+      );
+    }
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const howManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    if (prevHowManySupporters === howManySupporters) {
+      throw new Error(
+        "'how many supporters', doesn't work. transaction is not written in 'Statcampaign' table, and/or campaignId is not used to indentify for which campaign transaction is connected to. "
+      );
+    }
+
+    // so payment_status === "payment_status" && amount > 0, to know payment really worked fine
+    if (
+      paymentCheckProcessed.payment_status === "succeeded" &&
+      athleteCheckAgain.donatedAmount > 35002919
+    ) {
+      console.log(
+        `payment of ${athleteCheckAgain.donatedAmount}$, ${paymentCheckProcessed.payment_status}!`
+      );
+      return;
+    } else {
+      throw new Error(
+        `payment didn't proceed through (not written in database). payment_id is '${paymentIdCheck.payment_id}' , so check it directly in MySQL database once again 'select * from statscampaigns where payment_id="<payment_id>";'. Delay in database is 5 seconds, before checking database once again, if payment went through. `
+      );
+    }
+  });
+
+  it("Paying as first supporter (right after making campaign) - Stripe - 348749.32 $ payment without any coupon codes (regular pay with credit card) (campaignId is not of real campaign)", async function () {
+    this.timeout(15000);
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const prevHowManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+    // Make the request to create the payment
+    const res = await superagent
+      .post("http://localhost:5000/payment/makePayment")
+      .set("Content-Type", "application/json")
+      .send({
+        amount: "348749.32",
+        campaignId,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
+        supporterComment: "Go go go suporter coment test",
+        separateDonationThruPage: false,
+        discountCode: "",
+      });
+
+    const { paymentIntent } = res.body;
+
+    if (!paymentIntent.id) {
+      throw new Error(
+        "paymentIntent not received. Have you run Stripe CLI in background? `stripe listen --forward-to localhost:5000/webhook` "
+      );
+    }
+
+    // Confirm the payment intent
+    const confirmedIntent = await stripe.paymentIntents.confirm(
+      paymentIntent.id,
+      {
+        payment_method: "pm_card_visa",
+        return_url: "http://example.com/payment-success", // Dummy URL
+      }
+    );
+
+    // also check in athlete itself, if amount calculated is right one?
+    // first find the campaign
+    const campaignCheck = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+
+    // and then extract friendEmail, that's that athlete email used
+    const athleteCheck = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    let prevDonatedAmountAH = athleteCheck.donatedAmount;
+
+    // Query the database to check if paymentIntent.id is saved
+    // first, check if payment_id is written (so immediatelly)
+    const paymentIdCheck = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    if (!paymentIdCheck) {
+      throw new Error(
+        "payment_id not found in database. So payment will fail further."
+      );
+    }
+
+    // and then wait for some time, and check database again,
+    await delay(5000);
+
+    // and then, check again if payment proceed through (it's local, so database shouldn't be occupied, should go fast)
+    const paymentCheckProcessed = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    // it needs to check database again, for newest data
+    const athleteCheckAgain = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    // console.log("ss"+athleteCheck.donatedAmount)
+
+    // now, confirm, that donatedAmount (current previous), is same as one you get after
+    // only if this is NOT the case, it throws error, and fails test
+    if (!(prevDonatedAmountAH + 34874932 === athleteCheckAgain.donatedAmount)) {
+      // 10$, you see it as 1000 (last 2 digits are cents)
+      throw new Error(
+        `Previous amount '${prevDonatedAmountAH}' in athlete (table Users) is not same calculation what it should be. It's ${athleteCheck.donatedAmount}`
+      );
+    }
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const howManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    if (prevHowManySupporters === howManySupporters) {
+      throw new Error(
+        "'how many supporters', doesn't work. transaction is not written in 'Statcampaign' table, and/or campaignId is not used to indentify for which campaign transaction is connected to. "
+      );
+    }
+
+    // so payment_status === "payment_status" && amount > 0, to know payment really worked fine
+    if (
+      paymentCheckProcessed.payment_status === "succeeded" &&
+      athleteCheckAgain.donatedAmount > 35003953
+    ) {
+      console.log(
+        `payment of ${athleteCheckAgain.donatedAmount}$, ${paymentCheckProcessed.payment_status}!`
+      );
+      return;
+    } else {
+      throw new Error(
+        `payment didn't proceed through (not written in database). payment_id is '${paymentIdCheck.payment_id}' , so check it directly in MySQL database once again 'select * from statscampaigns where payment_id="<payment_id>";'. Delay in database is 5 seconds, before checking database once again, if payment went through. `
+      );
+    }
+  });
+
+  // with coupon (discount) codes
+  it("Paying as first supporter (right after making campaign) - Stripe - 10.34$ payment with TESTU1 (national US) (10$) coupon code (regular pay with credit card) (campaignId is not of real campaign)", async function () {
+    this.timeout(15000);
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const prevHowManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+    // Make the request to create the payment
+    const res = await superagent
+      .post("http://localhost:5000/payment/makePayment")
+      .set("Content-Type", "application/json")
+      .send({
+        amount: "10.34",
+        campaignId,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
+        supporterComment: "Go go go suporter coment test",
+        separateDonationThruPage: false,
+        discountCode: "TESTU1",
+      });
+
+    const { paymentIntent } = res.body;
+
+    if (!paymentIntent.id) {
+      throw new Error(
+        "paymentIntent not received. Have you run Stripe CLI in background? `stripe listen --forward-to localhost:5000/webhook` "
+      );
+    }
+
+    // Confirm the payment intent
+    const confirmedIntent = await stripe.paymentIntents.confirm(
+      paymentIntent.id,
+      {
+        payment_method: "pm_card_visa",
+        return_url: "http://example.com/payment-success", // Dummy URL
+      }
+    );
+
+    // also check in athlete itself, if amount calculated is right one?
+    // first find the campaign
+    const campaignCheck = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+
+    // and then extract friendEmail, that's that athlete email used
+    const athleteCheck = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    let prevDonatedAmountAH = athleteCheck.donatedAmount;
+
+    // Query the database to check if paymentIntent.id is saved
+    // first, check if payment_id is written (so immediatelly)
+    const paymentIdCheck = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    if (!paymentIdCheck) {
+      throw new Error(
+        "payment_id not found in database. So payment will fail further."
+      );
+    }
+
+    // and then wait for some time, and check database again,
+    await delay(5000);
+
+    // and then, check again if payment proceed through (it's local, so database shouldn't be occupied, should go fast)
+    const paymentCheckProcessed = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    // it needs to check database again, for newest data
+    const athleteCheckAgain = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    // console.log("ss"+athleteCheck.donatedAmount)
+
+    // now, confirm, that donatedAmount (current previous), is same as one you get after
+    // only if this is NOT the case, it throws error, and fails test
+    // + 1000 , is for coupon code, national US, 10$
+    if (
+      !(prevDonatedAmountAH + 1034 + 1000 === athleteCheckAgain.donatedAmount)
+    ) {
+      // 10$, you see it as 1000 (last 2 digits are cents)
+      throw new Error(
+        `Previous amount '${prevDonatedAmountAH}' in athlete (table Users) is not same calculation what it should be. It's ${athleteCheck.donatedAmount}`
+      );
+    }
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const howManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    if (prevHowManySupporters === howManySupporters) {
+      throw new Error(
+        "'how many supporters', doesn't work. transaction is not written in 'Statcampaign' table, and/or campaignId is not used to indentify for which campaign transaction is connected to. "
+      );
+    }
+
+    // and now check couponcodes table, if it saves correctly as well
+    const checkCouponTable = await Couponcode.findOne({
+      where: { couponCode: "TESTU1" },
+    });
+
+    // coupon code, actually saves whole transaction how much it took. so 2034, is how much amount gets used in total. okay..
+    if (
+      checkCouponTable.spentAmount !== 3034 &&
+      checkCouponTable.couponTimesUsed !== 2
+    ) {
+      throw new Error(
+        `Didn't saved in coupon table. Spent amount is ${checkCouponTable.spentAmount}. couponTimesUsed is ${checkCouponTable.couponTimesUsed} `
+      );
+    }
+
+    // so payment_status === "payment_status" && amount > 0, to know payment really worked fine
+    if (
+      paymentCheckProcessed.payment_status === "succeeded" &&
+      athleteCheckAgain.donatedAmount > 69878885
+    ) {
+      console.log(
+        `payment of ${athleteCheckAgain.donatedAmount}$, ${paymentCheckProcessed.payment_status}!`
+      );
+      return;
+    } else {
+      throw new Error(
+        `payment didn't proceed through (not written in database). payment_id is '${paymentIdCheck.payment_id}' , so check it directly in MySQL database once again 'select * from statscampaigns where payment_id="<payment_id>";'. Delay in database is 5 seconds, before checking database once again, if payment went through. `
+      );
+    }
+  });
+
+  it("Paying as first supporter (right after making campaign) -  Stripe - 349.32$ payment with TESTGL (global) (43%) coupon code (regular pay with credit card) (campaignId is not of real campaign)", async function () {
+    this.timeout(15000);
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const prevHowManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+    // Make the request to create the payment
+    const res = await superagent
+      .post("http://localhost:5000/payment/makePayment")
+      .set("Content-Type", "application/json")
+      .send({
+        amount: "349.32",
+        campaignId,
+        supporterName: `supporterName${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+        supporterEmail: `${generateRandomEmail()}`,
+        supporterComment: "Go go go suporter coment test",
+        separateDonationThruPage: false,
+        discountCode: "TESTGL",
+      });
+
+    const { paymentIntent } = res.body;
+
+    if (!paymentIntent.id) {
+      throw new Error(
+        "paymentIntent not received. Have you run Stripe CLI in background? `stripe listen --forward-to localhost:5000/webhook` "
+      );
+    }
+
+    // Confirm the payment intent
+    const confirmedIntent = await stripe.paymentIntents.confirm(
+      paymentIntent.id,
+      {
+        payment_method: "pm_card_visa",
+        return_url: "http://example.com/payment-success", // Dummy URL
+      }
+    );
+
+    // also check in athlete itself, if amount calculated is right one?
+    // first find the campaign
+    const campaignCheck = await Campaign.findOne({
+      where: { campaignId: campaignId },
+    });
+
+    // and then extract friendEmail, that's that athlete email used
+    const athleteCheck = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    let prevDonatedAmountAH = athleteCheck.donatedAmount;
+
+    // Query the database to check if paymentIntent.id is saved
+    // first, check if payment_id is written (so immediatelly)
+    const paymentIdCheck = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    if (!paymentIdCheck) {
+      throw new Error(
+        "payment_id not found in database. So payment will fail further."
+      );
+    }
+
+    // and then wait for some time, and check database again,
+    await delay(5000);
+
+    // and then, check again if payment proceed through (it's local, so database shouldn't be occupied, should go fast)
+    const paymentCheckProcessed = await Campaign.findOne({
+      where: { payment_id: paymentIntent.id },
+    });
+
+    // it needs to check database again, for newest data
+    const athleteCheckAgain = await Users.findOne({
+      where: { email: campaignCheck.friendEmail },
+    });
+
+    // console.log("ss"+athleteCheck.donatedAmount)
+
+    // now, confirm, that donatedAmount (current previous), is same as one you get after
+    // only if this is NOT the case, it throws error, and fails test
+
+    // ! + 43% of that , is for coupon code, national US, 10$
+    if (!(prevDonatedAmountAH + 49953 === athleteCheckAgain.donatedAmount)) {
+      throw new Error(
+        `Previous amount '${prevDonatedAmountAH}' in athlete (table Users) is not same calculation what it should be. It's ${athleteCheck.donatedAmount}`
+      );
+    }
+
+    // and last, check if "how many supporter" works, by just fetching from "Statscampaigns" (transactions), for my campaignId, and see how much you got. compared to previous. (this will get added more and more, throughout test, for other payments.. so you check this as well now)
+    const howManySupporters = await Statscampaign.count({
+      where: { campaignId: campaignId },
+    });
+
+    if (prevHowManySupporters === howManySupporters) {
+      throw new Error(
+        "'how many supporters', doesn't work. transaction is not written in 'Statcampaign' table, and/or campaignId is not used to indentify for which campaign transaction is connected to. "
+      );
+    }
+
+    // and now check couponcodes table, if it saves correctly as well
+    const checkCouponTable = await Couponcode.findOne({
+      where: { couponCode: "TESTGL" },
+    });
+
+    if (
+      checkCouponTable.spentAmount !== 99906 &&
+      checkCouponTable.couponTimesUsed !== 2
+    ) {
+      throw new Error(
+        `Didn't saved in coupon table. Spent amount is ${checkCouponTable.spentAmount}. couponTimesUsed is ${checkCouponTable.couponTimesUsed} `
+      );
+    }
+
+    // so payment_status === "payment_status" && amount > 0, to know payment really worked fine
+    if (
+      paymentCheckProcessed.payment_status === "succeeded" &&
+      athleteCheckAgain.donatedAmount > 69880919
+    ) {
+      console.log(
+        `payment of ${athleteCheckAgain.donatedAmount}$, ${paymentCheckProcessed.payment_status}!`
+      );
+      return;
+    } else {
+      throw new Error(
+        `payment didn't proceed through (not written in database). payment_id is '${paymentIdCheck.payment_id}' , so check it directly in MySQL database once again 'select * from statscampaigns where payment_id="<payment_id>";'. Delay in database is 5 seconds, before checking database once again, if payment went through. `
+      );
+    }
+  });
+
+  })
 
   it("", async function () {
     // for easy access in database queries

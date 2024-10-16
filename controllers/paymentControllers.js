@@ -75,6 +75,8 @@ const makePayment = async (req, res) => {
 
     console.log("ono sto on prima je." + campaignId);
 
+
+    // separateDonationThruPage, you made this, so you can know who first supporter was ! so it's not important to test this..
     if (separateDonationThruPage) {
       const t1 = await db.sequelize.transaction();
 
@@ -99,7 +101,7 @@ const makePayment = async (req, res) => {
 
         // e sada uzimas athleteId odatle:   oneAthlete.userId
 
-        // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId"
+        // sada, moras da proveris, da li je supporter anonymus ! A AKO IMA NALOG UPISUJES GA OVDE NJEGOV "supporterId" ! 
         // znaci izvrsi proveru, da li email supportera (isto je unique zar ne..), matchje neki koji postoji u database. cisto eto moze korisno imat ako treba (za njegovu listu, koga je on supportovao.. (a i fora je, da ako kreira nalog, vidis, isto ce imati pregled koga je supportovao..))
         // to jeste "supporterEmail", direktno, ovaj sto je donirao sa stranice, što upisuje !
         const oneSupporter = await User.findOne({
@@ -133,6 +135,7 @@ const makePayment = async (req, res) => {
           countryAthleteIsIn: countryAthleteIsIn,
         };
 
+        // ali i dalje, kreira tebelu, u statscampaign, i tuda confirm transakciju
         await Statscampaign.create(supporter_data, { transaction: t1 });
 
         await t1.commit();
@@ -144,6 +147,8 @@ const makePayment = async (req, res) => {
         console.log(error.stack);
       }
     } else {
+
+      // this get executed when it's first user
       const t2 = await db.sequelize.transaction();
 
       // ! OVO JE OBICAN, ubaci u campaignId, trazi on ovde..
