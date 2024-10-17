@@ -224,7 +224,7 @@ describe("payments", () => {
       .post("http://localhost:5000/payment/makePayment")
       .set("Content-Type", "application/json")
       .send({
-        amount: "10",
+        amount: "10.00",
         campaignId,
         supporterName: "",
         supporterEmail: "",
