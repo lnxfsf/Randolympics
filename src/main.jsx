@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import { hydrate, render } from "react-dom";
 
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -13,7 +14,6 @@ import "@mui/material/styles/styled";
 import { HelmetProvider } from "react-helmet-async";
 
 import "../i18n";
-
 
 /* 
 const app = (
@@ -41,11 +41,18 @@ this is in: package.json:
 
 */
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Router>
-    <HelmetProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </HelmetProvider>
-  </Router>
+  <PayPalScriptProvider
+    options={{
+      "client-id":
+        "AXQFMEsIDIdD1SJoHxSbaXVkUrzqbjutokXps4mHOG4IfPwngqs7t_WLzxv7kEbDCcJ9alo03JrtbjMd",
+    }}
+  >
+    <Router>
+      <HelmetProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </HelmetProvider>
+    </Router>
+  </PayPalScriptProvider>
 );

@@ -13,6 +13,15 @@ import { useTranslation } from "react-i18next";
 
 import { useEffect, useState, useRef } from "react";
 
+import { PayPalButtons } from "@paypal/react-paypal-js";
+
+import axios from "axios";
+
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
+
 const inputLabelPropsTextField = {
   sx: {
     // Styles when the input is not focused and has no value
@@ -60,12 +69,17 @@ const DonatePart = ({
   athlete,
   setDiscountCode,
   donateWithCouponOnly,
-  
+
   viewFullActivity,
   howManySupporters,
 }) => {
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
+
+
+  useEffect(()=> {
+
+  },[amount])
 
 
   return (
@@ -74,7 +88,9 @@ const DonatePart = ({
         className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
         style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
       >
-        <p className="font-bold text-xl md:text-2xl">{t("campaign.content70")}</p>
+        <p className="font-bold text-xl md:text-2xl">
+          {t("campaign.content70")}
+        </p>
 
         <div className="flex justify-between mt-4">
           <div>
@@ -84,19 +100,14 @@ const DonatePart = ({
             </p>
           </div>
 
-
-           {viewFullActivity && (
+          {viewFullActivity && (
             <>
               <div>
-              <p className="text-[#616673]">{t("campaign.content72")}</p>
-            <p className="text-xl font-medium">
-              {howManySupporters}
-            </p>
-
+                <p className="text-[#616673]">{t("campaign.content72")}</p>
+                <p className="text-xl font-medium">{howManySupporters}</p>
               </div>
             </>
-          )} 
-
+          )}
 
           <div>
             <p className="text-[#616673]">{t("campaign.content73")}</p>
@@ -138,7 +149,7 @@ const DonatePart = ({
           <>
             <div className="flex flex-col ">
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content74")}
+                {t("campaign.content74")}
               </p>
               <TextField
                 value={supporterName}
@@ -155,7 +166,7 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content75")}
+                {t("campaign.content75")}
               </p>
               <TextField
                 value={supporterEmail}
@@ -172,7 +183,7 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content76")}
+                {t("campaign.content76")}
               </p>
               <TextField
                 value={supporterComment}
@@ -248,6 +259,95 @@ const DonatePart = ({
                   <span className="lexend-font">{t("campaign.content79")}</span>
                 </Button>
               </div>
+            </div>
+
+            <div className="m-4 flex justify-center  items-center flex-col w-full">
+            
+            <p className="lexend-font text-black_second text-sm mb-2 mt-2 ">
+                Amount (paypal)
+              </p>
+              <TextField
+                value={amount}
+                onChange={(event) => {
+                  setAmount(event.target.value);
+                }}
+                placeholder="John"
+                type="number"
+                
+
+                InputLabelProps={inputLabelPropsTextField}
+                sx={sxTextField}
+                
+              />
+            
+
+              <PayPalButtons
+                key={amount}
+                createOrder={(data, actions) => {
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: amount, 
+                        },
+                        
+                      },
+                    ],
+                  });
+                }}
+                onApprove={ (data, actions) => {
+                  return actions.order.capture().then(async (details) => {
+                    console.log(
+                      `Transaction completed by ${details.payer.name.given_name}`
+                    );
+                    console.log(details)
+                    // Handle successful transaction here (e.g., send details to backend)
+                    // now, send details to backend, and confirm transaction, and then you can insert it in database info you need. 
+                    
+                    // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good. 
+                    // testing paypal can be done with E2E testing, on UI
+
+
+                    try {
+                      const response = await axios.post(
+                        `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                        {
+                       /*   discountCode: discountCode,
+                          campaignId: campaignId,
+                
+                          supporterEmail: supporterEmail,
+                          supporterName: supporterName,
+                          supporterComment: supporterComment, */
+
+                          transactionId: details.id,
+
+                          supporterName, 
+                          supporterEmail, 
+                          supporterComment,
+                          separateDonationThruPage: true,
+
+                          discountCode: discountCode,
+                          campaignId,
+                          countryAthleteIsIn,
+
+                        }
+                      );
+                
+                      if (response.status === 200) {
+                        setSnackbarMessage("Donated");
+                        setOpenSnackbar(true);
+                      }
+                    } catch (e) {
+                      console.log(e.stack);
+                    }
+
+
+
+
+                
+                  });
+                }}
+              />
             </div>
           </>
         )}
