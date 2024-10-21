@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import AuthCode from "react-auth-code-input";
 
 import axios from "axios";
+import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 
 import { WarningTextPopup } from "../../components/Supporters/WarningTextPopup";
 
@@ -42,8 +43,7 @@ import { QueryProvider } from "../../QueryProvider";
 import DonationForm from "../../components/Payments/DonationForm";
 import DonationFormItemCampaign from "../../components/Payments/DonationFormItemCampaign";
 
-import {useTranslation} from "react-i18next";
-
+import { useTranslation } from "react-i18next";
 
 const SupporterFourthPart = ({
   fourthIsVisible,
@@ -65,9 +65,7 @@ const SupporterFourthPart = ({
   setFourthIsVisible,
   setFifthIsVisible,
 }) => {
-
   const { t } = useTranslation();
-
 
   return (
     <>
@@ -77,90 +75,62 @@ const SupporterFourthPart = ({
         } `}
       >
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
-        
-        
-        
-
-
           <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
             <img src="supporters/4.jpg" className="image_supporter" />
           </div>
 
-
-
-
           <div className="basis-1/2 flex  flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
-         
+            {/* navigation rounded buttons */}
+            <div className="flex justify-around w-full  lexend-font">
+              <div className="flex flex-col items-center">
+                <div
+                  style={{ backgroundColor: "#F5F5F5", borderRadius: "50%" }}
+                  className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
+                >
+                  <p className="text-sm font-bold text-[#82889E]">1</p>
+                </div>
 
+                <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
+                  {t("campaign.content15")}
+                  <br /> {t("campaign.content16")}
+                </p>
+              </div>
 
-         
-           {/* navigation rounded buttons */} 
-           <div className="flex justify-around w-full  lexend-font">
-           
-           
-           <div className="flex flex-col items-center">
-            
-            
-             <div
-               style={{ backgroundColor: "#F5F5F5", borderRadius: "50%" }}
-               className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
-             >
-               <p className="text-sm font-bold text-[#82889E]">1</p>
-             </div>
+              <div className="flex flex-col items-center w-15">
+                <div
+                  style={{ backgroundColor: "#F5F5F5", borderRadius: "50%" }}
+                  className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
+                >
+                  <p className="text-sm font-bold text-[#82889E]">2</p>
+                </div>
 
-             <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-             {t('campaign.content15')}
-               <br /> {t('campaign.content16')}
-             </p>
-           </div>
+                <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
+                  {t("campaign.content17")}
+                </p>
+              </div>
 
+              <div className="flex flex-col items-center w-15">
+                <div
+                  style={{ backgroundColor: "#ffeaea", borderRadius: "50%" }}
+                  className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
+                >
+                  <p className="text-sm font-bold text-[#D24949]">3</p>
+                </div>
 
-             
-           <div className="flex flex-col items-center w-15">
-             <div
-               style={{ backgroundColor: "#F5F5F5", borderRadius: "50%" }}
-               className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
-             >
-               <p className="text-sm font-bold text-[#82889E]">2</p>
-             </div>
-
-             <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-             {t('campaign.content17')}
-             </p>
-           </div>
-
-
-
-
-           <div className="flex flex-col items-center w-15">
-             <div
-               style={{ backgroundColor: "#ffeaea", borderRadius: "50%" }}
-               className=" w-10 h-10 flex justify-center items-center select-none cursor-pointer"
-             >
-               <p className="text-sm font-bold text-[#D24949]">3</p>
-             </div>
-
-             <p className="text-sm font-medium text-center mt-3 text-[#D24949] ">
-             {t('campaign.content18')}
-             </p>
-           </div>
+                <p className="text-sm font-medium text-center mt-3 text-[#D24949] ">
+                  {t("campaign.content18")}
+                </p>
+              </div>
             </div>
 
-         
-         
-         
-
             <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font w-full">
-            {t('campaign.content19')} 
-                </p>
-
-
-
-       
+              {t("campaign.content19")}
+            </p>
 
             {/* and this is for those 3 options */}
-            <p className="mt-4 font-semibold w-full text-center">{t('campaign.content20')}</p>
-          
+            <p className="mt-4 font-semibold w-full text-center">
+              {t("campaign.content20")}
+            </p>
 
             <div className="flex justify-center mt-6 mb-6 gap-4 w-full">
               <div
@@ -216,7 +186,7 @@ const SupporterFourthPart = ({
               </div>
             </div>
 
-            <div className="flex   justify-center items-center w-full">
+            <div className="flex  flex-col justify-center items-center w-full">
               <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                 {/*  <img className="w-12" src="/supporters/pay.svg" />
             <p>Pay with credit card</p> */}
@@ -239,10 +209,14 @@ const SupporterFourthPart = ({
                   </QueryProvider>
                 </ThemeProvider>
               </div>
+
+
             </div>
 
             <div className=" mt-8 flex items-center justify-center flex-col w-full">
-              <p className="font-semibold w-full text-center">{t('campaign.content21')}</p>
+              <p className="font-semibold w-full text-center">
+                {t("campaign.content21")}
+              </p>
               {/* <input
             className="border-2 rounded-lg"
             type="text"
@@ -260,42 +234,30 @@ const SupporterFourthPart = ({
                 inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md  "
               />
 
-
-
-
-
-
               <Button
-                    onClick={donateWithCouponOnly}
-                    className="m-2 p-2 "
-                    style={{ textTransform: "none" }}
-                    sx={{
-                        m: 2,
-                        p:3,
-                      height: "50px",
-                      bgcolor: "#FFEAEA",
+                onClick={donateWithCouponOnly}
+                className="m-2 p-2 "
+                style={{ textTransform: "none" }}
+                sx={{
+                  m: 2,
+                  p: 3,
+                  height: "50px",
+                  bgcolor: "#FFEAEA",
 
-                      color: "#D24949",
-                      borderRadius: 3,
-                      border: `1px solid #FFEAEA`,
-                      "&:hover": {
-                        background: "#FFEAEA",
-                        color: "#D24949",
-                        border: `1px solid #D24949`,
-                      },
-                    }}
-                    id="join-the-fun-btn"
-                  >
-                    <span className="lexend-font">{t('campaign.content22')}</span>
-                    </Button>
-
-
-
-
-
-
+                  color: "#D24949",
+                  borderRadius: 3,
+                  border: `1px solid #FFEAEA`,
+                  "&:hover": {
+                    background: "#FFEAEA",
+                    color: "#D24949",
+                    border: `1px solid #D24949`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <span className="lexend-font">{t("campaign.content22")}</span>
+              </Button>
             </div>
-
 
             <Button
               onClick={() => {
@@ -321,14 +283,9 @@ const SupporterFourthPart = ({
               id="join-the-fun-btn"
             >
               <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-              <span className="lexend-font">{t('campaign.content23')}</span>
+              <span className="lexend-font">{t("campaign.content23")}</span>
             </Button>
-
-
           </div>
-
-
-
         </div>
       </div>
     </>

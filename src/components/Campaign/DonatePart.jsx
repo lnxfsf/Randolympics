@@ -13,10 +13,9 @@ import { useTranslation } from "react-i18next";
 
 import { useEffect, useState, useRef } from "react";
 
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 
 import axios from "axios";
-
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -76,11 +75,7 @@ const DonatePart = ({
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
 
-
-  useEffect(()=> {
-
-  },[amount])
-
+  useEffect(() => {}, [amount, discountCode]);
 
   return (
     <>
@@ -217,6 +212,71 @@ const DonatePart = ({
                 </ThemeProvider>
               </div>
 
+              <div className="p-8">
+                <PayPalButtons
+                  key={`${amount}-${discountCode}`}
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            value: amount,
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={(data, actions) => {
+                    return actions.order.capture().then(async (details) => {
+                      console.log(
+                        `Transaction completed by ${details.payer.name.given_name}`
+                      );
+                      console.log(details);
+                      // Handle successful transaction here (e.g., send details to backend)
+                      // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
+
+                      // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
+                      // testing paypal can be done with E2E testing, on UI
+
+                      try {
+                        const response = await axios.post(
+                          `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                          {
+                            /*   discountCode: discountCode,
+          campaignId: campaignId,
+
+          supporterEmail: supporterEmail,
+          supporterName: supporterName,
+          supporterComment: supporterComment, */
+
+                            transactionId: details.id,
+
+                            supporterName,
+                            supporterEmail,
+                            supporterComment,
+                            separateDonationThruPage: true, 
+
+                            discountCode: discountCode,
+                            campaignId,
+                            countryAthleteIsIn,
+                          }
+                        );
+
+                        if (response.status === 200) {
+                          setSnackbarMessage("Donated");
+                          setOpenSnackbar(true);
+                        }
+                      } catch (e) {
+                        console.log(e.stack);
+                      }
+                    });
+                  }}
+
+                  /* show only paypal button (not credit card) */
+                  fundingSource={FUNDING.PAYPAL}
+                />
+              </div>
+
               <div className="m-4 flex justify-center  items-center flex-col">
                 <p>{t("campaign.content78")}</p>
 
@@ -261,94 +321,6 @@ const DonatePart = ({
               </div>
             </div>
 
-            <div className="m-4 flex justify-center  items-center flex-col w-full">
-            
-            <p className="lexend-font text-black_second text-sm mb-2 mt-2 ">
-                Amount (paypal)
-              </p>
-              <TextField
-                value={amount}
-                onChange={(event) => {
-                  setAmount(event.target.value);
-                }}
-                placeholder="John"
-                type="number"
-                
-
-                InputLabelProps={inputLabelPropsTextField}
-                sx={sxTextField}
-                
-              />
-            
-
-              <PayPalButtons
-                key={amount}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: amount, 
-                        },
-                        
-                      },
-                    ],
-                  });
-                }}
-                onApprove={ (data, actions) => {
-                  return actions.order.capture().then(async (details) => {
-                    console.log(
-                      `Transaction completed by ${details.payer.name.given_name}`
-                    );
-                    console.log(details)
-                    // Handle successful transaction here (e.g., send details to backend)
-                    // now, send details to backend, and confirm transaction, and then you can insert it in database info you need. 
-                    
-                    // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good. 
-                    // testing paypal can be done with E2E testing, on UI
-
-
-                    try {
-                      const response = await axios.post(
-                        `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
-                        {
-                       /*   discountCode: discountCode,
-                          campaignId: campaignId,
-                
-                          supporterEmail: supporterEmail,
-                          supporterName: supporterName,
-                          supporterComment: supporterComment, */
-
-                          transactionId: details.id,
-
-                          supporterName, 
-                          supporterEmail, 
-                          supporterComment,
-                          separateDonationThruPage: true,
-
-                          discountCode: discountCode,
-                          campaignId,
-                          countryAthleteIsIn,
-
-                        }
-                      );
-                
-                      if (response.status === 200) {
-                        setSnackbarMessage("Donated");
-                        setOpenSnackbar(true);
-                      }
-                    } catch (e) {
-                      console.log(e.stack);
-                    }
-
-
-
-
-                
-                  });
-                }}
-              />
-            </div>
           </>
         )}
       </div>
