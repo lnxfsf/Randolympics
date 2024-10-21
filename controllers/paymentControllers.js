@@ -201,6 +201,193 @@ const makePayment = async (req, res) => {
     }); */
 };
 
+
+
+const calculateNewAmountWithDiscountCode = async (
+  amountOriginal,
+  couponDonationCode,
+  country
+) => {
+  const t1 = await db.sequelize.transaction();
+
+  // on nadje koji ima..
+  const oneCoupon = await Couponcodes.findOne({
+    where: { couponCode: couponDonationCode, isCouponActive: 1 },
+
+    lock: true,
+    transaction: t1,
+  });
+
+  // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
+  if (!oneCoupon) {
+    console.log("coupon code is not valid");
+
+    await t1.rollback();
+
+    return amountOriginal;
+  }
+
+  // da ga odma sad vratis..
+  if (oneCoupon.isCouponActive === 0) {
+    console.log("coupon code is not active");
+    await t1.rollback();
+    return amountOriginal;
+  }
+
+  // i sada, PRVO gleda jel "GLOBAL" (pa onda za national)  (znaci, mora da ima amountOriginal !)
+  if (oneCoupon.country === "GLOBAL") {
+    // e sada, ovde ces da definises , sta on radi ovde jos..
+
+    //
+    // proveris da li je kupon validan
+
+    // po datumu
+    const currentDate = new Date();
+    const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+
+    // because this is going by %, we take in consideration, a new value, we add as well, so it don't overflow it. so someone with 100€, can't use it, because it's going to be spent completelly..
+    // maybe to try with lesser amount, so they get that discout..
+
+    // so, calculate how much % up, it goes (that's add, that much %, to payment they gave). if they paid 20€, and coupon is 20%, then we do 20€+20%=24
+    // for "GLOBAL", in couponValue is stored as "0.05", so we use it as % for that. so this would be 5 , it need to be % now
+    let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon
+
+    let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+
+    /*  console.log("currentDate")
+      console.log(currentDate)
+  
+      console.log("expiryDate")
+      console.log(expiryDate)
+      console.log(currentDate <= expiryDate)
+  
+      console.log("newSpentAmount")
+      console.log(newSpentAmount)
+  
+      console.log("oneCoupon. maxSpentLimit")
+      console.log(oneCoupon.maxSpentLimit)
+      console.log(newSpentAmount < oneCoupon.maxSpentLimit)
+  
+      console.log("oneCoupon.couponTimesUsed")
+      console.log(oneCoupon.couponTimesUsed)
+  
+      console.log("oneCoupon.maxCouponTimesUsed")
+      console.log(oneCoupon.maxCouponTimesUsed) */
+    /* 
+      console.log(oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
+   */
+
+    if (
+      currentDate <= expiryDate &&
+      newSpentAmount < oneCoupon.maxSpentLimit &&
+      oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+    ) {
+      // ! you need to update
+      // couponTimesUsed
+      // spentAmount  (dodaj taj novi sto ima, + newAmount)
+
+      try {
+        await oneCoupon.update(
+          {
+            couponTimesUsed: oneCoupon.couponTimesUsed + 1,
+            spentAmount: newSpentAmount,
+          },
+          { transaction: t1 }
+        ); // azurira samo taj
+        await t1.commit();
+      } catch (error) {
+        await t1.rollback();
+        console.log(error.stack);
+      }
+
+      // we then, return with discount (we calculated and got it above)
+      return newAmount;
+    } else {
+      try {
+        // then it's expired, just set it so, so we don't check it anymore..
+        await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+        await t1.commit();
+      } catch (e) {
+        await t1.rollback();
+        console.log(e.stack);
+      }
+
+      return amountOriginal;
+    }
+  } else {
+    // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
+
+    // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
+
+    /*   2 | 32SU5DOIZT |              1 | GB      | 2024-09-09 |          10 |         10000 |               0 | 2024-08-10 22:37:41 | 2024-08-10 22:37:41
+   
+  
+  
+    --> kod national coupon, njegov couponValue je "fixed" price koliko se nadodaje na to sto on dodaje !
+    --> 
+  
+    */
+
+    // first, you need to match, if it's matching value that's provided (goes by country..)
+    if (oneCoupon.country === country) {
+      // po datumu
+      const currentDate = new Date();
+      const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+
+      // this is fixed amount addition ! (so not by percent), yes..
+      let newAmount = amountOriginal + oneCoupon.couponValue;
+
+      console.log("unutar drzave je");
+      console.log("amountOriginal: " + amountOriginal);
+      console.log("oneCoupon.couponValue: " + oneCoupon.couponValue);
+
+      let newSpentAmount = newAmount + oneCoupon.spentAmount;
+
+      if (
+        currentDate <= expiryDate &&
+        newSpentAmount < oneCoupon.maxSpentLimit &&
+        oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+      ) {
+        //  you need to update
+        // couponTimesUsed
+        // spentAmount  (dodaj taj novi sto ima, + newAmount)
+
+        try {
+          await oneCoupon.update(
+            {
+              couponTimesUsed: oneCoupon.couponTimesUsed + 1,
+              spentAmount: newSpentAmount,
+            },
+            { transaction: t1 }
+          ); // azurira samo taj
+          await t1.commit();
+        } catch (error) {
+          await t1.rollback();
+          console.log(error.stack);
+        }
+
+        // we then, return with discount (we calculated and got it above)
+        return newAmount;
+      } else {
+        await t1.rollback();
+        console.log("da vraca ovde");
+        return amountOriginal;
+      }
+    } else {
+      try {
+        // then it's expired, just set it so, so we don't check it anymore..
+        await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+        await t1.commit();
+      } catch (e) {
+        await t1.rollback();
+        console.log(e.stack);
+      }
+
+      return amountOriginal;
+    }
+  }
+};
+
 // donate using only dicsount code
 const donateOnlyWithDiscountCode = async (req, res) => {
   const {
@@ -515,14 +702,17 @@ const confirmPaypalTransaction = async (req, res) => {
           });
 
           console.log(" on moze naci oneAthlete");
-          // console.log(oneAthlete)
+         console.log(oneAthleteU);
+         console.log(amount) //vrv, treba da upišeš kao integer ovde... 
+
+
 
           // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
 
           //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
 
           await oneAthleteU.increment("donatedAmount", {
-            by: amount,
+            by: amount , // ! as integer, because it gets it as 55.00 , and should be 5500 for it
             transaction: t6u,
           }); // add (+) za toliko amount za taj athlete
 
@@ -634,7 +824,7 @@ const confirmPaypalTransaction = async (req, res) => {
 
         // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
         await oneAthletez.increment("donatedAmount", {
-          by: amount,
+          by: amount ,
           transaction: tAthleteZ,
         }); // add (+) za toliko amount za taj athlete
 
@@ -735,6 +925,10 @@ const confirmPaypalTransaction = async (req, res) => {
         separateDonationThruPage,
         discountCode,
     }); */
+
+
+    
+    
 
       // you do similar thing you do in /makePayments
 
@@ -853,8 +1047,10 @@ const confirmPaypalTransaction = async (req, res) => {
       await updatePaymentStatus(
         data.id,
         "succeeded",
-        data.purchase_units[0].amount.value
+        data.purchase_units[0].amount.value * 100
       );
+
+      // when you send as *100, then it gets it normal value. instead of 55.00 paypal gets us, we send to function as 5500 
 
       return res.status(200).json({ message: "Payment verified and saved" });
     } else {
