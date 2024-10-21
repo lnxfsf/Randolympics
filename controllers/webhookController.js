@@ -206,184 +206,72 @@ const calculateNewAmountWithDiscountCode = async (
   }
 };
 
-const webhookController = async (req, res) => {
-  async function updatePaymentStatus(paymentIntentId, status, amountOriginal) {
-    // Replace this with your actual database update logic
-    // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
-    // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
+async function updatePaymentStatus(paymentIntentId, status, amountOriginal) {
+  // Replace this with your actual database update logic
+  // Example: await db.query('UPDATE payments SET status = ? WHERE payment_intent_id = ?', [status, paymentIntentId]);
+  // TODO, so also update amount how much was updated. eh, this is what I wanted. no FE work for this. secure 100%
 
-    const t2 = await db.sequelize.transaction();
+  const t2 = await db.sequelize.transaction();
 
-    // make campaign as confirmed (so we keep it) // ! , e ako je ostavio za kasnije, vidis, isto mora da potvrdi ga
-    // on uvek dobija "campaignId" btw. tako da... prvo ides taj donacije 3 lice ! pa onda ovo ..
-    const oneCampaign = await Campaign.findOne({
+  // make campaign as confirmed (so we keep it) // ! , e ako je ostavio za kasnije, vidis, isto mora da potvrdi ga
+  // on uvek dobija "campaignId" btw. tako da... prvo ides taj donacije 3 lice ! pa onda ovo ..
+  const oneCampaign = await Campaign.findOne({
+    where: { payment_id: paymentIntentId },
+    lock: true,
+    transaction: t2,
+  });
+
+  // znaci ako je prazan, onda pogledaj u toj drugoj tabeli, (da li ima paymentId !! )
+  // oneCampaignThirdParty, znaci neko drugo, osim originalni koji je napravio campaign.
+  if (!oneCampaign) {
+    // so we release lock for "Campaign", on this row, as we're gonna use another..
+    console.log(
+      "THIS ROOLBACK IS NORMAL. It means, we're adding as supporter, that's not creator ! | so we release lock for 'Campaign', on this row, as we're gonna use another.."
+    );
+    await t2.rollback();
+
+    const t5 = await db.sequelize.transaction();
+
+    // znaci da nadje, onaj, koji ima Stats sa tom paymentId, (koji je sada uplatio neko vec..)
+    const oneCampaignThirdParty = await Statscampaign.findOne({
       where: { payment_id: paymentIntentId },
       lock: true,
-      transaction: t2,
+      transaction: t5,
     });
 
-    // znaci ako je prazan, onda pogledaj u toj drugoj tabeli, (da li ima paymentId !! )
-    // oneCampaignThirdParty, znaci neko drugo, osim originalni koji je napravio campaign.
-    if (!oneCampaign) {
-      // so we release lock for "Campaign", on this row, as we're gonna use another..
-      console.log(
-        "THIS ROOLBACK IS NORMAL. It means, we're adding as supporter, that's not creator ! | so we release lock for 'Campaign', on this row, as we're gonna use another.."
-      );
-      await t2.rollback();
-
-      const t5 = await db.sequelize.transaction();
-
-      // znaci da nadje, onaj, koji ima Stats sa tom paymentId, (koji je sada uplatio neko vec..)
-      const oneCampaignThirdParty = await Statscampaign.findOne({
-        where: { payment_id: paymentIntentId },
-        lock: true,
-        transaction: t5,
-      });
-
-      if (oneCampaignThirdParty) {
-        try {
-          // ovde azurira amount, po discount code koji ima.
-          if (oneCampaignThirdParty.couponDonationCode) {
-            // znaci ako ima neki coupon
-            var amount = await calculateNewAmountWithDiscountCode(
-              amountOriginal,
-              oneCampaignThirdParty.couponDonationCode,
-              oneCampaignThirdParty.countryAthleteIsIn
-            );
-            console.log("novi amount sa discount: " + amount);
-          } else {
-            // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
-            var amount = amountOriginal;
-          }
-        } catch (error) {
-          console.log(error.stack);
-        }
-
-        console.log("paymentIntentId je: " + paymentIntentId);
-        console.log("--------------oneCampaignThirdParty je--------------");
-        console.log(oneCampaignThirdParty);
-
-        // i treba amount da upise za tog supportera, i onda znamo kolko je taj supporter uplatio tacno..
-
-        try {
-          await oneCampaignThirdParty.update(
-            { payment_status: status, amount: amount },
-            { transaction: t5 }
-          ); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
-          await t5.commit();
-        } catch (error) {
-          await t5.rollback();
-          console.log(error.stack);
-        }
-
-        // we update value in that athlete (it's campaign for one athlete..)
-        //  ovde pravi error ti, za konfirmaciju sada ! ,
-
-        // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
-        // ! da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
-        // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
-
-        // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
-
-        const t6u = await db.sequelize.transaction();
-        console.log(" t6u transakciju");
-        /*  lock: true,
-          transaction: t6, */
-
-        try {
-          const oneAthleteU = await User.findOne({
-            where: { userId: oneCampaignThirdParty.athleteId },
-            lock: t6u.LOCK.UPDATE, // This adds the row-level lock (and then it will work for this)
-            transaction: t6u,
-
-            //  lock: true,
-            //  transaction: t6u,
-          });
-
-          console.log(" on moze naci oneAthlete");
-          // console.log(oneAthlete)
-
-          // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
-
-          //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
-
-          await oneAthleteU.increment("donatedAmount", {
-            by: amount,
-            transaction: t6u,
-          }); // add (+) za toliko amount za taj athlete
-
-          // Add the amount to the current value
-          // this way, we can update it... as it seemd .increment doesn't support transactions that well.
-          /*   await oneAthleteU.update({
-              donatedAmount: db.sequelize.literal(`donatedAmount + ${amount}`), }, {transaction: t6u,}
-          ); */
-
-          /*  { transaction: t6u } */
-
-          console.log("da li je nasao athlete !");
-          await t6u.commit();
-        } catch (error) {
-          await t6u.rollback();
-          console.log(error.stack);
-        }
-
-        // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
-
-        const t7 = await db.sequelize.transaction();
-
-        const oneCampaign = await Campaign.findOne({
-          where: { campaignId: oneCampaignThirdParty.campaignId },
-          lock: true,
-          transaction: t7,
-        });
-
-        // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
-        try {
-          await oneCampaign.update(
-            { payment_status: status },
-            { transaction: t7 }
-          ); // azurira samo taj
-          await t7.commit();
-        } catch (error) {
-          await t7.rollback();
-          console.log(error.stack);
-        }
-      } else {
-        await t5.rollback();
-        console.log(
-          "you need to release it as well, if there's not proper payment_id ! "
-        );
-        console.log(
-          "couldn't find proper payment_id, just send back to stripe as confirmed.. "
-        );
-      }
-    } else {
-      // ovde koristi t2 transaction od prvog !
-      // jer nije prazan..
-
-      // ovde azurira amount, po discount code koji ima.
-      if (oneCampaign.couponDonationCode) {
-        // znaci ako ima neki coupon
-        var amount = await calculateNewAmountWithDiscountCode(
-          amountOriginal,
-          oneCampaign.couponDonationCode,
-          oneCampaign.countryAthleteIsIn
-        );
-        console.log("novi amount sa discount oneCampaign: " + amount);
-      } else {
-        // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
-        var amount = amountOriginal;
-      }
-
-      // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
+    if (oneCampaignThirdParty) {
       try {
-        await oneCampaign.update(
-          { payment_status: status },
-          { transaction: t2 }
-        ); // azurira samo taj
-        await t2.commit();
+        // ovde azurira amount, po discount code koji ima.
+        if (oneCampaignThirdParty.couponDonationCode) {
+          // znaci ako ima neki coupon
+          var amount = await calculateNewAmountWithDiscountCode(
+            amountOriginal,
+            oneCampaignThirdParty.couponDonationCode,
+            oneCampaignThirdParty.countryAthleteIsIn
+          );
+          console.log("novi amount sa discount: " + amount);
+        } else {
+          // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
+          var amount = amountOriginal;
+        }
       } catch (error) {
-        await t2.rollback();
+        console.log(error.stack);
+      }
+
+      console.log("paymentIntentId je: " + paymentIntentId);
+      console.log("--------------oneCampaignThirdParty je--------------");
+      console.log(oneCampaignThirdParty);
+
+      // i treba amount da upise za tog supportera, i onda znamo kolko je taj supporter uplatio tacno..
+
+      try {
+        await oneCampaignThirdParty.update(
+          { payment_status: status, amount: amount },
+          { transaction: t5 }
+        ); // azurira status paymenta, za tog supportera (eto, treba da ima okej..)
+        await t5.commit();
+      } catch (error) {
+        await t5.rollback();
         console.log(error.stack);
       }
 
@@ -391,88 +279,203 @@ const webhookController = async (req, res) => {
       //  ovde pravi error ti, za konfirmaciju sada ! ,
 
       // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
-      // da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
-      // on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
+      // ! da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
+      // ! on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
 
-      /* lock: true,
-      transaction: t3z,
-      const t3z = await db.sequelize.transaction(); */
+      // ! aha, da ipak ovde mozes direktno preko "athleteId" , da nadjes athlete koji je
 
-      // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
+      const t6u = await db.sequelize.transaction();
+      console.log(" t6u transakciju");
+      /*  lock: true,
+        transaction: t6, */
 
-      const tAthleteZ = await db.sequelize.transaction();
-      let oneAthletez;
-      
       try {
-        oneAthletez = await User.findOne({
-          where: { email: oneCampaign.friendEmail },
-          lock: tAthleteZ.LOCK.UPDATE,
-          transaction: tAthleteZ,
+        const oneAthleteU = await User.findOne({
+          where: { userId: oneCampaignThirdParty.athleteId },
+          lock: t6u.LOCK.UPDATE, // This adds the row-level lock (and then it will work for this)
+          transaction: t6u,
+
+          //  lock: true,
+          //  transaction: t6u,
         });
 
         console.log(" on moze naci oneAthlete");
-        console.log(oneAthletez);
-
-        console.log("uvecava tog athlete-a donation amount");
-        console.log(oneAthletez);
+        // console.log(oneAthlete)
 
         // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
 
-        // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
-        await oneAthletez.increment("donatedAmount", {
+        //  await oneAthleteU.update({ donatedAmount: amount}); // azurira samo taj
+
+        await oneAthleteU.increment("donatedAmount", {
           by: amount,
-          transaction: tAthleteZ,
+          transaction: t6u,
         }); // add (+) za toliko amount za taj athlete
 
-        await tAthleteZ.commit();
+        // Add the amount to the current value
+        // this way, we can update it... as it seemd .increment doesn't support transactions that well.
+        /*   await oneAthleteU.update({
+            donatedAmount: db.sequelize.literal(`donatedAmount + ${amount}`), }, {transaction: t6u,}
+        ); */
 
-        // await t3z.commit();
+        /*  { transaction: t6u } */
+
+        console.log("da li je nasao athlete !");
+        await t6u.commit();
       } catch (error) {
-        //  await t3z.rollback();
-
-        await tAthleteZ.rollback();
+        await t6u.rollback();
         console.log(error.stack);
       }
 
-      // okej, dodatj tog supportera, u toj tabeli statscampaign (da bi lakse fetchovao  racunao, da ne pravim duple  itd..)
+      // e i za tu campaign, ako je prvi supporter koji to bio napravio, nije uplatio, neko drugi moze da uplati i onda ce nastaviti da bude aktivan ovaj !
 
-      if (oneCampaign.supporterEmail) {
-        const oneSupporter = await User.findOne({
-          where: { email: oneCampaign.supporterEmail },
-        });
+      const t7 = await db.sequelize.transaction();
 
-        var supporterUserId = oneSupporter.userId;
-      } else {
-        var supporterUserId = " ";
-      }
+      const oneCampaign = await Campaign.findOne({
+        where: { campaignId: oneCampaignThirdParty.campaignId },
+        lock: true,
+        transaction: t7,
+      });
 
-      const addSupporterToStats = {
-        campaignId: oneCampaign.campaignId,
-        athleteId: oneAthletez.userId,
-
-        supporterId: supporterUserId,
-        supporterName: oneCampaign.supporterName,
-        supporterEmail: oneCampaign.supporterEmail,
-
-        supporterComment: oneCampaign.supporterComment,
-
-        amount: amount,
-
-        payment_status: status,
-      };
-
-      const t4 = await db.sequelize.transaction();
-
+      // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
       try {
-        await Statscampaign.create(addSupporterToStats, { transaction: t4 });
-
-        await t4.commit();
-      } catch (e) {
-        await t4.rollback();
+        await oneCampaign.update(
+          { payment_status: status },
+          { transaction: t7 }
+        ); // azurira samo taj
+        await t7.commit();
+      } catch (error) {
+        await t7.rollback();
         console.log(error.stack);
       }
+    } else {
+      await t5.rollback();
+      console.log(
+        "you need to release it as well, if there's not proper payment_id ! "
+      );
+      console.log(
+        "couldn't find proper payment_id, just send back to stripe as confirmed.. "
+      );
+    }
+  } else {
+    // ovde koristi t2 transaction od prvog !
+    // jer nije prazan..
+
+    // ovde azurira amount, po discount code koji ima.
+    if (oneCampaign.couponDonationCode) {
+      // znaci ako ima neki coupon
+      var amount = await calculateNewAmountWithDiscountCode(
+        amountOriginal,
+        oneCampaign.couponDonationCode,
+        oneCampaign.countryAthleteIsIn
+      );
+      console.log("novi amount sa discount oneCampaign: " + amount);
+    } else {
+      // ako nema nijedan discount code upisan u tabeli, nece ni proveravat nista.. ide dalje onda..
+      var amount = amountOriginal;
+    }
+
+    // ne mozes ovo da diras ako je oneCampaign prazan. ne mozes ovako pristupit (al pristupice i dalje, onaj normalan.. )
+    try {
+      await oneCampaign.update(
+        { payment_status: status },
+        { transaction: t2 }
+      ); // azurira samo taj
+      await t2.commit();
+    } catch (error) {
+      await t2.rollback();
+      console.log(error.stack);
+    }
+
+    // we update value in that athlete (it's campaign for one athlete..)
+    //  ovde pravi error ti, za konfirmaciju sada ! ,
+
+    // i naravno, treba da uveca amount u taj Athlete (e sad, nebitno je odakle uzima, ali dobije email, sto treba ionako.. )
+    // da, za ovaj, trebace preko Id, da nadje email od tog athlete-a ? (jer ima samo "athleteId")
+    // on ce ici ovako (prvo ce proveriti da li je oneCampaign, prazan ? (il da koristis tu nekako ) )
+
+    /* lock: true,
+    transaction: t3z,
+    const t3z = await db.sequelize.transaction(); */
+
+    // e, za inicijalno kreiranje, user sto daje, i ne mora lock . jer to ce uvek biti taj jedan supporter.. tkd nema potrebe. ovo gore sto imas , je okej da ima lock..
+
+    const tAthleteZ = await db.sequelize.transaction();
+    let oneAthletez;
+    
+    try {
+      oneAthletez = await User.findOne({
+        where: { email: oneCampaign.friendEmail },
+        lock: tAthleteZ.LOCK.UPDATE,
+        transaction: tAthleteZ,
+      });
+
+      console.log(" on moze naci oneAthlete");
+      console.log(oneAthletez);
+
+      console.log("uvecava tog athlete-a donation amount");
+      console.log(oneAthletez);
+
+      // now you increase how much got donated (yes, in cents keep it so we get 2 decimal values there )
+
+      // await oneAthlete.update({ donatedAmount: amount}); // azurira samo taj
+      await oneAthletez.increment("donatedAmount", {
+        by: amount,
+        transaction: tAthleteZ,
+      }); // add (+) za toliko amount za taj athlete
+
+      await tAthleteZ.commit();
+
+      // await t3z.commit();
+    } catch (error) {
+      //  await t3z.rollback();
+
+      await tAthleteZ.rollback();
+      console.log(error.stack);
+    }
+
+    // okej, dodatj tog supportera, u toj tabeli statscampaign (da bi lakse fetchovao  racunao, da ne pravim duple  itd..)
+
+    if (oneCampaign.supporterEmail) {
+      const oneSupporter = await User.findOne({
+        where: { email: oneCampaign.supporterEmail },
+      });
+
+      var supporterUserId = oneSupporter.userId;
+    } else {
+      var supporterUserId = " ";
+    }
+
+    const addSupporterToStats = {
+      campaignId: oneCampaign.campaignId,
+      athleteId: oneAthletez.userId,
+
+      supporterId: supporterUserId,
+      supporterName: oneCampaign.supporterName,
+      supporterEmail: oneCampaign.supporterEmail,
+
+      supporterComment: oneCampaign.supporterComment,
+
+      amount: amount,
+
+      payment_status: status,
+    };
+
+    const t4 = await db.sequelize.transaction();
+
+    try {
+      await Statscampaign.create(addSupporterToStats, { transaction: t4 });
+
+      await t4.commit();
+    } catch (e) {
+      await t4.rollback();
+      console.log(error.stack);
     }
   }
+}
+
+
+const webhookController = async (req, res) => {
+
 
   const sig = req.headers["stripe-signature"];
 
@@ -531,4 +534,7 @@ const webhookController = async (req, res) => {
 
 module.exports = {
   webhookController,
+  calculateNewAmountWithDiscountCode,
+  updatePaymentStatus,
+
 };
