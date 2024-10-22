@@ -45,6 +45,12 @@ import DonationFormItemCampaign from "../../components/Payments/DonationFormItem
 
 import { useTranslation } from "react-i18next";
 
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+
 const SupporterFourthPart = ({
   fourthIsVisible,
 
@@ -64,6 +70,9 @@ const SupporterFourthPart = ({
 
   setFourthIsVisible,
   setFifthIsVisible,
+
+  
+
 }) => {
   const { t } = useTranslation();
 
@@ -208,6 +217,71 @@ const SupporterFourthPart = ({
                     {/*  /> */}
                   </QueryProvider>
                 </ThemeProvider>
+              </div>
+
+              <div className="p-8">
+                <PayPalButtons
+                  key={`${amount}-${discountCode}`}
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            value: amount,
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={(data, actions) => {
+                    return actions.order.capture().then(async (details) => {
+                      console.log(
+                        `Transaction completed by ${details.payer.name.given_name}`
+                      );
+                      console.log(details);
+                      // Handle successful transaction here (e.g., send details to backend)
+                      // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
+
+                      // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
+                      // testing paypal can be done with E2E testing, on UI
+
+                      try {
+                        const response = await axios.post(
+                          `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                          {
+                            /*   discountCode: discountCode,
+          campaignId: campaignId,
+
+          supporterEmail: supporterEmail,
+          supporterName: supporterName,
+          supporterComment: supporterComment, */
+
+                            transactionId: details.id,
+
+                            supporterName,
+                            supporterEmail,
+                            supporterComment,
+                            separateDonationThruPage: false, 
+
+                            discountCode: discountCode,
+                            campaignId,
+                            countryAthleteIsIn: "US" // ! pass props to here, from <Flag where you selected it,
+                          }
+                        );
+
+                        if (response.status === 200) {
+                          setSnackbarMessage("Donated");
+                          setOpenSnackbar(true);
+                        }
+                      } catch (e) {
+                        console.log(e.stack);
+                      }
+                    });
+                  }}
+
+                  /* show only paypal button (not credit card) */
+                  fundingSource={FUNDING.PAYPAL}
+                />
               </div>
 
 
