@@ -296,6 +296,8 @@ const EditProfile = () => {
 
       setBio(userJson.data.bio);
 
+      setSelectedRole(userJson.data.user_type);
+
       if (!passportUpload) {
         setPassportImage(userJson.data.passport_photo);
       }
@@ -1122,9 +1124,11 @@ const EditProfile = () => {
 
             <div className="flex items-end col-span-2 w-full">
               <div className="flex flex-col justify-center w-full">
+
                 {selectedRole === "AH" && (
                   <div className="flex mt-2  ">
                     <div className="flex flex-col w-full">
+                     
                       <p className="text-sm font-medium">
                         {t("myprofile.myaccount.content9")}
                       </p>
