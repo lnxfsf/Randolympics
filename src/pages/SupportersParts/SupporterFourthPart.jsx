@@ -219,7 +219,7 @@ const SupporterFourthPart = ({
                 </ThemeProvider>
               </div>
 
-              <div className="p-8">
+              <div className="p-8 w-full sm:w-1/2 md:w-[60%]">
                 <PayPalButtons
                   key={`${amount}-${discountCode}`}
                   createOrder={(data, actions) => {
@@ -286,6 +286,8 @@ const SupporterFourthPart = ({
 
 
             </div>
+
+         
 
             <div className=" mt-8 flex items-center justify-center flex-col w-full">
               <p className="font-semibold w-full text-center">
