@@ -568,6 +568,10 @@ const confirmPaypalTransaction = async (req, res) => {
           transaction: t2,
         });
 
+        console.log("he uses when it's only first supporter campaign")
+        console.log(data.id);
+        console.log(oneCampaign);
+
         try {
           await oneCampaign.update(
             {
