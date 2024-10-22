@@ -63,12 +63,12 @@ const CompetitionsDetails = () => {
                 {t(`sportDetails.${sportName}.title1`)}
               </p>
 
-              <p className="text-lg md:text-xl capitalize font-semibold">
+              <p className="text-xl md:text-2xl capitalize font-semibold">
                 {t("sportDetails.common1")}
               </p>
 
               <p
-                className="mt-4"
+                className="mt-4 text-base"
                 dangerouslySetInnerHTML={{
                   __html: t(`sportDetails.${sportName}.desc1`),
                 }}
@@ -95,9 +95,10 @@ const CompetitionsDetails = () => {
                     />
                   </div>
 
-                  <div className="w-full">
+                  <div className="w-full ">
                     <p
                       className=""
+                      
                       dangerouslySetInnerHTML={{
                         __html: variation.desc,
                       }}

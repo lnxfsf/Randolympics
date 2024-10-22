@@ -5,7 +5,6 @@ import "../../styles/home.scoped.scss";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
-
 import { Collapse } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
@@ -86,9 +85,7 @@ const SeventhScreenHome = () => {
         },
       },
 
-      slideChanged() {
-        
-      },
+      slideChanged() {},
     },
 
     [
@@ -177,9 +174,7 @@ const SeventhScreenHome = () => {
         },
       },
 
-      slideChanged() {
-        
-      },
+      slideChanged() {},
     },
 
     [
@@ -237,9 +232,27 @@ const SeventhScreenHome = () => {
   return (
     <>
       <div className="flex items-start lexend-font text-black_second flex-col">
-        <p className="text-4xl font-bold ml-6 mt-6">{t("home.seventhScreen.content1")}</p>
+        <p className="text-4xl font-bold ml-6 mt-6">
+          {t("home.seventhScreen.content1")}
+        </p>
 
-        <p className="text-3xl font-bold ml-6 mt-8 mb-8">{t("home.seventhScreen.content2")}</p>
+        <p className="ml-6 mr-6">
+          <br />
+          {t("home.seventhScreen.content19")}
+          <br />
+          <br /> {t("home.seventhScreen.content20")}
+           <a href="/supporters" className="underline">
+            {t("home.seventhScreen.content21")}
+          </a>{" "}
+          {t("home.seventhScreen.content22")}
+          <br />
+          <br />
+          {t("home.seventhScreen.content23")}
+        </p>
+
+        <p className="text-3xl font-bold ml-6 mt-8 mb-8">
+          {t("home.seventhScreen.content2")}
+        </p>
 
         <div ref={sliderRef} className="keen-slider w-32">
           <div className="keen-slider__slide    flex flex-col justify-center items-center">
@@ -304,8 +317,6 @@ const SeventhScreenHome = () => {
             <p className="font-bold">David Wilson</p>
             <p className="text-[#616673]">Member</p>
           </div>
-
-          
         </div>
 
         <div className="flex w-full justify-end p-8">
@@ -323,10 +334,11 @@ const SeventhScreenHome = () => {
           </button>
         </div>
 
-        <p className="text-3xl font-bold ml-6 mt-8 mb-8">{t("home.seventhScreen.content3")}</p>
+        <p className="text-3xl font-bold ml-6 mt-8 mb-8">
+          {t("home.seventhScreen.content3")}
+        </p>
 
         <div ref={sliderRef2} className="keen-slider w-32">
-      
           <div className="keen-slider__slide    flex flex-col justify-center items-center">
             <img src="/home/about/6.jpg" className="h-48 mb-4 object-contain" />
 
@@ -393,8 +405,6 @@ const SeventhScreenHome = () => {
             <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
           </div>
 
-
-
           <div className="keen-slider__slide    flex flex-col justify-center items-center">
             <img src="/home/about/6.jpg" className="h-48 mb-4 object-contain" />
 
@@ -418,9 +428,6 @@ const SeventhScreenHome = () => {
             <p className="font-bold">Ethan Brooks</p>
             <p className="text-[#616673]">{t("userTypes.user_type4")}</p>
           </div>
-
-
-          
         </div>
 
         <div className="flex w-full justify-end p-8">
@@ -468,51 +475,58 @@ const SeventhScreenHome = () => {
 
           <div className="">
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-            
               <div className=" rounded-b-lg p-4 text-black_second lexend-font ">
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content5")}</p>
-                  <p>{t("home.seventhScreen.content6")}
-                    
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content5")}
                   </p>
+                  <p>{t("home.seventhScreen.content6")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content7")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content7")}
+                  </p>
                   <p>{t("home.seventhScreen.content8")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content9")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content9")}
+                  </p>
                   <p>{t("home.seventhScreen.content10")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content11")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content11")}
+                  </p>
                   <p>{t("home.seventhScreen.content12")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content13")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content13")}
+                  </p>
                   <p>{t("home.seventhScreen.content14")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content15")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content15")}
+                  </p>
                   <p>{t("home.seventhScreen.content16")}</p>
                 </div>
 
                 <div className="mt-4 mb-4">
-                  <p className="text-2xl font-bold">{t("home.seventhScreen.content17")}</p>
+                  <p className="text-2xl font-bold">
+                    {t("home.seventhScreen.content17")}
+                  </p>
                   <p>{t("home.seventhScreen.content18")}</p>
                 </div>
               </div>
-
-
             </Collapse>
           </div>
-
-          
         </div>
       </div>
     </>
