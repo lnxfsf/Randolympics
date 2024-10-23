@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 import YouTube from "react-youtube";
 
+
 const CompetitionsDetails = () => {
   const { sportName } = useParams();
   const navigate = useNavigate();
