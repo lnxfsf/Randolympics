@@ -45,51 +45,42 @@ const FooterClean = () => {
             */}
               <p className="cursor-pointer select-none">{t("footer.cookie")}</p>
             </div>
-
-
-            <div className="lg:self-end mt-4 ">
-              <Select
-                labelId="language-switcher"
-                value={i18n.resolvedLanguage}
-                onChange={handleLanguageChange}
-                className=" sm:w-[100px] h-10"
-                style={{ color: "#000" }}
-              >
-                {Object.keys(lngs).map((lng) => (
-                  <MenuItem key={lng} value={lng}>
-                    {lngs[lng].nativeName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </div>
-
-
           </div>
         </div>
 
-
-
-        <div className="lexend-font text-black_second flex flex-col mt-4">
-          <p className="text-red_second font-bold mb-2 ">Sitemap</p>
-          
-          <a href="/campaign" >Campaigns</a>
-          <a href="/competitions">Competitions</a>
-          <a href="/news">News</a>
-          <a href="/faq">FAQ</a>
-          <a href="/contact">Contact us</a>
-          
-
-          <a href="/supporters">Create campaign for friend/celebrity/yourself</a>
-          <a href="/randomize">Test mock-up randomizer</a>
-          
-
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
-
-
-        </div>
-
-
+        <div className="flex justify-between items-start mt-4  flex-col md:flex-row ">
+          <div className="flex flex-col md:flex-row">
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-2">
+    <a href="/campaign">{t("navbar.btn2")}</a>
+    <a href="/competitions">{t("navbar.btn6")}</a>
+    <a href="/news">{t("navbar.btn3")}</a>
+    <a href="/faq">{t("navbar.btn4")}</a>
+  </div>
+  
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-2 md:ml-8">
+    <a href="/supporters">{t("navbar.profile9")}</a>
+    <a href="/randomize">{t("home.firstScreen.subtitle2")}</a>
+    <a href="/login">{t("navbar.profile8")}</a>
+    <a href="/register">{t("login.content9")}</a>
+  </div>
+  </div>
+  
+  <div className="mt-4 justify-self-end		">
+    <Select
+      labelId="language-switcher"
+      value={i18n.resolvedLanguage}
+      onChange={handleLanguageChange}
+      className="sm:w-[100px] h-10 "
+      style={{ color: "#000", borderRadius: "10px" }}
+    >
+      {Object.keys(lngs).map((lng) => (
+        <MenuItem key={lng} value={lng} >
+          {lngs[lng].nativeName}
+        </MenuItem>
+      ))}
+    </Select>
+  </div>
+</div>
 
       </div>
     </>
