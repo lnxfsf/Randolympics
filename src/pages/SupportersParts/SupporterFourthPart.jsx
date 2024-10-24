@@ -265,7 +265,7 @@ const SupporterFourthPart = ({
 
                             discountCode: discountCode,
                             campaignId,
-                            countryAthleteIsIn: "US" // ! pass props to here, from <Flag where you selected it,
+                            friendNationality // ! pass props to here, from <Flag where you selected it,
                           }
                         );
 
