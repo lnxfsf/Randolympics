@@ -263,8 +263,7 @@ const DonatePart = ({
                         );
 
                         if (response.status === 200) {
-                          setSnackbarMessage("Donated");
-                          setOpenSnackbar(true);
+                         
                         }
                       } catch (e) {
                         console.log(e.stack);
