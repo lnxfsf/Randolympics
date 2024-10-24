@@ -35,10 +35,10 @@ const FifthScreenHome = () => {
                 </div> */}
 
 {/*    */}
-            <div class="custom-border1 ml-4 md:ml-16 lg:ml-[4rem] mr-8 mb-5 flex">
-              <div class="dot"></div>
+            <div className="custom-border1 ml-4 md:ml-16 lg:ml-[4rem] mr-8 mb-5 flex">
+              <div className="dot"></div>
 
-              {/*  <div class="dash"></div> */}
+              {/*  <div className="dash"></div> */}
             </div>
 
 
@@ -91,10 +91,10 @@ const FifthScreenHome = () => {
                     <img src="/home/centreProgressContainer.svg" className="h-[100%]" />
                 </div> */}
 
-            <div class="custom-border3 ml-4 md:ml-[4rem] mr-8 flex mb-5 ">
-              <div class="dot"></div>
+            <div className="custom-border3 ml-4 md:ml-[4rem] mr-8 flex mb-5 ">
+              <div className="dot"></div>
 
-              {/*  <div class="dash"></div> */}
+              {/*  <div className="dash"></div> */}
             </div>
 
             <div className="flex flex-col items-start justify-start   text_games   ">
@@ -113,9 +113,9 @@ const FifthScreenHome = () => {
                 <img src="/home/centreProgressContainer.svg" className="h-[100%]" />
             </div> 
 
-            <div class="custom-border ml-4 md:ml-[4rem] mr-8 flex mb-5">
-              <div class="dot"></div>
-              {/*  <div class="dash"></div> 
+            <div className="custom-border ml-4 md:ml-[4rem] mr-8 flex mb-5">
+              <div className="dot"></div>
+              {/*  <div className="dash"></div> 
             </div>
 
             <div className="flex flex-col items-start justify-start  text_games ">
@@ -129,9 +129,9 @@ const FifthScreenHome = () => {
 
           {/* fourth */}
           <div className="flex">
-            <div class="custom-border4 ml-4 md:ml-[4rem] mr-8 flex ">
-              <div class="dot"></div>
-              {/*  <div class="dash"></div> */}
+            <div className="custom-border4 ml-4 md:ml-[4rem] mr-8 flex ">
+              <div className="dot"></div>
+              {/*  <div className="dash"></div> */}
             </div>
 
             <div className="flex flex-col items-start justify-start text_games">
@@ -177,15 +177,15 @@ const FifthScreenHome = () => {
 
           {/* fifth */}
        {/*    <div className="flex">
-            <div class="custom-borderEnd ml-4 md:ml-[4rem] mr-8 flex ">
-              <div class="dot3"></div>
+            <div className="custom-borderEnd ml-4 md:ml-[4rem] mr-8 flex ">
+              <div className="dot3"></div>
             
             </div>
           </div>
 
           <div className="flex">
-            <div class=" ml-4 md:ml-[4rem] mr-8 flex ">
-              {/*  <div class="dash"></div> 
+            <div className=" ml-4 md:ml-[4rem] mr-8 flex ">
+              {/*  <div className="dash"></div> 
             </div>
 
             <div className="flex flex-col items-start justify-start end_text_games">

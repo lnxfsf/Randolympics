@@ -100,13 +100,13 @@ const Others = ({
     }
 
     const today = moment();
-    console.log("danas" + today);
+    
 
     const birthDate = moment(birthdate);
-    console.log("rodjendan" + birthDate);
+    
 
     const years = today.diff(birthDate, "years");
-    console.log("razlika god" + years);
+    
 
     return years;
   }

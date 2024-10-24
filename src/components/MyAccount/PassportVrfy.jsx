@@ -111,8 +111,7 @@ const PassportVrfy = () => {
         }
       );
 
-      console.log("passport vrfy");
-      console.log(response)
+      
 
       setMaxPages(Math.ceil(response.data.count / 10));
       setListOfUsers(response.data.rows);

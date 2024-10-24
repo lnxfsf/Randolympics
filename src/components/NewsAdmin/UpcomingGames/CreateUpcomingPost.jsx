@@ -199,7 +199,7 @@ const CreateUpcomingPost = ({ onBack }) => {
                 const jsonResponse = JSON.parse(response);
                 const filename = jsonResponse;
 
-                console.log("Uploaded filename:", filename);
+                
 
                 // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
                 setTempEditCoverImage(filename)

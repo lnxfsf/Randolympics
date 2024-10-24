@@ -53,7 +53,7 @@ const FAQ = () => {
             }  bg-[#F7FAFA] pl-2 pr-2 mt-4`}
           >
             <p
-              expand={expandedFirstText}
+            /*   expand={expandedFirstText} */
               onClick={() => {
                 setExpandedFirstText(!expandedFirstText);
               }}
@@ -152,7 +152,7 @@ const FAQ = () => {
             }  bg-[#F7FAFA] pl-2 pr-2 mt-2`}
           >
             <p
-              expand={expandedSecondText}
+              /* expand={expandedSecondText} */
               onClick={() => {
                 setExpandedSecondText(!expandedSecondText);
               }}
@@ -243,7 +243,7 @@ const FAQ = () => {
             }  bg-[#F7FAFA] pl-2 pr-2 mt-2`}
           >
             <p
-              expand={expandedThirdText}
+             /*  expand={expandedThirdText} */
               onClick={() => {
                 setExpandedThirdText(!expandedThirdText);
               }}
@@ -306,7 +306,7 @@ const FAQ = () => {
             }  bg-[#F7FAFA] pl-2 pr-2 mt-2`}
           >
             <p
-              expand={expandedFourthText}
+            /*   expand={expandedFourthText} */
               onClick={() => {
                 setExpandedFourthText(!expandedFourthText);
               }}

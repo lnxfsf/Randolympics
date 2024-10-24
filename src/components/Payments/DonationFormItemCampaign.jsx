@@ -46,7 +46,7 @@ export default function DonationFormItemCampaign({amount, setAmount, campaignId,
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);
-    //console.log("da poziva se stvarno ");
+    //
   }, [paymentIntent]);
 
   const confirmPayment = (payment) => {

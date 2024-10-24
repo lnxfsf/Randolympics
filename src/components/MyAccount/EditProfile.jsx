@@ -339,7 +339,7 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
 
-        console.log(response);
+        
       }
     } catch (error) {
       console.log(error);
@@ -367,7 +367,7 @@ const EditProfile = () => {
 
   //const FDate = dayjs(selectedDate);
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
-  // console.log(formattedDate);
+  // 
 
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
@@ -530,7 +530,7 @@ const EditProfile = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
         setPassportImage(filename);
         // return filename;
       },
@@ -578,7 +578,7 @@ const EditProfile = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         /* setProfileImage(filename); */
 
@@ -671,7 +671,7 @@ const EditProfile = () => {
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
         weight = weight * 0.45359237;
-        console.log(weight);
+        
       }
     }
 

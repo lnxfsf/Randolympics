@@ -39,7 +39,7 @@ const NewsNewsBlock = () => {
 
     setGamesPosts(response.data);
 
-    console.log(response.data);
+    
   };
 
   return (

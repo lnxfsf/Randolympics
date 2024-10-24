@@ -169,9 +169,9 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log(response.data.oneCampaign);
+      
 
-      console.log(response.data.thatAthlete);
+      
 
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
@@ -277,8 +277,8 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("firstSupportersCampaign");
-      console.log(response.data);
+      
+      
 
       setFirstSupportersCampaign(response.data);
     } catch (error) {
@@ -299,8 +299,8 @@ const ItemCampaign = () => {
         }
       );
 
-     /*  console.log("saljes ti last coments allTransactionsSupportersCampaign");
-      console.log(response.data.rows);
+     /*  
+      
  */
 
       setMaxPages(Math.ceil(response.data.count / 10));

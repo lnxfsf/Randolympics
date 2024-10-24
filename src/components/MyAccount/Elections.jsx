@@ -175,7 +175,7 @@ const Elections = () => {
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
-    console.log("ovo ne radi");
+    
   };
 
   const handlePaginationChange = (event, value) => {
@@ -205,8 +205,8 @@ const Elections = () => {
         }
       );
 
-      console.log("top selected ");
-      console.log(response.data);
+      
+      
 
       setTop50Users(response.data);
     } catch (error) {
@@ -235,8 +235,8 @@ const Elections = () => {
         }
       );
 
-      console.log("elections");
-      console.log(response);
+      
+      
 
       setMaxPages(Math.ceil(response.data.count / 10));
       setOtherUsers(response.data.rows);

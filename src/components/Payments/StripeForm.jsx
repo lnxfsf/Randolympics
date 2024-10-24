@@ -27,8 +27,8 @@ const stripePromise = loadStripe(`${STRIPE_PUBLIC_KEY}`);
 const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
   const [confirmData, updateConfirmData] = useState(null);
 /* 
-  console.log("handle clear je");
-  console.log(handleCancel); */
+  
+   */
 
   const stripe = useStripe(`${STRIPE_PUBLIC_KEY}`);
 
@@ -99,8 +99,8 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
 
 
 const StripeForm = (props) => {
-   console.log("sta ima u props sve");
-    console.log(props);
+   
+    
   return (
     <>
       <Elements

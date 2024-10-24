@@ -306,8 +306,8 @@ const Supporters = () => {
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
 
-  console.log("sadaje");
-  console.log(additionalSupportersFormData);
+  
+  
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -413,7 +413,7 @@ const Supporters = () => {
           );
 
           if (response.status === 201) {
-            console.log("athleteId" + response.data.userId);
+            
             athleteId = response.data.userId;
 
             /*  alert("athlete user created"); */
@@ -549,7 +549,7 @@ const Supporters = () => {
   };
 
   const informOtherSupporters = async () => {
-    console.log("on izvrsava ovaj informOtherSupporters");
+    
 
     console.log(JSON.stringify(additionalSupportersFormData));
 
@@ -585,7 +585,7 @@ const Supporters = () => {
     }
   };
 
-  console.log("urlForCampaign ------------>  " + urlForCampaign);
+  
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -691,7 +691,7 @@ const Supporters = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         setFriendImage(filename);
 

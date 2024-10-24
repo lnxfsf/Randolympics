@@ -153,7 +153,7 @@ const SupporterSecondPart = ({
     }
 
     if (!isCelebrity) {
-      console.log("on DA pokrece email konfirmaciju za friend mail");
+      
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       if (!emailRegex.test(friendEmail)) {

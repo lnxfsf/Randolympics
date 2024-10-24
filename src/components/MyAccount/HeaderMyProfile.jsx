@@ -73,7 +73,7 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         setProfileImage(filename);
 
@@ -126,7 +126,7 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
 
-        console.log(response);
+        
         return 1;
       }
     } catch (error) {

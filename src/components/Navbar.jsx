@@ -183,6 +183,7 @@ const Navbar = () => {
                 {/* // when logged in */}
 
                 <Tooltip title="Account settings">
+                  <>
                   <div className="flex gap-2 items-center justify-center">
                     <IconButton
                       onClick={handleClick}
@@ -377,6 +378,7 @@ const Navbar = () => {
                       </span>
                     </MenuItem>
                   </Menu>
+                  </>
                 </Tooltip>
               </>
             ) : (

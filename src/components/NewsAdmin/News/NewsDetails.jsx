@@ -101,7 +101,7 @@ const NewsDetails = ({ postZ, onBack }) => {
       );
 
       if (response.status === 200) {
-        console.log("Post deleted successfully", response.message);
+        
 
         onBack(true, false);
       } else {
@@ -179,7 +179,7 @@ const NewsDetails = ({ postZ, onBack }) => {
       if (response.status === 200) {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
-        console.log(response.data.message);
+        
 
         console.log(
           " novi image treba da zameni sa starijim:" + editCoverImage
@@ -254,7 +254,7 @@ const NewsDetails = ({ postZ, onBack }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
         setTempEditCoverImage(filename);
@@ -321,7 +321,7 @@ const NewsDetails = ({ postZ, onBack }) => {
         }
       );
 
-      console.log(response.data);
+      
       setPost(response.data);
     } catch (error) {
       console.error(error);

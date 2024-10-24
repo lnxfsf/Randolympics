@@ -452,7 +452,7 @@ const SeventhScreenHome = () => {
             }   pl-2 pr-2`}
           >
             <p
-              expand={expanded}
+              /* expand={expanded} */
               onClick={() => {
                 setExpanded(!expanded);
               }}

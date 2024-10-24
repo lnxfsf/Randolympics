@@ -41,7 +41,7 @@ export default function DonationForm({amount, setAmount, campaignId}) {
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);
-    //console.log("da poziva se stvarno ");
+    //
   }, [paymentIntent]);
 
   const confirmPayment = (payment) => {
@@ -80,8 +80,8 @@ export default function DonationForm({amount, setAmount, campaignId}) {
     if (data) setPaymentIntent(data);
   }, [data]);
 
-  console.log("paymentIntent");
-  console.log(paymentIntent);
+  
+  
 
   return (
     <Card>

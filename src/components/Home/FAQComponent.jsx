@@ -35,7 +35,7 @@ const FAQComponent = ({title, content}) => {
         >
           
           <p
-            expand={expanded}
+          /*   expand={expanded} */
             onClick={() => {
               setExpanded(!expanded);
             }}

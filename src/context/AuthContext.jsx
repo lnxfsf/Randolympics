@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      console.log("damn" + response);
+      
     } catch (error) {
       if (error.response.status === 401) {
        // alert(error.response.data.message);
@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         }
 
     } else {
-      console.log("Something went wrong while loggin in the user!");
+      
       return 0;
     }
 

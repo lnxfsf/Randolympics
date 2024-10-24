@@ -43,7 +43,7 @@ const UserProfilePublicView = () => {
         }
       );
 
-      console.log(response.data);
+      
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching other users:", error);

@@ -112,7 +112,7 @@ const CountDownTimerHome = () => {
 
 
 
-         <p className="flex justify-between md:items-center max-md:flex-col max-md:gap-2 w-full pl-4 md:pl-8 md:pr-8">
+         <div className="flex justify-between md:items-center max-md:flex-col max-md:gap-2 w-full pl-4 md:pl-8 md:pr-8">
           
           
            <div className="flex gap-2">
@@ -122,7 +122,7 @@ const CountDownTimerHome = () => {
 
 
            <p className="max-md:text-xs md:text-normal  font-medium  ">{t('home.firstScreen.countdown6')}</p>
-         </p>
+         </div>
 
 
 

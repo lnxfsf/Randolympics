@@ -238,7 +238,7 @@ const SupporterFourthPart = ({
                       console.log(
                         `Transaction completed by ${details.payer.name.given_name}`
                       );
-                      console.log(details);
+                      
                       // Handle successful transaction here (e.g., send details to backend)
                       // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
 

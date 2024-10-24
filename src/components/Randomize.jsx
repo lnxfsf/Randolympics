@@ -214,8 +214,8 @@ const Randomize = () => {
         }
       );
 
-      console.log("a sta jeste funkcija:");
-      console.log(response);
+      
+      
 
       setScheduleData(response.data);
     } catch (error) {

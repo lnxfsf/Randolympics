@@ -160,7 +160,7 @@ const Register = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
         setUploadedFile(filename);
         // return filename;
       },
@@ -320,7 +320,7 @@ const Register = () => {
       }
     );
 
-    console.log(profile_uploaded); */
+     */
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
@@ -340,7 +340,7 @@ const Register = () => {
       if (selectedWeight === "Lb") {
         var weight = e.target.weight * 0.45359237;
 
-        //console.log(weight);
+        //
       }
     }
 
