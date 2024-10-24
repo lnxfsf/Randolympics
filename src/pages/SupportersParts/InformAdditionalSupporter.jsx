@@ -32,7 +32,7 @@ const InformAdditionalSupporter = ({
             </button>
 
             <label
-              htmlFor="theirName"
+              htmlFor="name"
               className="lexend-font mb-1 mt-1 font-medium text-sm"
             >
               {t('campaign.content1')}
@@ -41,7 +41,7 @@ const InformAdditionalSupporter = ({
               value={data.name}
               onChange={(event) => handleInputChange(index, event)}
               placeholder="John"
-              name="theirName"
+              name="name"
               type="text"
               inputProps={{
                 maxLength: 255,
@@ -51,7 +51,7 @@ const InformAdditionalSupporter = ({
             />
 
             <label
-              htmlFor="theirEmail"
+              htmlFor="email"
               className="lexend-font mb-1 mt-1 font-medium text-sm"
             >
               {t('campaign.content2')}
@@ -61,7 +61,7 @@ const InformAdditionalSupporter = ({
               onChange={(event) => handleInputChange(index, event)}
               placeholder="johndoe@gmail.com"
               type="email"
-              name="theirEmail"
+              name="email"
               inputProps={{
                 maxLength: 255,
               }}
