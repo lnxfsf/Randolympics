@@ -352,7 +352,8 @@ const newsToUser = async (req, res) => {
 
     const allBlogs = await News.findAll({
 
-      order: [["views", "DESC"]],
+      //order: [["views", "DESC"]],
+      order: [["updatedAt", "DESC"]],
       limit: limit,
       offset: offset,
 
