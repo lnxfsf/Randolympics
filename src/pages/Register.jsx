@@ -363,7 +363,7 @@ const Register = () => {
     var cryptoaddr = e.target.cryptoaddr.value;
 
     // check again, if email is correctly inserted
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+   /*  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
      
@@ -411,7 +411,7 @@ const Register = () => {
       recaptcha.current.reset();
     } else {
       setIsPasswordError(false);
-    }
+    } */
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
@@ -696,23 +696,8 @@ setOpenSnackbar(true);
                     name="email"
                     required
                     onInvalid={() => {
-                      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-    if (!emailRegex.test(email)) {
-     
-
-      setIsEmailError(true);
-      setIsEmailErrorHelper(t("register.content1"));
-
-      setSnackbarStatus("error");
-      setSnackbarMessage(t("register.content1"));
-      setOpenSnackbar(true);
-
-      //recaptcha.current.reset();
-    }
-
-
-                     // recaptcha.current.reset();
+                      
+                      recaptcha.current.reset();
                     }}
                     type="email"
                     maxLength="80"
@@ -831,22 +816,7 @@ setOpenSnackbar(true);
                 name="pass"
                 required
                 onInvalid={() => {
-                  const passwordRegex = /^.{4,}$/;
-
-                  if (!passwordRegex.test(password)) {
-                  
-              
-                    setIsPasswordError(true);
-                    setIsPasswordErrorHelper(t("register.content3"));
-              
-                    setSnackbarStatus("error");
-                    setSnackbarMessage(t("register.content3"));
-                    setOpenSnackbar(true);
-              
-                   // recaptcha.current.reset();
-                  } else {
-                    setIsPasswordError(false);
-                  }
+                  recaptcha.current.reset();
                 }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
@@ -882,23 +852,7 @@ setOpenSnackbar(true);
                     name="phone"
                     required
                     onInvalid={() => {
-                      const phoneRegex =
-                      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
-                
-                    if (!phoneRegex.test(phone)) {
-                     
-                
-                      setIsPhoneError(true);
-                      setIsPhoneErrorHelper(t("register.content2"));
-                
-                      setSnackbarStatus("error");
-                      setSnackbarMessage(t("register.content2"));
-                      setOpenSnackbar(true);
-                
-                     // recaptcha.current.reset();
-                    } else {
-                      setIsPhoneError(false);
-                    }
+                      recaptcha.current.reset();
                     }}
                     type="tel"
                     inputProps={{
