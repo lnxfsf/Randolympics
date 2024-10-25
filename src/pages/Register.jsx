@@ -1,6 +1,10 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
+
 import "../styles/register.scoped.scss";
 import { useTranslation } from "react-i18next";
 
@@ -101,6 +105,21 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
   const { t } = useTranslation();
 
   // ? this is for phone
@@ -118,8 +137,6 @@ const Register = () => {
   const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
   const isEmailErrorFocus = useRef(null);
 
-  const [resultText, setResultText] = useState("");
-  const [resultTextColor, setResultTextColor] = useState("black");
 
   // ? FILEPOND for IMAGE
   const [files, setFiles] = useState([]);
@@ -349,20 +366,32 @@ const Register = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      recaptcha.current.reset();
+     
 
       setIsEmailError(true);
       setIsEmailErrorHelper(t("register.content1"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content1"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
     }
 
     const phoneRegex =
       /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
     if (!phoneRegex.test(phone)) {
-      recaptcha.current.reset();
+     
 
       setIsPhoneError(true);
       setIsPhoneErrorHelper(t("register.content2"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content2"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
     } else {
       setIsPhoneError(false);
     }
@@ -370,10 +399,16 @@ const Register = () => {
     const passwordRegex = /^.{4,}$/;
 
     if (!passwordRegex.test(password)) {
-      recaptcha.current.reset();
+    
 
       setIsPasswordError(true);
       setIsPasswordErrorHelper(t("register.content3"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content3"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
     } else {
       setIsPasswordError(false);
     }
@@ -382,7 +417,9 @@ const Register = () => {
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
-      setResultText(t("register.content4"));
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content4"));
+      setOpenSnackbar(true);
     } else {
       if (
         nationality_selected &&
@@ -433,46 +470,76 @@ const Register = () => {
 
             if (axios.isAxiosError(error)) {
               if (error.response && error.response.status === 409) {
-                //alert("");
+               
 
-                setResultText(error.response.data.message);
-
-                //console.log(error)
-
-                setResultTextColor("red");
+                setSnackbarStatus("error");
+                setSnackbarMessage(error.response.data.message);
+                setOpenSnackbar(true);
               } else {
-                setResultText(
-                  "An error occurred: " +
-                    (error.response?.data?.message || error.message)
-                );
+               
+
+                setSnackbarStatus("error");
+                setSnackbarMessage("An error occurred: " +
+                    (error.response?.data?.message || error.message));
+                setOpenSnackbar(true);
+
+
               }
             } else {
-              setResultText("An unexpected error occurred: " + error.message);
+                setSnackbarStatus("error");
+                setSnackbarMessage("An unexpected error occurred: " + error.message);
+                setOpenSnackbar(true);
+
+
             }
           }
 
           if (response) {
-            setResultText(t("register.content5"));
-            setResultTextColor("black");
+            
+
+
+            setSnackbarStatus("success");
+                setSnackbarMessage(t("register.content5"));
+                setOpenSnackbar(true);
+
+
+
           }
         } else {
-          setResultText(t("register.content6"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+setSnackbarMessage((t("register.content6")));
+setOpenSnackbar(true);
+
+
         }
       } else {
         if (nationality_selected === "") {
           recaptcha.current.reset();
-          setResultText(t("register.content7"));
-          setResultTextColor("red");
+
+       
+          setSnackbarStatus("error");
+setSnackbarMessage((t("register.content7")));
+setOpenSnackbar(true);
+
+
         } else if (isEmailError === true) {
-          setResultText(t("register.content8"));
-          setResultTextColor("red");
+
+          setSnackbarStatus("error");
+setSnackbarMessage((t("register.content8")));
+setOpenSnackbar(true);
+
+
         } else if (isPhoneError === true) {
-          setResultText(t("register.content9"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+          setSnackbarMessage((t("register.content9")));
+          setOpenSnackbar(true);
+
+
         } else if (isPasswordError === true) {
-          setResultText(t("register.content10"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+          setSnackbarMessage((t("register.content10")));
+          setOpenSnackbar(true);
+
         }
       }
     }
@@ -629,7 +696,23 @@ const Register = () => {
                     name="email"
                     required
                     onInvalid={() => {
-                      recaptcha.current.reset();
+                      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+     
+
+      setIsEmailError(true);
+      setIsEmailErrorHelper(t("register.content1"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content1"));
+      setOpenSnackbar(true);
+
+      //recaptcha.current.reset();
+    }
+
+
+                     // recaptcha.current.reset();
                     }}
                     type="email"
                     maxLength="80"
@@ -748,7 +831,22 @@ const Register = () => {
                 name="pass"
                 required
                 onInvalid={() => {
-                  recaptcha.current.reset();
+                  const passwordRegex = /^.{4,}$/;
+
+                  if (!passwordRegex.test(password)) {
+                  
+              
+                    setIsPasswordError(true);
+                    setIsPasswordErrorHelper(t("register.content3"));
+              
+                    setSnackbarStatus("error");
+                    setSnackbarMessage(t("register.content3"));
+                    setOpenSnackbar(true);
+              
+                   // recaptcha.current.reset();
+                  } else {
+                    setIsPasswordError(false);
+                  }
                 }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
@@ -783,9 +881,25 @@ const Register = () => {
                     id="phone"
                     name="phone"
                     required
-                onInvalid={() => {
-                  recaptcha.current.reset();
-                }}
+                    onInvalid={() => {
+                      const phoneRegex =
+                      /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
+                
+                    if (!phoneRegex.test(phone)) {
+                     
+                
+                      setIsPhoneError(true);
+                      setIsPhoneErrorHelper(t("register.content2"));
+                
+                      setSnackbarStatus("error");
+                      setSnackbarMessage(t("register.content2"));
+                      setOpenSnackbar(true);
+                
+                     // recaptcha.current.reset();
+                    } else {
+                      setIsPhoneError(false);
+                    }
+                    }}
                     type="tel"
                     inputProps={{
                       maxLength: 15,
@@ -1076,12 +1190,25 @@ const Register = () => {
             <span className="popins-font">{t("register.content24")}</span>
           </Button>
 
-          {/* resultTextColor */}
-          <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
-            {resultText}
-          </p>
+         
         </div>
       </form>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
       <FooterClean />
     </>
