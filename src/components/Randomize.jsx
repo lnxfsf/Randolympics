@@ -973,7 +973,10 @@ return dataS.map((data, index) => { */
             {t("mockupRandomizer.content6")}. 🤩
           </p>
 
-          <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full mt-8 p-4">
+
+{/* sports items in circles */}
+<div className="w-full md:flex md:justify-center">
+          <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full md:w-[80%] lg:w-[70%] xl:w-[60%]  mt-8 p-4">
             {scheduleData.map((data, index) => {
               /*    data.icon
         data.sportName 
@@ -992,6 +995,8 @@ return dataS.map((data, index) => { */
               return (
                 <>
                   <div className="flex flex-col justify-center items-center ">
+                   
+                   
                     <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
                       <img
                         width={"30px"}
@@ -1001,10 +1006,12 @@ return dataS.map((data, index) => { */
                     </div>
 
                     <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
+
                   </div>
                 </>
               );
             })}
+          </div>
           </div>
 
           {/* table for PC */}
