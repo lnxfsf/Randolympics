@@ -160,7 +160,6 @@ const Register = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        
         setUploadedFile(filename);
         // return filename;
       },
@@ -350,14 +349,18 @@ const Register = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
+      recaptcha.current.reset();
+
       setIsEmailError(true);
-      setIsEmailErrorHelpert(t("register.content1"));
+      setIsEmailErrorHelper(t("register.content1"));
     }
 
     const phoneRegex =
       /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
     if (!phoneRegex.test(phone)) {
+      recaptcha.current.reset();
+
       setIsPhoneError(true);
       setIsPhoneErrorHelper(t("register.content2"));
     } else {
@@ -367,6 +370,8 @@ const Register = () => {
     const passwordRegex = /^.{4,}$/;
 
     if (!passwordRegex.test(password)) {
+      recaptcha.current.reset();
+
       setIsPasswordError(true);
       setIsPasswordErrorHelper(t("register.content3"));
     } else {
@@ -456,6 +461,7 @@ const Register = () => {
         }
       } else {
         if (nationality_selected === "") {
+          recaptcha.current.reset();
           setResultText(t("register.content7"));
           setResultTextColor("red");
         } else if (isEmailError === true) {
@@ -576,7 +582,7 @@ const Register = () => {
                   }}
                   style={{ color: "#000" }}
                 >
-                 {/* <MenuItem value={"AH"} sx={lexend_font}>
+                  {/* <MenuItem value={"AH"} sx={lexend_font}>
                     {t("register.user_type1")}
                   </MenuItem>*/}
                   <MenuItem value={"GP"} sx={lexend_font}>
@@ -622,6 +628,9 @@ const Register = () => {
                     id="email"
                     name="email"
                     required
+                    onInvalid={() => {
+                      recaptcha.current.reset();
+                    }}
                     type="email"
                     maxLength="80"
                     inputProps={{
@@ -678,6 +687,9 @@ const Register = () => {
                 id="name"
                 name="name"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type="text"
                 inputProps={{
                   maxLength: 255,
@@ -707,13 +719,16 @@ const Register = () => {
                 htmlFor="lastName"
                 className="lexend-font mb-1 mt-1 font-medium text-sm"
               >
-                {t("register.content16")}
+                {t("register.content16")} *
               </label>
               <TextField
                 placeholder="Doe"
                 id="lastName"
                 name="lastName"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type="text"
                 inputProps={{
                   maxLength: 255,
@@ -732,6 +747,9 @@ const Register = () => {
                 id="pass"
                 name="pass"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
                 InputProps={{
@@ -765,6 +783,9 @@ const Register = () => {
                     id="phone"
                     name="phone"
                     required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                     type="tel"
                     inputProps={{
                       maxLength: 15,
@@ -863,6 +884,9 @@ const Register = () => {
                       id="weight"
                       name="weight"
                       required
+                      onInvalid={() => {
+                        recaptcha.current.reset();
+                      }}
                       type="number"
                       onChange={(event) =>
                         event.target.value < 0
