@@ -77,23 +77,20 @@ const DonatePart = ({
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
 
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-    // for snackbar message.
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState("");
-  
-    // error, "success"
-    const [snackbarStatus, setSnackbarStatus] = useState("success");
-  
-    const handleSnackbar = (event, reason) => {
-      if (reason === "clickaway") {
-        return;
-      }
-  
-      setOpenSnackbar(false);
-    };
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
 
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenSnackbar(false);
+  };
 
   useEffect(() => {}, [amount, discountCode]);
 
@@ -232,79 +229,78 @@ const DonatePart = ({
                 </ThemeProvider>
               </div>
 
-              <div className="p-8">
-                <PayPalButtons
-                  /* key={`${amount}-${discountCode}`} */
-                  key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
-                  createOrder={(data, actions) => {
-                    return actions.order.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            value: amount,
+
+
+              <div className=" w-full flex justify-center items-center">
+                <div className="p-8 w-full sm:w-1/2 md:w-[60%]  ">
+                  <PayPalButtons
+                    /* key={`${amount}-${discountCode}`} */
+                    key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: amount,
+                            },
                           },
-                        },
-                      ],
-                    });
-                  }}
-                  onApprove={(data, actions) => {
-                    return actions.order.capture().then(async (details) => {
-                    /*   console.log(
+                        ],
+                      });
+                    }}
+                    onApprove={(data, actions) => {
+                      return actions.order.capture().then(async (details) => {
+                        /*   console.log(
                         `Transaction completed by ${details.payer.name.given_name}`
                       );
                        */
-                      // Handle successful transaction here (e.g., send details to backend)
-                      // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
+                        // Handle successful transaction here (e.g., send details to backend)
+                        // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
 
-                      // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
-                      // testing paypal can be done with E2E testing, on UI
+                        // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
+                        // testing paypal can be done with E2E testing, on UI
 
-                      try {
-                        const response = await axios.post(
-                          `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
-                          {
-                            /*   discountCode: discountCode,
+                        try {
+                          const response = await axios.post(
+                            `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                            {
+                              /*   discountCode: discountCode,
           campaignId: campaignId,
 
           supporterEmail: supporterEmail,
           supporterName: supporterName,
           supporterComment: supporterComment, */
 
-                            transactionId: details.id,
+                              transactionId: details.id,
 
-                            supporterName,
-                            supporterEmail,
-                            supporterComment,
-                            separateDonationThruPage: true, 
+                              supporterName,
+                              supporterEmail,
+                              supporterComment,
+                              separateDonationThruPage: true,
 
-                            discountCode: discountCode,
-                            campaignId,
-                            countryAthleteIsIn,
+                              discountCode: discountCode,
+                              campaignId,
+                              countryAthleteIsIn,
+                            }
+                          );
+
+                          if (response.status === 200) {
+                            setSnackbarMessage("Donation succeeded");
+                            setSnackbarStatus("success");
+                            setOpenSnackbar(true);
                           }
-                        );
+                        } catch (e) {
+                          console.log(e.stack);
 
-                        if (response.status === 200) {
-
-                          setSnackbarMessage("Donation succeeded");
-                          setSnackbarStatus("success");
+                          setSnackbarMessage("Donation failed");
+                          setSnackbarStatus("error");
                           setOpenSnackbar(true);
-                         
                         }
-                      } catch (e) {
-                        console.log(e.stack);
-
-                        setSnackbarMessage("Donation failed");
-                        setSnackbarStatus("error");
-                        setOpenSnackbar(true);
-
-
-                      }
-                    });
-                  }}
-
-                  /* show only paypal button (not credit card) */
-                  fundingSource={FUNDING.PAYPAL}
-                />
+                      });
+                    }}
+                    /* show only paypal button (not credit card) */
+                    fundingSource={FUNDING.PAYPAL}
+                  />
+                </div>
               </div>
 
               <div className="m-4 flex justify-center  items-center flex-col">
@@ -351,28 +347,21 @@ const DonatePart = ({
               </div>
             </div>
 
-
-
-
-
             <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleSnackbar}
-          severity={snackbarStatus}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
-
-
-
+              open={openSnackbar}
+              autoHideDuration={6000}
+              onClose={handleSnackbar}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            >
+              <Alert
+                onClose={handleSnackbar}
+                severity={snackbarStatus}
+                variant="filled"
+                sx={{ width: "100%" }}
+              >
+                {snackbarMessage}
+              </Alert>
+            </Snackbar>
           </>
         )}
       </div>
