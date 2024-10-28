@@ -4,6 +4,8 @@ import { QueryProvider } from "../../QueryProvider";
 import DonationForm from "../Payments/DonationForm";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import { PaymentPage } from "../Supporters/PaymentPage";
@@ -74,6 +76,24 @@ const DonatePart = ({
 }) => {
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
+
+
+    // for snackbar message.
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+    // error, "success"
+    const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+    const handleSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    };
+
+
 
   useEffect(() => {}, [amount, discountCode]);
 
@@ -214,7 +234,8 @@ const DonatePart = ({
 
               <div className="p-8">
                 <PayPalButtons
-                  key={`${amount}-${discountCode}`}
+                  /* key={`${amount}-${discountCode}`} */
+                  key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
                   createOrder={(data, actions) => {
                     return actions.order.create({
                       purchase_units: [
@@ -263,10 +284,20 @@ const DonatePart = ({
                         );
 
                         if (response.status === 200) {
+
+                          setSnackbarMessage("Donation succeeded");
+                          setSnackbarStatus("success");
+                          setOpenSnackbar(true);
                          
                         }
                       } catch (e) {
                         console.log(e.stack);
+
+                        setSnackbarMessage("Donation failed");
+                        setSnackbarStatus("error");
+                        setOpenSnackbar(true);
+
+
                       }
                     });
                   }}
@@ -319,6 +350,28 @@ const DonatePart = ({
                 </Button>
               </div>
             </div>
+
+
+
+
+
+            <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
+
 
           </>
         )}

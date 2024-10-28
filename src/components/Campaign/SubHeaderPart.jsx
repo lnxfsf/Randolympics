@@ -24,7 +24,7 @@ const SubHeaderPart = ({athlete, howManySupporters}) => {
 
         <p className="mt-1">{athlete.athleteStatement}</p>
 
-        <p className="mt-1">{howManySupporters} supporters</p>
+        <p key={howManySupporters} className="mt-1">{howManySupporters} supporters</p>
 
         <div className="flex justify-start mt-2">
           <AvatarGroup

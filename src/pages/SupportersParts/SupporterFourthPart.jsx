@@ -3,6 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
 import AuthCode from "react-auth-code-input";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 import axios from "axios";
 import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 
@@ -75,6 +78,26 @@ const SupporterFourthPart = ({
 
 }) => {
   const { t } = useTranslation();
+
+
+  
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+  
+
+
 
   return (
     <>
@@ -221,7 +244,7 @@ const SupporterFourthPart = ({
 
               <div className="p-8 w-full sm:w-1/2 md:w-[60%]">
                 <PayPalButtons
-                  key={`${amount}-${discountCode}`}
+                  key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
                   createOrder={(data, actions) => {
                     return actions.order.create({
                       purchase_units: [
@@ -270,10 +293,19 @@ const SupporterFourthPart = ({
                         );
 
                         if (response.status === 200) {
-                         
+                          setSnackbarMessage("Donation succeeded");
+                          setSnackbarStatus("success");
+                          setOpenSnackbar(true);
                         }
                       } catch (e) {
                         console.log(e.stack);
+
+                        
+                        setSnackbarMessage("Donation failed");
+                        setSnackbarStatus("error");
+                        setOpenSnackbar(true);
+
+
                       }
                     });
                   }}
@@ -363,6 +395,25 @@ const SupporterFourthPart = ({
           </div>
         </div>
       </div>
+
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
+
     </>
   );
 };

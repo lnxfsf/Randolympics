@@ -120,6 +120,11 @@ const ItemCampaign = () => {
 
   const [showAllSupporters, setShowAllSupporters] = useState(false);
 
+
+
+
+
+
   const donateWithCouponOnly = async () => {
     try {
       const response = await axios.post(
@@ -147,10 +152,20 @@ const ItemCampaign = () => {
   const [allTransactionsPage, setAllTransactionsPage] = useState(1);
   const [maxPages, setMaxPages] = useState(0);
 
+
   useEffect(() => {
+
+
+    // ! kk
+    getAllTransactions(); // you call this again, when opening "All transactions" 
     updateLatestData();
 
+    const interval = setInterval(() => {
+      updateLatestData();
+    }, 1000); 
+
    
+    return () => clearInterval(interval);
   }, [limitAllTransactions, allTransactionsPage]);
 
   
@@ -285,8 +300,13 @@ const ItemCampaign = () => {
       console.error(error);
     }
 
-    /* all transactions , activity */
-    try {
+   
+  };
+
+
+  const getAllTransactions = async () => {
+     /* all transactions , activity */
+     try {
       
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
@@ -309,8 +329,7 @@ const ItemCampaign = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
+  }
   
 
 
@@ -384,6 +403,7 @@ const ItemCampaign = () => {
               <ActivityPart
                 lastTransactionsSupporters={lastTransactionsSupporters}
                 setViewFullActivity={setViewFullActivity}
+                getAllTransactions={getAllTransactions}
               />
             </>
           ) : (

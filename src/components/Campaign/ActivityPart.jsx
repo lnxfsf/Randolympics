@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { useTranslation } from "react-i18next";
 
 
-const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
+const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewFullActivity }) => {
 
   const { t } = useTranslation();
 
@@ -60,6 +60,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
 
           <Button
             onClick={() => {
+              getAllTransactions();
               setViewFullActivity(true);
             }}
             className="w-full "
