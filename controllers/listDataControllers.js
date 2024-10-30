@@ -6516,35 +6516,6 @@ const createCampaign = async (req, res) => {
 
   } = req.body;
 
-  
-  console.log("he receives: supporterName: " + supporterName);
-
-  console.log("he receives: supporterEmail: " + supporterEmail);
-  console.log("he receives: supporterPhone: " + supporterPhone);
-
-  console.log("he receives: supporterComment: " + supporterComment);
-
-
-  console.log("check of all, not loggedIn and when logged in");
-  console.log('campaignId:', campaignId);
-console.log('friendName:', friendName);
-console.log('friendMiddleName:', friendMiddleName);
-console.log('friendFamilyName:', friendFamilyName);
-console.log('friendLastName:', friendLastName);
-console.log('friendEmail:', friendEmail);
-console.log('friendPhone:', friendPhone);
-console.log('friendBirthdate:', friendBirthdate);
-console.log('friendNationality:', friendNationality);
-console.log('friendImage:', friendImage);
-console.log('friendGender:', friendGender);
-console.log('supporterName:', supporterName);
-console.log('supporterPhone:', supporterPhone);
-console.log('supporterEmail:', supporterEmail);
-console.log('supporterComment:', supporterComment);
-console.log('isCelebrity:', isCelebrity);
-console.log('fb_link:', fb_link);
-console.log('ig_link:', ig_link);
-console.log('tw_link:', tw_link);
 
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {
@@ -6957,7 +6928,7 @@ const informOtherSupporters = async (req,res) => {
  
    if (additionalSupporterEmailsToSendTo) {
     additionalSupporterEmailsToSendTo.forEach((user) => {
-      console.log("salje li on nesto: " + user.email);
+     
 
       sendEmail(
         user.email,
@@ -6979,7 +6950,7 @@ const informOtherSupporters = async (req,res) => {
 
 } catch (e){
 
-  console.log("unrelated to creating campaigns")
+  
   console.log(e.stack);
 }
 
