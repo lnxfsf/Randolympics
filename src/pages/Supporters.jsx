@@ -151,7 +151,8 @@ const sxTextField = {
   },
 };
 
-const campaignId = uuidv4();
+
+//const campaignId = uuidv4();
 
 const generateRandomEmail = (usernameLength = 8) => {
   const charset =
@@ -173,6 +174,9 @@ const generateRandomEmail = (usernameLength = 8) => {
 
 const Supporters = () => {
 
+  const [campaignId, setCampaignId] = useState("");
+
+  
 
   let { user } = useContext(AuthContext);
 
@@ -280,7 +284,7 @@ const Supporters = () => {
     }
   }
 
-  console.log("jel napravio campaign ? ");
+
 
 
     // makes it for them
@@ -385,7 +389,6 @@ const Supporters = () => {
 
       if (responseCampaign.status === 201) {
 
-        console.log("he created campaign");
         /*  alert("created campaign in database"); */
 
         try {
@@ -426,7 +429,7 @@ const Supporters = () => {
 
           if (response.status === 201) {
             
-            console.log("he registered athlete (celebrity)")
+          
 
             athleteId = response.data.userId;
 
@@ -718,7 +721,7 @@ const Supporters = () => {
     },
 
     revert: (uniqueFileId, load, error) => {
-      //  console.log("ovo mu je" + profileImage)
+   
 
       // Send request to the server to delete the file with the uniqueFileId
       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
@@ -747,7 +750,19 @@ const Supporters = () => {
   const [amount, setAmount] = useState(10);
 
   useEffect(() => {
+    
+   
+
+
   }, [amount, additionalSupportersFormData]);
+
+
+  useEffect(() => {
+    // Generate a new unique campaignId each time the component renders. But only once, so user can make multiple campaigns without refresh of page.
+    setCampaignId(uuidv4());
+
+    
+  }, []);
 
 
   return (
