@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { Button } from "@mui/material";
 
 import axios from "axios";
+
+import AuthContext from "../../context/AuthContext";
+
 
 import { WarningTextPopup } from "../../components/Supporters/WarningTextPopup";
 
@@ -79,6 +82,26 @@ const SupporterThirdPart = ({
 }) => {
   const { t } = useTranslation();
 
+
+  let { user } = useContext(AuthContext);
+
+
+  // if there's signed up user, then use his Name, Email, and Phone (if exists), in account he's currently logged in 
+  if(user){
+
+    let tokens = JSON.parse(
+      localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens")
+    );
+
+
+    setSupporterName(tokens.data.name);
+    setSupporterEmail(tokens.data.email);
+    setSupporterPhone(tokens.data.phone);
+    
+
+  }
+
+
   return (
     <>
       <div
@@ -141,6 +164,9 @@ const SupporterThirdPart = ({
 
             {/* main fields */}
             <div className="flex flex-col w-full">
+             
+             
+           {!user && (<> 
               <label
                 htmlFor="name"
                 className="lexend-font mb-1 mt-1 font-medium text-sm"
@@ -244,6 +270,9 @@ const SupporterThirdPart = ({
                   ),
                 }}
               />
+              </> 
+)}
+
 
               <label
                 htmlFor="supporterComment"

@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 import "@mui/material/styles/styled";
 
+
+
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -172,6 +174,7 @@ const generateRandomEmail = (usernameLength = 8) => {
 const Supporters = () => {
 
 
+  let { user } = useContext(AuthContext);
 
   const validateSupporter = async () => {
     // da odma izbaci za email, pre password-a.. da imas posle odma..
@@ -185,6 +188,9 @@ const Supporters = () => {
 
     var tempDoCreateSupporterAccount = false;
 
+
+    // if user is logged in, no need to check it. it won't create another supporter account when making campaign
+  if(!user){
     // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
     if (supporterPassword !== "" && supporterEmail !== "") {
       // ALI AKO UNESE ŠIFRU !
@@ -272,6 +278,7 @@ const Supporters = () => {
       setOpenSnackbarFailure(true);
       return;
     }
+  }
 
     // makes it for them
     makeCampaign(tempDoCreateSupporterAccount);
