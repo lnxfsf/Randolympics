@@ -12,6 +12,7 @@ const sequelize = new Sequelize(
   {
     host: dbConfig.host,
     dialect: "mysql",
+    logging: console.log,
 
     operatorsAliases: false,
     pool: {
@@ -22,6 +23,7 @@ const sequelize = new Sequelize(
     }
   }
 );
+
 
 sequelize
   .authenticate()
