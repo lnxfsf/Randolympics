@@ -6517,6 +6517,13 @@ const createCampaign = async (req, res) => {
   } = req.body;
 
   
+  console.log("he receives: supporterName: " + supporterName);
+
+  console.log("he receives: supporterEmail: " + supporterEmail);
+  console.log("he receives: supporterPhone: " + supporterPhone);
+
+  console.log("he receives: supporterComment: " + supporterComment);
+
 
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {
@@ -6596,8 +6603,12 @@ const createCampaign = async (req, res) => {
 
     res.status(201).json({ message: "Campaign created successfully!" });
   } catch (error) {
+
+
     await t.rollback();
+    console.log("he fails to make campaign because: ");
     console.log(error.stack);
+
   }
 };
 
@@ -6946,6 +6957,8 @@ const informOtherSupporters = async (req,res) => {
   } 
 
 } catch (e){
+
+  console.log("unrelated to creating campaigns")
   console.log(e.stack);
 }
 
