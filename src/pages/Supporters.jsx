@@ -280,6 +280,9 @@ const Supporters = () => {
     }
   }
 
+  console.log("jel napravio campaign ? ");
+
+
     // makes it for them
     makeCampaign(tempDoCreateSupporterAccount);
 
@@ -381,6 +384,8 @@ const Supporters = () => {
       );
 
       if (responseCampaign.status === 201) {
+
+        console.log("he created campaign");
         /*  alert("created campaign in database"); */
 
         try {
@@ -421,6 +426,8 @@ const Supporters = () => {
 
           if (response.status === 201) {
             
+            console.log("he registered athlete (celebrity)")
+
             athleteId = response.data.userId;
 
             /*  alert("athlete user created"); */
