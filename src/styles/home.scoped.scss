@@ -68,11 +68,18 @@ ol li {
 .countdown-timer {
   color: white;
   // background-color: rgba(38, 25, 25, 0.8);
-  background-color: #332f2f;
+ 
+ // background-color: #332f2f;
+  background-color: rgba(51, 47, 47, 0.8);
+
   width: 80%;
 
 
-  height: 155px;
+  /* height: 155px; */
+
+  height: 165px;
+
+
   padding-bottom: 5px;
 
   
@@ -86,12 +93,17 @@ ol li {
   /* height: 135px; */
 
   @media screen and (min-width: 1024px) {
-    height: 135px;
+  /*   height: 135px; */
+
+  height: 165px;
     width: 45%;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
-    height: 155px;
+    /* height: 155px; */
+
+    height: 165px;
+
   }
 
   @media screen and (min-width: 1440px) and (max-width: 2559px) {

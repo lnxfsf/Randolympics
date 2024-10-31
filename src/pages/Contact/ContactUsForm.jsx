@@ -44,7 +44,7 @@ const ContactUsForm = () => {
     
     return (<>
 
-<div className="lexend-font text-black_second flex flex-col justify-center items-center min-h-screen ">
+<div className="lexend-font text-black_second flex flex-col justify-center items-center min-h-screen p-4 ">
         <p className="text-2xl md:text-4xl font-bold mt-8">
           {t("contact.title1")}
         </p>

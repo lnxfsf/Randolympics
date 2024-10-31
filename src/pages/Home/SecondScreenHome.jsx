@@ -11,10 +11,24 @@ const SecondScreenHome = () => {
   const { t } = useTranslation();
 
   return (
-    <>
+
+
+    <> 
+    
+    <div className="flex justify-center  mt-12">  
+      
+
+      <p className="text-3xl md:text-4xl font-bold text-black_second lexend-font">
+        Why you should join?
+      </p>
+    </div>
+
+
+
       {/* min-h-screen */}
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
         <div className="lg:basis-1/2 flex items-center justify-end">
+       
           <div className="">
             {/* // lg:p-12 */}
 

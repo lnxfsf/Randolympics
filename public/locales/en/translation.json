@@ -3,13 +3,14 @@
       "firstScreen": {
           "title1": "Real People.",
           "title2": "Randomly Selected.",
-          "title3": "Competing in Olympic Sports",
+          "title3": "Competing in 150+ Olympic Sports!",
           "countdown1": "Days",
           "countdown2": "Hours",
           "countdown3": "Minutes",
           "countdown4": "Sec",
           "countdown5": "Stockholm, Sweden",
           "countdown6": "June 25th - July 2nd 2028",
+          "countdown7": "Making history in",
           "subtitle1": "Curious about possible schedules?",
           "subtitle2": "Randomize"
       },
@@ -203,7 +204,13 @@
           "title2": "Are you passionate about sports and leadership? We are seeking motivated individuals to become National Presidents and Global Managers for Randolympics. This is your chance to represent your country or take on a global role in shaping the future of this movement.",
           "btn1": "Apply Now",
           "text1": "By signing up you're confirming that you agree with our ",
-          "text2": "Terms and Conditions"
+          "text2": "Terms and Conditions",
+
+          "title3": "Ready to get started?",
+          "text3": "Choose your role and Join Us!",
+          "btn2": "Sign up now"
+
+
       },
       "seventhScreen": {
           "content1": "About us",

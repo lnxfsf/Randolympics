@@ -44,6 +44,8 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SearchForUsers } from "./Home/SearchForUsers";
+import { FifthScreenHomeOld } from "./Home/FifthScreenHomeOld";
+import { SixthScreenHomeAnother } from "./Home/SixthScreenHomeAnother";
 
 // ? expand more, arrow icon transformation
 
@@ -90,21 +92,37 @@ const Home = () => {
       <Navbar />
 
       <FirstScreenHome />
-      <FifthScreenHome />
-      <SeventhScreenHome />
+        
+      <SecondScreenHome /> 
 
-      {/* 
-      <SecondScreenHome /> */}
+      
 
+      {/* <FifthScreenHome /> */}
+
+      <FifthScreenHomeOld />
+
+      <SixthScreenHomeAnother />
+      
       <ThirdScreenHome />
 
-      <div
+      <SeventhScreenHome />
+
+
+    
+
+
+    {/*   
+
+    // Read more about our four types of income
+    
+    
+    <div
         className={`flex  items-center w-full bg-black text-white mt-4 ${
           expanded ? "rounded-t-lg" : "rounded-lg"
         }   pl-2 pr-2`}
       >
         <p
-        /*   expand={expanded} */
+        /*   expand={expanded} 
           onClick={() => {
             setExpanded(!expanded);
           }}
@@ -123,7 +141,7 @@ const Home = () => {
         >
           <ExpandMoreIcon sx={{ color: "#D24949" }} />
         </ExpandMore>
-      </div>
+      </div> 
 
       <div className="">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -134,7 +152,7 @@ const Home = () => {
       <SixthScreenHome />
 
 
-      <SearchForUsers />
+      <SearchForUsers />*/}
 
       {/* Our Competitions */}
       <div className="flex justify-center items-center flex-col lexend-font text-black_second">
@@ -146,11 +164,16 @@ const Home = () => {
         <GridOfSportsHome />
       </div>
 
+      <SixthScreenHomeAnother />
+
+
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
         <p className="text-4xl font-semibold  text-red_second ">News</p>
 
         <NewsNewsBlock />
       </div>
+
+    <SixthScreenHome />
 
       <FAQ />
 
