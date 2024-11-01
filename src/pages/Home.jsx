@@ -4,7 +4,7 @@
 /* import "animate.css";
 import "@mui/material/styles/styled"; */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import "../styles/home.scoped.scss";
@@ -78,6 +78,10 @@ const Home = () => {
     AOS.init();
   }, []); */
 
+
+  const sectionRef = useRef(null);
+
+
   return (
     <>
       <Helmet>
@@ -91,9 +95,9 @@ const Home = () => {
 
       <Navbar />
 
-      <FirstScreenHome />
+      <FirstScreenHome scrollToSection={() => sectionRef.current.scrollIntoView({ behavior: 'smooth' })} />
         
-      <SecondScreenHome /> 
+      <SecondScreenHome sectionRef={sectionRef}/> 
 
       
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 
-const SecondScreenHome = () => {
+const SecondScreenHome = ({ sectionRef }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -18,8 +18,8 @@ const SecondScreenHome = () => {
     <div className="flex justify-center  mt-12">  
       
 
-      <p className="text-3xl md:text-4xl font-bold text-black_second lexend-font">
-        Why you should join?
+      <p ref={sectionRef}  className="text-3xl md:text-4xl font-bold text-black_second lexend-font">
+      {t('home.secondScreen.title3')}
       </p>
     </div>
 
@@ -92,7 +92,7 @@ const SecondScreenHome = () => {
                 </span>
               </Button>
 
-              <Button
+            {/*   <Button
                 onClick={() => {
                   navigate("/login");
                 }}
@@ -113,7 +113,7 @@ const SecondScreenHome = () => {
                 variant="text"
               >
                 <span className="lexend-font font-semibold">{t('home.secondScreen.button2')}</span>
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

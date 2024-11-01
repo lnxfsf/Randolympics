@@ -39,7 +39,7 @@ const formatDate = (dateString) => {
 
 
 
-const FirstScreenHome = () => {
+const FirstScreenHome = ({ scrollToSection }) => {
   const { t } = useTranslation();
 
   const targetDate = new Date("2028-06-25T00:00:00");
@@ -79,15 +79,14 @@ const FirstScreenHome = () => {
 
         <CountDownTimerHome />
 
-     {/*    <div className="flex items-center justify-center  flex-col pt-8">
-          <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
+         <div className="flex items-center justify-center  flex-col pt-8">
+         {/*  <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
           {t('home.firstScreen.subtitle1')} 
-          </p>
+          </p> */}
 
           <Button
-            onClick={() => {
-              navigate("/randomize");
-            }}
+            onClick={scrollToSection}
+
             className="w-36 "
             style={{ textTransform: "none" }}
             sx={{
@@ -111,7 +110,7 @@ const FirstScreenHome = () => {
               {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>
-        </div> */}
+        </div> 
 
 
   
