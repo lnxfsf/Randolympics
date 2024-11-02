@@ -501,7 +501,8 @@
           "side_nav5": "News",
           "side_nav6": "Passport Verification",
           "side_nav7": "Login & Traffic History",
-          "side_nav8": "Logout"
+          "side_nav8": "Logout",
+          "side_nav9": "Created campaigns"
       },
       "myaccount": {
           "content1": "Personal Information",

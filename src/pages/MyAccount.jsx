@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { WarningPassportMessage } from "../components/MyAccount/WarningPassportMessage";
+import { CreatedCampaigns } from "../components/MyAccount/CreatedCampaigns";
 
 const MyAccount = () => {
   const { t } = useTranslation();
@@ -81,6 +82,7 @@ const MyAccount = () => {
   // Create refs for each list item
   const myAccountRef = useRef(null);
   const settingsRef = useRef(null);
+  const createdCampaignsRef = useRef(null);
   const teamRef = useRef(null);
   const electionsRef = useRef(null);
 
@@ -137,6 +139,26 @@ const MyAccount = () => {
                 <img src="/myaccount/settings.svg" className="icon" />
               </div>
             </li>
+
+
+
+            <li
+              style={{ listStyleType: "none" }}
+              ref={createdCampaignsRef}
+              className={`list-item ${
+                selectedItem === "createdCampaigns" ? "selected" : ""
+              }`}
+              onClick={() => handleClick("createdCampaigns")}
+            >
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav9")}
+                </p>
+                <img src="/myaccount/team.svg" className="icon" />
+              </div>
+            </li>
+
+
 
             <li
               style={{ listStyleType: "none" }}
@@ -268,6 +290,8 @@ const MyAccount = () => {
         <div className="w-full">
           {selectedItem === "myAccount" && <EditProfile />}
           {selectedItem === "settings" && <Settings />}
+
+          {selectedItem === "createdCampaigns" && <CreatedCampaigns /> }
           {selectedItem === "team" && <Team />}
 
           {selectedItem === "elections" && <Elections />}
@@ -276,6 +300,8 @@ const MyAccount = () => {
 
           {selectedItem === "passportVerification" && <PassportVrfy />}
           {selectedItem === "loginTrafficHistory" && <LgnTraffcHistory />}
+
+
         </div>
       </div>
 
