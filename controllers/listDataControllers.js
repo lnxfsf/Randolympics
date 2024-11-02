@@ -6867,6 +6867,44 @@ const listAllCampaigns = async (req, res) => {
 };
 
 
+const listCreatedCampaignsByUser = async (req, res) => {
+
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+  const currentUserId = req.query.currentUserId;
+
+  const searchFirstNameText = req.query.searchFirstNameText || "";
+
+
+  try {
+
+
+    const findCurrentUser = await User.findByPk(currentUserId);
+
+
+
+  const allCampaigns = await Campaign.findAndCountAll({
+  
+
+    where: {
+      friendName: {
+        [Op.like]: `%${searchFirstNameText}%`,
+      },
+      supporterEmail: findCurrentUser.email
+    },
+    order: [["updatedAt", "DESC"]],
+    limit: limit,
+    offset: offset,
+  });
+
+
+  res.status(200).json(allCampaigns);
+} catch(e){
+  res.status(500).json({ error: "Internal server error" });
+}
+
+}
 
 
 const listAllUsers = async (req, res) => {
@@ -7040,5 +7078,7 @@ module.exports = {
   firstSupportersCampaign,
 
   allTransactionsSupportersCampaign,
+
+  listCreatedCampaignsByUser,
 
 };
