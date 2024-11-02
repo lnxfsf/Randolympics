@@ -46,6 +46,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SearchForUsers } from "./Home/SearchForUsers";
 import { FifthScreenHomeOld } from "./Home/FifthScreenHomeOld";
 import { SixthScreenHomeAnother } from "./Home/SixthScreenHomeAnother";
+import { FifthScreenHomeOld2 } from "./Home/FifthScreenHomeOld2";
+import { FifthScreenHomeOld3 } from "./Home/FifthScreenHomeOld3";
+import { SecondScreenHome2 } from "./Home/SecondScreenHome2";
+import { SecondScreenHome3 } from "./Home/SecondScreenHome3";
 
 // ? expand more, arrow icon transformation
 
@@ -99,11 +103,23 @@ const Home = () => {
         
       <SecondScreenHome sectionRef={sectionRef}/> 
 
+      <SecondScreenHome3 />
       
+      <SecondScreenHome2 />
+
+
 
       {/* <FifthScreenHome /> */}
 
       <FifthScreenHomeOld />
+
+
+
+
+
+
+
+
 
       <SixthScreenHomeAnother />
       

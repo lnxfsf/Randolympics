@@ -15,16 +15,37 @@
           "subtitle2": "Learn more"
       },
       "secondScreen": {
-          "title1": "From Couch Potato to",
-          "title2": "Gold Medalist !",
+          "title1": "Free Flights and ",
+          "title2": "Accommodation!",
           "title3": "Why you should join?",
-          "content1": "Transform your friend from couch potato to gold medalist - sign them up by starting their Randolympic campaign!",
-          "content2": "Show them you believe in their potential, it will be a big surprise and a huge compliment.",
-          "content3": "Get them out the couch, giving them a fitness program that finally works.",
-          "content4": "Motivate them, managing their progress and cheering them on all the way.",
-          "content5": "The best of all: a lot of fun for everyone involved !",
-          "button1": "Sign Up A Friend",
-          "button2": "Log In"
+          "content1": "Travel to Stockholm with all expenses covered",
+          "content2": "Get ready for an unforgettable experience at the first-ever Randolympics!",
+          "content3": "We’ll take care of your flights and accommodation, so you can focus on competing and enjoying Sweden without worrying about travel costs.",
+          "content4": "",
+          "content5": "",
+          "button1": "Secure My Free Trip",
+          "button2": "Log In",
+
+
+
+          
+          "titleSec4": "A chance to win Gold",
+          "contentSec1": "Compete in thrilling and unpredictable sports that will challenge you physically and mentally.",
+          "contentSec2": "Step into the world of unexpected challenges—where everyone has a shot at winning gold. ",
+          "contentSec3": "Compete in thrilling random sports and become one of the first-ever gold medalists in this groundbreaking event!",
+          "buttonSec1": "Go for Gold!",
+
+
+
+          "titleRd4": "Make History - With or Without a Medal",
+          "contentRd1": "Be a part of something bigger",
+          "contentRd2": "Whether you win a medal or not, you’ll be part of a historic moment—the first event of its kind in the world (maybe even the universe!). ",
+          "contentRd3": "Join us and leave your mark on history just by being there.",
+          "buttonRd1": "Make History!"
+
+
+
+
       },
       "ourCompetitions": {
           "title1": "Our Competitions",
