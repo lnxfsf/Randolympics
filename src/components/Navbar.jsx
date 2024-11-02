@@ -285,6 +285,20 @@ const Navbar = () => {
                       </span>
                     </MenuItem>
 
+
+
+                    <MenuItem to="/myaccount#createdCampaigns" component={Link}>
+                      <ListItemIcon>
+                        <img
+                          src="/myaccount/team_dark.svg"
+                          className="icon"
+                        />
+                      </ListItemIcon>
+                      <span className="lexend-font text-black_second ">
+                        {t("navbar.profile10")}
+                      </span>
+                    </MenuItem>
+
                     <MenuItem to="/myaccount#team" component={Link}>
                       <ListItemIcon>
                         <img src="/myaccount/team_dark.svg" className="icon" />

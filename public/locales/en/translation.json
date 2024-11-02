@@ -283,7 +283,8 @@
       "profile6": "Login & Traffic History",
       "profile7": "Logout",
       "profile8": "Log In",
-      "profile9": "Sign Up Your Friend"
+      "profile9": "Sign Up Your Friend",
+      "profile10": "Created campaigns"
   },
   "campaign": {
       "content1": "Their Name *",

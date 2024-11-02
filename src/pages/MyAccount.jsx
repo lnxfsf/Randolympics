@@ -63,6 +63,10 @@ const MyAccount = () => {
         setSelectedItem("settings");
         break;
 
+      case "createdCampaigns":
+        setSelectedItem("createdCampaigns");
+        break;
+
       case "news":
         setSelectedItem("news");
         break;
