@@ -49,7 +49,7 @@ const CreatedCampaigns = () => {
 
   useEffect(() => {
     updateLatestData();
-  }, [searchFirstNameText]);
+  }, [searchFirstNameText, editingCampaign]);
 
   const handlePaginationChange = (event, value) => {
     setCampaignsPage(value);
@@ -83,11 +83,27 @@ const CreatedCampaigns = () => {
     }
   };
 
+
+  const handleCampaignUpdated = () => {
+    setEditingCampaign(false);
+    updateLatestData(); // Refresh data after editing
+  };
+  
+
+  console.log("editingCampaign u parent: "+editingCampaign)
   return (
     <>
 
-    {!editingCampaign ? (<> 
-      <div className="min-h-screen">
+    {editingCampaign ? (<> 
+     
+        <EditCreatedCampaigns campaignId={editingCampaignID} editingCampaign={editingCampaign} handleCampaignUpdated={handleCampaignUpdated}/>
+       
+      </>) : (<>
+      
+        
+        <div className="min-h-screen">
+
+            
         <div className="p-4   flex justify-center items-center flex-col gap-4">
           {/* md:w-[50%] */}
           <div className="w-full  ">
@@ -189,10 +205,6 @@ const CreatedCampaigns = () => {
           </Stack>
         </div>
       </div>
-
-      </>) : (<>
-      
-        <EditCreatedCampaigns campaignId={editingCampaignID}/>
 
       </>)}
 
