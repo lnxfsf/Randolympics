@@ -146,8 +146,13 @@ const CreatedCampaigns = () => {
                   */}
 
                     <div className="flex gap-4 items-center">
-                      <Avatar sx={{ width: 55, height: 55 }}>
+                      <Avatar sx={{ width: 55, height: 55 }} src={
+                        BACKEND_SERVER_BASE_URL +
+                        "/imageUpload/profile_pics/" +
+                        item.friendImage
+                      }>
                         {item.friendName.charAt(0).toUpperCase()}
+                         
                       </Avatar>
                       <div className="lexend-font text-black_second">
                         <p className="font-bold">

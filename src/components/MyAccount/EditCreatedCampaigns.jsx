@@ -1,7 +1,3 @@
-
-
-
-
 import "../../styles/headermyprofile.scoped.scss";
 
 import React, { useState, useEffect } from "react";
@@ -40,34 +36,31 @@ registerPlugin(
 
 import { settingUserType } from "../../context/user_types";
 
-
-
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+const EditCreatedCampaigns = ({
+  campaignId,
+  handleCampaignUpdated,
+  editingCampaign,
+}) => {
+  const { t } = useTranslation();
 
+  const [toogleProfilePic, setToogleProfilePic] = useState(false);
+  const [name_header, setNameHeader] = useState("");
 
+  const [lastName_header, setLastName_Header] = useState("");
+  const [middleName_header, setMiddleNameHeader] = useState("");
 
+  const [user_typeText, setUserTypeText] = useState("");
+  const [code, setCode] = useState("");
+  const [original_email, setOriginalEmail] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaign}) => {
+  const [files, setFiles] = useState([]);
 
-    const { t } = useTranslation();
-
-    const [toogleProfilePic, setToogleProfilePic] = useState(false);
-    const [name_header, setNameHeader] = useState("");
-  
-    const [lastName_header, setLastName_Header] = useState("");
-    const [middleName_header, setMiddleNameHeader] = useState("");
-  
-    const [user_typeText, setUserTypeText] = useState("");
-    const [code, setCode] = useState("");
-    const [original_email, setOriginalEmail] = useState(null);
-    const [userData, setUserData] = useState(null);
-  
-    const [files, setFiles] = useState([]);
-  
-    const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
   const serverProfile = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
@@ -83,8 +76,6 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
 
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
-
-        
 
         setProfileImage(filename);
 
@@ -121,7 +112,6 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
     },
   };
 
-
   const profileUpload = async () => {
     try {
       // we just upload profile_image URL, in database !
@@ -136,12 +126,13 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
       );
 
       if (response.status === 200) {
-        fetchLatestInLocalStorage(userData.userId);
+       // fetchLatestInLocalStorage(userData.userId);
+       getCampaignDetails();
 
         setToogleProfilePic(!toogleProfilePic);
       }
 
-      setUserData((prevUserData) => ({
+    /*   setUserData((prevUserData) => ({
         ...prevUserData,
         data: {
           ...prevUserData.data,
@@ -156,48 +147,50 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
-      }
+      } */
     } catch (error) {
       console.log(error);
     }
   };
 
-
-  
   useEffect(() => {
-
-
-
-   getCampaignDetails();
-   
-
-
-  
-
+    getCampaignDetails();
   }, []);
 
-
   const getCampaignDetails = async () => {
-
     try {
-        const response = await axios.get(
-            `${BACKEND_SERVER_BASE_URL}/listsData/listUserOfCampaign`,
-            {
-              params: {
-                campaignId: campaignId,
-                
-              },
-            }
-          );
+      const response = await axios.get(
+        `${BACKEND_SERVER_BASE_URL}/listsData/listUserOfCampaign`,
+        {
+          params: {
+            campaignId: campaignId,
+          },
+        }
+      );
 
-          console.log("detalji o campaign ")
-          console.log(response.data)
+      console.log("detalji o campaign ");
+      console.log(response.data);
 
+      if (response.data) {
+        setUserData(response.data);
+        setOriginalEmail(response.data.email);
 
+        if (!toogleProfilePic) {
+          setProfileImage(response.data.picture);
+        }
+
+        setNameHeader(response.data.name);
+        setMiddleNameHeader(response.data.middleName);
+        setLastName_Header(response.data.lastName);
+
+        setUserTypeText(settingUserType(response.data.user_type));
+        setCode(response.data.nationality);
+      }
     } catch (error) {
+        
       console.error("Error fetching top users:", error);
     }
-/* 
+    /* 
 
   if (storedData) {
     var userJson = JSON.parse(storedData);
@@ -219,22 +212,22 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
     setUserTypeText(settingUserType(userJson.data.user_type));
     setCode(userJson.data.nationality);
   } */
+  };
 
+  return (
+    <>
+      <button
+        onClick={() => {
+          handleCampaignUpdated();
+          console.log("editingCampaign: " + editingCampaign);
+        }}
+      >
+        Back
+      </button>
 
-  }
+      <p>hello friend: {campaignId}</p>
 
-
-
-
-    return (<>
-    
-
-    <button onClick={()=>{handleCampaignUpdated(); console.log("editingCampaign: "+editingCampaign)}}>Back</button>
-
-    <p>hello friend: {campaignId}</p>
-
-
-    <p className="lexend-font font-medium text-black_second text-xl p-2">
+      <p className="lexend-font font-medium text-black_second text-xl p-2">
         {t("myprofile.myaccount.content30")}
       </p>
       <div className="flex flex-col md:flex-row justify-start mt-4 lexend-font text-black_second p-2 md:w-[80%]">
@@ -295,8 +288,10 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
               )}
             </div>
 
-            <h1 className="text-lg font-medium">{name_header} {middleName_header && ( <>({middleName_header}) </> )} {lastName_header}</h1>
-         
+            <h1 className="text-lg font-medium">
+              {name_header} {middleName_header && <>({middleName_header}) </>}{" "}
+              {lastName_header}
+            </h1>
           </div>
 
           <div className="flex flex-grow">
@@ -367,7 +362,8 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
           </div>
         </div>
       </div>
-    </>)
-}
+    </>
+  );
+};
 
-export {EditCreatedCampaigns}
+export { EditCreatedCampaigns };
