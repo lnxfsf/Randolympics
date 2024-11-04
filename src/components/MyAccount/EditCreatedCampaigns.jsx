@@ -135,6 +135,10 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
   const popupPassportRef = useRef(null);
 
+
+  const [athleteStatement, setAthleteStatement] = useState();
+
+
   const serverProfile = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
 
@@ -242,6 +246,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   };
 
   const handleathleteStatementChange = (event) => {
+    setAthleteStatement(event.target.value);
     // "prevUserData" comes from the useState hook
     setUserData((prevUserData) => ({
       ...prevUserData,
@@ -656,6 +661,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         }
       );
 
+      
+
       console.log("detalji o campaign ");
       console.log(response.data);
 
@@ -679,6 +686,10 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         setWeight_private(response.data.weight_private);
         setBirthdate_private(response.data.birthdate_private);
 
+
+        setAthleteStatement(response.data.athleteStatement);
+
+        console.log("athlete statement prima: "+response.data.athleteStatement);
         setBio(response.data.bio);
 
         if (!passportUpload) {
@@ -949,8 +960,11 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     id="phone"
                     name="phone"
                     type="tel"
+
                     inputProps={{
                       maxLength: 15,
+                      pattern: "[0-9]*", 
+                     inputMode: "numeric" 
                     }}
                     sx={sxTextField}
                   />
@@ -1367,6 +1381,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 }}
               />
             </div>
+
+{bio && (<>
+            <p className="text-xs mt-1 text-gray-600">
+          {`${250 - bio.length} ${t("myprofile.myaccount.content34")} `}
+        </p>
+        </>)}
+
           </div>
 
           <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
@@ -1406,6 +1427,12 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 },
               }}
             />
+
+{athleteStatement && (<>
+<p className="text-xs mt-1 text-gray-600">
+          {`${255 - athleteStatement.length} ${t("myprofile.myaccount.content34")} `}
+        </p> 
+        </>)}
           </div>
 
           <p className="text-lg mt-6">

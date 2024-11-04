@@ -540,7 +540,9 @@
           "content32": "Change",
           "content33": "Save photo",
           "private": "Private",
-          "public": "Public"
+          "public": "Public",
+
+          "content34": " characters remaining"
       },
       "settings": {
           "content1": "You resigned successfully",
