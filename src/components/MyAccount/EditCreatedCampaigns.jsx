@@ -135,9 +135,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
   const popupPassportRef = useRef(null);
 
-
   const [athleteStatement, setAthleteStatement] = useState();
-
 
   const serverProfile = {
     /* url: 'http://localhost:5000/profile_photo/upload', */
@@ -366,7 +364,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     }));
   };
 
-
   const handleBirthdatePrivacyChange = (event) => {
     setBirthdate_private(event.target.value);
 
@@ -395,9 +392,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   };
 
   const handleCancel = (event) => {
-    
     handleCampaignUpdated();
-
   };
 
   // ? filepond passport upload
@@ -481,8 +476,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
       // to update in localStorage
       if (response.status === 200) {
-        
-
         setPassportUpload(!passportUpload);
       }
 
@@ -551,7 +544,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
 
     var name = e.target.name.value;
 
@@ -565,7 +557,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     var cryptoaddr = e.target.cryptoaddr.value;
 
     var athleteStatement = e.target.athleteStatement.value;
-    
+
     // nationality_selected
 
     if (!e.target.weight) {
@@ -613,7 +605,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
           birthdate_private: birthdate_private,
 
           athleteStatement: athleteStatement,
-          
 
           familyName,
           lastName,
@@ -625,14 +616,11 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       );
 
       if (response.status === 200) {
-      
-        
         setSnackbarStatus("success");
         setSnackbarMessage("Profile details saved successfully !");
 
         setOpenSnackbar(true);
         getCampaignDetails();
-        
       }
     } catch (error) {
       console.log(error);
@@ -643,8 +631,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       setOpenSnackbar(true);
     }
   };
-
-
 
   useEffect(() => {
     getCampaignDetails();
@@ -660,8 +646,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
           },
         }
       );
-
-      
 
       console.log("detalji o campaign ");
       console.log(response.data);
@@ -686,10 +670,11 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         setWeight_private(response.data.weight_private);
         setBirthdate_private(response.data.birthdate_private);
 
-
         setAthleteStatement(response.data.athleteStatement);
 
-        console.log("athlete statement prima: "+response.data.athleteStatement);
+        console.log(
+          "athlete statement prima: " + response.data.athleteStatement
+        );
         setBio(response.data.bio);
 
         if (!passportUpload) {
@@ -946,7 +931,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               />
             </div>
 
-          
             <div className="flex flex-col w-full">
               <div className="flex gap-2 w-full">
                 <div className="flex flex-col w-full">
@@ -959,12 +943,10 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     placeholder="+1 212 456 7890"
                     id="phone"
                     name="phone"
-                    type="tel"
-
+                    type="number"
                     inputProps={{
                       maxLength: 15,
-                      pattern: "[0-9]*", 
-                     inputMode: "numeric" 
+                      
                     }}
                     sx={sxTextField}
                   />
@@ -1382,12 +1364,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               />
             </div>
 
-{bio && (<>
-            <p className="text-xs mt-1 text-gray-600">
-          {`${250 - bio.length} ${t("myprofile.myaccount.content34")} `}
-        </p>
-        </>)}
-
+            {bio && (
+              <>
+                <p className="text-xs mt-1 text-gray-600">
+                  {`${250 - bio.length} ${t("myprofile.myaccount.content34")} `}
+                </p>
+              </>
+            )}
           </div>
 
           <div className="flex flex-col w-full md:w-[82%] min-h-32 md:pr-4 mt-2 h-full">
@@ -1428,11 +1411,15 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               }}
             />
 
-{athleteStatement && (<>
-<p className="text-xs mt-1 text-gray-600">
-          {`${255 - athleteStatement.length} ${t("myprofile.myaccount.content34")} `}
-        </p> 
-        </>)}
+            {athleteStatement && (
+              <>
+                <p className="text-xs mt-1 text-gray-600">
+                  {`${255 - athleteStatement.length} ${t(
+                    "myprofile.myaccount.content34"
+                  )} `}
+                </p>
+              </>
+            )}
           </div>
 
           <p className="text-lg mt-6">

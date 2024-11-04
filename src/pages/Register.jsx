@@ -854,9 +854,13 @@ setOpenSnackbar(true);
                     onInvalid={() => {
                       recaptcha.current.reset();
                     }}
-                    type="tel"
+                    type="number"
                     inputProps={{
                       maxLength: 15,
+                      inputMode: "numeric",
+                      pattern: "[0-9]*",
+
+                    
                     }}
                     sx={sxTextField}
                   />
