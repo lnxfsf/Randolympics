@@ -168,38 +168,60 @@ const EditCreatedCampaigns = ({campaignId, handleCampaignUpdated, editingCampaig
 
 
 
+   getCampaignDetails();
+   
 
 
-
-
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
-
-    if (storedData) {
-      var userJson = JSON.parse(storedData);
-
-      setUserData(userJson);
-
-      setOriginalEmail(userJson.data.email);
-
-      if (!toogleProfilePic) {
-        setProfileImage(userJson.data.picture);
-      }
-
-      setNameHeader(userJson.data.name);
-      setMiddleNameHeader(userJson.data.middleName);
-      setLastName_Header(userJson.data.lastName);
-
-
-
-      setUserTypeText(settingUserType(userJson.data.user_type));
-      setCode(userJson.data.nationality);
-    }
-
+  
 
   }, []);
 
+
+  const getCampaignDetails = async () => {
+
+    try {
+        const response = await axios.get(
+            `${BACKEND_SERVER_BASE_URL}/listsData/listUserOfCampaign`,
+            {
+              params: {
+                campaignId: campaignId,
+                
+              },
+            }
+          );
+
+          console.log("detalji o campaign ")
+          console.log(response.data)
+
+
+    } catch (error) {
+      console.error("Error fetching top users:", error);
+    }
+/* 
+
+  if (storedData) {
+    var userJson = JSON.parse(storedData);
+
+    setUserData(userJson);
+
+    setOriginalEmail(userJson.data.email);
+
+    if (!toogleProfilePic) {
+      setProfileImage(userJson.data.picture);
+    }
+
+    setNameHeader(userJson.data.name);
+    setMiddleNameHeader(userJson.data.middleName);
+    setLastName_Header(userJson.data.lastName);
+
+
+
+    setUserTypeText(settingUserType(userJson.data.user_type));
+    setCode(userJson.data.nationality);
+  } */
+
+
+  }
 
 
 
