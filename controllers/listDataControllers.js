@@ -25,11 +25,6 @@ const dayjs = require("dayjs");
 var weekday = require("dayjs/plugin/isoWeek");
 dayjs.extend(weekday);
 
-
-
-
-
-
 const rankingTop50 = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10; // Default limit to 10
   const offset = parseInt(req.query.offset) || 0; //parseInt, is because we want it as integer
@@ -595,7 +590,7 @@ const otherUsers = async (req, res) => {
       });
 
       // we need to find percentage, for votes, how much each one have
-    /*   const npUsers = await User.findAndCountAll({
+      /*   const npUsers = await User.findAndCountAll({
         where: {
           user_type: user_type,
         },
@@ -603,8 +598,8 @@ const otherUsers = async (req, res) => {
 
       // Calculate total votes, in all NPs
       /* const totalVotes = npUsers.rows.reduce((sum, user) => sum + user.votes, 0);
- */
-   /*    const WithPercentage = otherNPs.rows.map((user) => {
+       */
+      /*    const WithPercentage = otherNPs.rows.map((user) => {
         const currentUser = npUsers.rows.find(
           (npUser) => npUser.userId === user.userId
         );
@@ -623,10 +618,8 @@ const otherUsers = async (req, res) => {
         };
       });
  */
-    
+
       res.json(otherNPs);
-
-
 
       // res.json(otherNPs);
     } catch (error) {
@@ -690,7 +683,7 @@ const currentNP = async (req, res) => {
 };
 
 const team = async (req, res) => {
-  const limit = parseInt(req.query.limit) || 10; 
+  const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
   const searchText = req.query.searchText;
@@ -817,8 +810,6 @@ const team = async (req, res) => {
 
     res.json(teamMates);
   } catch (error) {}
-
-
 };
 
 const listLoginTrafficHistory = async (req, res) => {
@@ -859,8 +850,6 @@ const listLoginTrafficHistory = async (req, res) => {
       offset: offset,
     });
 
-  
-
     res.json(listLoginTrafficHistory);
   } catch (error) {
     console.log(error.stack);
@@ -888,7 +877,6 @@ const lastInRank = async (req, res) => {
     console.log(latestUser);
 
     res.json(latestUser.ranking);
-
   } catch (error) {
     console.error("Error fetching top users:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -6513,9 +6501,7 @@ const createCampaign = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
-
   } = req.body;
-
 
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {
@@ -6595,16 +6581,11 @@ const createCampaign = async (req, res) => {
 
     res.status(201).json({ message: "Campaign created successfully!" });
   } catch (error) {
-
-
     await t.rollback();
     console.log("he fails to make campaign because: ");
     console.log(error.stack);
-
   }
 };
-
-
 
 const campaignDetails = async (req, res) => {
   const campaignId = req.query.campaignId;
@@ -6650,16 +6631,13 @@ const howManySupportersCampaign = async (req, res) => {
 
 const lastCommentsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
-  
 
   // we don't show creator, on there..
   const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
     },
-
   });
-
 
   try {
     const lastCommentsSupporters = await Statscampaign.findAll({
@@ -6687,23 +6665,18 @@ const lastCommentsSupportersCampaign = async (req, res) => {
 const lastTransactionsSupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
-   // we don't show creator, on there..
-   const firstSupporterCampaign = await Campaign.findOne({
+  // we don't show creator, on there..
+  const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
     },
-
   });
-
-
-
 
   try {
     const lastCommentsSupporters = await Statscampaign.findAll({
-
       where: {
         campaignId: campaignId,
-       /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
+        /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
       limit: 3,
@@ -6711,8 +6684,8 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
     });
 
-    console.log("------> lastTransactionsSupportersCampaign")
-    console.log(campaignId)
+    console.log("------> lastTransactionsSupportersCampaign");
+    console.log(campaignId);
     console.log(lastCommentsSupporters);
 
     res.json(lastCommentsSupporters);
@@ -6721,56 +6694,33 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
   }
 };
 
-
 const firstSupportersCampaign = async (req, res) => {
-
   const campaignId = req.query.campaignId;
 
-
-
   try {
-
-   
     // firstSupporterCampaign.supporterEmail , is going to be original email of supporter who made campaign !
     const firstSupporterCampaign = await Campaign.findOne({
       where: {
         campaignId: campaignId,
       },
-
     });
 
-    
     // so we find him in transactions table ,to see how much he's donated
     const firstSupporter = await Statscampaign.findOne({
       where: {
         supporterEmail: firstSupporterCampaign.supporterEmail,
       },
 
-    
       attributes: ["supporterName", "amount", "supporterComment"], // only this row in database retrieve
-     
     });
 
     console.log(firstSupporter);
 
-
-
-
     res.json(firstSupporter);
-
   } catch (error) {
     console.log(error.stack);
   }
-
-
-
-
-
-
-
-}
-
-
+};
 
 const listAllCampaigns = async (req, res) => {
   const campaignId = req.query.campaignId;
@@ -6783,13 +6733,11 @@ const listAllCampaigns = async (req, res) => {
   const searchFirstNameText = req.query.searchFirstNameText || "";
   const searchFamilyNameText = req.query.searchFamilyNameText || "";
 
-
   const isCelebrity = parseInt(req.query.isCelebrity);
 
   const fb_link = req.query.fb_link || "";
   const ig_link = req.query.ig_link || "";
   const tw_link = req.query.tw_link || "";
-
 
   try {
     const allCampaigns = await Campaign.findAndCountAll({
@@ -6830,9 +6778,8 @@ const listAllCampaigns = async (req, res) => {
           [Op.like]: `%${searchFamilyNameText}%`,
         },
 
-
         isCelebrity: isCelebrity,
-        
+
         fb_link: {
           [Op.like]: `%${fb_link}%`,
         },
@@ -6844,7 +6791,6 @@ const listAllCampaigns = async (req, res) => {
         tw_link: {
           [Op.like]: `%${tw_link}%`,
         },
-
       },
       order: [["updatedAt", "DESC"]],
       limit: limit,
@@ -6866,9 +6812,7 @@ const listAllCampaigns = async (req, res) => {
   }
 };
 
-
 const listCreatedCampaignsByUser = async (req, res) => {
-
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
@@ -6876,65 +6820,101 @@ const listCreatedCampaignsByUser = async (req, res) => {
 
   const searchFirstNameText = req.query.searchFirstNameText || "";
 
+  try {
+    const findCurrentUser = await User.findByPk(currentUserId);
+
+    const allCampaigns = await Campaign.findAndCountAll({
+      where: {
+        friendName: {
+          [Op.like]: `%${searchFirstNameText}%`,
+        },
+        supporterEmail: findCurrentUser.email,
+      },
+
+      order: [["updatedAt", "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+    // only those with "s1", "athleteStatus" (means that athlete didn't logged in yet), creator of campaign can change his campaign
+    const filteredCampaigns = {
+      count: 0,
+      rows: [],
+    };
+
+    if (allCampaigns.rows.length > 0) {
+      const campaignsWithUserDetails = await Promise.all(
+        allCampaigns.rows.map(async (campaign) => {
+          const user = await User.findOne({
+            where: {
+              email: campaign.friendEmail,
+              athleteStatus: "s1",
+            },
+          });
+          return user ? campaign : null;
+        })
+      );
+
+      // Filter out the null values and count the valid campaigns
+      filteredCampaigns.rows = campaignsWithUserDetails.filter(
+        (campaign) => campaign !== null
+      );
+      filteredCampaigns.count = filteredCampaigns.rows.length;
+    }
+
+    res.status(200).json(filteredCampaigns);
+  } catch (e) {
+    console.log(e.stack);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const listUserOfCampaign = async (req, res) => {
+  const campaignId = req.query.campaignId;
 
   try {
 
-
-    const findCurrentUser = await User.findByPk(currentUserId);
-
-
-
-  const allCampaigns = await Campaign.findAndCountAll({
-  
-
-    where: {
-      friendName: {
-        [Op.like]: `%${searchFirstNameText}%`,
-      },
-      supporterEmail: findCurrentUser.email
-    },
-    order: [["updatedAt", "DESC"]],
-    limit: limit,
-    offset: offset,
-  });
+    // you should find that athlete ! by campaignId, campaignId is just used to find athlete it belongs to
+    const userCampaign = await Campaign.findOne({
+      where: {campaignId: campaignId}
+    });
 
 
-  res.status(200).json(allCampaigns);
-} catch(e){
-  res.status(500).json({ error: "Internal server error" });
-}
+    const athleteOfCampaign = await User.findOne({
+      where: {email: userCampaign.friendEmail}
+    });
 
-}
 
+    res.status(200).json(athleteOfCampaign);
+
+
+
+
+
+  } catch (e) {
+    console.log(e.stack);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 const listAllUsers = async (req, res) => {
-
   const limit = parseInt(req.query.limit) || 10;
   const offset = parseInt(req.query.offset) || 0;
 
   const searchFirstNameText = req.query.searchFirstNameText;
 
-
-
-
   try {
-
-
     const allUsers = await User.findAndCountAll({
-
-
       where: {
         name: {
           [Op.like]: `${searchFirstNameText}%`,
         },
       },
 
-
       order: [["name", "ASC"]],
       limit: limit,
       offset: offset,
     });
-
 
     res.json(allUsers);
 
@@ -6942,36 +6922,23 @@ const listAllUsers = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
-
-
-
-
 };
 
-
-
-const informOtherSupporters = async (req,res) => {
-
+const informOtherSupporters = async (req, res) => {
   /* additionalSupporterEmailsToSendTo, */
-  const { campaignURL, name  } = req.body;
+  const { campaignURL, name } = req.body;
 
-  const additionalSupporterEmailsToSendTo = JSON.parse(req.body.additionalSupporterEmailsToSendTo);
-
-  
-  
-  
+  const additionalSupporterEmailsToSendTo = JSON.parse(
+    req.body.additionalSupporterEmailsToSendTo
+  );
 
   try {
-
- 
-   if (additionalSupporterEmailsToSendTo) {
-    additionalSupporterEmailsToSendTo.forEach((user) => {
-     
-
-      sendEmail(
-        user.email,
-        "Invitation to participate in Randolympics",
-        `We're signing up ${name} to participate in campaign.
+    if (additionalSupporterEmailsToSendTo) {
+      additionalSupporterEmailsToSendTo.forEach((user) => {
+        sendEmail(
+          user.email,
+          "Invitation to participate in Randolympics",
+          `We're signing up ${name} to participate in campaign.
 
         Check him <a href=${campaignURL}>out here</a>
 
@@ -6982,45 +6949,27 @@ const informOtherSupporters = async (req,res) => {
       
       
       `
-      );
-    });
-  } 
-
-} catch (e){
-
-  
-  console.log(e.stack);
-}
-
-
-
-  
-} 
-
-
-
+        );
+      });
+    }
+  } catch (e) {
+    console.log(e.stack);
+  }
+};
 
 const allTransactionsSupportersCampaign = async (req, res) => {
-
-
   const campaignId = req.query.campaignId;
-  const limitA = parseInt(req.query.limitA);  // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down ) 
+  const limitA = parseInt(req.query.limitA); // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down )
   const offset = parseInt(req.query.offset);
 
-
   console.log("limit je ------>" + limitA);
-
 
   // we don't show creator, on there..
   const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
     },
-
   });
-
-  
-  
 
   try {
     const allCommentsSupporters = await Statscampaign.findAndCountAll({
@@ -7034,16 +6983,13 @@ const allTransactionsSupportersCampaign = async (req, res) => {
 
       attributes: ["supporterName", "amount", "supporterComment", "createdAt"], // only this row in database retrieve
       order: [["amount", "DESC"]],
-
     });
- 
-    console.log("stamp aon ovde: allTransactionsSupportersCampaign: ")
-    console.log("campaignId: "+campaignId)
+
+    console.log("stamp aon ovde: allTransactionsSupportersCampaign: ");
+    console.log("campaignId: " + campaignId);
     console.log(allCommentsSupporters);
 
     res.status(200).json(allCommentsSupporters);
-
-    
   } catch (error) {
     console.log(error.stack);
   }
@@ -7080,5 +7026,5 @@ module.exports = {
   allTransactionsSupportersCampaign,
 
   listCreatedCampaignsByUser,
-
+  listUserOfCampaign,
 };
