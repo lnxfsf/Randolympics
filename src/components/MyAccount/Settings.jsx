@@ -161,6 +161,9 @@ const Settings = () => {
           className="rounded-md lexend-font text-black_second select-none font-medium"
           style={{ border: "1.5px solid #C6C6C6" }}
         >
+      
+      
+{user_type !== "SPT" && (<> 
           <div
             className="h-8 flex justify-start items-center gap-2 cursor-pointer"
             onClick={() => {
@@ -183,8 +186,9 @@ const Settings = () => {
             <p>{t('myprofile.settings.content4')}</p>
           </div>
 
-          <hr style={{ border: "1px solid #C6C6C6" }} />
 
+          <hr style={{ border: "1px solid #C6C6C6" }} />
+</>)}
           <div
             className="h-8 flex justify-start items-center gap-2 cursor-pointer"
             onClick={() => {
@@ -200,6 +204,8 @@ const Settings = () => {
 
        
       </div>
+
+
 
       {/* popup for resign */}
       <Popup
@@ -328,6 +334,7 @@ const Settings = () => {
           </div>
         </div>
       </Popup>
+     
 
       {/* popup for delete account */}
       <Popup

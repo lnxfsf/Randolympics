@@ -591,7 +591,8 @@
       "user_type9": "Validation Manager",
       "user_type10": "Legal Manager",
       "user_type11": "Referee & support",
-      "user_type12": "Guest"
+      "user_type12": "Guest",
+      "user_type13": "Supporter"
   },
   "sports": {
       "sport1": "Men's 50m Freestyle Swimming",

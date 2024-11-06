@@ -163,7 +163,7 @@ const MyAccount = () => {
             </li>
 
 
-
+{user_type !== "SPT" && (<>
             <li
               style={{ listStyleType: "none" }}
               ref={teamRef}
@@ -180,7 +180,8 @@ const MyAccount = () => {
                 <img src="/myaccount/team.svg" className="icon" />
               </div>
             </li>
-
+            </>)}
+            
             {(user_type === "AH" || user_type === "NP") && (
               <li
                 style={{ listStyleType: "none" }}

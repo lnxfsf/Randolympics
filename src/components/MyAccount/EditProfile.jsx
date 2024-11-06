@@ -1213,7 +1213,9 @@ const EditProfile = () => {
               </p>
               <ReactFlagsSelect
                 countries={supportedCountry}
-                disabled
+               
+                disabled={userData && userData.data.user_type !== "SPT"}
+
                 // to fill it with the one, which user's is currently selected...
                 selected={
                   nationality_selected ||
