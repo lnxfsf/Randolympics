@@ -98,9 +98,11 @@ const SixthScreenHome = () => {
               <span
                 className="text-red_second cursor-pointer select-none"
                 onClick={() => {
+                  window.scrollTo(0, 0);
                   navigate("/ToS");
                 }}
               >
+                
                 {t("home.sixthScreen.text2")}
               </span>
               .

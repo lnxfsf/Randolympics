@@ -34,6 +34,7 @@ const FooterClean = () => {
               <p
                 className="cursor-pointer select-none"
                 onClick={() => {
+                  window.scrollTo(0, 0);
                   navigate("/tos");
                 }}
               >
