@@ -51,14 +51,14 @@ const FooterClean = () => {
 
         <div className="flex justify-between items-start mt-4  flex-col md:flex-row ">
           <div className="flex flex-col md:flex-row">
-  <div className="lexend-font text-red_second font-bold flex flex-col space-y-2">
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-3 md:space-y-2">
     <a href="/campaign">{t("navbar.btn2")}</a>
     <a href="/competitions">{t("navbar.btn6")}</a>
     <a href="/news">{t("navbar.btn3")}</a>
     <a href="/faq">{t("navbar.btn4")}</a>
   </div>
   
-  <div className="lexend-font text-red_second font-bold flex flex-col space-y-2 md:ml-8">
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-3 md:space-y-2 md:ml-8 mt-3 md:mt-0">
     <a href="/supporters">{t("navbar.profile9")}</a>
     <a href="/randomize">{t("home.firstScreen.subtitle2")}</a>
     <a href="/login">{t("navbar.profile8")}</a>
