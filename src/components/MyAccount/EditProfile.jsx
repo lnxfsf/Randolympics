@@ -28,7 +28,6 @@ import Menu from "@mui/material/Menu";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-
 //we display it as fragment, inside MyProfile...
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -109,9 +108,6 @@ const sxTextField = {
 };
 
 const EditProfile = () => {
-
-
-  
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -126,8 +122,6 @@ const EditProfile = () => {
 
     setOpenSnackbar(false);
   };
-
-
 
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
@@ -338,8 +332,6 @@ const EditProfile = () => {
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
-
-        
       }
     } catch (error) {
       console.log(error);
@@ -367,7 +359,7 @@ const EditProfile = () => {
 
   //const FDate = dayjs(selectedDate);
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
-  // 
+  //
 
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
@@ -530,7 +522,6 @@ const EditProfile = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        
         setPassportImage(filename);
         // return filename;
       },
@@ -577,8 +568,6 @@ const EditProfile = () => {
 
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
-
-        
 
         /* setProfileImage(filename); */
 
@@ -632,10 +621,8 @@ const EditProfile = () => {
         setPassportUpload(!passportUpload);
       }
 
-     
       setSnackbarMessage("Profile details saved successfully !");
-        setOpenSnackbar(true);
-
+      setOpenSnackbar(true);
     } catch (error) {
       console.log(error);
     }
@@ -671,7 +658,6 @@ const EditProfile = () => {
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
         weight = weight * 0.45359237;
-        
       }
     }
 
@@ -727,22 +713,16 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-       
-
         setSnackbarMessage("Profile details saved successfully !");
         setOpenSnackbar(true);
-
       }
     } catch (error) {
       console.log(error);
-     
 
       setSnackbarMessage("There was some error !");
       setSnackbarStatus("error");
 
-        setOpenSnackbar(true);
-
-
+      setOpenSnackbar(true);
     }
   };
 
@@ -777,12 +757,8 @@ const EditProfile = () => {
         }
       }
 
-      
-
       setSnackbarMessage("Profile details saved successfully !");
       setOpenSnackbar(true);
-
-
     } catch (error) {
       console.log(error);
     }
@@ -903,9 +879,7 @@ const EditProfile = () => {
               </p>
               <TextField
                 value={userData && userData.data.name}
-               onChange={handleNameChange}
-
-                
+                onChange={handleNameChange}
                 placeholder="John Doe"
                 id="name"
                 name="name"
@@ -1124,11 +1098,9 @@ const EditProfile = () => {
 
             <div className="flex items-end col-span-2 w-full">
               <div className="flex flex-col justify-center w-full">
-
                 {selectedRole === "AH" && (
                   <div className="flex mt-2  ">
                     <div className="flex flex-col w-full">
-                     
                       <p className="text-sm font-medium">
                         {t("myprofile.myaccount.content9")}
                       </p>
@@ -1213,9 +1185,7 @@ const EditProfile = () => {
               </p>
               <ReactFlagsSelect
                 countries={supportedCountry}
-               
                 disabled={userData && userData.data.user_type !== "SPT"}
-
                 // to fill it with the one, which user's is currently selected...
                 selected={
                   nationality_selected ||
@@ -1453,12 +1423,22 @@ const EditProfile = () => {
                   },
                 }}
                 inputProps={{
-                  maxLength: 255,
+                  maxLength: 250,
                   style: {
                     resize: "vertical",
                   },
                 }}
               />
+
+              {userData && (
+                <>
+                  <p className="text-xs mt-1 text-gray-600">
+                    {`${250 - userData.data.bio.length} ${t(
+                      "myprofile.myaccount.content34"
+                    )} `}
+                  </p>
+                </>
+              )}
             </div>
           </div>
 
@@ -1543,7 +1523,7 @@ const EditProfile = () => {
                 },
               }}
               inputProps={{
-                maxLength: 255,
+                maxLength: 250,
                 style: {
                   resize: "vertical",
                 },
@@ -1650,12 +1630,8 @@ const EditProfile = () => {
               </span>
             </Button>
           </div>
-
-        
         </form>
       </div>
-
-
 
       <Snackbar
         open={openSnackbar}
@@ -1672,7 +1648,6 @@ const EditProfile = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-
     </>
   );
 };
