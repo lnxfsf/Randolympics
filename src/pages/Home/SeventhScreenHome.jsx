@@ -236,12 +236,12 @@ const SeventhScreenHome = () => {
           {t("home.seventhScreen.content1")}
         </p>
 
-        <p className="ml-6 mr-6">
+        <p className="ml-6 mr-6 pl-2 pr-2">
           <br />
           {t("home.seventhScreen.content19")}
           <br />
           <br /> {t("home.seventhScreen.content20")}
-           <a href="/supporters" className="underline">
+           <a href="/supporters" className="underline text-red_second">
             {t("home.seventhScreen.content21")}
           </a>{" "}
           {t("home.seventhScreen.content22")}
@@ -456,7 +456,7 @@ const SeventhScreenHome = () => {
               onClick={() => {
                 setExpanded(!expanded);
               }}
-              className="cursor-pointer select-none  pl-2 font-semibold text-red_second lexend-font "
+              className="cursor-pointer select-none pl-2 md:pl-6 font-semibold text-red_second lexend-font  "
             >
               {t("home.seventhScreen.content4")}
             </p>
@@ -473,7 +473,7 @@ const SeventhScreenHome = () => {
             </ExpandMore>
           </div>
 
-          <div className="">
+          <div className="pl-2 pr-2">
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <div className=" rounded-b-lg p-4 text-black_second lexend-font ">
                 <div className="mt-4 mb-4">

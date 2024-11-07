@@ -956,7 +956,7 @@ setFifthIsVisible={setFifthIsVisible}
         open={openSnackbarSuccess}
         autoHideDuration={6000}
         onClose={handleSnackbarSuccessClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarSuccessClose}
@@ -972,7 +972,7 @@ setFifthIsVisible={setFifthIsVisible}
         open={openSnackbarFailure}
         autoHideDuration={6000}
         onClose={handleSnackbarFailureClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarFailureClose}

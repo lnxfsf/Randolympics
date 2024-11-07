@@ -21,11 +21,11 @@ const SecondScreenHome3 = ({ sectionRef }) => {
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
        
 
-        <div className="hidden basis-1/2 lg:flex justify-start items-center ">
+        <div className="hidden basis-1/2 lg:flex justify-end items-end ">
           <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%] rounded-2xl" />
         </div>
 
-        <div className="lg:basis-1/2 flex items-center justify-end">
+        <div className="lg:basis-1/2 flex items-center justify-start">
        
        <div className="">
          {/* // lg:p-12 */}

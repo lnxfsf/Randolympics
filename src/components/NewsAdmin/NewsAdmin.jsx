@@ -189,7 +189,7 @@ const NewsAdmin = () => {
             <Snackbar open={openSnackbarDeleted}
                 autoHideDuration={6000}
                 onClose={handleSnackbarDeletedClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert
                     onClose={handleSnackbarDeletedClose}
                     severity="success"
@@ -208,7 +208,7 @@ const NewsAdmin = () => {
             <Snackbar open={openSnackbarCreated}
                 autoHideDuration={6000}
                 onClose={handleSnackbarCreatedClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert
                     onClose={handleSnackbarCreatedClose}
                     severity="success"

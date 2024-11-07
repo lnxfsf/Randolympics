@@ -406,7 +406,7 @@ const Settings = () => {
         open={openSnackbarError}
         autoHideDuration={6000}
         onClose={handleSnackbarErrorClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarErrorClose}
@@ -423,7 +423,7 @@ const Settings = () => {
         open={openSnackbarSuccess}
         autoHideDuration={6000}
         onClose={handleSnackbarSuccessClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarSuccessClose}

@@ -351,7 +351,7 @@ const DonatePart = ({
               open={openSnackbar}
               autoHideDuration={6000}
               onClose={handleSnackbar}
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
               <Alert
                 onClose={handleSnackbar}

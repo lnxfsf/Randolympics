@@ -5,7 +5,8 @@ import { NavbarClean } from "../components/NavbarClean";
 const ToS = () => {
   return (
     <>
-      <NavbarClean />
+     
+      <Navbar />
 
       <div className="m-8">
         <br />
