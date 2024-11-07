@@ -272,7 +272,7 @@ const Supporters = () => {
         tempDoCreateSupporterAccount = true;
       }
     } else if (supporterPassword !== "") {
-      setSnackbarMessage(" Type supporter email first !");
+      setSnackbarMessage("Password inserted with empty email. Type supporter email first ! ");
       setOpenSnackbarFailure(true);
       return;
     }
