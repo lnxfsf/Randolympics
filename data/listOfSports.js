@@ -1,7 +1,7 @@
 const listOfSports = [
     {
       translatedSportName: "sport1",
-      sportName: "Men's 50m Freestyle Swimming",
+      sportName: "50m Freestyle Swimming",
   
       howMuchAthletesMakeATeam: 1,
       locations: 1,
@@ -26,7 +26,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport2",
-      sportName: "Men's 100m Freestyle Swimming",
+      sportName: "100m Freestyle Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -53,7 +53,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport3",
-      sportName: "Men's 200m Freestyle Swimming",
+      sportName: "200m Freestyle Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -80,7 +80,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport4",
-      sportName: "Men's 400m Freestyle Swimming",
+      sportName: "400m Freestyle Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -107,7 +107,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport5",
-      sportName: "Men's 1500m Freestyle Swimming",
+      sportName: "1500m Freestyle Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -134,7 +134,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport6",
-      sportName: "Men's 100m Backstroke Swimming",
+      sportName: "100m Backstroke Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -161,7 +161,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport7",
-      sportName: "Men's 200m Backstroke Swimming",
+      sportName: "200m Backstroke Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -188,7 +188,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport8",
-      sportName: "Men's 100m Breaststroke Swimming",
+      sportName: "100m Breaststroke Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -215,7 +215,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport9",
-      sportName: "Men's 200m Breaststroke Swimming",
+      sportName: "200m Breaststroke Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -242,7 +242,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport10",
-      sportName: "Men's 100m Butterfly Swimming",
+      sportName: "100m Butterfly Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -269,7 +269,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport11",
-      sportName: "Men's 200m Butterfly Swimming",
+      sportName: "200m Butterfly Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -296,7 +296,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport12",
-      sportName: "Men's 200m Individual Medley Swimming",
+      sportName: "200m Individual Medley Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -323,7 +323,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport13",
-      sportName: "Men's 400m Individual Medley Swimming",
+      sportName: "400m Individual Medley Swimming",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -350,7 +350,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport14",
-      sportName: "Men's 4x100m Freestyle Relay Swimming",
+      sportName: "4x100m Freestyle Relay Swimming",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -377,7 +377,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport15",
-      sportName: "Men's 4x200m Freestyle Relay Swimming",
+      sportName: "4x200m Freestyle Relay Swimming",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -404,7 +404,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport16",
-      sportName: "Men's 4x100m Medley Relay Swimming",
+      sportName: "4x100m Medley Relay Swimming",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -431,7 +431,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport17",
-      sportName: "Men's 3m Springboard Diving",
+      sportName: "3m Springboard Diving",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -458,7 +458,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport18",
-      sportName: "Men's 10m Platform Diving",
+      sportName: "10m Platform Diving",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -485,7 +485,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport19",
-      sportName: "Men's Synchronized 3m Springboard Diving",
+      sportName: "Synchronized 3m Springboard Diving",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -512,7 +512,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport20",
-      sportName: "Men's Synchronized 10m Platform Diving",
+      sportName: "Synchronized 10m Platform Diving",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -539,7 +539,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport21",
-      sportName: "Men's 100m",
+      sportName: "100m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -566,7 +566,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport22",
-      sportName: "Men's 200m",
+      sportName: "200m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -593,7 +593,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport23",
-      sportName: "Men's 400m",
+      sportName: "400m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -620,7 +620,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport24",
-      sportName: "Men's 800m",
+      sportName: "800m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -647,7 +647,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport25",
-      sportName: "Men's 1500m",
+      sportName: "1500m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -674,7 +674,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport26",
-      sportName: "Men's 5000m",
+      sportName: "5000m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -701,7 +701,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport27",
-      sportName: "Men's 10 000m",
+      sportName: "10 000m",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -728,7 +728,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport28",
-      sportName: "Men's Marathon",
+      sportName: "Marathon",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -755,7 +755,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport29",
-      sportName: "Men's 110m Hurdles",
+      sportName: "110m Hurdles",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -782,7 +782,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport30",
-      sportName: "Men's 400m Hurdles",
+      sportName: "400m Hurdles",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -809,7 +809,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport31",
-      sportName: "Men's 3000m Steeplechase",
+      sportName: "3000m Steeplechase",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -836,7 +836,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport32",
-      sportName: "Men's 4x100m Relay",
+      sportName: "4x100m Relay",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -863,7 +863,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport33",
-      sportName: "Men's 4x400m Relay",
+      sportName: "4x400m Relay",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -890,7 +890,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport34",
-      sportName: "Men's 20km Race Walk",
+      sportName: "20km Race Walk",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -917,7 +917,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport35",
-      sportName: "Men's 50km Race Walk",
+      sportName: "50km Race Walk",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -944,7 +944,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport36",
-      sportName: "Men's High Jump",
+      sportName: "High Jump",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -971,7 +971,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport37",
-      sportName: "Men's Long Jump",
+      sportName: "Long Jump",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -998,7 +998,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport38",
-      sportName: "Men's Triple Jump",
+      sportName: "Triple Jump",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1025,7 +1025,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport39",
-      sportName: "Men's Shot Put",
+      sportName: "Shot Put",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1052,7 +1052,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport40",
-      sportName: "Men's Discus Throw",
+      sportName: "Discus Throw",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1079,7 +1079,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport41",
-      sportName: "Men's Hammer Throw",
+      sportName: "Hammer Throw",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1106,7 +1106,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport42",
-      sportName: "Men's Javelin Throw",
+      sportName: "Javelin Throw",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1133,7 +1133,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport43",
-      sportName: "Men's Decathlon",
+      sportName: "Decathlon",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1160,7 +1160,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport44",
-      sportName: "Men's Singles Badminton",
+      sportName: "Singles Badminton",
       howMuchAthletesMakeATeam: 1,
       locations: 4,
   
@@ -1187,7 +1187,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport45",
-      sportName: "Men's Doubles Badminton",
+      sportName: "Doubles Badminton",
       howMuchAthletesMakeATeam: 2,
       locations: 4,
   
@@ -1378,7 +1378,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport52",
-      sportName: "Men's Water Polo",
+      sportName: "Water Polo",
       howMuchAthletesMakeATeam: 11,
       locations: 4,
   
@@ -1405,7 +1405,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport53",
-      sportName: "Men's Individual Archery",
+      sportName: "Individual Archery",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1432,7 +1432,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport54",
-      sportName: "Men's Team Archery",
+      sportName: "Team Archery",
       howMuchAthletesMakeATeam: 3,
       locations: 1,
   
@@ -1743,7 +1743,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport65",
-      sportName: "Men's Individual Épée ( 4-5 stages)",
+      sportName: "Individual Épée ( 4-5 stages)",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1770,7 +1770,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport66",
-      sportName: "Men's Team Épée",
+      sportName: "Team Épée",
       howMuchAthletesMakeATeam: 4,
       locations: 2,
   
@@ -1797,7 +1797,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport67",
-      sportName: "Men's Individual Foil",
+      sportName: "Individual Foil",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1824,7 +1824,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport68",
-      sportName: "Men's Team Foil",
+      sportName: "Team Foil",
       howMuchAthletesMakeATeam: 4,
       locations: 2,
   
@@ -1851,7 +1851,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport69",
-      sportName: "Men's Individual Sabre",
+      sportName: "Individual Sabre",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1878,7 +1878,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport70",
-      sportName: "Men's Team Sabre",
+      sportName: "Team Sabre",
       howMuchAthletesMakeATeam: 4,
       locations: 2,
   
@@ -1905,7 +1905,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport71",
-      sportName: "Men's Golf",
+      sportName: "Golf",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1932,7 +1932,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport72",
-      sportName: "Men's 10m Air Pistol",
+      sportName: "10m Air Pistol",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1959,7 +1959,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport73",
-      sportName: "Men's 25m Rapid Fire Pistol",
+      sportName: "25m Rapid Fire Pistol",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -1986,7 +1986,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport74",
-      sportName: "Men's 50m Pistol",
+      sportName: "50m Pistol",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2013,7 +2013,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport75",
-      sportName: "Men's 10m Air Rifle",
+      sportName: "10m Air Rifle",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2040,7 +2040,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport76",
-      sportName: "Men's 50m Rifle Prone",
+      sportName: "50m Rifle Prone",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2067,7 +2067,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport77",
-      sportName: "Men's 50m Rifle Three Positions",
+      sportName: "50m Rifle Three Positions",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2094,7 +2094,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport78",
-      sportName: "Men's Trap",
+      sportName: "Trap",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2121,7 +2121,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport79",
-      sportName: "Men's Double Trap",
+      sportName: "Double Trap",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2148,7 +2148,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport80",
-      sportName: "Men's Skeet",
+      sportName: "Skeet",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2175,7 +2175,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport81",
-      sportName: "Men's Singles Tennis",
+      sportName: "Singles Tennis",
       howMuchAthletesMakeATeam: 1,
       locations: 2,
   
@@ -2202,7 +2202,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport82",
-      sportName: "Men's Doubles Tennis",
+      sportName: "Doubles Tennis",
       howMuchAthletesMakeATeam: 2,
       locations: 2,
   
@@ -2229,7 +2229,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport83",
-      sportName: "Men's Volleyball",
+      sportName: "Volleyball",
       howMuchAthletesMakeATeam: 12,
       locations: 8,
   
@@ -2429,7 +2429,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport90",
-      sportName: "Men's Individual All-Around Artistic Gymnastics",
+      sportName: "Individual All-Around Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2456,7 +2456,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport91",
-      sportName: "Men's Team All-Around Artistic Gymnastics",
+      sportName: "Team All-Around Artistic Gymnastics",
       howMuchAthletesMakeATeam: 5,
       locations: 1,
   
@@ -2483,7 +2483,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport92",
-      sportName: "Men's Floor Exercise Artistic Gymnastics",
+      sportName: "Floor Exercise Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2510,7 +2510,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport93",
-      sportName: "Men's Pommel Horse Artistic Gymnastics",
+      sportName: "Pommel Horse Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2537,7 +2537,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport94",
-      sportName: "Men's Rings Artistic Gymnastics",
+      sportName: "Rings Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2564,7 +2564,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport95",
-      sportName: "Men's Vault Artistic Gymnastics",
+      sportName: "Vault Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2591,7 +2591,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport96",
-      sportName: "Men's Parallel Bars Artistic Gymnastics",
+      sportName: "Parallel Bars Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2618,7 +2618,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport97",
-      sportName: "Men's Horizontal Bar Artistic Gymnastics",
+      sportName: "Horizontal Bar Artistic Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2645,7 +2645,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport98",
-      sportName: "Men's Individual Trampoline Gymnastics",
+      sportName: "Individual Trampoline Gymnastics",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2759,7 +2759,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport102",
-      sportName: "Men's Modern Pentathlon",
+      sportName: "Modern Pentathlon",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2786,7 +2786,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport103",
-      sportName: "Men's Single Sculls",
+      sportName: "Single Sculls",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -2813,7 +2813,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport104",
-      sportName: "Men's Double Sculls",
+      sportName: "Double Sculls",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -2840,7 +2840,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport105",
-      sportName: "Men's Lightweight Double Sculls",
+      sportName: "Lightweight Double Sculls",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -2867,7 +2867,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport106",
-      sportName: "Men's Quadruple Sculls",
+      sportName: "Quadruple Sculls",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -2894,7 +2894,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport107",
-      sportName: "Men's Pair",
+      sportName: "Pair",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -2921,7 +2921,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport108",
-      sportName: "Men's Four",
+      sportName: "Four",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -2948,7 +2948,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport109",
-      sportName: "Men's Lightweight Four",
+      sportName: "Lightweight Four",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -2975,7 +2975,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport110",
-      sportName: "Men's Eight",
+      sportName: "Eight",
       howMuchAthletesMakeATeam: 8,
       locations: 1,
   
@@ -3002,7 +3002,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport111",
-      sportName: "Men's Rugby Sevens",
+      sportName: "Rugby Sevens",
       howMuchAthletesMakeATeam: 12,
       locations: 1,
   
@@ -3029,7 +3029,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport112",
-      sportName: "Men's Singles Table Tennis",
+      sportName: "Singles Table Tennis",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3056,7 +3056,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport113",
-      sportName: "Men's Team Table Tennis",
+      sportName: "Team Table Tennis",
       howMuchAthletesMakeATeam: 3,
       locations: 1,
   
@@ -3169,7 +3169,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport117",
-      sportName: "Men's Beach Volleyball",
+      sportName: "Beach Volleyball",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -3198,7 +3198,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport118",
-      sportName: "Men's Basketball",
+      sportName: "Basketball",
       howMuchAthletesMakeATeam: 12,
       locations: 8,
   
@@ -3225,7 +3225,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport119",
-      sportName: "Men's Road Race Cycling 150km",
+      sportName: "Road Race Cycling 150km",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3252,7 +3252,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport120",
-      sportName: "Men's Time Trial Cycling 30km",
+      sportName: "Time Trial Cycling 30km",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3279,7 +3279,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport121",
-      sportName: "Men's Sprint Track Cycling",
+      sportName: "Sprint Track Cycling",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3306,7 +3306,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport122",
-      sportName: "Men's Team Sprint Track Cycling",
+      sportName: "Team Sprint Track Cycling",
       howMuchAthletesMakeATeam: 3,
       locations: 1,
   
@@ -3333,7 +3333,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport123",
-      sportName: "Men's Keirin Track Cycling",
+      sportName: "Keirin Track Cycling",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3360,7 +3360,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport124",
-      sportName: "Men's Omnium Track Cycling",
+      sportName: "Omnium Track Cycling",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3387,7 +3387,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport125",
-      sportName: "Men's Team Pursuit Track Cycling",
+      sportName: "Team Pursuit Track Cycling",
       howMuchAthletesMakeATeam: 4,
       locations: 1,
   
@@ -3414,7 +3414,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport126",
-      sportName: "Men's Cross-country Mountain Biking",
+      sportName: "Cross-country Mountain Biking",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3441,7 +3441,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport127",
-      sportName: "Men's BMX",
+      sportName: "BMX",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3470,7 +3470,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport128",
-      sportName: "Men's Football",
+      sportName: "Football",
       howMuchAthletesMakeATeam: 18,
       locations: 8,
   
@@ -3497,7 +3497,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport129",
-      sportName: "Men's Handball",
+      sportName: "Handball",
       howMuchAthletesMakeATeam: 14,
       locations: 8,
   
@@ -3524,7 +3524,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport130",
-      sportName: "Men's Field Hockey",
+      sportName: "Field Hockey",
       howMuchAthletesMakeATeam: 16,
       locations: 8,
   
@@ -3609,7 +3609,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport133",
-      sportName: "Men's Triathlon",
+      sportName: "Triathlon",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
