@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-
 import "../styles/register.scoped.scss";
 import { useTranslation } from "react-i18next";
 
@@ -137,7 +136,6 @@ const Register = () => {
   const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
   const isEmailErrorFocus = useRef(null);
 
-
   // ? FILEPOND for IMAGE
   const [files, setFiles] = useState([]);
 
@@ -209,6 +207,16 @@ const Register = () => {
           error("Error reverting file");
         });
     },
+  };
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  const validatePhoneNumber = (phone) => {
+    const phonePattern = /^\+[1-9]\d{7,14}$/;
+    return phonePattern.test(phone);
   };
 
   // ? image upload
@@ -363,7 +371,7 @@ const Register = () => {
     var cryptoaddr = e.target.cryptoaddr.value;
 
     // check again, if email is correctly inserted
-   /*  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    /*  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
      
@@ -470,76 +478,55 @@ const Register = () => {
 
             if (axios.isAxiosError(error)) {
               if (error.response && error.response.status === 409) {
-               
-
                 setSnackbarStatus("error");
                 setSnackbarMessage(error.response.data.message);
                 setOpenSnackbar(true);
               } else {
-               
-
                 setSnackbarStatus("error");
-                setSnackbarMessage("An error occurred: " +
-                    (error.response?.data?.message || error.message));
+                setSnackbarMessage(
+                  "An error occurred: " +
+                    (error.response?.data?.message || error.message)
+                );
                 setOpenSnackbar(true);
-
-
               }
             } else {
-                setSnackbarStatus("error");
-                setSnackbarMessage("An unexpected error occurred: " + error.message);
-                setOpenSnackbar(true);
-
-
+              setSnackbarStatus("error");
+              setSnackbarMessage(
+                "An unexpected error occurred: " + error.message
+              );
+              setOpenSnackbar(true);
             }
           }
 
           if (response) {
-            
-
-
             setSnackbarStatus("success");
-                setSnackbarMessage(t("register.content5"));
-                setOpenSnackbar(true);
-
-
-
+            setSnackbarMessage(t("register.content5"));
+            setOpenSnackbar(true);
           }
         } else {
           setSnackbarStatus("error");
-setSnackbarMessage((t("register.content6")));
-setOpenSnackbar(true);
-
-
+          setSnackbarMessage(t("register.content6"));
+          setOpenSnackbar(true);
         }
       } else {
         if (nationality_selected === "") {
           recaptcha.current.reset();
 
-       
           setSnackbarStatus("error");
-setSnackbarMessage((t("register.content7")));
-setOpenSnackbar(true);
-
-
+          setSnackbarMessage(t("register.content7"));
+          setOpenSnackbar(true);
         } else if (isEmailError === true) {
-
           setSnackbarStatus("error");
-setSnackbarMessage((t("register.content8")));
-setOpenSnackbar(true);
-
-
+          setSnackbarMessage(t("register.content8"));
+          setOpenSnackbar(true);
         } else if (isPhoneError === true) {
           setSnackbarStatus("error");
-          setSnackbarMessage((t("register.content9")));
+          setSnackbarMessage(t("register.content9"));
           setOpenSnackbar(true);
-
-
         } else if (isPasswordError === true) {
           setSnackbarStatus("error");
-          setSnackbarMessage((t("register.content10")));
+          setSnackbarMessage(t("register.content10"));
           setOpenSnackbar(true);
-
         }
       }
     }
@@ -696,8 +683,28 @@ setOpenSnackbar(true);
                     name="email"
                     required
                     onInvalid={() => {
-                      
                       recaptcha.current.reset();
+                    }}
+                    inputRef={isEmailErrorFocus}
+                    error={isEmailError}
+                    helperText={isEmailError ? isEmailErrorHelper : ""}
+                    onChange={(e) => {
+                      const emailValue = e.target.value;
+
+                      if (!validateEmail(emailValue) && emailValue.length > 0) {
+                        setIsEmailError(true);
+                        setIsEmailErrorHelper(t("register.content8"));
+                        isEmailErrorFocus.current.focus();
+                        recaptcha.current.reset();
+                      } else {
+                        setIsEmailError(false);
+                        setIsEmailErrorHelper("");
+                      }
+
+                      /*  
+          setSnackbarStatus("error");
+          setSnackbarMessage((t("register.content8")));
+          setOpenSnackbar(true); */
                     }}
                     type="email"
                     maxLength="80"
@@ -802,6 +809,8 @@ setOpenSnackbar(true);
                   maxLength: 255,
                 }}
                 sx={sxTextField}
+
+                
               />
 
               <label
@@ -820,6 +829,26 @@ setOpenSnackbar(true);
                 }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
+
+                error={isPasswordError} 
+                helperText={isPasswordHelper}
+
+                onChange={(e)=> {
+                  const passwordValue = e.target.value;
+
+                  if(passwordValue.length >= 4 || passwordValue.length == 0){
+                    setIsPasswordError(false);
+                    setIsPasswordErrorHelper("");
+                  } else{
+                    setIsPasswordError(true);
+                    setIsPasswordErrorHelper(t("register.content3"));
+                    isPasswordErrorFocus.current.focus();
+                    recaptcha.current.reset();
+                    
+                  }
+                }}
+
+
                 InputProps={{
                   maxLength: 255,
 
@@ -854,13 +883,35 @@ setOpenSnackbar(true);
                     onInvalid={() => {
                       recaptcha.current.reset();
                     }}
-                    type="number"
+                    inputRef={isPhoneErrorFocus}
+                    error={isPhoneError}
+                    helperText={isPhoneError ? isPhonerHelper : ""}
+                    onChange={(e) => {
+                      const phoneValue = e.target.value;
+
+                      console.log(
+                        "validatePhoneNumber je: " +
+                          validatePhoneNumber(phoneValue)
+                      );
+
+                      if (
+                        !validatePhoneNumber(phoneValue) &&
+                        phoneValue.length > 0
+                      ) {
+                        setIsPhoneError(true);
+                        setIsPhoneErrorHelper(t("register.content9"));
+                        isPhoneErrorFocus.current.focus();
+                        recaptcha.current.reset();
+                      } else {
+                        setIsPhoneError(false);
+                        setIsPhoneErrorHelper("");
+                      }
+                    }}
+                    type="tel"
                     inputProps={{
                       maxLength: 15,
                       inputMode: "numeric",
                       pattern: "[0-9]*",
-
-                    
                     }}
                     sx={sxTextField}
                   />
@@ -1147,8 +1198,6 @@ setOpenSnackbar(true);
           >
             <span className="popins-font">{t("register.content24")}</span>
           </Button>
-
-         
         </div>
       </form>
 
