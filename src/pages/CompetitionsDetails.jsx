@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 import YouTube from "react-youtube";
 
+import {Navbar} from "../components/Navbar"
 
 const CompetitionsDetails = () => {
   const { sportName } = useParams();
@@ -24,6 +25,9 @@ const CompetitionsDetails = () => {
 
   return (
     <>
+      <Navbar />
+
+    
       <div className="lexend-font text-black_second">
         {/*  general info about sport */}
         <div className="m-8 mb-12">
