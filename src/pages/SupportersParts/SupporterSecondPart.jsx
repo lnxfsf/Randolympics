@@ -65,6 +65,13 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
+
+const validatePhoneNumber = (phone) => {
+  const phonePattern = /^\+[1-9]\d{7,14}$/;
+  return phonePattern.test(phone);
+};
+
+
 const SupporterSecondPart = ({
   secondIsVisible,
   setHowItWorks,
@@ -115,6 +122,26 @@ const SupporterSecondPart = ({
   const { t } = useTranslation();
 
 
+    // ? this is for phone
+    const [isPhoneError, setIsPhoneError] = useState(false);
+    const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
+    const isPhoneErrorFocus = useRef(null);
+    
+
+
+
+    useEffect(() => {
+
+      if (isPhoneError && isPhoneErrorFocus.current) {
+        isPhoneErrorFocus.current.focus();
+      }
+
+
+
+
+
+    },[isPhoneError]);
+
   const validateAthlete = async () => {
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
     const responseAthleteUser = await axios.get(
@@ -152,6 +179,12 @@ const SupporterSecondPart = ({
       return;
     }
 
+    if(isPhoneError === true){
+      setSnackbarMessage("Phone is not valid !");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
     if (!isCelebrity) {
       
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -161,6 +194,11 @@ const SupporterSecondPart = ({
         setOpenSnackbarFailure(true);
         return;
       }
+
+
+
+
+
     }
 
     if (friendNationality === "") {
@@ -428,14 +466,46 @@ const SupporterSecondPart = ({
 
                   <TextField
                     value={friendPhone}
+
+                    inputRef={isPhoneErrorFocus}
+                    error={isPhoneError}
+                    helperText={isPhoneError ? isPhonerHelper : ""}
+					
+
+
                     onChange={(e) => {
                       setFriendPhone(e.target.value);
+
+
+
+
+
+                      const phoneValue = e.target.value;
+
+                      if (
+                        !validatePhoneNumber(phoneValue) &&
+                        phoneValue.length > 0
+                      ) {
+                        setIsPhoneError(true);
+                        setIsPhoneErrorHelper(t("register.content9"));
+                        isPhoneErrorFocus.current.focus();
+                       
+                      } else {
+                        setIsPhoneError(false);
+                        setIsPhoneErrorHelper("");
+                      }
                     }}
+
+
+
+
                     id="friendPhone"
                     placeholder="+1 425 555 0123"
-                    type="text"
+                    type="tel"
                     inputProps={{
-                      maxLength: 255,
+                      maxLength: 15,
+                      inputMode: "numeric",
+                      pattern: "[0-9]*",
                     }}
                     InputLabelProps={inputLabelPropsTextField}
                     sx={sxTextField}
