@@ -184,9 +184,9 @@ const Navbar = () => {
 
                 <Tooltip title="Account settings">
                   <>
-                  <div className="flex gap-2 items-center justify-center">
+                  <div className="flex gap-2 items-center justify-center select-none cursor-pointer"  onClick={handleClick}>
                     <IconButton
-                      onClick={handleClick}
+                     /*  onClick={handleClick} */
                       size="small"
                       sx={{ ml: 2 }}
                       aria-controls={open1 ? "account-menu" : undefined}
@@ -209,7 +209,7 @@ const Navbar = () => {
                       )}
                     </IconButton>
                     <p
-                      onClick={handleClick}
+                     /*  onClick={handleClick} */
                       className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer"
                     >
                       {settingUserType(user_type)}
