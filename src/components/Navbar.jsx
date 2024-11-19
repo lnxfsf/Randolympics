@@ -267,9 +267,18 @@ const Navbar = () => {
                         </Avatar>
                       )}
 
-                      <span className="lexend-font text-black_second ">
+                      <p className="lexend-font text-black_second break-all"
+                      
+                      style={{
+                        wordWrap: "break-word",
+                        whiteSpace: "normal",
+                        overflowWrap: "break-word",
+                     
+                      }}
+
+                      >
                         {username}
-                      </span>
+                      </p>
                     </MenuItem>
                     <Divider />
 
