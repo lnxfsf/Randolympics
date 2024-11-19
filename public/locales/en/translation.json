@@ -583,16 +583,11 @@
       "elections": {
         "vote1": "What are you voting for",
         "votenp": "You are voting for the National President who will represent your team and country.",
-
         "votegp": "You are voting for the Global President.",
-
-
         "vote2": "How To Vote",
         "vote3": "Select first button on left side, of table, to cast your vote.",
-
         "votenp1": "National President Elections",
         "votegp1": "Global President Elections",
-
         "votedfor1": "You voted for ",
         "votedfor2": "You can update your vote anytime by repeating the process."
       }

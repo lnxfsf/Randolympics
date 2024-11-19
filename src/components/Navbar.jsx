@@ -310,7 +310,7 @@ const Navbar = () => {
                     </MenuItem>
                     </>)}
 
-                    {(userData.data.user_type !== "VM" && userData.data.user_type !== "SPT" ) && (<>
+                    {(userData.data.user_type === "AH" && userData.data.user_type === "NP" ) && (<>
                       <MenuItem to="/myaccount#elections" component={Link}>
                         <ListItemIcon>
                           <img
