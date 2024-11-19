@@ -175,19 +175,32 @@ const LgnTraffcHistory = () => {
               </Button>
 
               <FormControl
-                variant="standard"
+                
                 sx={{ m: 1, minWidth: 120 }}
                 className="m-4 ml-0 mb-1"
               >
-                <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+             {/*    <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
                   <b>Role</b>
-                </InputLabel>
+                </InputLabel> */}
+                <p className="lexend-font font-medium text-sm">Role</p>
 
                 <Select
                   labelId="roleDropdowns"
                   value={filterRole}
                   onChange={handleFilterRole}
                   className="w-full md:w-[300px]"
+                 /*  style={{ color: "#000" }} */
+                  sx={{
+                    fontFamily: "'Lexend', sans-serif",
+
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
                   style={{ color: "#000" }}
                 >
                   <MenuItem value="">None</MenuItem>

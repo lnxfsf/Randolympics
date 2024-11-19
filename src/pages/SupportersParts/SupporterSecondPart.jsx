@@ -67,8 +67,11 @@ let FRONTEND_SERVER_BASE_URL =
 
 
 const validatePhoneNumber = (phone) => {
+
+  const sanitizedPhone = phone.replace(/\s+/g, '');
+
   const phonePattern = /^\+[1-9]\d{7,14}$/;
-  return phonePattern.test(phone);
+  return phonePattern.test(sanitizedPhone);
 };
 
 
@@ -207,6 +210,12 @@ const SupporterSecondPart = ({
       return;
     }
 
+
+
+    // at last remove spaces from phone number
+    setFriendPhone(friendPhone.replace(/\s+/g, ''));
+
+
     setPopupWarning(true);
 
     // ako je sve proslo onda ide okej ovde (nema return ..)
@@ -295,6 +304,7 @@ const SupporterSecondPart = ({
                       allowMultiple={false}
                       maxFiles={1}
                       server={server}
+                     
                       name="image"
                       labelIdle={t('campaign.content40')}
                       accept="image/png, image/jpeg, image/gif"
