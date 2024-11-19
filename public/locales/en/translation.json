@@ -457,7 +457,7 @@
       "content7": "Insert nationality !",
       "content8": "Email is not valid !",
       "content9": "Phone is not valid !",
-      "content10": "Password should at least 4 characters ! ",
+      "content10": "Password should be at least 4 characters ! ",
       "content11": "Drag & Drop profile picture or <span class=\"filepond--label-action\">Browse</span> <br/>(optional)",
       "content12": "Register as",
       "content13": "Email",
@@ -579,6 +579,22 @@
           "table11": "Medium",
           "table12": "Light",
           "private": "private"
+      },
+      "elections": {
+        "vote1": "What are you voting for",
+        "votenp": "You are voting for the National President who will represent your team and country.",
+
+        "votegp": "You are voting for the Global President.",
+
+
+        "vote2": "How To Vote",
+        "vote3": "Select first button on left side, of table, to cast your vote.",
+
+        "votenp1": "National President Elections",
+        "votegp1": "Global President Elections",
+
+        "votedfor1": "You voted for ",
+        "votedfor2": "You can update your vote anytime by repeating the process."
       }
   },
   "userTypes": {
