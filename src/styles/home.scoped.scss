@@ -28,8 +28,7 @@ ol li {
    background: linear-gradient(180deg, rgba(41, 41, 41, 0.00) 0%, #671212 100%);
     */
 
-
-/* 
+  /* 
   background-image: linear-gradient(
       180deg,
       rgba(41, 41, 41, 0) 0%,
@@ -38,27 +37,17 @@ ol li {
     url("/home/home3.webp");
  */
 
-    
-
-    
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
-  ),
-  url("/home/home_cover.jpg");
-
-
-
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/home/home_cover.jpg");
 
   background-size: cover;
   background-position: center;
-  
 
   /* height: 60vh; */
 
-  height: 85vh;
+  // height: 85vh;  20 nov 2024
 
-
+  height: 105vh;
 
   @media screen and (min-width: 1024px) {
     height: 110vh;
@@ -68,21 +57,17 @@ ol li {
 .countdown-timer {
   color: white;
   // background-color: rgba(38, 25, 25, 0.8);
- 
- // background-color: #332f2f;
+
+  // background-color: #332f2f;
   background-color: rgba(51, 47, 47, 0.8);
 
   width: 80%;
-
 
   /* height: 155px; */
 
   height: 165px;
 
-
   padding-bottom: 5px;
-
-  
 
   border-radius: 20px;
 
@@ -93,9 +78,9 @@ ol li {
   /* height: 135px; */
 
   @media screen and (min-width: 1024px) {
-  /*   height: 135px; */
+    /*   height: 135px; */
 
-  height: 165px;
+    height: 165px;
     width: 45%;
   }
 
@@ -103,7 +88,6 @@ ol li {
     /* height: 155px; */
 
     height: 165px;
-
   }
 
   @media screen and (min-width: 1440px) and (max-width: 2559px) {
@@ -163,8 +147,6 @@ tako imas na hover animation
   animation: pulse infinite 1s;
 } */
 
-
-
 .ellipse-image {
   position: absolute;
   width: 150px;
@@ -206,8 +188,7 @@ tako imas na hover animation
 
   border-radius: 50%;
 
-  background: #FFE9E9;
-
+  background: #ffe9e9;
 }
 /* 
 .competitionItem:hover {
@@ -234,118 +215,94 @@ tako imas na hover animation
   --progress: 100;
 }
 
-
-
 // image_beliefs
-
 
 .container_beliefs {
   position: relative;
-  width: 100%; 
+  width: 100%;
   overflow: hidden; /* Hide any overflow of the image */
 }
 
-
-
 .image_beliefs {
- /*  width: 100%;
+  /*  width: 100%;
 
   min-height: "screen";
   
  */
- 
- 
+
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
 
-  
+
+
+.container_imagine_pic1 {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.imagine_pic1 {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 
 
 
 .fourth_screen {
-
   background-image: linear-gradient(
     180deg,
     rgba(210, 73, 73, 0),
     rgba(210, 73, 73, 0.1)
   );
-
 }
-
-
 
 @media (max-width: 767px) {
-
   .limit_lines_mobile {
-
-
-    display: -webkit-box;         
-    -webkit-line-clamp: 6;       
-    -webkit-box-orient: vertical; 
-    overflow: hidden;             
-    text-overflow: ellipsis;      
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-
 }
-
-
-
-
 
 @media (min-width: 768px) {
-
   .limit_lines_PC {
-
-
-    display: -webkit-box;        
-    -webkit-line-clamp: 10;        
-    -webkit-box-orient: vertical;  
-    overflow: hidden;             
-    text-overflow: ellipsis;       
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-
 }
 
-
-
-
-
-
-
-// custom border ? 
+// custom border ?
 
 .custom-border {
   position: relative;
   width: 2px; /* Width of the border */
   height: 100px; /* Adjust as needed */
-  background-color: #D24949; /* Color of the border */
+  background-color: #d24949; /* Color of the border */
   margin: 0 auto;
-
-
-  
-
 }
-
 
 .custom-border1 {
   position: relative;
   width: 2px; /* Width of the border */
   height: 300px; /* Adjust as needed */
-  background-color: #D24949; /* Color of the border */
+  background-color: #d24949; /* Color of the border */
   margin: 0 auto;
-
-
-  
-
 }
-
-
 
 .dot {
   position: absolute;
@@ -354,23 +311,19 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D24949; /* Same color as the border */
+  background-color: #d24949; /* Same color as the border */
   border-radius: 50%;
 }
-
 
 .dash {
   position: absolute;
   bottom: 5px; /* Adjust as needed */
   left: 50%;
   transform: translateX(-50%);
-  width: 0px; /* Width of the dash */  /* 4px  */
+  width: 0px; /* Width of the dash */ /* 4px  */
   height: 2px; /* Height of the dash */
-  background-color: #D24949; /* Same color as the border */
+  background-color: #d24949; /* Same color as the border */
 }
-
-
-
 
 .dot2 {
   position: absolute;
@@ -379,11 +332,9 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D24949; /* Same color as the border */
+  background-color: #d24949; /* Same color as the border */
   border-radius: 50%;
 }
-
-
 
 .dot3 {
   position: absolute;
@@ -392,151 +343,101 @@ tako imas na hover animation
   transform: translateX(-50%);
   width: 10px; /* Diameter of the dot */
   height: 10px;
-  background-color: #D24949; /* Same color as the border */
+  background-color: #d24949; /* Same color as the border */
   border-radius: 50%;
 }
-
 
 /* when there's more lines on subtitle.. so this need thicker.. */
 .custom-border2 {
   position: relative;
 
+  width: 3px; /* Width of the border */ /* 3px na blize sto je  */
 
-  width: 3px ; /* Width of the border */  /* 3px na blize sto je  */
-
-  
   /* @media screen and (min-width: 1536px) {
     width: 2px;
   } */
 
-
-
   height: 100px; /* Adjust as needed */
-  background-color: #D85A52; /* Color of the border */
+  background-color: #d85a52; /* Color of the border */
   margin: 0 auto;
 }
-
-
-
 
 .custom-border3 {
   position: relative;
   width: 2px; /* Width of the border */
   height: 150px; /* Adjust as needed */
-  background-color: #D24949; /* Color of the border */
+  background-color: #d24949; /* Color of the border */
   margin: 0 auto;
-
-
-  
-
 }
-
-
-
-
-
 
 .custom-border4 {
   position: relative;
   width: 2px; /* Width of the border */
   height: 230px; /* Adjust as needed */
-  background-color: #D24949; /* Color of the border */
+  background-color: #d24949; /* Color of the border */
   margin: 0 auto;
-
 }
-
 
 .custom-borderEnd {
   position: relative;
-  width: 2px ; /* Width of the border */
-  
-/* 
+  width: 2px; /* Width of the border */
+
+  /* 
   // jer ovaj se crashuje u gornji
   @media screen and (min-width: 1536px) {
     width: 2px;
   }  */
 
-
-
-
-
   height: 30px; /* Adjust as needed */
-  background-color: #D85A52; /* Color of the border */
+  background-color: #d85a52; /* Color of the border */
   margin: 0 auto;
 }
 
-
-
-
-// for fixing text, placement !!! it needs to be at specific height.. so, you make it with this.. it will work... 
+// for fixing text, placement !!! it needs to be at specific height.. so, you make it with this.. it will work...
 
 .end_text_games {
-
-   margin-top: -15px; 
-
+  margin-top: -15px;
 }
 
 .text_games {
- /*  margin-top: -35px; */
+  /*  margin-top: -35px; */
 }
-
-
-
-
 
 // join us, section end
 
-
 // image_beliefs
-
 
 .container_join_us {
   position: relative;
-  width: 100%; 
-
-
-   
- 
-
+  width: 100%;
 
   overflow: hidden; /* Hide any overflow of the image */
 }
 
-
-
 .image_join_us {
- /*  width: 100%;
+  /*  width: 100%;
 
   min-height: "screen";
   
  */
- 
- 
+
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  
 }
-
-
-
-
 
 .container_first_screen {
   position: relative;
   width: 100%;
-  
+
   overflow: hidden; /* Hide any overflow of the image */
 }
 
-
-
 .image_first_screen {
- /*  width: 100%;
+  /*  width: 100%;
 
   min-height: "screen";
   
@@ -548,13 +449,7 @@ tako imas na hover animation
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  
 }
-
-
-
-
 
 /* 
 
