@@ -236,7 +236,7 @@ const SeventhScreenHome = () => {
           {t("home.seventhScreen.content1")}
         </p>
 
-        <p className="ml-6 mr-6 pl-2 pr-2">
+        <p className="ml-6 mr-6 pl-2 pr-2 2xl:w-[50%] 2xl:text-center self-center">
           <br />
           {t("home.seventhScreen.content19")}
           <br />
