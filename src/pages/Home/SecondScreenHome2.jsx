@@ -19,9 +19,11 @@ const SecondScreenHome2 = ({ sectionRef }) => {
 
       {/* min-h-screen */}
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
-        <div className="lg:basis-1/2 flex items-center justify-end">
+        
+        
+        <div className="lg:basis-1/2  flex items-center justify-end">
        
-          <div className="">
+          <div className=" 2xl:basis-1/2 ">
             {/* // lg:p-12 */}
 
             <p className="text-2xl md:text-4xl font-bold mb-4">
@@ -29,17 +31,17 @@ const SecondScreenHome2 = ({ sectionRef }) => {
           
             </p>
 
-            <p className="font-medium mb-4">
+            <p className="font-medium mb-1">
             {t('home.secondScreen.contentRd1')}
             </p>
 
-            <ul className="pl-4 font-medium  ">
-              <li className="text-base">
+            
+              <li className="text-base font-medium mb-1">
               {t('home.secondScreen.contentRd2')}
                 
               </li>
 
-              <li className="text-base">
+              <li className="text-base font-medium mb-1">
               {t('home.secondScreen.contentRd3')}
                 
               </li>
@@ -47,7 +49,10 @@ const SecondScreenHome2 = ({ sectionRef }) => {
 
 
            
-            </ul>
+            
+
+
+
 
             {/* buttons */}
 
@@ -107,6 +112,8 @@ const SecondScreenHome2 = ({ sectionRef }) => {
         <div className="hidden basis-1/2 lg:flex justify-start items-center ">
           <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%] rounded-2xl" />
         </div>
+
+
       </div>
     </>
   );

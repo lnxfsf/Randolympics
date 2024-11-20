@@ -29,7 +29,7 @@ const SecondScreenHome = ({ sectionRef }) => {
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
         <div className="lg:basis-1/2 flex items-center justify-end">
        
-          <div className="">
+          <div className="2xl:basis-1/2">
             {/* // lg:p-12 */}
 
             <p className="text-2xl md:text-4xl font-bold mb-4">
@@ -37,31 +37,31 @@ const SecondScreenHome = ({ sectionRef }) => {
             {t('home.secondScreen.title2')}
             </p>
 
-            <p className="font-medium mb-4">
+            <p className="font-medium mb-1">
             {t('home.secondScreen.content1')}
             </p>
 
-            <ul className="pl-4 font-medium  ">
-              <li className="text-base">
+            
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content2')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content3')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content4')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content5')}
                 
-              </li>
-            </ul>
+              </p>
+           
 
             {/* buttons */}
 
