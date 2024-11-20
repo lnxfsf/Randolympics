@@ -10,12 +10,12 @@ const ImagineHomeScreen = () => {
           <p className=" font-bold text-3xl md:text-4xl ">Imagine</p>
 
           <div className="flex justify-between flex-col gap-y-2 md:flex-row">
-            <p className=" font-medium sm:text-lg md:text-xl mt-2">
+            <p className=" font-medium sm:text-lg md:text-xl mt-2 mb-4 md:mb-0">
               Your boss completing a triathlon.
             </p>
 
             <Button
-              className="w-60 "
+              className="w-60 self-center  "
               style={{ textTransform: "none" }}
               sx={{
                 height: "45px",
