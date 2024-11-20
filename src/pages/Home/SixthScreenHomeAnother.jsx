@@ -62,7 +62,7 @@ const SixthScreenHomeAnother = () => {
 {/* md:basis-1/2 */}
               <Button
               onClick={() => {
-                navigate("/register");
+                navigate("/supporters");
               }}
                 className="self-center w-full "
                 /* w-full md:w-50% */

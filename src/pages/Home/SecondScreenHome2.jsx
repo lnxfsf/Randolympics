@@ -110,7 +110,7 @@ const SecondScreenHome2 = ({ sectionRef }) => {
         </div>
 
         <div className="hidden basis-1/2 lg:flex justify-start items-center ">
-          <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%] rounded-2xl" />
+          <img src="/home/second_screen.jpg" className="w-full 2xl:w-[40%] rounded-2xl" />
         </div>
 
 
