@@ -38,6 +38,16 @@ const ImagineHomeScreen = () => {
           <div className="w-full h-96 overflow-hidden container_imagine_pic1 mt-4 ">
             <img src="/home/imagine1.jpeg" className="imagine_pic1 " />
           </div>
+
+          <div className="textBox1 inline-block mr-8">
+            <p className="font-medium text-black_second pr-3 p-2 pl-3">
+              <span className="text-red-600 mr-2"><img className="inline " src="/home/imagine1icon.svg"/></span> It’s wild, it’s fun,
+              and it will be unforgettable.
+            </p>
+          </div>
+
+
+
         </div>
       </div>
     </>
