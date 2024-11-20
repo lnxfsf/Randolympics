@@ -50,6 +50,7 @@ import { FifthScreenHomeOld2 } from "./Home/FifthScreenHomeOld2";
 import { FifthScreenHomeOld3 } from "./Home/FifthScreenHomeOld3";
 import { SecondScreenHome2 } from "./Home/SecondScreenHome2";
 import { SecondScreenHome3 } from "./Home/SecondScreenHome3";
+import { FifthScreenHomeNewDesign } from "./Home/FifthScreenHomeNewDesign";
 
 // ? expand more, arrow icon transformation
 
@@ -111,7 +112,11 @@ const Home = () => {
 
       {/* <FifthScreenHome /> */}
 
-      <FifthScreenHomeOld />
+      <FifthScreenHomeNewDesign />
+{/* 
+      <FifthScreenHomeOld /> */}
+
+
 
 
 

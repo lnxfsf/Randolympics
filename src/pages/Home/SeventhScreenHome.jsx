@@ -232,7 +232,7 @@ const SeventhScreenHome = () => {
   return (
     <>
       <div className="flex items-start lexend-font text-black_second flex-col">
-        <p className="text-4xl font-bold ml-6 mt-6">
+        <p className="text-4xl font-bold ml-6 mt-6 self-center">
           {t("home.seventhScreen.content1")}
         </p>
 

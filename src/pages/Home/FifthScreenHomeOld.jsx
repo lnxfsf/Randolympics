@@ -9,6 +9,7 @@ const FifthScreenHomeOld = () => {
       <p className="text-2xl md:text-4xl font-bold text-center lexend-font text-black_second mt-16 mb-16">
         {t("home.howItWorks.title1")}
       </p>
+      
 
       <div className="flex w-full lexend-font text-black_second ">
         <div className="min-[890px]:basis-1/2 flex justify-start flex-col  p-2  md:p-16">

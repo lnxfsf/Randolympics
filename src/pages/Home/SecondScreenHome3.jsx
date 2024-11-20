@@ -17,7 +17,7 @@ const SecondScreenHome3 = ({ sectionRef }) => {
        
         <div className="hidden basis-1/2 lg:flex justify-end items-end ">
           <img
-            src="/home/second_screen.jpg"
+            src="/home/win_gold.jpg"
             className="w-full 2xl:w-[40%] rounded-2xl"
           />
         </div>
