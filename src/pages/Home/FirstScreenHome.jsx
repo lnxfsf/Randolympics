@@ -65,7 +65,8 @@ const FirstScreenHome = ({ scrollToSection }) => {
 
 
    
-        <p className="text-2xl md:text-4xl p-2 font-bold  text-center" style={{ color: "white" }}>
+    {/* text-2xl md:text-4xl */}
+        <p className="text-2xl md:text-4xl lg:text-5xl 2xl:text-7xl p-2 font-bold  text-center" style={{ color: "white" }}>
           {t('home.firstScreen.title1')} 
           <br />{t('home.firstScreen.title2')} 
           <br />{t('home.firstScreen.title3')} 

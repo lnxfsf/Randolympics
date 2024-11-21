@@ -296,9 +296,10 @@ const SupporterThirdPart = ({
                 sx={sxTextField}
               />
 
-              <p className="text-xl text-start mt-6 mb-6 text-black_second font-semibold lexend-font">
+              <p className="text-xl text-start mt-6 mb-1 text-black_second font-semibold lexend-font">
                 {t("campaign.content53")}
               </p>
+              <p className="lexend-font text-sm mb-6">Informing {additionalSupportersFormData.length} people about this campaign to become supporters. </p>
 
               {/* inform additional supporters */}
 

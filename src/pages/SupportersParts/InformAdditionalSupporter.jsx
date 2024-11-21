@@ -2,6 +2,10 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import {useState} from "react";
+
+
+
 const InformAdditionalSupporter = ({
   additionalSupportersFormData,
 
@@ -14,9 +18,12 @@ const InformAdditionalSupporter = ({
 }) => {
   const { t } = useTranslation();
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   return (
     <>
       <div className="flex flex-col justify-start w-full">
+      
         {additionalSupportersFormData.map((data, index) => (
           <div
             className="flex flex-col items-start justify-center"
@@ -72,7 +79,18 @@ const InformAdditionalSupporter = ({
         ))}
 
         <Button
-          onClick={addInputSet}
+         disabled={isDisabled}
+          onClick={() => {
+            addInputSet(); 
+
+            setIsDisabled(true);
+
+            setTimeout(() => {
+              setIsDisabled(false);
+            }, 500);
+            
+
+          }}
           className="w-full md:w-50%"
           style={{ textTransform: "none" }}
           sx={{
