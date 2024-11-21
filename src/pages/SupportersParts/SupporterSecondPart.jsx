@@ -1065,6 +1065,7 @@ const SupporterSecondPart = ({
           className="popup-content "
         >
           <WarningTextPopup
+          isCelebrity={isCelebrity}
             setSecondIsVisible={setSecondIsVisible}
             setThirdIsVisible={setThirdIsVisible}
             setPopupWarning={setPopupWarning}

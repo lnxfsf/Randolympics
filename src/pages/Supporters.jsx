@@ -721,15 +721,18 @@ const Supporters = () => {
 
   useEffect(() => {
     switch (hash) {
-      case "friend" && firstIsVisible === true:
+      case "friend" :
+        if(firstIsVisible){
         setIsCelebrity(false);
         setFriendEmail("");
 
         setFirstIsVisible(false);
         setSecondIsVisible(true);
+      }
         break;
 
-      case "celebrity" && firstIsVisible === true:
+      case "celebrity":
+        if(firstIsVisible){
         setFriendEmail(() => {
           return generateRandomEmail();
         });
@@ -737,6 +740,7 @@ const Supporters = () => {
 
         setFirstIsVisible(false);
         setSecondIsVisible(true);
+      }
 
         break;
     }
@@ -748,6 +752,10 @@ const Supporters = () => {
 
     console.log("drugi je visible");
     console.log(secondIsVisible);
+    console.log(firstIsVisible)
+
+
+
   }, [secondIsVisible]);
 
   return (
