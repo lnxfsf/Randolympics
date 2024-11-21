@@ -3,7 +3,7 @@ import { NavbarHome } from "../components/NavbarHome";
 import { Button } from "@mui/material";
 import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 import "@mui/material/styles/styled";
-
+import { useLocation } from "react-router-dom";
 
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -650,6 +650,17 @@ const Supporters = () => {
   const [isCelebrity, setIsCelebrity] = useState(false); 
 
 
+  
+  const location = useLocation();
+  const hash = location.hash.replace("#", "");
+
+
+
+
+
+
+
+
   // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
   const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
 
@@ -761,6 +772,30 @@ const Supporters = () => {
   useEffect(() => {
     
    
+    
+  switch(hash){
+    case "friend":
+      setIsCelebrity(false);
+              setFriendEmail("");
+
+              setFirstIsVisible(false);
+              setSecondIsVisible(true);
+      break;
+
+
+    case "celebrity":
+      setFriendEmail(() => {
+        return generateRandomEmail();
+      });
+      setIsCelebrity(true);
+
+      setFirstIsVisible(false);
+      setSecondIsVisible(true);
+
+      break;
+  }
+  
+  
 
 
   }, [amount, additionalSupportersFormData]);

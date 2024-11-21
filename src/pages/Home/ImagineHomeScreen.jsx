@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import "../../styles/home.scoped.scss";
 
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ImagineHomeScreen = () => {
+
+    const navigate = useNavigate();
+
   const lines = Array.from({ length: 100 });
 
   return (
@@ -117,6 +123,7 @@ const ImagineHomeScreen = () => {
             <div className="w-full flex justify-center items-center pt-8 flex-col">
               <div className="flex max-md:w-full items-center gap-2">
                 <Button
+                onClick={() => {navigate("/supporters#friend")}}
                   className="w-full md:w-60 self-center  "
                   style={{ textTransform: "none" }}
                   sx={{
@@ -151,6 +158,7 @@ const ImagineHomeScreen = () => {
                   </div>
 
                   <Button
+                  onClick={() => {navigate("/supporters#celebrity")}}
                     className="w-full md:w-60 self-center  "
                     style={{ textTransform: "none" }}
                     sx={{
