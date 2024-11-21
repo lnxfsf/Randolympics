@@ -63,7 +63,6 @@ const ImagineHomeScreen = () => {
     t('home.imagineHome.happen7'),
     t('home.imagineHome.happen8'),
     t('home.imagineHome.happen9'),
-    t('home.imagineHome.happen10'),
     t('home.imagineHome.happen11'),
     t('home.imagineHome.happen12'),
   ];
@@ -214,7 +213,7 @@ const ImagineHomeScreen = () => {
 
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between  flex-col lg:flex-row">
           <div className="self-center grow">
-            <p className="font-medium text-lg text-center">
+            <p className="font-medium text-lg text-center ">
             {t('home.imagineHome.text7')}
             </p>
 
@@ -273,12 +272,12 @@ const ImagineHomeScreen = () => {
                 <div className="relative max-md:w-full">
                   <div className="all_stars z-10">
                     <div className="flex justify-end">
-                      <img className="first_star" src="/home/first_star.svg" />
+                      <img className="first_star animate_heartBeat " src="/home/first_star.svg" />
                       <img
-                        className="second_star"
+                        className="second_star animate_heartBeat animate__delay-2s"
                         src="/home/second_star.svg"
                       />
-                      <img className="third_star" src="/home/third_star.svg" />
+                      <img className="third_star animate_heartBeat animate__delay-4s" src="/home/third_star.svg" />
                     </div>
                   </div>
 

@@ -329,6 +329,14 @@ tako imas na hover animation
 
 }
 
+
+
+
+.animate_heartBeat {
+  animation: pulse 1s ease-in-out infinite; /* Adjust duration as needed */
+}
+
+
 .second_star {
   position: relative;
 
