@@ -204,8 +204,8 @@ const ImagineHomeScreen = () => {
           <div className="basis-1/3 p-4 flex self-center flex-col">
             <img className="2xl:w-96" src="home/imagine2.jpeg" />
 
-            <div className="textBox2 max-w-fit inline-block mr-8">
-              <p className="font-medium text-black_second  p-2 pl-3">
+            <div className="textBox2 max-w-fit inline-block lg:mr-8  ">
+              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">
               {t('home.imagineHome.text6')}
               </p>
             </div>
@@ -312,8 +312,8 @@ const ImagineHomeScreen = () => {
           </div>
 
           <div className="basis-1/3 p-4 flex self-center flex-col">
-            <div className="textBox3 max-w-fit inline-block mr-8">
-              <p className="font-medium text-black_second  p-2 pl-3">{t('home.imagineHome.text13')}
+            <div className="textBox3 max-w-fit inline-block lg:mr-8">
+              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">{t('home.imagineHome.text13')}
               </p>
             </div>
             <img className="2xl:w-96" src="home/imagine3.jpeg" />

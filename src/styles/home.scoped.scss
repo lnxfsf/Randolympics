@@ -272,6 +272,8 @@ tako imas na hover animation
 
   @media (max-width: 1125px) {
     bottom: 25px;
+    right: 10px;
+
     margin-left: auto;
     margin-right: auto;
   }
@@ -286,15 +288,22 @@ tako imas na hover animation
 .textBox3 {
   position: relative;
 
-  @media (min-width: 1125px) {
+/*   @media (min-width: 1125px) {
     top: 65px;
     right: 75px;
+  } */
+
+  
+  @media (min-width: 1125px) {
+    top: 65px;
+    right: 145px;
   }
 
   @media (max-width: 1125px) {
     top: 15px;
+    right: 15px;
     margin-left: auto;
-    margin-right: auto;
+   // margin-right: auto;
   }
 
   background-color: white;

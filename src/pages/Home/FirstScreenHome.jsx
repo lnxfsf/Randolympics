@@ -81,12 +81,14 @@ const FirstScreenHome = ({ scrollToSection }) => {
         <CountDownTimerHome />
 
          <div className="flex items-center justify-center  flex-col pt-8">
-         {/*  <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
+           <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
           {t('home.firstScreen.subtitle1')} 
-          </p> */}
+          </p> 
 
           <Button
-            onClick={scrollToSection}
+            /* onClick={scrollToSection}
+             */
+            onClick={() => {navigate("/randomize");}}
 
             className="w-36 "
             style={{ textTransform: "none" }}
@@ -107,7 +109,7 @@ const FirstScreenHome = ({ scrollToSection }) => {
             id="randomize-btn"
             type="submit"
           >
-            <span className="popins-font" style={{ textTransform: "none" }}>
+            <span className="lexend-font" style={{ textTransform: "none" }}>
               {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>
