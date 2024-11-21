@@ -10,13 +10,10 @@ const FifthScreenHomeNewDesign = () => {
         {t("home.howItWorks.title1")}
       </p>
 
-      <div className="flex justify-center w-full  m-4 flex-col md:flex-row ">
-      
-      
-      {/*  min-[1536px]:w-[65%] max-[2000px]:w-[65%] */}
+      <div className="flex justify-center w-full flex-col md:flex-row ">
+        {/*  min-[1536px]:w-[65%] max-[2000px]:w-[65%] */}
 
         <div className=" flex  w-[95%] lg:w-[80%]  2xl:w-[65%] min-[2001px]:w-[52%] lexend-font text-black_second ">
-
           <div className=" min-[890px]:basis-1/2 flex justify-start flex-col  p-2  md:p-16 grow ">
             <div className="flex">
               <div className="flex flex-col items-start justify-start mb-4 w-full">
@@ -24,9 +21,9 @@ const FifthScreenHomeNewDesign = () => {
 
                 <p className=" font-medium text-red_second">In Progress!</p>
                 <p>
-                  Nominate a friend, family member, or even a celebrity for the Randolympics
+                  Nominate a friend, family member, or even a celebrity for the
+                  Randolympics
                 </p>
-                
               </div>
             </div>
 
@@ -42,7 +39,6 @@ const FifthScreenHomeNewDesign = () => {
                 Use social media to gather votes, shares, and donations for your
                 nominee.
               </p>
-              
             </div>
 
             <div className="flex flex-col items-start justify-start mb-4   ">
@@ -87,8 +83,6 @@ const FifthScreenHomeNewDesign = () => {
               className=" w-[65%] xl:w-[45%] 2xl:w-[35%]"
             />
           </div>
-
-
         </div>
       </div>
     </>
