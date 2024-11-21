@@ -97,7 +97,22 @@ const ImagineHomeScreen = () => {
 
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between  flex-col lg:flex-row">
           <div className="self-center grow">
-            <p className="font-medium text-lg">Who would you want to see compete in</p>
+            <p className="font-medium text-lg text-center">Who would you want to see compete in</p>
+
+           <div className="flex justify-center items-center flex-col gap-4 p-8">
+            
+            <p className="text-xl md:text-2xl font-semibold">Pole vault</p>
+
+
+            <p>and</p>
+
+
+
+            <p className="text-xl md:text-2xl font-semibold">Win</p>
+           
+
+
+            </div>
 
             <div className="w-full flex justify-center items-center pt-8 flex-col">
               <div className="flex max-md:w-full items-center gap-2">
