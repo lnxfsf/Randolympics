@@ -57,7 +57,6 @@ const ImagineHomeScreen = () => {
   const listOfHappen = [
     t('home.imagineHome.happen1'),
     t('home.imagineHome.happen2'),
-    t('home.imagineHome.happen3'),
     t('home.imagineHome.happen4'),
     t('home.imagineHome.happen5'),
     t('home.imagineHome.happen6'),
