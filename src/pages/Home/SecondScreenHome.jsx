@@ -18,7 +18,7 @@ const SecondScreenHome = ({ sectionRef }) => {
     <div className="flex justify-center  mt-12">  
       
 
-      <p ref={sectionRef}  className="text-3xl md:text-4xl font-bold text-black_second lexend-font">
+      <p ref={sectionRef}  className="text-3xl md:text-4xl font-bold text-black_second lexend-font text-center">
       {t('home.secondScreen.title3')}
       </p>
     </div>

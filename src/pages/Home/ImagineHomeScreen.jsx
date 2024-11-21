@@ -88,8 +88,88 @@ const ImagineHomeScreen = () => {
             <img className="2xl:w-96" src="home/imagine2.jpeg" />
 
             <div className="textBox2 max-w-fit inline-block mr-8">
-              <p className="font-medium text-black_second  p-2 pl-3">It will be fun to watch!</p>
+              <p className="font-medium text-black_second  p-2 pl-3">
+                It will be fun to watch!
+              </p>
             </div>
+          </div>
+        </div>
+
+        <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between  flex-col lg:flex-row">
+          <div className="self-center grow">
+            <p className="font-medium text-lg">Who would you want to see compete in</p>
+
+            <div className="w-full flex justify-center items-center pt-8 flex-col">
+              <div className="flex max-md:w-full items-center gap-2">
+                <Button
+                  className="w-full md:w-60 self-center  "
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "45px",
+                    bgcolor: "#D24949",
+
+                    color: "#fff",
+                    borderRadius: 2,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                >
+                  <span className="lexend-font">Friend</span>
+                </Button>
+
+                <p className="font-medium">or</p>
+
+                <div className="relative max-md:w-full">
+                  <div className="all_stars z-10">
+                    <div className="flex justify-end">
+                      <img className="first_star" src="/home/first_star.svg" />
+                      <img
+                        className="second_star"
+                        src="/home/second_star.svg"
+                      />
+                      <img className="third_star" src="/home/third_star.svg" />
+                    </div>
+                  </div>
+
+                  <Button
+                    className="w-full md:w-60 self-center  "
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      height: "45px",
+                      bgcolor: "#D24949",
+
+                      color: "#fff",
+                      borderRadius: 2,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                  >
+                    <span className="lexend-font">Celebrity</span>
+                  </Button>
+                </div>
+              </div>
+
+              <p className="text-sm mt-4">Make your choice now !</p>
+            </div>
+          </div>
+
+          <div className="basis-1/3 p-4 flex self-center flex-col">
+            <div className="textBox3 max-w-fit inline-block mr-8">
+              <p className="font-medium text-black_second  p-2 pl-3">
+                33 competitions in total
+              </p>
+            </div>
+            <img className="2xl:w-96" src="home/imagine3.jpeg" />
+
+            <img className="2xl:w-96 mt-6" src="home/imagine4.jpeg" />
           </div>
         </div>
       </div>
