@@ -263,8 +263,46 @@
           "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal."
       },
       "imagineHome": {
+
+
+        "text1": "Imagine",
+        "text2": "That's Randolympics!",
+        "text3": "It’s wild, it’s fun, and it will be unforgettable.",
+        "text4": "Randolympics is a one-of-a-kind event where random people compete in unpredictable sports.",
+        "text5": "We are transforming everyday people into unforgettable competitors.",
+        "text6": "It will be fun to watch!",
+        "text7": "Who would you want to see compete in",
+        "text8": "and",
+        "text9": "Friend",
+        "text10": "or",
+        "text11": "Celebrity",
+        "text12": "Make your choice now !",
+        "text13": "33 competitions in total",
+
         "happen1": "Win",
-        "happen2": "Lose"
+        "happen2": "Lose",
+
+        "happen4": "Fail",
+        "happen5": "Die of embarrassment",
+        "happen6": "Wish the ground would swallow him",
+        "happen7": "Feel like crawling under a rock",
+        "happen8": "Humiliated",
+        "happen9": "Burn with shame",
+        "happen11": "Be red-faced with embarrassment",
+        "happen12": "Feel utterly humiliated",
+
+
+        "scenario1": "Your boss completing a triathlon.",
+        "scenario2": "Your grandma winning gold in archery.",
+        "scenario3": "Your cousin scoring the game-winning goal in football.",
+        "scenario4":  "Your gym buddy doing backflips in gymnastics.",
+        "scenario5":  "Your dad surprising everyone with a 50m dive.",
+        "scenario6": "Your favorite celebrity boxing like a champ.",
+        "scenario7": "Your neighbor leading the volleyball team to victory.",
+        "scenario8": "Your sibling crushing it in table tennis.",
+        "scenario9": "Your roommate throwing the perfect discus.",
+        "scenario10":  "Your best friend sprinting to glory in the 200m race."
+
 
       }
   },
