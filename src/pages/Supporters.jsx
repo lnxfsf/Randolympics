@@ -5,7 +5,6 @@ import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
 import "@mui/material/styles/styled";
 import { useLocation } from "react-router-dom";
 
-
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -122,7 +121,6 @@ const inputLabelPropsTextField = {
 };
 
 const sxTextField = {
- 
   mb: 1,
   mr: 1,
 
@@ -139,18 +137,12 @@ const sxTextField = {
   },
   "& .MuiInputLabel-root": {
     fontFamily: "'Lexend', sans-serif",
-    
+
     "&.Mui-focused": {
       color: "black",
     },
-
-
-
-
-    
   },
 };
-
 
 //const campaignId = uuidv4();
 
@@ -173,10 +165,7 @@ const generateRandomEmail = (usernameLength = 8) => {
 };
 
 const Supporters = () => {
-
   const [campaignId, setCampaignId] = useState("");
-
-  
 
   let { user } = useContext(AuthContext);
 
@@ -192,100 +181,98 @@ const Supporters = () => {
 
     var tempDoCreateSupporterAccount = false;
 
-
     // if user is logged in, no need to check it. it won't create another supporter account when making campaign
-  if(!user){
-    // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
-    if (supporterPassword !== "" && supporterEmail !== "") {
-      // ALI AKO UNESE ŠIFRU !
+    if (!user) {
+      // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
+      if (supporterPassword !== "" && supporterEmail !== "") {
+        // ALI AKO UNESE ŠIFRU !
 
-      // moras videti da li ima taj email prvo, da li postoji vec
+        // moras videti da li ima taj email prvo, da li postoji vec
 
-      const responseSupporterUser = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
-        {
-          params: {
-            email: supporterEmail,
-          },
-        }
-      );
-
-      if (responseSupporterUser.data.found) {
-        // pronasao je tog user-a !
-
-        // ! treba SAMO DA PROVERIS, da li je password isti !
-        // ako nije, isto i dalje izbacuje, dok ne unese isparavnu
-
-        const responseSupporterUserPasswordCheck = await axios.get(
-          `${BACKEND_SERVER_BASE_URL}/auth/campaignIsSupporterPassCorrect`,
+        const responseSupporterUser = await axios.get(
+          `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
           {
             params: {
               email: supporterEmail,
-              password: supporterPassword,
             },
           }
         );
 
-        // If the password is incorrect, show an error message
-        if (responseSupporterUserPasswordCheck.data.check === false) {
-          setSnackbarMessage("Wrong supporter password!");
-          setOpenSnackbarFailure(true);
-          return;
-        }
+        if (responseSupporterUser.data.found) {
+          // pronasao je tog user-a !
 
-        // ako je ispravna, nece se nista desiti, samo ce proci dalje..
+          // ! treba SAMO DA PROVERIS, da li je password isti !
+          // ako nije, isto i dalje izbacuje, dok ne unese isparavnu
 
-        // On ovde, dobije taj password, a i email
-        /*   setSnackbarMessage("");
+          const responseSupporterUserPasswordCheck = await axios.get(
+            `${BACKEND_SERVER_BASE_URL}/auth/campaignIsSupporterPassCorrect`,
+            {
+              params: {
+                email: supporterEmail,
+                password: supporterPassword,
+              },
+            }
+          );
+
+          // If the password is incorrect, show an error message
+          if (responseSupporterUserPasswordCheck.data.check === false) {
+            setSnackbarMessage("Wrong supporter password!");
+            setOpenSnackbarFailure(true);
+            return;
+          }
+
+          // ako je ispravna, nece se nista desiti, samo ce proci dalje..
+
+          // On ovde, dobije taj password, a i email
+          /*   setSnackbarMessage("");
         setOpenSnackbarFailure(true);
         return;
  */
-      } else {
-        // ako nije pronasao tog user-a.
-        // E SADA DOZVOLJAVA DA KREIRA OVAJ NOVI, USER. jer sada ima i password i email ! (pa kreira novi account sa ovime (ovde nece biti errors. a onaj gde on dozvoli, samo sa email, on ne vrsi registraciju, pa tamo erroruje.. al uglv ostalo radi sve))
+        } else {
+          // ako nije pronasao tog user-a.
+          // E SADA DOZVOLJAVA DA KREIRA OVAJ NOVI, USER. jer sada ima i password i email ! (pa kreira novi account sa ovime (ovde nece biti errors. a onaj gde on dozvoli, samo sa email, on ne vrsi registraciju, pa tamo erroruje.. al uglv ostalo radi sve))
 
-        setDoCreateSupporterAccount(true);
-        tempDoCreateSupporterAccount = true;
-      }
-    } else if (supporterEmail !== "") {
-      const responseSupporterUser = await axios.get(
-        `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
-        {
-          params: {
-            email: supporterEmail,
-          },
+          setDoCreateSupporterAccount(true);
+          tempDoCreateSupporterAccount = true;
         }
-      );
+      } else if (supporterEmail !== "") {
+        const responseSupporterUser = await axios.get(
+          `${BACKEND_SERVER_BASE_URL}/auth/campaignDoesUserExist`,
+          {
+            params: {
+              email: supporterEmail,
+            },
+          }
+        );
 
-      if (responseSupporterUser.data.found) {
-        // If the supporter exists but no password was provided, prompt the user to enter a password
+        if (responseSupporterUser.data.found) {
+          // If the supporter exists but no password was provided, prompt the user to enter a password
+          setSnackbarMessage(
+            "Supporter already exists. Type supporter password."
+          );
+          setOpenSnackbarFailure(true);
+          return;
+        } else {
+          // If no supporter exists, allow account creation. ALI CEKAJ, NE MOZE DA KREIRA, AKO NEMA PASSWORD !
+          // okej, da, on NE treba, da unese password. on ce i dalje biti upisan kao donator ! sve ostalo ce raditi isto. kako cuva u bazi !
+          // zato ga ovde pustas..
+          setDoCreateSupporterAccount(true);
+          tempDoCreateSupporterAccount = true;
+        }
+      } else if (supporterPassword !== "") {
         setSnackbarMessage(
-          "Supporter already exists. Type supporter password."
+          "Password inserted with empty email. Type supporter email first ! "
         );
         setOpenSnackbarFailure(true);
         return;
-      } else {
-        // If no supporter exists, allow account creation. ALI CEKAJ, NE MOZE DA KREIRA, AKO NEMA PASSWORD !
-        // okej, da, on NE treba, da unese password. on ce i dalje biti upisan kao donator ! sve ostalo ce raditi isto. kako cuva u bazi !
-        // zato ga ovde pustas..
-        setDoCreateSupporterAccount(true);
-        tempDoCreateSupporterAccount = true;
       }
-    } else if (supporterPassword !== "") {
-      setSnackbarMessage("Password inserted with empty email. Type supporter email first ! ");
-      setOpenSnackbarFailure(true);
-      return;
+
+      if (supporterName === "") {
+        setSnackbarMessage("Insert your name");
+        setOpenSnackbarFailure(true);
+        return;
+      }
     }
-
-    if (supporterName === "") {
-      setSnackbarMessage("Insert your name");
-      setOpenSnackbarFailure(true);
-      return;
-    }
-  }
-
-
-
 
     // makes it for them
     makeCampaign(tempDoCreateSupporterAccount);
@@ -296,7 +283,7 @@ const Supporters = () => {
     setFourthIsVisible(true);
   };
 
-  // for snackbar message. 
+  // for snackbar message.
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false);
   const [openSnackbarFailure, setOpenSnackbarFailure] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -319,9 +306,6 @@ const Supporters = () => {
 
   const [additionalSupportersFormData, setAdditionalSupportersFormData] =
     useState([{ name: "", email: "" }]);
-
-  
-  
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -349,8 +333,7 @@ const Supporters = () => {
 
   const urlForCampaign = `${FRONTEND_SERVER_BASE_URL}/campaign/${campaignId}`;
 
-
-  // function to make campaign, once everything is good. it creates campaign, then creates user accounts as user_type AH (athlete), SPT (supporter) 
+  // function to make campaign, once everything is good. it creates campaign, then creates user accounts as user_type AH (athlete), SPT (supporter)
   const makeCampaign = async (tempDoCreateSupporterAccount) => {
     var athleteId = "";
     var supporterId = "";
@@ -379,16 +362,14 @@ const Supporters = () => {
           supporterEmail,
           supporterComment,
 
-
           isCelebrity,
           fb_link,
           ig_link,
-          tw_link
+          tw_link,
         }
       );
 
       if (responseCampaign.status === 201) {
-
         /*  alert("created campaign in database"); */
 
         try {
@@ -428,9 +409,6 @@ const Supporters = () => {
           );
 
           if (response.status === 201) {
-            
-          
-
             athleteId = response.data.userId;
 
             /*  alert("athlete user created"); */
@@ -561,13 +539,9 @@ const Supporters = () => {
         return true;
       }
     }
-
-   
   };
 
   const informOtherSupporters = async () => {
-    
-
     console.log(JSON.stringify(additionalSupportersFormData));
 
     try {
@@ -601,8 +575,6 @@ const Supporters = () => {
       }
     }
   };
-
-  
 
   // this is for password <input> field, MUI library we use
   const [showPassword, setShowPassword] = React.useState(false);
@@ -647,22 +619,14 @@ const Supporters = () => {
   const [supporterPassword, setSupporterPassword] = useState("");
   const [supporterComment, setSupporterComment] = useState("");
 
-  const [isCelebrity, setIsCelebrity] = useState(false); 
+  const [isCelebrity, setIsCelebrity] = useState(false);
 
-
-  
   const location = useLocation();
   const hash = location.hash.replace("#", "");
 
-
-
-
-
-
-
-
   // do we create Supporter account, depends if we have passwordSupporter filled or not (we also test it, to check if there's a user, and if it is, we check his password if it's correct one)
-  const [doCreateSupporterAccount, setDoCreateSupporterAccount] = useState(false);
+  const [doCreateSupporterAccount, setDoCreateSupporterAccount] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -683,15 +647,9 @@ const Supporters = () => {
       );
 
       if (response.status === 200) {
-
-       
         setSnackbarMessage("Donated");
         setOpenSnackbarSuccess(true);
-
-
       }
-
-
     } catch (e) {
       console.log(e.stack);
     }
@@ -719,27 +677,22 @@ const Supporters = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        
-
         setFriendImage(filename);
 
         // return filename;
       },
       onerror: (response) => {
         console.error("Error uploading file:", response);
-      
+
         setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
         setOpenSnackbarFailure(true);
 
-         return response;
-      
+        return response;
       },
     },
 
     revert: (uniqueFileId, load, error) => {
-   
-
-      console.log("try to revert ")
+      console.log("try to revert ");
       // Send request to the server to delete the file with the uniqueFileId
       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
         method: "DELETE",
@@ -750,10 +703,8 @@ const Supporters = () => {
       })
         .then((response) => {
           if (response.ok) {
-            
-            console.log("reverted ?")
+            console.log("reverted ?");
             load(); // Signal that the file has been reverted successfully
-
           } else {
             response.json().then((errorData) => error(errorData.message));
           }
@@ -766,56 +717,44 @@ const Supporters = () => {
   };
   // ? for FilePond
 
-
   const [amount, setAmount] = useState(10);
 
   useEffect(() => {
-    
-   
-    
-  switch(hash){
-    case "friend":
-      setIsCelebrity(false);
-              setFriendEmail("");
+    switch (hash) {
+      case "friend" && firstIsVisible === true:
+        setIsCelebrity(false);
+        setFriendEmail("");
 
-              setFirstIsVisible(false);
-              setSecondIsVisible(true);
-      break;
+        setFirstIsVisible(false);
+        setSecondIsVisible(true);
+        break;
 
+      case "celebrity" && firstIsVisible === true:
+        setFriendEmail(() => {
+          return generateRandomEmail();
+        });
+        setIsCelebrity(true);
 
-    case "celebrity":
-      setFriendEmail(() => {
-        return generateRandomEmail();
-      });
-      setIsCelebrity(true);
+        setFirstIsVisible(false);
+        setSecondIsVisible(true);
 
-      setFirstIsVisible(false);
-      setSecondIsVisible(true);
-
-      break;
-  }
-  
-  
-
-
+        break;
+    }
   }, [amount, additionalSupportersFormData]);
-
 
   useEffect(() => {
     // Generate a new unique campaignId each time the component renders. But only once, so user can make multiple campaigns without refresh of page.
     setCampaignId(uuidv4());
 
-    
-  }, []);
-
+    console.log("drugi je visible");
+    console.log(secondIsVisible);
+  }, [secondIsVisible]);
 
   return (
     <>
-
       <NavbarClean />
 
-
-     <Popup
+      <Popup
         open={howItWorks}
         onClose={() => setHowItWorks(false)}
         position="right center"
@@ -862,63 +801,68 @@ const Supporters = () => {
             <span className="popins-font">Back</span>
           </Button>
         </div>
-      </Popup> 
-
-     
-
-    
-
-
+      </Popup>
 
       {/* first */}
-      <SupporterFirstPart firstIsVisible={firstIsVisible} setIsCelebrity={setIsCelebrity} setFriendEmail={setFriendEmail} setFirstIsVisible={setFirstIsVisible} setSecondIsVisible={setSecondIsVisible} generateRandomEmail={generateRandomEmail}    />
-   
+      <SupporterFirstPart
+        firstIsVisible={firstIsVisible}
+        setIsCelebrity={setIsCelebrity}
+        setFriendEmail={setFriendEmail}
+        setFirstIsVisible={setFirstIsVisible}
+        setSecondIsVisible={setSecondIsVisible}
+        generateRandomEmail={generateRandomEmail}
+      />
 
       {/* second */}
-      <SupporterSecondPart secondIsVisible={secondIsVisible} setHowItWorks={setHowItWorks} isCelebrity={isCelebrity} 
-      friendName={friendName} setFriendName={setFriendName}
-      friendMiddleName={friendMiddleName} setFriendMiddleName={setFriendMiddleName}
-      inputLabelPropsTextField={inputLabelPropsTextField}
-      sxTextField={sxTextField}
-      friendLastName={friendLastName} setFriendLastName={setFriendLastName}
-      friendEmail={friendEmail} setFriendEmail={setFriendEmail}
-      friendPhone={friendPhone} setFriendPhone={setFriendPhone}
-      friendBirthdate={friendBirthdate} setFriendBirthdate={setFriendBirthdate}
-      friendNationality={friendNationality} setFriendNationality={setFriendNationality}
-      friendGender={friendGender} setFriendGender={setFriendGender}
-      setSendEmailToFriend={setSendEmailToFriend}
-      fb_link={fb_link} setFb_link={setFb_link}
-      ig_link={ig_link} setIg_link={setIg_link}
-      tw_link={tw_link} setTw_link={setTw_link}
-
-      setSecondIsVisible={setSecondIsVisible} 
-      setThirdIsVisible={setThirdIsVisible}
-      setFirstIsVisible={setFirstIsVisible}
-      files={files}
-       setFiles={setFiles}
-       server={server} 
-       
-       setOpenSnackbarFailure={setOpenSnackbarFailure}
-       setOpenSnackbarSuccess={setOpenSnackbarSuccess}
-
-       openSnackbarFailure={openSnackbarFailure}
-       handleSnackbarFailureClose={handleSnackbarFailureClose}
-       openSnackbarSuccess={openSnackbarSuccess}
-       handleSnackbarSuccessClose={handleSnackbarSuccessClose}
-
-       snackbarMessage={snackbarMessage}
-       setSnackbarMessage={setSnackbarMessage}
-       
-       />
-   
+      <SupporterSecondPart
+        secondIsVisible={secondIsVisible}
+        setHowItWorks={setHowItWorks}
+        isCelebrity={isCelebrity}
+        friendName={friendName}
+        setFriendName={setFriendName}
+        friendMiddleName={friendMiddleName}
+        setFriendMiddleName={setFriendMiddleName}
+        inputLabelPropsTextField={inputLabelPropsTextField}
+        sxTextField={sxTextField}
+        friendLastName={friendLastName}
+        setFriendLastName={setFriendLastName}
+        friendEmail={friendEmail}
+        setFriendEmail={setFriendEmail}
+        friendPhone={friendPhone}
+        setFriendPhone={setFriendPhone}
+        friendBirthdate={friendBirthdate}
+        setFriendBirthdate={setFriendBirthdate}
+        friendNationality={friendNationality}
+        setFriendNationality={setFriendNationality}
+        friendGender={friendGender}
+        setFriendGender={setFriendGender}
+        setSendEmailToFriend={setSendEmailToFriend}
+        fb_link={fb_link}
+        setFb_link={setFb_link}
+        ig_link={ig_link}
+        setIg_link={setIg_link}
+        tw_link={tw_link}
+        setTw_link={setTw_link}
+        setSecondIsVisible={setSecondIsVisible}
+        setThirdIsVisible={setThirdIsVisible}
+        setFirstIsVisible={setFirstIsVisible}
+        files={files}
+        setFiles={setFiles}
+        server={server}
+        setOpenSnackbarFailure={setOpenSnackbarFailure}
+        setOpenSnackbarSuccess={setOpenSnackbarSuccess}
+        openSnackbarFailure={openSnackbarFailure}
+        handleSnackbarFailureClose={handleSnackbarFailureClose}
+        openSnackbarSuccess={openSnackbarSuccess}
+        handleSnackbarSuccessClose={handleSnackbarSuccessClose}
+        snackbarMessage={snackbarMessage}
+        setSnackbarMessage={setSnackbarMessage}
+      />
 
       {/* treca */}
-            <SupporterThirdPart 
-            
-            
-
-            thirdIsVisible={thirdIsVisible}
-            friendName={friendName}
+      <SupporterThirdPart
+        thirdIsVisible={thirdIsVisible}
+        friendName={friendName}
         supporterName={supporterName}
         setSupporterName={setSupporterName}
         supporterEmail={supporterEmail}
@@ -941,51 +885,36 @@ const Supporters = () => {
         setSecondIsVisible={setSecondIsVisible}
         setThirdIsVisible={setThirdIsVisible}
         validateSupporter={validateSupporter}
-            
-            />
-
-
+      />
 
       {/* cetvrta */}
-        <SupporterFourthPart 
-        
-fourthIsVisible={fourthIsVisible}
-amount={amount}
-setAmount={setAmount}
-campaignId={campaignId}
-supporterName={supporterName}
-supporterEmail={supporterEmail}
-supporterComment={supporterComment}
-discountCode={discountCode}
-friendNationality={friendNationality}
-setDiscountCode={setDiscountCode}
-donateWithCouponOnly={donateWithCouponOnly}
-setFourthIsVisible={setFourthIsVisible}
-setFifthIsVisible={setFifthIsVisible}
- />
-
-
-
+      <SupporterFourthPart
+        fourthIsVisible={fourthIsVisible}
+        amount={amount}
+        setAmount={setAmount}
+        campaignId={campaignId}
+        supporterName={supporterName}
+        supporterEmail={supporterEmail}
+        supporterComment={supporterComment}
+        discountCode={discountCode}
+        friendNationality={friendNationality}
+        setDiscountCode={setDiscountCode}
+        donateWithCouponOnly={donateWithCouponOnly}
+        setFourthIsVisible={setFourthIsVisible}
+        setFifthIsVisible={setFifthIsVisible}
+      />
 
       {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
 
-            <SupporterFifthPart
-            
-            fifthIsVisible={fifthIsVisible}
-            urlForCampaign={urlForCampaign}
-            inputLabelPropsTextField={inputLabelPropsTextField}
-            sxTextField={sxTextField}
-
-            setOpenSnackbarSuccess={setOpenSnackbarSuccess}
-            setSnackbarMessage={setSnackbarMessage}
-
-            friendName={friendName}
-
-            />
-
-
-
-
+      <SupporterFifthPart
+        fifthIsVisible={fifthIsVisible}
+        urlForCampaign={urlForCampaign}
+        inputLabelPropsTextField={inputLabelPropsTextField}
+        sxTextField={sxTextField}
+        setOpenSnackbarSuccess={setOpenSnackbarSuccess}
+        setSnackbarMessage={setSnackbarMessage}
+        friendName={friendName}
+      />
 
       {/* <p>Crypto currency: <b>USDT (ERC 20)</b></p>
             <p>Ethereum blockchain</p><br/>
@@ -1027,9 +956,6 @@ setFifthIsVisible={setFifthIsVisible}
           {snackbarMessage}
         </Alert>
       </Snackbar>
-
-
-
 
       <FooterClean />
     </>
