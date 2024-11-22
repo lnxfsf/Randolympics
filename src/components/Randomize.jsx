@@ -1241,7 +1241,7 @@ return dataS.map((data, index) => { */
 
               <Button
                 onClick={() => {
-                  navigate("/register");
+                  navigate("/supporters");
                 }}
                 className="w-full"
                 style={{ textTransform: "none" }}
