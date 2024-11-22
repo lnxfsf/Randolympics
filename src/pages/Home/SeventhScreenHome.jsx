@@ -561,7 +561,7 @@ const SeventhScreenHome = () => {
 
         <div className="w-full">
           <div
-            className={`flex  items-center w-full bg-black text-white mt-4 ${
+            className={`flex justify-center items-center w-full bg-black text-white mt-4 ${
               expanded ? "rounded-t-lg" : "rounded-lg"
             }   pl-2 pr-2`}
           >
