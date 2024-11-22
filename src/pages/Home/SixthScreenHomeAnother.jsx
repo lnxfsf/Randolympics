@@ -112,7 +112,7 @@ const SixthScreenHomeAnother = () => {
             </div> */}
 
           <div className="hidden lg:basis-1/2  justify-center items-center lg:flex  container_join_us ">
-            <img src="/home/join_us.jpg" className="image_join_us rounded-xl" />
+            <img src="/home/join2.jpg" className="image_join_us rounded-xl" />
           </div>
         </div>
       </div>

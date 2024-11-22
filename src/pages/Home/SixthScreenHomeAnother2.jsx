@@ -26,7 +26,7 @@ const sxTextField = {
   },
 };
 
-const SixthScreenHome = () => {
+const SixthScreenHomeAnother2 = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -36,10 +36,10 @@ const SixthScreenHome = () => {
         <div className=" bg-red_third w-full m-4 mt-12 md:m-16 lg:w-[80%] 2xl:w-[60%] rounded-2xl flex lexend-font text-black_second">
           <div className="grow lg:basis-1/2 flex flex-col p-8 md:p-16 pl-6 md:pl-10  justify-center">
             <p className="text-2xl md:text-4xl font-bold">
-              {t("home.sixthScreen.title1")}
+              {t("home.sixthScreen.title3")}
             </p>
 
-            <p className=" font-medium mt-4">{t("home.sixthScreen.title2")}</p>
+            <p className=" font-medium mt-4">{t("home.sixthScreen.text3")}</p>
 
             <div className="mt-2 mb-2 flex flex-col md:flex-row gap-2">
               {/* <TextField
@@ -62,7 +62,7 @@ const SixthScreenHome = () => {
 {/* md:basis-1/2 */}
               <Button
               onClick={() => {
-                navigate("/register");
+                navigate("/supporters");
               }}
                 className="self-center w-full "
                 /* w-full md:w-50% */
@@ -88,25 +88,23 @@ const SixthScreenHome = () => {
                   className="lexend-font"
                   
                 >
-                  {t("home.sixthScreen.btn1")}
+                  {t("home.sixthScreen.btn2")}
                 </span>
               </Button>
             </div>
 
-            <p className="font-medium mt-2 text-xs md:text-sm">
+          {/*   <p className="font-medium mt-2 text-xs md:text-sm">
             {t("home.sixthScreen.text1")}
               <span
                 className="text-red_second cursor-pointer select-none"
                 onClick={() => {
-                  window.scrollTo(0, 0);
                   navigate("/ToS");
                 }}
               >
-                
                 {t("home.sixthScreen.text2")}
               </span>
               .
-            </p>
+            </p> */}
           </div>
 
           {/*  <div className="hidden md:basis-1/2 md:flex ">
@@ -114,7 +112,7 @@ const SixthScreenHome = () => {
             </div> */}
 
           <div className="hidden lg:basis-1/2  justify-center items-center lg:flex  container_join_us ">
-            <img src="/home/join3.jpg" className="image_join_us rounded-xl" />
+            <img src="/home/join1.jpg" className="image_join_us rounded-xl" />
           </div>
         </div>
       </div>
@@ -122,4 +120,4 @@ const SixthScreenHome = () => {
   );
 };
 
-export { SixthScreenHome };
+export { SixthScreenHomeAnother2 };

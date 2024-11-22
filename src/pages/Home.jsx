@@ -46,6 +46,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SearchForUsers } from "./Home/SearchForUsers";
 import { FifthScreenHomeOld } from "./Home/FifthScreenHomeOld";
 import { SixthScreenHomeAnother } from "./Home/SixthScreenHomeAnother";
+import { SixthScreenHomeAnother2 } from "./Home/SixthScreenHomeAnother2";
 import { FifthScreenHomeOld2 } from "./Home/FifthScreenHomeOld2";
 import { FifthScreenHomeOld3 } from "./Home/FifthScreenHomeOld3";
 import { SecondScreenHome2 } from "./Home/SecondScreenHome2";
@@ -107,6 +108,9 @@ const Home = () => {
 
 
 
+      <FifthScreenHomeNewDesign />
+
+
       <SecondScreenHome sectionRef={sectionRef}/> 
 
 
@@ -121,9 +125,7 @@ const Home = () => {
 
       {/* <FifthScreenHome /> */}
 
-      <FifthScreenHomeNewDesign />
-{/* 
-      <FifthScreenHomeOld /> */}
+     {/* <FifthScreenHomeOld /> */}
 
 
 
@@ -135,7 +137,7 @@ const Home = () => {
 
 
 
-      <SixthScreenHomeAnother />
+      <SixthScreenHomeAnother2 />
       
       <ThirdScreenHome />
 
