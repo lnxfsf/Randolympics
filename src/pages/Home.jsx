@@ -109,7 +109,18 @@ const Home = () => {
 
 
       <FifthScreenHomeNewDesign />
-
+      <div className="flex items-start lexend-font text-black_second flex-col">
+      <p className="ml-6 mr-6 pl-2 pr-2 2xl:w-[50%] 2xl:text-center self-center">
+      <br /> {t("home.seventhScreen.content20")}
+          <a href="/supporters" className="underline text-red_second">
+            {t("home.seventhScreen.content21")}
+          </a>{" "}
+          {t("home.seventhScreen.content22")}
+          <br />
+          <br />
+          {t("home.seventhScreen.content23")}
+          </p>
+          </div>
 
       <SecondScreenHome sectionRef={sectionRef}/> 
 
