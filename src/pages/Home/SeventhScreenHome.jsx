@@ -241,7 +241,7 @@ const SeventhScreenHome = () => {
           {t("home.seventhScreen.content19")}
           <br />
           <br /> {t("home.seventhScreen.content20")}
-           <a href="/supporters" className="underline text-red_second">
+          <a href="/supporters" className="underline text-red_second">
             {t("home.seventhScreen.content21")}
           </a>{" "}
           {t("home.seventhScreen.content22")}
@@ -339,18 +339,36 @@ const SeventhScreenHome = () => {
         </p>
 
         <div ref={sliderRef2} className="keen-slider w-32">
-          <div className="keen-slider__slide    flex flex-col justify-center items-center">
-            <img src="/home/about/6.jpg" className="h-48 mb-4 object-contain" />
+          <div className="keen-slider__slide    flex flex-col justify-start items-start p-4">
+            {/* <img src="/home/about/6.jpg" className="h-48 mb-4 object-contain" />
+             */}
+
+            <img
+              src="/home/about/6.jpg"
+              className="h-48 mb-4 object-contain "
+            />
 
             {/*  <div className="item_div">
                     <img src="/home/about/1.jpg" />
             </div> */}
 
-            <p className="font-bold ">Noah Bennett</p>
-            <p className="text-[#616673]">{t("userTypes.user_type2")}</p>
+            <div className="pr-10 ">
+              <p className="font-bold ">Noah Bennett</p>
+              <p className="text-[#616673]">{t("userTypes.user_type2")}</p>
+            </div>
+
+            <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+            <p className="text-sm text-black_second mt-4">
+              <span className="font-medium">Strong:</span> Triathlon, Swimming
+            </p>
+            <p className="text-sm text-black_second">
+              <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+              Golf
+            </p>
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start  p-4 ">
             {/* <div className="flex justify-center "> */}
             <img src="/home/about/7.jpg" className="h-48 mb-4 object-contain" />
             {/*  </div> */}
@@ -359,11 +377,26 @@ const SeventhScreenHome = () => {
                     <img src="/home/about/1.jpg" />
             </div> */}
 
+<div className="pr-10 ">
             <p className="font-bold">Ethan Brooks</p>
             <p className="text-[#616673]">{t("userTypes.user_type7")}</p>
+            </div>
+
+
+            <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
+
+
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start  p-4 ">
             {/* <div className="flex justify-center "> */}
             <img src="/home/about/8.jpg" className="h-48 mb-4 object-contain" />
             {/*  </div> */}
@@ -372,11 +405,30 @@ const SeventhScreenHome = () => {
                    <img src="/home/about/1.jpg" />
            </div> */}
 
+<div className="pr-10 ">
             <p className="font-bold">Henry Foster</p>
             <p className="text-[#616673]">{t("userTypes.user_type5")}</p>
+            </div>
+
+
+
+            <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
+
+
+
+
+
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start  p-4">
             {/* <div className="flex justify-center "> */}
             <img src="/home/about/9.jpg" className="h-48 mb-4 object-contain" />
             {/*  </div> */}
@@ -385,11 +437,30 @@ const SeventhScreenHome = () => {
                    <img src="/home/about/1.jpg" />
            </div> */}
 
+<div className="pr-10 ">
+
             <p className="font-bold">Mia Cooper</p>
             <p className="text-[#616673]">{t("userTypes.user_type9")}</p>
+
+            </div>
+
+
+
+            
+		   <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
+
+
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start p-4 ">
             {/* <div className="flex justify-center "> */}
             <img
               src="/home/about/10.jpg"
@@ -401,22 +472,49 @@ const SeventhScreenHome = () => {
                    <img src="/home/about/1.jpg" />
            </div> */}
 
+<div className="pr-10 ">
             <p className="font-bold">Amelia Ross</p>
             <p className="text-[#616673]">{t("userTypes.user_type8")}</p>
+</div>
+
+            
+		   <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start p-4">
             <img src="/home/about/6.jpg" className="h-48 mb-4 object-contain" />
 
             {/*  <div className="item_div">
                     <img src="/home/about/1.jpg" />
             </div> */}
-
+ <div className="pr-10 ">
             <p className="font-bold ">Noah Bennett</p>
             <p className="text-[#616673]">{t("userTypes.user_type10")}</p>
+            </div>
+
+
+            <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
+
+
           </div>
 
-          <div className="keen-slider__slide    flex flex-col justify-center items-center  ">
+          <div className="keen-slider__slide    flex flex-col justify-start items-start p-4 ">
             {/* <div className="flex justify-center "> */}
             <img src="/home/about/7.jpg" className="h-48 mb-4 object-contain" />
             {/*  </div> */}
@@ -425,8 +523,24 @@ const SeventhScreenHome = () => {
                     <img src="/home/about/1.jpg" />
             </div> */}
 
+<div className="pr-10 ">
             <p className="font-bold">Ethan Brooks</p>
             <p className="text-[#616673]">{t("userTypes.user_type4")}</p>
+            </div>
+
+
+            <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+
+<p className="text-sm text-black_second mt-4">
+  <span className="font-medium">Strong:</span> Triathlon, Swimming
+</p>
+<p className="text-sm text-black_second">
+  <span className="font-medium">Weak:</span> Taekwondo, Shooting,
+  Golf
+</p>
+
+
+
           </div>
         </div>
 
