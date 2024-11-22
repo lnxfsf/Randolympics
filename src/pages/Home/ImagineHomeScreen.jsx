@@ -18,40 +18,40 @@ const ImagineHomeScreen = () => {
   const [animate, setAnimate] = useState(true);
 
   const listOfTitle1 = [
-    t("home.ourCompetitions.sport1"),
+    t("home.imagineHome.sport1"),
 
-    t("home.ourCompetitions.sport2"),
-    t("home.ourCompetitions.sport3"),
-    t("home.ourCompetitions.sport4"),
-    t("home.ourCompetitions.sport6"),
-    t("home.ourCompetitions.sport7"),
-    t("home.ourCompetitions.sport8"),
-    t("home.ourCompetitions.sport9"),
-    t("home.ourCompetitions.sport10"),
+    t("home.imagineHome.sport2"),
+    t("home.imagineHome.sport3"),
+    t("home.imagineHome.sport4"),
+    t("home.imagineHome.sport6"),
+    t("home.imagineHome.sport7"),
+    t("home.imagineHome.sport8"),
+    t("home.imagineHome.sport9"),
+    t("home.imagineHome.sport10"),
 
-    t("home.ourCompetitions.sport11"),
-    t("home.ourCompetitions.sport12"),
-    t("home.ourCompetitions.sport13"),
-    t("home.ourCompetitions.sport14"),
-    t("home.ourCompetitions.sport15"),
-    t("home.ourCompetitions.sport16"),
-    t("home.ourCompetitions.sport17"),
-    t("home.ourCompetitions.sport18"),
-    t("home.ourCompetitions.sport19"),
+    t("home.imagineHome.sport11"),
+    t("home.imagineHome.sport12"),
+    t("home.imagineHome.sport13"),
+    t("home.imagineHome.sport14"),
+    t("home.imagineHome.sport15"),
+    t("home.imagineHome.sport16"),
+    t("home.imagineHome.sport17"),
+    t("home.imagineHome.sport18"),
+    t("home.imagineHome.sport19"),
 
-    t("home.ourCompetitions.sport20"),
-    t("home.ourCompetitions.sport21"),
-    t("home.ourCompetitions.sport22"),
-    t("home.ourCompetitions.sport23"),
-    t("home.ourCompetitions.sport24"),
-    t("home.ourCompetitions.sport25"),
-    t("home.ourCompetitions.sport27"),
-    t("home.ourCompetitions.sport28"),
+    t("home.imagineHome.sport20"),
+    t("home.imagineHome.sport21"),
+    t("home.imagineHome.sport22"),
+    t("home.imagineHome.sport23"),
+    t("home.imagineHome.sport24"),
+    t("home.imagineHome.sport25"),
+    t("home.imagineHome.sport27"),
+    t("home.imagineHome.sport28"),
 
-    t("home.ourCompetitions.sport29"),
-    t("home.ourCompetitions.sport30"),
-    t("home.ourCompetitions.sport31"),
-    t("home.ourCompetitions.sport33"),
+    t("home.imagineHome.sport29"),
+    t("home.imagineHome.sport30"),
+    t("home.imagineHome.sport31"),
+    t("home.imagineHome.sport33"),
   ];
 
   const listOfHappen = [
@@ -65,6 +65,16 @@ const ImagineHomeScreen = () => {
     t('home.imagineHome.happen9'),
     t('home.imagineHome.happen11'),
     t('home.imagineHome.happen12'),
+
+    t('home.imagineHome.happen13'),
+    t('home.imagineHome.happen14'),
+    t('home.imagineHome.happen15'),
+    t('home.imagineHome.happen16'),
+    t('home.imagineHome.happen17'),
+
+
+
+
   ];
 
   const listOfScenarios = [
@@ -138,8 +148,9 @@ const ImagineHomeScreen = () => {
               {scenarios}
             </p>
 
-            <Button
+           {/*  <Button
               className="w-60 self-center  "
+              
               style={{ textTransform: "none" }}
               sx={{
                 height: "45px",
@@ -156,7 +167,27 @@ const ImagineHomeScreen = () => {
               }}
             >
               <span className="lexend-font">{t('home.imagineHome.text2')}</span>
-            </Button>
+            </Button> */}
+
+<div
+  className="w-60 self-center lexend-font"
+  style={{
+    textTransform: "none",
+    height: "45px",
+    backgroundColor: "#D24949",
+    color: "#fff",
+    borderRadius: "8px", // equivalent to `borderRadius: 2`
+    border: "1px solid #D24949",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "default",
+  }}
+>
+  {t('home.imagineHome.text2')}
+</div>
+
+
           </div>
 
           <div className="w-full h-96 overflow-hidden container_imagine_pic1 mt-4 ">
@@ -201,7 +232,7 @@ const ImagineHomeScreen = () => {
           </div>
 
           <div className="basis-1/3 p-4 flex self-center flex-col">
-            <img className="2xl:w-96" src="home/imagine2.jpeg" />
+            <img className="2xl:w-96" src="home/imagine2.jpg" />
 
             <div className="textBox2 max-w-fit inline-block lg:mr-8  ">
               <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">
