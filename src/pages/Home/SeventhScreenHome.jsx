@@ -247,10 +247,6 @@ const SeventhScreenHome = () => {
          
         </p>
 
-          <p className="text-3xl font-bold ml-6 mt-8 mb-8">
-            {t("home.seventhScreen.content2")}
-          </p>
-
 
 <div className="w-full">
 
@@ -287,6 +283,12 @@ const SeventhScreenHome = () => {
     <div className="pl-2 pr-2">
     <Collapse in={expanded2} timeout="auto" unmountOnExit>
             <div>
+              
+          <p className="text-3xl font-bold ml-6 mt-8 mb-8">
+            {t("home.seventhScreen.content2")}
+          </p>
+
+
               <div ref={sliderRef} className="keen-slider w-32">
                 <div className="keen-slider__slide    flex flex-col justify-center items-center">
                   <img src="/home/about/1.jpg" className="h-48 mb-4 object-contain" />
