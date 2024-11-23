@@ -3,6 +3,22 @@
 .main_window_cookie{ 
 
     background-color: white;
+    z-index: 60;
+
+    @media (max-width: 767px) {
+    max-height: 85vh; 
+  overflow-y: auto; 
+
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        max-height: 85vh;
+      overflow-y: auto; 
+    
+        }
+
+
+
 }
 
 

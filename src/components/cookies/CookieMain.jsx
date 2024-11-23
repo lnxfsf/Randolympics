@@ -3,7 +3,8 @@ import "../../styles/cookies.scoped.scss";
 const CookieMain = () => {
   return (
     <>
-      <div class="fixed bottom-0 inset-x-0 z-[60] main_window_cookie">
+      <div class="fixed bottom-0 inset-x-0 z-[60] main_window_cookie ">
+       
         <div class="p-4 sm:p-6 bg-white border border-[#e5e7eb] shadow-sm ">
           <div class="max-w-[85rem] mx-auto">
             <div class="grid lg:grid-cols-4 xl:grid-cols-5 gap-5 items-center">
@@ -18,12 +19,7 @@ const CookieMain = () => {
                   We use cookies
                 </h2>
                 <p class="mt-2 text-sm text-[#4b5563] dark:text-[#9ca3af]">
-                  We use cookies to personalise content and ads, to provide
-                  social media features and to analyse our traffic. We also
-                  share information about your use of our site with our social
-                  media, advertising and analytics partners who may combine it
-                  with other information that you’ve provided to them or that
-                  they’ve collected from your use of their services.
+                Cookies are here to sweeten your Randolympics experience 🍪! <br/>They help us improve the site, bring you relevant content, and keep things running smoothly. <br/>Adjust your cookie settings or accept them all!
                 </p>
                 <div class="mt-5 grid md:flex md:items-center gap-3">
                   <div class="toggle-container">
@@ -85,6 +81,7 @@ const CookieMain = () => {
             </div>
           </div>
         </div>
+
       </div>
     </>
   );
