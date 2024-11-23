@@ -5,24 +5,24 @@ import { useCookies } from "react-cookie";
 
 const CookieMain = () => {
   const [cookies, setCookie] = useCookies([
-    "cookieConsent",
+    "cookieNeccessary",
     "cookieConsentOpen",
-    "preferences",
-    "stastistics",
-    "marketing",
+    "cookiePreferences",
+    "cookieStastistics",
+    "cookieMarketing",
   ]);
 
   const selectionCookieConsent = () => {
-    setCookie("cookieConsent", true, { path: "/" });
+    setCookie("cookieNeccessary", true, { path: "/" });
   };
 
   const acceptAllCookies = () => {
 
-    setCookie("cookieConsent", true, { path: "/" });
+    setCookie("cookieNeccessary", true, { path: "/" });
 
-    setCookie("preferences", true, { path: "/" });
-    setCookie("stastistics", true, { path: "/" });
-    setCookie("marketing", true, { path: "/" });
+    setCookie("cookiePreferences", true, { path: "/" });
+    setCookie("cookieStastistics", true, { path: "/" });
+    setCookie("cookieMarketing", true, { path: "/" });
 
 
 
@@ -36,12 +36,14 @@ const CookieMain = () => {
     setCookie("cookieConsentOpen", false, { path: "/" });
   };
 
-  const rejectAllCookies = () => {
-    setCookie("cookieConsent", true, { path: "/" });
 
-    setCookie("preferences", false, { path: "/" });
-    setCookie("stastistics", false, { path: "/" });
-    setCookie("marketing", false, { path: "/" });
+
+  const rejectAllCookies = () => {
+    setCookie("cookieNeccessary", true, { path: "/" });
+
+    setCookie("cookiePreferences", false, { path: "/" });
+    setCookie("cookieStastistics", false, { path: "/" });
+    setCookie("cookieMarketing", false, { path: "/" });
 
   }
 
@@ -80,9 +82,9 @@ const CookieMain = () => {
                     <label class="toggle">
                       <input
                         type="checkbox"
-                        checked={cookies.preferences === true}
+                        checked={cookies.cookiePreferences === true}
                         onChange={(event) => {
-                          setCookie("preferences", event.target.checked, {
+                          setCookie("cookiePreferences", event.target.checked, {
                             path: "/",
                           });
                         }}
@@ -96,9 +98,9 @@ const CookieMain = () => {
                     <label class="toggle">
                       <input
                         type="checkbox"
-                        checked={cookies.stastistics === true}
+                        checked={cookies.cookieStastistics === true}
                         onChange={(event) => {
-                          setCookie("stastistics", event.target.checked, {
+                          setCookie("cookieStastistics", event.target.checked, {
                             path: "/",
                           });
                         }}
@@ -112,9 +114,9 @@ const CookieMain = () => {
                     <label class="toggle">
                       <input
                         type="checkbox"
-                        checked={cookies.marketing === true}
+                        checked={cookies.cookieMarketing === true}
                         onChange={(event) => {
-                          setCookie("marketing", event.target.checked, {
+                          setCookie("cookieMarketing", event.target.checked, {
                             path: "/",
                           });
                         }}
