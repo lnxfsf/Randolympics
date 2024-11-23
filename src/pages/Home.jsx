@@ -53,6 +53,7 @@ import { SecondScreenHome2 } from "./Home/SecondScreenHome2";
 import { SecondScreenHome3 } from "./Home/SecondScreenHome3";
 import { FifthScreenHomeNewDesign } from "./Home/FifthScreenHomeNewDesign";
 import { ImagineHomeScreen } from "./Home/ImagineHomeScreen";
+import { CookieMain } from "../components/cookies/CookieMain";
 
 // ? expand more, arrow icon transformation
 
@@ -101,6 +102,9 @@ const Home = () => {
       </Helmet>
 
       <Navbar />
+
+
+      <CookieMain />
 
       <FirstScreenHome scrollToSection={() => sectionRef.current.scrollIntoView({ behavior: 'smooth' })} />
         
