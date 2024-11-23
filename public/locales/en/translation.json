@@ -1711,5 +1711,18 @@
     "content11": "Instagram",
     "content12": "Twitter",
     "content13": "Crypto"
+  },
+  "cookies": {
+    "text1": "We use cookies",
+    "text2": "Cookies are here to sweeten your Randolympics experience 🍪!",
+    "text3": "They help us improve the site, bring you relevant content, and keep things running smoothly.",
+    "text4": "Adjust your cookie settings or accept them all!",
+    "text5": "Necessary",
+    "text6": "Preferences",
+    "text7": "Statistics",
+    "text8": "Marketing",
+    "text9": "Allow all",
+    "text10": "Allow selection",
+    "text11": "Reject all"
   }
 }

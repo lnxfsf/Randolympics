@@ -1,6 +1,11 @@
 import "../../styles/cookies.scoped.scss";
+import { useTranslation } from "react-i18next";
 
 const CookieMain = () => {
+
+    const { t } = useTranslation();
+
+
   return (
     <>
       <div class="fixed bottom-0 inset-x-0 z-[60] main_window_cookie ">
@@ -16,10 +21,10 @@ const CookieMain = () => {
 
               <div class="lg:col-span-3">
                 <h2 class="text-lg font-semibold text-[#1f2937] dark:text-white">
-                  We use cookies
+                  {t('cookies.text1')}
                 </h2>
                 <p class="mt-2 text-sm text-[#4b5563] dark:text-[#9ca3af]">
-                Cookies are here to sweeten your Randolympics experience 🍪! <br/>They help us improve the site, bring you relevant content, and keep things running smoothly. <br/>Adjust your cookie settings or accept them all!
+                {t('cookies.text2')} <br/> {t('cookies.text3')} <br/> {t('cookies.text4')}
                 </p>
                 <div class="mt-5 grid md:flex md:items-center gap-3">
                   <div class="toggle-container">
@@ -27,7 +32,7 @@ const CookieMain = () => {
                       <input type="checkbox" checked disabled />
                       <span class="slider"></span>
                     </label>
-                    <span class="label-text">Necessary</span>
+                    <span class="label-text">{t('cookies.text5')}</span>
                   </div>
 
                   <div class="toggle-container">
@@ -35,7 +40,7 @@ const CookieMain = () => {
                       <input type="checkbox" />
                       <span class="slider"></span>
                     </label>
-                    <span class="label-text">Preferences</span>
+                    <span class="label-text">{t('cookies.text6')}</span>
                   </div>
 
                   <div class="toggle-container">
@@ -43,7 +48,7 @@ const CookieMain = () => {
                       <input type="checkbox" />
                       <span class="slider"></span>
                     </label>
-                    <span class="label-text">Statistics</span>
+                    <span class="label-text">{t('cookies.text7')}</span>
                   </div>
 
                   <div class="toggle-container">
@@ -51,7 +56,7 @@ const CookieMain = () => {
                       <input type="checkbox" />
                       <span class="slider"></span>
                     </label>
-                    <span class="label-text">Marketing</span>
+                    <span class="label-text">{t('cookies.text8')}</span>
                   </div>
                 </div>
               </div>
@@ -62,19 +67,19 @@ const CookieMain = () => {
                     type="button"
                     class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-[#D24949] text-[#fff] hover:bg-[#C44141] focus:outline-none focus:ring-2 focus:ring-[#D24949] focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                   >
-                    Allow all
+                    {t('cookies.text9')}
                   </button>
                   <button
                     type="button"
                     class="py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-[#D24949] font-semibold text-[#D24949] hover:text-[#fff] hover:bg-[#D24949] hover:border-[#D24949] focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-all text-sm dark:border-sky-500 dark:text-sky-500 dark:hover:text-[#fff]"
                   >
-                    Allow selection
+                    {t('cookies.text10')}
                   </button>
                   <button
                     type="button"
                     class="py-3 px-4 inline-flex justify-center items-center border-[#9ca3af]  gap-2 rounded-md border font-medium bg-[#fff] text-[#374151] shadow-sm align-middle hover:bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-sky-600 transition-all text-sm   "
                   >
-                    Reject all
+                    {t('cookies.text11')}
                   </button>
                 </div>
               </div>
