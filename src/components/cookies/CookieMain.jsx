@@ -12,13 +12,38 @@ const CookieMain = () => {
     "marketing",
   ]);
 
-  const giveCookieConsent = () => {
+  const selectionCookieConsent = () => {
     setCookie("cookieConsent", true, { path: "/" });
   };
+
+  const acceptAllCookies = () => {
+
+    setCookie("cookieConsent", true, { path: "/" });
+
+    setCookie("preferences", true, { path: "/" });
+    setCookie("stastistics", true, { path: "/" });
+    setCookie("marketing", true, { path: "/" });
+
+
+
+  };
+
+
+
+
 
   const closeCookieWindow = () => {
     setCookie("cookieConsentOpen", false, { path: "/" });
   };
+
+  const rejectAllCookies = () => {
+    setCookie("cookieConsent", true, { path: "/" });
+
+    setCookie("preferences", false, { path: "/" });
+    setCookie("stastistics", false, { path: "/" });
+    setCookie("marketing", false, { path: "/" });
+
+  }
 
   const { t } = useTranslation();
 
@@ -105,7 +130,7 @@ const CookieMain = () => {
                 <div class="grid sm:grid-cols-3 xl:grid-cols-1 gap-y-2 sm:gap-y-0 sm:gap-x-5 xl:gap-y-2 xl:gap-x-0">
                   <button
                     onClick={() => {
-                      giveCookieConsent();
+                      acceptAllCookies();
                       closeCookieWindow();
                     }}
                     type="button"
@@ -115,7 +140,7 @@ const CookieMain = () => {
                   </button>
                   <button
                     onClick={() => {
-                      giveCookieConsent();
+                      selectionCookieConsent();
                       closeCookieWindow();
                     }}
                     type="button"
@@ -125,7 +150,7 @@ const CookieMain = () => {
                   </button>
                   <button
                     onClick={() => {
-                      giveCookieConsent();
+                      rejectAllCookies();
                       closeCookieWindow();
                     }}
                     type="button"
