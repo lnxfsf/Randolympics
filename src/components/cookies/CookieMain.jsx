@@ -89,6 +89,7 @@ const CookieMain = () => {
                     {t("cookies.text10")}
                   </button>
                   <button
+                   onClick={giveCookieConsent}
                     type="button"
                     class="py-3 px-4 inline-flex justify-center items-center border-[#9ca3af]  gap-2 rounded-md border font-medium bg-[#fff] text-[#374151] shadow-sm align-middle hover:bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-sky-600 transition-all text-sm   "
                   >
