@@ -52,7 +52,7 @@ const App = () => {
   return (
     <>
       {/* // show cookies in all pages */}
-      {cookies.cookieConsent !== true || cookies.cookieConsentOpen === true && <CookieMain />}
+      {(cookies.cookieConsent !== true || cookies.cookieConsentOpen) === true && <CookieMain />}
 
       <Routes>
         <Route path="/landingpage" element={<LandingPage />} />
