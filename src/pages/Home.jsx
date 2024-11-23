@@ -104,7 +104,6 @@ const Home = () => {
       <Navbar />
 
 
-      <CookieMain />
 
       <FirstScreenHome scrollToSection={() => sectionRef.current.scrollIntoView({ behavior: 'smooth' })} />
         
