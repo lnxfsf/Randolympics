@@ -47,12 +47,12 @@ ReactGA.initialize(TRACKING_ID);
 import { useCookies } from "react-cookie";
 
 const App = () => {
-  const [cookies, setCookie] = useCookies(["cookieConsent"]);
+  const [cookies, setCookie] = useCookies(["cookieConsent", "cookieConsentOpen"]);
 
   return (
     <>
       {/* // show cookies in all pages */}
-      {cookies.cookieConsent !== true && <CookieMain />}
+      {cookies.cookieConsent !== true || cookies.cookieConsentOpen === true && <CookieMain />}
 
       <Routes>
         <Route path="/landingpage" element={<LandingPage />} />

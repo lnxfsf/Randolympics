@@ -1,19 +1,24 @@
 import "../../styles/cookies.scoped.scss";
 import { useTranslation } from "react-i18next";
 
-
-import { useCookies } from 'react-cookie';
-
-
+import { useCookies } from "react-cookie";
 
 const CookieMain = () => {
-
-  const [cookies, setCookie] = useCookies(['cookieConsent']);
+  const [cookies, setCookie] = useCookies([
+    "cookieConsent",
+    "cookieConsentOpen",
+    "preferences",
+    "stastistics",
+    "marketing",
+  ]);
 
   const giveCookieConsent = () => {
-    setCookie("cookieConsent", true, {path: "/"});
+    setCookie("cookieConsent", true, { path: "/" });
+  };
 
-  }
+  const closeCookieWindow = () => {
+    setCookie("cookieConsentOpen", false, { path: "/" });
+  };
 
   const { t } = useTranslation();
 
@@ -48,7 +53,15 @@ const CookieMain = () => {
 
                   <div class="toggle-container">
                     <label class="toggle">
-                      <input type="checkbox" />
+                      <input
+                        type="checkbox"
+                        checked={cookies.preferences === true}
+                        onChange={(event) => {
+                          setCookie("preferences", event.target.checked, {
+                            path: "/",
+                          });
+                        }}
+                      />
                       <span class="slider"></span>
                     </label>
                     <span class="label-text">{t("cookies.text6")}</span>
@@ -56,7 +69,15 @@ const CookieMain = () => {
 
                   <div class="toggle-container">
                     <label class="toggle">
-                      <input type="checkbox" />
+                      <input
+                        type="checkbox"
+                        checked={cookies.stastistics === true}
+                        onChange={(event) => {
+                          setCookie("stastistics", event.target.checked, {
+                            path: "/",
+                          });
+                        }}
+                      />
                       <span class="slider"></span>
                     </label>
                     <span class="label-text">{t("cookies.text7")}</span>
@@ -64,7 +85,15 @@ const CookieMain = () => {
 
                   <div class="toggle-container">
                     <label class="toggle">
-                      <input type="checkbox" />
+                      <input
+                        type="checkbox"
+                        checked={cookies.marketing === true}
+                        onChange={(event) => {
+                          setCookie("marketing", event.target.checked, {
+                            path: "/",
+                          });
+                        }}
+                      />
                       <span class="slider"></span>
                     </label>
                     <span class="label-text">{t("cookies.text8")}</span>
@@ -75,21 +104,30 @@ const CookieMain = () => {
               <div class="col-span-full col-start-2 xl:col-start-5 xl:col-span-1">
                 <div class="grid sm:grid-cols-3 xl:grid-cols-1 gap-y-2 sm:gap-y-0 sm:gap-x-5 xl:gap-y-2 xl:gap-x-0">
                   <button
-                  onClick={giveCookieConsent}
+                    onClick={() => {
+                      giveCookieConsent();
+                      closeCookieWindow();
+                    }}
                     type="button"
                     class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-[#D24949] text-[#fff] hover:bg-[#C44141] focus:outline-none focus:ring-2 focus:ring-[#D24949] focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                   >
                     {t("cookies.text9")}
                   </button>
                   <button
-                  onClick={giveCookieConsent}
+                    onClick={() => {
+                      giveCookieConsent();
+                      closeCookieWindow();
+                    }}
                     type="button"
                     class="py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-[#D24949] font-semibold text-[#D24949] hover:text-[#fff] hover:bg-[#D24949] hover:border-[#D24949] focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-all text-sm dark:border-sky-500 dark:text-sky-500 dark:hover:text-[#fff]"
                   >
                     {t("cookies.text10")}
                   </button>
                   <button
-                   onClick={giveCookieConsent}
+                    onClick={() => {
+                      giveCookieConsent();
+                      closeCookieWindow();
+                    }}
                     type="button"
                     class="py-3 px-4 inline-flex justify-center items-center border-[#9ca3af]  gap-2 rounded-md border font-medium bg-[#fff] text-[#374151] shadow-sm align-middle hover:bg-[#f9fafb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-sky-600 transition-all text-sm   "
                   >

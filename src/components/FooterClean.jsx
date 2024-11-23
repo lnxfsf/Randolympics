@@ -4,11 +4,26 @@ import { useTranslation, Trans } from "react-i18next";
 import { MenuItem, Select } from "@mui/material";
 
 import { lngs } from "../../languages";
+import { useState } from "react";
+
+
+import { useCookies } from 'react-cookie';
+
+
+
 
 const FooterClean = () => {
   const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
+
+  
+  const [cookies, setCookie] = useCookies(['cookieConsentOpen']);
+
+  const openCookieWindow = () => {
+    setCookie("cookieConsentOpen", true, {path: "/"});
+
+  }
 
   const handleLanguageChange = (event) => {
     i18n.changeLanguage(`${event.target.value}`);
@@ -44,10 +59,11 @@ const FooterClean = () => {
               {/* as for now, we don't yet use non-essential cookies. https://law.stackexchange.com/questions/81602/why-does-the-gdpr-matter-to-me-a-us-citizen-with-no-property-in-europe/81624#81624 
             https://law.stackexchange.com/questions/94052/if-website-uses-cookies-only-after-users-login-can-i-ask-for-cookie-consent-dur
             */}
-              <p className="cursor-pointer select-none">{t("footer.cookie")}</p>
+              <p className="cursor-pointer select-none " onClick={openCookieWindow} >{t("footer.cookie")}</p>
             </div>
           </div>
         </div>
+
 
         <div className="flex justify-between items-start mt-4  flex-col md:flex-row ">
           <div className="flex flex-col md:flex-row">
