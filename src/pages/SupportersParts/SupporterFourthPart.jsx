@@ -351,7 +351,10 @@ const SupporterFourthPart = ({
                   </div>
                 </div>
 
-                <div className="flex justify-center mt-6 mb-6 gap-4 w-full">
+                <div className="flex justify-center mt-6 mb-6 gap-4 w-full flex-wrap">
+                 
+
+                
                   <div
                     className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second
             `}
@@ -373,6 +376,23 @@ const SupporterFourthPart = ({
                   <div
                     className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
                     onClick={() => {
+                      setAmount(5);
+                    }}
+                    style={{
+                      backgroundColor: ` ${
+                        amount === 5 ? "#FFEAEA" : "transparent"
+                      }`,
+                    }}
+                  >
+                    {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
+                    <p className="text-black_second font-semibold lexend-font">
+                      5 $
+                    </p>
+                  </div>
+
+                  <div
+                    className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
+                    onClick={() => {
                       setAmount(10);
                     }}
                     style={{
@@ -381,7 +401,7 @@ const SupporterFourthPart = ({
                       }`,
                     }}
                   >
-                    {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
+                    {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
                     <p className="text-black_second font-semibold lexend-font">
                       10 $
                     </p>
@@ -390,19 +410,40 @@ const SupporterFourthPart = ({
                   <div
                     className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
                     onClick={() => {
-                      setAmount(100);
+                      setAmount(20);
                     }}
                     style={{
                       backgroundColor: ` ${
-                        amount === 100 ? "#FFEAEA" : "transparent"
+                        amount === 20 ? "#FFEAEA" : "transparent"
                       }`,
                     }}
                   >
                     {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
                     <p className="text-black_second font-semibold lexend-font">
-                      100 $
+                      20 $
                     </p>
                   </div>
+
+                  
+
+                  <div
+                    className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
+                    onClick={() => {
+                      setAmount(50);
+                    }}
+                    style={{
+                      backgroundColor: ` ${
+                        amount === 50 ? "#FFEAEA" : "transparent"
+                      }`,
+                    }}
+                  >
+                    {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
+                    <p className="text-black_second font-semibold lexend-font">
+                      50 $
+                    </p>
+                  </div>
+
+
                 </div>
 
                 <div className="flex  flex-col justify-center items-center w-full">
