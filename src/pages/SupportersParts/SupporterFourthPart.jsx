@@ -48,11 +48,9 @@ import DonationFormItemCampaign from "../../components/Payments/DonationFormItem
 
 import { useTranslation } from "react-i18next";
 
-
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
-
 
 const SupporterFourthPart = ({
   fourthIsVisible,
@@ -73,14 +71,9 @@ const SupporterFourthPart = ({
 
   setFourthIsVisible,
   setFifthIsVisible,
-
-  
-
 }) => {
   const { t } = useTranslation();
 
-
-  
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -95,10 +88,8 @@ const SupporterFourthPart = ({
 
     setOpenSnackbar(false);
   };
-  
 
-
-  const [payWithCreditCard,setPayWithCreditCard] = useState(false);
+  const [payWithCreditCard, setPayWithCreditCard] = useState(false);
 
   return (
     <>
@@ -160,64 +151,85 @@ const SupporterFourthPart = ({
               {t("campaign.content19")}
             </p>
 
+            {!payWithCreditCard && (
+              <>
+                <div className=" mt-8 flex items-center justify-center flex-col w-full">
+                  <div className="flex gap-2">
+                    <p className="font-semibold w-full text-center">
+                      {t("campaign.content21")}
+                    </p>
 
+                    <Popup
+                      trigger={
+                        <img
+                          src="/randomizer/info.svg"
+                          className="cursor-pointer select-none "
+                        />
+                      }
+                      position="right center"
+                      className="popup-content "
+                      modal
+                      closeOnDocumentClick
+                    >
+                      <div
+                        className="p-4 lexend-font text-black_second"
+                        style={{
+                          maxHeight: "300px", // Set maximum height for the scrollable area
+                          overflowY: "auto", // Enable vertical scrolling
+                        }}
+                      >
+                        If you have coupon code, you can make a donation using
+                        only coupon code, without needing to pay with real money
+                        (credit card, paypal).
+                        <br /><br />
+                        If you don't have coupon code, you can proceed <i>Next</i>, to pay with credit card (paypal) only. 
+                        <br /><br />
+                        You can use only national coupon codes to make
+                        coupon-only donation to campaign. National coupon codes
+                        apply depending in what country athlete of campaign is
+                        located in. <br />
+                        <br />
+                        So, campaign for athlete who is located in Sweden, you
+                        can use only Sweden national coupon codes to make
+                        coupon-only donation to campaign. <br /> <br />
+                        As well, using coupon code, you can have addition to
+                        payment you make. <br /> <br />
+                        Types of coupon codes: <b>National</b> and <b>Global</b>{" "}
+                        <br />
+                        All coupon codes are 6 characters (which can be
+                        anything, doesn't determine it's value), but they have a
+                        type, which determines how much addition will be applied
+                        to donation. <br />
+                        <br />
+                        <b>National coupon code</b> - coupon of fixed price
+                        value. E.g. <code>SWED12</code> can be coupon name (6
+                        chars), that will add <i>10$</i> to payment. If donation
+                        is done coupon-only then donation is done just by
+                        inserting donation code, and that's <i>10$</i> donation
+                        for that friend campaign. If on other hand, you insert
+                        this coupon code, and click <i>Next</i>, and proceed to
+                        insert credit card or Paypal amount you want to donate,
+                        then 10$ of coupon code value will be added to payment
+                        you make. So, if you make 5$ payment donation with
+                        credit card (or paypal), then together with national
+                        coupon, your donation will be calcualted as <i>15$</i>{" "}
+                        <code>(10$ + 5$ = 15$)</code>
+                        <br />
+                        <br />
+                        <b>Global coupon code</b> - coupon of percentage value,
+                        depending on your payment (credit card, paypal). E.g. In
+                        this case coupon code can be <code>RAND18</code>, and
+                        it's value is <i>50%</i>. So that means, <i>50%</i> is
+                        added onto payment you make via credit card (paypal).
+                        So, if you make <i>5$</i> payment donation via credit
+                        card or paypal, then your actual donation will be
+                        calculated as <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code>{" "}
+                        <code>(50% of 5$ )</code>
+                      </div>
+                    </Popup>
+                  </div>
 
-            {!payWithCreditCard && (<>
-          <div className=" mt-8 flex items-center justify-center flex-col w-full">
-           
-           <div className="flex gap-2">
-            <p className="font-semibold w-full text-center">
-              {t("campaign.content21")}
-            </p>
-
-
-            <Popup
-              trigger={
-                <img
-                  src="/randomizer/info.svg"
-                  className="cursor-pointer select-none "
-                />
-              }
-              position="right center"
-              className="popup-content "
-              modal
-              closeOnDocumentClick
-            >
-              <div className="p-4"
-              style={{
-                maxHeight: '300px', // Set maximum height for the scrollable area
-                overflowY: 'auto',  // Enable vertical scrolling
-              }}
-              >
-
-               
-
-
-                If you have coupon code, you can make a donation using only coupon code, without needing to pay with real money (credit card, paypal).<br/><br/>
-              You can use only national coupon codes to make coupon-only donation to campaign. National coupon codes apply depending in what country athlete of campaign is located in. <br/><br/>
-              So, campaign for athlete who is located in Sweden, you can use only Sweden national coupon codes to make coupon-only donation to campaign. <br/> <br/>
-              
-               
-                As well, using coupon code, you can have addition to payment you make. <br/> <br/>
-
-                
-               
-                Types of coupon codes: <b>National</b> and <b>Global</b> <br/>
-                All coupon codes are 6 characters (which can be anything, doesn't determine it's value), but they have a type, which determines how much addition will be applied to donation. <br/>
-                <br/>
-                <b>National coupon code</b> - coupon of fixed price value. E.g. <code>SWED12</code> can be coupon name (6 chars), that will add <i>10$</i> to payment. If donation is done coupon-only then donation is done just by inserting donation code, and that's <i>10$</i> donation for that friend campaign. If on other hand, you insert this coupon code, and click <i>Next</i>, and proceed to insert credit card or Paypal amount you want to donate, then 10$ of coupon code value will be added to payment you make. So, if you make 5$ payment donation with credit card (or paypal), then together with national coupon, your donation will be calcualted as <i>15$</i> <code>(10$ + 5$ = 15$)</code><br/><br/>
-
-              <b>Global coupon code</b> - coupon of percentage value, depending on your payment (credit card, paypal). E.g. In this case coupon code can be <code>RAND18</code>, and it's value is <i>50%</i>. So that means, <i>50%</i> is added onto payment you make via credit card (paypal). So, if you make <i>5$</i> payment donation via credit card or paypal, then your actual donation will be calculated as <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code> <code>(50% of 5$ )</code>
-
-
-
-              
-               
-              </div>
-            </Popup>
-</div>
-
-            {/* <input
+                  {/* <input
           className="border-2 rounded-lg"
           type="text"
           placeholder="Code"
@@ -227,301 +239,323 @@ const SupporterFourthPart = ({
           }}
         /> */}
 
-            <AuthCode
-              onChange={(res) => {
-                setDiscountCode(res);
-              }}
-              inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md  "
-            />
+                  <AuthCode
+                    onChange={(res) => {
+                      setDiscountCode(res);
+                    }}
+                    inputClassName=" h-8 w-8 text-center  m-1 border-2 rounded-md  "
+                  />
 
+                  <Button
+                    onClick={() => {
+                      setPayWithCreditCard(true);
+                    }}
+                    className="m-2 p-2 w-full md:w-[40%] xl:w-[45%] 2xl:w-[35%]"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      mt: 6,
+                      height: "50px",
+                      bgcolor: "#D24949",
 
-        <Button
-              onClick={() => {setPayWithCreditCard(true);}}
-              className="m-2 p-2 w-full md:w-[40%] xl:w-[45%] 2xl:w-[35%]"
-              style={{ textTransform: "none" }}
-              sx={{
-                mt:6,
-                height: "50px",
-                bgcolor: "#D24949",
+                      color: "#fff",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                      "&:hover": {
+                        background: "rgba(210, 73, 73, 1)",
+                        color: "white",
+                        border: `1px solid rgba(210, 73, 73, 1)`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <span className="lexend-font">Next</span>
+                  </Button>
 
-                color: "#fff",
-                borderRadius: 3,
-                border: `1px solid #D24949`,
-                "&:hover": {
-                  background: "rgba(210, 73, 73, 1)",
-                  color: "white",
-                  border: `1px solid rgba(210, 73, 73, 1)`,
-                },
-              }}
-              id="join-the-fun-btn"
-            >
-              <span className="lexend-font">Next</span>
-            </Button>
+                  <Button
+                    onClick={donateWithCouponOnly}
+                    className="m-2 p-2 w-full md:w-[40%] xl:w-[45%]  2xl:w-[35%]"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      m: 2,
+                      p: 3,
+                      height: "50px",
+                      bgcolor: "#FFEAEA",
 
-            
+                      color: "#D24949",
+                      borderRadius: 3,
+                      border: `1px solid #FFEAEA`,
+                      "&:hover": {
+                        background: "#FFEAEA",
+                        color: "#D24949",
+                        border: `1px solid #D24949`,
+                      },
+                    }}
+                    id="join-the-fun-btn"
+                  >
+                    <span className="lexend-font">
+                      {t("campaign.content22")}
+                    </span>
+                  </Button>
+                </div>
+              </>
+            )}
 
+            {payWithCreditCard && (
+              <>
+                {/* and this is for those 3 options */}
 
-         
+                <div className="flex w-full items-center justify-center">
+                  <div className="flex gap-2">
+                    <p className=" font-semibold w-full text-center">
+                      {t("campaign.content20")}
+                    </p>
 
+                    <Popup
+                      trigger={
+                        <img
+                          src="/randomizer/info.svg"
+                          className="cursor-pointer select-none "
+                        />
+                      }
+                      position="right center"
+                      className="popup-content "
+                      modal
+                      closeOnDocumentClick
+                    >
+                      <div
+                        className="p-4 lexend-font text-black_second"
+                        style={{
+                          maxHeight: "300px",
+                          overflowY: "auto",
+                        }}
+                      >
+                        <p className="font-bold">
+                          💡 The more you donate the higher the chances for your
+                          campaign to succeed.
+                        </p>
+                        <p>
+                          The campaigns with the one hundred highest rankings
+                          will have the chance to participate in the event.
+                        </p>
 
- <Button
-              onClick={donateWithCouponOnly}
-              className="m-2 p-2 w-full md:w-[40%] xl:w-[45%]  2xl:w-[35%]"
-              style={{ textTransform: "none" }}
-              sx={{
-                m: 2,
-                p: 3,
-                height: "50px",
-                bgcolor: "#FFEAEA",
+                        <br />
 
-                color: "#D24949",
-                borderRadius: 3,
-                border: `1px solid #FFEAEA`,
-                "&:hover": {
-                  background: "#FFEAEA",
-                  color: "#D24949",
-                  border: `1px solid #D24949`,
-                },
-              }}
-              id="join-the-fun-btn"
-            >
-              <span className="lexend-font">{t("campaign.content22")}</span>
-            </Button>
+                        <p>Rankings are determined by multiplying:</p>
+                        <ul className="ml-4 donationInfo1">
+                          <li>Number of Supporters 👫</li>
+                          <li>Total Donations 💰</li>
+                          <li>A Random Lucky Number 🎲</li>
+                        </ul>
+                      </div>
+                    </Popup>
+                  </div>
+                </div>
 
-
-
-           
-
-            
-          </div>
-          </>)}
-
-        {payWithCreditCard && (<>
-              {/* and this is for those 3 options */}
-              <p className="mt-4 font-semibold w-full text-center">
-                {t("campaign.content20")}
-              </p>
-
-              <div className="flex justify-center mt-6 mb-6 gap-4 w-full">
-                <div
-                  className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second
+                <div className="flex justify-center mt-6 mb-6 gap-4 w-full">
+                  <div
+                    className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second
             `}
-                  style={{
-                    backgroundColor: ` ${
-                      amount === 1 ? "#FFEAEA" : "transparent"
-                    }`,
-                  }}
-                  onClick={() => {
-                    setAmount(1);
-                  }}
-                >
-                  {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
-                  <p className="text-black_second font-semibold lexend-font">
-                    1 $
-                  </p>
+                    style={{
+                      backgroundColor: ` ${
+                        amount === 1 ? "#FFEAEA" : "transparent"
+                      }`,
+                    }}
+                    onClick={() => {
+                      setAmount(1);
+                    }}
+                  >
+                    {/*  <img className="w-10 m-2 " src="supporters/1_dollar.svg" /> */}
+                    <p className="text-black_second font-semibold lexend-font">
+                      1 $
+                    </p>
+                  </div>
+
+                  <div
+                    className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
+                    onClick={() => {
+                      setAmount(10);
+                    }}
+                    style={{
+                      backgroundColor: ` ${
+                        amount === 10 ? "#FFEAEA" : "transparent"
+                      }`,
+                    }}
+                  >
+                    {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
+                    <p className="text-black_second font-semibold lexend-font">
+                      10 $
+                    </p>
+                  </div>
+
+                  <div
+                    className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
+                    onClick={() => {
+                      setAmount(100);
+                    }}
+                    style={{
+                      backgroundColor: ` ${
+                        amount === 100 ? "#FFEAEA" : "transparent"
+                      }`,
+                    }}
+                  >
+                    {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
+                    <p className="text-black_second font-semibold lexend-font">
+                      100 $
+                    </p>
+                  </div>
                 </div>
 
-                <div
-                  className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
-                  onClick={() => {
-                    setAmount(10);
-                  }}
-                  style={{
-                    backgroundColor: ` ${
-                      amount === 10 ? "#FFEAEA" : "transparent"
-                    }`,
-                  }}
-                >
-                  {/*  <img className="w-8 " src="supporters/10_dollars.svg" /> */}
-                  <p className="text-black_second font-semibold lexend-font">
-                    10 $
-                  </p>
-                </div>
-
-                <div
-                  className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
-                  onClick={() => {
-                    setAmount(100);
-                  }}
-                  style={{
-                    backgroundColor: ` ${
-                      amount === 100 ? "#FFEAEA" : "transparent"
-                    }`,
-                  }}
-                >
-                  {/*  <img className="w-8 " src="supporters/100_dollars.sv" /> */}
-                  <p className="text-black_second font-semibold lexend-font">
-                    100 $
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex  flex-col justify-center items-center w-full">
-                <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
-                  {/*  <img className="w-12" src="/supporters/pay.svg" />
+                <div className="flex  flex-col justify-center items-center w-full">
+                  <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
+                    {/*  <img className="w-12" src="/supporters/pay.svg" />
               <p>Pay with credit card</p> */}
 
-                  <ThemeProvider theme={theme}>
-                    <QueryProvider>
-                      {/*   <DonationForm   */}
-                      <DonationFormItemCampaign
-                        amount={amount}
-                        setAmount={setAmount}
-                        campaignId={campaignId}
-                        supporterName={supporterName}
-                        supporterEmail={supporterEmail}
-                        supporterComment={supporterComment}
-                        discountCode={discountCode}
-                        countryAthleteIsIn={friendNationality}
-                        separateDonationThruPage={false}
-                      />
-                      {/*  /> */}
-                    </QueryProvider>
-                  </ThemeProvider>
-                </div>
+                    <ThemeProvider theme={theme}>
+                      <QueryProvider>
+                        {/*   <DonationForm   */}
+                        <DonationFormItemCampaign
+                          amount={amount}
+                          setAmount={setAmount}
+                          campaignId={campaignId}
+                          supporterName={supporterName}
+                          supporterEmail={supporterEmail}
+                          supporterComment={supporterComment}
+                          discountCode={discountCode}
+                          countryAthleteIsIn={friendNationality}
+                          separateDonationThruPage={false}
+                        />
+                        {/*  /> */}
+                      </QueryProvider>
+                    </ThemeProvider>
+                  </div>
 
-                <div className="p-8 w-full sm:w-1/2 md:w-[60%]">
-                  <PayPalButtons
-                    key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
-                    createOrder={(data, actions) => {
-                      return actions.order.create({
-                        purchase_units: [
-                          {
-                            amount: {
-                              value: amount,
-                            },
-                          },
-                        ],
-                      });
-                    }}
-                    onApprove={(data, actions) => {
-                      return actions.order.capture().then(async (details) => {
-                        console.log(
-                          `Transaction completed by ${details.payer.name.given_name}`
-                        );
-                        
-                        // Handle successful transaction here (e.g., send details to backend)
-                        // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
-
-                        // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
-                        // testing paypal can be done with E2E testing, on UI
-
-                        try {
-                          const response = await axios.post(
-                            `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                  <div className="p-8 w-full sm:w-1/2 md:w-[60%]">
+                    <PayPalButtons
+                      key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
                             {
-                              /*   discountCode: discountCode,
+                              amount: {
+                                value: amount,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then(async (details) => {
+                          console.log(
+                            `Transaction completed by ${details.payer.name.given_name}`
+                          );
+
+                          // Handle successful transaction here (e.g., send details to backend)
+                          // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
+
+                          // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
+                          // testing paypal can be done with E2E testing, on UI
+
+                          try {
+                            const response = await axios.post(
+                              `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                              {
+                                /*   discountCode: discountCode,
             campaignId: campaignId,
 
             supporterEmail: supporterEmail,
             supporterName: supporterName,
             supporterComment: supporterComment, */
 
-                              transactionId: details.id,
+                                transactionId: details.id,
 
-                              supporterName,
-                              supporterEmail,
-                              supporterComment,
-                              separateDonationThruPage: false, 
+                                supporterName,
+                                supporterEmail,
+                                supporterComment,
+                                separateDonationThruPage: false,
 
-                              discountCode: discountCode,
-                              campaignId,
-                              friendNationality 
+                                discountCode: discountCode,
+                                campaignId,
+                                friendNationality,
+                              }
+                            );
+
+                            if (response.status === 200) {
+                              setSnackbarMessage("Donation succeeded");
+                              setSnackbarStatus("success");
+                              setOpenSnackbar(true);
                             }
-                          );
+                          } catch (e) {
+                            console.log(e.stack);
 
-                          if (response.status === 200) {
-                            setSnackbarMessage("Donation succeeded");
-                            setSnackbarStatus("success");
+                            setSnackbarMessage("Donation failed");
+                            setSnackbarStatus("error");
                             setOpenSnackbar(true);
                           }
-                        } catch (e) {
-                          console.log(e.stack);
-
-                          
-                          setSnackbarMessage("Donation failed");
-                          setSnackbarStatus("error");
-                          setOpenSnackbar(true);
-
-
-                        }
-                      });
-                    }}
-
-                    /* show only paypal button (not credit card) */
-                    fundingSource={FUNDING.PAYPAL}
-                  />
+                        });
+                      }}
+                      /* show only paypal button (not credit card) */
+                      fundingSource={FUNDING.PAYPAL}
+                    />
+                  </div>
                 </div>
 
+                <Button
+                  onClick={() => {
+                    setFourthIsVisible(false);
+                    setFifthIsVisible(true);
+                  }}
+                  className="self-center  w-[50%]"
+                  /* w-full md:w-50% */
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "50px",
+                    bgcolor: "#D24949",
 
-              </div>
+                    color: "#fff",
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                  id="join-the-fun-btn"
+                >
+                  <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
+                  <span className="lexend-font">{t("campaign.content23")}</span>
+                </Button>
 
-
-              <Button
-              onClick={() => {
-                setFourthIsVisible(false);
-                setFifthIsVisible(true);
-              }}
-              className="self-center  w-[50%]"
-              /* w-full md:w-50% */
-              style={{ textTransform: "none" }}
-              sx={{
-                height: "50px",
-                bgcolor: "#D24949",
-
-                color: "#fff",
-                borderRadius: 3,
-                border: `1px solid #D24949`,
-                "&:hover": {
-                  background: "rgba(210, 73, 73, 1)",
-                  color: "white",
-                  border: `1px solid rgba(210, 73, 73, 1)`,
-                },
-              }}
-              id="join-the-fun-btn"
-            >
-              <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-              <span className="lexend-font">{t("campaign.content23")}</span>
-            </Button>
-
-
-            <Button
-              onClick={() => {
-                setPayWithCreditCard(false);
-              }}
-              className="self-center  w-[50%]"
-              /* w-full md:w-50% */
-              style={{ textTransform: "none" }}
-              sx={{
-                mt: 1,
-                height: "50px",
-                bgcolor: "#fff",
-                color: "#444444",
-                borderRadius: 3,
-                border: `1px solid #D24949`,
-                "&:hover": {
-                  background: "rgba(210, 73, 73, 1)",
-                  color: "white",
-                  border: `1px solid rgba(210, 73, 73, 1)`,
-                },
-              }}
-              id="join-the-fun-btn"
-            >
-              <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-              <span className="lexend-font">{t("campaign.content94")}</span>
-            </Button>
-         </>)}
-         
-
-
-         
-
-
-
+                <Button
+                  onClick={() => {
+                    setPayWithCreditCard(false);
+                  }}
+                  className="self-center  w-[50%]"
+                  /* w-full md:w-50% */
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    mt: 1,
+                    height: "50px",
+                    bgcolor: "#fff",
+                    color: "#444444",
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                  id="join-the-fun-btn"
+                >
+                  <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
+                  <span className="lexend-font">{t("campaign.content94")}</span>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
-
 
       <Snackbar
         open={openSnackbar}
@@ -538,8 +572,6 @@ const SupporterFourthPart = ({
           {snackbarMessage}
         </Alert>
       </Snackbar>
-
-
     </>
   );
 };
