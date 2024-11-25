@@ -164,9 +164,59 @@ const SupporterFourthPart = ({
 
             {!payWithCreditCard && (<>
           <div className=" mt-8 flex items-center justify-center flex-col w-full">
+           
+           <div className="flex gap-2">
             <p className="font-semibold w-full text-center">
               {t("campaign.content21")}
             </p>
+
+
+            <Popup
+              trigger={
+                <img
+                  src="/randomizer/info.svg"
+                  className="cursor-pointer select-none "
+                />
+              }
+              position="right center"
+              className="popup-content "
+              modal
+              closeOnDocumentClick
+            >
+              <div className="p-4"
+              style={{
+                maxHeight: '300px', // Set maximum height for the scrollable area
+                overflowY: 'auto',  // Enable vertical scrolling
+              }}
+              >
+
+               
+
+
+                If you have coupon code, you can make a donation using only coupon code, without needing to pay with real money (credit card, paypal).<br/><br/>
+              You can use only national coupon codes to make coupon-only donation to campaign. National coupon codes apply depending in what country athlete of campaign is located in. <br/><br/>
+              So, campaign for athlete who is located in Sweden, you can use only Sweden national coupon codes to make coupon-only donation to campaign. <br/> <br/>
+              
+               
+                As well, using coupon code, you can have addition to payment you make. <br/> <br/>
+
+                
+               
+                Types of coupon codes: <b>National</b> and <b>Global</b> <br/>
+                All coupon codes are 6 characters (which can be anything, doesn't determine it's value), but they have a type, which determines how much addition will be applied to donation. <br/>
+                <br/>
+                <b>National coupon code</b> - coupon of fixed price value. E.g. <code>SWED12</code> can be coupon name (6 chars), that will add <i>10$</i> to payment. If donation is done coupon-only then donation is done just by inserting donation code, and that's <i>10$</i> donation for that friend campaign. If on other hand, you insert this coupon code, and click <i>Next</i>, and proceed to insert credit card or Paypal amount you want to donate, then 10$ of coupon code value will be added to payment you make. So, if you make 5$ payment donation with credit card (or paypal), then together with national coupon, your donation will be calcualted as <i>15$</i> <code>(10$ + 5$ = 15$)</code><br/><br/>
+
+              <b>Global coupon code</b> - coupon of percentage value, depending on your payment (credit card, paypal). E.g. In this case coupon code can be <code>RAND18</code>, and it's value is <i>50%</i>. So that means, <i>50%</i> is added onto payment you make via credit card (paypal). So, if you make <i>5$</i> payment donation via credit card or paypal, then your actual donation will be calculated as <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code> <code>(50% of 5$ )</code>
+
+
+
+              
+               
+              </div>
+            </Popup>
+</div>
+
             {/* <input
           className="border-2 rounded-lg"
           type="text"
