@@ -73,6 +73,43 @@ const SupporterFourthPart = ({
   setFourthIsVisible,
   setFifthIsVisible,
 }) => {
+
+
+  
+  const donateBeforeStripe = async () => {
+   
+
+    try{
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
+        {
+          campaignId,
+          supporterName,
+          supporterEmail,
+          supporterComment,
+          discountCode: discountCode,
+          friendNationality,
+          amount: amount*100,
+        }
+      );
+
+      if (response.status === 200) {
+        setSnackbarMessage("Donation succeeded");
+        setSnackbarStatus("success");
+        setOpenSnackbar(true);
+      }
+
+
+    } catch(e) {
+      console.log(e.stack);
+
+    }
+   
+  
+};
+
+
+
   const { t } = useTranslation();
 
   // for snackbar message.
@@ -575,10 +612,7 @@ const SupporterFourthPart = ({
                         </div>
 
 <Button
-                  onClick={() => {
-                    setFourthIsVisible(false);
-                    setFifthIsVisible(true);
-                  }}
+                  onClick={donateBeforeStripe}
                   className="self-center  w-[50%] "
                   /* w-full md:w-50% */
                   style={{ textTransform: "none" }}

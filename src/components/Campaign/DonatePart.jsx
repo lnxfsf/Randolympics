@@ -7,6 +7,10 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
+
+
+import { OutlinedInput, InputAdornment } from "@mui/material";
+
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import { PaymentPage } from "../Supporters/PaymentPage";
 import AuthCode from "react-auth-code-input";
@@ -74,6 +78,45 @@ const DonatePart = ({
   viewFullActivity,
   howManySupporters,
 }) => {
+
+
+  const donateBeforeStripe = async () => {
+   
+
+      try{
+        const response = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
+          {
+            campaignId,
+            supporterName,
+            supporterEmail,
+            supporterComment,
+            discountCode: discountCode,
+            countryAthleteIsIn,
+            amount: amount*100,
+          }
+        );
+
+        if (response.status === 200) {
+          setSnackbarMessage("Donation succeeded");
+          setSnackbarStatus("success");
+          setOpenSnackbar(true);
+        }
+
+
+        console.log("vraca")
+        console.log(response)
+
+
+      } catch(e) {
+        console.log(e.stack);
+
+      }
+     
+    
+  };
+
+
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
 
@@ -211,7 +254,7 @@ const DonatePart = ({
                 sx={sxTextField}
               />
 
-              <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
+             {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
                 <ThemeProvider theme={theme}>
                   <QueryProvider>
                     <DonationFormItemCampaign
@@ -234,7 +277,7 @@ const DonatePart = ({
               <div className=" w-full flex justify-center items-center">
                 <div className="p-8 w-full sm:w-1/2 md:w-[60%]  ">
                   <PayPalButtons
-                    /* key={`${amount}-${discountCode}`} */
+                    /* key={`${amount}-${discountCode}`} 
                     key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
                     createOrder={(data, actions) => {
                       return actions.order.create({
@@ -252,7 +295,7 @@ const DonatePart = ({
                         /*   console.log(
                         `Transaction completed by ${details.payer.name.given_name}`
                       );
-                       */
+                       /
                         // Handle successful transaction here (e.g., send details to backend)
                         // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
 
@@ -268,7 +311,7 @@ const DonatePart = ({
 
           supporterEmail: supporterEmail,
           supporterName: supporterName,
-          supporterComment: supporterComment, */
+          supporterComment: supporterComment, /
 
                               transactionId: details.id,
 
@@ -297,11 +340,70 @@ const DonatePart = ({
                         }
                       });
                     }}
-                    /* show only paypal button (not credit card) */
+                    /* show only paypal button (not credit card) /
                     fundingSource={FUNDING.PAYPAL}
                   />
                 </div>
-              </div>
+              </div> */}
+
+
+
+<div className=" self-center w-[50%] mb-2">
+                <OutlinedInput
+                            type="number"
+
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
+                            fullWidth
+
+                            inputProps={{ min: 1 }}
+
+                            sx={{
+                                fontFamily: "'Lexend', sans-serif",
+                                // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
+                                'input[type=number]::-webkit-inner-spin-button': {
+                                    WebkitAppearance: 'none',
+                                    margin: 0,
+                                },
+                                'input[type=number]::-webkit-outer-spin-button': {
+                                    WebkitAppearance: 'none',
+                                    margin: 0,
+                                },
+                                // Hide arrows
+                                'input[type=number]': {
+                                    MozAppearance: 'textfield',
+                                },
+                            }}
+                        />
+                        </div>
+
+<Button
+                  onClick={donateBeforeStripe}
+                  className="self-center  w-[50%] "
+                  /* w-full md:w-50% */
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    mb:8,
+                    height: "50px",
+                    bgcolor: "#D24949",
+
+                    color: "#fff",
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                  id="join-the-fun-btn"
+                ><span className="lexend-font">Donate</span>
+                </Button>
+
+
+
+
 
               <div className="m-4 flex justify-center  items-center flex-col">
                 <p>{t("campaign.content78")}</p>
