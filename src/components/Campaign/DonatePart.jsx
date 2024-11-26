@@ -104,9 +104,8 @@ const DonatePart = ({
         }
 
 
-        console.log("vraca")
-        console.log(response)
-
+     
+        
 
       } catch(e) {
         console.log(e.stack);
