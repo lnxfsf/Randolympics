@@ -886,6 +886,8 @@ try{
 
   const t1 = await db.sequelize.transaction();
 
+  const t2 = await db.sequelize.transaction();
+
   const amount = await calculateNewAmountWithDiscountCodeBeforeStripe(amountOriginal,campaignViewed.couponDonationCode, campaignViewed.countryAthleteIsIn);
 
 
@@ -910,7 +912,16 @@ try{
 
   await Statscampaign.create(supporter_data, { transaction: t1 });
 
+  await oneAthlete.update(
+    {
+      donatedAmount: oneAthlete.donatedAmount + amount,
+    },
+    { transaction: t2 }
+  );
+
+
   await t1.commit();
+  await t2.commit();
   
   return res.status(200).json({ message: "Payment verified and saved" });
 
