@@ -645,8 +645,290 @@ async function getPayPalAccessToken() {
   return data.access_token;
 }
 
+
+
+const tempPaymentBeforeStripe = async (req, res) => {
+  
+  const calculateNewAmountWithDiscountCodeBeforeStripe = async (
+    amountOriginal,
+    couponDonationCode,
+    country
+  ) => {
+    const t1 = await db.sequelize.transaction();
+  
+    // on nadje koji ima..
+    const oneCoupon = await Couponcodes.findOne({
+      where: { couponCode: couponDonationCode, isCouponActive: 1 },
+  
+      lock: true,
+      transaction: t1,
+    });
+  
+    // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
+    if (!oneCoupon) {
+      console.log("coupon code is not valid");
+  
+      await t1.rollback();
+  
+      return amountOriginal;
+    }
+  
+    // da ga odma sad vratis..
+    if (oneCoupon.isCouponActive === 0) {
+      console.log("coupon code is not active");
+      await t1.rollback();
+      return amountOriginal;
+    }
+  
+    // i sada, PRVO gleda jel "GLOBAL" (pa onda za national)  (znaci, mora da ima amountOriginal !)
+    if (oneCoupon.country === "GLOBAL") {
+      // e sada, ovde ces da definises , sta on radi ovde jos..
+  
+      //
+      // proveris da li je kupon validan
+  
+      // po datumu
+      const currentDate = new Date();
+      const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+  
+      // because this is going by %, we take in consideration, a new value, we add as well, so it don't overflow it. so someone with 100€, can't use it, because it's going to be spent completelly..
+      // maybe to try with lesser amount, so they get that discout..
+  
+      // so, calculate how much % up, it goes (that's add, that much %, to payment they gave). if they paid 20€, and coupon is 20%, then we do 20€+20%=24
+      // for "GLOBAL", in couponValue is stored as "0.05", so we use it as % for that. so this would be 5 , it need to be % now
+      let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon
+  
+      let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+  
+      /*  console.log("currentDate")
+        console.log(currentDate)
+    
+        console.log("expiryDate")
+        console.log(expiryDate)
+        console.log(currentDate <= expiryDate)
+    
+        console.log("newSpentAmount")
+        console.log(newSpentAmount)
+    
+        console.log("oneCoupon. maxSpentLimit")
+        console.log(oneCoupon.maxSpentLimit)
+        console.log(newSpentAmount < oneCoupon.maxSpentLimit)
+    
+        console.log("oneCoupon.couponTimesUsed")
+        console.log(oneCoupon.couponTimesUsed)
+    
+        console.log("oneCoupon.maxCouponTimesUsed")
+        console.log(oneCoupon.maxCouponTimesUsed) */
+      /* 
+        console.log(oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
+     */
+  
+      if (
+        currentDate <= expiryDate &&
+        newSpentAmount < oneCoupon.maxSpentLimit &&
+        oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+      ) {
+        // ! you need to update
+        // couponTimesUsed
+        // spentAmount  (dodaj taj novi sto ima, + newAmount)
+  
+        try {
+          await oneCoupon.update(
+            {
+              couponTimesUsed: oneCoupon.couponTimesUsed + 1,
+              spentAmount: newSpentAmount,
+            },
+            { transaction: t1 }
+          ); // azurira samo taj
+          await t1.commit();
+        } catch (error) {
+          await t1.rollback();
+          console.log(error.stack);
+        }
+  
+        // we then, return with discount (we calculated and got it above)
+        return newAmount;
+      } else {
+        try {
+          // then it's expired, just set it so, so we don't check it anymore..
+          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+          await t1.commit();
+        } catch (e) {
+          await t1.rollback();
+          console.log(e.stack);
+        }
+  
+        return amountOriginal;
+      }
+    } else {
+      // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
+  
+      // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
+  
+      /*   2 | 32SU5DOIZT |              1 | GB      | 2024-09-09 |          10 |         10000 |               0 | 2024-08-10 22:37:41 | 2024-08-10 22:37:41
+     
+    
+    
+      --> kod national coupon, njegov couponValue je "fixed" price koliko se nadodaje na to sto on dodaje !
+      --> 
+    
+      */
+  
+      // first, you need to match, if it's matching value that's provided (goes by country..)
+      if (oneCoupon.country === country) {
+        // po datumu
+        const currentDate = new Date();
+        const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+  
+        // this is fixed amount addition ! (so not by percent), yes..
+        let newAmount = amountOriginal + oneCoupon.couponValue;
+  
+        console.log("unutar drzave je");
+        console.log("amountOriginal: " + amountOriginal);
+        console.log("oneCoupon.couponValue: " + oneCoupon.couponValue);
+  
+        let newSpentAmount = newAmount + oneCoupon.spentAmount;
+  
+        if (
+          currentDate <= expiryDate &&
+          newSpentAmount < oneCoupon.maxSpentLimit &&
+          oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+        ) {
+          //  you need to update
+          // couponTimesUsed
+          // spentAmount  (dodaj taj novi sto ima, + newAmount)
+  
+          try {
+            await oneCoupon.update(
+              {
+                couponTimesUsed: oneCoupon.couponTimesUsed + 1,
+                spentAmount: newSpentAmount,
+              },
+              { transaction: t1 }
+            ); // azurira samo taj
+            await t1.commit();
+          } catch (error) {
+            await t1.rollback();
+            console.log(error.stack);
+          }
+  
+          // we then, return with discount (we calculated and got it above)
+          return newAmount;
+        } else {
+          await t1.rollback();
+          console.log("da vraca ovde");
+          return amountOriginal;
+        }
+      } else {
+        try {
+          // then it's expired, just set it so, so we don't check it anymore..
+          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+          await t1.commit();
+        } catch (e) {
+          await t1.rollback();
+          console.log(e.stack);
+        }
+  
+        return amountOriginal;
+      }
+    }
+  };
+
+
+  const {
+   
+    campaignId,
+
+    
+    supporterName,
+    supporterEmail,
+    supporterComment,
+
+    discountCode,
+    
+    countryAthleteIsIn,
+    amount: amountOriginal,
+  } = req.body;
+
+
+
+try{
+
+
+   // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
+   var campaignViewed = await Campaign.findOne({
+    where: { campaignId: campaignId },
+  });
+
+   // sad nalazi athleteId po ovome...
+   const oneAthlete = await User.findOne({
+    where: { email: campaignViewed.friendEmail },
+  });
+
+  const oneSupporter = await User.findOne({
+    where: { email: supporterEmail },
+  });
+
+  if (oneSupporter) {
+    var supporterId = oneSupporter.userId;
+    // if there's nothing, no such user, supporter, then nothing happens, it will be "null" stored in database anyways..
+  } else {
+    var supporterId = "";
+  }
+
+
+  // just calculate amount with discount, and write directly in database
+  // before stripe implemented (we have no bank account), you can use this placeholder in 'payment_id' (as it's not deleted... )
+  // and 'payment_status' is still 'unpaid', so we also know it's not really paid with real money
+
+
+
+  const t1 = await db.sequelize.transaction();
+
+  const amount = calculateNewAmountWithDiscountCodeBeforeStripe(amountOriginal,campaignViewed.couponDonationCode, campaignViewed.countryAthleteIsIn);
+
+  const supporter_data = {
+    campaignId,
+    athleteId: oneAthlete.userId,
+    supporterId,
+
+    supporterName,
+    supporterEmail,
+    supporterComment,
+
+
+    payment_id: "WAITING_TO_PAY_BEFORE_STRIPE",
+    amount: amount,
+
+
+    couponDonationCode: discountCode,
+    countryAthleteIsIn: countryAthleteIsIn,
+  };
+
+  await Statscampaign.create(supporter_data, { transaction: t1 });
+
+  await t1.commit();
+  
+  return res.status(200).json({ message: "Payment verified and saved" });
+
+
+
+} catch(error){
+  console.error("Error verifying payment:", error);
+  return res.status(500).json({ message: "Error verifying payment" });
+}
+
+
+
+
+
+
+
+}
+
 module.exports = {
   makePayment,
   donateOnlyWithDiscountCode,
   confirmPaypalTransaction,
+  tempPaymentBeforeStripe,
 };
