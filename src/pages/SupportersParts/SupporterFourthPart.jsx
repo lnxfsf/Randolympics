@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Button } from "@mui/material";
+
+import { Button, OutlinedInput, InputAdornment } from "@mui/material";
 import AuthCode from "react-auth-code-input";
 
 import Snackbar from "@mui/material/Snackbar";
@@ -446,14 +447,14 @@ const SupporterFourthPart = ({
 
                 </div>
 
-                <div className="flex  flex-col justify-center items-center w-full">
+             {/*    <div className="flex  flex-col justify-center items-center w-full">
                   <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                     {/*  <img className="w-12" src="/supporters/pay.svg" />
-              <p>Pay with credit card</p> */}
+              <p>Pay with credit card</p> 
 
                     <ThemeProvider theme={theme}>
                       <QueryProvider>
-                        {/*   <DonationForm   */}
+                        {/*   <DonationForm   
                         <DonationFormItemCampaign
                           amount={amount}
                           setAmount={setAmount}
@@ -465,7 +466,7 @@ const SupporterFourthPart = ({
                           countryAthleteIsIn={friendNationality}
                           separateDonationThruPage={false}
                         />
-                        {/*  /> */}
+                        {/*  /> 
                       </QueryProvider>
                     </ThemeProvider>
                   </div>
@@ -505,7 +506,7 @@ const SupporterFourthPart = ({
 
             supporterEmail: supporterEmail,
             supporterName: supporterName,
-            supporterComment: supporterComment, */
+            supporterComment: supporterComment, 
 
                                 transactionId: details.id,
 
@@ -534,11 +535,71 @@ const SupporterFourthPart = ({
                           }
                         });
                       }}
-                      /* show only paypal button (not credit card) */
+                      /* show only paypal button (not credit card) 
                       fundingSource={FUNDING.PAYPAL}
                     />
                   </div>
                 </div>
+ */}
+
+
+
+<div className=" self-center w-[50%] mb-2">
+                <OutlinedInput
+                            type="number"
+
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
+                            fullWidth
+
+                            inputProps={{ min: 1 }}
+
+                            sx={{
+                                fontFamily: "'Lexend', sans-serif",
+                                // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
+                                'input[type=number]::-webkit-inner-spin-button': {
+                                    WebkitAppearance: 'none',
+                                    margin: 0,
+                                },
+                                'input[type=number]::-webkit-outer-spin-button': {
+                                    WebkitAppearance: 'none',
+                                    margin: 0,
+                                },
+                                // Hide arrows
+                                'input[type=number]': {
+                                    MozAppearance: 'textfield',
+                                },
+                            }}
+                        />
+                        </div>
+
+<Button
+                  onClick={() => {
+                    setFourthIsVisible(false);
+                    setFifthIsVisible(true);
+                  }}
+                  className="self-center  w-[50%] "
+                  /* w-full md:w-50% */
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    mb:8,
+                    height: "50px",
+                    bgcolor: "#D24949",
+
+                    color: "#fff",
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                  id="join-the-fun-btn"
+                ><span className="lexend-font">Donate</span>
+                </Button>
+
 
                 <Button
                   onClick={() => {
