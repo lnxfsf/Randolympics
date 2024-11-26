@@ -850,6 +850,7 @@ const tempPaymentBeforeStripe = async (req, res) => {
     amount: amountOriginal,
   } = req.body;
 
+  
 
 
 try{
@@ -885,7 +886,9 @@ try{
 
   const t1 = await db.sequelize.transaction();
 
-  const amount = calculateNewAmountWithDiscountCodeBeforeStripe(amountOriginal,campaignViewed.couponDonationCode, campaignViewed.countryAthleteIsIn);
+  const amount = await calculateNewAmountWithDiscountCodeBeforeStripe(amountOriginal,campaignViewed.couponDonationCode, campaignViewed.countryAthleteIsIn);
+
+
 
   const supporter_data = {
     campaignId,
@@ -914,7 +917,7 @@ try{
 
 
 } catch(error){
-  console.error("Error verifying payment:", error);
+  console.error("Nije verifikovao nece:", error);
   return res.status(500).json({ message: "Error verifying payment" });
 }
 
