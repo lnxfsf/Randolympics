@@ -750,10 +750,6 @@ const Supporters = () => {
     // Generate a new unique campaignId each time the component renders. But only once, so user can make multiple campaigns without refresh of page.
     setCampaignId(uuidv4());
 
-    console.log("drugi je visible");
-    console.log(secondIsVisible);
-    console.log(firstIsVisible)
-
 
 
   }, [secondIsVisible]);
@@ -869,6 +865,7 @@ const Supporters = () => {
 
       {/* treca */}
       <SupporterThirdPart
+      isCelebrity={isCelebrity}
         thirdIsVisible={thirdIsVisible}
         friendName={friendName}
         supporterName={supporterName}
