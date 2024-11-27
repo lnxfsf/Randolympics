@@ -264,6 +264,8 @@ tako imas na hover animation
 
 .textBox2 {
   position: relative;
+  background-color: white;
+  border: 2px black solid;
 
   @media (min-width: 1125px) {
     top: -55px;
@@ -278,8 +280,7 @@ tako imas na hover animation
     margin-right: auto;
   }
 
-  background-color: white;
-  border: 2px black solid;
+
 }
 
 
@@ -288,6 +289,9 @@ tako imas na hover animation
 .textBox3 {
   position: relative;
 
+  background-color: white;
+  border: 2px black solid;
+  
 /*   @media (min-width: 1125px) {
     top: 65px;
     right: 75px;
@@ -306,8 +310,6 @@ tako imas na hover animation
    // margin-right: auto;
   }
 
-  background-color: white;
-  border: 2px black solid;
 }
 
 
