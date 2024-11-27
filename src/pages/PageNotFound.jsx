@@ -8,16 +8,19 @@ const PageNotFound = () => {
 
   return (
     <>
-      <section class="flex min-h-screen justify-center items-center">
-        <div class="">
-          <div class="row">
-            <div class="col-sm-12 ">
+      <section class="flex min-h-screen justify-center items-center flex-col">
+
+             
+<img src="/not_found/404_sign.svg" className="w-32 self-center" />
+
+         
+       
               <div class="col-sm-10 col-sm-offset-1  text-center">
                
                
 
               
-
+         
                 <div class="lexend-font text-semibold">
                   <p>{t('pagenotfound.title1')}</p>
                   <p>{t('pagenotfound.title2')}</p><br/>
@@ -26,9 +29,9 @@ const PageNotFound = () => {
 
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+          
+          
+       
       </section>
     </>
   );
