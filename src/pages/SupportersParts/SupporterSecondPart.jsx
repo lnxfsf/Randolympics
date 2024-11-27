@@ -547,7 +547,7 @@ const SupporterSecondPart = ({
                     inputProps={{
                       maxLength: 15,
                       inputMode: "numeric",
-                      pattern: "[0-9]*",
+                      pattern: "/^\+[1-9]\d{7,14}$/",
                     }}
                     InputLabelProps={inputLabelPropsTextField}
                     sx={sxTextField}

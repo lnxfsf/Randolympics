@@ -355,6 +355,29 @@ const Register = () => {
     var phone = e.target.phone.value;
     var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+    
+
+      
+
+      setIsPasswordError(true);
+      setIsPasswordErrorHelper(t("register.content3"));
+      
+      isPasswordErrorFocus.current.focus();
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content3"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
+      
+    } else {
+      setIsPasswordError(false);
+    } 
+
+
     if (!e.target.weight) {
       var weight = null;
     } else {
@@ -403,23 +426,10 @@ const Register = () => {
     } else {
       setIsPhoneError(false);
     }
+      */
+     
 
-    const passwordRegex = /^.{4,}$/;
-
-    if (!passwordRegex.test(password)) {
-    
-
-      setIsPasswordError(true);
-      setIsPasswordErrorHelper(t("register.content3"));
-
-      setSnackbarStatus("error");
-      setSnackbarMessage(t("register.content3"));
-      setOpenSnackbar(true);
-
-      recaptcha.current.reset();
-    } else {
-      setIsPasswordError(false);
-    } */
+   
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
@@ -519,13 +529,13 @@ const Register = () => {
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content8"));
           setOpenSnackbar(true);
-        } else if (isPhoneError === true) {
-          setSnackbarStatus("error");
-          setSnackbarMessage(t("register.content9"));
-          setOpenSnackbar(true);
         } else if (isPasswordError === true) {
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content10"));
+          setOpenSnackbar(true);
+        } else if (isPhoneError === true) {
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content9"));
           setOpenSnackbar(true);
         }
       }
@@ -823,7 +833,7 @@ const Register = () => {
                 {t("register.content17")}
               </label>
               <TextField
-                placeholder="****"
+                placeholder="********"
                 id="pass"
                 name="pass"
                 required
@@ -833,13 +843,16 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
 
+                inputRef={isPasswordErrorFocus}
                 error={isPasswordError} 
                 helperText={isPasswordHelper}
+
+                className="max-w-[434px]"
 
                 onChange={(e)=> {
                   const passwordValue = e.target.value;
 
-                  if(passwordValue.length >= 4 || passwordValue.length == 0){
+                  if(passwordValue.length >= 8 || passwordValue.length == 0){
                     setIsPasswordError(false);
                     setIsPasswordErrorHelper("");
                   } else{
@@ -854,6 +867,7 @@ const Register = () => {
 
                 InputProps={{
                   maxLength: 255,
+                
 
                   endAdornment: (
                     <InputAdornment position="end">
@@ -914,7 +928,7 @@ const Register = () => {
                     inputProps={{
                       maxLength: 15,
                       inputMode: "numeric",
-                      pattern: "[0-9]*",
+                      pattern: "/^\+[1-9]\d{7,14}$/",
                     }}
                     sx={sxTextField}
                   />
@@ -1055,7 +1069,7 @@ const Register = () => {
                         ),
 
                         inputMode: "numeric",
-                        pattern: "[0-9]*",
+                        pattern: "/^\+[1-9]\d{7,14}$/",
                       }}
                     />
                   </div>
