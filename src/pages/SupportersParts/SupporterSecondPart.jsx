@@ -211,6 +211,38 @@ const SupporterSecondPart = ({
     }
 
 
+    // if all fields are empty
+    if((fb_link === "" && ig_link === "" && tw_link === "") && isCelebrity){
+      setSnackbarMessage("Provide at least one social media profile");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+    const socialMediaRegex = /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$/;
+
+
+    if(isCelebrity && (fb_link !== "" && !socialMediaRegex.test(fb_link))){
+      setSnackbarMessage("Facebook link has an incorrect format.");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+    if(isCelebrity && (ig_link !== "" && !socialMediaRegex.test(ig_link)) ){
+      setSnackbarMessage("Instagram link has an incorrect format.");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+    if(isCelebrity && (tw_link !== "" && !socialMediaRegex.test(tw_link))){
+      setSnackbarMessage("X (Twitter) link has an incorrect format.");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+
+
+
+
 
     // at last remove spaces from phone number
     setFriendPhone(friendPhone.replace(/\s+/g, ''));
