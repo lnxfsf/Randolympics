@@ -72,6 +72,7 @@ const SupporterFourthPart = ({
 
   setFourthIsVisible,
   setFifthIsVisible,
+  isCelebrity,
 }) => {
 
 
@@ -153,7 +154,7 @@ const SupporterFourthPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-                  {t("campaign.content15")}
+                 {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
                   <br /> {t("campaign.content16")}
                 </p>
               </div>

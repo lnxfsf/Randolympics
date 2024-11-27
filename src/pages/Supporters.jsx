@@ -894,6 +894,7 @@ const Supporters = () => {
 
       {/* cetvrta */}
       <SupporterFourthPart
+      isCelebrity={isCelebrity}
         fourthIsVisible={fourthIsVisible}
         amount={amount}
         setAmount={setAmount}

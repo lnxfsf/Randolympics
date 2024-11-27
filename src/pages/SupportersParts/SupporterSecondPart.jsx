@@ -285,7 +285,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                      {t('campaign.content15')}
+                    {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
                       <br /> {t('campaign.content16')}
                     </p>
                   </div>
@@ -749,7 +749,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                    {t('campaign.content15')}
+                    {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
                       <br /> {t('campaign.content16')}
                     </p>
                   </div>
