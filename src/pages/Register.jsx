@@ -674,7 +674,7 @@ const Register = () => {
                 <div className="flex flex-col grow ">
                   <label
                     htmlFor="email"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    className={`lexend-font ${isEmailError ? "mb-2" : "mb-1"} mt-1 font-medium text-sm`}
                   >
                     {t("register.content13")} *
                   </label>
@@ -724,7 +724,7 @@ const Register = () => {
                     disableUnderline
                     onChange={handleEmailPrivacyChange}
                     sx={{
-                      mt: 2.2,
+                      mt: isEmailError ? 0 : 2.2,
                       fontFamily: "'Lexend', sans-serif",
 
                       "& .MuiOutlinedInput-root": {
@@ -873,7 +873,7 @@ const Register = () => {
                 <div className="flex flex-col grow">
                   <label
                     htmlFor="phone"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    className={`lexend-font ${isPhoneError ? "mb-2" : "mb-1"} mt-1 font-medium text-sm`}
                   >
                     {t("register.content18")} *
                   </label>
@@ -891,10 +891,6 @@ const Register = () => {
                     onChange={(e) => {
                       const phoneValue = e.target.value;
 
-                      console.log(
-                        "validatePhoneNumber je: " +
-                          validatePhoneNumber(phoneValue)
-                      );
 
                       if (
                         !validatePhoneNumber(phoneValue) &&
@@ -920,7 +916,7 @@ const Register = () => {
                 </div>
 
                 {/* sx={{ m: 1, minWidth: 120 }} */}
-                <FormControl sx={{ minWidth: 120, mt: 2.2 }}>
+                <FormControl sx={{ minWidth: 120, mt: isPhoneError ? 0 : 2.2 }}>
                   <Select
                     name="phone_private"
                     id="phone_private"
