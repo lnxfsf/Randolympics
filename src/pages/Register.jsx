@@ -688,6 +688,7 @@ const Register = () => {
                     inputRef={isEmailErrorFocus}
                     error={isEmailError}
                     helperText={isEmailError ? isEmailErrorHelper : ""}
+                    
                     onChange={(e) => {
                       const emailValue = e.target.value;
 
@@ -706,6 +707,8 @@ const Register = () => {
           setSnackbarMessage((t("register.content8")));
           setOpenSnackbar(true); */
                     }}
+
+                    
                     type="email"
                     maxLength="80"
                     inputProps={{
