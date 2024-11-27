@@ -33,8 +33,7 @@ const WarningTextPopup = ({
     t('campaign.warningPopupFriText8'),
     t('campaign.warningPopupFriText9'),
     t('campaign.warningPopupFriText10'),
-    t('campaign.warningPopupFriText11'),
-    t('campaign.warningPopupFriText12'),
+
   ];
 
   const titlesOfTextCeleb = [
