@@ -1727,5 +1727,11 @@
     "text9": "Allow all",
     "text10": "Allow selection",
     "text11": "Reject all"
+  },
+  "pagenotfound": {
+    "title1": "Random? Sure.",
+    "title2": "But this page is a little too random.",
+    "title3": "Let’s find you something worth competing for",
+    "title4": "head back home"
   }
 }
