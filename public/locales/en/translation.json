@@ -1726,7 +1726,13 @@
     "text8": "Marketing",
     "text9": "Allow all",
     "text10": "Allow selection",
-    "text11": "Reject all"
+    "text11": "Reject all",
+
+    "text12": "Find out more about how we use your personal data in our",
+    "text13": "privacy policy",
+    "text14": "and",
+    "text15": "cookie policy"
+    
   },
   "pagenotfound": {
     "title1": "Random? Sure.",
