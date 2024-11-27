@@ -283,7 +283,7 @@ const ContactUsForm = () => {
           variant="text"
         >
           <span className="popins-font">
-            {t("myprofile.myaccount.content28")}
+            {t("contact.content7")}
           </span>
         </Button>
       </div>
