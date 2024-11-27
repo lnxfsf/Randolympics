@@ -92,7 +92,7 @@ const FooterClean = () => {
     >
       {Object.keys(lngs).map((lng) => (
         <MenuItem key={lng} value={lng} >
-          {lngs[lng].nativeName}
+          {lngs[lng].translations[i18n.resolvedLanguage]}
         </MenuItem>
       ))}
     </Select>
