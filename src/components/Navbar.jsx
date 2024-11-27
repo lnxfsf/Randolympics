@@ -222,10 +222,14 @@ const Navbar = () => {
                     open={open1}
                     onClose={handleClose}
                     onClick={handleClose}
+                     className="max-w-[26rem]"  
                     PaperProps={{
+
                       elevation: 0,
                       sx: {
-                        overflow: "visible",
+                      
+                        overflowY: "auto",
+                        overflowX: "hidden",
                         filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                         mt: 1.5,
                         "& .MuiAvatar-root": {
@@ -289,7 +293,7 @@ const Navbar = () => {
                           className="icon"
                         />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
+                      <span className="lexend-font text-black_second break-all">
                         {t("navbar.profile1")}
                       </span>
                     </MenuItem>
@@ -303,7 +307,7 @@ const Navbar = () => {
                           className="icon"
                         />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
+                      <span className="lexend-font text-black_second break-all">
                         {t("navbar.profile10")}
                       </span>
                     </MenuItem>
@@ -313,7 +317,7 @@ const Navbar = () => {
                       <ListItemIcon>
                         <img src="/myaccount/team_dark.svg" className="icon" />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
+                      <span className="lexend-font text-black_second break-all">
                         {t("navbar.profile2")}
                       </span>
                     </MenuItem>
@@ -327,7 +331,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile3")}
                         </span>
                       </MenuItem>
@@ -348,7 +352,7 @@ const Navbar = () => {
                               className="icon"
                             />
                           </ListItemIcon>
-                          <span className="lexend-font text-black_second ">
+                          <span className="lexend-font text-black_second break-all">
                             {t("navbar.profile4")}
                           </span>
                         </MenuItem>
@@ -366,7 +370,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile5")}
                         </span>
                       </MenuItem>
@@ -389,7 +393,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile6")}
                         </span>
                       </MenuItem>
@@ -399,7 +403,7 @@ const Navbar = () => {
                       <ListItemIcon>
                         <Logout fontSize="small" style={{ color: "#D24949" }} />
                       </ListItemIcon>
-                      <span className="lexend-font text-red_second ">
+                      <span className="lexend-font text-red_second break-all">
                         {t("navbar.profile7")}
                       </span>
                     </MenuItem>
