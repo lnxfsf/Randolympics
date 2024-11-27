@@ -358,13 +358,9 @@ const Register = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
     if (!passwordRegex.test(password)) {
-    
-
-      
-
       setIsPasswordError(true);
       setIsPasswordErrorHelper(t("register.content3"));
-      
+
       isPasswordErrorFocus.current.focus();
 
       setSnackbarStatus("error");
@@ -372,11 +368,9 @@ const Register = () => {
       setOpenSnackbar(true);
 
       recaptcha.current.reset();
-      
     } else {
       setIsPasswordError(false);
-    } 
-
+    }
 
     if (!e.target.weight) {
       var weight = null;
@@ -427,9 +421,6 @@ const Register = () => {
       setIsPhoneError(false);
     }
       */
-     
-
-   
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
@@ -698,7 +689,6 @@ const Register = () => {
                     inputRef={isEmailErrorFocus}
                     error={isEmailError}
                     helperText={isEmailError ? isEmailErrorHelper : ""}
-                    
                     onChange={(e) => {
                       const emailValue = e.target.value;
 
@@ -717,8 +707,6 @@ const Register = () => {
           setSnackbarMessage((t("register.content8")));
           setOpenSnackbar(true); */
                     }}
-
-                    
                     type="email"
                     maxLength="80"
                     inputProps={{
@@ -822,8 +810,6 @@ const Register = () => {
                   maxLength: 255,
                 }}
                 sx={sxTextField}
-
-                
               />
 
               <label
@@ -842,32 +828,31 @@ const Register = () => {
                 }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
-
                 inputRef={isPasswordErrorFocus}
-                error={isPasswordError} 
+                error={isPasswordError}
                 helperText={isPasswordHelper}
-
                 className="max-w-[434px]"
-
-                onChange={(e)=> {
+                onChange={(e) => {
                   const passwordValue = e.target.value;
 
-                  if(passwordValue.length >= 8 || passwordValue.length == 0){
+                  const passwordRegex1 =
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+                  if (
+                    passwordValue.length == 0 ||
+                    passwordRegex1.test(passwordValue)
+                  ) {
                     setIsPasswordError(false);
                     setIsPasswordErrorHelper("");
-                  } else{
+                  } else {
                     setIsPasswordError(true);
                     setIsPasswordErrorHelper(t("register.content3"));
                     isPasswordErrorFocus.current.focus();
                     recaptcha.current.reset();
-                    
                   }
                 }}
-
-
                 InputProps={{
                   maxLength: 255,
-                
 
                   endAdornment: (
                     <InputAdornment position="end">
@@ -928,7 +913,7 @@ const Register = () => {
                     inputProps={{
                       maxLength: 15,
                       inputMode: "numeric",
-                      pattern: "/^\+[1-9]\d{7,14}$/",
+                      pattern: "/^+[1-9]d{7,14}$/",
                     }}
                     sx={sxTextField}
                   />
@@ -1069,7 +1054,7 @@ const Register = () => {
                         ),
 
                         inputMode: "numeric",
-                        pattern: "/^\+[1-9]\d{7,14}$/",
+                        pattern: "/^+[1-9]d{7,14}$/",
                       }}
                     />
                   </div>
