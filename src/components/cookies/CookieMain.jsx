@@ -2,6 +2,9 @@ import "../../styles/cookies.scoped.scss";
 import { useTranslation } from "react-i18next";
 
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+
+
 
 const CookieMain = () => {
   const [cookies, setCookie] = useCookies([
@@ -49,6 +52,9 @@ const CookieMain = () => {
 
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+
+
   return (
     <>
       <div className="fixed bottom-0 inset-x-0 z-[60] main_window_cookie ">
@@ -68,7 +74,7 @@ const CookieMain = () => {
                 <p className="mt-2 text-sm text-[#4b5563] dark:text-[#9ca3af]">
                   {t("cookies.text2")} <br /> {t("cookies.text3")} <br />{" "}
                   {t("cookies.text4")}<br/>
-                  {t("cookies.text12")} <span className="text-red_second cursor-pointer">{t("cookies.text13")}</span> {t("cookies.text14")} <span className="text-red_second cursor-pointer">{t("cookies.text15")}</span>.
+                  {t("cookies.text12")} <span className="text-red_second cursor-pointer" onClick={()=>{navigate("/tos#termsof")}}>{t("cookies.text13")}</span> {t("cookies.text14")} <span className="text-red_second cursor-pointer">{t("cookies.text15")}</span>.
                 </p>
                
                 <div className="mt-5 grid md:flex md:items-center gap-3">

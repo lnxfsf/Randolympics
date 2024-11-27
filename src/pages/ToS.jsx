@@ -1,8 +1,25 @@
+import { useEffect } from "react";
 import { FooterClean } from "../components/FooterClean";
 import { Navbar } from "../components/Navbar";
 import { NavbarClean } from "../components/NavbarClean";
 
 const ToS = () => {
+
+
+  useEffect(()=>{
+
+    const hash = window.location.hash;
+    if(hash === "#termsof"){
+      const element = document.getElementById("termsof");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      
+    }
+  },[])
+
+
+
   return (
     <>
      
@@ -11,7 +28,7 @@ const ToS = () => {
       <div className="m-8">
         <br />
         <br />
-        <h1 className="text-4xl">Terms of service</h1>
+        <h1 className="text-4xl" >Terms of service</h1>
         <br />
         <br />
         <p>
@@ -176,6 +193,8 @@ const ToS = () => {
 
         <br />
         <br />
+
+        <h1 className="text-4xl" id="termsof">hi</h1>
 
         <h2>9. COPYRIGHT AND TRADEMARK NOTICE</h2>
         <p>
