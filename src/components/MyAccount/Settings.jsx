@@ -143,6 +143,7 @@ const Settings = () => {
         setOpenSnackbarSuccess(true);
 
         popupRefResign.current.close();
+        popupRefWithdraw.current.close();  // withdraw also uses this function, as we hadn't defined withdraw functionality in backend 
       }
     } catch (error) {
       console.log(error);
@@ -226,6 +227,7 @@ const Settings = () => {
           </div>
 
           <div className="flex justify-center items-center gap-2 m-4">
+      
             <Button
               onClick={resignFromPosition}
               className="w-full"
