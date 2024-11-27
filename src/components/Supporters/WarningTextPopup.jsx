@@ -34,16 +34,10 @@ const WarningTextPopup = ({
     t('campaign.warningPopupFriText9'),
     t('campaign.warningPopupFriText10'),
     t('campaign.warningPopupFriText11'),
-    
     t('campaign.warningPopupFriText12'),
-    
-   
-    
-    
   ];
 
   const titlesOfTextCeleb = [
-
     t('campaign.warningPopupCelebTitle1'),
     t('campaign.warningPopupCelebTitle2'),
     t('campaign.warningPopupCelebTitle3'),
@@ -51,7 +45,6 @@ const WarningTextPopup = ({
   ];
 
   const listOfTextCeleb = [
-
     t('campaign.warningPopupCelebText1'),
     t('campaign.warningPopupCelebText2'),
     t('campaign.warningPopupCelebText3'),
@@ -63,20 +56,18 @@ const WarningTextPopup = ({
     t('campaign.warningPopupCelebText9'),
     t('campaign.warningPopupCelebText10'),
    
-    
-    
-    
-    
-    
-   
-   
-   
   ];
 
   const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
 
-  const randomIndex = getRandomIndex(listOfTextFrie);
-  const randomIndex2 = getRandomIndex(titlesOfTextFrie);
+  const randomIndexTitleFriend = getRandomIndex(titlesOfTextFrie);
+  const randomIndexContentFriend = getRandomIndex(listOfTextFrie);
+
+
+  const randomIndexTitleCeleb = getRandomIndex(titlesOfTextCeleb);
+  const randomIndexContentCeleb = getRandomIndex(listOfTextCeleb);
+
+  
   
 
   var randomTitle;
@@ -84,11 +75,11 @@ const WarningTextPopup = ({
 
 
   if (isCelebrity) {
-    randomTitle = titlesOfTextCeleb[randomIndex2];
-    randomText = listOfTextCeleb[randomIndex];
+    randomTitle = titlesOfTextCeleb[randomIndexTitleCeleb];
+    randomText = listOfTextCeleb[randomIndexContentCeleb];
   } else {
-    randomTitle = titlesOfTextFrie[randomIndex2];
-    randomText = listOfTextFrie[randomIndex];
+    randomTitle = titlesOfTextFrie[randomIndexTitleFriend];
+    randomText = listOfTextFrie[randomIndexContentFriend];
   }
 
   return (
