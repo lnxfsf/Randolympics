@@ -1737,5 +1737,28 @@
     "title2": "But this page is a little too random.",
     "title3": "Let’s find you something worth competing for",
     "title4": "head back home"
+  }, 
+
+  "privacyPolicy": {
+    "cookiePolicy1": "Cookie policy",
+    "cookiePolicy2": "Necessary Cookies",
+"cookiePolicy3": "These cookies are essential for the website to function properly. They enable core functionalities like page navigation and access to secure areas. The website cannot operate efficiently without these cookies.",
+
+"cookiePolicy4": "Preferences Cookies",
+"cookiePolicy5": "Preference cookies allow us to remember your choices and preferences, such as language settings or your favorite features. They help us tailor your Randolympics experience to suit you better.",
+"cookiePolicy6": "Statistics Cookies",
+
+"cookiePolicy7": "These cookies collect anonymous data about how visitors interact with the website. They help us understand what content is most engaging and improve the site’s performance over time.",
+"cookiePolicy8": "Marketing Cookies",
+
+"cookiePolicy9": "Marketing cookies help us deliver personalized ads and relevant content. They track your browsing activity across websites to ensure you see what’s most interesting to you."
+
+
+
+
+
+
+
+
   }
 }

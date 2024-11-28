@@ -45,6 +45,7 @@ const TRACKING_ID = GTAG_ID;
 ReactGA.initialize(TRACKING_ID);
 
 import { useCookies } from "react-cookie";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 
 const App = () => {
   const [cookies, setCookie] = useCookies(["cookieNeccessary", "cookieConsentOpen"]);
@@ -68,6 +69,8 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passresetbyfriend" element={<RegisteredByFriend />} />
         <Route path="/tos" element={<ToS />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+
         <Route path="/randomize" element={<Randomize />} />
 
         <Route
