@@ -45,7 +45,7 @@ const FooterClean = () => {
             <div className="flex gap-4 text-[#d24949] lexend-font font-bold flex-col lg:flex-row mt-4 lg:mt-0">
               <p className="cursor-pointer select-none " onClick={()=> {
                 window.scrollTo(0, 0);;
-                navigate("/privacyPolicy#cookiePolicy");
+                navigate("/privacyPolicy");
               }}>
                 {t("footer.privacy")}
               </p>
