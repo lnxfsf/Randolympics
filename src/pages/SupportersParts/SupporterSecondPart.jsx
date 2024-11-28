@@ -218,7 +218,7 @@ const SupporterSecondPart = ({
       return;
     }
 
-    const socialMediaRegex = /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$/;
+    const socialMediaRegex = /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
 
 
     if(isCelebrity && (fb_link !== "" && !socialMediaRegex.test(fb_link))){
