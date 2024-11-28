@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { FooterClean } from "../components/FooterClean";
 
@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next";
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
 
-  useEffect(() => {
+    
+useEffect(() => {
+  
     const hash = window.location.hash;
     if (hash === "#cookiePolicy") {
       const element = document.getElementById("cookiePolicy");
@@ -15,7 +17,10 @@ const PrivacyPolicy = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, []);
+}, []);
+
+
+ 
 
   return (
     <>
