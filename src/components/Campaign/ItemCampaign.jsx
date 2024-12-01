@@ -106,6 +106,7 @@ const ItemCampaign = () => {
   const [supporterComment, setSupporterComment] = useState("");
 
   const [howManySupporters, setHowManySupporters] = useState();
+  const [moreDetailsAboutSupporters, setMoreDetailsAboutSupporters] = useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
   const [lastTransactionsSupporters, setLastTransactionsSupporters] =
     useState();
@@ -156,7 +157,7 @@ const ItemCampaign = () => {
   useEffect(() => {
 
 
-    // ! kk
+    
     getAllTransactions(); // you call this again, when opening "All transactions" 
     updateLatestData();
 
@@ -240,6 +241,11 @@ const ItemCampaign = () => {
       );
 
       setHowManySupporters(response.data.count);
+      setMoreDetailsAboutSupporters(response.data.rows);
+
+     
+
+
     } catch (error) {
       console.error(error);
     }
@@ -371,9 +377,12 @@ const ItemCampaign = () => {
         <>
           {!viewFullActivity ? (
             <>
+
+
               <SubHeaderPart
                 athlete={athlete}
                 howManySupporters={howManySupporters}
+                moreDetailsAboutSupporters={moreDetailsAboutSupporters}
               />
 
               <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
