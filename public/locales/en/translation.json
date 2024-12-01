@@ -39,7 +39,7 @@
       "buttonRd1": "Make History!"
     },
     "ourCompetitions": {
-      "title1": "Our Competitions",
+      "title1": "Our Sports",
       "sport1": "Archery",
       "sport2": "Athletics",
       "sport3": "Badminton",
@@ -341,7 +341,7 @@
     "btn3": "News",
     "btn4": "FAQ",
     "btn5": "Contact",
-    "btn6": "Competitions",
+    "btn6": "Sports",
     "profile1": "Settings",
     "profile2": "Team",
     "profile3": "Elections",

@@ -341,7 +341,7 @@ const Login = () => {
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
-          <div className="flex justify-center mt-0 max-md:w-full ">
+        {/*   <div className="flex justify-center mt-0 max-md:w-full ">
             <Button
               onClick={handleSignUp}
               className="w-full md:w-[420px]"
@@ -364,7 +364,7 @@ const Login = () => {
                 {t("login.content9")}
               </span>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 
