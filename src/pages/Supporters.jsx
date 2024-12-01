@@ -692,7 +692,7 @@ const Supporters = () => {
     },
 
     revert: (uniqueFileId, load, error) => {
-      console.log("try to revert ");
+      
       // Send request to the server to delete the file with the uniqueFileId
       fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertProfilePicture`, {
         method: "DELETE",
@@ -703,7 +703,7 @@ const Supporters = () => {
       })
         .then((response) => {
           if (response.ok) {
-            console.log("reverted ?");
+           
             load(); // Signal that the file has been reverted successfully
           } else {
             response.json().then((errorData) => error(errorData.message));
