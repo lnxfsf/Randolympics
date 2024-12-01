@@ -6,7 +6,6 @@ import axios from "axios";
 
 import AuthContext from "../../context/AuthContext";
 
-
 import { WarningTextPopup } from "../../components/Supporters/WarningTextPopup";
 
 import Popup from "reactjs-popup";
@@ -83,25 +82,18 @@ const SupporterThirdPart = ({
 }) => {
   const { t } = useTranslation();
 
-
   let { user } = useContext(AuthContext);
 
-
-  // if there's signed up user, then use his Name, Email, and Phone (if exists), in account he's currently logged in 
-  if(user){
-
+  // if there's signed up user, then use his Name, Email, and Phone (if exists), in account he's currently logged in
+  if (user) {
     let tokens = JSON.parse(
       localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens")
     );
 
-
     setSupporterName(tokens.data.name);
     setSupporterEmail(tokens.data.email);
     setSupporterPhone(tokens.data.phone);
-    
-
   }
-
 
   return (
     <>
@@ -112,7 +104,10 @@ const SupporterThirdPart = ({
       >
         <div className="flex items-center  justify-start md:justify-center w-full min-h-screen">
           <div className="basis-1/2 justify-center items-center hidden lg:block 2xl:m-32 image-container min-h-screen">
-            <img src={isCelebrity ?  "/supporters/3.jpg" :  "supporters/2.jpg" } className="image_supporter" />
+            <img
+              src={isCelebrity ? "/supporters/3.jpg" : "supporters/2.jpg"}
+              className="image_supporter"
+            />
           </div>
 
           <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
@@ -127,7 +122,9 @@ const SupporterThirdPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-                {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
+                  {isCelebrity
+                    ? t("campaign.content95")
+                    : t("campaign.content15")}
                   <br /> {t("campaign.content16")}
                 </p>
               </div>
@@ -165,115 +162,113 @@ const SupporterThirdPart = ({
 
             {/* main fields */}
             <div className="flex flex-col w-full">
-             
-             
-           {!user && (<> 
-              <label
-                htmlFor="name"
-                className="lexend-font mb-1 mt-1 font-medium text-sm"
-              >
-                {t("campaign.content47")} *
-              </label>
-              <div className="flex flex-col justify-start">
-                <TextField
-                  value={supporterName}
-                  onChange={(e) => {
-                    setSupporterName(e.target.value);
-                  }}
-                  placeholder="John"
-                  id="name"
-                  name="name"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-              </div>
+              {!user && (
+                <>
+                  <label
+                    htmlFor="name"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content47")} *
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={supporterName}
+                      onChange={(e) => {
+                        setSupporterName(e.target.value);
+                      }}
+                      placeholder="John"
+                      id="name"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
 
-              <label
-                htmlFor="supporterEmail"
-                className="lexend-font mb-1 mt-1 font-medium text-sm"
-              >
-                {t("campaign.content48")}
-              </label>
-              <div className="flex flex-col justify-start">
-                <TextField
-                  value={supporterEmail}
-                  onChange={(e) => {
-                    setSupporterEmail(e.target.value);
-                  }}
-                  id="supporterEmail"
-                  placeholder="johndoe@gmail.com"
-                  type="text"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-              </div>
+                  <label
+                    htmlFor="supporterEmail"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content48")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={supporterEmail}
+                      onChange={(e) => {
+                        setSupporterEmail(e.target.value);
+                      }}
+                      id="supporterEmail"
+                      placeholder="johndoe@gmail.com"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
 
-              <label
-                htmlFor="supporterPhone"
-                className="lexend-font mb-1 mt-1 font-medium text-sm"
-              >
-                {t("campaign.content49")}
-              </label>
-              <div className="flex flex-col justify-start">
-                <TextField
-                  value={supporterPhone}
-                  onChange={(e) => {
-                    setSupporterPhone(e.target.value);
-                  }}
-                  placeholder="+1 425 555 0123"
-                  type="text"
-                  id="supporterPhone"
-                  inputProps={{
-                    maxLength: 255,
-                  }}
-                  InputLabelProps={inputLabelPropsTextField}
-                  sx={sxTextField}
-                />
-              </div>
+                  <label
+                    htmlFor="supporterPhone"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content49")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={supporterPhone}
+                      onChange={(e) => {
+                        setSupporterPhone(e.target.value);
+                      }}
+                      placeholder="+1 425 555 0123"
+                      type="text"
+                      id="supporterPhone"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                    />
+                  </div>
 
-              <label
-                htmlFor="pass"
-                className="lexend-font mb-1 mt-1 font-medium text-sm"
-              >
-                {t("campaign.content50")}
-              </label>
-              <TextField
-                value={supporterPassword}
-                onChange={(event) => {
-                  setSupporterPassword(event.target.value);
-                }}
-                placeholder="****"
-                id="pass"
-                name="pass"
-                type={showPassword ? "text" : "password"}
-                sx={sxTextField}
-                InputProps={{
-                  maxLength: 255,
+                  <label
+                    htmlFor="pass"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content50")}
+                  </label>
+                  <TextField
+                    value={supporterPassword}
+                    onChange={(event) => {
+                      setSupporterPassword(event.target.value);
+                    }}
+                    placeholder="****"
+                    id="pass"
+                    name="pass"
+                    type={showPassword ? "text" : "password"}
+                    sx={sxTextField}
+                    InputProps={{
+                      maxLength: 255,
 
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label={t("campaign.content51")}
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              </> 
-)}
-
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label={t("campaign.content51")}
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </>
+              )}
 
               <label
                 htmlFor="supporterComment"
@@ -300,7 +295,23 @@ const SupporterThirdPart = ({
               <p className="text-xl text-start mt-6 mb-1 text-black_second font-semibold lexend-font">
                 {t("campaign.content53")}
               </p>
-              <p className="lexend-font text-sm mb-6">Informing {additionalSupportersFormData.length} people about this campaign to become supporters. </p>
+
+              {additionalSupportersFormData &&
+                additionalSupportersFormData.length > 0 && (
+                  <>
+                    <p className="lexend-font text-sm mb-6">
+                      Informing{" "}
+                      {additionalSupportersFormData.some(
+                        (supporter) => supporter.name?.trim() === ""
+                      ) === ""
+                        ? "0"
+                        : additionalSupportersFormData.filter(
+                            (supporter) => supporter.name?.trim() !== ""
+                          ).length}{" "}
+                      people about this campaign to become supporters.{" "}
+                    </p>
+                  </>
+                )}
 
               {/* inform additional supporters */}
 
