@@ -211,7 +211,7 @@ const Login = () => {
               </label>
               <TextField
                 /*  label="Password" */
-                placeholder="****"
+                placeholder="********"
                 id="pass"
                 name="pass"
                 required
