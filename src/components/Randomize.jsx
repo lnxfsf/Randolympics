@@ -131,14 +131,14 @@ const Randomize = () => {
       // TODO, this one is for gender, so it uses F or M (we used below one, just so backend can work for M for now..)
       // setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
 
-        setOneLandingPageUser([
-          {
-            name: "first",
-            email: "first@gmail.com",
-            weightCategory: selectedWeightCategory,
-            gender: "M",
-          },
-        ]);
+      setOneLandingPageUser([
+        {
+          name: "first",
+          email: "first@gmail.com",
+          weightCategory: selectedWeightCategory,
+          gender: "M",
+        },
+      ]);
     }
   }, [scheduleData, selectedWeightCategory, selectedGender]);
 
@@ -214,9 +214,6 @@ const Randomize = () => {
         }
       );
 
-      
-      
-
       setScheduleData(response.data);
     } catch (error) {
       console.log(error);
@@ -238,7 +235,13 @@ const Randomize = () => {
       slotIndex === startSlotIndex &&
       slotIndex <= endSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName} />;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     const secondDayStartSlotIndex = timeSlots.indexOf(
@@ -253,7 +256,13 @@ const Randomize = () => {
       slotIndex === secondDayStartSlotIndex &&
       slotIndex <= secondDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     const thirdDayStartSlotIndex = timeSlots.indexOf(
@@ -268,7 +277,13 @@ const Randomize = () => {
       slotIndex === thirdDayStartSlotIndex &&
       slotIndex <= thirdDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     return null;
@@ -973,45 +988,43 @@ return dataS.map((data, index) => { */
             {t("mockupRandomizer.content6")}. 🤩
           </p>
 
-
-{/* sports items in circles */}
-<div className="w-full md:flex md:justify-center">
-          <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full md:w-[80%] lg:w-[70%] xl:w-[60%]  mt-8 p-4">
-            {scheduleData.map((data, index) => {
-              /*    data.icon
+          {/* sports items in circles */}
+          <div className="w-full md:flex md:justify-center">
+            <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full md:w-[80%] lg:w-[70%] xl:w-[60%]  mt-8 p-4">
+              {scheduleData.map((data, index) => {
+                /*    data.icon
         data.sportName 
         
         let icon_url = "randomize/" + icon + ".svg";
         
         */
 
-              if (
-                data.sportName === "Opening ceremony" ||
-                data.sportName === "Closing ceremony"
-              ) {
-                return null;
-              }
+                if (
+                  data.sportName === "Opening ceremony" ||
+                  data.sportName === "Closing ceremony"
+                ) {
+                  return null;
+                }
 
-              return (
-                <>
-                  <div className="flex flex-col justify-center items-center ">
-                   
-                   
-                    <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
-                      <img
-                        width={"30px"}
-                        height={"30px"}
-                        src={`randomize/${data.icon}.svg`}
-                      />
+                return (
+                  <>
+                    <div className="flex flex-col justify-center items-center ">
+                      <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
+                        <img
+                          width={"30px"}
+                          height={"30px"}
+                          src={`randomize/${data.icon}.svg`}
+                        />
+                      </div>
+
+                      <p className="mt-7 text-center w-[70%]">
+                        {data.sportName}
+                      </p>
                     </div>
-
-                    <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
-
-                  </div>
-                </>
-              );
-            })}
-          </div>
+                  </>
+                );
+              })}
+            </div>
           </div>
 
           {/* table for PC */}
@@ -1072,7 +1085,10 @@ return dataS.map((data, index) => { */
                           */
                         >
                           {event ? (
-                            <RandomizeItem name={event.sportName} translatedName={event.translatedSportName} />
+                            <RandomizeItem
+                              name={event.sportName}
+                              translatedName={event.translatedSportName}
+                            />
                           ) : (
                             ""
                           )}
@@ -1269,7 +1285,7 @@ return dataS.map((data, index) => { */
           </div>
 
           {/* share to friends */}
-        {/*   <form
+          {/*   <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
             onSubmit={sendToFriends}
@@ -1303,7 +1319,7 @@ return dataS.map((data, index) => { */
                 <option value="heavy">Heavy</option>
               </select> */}
 
-                {/* 
+          {/* 
               <select
                 name="gender"
                 value={data.gender}
@@ -1315,7 +1331,7 @@ return dataS.map((data, index) => { */
               </select>
  */}
 
-                {/*    <button type="button" onClick={() => removeInputSet(index)}>
+          {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
  
