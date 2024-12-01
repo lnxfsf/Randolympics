@@ -150,6 +150,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
   const popupPassportRef = useRef(null);
 
+  const filePondRef1 = useRef(null);
+  const filePondRef2 = useRef(null);
+
   const [athleteStatement, setAthleteStatement] = useState();
 
   const serverProfile = {
@@ -178,6 +181,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
+        if (filePondRef1.current) {
+          filePondRef1.current.removeFiles();
+        }
 
         console.error("Error uploading file:", response);
         return response;
@@ -431,6 +437,10 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
+
+        if (filePondRef2.current) {
+          filePondRef2.current.removeFiles();
+        }
         
         console.error("Error uploading file:", response);
         return response;
@@ -757,6 +767,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               {toogleProfilePic && (
                 <>
                   <FilePond
+                   ref={filePondRef1}
                     className="filepond--root small"
                     type="file"
                     onupdatefiles={setFiles}
@@ -1234,6 +1245,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
             {passportUpload && (
               <>
                 <FilePond
+                ref={filePondRef2}
                   className="filepond--root large"
                   type="file"
                   onupdatefiles={setFiles}

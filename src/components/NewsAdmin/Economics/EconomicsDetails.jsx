@@ -68,6 +68,8 @@ function getImageUrl(coverImage) {
 
 const EconomicsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
+  const filePondRef = useRef(null);
+
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -282,7 +284,9 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
-
+ if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
 
 
         console.error("Error uploading file:", response);
@@ -504,6 +508,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
             <form action="#" onSubmit={handleUpdatePost}>
               <div className="flex flex-col gap-4">
                 <FilePond
+                 ref={filePondRef}
                   /* className="filepond--root large" */
                   type="file"
                   onupdatefiles={setFiles}

@@ -167,6 +167,11 @@ const generateRandomEmail = (usernameLength = 8) => {
 const Supporters = () => {
   const [campaignId, setCampaignId] = useState("");
 
+  
+  const filePondRef1 = useRef(null);
+  const filePondRef2 = useRef(null);
+
+
   let { user } = useContext(AuthContext);
 
   const validateSupporter = async () => {
@@ -687,6 +692,17 @@ const Supporters = () => {
         setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
         setOpenSnackbarFailure(true);
 
+
+        
+  if (filePondRef1.current) {
+    filePondRef1.current.removeFiles();
+  }
+  
+  if (filePondRef2.current) {
+    filePondRef2.current.removeFiles();
+  }
+
+
         return response;
       },
     },
@@ -861,6 +877,10 @@ const Supporters = () => {
         handleSnackbarSuccessClose={handleSnackbarSuccessClose}
         snackbarMessage={snackbarMessage}
         setSnackbarMessage={setSnackbarMessage}
+
+
+        filePondRef1={filePondRef1}
+        filePondRef2={filePondRef2}
       />
 
       {/* treca */}

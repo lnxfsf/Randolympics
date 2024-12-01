@@ -104,6 +104,10 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+
+
+  const filePondRef = useRef(null);
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -183,6 +187,11 @@ const Register = () => {
         setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
         setSnackbarStatus("error");
         setOpenSnackbar(true);
+
+        
+  if (filePondRef.current) {
+    filePondRef.current.removeFiles();
+  }
 
         console.error("Error uploading file:", response);
         return response;
@@ -579,6 +588,7 @@ const Register = () => {
                 {/* server="http://localhost:5000/profile_photo/upload" */}
 
                 <FilePond
+                 ref={filePondRef}
                   type="file"
                   /* className={"profile_pic_upload"} */
                   className="filepond--root athlete"

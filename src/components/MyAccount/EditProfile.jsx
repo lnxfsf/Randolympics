@@ -128,6 +128,9 @@ const EditProfile = () => {
   const [userData, setUserData] = useState(null);
   const popupPassportRef = useRef(null); // popup for showing passport image
 
+  const filePondRef = useRef(null);
+   
+
   const { t } = useTranslation();
 
   const handleathleteStatementChange = (event) => {
@@ -532,6 +535,10 @@ const EditProfile = () => {
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
+
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
 
         console.error("Error uploading file:", response);
         return response;
@@ -1293,6 +1300,7 @@ const EditProfile = () => {
             {passportUpload && (
               <>
                 <FilePond
+                ref={filePondRef}
                   className="filepond--root large"
                   type="file"
                   onupdatefiles={setFiles}

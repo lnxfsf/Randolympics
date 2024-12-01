@@ -120,9 +120,14 @@ const SupporterSecondPart = ({
 
   setOpenSnackbarFailure,
   setOpenSnackbarSuccess,
+
+  filePondRef1,
+  filePondRef2,
 }) => {
   const [popupWarning, setPopupWarning] = useState(false);
   const { t } = useTranslation();
+
+
 
 
     // ? this is for phone
@@ -330,6 +335,7 @@ const SupporterSecondPart = ({
                 <div className="flex flex-col w-full">
                   <div className="ml-2 flex ">
                     <FilePond
+                    ref={filePondRef1}
                       className="filepond--root athlete"
                       type="file"
                       onupdatefiles={setFiles}
@@ -794,6 +800,7 @@ const SupporterSecondPart = ({
                 <div className="flex flex-col w-full">
                   <div className="ml-2 flex ">
                     <FilePond
+                    ref={filePondRef2}
                       className="filepond--root athlete"
                       type="file"
                       onupdatefiles={setFiles}

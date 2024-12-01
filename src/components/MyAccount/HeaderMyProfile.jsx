@@ -1,6 +1,6 @@
 import "../../styles/headermyprofile.scoped.scss";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Flag from "react-world-flags";
 import axios from "axios";
 import { Button } from "@mui/material";
@@ -54,6 +54,9 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
   const [original_email, setOriginalEmail] = useState(null);
   const [userData, setUserData] = useState(null);
 
+  const filePondRef = useRef(null);
+
+
   const [files, setFiles] = useState([]);
 
   const [profileImage, setProfileImage] = useState(null);
@@ -85,6 +88,11 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
+
+        
 
         console.error("Error uploading file:", response);
         return response;
@@ -235,6 +243,8 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
               {toogleProfilePic && (
                 <>
                   <FilePond
+                    ref={filePondRef}
+
                     className="filepond--root small"
                     type="file"
                     onupdatefiles={setFiles}
@@ -249,6 +259,13 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                     allowPaste={true}
                     allowReplace={true}
                     credits={""}
+
+                   
+
+                  
+
+                    
+
                     allowFileEncode={true}
                     allowFileTypeValidation={true}
                     allowImagePreview={true}

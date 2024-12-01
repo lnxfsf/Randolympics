@@ -64,23 +64,23 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
-
 function formatDate(dateString) {
-    let date = new Date(dateString);
-    let options = { year: "numeric", month: "long", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  }
-
+  let date = new Date(dateString);
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+}
 
 const NewsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
+
+  const filePondRef = useRef(null);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // error, "success"
   const [snackbarStatus, setSnackbarStatus] = useState("success");
-  
+
   const handleSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -88,8 +88,6 @@ const NewsDetails = ({ postZ, onBack }) => {
 
     setOpenSnackbar(false);
   };
-
-
 
   const [post, setPost] = useState(postZ);
 
@@ -107,8 +105,6 @@ const NewsDetails = ({ postZ, onBack }) => {
       );
 
       if (response.status === 200) {
-        
-
         onBack(true, false);
       } else {
         console.error("Failed to delete post. Status:", response.status);
@@ -185,7 +181,6 @@ const NewsDetails = ({ postZ, onBack }) => {
       if (response.status === 200) {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
-        
 
         console.log(
           " novi image treba da zameni sa starijim:" + editCoverImage
@@ -263,19 +258,19 @@ const NewsDetails = ({ postZ, onBack }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        
-
         // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
         setTempEditCoverImage(filename);
 
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
-
         setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
         setSnackbarStatus("error");
         setOpenSnackbar(true);
-
+              
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
 
         console.error("Error uploading file:", response);
         return response;
@@ -336,7 +331,6 @@ const NewsDetails = ({ postZ, onBack }) => {
         }
       );
 
-      
       setPost(response.data);
     } catch (error) {
       console.error(error);
@@ -437,7 +431,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
         {!isEditing && (
           <>
-            <div className="lexend-font text-black_second" >
+            <div className="lexend-font text-black_second">
               <div className="coverImageUpcomingGames flex justify-center">
                 <img
                   className="coverImageUpcomingGames"
@@ -448,13 +442,13 @@ const NewsDetails = ({ postZ, onBack }) => {
               <h1 className="text-4xl">{post.title}</h1>
 
               <h2 className="text-xl">{post.subtitle}</h2>
-            
+
               <br />
               <p>Date of publishing: {formatDate(post.createdAt)}</p>
               <p>Updated at: {formatDate(post.updatedAt)}</p>
               <p>Reading time: {readingTime(post.content)} minute read</p>
               <br />
-             
+
               {/*  <p >{post.content} </p> */}
               <div
                 className="ql-editor p-0"
@@ -464,29 +458,28 @@ const NewsDetails = ({ postZ, onBack }) => {
           </>
         )}
 
-       
-
         <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert
+          open={openSnackbar}
+          autoHideDuration={6000}
           onClose={handleSnackbar}
-          severity={snackbarStatus}
-          variant="filled"
-          sx={{ width: "100%" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleSnackbar}
+            severity={snackbarStatus}
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
 
         {isEditing && (
           <>
             <form action="#" onSubmit={handleUpdatePost}>
               <div className="flex flex-col gap-4">
                 <FilePond
+                  ref={filePondRef}
                   /* className="filepond--root large" */
                   type="file"
                   onupdatefiles={setFiles}

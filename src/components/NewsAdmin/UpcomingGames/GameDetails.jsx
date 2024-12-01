@@ -88,7 +88,7 @@ function getImageUrl(coverImage) {
 
 const GameDetails = ({ postZ, onBack }) => {
     const popupRef = useRef(null);
-
+    const filePondRef = useRef(null);
 
   
 
@@ -338,7 +338,10 @@ const GameDetails = ({ postZ, onBack }) => {
                 setSnackbarStatus("error");
                 setOpenSnackbar(true);
         
-
+                if (filePondRef.current) {
+                    filePondRef.current.removeFiles();
+                  }
+                  
 
                 console.error("Error uploading file:", response);
                 return response;
@@ -616,6 +619,8 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
                                 <FilePond
+                                 ref={filePondRef}
+
                                     /* className="filepond--root large" */
                                     type="file"
                                     onupdatefiles={setFiles}

@@ -56,6 +56,7 @@ let BACKEND_SERVER_BASE_URL =
 const CreateUpcomingPost = ({ onBack }) => {
 
 
+    const filePondRef = useRef(null);
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -231,6 +232,11 @@ const CreateUpcomingPost = ({ onBack }) => {
                 setOpenSnackbar(true);
         
 
+ 
+                if (filePondRef.current) {
+                    filePondRef.current.removeFiles();
+                  }
+          
 
                 console.error("Error uploading file:", response);
                 return response;
@@ -291,6 +297,7 @@ const CreateUpcomingPost = ({ onBack }) => {
 
 
                     <FilePond
+                    ref={filePondRef}
                         /* className="filepond--root large" */
                         type="file"
                         onupdatefiles={setFiles}
