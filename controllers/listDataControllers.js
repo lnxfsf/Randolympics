@@ -6615,13 +6615,38 @@ const howManySupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
   try {
-    const countOfSupporters = await Statscampaign.count({
+
+
+    const countOfSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
       },
     });
 
-    res.status(200).json({ count: countOfSupporters });
+
+
+    // now we need to go to each supporter in Users table, to get value for profile picture, for that supporter if he has account, so it reflects in here.
+    const supportersWithPictures = await Promise.all(
+
+      countOfSupporters.rows.map(async (item) => {
+        const user = await User.findOne({
+          where: { userId: item.supporterId }, 
+          attributes: ['picture'], 
+        });
+
+        return {
+          ...item.toJSON(), // Convert the Sequelize model instance to plain object
+          picture: user ? user.picture : null, // Include the picture or null if not found
+          
+        };
+      })
+    );
+
+
+
+
+    res.status(200).json({ count: countOfSupporters.count, rows: supportersWithPictures, });
+
   } catch (error) {
     console.log(error.stack);
   }
