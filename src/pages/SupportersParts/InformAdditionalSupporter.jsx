@@ -78,6 +78,8 @@ const InformAdditionalSupporter = ({
           </div>
         ))}
 
+
+{ additionalSupportersFormData.length <= 50 && (<>
         <Button
          disabled={isDisabled}
           onClick={() => {
@@ -114,6 +116,8 @@ const InformAdditionalSupporter = ({
             {t('campaign.content3')}
           </span>
         </Button>
+        </>)}
+
       </div>
     </>
   );
