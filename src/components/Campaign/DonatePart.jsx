@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-
-
 import { OutlinedInput, InputAdornment } from "@mui/material";
 
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
@@ -78,43 +76,30 @@ const DonatePart = ({
   viewFullActivity,
   howManySupporters,
 }) => {
-
-
   const donateBeforeStripe = async () => {
-   
-
-      try{
-        const response = await axios.post(
-          `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
-          {
-            campaignId,
-            supporterName,
-            supporterEmail,
-            supporterComment,
-            discountCode: discountCode,
-            countryAthleteIsIn,
-            amount: amount*100,
-          }
-        );
-
-        if (response.status === 200) {
-          setSnackbarMessage("Donation succeeded");
-          setSnackbarStatus("success");
-          setOpenSnackbar(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
+        {
+          campaignId,
+          supporterName,
+          supporterEmail,
+          supporterComment,
+          discountCode: discountCode,
+          countryAthleteIsIn,
+          amount: amount * 100,
         }
+      );
 
-
-     
-        
-
-      } catch(e) {
-        console.log(e.stack);
-
+      if (response.status === 200) {
+        setSnackbarMessage("Donation succeeded");
+        setSnackbarStatus("success");
+        setOpenSnackbar(true);
       }
-     
-    
+    } catch (e) {
+      console.log(e.stack);
+    }
   };
-
 
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
@@ -146,26 +131,30 @@ const DonatePart = ({
           {t("campaign.content70")}
         </p>
 
-        <div className="flex justify-between mt-4">
-          <div>
+        <div className="flex justify-between mt-4 mb-4 gap-4">
+          <div className={`${viewFullActivity ? "basis-1/3" : "basis-1/2"}`}>
             <p className="text-[#616673]">{t("campaign.content71")}</p>
-            <p className="text-xl font-medium">
+            <p className="text-xl font-medium break-all ">
               ${athlete.donatedAmount / 100}
             </p>
           </div>
 
           {viewFullActivity && (
             <>
-              <div>
+              <div className="basis-1/3">
                 <p className="text-[#616673]">{t("campaign.content72")}</p>
-                <p className="text-xl font-medium">{howManySupporters}</p>
+                <p className="text-xl font-medium break-all">
+                  {howManySupporters}
+                </p>
               </div>
             </>
           )}
 
-          <div>
+          <div className={`${viewFullActivity ? "basis-1/3" : "basis-1/2"}`}>
             <p className="text-[#616673]">{t("campaign.content73")}</p>
-            <p className="text-xl font-medium">{campaign.supporterName}</p>
+            <p className="text-xl font-medium break-all">
+              {campaign.supporterName}
+            </p>
           </div>
         </div>
 
@@ -253,7 +242,7 @@ const DonatePart = ({
                 sx={sxTextField}
               />
 
-             {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
+              {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
                 <ThemeProvider theme={theme}>
                   <QueryProvider>
                     <DonationFormItemCampaign
@@ -345,66 +334,65 @@ const DonatePart = ({
                 </div>
               </div> */}
 
-
-
-<div className=" self-center w-[50%] mb-2">
+              <div className=" self-center w-[50%] mb-2 mt-8">
                 <OutlinedInput
-                            type="number"
-
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
-                            fullWidth
-
-                            inputProps={{ min: 1 }}
-
-                            sx={{
-                                fontFamily: "'Lexend', sans-serif",
-                                // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
-                                'input[type=number]::-webkit-inner-spin-button': {
-                                    WebkitAppearance: 'none',
-                                    margin: 0,
-                                },
-                                'input[type=number]::-webkit-outer-spin-button': {
-                                    WebkitAppearance: 'none',
-                                    margin: 0,
-                                },
-                                // Hide arrows
-                                'input[type=number]': {
-                                    MozAppearance: 'textfield',
-                                },
-                            }}
-                        />
-                        </div>
-
-<Button
-                  onClick={donateBeforeStripe}
-                  className="self-center  w-[50%] "
-                  /* w-full md:w-50% */
-                  style={{ textTransform: "none" }}
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  startAdornment={
+                    <InputAdornment
+                      position="start"
+                      sx={{ fontFamily: "'Lexend', sans-serif" }}
+                    >
+                      $
+                    </InputAdornment>
+                  }
+                  fullWidth
+                  inputProps={{ min: 1 }}
                   sx={{
-                    mb:8,
-                    height: "50px",
-                    bgcolor: "#D24949",
-
-                    color: "#fff",
-                    borderRadius: 3,
-                    border: `1px solid #D24949`,
-                    "&:hover": {
-                      background: "rgba(210, 73, 73, 1)",
-                      color: "white",
-                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    fontFamily: "'Lexend', sans-serif",
+                    // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
+                    "input[type=number]::-webkit-inner-spin-button": {
+                      WebkitAppearance: "none",
+                      margin: 0,
+                    },
+                    "input[type=number]::-webkit-outer-spin-button": {
+                      WebkitAppearance: "none",
+                      margin: 0,
+                    },
+                    // Hide arrows
+                    "input[type=number]": {
+                      MozAppearance: "textfield",
                     },
                   }}
-                  id="join-the-fun-btn"
-                ><span className="lexend-font">Donate</span>
-                </Button>
+                />
+              </div>
 
+              <Button
+                onClick={donateBeforeStripe}
+                className="self-center  w-[50%] "
+                /* w-full md:w-50% */
+                style={{ textTransform: "none" }}
+                sx={{
+                  mb: 8,
+                  height: "50px",
+                  bgcolor: "#D24949",
 
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <span className="lexend-font">Donate</span>
+              </Button>
 
-
-
-              <div className="m-4 flex justify-center  items-center flex-col">
+              <div className="m-4  flex justify-center  items-center flex-col">
                 <p>{t("campaign.content78")}</p>
 
                 {/*   <input

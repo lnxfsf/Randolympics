@@ -21,8 +21,7 @@ const CompetitionsDetails = () => {
 
   }
 
-  console.log(variations)
-
+ 
   return (
     <>
       <Navbar />
