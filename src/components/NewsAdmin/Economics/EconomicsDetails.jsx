@@ -6,6 +6,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+
+
 import "../../../styles/blogPosts.scoped.scss";
 
 import Popup from "reactjs-popup";
@@ -68,11 +70,18 @@ const EconomicsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+ 
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
+
+   
 
     setOpenSnackbar(false);
   };
@@ -103,6 +112,13 @@ const EconomicsDetails = ({ postZ, onBack }) => {
       console.error("Error deleting post:", error);
     }
   };
+
+
+  
+
+  
+
+
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingImage, setEditingImage] = useState(
@@ -207,6 +223,9 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         }
 
         setIsEditing(false);
+
+        setSnackbarMessage("Post edited");
+        setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
     } catch (error) {
@@ -258,6 +277,14 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
+
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -464,11 +491,11 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         >
           <Alert
             onClose={handleSnackbarClose}
-            severity="success"
+            severity={snackbarStatus}
             variant="filled"
             sx={{ width: "100%" }}
           >
-            Post edited
+            {snackbarMessage}
           </Alert>
         </Snackbar>
 
@@ -630,6 +657,10 @@ const EconomicsDetails = ({ postZ, onBack }) => {
           </>
         )}
       </div>
+
+
+
+
     </>
   );
 };

@@ -179,6 +179,11 @@ const Register = () => {
         // return filename;
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
         console.error("Error uploading file:", response);
         return response;
       },

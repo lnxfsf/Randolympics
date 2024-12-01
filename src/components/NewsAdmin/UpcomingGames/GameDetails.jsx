@@ -90,15 +90,26 @@ const GameDetails = ({ postZ, onBack }) => {
     const popupRef = useRef(null);
 
 
+  
+
     const [openSnackbar, setOpenSnackbar] = useState(false);
-
-    const handleSnackbarClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenSnackbar(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+    // error, "success"
+    const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+    const handleSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+  
+      setOpenSnackbar(false);
     };
+
+
+
+
+
 
     const [post, setPost] = useState(postZ); // initial state it gets.. from props.. fine.. so I don't have to redeclare everywhere..  just edit this one..
 
@@ -246,8 +257,11 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
                 
-                setIsEditing(false)
-                setOpenSnackbar(true)
+                setIsEditing(false);
+                
+                setSnackbarMessage("Post edited");
+                setSnackbarStatus("success");
+                setOpenSnackbar(true);
 
 
             }
@@ -319,6 +333,13 @@ const GameDetails = ({ postZ, onBack }) => {
 
             },
             onerror: (response) => {
+
+                setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+                setSnackbarStatus("error");
+                setOpenSnackbar(true);
+        
+
+
                 console.error("Error uploading file:", response);
                 return response;
             },
@@ -568,20 +589,21 @@ const GameDetails = ({ postZ, onBack }) => {
 
 
 
-                <Snackbar open={openSnackbar}
-                    autoHideDuration={6000}
-                    onClose={handleSnackbarClose}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                    <Alert
-                        onClose={handleSnackbarClose}
-                        severity="success"
-                        variant="filled"
-                        sx={{ width: '100%' }}
-
-                    >
-                        Post edited
-                    </Alert>
-                </Snackbar>
+                <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
 
 

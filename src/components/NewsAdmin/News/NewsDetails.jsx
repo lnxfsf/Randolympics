@@ -76,14 +76,20 @@ const NewsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  const handleSnackbarClose = (event, reason) => {
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+  const handleSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
     setOpenSnackbar(false);
   };
+
+
 
   const [post, setPost] = useState(postZ);
 
@@ -211,6 +217,9 @@ const NewsDetails = ({ postZ, onBack }) => {
         }
 
         setIsEditing(false);
+
+        setSnackbarMessage("Post edited");
+        setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
     } catch (error) {
@@ -262,6 +271,12 @@ const NewsDetails = ({ postZ, onBack }) => {
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -449,21 +464,23 @@ const NewsDetails = ({ postZ, onBack }) => {
           </>
         )}
 
+       
+
         <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleSnackbarClose}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
         >
-          <Alert
-            onClose={handleSnackbarClose}
-            severity="success"
-            variant="filled"
-            sx={{ width: "100%" }}
-          >
-            Post edited
-          </Alert>
-        </Snackbar>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
         {isEditing && (
           <>

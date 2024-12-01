@@ -40,7 +40,7 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const HeaderMyProfile = ({ ShowEditProfile }) => {
+const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatus, setOpenSnackbar   }) => {
   const { t } = useTranslation();
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
@@ -80,6 +80,12 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
         // return filename;
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
         console.error("Error uploading file:", response);
         return response;
       },

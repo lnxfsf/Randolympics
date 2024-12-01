@@ -15,9 +15,9 @@ import 'react-quill/dist/quill.snow.css';
 
 import TextField from "@mui/material/TextField";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 
 
 // FilePond
@@ -62,6 +62,20 @@ let BACKEND_SERVER_BASE_URL =
 const CreateEconomicsPost = ({ onBack }) => {
 
 
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+    // error, "success"
+    const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+    const handleSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    };
     
 
     const [editTitle, setEditTitle] = useState("")
@@ -194,12 +208,6 @@ const CreateEconomicsPost = ({ onBack }) => {
 
             onload: (response) => {
                 // Parse the JSON response to get the filename
-
-
-
-
-
-
                 const jsonResponse = JSON.parse(response);
                 const filename = jsonResponse;
 
@@ -213,6 +221,12 @@ const CreateEconomicsPost = ({ onBack }) => {
 
             },
             onerror: (response) => {
+
+                setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+                setSnackbarStatus("error");
+                setOpenSnackbar(true);
+        
+
                 console.error("Error uploading file:", response);
                 return response;
             },
@@ -256,8 +270,6 @@ const CreateEconomicsPost = ({ onBack }) => {
 
 
     };
-
-
 
 
 
@@ -454,6 +466,21 @@ const CreateEconomicsPost = ({ onBack }) => {
 
             </form>
 
+            <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
         </>
     )

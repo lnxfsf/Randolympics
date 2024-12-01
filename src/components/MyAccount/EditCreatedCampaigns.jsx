@@ -102,6 +102,21 @@ let BACKEND_SERVER_BASE_URL =
 
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const { t } = useTranslation();
+ // for snackbar message.
+ const [openSnackbar, setOpenSnackbar] = useState(false);
+ const [snackbarMessage, setSnackbarMessage] = useState("");
+
+ // error, "success"
+ const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+ const handleSnackbar = (event, reason) => {
+   if (reason === "clickaway") {
+     return;
+   }
+
+   setOpenSnackbar(false);
+ };
+
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
@@ -157,6 +172,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         // return filename;
       },
       onerror: (response) => {
+
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -228,20 +250,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     }
   };
 
-  // for snackbar message.
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  // error, "success"
-  const [snackbarStatus, setSnackbarStatus] = useState("success");
-
-  const handleSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
+ 
 
   const handleathleteStatementChange = (event) => {
     setAthleteStatement(event.target.value);
@@ -417,6 +426,12 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         // return filename;
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+        
         console.error("Error uploading file:", response);
         return response;
       },

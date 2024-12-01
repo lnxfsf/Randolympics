@@ -526,6 +526,13 @@ const EditProfile = () => {
         // return filename;
       },
       onerror: (response) => {
+
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -767,7 +774,7 @@ const EditProfile = () => {
   return (
     <>
       <div>
-        <HeaderMyProfile ShowEditProfile={true} />
+        <HeaderMyProfile ShowEditProfile={true} setSnackbarMessage={setSnackbarMessage} setSnackbarStatus={setSnackbarStatus} setOpenSnackbar={setOpenSnackbar} />
 
         {/*  <div className="flex justify-start">
           <div className="flex justify-center items-center">
