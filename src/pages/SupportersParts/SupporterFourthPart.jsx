@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 
-
 import { Button, OutlinedInput, InputAdornment } from "@mui/material";
 import AuthCode from "react-auth-code-input";
 
@@ -74,13 +73,8 @@ const SupporterFourthPart = ({
   setFifthIsVisible,
   isCelebrity,
 }) => {
-
-
-  
   const donateBeforeStripe = async () => {
-   
-
-    try{
+    try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
         {
@@ -90,7 +84,7 @@ const SupporterFourthPart = ({
           supporterComment,
           discountCode: discountCode,
           friendNationality,
-          amount: amount*100,
+          amount: amount * 100,
         }
       );
 
@@ -99,17 +93,10 @@ const SupporterFourthPart = ({
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
-
-
-    } catch(e) {
+    } catch (e) {
       console.log(e.stack);
-
     }
-   
-  
-};
-
-
+  };
 
   const { t } = useTranslation();
 
@@ -154,7 +141,9 @@ const SupporterFourthPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E]">
-                 {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
+                  {isCelebrity
+                    ? t("campaign.content95")
+                    : t("campaign.content15")}
                   <br /> {t("campaign.content16")}
                 </p>
               </div>
@@ -220,9 +209,12 @@ const SupporterFourthPart = ({
                         If you have coupon code, you can make a donation using
                         only coupon code, without needing to pay with real money
                         (credit card, paypal).
-                        <br /><br />
-                        If you don't have coupon code, you can proceed <i>Next</i>, to pay with credit card (paypal) only. 
-                        <br /><br />
+                        <br />
+                        <br />
+                        If you don't have coupon code, you can proceed{" "}
+                        <i>Next</i>, to pay with credit card (paypal) only.
+                        <br />
+                        <br />
                         You can use only national coupon codes to make
                         coupon-only donation to campaign. National coupon codes
                         apply depending in what country athlete of campaign is
@@ -391,9 +383,6 @@ const SupporterFourthPart = ({
                 </div>
 
                 <div className="flex justify-center mt-6 mb-6 gap-4 w-full flex-wrap">
-                 
-
-                
                   <div
                     className={` p-2 border-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second
             `}
@@ -463,8 +452,6 @@ const SupporterFourthPart = ({
                     </p>
                   </div>
 
-                  
-
                   <div
                     className="border-2 p-2 flex justify-center items-center flex-col select-none cursor-pointer rounded-lg w-18 border-red_second"
                     onClick={() => {
@@ -481,11 +468,9 @@ const SupporterFourthPart = ({
                       50 $
                     </p>
                   </div>
-
-
                 </div>
 
-             {/*    <div className="flex  flex-col justify-center items-center w-full">
+                {/*    <div className="flex  flex-col justify-center items-center w-full">
                   <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                     {/*  <img className="w-12" src="/supporters/pay.svg" />
               <p>Pay with credit card</p> 
@@ -580,45 +565,63 @@ const SupporterFourthPart = ({
                 </div>
  */}
 
+                <div className=" self-center w-[50%] mb-2">
+                  <OutlinedInput
+                    type="number"
+                    value={amount}
+                    onChange={(e) => {
+                      setAmount(e.target.value);
 
+                      /* no negative numbers allowed for donation */
+                      /* allow it to be cleared */
+                      if (e.target.value === "") {
+                        setAmount(e.target.value);
+                      } else {
+                        const tempNumber = Number(e.target.value);
 
-<div className=" self-center w-[50%] mb-2">
-                <OutlinedInput
-                            type="number"
+                        if (tempNumber < 1) {
+                          setAmount(1);
+                        } else {
+                          setAmount(tempNumber);
+                        }
+                      }
+                    }}
+                    startAdornment={
+                      <InputAdornment
+                        position="start"
+                        sx={{ fontFamily: "'Lexend', sans-serif" }}
+                      >
+                        $
+                      </InputAdornment>
+                    }
+                    fullWidth
+                    inputProps={{ min: 1 }}
+                    sx={{
+                      fontFamily: "'Lexend', sans-serif",
+                      // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
+                      "input[type=number]::-webkit-inner-spin-button": {
+                        WebkitAppearance: "none",
+                        margin: 0,
+                      },
+                      "input[type=number]::-webkit-outer-spin-button": {
+                        WebkitAppearance: "none",
+                        margin: 0,
+                      },
+                      // Hide arrows
+                      "input[type=number]": {
+                        MozAppearance: "textfield",
+                      },
+                    }}
+                  />
+                </div>
 
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
-                            fullWidth
-
-                            inputProps={{ min: 1 }}
-
-                            sx={{
-                                fontFamily: "'Lexend', sans-serif",
-                                // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
-                                'input[type=number]::-webkit-inner-spin-button': {
-                                    WebkitAppearance: 'none',
-                                    margin: 0,
-                                },
-                                'input[type=number]::-webkit-outer-spin-button': {
-                                    WebkitAppearance: 'none',
-                                    margin: 0,
-                                },
-                                // Hide arrows
-                                'input[type=number]': {
-                                    MozAppearance: 'textfield',
-                                },
-                            }}
-                        />
-                        </div>
-
-<Button
+                <Button
                   onClick={donateBeforeStripe}
                   className="self-center  w-[50%] "
                   /* w-full md:w-50% */
                   style={{ textTransform: "none" }}
                   sx={{
-                    mb:8,
+                    mb: 8,
                     height: "50px",
                     bgcolor: "#D24949",
 
@@ -632,9 +635,9 @@ const SupporterFourthPart = ({
                     },
                   }}
                   id="join-the-fun-btn"
-                ><span className="lexend-font">Donate</span>
+                >
+                  <span className="lexend-font">Donate</span>
                 </Button>
-
 
                 <Button
                   onClick={() => {

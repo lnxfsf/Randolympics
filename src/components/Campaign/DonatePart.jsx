@@ -338,7 +338,28 @@ const DonatePart = ({
                 <OutlinedInput
                   type="number"
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) => {
+
+                    /* no negative numbers allowed for donation */
+                    /* allow it to be cleared */
+                     if(e.target.value === ""){
+                      setAmount(e.target.value);
+                    } else {
+
+                      const tempNumber = Number(e.target.value);
+
+                      if (tempNumber < 1) {
+                        setAmount(1);
+                      } else {
+                        setAmount(tempNumber); 
+                      }
+
+
+                    }
+ 
+
+                  }}
+
                   startAdornment={
                     <InputAdornment
                       position="start"
