@@ -699,7 +699,7 @@ const Supporters = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ filename: profileImage }),
+        body: JSON.stringify({ filename: friendImage }),
       })
         .then((response) => {
           if (response.ok) {
