@@ -68,14 +68,9 @@ const NewsAdmin = () => {
     <>
       <Tabs>
         <TabList>
-          {/*  {((user_type === "GP" || user_type === "EM" || user_type === "ITM")) && (
-                        <Tab>Upcoming 2028 Games</Tab>
-                    )}
- */}
+          
 
-          {/* {((user_type === "GP" || user_type === "MM" || user_type === "ITM")) && (
-                        <Tab>News</Tab>
-                    )} */}
+        
 
           {(user_type === "GP" ||
             user_type === "MM" ||
@@ -83,44 +78,9 @@ const NewsAdmin = () => {
             user_type === "EM" ||
             user_type === "SM") && <Tab>News</Tab>}
 
-          {/*  {((user_type === "GP" || user_type === "SM" || user_type === "ITM")) && (
-                        <Tab>Economics</Tab>
-                    )} */}
         </TabList>
 
-        {/* <TabPanel>
-          {selectedUpcomingPost || createUpcomingPost ? (
-            selectedUpcomingPost ? (
-              <GameDetails
-                postZ={selectedUpcomingPost}
-                onBack={(deleting) => {
-                  setSelectedUpcomingPost(null);
-                  if (deleting) {
-                    setOpenSnackbarDeleted(true);
-                  }
-                }}
-              />
-            ) : (
-              <CreateUpcomingPost
-                onBack={(deleting, created) => {
-                  setCreateUpcomingPost(false);
-                  if (created) {
-                    setOpenSnackbarCreated(true);
-                  }
-                  console.log("on izvrsava ovo i dobija: " + created);
-                }}
-              />
-            )
-          ) : (
-            <UpcomingGamesList
-              onSelectPost={setSelectedUpcomingPost}
-              onCreatePost={setCreateUpcomingPost}
-            />
-          )}
-
-          {/* ako kreiramo post ovo prikazuje... (aha, moze onBack isto, samo ce, da stavi ovu varijablu na null, )
-           /}
-        </TabPanel> */}
+      
 
         <TabPanel>
           {selectedNewsPost || createNewsPost ? (
@@ -141,7 +101,7 @@ const NewsAdmin = () => {
                   if (created) {
                     setOpenSnackbarCreated(true);
                   }
-                  console.log("on izvrsava ovo i dobija: " + created);
+                 
                 }}
               />
             )
@@ -153,36 +113,7 @@ const NewsAdmin = () => {
           )}
         </TabPanel>
 
-      {/*   <TabPanel>
-          {selectedEconomicsPost || createEconomicsPost ? (
-            selectedEconomicsPost ? (
-              <EconomicsDetails
-                postZ={selectedEconomicsPost}
-                onBack={(deleting, created) => {
-                  setSelectedEconomicsPost(null);
-                  if (deleting) {
-                    setOpenSnackbarDeleted(true);
-                  }
-                }}
-              />
-            ) : (
-              <CreateEconomicsPost
-                onBack={(deleting, created) => {
-                  setCreateEconomicsPost(false);
-                  if (created) {
-                    setOpenSnackbarCreated(true);
-                  }
-                  console.log("on izvrsava ovo i dobija: " + created);
-                }}
-              />
-            )
-          ) : (
-            <EconomicsList
-              onSelectPost={setSelectedEconomicsPost}
-              onCreatePost={setCreateEconomicsPost}
-            />
-          )}
-        </TabPanel> */}
+      
       </Tabs>
 
       <Snackbar
