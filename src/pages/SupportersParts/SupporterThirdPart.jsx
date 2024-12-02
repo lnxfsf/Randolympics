@@ -103,16 +103,12 @@ const SupporterThirdPart = ({
         } `}
       >
         <div className="flex items-start  justify-start md:justify-center w-full min-h-screen">
-         
-         
           <div className="basis-1/2  justify-start items-start hidden lg:block 2xl:m-32 image-container min-h-screen">
             <img
               src={isCelebrity ? "/supporters/3.jpg" : "supporters/2.jpg"}
               className="image_supporter"
             />
           </div>
-
-
 
           <div className="basis-1/2 flex flex-wrap flex-col  justify-start md:justify-center  items-start md:items-center lg:items-start m-8 md:m-16 text-black_second grow">
             {/* navigation rounded buttons */}
@@ -305,13 +301,25 @@ const SupporterThirdPart = ({
                   <>
                     <p className="lexend-font text-sm mb-6">
                       Informing{" "}
-                      {additionalSupportersFormData.some(
+                      {/*   {additionalSupportersFormData.some(
                         (supporter) => supporter.name?.trim() === ""
                       ) === ""
                         ? "0"
                         : additionalSupportersFormData.filter(
                             (supporter) => supporter.name?.trim() !== ""
-                          ).length}{" "}
+                          ).length }{"/50"}{" "}  */}
+                      {(() => {
+                        const validSupportersCount =
+                          additionalSupportersFormData?.filter(
+                            (supporter) => supporter.name?.trim() !== ""
+                          ).length || 0;
+
+                        if (validSupportersCount > 0) {
+                          return `${validSupportersCount}/50`;
+                        } else {
+                          return "0";
+                        }
+                      })()}{" "}
                       people about this campaign to become supporters.{" "}
                     </p>
                   </>
