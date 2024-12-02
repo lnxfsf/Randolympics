@@ -134,7 +134,7 @@ const NewsDetails = ({ postZ, onBack }) => {
     setEditSubTitle(post.subtitle);
     setEditContent(post.content);
 
-    if (tempEditCoverImage) {
+    if (tempEditCoverImage && isEditing) {
       fetch(
         `${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`,
         {
@@ -158,6 +158,9 @@ const NewsDetails = ({ postZ, onBack }) => {
     }
 
     setTempEditCoverImage(null);
+    
+    onBack(false, false);
+    
   };
 
   const handleUpdatePost = async (e) => {
@@ -182,9 +185,7 @@ const NewsDetails = ({ postZ, onBack }) => {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
 
-        console.log(
-          " novi image treba da zameni sa starijim:" + editCoverImage
-        );
+       
         // so, we delete previous image (if there was one)
         // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
         // i ako zaista ima neki upload uopste..
@@ -339,9 +340,11 @@ const NewsDetails = ({ postZ, onBack }) => {
 
   return (
     <>
-      <div>
+    
+   
+      <div className="m-4  ">
         {/* controls */}
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-4">
           <IconButton
             className="back-icon"
             aria-label="back"
@@ -391,12 +394,12 @@ const NewsDetails = ({ postZ, onBack }) => {
                       height: "30px",
                       bgcolor: "#fff",
                       color: "#232323",
-                      borderRadius: 15,
+                      borderRadius: 5,
                       border: `1px solid #fff`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                   >
@@ -410,14 +413,14 @@ const NewsDetails = ({ postZ, onBack }) => {
                     sx={{
                       fontSize: "8pt",
                       height: "30px",
-                      bgcolor: "#AF2626",
+                      bgcolor: "#D24949",
                       color: "#fff",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                   >
@@ -530,10 +533,11 @@ const NewsDetails = ({ postZ, onBack }) => {
                     maxLength: 255,
                   }}
                   sx={{
-                    m: 1,
+                    borderRadius: 0,
+                    
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      borderRadius: 0,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
@@ -561,10 +565,10 @@ const NewsDetails = ({ postZ, onBack }) => {
                     maxLength: 255,
                   }}
                   sx={{
-                    m: 1,
+                    
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      borderRadius: 0,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
@@ -594,12 +598,12 @@ const NewsDetails = ({ postZ, onBack }) => {
                       height: "50px",
                       bgcolor: "#fff",
                       color: "#000",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                     variant="text"
@@ -612,14 +616,14 @@ const NewsDetails = ({ postZ, onBack }) => {
                     style={{ marginTop: "20px" }}
                     sx={{
                       height: "50px",
-                      bgcolor: "#AF2626",
+                      bgcolor: "#D24949",
                       color: "#fff",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                     type="submit"
@@ -633,6 +637,8 @@ const NewsDetails = ({ postZ, onBack }) => {
           </>
         )}
       </div>
+      
+
     </>
   );
 };

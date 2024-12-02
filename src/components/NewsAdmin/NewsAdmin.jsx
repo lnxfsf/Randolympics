@@ -88,7 +88,7 @@ const NewsAdmin = () => {
                     )} */}
         </TabList>
 
-        <TabPanel>
+        {/* <TabPanel>
           {selectedUpcomingPost || createUpcomingPost ? (
             selectedUpcomingPost ? (
               <GameDetails
@@ -119,8 +119,8 @@ const NewsAdmin = () => {
           )}
 
           {/* ako kreiramo post ovo prikazuje... (aha, moze onBack isto, samo ce, da stavi ovu varijablu na null, )
-           */}
-        </TabPanel>
+           /}
+        </TabPanel> */}
 
         <TabPanel>
           {selectedNewsPost || createNewsPost ? (
@@ -153,7 +153,7 @@ const NewsAdmin = () => {
           )}
         </TabPanel>
 
-        <TabPanel>
+      {/*   <TabPanel>
           {selectedEconomicsPost || createEconomicsPost ? (
             selectedEconomicsPost ? (
               <EconomicsDetails
@@ -182,7 +182,7 @@ const NewsAdmin = () => {
               onCreatePost={setCreateEconomicsPost}
             />
           )}
-        </TabPanel>
+        </TabPanel> */}
       </Tabs>
 
       <Snackbar
