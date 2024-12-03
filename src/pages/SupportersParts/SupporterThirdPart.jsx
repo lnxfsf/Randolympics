@@ -181,7 +181,7 @@ const SupporterThirdPart = ({
                       name="name"
                       type="text"
                       inputProps={{
-                        maxLength: 255,
+                        maxLength: 30,
                       }}
                       InputLabelProps={inputLabelPropsTextField}
                       sx={sxTextField}

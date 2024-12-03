@@ -783,7 +783,7 @@ const Register = () => {
                 }}
                 type="text"
                 inputProps={{
-                  maxLength: 255,
+                  maxLength: 30,
                 }}
                 sx={sxTextField}
               />
