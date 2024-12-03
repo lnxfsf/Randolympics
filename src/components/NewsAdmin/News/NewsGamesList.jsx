@@ -150,7 +150,7 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
                 style={{
                     position: 'fixed',
                     bottom: 16,
-                    right: 65,
+                    right: 15,
                     zIndex: 1000,
                 }}
 

@@ -169,6 +169,40 @@ const NewsDetails = ({ postZ, onBack }) => {
     var title = e.target.title.value;
     var subtitle = e.target.subtitle.value;
 
+
+
+    if(title === ""){
+      setSnackbarMessage("Can't leave title empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+  if(subtitle === ""){
+      setSnackbarMessage("Can't leave subtitle empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+  if(editContent === "" || editContent === "<p><br></p>" || editContent === "<p></p>" ){
+      setSnackbarMessage("Can't leave body content empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+
+
+
+
+
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/blog/updateNewsBlog`,
@@ -582,6 +616,8 @@ const NewsDetails = ({ postZ, onBack }) => {
                   }}
                 />
 
+
+{editContent}
                 <ReactQuill
                   theme="snow"
                   value={editContent}

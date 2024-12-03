@@ -135,7 +135,38 @@ const CreateNewsPost = ({ onBack }) => {
         var title = e.target.title.value;
         var subtitle = e.target.subtitle.value;
 
-        // TODO , for creating, route in backend
+       
+
+
+        if(editTitle === ""){
+        setSnackbarMessage("Can't leave title empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+    if(editSubTitle === ""){
+        setSnackbarMessage("Can't leave subtitle empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+    if(editContent === ""){
+        setSnackbarMessage("Can't leave body content empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+
+
 
         try {
 
@@ -152,7 +183,9 @@ const CreateNewsPost = ({ onBack }) => {
             );
 
             if (response.status === 201) {
-                console.log("created user success")
+                console.log("created user success");
+
+
                 
                 
                 onBack(false, true);
@@ -433,7 +466,6 @@ const CreateNewsPost = ({ onBack }) => {
                             },
                         }}
                     />
-
 
 
 
