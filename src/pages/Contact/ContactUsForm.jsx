@@ -69,7 +69,7 @@ const ContactUsForm = () => {
 
 
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
   const isEmailErrorFocus = useRef(null);
 
   const nameRef = useRef(null);

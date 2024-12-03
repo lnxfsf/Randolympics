@@ -245,7 +245,7 @@ const SupporterThirdPart = ({
                     onChange={(event) => {
                       setSupporterPassword(event.target.value);
                     }}
-                    placeholder="****"
+                    placeholder="********"
                     id="pass"
                     name="pass"
                     type={showPassword ? "text" : "password"}

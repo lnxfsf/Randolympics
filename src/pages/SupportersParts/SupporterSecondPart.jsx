@@ -132,7 +132,7 @@ const SupporterSecondPart = ({
 
     // ? this is for phone
     const [isPhoneError, setIsPhoneError] = useState(false);
-    const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
+    const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
     const isPhoneErrorFocus = useRef(null);
     
 

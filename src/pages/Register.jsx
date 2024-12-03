@@ -127,17 +127,17 @@ const Register = () => {
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
-  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
   const isPhoneErrorFocus = useRef(null);
 
   // ? this is for password  Password
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("* Required");
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
   const isPasswordErrorFocus = useRef(null);
 
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
   const isEmailErrorFocus = useRef(null);
 
   // ? FILEPOND for IMAGE
