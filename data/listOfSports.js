@@ -17,7 +17,7 @@ const listOfSports = [
       thirdDayStartGameTimeSlot: "",
       thirdDayEndGameTimeSlot: "",
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -44,7 +44,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -71,7 +71,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -98,7 +98,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -125,7 +125,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -152,7 +152,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -179,7 +179,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -206,7 +206,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -233,7 +233,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -260,7 +260,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -287,7 +287,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -314,7 +314,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -341,7 +341,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -368,7 +368,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -395,7 +395,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -422,7 +422,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "swim",
   
@@ -449,7 +449,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "diving",
   
@@ -476,7 +476,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "diving",
   
@@ -503,7 +503,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "diving",
   
@@ -530,7 +530,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "diving",
   
@@ -557,7 +557,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -584,7 +584,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -611,7 +611,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -638,7 +638,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -665,7 +665,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -692,7 +692,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -719,7 +719,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -746,7 +746,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -773,7 +773,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "jumping_hurdles",
   
@@ -800,7 +800,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "jumping_hurdles",
   
@@ -827,7 +827,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "jumping_hurdles",
   
@@ -854,7 +854,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -881,7 +881,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "running",
   
@@ -908,7 +908,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "walk_race",
   
@@ -935,7 +935,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "walk_race",
   
@@ -962,7 +962,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "high_jump",
   
@@ -989,7 +989,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "long_jump",
   
@@ -1016,7 +1016,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "long_jump",
   
@@ -1043,7 +1043,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "shot_put",
   
@@ -1070,7 +1070,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "athletics",
   
@@ -1097,7 +1097,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "athletics",
   
@@ -1124,7 +1124,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "athletics",
   
@@ -1151,7 +1151,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "triathlon",
   
@@ -1178,7 +1178,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "badminton",
   
@@ -1205,7 +1205,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "badminton",
   
@@ -1232,7 +1232,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1259,7 +1259,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1286,7 +1286,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1313,7 +1313,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1340,7 +1340,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1367,7 +1367,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "June 25th",
+      dateOfStart: "July 9th",
   
       icon: "kayaking",
   
@@ -1396,7 +1396,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "waterpolo",
   
@@ -1423,7 +1423,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "archery",
   
@@ -1450,7 +1450,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "archery",
   
@@ -1477,7 +1477,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "surfing",
   
@@ -1504,7 +1504,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "surfing",
   
@@ -1531,7 +1531,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "surfing",
   
@@ -1558,7 +1558,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "surfing",
   
@@ -1585,7 +1585,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "weightlifting",
   
@@ -1614,7 +1614,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "weightlifting",
   
@@ -1643,7 +1643,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Monday",
-      dateOfStart: "June 26th",
+      dateOfStart: "July 10th",
   
       icon: "weightlifting",
   
@@ -1674,7 +1674,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "boxing",
   
@@ -1703,7 +1703,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "21_24",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "boxing",
   
@@ -1732,7 +1732,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "21_24",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "boxing",
   
@@ -1761,7 +1761,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1788,7 +1788,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1815,7 +1815,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1842,7 +1842,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1869,7 +1869,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1896,7 +1896,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "fencing",
   
@@ -1923,7 +1923,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "golf",
   
@@ -1950,7 +1950,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -1977,7 +1977,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2004,7 +2004,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2031,7 +2031,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2058,7 +2058,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2085,7 +2085,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2112,7 +2112,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2139,7 +2139,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2166,7 +2166,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "shooting",
   
@@ -2193,7 +2193,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "9_12",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "tennis",
   
@@ -2220,7 +2220,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "9_12",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "tennis",
   
@@ -2247,7 +2247,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "9_12",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "volleyball",
   
@@ -2274,7 +2274,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2303,7 +2303,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2331,7 +2331,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "21_24",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2359,7 +2359,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "15_18",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2388,7 +2388,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2416,7 +2416,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "21_24",
   
       dayOfStart: "Tuesday",
-      dateOfStart: "June 27th",
+      dateOfStart: "July 11th",
   
       icon: "wrestling",
   
@@ -2447,7 +2447,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2474,7 +2474,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2501,7 +2501,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2528,7 +2528,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2555,7 +2555,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2582,7 +2582,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2609,7 +2609,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2636,7 +2636,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2663,7 +2663,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "acrobatics",
   
@@ -2690,7 +2690,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "judo",
   
@@ -2719,7 +2719,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "judo",
   
@@ -2748,7 +2748,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "judo",
   
@@ -2777,7 +2777,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "shooting",
   
@@ -2804,7 +2804,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2831,7 +2831,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2858,7 +2858,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2885,7 +2885,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2912,7 +2912,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2939,7 +2939,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2966,7 +2966,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -2993,7 +2993,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "kayaking",
   
@@ -3020,7 +3020,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "18_21",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "rugby",
   
@@ -3047,7 +3047,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "ping_pong",
   
@@ -3074,7 +3074,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "ping_pong",
   
@@ -3101,7 +3101,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "taekwondo",
   
@@ -3130,7 +3130,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "taekwondo",
   
@@ -3159,7 +3159,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "taekwondo",
   
@@ -3187,14 +3187,14 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "6_9",
   
       dayOfStart: "Wednesday",
-      dateOfStart: "June 28th",
+      dateOfStart: "July 12th",
   
       icon: "volleyball",
   
       gender: "M",
     },
   
-    // Thursday    June 29th
+    // Thursday    July 13th
   
     {
       translatedSportName: "sport118",
@@ -3216,7 +3216,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "12_15",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "basketball",
   
@@ -3243,7 +3243,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3270,7 +3270,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3297,7 +3297,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3324,7 +3324,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3351,7 +3351,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3378,7 +3378,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3405,7 +3405,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3432,7 +3432,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3459,7 +3459,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Thursday",
-      dateOfStart: "June 29th",
+      dateOfStart: "July 13th",
   
       icon: "cycling",
   
@@ -3488,7 +3488,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "9_12",
   
       dayOfStart: "Friday",
-      dateOfStart: "June 30th",
+      dateOfStart: "July 14th",
   
       icon: "soccer",
   
@@ -3515,7 +3515,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Friday",
-      dateOfStart: "June 30th",
+      dateOfStart: "July 14th",
   
       icon: "handball",
   
@@ -3542,7 +3542,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Friday",
-      dateOfStart: "June 30th",
+      dateOfStart: "July 14th",
   
       icon: "hockey",
   
@@ -3571,7 +3571,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Saturday",
-      dateOfStart: "July 1st",
+      dateOfStart: "July 15th",
   
       icon: "horse",
   
@@ -3598,7 +3598,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Saturday",
-      dateOfStart: "July 1st",
+      dateOfStart: "July 15th",
   
       icon: "horse",
   
@@ -3627,7 +3627,7 @@ const listOfSports = [
       thirdDayEndGameTimeSlot: "",
   
       dayOfStart: "Sunday",
-      dateOfStart: "July 2nd",
+      dateOfStart: "July 16th",
   
       icon: "triathlon",
   
