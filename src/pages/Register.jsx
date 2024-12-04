@@ -831,7 +831,7 @@ const Register = () => {
                 htmlFor="pass"
                 className="lexend-font mb-1 mt-1 font-medium text-sm"
               >
-                {t("register.content17")}
+                {t("register.content17")} *
               </label>
               <TextField
                 placeholder="********"
