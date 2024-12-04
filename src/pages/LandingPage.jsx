@@ -42,7 +42,7 @@ const LandingPage = () => {
           <h1 className="text-[25px]">
             Are you ready to represent your country at the{" "}
             <span className="text-red_first  font-bold">Randolympics</span>,
-            June 2028 ?
+            July 2028 ?
           </h1>
 
           <p className="pt-8 text-base">

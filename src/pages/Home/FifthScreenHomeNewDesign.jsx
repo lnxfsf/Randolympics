@@ -44,9 +44,9 @@ const FifthScreenHomeNewDesign = () => {
             <div className="flex flex-col items-start justify-start mb-4   ">
               <p className="text-2xl font-bold">National Randomization</p>
 
-              <p className=" font-medium text-red_second">June 25th, 2026</p>
+              <p className=" font-medium text-red_second">July 8th, 2026</p>
               <p>
-                National Selection On June 25, 2026, top 50 men and 50 women are
+                National Selection On July 8th, 2026, top 50 men and 50 women are
                 randomly chosen from each country to form national teams.
               </p>
               <p></p>
