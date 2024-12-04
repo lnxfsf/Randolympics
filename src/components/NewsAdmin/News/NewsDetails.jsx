@@ -126,7 +126,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
   const [editCoverImage, setEditCoverImage] = useState(post.cover_image);
 
-  const [tempEditCoverImage, setTempEditCoverImage] = useState();
+  const [tempEditCoverImage, setTempEditCoverImage] = useState("");
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -157,7 +157,7 @@ const NewsDetails = ({ postZ, onBack }) => {
         });
     }
 
-    setTempEditCoverImage(null);
+    setTempEditCoverImage("");
     
     onBack(false, false);
     
@@ -203,7 +203,12 @@ const NewsDetails = ({ postZ, onBack }) => {
 
 
 
+   //hey, don't replace old image, if that new image is cancelled (if user uploads, and removes, then it shouldn't save it in here as emtpy)
+      // you must update it, but if tempEditCoverImage is "", which will be set on, when you error, or remove it above. and then it uses old url string, and it will work...
+  
     try {
+     
+
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/blog/updateNewsBlog`,
         {
@@ -211,7 +216,7 @@ const NewsDetails = ({ postZ, onBack }) => {
           title,
           subtitle,
           content: editContent,
-          cover_image: tempEditCoverImage,
+          cover_image: tempEditCoverImage !== "" ? tempEditCoverImage : editCoverImage,
         }
       );
 
@@ -252,11 +257,14 @@ const NewsDetails = ({ postZ, onBack }) => {
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
+
     } catch (error) {
       console.log(error);
 
       // TODO, ovde onaj popup da imas..
     }
+
+
   };
 
   const toolbarOptions = [
@@ -330,6 +338,9 @@ const NewsDetails = ({ postZ, onBack }) => {
       )
         .then((response) => {
           if (response.ok) {
+            // empty tempEditCoverImage 
+            setTempEditCoverImage("");
+
             load(); // Signal that the file has been reverted successfully
           } else {
             response.json().then((errorData) => error(errorData.message));
