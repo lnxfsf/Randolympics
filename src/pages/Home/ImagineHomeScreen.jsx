@@ -191,7 +191,7 @@ const ImagineHomeScreen = () => {
           </div>
 
           <div className="w-full h-96 overflow-hidden container_imagine_pic1 mt-4 ">
-            <img src="/home/imagine1.jpeg" className="imagine_pic1 " />
+            <img src="/home/imagine1.jpg" className="imagine_pic1 " />
           </div>
 
           <div className="textBox1 inline-block mr-8">
