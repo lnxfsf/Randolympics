@@ -54,8 +54,7 @@ import zIndex from "@mui/material/styles/zIndex";
 import { NavbarClean } from "../../components/NavbarClean";
 import { FooterClean } from "../../components/FooterClean";
 
-import {useTranslation} from "react-i18next";
-
+import { useTranslation } from "react-i18next";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -65,15 +64,12 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
-
 const validatePhoneNumber = (phone) => {
-
-  const sanitizedPhone = phone.replace(/\s+/g, '');
+  const sanitizedPhone = phone.replace(/\s+/g, "");
 
   const phonePattern = /^\+[1-9]\d{7,14}$/;
   return phonePattern.test(sanitizedPhone);
 };
-
 
 const SupporterSecondPart = ({
   secondIsVisible,
@@ -127,28 +123,19 @@ const SupporterSecondPart = ({
   const [popupWarning, setPopupWarning] = useState(false);
   const { t } = useTranslation();
 
+  // 12 yrs, is minium to participate in this
+  const maxAllowedDate = dayjs().subtract(12, "year");
 
+  // ? this is for phone
+  const [isPhoneError, setIsPhoneError] = useState(false);
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
+  const isPhoneErrorFocus = useRef(null);
 
-
-    // ? this is for phone
-    const [isPhoneError, setIsPhoneError] = useState(false);
-    const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
-    const isPhoneErrorFocus = useRef(null);
-    
-
-
-
-    useEffect(() => {
-
-      if (isPhoneError && isPhoneErrorFocus.current) {
-        isPhoneErrorFocus.current.focus();
-      }
-
-
-
-
-
-    },[isPhoneError]);
+  useEffect(() => {
+    if (isPhoneError && isPhoneErrorFocus.current) {
+      isPhoneErrorFocus.current.focus();
+    }
+  }, [isPhoneError]);
 
   const validateAthlete = async () => {
     // with this, we check if such athlete exists (so, we show that different screen, and immediatelly stop execution other stuff..)
@@ -187,14 +174,13 @@ const SupporterSecondPart = ({
       return;
     }
 
-    if(isPhoneError === true){
+    if (isPhoneError === true) {
       setSnackbarMessage("Phone is not valid !");
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (!isCelebrity) {
-      
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       if (!emailRegex.test(friendEmail)) {
@@ -202,11 +188,6 @@ const SupporterSecondPart = ({
         setOpenSnackbarFailure(true);
         return;
       }
-
-
-
-
-
     }
 
     if (friendNationality === "") {
@@ -215,43 +196,36 @@ const SupporterSecondPart = ({
       return;
     }
 
-
     // if all fields are empty
-    if((fb_link === "" && ig_link === "" && tw_link === "") && isCelebrity){
+    if (fb_link === "" && ig_link === "" && tw_link === "" && isCelebrity) {
       setSnackbarMessage("Provide at least one social media profile");
       setOpenSnackbarFailure(true);
       return;
     }
 
-    const socialMediaRegex = /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
+    const socialMediaRegex =
+      /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
 
-
-    if(isCelebrity && (fb_link !== "" && !socialMediaRegex.test(fb_link))){
+    if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
       setSnackbarMessage("Facebook link has an incorrect format.");
       setOpenSnackbarFailure(true);
       return;
     }
 
-    if(isCelebrity && (ig_link !== "" && !socialMediaRegex.test(ig_link)) ){
+    if (isCelebrity && ig_link !== "" && !socialMediaRegex.test(ig_link)) {
       setSnackbarMessage("Instagram link has an incorrect format.");
       setOpenSnackbarFailure(true);
       return;
     }
 
-    if(isCelebrity && (tw_link !== "" && !socialMediaRegex.test(tw_link))){
+    if (isCelebrity && tw_link !== "" && !socialMediaRegex.test(tw_link)) {
       setSnackbarMessage("X (Twitter) link has an incorrect format.");
       setOpenSnackbarFailure(true);
       return;
     }
 
-
-
-
-
-
     // at last remove spaces from phone number
-    setFriendPhone(friendPhone.replace(/\s+/g, ''));
-
+    setFriendPhone(friendPhone.replace(/\s+/g, ""));
 
     setPopupWarning(true);
 
@@ -290,8 +264,10 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                    {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
-                      <br /> {t('campaign.content16')}
+                      {isCelebrity
+                        ? t("campaign.content95")
+                        : t("campaign.content15")}
+                      <br /> {t("campaign.content16")}
                     </p>
                   </div>
 
@@ -307,7 +283,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                    {t('campaign.content17')}
+                      {t("campaign.content17")}
                     </p>
                   </div>
 
@@ -323,28 +299,27 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                    {t('campaign.content18')}
+                      {t("campaign.content18")}
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
-                {t('campaign.content24')}
+                  {t("campaign.content24")}
                 </p>
 
                 <div className="flex flex-col w-full">
                   <div className="ml-2 flex ">
                     <FilePond
-                    ref={filePondRef1}
+                      ref={filePondRef1}
                       className="filepond--root athlete"
                       type="file"
                       onupdatefiles={setFiles}
                       allowMultiple={false}
                       maxFiles={1}
                       server={server}
-                     
                       name="image"
-                      labelIdle={t('campaign.content40')}
+                      labelIdle={t("campaign.content40")}
                       accept="image/png, image/jpeg, image/gif"
                       dropOnPage
                       dropValidation
@@ -374,7 +349,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content25')} *
+                    {t("campaign.content25")} *
                   </label>
 
                   <TextField
@@ -397,7 +372,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendMiddleName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content26')}
+                    {t("campaign.content26")}
                   </label>
 
                   <TextField
@@ -420,7 +395,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendLastName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content27')} *
+                    {t("campaign.content27")} *
                   </label>
 
                   <TextField
@@ -442,7 +417,7 @@ const SupporterSecondPart = ({
                     htmlFor="gender"
                     className="lexend-font mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content28')}
+                    {t("campaign.content28")}
                   </label>
 
                   <Select
@@ -471,7 +446,7 @@ const SupporterSecondPart = ({
                         fontFamily: "'Lexend', sans-serif",
                       }}
                     >
-                      {t('campaign.content29')}
+                      {t("campaign.content29")}
                     </MenuItem>
                     <MenuItem
                       value={"F"}
@@ -479,7 +454,7 @@ const SupporterSecondPart = ({
                         fontFamily: "'Lexend', sans-serif",
                       }}
                     >
-                      {t('campaign.content30')}
+                      {t("campaign.content30")}
                     </MenuItem>
                   </Select>
 
@@ -487,7 +462,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendEmail"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content31')} *
+                    {t("campaign.content31")} *
                   </label>
 
                   <TextField
@@ -509,24 +484,16 @@ const SupporterSecondPart = ({
                     htmlFor="friendPhone"
                     className="lexend-font mb-1  mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content32')}
+                    {t("campaign.content32")}
                   </label>
 
                   <TextField
                     value={friendPhone}
-
                     inputRef={isPhoneErrorFocus}
                     error={isPhoneError}
                     helperText={isPhoneError ? isPhonerHelper : ""}
-					
-
-
                     onChange={(e) => {
                       setFriendPhone(e.target.value);
-
-
-
-
 
                       const phoneValue = e.target.value;
 
@@ -537,23 +504,18 @@ const SupporterSecondPart = ({
                         setIsPhoneError(true);
                         setIsPhoneErrorHelper(t("register.content9"));
                         isPhoneErrorFocus.current.focus();
-                       
                       } else {
                         setIsPhoneError(false);
                         setIsPhoneErrorHelper("");
                       }
                     }}
-
-
-
-
                     id="friendPhone"
                     placeholder="+1 425 555 0123"
                     type="tel"
                     inputProps={{
                       maxLength: 15,
                       inputMode: "numeric",
-                      pattern: "/^\+[1-9]\d{7,14}$/",
+                      pattern: "/^+[1-9]d{7,14}$/",
                     }}
                     InputLabelProps={inputLabelPropsTextField}
                     sx={sxTextField}
@@ -563,7 +525,7 @@ const SupporterSecondPart = ({
                     htmlFor="birthdate"
                     className="lexend-font mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content33')}
+                    {t("campaign.content33")}
                   </label>
 
                   <FormControl>
@@ -574,8 +536,15 @@ const SupporterSecondPart = ({
                           className="w-full"
                           id="birthdate"
                           value={friendBirthdate}
+                          maxDate={maxAllowedDate}
                           onChange={(date) => {
                             setFriendBirthdate(date);
+                          }}
+                          slotProps={{
+                            textField: {
+                              helperText:
+                                "Must be at least 12 years old to participate.", // Add the helper text
+                            },
                           }}
                           format="MMMM DD, YYYY"
                           sx={{
@@ -601,11 +570,11 @@ const SupporterSecondPart = ({
                     htmlFor="nationality"
                     className="lexend-font mb-1  mt-4 font-medium text-sm"
                   >
-                    {t('campaign.content34')} *
+                    {t("campaign.content34")} *
                   </label>
 
                   <ReactFlagsSelect
-                  placeholder={t('campaign.content63')}
+                    placeholder={t("campaign.content63")}
                     countries={supportedCountry}
                     className="w-full p-0 lexend-font rounded-lg"
                     selected={friendNationality}
@@ -645,7 +614,7 @@ const SupporterSecondPart = ({
                             }}
                           />
                         }
-                        label={t('campaign.content35')}
+                        label={t("campaign.content35")}
                         sx={{
                           marginBottom: "0px",
                           "& .MuiTypography-root": {
@@ -666,7 +635,7 @@ const SupporterSecondPart = ({
                             }}
                           />
                         }
-                        label={t('campaign.content36')}
+                        label={t("campaign.content36")}
                         sx={{
                           marginTop: "0px",
                           "& .MuiTypography-root": {
@@ -700,7 +669,9 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">{t('campaign.content23')}</span>
+                    <span className="lexend-font">
+                      {t("campaign.content23")}
+                    </span>
                   </Button>
 
                   <Button
@@ -725,7 +696,9 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">{t('campaign.content37')}</span>
+                    <span className="lexend-font">
+                      {t("campaign.content37")}
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -755,8 +728,10 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#D24949]">
-                    {isCelebrity ? t("campaign.content95") : t("campaign.content15")  }
-                      <br /> {t('campaign.content16')}
+                      {isCelebrity
+                        ? t("campaign.content95")
+                        : t("campaign.content15")}
+                      <br /> {t("campaign.content16")}
                     </p>
                   </div>
 
@@ -772,7 +747,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                    {t('campaign.content17')}
+                      {t("campaign.content17")}
                     </p>
                   </div>
 
@@ -788,19 +763,19 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                    {t('campaign.content18')}
+                      {t("campaign.content18")}
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl text-center mt-8 mb-12 font-bold text-black_second lexend-font">
-                {t('campaign.content38')}
+                  {t("campaign.content38")}
                 </p>
 
                 <div className="flex flex-col w-full">
                   <div className="ml-2 flex ">
                     <FilePond
-                    ref={filePondRef2}
+                      ref={filePondRef2}
                       className="filepond--root athlete"
                       type="file"
                       onupdatefiles={setFiles}
@@ -808,7 +783,7 @@ const SupporterSecondPart = ({
                       maxFiles={1}
                       server={server}
                       name="image"
-                      labelIdle={t('campaign.content39')}
+                      labelIdle={t("campaign.content39")}
                       accept="image/png, image/jpeg, image/gif"
                       dropOnPage
                       dropValidation
@@ -838,7 +813,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                   {t('campaign.content25')} *
+                    {t("campaign.content25")} *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -863,7 +838,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendMiddleName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content26')}
+                    {t("campaign.content26")}
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -888,7 +863,7 @@ const SupporterSecondPart = ({
                     htmlFor="friendLastName"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content27')} *
+                    {t("campaign.content27")} *
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -913,7 +888,7 @@ const SupporterSecondPart = ({
                       htmlFor="gender"
                       className="lexend-font mt-1 font-medium text-sm"
                     >
-                      {t('campaign.content28')}
+                      {t("campaign.content28")}
                     </label>
                     <Select
                       labelId="roleDropdowns"
@@ -935,8 +910,8 @@ const SupporterSecondPart = ({
                         },
                       }}
                     >
-                      <MenuItem value={"M"}>{t('campaign.content29')}</MenuItem>
-                      <MenuItem value={"F"}>{t('campaign.content30')}</MenuItem>
+                      <MenuItem value={"M"}>{t("campaign.content29")}</MenuItem>
+                      <MenuItem value={"F"}>{t("campaign.content30")}</MenuItem>
                     </Select>
                   </div>
 
@@ -944,11 +919,11 @@ const SupporterSecondPart = ({
                     htmlFor="nationality"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content34')} *
+                    {t("campaign.content34")} *
                   </label>
 
                   <ReactFlagsSelect
-                    placeholder={t('campaign.content63')}
+                    placeholder={t("campaign.content63")}
                     countries={supportedCountry}
                     className="w-full rounded-md p-0 lexend-font"
                     /*  bg-[#fff]  */
@@ -965,13 +940,13 @@ const SupporterSecondPart = ({
                   />
 
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">
-                  {t('campaign.content41')}
+                    {t("campaign.content41")}
                   </p>
                   <label
                     htmlFor="fbl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                     {t('campaign.content42')}
+                    {t("campaign.content42")}
                   </label>
 
                   <div className="flex flex-col justify-start">
@@ -996,7 +971,7 @@ const SupporterSecondPart = ({
                     htmlFor="igl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content43')}
+                    {t("campaign.content43")}
                   </label>
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -1020,7 +995,7 @@ const SupporterSecondPart = ({
                     htmlFor="igl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
-                    {t('campaign.content44')}
+                    {t("campaign.content44")}
                   </label>
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -1039,7 +1014,7 @@ const SupporterSecondPart = ({
                   </div>
 
                   <label className="lexend-font  font-medium text-sm text-[#82889e]">
-                  {t('campaign.content45')}
+                    {t("campaign.content45")}
                   </label>
                 </div>
 
@@ -1064,7 +1039,9 @@ const SupporterSecondPart = ({
                     id="join-the-fun-btn"
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
-                    <span className="lexend-font">{t('campaign.content23')}</span>
+                    <span className="lexend-font">
+                      {t("campaign.content23")}
+                    </span>
                   </Button>
 
                   <Button
@@ -1089,7 +1066,9 @@ const SupporterSecondPart = ({
                     id="go_back_btn"
                   >
                     <img src="/supporters/left_arrow.svg" className="mr-2 " />{" "}
-                    <span className="lexend-font">{t('campaign.content37')}</span>
+                    <span className="lexend-font">
+                      {t("campaign.content37")}
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -1104,7 +1083,7 @@ const SupporterSecondPart = ({
           className="popup-content "
         >
           <WarningTextPopup
-          isCelebrity={isCelebrity}
+            isCelebrity={isCelebrity}
             setSecondIsVisible={setSecondIsVisible}
             setThirdIsVisible={setThirdIsVisible}
             setPopupWarning={setPopupWarning}
