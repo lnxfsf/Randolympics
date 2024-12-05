@@ -577,6 +577,8 @@
     "content23": "Crypto (optional)",
     "content24": "Create account",
     "content25": "Should be in international format",
+    "content26": "Wanna work with us full time or part time?",
+    "content27": "In case you want to work as a Manager or a National President for our organisation you can apply here",
     "user_type1": "Athlete",
     "user_type2": "Global President",
     "user_type3": "National President",
@@ -591,6 +593,7 @@
     "public": "Public",
     "tos1": "I have read and understood the",
     "tos2": "Terms of Service"
+
   },
   "myprofile": {
     "side_nav": {

@@ -571,6 +571,14 @@ const Register = () => {
     <>
       <NavbarClean />
 
+
+
+      <p className="text-center text-2xl md:text-3xl lg:text-4xl lexend-font text-black_second mt-6 p-2">{t("register.content26")}</p>
+
+<div className="flex justify-center mt-4 mb-8 lexend-font text-black_second p-2">
+      <p className="text-center w-[90%] md:w-[50%] 2xl:w-[25%]">{t("register.content27")}</p>
+      </div>
+
       <form
         action="#"
         className=" flex flex-col wrap justify-start items-center"
