@@ -127,7 +127,17 @@ const ImagineHomeScreen = () => {
   const [imageImagine1, setImageImagine1] = useState(listOfImages[3]);
   const [imageImagine2, setImageImagine2] = useState(listOfImages[1]);
 
+ 
+
   useEffect(() => {
+    
+    // force preload of images. it caches all images in cache, so when it switches again, it's should be faster
+    listOfImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+
     const interval = setInterval(() => {
       setAnimate(true);
 
@@ -140,15 +150,20 @@ const ImagineHomeScreen = () => {
       const randomIndex3 = getRandomIndex(listOfScenarios);
       setScenarios(listOfScenarios[randomIndex3]);
 
-      const randomIndexOfImages1 = getRandomIndex(listOfImages);
-      const randomIndexOfImages2 = getRandomIndex(listOfImages, randomIndexOfImages1);
+    
 
-      
+
+      const randomIndexOfImages1 = getRandomIndex(listOfImages);
+      const randomIndexOfImages2 = getRandomIndex(
+        listOfImages,
+        randomIndexOfImages1
+      );
+
       setImageImagine1(listOfImages[randomIndexOfImages1]);
       setImageImagine2(listOfImages[randomIndexOfImages2]);
-
  
     }, 5000);
+
 
     return () => clearInterval(interval);
   }, []);
@@ -390,14 +405,41 @@ const ImagineHomeScreen = () => {
 
           <div className="basis-1/3 p-4 flex self-center flex-col">
             <div className="textBox3 max-w-fit inline-block lg:mr-8">
-              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">
+              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base ">
                 {t("home.imagineHome.text13")}
               </p>
             </div>
 
-            <img className="2xl:w-96" src={imageImagine1} />
+            {/*    ${
+                animate
+                  ? "animate__animated animate__bounceInLeft   "
+                  : "animate__animated animate__bounceOutRight"
+              } */}
+            <img
+              className={`2xl:w-96
+                
 
-            <img className="2xl:w-96 mt-6" src={imageImagine2} />
+                
+                
+                `}
+              src={imageImagine1}
+            />
+
+            {/* 
+${
+  animate
+    ? "animate__animated animate__bounceInLeft   "
+    : "animate__animated animate__bounceOutRight"
+}
+ */}
+            <img
+              className={`2xl:w-96 mt-6 
+                
+                 
+                
+                `}
+              src={imageImagine2}
+            />
           </div>
         </div>
       </div>
