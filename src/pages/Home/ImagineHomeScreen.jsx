@@ -7,7 +7,15 @@ import { useTranslation } from "react-i18next";
 
 import "animate.css";
 
-const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
+const getRandomIndex = (array, excludeIndex) => {
+  let index;
+
+  do {
+    index = Math.floor(Math.random() * array.length);
+  } while (index === excludeIndex);
+
+  return index;
+};
 
 const ImagineHomeScreen = () => {
   const navigate = useNavigate();
@@ -55,39 +63,50 @@ const ImagineHomeScreen = () => {
   ];
 
   const listOfHappen = [
-    t('home.imagineHome.happen1'),
-    t('home.imagineHome.happen2'),
-    t('home.imagineHome.happen4'),
-    t('home.imagineHome.happen5'),
-    t('home.imagineHome.happen6'),
-    t('home.imagineHome.happen7'),
-    t('home.imagineHome.happen8'),
-    t('home.imagineHome.happen9'),
-    t('home.imagineHome.happen11'),
-    t('home.imagineHome.happen12'),
+    t("home.imagineHome.happen1"),
+    t("home.imagineHome.happen2"),
+    t("home.imagineHome.happen4"),
+    t("home.imagineHome.happen5"),
+    t("home.imagineHome.happen6"),
+    t("home.imagineHome.happen7"),
+    t("home.imagineHome.happen8"),
+    t("home.imagineHome.happen9"),
+    t("home.imagineHome.happen11"),
+    t("home.imagineHome.happen12"),
 
-    t('home.imagineHome.happen13'),
-    t('home.imagineHome.happen14'),
-    t('home.imagineHome.happen15'),
-    t('home.imagineHome.happen16'),
-    t('home.imagineHome.happen17'),
-
-
-
-
+    t("home.imagineHome.happen13"),
+    t("home.imagineHome.happen14"),
+    t("home.imagineHome.happen15"),
+    t("home.imagineHome.happen16"),
+    t("home.imagineHome.happen17"),
   ];
 
   const listOfScenarios = [
-     t('home.imagineHome.scenario1'),
-     t('home.imagineHome.scenario2'),
-     t('home.imagineHome.scenario3'),
-     t('home.imagineHome.scenario4'),
-     t('home.imagineHome.scenario5'),
-     t('home.imagineHome.scenario6'),
-     t('home.imagineHome.scenario7'),
-     t('home.imagineHome.scenario8'),
-     t('home.imagineHome.scenario9'),
-     t('home.imagineHome.scenario10'),  
+    t("home.imagineHome.scenario1"),
+    t("home.imagineHome.scenario2"),
+    t("home.imagineHome.scenario3"),
+    t("home.imagineHome.scenario4"),
+    t("home.imagineHome.scenario5"),
+    t("home.imagineHome.scenario6"),
+    t("home.imagineHome.scenario7"),
+    t("home.imagineHome.scenario8"),
+    t("home.imagineHome.scenario9"),
+    t("home.imagineHome.scenario10"),
+  ];
+
+  const listOfImages = [
+    "/home/home_random_sports/imagine3.jpg",
+    "/home/home_random_sports/imagine4.jpg",
+    "/home/home_random_sports/imagine5.jpg",
+    "/home/home_random_sports/imagine6.jpg",
+    "/home/home_random_sports/imagine7.jpg",
+    "/home/home_random_sports/imagine8.jpg",
+    "/home/home_random_sports/imagine9.jpg",
+    "/home/home_random_sports/imagine10.jpg",
+    "/home/home_random_sports/imagine11.jpg",
+    "/home/home_random_sports/imagine12.jpg",
+    "/home/home_random_sports/imagine13.jpg",
+    "/home/home_random_sports/imagine14.jpg",
   ];
 
   const [title1, setTitle1] = useState(() => {
@@ -105,6 +124,9 @@ const ImagineHomeScreen = () => {
     return listOfScenarios[randomIndex];
   });
 
+  const [imageImagine1, setImageImagine1] = useState(listOfImages[3]);
+  const [imageImagine2, setImageImagine2] = useState(listOfImages[1]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimate(true);
@@ -117,6 +139,15 @@ const ImagineHomeScreen = () => {
 
       const randomIndex3 = getRandomIndex(listOfScenarios);
       setScenarios(listOfScenarios[randomIndex3]);
+
+      const randomIndexOfImages1 = getRandomIndex(listOfImages);
+      const randomIndexOfImages2 = getRandomIndex(listOfImages, randomIndexOfImages1);
+
+      
+      setImageImagine1(listOfImages[randomIndexOfImages1]);
+      setImageImagine2(listOfImages[randomIndexOfImages2]);
+
+ 
     }, 5000);
 
     return () => clearInterval(interval);
@@ -135,7 +166,9 @@ const ImagineHomeScreen = () => {
     <>
       <div className="flex w-full justify-center items-center lexend-font text-black_second flex-col">
         <div className="  p-8 w-full 2xl:w-[70%]">
-          <p className=" font-bold text-3xl md:text-4xl ">{t('home.imagineHome.text1')}</p>
+          <p className=" font-bold text-3xl md:text-4xl ">
+            {t("home.imagineHome.text1")}
+          </p>
 
           <div className="flex justify-between flex-col gap-y-2 md:flex-row">
             <p
@@ -148,7 +181,7 @@ const ImagineHomeScreen = () => {
               {scenarios}
             </p>
 
-           {/*  <Button
+            {/*  <Button
               className="w-60 self-center  "
               
               style={{ textTransform: "none" }}
@@ -169,25 +202,23 @@ const ImagineHomeScreen = () => {
               <span className="lexend-font">{t('home.imagineHome.text2')}</span>
             </Button> */}
 
-<div
-  className="w-60 self-center lexend-font"
-  style={{
-    textTransform: "none",
-    height: "45px",
-    backgroundColor: "#D24949",
-    color: "#fff",
-    borderRadius: "8px", // equivalent to `borderRadius: 2`
-    border: "1px solid #D24949",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "default",
-  }}
->
-  {t('home.imagineHome.text2')}
-</div>
-
-
+            <div
+              className="w-60 self-center lexend-font"
+              style={{
+                textTransform: "none",
+                height: "45px",
+                backgroundColor: "#D24949",
+                color: "#fff",
+                borderRadius: "8px", // equivalent to `borderRadius: 2`
+                border: "1px solid #D24949",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "default",
+              }}
+            >
+              {t("home.imagineHome.text2")}
+            </div>
           </div>
 
           <div className="w-full h-96 overflow-hidden container_imagine_pic1 mt-4 ">
@@ -198,7 +229,8 @@ const ImagineHomeScreen = () => {
             <p className="font-medium text-black_second pr-3 p-2 pl-3">
               <span className="text-red-600 mr-2">
                 <img className="inline " src="/home/imagine1icon.svg" />
-              </span>{t('home.imagineHome.text3')} 
+              </span>
+              {t("home.imagineHome.text3")}
             </p>
           </div>
         </div>
@@ -210,7 +242,7 @@ const ImagineHomeScreen = () => {
             <div className="flex items-start">
               <img className="inline w-5 mt-4 md:mt-3" src="/home/shoe.svg" />
               <p className="font-medium text-red_second pr-3 p-2 pl-3">
-              {t('home.imagineHome.text4')} 
+                {t("home.imagineHome.text4")}
               </p>
             </div>
 
@@ -227,16 +259,21 @@ const ImagineHomeScreen = () => {
 
             <div className="flex items-start">
               <img className="inline w-5 mt-4 md:mt-3" src="/home/loop.svg" />
-              <p className="font-medium text-black_second pr-3 p-2 pl-3">{t('home.imagineHome.text5')}</p>
+              <p className="font-medium text-black_second pr-3 p-2 pl-3">
+                {t("home.imagineHome.text5")}
+              </p>
             </div>
           </div>
 
           <div className="basis-1/3 p-4 flex self-center flex-col">
-            <img className="2xl:w-96" src="home/imagine2.jpg" />
+            <img
+              className="2xl:w-96"
+              src="/home/home_random_sports/imagine2.jpg"
+            />
 
             <div className="textBox2 max-w-fit inline-block lg:mr-8  ">
               <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">
-              {t('home.imagineHome.text6')}
+                {t("home.imagineHome.text6")}
               </p>
             </div>
           </div>
@@ -245,7 +282,7 @@ const ImagineHomeScreen = () => {
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between  flex-col lg:flex-row">
           <div className="self-center grow">
             <p className="font-medium text-lg text-center ">
-            {t('home.imagineHome.text7')}
+              {t("home.imagineHome.text7")}
             </p>
 
             <div className="flex justify-center items-center flex-col gap-4 p-8">
@@ -259,7 +296,7 @@ const ImagineHomeScreen = () => {
                 {title1}
               </p>
 
-              <p>{t('home.imagineHome.text8')}</p>
+              <p>{t("home.imagineHome.text8")}</p>
 
               {/* animate__hinge */}
               <p
@@ -295,20 +332,28 @@ const ImagineHomeScreen = () => {
                     },
                   }}
                 >
-                  <span className="lexend-font">{t('home.imagineHome.text9')}</span>
+                  <span className="lexend-font">
+                    {t("home.imagineHome.text9")}
+                  </span>
                 </Button>
 
-                <p className="font-medium">{t('home.imagineHome.text10')}</p>
+                <p className="font-medium">{t("home.imagineHome.text10")}</p>
 
                 <div className="relative max-md:w-full">
                   <div className="all_stars z-10">
                     <div className="flex justify-end">
-                      <img className="first_star animate_heartBeat " src="/home/first_star.svg" />
+                      <img
+                        className="first_star animate_heartBeat "
+                        src="/home/first_star.svg"
+                      />
                       <img
                         className="second_star animate_heartBeat animate__delay-2s"
                         src="/home/second_star.svg"
                       />
-                      <img className="third_star animate_heartBeat animate__delay-4s" src="/home/third_star.svg" />
+                      <img
+                        className="third_star animate_heartBeat animate__delay-4s"
+                        src="/home/third_star.svg"
+                      />
                     </div>
                   </div>
 
@@ -332,23 +377,27 @@ const ImagineHomeScreen = () => {
                       },
                     }}
                   >
-                    <span className="lexend-font">{t('home.imagineHome.text11')}</span>
+                    <span className="lexend-font">
+                      {t("home.imagineHome.text11")}
+                    </span>
                   </Button>
                 </div>
               </div>
 
-              <p className="text-sm mt-4">{t('home.imagineHome.text12')}</p>
+              <p className="text-sm mt-4">{t("home.imagineHome.text12")}</p>
             </div>
           </div>
 
           <div className="basis-1/3 p-4 flex self-center flex-col">
             <div className="textBox3 max-w-fit inline-block lg:mr-8">
-              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">{t('home.imagineHome.text13')}
+              <p className="font-medium text-black_second  p-2 pl-3 text-sm md:text-base">
+                {t("home.imagineHome.text13")}
               </p>
             </div>
-            <img className="2xl:w-96" src="home/imagine3.jpeg" />
 
-            <img className="2xl:w-96 mt-6" src="home/imagine4.jpeg" />
+            <img className="2xl:w-96" src={imageImagine1} />
+
+            <img className="2xl:w-96 mt-6" src={imageImagine2} />
           </div>
         </div>
       </div>
