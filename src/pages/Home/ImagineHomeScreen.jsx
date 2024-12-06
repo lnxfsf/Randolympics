@@ -153,20 +153,44 @@ const ImagineHomeScreen = () => {
     
 
 
-      const randomIndexOfImages1 = getRandomIndex(listOfImages);
+    /*   const randomIndexOfImages1 = getRandomIndex(listOfImages);
       const randomIndexOfImages2 = getRandomIndex(
         listOfImages,
         randomIndexOfImages1
       );
 
       setImageImagine1(listOfImages[randomIndexOfImages1]);
-      setImageImagine2(listOfImages[randomIndexOfImages2]);
+      setImageImagine2(listOfImages[randomIndexOfImages2]); */
  
     }, 5000);
 
 
     return () => clearInterval(interval);
   }, []);
+
+
+
+  
+  useEffect(() => {
+
+ const interval2 = setInterval(() => {
+
+    const randomIndexOfImages1 = getRandomIndex(listOfImages);
+    const randomIndexOfImages2 = getRandomIndex(
+      listOfImages,
+      randomIndexOfImages1
+    );
+
+    setImageImagine1(listOfImages[randomIndexOfImages1]);
+    setImageImagine2(listOfImages[randomIndexOfImages2]);
+
+ }, 9100);
+
+    
+    return () => clearInterval(interval2);
+  }, []);
+ 
+
 
   useEffect(() => {
     if (animate) {
