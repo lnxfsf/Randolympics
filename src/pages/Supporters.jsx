@@ -654,9 +654,20 @@ const Supporters = () => {
       if (response.status === 200) {
         setSnackbarMessage("Donated");
         setOpenSnackbarSuccess(true);
+      } else {
+
+        
+        
+        setSnackbarMessage(error.response?.data?.message || error.message);
+      setOpenSnackbarFailure(true);
       }
-    } catch (e) {
-      console.log(e.stack);
+    } catch (error) {
+
+      
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setOpenSnackbarFailure(true);
+
+      console.log(error.stack);
     }
   };
 
@@ -956,6 +967,7 @@ const Supporters = () => {
         autoHideDuration={6000}
         onClose={handleSnackbarSuccessClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
+     
       >
         <Alert
           onClose={handleSnackbarSuccessClose}

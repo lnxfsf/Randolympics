@@ -143,9 +143,19 @@ const ItemCampaign = () => {
       if (response.status === 200) {
         setSnackbarMessage("Donated");
         setOpenSnackbar(true);
+      } else {
+        
+        setSnackbarMessage(error.response?.data?.message || error.message);
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
       }
-    } catch (e) {
-      console.log(e.stack);
+    } catch (error) {
+
+      
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      console.log(error.stack);
     }
   };
 
