@@ -217,6 +217,11 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     supporterComment,
   } = req.body;
 
+  if(discountCode === ""){
+    res.status(400).json({ message: "Code empty"});
+  }
+
+
   try {
     // ima li koji odgovara tome..
     var oneCoupon;
@@ -261,6 +266,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         var supporterId = "";
       }
     } catch (e) {
+
+    
+
       console.log(e.stack);
     }
 
@@ -285,8 +293,23 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       console.log(discountCode);
       console.log(oneAthlete.nationality.toUpperCase());
 
+
+      
+    
+
+
       console.log(oneCoupon);
     } catch (e) {
+
+      // here you can catch, if there's difference in nationality coupon is used for, and what coupons atlete can be used for.
+      if (oneCoupon.country === "GLOBAL"){
+        res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
+    
+       } else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase()){
+        res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
+       } 
+
+
       await t1.rollback();
       console.log(e.stack);
     }
@@ -296,10 +319,44 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       await t2.rollback();
       await t3.rollback();
 
+
+      // TODO treba i ako postoji taj, da šalje "da je istekao", ako postoji ali je isCouponActive (jer mozda i opet druge komponente nisu uspjele..)
+      // TODO pa, isCouponActive, isto i ovde ako je 0, a postoji, kazes "istekao". jer imas vec dole, ako on tek sazna da je nov istekao, da javi on to, da je istekao, i ne moze se koristiti
+
+      // okay, rollback previous, but it probably didn't found code with same code as athlete country code, so with this you're sure, and know what to send to FE, for it to show message
+      let checkCoupon = await Couponcodes.findOne({
+        where: {
+          couponCode: discountCode,
+          
+        },
+      });
+
+      console.log("bb")
+      console.log(checkCoupon)
+
+      // sa tim discountCode, he finds it in database, and determines what is it
+
+
+      if(!checkCoupon){
+        res.status(400).json({ message: "Code invalid" });
+      } else if(checkCoupon.isCouponActive === 0){
+        res.status(400).json({ message: "Code expired" });
+      }  else if (checkCoupon.country === "GLOBAL"){
+        res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
+       }  else if(checkCoupon.country !== oneAthlete.nationality.toUpperCase()){
+        res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
+       }
+
+
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
-      res.status(400).json({ message: "coupon code is not valid" });
+      
+    
+        
+      
+
+
       return;
     }
 
@@ -371,6 +428,19 @@ const donateOnlyWithDiscountCode = async (req, res) => {
             await t1.rollback();
             await t2.rollback();
             await t3.rollback();
+
+          
+             if(!oneCoupon){
+              res.status(400).json({ message: "Code invalid" });
+            } else if(oneCoupon.isCouponActive === 0){
+              res.status(400).json({ message: "Code expired" });
+            }  else if (oneCoupon.country === "GLOBAL"){
+              res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
+             }  else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase()){
+              res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
+             }
+
+
             console.log(error.stack);
           }
 
@@ -379,6 +449,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           try {
             // then it's expired, just set it so, so we don't check it anymore..
             await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+            res.status(400).json({ message: "Coupon code expired" });
             await t1.commit();
           } catch (e) {
             await t1.rollback();
@@ -414,13 +485,21 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
         await t4.commit();
 
-        res.status(200).json({ message: "coupon confirmed" });
+        res.status(200).json({ message: "Coupon confirmed" });
       } catch (e) {
+
+        
+
+
         await t4.rollback();
         console.log(e.stack);
       }
     }
   } catch (e) {
+
+   
+
+
     console.log(e.stack);
   }
 };
