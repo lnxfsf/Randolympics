@@ -179,8 +179,8 @@ export const AuthProvider = ({ children }) => {
     refreshAccessToken();
 
 
-   // const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
-   const REFRESH_INTERVAL = 10 * 1000; // 4 mins
+   const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
+  // const REFRESH_INTERVAL = 10 * 1000; // 4 mins
 
     const interval = setInterval(() => {
       refreshAccessToken();
