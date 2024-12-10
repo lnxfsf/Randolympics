@@ -174,11 +174,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
 
- 
     
-    refreshAccessToken();
+ 
+   // only for first time, but only if there is some user.. and that means we have accessToken in there.. as we can't send refreshToken if it's expired (when logout)
+    if (localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken")) {
+      refreshAccessToken();
+    }
+   
 
 
+
+if(user){
    const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
   // const REFRESH_INTERVAL = 10 * 1000; // 4 mins
 
@@ -186,17 +192,34 @@ export const AuthProvider = ({ children }) => {
       refreshAccessToken();
     }, REFRESH_INTERVAL);
 
-    
-
 
     return () => clearInterval(interval); 
+
+  }
+
+
+    
   }, []);
 
 
 
 
   // just call this function, for logout, and you're done
-  let logoutUser = (e) => {
+  let logoutUser = async (e) => {
+
+    //you can see refreshToken, only in /auth routes.. 
+
+    // clear http only cookie, will expiry after 1 sec
+      const response = await axios.get(
+      `${BACKEND_SERVER_BASE_URL}/auth/logout`,
+   
+      { withCredentials: true } 
+    );  
+
+    
+
+
+
     //e.preventDefault();
     localStorage.removeItem("authTokens");
     sessionStorage.removeItem("authTokens");
