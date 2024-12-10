@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }) => {
         { withCredentials: true } //  cookies are sent
       );
 
-      console.log(response)
+   
       const access_token = response.data.accessToken;
 
       // Update accessToken in storage. so it depends if user signed one time or with remember me
@@ -138,7 +138,6 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.setItem("accessToken", access_token);
       }
 
-      console.log(access_token)
 
    
       return access_token;

@@ -165,7 +165,7 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-start mt-8 w-full ">
-              <label for="email" className="lexend-font">
+              <label htmlFor="email" className="lexend-font">
                 {t("login.content2")}
               </label>
               <TextField
@@ -206,7 +206,7 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col mb-2.5 justify-start mt-2 w-full">
-              <label for="pass" className=" lexend-font">
+              <label htmlFor="pass" className=" lexend-font">
                 {t("login.content3")}
               </label>
               <TextField
