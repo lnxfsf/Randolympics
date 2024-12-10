@@ -803,16 +803,14 @@ const login = async (req, res) => {
 
         const refreshToken = generateRefreshToken(existingUser.userId);
 
-        /* secure: process.env.PRODUCTION === "true", // Use 'true' in production with HTTPS
-        
-    sameSite: "strict",
-        */
+       
         // Store refresh token in HTTP-only cookie
-  res.cookie("refreshToken", refreshToken, {
-    httpOnly: true,
-   
-    path: "/",
-  });
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          secure: process.env.PRODUCTION === "true",
+          sameSite: "strict",
+          path: "/",
+        });
 
 
         res.status(200).json({
@@ -887,16 +885,15 @@ const refreshToken = async (req, res) => {
     const newRefreshToken = generateRefreshToken(decoded.userId);
 
 
-/* 
-    secure: process.env.PRODUCTION === "true", // Use in production 
-    
-    sameSite: "strict",
-    */
+    console.log("on kreira newAccssToken");
+    console.log(newAccessToken);
+
 
     // Send new refresh token in HTTP-only cookie
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
-    
+      secure: process.env.PRODUCTION === "true",
+      sameSite: "strict",
       path: "/",
     });
 
