@@ -9,6 +9,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
+var cookieParser = require('cookie-parser')
 
 
 const authRoutes = require("./routes/authRoutes");
@@ -53,7 +54,10 @@ if(isProduction === "true"){
 
 
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.BASE_URL, // Your frontend URL
+  credentials: true, // Allows cookies to be sent
+}));
 
 
 app.use('/webhook', webhookRoute);
@@ -65,6 +69,9 @@ app.use('/webhook', webhookRoute);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser())
+
 
 // we separated every route in it's file
 // we use separate routes, for them

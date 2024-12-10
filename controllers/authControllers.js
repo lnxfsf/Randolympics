@@ -24,8 +24,14 @@ const bcrypt = require("bcryptjs");
 
 var path = require("path");
 
+
+
 const generateAccessToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "5m" });
+};
+
+const generateRefreshToken = (userId) => {
+  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: "30m" });
 };
 
 // When a user signs up, generate a unique verification token and save it in the database with user email.
@@ -794,6 +800,21 @@ const login = async (req, res) => {
 
         }
 
+
+        const refreshToken = generateRefreshToken(existingUser.userId);
+
+        /* secure: process.env.PRODUCTION === "true", // Use 'true' in production with HTTPS
+        
+    sameSite: "strict",
+        */
+        // Store refresh token in HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+   
+    path: "/",
+  });
+
+
         res.status(200).json({
           userId: existingUser.userId,
           user_type: existingUser.user_type,
@@ -848,6 +869,43 @@ const login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+const refreshToken = async (req, res) => {
+
+  const refreshToken = req.cookies.refreshToken;
+
+  
+
+  if (!refreshToken) return res.status(401).json({ message: "No refresh token" });
+
+  jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
+    if (err) return res.status(403).json({ message: "Invalid refresh token" });
+
+    // Generate new access token
+    const newAccessToken = generateAccessToken(decoded.userId);
+    const newRefreshToken = generateRefreshToken(decoded.userId);
+
+
+/* 
+    secure: process.env.PRODUCTION === "true", // Use in production 
+    
+    sameSite: "strict",
+    */
+
+    // Send new refresh token in HTTP-only cookie
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+    
+      path: "/",
+    });
+
+    res.json({ accessToken: newAccessToken });
+  });
+
+
+};
+
 
 const campaignDoesUserExist = async (req, res) => {
   const { email } = req.query;
@@ -937,4 +995,5 @@ module.exports = {
   email_resend,
   campaignDoesUserExist,
   campaignIsSupporterPassCorrect,
+  refreshToken,
 };
