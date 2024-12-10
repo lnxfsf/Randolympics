@@ -885,9 +885,6 @@ const refreshToken = async (req, res) => {
     const newRefreshToken = generateRefreshToken(decoded.userId);
 
 
-    console.log("on kreira newAccssToken");
-    console.log(newAccessToken);
-
 
     // Send new refresh token in HTTP-only cookie
     res.cookie("refreshToken", newRefreshToken, {
