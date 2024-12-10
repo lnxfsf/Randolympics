@@ -31,7 +31,7 @@ const generateAccessToken = (userId) => {
 };
 
 const generateRefreshToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: "30m" });
+  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: "7d" });
 };
 
 // When a user signs up, generate a unique verification token and save it in the database with user email.
