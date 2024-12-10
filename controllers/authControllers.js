@@ -809,7 +809,7 @@ const login = async (req, res) => {
           httpOnly: true,
           secure: process.env.PRODUCTION === "true",
           sameSite: "strict",
-          path: "/auth/refresh",
+          path: "/auth",
         });
 
 
@@ -893,7 +893,7 @@ const refreshToken = async (req, res) => {
       httpOnly: true,
       secure: process.env.PRODUCTION === "true",
       sameSite: "strict",
-      path: "/auth/refresh",
+      path: "/auth",
     });
 
     res.json({ accessToken: newAccessToken });
@@ -902,6 +902,24 @@ const refreshToken = async (req, res) => {
 
 };
 
+const logout = async (req,res) => {
+
+  res.cookie("refreshToken", '', {
+    expires: new Date(0),
+    httpOnly: true,
+    sameSite: "strict",
+    path: "/auth",
+  });
+
+  res
+        .status(200)
+        .json({ success: true, message: 'User logged out successfully' })
+
+
+
+
+
+}
 
 const campaignDoesUserExist = async (req, res) => {
   const { email } = req.query;
@@ -992,4 +1010,5 @@ module.exports = {
   campaignDoesUserExist,
   campaignIsSupporterPassCorrect,
   refreshToken,
+  logout,
 };

@@ -4,6 +4,7 @@ const { register, login, verify_token, verification_success,
     campaignDoesUserExist,
     campaignIsSupporterPassCorrect,
     refreshToken,
+    logout,
 } = require("../controllers/authControllers");
 const router = express.Router();
 
@@ -35,6 +36,7 @@ router.get('/campaignIsSupporterPassCorrect',campaignIsSupporterPassCorrect)
 
 // refresh jwt token
 router.post("/refresh", refreshToken);
+router.get("/logout", logout);
 
 
 
