@@ -809,7 +809,7 @@ const login = async (req, res) => {
           httpOnly: true,
           secure: process.env.PRODUCTION === "true",
           sameSite: "strict",
-          path: "/",
+          path: "/auth/refresh",
         });
 
 
@@ -879,6 +879,8 @@ const refreshToken = async (req, res) => {
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid refresh token" });
+    // so if refresh token expires, user will simply be logged out
+    
 
     // Generate new access token
     const newAccessToken = generateAccessToken(decoded.userId);
@@ -891,7 +893,7 @@ const refreshToken = async (req, res) => {
       httpOnly: true,
       secure: process.env.PRODUCTION === "true",
       sameSite: "strict",
-      path: "/",
+      path: "/auth/refresh",
     });
 
     res.json({ accessToken: newAccessToken });
