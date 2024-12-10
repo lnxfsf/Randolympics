@@ -128,29 +128,31 @@ export const AuthProvider = ({ children }) => {
         { withCredentials: true } //  cookies are sent
       );
 
-      const { access_token } = response.data;
+      console.log(response)
+      const access_token = response.data.accessToken;
 
-      // Update accessToken in storage
+      // Update accessToken in storage. so it depends if user signed one time or with remember me
       if (localStorage.getItem("accessToken")) {
         localStorage.setItem("accessToken", access_token);
       } else if (sessionStorage.getItem("accessToken")) {
         sessionStorage.setItem("accessToken", access_token);
       }
 
+      console.log(access_token)
 
-      setUser(jwtDecode(access_token)); // set userId again, but we don't need really this, just ...
-
+   
       return access_token;
 
     } catch (error) {
       console.error("Failed to refresh access token:", error);
-      logoutUser(); // Log out if refresh fails, then we don't have latest credentials
+      logoutUser(); // Log out if refresh fails, then we don't have latest credentials. maybe in backend, it said refreshToken is invalid, so we logout in here then
     }
   };
 
 
   useEffect(() => {
-    const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
+ //   const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
+    const REFRESH_INTERVAL = 10 * 1000; // 4 mins
 
     const interval = setInterval(() => {
       refreshAccessToken();
