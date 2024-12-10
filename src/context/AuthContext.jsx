@@ -13,29 +13,51 @@ let BACKEND_SERVER_BASE_URL =
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+
+  // declare it here, and define later
+  async function refreshAccessToken(){
+
+  }
+
+
   let [campaignId, setCampaignId] = useState("");
 
+ 
 
   
   const [user, setUser] = useState(() => {
-    /* const tokenString =
+     /* const tokenString =
       localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
+      sessionStorage.getItem("authTokens"); */
 
-    if (tokenString) {
-      try {
-        const authData = JSON.parse(tokenString);
-        return jwtDecode(authData.data.access_token);
+      /* 
+
+    if (tokenString) { */
+    /*   try {
+
+
+        
+
+
+        // const authData = JSON.parse(tokenString);
+
+        const access_token = refreshAccessToken();
+
+        console.log(access_token)
+
+        return jwtDecode(access_token);
+
+
       } catch (error) {
         console.error("Invalid token:", error);
         // localStorage.removeItem("authTokens");
         // return null;
-      }
-    } */
+      } */
+   /*  } */ 
     // return null;
   });
-/* 
-  let [authTokens, setAuthTokens] = useState(() => {
+
+ /*  let [authTokens, setAuthTokens] = useState(() => {
     let authTokensString =
       (typeof localStorage !== "undefined" &&
         localStorage.getItem("authTokens")) ||
@@ -43,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.getItem("authTokens"));
 // if authTokens is not empty in local/session storage, then save their values in this 
     return authTokensString ? JSON.parse(authTokensString) : null;
-  }); */
+  });  */
 
   const navigate = useNavigate();
 
@@ -120,7 +142,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-  const refreshAccessToken = async () => {
+  refreshAccessToken = async () => {
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/refresh`,
@@ -139,6 +161,7 @@ export const AuthProvider = ({ children }) => {
       }
 
 
+      setUser(jwtDecode(access_token)); // you need this, for first login, after refresh of page.. and we also get new accessTokens from refreshTokens
    
       return access_token;
 
@@ -150,12 +173,21 @@ export const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
- //   const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
-    const REFRESH_INTERVAL = 10 * 1000; // 4 mins
+
+ 
+    
+    refreshAccessToken();
+
+
+   // const REFRESH_INTERVAL = 4 * 60 * 1000; // 4 mins
+   const REFRESH_INTERVAL = 10 * 1000; // 4 mins
 
     const interval = setInterval(() => {
       refreshAccessToken();
     }, REFRESH_INTERVAL);
+
+    
+
 
     return () => clearInterval(interval); 
   }, []);
