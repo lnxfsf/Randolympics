@@ -47,6 +47,7 @@
     "keen-slider": "^6.8.6",
     "moment": "^2.30.1",
     "postcss": "^8.4.49",
+    "posthog-js": "^1.195.0",
     "react": "^18.3.1",
     "react-auth-code-input": "^3.2.1",
     "react-cookie": "^7.2.2",

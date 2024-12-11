@@ -50,6 +50,8 @@ import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 const App = () => {
   const [cookies, setCookie] = useCookies(["cookieNeccessary", "cookieConsentOpen"]);
 
+  
+
   return (
     <>
       {/* // show cookies in all pages */}

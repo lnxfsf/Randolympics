@@ -15,31 +15,31 @@ import { HelmetProvider } from "react-helmet-async";
 
 import "../i18n";
 
+// analytics
+import { PostHogProvider } from "posthog-js/react";
+import posthog from "posthog-js";
+
+const VITE_PUBLIC_POSTHOG_HOST =
+  import.meta.env.VITE_PUBLIC_POSTHOG_HOST ||
+  process.env.VITE_PUBLIC_POSTHOG_HOST;
+
+const VITE_PUBLIC_POSTHOG_KEY =
+  import.meta.env.VITE_PUBLIC_POSTHOG_KEY ||
+  process.env.VITE_PUBLIC_POSTHOG_KEY;
+
+/* const options = {
+  api_host: VITE_PUBLIC_POSTHOG_HOST,
+}  */
+
+posthog.init(VITE_PUBLIC_POSTHOG_HOST, {
+  api_host: VITE_PUBLIC_POSTHOG_HOST,
+  person_profiles: "always", // or 'always' to create profiles for anonymous users as well
+});
+
 /* 
-const app = (
-  <Router>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </Router>
-);
+import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL; */
 
-
-const rootElement = document.getElementById("root");
-if (rootElement.hasChildNodes()) {
-  hydrate(app, rootElement);
-} else {
-  render(app, rootElement);
-} */
-
-/* before  installing  react-snap (for SEO)
-
-this is in: package.json:
-"postbuild": "react-snap",
-
-/ ----- 
-
-*/
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PayPalScriptProvider
     options={{
@@ -50,7 +50,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
       <HelmetProvider>
         <AuthProvider>
-          <App />
+          <PostHogProvider client={posthog}>
+            <App />
+          </PostHogProvider>
         </AuthProvider>
       </HelmetProvider>
     </Router>
