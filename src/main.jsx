@@ -27,6 +27,8 @@ const VITE_PUBLIC_POSTHOG_KEY =
   import.meta.env.VITE_PUBLIC_POSTHOG_KEY ||
   process.env.VITE_PUBLIC_POSTHOG_KEY;
 
+
+
 /* const options = {
   api_host: VITE_PUBLIC_POSTHOG_HOST,
 }  */
