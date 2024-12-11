@@ -38,11 +38,8 @@ import { UserProfilePublicView } from "./components/Home/UserProfilePublicView";
 import { CompetitionsDetails } from "./pages/CompetitionsDetails";
 import { CookieMain } from "./components/cookies/CookieMain";
 
-let GTAG_ID = import.meta.env.VITE_GTAG_ID || process.env.VITE_GTAG_ID;
 
-const TRACKING_ID = GTAG_ID;
 
-ReactGA.initialize(TRACKING_ID);
 
 import { useCookies } from "react-cookie";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
