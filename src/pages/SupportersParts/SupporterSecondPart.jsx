@@ -124,7 +124,7 @@ const SupporterSecondPart = ({
   const { t } = useTranslation();
 
   // 12 yrs, is minium to participate in this
-  const maxAllowedDate = dayjs().subtract(12, "year");
+  const maxAllowedDate = dayjs().subtract(15, "year");
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
@@ -543,7 +543,7 @@ const SupporterSecondPart = ({
                           slotProps={{
                             textField: {
                               helperText:
-                                "Must be at least 12 years old to participate.", // Add the helper text
+                                "Must be at least 15 years old to participate.", // Add the helper text
                             },
                           }}
                           format="MMMM DD, YYYY"
