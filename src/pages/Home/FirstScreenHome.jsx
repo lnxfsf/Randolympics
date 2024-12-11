@@ -94,22 +94,22 @@ const FirstScreenHome = ({ scrollToSection }) => {
             style={{ textTransform: "none" }}
             sx={{
               height: "45px",
-              bgcolor: "#D24949",
+              bgcolor: "#BDFCC9",
             
 
               color: "#fff",
               borderRadius: 2,
-              border: `1px solid #D24949`,
+              border: `1px solid #BDFCC9`,
               "&:hover": {
-                background: "rgba(210, 73, 73, 1)",
+                background: "rgba(189, 252, 201, 1)",
                 color: "white",
-                border: `1px solid rgba(210, 73, 73, 1)`,
+                border: `1px solid rgba(189, 252, 201, 1)`,
               },
             }}
             id="randomize-btn"
             type="submit"
           >
-            <span className="lexend-font" style={{ textTransform: "none" }}>
+            <span className="lexend-font text-black_second" style={{ textTransform: "none" }}>
               {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>

@@ -70,22 +70,22 @@ const SixthScreenHomeAnother2 = () => {
                 sx={{
                   height: "50px",
 
-                  bgcolor: "#D24949",
+                  bgcolor: "#A3D977",
 
                   color: "#fff",
                   borderRadius: 3,
-                  border: `1px solid #D24949`,
+                  border: `1px solid #A3D977`,
                   "&:hover": {
-                    background: "rgba(210, 73, 73, 1)",
+                    background: "rgba(163, 217, 119, 1)",
                     color: "white",
-                    border: `1px solid rgba(210, 73, 73, 1)`,
+                    border: `1px solid rgba(163, 217, 119, 1)`,
                   },
                 }}
                 
               >
-                <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
+                <img src="supporters/right_arrow_black.svg" className="mr-2" />{" "}
                 <span
-                  className="lexend-font"
+                  className="lexend-font text-black_second"
                   
                 >
                   {t("home.sixthScreen.btn2")}
