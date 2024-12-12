@@ -320,6 +320,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       await t3.rollback();
 
 
+
+      
+    const tEr1 = await db.sequelize.transaction();
       // TODO treba i ako postoji taj, da šalje "da je istekao", ako postoji ali je isCouponActive (jer mozda i opet druge komponente nisu uspjele..)
       // TODO pa, isCouponActive, isto i ovde ako je 0, a postoji, kazes "istekao". jer imas vec dole, ako on tek sazna da je nov istekao, da javi on to, da je istekao, i ne moze se koristiti
 
@@ -329,21 +332,27 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           couponCode: discountCode,
           
         },
+
+        transaction: tEr1,
       });
 
-      console.log("bb")
+      console.log("no coupon found, so we default by these")
       console.log(checkCoupon)
 
       // sa tim discountCode, he finds it in database, and determines what is it
 
 
       if(!checkCoupon){
+        await tEr1.rollback();
         res.status(400).json({ message: "Code invalid" });
       } else if(checkCoupon.isCouponActive === 0){
+        await tEr1.rollback();
         res.status(400).json({ message: "Code expired" });
       }  else if (checkCoupon.country === "GLOBAL"){
+        await tEr1.rollback();
         res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
        }  else if(checkCoupon.country !== oneAthlete.nationality.toUpperCase()){
+        await tEr1.rollback();
         res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
        }
 
@@ -395,7 +404,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
         if (
           currentDate <= expiryDate &&
-          newSpentAmount < oneCoupon.maxSpentLimit &&
+          newSpentAmount <= oneCoupon.maxSpentLimit &&
           oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
         ) {
           try {
@@ -424,13 +433,19 @@ const donateOnlyWithDiscountCode = async (req, res) => {
             await t1.commit();
             await t2.commit();
             await t3.commit();
+
+
+            res.status(200).json({ message: "Donated" });
+
           } catch (error) {
             await t1.rollback();
             await t2.rollback();
             await t3.rollback();
 
           
+            console.log("donation errors after it passed through logic ")
              if(!oneCoupon){
+
               res.status(400).json({ message: "Code invalid" });
             } else if(oneCoupon.isCouponActive === 0){
               res.status(400).json({ message: "Code expired" });
@@ -449,7 +464,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           try {
             // then it's expired, just set it so, so we don't check it anymore..
             await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
+           
             res.status(400).json({ message: "Coupon code expired" });
+
             await t1.commit();
           } catch (e) {
             await t1.rollback();
