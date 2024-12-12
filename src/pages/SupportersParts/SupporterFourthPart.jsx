@@ -98,6 +98,36 @@ const SupporterFourthPart = ({
     }
   };
 
+
+  const checkIfCouponValid = async () => {
+    try {
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
+        { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 }
+      );
+
+      if (response.status !== 200) {
+        setSnackbarStatus("error");
+        setSnackbarMessage(error.response?.data?.message || error.message);
+        setOpenSnackbar(true);
+
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      setSnackbarStatus("error");
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setOpenSnackbar(true);
+
+      console.log(e.stack);
+
+      return false;
+
+     
+    }
+  };
+
   const { t } = useTranslation();
 
   // for snackbar message.
@@ -616,7 +646,12 @@ const SupporterFourthPart = ({
                 </div>
 
                 <Button
-                  onClick={donateBeforeStripe}
+                  onClick={ () => {
+                  if(checkIfCouponValid()){
+                    donateBeforeStripe();
+                  }
+
+                }}
                   className="self-center  w-[50%] "
                   /* w-full md:w-50% */
                   style={{ textTransform: "none" }}

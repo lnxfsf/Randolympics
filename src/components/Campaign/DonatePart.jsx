@@ -134,9 +134,10 @@ return true;
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
 
+      console.log(e.stack);
       return false;
 
-      console.log(e.stack);
+      
     }
   }
 
