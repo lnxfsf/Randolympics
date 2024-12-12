@@ -6990,12 +6990,12 @@ const allTransactionsSupportersCampaign = async (req, res) => {
   console.log("limit je ------>" + limitA);
 
   // we don't show creator, on there..
-  const firstSupporterCampaign = await Campaign.findOne({
+ /*  const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
     },
   });
-
+ */
   try {
     const allCommentsSupporters = await Statscampaign.findAndCountAll({
       where: {

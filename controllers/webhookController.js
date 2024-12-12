@@ -98,7 +98,7 @@ const calculateNewAmountWithDiscountCode = async (
     if (
       currentDate <= expiryDate &&
       newSpentAmount <= oneCoupon.maxSpentLimit &&
-      oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+      oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
     ) {
       // ! you need to update
       // couponTimesUsed
@@ -164,7 +164,7 @@ const calculateNewAmountWithDiscountCode = async (
       if (
         currentDate <= expiryDate &&
         newSpentAmount <= oneCoupon.maxSpentLimit &&
-        oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+        oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
       ) {
         //  you need to update
         // couponTimesUsed

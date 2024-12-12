@@ -217,10 +217,9 @@ const donateOnlyWithDiscountCode = async (req, res) => {
     supporterComment,
   } = req.body;
 
-  if(discountCode === ""){
-    res.status(400).json({ message: "Code empty"});
+  if (discountCode === "") {
+    res.status(400).json({ message: "Code empty" });
   }
-
 
   try {
     // ima li koji odgovara tome..
@@ -266,9 +265,6 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         var supporterId = "";
       }
     } catch (e) {
-
-    
-
       console.log(e.stack);
     }
 
@@ -293,22 +289,20 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       console.log(discountCode);
       console.log(oneAthlete.nationality.toUpperCase());
 
-
-      
-    
-
-
       console.log(oneCoupon);
     } catch (e) {
-
       // here you can catch, if there's difference in nationality coupon is used for, and what coupons atlete can be used for.
-      if (oneCoupon.country === "GLOBAL"){
-        res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
-    
-       } else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase()){
-        res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
-       } 
-
+      if (oneCoupon.country === "GLOBAL") {
+        res.status(400).json({
+          message:
+            "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+        });
+      } else if (oneCoupon.country !== oneAthlete.nationality.toUpperCase()) {
+        res.status(400).json({
+          message:
+            "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+        });
+      }
 
       await t1.rollback();
       console.log(e.stack);
@@ -319,10 +313,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       await t2.rollback();
       await t3.rollback();
 
-
-
-      
-    const tEr1 = await db.sequelize.transaction();
+      const tEr1 = await db.sequelize.transaction();
       // TODO treba i ako postoji taj, da šalje "da je istekao", ako postoji ali je isCouponActive (jer mozda i opet druge komponente nisu uspjele..)
       // TODO pa, isCouponActive, isto i ovde ako je 0, a postoji, kazes "istekao". jer imas vec dole, ako on tek sazna da je nov istekao, da javi on to, da je istekao, i ne moze se koristiti
 
@@ -330,41 +321,39 @@ const donateOnlyWithDiscountCode = async (req, res) => {
       let checkCoupon = await Couponcodes.findOne({
         where: {
           couponCode: discountCode,
-          
         },
 
         transaction: tEr1,
       });
 
-      console.log("no coupon found, so we default by these")
-      console.log(checkCoupon)
+      console.log("no coupon found, so we default by these");
+      console.log(checkCoupon);
 
       // sa tim discountCode, he finds it in database, and determines what is it
 
-
-      if(!checkCoupon){
+      if (!checkCoupon) {
         await tEr1.rollback();
         res.status(400).json({ message: "Code invalid" });
-      } else if(checkCoupon.isCouponActive === 0){
+      } else if (checkCoupon.isCouponActive === 0) {
         await tEr1.rollback();
         res.status(400).json({ message: "Code expired" });
-      }  else if (checkCoupon.country === "GLOBAL"){
+      } else if (checkCoupon.country === "GLOBAL") {
         await tEr1.rollback();
-        res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
-       }  else if(checkCoupon.country !== oneAthlete.nationality.toUpperCase()){
+        res.status(400).json({
+          message:
+            "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+        });
+      } else if (checkCoupon.country !== oneAthlete.nationality.toUpperCase()) {
         await tEr1.rollback();
-        res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
-       }
-
+        res.status(400).json({
+          message:
+            "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+        });
+      }
 
       //  console.log("coupon code is not valid");
 
       // so it do nothing in backend anyways..
-      
-    
-        
-      
-
 
       return;
     }
@@ -405,7 +394,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
         if (
           currentDate <= expiryDate &&
           newSpentAmount <= oneCoupon.maxSpentLimit &&
-          oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+          oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
         ) {
           try {
             await oneCoupon.update(
@@ -434,27 +423,30 @@ const donateOnlyWithDiscountCode = async (req, res) => {
             await t2.commit();
             await t3.commit();
 
-
             res.status(200).json({ message: "Donated" });
-
           } catch (error) {
             await t1.rollback();
             await t2.rollback();
             await t3.rollback();
 
-          
-            console.log("donation errors after it passed through logic ")
-             if(!oneCoupon){
-
+            console.log("donation errors after it passed through logic ");
+            if (!oneCoupon) {
               res.status(400).json({ message: "Code invalid" });
-            } else if(oneCoupon.isCouponActive === 0){
+            } else if (oneCoupon.isCouponActive === 0) {
               res.status(400).json({ message: "Code expired" });
-            }  else if (oneCoupon.country === "GLOBAL"){
-              res.status(400).json({ message: "You can't use global coupon codes for standalone payment with coupon code only." });
-             }  else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase()){
-              res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
-             }
-
+            } else if (oneCoupon.country === "GLOBAL") {
+              res.status(400).json({
+                message:
+                  "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+              });
+            } else if (
+              oneCoupon.country !== oneAthlete.nationality.toUpperCase()
+            ) {
+              res.status(400).json({
+                message:
+                  "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+              });
+            }
 
             console.log(error.stack);
           }
@@ -464,7 +456,7 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           try {
             // then it's expired, just set it so, so we don't check it anymore..
             await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
-           
+
             res.status(400).json({ message: "Coupon code expired" });
 
             await t1.commit();
@@ -504,20 +496,123 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
         res.status(200).json({ message: "Coupon confirmed" });
       } catch (e) {
-
-        
-
-
         await t4.rollback();
         console.log(e.stack);
       }
     }
   } catch (e) {
-
-   
-
-
     console.log(e.stack);
+  }
+};
+
+const checkIfCouponValid = async (req, res) => {
+  const { discountCode, countryAthleteIsIn, amountOriginal } = req.body;
+
+  var oneCoupon;
+ 
+  try {
+    oneCoupon = await Couponcodes.findOne({
+      where: {
+        couponCode: discountCode,
+      },
+
+      lock: true,
+    
+    });
+
+
+    if(oneCoupon.isCouponActive === 0){
+      res.status(400).json({message: "Code expired"})
+      await t1.rollback();
+      return;
+    }
+
+    if (
+      oneCoupon.country === countryAthleteIsIn &&
+      oneCoupon.isCouponActive === 1
+    ) {
+      // national codes
+
+    
+      const currentDate = new Date();
+      const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+
+      let newAmount = oneCoupon.couponValue; // this is new amount we get when we apply coupon.
+// for national codes, you take into consideration only coupon value
+
+      let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+
+      if (
+        currentDate <= expiryDate &&
+        newSpentAmount <= oneCoupon.maxSpentLimit &&
+        oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
+      ) {
+        res.status(200).json({ message: "Coupon code ok" });
+      } else {
+        res.status(400).json({message: "Code expired"})
+
+      } 
+
+      
+
+
+
+
+    } else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase() && oneCoupon.country !== "GLOBAL"){
+
+      res.status(400).json({ message: "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia." });
+
+    } else  if (
+      oneCoupon.country === "GLOBAL" &&
+      oneCoupon.isCouponActive === 1
+    ) {
+      // global codes
+          const currentDate = new Date();
+          const expiryDate = new Date(oneCoupon.expiryDate); //iz database, kolko moze max..
+
+          let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon.
+
+          let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+
+          if (
+            currentDate <= expiryDate &&
+            newSpentAmount <= oneCoupon.maxSpentLimit &&
+            oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
+          ) {
+            res.status(200).json({ message: "Coupon code ok" });
+          }  else if (newSpentAmount > oneCoupon.maxSpentLimit) {
+              res.status(400).json({message: "Amount you want to credit is higher than coupon can accept. Coupon hit limit of max spending amount. Try donating less. As global code is calculated by adding percent to your payment."})
+          } else {
+          
+              res.status(400).json({message: "Code expired"})
+      
+           
+          }
+
+
+       
+
+
+    } else {
+      res.status(400).json({ message: "Code expired" });
+    }
+  } catch (error) {
+
+    if (!oneCoupon) {
+      res.status(400).json({ message: "Code invalid" });
+    } else if (oneCoupon.isCouponActive === 0) {
+      res.status(400).json({ message: "Code expired" });
+    } else if (oneCoupon.country === "GLOBAL") {
+      res.status(400).json({
+        message:
+          "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+      });
+    } else if (oneCoupon.country !== oneAthlete.nationality.toUpperCase()) {
+      res.status(400).json({
+        message:
+          "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+      });
+    }
   }
 };
 
@@ -728,35 +823,36 @@ async function getPayPalAccessToken() {
 }
 
 const tempPaymentBeforeStripe = async (req, res) => {
+
+  // znaci on dodje do racunanja discount codes
   const calculateNewAmountWithDiscountCodeBeforeStripe = async (
     amountOriginal,
     couponDonationCode,
     country
   ) => {
+    console.log("calc donation with payment");
+    console.log(amountOriginal);
+    console.log(country);
+    console.log(couponDonationCode);
 
-    console.log("calc donation with payment")
-    console.log(amountOriginal)
-    console.log(country)
-    console.log(couponDonationCode)
-
-    const t1 = await db.sequelize.transaction();
+    const t4 = await db.sequelize.transaction();
 
     // on nadje koji ima..
     const oneCoupon = await Couponcodes.findOne({
       where: { couponCode: couponDonationCode, isCouponActive: 1 },
 
+      transaction: t4,
       lock: true,
-      transaction: t1,
     });
 
-    console.log("if finds coupon code as well to calculate code")
-    console.log(oneCoupon)
+    console.log("if finds coupon code as well to calculate code");
+    console.log(oneCoupon);
 
     // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
     if (!oneCoupon) {
       console.log("coupon code is not valid");
 
-      await t1.rollback();
+      await t4.rollback();
 
       return amountOriginal;
     }
@@ -764,14 +860,13 @@ const tempPaymentBeforeStripe = async (req, res) => {
     // da ga odma sad vratis..
     if (oneCoupon.isCouponActive === 0) {
       console.log("coupon code is not active");
-      await t1.rollback();
+      await t4.rollback();
       return amountOriginal;
     }
 
     // i sada, PRVO gleda jel "GLOBAL" (pa onda za national)  (znaci, mora da ima amountOriginal !)
     if (oneCoupon.country === "GLOBAL") {
-
-      console.log("it goes in global code")
+      console.log("it goes in global code");
 
       // e sada, ovde ces da definises , sta on radi ovde jos..
 
@@ -787,41 +882,16 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
       // so, calculate how much % up, it goes (that's add, that much %, to payment they gave). if they paid 20€, and coupon is 20%, then we do 20€+20%=24
       // for "GLOBAL", in couponValue is stored as "0.05", so we use it as % for that. so this would be 5 , it need to be % now
-      let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon.  
+      let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon.
       // BUT THIS SHOULD ONLY APPLIES FOR GLOBAL CODES, so it can't go over limit ! for national codes, there shouldn't be limit calculated like this.. (as for national codes, it's by how Many times code can be used (and we need a column, so we also limit, when code should end (up to 10000 , but that's calculated from value of coupon and how much it can be used)))
-
 
       let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
 
-
-
-      /*  console.log("currentDate")
-        console.log(currentDate)
     
-        console.log("expiryDate")
-        console.log(expiryDate)
-        console.log(currentDate <= expiryDate)
-    
-        console.log("newSpentAmount")
-        console.log(newSpentAmount)
-    
-        console.log("oneCoupon. maxSpentLimit")
-        console.log(oneCoupon.maxSpentLimit)
-        console.log(newSpentAmount < oneCoupon.maxSpentLimit)
-    
-        console.log("oneCoupon.couponTimesUsed")
-        console.log(oneCoupon.couponTimesUsed)
-    
-        console.log("oneCoupon.maxCouponTimesUsed")
-        console.log(oneCoupon.maxCouponTimesUsed) */
-      /* 
-        console.log(oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed)
-     */
-
       if (
         currentDate <= expiryDate &&
         newSpentAmount <= oneCoupon.maxSpentLimit &&
-        oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+        oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
       ) {
         // ! you need to update
         // couponTimesUsed
@@ -833,11 +903,11 @@ const tempPaymentBeforeStripe = async (req, res) => {
               couponTimesUsed: oneCoupon.couponTimesUsed + 1,
               spentAmount: newSpentAmount,
             },
-            { transaction: t1 }
+            { transaction: t4 }
           ); // azurira samo taj
-          await t1.commit();
+          await t4.commit();
         } catch (error) {
-          await t1.rollback();
+          await t4.rollback();
           console.log(error.stack);
         }
 
@@ -846,18 +916,18 @@ const tempPaymentBeforeStripe = async (req, res) => {
       } else {
         try {
           // then it's expired, just set it so, so we don't check it anymore..
-          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
-          await t1.commit();
+          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t4 });
+          await t4.commit();
         } catch (e) {
-          await t1.rollback();
+          await t4.rollback();
           console.log(e.stack);
         }
 
         return amountOriginal;
       }
     } else {
-      console.log("it goes in national code")
-      // FOR NATIONAL COUPON CODES 
+      console.log("it goes in national code");
+      // FOR NATIONAL COUPON CODES
 
       // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
 
@@ -881,19 +951,17 @@ const tempPaymentBeforeStripe = async (req, res) => {
         // this is fixed amount addition ! (so not by percent), yes..
         let newAmount = amountOriginal + oneCoupon.couponValue;
 
-
         console.log("unutar drzave je");
         console.log("amountOriginal: " + amountOriginal);
         console.log("oneCoupon.couponValue: " + oneCoupon.couponValue);
 
-
         // let newSpentAmount = newAmount + oneCoupon.spentAmount;
-        let newSpentAmount = oneCoupon.spentAmount;  // because this is national code, only value of code you use, for spent amount, as we have other constraints for national coupon like TimesUsed
+        let newSpentAmount = oneCoupon.spentAmount; // because this is national code, only value of code you use, for spent amount, as we have other constraints for national coupon like TimesUsed
 
         if (
           currentDate <= expiryDate &&
           newSpentAmount <= oneCoupon.maxSpentLimit &&
-          oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
+          oneCoupon.couponTimesUsed < oneCoupon.maxCouponTimesUsed
         ) {
           //  you need to update
           // couponTimesUsed
@@ -905,28 +973,28 @@ const tempPaymentBeforeStripe = async (req, res) => {
                 couponTimesUsed: oneCoupon.couponTimesUsed + 1,
                 spentAmount: newSpentAmount,
               },
-              { transaction: t1 }
+              { transaction: t4 }
             ); // azurira samo taj
-            await t1.commit();
+            await t4.commit();
           } catch (error) {
-            await t1.rollback();
+            await t4.rollback();
             console.log(error.stack);
           }
 
           // we then, return with discount (we calculated and got it above)
           return newAmount;
         } else {
-          await t1.rollback();
+          await t4.rollback();
           console.log("da vraca ovde");
           return amountOriginal;
         }
       } else {
         try {
           // then it's expired, just set it so, so we don't check it anymore..
-          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t1 });
-          await t1.commit();
+          await oneCoupon.update({ isCouponActive: 0 }, { transaction: t4 });
+          await t4.commit();
         } catch (e) {
-          await t1.rollback();
+          await t4.rollback();
           console.log(e.stack);
         }
 
@@ -942,13 +1010,16 @@ const tempPaymentBeforeStripe = async (req, res) => {
     supporterEmail,
     supporterComment,
 
-    discountCode,
+    discountCode ,
 
     countryAthleteIsIn,
     amountOriginal,
   } = req.body;
 
   if (amountOriginal > 0) {
+    const t1 = await db.sequelize.transaction();
+    const t2 = await db.sequelize.transaction();
+
     try {
       // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
       var campaignViewed = await Campaign.findOne({
@@ -975,15 +1046,22 @@ const tempPaymentBeforeStripe = async (req, res) => {
       // before stripe implemented (we have no bank account), you can use this placeholder in 'payment_id' (as it's not deleted... )
       // and 'payment_status' is still 'unpaid', so we also know it's not really paid with real money
 
-      const t1 = await db.sequelize.transaction();
+    
+      var amount;
 
-      const t2 = await db.sequelize.transaction();
-
-      const amount = await calculateNewAmountWithDiscountCodeBeforeStripe(
+      // so if discountCode invalid, then it doesnt need to calculate that
+if(discountCode){
+      amount = await calculateNewAmountWithDiscountCodeBeforeStripe(
         amountOriginal,
         discountCode,
-        countryAthleteIsIn,
+        countryAthleteIsIn
       );
+    } else {
+      amount = amountOriginal;
+    }
+
+    
+
 
       const supporter_data = {
         campaignId,
@@ -1015,11 +1093,15 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
       return res.status(200).json({ message: "Payment verified and saved" });
     } catch (error) {
-      
+      await t1.rollback();
+      await t2.rollback();
+      console.log(error.stack);
       return res.status(500).json({ message: "Error verifying payment" });
     }
   } else {
-    return res.status(500).json({ message: "Amount needs to be positive number" });
+    return res
+      .status(500)
+      .json({ message: "Amount needs to be positive number" });
   }
 };
 
@@ -1028,4 +1110,5 @@ module.exports = {
   donateOnlyWithDiscountCode,
   confirmPaypalTransaction,
   tempPaymentBeforeStripe,
+  checkIfCouponValid,
 };
