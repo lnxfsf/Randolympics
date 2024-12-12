@@ -733,6 +733,12 @@ const tempPaymentBeforeStripe = async (req, res) => {
     couponDonationCode,
     country
   ) => {
+
+    console.log("calc donation with payment")
+    console.log(amountOriginal)
+    console.log(country)
+    console.log(couponDonationCode)
+
     const t1 = await db.sequelize.transaction();
 
     // on nadje koji ima..
@@ -742,6 +748,9 @@ const tempPaymentBeforeStripe = async (req, res) => {
       lock: true,
       transaction: t1,
     });
+
+    console.log("if finds coupon code as well to calculate code")
+    console.log(oneCoupon)
 
     // prvo, ako nema, razlike, ako coupon se ne matchuje, onda vracas original amount odma vec.. jer nije nasao nista u database
     if (!oneCoupon) {
@@ -761,6 +770,9 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
     // i sada, PRVO gleda jel "GLOBAL" (pa onda za national)  (znaci, mora da ima amountOriginal !)
     if (oneCoupon.country === "GLOBAL") {
+
+      console.log("it goes in global code")
+
       // e sada, ovde ces da definises , sta on radi ovde jos..
 
       //
@@ -775,9 +787,13 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
       // so, calculate how much % up, it goes (that's add, that much %, to payment they gave). if they paid 20€, and coupon is 20%, then we do 20€+20%=24
       // for "GLOBAL", in couponValue is stored as "0.05", so we use it as % for that. so this would be 5 , it need to be % now
-      let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon
+      let newAmount = amountOriginal + amountOriginal * oneCoupon.couponValue; // this is new amount we get when we apply coupon.  
+      // BUT THIS SHOULD ONLY APPLIES FOR GLOBAL CODES, so it can't go over limit ! for national codes, there shouldn't be limit calculated like this.. (as for national codes, it's by how Many times code can be used (and we need a column, so we also limit, when code should end (up to 10000 , but that's calculated from value of coupon and how much it can be used)))
+
 
       let newSpentAmount = newAmount + oneCoupon.spentAmount; // this is if we add our new value and previous spentAmount, so we don't go over what's allowed
+
+
 
       /*  console.log("currentDate")
         console.log(currentDate)
@@ -840,6 +856,9 @@ const tempPaymentBeforeStripe = async (req, res) => {
         return amountOriginal;
       }
     } else {
+      console.log("it goes in national code")
+      // FOR NATIONAL COUPON CODES 
+
       // ovo je za sve ostale drzave (da  , on pusta ovde, ali takodje, filtira po drzavi)
 
       // TODO drzavu, dobijes po country koji placa u sami payment ! (e, eto, jer ima on u payment, data, da izvuces, odakle , sa koje country placa, i to je taj onda.., country code.. ) (ionako karticu mora da matchuje sa drzavom)ž
@@ -862,11 +881,14 @@ const tempPaymentBeforeStripe = async (req, res) => {
         // this is fixed amount addition ! (so not by percent), yes..
         let newAmount = amountOriginal + oneCoupon.couponValue;
 
+
         console.log("unutar drzave je");
         console.log("amountOriginal: " + amountOriginal);
         console.log("oneCoupon.couponValue: " + oneCoupon.couponValue);
 
-        let newSpentAmount = newAmount + oneCoupon.spentAmount;
+
+        // let newSpentAmount = newAmount + oneCoupon.spentAmount;
+        let newSpentAmount = oneCoupon.spentAmount;  // because this is national code, only value of code you use, for spent amount, as we have other constraints for national coupon like TimesUsed
 
         if (
           currentDate <= expiryDate &&
@@ -959,8 +981,8 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
       const amount = await calculateNewAmountWithDiscountCodeBeforeStripe(
         amountOriginal,
-        campaignViewed.couponDonationCode,
-        campaignViewed.countryAthleteIsIn
+        discountCode,
+        countryAthleteIsIn,
       );
 
       const supporter_data = {
