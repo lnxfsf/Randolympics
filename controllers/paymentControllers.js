@@ -923,10 +923,10 @@ const tempPaymentBeforeStripe = async (req, res) => {
     discountCode,
 
     countryAthleteIsIn,
-    amount: amountOriginal,
+    amountOriginal,
   } = req.body;
 
-  if (amount > 0) {
+  if (amountOriginal > 0) {
     try {
       // prvo nadjes u campaign, pa odatle nadjes info (u Users, za taj email, athlete !)
       var campaignViewed = await Campaign.findOne({
