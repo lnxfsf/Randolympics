@@ -124,15 +124,18 @@ if (response.status !== 200){
   setSnackbarMessage(error.response?.data?.message || error.message);
   setOpenSnackbar(true);
 
+  return false;
 }
 
-
+return true;
 
     }catch(e){
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
-      
+
+      return false;
+
       console.log(e.stack);
     }
   }
@@ -426,7 +429,14 @@ if (response.status !== 200){
               </div>
 
               <Button
-                onClick={donateBeforeStripe}
+                onClick={
+                  () => {
+                  if(checkIfCouponValid()){
+                    donateBeforeStripe();
+                  }
+
+                }
+                }
                 className="self-center  w-[50%] "
                 /* w-full md:w-50% */
                 style={{ textTransform: "none" }}
