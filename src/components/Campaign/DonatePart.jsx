@@ -78,6 +78,10 @@ const DonatePart = ({
 }) => {
   const donateBeforeStripe = async () => {
     try {
+
+     
+
+
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
         {
@@ -87,7 +91,7 @@ const DonatePart = ({
           supporterComment,
           discountCode: discountCode,
           countryAthleteIsIn,
-          amount: amount * 100,
+          amountOriginal: amount * 100,
         }
       );
 

@@ -84,7 +84,7 @@ const SupporterFourthPart = ({
           supporterComment,
           discountCode: discountCode,
           friendNationality,
-          amount: amount * 100,
+          amountOriginal: amount * 100,
         }
       );
 
