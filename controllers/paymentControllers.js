@@ -804,7 +804,7 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
       if (
         currentDate <= expiryDate &&
-        newSpentAmount < oneCoupon.maxSpentLimit &&
+        newSpentAmount <= oneCoupon.maxSpentLimit &&
         oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
       ) {
         // ! you need to update
@@ -870,7 +870,7 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
         if (
           currentDate <= expiryDate &&
-          newSpentAmount < oneCoupon.maxSpentLimit &&
+          newSpentAmount <= oneCoupon.maxSpentLimit &&
           oneCoupon.couponTimesUsed <= oneCoupon.maxCouponTimesUsed
         ) {
           //  you need to update
