@@ -13,7 +13,8 @@ import 'react-quill/dist/quill.snow.css';
 
 
 import TextField from "@mui/material/TextField";
-
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -59,6 +60,25 @@ let BACKEND_SERVER_BASE_URL =
 
 const CreateNewsPost = ({ onBack }) => {
 
+
+    const filePondRef = useRef(null);
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+    // error, "success"
+    const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+    const handleSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    };
+    
+
+
     const [editTitle, setEditTitle] = useState("")
     const [editSubTitle, setEditSubTitle] = useState("")
 
@@ -77,6 +97,8 @@ const CreateNewsPost = ({ onBack }) => {
         // setEditCoverImage(post.cover_image)  // e evo je taj original vidis, on cuva, url od pravog (i ovaj mozes koristiti da obrises pre nego sačuvaš u database ovaj novi... )
 
 
+
+        if (tempEditCoverImage) {
         // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
         fetch(`${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`, {
             method: 'DELETE',
@@ -94,10 +116,12 @@ const CreateNewsPost = ({ onBack }) => {
             console.error('Error reverting file:', err);
 
         });
-
+    }
 
 
         setTempEditCoverImage(null);
+
+        onBack(false, false);
 
     }
 
@@ -111,7 +135,38 @@ const CreateNewsPost = ({ onBack }) => {
         var title = e.target.title.value;
         var subtitle = e.target.subtitle.value;
 
-        // TODO , for creating, route in backend
+       
+
+
+        if(editTitle === ""){
+        setSnackbarMessage("Can't leave title empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+    if(editSubTitle === ""){
+        setSnackbarMessage("Can't leave subtitle empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+    if(editContent === ""){
+        setSnackbarMessage("Can't leave body content empty");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+            return;
+    }
+
+
+
+
 
         try {
 
@@ -128,7 +183,9 @@ const CreateNewsPost = ({ onBack }) => {
             );
 
             if (response.status === 201) {
-                console.log("created user success")
+                console.log("created user success");
+
+
                 
                 
                 onBack(false, true);
@@ -199,15 +256,10 @@ const CreateNewsPost = ({ onBack }) => {
             onload: (response) => {
                 // Parse the JSON response to get the filename
 
-
-
-
-
-
                 const jsonResponse = JSON.parse(response);
                 const filename = jsonResponse;
 
-                console.log("Uploaded filename:", filename);
+                
 
                 // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
                 setTempEditCoverImage(filename)
@@ -217,6 +269,19 @@ const CreateNewsPost = ({ onBack }) => {
 
             },
             onerror: (response) => {
+
+                setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+                setSnackbarStatus("error");
+                setOpenSnackbar(true);
+        
+
+
+                if (filePondRef.current) {
+                    filePondRef.current.removeFiles();
+                  }
+          
+
+
                 console.error("Error uploading file:", response);
                 return response;
             },
@@ -266,9 +331,20 @@ const CreateNewsPost = ({ onBack }) => {
     return (
         <>
 
-            <div className="flex justify-between">
-                <button button className="border-2 mb-4 m-2 bg-[#fbbf24]" onClick={() => { handleCancel(); onBack(); }}>Back</button>
-                <p>Create post</p>
+
+<div className="m-4">
+            <div className="flex justify-between mb-4">
+            <IconButton
+            className="back-icon"
+            aria-label="back"
+            onClick={() => {
+              onBack(false, false);
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+                
+              
             </div>
 
 
@@ -279,6 +355,7 @@ const CreateNewsPost = ({ onBack }) => {
 
                     <FilePond
                         /* className="filepond--root large" */
+                        ref={filePondRef}
                         type="file"
                         onupdatefiles={setFiles}
                         allowMultiple={false}
@@ -339,10 +416,10 @@ const CreateNewsPost = ({ onBack }) => {
                             maxLength: 255,
                         }}
                         sx={{
-                            m: 1,
+                           
                             width: "auto",
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: 5,
+                                borderRadius: 0,
                             },
                             "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                             {
@@ -365,7 +442,7 @@ const CreateNewsPost = ({ onBack }) => {
 
                         label="Subtitle"
 
-                        placeholder="subtitle"
+                        placeholder="Subtitle"
                         id="name"
                         name="subtitle"
                         type="text"
@@ -373,10 +450,10 @@ const CreateNewsPost = ({ onBack }) => {
                             maxLength: 255,
                         }}
                         sx={{
-                            m: 1,
+                            
                             width: "auto",
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: 5,
+                                borderRadius: 0,
                             },
                             "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                             {
@@ -389,7 +466,6 @@ const CreateNewsPost = ({ onBack }) => {
                             },
                         }}
                     />
-
 
 
 
@@ -408,12 +484,12 @@ const CreateNewsPost = ({ onBack }) => {
                                 height: "50px",
                                 bgcolor: "#fff",
                                 color: "#000",
-                                borderRadius: 15,
-                                border: `1px solid #AF2626`,
+                                borderRadius: 5,
+                                border: `1px solid #D24949`,
                                 "&:hover": {
-                                    background: "rgb(196, 43, 43)",
+                                    background: "rgb(210, 73, 73)",
                                     color: "white",
-                                    border: `1px solid rgb(196, 43, 43)`,
+                                    border: `1px solid rgb(210, 73, 73)`,
                                 },
                             }}
                             variant="text"
@@ -426,14 +502,14 @@ const CreateNewsPost = ({ onBack }) => {
                             style={{ marginTop: "20px" }}
                             sx={{
                                 height: "50px",
-                                bgcolor: "#AF2626",
+                                bgcolor: "#D24949",
                                 color: "#fff",
-                                borderRadius: 15,
-                                border: `1px solid #AF2626`,
+                                borderRadius: 5,
+                                border: `1px solid #D24949`,
                                 "&:hover": {
-                                    background: "rgb(196, 43, 43)",
+                                    background: "rgb(210, 73, 73)",
                                     color: "white",
-                                    border: `1px solid rgb(196, 43, 43)`,
+                                    border: `1px solid rgb(210, 73, 73)`,
                                 },
                             }}
                             type="submit"
@@ -449,6 +525,24 @@ const CreateNewsPost = ({ onBack }) => {
 
 
             </form>
+
+            </div>
+            <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
 
 
         </>

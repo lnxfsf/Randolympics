@@ -6,6 +6,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+
+
 import "../../../styles/blogPosts.scoped.scss";
 
 import Popup from "reactjs-popup";
@@ -66,13 +68,22 @@ function getImageUrl(coverImage) {
 
 const EconomicsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
+  const filePondRef = useRef(null);
+
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+ 
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
+
+   
 
     setOpenSnackbar(false);
   };
@@ -93,7 +104,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
       );
 
       if (response.status === 200) {
-        console.log("Post deleted successfully", response.message);
+        
 
         onBack(true);
       } else {
@@ -103,6 +114,13 @@ const EconomicsDetails = ({ postZ, onBack }) => {
       console.error("Error deleting post:", error);
     }
   };
+
+
+  
+
+  
+
+
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingImage, setEditingImage] = useState(
@@ -175,7 +193,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
       if (response.status === 200) {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
-        console.log(response.data.message);
+        
 
         console.log(
           " novi image treba da zameni sa starijim:" + editCoverImage
@@ -207,6 +225,9 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         }
 
         setIsEditing(false);
+
+        setSnackbarMessage("Post edited");
+        setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
     } catch (error) {
@@ -250,7 +271,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
         setTempEditCoverImage(filename);
@@ -258,6 +279,16 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+ if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
+
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -317,7 +348,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
         }
       );
 
-      console.log(response.data);
+      
       setPost(response.data);
     } catch (error) {
       console.error(error);
@@ -460,15 +491,15 @@ const EconomicsDetails = ({ postZ, onBack }) => {
           open={openSnackbar}
           autoHideDuration={6000}
           onClose={handleSnackbarClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Alert
             onClose={handleSnackbarClose}
-            severity="success"
+            severity={snackbarStatus}
             variant="filled"
             sx={{ width: "100%" }}
           >
-            Post edited
+            {snackbarMessage}
           </Alert>
         </Snackbar>
 
@@ -477,6 +508,7 @@ const EconomicsDetails = ({ postZ, onBack }) => {
             <form action="#" onSubmit={handleUpdatePost}>
               <div className="flex flex-col gap-4">
                 <FilePond
+                 ref={filePondRef}
                   /* className="filepond--root large" */
                   type="file"
                   onupdatefiles={setFiles}
@@ -630,6 +662,10 @@ const EconomicsDetails = ({ postZ, onBack }) => {
           </>
         )}
       </div>
+
+
+
+
     </>
   );
 };

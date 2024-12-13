@@ -12,6 +12,9 @@ import "../../../styles/blogPosts.scoped.scss"
 import { ItemNewsList } from "./ItemNewsList";
 
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 
 let BACKEND_SERVER_BASE_URL =
     import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -27,6 +30,12 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
     const [hasMore, setHasMore] = useState(true);
 
 
+    const [maxPages, setMaxPages] = useState(0);
+
+
+    const handlePaginationChange = (event, value) => {
+        setNewsPostsPage(value);
+      };
 
 
     useEffect(() => {
@@ -70,28 +79,11 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
         );
 
 
-        setNewsPosts(response.data);
+        setMaxPages(Math.ceil(response.data.count / 10));
+        setNewsPosts(response.data.rows);
 
 
 
-
-        const isThereNextPage = await axios.get(
-            `${BACKEND_SERVER_BASE_URL}/blog/news`,
-            {
-                params: {
-                    limit: limit,
-                    offset: (newsPostsPage) * 10,
-
-                },
-
-            }
-        );
-
-        if (isThereNextPage.data.length == 0) {
-            setHasMore(false);
-        } else {
-            setHasMore(true);
-        }
 
 
 
@@ -124,23 +116,25 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
 
 
 
-            <div className="flex justify-center mt-4">
-                <button
 
-                    disabled={newsPostsPage === 1}
-                    onClick={handlePreviousPage}
-                    className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-                >
-                    Previous
-                </button>
-                <button
-                    disabled={!hasMore}
-                    onClick={handleNextPage}
-                    className="px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                    Next Page
-                </button>
-            </div>
+
+            <div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={newsPostsPage}
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
+      </div>
 
 
 
@@ -150,7 +144,7 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
                 style={{
                     position: 'fixed',
                     bottom: 16,
-                    right: 65,
+                    right: 15,
                     zIndex: 1000,
                 }}
 

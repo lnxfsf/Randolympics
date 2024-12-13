@@ -64,20 +64,24 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
-
 function formatDate(dateString) {
-    let date = new Date(dateString);
-    let options = { year: "numeric", month: "long", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  }
-
+  let date = new Date(dateString);
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+}
 
 const NewsDetails = ({ postZ, onBack }) => {
   const popupRef = useRef(null);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const filePondRef = useRef(null);
 
-  const handleSnackbarClose = (event, reason) => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
@@ -101,8 +105,6 @@ const NewsDetails = ({ postZ, onBack }) => {
       );
 
       if (response.status === 200) {
-        console.log("Post deleted successfully", response.message);
-
         onBack(true, false);
       } else {
         console.error("Failed to delete post. Status:", response.status);
@@ -124,7 +126,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
   const [editCoverImage, setEditCoverImage] = useState(post.cover_image);
 
-  const [tempEditCoverImage, setTempEditCoverImage] = useState();
+  const [tempEditCoverImage, setTempEditCoverImage] = useState("");
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -132,7 +134,7 @@ const NewsDetails = ({ postZ, onBack }) => {
     setEditSubTitle(post.subtitle);
     setEditContent(post.content);
 
-    if (tempEditCoverImage) {
+    if (tempEditCoverImage && isEditing) {
       fetch(
         `${BACKEND_SERVER_BASE_URL}/imageUpload/revertBlogs_news_picture_upload`,
         {
@@ -155,7 +157,10 @@ const NewsDetails = ({ postZ, onBack }) => {
         });
     }
 
-    setTempEditCoverImage(null);
+    setTempEditCoverImage("");
+    
+    onBack(false, false);
+    
   };
 
   const handleUpdatePost = async (e) => {
@@ -164,7 +169,46 @@ const NewsDetails = ({ postZ, onBack }) => {
     var title = e.target.title.value;
     var subtitle = e.target.subtitle.value;
 
+
+
+    if(title === ""){
+      setSnackbarMessage("Can't leave title empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+  if(subtitle === ""){
+      setSnackbarMessage("Can't leave subtitle empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+  if(editContent === "" || editContent === "<p><br></p>" || editContent === "<p></p>" ){
+      setSnackbarMessage("Can't leave body content empty");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+          return;
+  }
+
+
+
+
+
+
+
+   //hey, don't replace old image, if that new image is cancelled (if user uploads, and removes, then it shouldn't save it in here as emtpy)
+      // you must update it, but if tempEditCoverImage is "", which will be set on, when you error, or remove it above. and then it uses old url string, and it will work...
+  
     try {
+     
+
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/blog/updateNewsBlog`,
         {
@@ -172,18 +216,15 @@ const NewsDetails = ({ postZ, onBack }) => {
           title,
           subtitle,
           content: editContent,
-          cover_image: tempEditCoverImage,
+          cover_image: tempEditCoverImage !== "" ? tempEditCoverImage : editCoverImage,
         }
       );
 
       if (response.status === 200) {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
-        console.log(response.data.message);
 
-        console.log(
-          " novi image treba da zameni sa starijim:" + editCoverImage
-        );
+       
         // so, we delete previous image (if there was one)
         // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
         // i ako zaista ima neki upload uopste..
@@ -211,13 +252,19 @@ const NewsDetails = ({ postZ, onBack }) => {
         }
 
         setIsEditing(false);
+
+        setSnackbarMessage("Post edited");
+        setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
+
     } catch (error) {
       console.log(error);
 
       // TODO, ovde onaj popup da imas..
     }
+
+
   };
 
   const toolbarOptions = [
@@ -254,14 +301,20 @@ const NewsDetails = ({ postZ, onBack }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
-
         // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
         setTempEditCoverImage(filename);
 
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+              
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -285,6 +338,9 @@ const NewsDetails = ({ postZ, onBack }) => {
       )
         .then((response) => {
           if (response.ok) {
+            // empty tempEditCoverImage 
+            setTempEditCoverImage("");
+
             load(); // Signal that the file has been reverted successfully
           } else {
             response.json().then((errorData) => error(errorData.message));
@@ -321,7 +377,6 @@ const NewsDetails = ({ postZ, onBack }) => {
         }
       );
 
-      console.log(response.data);
       setPost(response.data);
     } catch (error) {
       console.error(error);
@@ -330,9 +385,11 @@ const NewsDetails = ({ postZ, onBack }) => {
 
   return (
     <>
-      <div>
+    
+   
+      <div className="m-4  ">
         {/* controls */}
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-4">
           <IconButton
             className="back-icon"
             aria-label="back"
@@ -382,12 +439,12 @@ const NewsDetails = ({ postZ, onBack }) => {
                       height: "30px",
                       bgcolor: "#fff",
                       color: "#232323",
-                      borderRadius: 15,
+                      borderRadius: 5,
                       border: `1px solid #fff`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                   >
@@ -401,14 +458,14 @@ const NewsDetails = ({ postZ, onBack }) => {
                     sx={{
                       fontSize: "8pt",
                       height: "30px",
-                      bgcolor: "#AF2626",
+                      bgcolor: "#D24949",
                       color: "#fff",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                   >
@@ -422,7 +479,7 @@ const NewsDetails = ({ postZ, onBack }) => {
 
         {!isEditing && (
           <>
-            <div className="lexend-font text-black_second" >
+            <div className="lexend-font text-black_second">
               <div className="coverImageUpcomingGames flex justify-center">
                 <img
                   className="coverImageUpcomingGames"
@@ -433,13 +490,13 @@ const NewsDetails = ({ postZ, onBack }) => {
               <h1 className="text-4xl">{post.title}</h1>
 
               <h2 className="text-xl">{post.subtitle}</h2>
-            
+
               <br />
               <p>Date of publishing: {formatDate(post.createdAt)}</p>
               <p>Updated at: {formatDate(post.updatedAt)}</p>
               <p>Reading time: {readingTime(post.content)} minute read</p>
               <br />
-             
+
               {/*  <p >{post.content} </p> */}
               <div
                 className="ql-editor p-0"
@@ -452,16 +509,16 @@ const NewsDetails = ({ postZ, onBack }) => {
         <Snackbar
           open={openSnackbar}
           autoHideDuration={6000}
-          onClose={handleSnackbarClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          onClose={handleSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Alert
-            onClose={handleSnackbarClose}
-            severity="success"
+            onClose={handleSnackbar}
+            severity={snackbarStatus}
             variant="filled"
             sx={{ width: "100%" }}
           >
-            Post edited
+            {snackbarMessage}
           </Alert>
         </Snackbar>
 
@@ -470,6 +527,7 @@ const NewsDetails = ({ postZ, onBack }) => {
             <form action="#" onSubmit={handleUpdatePost}>
               <div className="flex flex-col gap-4">
                 <FilePond
+                  ref={filePondRef}
                   /* className="filepond--root large" */
                   type="file"
                   onupdatefiles={setFiles}
@@ -520,10 +578,11 @@ const NewsDetails = ({ postZ, onBack }) => {
                     maxLength: 255,
                   }}
                   sx={{
-                    m: 1,
+                    borderRadius: 0,
+                    
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      borderRadius: 0,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
@@ -551,10 +610,10 @@ const NewsDetails = ({ postZ, onBack }) => {
                     maxLength: 255,
                   }}
                   sx={{
-                    m: 1,
+                    
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
-                      borderRadius: 5,
+                      borderRadius: 0,
                     },
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                       {
@@ -568,6 +627,8 @@ const NewsDetails = ({ postZ, onBack }) => {
                   }}
                 />
 
+
+{editContent}
                 <ReactQuill
                   theme="snow"
                   value={editContent}
@@ -584,12 +645,12 @@ const NewsDetails = ({ postZ, onBack }) => {
                       height: "50px",
                       bgcolor: "#fff",
                       color: "#000",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                     variant="text"
@@ -602,14 +663,14 @@ const NewsDetails = ({ postZ, onBack }) => {
                     style={{ marginTop: "20px" }}
                     sx={{
                       height: "50px",
-                      bgcolor: "#AF2626",
+                      bgcolor: "#D24949",
                       color: "#fff",
-                      borderRadius: 15,
-                      border: `1px solid #AF2626`,
+                      borderRadius: 5,
+                      border: `1px solid #D24949`,
                       "&:hover": {
-                        background: "rgb(196, 43, 43)",
+                        background: "rgb(210, 73, 73)",
                         color: "white",
-                        border: `1px solid rgb(196, 43, 43)`,
+                        border: `1px solid rgb(210, 73, 73)`,
                       },
                     }}
                     type="submit"
@@ -623,6 +684,8 @@ const NewsDetails = ({ postZ, onBack }) => {
           </>
         )}
       </div>
+      
+
     </>
   );
 };

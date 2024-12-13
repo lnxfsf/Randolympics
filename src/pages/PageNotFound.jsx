@@ -1,40 +1,40 @@
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 
 const PageNotFound = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
+  return (
+    <>
+      <section class="flex min-h-screen justify-center items-center flex-col">
 
+             
+<img src="/not_found/404_sign.svg" className="w-32 self-center" />
 
-    return (<>
-    
-   <section class="page_404">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 ">
-        <div class="col-sm-10 col-sm-offset-1  text-center">
-          <div class="four_zero_four_bg">
-            <h1 class="text-center ">404</h1>
+         
+       
+              <div class="col-sm-10 col-sm-offset-1  text-center">
+               
+               
 
-          </div>
+              
+         
+                <div class="lexend-font text-semibold">
+                  <p>{t('pagenotfound.title1')}</p>
+                  <p>{t('pagenotfound.title2')}</p><br/>
 
-          <div class="contant_box_404">
-            <h3 class="h2">
-              Look like you're lost
-            </h3>
+                  <p>{t('pagenotfound.title3')} - <span className="underline text-red_second cursor-pointer " onClick={()=>{navigate("/");}}>{t('pagenotfound.title4')}</span></p>
 
-            <p>the page you are looking for not avaible!</p>
-
-            <a class="link_404">Go to Home</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
+                </div>
+              </div>
+          
+          
+       
+      </section>
     </>
-    )
-}
+  );
+};
 
-
-export {PageNotFound}
+export { PageNotFound };

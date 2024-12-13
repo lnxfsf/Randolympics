@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 import YouTube from "react-youtube";
 
+import {Navbar} from "../components/Navbar"
+
 const CompetitionsDetails = () => {
   const { sportName } = useParams();
   const navigate = useNavigate();
@@ -19,10 +21,12 @@ const CompetitionsDetails = () => {
 
   }
 
-  console.log(variations)
-
+ 
   return (
     <>
+      <Navbar />
+
+    
       <div className="lexend-font text-black_second">
         {/*  general info about sport */}
         <div className="m-8 mb-12">
@@ -63,12 +67,12 @@ const CompetitionsDetails = () => {
                 {t(`sportDetails.${sportName}.title1`)}
               </p>
 
-              <p className="text-lg md:text-xl capitalize font-semibold">
+              <p className="text-xl md:text-2xl capitalize font-semibold">
                 {t("sportDetails.common1")}
               </p>
 
               <p
-                className="mt-4"
+                className="mt-4 text-base"
                 dangerouslySetInnerHTML={{
                   __html: t(`sportDetails.${sportName}.desc1`),
                 }}
@@ -95,9 +99,10 @@ const CompetitionsDetails = () => {
                     />
                   </div>
 
-                  <div className="w-full">
+                  <div className="w-full ">
                     <p
                       className=""
+                      
                       dangerouslySetInnerHTML={{
                         __html: variation.desc,
                       }}

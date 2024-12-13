@@ -39,7 +39,7 @@ const formatDate = (dateString) => {
 
 
 
-const FirstScreenHome = () => {
+const FirstScreenHome = ({ scrollToSection }) => {
   const { t } = useTranslation();
 
   const targetDate = new Date("2028-06-25T00:00:00");
@@ -65,7 +65,8 @@ const FirstScreenHome = () => {
 
 
    
-        <p className="text-2xl md:text-4xl p-2 font-bold  text-center" style={{ color: "white" }}>
+    {/* text-2xl md:text-4xl */}
+        <p className="text-2xl md:text-4xl lg:text-5xl 2xl:text-7xl p-2 font-bold  text-center" style={{ color: "white" }}>
           {t('home.firstScreen.title1')} 
           <br />{t('home.firstScreen.title2')} 
           <br />{t('home.firstScreen.title3')} 
@@ -79,39 +80,40 @@ const FirstScreenHome = () => {
 
         <CountDownTimerHome />
 
-     {/*    <div className="flex items-center justify-center  flex-col pt-8">
-          <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
+         <div className="flex items-center justify-center  flex-col pt-8">
+           <p className="text-xl pb-4 text-center" style={{ color: "white" }}>
           {t('home.firstScreen.subtitle1')} 
-          </p>
+          </p> 
 
           <Button
-            onClick={() => {
-              navigate("/randomize");
-            }}
+            /* onClick={scrollToSection}
+             */
+            onClick={() => {navigate("/randomize");}}
+
             className="w-36 "
             style={{ textTransform: "none" }}
             sx={{
               height: "45px",
-              bgcolor: "#D24949",
+              bgcolor: "#BDFCC9",
             
 
               color: "#fff",
               borderRadius: 2,
-              border: `1px solid #D24949`,
+              border: `1px solid #BDFCC9`,
               "&:hover": {
-                background: "rgba(210, 73, 73, 1)",
+                background: "rgba(189, 252, 201, 1)",
                 color: "white",
-                border: `1px solid rgba(210, 73, 73, 1)`,
+                border: `1px solid rgba(189, 252, 201, 1)`,
               },
             }}
             id="randomize-btn"
             type="submit"
           >
-            <span className="popins-font" style={{ textTransform: "none" }}>
+            <span className="lexend-font text-black_second" style={{ textTransform: "none" }}>
               {t('home.firstScreen.subtitle2')} 
             </span>
           </Button>
-        </div> */}
+        </div> 
 
 
   

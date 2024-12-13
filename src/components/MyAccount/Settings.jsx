@@ -143,6 +143,7 @@ const Settings = () => {
         setOpenSnackbarSuccess(true);
 
         popupRefResign.current.close();
+        popupRefWithdraw.current.close();  // withdraw also uses this function, as we hadn't defined withdraw functionality in backend 
       }
     } catch (error) {
       console.log(error);
@@ -161,6 +162,9 @@ const Settings = () => {
           className="rounded-md lexend-font text-black_second select-none font-medium"
           style={{ border: "1.5px solid #C6C6C6" }}
         >
+      
+      
+{user_type !== "SPT" && (<> 
           <div
             className="h-8 flex justify-start items-center gap-2 cursor-pointer"
             onClick={() => {
@@ -183,8 +187,9 @@ const Settings = () => {
             <p>{t('myprofile.settings.content4')}</p>
           </div>
 
-          <hr style={{ border: "1px solid #C6C6C6" }} />
 
+          <hr style={{ border: "1px solid #C6C6C6" }} />
+</>)}
           <div
             className="h-8 flex justify-start items-center gap-2 cursor-pointer"
             onClick={() => {
@@ -200,6 +205,8 @@ const Settings = () => {
 
        
       </div>
+
+
 
       {/* popup for resign */}
       <Popup
@@ -220,6 +227,7 @@ const Settings = () => {
           </div>
 
           <div className="flex justify-center items-center gap-2 m-4">
+      
             <Button
               onClick={resignFromPosition}
               className="w-full"
@@ -328,6 +336,7 @@ const Settings = () => {
           </div>
         </div>
       </Popup>
+     
 
       {/* popup for delete account */}
       <Popup
@@ -399,7 +408,7 @@ const Settings = () => {
         open={openSnackbarError}
         autoHideDuration={6000}
         onClose={handleSnackbarErrorClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarErrorClose}
@@ -416,7 +425,7 @@ const Settings = () => {
         open={openSnackbarSuccess}
         autoHideDuration={6000}
         onClose={handleSnackbarSuccessClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarSuccessClose}

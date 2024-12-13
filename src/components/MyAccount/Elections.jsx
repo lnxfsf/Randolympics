@@ -175,7 +175,7 @@ const Elections = () => {
 
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
-    console.log("ovo ne radi");
+    
   };
 
   const handlePaginationChange = (event, value) => {
@@ -205,8 +205,8 @@ const Elections = () => {
         }
       );
 
-      console.log("top selected ");
-      console.log(response.data);
+      
+      
 
       setTop50Users(response.data);
     } catch (error) {
@@ -235,8 +235,8 @@ const Elections = () => {
         }
       );
 
-      console.log("elections");
-      console.log(response);
+      
+      
 
       setMaxPages(Math.ceil(response.data.count / 10));
       setOtherUsers(response.data.rows);
@@ -337,38 +337,36 @@ const Elections = () => {
       <WarningPassportMessage />
 
       <div className="w-full flex justify-center flex-col gap-4 lexend-font text-black_second">
+       
+       {top50Users[0] && (<>
         <div className="bg-gray_second p-4 flex gap-2 w-[97%] justify-start  ">
           <img src="/myaccount/ballot.svg" />
 
           <p>
-            You voted for{" "}
+            {t('myprofile.elections.votedfor1')}
             <a
               className="text-red_second font-medium"
               href={`profile/${getUserVotedFor()}`}
             >
              {top50Users[0] && (<>{top50Users[0].name} {top50Users[0].lastName}</>)}
             </a>
-            . You can update your vote anytime by repeating the process.
+            . {t('myprofile.elections.votedfor2')}
           </p>
 
           <p></p>
         </div>
+        </>)}
 
         <div className="elections_header  w-[97%] rounded-xl  p-4">
-          <p className="font-semibold text-lg md:text-xl mb-2">
-            National President Elections
-          </p>
+          <p className="font-semibold text-lg md:text-xl mb-2">{currentUserType === "AH" ? t('myprofile.elections.votenp1') : t('myprofile.elections.votegp1')  }</p>
 
           <div className="flex gap-4 flex-col md:flex-row">
             <div className="w-full flex items-start gap-2">
               <img src="/myaccount/info.svg" className="mt-2" />
 
               <div className="grow mt-1">
-                <p className="font-bold">What are you voting for</p>
-                <p>
-                  You are voting for the National President who will represent
-                  your team and country.
-                </p>
+                <p className="font-bold">{t('myprofile.elections.vote1')}</p>
+                <p>{currentUserType === "AH" ? t('myprofile.elections.votenp') : t('myprofile.elections.votegp')  }</p>
               </div>
             </div>
 
@@ -376,10 +374,8 @@ const Elections = () => {
               <img src="/myaccount/vote.svg" className="mt-2" />
 
               <div className="grow mt-1">
-                <p className="font-bold">How To Vote</p>
-                <p>
-                  Select first button on left side, of table, to cast your vote.
-                </p>
+                <p className="font-bold">{t('myprofile.elections.vote2')}</p>
+                <p>{t('myprofile.elections.vote3')}</p>
               </div>
             </div>
           </div>

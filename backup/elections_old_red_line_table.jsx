@@ -165,7 +165,7 @@ const Elections = () => {
   const handleSearch = (he) => {
     // Fired when enter button is pressed.
 
-    console.log("ovo ne radi");
+    
   };
 
 

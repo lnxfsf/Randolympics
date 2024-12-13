@@ -56,6 +56,23 @@ let BACKEND_SERVER_BASE_URL =
 const CreateUpcomingPost = ({ onBack }) => {
 
 
+    const filePondRef = useRef(null);
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+    // error, "success"
+    const [snackbarStatus, setSnackbarStatus] = useState("success");
+  
+    const handleSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    };
+
+
 
 
     const [editTitle, setEditTitle] = useState("")
@@ -199,7 +216,7 @@ const CreateUpcomingPost = ({ onBack }) => {
                 const jsonResponse = JSON.parse(response);
                 const filename = jsonResponse;
 
-                console.log("Uploaded filename:", filename);
+                
 
                 // e ovde, ne treba da menjas original, nego kopiju napravis samo (koju uploadujes.. (i onda ona postaje original posle... ))
                 setTempEditCoverImage(filename)
@@ -209,6 +226,18 @@ const CreateUpcomingPost = ({ onBack }) => {
 
             },
             onerror: (response) => {
+
+                setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+                setSnackbarStatus("error");
+                setOpenSnackbar(true);
+        
+
+ 
+                if (filePondRef.current) {
+                    filePondRef.current.removeFiles();
+                  }
+          
+
                 console.error("Error uploading file:", response);
                 return response;
             },
@@ -268,6 +297,7 @@ const CreateUpcomingPost = ({ onBack }) => {
 
 
                     <FilePond
+                    ref={filePondRef}
                         /* className="filepond--root large" */
                         type="file"
                         onupdatefiles={setFiles}
@@ -439,6 +469,24 @@ const CreateUpcomingPost = ({ onBack }) => {
 
 
             </form>
+
+
+ <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
 
 
         </>

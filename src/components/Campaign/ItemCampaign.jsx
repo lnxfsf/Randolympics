@@ -106,6 +106,7 @@ const ItemCampaign = () => {
   const [supporterComment, setSupporterComment] = useState("");
 
   const [howManySupporters, setHowManySupporters] = useState();
+  const [moreDetailsAboutSupporters, setMoreDetailsAboutSupporters] = useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
   const [lastTransactionsSupporters, setLastTransactionsSupporters] =
     useState();
@@ -119,6 +120,11 @@ const ItemCampaign = () => {
   const [payment, setPayment] = useState(false);
 
   const [showAllSupporters, setShowAllSupporters] = useState(false);
+
+
+
+
+
 
   const donateWithCouponOnly = async () => {
     try {
@@ -137,9 +143,19 @@ const ItemCampaign = () => {
       if (response.status === 200) {
         setSnackbarMessage("Donated");
         setOpenSnackbar(true);
+      } else {
+        
+        setSnackbarMessage(error.response?.data?.message || error.message);
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
       }
-    } catch (e) {
-      console.log(e.stack);
+    } catch (error) {
+
+      
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      console.log(error.stack);
     }
   };
 
@@ -147,10 +163,20 @@ const ItemCampaign = () => {
   const [allTransactionsPage, setAllTransactionsPage] = useState(1);
   const [maxPages, setMaxPages] = useState(0);
 
+
   useEffect(() => {
+
+
+    
+    getAllTransactions(); // you call this again, when opening "All transactions" 
     updateLatestData();
 
+    const interval = setInterval(() => {
+      updateLatestData();
+    }, 1000); 
+
    
+    return () => clearInterval(interval);
   }, [limitAllTransactions, allTransactionsPage]);
 
   
@@ -169,9 +195,9 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log(response.data.oneCampaign);
+      
 
-      console.log(response.data.thatAthlete);
+      
 
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
@@ -225,6 +251,11 @@ const ItemCampaign = () => {
       );
 
       setHowManySupporters(response.data.count);
+      setMoreDetailsAboutSupporters(response.data.rows);
+
+     
+
+
     } catch (error) {
       console.error(error);
     }
@@ -277,16 +308,21 @@ const ItemCampaign = () => {
         }
       );
 
-      console.log("firstSupportersCampaign");
-      console.log(response.data);
+      
+      
 
       setFirstSupportersCampaign(response.data);
     } catch (error) {
       console.error(error);
     }
 
-    /* all transactions , activity */
-    try {
+   
+  };
+
+
+  const getAllTransactions = async () => {
+     /* all transactions , activity */
+     try {
       
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
@@ -299,8 +335,8 @@ const ItemCampaign = () => {
         }
       );
 
-     /*  console.log("saljes ti last coments allTransactionsSupportersCampaign");
-      console.log(response.data.rows);
+     /*  
+      
  */
 
       setMaxPages(Math.ceil(response.data.count / 10));
@@ -309,8 +345,7 @@ const ItemCampaign = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
+  }
   
 
 
@@ -352,9 +387,12 @@ const ItemCampaign = () => {
         <>
           {!viewFullActivity ? (
             <>
+
+
               <SubHeaderPart
                 athlete={athlete}
                 howManySupporters={howManySupporters}
+                moreDetailsAboutSupporters={moreDetailsAboutSupporters}
               />
 
               <div className="flex flex-col lg:flex-row w-full p-3 md:p-8 gap-6 ml-0 ">
@@ -384,6 +422,7 @@ const ItemCampaign = () => {
               <ActivityPart
                 lastTransactionsSupporters={lastTransactionsSupporters}
                 setViewFullActivity={setViewFullActivity}
+                getAllTransactions={getAllTransactions}
               />
             </>
           ) : (
@@ -423,7 +462,7 @@ const ItemCampaign = () => {
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbar}

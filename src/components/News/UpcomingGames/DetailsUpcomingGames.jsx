@@ -58,7 +58,7 @@ const DetailsUpcomingGames = () => {
         }
       );
 
-      console.log(response.data);
+      
       setPost(response.data);
     } catch (error) {
       console.error(error);

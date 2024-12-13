@@ -4,6 +4,10 @@ import { QueryProvider } from "../../QueryProvider";
 import DonationForm from "../Payments/DonationForm";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
+import { OutlinedInput, InputAdornment } from "@mui/material";
 
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 import { PaymentPage } from "../Supporters/PaymentPage";
@@ -12,6 +16,14 @@ import AuthCode from "react-auth-code-input";
 import { useTranslation } from "react-i18next";
 
 import { useEffect, useState, useRef } from "react";
+
+import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
+
+import axios from "axios";
+
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const inputLabelPropsTextField = {
   sx: {
@@ -60,13 +72,94 @@ const DonatePart = ({
   athlete,
   setDiscountCode,
   donateWithCouponOnly,
-  
+
   viewFullActivity,
   howManySupporters,
 }) => {
+  const donateBeforeStripe = async () => {
+    try {
+
+     
+
+
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
+        {
+          campaignId,
+          supporterName,
+          supporterEmail,
+          supporterComment,
+          discountCode: discountCode,
+          countryAthleteIsIn,
+          amountOriginal: amount * 100,
+        }
+      );
+
+      if (response.status === 200) {
+        setSnackbarMessage("Donation succeeded");
+        setSnackbarStatus("success");
+        setOpenSnackbar(true);
+      }
+    } catch (e) {
+      console.log(e.stack);
+    }
+  };
+
+
+  const checkIfCouponValid = async () => {
+
+    try{
+const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
+  {discountCode,
+    countryAthleteIsIn,
+    amountOriginal: amount * 100,
+  }
+
+
+);
+
+
+if (response.status !== 200){
+  setSnackbarStatus("error");
+  setSnackbarMessage(error.response?.data?.message || error.message);
+  setOpenSnackbar(true);
+
+  return false;
+}
+
+return true;
+
+    }catch(e){
+      setSnackbarStatus("error");
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setOpenSnackbar(true);
+
+      console.log(e.stack);
+      return false;
+
+      
+    }
+  }
+
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
 
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  useEffect(() => {}, [amount, discountCode]);
 
   return (
     <>
@@ -74,33 +167,34 @@ const DonatePart = ({
         className="lexend-font text-black_second  flex  flex-col justify-start  rounded-2xl p-6 md:p-8 w-full "
         style={{ boxShadow: "4px 4px 10px 0px #0000001A" }}
       >
-        <p className="font-bold text-xl md:text-2xl">{t("campaign.content70")}</p>
+        <p className="font-bold text-xl md:text-2xl">
+          {t("campaign.content70")}
+        </p>
 
-        <div className="flex justify-between mt-4">
-          <div>
+        <div className="flex justify-between mt-4 mb-4 gap-4">
+          <div className={`${viewFullActivity ? "basis-1/3" : "basis-1/2"}`}>
             <p className="text-[#616673]">{t("campaign.content71")}</p>
-            <p className="text-xl font-medium">
+            <p className="text-xl font-medium break-all ">
               ${athlete.donatedAmount / 100}
             </p>
           </div>
 
-
-           {viewFullActivity && (
+          {viewFullActivity && (
             <>
-              <div>
-              <p className="text-[#616673]">{t("campaign.content72")}</p>
-            <p className="text-xl font-medium">
-              {howManySupporters}
-            </p>
-
+              <div className="basis-1/3">
+                <p className="text-[#616673]">{t("campaign.content72")}</p>
+                <p className="text-xl font-medium break-all">
+                  {howManySupporters}
+                </p>
               </div>
             </>
-          )} 
+          )}
 
-
-          <div>
+          <div className={`${viewFullActivity ? "basis-1/3" : "basis-1/2"}`}>
             <p className="text-[#616673]">{t("campaign.content73")}</p>
-            <p className="text-xl font-medium">{campaign.supporterName}</p>
+            <p className="text-xl font-medium break-all">
+              {campaign.supporterName}
+            </p>
           </div>
         </div>
 
@@ -138,7 +232,7 @@ const DonatePart = ({
           <>
             <div className="flex flex-col ">
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content74")}
+                {t("campaign.content74")}
               </p>
               <TextField
                 value={supporterName}
@@ -155,7 +249,7 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content75")}
+                {t("campaign.content75")}
               </p>
               <TextField
                 value={supporterEmail}
@@ -172,7 +266,7 @@ const DonatePart = ({
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
-              {t("campaign.content76")}
+                {t("campaign.content76")}
               </p>
               <TextField
                 value={supporterComment}
@@ -188,7 +282,7 @@ const DonatePart = ({
                 sx={sxTextField}
               />
 
-              <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
+              {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
                 <ThemeProvider theme={theme}>
                   <QueryProvider>
                     <DonationFormItemCampaign
@@ -206,7 +300,167 @@ const DonatePart = ({
                 </ThemeProvider>
               </div>
 
-              <div className="m-4 flex justify-center  items-center flex-col">
+
+
+              <div className=" w-full flex justify-center items-center">
+                <div className="p-8 w-full sm:w-1/2 md:w-[60%]  ">
+                  <PayPalButtons
+                    /* key={`${amount}-${discountCode}`} 
+                    key={`${amount}-${discountCode}-${supporterName}-${supporterEmail}-${supporterComment}`}
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: amount,
+                            },
+                          },
+                        ],
+                      });
+                    }}
+                    onApprove={(data, actions) => {
+                      return actions.order.capture().then(async (details) => {
+                        /*   console.log(
+                        `Transaction completed by ${details.payer.name.given_name}`
+                      );
+                       /
+                        // Handle successful transaction here (e.g., send details to backend)
+                        // now, send details to backend, and confirm transaction, and then you can insert it in database info you need.
+
+                        // TODO, yes, you'll need to send other stuff, you usually create payment with stripe... to first have it in database. and then, you call confirm payment. so you don't change code much at all. and all test remain good.
+                        // testing paypal can be done with E2E testing, on UI
+
+                        try {
+                          const response = await axios.post(
+                            `${BACKEND_SERVER_BASE_URL}/payment/confirmPaypalTransaction`,
+                            {
+                              /*   discountCode: discountCode,
+          campaignId: campaignId,
+
+          supporterEmail: supporterEmail,
+          supporterName: supporterName,
+          supporterComment: supporterComment, /
+
+                              transactionId: details.id,
+
+                              supporterName,
+                              supporterEmail,
+                              supporterComment,
+                              separateDonationThruPage: true,
+
+                              discountCode: discountCode,
+                              campaignId,
+                              countryAthleteIsIn,
+                            }
+                          );
+
+                          if (response.status === 200) {
+                            setSnackbarMessage("Donation succeeded");
+                            setSnackbarStatus("success");
+                            setOpenSnackbar(true);
+                          }
+                        } catch (e) {
+                          console.log(e.stack);
+
+                          setSnackbarMessage("Donation failed");
+                          setSnackbarStatus("error");
+                          setOpenSnackbar(true);
+                        }
+                      });
+                    }}
+                    /* show only paypal button (not credit card) /
+                    fundingSource={FUNDING.PAYPAL}
+                  />
+                </div>
+              </div> */}
+
+              <div className=" self-center w-[50%] mb-2 mt-8">
+                <OutlinedInput
+                  type="number"
+                  value={amount}
+                  onChange={(e) => {
+
+                    /* no negative numbers allowed for donation */
+                    /* allow it to be cleared */
+                     if(e.target.value === ""){
+                      setAmount(e.target.value);
+                    } else {
+
+                      const tempNumber = Number(e.target.value);
+
+                      if (tempNumber < 1) {
+                        setAmount(1);
+                      } else {
+                        setAmount(tempNumber); 
+                      }
+
+
+                    }
+ 
+
+                  }}
+
+                  startAdornment={
+                    <InputAdornment
+                      position="start"
+                      sx={{ fontFamily: "'Lexend', sans-serif" }}
+                    >
+                      $
+                    </InputAdornment>
+                  }
+                  fullWidth
+                  inputProps={{ min: 1 }}
+                  sx={{
+                    fontFamily: "'Lexend', sans-serif",
+                    // Hide arrows for WebKit browsers (Chrome, Safari, Edge, Opera)
+                    "input[type=number]::-webkit-inner-spin-button": {
+                      WebkitAppearance: "none",
+                      margin: 0,
+                    },
+                    "input[type=number]::-webkit-outer-spin-button": {
+                      WebkitAppearance: "none",
+                      margin: 0,
+                    },
+                    // Hide arrows
+                    "input[type=number]": {
+                      MozAppearance: "textfield",
+                    },
+                  }}
+                />
+              </div>
+
+              <Button
+                onClick={
+                  () => {
+                  if(checkIfCouponValid()){
+                    donateBeforeStripe();
+                  }
+
+                }
+                }
+                className="self-center  w-[50%] "
+                /* w-full md:w-50% */
+                style={{ textTransform: "none" }}
+                sx={{
+                  mb: 8,
+                  height: "50px",
+                  bgcolor: "#D24949",
+
+                  color: "#fff",
+                  borderRadius: 3,
+                  border: `1px solid #D24949`,
+                  "&:hover": {
+                    background: "rgba(210, 73, 73, 1)",
+                    color: "white",
+                    border: `1px solid rgba(210, 73, 73, 1)`,
+                  },
+                }}
+                id="join-the-fun-btn"
+              >
+                <span className="lexend-font">Donate</span>
+              </Button>
+
+              <div className="m-4  flex justify-center  items-center flex-col">
                 <p>{t("campaign.content78")}</p>
 
                 {/*   <input
@@ -249,6 +503,22 @@ const DonatePart = ({
                 </Button>
               </div>
             </div>
+
+            <Snackbar
+              open={openSnackbar}
+              autoHideDuration={6000}
+              onClose={handleSnackbar}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+              <Alert
+                onClose={handleSnackbar}
+                severity={snackbarStatus}
+                variant="filled"
+                sx={{ width: "100%" }}
+              >
+                {snackbarMessage}
+              </Alert>
+            </Snackbar>
           </>
         )}
       </div>

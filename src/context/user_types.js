@@ -39,6 +39,8 @@ export const settingUserType = (user_type) => {
       case "RS":
         return i18next.t('userTypes.user_type11');
         
+      case "SPT": 
+      return i18next.t('userTypes.user_type13');
       default:
         return i18next.t('userTypes.user_type12');
 

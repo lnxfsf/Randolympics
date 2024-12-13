@@ -75,9 +75,9 @@ const UpdateAthleteStatus = () => {
   };
 
   const submitChangeStatus = async (athleteStatusS2, autoUpdate) => {
-    console.log("in submitChangeStatus");
-    console.log(athleteEmail);
-    console.log(athleteStatus);
+    
+    
+    
 
     if (!autoUpdate) {
       try {
@@ -101,7 +101,7 @@ const UpdateAthleteStatus = () => {
           navigate("/myaccount");
         }
       } catch (error) {
-        console.log("ne radi nista");
+        
         console.log(error);
       }
     } else if (loaded) {
@@ -135,7 +135,7 @@ const UpdateAthleteStatus = () => {
           setLoaded(false); // we do it only once, so we don't call this again..
         }
       } catch (error) {
-        console.log("ne radi nista");
+        
         console.log(error);
       }
     }

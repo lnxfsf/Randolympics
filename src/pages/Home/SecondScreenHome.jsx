@@ -6,16 +6,30 @@ import { useNavigate } from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 
-const SecondScreenHome = () => {
+const SecondScreenHome = ({ sectionRef }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
-    <>
+
+
+    <> 
+    
+    <div className="flex justify-center  mt-12">  
+      
+
+      <p ref={sectionRef}  className="text-3xl md:text-4xl font-bold text-black_second lexend-font text-center">
+      {t('home.secondScreen.title3')}
+      </p>
+    </div>
+
+
+
       {/* min-h-screen */}
       <div className="flex h-auto mt-6 p-8 lg:p-16 text-black_second lexend-font gap-8">
         <div className="lg:basis-1/2 flex items-center justify-end">
-          <div className="">
+       
+          <div className=" 2xl:basis-1/2">
             {/* // lg:p-12 */}
 
             <p className="text-2xl md:text-4xl font-bold mb-4">
@@ -23,31 +37,31 @@ const SecondScreenHome = () => {
             {t('home.secondScreen.title2')}
             </p>
 
-            <p className="font-medium mb-4">
+            <p className="font-medium mb-1">
             {t('home.secondScreen.content1')}
             </p>
 
-            <ul className="pl-4 font-medium  ">
-              <li className="text-base">
+            
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content2')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content3')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content4')}
                 
-              </li>
+              </p>
 
-              <li className="text-base">
+              <p className="font-medium text-base mb-1">
               {t('home.secondScreen.content5')}
                 
-              </li>
-            </ul>
+              </p>
+           
 
             {/* buttons */}
 
@@ -78,7 +92,7 @@ const SecondScreenHome = () => {
                 </span>
               </Button>
 
-              <Button
+            {/*   <Button
                 onClick={() => {
                   navigate("/login");
                 }}
@@ -99,13 +113,13 @@ const SecondScreenHome = () => {
                 variant="text"
               >
                 <span className="lexend-font font-semibold">{t('home.secondScreen.button2')}</span>
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
 
         <div className="hidden basis-1/2 lg:flex justify-start items-center ">
-          <img src="/home/second_screen.jpg" className="w-full 2xl:w-[50%] rounded-2xl" />
+          <img src="/home/free_flights.jpg" className="w-full 2xl:w-[40%] rounded-2xl" />
         </div>
       </div>
     </>

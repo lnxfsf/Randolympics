@@ -1,8 +1,9 @@
 import Button from "@mui/material/Button";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 
-const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
+const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewFullActivity }) => {
 
   const { t } = useTranslation();
 
@@ -17,15 +18,15 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
         >
           <p className="font-bold text-xl md:text-2xl">{t("campaign.content65")}</p>
 
-          <div className="flex w-full flex-col mt-4">
+          <div className="flex w-full flex-col mt-4" >
             {lastTransactionsSupporters &&
               lastTransactionsSupporters.map((item, index) => (
-                <>
+                <React.Fragment key={index}>
                   {/* pl-4 pr-4 */}
-                  <div className="flex w-full flex-col justify-start items-start mt-1 mb-1   ">
+                  <div  className="flex w-full flex-col justify-start items-start mt-1 mb-1   ">
                     <div className="flex w-full  items-center justify-between">
                      
-                      <p key={index} className="  ">
+                      <p className="  ">
                         
                        
                         {item.supporterName !== '' ? (<>{item.supporterName}</>) : (<>{t("campaign.content66")}</>)}
@@ -44,7 +45,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
                       {item.supporterComment}
                     </p>
                   </div>
-                </>
+                  </React.Fragment>
               ))}
           </div>
 
@@ -60,6 +61,7 @@ const ActivityPart = ({ lastTransactionsSupporters, setViewFullActivity }) => {
 
           <Button
             onClick={() => {
+              getAllTransactions();
               setViewFullActivity(true);
             }}
             className="w-full "

@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { WarningPassportMessage } from "../components/MyAccount/WarningPassportMessage";
+import { CreatedCampaigns } from "../components/MyAccount/CreatedCampaigns";
 
 const MyAccount = () => {
   const { t } = useTranslation();
@@ -62,6 +63,10 @@ const MyAccount = () => {
         setSelectedItem("settings");
         break;
 
+      case "createdCampaigns":
+        setSelectedItem("createdCampaigns");
+        break;
+
       case "news":
         setSelectedItem("news");
         break;
@@ -81,6 +86,7 @@ const MyAccount = () => {
   // Create refs for each list item
   const myAccountRef = useRef(null);
   const settingsRef = useRef(null);
+  const createdCampaignsRef = useRef(null);
   const teamRef = useRef(null);
   const electionsRef = useRef(null);
 
@@ -138,6 +144,26 @@ const MyAccount = () => {
               </div>
             </li>
 
+
+
+            <li
+              style={{ listStyleType: "none" }}
+              ref={createdCampaignsRef}
+              className={`list-item ${
+                selectedItem === "createdCampaigns" ? "selected" : ""
+              }`}
+              onClick={() => handleClick("createdCampaigns")}
+            >
+              <div className="flex justify-between">
+                <p className="text-red_second font-medium ">
+                  {t("myprofile.side_nav.side_nav9")}
+                </p>
+                <img src="/myaccount/team.svg" className="icon" />
+              </div>
+            </li>
+
+
+{user_type !== "SPT" && (<>
             <li
               style={{ listStyleType: "none" }}
               ref={teamRef}
@@ -154,7 +180,8 @@ const MyAccount = () => {
                 <img src="/myaccount/team.svg" className="icon" />
               </div>
             </li>
-
+            </>)}
+            
             {(user_type === "AH" || user_type === "NP") && (
               <li
                 style={{ listStyleType: "none" }}
@@ -268,6 +295,8 @@ const MyAccount = () => {
         <div className="w-full">
           {selectedItem === "myAccount" && <EditProfile />}
           {selectedItem === "settings" && <Settings />}
+
+          {selectedItem === "createdCampaigns" && <CreatedCampaigns /> }
           {selectedItem === "team" && <Team />}
 
           {selectedItem === "elections" && <Elections />}
@@ -276,6 +305,8 @@ const MyAccount = () => {
 
           {selectedItem === "passportVerification" && <PassportVrfy />}
           {selectedItem === "loginTrafficHistory" && <LgnTraffcHistory />}
+
+
         </div>
       </div>
 

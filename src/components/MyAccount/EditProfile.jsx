@@ -28,7 +28,6 @@ import Menu from "@mui/material/Menu";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-
 //we display it as fragment, inside MyProfile...
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -109,9 +108,6 @@ const sxTextField = {
 };
 
 const EditProfile = () => {
-
-
-  
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -127,12 +123,13 @@ const EditProfile = () => {
     setOpenSnackbar(false);
   };
 
-
-
   /*   const [toogleProfilePic, setToogleProfilePic] = useState(false);
    */
   const [userData, setUserData] = useState(null);
   const popupPassportRef = useRef(null); // popup for showing passport image
+
+  const filePondRef = useRef(null);
+   
 
   const { t } = useTranslation();
 
@@ -296,6 +293,8 @@ const EditProfile = () => {
 
       setBio(userJson.data.bio);
 
+      setSelectedRole(userJson.data.user_type);
+
       if (!passportUpload) {
         setPassportImage(userJson.data.passport_photo);
       }
@@ -336,8 +335,6 @@ const EditProfile = () => {
         } else if (sessionStorage.getItem("authTokens")) {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
-
-        console.log(response);
       }
     } catch (error) {
       console.log(error);
@@ -365,7 +362,7 @@ const EditProfile = () => {
 
   //const FDate = dayjs(selectedDate);
   //setFormattedDate(FDate.format('MMMM DD, YYYY'));
-  // console.log(formattedDate);
+  //
 
   const [selectedRole, setSelectedRole] = useState("AH"); //athlete , just for developing
   const [nationality_selected, setNationality_selected] = useState("");
@@ -528,11 +525,21 @@ const EditProfile = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
         setPassportImage(filename);
         // return filename;
       },
       onerror: (response) => {
+
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -575,8 +582,6 @@ const EditProfile = () => {
 
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
-
-        console.log("Uploaded filename:", filename);
 
         /* setProfileImage(filename); */
 
@@ -630,10 +635,8 @@ const EditProfile = () => {
         setPassportUpload(!passportUpload);
       }
 
-     
       setSnackbarMessage("Profile details saved successfully !");
-        setOpenSnackbar(true);
-
+      setOpenSnackbar(true);
     } catch (error) {
       console.log(error);
     }
@@ -669,7 +672,6 @@ const EditProfile = () => {
       // if "lb" is selected. we upload in database in "kg". so we do converstion from "lb" -> "kg"
       if (selectedWeight === "Lb") {
         weight = weight * 0.45359237;
-        console.log(weight);
       }
     }
 
@@ -725,22 +727,16 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-       
-
         setSnackbarMessage("Profile details saved successfully !");
         setOpenSnackbar(true);
-
       }
     } catch (error) {
       console.log(error);
-     
 
       setSnackbarMessage("There was some error !");
       setSnackbarStatus("error");
 
-        setOpenSnackbar(true);
-
-
+      setOpenSnackbar(true);
     }
   };
 
@@ -775,12 +771,8 @@ const EditProfile = () => {
         }
       }
 
-      
-
       setSnackbarMessage("Profile details saved successfully !");
       setOpenSnackbar(true);
-
-
     } catch (error) {
       console.log(error);
     }
@@ -789,7 +781,7 @@ const EditProfile = () => {
   return (
     <>
       <div>
-        <HeaderMyProfile ShowEditProfile={true} />
+        <HeaderMyProfile ShowEditProfile={true} setSnackbarMessage={setSnackbarMessage} setSnackbarStatus={setSnackbarStatus} setOpenSnackbar={setOpenSnackbar} />
 
         {/*  <div className="flex justify-start">
           <div className="flex justify-center items-center">
@@ -901,15 +893,13 @@ const EditProfile = () => {
               </p>
               <TextField
                 value={userData && userData.data.name}
-               onChange={handleNameChange}
-
-                
+                onChange={handleNameChange}
                 placeholder="John Doe"
                 id="name"
                 name="name"
                 type="text"
                 inputProps={{
-                  maxLength: 255,
+                  maxLength: 30,
                 }}
                 sx={sxTextField}
               />
@@ -1209,7 +1199,7 @@ const EditProfile = () => {
               </p>
               <ReactFlagsSelect
                 countries={supportedCountry}
-                disabled
+                disabled={userData && userData.data.user_type !== "SPT"}
                 // to fill it with the one, which user's is currently selected...
                 selected={
                   nationality_selected ||
@@ -1310,6 +1300,7 @@ const EditProfile = () => {
             {passportUpload && (
               <>
                 <FilePond
+                ref={filePondRef}
                   className="filepond--root large"
                   type="file"
                   onupdatefiles={setFiles}
@@ -1447,12 +1438,22 @@ const EditProfile = () => {
                   },
                 }}
                 inputProps={{
-                  maxLength: 255,
+                  maxLength: 250,
                   style: {
                     resize: "vertical",
                   },
                 }}
               />
+
+              {userData && (
+                <>
+                  <p className="text-xs mt-1 text-gray-600">
+                    {`${250 - userData.data.bio.length} ${t(
+                      "myprofile.myaccount.content34"
+                    )} `}
+                  </p>
+                </>
+              )}
             </div>
           </div>
 
@@ -1537,7 +1538,7 @@ const EditProfile = () => {
                 },
               }}
               inputProps={{
-                maxLength: 255,
+                maxLength: 250,
                 style: {
                   resize: "vertical",
                 },
@@ -1644,18 +1645,14 @@ const EditProfile = () => {
               </span>
             </Button>
           </div>
-
-        
         </form>
       </div>
-
-
 
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbar}
@@ -1666,7 +1663,6 @@ const EditProfile = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-
     </>
   );
 };

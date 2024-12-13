@@ -10,19 +10,21 @@ import Stack from "@mui/material/Stack";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-
 import { Button } from "@mui/material";
 
-
-
 import TuneIcon from "@mui/icons-material/Tune";
-import RestoreIcon from '@mui/icons-material/Restore';
+import RestoreIcon from "@mui/icons-material/Restore";
 
 import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../../context/supportedCountry";
 
-import { FormControl, InputLabel, Select, MenuItem, Divider  } from "@mui/material";
-
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider,
+} from "@mui/material";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -34,32 +36,24 @@ const LgnTraffcHistory = () => {
   const [listOfLoginsPage, setListOfUsersPage] = useState(1);
   const [maxPages, setMaxPages] = useState(0);
 
-  
-
   const [filterRole, setFilterRole] = useState();
-  const [filterNationality_selected, setFilterNationality_selected] = useState(() => {
-    // it uses currently user's country, just so it displays less, when first loaded. and just can filter later on by country.. 
+  const [filterNationality_selected, setFilterNationality_selected] = useState(
+    () => {
+      // it uses currently user's country, just so it displays less, when first loaded. and just can filter later on by country..
 
-    const storedData =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens");
+      const storedData =
+        localStorage.getItem("authTokens") ||
+        sessionStorage.getItem("authTokens");
 
       if (storedData) {
         const userJson = JSON.parse(storedData);
-        return userJson.data.nationality; // 
+        return userJson.data.nationality; //
       }
-
-  });
-
-
-
+    }
+  );
 
   // popup
   const popupRef = useRef(null);
-
-
-
-
 
   useEffect(() => {
     fetchlistOfLogins();
@@ -72,7 +66,6 @@ const LgnTraffcHistory = () => {
   const resetFilterFields = () => {
     setFilterRole();
     setFilterNationality_selected();
-   
   };
 
   const fetchlistOfLogins = async () => {
@@ -84,7 +77,7 @@ const LgnTraffcHistory = () => {
             limit: 10,
             offset: (listOfLoginsPage - 1) * 10,
 
-            user_type: filterRole,  // to also filter by user_type
+            user_type: filterRole, // to also filter by user_type
 
             nationality: filterNationality_selected,
           },
@@ -93,30 +86,22 @@ const LgnTraffcHistory = () => {
 
       setMaxPages(Math.ceil(response.data.count / 10));
       setListOfUsers(response.data.rows);
-
-    
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
   };
 
-
-  
   const handlePaginationChange = (event, value) => {
     setListOfUsersPage(value);
   };
 
-  
-
   return (
     <>
-    
-    
-
       <div className="flex justify-between items-center lexend-font text-black_second p-2">
-        <p className="text-lg md:text-xl font-medium">Login & Traffic History</p>
+        <p className="text-lg md:text-xl font-medium">
+          Login & Traffic History
+        </p>
         <div className="m-4 flex justify-center items-center">
-       
           <Popup
             ref={popupRef}
             trigger={
@@ -171,23 +156,43 @@ const LgnTraffcHistory = () => {
                   },
                 }}
               >
-                <span className="popins-font">Reset fields</span>
+                <span className="lexend-font">Reset fields</span>
               </Button>
 
               <FormControl
-                variant="standard"
-                sx={{ m: 1, minWidth: 120 }}
-                className="m-4 ml-0 mb-1"
+                sx={{
+                  m: 1,
+                  minWidth: 120,
+
+                  "& .MuiInputBase-root": {
+                    height: "45px",
+                    fontSize: "0.875rem",
+                  },
+                }}
+                className="m-4 ml-0 mb-1 max-md:w-full "
               >
-                <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                {/*    <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
                   <b>Role</b>
-                </InputLabel>
+                </InputLabel> */}
+                <p className="lexend-font font-medium text-sm">Role</p>
 
                 <Select
                   labelId="roleDropdowns"
                   value={filterRole}
                   onChange={handleFilterRole}
                   className="w-full md:w-[300px]"
+                  /*  style={{ color: "#000" }} */
+                  sx={{
+                    fontFamily: "'Lexend', sans-serif",
+
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      fontFamily: "'Lexend', sans-serif",
+                    },
+                    "& fieldset": {
+                      borderRadius: 2,
+                    },
+                  }}
                   style={{ color: "#000" }}
                 >
                   <MenuItem value="">None</MenuItem>
@@ -207,9 +212,11 @@ const LgnTraffcHistory = () => {
                 </Select>
               </FormControl>
 
+              <p className="lexend-font font-medium text-sm ml-2 self-start">
+                Nationality
+              </p>
               <ReactFlagsSelect
-              
-              countries={supportedCountry}
+                countries={supportedCountry}
                 selected={filterNationality_selected}
                 onSelect={(code) => setFilterNationality_selected(code)}
                 className="w-full md:w-[300px]  "
@@ -218,13 +225,10 @@ const LgnTraffcHistory = () => {
                 name="nationality"
                 placeholder="Nationality"
               />
-
-             
             </div>
           </Popup>
         </div>
       </div>
-
 
       <div className="mt-8">
         <table className="w-full lexend-font text-black_second">
@@ -243,10 +247,6 @@ const LgnTraffcHistory = () => {
         </table>
       </div>
 
-
-
-
-      
       <div className="flex justify-center items-start mt-4    w-full ">
         <Stack>
           <Pagination
@@ -264,9 +264,6 @@ const LgnTraffcHistory = () => {
           />
         </Stack>
       </div>
-
-
-
     </>
   );
 };

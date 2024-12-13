@@ -183,9 +183,10 @@ const Navbar = () => {
                 {/* // when logged in */}
 
                 <Tooltip title="Account settings">
-                  <div className="flex gap-2 items-center justify-center">
+                  <>
+                  <div className="flex gap-2 items-center justify-center select-none cursor-pointer"  onClick={handleClick}>
                     <IconButton
-                      onClick={handleClick}
+                     /*  onClick={handleClick} */
                       size="small"
                       sx={{ ml: 2 }}
                       aria-controls={open1 ? "account-menu" : undefined}
@@ -208,7 +209,7 @@ const Navbar = () => {
                       )}
                     </IconButton>
                     <p
-                      onClick={handleClick}
+                     /*  onClick={handleClick} */
                       className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer"
                     >
                       {settingUserType(user_type)}
@@ -221,10 +222,14 @@ const Navbar = () => {
                     open={open1}
                     onClose={handleClose}
                     onClick={handleClose}
+                     className="max-w-[26rem]"  
                     PaperProps={{
+
                       elevation: 0,
                       sx: {
-                        overflow: "visible",
+                      
+                        overflowY: "auto",
+                        overflowX: "hidden",
                         filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                         mt: 1.5,
                         "& .MuiAvatar-root": {
@@ -266,9 +271,18 @@ const Navbar = () => {
                         </Avatar>
                       )}
 
-                      <span className="lexend-font text-black_second ">
+                      <p className="lexend-font text-black_second break-all"
+                      
+                      style={{
+                        wordWrap: "break-word",
+                        whiteSpace: "normal",
+                        overflowWrap: "break-word",
+                     
+                      }}
+
+                      >
                         {username}
-                      </span>
+                      </p>
                     </MenuItem>
                     <Divider />
 
@@ -279,21 +293,37 @@ const Navbar = () => {
                           className="icon"
                         />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
+                      <span className="lexend-font text-black_second break-all">
                         {t("navbar.profile1")}
                       </span>
                     </MenuItem>
 
+
+
+                    <MenuItem to="/myaccount#createdCampaigns" component={Link}>
+                      <ListItemIcon>
+                        <img
+                          src="/myaccount/team_dark.svg"
+                          className="icon"
+                        />
+                      </ListItemIcon>
+                      <span className="lexend-font text-black_second break-all">
+                        {t("navbar.profile10")}
+                      </span>
+                    </MenuItem>
+
+{(userData.data.user_type !== "SPT") && (<>
                     <MenuItem to="/myaccount#team" component={Link}>
                       <ListItemIcon>
                         <img src="/myaccount/team_dark.svg" className="icon" />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second ">
+                      <span className="lexend-font text-black_second break-all">
                         {t("navbar.profile2")}
                       </span>
                     </MenuItem>
+                    </>)}
 
-                    {userData.data.user_type !== "VM" && (
+                    {(userData.data.user_type === "AH" || userData.data.user_type === "NP" ) && (<>
                       <MenuItem to="/myaccount#elections" component={Link}>
                         <ListItemIcon>
                           <img
@@ -301,10 +331,11 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile3")}
                         </span>
                       </MenuItem>
+                      </>
                     )}
 
                     {(userData.data.user_type === "EM" ||
@@ -321,7 +352,7 @@ const Navbar = () => {
                               className="icon"
                             />
                           </ListItemIcon>
-                          <span className="lexend-font text-black_second ">
+                          <span className="lexend-font text-black_second break-all">
                             {t("navbar.profile4")}
                           </span>
                         </MenuItem>
@@ -339,7 +370,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile5")}
                         </span>
                       </MenuItem>
@@ -362,7 +393,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second ">
+                        <span className="lexend-font text-black_second break-all">
                           {t("navbar.profile6")}
                         </span>
                       </MenuItem>
@@ -372,11 +403,12 @@ const Navbar = () => {
                       <ListItemIcon>
                         <Logout fontSize="small" style={{ color: "#D24949" }} />
                       </ListItemIcon>
-                      <span className="lexend-font text-red_second ">
+                      <span className="lexend-font text-red_second break-all">
                         {t("navbar.profile7")}
                       </span>
                     </MenuItem>
                   </Menu>
+                  </>
                 </Tooltip>
               </>
             ) : (

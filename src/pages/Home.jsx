@@ -4,7 +4,7 @@
 /* import "animate.css";
 import "@mui/material/styles/styled"; */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import "../styles/home.scoped.scss";
@@ -44,6 +44,16 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SearchForUsers } from "./Home/SearchForUsers";
+import { FifthScreenHomeOld } from "./Home/FifthScreenHomeOld";
+import { SixthScreenHomeAnother } from "./Home/SixthScreenHomeAnother";
+import { SixthScreenHomeAnother2 } from "./Home/SixthScreenHomeAnother2";
+import { FifthScreenHomeOld2 } from "./Home/FifthScreenHomeOld2";
+import { FifthScreenHomeOld3 } from "./Home/FifthScreenHomeOld3";
+import { SecondScreenHome2 } from "./Home/SecondScreenHome2";
+import { SecondScreenHome3 } from "./Home/SecondScreenHome3";
+import { FifthScreenHomeNewDesign } from "./Home/FifthScreenHomeNewDesign";
+import { ImagineHomeScreen } from "./Home/ImagineHomeScreen";
+import { CookieMain } from "../components/cookies/CookieMain";
 
 // ? expand more, arrow icon transformation
 
@@ -76,6 +86,10 @@ const Home = () => {
     AOS.init();
   }, []); */
 
+
+  const sectionRef = useRef(null);
+
+
   return (
     <>
       <Helmet>
@@ -89,22 +103,76 @@ const Home = () => {
 
       <Navbar />
 
-      <FirstScreenHome />
-      <FifthScreenHome />
-      <SeventhScreenHome />
 
-      {/* 
-      <SecondScreenHome /> */}
 
+      <FirstScreenHome scrollToSection={() => sectionRef.current.scrollIntoView({ behavior: 'smooth' })} />
+        
+      <ImagineHomeScreen />
+
+
+
+      <FifthScreenHomeNewDesign />
+      <div className="flex items-start lexend-font text-black_second flex-col">
+      <p className="ml-6 mr-6 pl-2 pr-2 2xl:w-[50%] 2xl:text-center self-center">
+      <br /> {t("home.seventhScreen.content20")}
+          <a href="/supporters" className="underline text-red_second">
+            {t("home.seventhScreen.content21")}
+          </a>{" "}
+          {t("home.seventhScreen.content22")}
+          <br />
+          <br />
+          {t("home.seventhScreen.content23")}
+          </p>
+          </div>
+
+      <SecondScreenHome sectionRef={sectionRef}/> 
+
+
+
+
+
+      <SecondScreenHome3 />
+      
+      <SecondScreenHome2 />
+
+
+
+      {/* <FifthScreenHome /> */}
+
+     {/* <FifthScreenHomeOld /> */}
+
+
+
+
+
+
+
+
+
+
+
+      <SixthScreenHomeAnother2 />
+      
       <ThirdScreenHome />
 
-      <div
+      <SeventhScreenHome />
+
+
+    
+
+
+    {/*   
+
+    // Read more about our four types of income
+    
+    
+    <div
         className={`flex  items-center w-full bg-black text-white mt-4 ${
           expanded ? "rounded-t-lg" : "rounded-lg"
         }   pl-2 pr-2`}
       >
         <p
-          expand={expanded}
+        /*   expand={expanded} 
           onClick={() => {
             setExpanded(!expanded);
           }}
@@ -123,7 +191,7 @@ const Home = () => {
         >
           <ExpandMoreIcon sx={{ color: "#D24949" }} />
         </ExpandMore>
-      </div>
+      </div> 
 
       <div className="">
         <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -134,7 +202,7 @@ const Home = () => {
       <SixthScreenHome />
 
 
-      <SearchForUsers />
+      <SearchForUsers />*/}
 
       {/* Our Competitions */}
       <div className="flex justify-center items-center flex-col lexend-font text-black_second">
@@ -146,11 +214,16 @@ const Home = () => {
         <GridOfSportsHome />
       </div>
 
+      <SixthScreenHomeAnother />
+
+
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
         <p className="text-4xl font-semibold  text-red_second ">News</p>
 
         <NewsNewsBlock />
       </div>
+
+    <SixthScreenHome />
 
       <FAQ />
 

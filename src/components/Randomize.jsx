@@ -36,18 +36,18 @@ const timeSlots = ["6_9", "9_12", "12_15", "15_18", "18_21", "21_24"];
 
 /*  ja Mms, on ce ici redom ovde, ali samo je fora kad naidje na jul 1, jul 2, koristi taj drugi. odnosno za saturday, moze da proveri bas ako je PRAZAN TAJ, i onda znas da je prvi saturday kao*/
 const days = [
-  { day: "Saturday", date: "June 24th" },
+  { day: "Saturday", date: "July 8th" },
 
-  { day: "Sunday", date: "June 25th" },
-  { day: "Monday", date: "June 26th" },
-  { day: "Tuesday", date: "June 27th" },
-  { day: "Wednesday", date: "June 28th" },
-  { day: "Thursday", date: "June 29th" },
-  { day: "Friday", date: "June 30th" },
+  { day: "Sunday", date: "July 9th" },
+  { day: "Monday", date: "July 10th" },
+  { day: "Tuesday", date: "July 11th" },
+  { day: "Wednesday", date: "July 12th" },
+  { day: "Thursday", date: "July 13th" },
+  { day: "Friday", date: "July 14th" },
 
-  { day: "Saturday", date: "July 1st" },
+  { day: "Saturday", date: "July 15th" },
 
-  { day: "Sunday", date: "July 2nd" },
+  { day: "Sunday", date: "July 16th" },
 ];
 
 const Randomize = () => {
@@ -131,14 +131,14 @@ const Randomize = () => {
       // TODO, this one is for gender, so it uses F or M (we used below one, just so backend can work for M for now..)
       // setOneLandingPageUser([{ name: 'first', email: 'first@gmail.com', weightCategory: selectedWeightCategory, gender: selectedGender }])
 
-        setOneLandingPageUser([
-          {
-            name: "first",
-            email: "first@gmail.com",
-            weightCategory: selectedWeightCategory,
-            gender: "M",
-          },
-        ]);
+      setOneLandingPageUser([
+        {
+          name: "first",
+          email: "first@gmail.com",
+          weightCategory: selectedWeightCategory,
+          gender: "M",
+        },
+      ]);
     }
   }, [scheduleData, selectedWeightCategory, selectedGender]);
 
@@ -214,9 +214,6 @@ const Randomize = () => {
         }
       );
 
-      console.log("a sta jeste funkcija:");
-      console.log(response);
-
       setScheduleData(response.data);
     } catch (error) {
       console.log(error);
@@ -238,7 +235,13 @@ const Randomize = () => {
       slotIndex === startSlotIndex &&
       slotIndex <= endSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName} />;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     const secondDayStartSlotIndex = timeSlots.indexOf(
@@ -253,7 +256,13 @@ const Randomize = () => {
       slotIndex === secondDayStartSlotIndex &&
       slotIndex <= secondDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     const thirdDayStartSlotIndex = timeSlots.indexOf(
@@ -268,7 +277,13 @@ const Randomize = () => {
       slotIndex === thirdDayStartSlotIndex &&
       slotIndex <= thirdDayEndSlotIndex
     ) {
-      return <RandomizeItem icon="swim" name={event.sportName} translatedName={event.translatedSportName}/>;
+      return (
+        <RandomizeItem
+          icon="swim"
+          name={event.sportName}
+          translatedName={event.translatedSportName}
+        />
+      );
     }
 
     return null;
@@ -358,7 +373,7 @@ const Randomize = () => {
     // WE ‚avoid, those who have opening and closing ceremony, to allow space, for another, on this day.. Backend, always gives us single, so it get off that load..
     if (
       scheduleData.dayOfStart === "Saturday" &&
-      scheduleData.dateOfStart === "June 24th" &&
+      scheduleData.dateOfStart === "July 8th" &&
       scheduleData.sportName !== "Opening ceremony"
     ) {
       // Extract start and end time slots
@@ -392,7 +407,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Sunday" && data.dateOfStart === "June 25th") {
+      if (data.dayOfStart === "Sunday" && data.dateOfStart === "July 9th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -408,7 +423,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Saturday" &&
-        data.dateOfStart === "June 24th" &&
+        data.dateOfStart === "July 8th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -444,7 +459,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Monday" && data.dateOfStart === "June 26th") {
+      if (data.dayOfStart === "Monday" && data.dateOfStart === "July 10th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -460,7 +475,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Sunday" &&
-        data.dateOfStart === "June 25th" &&
+        data.dateOfStart === "July 9th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -480,7 +495,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Saturday" &&
-        data.dateOfStart === "June 24th" &&
+        data.dateOfStart === "July 8th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -516,7 +531,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Tuesday" && data.dateOfStart === "June 27th") {
+      if (data.dayOfStart === "Tuesday" && data.dateOfStart === "July 11th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -532,7 +547,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Monday" &&
-        data.dateOfStart === "June 26th" &&
+        data.dateOfStart === "July 10th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -552,7 +567,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Sunday" &&
-        data.dateOfStart === "June 25th" &&
+        data.dateOfStart === "July 9th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -588,7 +603,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Wednesday" && data.dateOfStart === "June 28th") {
+      if (data.dayOfStart === "Wednesday" && data.dateOfStart === "July 12th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -604,7 +619,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Tuesday" &&
-        data.dateOfStart === "June 27th" &&
+        data.dateOfStart === "July 11th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -624,7 +639,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Monday" &&
-        data.dateOfStart === "June 26th" &&
+        data.dateOfStart === "July 10th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -660,7 +675,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Thursday" && data.dateOfStart === "June 29th") {
+      if (data.dayOfStart === "Thursday" && data.dateOfStart === "July 13th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -676,7 +691,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Wednesday" &&
-        data.dateOfStart === "June 28th" &&
+        data.dateOfStart === "July 12th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -696,7 +711,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Tuesday" &&
-        data.dateOfStart === "June 27th" &&
+        data.dateOfStart === "July 11th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -732,7 +747,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Friday" && data.dateOfStart === "June 30th") {
+      if (data.dayOfStart === "Friday" && data.dateOfStart === "July 14th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -748,7 +763,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Thursday" &&
-        data.dateOfStart === "June 29th" &&
+        data.dateOfStart === "July 13th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -768,7 +783,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Wednesday" &&
-        data.dateOfStart === "June 28th" &&
+        data.dateOfStart === "July 12th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -804,7 +819,7 @@ return dataS.map((data, index) => { */
       const data = scheduleData[i];
 
       // Check for match on dayOfStart and dateOfStart
-      if (data.dayOfStart === "Saturday" && data.dateOfStart === "July 1st") {
+      if (data.dayOfStart === "Saturday" && data.dateOfStart === "July 15th") {
         // Extract start and end time slots
         const startSlot = data.firstDayStartGameTimeSlot.split("_")[0];
         const endSlot = data.firstDayEndGameTimeSlot.split("_").pop();
@@ -820,7 +835,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Friday" &&
-        data.dateOfStart === "June 30th" &&
+        data.dateOfStart === "July 14th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -840,7 +855,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Thursday" &&
-        data.dateOfStart === "June 29th" &&
+        data.dateOfStart === "July 13th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0 &&
         data.sportName !== "Opening ceremony"
       ) {
@@ -878,7 +893,7 @@ return dataS.map((data, index) => { */
       // Check for match on dayOfStart and dateOfStart
       if (
         data.dayOfStart === "Sunday" &&
-        data.dateOfStart === "July 2nd" &&
+        data.dateOfStart === "July 16th" &&
         data.sportName !== "Closing ceremony"
       ) {
         // Extract start and end time slots
@@ -896,7 +911,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Saturday" &&
-        data.dateOfStart === "July 1st" &&
+        data.dateOfStart === "July 15th" &&
         data.secondDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -916,7 +931,7 @@ return dataS.map((data, index) => { */
         );
       } else if (
         data.dayOfStart === "Friday" &&
-        data.dateOfStart === "June 30th" &&
+        data.dateOfStart === "July 14th" &&
         data.thirdDayHowMuchTimeSlotsExpandBy > 0
       ) {
         // and this is to check for previous day, if there's no entry for current one !
@@ -973,38 +988,43 @@ return dataS.map((data, index) => { */
             {t("mockupRandomizer.content6")}. 🤩
           </p>
 
-          <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full mt-8 p-4">
-            {scheduleData.map((data, index) => {
-              /*    data.icon
+          {/* sports items in circles */}
+          <div className="w-full md:flex md:justify-center">
+            <div className="grid grid-cols-2  md:grid-cols-3 justify-center items-center flex-wrap gap-8 xl:gap-12 2xl:gap-16 text-black_second lexend-font font-bold text-sm md:text-base text-center w-full md:w-[80%] lg:w-[70%] xl:w-[60%]  mt-8 p-4">
+              {scheduleData.map((data, index) => {
+                /*    data.icon
         data.sportName 
         
         let icon_url = "randomize/" + icon + ".svg";
         
         */
 
-              if (
-                data.sportName === "Opening ceremony" ||
-                data.sportName === "Closing ceremony"
-              ) {
-                return null;
-              }
+                if (
+                  data.sportName === "Opening ceremony" ||
+                  data.sportName === "Closing ceremony"
+                ) {
+                  return null;
+                }
 
-              return (
-                <>
-                  <div className="flex flex-col justify-center items-center ">
-                    <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
-                      <img
-                        width={"30px"}
-                        height={"30px"}
-                        src={`randomize/${data.icon}.svg`}
-                      />
+                return (
+                  <>
+                    <div className="flex flex-col justify-center items-center ">
+                      <div className="  flex flex-col justify-center items-center  competitionItem cursor-pointer select-none">
+                        <img
+                          width={"30px"}
+                          height={"30px"}
+                          src={`randomize/${data.icon}.svg`}
+                        />
+                      </div>
+
+                      <p className="mt-7 text-center w-[70%]">
+                        {data.sportName}
+                      </p>
                     </div>
-
-                    <p className="mt-7 text-center w-[70%]">{data.sportName}</p>
-                  </div>
-                </>
-              );
-            })}
+                  </>
+                );
+              })}
+            </div>
           </div>
 
           {/* table for PC */}
@@ -1065,7 +1085,10 @@ return dataS.map((data, index) => { */
                           */
                         >
                           {event ? (
-                            <RandomizeItem name={event.sportName} translatedName={event.translatedSportName} />
+                            <RandomizeItem
+                              name={event.sportName}
+                              translatedName={event.translatedSportName}
+                            />
                           ) : (
                             ""
                           )}
@@ -1234,7 +1257,7 @@ return dataS.map((data, index) => { */
 
               <Button
                 onClick={() => {
-                  navigate("/register");
+                  navigate("/supporters");
                 }}
                 className="w-full"
                 style={{ textTransform: "none" }}
@@ -1262,7 +1285,7 @@ return dataS.map((data, index) => { */
           </div>
 
           {/* share to friends */}
-        {/*   <form
+          {/*   <form
             action="#"
             className="sign-in-form flex flex-col wrap justify-start items-center"
             onSubmit={sendToFriends}
@@ -1296,7 +1319,7 @@ return dataS.map((data, index) => { */
                 <option value="heavy">Heavy</option>
               </select> */}
 
-                {/* 
+          {/* 
               <select
                 name="gender"
                 value={data.gender}
@@ -1308,7 +1331,7 @@ return dataS.map((data, index) => { */
               </select>
  */}
 
-                {/*    <button type="button" onClick={() => removeInputSet(index)}>
+          {/*    <button type="button" onClick={() => removeInputSet(index)}>
                 Remove
               </button>
  
@@ -1351,7 +1374,7 @@ return dataS.map((data, index) => { */
         open={openSnackbarError}
         autoHideDuration={6000}
         onClose={handleSnackbarErrorClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarErrorClose}

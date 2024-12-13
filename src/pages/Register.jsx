@@ -1,6 +1,9 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 import "../styles/register.scoped.scss";
 import { useTranslation } from "react-i18next";
 
@@ -101,25 +104,41 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+
+
+  const filePondRef = useRef(null);
+
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
   const { t } = useTranslation();
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
-  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("* Required");
+  const [isPhonerHelper, setIsPhoneErrorHelper] = useState("");
   const isPhoneErrorFocus = useRef(null);
 
   // ? this is for password  Password
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("* Required");
+  const [isPasswordHelper, setIsPasswordErrorHelper] = useState("");
   const isPasswordErrorFocus = useRef(null);
 
   // ? this for error in the "input" to display
   const [isEmailError, setIsEmailError] = useState(false);
-  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("* Required");
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
   const isEmailErrorFocus = useRef(null);
-
-  const [resultText, setResultText] = useState("");
-  const [resultTextColor, setResultTextColor] = useState("black");
 
   // ? FILEPOND for IMAGE
   const [files, setFiles] = useState([]);
@@ -160,11 +179,20 @@ const Register = () => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
         setUploadedFile(filename);
         // return filename;
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+        
+  if (filePondRef.current) {
+    filePondRef.current.removeFiles();
+  }
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -193,6 +221,16 @@ const Register = () => {
           error("Error reverting file");
         });
     },
+  };
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  const validatePhoneNumber = (phone) => {
+    const phonePattern = /^\+[1-9]\d{7,14}$/;
+    return phonePattern.test(phone);
   };
 
   // ? image upload
@@ -320,7 +358,7 @@ const Register = () => {
       }
     );
 
-    console.log(profile_uploaded); */
+     */
 
     var email = e.target.email.value;
     var password = e.target.pass.value;
@@ -331,6 +369,23 @@ const Register = () => {
     var phone = e.target.phone.value;
     var bio = ""; // because we don't user bio field right now, or maybe we will use it.
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setIsPasswordError(true);
+      setIsPasswordErrorHelper(t("register.content3"));
+
+      isPasswordErrorFocus.current.focus();
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content3"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
+    } else {
+      setIsPasswordError(false);
+    }
+
     if (!e.target.weight) {
       var weight = null;
     } else {
@@ -340,44 +395,54 @@ const Register = () => {
       if (selectedWeight === "Lb") {
         var weight = e.target.weight * 0.45359237;
 
-        //console.log(weight);
+        //
       }
     }
 
     var cryptoaddr = e.target.cryptoaddr.value;
 
     // check again, if email is correctly inserted
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    /*  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
+     
+
       setIsEmailError(true);
-      setIsEmailErrorHelpert(t("register.content1"));
+      setIsEmailErrorHelper(t("register.content1"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content1"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
     }
 
     const phoneRegex =
       /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/;
 
     if (!phoneRegex.test(phone)) {
+     
+
       setIsPhoneError(true);
       setIsPhoneErrorHelper(t("register.content2"));
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content2"));
+      setOpenSnackbar(true);
+
+      recaptcha.current.reset();
     } else {
       setIsPhoneError(false);
     }
-
-    const passwordRegex = /^.{4,}$/;
-
-    if (!passwordRegex.test(password)) {
-      setIsPasswordError(true);
-      setIsPasswordErrorHelper(t("register.content3"));
-    } else {
-      setIsPasswordError(false);
-    }
+      */
 
     // check if captcha okay
     const captchaValue = recaptcha.current.getValue();
 
     if (!captchaValue) {
-      setResultText(t("register.content4"));
+      setSnackbarStatus("error");
+      setSnackbarMessage(t("register.content4"));
+      setOpenSnackbar(true);
     } else {
       if (
         nationality_selected &&
@@ -428,45 +493,55 @@ const Register = () => {
 
             if (axios.isAxiosError(error)) {
               if (error.response && error.response.status === 409) {
-                //alert("");
-
-                setResultText(error.response.data.message);
-
-                //console.log(error)
-
-                setResultTextColor("red");
+                setSnackbarStatus("error");
+                setSnackbarMessage(error.response.data.message);
+                setOpenSnackbar(true);
               } else {
-                setResultText(
+                setSnackbarStatus("error");
+                setSnackbarMessage(
                   "An error occurred: " +
                     (error.response?.data?.message || error.message)
                 );
+                setOpenSnackbar(true);
               }
             } else {
-              setResultText("An unexpected error occurred: " + error.message);
+              setSnackbarStatus("error");
+              setSnackbarMessage(
+                "An unexpected error occurred: " + error.message
+              );
+              setOpenSnackbar(true);
             }
           }
 
           if (response) {
-            setResultText(t("register.content5"));
-            setResultTextColor("black");
+            setSnackbarStatus("success");
+            setSnackbarMessage(t("register.content5"));
+            setOpenSnackbar(true);
           }
         } else {
-          setResultText(t("register.content6"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content6"));
+          setOpenSnackbar(true);
         }
       } else {
         if (nationality_selected === "") {
-          setResultText(t("register.content7"));
-          setResultTextColor("red");
+          recaptcha.current.reset();
+
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content7"));
+          setOpenSnackbar(true);
         } else if (isEmailError === true) {
-          setResultText(t("register.content8"));
-          setResultTextColor("red");
-        } else if (isPhoneError === true) {
-          setResultText(t("register.content9"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content8"));
+          setOpenSnackbar(true);
         } else if (isPasswordError === true) {
-          setResultText(t("register.content10"));
-          setResultTextColor("red");
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content10"));
+          setOpenSnackbar(true);
+        } else if (isPhoneError === true) {
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("register.content9"));
+          setOpenSnackbar(true);
         }
       }
     }
@@ -496,6 +571,14 @@ const Register = () => {
     <>
       <NavbarClean />
 
+
+
+      <p className="text-center text-2xl md:text-3xl lg:text-4xl lexend-font text-black_second mt-6 p-2">{t("register.content26")}</p>
+
+<div className="flex justify-center mt-4 mb-8 lexend-font text-black_second p-2">
+      <p className="text-center w-[90%] md:w-[50%] 2xl:w-[25%]">{t("register.content27")}</p>
+      </div>
+
       <form
         action="#"
         className=" flex flex-col wrap justify-start items-center"
@@ -513,6 +596,7 @@ const Register = () => {
                 {/* server="http://localhost:5000/profile_photo/upload" */}
 
                 <FilePond
+                 ref={filePondRef}
                   type="file"
                   /* className={"profile_pic_upload"} */
                   className="filepond--root athlete"
@@ -576,7 +660,7 @@ const Register = () => {
                   }}
                   style={{ color: "#000" }}
                 >
-                 {/* <MenuItem value={"AH"} sx={lexend_font}>
+                  {/* <MenuItem value={"AH"} sx={lexend_font}>
                     {t("register.user_type1")}
                   </MenuItem>*/}
                   <MenuItem value={"GP"} sx={lexend_font}>
@@ -613,7 +697,7 @@ const Register = () => {
                 <div className="flex flex-col grow ">
                   <label
                     htmlFor="email"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    className={`lexend-font ${isEmailError ? "mb-2" : "mb-1"} mt-1 font-medium text-sm`}
                   >
                     {t("register.content13")} *
                   </label>
@@ -622,6 +706,30 @@ const Register = () => {
                     id="email"
                     name="email"
                     required
+                    onInvalid={() => {
+                      recaptcha.current.reset();
+                    }}
+                    inputRef={isEmailErrorFocus}
+                    error={isEmailError}
+                    helperText={isEmailError ? isEmailErrorHelper : ""}
+                    onChange={(e) => {
+                      const emailValue = e.target.value;
+
+                      if (!validateEmail(emailValue) && emailValue.length > 0) {
+                        setIsEmailError(true);
+                        setIsEmailErrorHelper(t("register.content8"));
+                        isEmailErrorFocus.current.focus();
+                        recaptcha.current.reset();
+                      } else {
+                        setIsEmailError(false);
+                        setIsEmailErrorHelper("");
+                      }
+
+                      /*  
+          setSnackbarStatus("error");
+          setSnackbarMessage((t("register.content8")));
+          setOpenSnackbar(true); */
+                    }}
                     type="email"
                     maxLength="80"
                     inputProps={{
@@ -639,7 +747,7 @@ const Register = () => {
                     disableUnderline
                     onChange={handleEmailPrivacyChange}
                     sx={{
-                      mt: 2.2,
+                      mt: isEmailError ? 0 : 2.2,
                       fontFamily: "'Lexend', sans-serif",
 
                       "& .MuiOutlinedInput-root": {
@@ -678,9 +786,12 @@ const Register = () => {
                 id="name"
                 name="name"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type="text"
                 inputProps={{
-                  maxLength: 255,
+                  maxLength: 30,
                 }}
                 sx={sxTextField}
               />
@@ -707,13 +818,16 @@ const Register = () => {
                 htmlFor="lastName"
                 className="lexend-font mb-1 mt-1 font-medium text-sm"
               >
-                {t("register.content16")}
+                {t("register.content16")} *
               </label>
               <TextField
                 placeholder="Doe"
                 id="lastName"
                 name="lastName"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type="text"
                 inputProps={{
                   maxLength: 255,
@@ -725,15 +839,41 @@ const Register = () => {
                 htmlFor="pass"
                 className="lexend-font mb-1 mt-1 font-medium text-sm"
               >
-                {t("register.content17")}
+                {t("register.content17")} *
               </label>
               <TextField
-                placeholder="****"
+                placeholder="********"
                 id="pass"
                 name="pass"
                 required
+                onInvalid={() => {
+                  recaptcha.current.reset();
+                }}
                 type={showPassword ? "text" : "password"}
                 sx={sxTextField}
+                inputRef={isPasswordErrorFocus}
+                error={isPasswordError}
+                helperText={isPasswordHelper}
+                className="max-w-[434px]"
+                onChange={(e) => {
+                  const passwordValue = e.target.value;
+
+                  const passwordRegex1 =
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+                  if (
+                    passwordValue.length == 0 ||
+                    passwordRegex1.test(passwordValue)
+                  ) {
+                    setIsPasswordError(false);
+                    setIsPasswordErrorHelper("");
+                  } else {
+                    setIsPasswordError(true);
+                    setIsPasswordErrorHelper(t("register.content3"));
+                    isPasswordErrorFocus.current.focus();
+                    recaptcha.current.reset();
+                  }
+                }}
                 InputProps={{
                   maxLength: 255,
 
@@ -756,7 +896,7 @@ const Register = () => {
                 <div className="flex flex-col grow">
                   <label
                     htmlFor="phone"
-                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    className={`lexend-font ${isPhoneError ? "mb-2" : "mb-1"} mt-1 font-medium text-sm`}
                   >
                     {t("register.content18")} *
                   </label>
@@ -765,16 +905,41 @@ const Register = () => {
                     id="phone"
                     name="phone"
                     required
+                    onInvalid={() => {
+                      recaptcha.current.reset();
+                    }}
+                    inputRef={isPhoneErrorFocus}
+                    error={isPhoneError}
+                    helperText={isPhoneError ? isPhonerHelper : ""}
+                    onChange={(e) => {
+                      const phoneValue = e.target.value;
+
+
+                      if (
+                        !validatePhoneNumber(phoneValue) &&
+                        phoneValue.length > 0
+                      ) {
+                        setIsPhoneError(true);
+                        setIsPhoneErrorHelper(t("register.content9"));
+                        isPhoneErrorFocus.current.focus();
+                        recaptcha.current.reset();
+                      } else {
+                        setIsPhoneError(false);
+                        setIsPhoneErrorHelper("");
+                      }
+                    }}
                     type="tel"
                     inputProps={{
                       maxLength: 15,
+                      inputMode: "numeric",
+                      pattern: "/^+[1-9]d{7,14}$/",
                     }}
                     sx={sxTextField}
                   />
                 </div>
 
                 {/* sx={{ m: 1, minWidth: 120 }} */}
-                <FormControl sx={{ minWidth: 120, mt: 2.2 }}>
+                <FormControl sx={{ minWidth: 120, mt: isPhoneError ? 0 : 2.2 }}>
                   <Select
                     name="phone_private"
                     id="phone_private"
@@ -863,6 +1028,9 @@ const Register = () => {
                       id="weight"
                       name="weight"
                       required
+                      onInvalid={() => {
+                        recaptcha.current.reset();
+                      }}
                       type="number"
                       onChange={(event) =>
                         event.target.value < 0
@@ -905,7 +1073,7 @@ const Register = () => {
                         ),
 
                         inputMode: "numeric",
-                        pattern: "[0-9]*",
+                        pattern: "/^+[1-9]d{7,14}$/",
                       }}
                     />
                   </div>
@@ -1051,13 +1219,24 @@ const Register = () => {
           >
             <span className="popins-font">{t("register.content24")}</span>
           </Button>
-
-          {/* resultTextColor */}
-          <p className="mt-4 " style={{ color: `${resultTextColor}` }}>
-            {resultText}
-          </p>
         </div>
       </form>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
       <FooterClean />
     </>

@@ -89,8 +89,6 @@ const Campaign = () => {
 
   useEffect(() => {
     updateLatestData();
-
-   
   }, [
     filterGender,
     filterNationality_selected,
@@ -105,8 +103,6 @@ const Campaign = () => {
   ]);
 
   const { t } = useTranslation();
-
-  
 
   const handlePaginationChange = (event, value) => {
     setCampaignsPage(value);
@@ -134,12 +130,10 @@ const Campaign = () => {
         }
       );
 
-     
       setMaxPages(Math.ceil(response.data.count / 10));
       setResultsAmount(response.data.count);
 
       setCampaigns(response.data.rows);
-
     } catch (e) {
       console.log(e.stack);
     }
@@ -158,408 +152,414 @@ const Campaign = () => {
     <>
       <Navbar />
 
+      <div className="min-h-screen">
+        <div className="flex justify-center items-center mt-4 ">
+          <div className="w-full md:w-[50%] flex justify-between  items-center gap-6 p-2">
+            <p className="text-xl md:text-3xl flex justify-center  lexend-font text-black_second font-bold">
+              {t("campaign.content54")}
+            </p>
 
-<div className="min-h-screen">
-      <div className="flex justify-center items-center mt-4 ">
-        <div className="w-full md:w-[50%] flex justify-between  items-center gap-6 p-2">
-          <p className="text-xl md:text-3xl flex justify-center  lexend-font text-black_second font-bold">
-            {t("campaign.content54")}
-          </p>
-
-          <Popup
-            ref={popupRef}
-            trigger={
-              <Button
-                startIcon={<img src="supporters/filter.svg" className="w-5" />}
-                className="w-[150px] md:w-[120px]"
-                style={{
-                  margin: "0px",
-                  paddingLeft: "20px",
-                  paddingRight: "20px",
-                  textTransform: "none",
-                }}
-                sx={{
-                  /*  fontSize: "8pt", */
-                  height: "40px",
-                  bgcolor: "#fff",
-                  color: "#232323",
-                  borderRadius: 2,
-                  border: `1px solid #CACAD0`,
-                }}
-              >
-                <span className="lexend-font text-black_second font-bold">
-                  {t("campaign.content55")}
-                </span>
-              </Button>
-            }
-            position="bottom right"
-            contentStyle={{ width: "auto" }}
-            closeOnDocumentClick={false}
-          >
-            <div className="flex flex-col justify-center items-center">
-              <Button
-                onClick={resetFilterFields}
-                startIcon={<RestoreIcon />}
-                className="w-[150px] "
-                style={{
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                }}
-                sx={{
-                  fontSize: "8pt",
-                  height: "30px",
-                  bgcolor: "#fff",
-                  color: "#232323",
-                  borderRadius: 2,
-                  border: `1px solid #000`,
-                }}
-              >
-                <span className="popins-font">{t("campaign.content56")}</span>
-              </Button>
-
-              <FormControl>
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue={() => {
-                    if (filterIsCelebrity === 0) {
-                      return "no";
-                    } else {
-                      return "yes";
-                    }
+            <Popup
+              ref={popupRef}
+              trigger={
+                <Button
+                  startIcon={
+                    <img src="supporters/filter.svg" className="w-5" />
+                  }
+                  className="w-[150px] md:w-[120px]"
+                  style={{
+                    margin: "0px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                    textTransform: "none",
                   }}
-                  name="radio-buttons-group"
-                  onChange={(event) => {
-                    const value = event.target.value;
-
-                    if (value === "yes") {
-                      setFilterIsCelebrity(1);
-                      setCampaignsPage(1);
-                    
-
-                    } else if (value === "no") {
-                      setFilterIsCelebrity(0);
-                      setCampaignsPage(1);
-                     
-                    }
+                  sx={{
+                    /*  fontSize: "8pt", */
+                    height: "40px",
+                    bgcolor: "#fff",
+                    color: "#232323",
+                    borderRadius: 2,
+                    border: `1px solid #CACAD0`,
                   }}
                 >
-                  <FormGroup row>
-                    <FormControlLabel
-                      value="yes"
-                      control={
-                        <Radio
-                          sx={{
-                            color: "#444444",
-                            "&.Mui-checked": {
-                              color: "#444444",
-                            },
-                          }}
-                        />
-                      }
-                      label={`Celebrity`}
-                    />
-                    <FormControlLabel
-                      value="no"
-                      control={
-                        <Radio
-                          sx={{
-                            color: "#444444",
-                            "&.Mui-checked": {
-                              color: "#444444",
-                            },
-                          }}
-                        />
-                      }
-                      label={`Athlete`}
-                    />
-                  </FormGroup>
-                </RadioGroup>
-              </FormControl>
-
-              <FormControl
-                variant="standard"
-                sx={{ m: 1, minWidth: 120 }}
-                className="m-4 ml-0 mb-1"
-              >
-                <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                  <b>{t("campaign.content28")}</b>
-                </InputLabel>
-
-                <Select
-                  labelId="roleDropdowns"
-                  value={filterGender}
-                  onChange={(event) => {
-                    setFilterGender(event.target.value);
-                  }}
-                  className="w-[300px]"
-                  style={{ color: "#000" }}
-                >
-                  <MenuItem value="">{t("campaign.content57")}</MenuItem>
-                  <Divider />
-                  <MenuItem value="M">{t("campaign.content29")}</MenuItem>
-                  <MenuItem value="F">{t("campaign.content30")}</MenuItem>
-                </Select>
-              </FormControl>
-
-              <ReactFlagsSelect
-                countries={supportedCountry}
-                selected={filterNationality_selected}
-                onSelect={(code) => setFilterNationality_selected(code)}
-                className="w-[300px] "
-                searchable={true}
-                id="nationality"
-                name="nationality"
-                placeholder="Nationality"
-              />
-
-              {/* this is for athlete NON celebrity */}
-              {filterIsCelebrity === 0 && (
-                <div>
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content25")}</p>
-                    <SearchBar
-                      value={searchFirstNameText}
-                      onChange={(newValue) => setSearchFirstNameText(newValue)}
-                      onCancelResearch={(newValue) =>
-                        setSearchFirstNameText("")
-                      }
-                      placeholder={"Search " + searchPlaceholderFirstNameText}
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content58")}</p>
-                    <SearchBar
-                      value={searchFamilyNameText}
-                      onChange={(newValue) => setSearchFamilyNameText(newValue)}
-                      onCancelResearch={(newValue) =>
-                        setSearchFamilyNameText("")
-                      }
-                      placeholder={"Search " + searchPlaceholderFamilyNameText}
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* this is for athlete CELEBRITY */}
-              {filterIsCelebrity === 1 && (
-                <div>
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content25")}</p>
-                    <SearchBar
-                      value={searchFirstNameText}
-                      onChange={(newValue) => setSearchFirstNameText(newValue)}
-                      onCancelResearch={(newValue) =>
-                        setSearchFirstNameText("")
-                      }
-                      placeholder={"Search " + searchPlaceholderFirstNameText}
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content59")}</p>
-                    <SearchBar
-                      value={searchfb_link}
-                      onChange={(newValue) => setSearchfb_link(newValue)}
-                      onCancelResearch={(newValue) => setSearchfb_link("")}
-                      /*  placeholder={""}  */
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content60")}</p>
-                    <SearchBar
-                      value={searchig_link}
-                      onChange={(newValue) => setSearchig_link(newValue)}
-                      onCancelResearch={(newValue) => setSearchig_link("")}
-                      /* placeholder={"Search " + searchPlaceholderFirstNameText} */
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-start flex-col">
-                    <p>{t("campaign.content61")}</p>
-                    <SearchBar
-                      value={searchtw_link}
-                      onChange={(newValue) => setSearchtw_link(newValue)}
-                      onCancelResearch={(newValue) => setSearchtw_link("")}
-                      /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
-                      onSearch={handleSearch}
-                      style={{
-                        border: "1px solid #C6C6C6", // Border color and thickness
-                        borderRadius: "10px", // Border radius
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          </Popup>
-        </div>
-      </div>
-
-      <div className="p-4   flex justify-center items-center flex-col gap-4">
-        <div className="w-full md:w-[50%] ">
-          <SearchBar
-            width="100%"
-            value={searchFirstNameText}
-            onChange={(newValue) => setSearchFirstNameText(newValue)}
-            onCancelResearch={(newValue) => setSearchFirstNameText("")}
-            placeholder={"Enter " + searchPlaceholderFirstNameText}
-            onSearch={handleSearch}
-            style={{
-              border: "1px solid #C6C6C6",
-              borderRadius: "10px",
-            }}
-            sx={{ fontFamily: "'Lexend', sans-serif" }}
-          />
-        </div>
-
-        <div>
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue={() => {
-                if (filterIsCelebrity === 0) {
-                  return "no";
-                } else {
-                  return "yes";
-                }
-              }}
-              name="radio-buttons-group"
-              onChange={(event) => {
-                const value = event.target.value;
-
-                if (value === "yes") {
-                  setFilterIsCelebrity(1);
-                  setCampaignsPage(1);
-                
-                } else if (value === "no") {
-                  setFilterIsCelebrity(0);
-                  setCampaignsPage(1);
-                
-                }
-              }}
+                  <span className="lexend-font text-black_second font-bold">
+                    {t("campaign.content55")}
+                  </span>
+                </Button>
+              }
+              position="bottom right"
+              contentStyle={{ width: "auto" }}
+              closeOnDocumentClick={false}
             >
-              <FormGroup row>
-                <FormControlLabel
-                  value="yes"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "#444444",
-                        "&.Mui-checked": {
-                          color: "#444444",
-                        },
-                      }}
-                    />
-                  }
-                  sx={{
-                    marginTop: "0px",
-                    "& .MuiTypography-root": {
-                      fontFamily: "'Lexend', sans-serif",
-                      fontWeight: 500,
-                    },
+              <div className="flex flex-col justify-center items-center">
+                <Button
+                  onClick={resetFilterFields}
+                  startIcon={<RestoreIcon />}
+                  className="w-[150px] "
+                  style={{
+                    marginTop: "10px",
+                    marginBottom: "10px",
                   }}
-                  label={`Celebrity`}
-                />
-                <FormControlLabel
-                  value="no"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "#444444",
-                        "&.Mui-checked": {
-                          color: "#444444",
-                        },
-                      }}
-                    />
-                  }
                   sx={{
-                    marginTop: "0px",
-                    "& .MuiTypography-root": {
-                      fontFamily: "'Lexend', sans-serif",
-                      fontWeight: 500,
-                    },
+                    fontSize: "8pt",
+                    height: "30px",
+                    bgcolor: "#fff",
+                    color: "#232323",
+                    borderRadius: 2,
+                    border: `1px solid #000`,
                   }}
-                  label={`Athlete`}
-                />
-              </FormGroup>
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-
-      {resultsAmount > 0 && (
-        <>
-          <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
-            {resultsAmount} results
-          </p>
-        </>
-      )}
-
-      {campaigns && (
-        <>
-          {campaigns.map((item, index) => (
-            <>
-              <div className="flex justify-center items-center  ">
-                <div
-                  key={index}
-                  /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
-                  onClick={() => navigate(`/campaign/${item.campaignId}`)}
-                  className="p-4 w-[95%] h-20   cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
                 >
-                  {/* //TODO, there should be profile image, of current athlete. If there's none, then you need to use avatar based on name initials
+                  <span className="popins-font">{t("campaign.content56")}</span>
+                </Button>
+
+                <FormControl>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue={() => {
+                      if (filterIsCelebrity === 0) {
+                        return "no";
+                      } else {
+                        return "yes";
+                      }
+                    }}
+                    name="radio-buttons-group"
+                    onChange={(event) => {
+                      const value = event.target.value;
+
+                      if (value === "yes") {
+                        setFilterIsCelebrity(1);
+                        setCampaignsPage(1);
+                      } else if (value === "no") {
+                        setFilterIsCelebrity(0);
+                        setCampaignsPage(1);
+                      }
+                    }}
+                  >
+                    <FormGroup row>
+                      <FormControlLabel
+                        value="yes"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "#444444",
+                              "&.Mui-checked": {
+                                color: "#444444",
+                              },
+                            }}
+                          />
+                        }
+                        label={`Celebrity`}
+                      />
+                      <FormControlLabel
+                        value="no"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "#444444",
+                              "&.Mui-checked": {
+                                color: "#444444",
+                              },
+                            }}
+                          />
+                        }
+                        label={`Athlete`}
+                      />
+                    </FormGroup>
+                  </RadioGroup>
+                </FormControl>
+
+                <FormControl
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 120 }}
+                  className="m-4 ml-0 mb-1"
+                >
+                  <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
+                    <b>{t("campaign.content28")}</b>
+                  </InputLabel>
+
+                  <Select
+                    labelId="roleDropdowns"
+                    value={filterGender}
+                    onChange={(event) => {
+                      setFilterGender(event.target.value);
+                    }}
+                    className="w-[300px]"
+                    style={{ color: "#000" }}
+                  >
+                    <MenuItem value="">{t("campaign.content57")}</MenuItem>
+                    <Divider />
+                    <MenuItem value="M">{t("campaign.content29")}</MenuItem>
+                    <MenuItem value="F">{t("campaign.content30")}</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <ReactFlagsSelect
+                  countries={supportedCountry}
+                  selected={filterNationality_selected}
+                  onSelect={(code) => setFilterNationality_selected(code)}
+                  className="w-[300px] "
+                  searchable={true}
+                  id="nationality"
+                  name="nationality"
+                  placeholder="Nationality"
+                />
+
+                {/* this is for athlete NON celebrity */}
+                {filterIsCelebrity === 0 && (
+                  <div>
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content25")}</p>
+                      <SearchBar
+                        value={searchFirstNameText}
+                        onChange={(newValue) =>
+                          setSearchFirstNameText(newValue)
+                        }
+                        onCancelResearch={(newValue) =>
+                          setSearchFirstNameText("")
+                        }
+                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content58")}</p>
+                      <SearchBar
+                        value={searchFamilyNameText}
+                        onChange={(newValue) =>
+                          setSearchFamilyNameText(newValue)
+                        }
+                        onCancelResearch={(newValue) =>
+                          setSearchFamilyNameText("")
+                        }
+                        placeholder={
+                          "Search " + searchPlaceholderFamilyNameText
+                        }
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* this is for athlete CELEBRITY */}
+                {filterIsCelebrity === 1 && (
+                  <div>
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content25")}</p>
+                      <SearchBar
+                        value={searchFirstNameText}
+                        onChange={(newValue) =>
+                          setSearchFirstNameText(newValue)
+                        }
+                        onCancelResearch={(newValue) =>
+                          setSearchFirstNameText("")
+                        }
+                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content59")}</p>
+                      <SearchBar
+                        value={searchfb_link}
+                        onChange={(newValue) => setSearchfb_link(newValue)}
+                        onCancelResearch={(newValue) => setSearchfb_link("")}
+                        /*  placeholder={""}  */
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content60")}</p>
+                      <SearchBar
+                        value={searchig_link}
+                        onChange={(newValue) => setSearchig_link(newValue)}
+                        onCancelResearch={(newValue) => setSearchig_link("")}
+                        /* placeholder={"Search " + searchPlaceholderFirstNameText} */
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content61")}</p>
+                      <SearchBar
+                        value={searchtw_link}
+                        onChange={(newValue) => setSearchtw_link(newValue)}
+                        onCancelResearch={(newValue) => setSearchtw_link("")}
+                        /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Popup>
+          </div>
+        </div>
+
+        <div className="p-4   flex justify-center items-center flex-col gap-4">
+          <div className="w-full md:w-[50%] ">
+            <SearchBar
+              width="100%"
+              value={searchFirstNameText}
+              onChange={(newValue) => setSearchFirstNameText(newValue)}
+              onCancelResearch={(newValue) => setSearchFirstNameText("")}
+              placeholder={"Enter " + searchPlaceholderFirstNameText}
+              onSearch={handleSearch}
+              style={{
+                border: "1px solid #C6C6C6",
+                borderRadius: "10px",
+              }}
+              sx={{ fontFamily: "'Lexend', sans-serif" }}
+            />
+          </div>
+
+          <div>
+            <FormControl>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue={() => {
+                  if (filterIsCelebrity === 0) {
+                    return "no";
+                  } else {
+                    return "yes";
+                  }
+                }}
+                name="radio-buttons-group"
+                onChange={(event) => {
+                  const value = event.target.value;
+
+                  if (value === "yes") {
+                    setFilterIsCelebrity(1);
+                    setCampaignsPage(1);
+                  } else if (value === "no") {
+                    setFilterIsCelebrity(0);
+                    setCampaignsPage(1);
+                  }
+                }}
+              >
+                <FormGroup row>
+                  <FormControlLabel
+                    value="yes"
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#444444",
+                          "&.Mui-checked": {
+                            color: "#444444",
+                          },
+                        }}
+                      />
+                    }
+                    sx={{
+                      marginTop: "0px",
+                      "& .MuiTypography-root": {
+                        fontFamily: "'Lexend', sans-serif",
+                        fontWeight: 500,
+                      },
+                    }}
+                    label={`Celebrity`}
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={
+                      <Radio
+                        sx={{
+                          color: "#444444",
+                          "&.Mui-checked": {
+                            color: "#444444",
+                          },
+                        }}
+                      />
+                    }
+                    sx={{
+                      marginTop: "0px",
+                      "& .MuiTypography-root": {
+                        fontFamily: "'Lexend', sans-serif",
+                        fontWeight: 500,
+                      },
+                    }}
+                    label={`Athlete`}
+                  />
+                </FormGroup>
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </div>
+
+        {resultsAmount > 0 && (
+          <>
+            <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
+              {resultsAmount} results
+            </p>
+          </>
+        )}
+
+        {campaigns && (
+          <>
+            {campaigns.map((item, index) => (
+              <>
+                <div className="flex justify-center items-center  ">
+                  <div
+                    key={index}
+                    /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
+                    onClick={() => navigate(`/campaign/${item.campaignId}`)}
+                    className="p-4 w-[95%] h-20   cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
+                  >
+                    {/* //TODO, there should be profile image, of current athlete. If there's none, then you need to use avatar based on name initials
                   
                   // TODO, as it seems, even names or similar, should be connected to athlete, so if he updates profile, campaign also updates as well...
                   */}
 
-                  <div className="flex gap-4 items-center">
-                    <Avatar sx={{ width: 55, height: 55 }}>
-                      {item.friendName.charAt(0).toUpperCase()}
-                    </Avatar>
-                    <div className="lexend-font text-black_second">
-                      <p className="font-bold">
-                        {item.friendName}{" "}
-                        {item.friendMiddleName && (
-                          <>({item.friendMiddleName})</>
-                        )}{" "}
-                        {item.friendLastName}
-                      </p>
+                    <div className="flex gap-4 items-center">
+                      <Avatar sx={{ width: 55, height: 55 }}>
+                        {item.friendName.charAt(0).toUpperCase()}
+                      </Avatar>
+                      <div className="lexend-font text-black_second">
+                        <p className="font-bold">
+                          {item.friendName}{" "}
+                          {item.friendMiddleName && (
+                            <>({item.friendMiddleName})</>
+                          )}{" "}
+                          {item.friendLastName}
+                        </p>
 
-                      {/*   <p>
+                        {/*   <p>
                       <b>{t("campaign.content28")}:</b>{" "}
                       {item.friendGender === "M" ? "Male" : "Female"}
                     </p> */}
-                      <p className="text-red_second font-medium">See Profile</p>
+                        <p className="text-red_second font-medium">
+                          See Profile
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/*   {item.isCelebrity ? (
+                    {/*   {item.isCelebrity ? (
                     <img
                       className=" ml-auto w-6 m-4"
                       src="/supporters/celebrity_icon.svg"
@@ -568,34 +568,33 @@ const Campaign = () => {
                     <></>
                   )} */}
 
-                  <div>
-                    <Flag className="w-12 " code={item.friendNationality} />
+                    <div>
+                      <Flag className="w-12 " code={item.friendNationality} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
-          ))}
-        </>
-      )}
+              </>
+            ))}
+          </>
+        )}
 
-      <div className="flex justify-center items-start mt-4    w-full ">
-        <Stack>
-          <Pagination
-            count={maxPages}
-            page={campaignsPage}
-            onChange={handlePaginationChange}
-            sx={{
-              "& .MuiPaginationItem-root": {
-                "&.Mui-selected": {
-                  backgroundColor: "#FFEAEA",
-                  color: "#D24949",
+        <div className="flex justify-center items-start mt-4    w-full ">
+          <Stack>
+            <Pagination
+              count={maxPages}
+              page={campaignsPage}
+              onChange={handlePaginationChange}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  "&.Mui-selected": {
+                    backgroundColor: "#FFEAEA",
+                    color: "#D24949",
+                  },
                 },
-              },
-            }}
-          />
-        </Stack>
-      </div>
-
+              }}
+            />
+          </Stack>
+        </div>
       </div>
       <FooterClean />
     </>

@@ -1,10 +1,13 @@
-
-
 import { FooterClean } from "../../components/FooterClean";
 import { Navbar } from "../../components/Navbar";
 import { useTranslation } from "react-i18next";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { useEffect, useState, useRef } from "react";
+
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 
 const lexend_font = {
   fontFamily: "'Lexend', sans-serif",
@@ -35,16 +38,115 @@ const sxTextField = {
 };
 
 
+const validateEmail = (email) => {
+  const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return emailPattern.test(email);
+};
 
 const ContactUsForm = () => {
+  const { t } = useTranslation();
 
-    const { t } = useTranslation();
+
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
+
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const [name, setName]=useState("");
+  const [email, setEmail]= useState("");
+  const [subject, setSubject]= useState("");
+  const [message, setMessage]= useState("");
 
 
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isEmailErrorHelper, setIsEmailErrorHelper] = useState("");
+  const isEmailErrorFocus = useRef(null);
+
+  const nameRef = useRef(null);
+  const subjectRef = useRef(null);
+  const messageRef = useRef(null);
+  
+
+
+  useEffect(()=> {
     
-    return (<>
+    if (isEmailError && isEmailErrorFocus.current) {
+      isEmailErrorFocus.current.focus();
+    }
 
-<div className="lexend-font text-black_second flex flex-col justify-center items-center min-h-screen ">
+  },[isEmailError]);
+
+
+
+  const onSubmit = () => {
+
+
+      if(isEmailError || email === ""){
+        setSnackbarStatus("error");
+        setSnackbarMessage("Insert email");
+        setOpenSnackbar(true);
+
+        isEmailErrorFocus.current.focus();
+        return;
+      }
+
+      if(name === ""){
+        setSnackbarStatus("error");
+        setSnackbarMessage("Insert name");
+        setOpenSnackbar(true);
+
+        nameRef.current.focus();
+        return;
+      }
+
+      if(subject === ""){
+        setSnackbarStatus("error");
+        setSnackbarMessage("Insert subject");
+        setOpenSnackbar(true);
+
+        subjectRef.current.focus();
+        return;
+      }
+
+
+      if(message === ""){
+        setSnackbarStatus("error");
+        setSnackbarMessage("Insert message");
+        setOpenSnackbar(true);
+
+        messageRef.current.focus();
+        return;
+      }
+
+
+
+      setSnackbarStatus("success");
+      setSnackbarMessage("Message sent");
+      setOpenSnackbar(true);
+
+
+
+
+
+
+
+  }
+
+
+  return (
+
+    <>
+      <div className="lexend-font text-black_second flex flex-col justify-center items-center min-h-screen p-4 ">
         <p className="text-2xl md:text-4xl font-bold mt-8">
           {t("contact.title1")}
         </p>
@@ -60,6 +162,7 @@ const ContactUsForm = () => {
           <TextField
             placeholder="John Doe"
             id="name"
+            onChange={(e)=> {setName(e.target.value);}}
             name="name"
             required
             type="text"
@@ -67,6 +170,9 @@ const ContactUsForm = () => {
               maxLength: 255,
             }}
             sx={sxTextField}
+            value={name}
+            inputRef={nameRef}
+
           />
 
           <label className="lexend-font mb-1 mt-1 font-medium text-sm">
@@ -74,10 +180,36 @@ const ContactUsForm = () => {
           </label>
           <TextField
             placeholder="example@gmail.com"
-            id="name"
-            name="name"
+            value={email}
+           
             required
             type="email"
+
+
+            inputRef={isEmailErrorFocus}
+            error={isEmailError}
+            helperText={isEmailError ? isEmailErrorHelper : ""}
+
+
+            onChange={(e) => {
+              const emailValue = e.target.value;
+
+              setEmail(e.target.value);
+
+              if (!validateEmail(emailValue) && emailValue.length > 0) {
+                setIsEmailError(true);
+                setIsEmailErrorHelper(t("register.content8"));
+                isEmailErrorFocus.current.focus();
+                recaptcha.current.reset();
+              } else {
+                setIsEmailError(false);
+                setIsEmailErrorHelper("");
+              }
+
+           
+            }}
+
+
             inputProps={{
               maxLength: 255,
             }}
@@ -89,10 +221,13 @@ const ContactUsForm = () => {
           </label>
           <TextField
             placeholder={t("contact.content5")}
-            id="name"
-            name="name"
+           
+            value={subject}
+            onChange={(e)=> {setSubject(e.target.value);}}
+            inputRef={subjectRef}
+
             required
-            type="email"
+            type="text"
             inputProps={{
               maxLength: 255,
             }}
@@ -104,12 +239,19 @@ const ContactUsForm = () => {
           </label>
           <TextField
             placeholder={t("contact.content6")}
-            id="name"
-            name="name"
+       
             required
             multiline
             rows={4}
-            type="email"
+            type="text"
+
+
+            value={message}
+            onChange={(e)=> {setMessage(e.target.value);}}
+            inputRef={messageRef}
+
+          
+
             inputProps={{
               maxLength: 255,
               style: {
@@ -122,6 +264,7 @@ const ContactUsForm = () => {
 
         <Button
           className="w-[50%]"
+          onClick={onSubmit}
           style={{ textTransform: "none" }}
           sx={{
             height: "50px",
@@ -140,11 +283,30 @@ const ContactUsForm = () => {
           variant="text"
         >
           <span className="popins-font">
-            {t("myprofile.myaccount.content28")}
+            {t("contact.content7")}
           </span>
         </Button>
       </div>
-    </>)
-}
 
-export {ContactUsForm}
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbar}
+          severity={snackbarStatus}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
+    </>
+  );
+};
+
+export { ContactUsForm };

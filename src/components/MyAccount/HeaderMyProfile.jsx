@@ -1,6 +1,6 @@
 import "../../styles/headermyprofile.scoped.scss";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Flag from "react-world-flags";
 import axios from "axios";
 import { Button } from "@mui/material";
@@ -40,7 +40,7 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-const HeaderMyProfile = ({ ShowEditProfile }) => {
+const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatus, setOpenSnackbar   }) => {
   const { t } = useTranslation();
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
@@ -53,6 +53,9 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
   const [code, setCode] = useState("");
   const [original_email, setOriginalEmail] = useState(null);
   const [userData, setUserData] = useState(null);
+
+  const filePondRef = useRef(null);
+
 
   const [files, setFiles] = useState([]);
 
@@ -73,13 +76,24 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
-        console.log("Uploaded filename:", filename);
+        
 
         setProfileImage(filename);
 
         // return filename;
       },
       onerror: (response) => {
+
+        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarStatus("error");
+        setOpenSnackbar(true);
+
+        if (filePondRef.current) {
+          filePondRef.current.removeFiles();
+        }
+
+        
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -126,7 +140,7 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
           sessionStorage.setItem("authTokens", JSON.stringify(response));
         }
 
-        console.log(response);
+        
         return 1;
       }
     } catch (error) {
@@ -229,6 +243,8 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
               {toogleProfilePic && (
                 <>
                   <FilePond
+                    ref={filePondRef}
+
                     className="filepond--root small"
                     type="file"
                     onupdatefiles={setFiles}
@@ -243,6 +259,13 @@ const HeaderMyProfile = ({ ShowEditProfile }) => {
                     allowPaste={true}
                     allowReplace={true}
                     credits={""}
+
+                   
+
+                  
+
+                    
+
                     allowFileEncode={true}
                     allowFileTypeValidation={true}
                     allowImagePreview={true}

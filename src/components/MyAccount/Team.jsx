@@ -193,8 +193,8 @@ const Team = () => {
         }
       );
 
-      console.log("team, does it get count");
-      console.log(response);
+      
+      
 
 
       

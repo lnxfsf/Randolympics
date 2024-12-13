@@ -1,0 +1,363 @@
+"filename", "language", "JavaScript", "HTML", "Markdown", "JavaScript JSX", "XML", "SCSS", "JSON", "CSS", "comment", "blank", "total"
+"c:\Users\Igor\Downloads\Randolympics\.eslintrc.cjs", "JavaScript", 20, 0, 0, 0, 0, 0, 0, 0, 0, 1, 21
+"c:\Users\Igor\Downloads\Randolympics\README.md", "Markdown", 0, 0, 55, 0, 0, 0, 0, 0, 0, 73, 128
+"c:\Users\Igor\Downloads\Randolympics\backup\elections_old_red_line_table.jsx", "JavaScript JSX", 0, 0, 0, 549, 0, 0, 0, 0, 60, 263, 872
+"c:\Users\Igor\Downloads\Randolympics\backup\itemcampaign.jsx", "JavaScript JSX", 0, 0, 0, 517, 0, 0, 0, 0, 132, 85, 734
+"c:\Users\Igor\Downloads\Randolympics\backup\others.jsx", "JavaScript JSX", 0, 0, 0, 236, 0, 0, 0, 0, 138, 89, 463
+"c:\Users\Igor\Downloads\Randolympics\backup\snipet_elections.jsx", "JavaScript JSX", 0, 0, 0, 63, 0, 0, 0, 0, 2, 9, 74
+"c:\Users\Igor\Downloads\Randolympics\i18n.js", "JavaScript", 19, 0, 0, 0, 0, 0, 0, 0, 22, 10, 51
+"c:\Users\Igor\Downloads\Randolympics\index.html", "HTML", 0, 23, 0, 0, 0, 0, 0, 0, 5, 31, 59
+"c:\Users\Igor\Downloads\Randolympics\languages.js", "JavaScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 4, 9
+"c:\Users\Igor\Downloads\Randolympics\package-lock.json", "JSON", 0, 0, 0, 0, 0, 0, 8052, 0, 0, 1, 8053
+"c:\Users\Igor\Downloads\Randolympics\package.json", "JSON", 0, 0, 0, 0, 0, 0, 87, 0, 0, 1, 88
+"c:\Users\Igor\Downloads\Randolympics\postcss.config.js", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\pen_to_square_empty.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\pen_to_square_filled.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\pencil.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\star_empty.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\star_filled.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\blogs\trash.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\editprofile\delete.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\editprofile\private_lock.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\editprofile\resign.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\editprofile\withdraw.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\favicon-fullcolor.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\favicon-red.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\footer\app_store.svg", "XML", 0, 0, 0, 0, 6, 0, 0, 0, 0, 1, 7
+"c:\Users\Igor\Downloads\Randolympics\public\footer\google_play.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\footer\logo_footer.svg", "XML", 0, 0, 0, 0, 15, 0, 0, 0, 0, 1, 16
+"c:\Users\Igor\Downloads\Randolympics\public\home\about\left.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\home\about\right.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\home\centreProgressContainer.svg", "XML", 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Igor\Downloads\Randolympics\public\home\charityBox.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\JavelinThrow.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\acrobatics.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\archery.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\athletics.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\badminton.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\basketball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\boxing.svg", "XML", 0, 0, 0, 0, 6, 0, 0, 0, 0, 1, 7
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\cannoening.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\climbing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\cycling.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\diving.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\fencing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\fieldHockey.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\football.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\golf.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\gun.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\gymnastics.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\handball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\high_jump.svg", "XML", 0, 0, 0, 0, 31, 0, 0, 0, 0, 2, 33
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\hockey.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\horse.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\hourglass.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\judo.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\jumping_hurdles.svg", "XML", 0, 0, 0, 0, 28, 0, 0, 0, 0, 2, 30
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\karate.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\kayaking.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\long_jump.svg", "XML", 0, 0, 0, 0, 33, 0, 0, 0, 0, 2, 35
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\modernPentathlon.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\olympic_flame.svg", "XML", 0, 0, 0, 0, 21, 0, 0, 0, 0, 2, 23
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\ping_pong.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\rowing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\rugby.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\running.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\sailing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\shooting.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\shooting2.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\shot_put.svg", "XML", 0, 0, 0, 0, 29, 0, 0, 0, 0, 2, 31
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\skateboarding.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\soccer.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\surfing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\swim.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\swimrun.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\synchronized_swimming.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\tableTenis.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\taekwondo.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\tennis.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\tennisRacquet.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\triathlon.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\volleyball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\walk_race.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\waterpolo.svg", "XML", 0, 0, 0, 0, 38, 0, 0, 0, 0, 2, 40
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\weightlifting.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\competitions\wrestling.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\earth.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\ellipse.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\home\loans.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\location.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\home\login.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"c:\Users\Igor\Downloads\Randolympics\public\home\morale.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\newspaper.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\radioTower.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\right_arrow.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\home\startProgressContainer.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\home\trust.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\home\user.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\home\verticalDivider.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\locales\en\orig_translation_backup.json", "JSON", 0, 0, 0, 0, 0, 0, 1557, 0, 0, 547, 2104
+"c:\Users\Igor\Downloads\Randolympics\public\locales\en\translation.json", "JSON", 0, 0, 0, 0, 0, 0, 1580, 0, 0, 17, 1597
+"c:\Users\Igor\Downloads\Randolympics\public\locales\fr\translation.json", "JSON", 0, 0, 0, 0, 0, 0, 6, 0, 0, 3, 9
+"c:\Users\Igor\Downloads\Randolympics\public\locales\sr\translation.json", "JSON", 0, 0, 0, 0, 0, 0, 34, 0, 0, 8, 42
+"c:\Users\Igor\Downloads\Randolympics\public\login\login.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"c:\Users\Igor\Downloads\Randolympics\public\login\logo.svg", "XML", 0, 0, 0, 0, 26, 0, 0, 0, 0, 1, 27
+"c:\Users\Igor\Downloads\Randolympics\public\login\other_sign_in.svg", "XML", 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\ballot.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\ballot_dark.svg", "XML", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\continue.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\exit.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\info.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\login_history.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\login_history_dark.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\news.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\news_dark.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\passport.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\passport_dark.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\pencil.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\rejected.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\save.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\settings.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\settings1.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\settings_dark.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\team.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\team_dark.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\trash.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\triangle-exclamation.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\unvalidated.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\upload.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\user.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\user_old.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\validated.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\myaccount\vote.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\news\arrow_down.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\news\arrow_right.svg", "XML", 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Igor\Downloads\Randolympics\public\news\mdi_dot.svg", "XML", 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Igor\Downloads\Randolympics\public\randolympics_logo.svg", "XML", 0, 0, 0, 0, 26, 0, 0, 0, 0, 1, 27
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\acrobatics.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\archery.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\athletics.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\badminton.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\basketball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\boxing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\cycling.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\diving.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\fencing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\golf.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\gun.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\handball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\high_jump.svg", "XML", 0, 0, 0, 0, 31, 0, 0, 0, 0, 2, 33
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\hockey.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\horse.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\hourglass.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\judo.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\jumping_hurdles.svg", "XML", 0, 0, 0, 0, 28, 0, 0, 0, 0, 2, 30
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\kayaking.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\long_jump.svg", "XML", 0, 0, 0, 0, 33, 0, 0, 0, 0, 2, 35
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\olympic_flame.svg", "XML", 0, 0, 0, 0, 21, 0, 0, 0, 0, 2, 23
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\ping_pong.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\rugby.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\running.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\shooting.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\shot_put.svg", "XML", 0, 0, 0, 0, 29, 0, 0, 0, 0, 2, 31
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\soccer.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\surfing.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\swim.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\taekwondo.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\tennis.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\triathlon.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\volleyball.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\walk_race.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\waterpolo.svg", "XML", 0, 0, 0, 0, 38, 0, 0, 0, 0, 2, 40
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\weightlifting.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomize\wrestling.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\dice.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\dice_hover.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\female.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\female_selected.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\heavy.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\heavy_selected.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\info.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\light.svg", "XML", 0, 0, 0, 0, 12, 0, 0, 0, 0, 1, 13
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\light_selected.svg", "XML", 0, 0, 0, 0, 12, 0, 0, 0, 0, 1, 13
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\male.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\male_selected.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\medium.svg", "XML", 0, 0, 0, 0, 11, 0, 0, 0, 0, 1, 12
+"c:\Users\Igor\Downloads\Randolympics\public\randomizer\medium_selected.svg", "XML", 0, 0, 0, 0, 11, 0, 0, 0, 0, 1, 12
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\100_dollars.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 2, 6
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\10_dollars.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\1_dollar.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\celebrity_icon.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 3
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\fb.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\filter.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\going_sure.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\ig.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\left_arrow.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\left_arrow_white.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\likely_going.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\ln.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\maybe_going.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\not_going.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\not_going_not_logged.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 10
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\pay.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\plus_sign.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\red_circle.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\right_arrow.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\right_arrow_black.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\share.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\share_white.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\trash.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\supporters\x.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\Igor\Downloads\Randolympics\public\vite.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\Igor\Downloads\Randolympics\src\App.jsx", "JavaScript JSX", 0, 0, 0, 79, 0, 0, 0, 0, 4, 64, 147
+"c:\Users\Igor\Downloads\Randolympics\src\QueryProvider.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 0, 6, 15
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\ActivityPart.jsx", "JavaScript JSX", 0, 0, 0, 72, 0, 0, 0, 0, 2, 16, 90
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\DonatePart.jsx", "JavaScript JSX", 0, 0, 0, 298, 0, 0, 0, 0, 30, 45, 373
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\HeaderPart.jsx", "JavaScript JSX", 0, 0, 0, 73, 0, 0, 0, 0, 18, 13, 104
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\InformationPart.jsx", "JavaScript JSX", 0, 0, 0, 159, 0, 0, 0, 0, 0, 27, 186
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\ItemCampaign.jsx", "JavaScript JSX", 0, 0, 0, 349, 0, 0, 0, 0, 13, 102, 464
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\SubHeaderPart.jsx", "JavaScript JSX", 0, 0, 0, 88, 0, 0, 0, 0, 0, 10, 98
+"c:\Users\Igor\Downloads\Randolympics\src\components\Campaign\ViewFullActivity.jsx", "JavaScript JSX", 0, 0, 0, 146, 0, 0, 0, 0, 3, 31, 180
+"c:\Users\Igor\Downloads\Randolympics\src\components\Footer.jsx", "JavaScript JSX", 0, 0, 0, 75, 0, 0, 0, 0, 0, 21, 96
+"c:\Users\Igor\Downloads\Randolympics\src\components\FooterClean.jsx", "JavaScript JSX", 0, 0, 0, 73, 0, 0, 0, 0, 3, 15, 91
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\CompetitionsHome.jsx", "JavaScript JSX", 0, 0, 0, 160, 0, 0, 0, 0, 0, 140, 300
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\CountDownTimerHome.jsx", "JavaScript JSX", 0, 0, 0, 81, 0, 0, 0, 0, 4, 55, 140
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\FAQ.jsx", "JavaScript JSX", 0, 0, 0, 315, 0, 0, 0, 0, 12, 54, 381
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\FAQComponent.jsx", "JavaScript JSX", 0, 0, 0, 56, 0, 0, 0, 0, 3, 13, 72
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\FirstCollapsibleHome.jsx", "JavaScript JSX", 0, 0, 0, 44, 0, 0, 0, 0, 18, 43, 105
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\GridOfSportsHome.jsx", "JavaScript JSX", 0, 0, 0, 532, 0, 0, 0, 0, 38, 72, 642
+"c:\Users\Igor\Downloads\Randolympics\src\components\Home\UserProfilePublicView.jsx", "JavaScript JSX", 0, 0, 0, 235, 0, 0, 0, 0, 0, 40, 275
+"c:\Users\Igor\Downloads\Randolympics\src\components\Login\ForgotPassword.jsx", "JavaScript JSX", 0, 0, 0, 165, 0, 0, 0, 0, 5, 29, 199
+"c:\Users\Igor\Downloads\Randolympics\src\components\Login\RegisteredByFriend.jsx", "JavaScript JSX", 0, 0, 0, 19, 0, 0, 0, 0, 0, 12, 31
+"c:\Users\Igor\Downloads\Randolympics\src\components\MockupRandomizer\MockupRandomizerSelect.jsx", "JavaScript JSX", 0, 0, 0, 286, 0, 0, 0, 0, 2, 30, 318
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\CreatedCampaigns.jsx", "JavaScript JSX", 0, 0, 0, 167, 0, 0, 0, 0, 20, 33, 220
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\EditCreatedCampaigns.jsx", "JavaScript JSX", 0, 0, 0, 1230, 0, 0, 0, 0, 130, 187, 1547
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\EditProfile.jsx", "JavaScript JSX", 0, 0, 0, 1220, 0, 0, 0, 0, 225, 234, 1679
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections.jsx", "JavaScript JSX", 0, 0, 0, 366, 0, 0, 0, 0, 40, 87, 493
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\LoginAndTraffic.jsx", "JavaScript JSX", 0, 0, 0, 46, 0, 0, 0, 0, 0, 13, 59
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\Others.jsx", "JavaScript JSX", 0, 0, 0, 186, 0, 0, 0, 0, 41, 39, 266
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\Others50Popup.jsx", "JavaScript JSX", 0, 0, 0, 103, 0, 0, 0, 0, 0, 19, 122
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\PassVerify.jsx", "JavaScript JSX", 0, 0, 0, 306, 0, 0, 0, 0, 39, 62, 407
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\PopupPassVerify.jsx", "JavaScript JSX", 0, 0, 0, 408, 0, 0, 0, 0, 30, 76, 514
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\TeamList.jsx", "JavaScript JSX", 0, 0, 0, 108, 0, 0, 0, 0, 7, 24, 139
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\Top50.jsx", "JavaScript JSX", 0, 0, 0, 154, 0, 0, 0, 0, 34, 35, 223
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Elections\Top50Popup.jsx", "JavaScript JSX", 0, 0, 0, 103, 0, 0, 0, 0, 0, 19, 122
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\HeaderMyProfile.jsx", "JavaScript JSX", 0, 0, 0, 277, 0, 0, 0, 0, 14, 53, 344
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\LgnTraffcHistory.jsx", "JavaScript JSX", 0, 0, 0, 205, 0, 0, 0, 0, 2, 68, 275
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\PassportVrfy.jsx", "JavaScript JSX", 0, 0, 0, 276, 0, 0, 0, 0, 17, 57, 350
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Settings.jsx", "JavaScript JSX", 0, 0, 0, 359, 0, 0, 0, 0, 14, 62, 435
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\Team.jsx", "JavaScript JSX", 0, 0, 0, 381, 0, 0, 0, 0, 7, 70, 458
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\UpdateAthleteStatus.jsx", "JavaScript JSX", 0, 0, 0, 268, 0, 0, 0, 0, 7, 40, 315
+"c:\Users\Igor\Downloads\Randolympics\src\components\MyAccount\WarningPassportMessage.jsx", "JavaScript JSX", 0, 0, 0, 68, 0, 0, 0, 0, 1, 12, 81
+"c:\Users\Igor\Downloads\Randolympics\src\components\Navbar.jsx", "JavaScript JSX", 0, 0, 0, 484, 0, 0, 0, 0, 41, 56, 581
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarClean.jsx", "JavaScript JSX", 0, 0, 0, 24, 0, 0, 0, 0, 0, 9, 33
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarHome.jsx", "JavaScript JSX", 0, 0, 0, 138, 0, 0, 0, 0, 1, 28, 167
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarHomeCollapsed.jsx", "JavaScript JSX", 0, 0, 0, 63, 0, 0, 0, 0, 2, 74, 139
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarHome\BeliefsDropDownMenu.jsx", "JavaScript JSX", 0, 0, 0, 39, 0, 0, 0, 0, 4, 58, 101
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarHome\EconomicsDropDownMenu.jsx", "JavaScript JSX", 0, 0, 0, 44, 0, 0, 0, 0, 2, 41, 87
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarHome\SportsDropDownMenu.jsx", "JavaScript JSX", 0, 0, 0, 255, 0, 0, 0, 0, 2, 98, 355
+"c:\Users\Igor\Downloads\Randolympics\src\components\NavbarOld.jsx", "JavaScript JSX", 0, 0, 0, 41, 0, 0, 0, 0, 3, 20, 64
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\Economics\CreateEconomicsPost.jsx", "JavaScript JSX", 0, 0, 0, 270, 0, 0, 0, 0, 19, 177, 466
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\Economics\EconomicsDetails.jsx", "JavaScript JSX", 0, 0, 0, 521, 0, 0, 0, 0, 36, 81, 638
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\Economics\EconomicsList.jsx", "JavaScript JSX", 0, 0, 0, 91, 0, 0, 0, 0, 0, 85, 176
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\Economics\ItemEconomicsList.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 0, 0, 31, 71
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\NewsAdmin.jsx", "JavaScript JSX", 0, 0, 0, 124, 0, 0, 0, 0, 6, 101, 231
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\News\CreateNewsPost.jsx", "JavaScript JSX", 0, 0, 0, 270, 0, 0, 0, 0, 21, 169, 460
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\News\ItemNewsList.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 0, 1, 9, 50
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\News\NewsDetails.jsx", "JavaScript JSX", 0, 0, 0, 521, 0, 0, 0, 0, 28, 82, 631
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\News\NewsGamesList.jsx", "JavaScript JSX", 0, 0, 0, 91, 0, 0, 0, 0, 0, 77, 168
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\UpcomingGames\CreateUpcomingPost.jsx", "JavaScript JSX", 0, 0, 0, 270, 0, 0, 0, 0, 21, 157, 448
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\UpcomingGames\GameDetails.jsx", "JavaScript JSX", 0, 0, 0, 478, 0, 0, 0, 0, 31, 281, 790
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\UpcomingGames\ItemUpcomingGamesList.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 0, 1, 18, 59
+"c:\Users\Igor\Downloads\Randolympics\src\components\NewsAdmin\UpcomingGames\UpcomingGamesList.jsx", "JavaScript JSX", 0, 0, 0, 91, 0, 0, 0, 0, 0, 69, 160
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\Economics\DetailsNewsEconomics.jsx", "JavaScript JSX", 0, 0, 0, 111, 0, 0, 0, 0, 2, 32, 145
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\Economics\EconomicsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 16, 0, 0, 0, 0, 1, 28, 45
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\Economics\ItemEconomicsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 79, 0, 0, 0, 0, 0, 20, 99
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\Economics\ReadMoreNewsEconomics.jsx", "JavaScript JSX", 0, 0, 0, 109, 0, 0, 0, 0, 0, 23, 132
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\NewsBlock\DetailsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 111, 0, 0, 0, 0, 7, 45, 163
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\NewsBlock\ItemNewsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 79, 0, 0, 0, 0, 0, 18, 97
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\NewsBlock\NewsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 93, 0, 0, 0, 0, 3, 21, 117
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\NewsBlock\ReadMoreNewsNewsBlock.jsx", "JavaScript JSX", 0, 0, 0, 106, 0, 0, 0, 0, 0, 26, 132
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\UpcomingGames\DetailsUpcomingGames.jsx", "JavaScript JSX", 0, 0, 0, 111, 0, 0, 0, 0, 2, 31, 144
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\UpcomingGames\ReadMoreUpcomingGames.jsx", "JavaScript JSX", 0, 0, 0, 106, 0, 0, 0, 0, 0, 25, 131
+"c:\Users\Igor\Downloads\Randolympics\src\components\News\UpcomingGames\UpcomingGames.jsx", "JavaScript JSX", 0, 0, 0, 108, 0, 0, 0, 0, 3, 131, 242
+"c:\Users\Igor\Downloads\Randolympics\src\components\Payments\DonationForm.jsx", "JavaScript JSX", 0, 0, 0, 84, 0, 0, 0, 0, 12, 36, 132
+"c:\Users\Igor\Downloads\Randolympics\src\components\Payments\DonationFormItemCampaign.jsx", "JavaScript JSX", 0, 0, 0, 81, 0, 0, 0, 0, 13, 42, 136
+"c:\Users\Igor\Downloads\Randolympics\src\components\Payments\DonationInput.jsx", "JavaScript JSX", 0, 0, 0, 58, 0, 0, 0, 0, 4, 15, 77
+"c:\Users\Igor\Downloads\Randolympics\src\components\Payments\StripeForm.jsx", "JavaScript JSX", 0, 0, 0, 85, 0, 0, 0, 0, 4, 29, 118
+"c:\Users\Igor\Downloads\Randolympics\src\components\Randomize.jsx", "JavaScript JSX", 0, 0, 0, 919, 0, 0, 0, 0, 258, 201, 1378
+"c:\Users\Igor\Downloads\Randolympics\src\components\Randomize\RandomizeItem.jsx", "JavaScript JSX", 0, 0, 0, 21, 0, 0, 0, 0, 7, 8, 36
+"c:\Users\Igor\Downloads\Randolympics\src\components\Supporters\HorizontalLinearAlternativeLabelStepper.jsx", "JavaScript JSX", 0, 0, 0, 45, 0, 0, 0, 0, 0, 4, 49
+"c:\Users\Igor\Downloads\Randolympics\src\components\Supporters\PaymentPage.jsx", "JavaScript JSX", 0, 0, 0, 163, 0, 0, 0, 0, 27, 48, 238
+"c:\Users\Igor\Downloads\Randolympics\src\components\Supporters\WarningTextPopup.jsx", "JavaScript JSX", 0, 0, 0, 52, 0, 0, 0, 0, 0, 20, 72
+"c:\Users\Igor\Downloads\Randolympics\src\context\AuthContext.jsx", "JavaScript JSX", 0, 0, 0, 89, 0, 0, 0, 0, 12, 54, 155
+"c:\Users\Igor\Downloads\Randolympics\src\context\supportedCountry.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 5, 7
+"c:\Users\Igor\Downloads\Randolympics\src\context\user_types.js", "JavaScript", 29, 0, 0, 0, 0, 0, 0, 0, 0, 18, 47
+"c:\Users\Igor\Downloads\Randolympics\src\functions\capturePayment.js", "JavaScript", 19, 0, 0, 0, 0, 0, 0, 0, 0, 5, 24
+"c:\Users\Igor\Downloads\Randolympics\src\functions\createPaymentIntent.js", "JavaScript", 28, 0, 0, 0, 0, 0, 0, 0, 10, 21, 59
+"c:\Users\Igor\Downloads\Randolympics\src\hooks\useCapturePayment.js", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"c:\Users\Igor\Downloads\Randolympics\src\hooks\useCreatePaymentIntent.js", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 1, 6, 13
+"c:\Users\Igor\Downloads\Randolympics\src\index.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 19, 1, 15, 35
+"c:\Users\Igor\Downloads\Randolympics\src\main.jsx", "JavaScript JSX", 0, 0, 0, 27, 0, 0, 0, 0, 24, 8, 59
+"c:\Users\Igor\Downloads\Randolympics\src\pages\AboutUs.jsx", "JavaScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 0, 7, 24
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Campaign.jsx", "JavaScript JSX", 0, 0, 0, 506, 0, 0, 0, 0, 27, 73, 606
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Competitions.jsx", "JavaScript JSX", 0, 0, 0, 22, 0, 0, 0, 0, 0, 7, 29
+"c:\Users\Igor\Downloads\Randolympics\src\pages\CompetitionsDetails.jsx", "JavaScript JSX", 0, 0, 0, 95, 0, 0, 0, 0, 2, 22, 119
+"c:\Users\Igor\Downloads\Randolympics\src\pages\ContactUs.jsx", "JavaScript JSX", 0, 0, 0, 38, 0, 0, 0, 0, 3, 14, 55
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Contact\ContactUsForm.jsx", "JavaScript JSX", 0, 0, 0, 125, 0, 0, 0, 0, 2, 23, 150
+"c:\Users\Igor\Downloads\Randolympics\src\pages\FAQPage.jsx", "JavaScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 0, 9, 20
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home.jsx", "JavaScript JSX", 0, 0, 0, 89, 0, 0, 0, 0, 58, 61, 208
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\EconomicsBroadcastingHome.jsx", "JavaScript JSX", 0, 0, 0, 128, 0, 0, 0, 0, 0, 209, 337
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\EconomicsSponsorshipHome.jsx", "JavaScript JSX", 0, 0, 0, 114, 0, 0, 0, 0, 0, 199, 313
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\EconomiscLoansHome.jsx", "JavaScript JSX", 0, 0, 0, 96, 0, 0, 0, 0, 0, 138, 234
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FifthScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 107, 0, 0, 0, 0, 61, 55, 223
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FifthScreenHomeOld.jsx", "JavaScript JSX", 0, 0, 0, 81, 0, 0, 0, 0, 19, 28, 128
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FifthScreenHomeOld2.jsx", "JavaScript JSX", 0, 0, 0, 81, 0, 0, 0, 0, 19, 28, 128
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FifthScreenHomeOld3.jsx", "JavaScript JSX", 0, 0, 0, 81, 0, 0, 0, 0, 19, 28, 128
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FirstScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 75, 0, 0, 0, 0, 5, 49, 129
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\FourthScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 105, 0, 0, 0, 0, 1, 37, 143
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SearchForUsers.jsx", "JavaScript JSX", 0, 0, 0, 177, 0, 0, 0, 0, 18, 56, 251
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SecondScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 74, 0, 0, 0, 0, 25, 31, 130
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SecondScreenHome2.jsx", "JavaScript JSX", 0, 0, 0, 62, 0, 0, 0, 0, 25, 29, 116
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SecondScreenHome3.jsx", "JavaScript JSX", 0, 0, 0, 62, 0, 0, 0, 0, 25, 31, 118
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SeventhScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 381, 0, 0, 0, 0, 76, 80, 537
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SixthScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 83, 0, 0, 0, 0, 22, 19, 124
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\SixthScreenHomeAnother.jsx", "JavaScript JSX", 0, 0, 0, 71, 0, 0, 0, 0, 34, 19, 124
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Home\ThirdScreenHome.jsx", "JavaScript JSX", 0, 0, 0, 46, 0, 0, 0, 0, 0, 20, 66
+"c:\Users\Igor\Downloads\Randolympics\src\pages\JoinTeam.jsx", "JavaScript JSX", 0, 0, 0, 96, 0, 0, 0, 0, 0, 6, 102
+"c:\Users\Igor\Downloads\Randolympics\src\pages\LandingPage.jsx", "JavaScript JSX", 0, 0, 0, 291, 0, 0, 0, 0, 27, 43, 361
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Login.jsx", "JavaScript JSX", 0, 0, 0, 308, 0, 0, 0, 0, 16, 70, 394
+"c:\Users\Igor\Downloads\Randolympics\src\pages\MyAccount.jsx", "JavaScript JSX", 0, 0, 0, 257, 0, 0, 0, 0, 7, 56, 320
+"c:\Users\Igor\Downloads\Randolympics\src\pages\News.jsx", "JavaScript JSX", 0, 0, 0, 23, 0, 0, 0, 0, 13, 8, 44
+"c:\Users\Igor\Downloads\Randolympics\src\pages\PageNotFound.jsx", "JavaScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 0, 14, 40
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Register.jsx", "JavaScript JSX", 0, 0, 0, 883, 0, 0, 0, 0, 130, 164, 1177
+"c:\Users\Igor\Downloads\Randolympics\src\pages\Supporters.jsx", "JavaScript JSX", 0, 0, 0, 692, 0, 0, 0, 0, 76, 228, 996
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\InformAdditionalSupporter.jsx", "JavaScript JSX", 0, 0, 0, 95, 0, 0, 0, 0, 0, 10, 105
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\SupporterFifthPart.jsx", "JavaScript JSX", 0, 0, 0, 112, 0, 0, 0, 0, 1, 15, 128
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\SupporterFirstPart.jsx", "JavaScript JSX", 0, 0, 0, 82, 0, 0, 0, 0, 78, 12, 172
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\SupporterFourthPart.jsx", "JavaScript JSX", 0, 0, 0, 310, 0, 0, 0, 0, 33, 79, 422
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\SupporterSecondPart.jsx", "JavaScript JSX", 0, 0, 0, 882, 0, 0, 0, 0, 21, 97, 1000
+"c:\Users\Igor\Downloads\Randolympics\src\pages\SupportersParts\SupporterThirdPart.jsx", "JavaScript JSX", 0, 0, 0, 313, 0, 0, 0, 0, 5, 54, 372
+"c:\Users\Igor\Downloads\Randolympics\src\pages\ToS.jsx", "JavaScript JSX", 0, 0, 0, 232, 0, 0, 0, 0, 0, 28, 260
+"c:\Users\Igor\Downloads\Randolympics\src\styles\blogPosts.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 12, 0, 0, 0, 17, 29
+"c:\Users\Igor\Downloads\Randolympics\src\styles\campaign.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 15, 0, 0, 5, 20, 40
+"c:\Users\Igor\Downloads\Randolympics\src\styles\editprofile.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 34, 0, 0, 23, 40, 97
+"c:\Users\Igor\Downloads\Randolympics\src\styles\elections.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 60, 0, 0, 4, 28, 92
+"c:\Users\Igor\Downloads\Randolympics\src\styles\footer.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 38, 0, 0, 4, 9, 51
+"c:\Users\Igor\Downloads\Randolympics\src\styles\headermyprofile.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 34, 0, 0, 25, 32, 91
+"c:\Users\Igor\Downloads\Randolympics\src\styles\home.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 264, 0, 0, 97, 205, 566
+"c:\Users\Igor\Downloads\Randolympics\src\styles\landingPage.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 41, 0, 0, 5, 13, 59
+"c:\Users\Igor\Downloads\Randolympics\src\styles\login.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 13, 0, 0, 0, 12, 25
+"c:\Users\Igor\Downloads\Randolympics\src\styles\myaccount.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 39, 0, 0, 10, 27, 76
+"c:\Users\Igor\Downloads\Randolympics\src\styles\navbar.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 22, 0, 0, 0, 5, 27
+"c:\Users\Igor\Downloads\Randolympics\src\styles\navbarHome.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 202, 0, 0, 76, 181, 459
+"c:\Users\Igor\Downloads\Randolympics\src\styles\news.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 38, 0, 0, 1, 10, 49
+"c:\Users\Igor\Downloads\Randolympics\src\styles\passverify.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 11, 0, 0, 11, 14, 36
+"c:\Users\Igor\Downloads\Randolympics\src\styles\randomize.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 16, 0, 0, 20, 20, 56
+"c:\Users\Igor\Downloads\Randolympics\src\styles\register.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 3, 0, 0, 2, 2, 7
+"c:\Users\Igor\Downloads\Randolympics\src\styles\supporters.scoped.scss", "SCSS", 0, 0, 0, 0, 0, 79, 0, 0, 6, 77, 162
+"c:\Users\Igor\Downloads\Randolympics\src\themes\theme.js", "JavaScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 8, 26
+"c:\Users\Igor\Downloads\Randolympics\src\utils\PrivateRoute.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 0, 7, 15
+"c:\Users\Igor\Downloads\Randolympics\tailwind.config.js", "JavaScript", 25, 0, 0, 0, 0, 0, 0, 0, 1, 22, 48
+"c:\Users\Igor\Downloads\Randolympics\vite.config.js", "JavaScript", 12, 0, 0, 0, 0, 0, 0, 0, 1, 4, 17
+"Total", "-", 195, 23, 55, 24835, 1456, 921, 11316, 19, 2891, 8913, 50624

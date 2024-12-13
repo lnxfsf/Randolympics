@@ -133,7 +133,7 @@ const Others = ({
     status_date = status_date.format("(HH:mm MMMM Do YYYY)");
   }
 
-  //console.log("userid je: " + userId);
+  //
 
   const [currentRank, setCurrentRank] = useState(rank);
 

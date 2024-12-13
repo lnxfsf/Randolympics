@@ -100,54 +100,7 @@ const MockupRandomizerSelect = ({
               {t("mockupRandomizer.select3")}
             </p>
 
-            <Popup
-              trigger={
-                <img
-                  src="/randomizer/info.svg"
-                  className="cursor-pointer select-none"
-                />
-              }
-              position="right center"
-              className="popup-content "
-              modal
-              closeOnDocumentClick
-            >
-              <div className="p-4">
-                <div>
-                  <p className="text-2xl md:text-3xl  lexend-font text-black_second text-center font-bold">
-                    {t("mockupRandomizer.select4")}
-                  </p>
-                </div>
-
-                <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4 mb-4">
-                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
-                    {t("mockupRandomizer.select1")}
-                  </p>
-
-                  <p>{t("mockupRandomizer.select5")}</p>
-
-                  <p>{t("mockupRandomizer.select6")}</p>
-
-                  <p>{t("mockupRandomizer.select7")}</p>
-                </div>
-
-                <div className="w-full flex justify-center">
-                  <hr className="w-[80%]" />
-                </div>
-
-                <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4">
-                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
-                    {t("mockupRandomizer.select2")}
-                  </p>
-
-                  <p>{t("mockupRandomizer.select8")}</p>
-
-                  <p>{t("mockupRandomizer.select9")}</p>
-
-                  <p>{t("mockupRandomizer.select10")}</p>
-                </div>
-              </div>
-            </Popup>
+            
           </div>
 
           <div className="flex w-full gap-4 mt-4 ">
@@ -308,7 +261,66 @@ const MockupRandomizerSelect = ({
               {t("mockupRandomizer.select15")}
             </span>
           </Button>
+
+
+<div className="w-full flex items-center justify-center mt-4 flex-col lexend-font">
+            <p className="  text-center ">Don't know which weight category you are? </p>
+          <Popup
+              trigger={
+                  <p className=" text-red_second cursor-pointer text-center">Click here to find it out</p>
+               /*  <img
+                  src="/randomizer/info.svg"
+                  className="cursor-pointer select-none"
+                /> */
+
+                
+              }
+              position="right center"
+              className="popup-content "
+              modal
+              closeOnDocumentClick
+            >
+              <div className="p-4">
+                <div>
+                  <p className="text-2xl md:text-3xl  lexend-font text-black_second text-center font-bold">
+                    {t("mockupRandomizer.select4")}
+                  </p>
+                </div>
+
+                <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4 mb-4">
+                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
+                    {t("mockupRandomizer.select1")}
+                  </p>
+
+                  <p>{t("mockupRandomizer.select5")}</p>
+
+                  <p>{t("mockupRandomizer.select6")}</p>
+
+                  <p>{t("mockupRandomizer.select7")}</p>
+                </div>
+
+                <div className="w-full flex justify-center">
+                  <hr className="w-[80%]" />
+                </div>
+
+                <div className="flex flex-col  lexend-font text-black_second text-start font-medium gap-2 mt-4">
+                  <p className="text-xl md:text-2xl  lexend-font text-black_second text-start font-bold">
+                    {t("mockupRandomizer.select2")}
+                  </p>
+
+                  <p>{t("mockupRandomizer.select8")}</p>
+
+                  <p>{t("mockupRandomizer.select9")}</p>
+
+                  <p>{t("mockupRandomizer.select10")}</p>
+                </div>
+              </div>
+            </Popup>
+            </div>
+
         </div>
+
+        
       </div>
     </>
   );

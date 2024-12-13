@@ -2,6 +2,10 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import {useState} from "react";
+
+
+
 const InformAdditionalSupporter = ({
   additionalSupportersFormData,
 
@@ -14,9 +18,12 @@ const InformAdditionalSupporter = ({
 }) => {
   const { t } = useTranslation();
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   return (
     <>
       <div className="flex flex-col justify-start w-full">
+      
         {additionalSupportersFormData.map((data, index) => (
           <div
             className="flex flex-col items-start justify-center"
@@ -32,7 +39,7 @@ const InformAdditionalSupporter = ({
             </button>
 
             <label
-              htmlFor="theirName"
+              htmlFor="name"
               className="lexend-font mb-1 mt-1 font-medium text-sm"
             >
               {t('campaign.content1')}
@@ -41,7 +48,7 @@ const InformAdditionalSupporter = ({
               value={data.name}
               onChange={(event) => handleInputChange(index, event)}
               placeholder="John"
-              name="theirName"
+              name="name"
               type="text"
               inputProps={{
                 maxLength: 255,
@@ -51,7 +58,7 @@ const InformAdditionalSupporter = ({
             />
 
             <label
-              htmlFor="theirEmail"
+              htmlFor="email"
               className="lexend-font mb-1 mt-1 font-medium text-sm"
             >
               {t('campaign.content2')}
@@ -61,7 +68,7 @@ const InformAdditionalSupporter = ({
               onChange={(event) => handleInputChange(index, event)}
               placeholder="johndoe@gmail.com"
               type="email"
-              name="theirEmail"
+              name="email"
               inputProps={{
                 maxLength: 255,
               }}
@@ -71,8 +78,21 @@ const InformAdditionalSupporter = ({
           </div>
         ))}
 
+
+{ additionalSupportersFormData.length <= 50 && (<>
         <Button
-          onClick={addInputSet}
+         disabled={isDisabled}
+          onClick={() => {
+            addInputSet(); 
+
+            setIsDisabled(true);
+
+            setTimeout(() => {
+              setIsDisabled(false);
+            }, 500);
+            
+
+          }}
           className="w-full md:w-50%"
           style={{ textTransform: "none" }}
           sx={{
@@ -96,6 +116,8 @@ const InformAdditionalSupporter = ({
             {t('campaign.content3')}
           </span>
         </Button>
+        </>)}
+
       </div>
     </>
   );

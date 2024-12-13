@@ -191,7 +191,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) =
 
       if (response.status === 200) {
         setUpdatedPassportPopup((prev) => !prev);
-        console.log("poslao je dobro on..");
+        
        // popupRef.current.close();
         setOpen(false);
       }

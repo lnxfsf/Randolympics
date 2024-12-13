@@ -165,7 +165,7 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col mb-1 justify-start mt-8 w-full ">
-              <label for="email" className="lexend-font">
+              <label htmlFor="email" className="lexend-font">
                 {t("login.content2")}
               </label>
               <TextField
@@ -206,12 +206,12 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col mb-2.5 justify-start mt-2 w-full">
-              <label for="pass" className=" lexend-font">
+              <label htmlFor="pass" className=" lexend-font">
                 {t("login.content3")}
               </label>
               <TextField
                 /*  label="Password" */
-                placeholder="****"
+                placeholder="********"
                 id="pass"
                 name="pass"
                 required
@@ -341,7 +341,7 @@ const Login = () => {
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
-          <div className="flex justify-center mt-0 max-md:w-full ">
+        {/*   <div className="flex justify-center mt-0 max-md:w-full ">
             <Button
               onClick={handleSignUp}
               className="w-full md:w-[420px]"
@@ -364,7 +364,7 @@ const Login = () => {
                 {t("login.content9")}
               </span>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -373,7 +373,7 @@ const Login = () => {
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarClose}
