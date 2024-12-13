@@ -318,7 +318,7 @@ const blogNews = async (req, res) => {
 
   try {
 
-    const allBlogs = await News.findAll({
+    const allBlogs = await News.findAndCountAll({
 
       order: [["updatedAt", "DESC"]],
       limit: limit,
@@ -327,7 +327,7 @@ const blogNews = async (req, res) => {
 
     });
 
-    res.json(allBlogs);
+    res.status(200).json(allBlogs);
 
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -352,7 +352,8 @@ const newsToUser = async (req, res) => {
 
     const allBlogs = await News.findAll({
 
-      order: [["views", "DESC"]],
+      //order: [["views", "DESC"]],
+      order: [["updatedAt", "DESC"]],
       limit: limit,
       offset: offset,
 

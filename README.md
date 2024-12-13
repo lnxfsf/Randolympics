@@ -153,6 +153,12 @@ npm install chai
 
 npm install superagent
 
+npm install date-fns
+
+
+npm install @paypal/paypal-server-sdk@0.5.1
+
+npm i cookie-parser
 
 -----------
 

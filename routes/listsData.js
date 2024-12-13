@@ -11,6 +11,8 @@ const { rankingTop50, otherUsers, lastInRank,
 
 
            listAllCampaigns,
+           listCreatedCampaignsByUser,
+           listUserOfCampaign,
            listAllUsers,
 
            informOtherSupporters,
@@ -75,6 +77,11 @@ router.get("/allTransactionsSupportersCampaign",allTransactionsSupportersCampaig
 
 // list all campaigns
 router.get("/listAllCampaigns",listAllCampaigns)
+
+
+// list campaigns created by user
+router.get("/listCreatedCampaignsByUser", listCreatedCampaignsByUser)
+router.get("/listUserOfCampaign", listUserOfCampaign)
 
 // list all users
 router.get("/listAllUsers",listAllUsers)

@@ -3,6 +3,8 @@ const { register, login, verify_token, verification_success,
     email_resend, forgot_password, reset_password_token, reset_password,
     campaignDoesUserExist,
     campaignIsSupporterPassCorrect,
+    refreshToken,
+    logout,
 } = require("../controllers/authControllers");
 const router = express.Router();
 
@@ -30,6 +32,11 @@ router.post('/reset_password', reset_password) // Route to update the password
 // we need this for campaign, in order to check if there's already some ... (as well, not to create users, or ones that will be left, and not used in database)
 router.get('/campaignDoesUserExist', campaignDoesUserExist)
 router.get('/campaignIsSupporterPassCorrect',campaignIsSupporterPassCorrect)
+
+
+// refresh jwt token
+router.post("/refresh", refreshToken);
+router.get("/logout", logout);
 
 
 

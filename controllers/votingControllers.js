@@ -290,7 +290,6 @@ const votingForNP = async (req, res) => {
       });
 
       //ne vraca nista..
-      console.log("stampa sinovac" + selectedVoteNP);
       res.status(200).json(selectedVoteNP); // okej, vrati objekat tog, user-a, ali samo, prikaze za taj user, njegova kolona "votedFor"... (da, nemoj da se bakćeš sa localstorage kod ovoga.. lakse je ovako. ima sa NP rangiranjem jos da se radi... )
     } catch (error) {
       console.log(error.stack)
@@ -303,8 +302,6 @@ const votingForNP = async (req, res) => {
   if (req.method === "POST") {
     const { /* votedFor, */ NPuserId, current_user_userId } = req.body;
     // votedFor , is .name , value..
-    // cek, dobio je sada userId ! kako, nzm, bolje ne diraj !
-
     // userId, od NP, for who he voted for.. so we can work with it !
 
     try {
