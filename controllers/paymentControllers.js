@@ -839,6 +839,7 @@ const tempPaymentBeforeStripe = async (req, res) => {
 
     const t4 = await db.sequelize.transaction();
 
+    try {
     // on nadje koji ima..
     const oneCoupon = await Couponcodes.findOne({
       where: { couponCode: couponDonationCode, isCouponActive: 1 },
@@ -1003,7 +1004,10 @@ const tempPaymentBeforeStripe = async (req, res) => {
         return amountOriginal;
       }
     }
-
+  }catch(e){
+    wait t4.rollback();
+    console.log(e.stack);
+  }
 
 
   };
