@@ -835,6 +835,8 @@ const tempPaymentBeforeStripe = async (req, res) => {
     console.log(country);
     console.log(couponDonationCode);
 
+
+
     const t4 = await db.sequelize.transaction();
 
     // on nadje koji ima..
@@ -1001,6 +1003,9 @@ const tempPaymentBeforeStripe = async (req, res) => {
         return amountOriginal;
       }
     }
+
+
+
   };
 
   const {
@@ -1047,17 +1052,17 @@ const tempPaymentBeforeStripe = async (req, res) => {
       // and 'payment_status' is still 'unpaid', so we also know it's not really paid with real money
 
     
-      var amount;
+      var amountNew;
 
       // so if discountCode invalid, then it doesnt need to calculate that
 if(discountCode){
-      amount = await calculateNewAmountWithDiscountCodeBeforeStripe(
+      amountNew = await calculateNewAmountWithDiscountCodeBeforeStripe(
         amountOriginal,
         discountCode,
         countryAthleteIsIn
       );
     } else {
-      amount = amountOriginal;
+      amountNew = amountOriginal;
     }
 
     
@@ -1073,7 +1078,7 @@ if(discountCode){
         supporterComment,
 
         payment_id: "WAITING_TO_PAY_BEFORE_STRIPE",
-        amount: amount,
+        amount: amountNew,
 
         couponDonationCode: discountCode,
         countryAthleteIsIn: countryAthleteIsIn,
@@ -1083,7 +1088,7 @@ if(discountCode){
 
       await oneAthlete.update(
         {
-          donatedAmount: oneAthlete.donatedAmount + amount,
+          donatedAmount: oneAthlete.donatedAmount + amountNew,
         },
         { transaction: t2 }
       );
