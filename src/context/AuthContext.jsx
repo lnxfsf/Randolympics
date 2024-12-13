@@ -26,46 +26,18 @@ export const AuthProvider = ({ children }) => {
 
   
   const [user, setUser] = useState(() => {
-     /* const tokenString =
-      localStorage.getItem("authTokens") ||
-      sessionStorage.getItem("authTokens"); */
 
-      /* 
+    // getting userId from old accessToken jwt, but nothing to worry about, because it's going to be refreshed immediatelly on page load anyways (and will logout him if it's wrong, and server won't accept that old jwt access token if it's expired either.. so he will be logged out)
+    // so, behaviour can be as follows
+    // user is on /myprofile, refreshToken gets new accessToken
+    // so, there's no way for accesstoken to be old in this case. 
+    // but in case it does, it's safer to log out user then 
+    if(localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken")){
+      const accessToken = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
+      return jwtDecode(accessToken);
+    }
 
-    if (tokenString) { */
-    /*   try {
-
-
-        
-
-
-        // const authData = JSON.parse(tokenString);
-
-        const access_token = refreshAccessToken();
-
-        console.log(access_token)
-
-        return jwtDecode(access_token);
-
-
-      } catch (error) {
-        console.error("Invalid token:", error);
-        // localStorage.removeItem("authTokens");
-        // return null;
-      } */
-   /*  } */ 
-    // return null;
   });
-
- /*  let [authTokens, setAuthTokens] = useState(() => {
-    let authTokensString =
-      (typeof localStorage !== "undefined" &&
-        localStorage.getItem("authTokens")) ||
-      (typeof sessionStorage !== "undefined" &&
-        sessionStorage.getItem("authTokens"));
-// if authTokens is not empty in local/session storage, then save their values in this 
-    return authTokensString ? JSON.parse(authTokensString) : null;
-  });  */
 
   const navigate = useNavigate();
 

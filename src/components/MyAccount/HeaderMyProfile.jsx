@@ -245,6 +245,8 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                   <FilePond
                     ref={filePondRef}
 
+                  
+
                     className="filepond--root small"
                     type="file"
                     onupdatefiles={setFiles}
