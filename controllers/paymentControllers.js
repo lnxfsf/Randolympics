@@ -1007,6 +1007,8 @@ const tempPaymentBeforeStripe = async (req, res) => {
   }catch(e){
     await t4.rollback();
     console.log(e.stack);
+
+    return amountOriginal;
   }
 
 
