@@ -60,7 +60,11 @@ const profile_picture_upload = async (req, res) => {
  console.log(req.file); */
 
   const file = req.file;
-  const newFileName = uuidv4(); // we will get more random file name
+  const newFileName = uuidv4() + file.originalname; // we will get more random file name
+
+ 
+  
+
 
   try {
     if (
@@ -84,6 +88,9 @@ const profile_picture_upload = async (req, res) => {
     const command = new PutObjectCommand(params);
     const data = await s3.send(command);
 
+  
+    
+
     res.json(newFileName);
   } catch (error) {
     console.error("Error uploading file:", error);
@@ -95,7 +102,7 @@ const profile_picture_upload = async (req, res) => {
 
 const passport_picture_upload = async (req, res) => {
   const file = req.file;
-  const newFileName = uuidv4();
+  const newFileName = uuidv4() + file.originalname;
 
   try {
     if (
@@ -166,7 +173,7 @@ const passport_picture_upload = async (req, res) => {
 
 const blogs_news_picture_upload = async (req, res) => {
   const file = req.file;
-  const newFileName = uuidv4();
+  const newFileName = uuidv4() + file.originalname;
 
   try {
     if (
