@@ -30,6 +30,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
 const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) => {
 
   const [open1, setOpen1] = useState(false);
@@ -220,8 +225,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) =
           <Avatar
             sx={{ width: 97, height: 97 }}
             src={
-              BACKEND_SERVER_BASE_URL +
-              "/imageUpload/profile_pics/" +
+              S3_BUCKET_CDN_BASE_URL +
+              "/profile_pictures/" +
               user.picture
             }
           />

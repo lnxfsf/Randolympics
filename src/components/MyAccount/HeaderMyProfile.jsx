@@ -40,6 +40,10 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatus, setOpenSnackbar   }) => {
   const { t } = useTranslation();
 
@@ -76,6 +80,7 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
         const jsonResponse = JSON.parse(response);
         const filename = jsonResponse;
 
+     
         
 
         setProfileImage(filename);
@@ -229,8 +234,8 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                   <div className="image_editProfile">
                     <img
                       src={
-                        BACKEND_SERVER_BASE_URL +
-                        "/imageUpload/profile_pics/" +
+                        S3_BUCKET_CDN_BASE_URL +
+                        "/profile_pictures/" +
                         profileImage
                       }
                       className="image_editProfile"
@@ -318,6 +323,7 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                   </Button>
                 </>
               )}
+           {/*//    TODO, if image is empty, then show "Cancel", and in that case, it just reverts this image, as nothing changed, and won't communicate with BACKEND_SERVER_BASE_URL */}
               {toogleProfilePic && (
                 <>
                   {/* <p className="edit-photo" onClick={profileUpload}>

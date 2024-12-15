@@ -17,6 +17,12 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
+
 const SearchForUsers = () => {
   const [searchFirstNameText, setSearchFirstNameText] = useState("");
   const [resultsAmount, setResultsAmount] = useState();
@@ -180,8 +186,8 @@ const SearchForUsers = () => {
                       <Avatar
                         sx={{ width: 55, height: 55 }}
                         src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/profile_pics/" +
+                          S3_BUCKET_CDN_BASE_URL +
+                          "/profile_pictures/" +
                           item.picture
                         }
                       >

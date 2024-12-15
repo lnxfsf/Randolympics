@@ -100,6 +100,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+  
+
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const { t } = useTranslation();
  // for snackbar message.
@@ -753,8 +758,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                   <div className="image_editProfile">
                     <img
                       src={
-                        BACKEND_SERVER_BASE_URL +
-                        "/imageUpload/profile_pics/" +
+                        S3_BUCKET_CDN_BASE_URL +
+                        "/profile_pictures/" +
                         profileImage
                       }
                       className="image_editProfile"
