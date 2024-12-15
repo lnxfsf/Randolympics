@@ -94,8 +94,46 @@ const profile_picture_upload = async (req, res) => {
 };
 
 const passport_picture_upload = async (req, res) => {
+
+  const file = req.file;
+  const newFileName = uuidv4();
+
+  try {
+
+    if (
+      file.mimetype !== "image/png" &&
+      file.mimetype !== "image/jpg" &&
+      file.mimetype !== "image/jpeg"
+    ) {
+      return res.status(400).send({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
+    }
+
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: `passport_pictures/${newFileName}`,
+      Body: req.file.buffer,
+      ContentType: req.file.mimetype,
+      ACL: "public-read",
+    };
+
+
+    const command = new PutObjectCommand(params);
+    const data = await s3.send(command);
+
+    res.json(newFileName);
+
+
+
+
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res
+      .status(500)
+      .send({ message: "Error uploading file", error: error.message });
+  }
+
   //pass the upload path. for profile_picture
-  const uploadPassport = createUpload("uploads/passport_pictures");
+/*   const uploadPassport = createUpload("uploads/passport_pictures");
   const uploadPassportImage = uploadPassport.single("image");
 
   uploadPassportImage(req, res, function (err) {
@@ -109,10 +147,13 @@ const passport_picture_upload = async (req, res) => {
     console.log(filename);
 
     res.json(filename);
-  });
+  }); */
+
+
+
 };
 
-const blogs_upcominggames_picture_upload = async (req, res) => {
+/* const blogs_upcominggames_picture_upload = async (req, res) => {
   //pass the upload path. for profile_picture
   const uploadBlogUpcomingGame = createUpload("uploads/blogs/upcominggames");
   const uploadBlogUpcomingImage = uploadBlogUpcomingGame.single("image");
@@ -129,28 +170,58 @@ const blogs_upcominggames_picture_upload = async (req, res) => {
 
     res.json(filename);
   });
-};
+}; */
 
 const blogs_news_picture_upload = async (req, res) => {
-  //pass the upload path. for profile_picture
-  const uploadBlogNews = createUpload("uploads/blogs/news");
-  const uploadBlogNewsImage = uploadBlogNews.single("image");
 
-  uploadBlogNewsImage(req, res, function (err) {
-    if (err) {
-      return res.status(400).send({ message: err.message });
-    }
-    // Everything went fine.
-    const files = req.files;
-    console.log(files);
+  const file = req.file;
+  const newFileName = uuidv4();
 
-    console.log(filename);
+try {
 
-    res.json(filename);
-  });
+  if (
+    file.mimetype !== "image/png" &&
+    file.mimetype !== "image/jpg" &&
+    file.mimetype !== "image/jpeg"
+  ) {
+    return res.status(400).send({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
+  }
+
+
+  const params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Key: `blogs/news/${newFileName}`,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype,
+    ACL: "public-read",
+  };
+
+
+  
+const command = new PutObjectCommand(params);
+const data = await s3.send(command);
+
+
+} catch (error) {
+  console.error("Error uploading file:", error);
+  res
+    .status(500)
+    .send({ message: "Error uploading file", error: error.message });
+}
+
+
+
+res.json(newFileName);
+
+
+
+
+
+
+
 };
 
-const blogs_economics_picture_upload = async (req, res) => {
+/* const blogs_economics_picture_upload = async (req, res) => {
   //pass the upload path. for profile_picture
   const uploadEconomicsNews = createUpload("uploads/blogs/economics");
   const uploadBlogEconomicsImage = uploadEconomicsNews.single("image");
@@ -167,7 +238,7 @@ const blogs_economics_picture_upload = async (req, res) => {
 
     res.json(filename);
   });
-};
+}; */
 
 const revertPassportPicture = async (req, res) => {
   const { filename } = req.body;
@@ -241,7 +312,7 @@ const revertProfilePicture = async (req, res) => {
   }
 };
 
-const revertBlogs_upcominggames_picture_upload = async (req, res) => {
+/* const revertBlogs_upcominggames_picture_upload = async (req, res) => {
   const { filename } = req.body;
 
   console.log("on stampa-------- da revertuje image");
@@ -276,7 +347,7 @@ const revertBlogs_upcominggames_picture_upload = async (req, res) => {
     console.error("Server error:", err);
     res.status(500).json({ message: "Internal server error" });
   }
-};
+}; */
 
 const revertBlogs_news_picture_upload = async (req, res) => {
   const { filename } = req.body;
@@ -312,7 +383,7 @@ const revertBlogs_news_picture_upload = async (req, res) => {
   }
 };
 
-const revertBlogs_economics_picture_upload = async (req, res) => {
+/* const revertBlogs_economics_picture_upload = async (req, res) => {
   const { filename } = req.body;
 
   // find uploaded image..
@@ -344,7 +415,7 @@ const revertBlogs_economics_picture_upload = async (req, res) => {
     console.error("Server error:", err);
     res.status(500).json({ message: "Internal server error" });
   }
-};
+}; */
 
 module.exports = {
   profile_picture_upload,
@@ -352,12 +423,8 @@ module.exports = {
   revertProfilePicture,
   revertPassportPicture,
 
-  blogs_upcominggames_picture_upload,
-  revertBlogs_upcominggames_picture_upload,
 
   blogs_news_picture_upload,
   revertBlogs_news_picture_upload,
 
-  revertBlogs_economics_picture_upload,
-  blogs_economics_picture_upload,
 };
