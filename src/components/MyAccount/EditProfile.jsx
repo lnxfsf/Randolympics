@@ -537,9 +537,10 @@ const EditProfile = () => {
         // return filename;
       },
       onerror: (response) => {
+        const jsonResponse = JSON.parse(response);
 
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 

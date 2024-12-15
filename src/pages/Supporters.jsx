@@ -700,7 +700,9 @@ const Supporters = () => {
       onerror: (response) => {
         console.error("Error uploading file:", response);
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        const jsonResponse = JSON.parse(response);
+
+        setSnackbarMessage(jsonResponse.message);
         setOpenSnackbarFailure(true);
 
 

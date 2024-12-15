@@ -227,7 +227,10 @@ const CreateUpcomingPost = ({ onBack }) => {
             },
             onerror: (response) => {
 
-                setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+                const jsonResponse = JSON.parse(response);
+
+
+                setSnackbarMessage(jsonResponse.message);
                 setSnackbarStatus("error");
                 setOpenSnackbar(true);
         

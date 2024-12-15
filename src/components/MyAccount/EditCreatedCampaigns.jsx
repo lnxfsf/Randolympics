@@ -184,10 +184,12 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       },
       onerror: (response) => {
 
+        const jsonResponse = JSON.parse(response);
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
+
 
         if (filePondRef1.current) {
           filePondRef1.current.removeFiles();
@@ -441,7 +443,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       },
       onerror: (response) => {
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        const jsonResponse = JSON.parse(response);
+
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 

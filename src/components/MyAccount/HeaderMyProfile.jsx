@@ -93,7 +93,11 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
       },
       onerror: (response) => {
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+
+        // sent as string, so it needs to be parsed in JSON
+        const jsonResponse = JSON.parse(response);
+
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
