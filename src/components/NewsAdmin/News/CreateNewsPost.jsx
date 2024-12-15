@@ -28,6 +28,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -43,7 +45,8 @@ registerPlugin(
     FilePondPluginImagePreview,
     FilePondPluginImageResize,
     FilePondPluginImageTransform,
-    FilePondPluginImageEdit
+    FilePondPluginImageEdit,
+    FilePondPluginFileValidateSize,
 );
 
 
@@ -396,6 +399,24 @@ const CreateNewsPost = ({ onBack }) => {
                         imageEditAllowEdit={false}
 
 
+                        
+
+                    allowFileSizeValidation={true}
+                    maxFileSize="4Mb"
+
+
+
+                    
+                    onaddfile={(error, file) => {
+                        if (error) {
+                          if (error.status === 500 || error.main === "File is too large") {
+                            setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                            setSnackbarStatus("error");
+                            setOpenSnackbar(true);
+                            filePondRef.current.removeFiles(); // Remove the invalid file
+                          }
+                        }
+                      }}
 
                     />
 

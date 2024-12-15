@@ -43,6 +43,18 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+
+registerPlugin(
+  FilePondPluginFileValidateType,
+  FilePondPluginFilePoster,
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform,
+  FilePondPluginImageEdit,
+  FilePondPluginFileValidateSize
+);
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -342,6 +354,22 @@ const SupporterSecondPart = ({
                       styleButtonRemoveItemPosition="center  bottom"
                       styleButtonProcessItemPosition="center bottom"
                       imageEditAllowEdit={false}
+                      allowFileSizeValidation={true}
+                      maxFileSize="4Mb"
+                      onaddfile={(error, file) => {
+                        if (error) {
+                          if (
+                            error.status === 500 ||
+                            error.main === "File is too large"
+                          ) {
+                            setSnackbarMessage(
+                              "File is too large! Maximum allowed size is 4MB."
+                            );
+                            setOpenSnackbarFailure(true);
+                            filePondRef1.current.removeFiles(); // Remove the invalid file
+                          }
+                        }
+                      }}
                     />
                   </div>
 
@@ -806,6 +834,22 @@ const SupporterSecondPart = ({
                       styleButtonRemoveItemPosition="center  bottom"
                       styleButtonProcessItemPosition="center bottom"
                       imageEditAllowEdit={false}
+                      allowFileSizeValidation={true}
+                      maxFileSize="4Mb"
+                      onaddfile={(error, file) => {
+                        if (error) {
+                          if (
+                            error.status === 500 ||
+                            error.main === "File is too large"
+                          ) {
+                            setSnackbarMessage(
+                              "File is too large! Maximum allowed size is 4MB."
+                            );
+                            setOpenSnackbarFailure(true);
+                            filePondRef2.current.removeFiles();
+                          }
+                        }
+                      }}
                     />
                   </div>
 
