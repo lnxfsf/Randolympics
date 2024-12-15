@@ -2,7 +2,7 @@ const multer = require("multer");
 
 const path = require("path");
 const fs = require("fs");
-
+const sharp = require('sharp');
 const aws = require("aws-sdk");
 const {
   S3Client,
@@ -63,6 +63,8 @@ const profile_picture_upload = async (req, res) => {
   const newFileName = uuidv4() + file.originalname; // we will get more random file name
 
  
+
+
   
 
 
@@ -77,10 +79,30 @@ const profile_picture_upload = async (req, res) => {
         .send({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
     }
 
+
+    let compressedImageBuffer;
+
+
+    if (file.mimetype === "image/png") {
+      // Compress PNG
+      compressedImageBuffer = await sharp(file.buffer)
+        .png({ compressionLevel: 9, quality: 80 }) 
+        .toBuffer();
+    } else {
+      // Compress JPEG
+      compressedImageBuffer = await sharp(file.buffer)
+        .jpeg({ quality: 80 }) // Set JPEG quality to 80%
+        .toBuffer();
+    }
+
+
+
+
+
     const params = {
       Bucket: process.env.S3_BUCKET_NAME,
       Key: `profile_pictures/${newFileName}`,
-      Body: req.file.buffer,
+      Body: compressedImageBuffer,
       ContentType: req.file.mimetype,
       ACL: "public-read",
     };
@@ -115,10 +137,25 @@ const passport_picture_upload = async (req, res) => {
         .send({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
     }
 
+    let compressedImageBuffer;
+
+
+    if (file.mimetype === "image/png") {
+      // Compress PNG
+      compressedImageBuffer = await sharp(file.buffer)
+        .png({ compressionLevel: 9, quality: 80 }) 
+        .toBuffer();
+    } else {
+      // Compress JPEG
+      compressedImageBuffer = await sharp(file.buffer)
+        .jpeg({ quality: 80 }) // Set JPEG quality to 80%
+        .toBuffer();
+    }
+
     const params = {
       Bucket: process.env.S3_BUCKET_NAME,
       Key: `passport_pictures/${newFileName}`,
-      Body: req.file.buffer,
+      Body: compressedImageBuffer,
       ContentType: req.file.mimetype,
       ACL: "public-read",
     };
@@ -186,6 +223,19 @@ const blogs_news_picture_upload = async (req, res) => {
         .send({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
     }
 
+    if (file.mimetype === "image/png") {
+      // Compress PNG
+      compressedImageBuffer = await sharp(file.buffer)
+        .png({ compressionLevel: 9, quality: 80 }) 
+        .toBuffer();
+    } else {
+      // Compress JPEG
+      compressedImageBuffer = await sharp(file.buffer)
+        .jpeg({ quality: 80 }) // Set JPEG quality to 80%
+        .toBuffer();
+    }
+
+    
     const params = {
       Bucket: process.env.S3_BUCKET_NAME,
       Key: `blogs/news/${newFileName}`,

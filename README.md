@@ -164,6 +164,7 @@ npm i cookie-parser
 npm install aws-sdk multer-s3
 
 npm i log-timestamp
+npm install sharp
 
 
 -----------
