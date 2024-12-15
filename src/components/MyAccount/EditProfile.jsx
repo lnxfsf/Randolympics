@@ -74,6 +74,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 import moment from "moment";
 
 import Popup from "reactjs-popup";
@@ -1230,8 +1235,8 @@ const EditProfile = () => {
                     trigger={
                       <img
                         src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/passport_pics/" +
+                          S3_BUCKET_CDN_BASE_URL +
+                          "/passport_pictures/" +
                           passportImage
                         }
                         alt="Profile"
@@ -1247,8 +1252,8 @@ const EditProfile = () => {
                       <TransformComponent>
                         <img
                           src={
-                            BACKEND_SERVER_BASE_URL +
-                            "/imageUpload/passport_pics/" +
+                            S3_BUCKET_CDN_BASE_URL +
+                            "/passport_pictures/" +
                             passportImage
                           }
                           alt="Profile"

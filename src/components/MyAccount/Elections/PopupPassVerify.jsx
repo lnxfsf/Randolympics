@@ -236,8 +236,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) =
 
           <img
                 src={
-                  BACKEND_SERVER_BASE_URL +
-                  "/imageUpload/passport_pics/" +
+                  S3_BUCKET_CDN_BASE_URL +
+                  "/passport_pictures/" +
                   user.passport_photo
                 }
                 alt="Profile"
@@ -266,8 +266,8 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) =
               <TransformComponent>
                 <img
                   src={
-                    BACKEND_SERVER_BASE_URL +
-                    "/imageUpload/passport_pics/" +
+                    S3_BUCKET_CDN_BASE_URL +
+                    "/passport_pictures/" +
                     user.passport_photo
                   }
                   alt="Profile"

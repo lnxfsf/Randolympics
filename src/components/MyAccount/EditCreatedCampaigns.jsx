@@ -1180,8 +1180,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     trigger={
                       <img
                         src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/passport_pics/" +
+                          S3_BUCKET_CDN_BASE_URL +
+                          "/passport_pictures/" +
                           passportImage
                         }
                         alt="Profile"
@@ -1197,8 +1197,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                       <TransformComponent>
                         <img
                           src={
-                            BACKEND_SERVER_BASE_URL +
-                            "/imageUpload/passport_pics/" +
+                            S3_BUCKET_CDN_BASE_URL +
+                            "/passport_pictures/" +
                             passportImage
                           }
                           alt="Profile"
