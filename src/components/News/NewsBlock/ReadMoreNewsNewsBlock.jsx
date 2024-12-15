@@ -20,6 +20,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+
+  
 const ReadMoreNewsNewsBlock = () => {
   const [gamesPosts, setGamesPosts] = useState();
 

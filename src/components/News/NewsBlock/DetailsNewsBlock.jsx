@@ -20,6 +20,12 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
 const readingTime = (text) => {
   const wpm = 225;
   const words = text.trim().split(/\s+/).length;
@@ -29,7 +35,7 @@ const readingTime = (text) => {
 
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${BACKEND_SERVER_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blog/news/${coverImage}`
     : "news/news1.png";
 }
 

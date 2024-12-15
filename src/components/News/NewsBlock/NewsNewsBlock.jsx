@@ -11,6 +11,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
 function formatDate(dateString) {
   let date = new Date(dateString);
   let options = { year: "numeric", month: "long", day: "numeric" };
@@ -19,7 +24,7 @@ function formatDate(dateString) {
 
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${BACKEND_SERVER_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blog/news/${coverImage}`
     : "news/news1.png";
 }
 
