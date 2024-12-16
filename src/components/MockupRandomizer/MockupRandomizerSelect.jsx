@@ -217,20 +217,20 @@ const MockupRandomizerSelect = ({
             style={{ textTransform: "none" }}
             sx={{
               height: "50px",
-              bgcolor: "#D24949",
+              bgcolor: "#BDFCC9",
 
               color: "#fff",
               borderRadius: 3,
-              border: `1px solid #D24949`,
+              border: `1px solid #BDFCC9`,
               "&:hover": {
-                background: "rgba(210, 73, 73, 1)",
+                background: "rgba(189, 252, 201, 1)",
                 color: "white",
-                border: `1px solid rgba(210, 73, 73, 1)`,
+                border: `1px solid rgba(189, 252, 201, 1)`,
               },
             }}
             id="randomize-btn"
           >
-            <span className="lexend-font">
+            <span className="lexend-font text-black_second">
               {t("mockupRandomizer.select14")}
             </span>
           </Button>
@@ -257,7 +257,7 @@ const MockupRandomizerSelect = ({
             
           >
             <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
-            <span className="lexend-font">
+            <span className="lexend-font ">
               {t("mockupRandomizer.select15")}
             </span>
           </Button>
