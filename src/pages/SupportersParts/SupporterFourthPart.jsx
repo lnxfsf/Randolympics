@@ -327,7 +327,7 @@ const SupporterFourthPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    
                   >
                     <span className="lexend-font">Next</span>
                   </Button>
@@ -351,7 +351,7 @@ const SupporterFourthPart = ({
                         border: `1px solid #D24949`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    
                   >
                     <span className="lexend-font">
                       {t("campaign.content22")}
@@ -669,7 +669,7 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  id="join-the-fun-btn"
+                  
                 >
                   <span className="lexend-font">Donate</span>
                 </Button>
@@ -695,7 +695,7 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  id="join-the-fun-btn"
+                  
                 >
                   <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
                   <span className="lexend-font">{t("campaign.content23")}</span>
@@ -721,7 +721,7 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  id="join-the-fun-btn"
+                  
                 >
                   <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
                   <span className="lexend-font">{t("campaign.content94")}</span>

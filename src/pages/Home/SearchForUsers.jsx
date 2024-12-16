@@ -149,7 +149,7 @@ const SearchForUsers = () => {
                   border: `1px solid rgba(210, 73, 73, 1)`,
                 },
               }}
-              id="join-the-fun-btn"
+              
             >
               <span className="lexend-font">{t("campaign.content91")}</span>
             </Button>

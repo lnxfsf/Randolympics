@@ -220,7 +220,7 @@ return true;
                 border: `1px solid rgba(210, 73, 73, 1)`,
               },
             }}
-            id="join-the-fun-btn"
+            
           >
             <span className="lexend-font">
               {wantToDonate ? "Cancel" : "Donate"}
@@ -455,7 +455,7 @@ return true;
                     border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
-                id="join-the-fun-btn"
+                
               >
                 <span className="lexend-font">Donate</span>
               </Button>

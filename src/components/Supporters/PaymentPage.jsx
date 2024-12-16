@@ -225,7 +225,7 @@ return (<>
               border: `1px solid rgb(175, 38, 38)`,
             },
           }}
-          id="join-the-fun-btn"
+          
         >
           <span className="popins-font">Proceed</span>
         </Button>

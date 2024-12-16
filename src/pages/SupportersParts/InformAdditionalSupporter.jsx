@@ -108,7 +108,7 @@ const InformAdditionalSupporter = ({
               border: `1px solid rgba(210, 73, 73, 1)`,
             },
           }}
-          id="join-the-fun-btn"
+          
         >
           <img src="supporters/plus_sign.svg" className="mr-2" />{" "}
           <span className="lexend-font text-[#D24949]">

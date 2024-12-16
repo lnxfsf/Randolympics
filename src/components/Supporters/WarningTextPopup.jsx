@@ -118,7 +118,7 @@ const WarningTextPopup = ({
                 border: `1px solid rgba(210, 73, 73, 1)`,
               },
             }}
-            id="join-the-fun-btn"
+            
           >
             <span className="lexend-font">Proceed anyways</span>
           </Button>

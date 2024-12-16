@@ -694,7 +694,7 @@ const SupporterSecondPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
                     <span className="lexend-font">
@@ -721,7 +721,7 @@ const SupporterSecondPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    
                   >
                     <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
                     <span className="lexend-font">
@@ -1080,7 +1080,7 @@ const SupporterSecondPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    id="join-the-fun-btn"
+                    
                   >
                     <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
                     <span className="lexend-font">

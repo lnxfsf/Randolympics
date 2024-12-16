@@ -94,7 +94,7 @@ const HeaderPart = ({
               border: `1px solid rgba(210, 73, 73, 1)`,
             },
           }}
-          id="join-the-fun-btn"
+          
         >
           <img src="/supporters/share_white.svg" className="mr-2" />
           <span className="lexend-font">{t("campaign.content10")}</span>
