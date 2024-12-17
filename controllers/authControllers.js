@@ -444,7 +444,7 @@ const register = async (req, res) => {
       sendEmail(
         newUser.email,
         "Email Verification",
-        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank">here</a> to verify your email.</p>`
       );
     } else {
       // maybe we want to keep it a secret.. (then he have to confirm email and receive new password, when trying to get it.. (but it's unusual scenario maybe.. ))
@@ -479,7 +479,7 @@ const register = async (req, res) => {
     <p>But first you need to verify your account as well </p>
     <p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
             newUser.verificationToken
-          }">here</a> to verify your email.</p>
+          }" target="_blank">here</a> to verify your email.</p>
 
 
             
@@ -493,7 +493,7 @@ const register = async (req, res) => {
       sendEmail(
         newUser.email,
         "Email Verification",
-        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}">here</a> to verify your email.</p>`
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken} target="_blank"">here</a> to verify your email.</p>`
       );
 
       
@@ -530,7 +530,7 @@ const email_resend = async (req, res) => {
     sendEmail(
       user.email,
       "Email Verification",
-      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken}" >here</a> to verify your email.</p>`
+      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken} target="_blank""  >here</a> to verify your email.</p>`
     );
 
     res.status(200).json({ message: "Email verification link resent" });
