@@ -130,6 +130,9 @@ const Campaign = () => {
         }
       );
 
+
+
+
       setMaxPages(Math.ceil(response.data.count / 10));
       setResultsAmount(response.data.count);
 
@@ -137,6 +140,13 @@ const Campaign = () => {
     } catch (e) {
       console.log(e.stack);
     }
+
+
+
+
+
+
+
   };
 
   const resetFilterFields = () => {
@@ -529,19 +539,22 @@ const Campaign = () => {
                     key={index}
                     /*   className="flex justify-between border-2 m-4 p-2 select-none cursor-pointer" */
                     onClick={() => navigate(`/campaign/${item.campaignId}`)}
-                    className="p-4 w-[95%] h-20   cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
+                    className="p-4 w-[95%] min-h-20    cursor-pointer flex justify-between items-center mt-1 mb-1 campaign-container-list rounded-lg"
                   >
                     {/* //TODO, there should be profile image, of current athlete. If there's none, then you need to use avatar based on name initials
                   
                   // TODO, as it seems, even names or similar, should be connected to athlete, so if he updates profile, campaign also updates as well...
                   */}
 
-                    <div className="flex gap-4 items-center">
+
+                 
+
+                    <div className="flex gap-4 items-center ">
                       <Avatar sx={{ width: 55, height: 55 }}>
                         {item.friendName.charAt(0).toUpperCase()}
                       </Avatar>
                       <div className="lexend-font text-black_second">
-                        <p className="font-bold">
+                        <p className="font-bold break-all  pr-4">
                           {item.friendName}{" "}
                           {item.friendMiddleName && (
                             <>({item.friendMiddleName})</>
@@ -559,18 +572,23 @@ const Campaign = () => {
                       </div>
                     </div>
 
-                    {/*   {item.isCelebrity ? (
-                    <img
-                      className=" ml-auto w-6 m-4"
-                      src="/supporters/celebrity_icon.svg"
-                    />
-                  ) : (
-                    <></>
-                  )} */}
 
-                    <div>
-                      <Flag className="w-12 " code={item.friendNationality} />
+                    <div className="flex gap-4 lexend-font text-black_second"> 
+                    <p className="hidden lg:inline"><span className="font-semibold">#</span>12</p>
+                    <p className="hidden lg:inline"><span className="font-semibold">$</span><span className="text-[#44BC49] font-bold">5000</span> </p>
+
+                    <div >
+
+                  
+<div className="flex  lg:hidden  gap-2 self-baseline md:self-center lexend-font text-black_second ">
+<p><span className="font-semibold">#</span>12</p>
+<p><span className="font-semibold">$</span><span className="text-[#44BC49] font-bold">5000</span> </p>
+</div>
+
+                      <Flag className="w-12 justify-self-end " code={item.friendNationality} />
                     </div>
+                    </div> 
+
                   </div>
                 </div>
               </>
