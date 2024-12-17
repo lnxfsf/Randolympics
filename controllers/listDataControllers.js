@@ -6455,6 +6455,10 @@ const shareTableLandingPage = async (req, res) => {
   var email = "ivanlerinc1510@gmail.com";
 
   emailsToSendTo.forEach((user) => {
+
+
+    // if email is provided
+    if(user.email){
     sendEmail(
       user.email,
       "See my event schedule",
@@ -6474,6 +6478,9 @@ const shareTableLandingPage = async (req, res) => {
       
       `
     );
+  }
+
+
   });
 };
 
@@ -6960,6 +6967,10 @@ const informOtherSupporters = async (req, res) => {
   try {
     if (additionalSupporterEmailsToSendTo) {
       additionalSupporterEmailsToSendTo.forEach((user) => {
+
+
+// if email is provided
+    if(user.email){
         sendEmail(
           user.email,
           "Invitation to participate in Randolympics",
@@ -6975,6 +6986,8 @@ const informOtherSupporters = async (req, res) => {
       
       `
         );
+
+      }
       });
     }
   } catch (e) {
