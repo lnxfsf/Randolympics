@@ -9,44 +9,35 @@ import { NavbarHome } from "../../NavbarHome";
 import { useNavigate } from "react-router-dom";
 import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
 
-
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
 import { FooterClean } from "../../FooterClean";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-
-  
 const ReadMoreNewsNewsBlock = () => {
   const [gamesPosts, setGamesPosts] = useState();
 
   const [limit, setLimit] = useState(10);
   const [gamesPostsPage, setGamesPostsPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+
+  const [maxPages, setMaxPages] = useState(0);
 
   const navigate = useNavigate();
+
+  const handlePaginationChange = (event, value) => {
+    setGamesPostsPage(value);
+  };
 
   useEffect(() => {
     getGamesPosts();
   }, [gamesPostsPage]);
-
-  const handleNextPage = () => {
-    if (hasMore) {
-      setGamesPostsPage((prev) => prev + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (gamesPostsPage > 1) {
-      setGamesPostsPage((prev) => prev - 1);
-    }
-  };
 
   const getGamesPosts = async () => {
     var response = await axios.get(`${BACKEND_SERVER_BASE_URL}/blog/news`, {
@@ -56,23 +47,8 @@ const ReadMoreNewsNewsBlock = () => {
       },
     });
 
-    setGamesPosts(response.data);
-
-    const isThereNextPage = await axios.get(
-      `${BACKEND_SERVER_BASE_URL}/blog/news`,
-      {
-        params: {
-          limit: limit,
-          offset: gamesPostsPage * 10,
-        },
-      }
-    );
-
-    if (isThereNextPage.data.length == 0) {
-      setHasMore(false);
-    } else {
-      setHasMore(true);
-    }
+    setMaxPages(Math.ceil(response.data.count / 10));
+    setGamesPosts(response.data.rows);
   };
 
   return (
@@ -82,7 +58,6 @@ const ReadMoreNewsNewsBlock = () => {
       <div className="mb-32"></div>
 
       <div className=" flex justify-center items-center">
-        
         <div className="w-[97%]">
           <IconButton
             className="back-icon"
@@ -96,9 +71,10 @@ const ReadMoreNewsNewsBlock = () => {
         </div>
       </div>
 
+<div className="lg:p-8">
       {gamesPosts &&
         gamesPosts.map((post, index) => (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center ">
             <ItemNewsList
               post={post}
               index={index}
@@ -108,22 +84,24 @@ const ReadMoreNewsNewsBlock = () => {
             />
           </div>
         ))}
+        </div>
 
-      <div className="flex justify-center mt-4">
-        <button
-          disabled={gamesPostsPage === 1}
-          onClick={handlePreviousPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
-        >
-          Previous
-        </button>
-        <button
-          disabled={!hasMore}
-          onClick={handleNextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Next Page
-        </button>
+      <div className="flex justify-center items-start mt-4    w-full ">
+        <Stack>
+          <Pagination
+            count={maxPages}
+            page={gamesPostsPage}
+            onChange={handlePaginationChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                "&.Mui-selected": {
+                  backgroundColor: "#FFEAEA",
+                  color: "#D24949",
+                },
+              },
+            }}
+          />
+        </Stack>
       </div>
 
       <FooterClean />
