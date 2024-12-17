@@ -4,22 +4,11 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 
 
-/* 
+let S3_BUCKET_CDN_BASE_URL =
+import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
 
-const enTranslations = {
-
-
-  welcomeMessage: "ENGLISH",
-  instructions: "ENGLISH todo Real People.\nRandomly Selected.\nCompeting in Olympic Sports",
-
-
-};
-
-const frTranslations = {
-  welcomeMessage: "FRANCE ",
-  instructions: "Click here to see intruction",
-}; */
 
 
 
@@ -30,19 +19,13 @@ i18n
 .use(LanguageDetector)
 .use(Backend)
 .init({
-    /* 
-  resources: {
-    en: { translation: enTranslations },
-    fr: { translation: frTranslations },
-  }, */
- /*  lng: "en", */
   lng: "en",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
   },
   backend: {
-    loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to the translation files
+    loadPath: `${S3_BUCKET_CDN_BASE_URL}/locales/{{lng}}/{{ns}}.json`, // Path to the translation files
   },
   
 });
