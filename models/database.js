@@ -13,7 +13,8 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     dialect: "mysql",
 
-    operatorsAliases: false,
+    
+
     pool: {
       max: dbConfig.pool.max,
       min: dbConfig.pool.min,

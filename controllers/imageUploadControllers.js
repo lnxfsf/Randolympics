@@ -3,17 +3,19 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const sharp = require('sharp');
-const aws = require("aws-sdk");
+
 const {
   S3Client,
   PutObjectCommand,
   DeleteObjectCommand,
 } = require("@aws-sdk/client-s3");
+const { Endpoint } = require("@aws-sdk/types");
+
 const { v4: uuidv4 } = require("uuid");
 
-const spacesEndpoint = new aws.Endpoint("https://fra1.digitaloceanspaces.com");
+
 const s3 = new S3Client({
-  endpoint: spacesEndpoint,
+  endpoint: "https://fra1.digitaloceanspaces.com",
   region: "fra1",
   credentials: {
     accessKeyId: process.env.S3_BUCKET_ACCESS_KEY,
