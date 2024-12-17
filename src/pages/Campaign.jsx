@@ -46,6 +46,18 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Campaign = () => {
+  function formatNumber(value) {
+    const number = Number(value);
+
+    if (number >= 1000000) {
+      return (number / 1000000).toFixed(0) + "M";
+    } else if (number >= 1000) {
+      return (number / 1000).toFixed(0) + "k";
+    } else {
+      return number.toString(); // Less than 1000
+    }
+  }
+
   const [maxPages, setMaxPages] = useState(0);
 
   const [resultsAmount, setResultsAmount] = useState();
@@ -130,9 +142,6 @@ const Campaign = () => {
         }
       );
 
-
-
-
       setMaxPages(Math.ceil(response.data.count / 10));
       setResultsAmount(response.data.count);
 
@@ -140,13 +149,6 @@ const Campaign = () => {
     } catch (e) {
       console.log(e.stack);
     }
-
-
-
-
-
-
-
   };
 
   const resetFilterFields = () => {
@@ -546,9 +548,6 @@ const Campaign = () => {
                   // TODO, as it seems, even names or similar, should be connected to athlete, so if he updates profile, campaign also updates as well...
                   */}
 
-
-                 
-
                     <div className="flex gap-4 items-center ">
                       <Avatar sx={{ width: 55, height: 55 }}>
                         {item.friendName.charAt(0).toUpperCase()}
@@ -572,23 +571,38 @@ const Campaign = () => {
                       </div>
                     </div>
 
+                    <div className="flex gap-2 lexend-font text-black_second">
+                      <p className="hidden lg:inline">
+                        <span className="font-semibold">#</span>
+                        {item.supporterCount}
+                      </p>
+                      <p className="hidden lg:inline">
+                        <span className="font-semibold">$</span>
+                        <span className="text-[#44BC49] font-bold">
+                          {formatNumber(item.donatedAmount)}
+                        </span>{" "}
+                      </p>
 
-                    <div className="flex gap-4 lexend-font text-black_second"> 
-                    <p className="hidden lg:inline"><span className="font-semibold">#</span>12</p>
-                    <p className="hidden lg:inline"><span className="font-semibold">$</span><span className="text-[#44BC49] font-bold">5000</span> </p>
+                      <div>
+                        <div className="flex  lg:hidden  gap-2 self-baseline md:self-center lexend-font text-black_second ">
+                          <p>
+                            <span className="font-semibold">#</span>
+                            {item.supporterCount}
+                          </p>
+                          <p>
+                            <span className="font-semibold">$</span>
+                            <span className="text-[#44BC49] font-bold">
+                              {formatNumber(item.donatedAmount)}
+                            </span>{" "}
+                          </p>
+                        </div>
 
-                    <div >
-
-                  
-<div className="flex  lg:hidden  gap-2 self-baseline md:self-center lexend-font text-black_second ">
-<p><span className="font-semibold">#</span>12</p>
-<p><span className="font-semibold">$</span><span className="text-[#44BC49] font-bold">5000</span> </p>
-</div>
-
-                      <Flag className="w-12 justify-self-end " code={item.friendNationality} />
+                        <Flag
+                          className="w-12 justify-self-end "
+                          code={item.friendNationality}
+                        />
+                      </div>
                     </div>
-                    </div> 
-
                   </div>
                 </div>
               </>
