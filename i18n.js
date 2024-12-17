@@ -25,7 +25,7 @@ i18n
     escapeValue: false,
   },
   backend: {
-    loadPath: `${S3_BUCKET_CDN_BASE_URL}/locales/{{lng}}/{{ns}}.json`, // Path to the translation files
+    loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to the translation files
   },
   
 });
