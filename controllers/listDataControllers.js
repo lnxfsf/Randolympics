@@ -6834,7 +6834,7 @@ const listAllCampaigns = async (req, res) => {
         // Return the campaign with additional fields
         return {
           ...campaign.toJSON(),
-          donatedAmount: user ? user.donatedAmount : 0, 
+          donatedAmount: user ? user.donatedAmount/100 : 0, 
           supporterCount: supporterCount,
         };
       })
