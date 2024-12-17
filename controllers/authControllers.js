@@ -530,7 +530,7 @@ const email_resend = async (req, res) => {
     sendEmail(
       user.email,
       "Email Verification",
-      `<p>Click <a href="http://localhost:5000/auth/verify/${user.verificationToken}">here</a> to verify your email.</p>`
+      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken}" >here</a> to verify your email.</p>`
     );
 
     res.status(200).json({ message: "Email verification link resent" });
