@@ -98,13 +98,15 @@ const SupporterFourthPart = ({
     }
   };
 
-
   const checkIfCouponValid = async () => {
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
-        { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 }
+        { discountCode, friendNationality, amountOriginal: amount * 100 }
       );
+
+      console.log("dobija: ");
+      console.log(response);
 
       if (response.status !== 200) {
         setSnackbarStatus("error");
@@ -115,16 +117,14 @@ const SupporterFourthPart = ({
       }
 
       return true;
-    } catch (e) {
+    } catch (error) {
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
 
-      console.log(e.stack);
+      console.log(error.stack);
 
       return false;
-
-     
     }
   };
 
@@ -308,8 +308,15 @@ const SupporterFourthPart = ({
                   />
 
                   <Button
-                    onClick={() => {
-                      setPayWithCreditCard(true);
+                    onClick={async () => {
+                      if (discountCode !== "") {
+                        const isCouponValid = await checkIfCouponValid();
+                        if (isCouponValid) {
+                          setPayWithCreditCard(true);
+                        }
+                      } else if (discountCode === "") {
+                        setPayWithCreditCard(true);
+                      }
                     }}
                     className="m-2 p-2 w-full md:w-[40%] xl:w-[45%] 2xl:w-[35%]"
                     style={{ textTransform: "none" }}
@@ -327,9 +334,10 @@ const SupporterFourthPart = ({
                         border: `1px solid rgba(210, 73, 73, 1)`,
                       },
                     }}
-                    
                   >
-                    <span className="lexend-font">Next</span>
+                    <span className="lexend-font">
+                      {discountCode ? t("campaign.content96") : t("campaign.content97")}
+                    </span>
                   </Button>
 
                   <Button
@@ -351,7 +359,6 @@ const SupporterFourthPart = ({
                         border: `1px solid #D24949`,
                       },
                     }}
-                    
                   >
                     <span className="lexend-font">
                       {t("campaign.content22")}
@@ -646,12 +653,11 @@ const SupporterFourthPart = ({
                 </div>
 
                 <Button
-                  onClick={ () => {
-                  if(checkIfCouponValid()){
-                    donateBeforeStripe();
-                  }
-
-                }}
+                  onClick={() => {
+                    if (checkIfCouponValid()) {
+                      donateBeforeStripe();
+                    }
+                  }}
                   className="self-center  w-[50%] "
                   /* w-full md:w-50% */
                   style={{ textTransform: "none" }}
@@ -669,7 +675,6 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  
                 >
                   <span className="lexend-font">Donate</span>
                 </Button>
@@ -695,7 +700,6 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  
                 >
                   <img src="supporters/right_arrow.svg" className="mr-2" />{" "}
                   <span className="lexend-font">{t("campaign.content23")}</span>
@@ -721,7 +725,6 @@ const SupporterFourthPart = ({
                       border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
-                  
                 >
                   <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
                   <span className="lexend-font">{t("campaign.content94")}</span>

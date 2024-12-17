@@ -635,7 +635,7 @@ const Supporters = () => {
 
   const navigate = useNavigate();
 
-  const [discountCode, setDiscountCode] = useState();
+  const [discountCode, setDiscountCode] = useState("");
 
   const donateWithCouponOnly = async () => {
     try {
