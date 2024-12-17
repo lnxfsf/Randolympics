@@ -52,7 +52,7 @@ let FRONTEND_SERVER_BASE_URL =
 
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${S3_BUCKET_CDN_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blogs/news/${coverImage}`
     : "news/news1.png";
 }
 

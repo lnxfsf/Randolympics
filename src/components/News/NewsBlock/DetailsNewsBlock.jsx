@@ -35,7 +35,7 @@ const readingTime = (text) => {
 
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${S3_BUCKET_CDN_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blogs/news/${coverImage}`
     : "news/news1.png";
 }
 
@@ -65,6 +65,7 @@ const DetailsNewsBlock = () => {
           },
         }
       );
+
 
       
       setPost(response.data);
@@ -105,6 +106,9 @@ const DetailsNewsBlock = () => {
               
 
               
+
+
+
                 <img
                   /*  className="w-full h-64" */
                   /*  ml-auto mr-auto 
@@ -120,7 +124,14 @@ const DetailsNewsBlock = () => {
 
                   
                   src={getImageUrl(post.cover_image)}
+
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/news/news1.png"; 
+                  }}
                 /> 
+
+
              
 
               <div className=" flex justify-center items-center w-full grow ">
