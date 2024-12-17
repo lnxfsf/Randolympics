@@ -66,9 +66,9 @@ function statusImage(athleteStatus) {
   /* statusOfGoing */
 
   if (athleteStatus === "s1") {
-    return "/supporters/not_going_not_logged.svg";
+    return "/supporters/likely_going.svg";
   } else if (athleteStatus === "s2") {
-    return "/supporters/not_going_not_logged.svg";
+    return "/supporters/likely_going.svg";
   } else if (athleteStatus === "s3") {
     return "/supporters/going_sure.svg";
   } else if (athleteStatus === "s4") {
