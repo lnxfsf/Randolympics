@@ -56,12 +56,18 @@ const NewsNewsBlock = () => {
     const imageUrl = getImageUrl(gamesPosts[0]?.cover_image);
     if (!imageUrl) return;
     
-    try {
+    const img = new Image();
+
+    img.onload = () => setBgImage(imageUrl);
+    img.onerror = () => setBgImage("/news/news1.png");
+    img.src = imageUrl;
+
+   /*  try {
       await axios.head(imageUrl); // Check if the image exists
       setBgImage(imageUrl);
     } catch {
       setBgImage("/news/news1.png"); // Use placeholder on error
-    }
+    } */
   };
 
 
