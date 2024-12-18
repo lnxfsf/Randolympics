@@ -6455,14 +6455,12 @@ const shareTableLandingPage = async (req, res) => {
   var email = "ivanlerinc1510@gmail.com";
 
   emailsToSendTo.forEach((user) => {
-
-
     // if email is provided
-    if(user.email){
-    sendEmail(
-      user.email,
-      "See my event schedule",
-      `Hey I thought you should see a demo from <a href="www.randolympics.com">Randolympics</a> website, how it will create random events, for sports we can try to compete in. 
+    if (user.email) {
+      sendEmail(
+        user.email,
+        "See my event schedule",
+        `Hey I thought you should see a demo from <a href="www.randolympics.com">Randolympics</a> website, how it will create random events, for sports we can try to compete in. 
       <br/>
       What do you think ? Let's try out some new challenge. Let's sign up together for this.
       <br/>
@@ -6477,10 +6475,8 @@ const shareTableLandingPage = async (req, res) => {
       
       
       `
-    );
-  }
-
-
+      );
+    }
   });
 };
 
@@ -6622,38 +6618,30 @@ const howManySupportersCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
   try {
-
-
     const countOfSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
       },
     });
 
-
-
     // now we need to go to each supporter in Users table, to get value for profile picture, for that supporter if he has account, so it reflects in here.
     const supportersWithPictures = await Promise.all(
-
       countOfSupporters.rows.map(async (item) => {
         const user = await User.findOne({
-          where: { userId: item.supporterId }, 
-          attributes: ['picture'], 
+          where: { userId: item.supporterId },
+          attributes: ["picture"],
         });
 
         return {
           ...item.toJSON(), // Convert the Sequelize model instance to plain object
           picture: user ? user.picture : null, // Include the picture or null if not found
-          
         };
       })
     );
 
-
-
-
-    res.status(200).json({ count: countOfSupporters.count, rows: supportersWithPictures, });
-
+    res
+      .status(200)
+      .json({ count: countOfSupporters.count, rows: supportersWithPictures });
   } catch (error) {
     console.log(error.stack);
   }
@@ -6773,8 +6761,6 @@ const listAllCampaigns = async (req, res) => {
 
   try {
     var allCampaigns = await Campaign.findAndCountAll({
-     
-
       where: {
         friendGender: {
           [Op.like]: `%${filterGender}%`,
@@ -6809,22 +6795,11 @@ const listAllCampaigns = async (req, res) => {
       offset: offset,
     });
 
-
-
-
-
-    
-
     const modifiedRows = await Promise.all(
       allCampaigns.rows.map(async (campaign) => {
-        
         const user = await User.findOne({
           where: { email: campaign.friendEmail },
-         
         });
-
-
-
 
         // Count rows in statscampaigns table for this campaignId
         const supporterCount = await Statscampaign.count({
@@ -6834,19 +6809,16 @@ const listAllCampaigns = async (req, res) => {
         // Return the campaign with additional fields
         return {
           ...campaign.toJSON(),
-          donatedAmount: user ? user.donatedAmount/100 : 0, 
+          donatedAmount: user ? user.donatedAmount / 100 : 0,
           supporterCount: supporterCount,
         };
       })
     );
 
-
     res.status(200).json({
       count: allCampaigns.count,
       rows: modifiedRows,
     });
-
-  
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -6913,24 +6885,16 @@ const listUserOfCampaign = async (req, res) => {
   const campaignId = req.query.campaignId;
 
   try {
-
     // you should find that athlete ! by campaignId, campaignId is just used to find athlete it belongs to
     const userCampaign = await Campaign.findOne({
-      where: {campaignId: campaignId}
+      where: { campaignId: campaignId },
     });
-
 
     const athleteOfCampaign = await User.findOne({
-      where: {email: userCampaign.friendEmail}
+      where: { email: userCampaign.friendEmail },
     });
 
-
     res.status(200).json(athleteOfCampaign);
-
-
-
-
-
   } catch (e) {
     console.log(e.stack);
     res.status(500).json({ error: "Internal server error" });
@@ -6975,30 +6939,25 @@ const informOtherSupporters = async (req, res) => {
   try {
     if (additionalSupporterEmailsToSendTo) {
       additionalSupporterEmailsToSendTo.forEach((user) => {
-
-
-// if email is provided
-    if(user.email){
-        sendEmail(
-          user.email,
-          "Invitation to participate in Randolympics",
-          `We're signing up ${name} to participate in campaign.
-
+        // if email is provided
+        if (user.email) {
+          sendEmail(
+            user.email,
+            "Invitation to participate in Randolympics",
+            `We're signing up ${name} to participate in campaign.
         Check him <a href=${campaignURL}>out here</a>
-
-      
-      
-      
-      
-      
-      
       `
-        );
-
-      }
+          );
+        }
       });
     }
+    
+    res.status(200).send("Emails sent successfully");
+
+
   } catch (e) {
+
+    res.status(500).send("Emails not sent");
     console.log(e.stack);
   }
 };
@@ -7011,7 +6970,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
   console.log("limit je ------>" + limitA);
 
   // we don't show creator, on there..
- /*  const firstSupporterCampaign = await Campaign.findOne({
+  /*  const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
     },
