@@ -25,7 +25,8 @@ i18n
     escapeValue: false,
   },
   backend: {
-    loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to the translation files
+    loadPath: 'https://randolympics.fra1.cdn.digitaloceanspaces.com/locales/{{lng}}/{{ns}}.json', // Path to the translation files
+    crossDomain: true
   },
   
 });
