@@ -95,6 +95,13 @@ const NewsNewsBlock = () => {
               `/news/news/${gamesPosts[0].postId}/${gamesPosts[0].title}`
             );
           }}
+
+          onError={(e) => {
+            e.target.onerror = null;
+          }}
+
+
+
         >
           <div className="grow">
             <div className="w-1/2 md:w-1/3 h-9 bg-red_second text-[#fff] flex justify-start items-start p-2 pl-5 md:pl-10 rounded-tl-lg">
