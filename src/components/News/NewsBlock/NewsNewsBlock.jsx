@@ -54,6 +54,8 @@ const NewsNewsBlock = () => {
 
   const checkImage = async () => {
     const imageUrl = getImageUrl(gamesPosts[0]?.cover_image);
+    if (!imageUrl) return;
+    
     try {
       await axios.head(imageUrl); // Check if the image exists
       setBgImage(imageUrl);
