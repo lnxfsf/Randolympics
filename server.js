@@ -4,6 +4,25 @@ const https = require("https");
 const fs = require("fs");
 
 
+ require('log-timestamp')(function () {
+  // Create a timestamp formatted for Europe/Belgrade
+  const options = {
+    timeZone: 'Europe/Belgrade',
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  };
+  const dateTimeFormatter = new Intl.DateTimeFormat('en-GB', options);
+  return `[${dateTimeFormatter.format(new Date())}]`;
+}); 
+
+
+
+
 
 const express = require("express");
 const dotenv = require("dotenv");

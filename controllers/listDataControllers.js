@@ -6455,6 +6455,10 @@ const shareTableLandingPage = async (req, res) => {
   var email = "ivanlerinc1510@gmail.com";
 
   emailsToSendTo.forEach((user) => {
+
+
+    // if email is provided
+    if(user.email){
     sendEmail(
       user.email,
       "See my event schedule",
@@ -6474,6 +6478,9 @@ const shareTableLandingPage = async (req, res) => {
       
       `
     );
+  }
+
+
   });
 };
 
@@ -6765,28 +6772,8 @@ const listAllCampaigns = async (req, res) => {
   const tw_link = req.query.tw_link || "";
 
   try {
-    const allCampaigns = await Campaign.findAndCountAll({
-      /*  where: {
-
-      friendGender: {
-        [Op.like]: `${filterGender}`,  // Partial match for first name
-      },
-
-      friendNationality: {
-        [Op.like]: `%${filterNationality_selected}%`,  // Partial match for first name
-      },
+    var allCampaigns = await Campaign.findAndCountAll({
      
-      friendName: {
-        [Op.like]: `%${searchFirstNameText}%`,  // Partial match for first name
-      },
-
-      friendFamilyName: {
-        [Op.like]: `%${searchFamilyNameText}%`,  // Partial match for first name
-      },
-    
-
-
-      },  */
 
       where: {
         friendGender: {
@@ -6822,16 +6809,44 @@ const listAllCampaigns = async (req, res) => {
       offset: offset,
     });
 
-    /*  // i nadji user Athlete-a, takodje, da i to koristis u BE... (pa ces izvuci koji ti treba u dve varijable..)
-    const thatAthlete = await User.findOne({
-      where: {
-        email: oneCampaign.friendEmail,
-      },
-    });  */
 
-    res.status(200).json(allCampaigns);
 
-    //  return res.status(200).json({ oneCampaign, thatAthlete });
+
+
+    
+
+    const modifiedRows = await Promise.all(
+      allCampaigns.rows.map(async (campaign) => {
+        
+        const user = await User.findOne({
+          where: { email: campaign.friendEmail },
+         
+        });
+
+
+
+
+        // Count rows in statscampaigns table for this campaignId
+        const supporterCount = await Statscampaign.count({
+          where: { campaignId: campaign.campaignId },
+        });
+
+        // Return the campaign with additional fields
+        return {
+          ...campaign.toJSON(),
+          donatedAmount: user ? user.donatedAmount/100 : 0, 
+          supporterCount: supporterCount,
+        };
+      })
+    );
+
+
+    res.status(200).json({
+      count: allCampaigns.count,
+      rows: modifiedRows,
+    });
+
+  
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -6960,6 +6975,10 @@ const informOtherSupporters = async (req, res) => {
   try {
     if (additionalSupporterEmailsToSendTo) {
       additionalSupporterEmailsToSendTo.forEach((user) => {
+
+
+// if email is provided
+    if(user.email){
         sendEmail(
           user.email,
           "Invitation to participate in Randolympics",
@@ -6975,6 +6994,8 @@ const informOtherSupporters = async (req, res) => {
       
       `
         );
+
+      }
       });
     }
   } catch (e) {

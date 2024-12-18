@@ -1214,7 +1214,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport46",
-      sportName: "Kayak Strömkajen",
+      sportName: "Kayak Short",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1241,7 +1241,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport47",
-      sportName: "Kayak Stora Essingen runt lång",
+      sportName: "Kayak Long",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1322,7 +1322,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport50",
-      sportName: "Dragbåtspaddling Essingen runt lång",
+      sportName: "Canoe Drakbåtspaddling - Long",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -1349,7 +1349,7 @@ const listOfSports = [
   
     {
       translatedSportName: "sport51",
-      sportName: "Dragbåtspaddling - Alvik Sprint",
+      sportName: "Canoe Drakbåtspaddling - Sprint",
       howMuchAthletesMakeATeam: 1,
       locations: 1,
   
@@ -3330,6 +3330,104 @@ const listOfSports = [
   
       gender: "M",
     },
+
+
+
+
+
+
+
+
+    {
+      translatedSportName: "sport136",
+      sportName: "Keirin Track Cycling",
+      howMuchAthletesMakeATeam: 1,
+      locations: 1,
+  
+      firstDayHowMuchTimeSlotsExpandBy: 6,
+      secondDayHowMuchTimeSlotsExpandBy: 0,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+  
+      firstDayStartGameTimeSlot: "3_6",
+      firstDayEndGameTimeSlot: "18_21",
+  
+      secondDayStartGameTimeSlot: "",
+      secondDayEndGameTimeSlot: "",
+  
+      thirdDayStartGameTimeSlot: "",
+      thirdDayEndGameTimeSlot: "",
+  
+      dayOfStart: "Thursday",
+      dateOfStart: "July 13th",
+  
+      icon: "cycling",
+  
+      gender: "M",
+    },
+
+
+
+    {
+      translatedSportName: "sport137",
+      sportName: "Omnium Track Cycling",
+      howMuchAthletesMakeATeam: 1,
+      locations: 1,
+  
+      firstDayHowMuchTimeSlotsExpandBy: 6,
+      secondDayHowMuchTimeSlotsExpandBy: 0,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+  
+      firstDayStartGameTimeSlot: "3_6",
+      firstDayEndGameTimeSlot: "18_21",
+  
+      secondDayStartGameTimeSlot: "",
+      secondDayEndGameTimeSlot: "",
+  
+      thirdDayStartGameTimeSlot: "",
+      thirdDayEndGameTimeSlot: "",
+  
+      dayOfStart: "Thursday",
+      dateOfStart: "July 13th",
+  
+      icon: "cycling",
+  
+      gender: "M",
+    },
+
+
+    
+    {
+      translatedSportName: "sport138",
+      sportName: "Team Pursuit Track Cycling",
+      howMuchAthletesMakeATeam: 4,
+      locations: 1,
+  
+      firstDayHowMuchTimeSlotsExpandBy: 6,
+      secondDayHowMuchTimeSlotsExpandBy: 0,
+      thirdDayHowMuchTimeSlotsExpandBy: 0,
+  
+      firstDayStartGameTimeSlot: "3_6",
+      firstDayEndGameTimeSlot: "18_21",
+  
+      secondDayStartGameTimeSlot: "",
+      secondDayEndGameTimeSlot: "",
+  
+      thirdDayStartGameTimeSlot: "",
+      thirdDayEndGameTimeSlot: "",
+  
+      dayOfStart: "Thursday",
+      dateOfStart: "July 13th",
+  
+      icon: "cycling",
+  
+      gender: "M",
+    },
+
+
+
+
+
+
   
     {
       translatedSportName: "sport123",
@@ -3551,9 +3649,11 @@ const listOfSports = [
   
     // saturday
   
+   
+  
     {
-      translatedSportName: "sport131",
-      sportName: "Individual Dressage",
+      translatedSportName: "sport134",
+      sportName: "Swimrun",
       howMuchAthletesMakeATeam: 2,
       locations: 1,
   
@@ -3573,14 +3673,16 @@ const listOfSports = [
       dayOfStart: "Saturday",
       dateOfStart: "July 15th",
   
-      icon: "horse",
+      icon: "swimrun",
   
       gender: "M",
     },
   
-    {
-      translatedSportName: "sport132",
-      sportName: "Team Dressage",
+  
+  
+ {
+      translatedSportName: "sport135",
+      sportName: "Swimrun relay",
       howMuchAthletesMakeATeam: 8,
       locations: 1,
   
@@ -3600,10 +3702,11 @@ const listOfSports = [
       dayOfStart: "Saturday",
       dateOfStart: "July 15th",
   
-      icon: "horse",
+      icon: "swimrun",
   
       gender: "M",
     },
+   
   
     // Sunday
   
@@ -3635,6 +3738,11 @@ const listOfSports = [
     },
   ];
   
+
+  // you need to add names in frontend translations file, as well
+  // sport139 is latest for "translatedSportName", continue next number in sequence
+
+
   module.exports = {
     listOfSports,
   };
