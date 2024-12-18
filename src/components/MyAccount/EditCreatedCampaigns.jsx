@@ -27,6 +27,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -43,7 +45,8 @@ registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
   FilePondPluginImageTransform,
-  FilePondPluginImageEdit
+  FilePondPluginImageEdit,
+  FilePondPluginFileValidateSize,
 );
 
 // MUI
@@ -99,6 +102,11 @@ import { settingUserType } from "../../context/user_types";
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+  
 
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const { t } = useTranslation();
@@ -176,10 +184,12 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       },
       onerror: (response) => {
 
+        const jsonResponse = JSON.parse(response);
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
+
 
         if (filePondRef1.current) {
           filePondRef1.current.removeFiles();
@@ -433,7 +443,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       },
       onerror: (response) => {
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        const jsonResponse = JSON.parse(response);
+
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
@@ -753,8 +765,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                   <div className="image_editProfile">
                     <img
                       src={
-                        BACKEND_SERVER_BASE_URL +
-                        "/imageUpload/profile_pics/" +
+                        S3_BUCKET_CDN_BASE_URL +
+                        "/profile_pictures/" +
                         profileImage
                       }
                       className="image_editProfile"
@@ -798,6 +810,21 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     styleButtonRemoveItemPosition="center  bottom"
                     styleButtonProcessItemPosition="center bottom"
                     imageEditAllowEdit={false}
+
+                    
+                    allowFileSizeValidation={true}
+                    maxFileSize="4Mb"
+
+                    onaddfile={(error, file) => {
+                      if (error) {
+                        if (error.status === 500 || error.main === "File is too large") {
+                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                          setSnackbarStatus("error");
+                          setOpenSnackbar(true);
+                          filePondRef1.current.removeFiles(); // Remove the invalid file
+                        }
+                      }
+                    }}
                   />
                 </>
               )}
@@ -1175,8 +1202,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     trigger={
                       <img
                         src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/passport_pics/" +
+                          S3_BUCKET_CDN_BASE_URL +
+                          "/passport_pictures/" +
                           passportImage
                         }
                         alt="Profile"
@@ -1192,8 +1219,8 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                       <TransformComponent>
                         <img
                           src={
-                            BACKEND_SERVER_BASE_URL +
-                            "/imageUpload/passport_pics/" +
+                            S3_BUCKET_CDN_BASE_URL +
+                            "/passport_pictures/" +
                             passportImage
                           }
                           alt="Profile"
@@ -1279,6 +1306,24 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                   styleButtonRemoveItemPosition="center  bottom"
                   styleButtonProcessItemPosition="center bottom"
                   imageEditAllowEdit={false}
+
+                  
+                  allowFileSizeValidation={true}
+                  maxFileSize="4Mb"
+
+                  
+                  onaddfile={(error, file) => {
+                    if (error) {
+                      if (error.status === 500 || error.main === "File is too large") {
+                        setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                        setSnackbarStatus("error");
+                        setOpenSnackbar(true);
+                        filePondRef2.current.removeFiles(); // Remove the invalid file
+                      }
+                    }
+                  }}
+
+
                 />
 
                 {/*   <p className="edit-photo" onClick={sendPassportUpload}>

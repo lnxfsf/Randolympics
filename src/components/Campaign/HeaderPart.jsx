@@ -7,6 +7,10 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 const HeaderPart = ({
   athlete,
   statusImage,
@@ -46,8 +50,8 @@ const HeaderPart = ({
                */
 
               src={
-                BACKEND_SERVER_BASE_URL +
-                "/imageUpload/profile_pics/" +
+                S3_BUCKET_CDN_BASE_URL +
+                "/profile_pictures/" +
                 athlete.picture
               }
               className=" absolute top-10 left-5 right-0 ml-4 md:ml-8 mr-auto  "
@@ -90,7 +94,7 @@ const HeaderPart = ({
               border: `1px solid rgba(210, 73, 73, 1)`,
             },
           }}
-          id="join-the-fun-btn"
+          
         >
           <img src="/supporters/share_white.svg" className="mr-2" />
           <span className="lexend-font">{t("campaign.content10")}</span>

@@ -46,9 +46,13 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${BACKEND_SERVER_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blogs/news/${coverImage}`
     : "news/news1.png";
 }
 
@@ -62,9 +66,9 @@ function statusImage(athleteStatus) {
   /* statusOfGoing */
 
   if (athleteStatus === "s1") {
-    return "/supporters/not_going_not_logged.svg";
+    return "/supporters/likely_going.svg";
   } else if (athleteStatus === "s2") {
-    return "/supporters/not_going_not_logged.svg";
+    return "/supporters/likely_going.svg";
   } else if (athleteStatus === "s3") {
     return "/supporters/going_sure.svg";
   } else if (athleteStatus === "s4") {

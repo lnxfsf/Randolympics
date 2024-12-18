@@ -27,7 +27,7 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
 
     const [limit, setLimit] = useState(10);
     const [newsPostsPage, setNewsPostsPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
+   
 
 
     const [maxPages, setMaxPages] = useState(0);
@@ -48,18 +48,7 @@ const NewsGamesList = ({ onSelectPost, onCreatePost }) => {
 
 
 
-    const handleNextPage = () => {
-        if (hasMore) {
-            setNewsPostsPage((prev) => prev + 1);
-        }
-    };
-
-
-    const handlePreviousPage = () => {
-        if (newsPostsPage > 1) {
-            setNewsPostsPage((prev) => prev - 1);
-        }
-    };
+   
 
 
 

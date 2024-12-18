@@ -11,6 +11,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
 function formatDate(dateString) {
   let date = new Date(dateString);
   let options = { year: "numeric", month: "long", day: "numeric" };
@@ -19,18 +24,44 @@ function formatDate(dateString) {
 
 function getImageUrl(coverImage) {
   return coverImage
-    ? `${BACKEND_SERVER_BASE_URL}/blog/news/${coverImage}`
+    ? `${S3_BUCKET_CDN_BASE_URL}/blogs/news/${coverImage}`
     : "news/news1.png";
 }
 
+
 const NewsNewsBlock = () => {
   const [gamesPosts, setGamesPosts] = useState();
+  const [bgImage, setBgImage] = useState("/news/news1.png");
+
+
 
   const navigate = useNavigate();
 
   useEffect(() => {
+
+
     getGamesPosts();
-  }, []);
+
+
+    
+    if (gamesPosts && gamesPosts[0]?.cover_image) {
+      checkImage();
+    }
+
+
+  }, [gamesPosts]);
+
+
+  const checkImage = async () => {
+    const imageUrl = getImageUrl(gamesPosts[0]?.cover_image);
+    try {
+      await axios.head(imageUrl); // Check if the image exists
+      setBgImage(imageUrl);
+    } catch {
+      setBgImage("/news/news1.png"); // Use placeholder on error
+    }
+  };
+
 
   const getGamesPosts = async () => {
     var response = await axios.get(
@@ -38,6 +69,10 @@ const NewsNewsBlock = () => {
     );
 
     setGamesPosts(response.data);
+
+
+
+   
 
     
   };
@@ -49,10 +84,12 @@ const NewsNewsBlock = () => {
         <div
           className="flex flex-col w-[90%] sm:w-[70%]  mt-8 bg-body_news rounded-lg gap-8 blog-container cursor-pointer news-card-landing "
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${getImageUrl(
-              gamesPosts[0].cover_image
-            )})`,
+            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${bgImage})`,
           }}
+
+         
+
+
           onClick={() => {
             navigate(
               `/news/news/${gamesPosts[0].postId}/${gamesPosts[0].title}`

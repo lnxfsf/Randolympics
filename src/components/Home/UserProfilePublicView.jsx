@@ -16,6 +16,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
+
 function formatDate(dateString) {
   let date = new Date(dateString);
   let options = { year: "numeric", month: "long", day: "numeric" };
@@ -61,8 +66,8 @@ const UserProfilePublicView = () => {
               <Avatar
                 sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 } }}
                 src={
-                  BACKEND_SERVER_BASE_URL +
-                  "/imageUpload/profile_pics/" +
+                  S3_BUCKET_CDN_BASE_URL +
+                  "/profile_pictures/" +
                   userData.picture
                 }
               >

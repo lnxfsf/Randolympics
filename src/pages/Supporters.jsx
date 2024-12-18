@@ -635,7 +635,7 @@ const Supporters = () => {
 
   const navigate = useNavigate();
 
-  const [discountCode, setDiscountCode] = useState();
+  const [discountCode, setDiscountCode] = useState("");
 
   const donateWithCouponOnly = async () => {
     try {
@@ -700,7 +700,9 @@ const Supporters = () => {
       onerror: (response) => {
         console.error("Error uploading file:", response);
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        const jsonResponse = JSON.parse(response);
+
+        setSnackbarMessage(jsonResponse.message);
         setOpenSnackbarFailure(true);
 
 
@@ -827,7 +829,7 @@ const Supporters = () => {
                 border: `1px solid rgb(175, 38, 38)`,
               },
             }}
-            id="join-the-fun-btn"
+            
           >
             <span className="popins-font">Back</span>
           </Button>

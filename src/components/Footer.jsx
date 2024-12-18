@@ -44,7 +44,7 @@ const Footer = () => {
                     border: `1px solid rgb(255, 255, 255)`,
                   },
                 }}
-                id="join-the-fun-btn"
+                
               >
                 <span className="popins-font">Sign up a friend</span>
               </Button>

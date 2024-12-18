@@ -449,6 +449,9 @@
     "content93": "results",
     "content94": "Donation code",
     "content95": "Celebrity's",
+    "content96": "Next",
+    "content97": "No",
+    
 
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
@@ -760,12 +763,12 @@
     "sport43": "Decathlon",
     "sport44": "Singles Badminton",
     "sport45": "Doubles Badminton",
-    "sport46": "Kayak Strömkajen",
-    "sport47": "Kayak Stora Essingen runt lång",
+    "sport46": "Kayak Short ",
+    "sport47": "Kayak Long",
     "sport48": "Kayak Stora Essingen - Alvik Sprint",
     "sport49": "Kayak Lilla Essingen Stafett",
-    "sport50": "Dragbåtspaddling Essingen runt lång",
-    "sport51": "Dragbåtspaddling - Alvik Sprint",
+    "sport50": "Canoe Drakbåtspaddling - Long",
+    "sport51": "Canoe Drakbåtspaddling - Sprint",
     "sport52": "Water Polo",
     "sport53": "Individual Archery",
     "sport54": "Team Archery",
@@ -845,9 +848,15 @@
     "sport128": "Football",
     "sport129": "Handball",
     "sport130": "Field Hockey",
-    "sport131": "Individual Dressage",
-    "sport132": "Team Dressage",
-    "sport133": "Triathlon"
+    "sport133": "Triathlon",
+
+    "sport134": "Swimrun",
+    "sport135": "Swimrun relay",
+    "sport136": "Keirin Track Cycling",
+    "sport137": "Omnium Track Cycling",
+    "sport138": "Team Pursuit Track Cycling"
+
+
   },
   "contact": {
     "title1": "General Inquiries",

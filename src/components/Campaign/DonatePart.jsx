@@ -78,10 +78,6 @@ const DonatePart = ({
 }) => {
   const donateBeforeStripe = async () => {
     try {
-
-     
-
-
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/tempPaymentBeforeStripe`,
         {
@@ -105,41 +101,31 @@ const DonatePart = ({
     }
   };
 
-
   const checkIfCouponValid = async () => {
+    try {
+      const response = await axios.post(
+        `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
+        { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 }
+      );
 
-    try{
-const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
-  {discountCode,
-    countryAthleteIsIn,
-    amountOriginal: amount * 100,
-  }
+      if (response.status !== 200) {
+        setSnackbarStatus("error");
+        setSnackbarMessage(error.response?.data?.message || error.message);
+        setOpenSnackbar(true);
 
+        return false;
+      }
 
-);
-
-
-if (response.status !== 200){
-  setSnackbarStatus("error");
-  setSnackbarMessage(error.response?.data?.message || error.message);
-  setOpenSnackbar(true);
-
-  return false;
-}
-
-return true;
-
-    }catch(e){
+      return true;
+    } catch (e) {
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
 
       console.log(e.stack);
       return false;
-
-      
     }
-  }
+  };
 
   const [amount, setAmount] = useState(10);
   const { t } = useTranslation();
@@ -220,7 +206,6 @@ return true;
                 border: `1px solid rgba(210, 73, 73, 1)`,
               },
             }}
-            id="join-the-fun-btn"
           >
             <span className="lexend-font">
               {wantToDonate ? "Cancel" : "Donate"}
@@ -379,27 +364,20 @@ return true;
                   type="number"
                   value={amount}
                   onChange={(e) => {
-
                     /* no negative numbers allowed for donation */
                     /* allow it to be cleared */
-                     if(e.target.value === ""){
+                    if (e.target.value === "") {
                       setAmount(e.target.value);
                     } else {
-
                       const tempNumber = Number(e.target.value);
 
                       if (tempNumber < 1) {
                         setAmount(1);
                       } else {
-                        setAmount(tempNumber); 
+                        setAmount(tempNumber);
                       }
-
-
                     }
- 
-
                   }}
-
                   startAdornment={
                     <InputAdornment
                       position="start"
@@ -430,14 +408,11 @@ return true;
               </div>
 
               <Button
-                onClick={
-                  () => {
-                  if(checkIfCouponValid()){
+                onClick={() => {
+                  if (checkIfCouponValid()) {
                     donateBeforeStripe();
                   }
-
-                }
-                }
+                }}
                 className="self-center  w-[50%] "
                 /* w-full md:w-50% */
                 style={{ textTransform: "none" }}
@@ -455,7 +430,6 @@ return true;
                     border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
-                id="join-the-fun-btn"
               >
                 <span className="lexend-font">Donate</span>
               </Button>

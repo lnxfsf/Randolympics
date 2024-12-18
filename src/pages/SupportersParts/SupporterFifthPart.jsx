@@ -74,7 +74,7 @@ const SupporterFifthPart = ({
                     border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
-                id="join-the-fun-btn"
+                
               >
                 <img src="supporters/right_arrow.svg" className="mr-2" />
                 <span className="lexend-font">{t("campaign.content8")}</span>
@@ -104,7 +104,7 @@ const SupporterFifthPart = ({
                     border: `1px solid rgba(210, 73, 73, 1)`,
                   },
                 }}
-                id="join-the-fun-btn"
+                
               >
                 <img src="supporters/share.svg" className="mr-2" />
                 <span className="lexend-font">{t("campaign.content10")}</span>

@@ -45,6 +45,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -62,7 +64,8 @@ registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
   FilePondPluginImageTransform,
-  FilePondPluginImageEdit
+  FilePondPluginImageEdit,
+  FilePondPluginFileValidateSize,
 );
 
 import { useTranslation } from "react-i18next";
@@ -73,6 +76,11 @@ import { useRouteError } from "react-router-dom";
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+
+  let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
 import moment from "moment";
 
@@ -529,9 +537,10 @@ const EditProfile = () => {
         // return filename;
       },
       onerror: (response) => {
+        const jsonResponse = JSON.parse(response);
 
 
-        setSnackbarMessage("Only .png, .jpg and .jpeg format allowed !");
+        setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
@@ -1230,8 +1239,8 @@ const EditProfile = () => {
                     trigger={
                       <img
                         src={
-                          BACKEND_SERVER_BASE_URL +
-                          "/imageUpload/passport_pics/" +
+                          S3_BUCKET_CDN_BASE_URL +
+                          "/passport_pictures/" +
                           passportImage
                         }
                         alt="Profile"
@@ -1247,8 +1256,8 @@ const EditProfile = () => {
                       <TransformComponent>
                         <img
                           src={
-                            BACKEND_SERVER_BASE_URL +
-                            "/imageUpload/passport_pics/" +
+                            S3_BUCKET_CDN_BASE_URL +
+                            "/passport_pictures/" +
                             passportImage
                           }
                           alt="Profile"
@@ -1334,6 +1343,22 @@ const EditProfile = () => {
                   styleButtonRemoveItemPosition="center  bottom"
                   styleButtonProcessItemPosition="center bottom"
                   imageEditAllowEdit={false}
+
+
+                   allowFileSizeValidation={true}
+                    maxFileSize="4Mb"
+
+
+                    onaddfile={(error, file) => {
+                      if (error) {
+                        if (error.status === 500 || error.main === "File is too large") {
+                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                          setSnackbarStatus("error");
+                          setOpenSnackbar(true);
+                          filePondRef.current.removeFiles(); // Remove the invalid file
+                        }
+                      }
+                    }}
                 />
 
                 {/*   <p className="edit-photo" onClick={sendPassportUpload}>
