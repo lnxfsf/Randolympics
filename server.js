@@ -58,7 +58,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 var isProduction = process.env.PRODUCTION;
 
 
-
+/* 
 if(isProduction === "true"){
 
   var options = {
@@ -68,7 +68,7 @@ if(isProduction === "true"){
 
 
 }
-
+ */
 
 
 
@@ -117,16 +117,19 @@ app.use("/payment", paymentRoutes);
 db.sequelize.authenticate().then(() => {
  
  
-  if(isProduction  === "true"){
+ /*  if(isProduction  === "true"){
     https.createServer(options, app)
         .listen(port, function () {
             console.log(`HTTPS Server running on port: ${port}`);
         });
-  } else {
+  } else { */
+
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`);
     });
-  }
+
+/* 
+  } */
  
 
 
