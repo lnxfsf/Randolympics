@@ -96,7 +96,7 @@ const ItemCampaign = () => {
   const [allTransactionsSupporters, setAllTransactionsSupporters] = useState();
 
   const [textAthleteStatus, setTextAthleteStatus] = useState(
-    "Has not logged in yet"
+    t("campaign.content101")
   );
 
   const [wantToDonate, setWantToDonate] = useState(false);
@@ -209,28 +209,28 @@ const ItemCampaign = () => {
       if (response.data.thatAthlete) {
         switch (response.data.thatAthlete.athleteStatus) {
           case "s1":
-            setTextAthleteStatus("Has not logged in yet");
+            setTextAthleteStatus(t("campaign.content101"));
             setColorStatusGoing("rgba(128, 128, 128, 0.75)");
             break;
           case "s2":
-            setTextAthleteStatus("Logged in but no status");
+            setTextAthleteStatus(t("campaign.content102"));
             setColorStatusGoing("rgba(128, 128, 128, 0.75)");
             break;
           case "s3":
-            setTextAthleteStatus("I'm 99% taking the challenge and going");
+            setTextAthleteStatus(t("campaign.content103"));
             setColorStatusGoing("rgba(58, 173, 84, 0.75)");
             break;
           case "s4":
-            setTextAthleteStatus("Most likely going");
+            setTextAthleteStatus(t("campaign.content104"));
             setColorStatusGoing("rgba(233, 165, 6, 0.75)");
             break;
 
           case "s5":
-            setTextAthleteStatus("I'm maybe going");
+            setTextAthleteStatus(t("campaign.content105"));
             setColorStatusGoing("rgba(233, 165, 6, 0.75)");
             break;
           case "s6":
-            setTextAthleteStatus("I'm definitely not going");
+            setTextAthleteStatus(t("campaign.content106"));
             setColorStatusGoing("rgba(180, 55, 55, 0.75)");
             break;
         }

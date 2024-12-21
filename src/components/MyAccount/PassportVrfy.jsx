@@ -163,7 +163,7 @@ const PassportVrfy = () => {
               border: "1px solid #C6C6C6",
               borderRadius: "10px",
             }}
-            placeholder={t("myprofile.validationPassword.content1")}
+            placeholder={t("myprofile.validationPassport.content1")}
             width="100%"
           />
         </div>
@@ -191,7 +191,7 @@ const PassportVrfy = () => {
                 }}
               >
                 <span className="lexend-font text-black_second font-bold">
-                  Filter
+                  {t("login.content18")}
                 </span>
               </Button>
             }
@@ -221,7 +221,7 @@ const PassportVrfy = () => {
                   },
                 }}
               >
-                <span className="popins-font">Reset fields</span>
+                <span className="popins-font">{t("login.content19")}</span>
               </Button>
 
               <FormControl
@@ -230,7 +230,7 @@ const PassportVrfy = () => {
                 className="m-4 ml-0 mb-1"
               >
                 <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                  <b>Role</b>
+                  <b>{t("login.content20")}</b>
                 </InputLabel>
 
                 <Select
@@ -240,20 +240,20 @@ const PassportVrfy = () => {
                   className="w-[300px]"
                   style={{ color: "#000" }}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem value="">{t("login.content21")}</MenuItem>
                   <Divider />
-                  <MenuItem value="AH">Athlete</MenuItem>
-                  <MenuItem value="GP">Global President</MenuItem>
+                  <MenuItem value="AH">{t("login.content22")}</MenuItem>
+                  <MenuItem value="GP">{t("login.content23")}</MenuItem>
 
-                  <MenuItem value="NP">National President</MenuItem>
-                  <MenuItem value="EM">Event Manager</MenuItem>
-                  <MenuItem value="ITM">IT Manager Page editor</MenuItem>
-                  <MenuItem value="MM">Marketing Manager</MenuItem>
-                  <MenuItem value="SM">Sales Manager</MenuItem>
+                  <MenuItem value="NP">{t("login.content24")}</MenuItem>
+                  <MenuItem value="EM">{t("login.content25")}</MenuItem>
+                  <MenuItem value="ITM">{t("login.content26")}</MenuItem>
+                  <MenuItem value="MM">{t("login.content27")}</MenuItem>
+                  <MenuItem value="SM">{t("login.content28")}</MenuItem>
 
-                  <MenuItem value="VM">Validation Manager</MenuItem>
-                  <MenuItem value="LM">Legal Manager</MenuItem>
-                  <MenuItem value="RS">Referee & Support</MenuItem>
+                  <MenuItem value="VM">{t("login.content29")}</MenuItem>
+                  <MenuItem value="LM">{t("login.content30")}</MenuItem>
+                  <MenuItem value="RS">{t("login.content31")}</MenuItem>
                 </Select>
               </FormControl>
 
