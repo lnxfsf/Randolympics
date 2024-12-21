@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite preview",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": " vite preview"
   },
   "dependencies": {
     "@directus/sdk": "^18.0.0",
@@ -73,6 +74,7 @@
     "react-youtube": "^10.1.0",
     "react-zoom-pan-pinch": "^3.6.1",
     "reactjs-popup": "^2.0.6",
+    "serve": "^14.2.4",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
