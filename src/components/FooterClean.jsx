@@ -37,7 +37,7 @@ const FooterClean = () => {
         <div className="flex justify-between pt-12 flex-col lg:flex-row  ">
           <div>
             <p className="lexend-font font-bold">
-              © 2024 Randolympics. {t("footer.copyright")}
+              2024 Randolympics. 
             </p>
           </div>
 
