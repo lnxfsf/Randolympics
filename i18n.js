@@ -19,7 +19,7 @@ i18n
 .use(LanguageDetector)
 .use(Backend)
 .init({
-  lng: "en",
+  lng: "sr",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
