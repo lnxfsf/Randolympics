@@ -27,7 +27,7 @@ var path = require("path");
 
 
 const generateAccessToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "5m" });
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "10m" });
 };
 
 const generateRefreshToken = (userId) => {
