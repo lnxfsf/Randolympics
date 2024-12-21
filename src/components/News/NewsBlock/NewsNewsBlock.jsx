@@ -11,10 +11,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
-
 
 function formatDate(dateString) {
   let date = new Date(dateString);
@@ -28,40 +27,30 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
-
 const NewsNewsBlock = () => {
   const [gamesPosts, setGamesPosts] = useState();
   const [bgImage, setBgImage] = useState("/news/news1.png");
 
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
-
-
     getGamesPosts();
 
-
-    
     if (gamesPosts && gamesPosts[0]?.cover_image) {
       checkImage();
     }
-
-
   }, [gamesPosts]);
-
 
   const checkImage = async () => {
     const imageUrl = getImageUrl(gamesPosts[0]?.cover_image);
-    try {
-      await axios.head(imageUrl); // Check if the image exists
-      setBgImage(imageUrl);
-    } catch {
-      setBgImage("/news/news1.png"); // Use placeholder on error
-    }
-  };
+    if (!imageUrl) return;
 
+    const img = new Image();
+
+    img.onload = () => setBgImage(imageUrl);
+    img.onerror = () => setBgImage("/news/news1.png");
+    img.src = imageUrl;
+  };
 
   const getGamesPosts = async () => {
     var response = await axios.get(
@@ -69,12 +58,6 @@ const NewsNewsBlock = () => {
     );
 
     setGamesPosts(response.data);
-
-
-
-   
-
-    
   };
 
   return (
@@ -86,14 +69,13 @@ const NewsNewsBlock = () => {
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${bgImage})`,
           }}
-
-         
-
-
           onClick={() => {
             navigate(
               `/news/news/${gamesPosts[0].postId}/${gamesPosts[0].title}`
             );
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
           }}
         >
           <div className="grow">
@@ -140,7 +122,7 @@ const NewsNewsBlock = () => {
         <ItemNewsNewsBlock number={2} />
         <ItemNewsNewsBlock number={3} />
       </div>
-{/* 
+      {/* 
       <div className="flex w-[90%] sm:w-[70%] lg:justify-between flex-col items-center  lg:flex-row ">
         <ItemNewsNewsBlock number={4} />
         <ItemNewsNewsBlock number={5} />

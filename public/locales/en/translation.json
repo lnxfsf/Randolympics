@@ -451,7 +451,23 @@
     "content95": "Celebrity's",
     "content96": "Next",
     "content97": "No",
-    
+	
+	"content98": "Enter first name",
+	"content99": "Search ",
+	"content100": "Enter ",
+	
+	"content101": "Has not logged in yet",
+	
+	"content102": "Logged in but no status",
+	"content103": "I'm 99% taking the challenge and going",
+	"content104": "Most likely going",
+	"content105": "I'm maybe going",
+	"content106": "I'm definitely not going",
+	
+	
+    "content107": " supporters",
+	
+	
 
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
@@ -552,7 +568,31 @@
     "content13": "If an account with this email exists, a password reset email has been sent.",
     "content14": "Please enter a valid email address",
     "content15": "Reset password",
-    "content16": "Back to sign in"
+    "content16": "Back to sign in",
+	
+	"content17": "Login & Traffic History",
+	"content18": "Filter",
+	"content19": "Reset fields",
+	"content20": "Role",
+	
+	"content21": "None",
+	"content22": "Athlete",
+	"content23": "Global President",
+	"content24": "National President",
+	"content25": "Event Manager",
+	"content26": "IT Manager Page editor",
+	"content27": "Marketing Manager",
+	"content28": "Sales Manager",
+	"content29": "Validation Manager",
+	"content30": "Legal Manager",
+	"content31": "Referee & Support",
+	
+	
+	"content32": "Nationality",
+	"content33": "Country",
+	"content34": "Number of logins"
+	
+	
   },
   "register": {
     "content1": "Enter a valid email address",
@@ -700,7 +740,10 @@
       "votegp1": "Global President Elections",
       "votedfor1": "You voted for ",
       "votedfor2": "You can update your vote anytime by repeating the process."
-    }
+    },
+	"validationPassport": {
+		"content1": "Search by name"
+	}
   },
   "userTypes": {
     "user_type1": "Athlete",
@@ -1749,21 +1792,83 @@
 
   "privacyPolicy": {
     "cookiePolicy1": "Cookie policy",
-    "cookiePolicy2": "Necessary Cookies",
-"cookiePolicy3": "These cookies are essential for the website to function properly. They enable core functionalities like page navigation and access to secure areas. The website cannot operate efficiently without these cookies.",
+	
+	
+	
+    "cookiePolicy2": "1. Introduction",
+"cookiePolicy3": "This Cookie Policy explains how Randolympics (\"we,\" \"our,\" or \"us\") uses cookies and similar technologies on our website (\"the Website\"). By using the Website, you agree to the use of cookies as described in this policy.",
 
-"cookiePolicy4": "Preferences Cookies",
-"cookiePolicy5": "Preference cookies allow us to remember your choices and preferences, such as language settings or your favorite features. They help us tailor your Randolympics experience to suit you better.",
-"cookiePolicy6": "Statistics Cookies",
+ "cookiePolicy4": "If you do not agree to the use of cookies, you can adjust your browser settings or disable specific cookies using the methods described below.",
+ 
+ 
+ 
+ 
+ 
+ 
+ "cookiePolicy5": "2. What Are Cookies?",
+ "cookiePolicy6": "Cookies are small text files that are placed on your device (e.g., computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work efficiently, as well as to provide information to the site owners.",
+ 
+ "cookiePolicy7": "There are two main types of cookies:",
+ 
+ "cookiePolicy8": "Session Cookies: ", 
+ "cookiePolicy9": "These are temporary cookies that expire when you close your browser.",
+ 
+  "cookiePolicy10": "Persistent Cookies: ", 
+ "cookiePolicy11": "These remain on your device until they expire or you delete them manually.",
+ 
 
-"cookiePolicy7": "These cookies collect anonymous data about how visitors interact with the website. They help us understand what content is most engaging and improve the site’s performance over time.",
-"cookiePolicy8": "Marketing Cookies",
+	
+	
+	
+	"cookiePolicy12": "3. Types of Cookies We Use",
+	
+	"cookiePolicy13": "3.1 Necessary Cookies",
+ "cookiePolicy14": "These cookies are essential for the Website to function properly. They enable basic features such as navigation and access to secure areas. Without these cookies, the Website may not perform as intended.",
+ 
+ 
+ "cookiePolicy15": "3.2 Performance Cookies",
+ "cookiePolicy16": "These cookies collect information about how users interact with the Website, such as which pages are visited most often. This data is aggregated and anonymized, helping us improve the Website’s functionality and user experience.",
 
-"cookiePolicy9": "Marketing cookies help us deliver personalized ads and relevant content. They track your browsing activity across websites to ensure you see what’s most interesting to you."
+ "cookiePolicy17": "3.3 Functional Cookies",
+ "cookiePolicy18": "These cookies allow the Website to remember your preferences and settings, such as language or region, to provide a more personalized experience.",
 
 
+ "cookiePolicy19": "3.4 Advertising and Targeting Cookies",
+ "cookiePolicy20": "These cookies track your browsing habits to deliver relevant advertisements and measure the effectiveness of marketing campaigns. These may be set by us or third-party advertisers.",
 
-
+ "cookiePolicy21": "3.5 Third-Party Cookies",
+ "cookiePolicy22": "Our Website may use third-party services (e.g., analytics providers like Google Analytics) that set their own cookies to collect data and provide their services. We do not control these cookies and recommend reviewing the respective third-party privacy policies.",
+ 
+ 
+ 
+ "cookiePolicy23": "4. Why We Use Cookies",
+ 
+ 
+  "cookiePolicy24": "We use cookies for the following purposes:",
+ 
+ 
+ "cookiePolicy25":  "To enable the functionality of the Website.",
+ "cookiePolicy26": "To analyze traffic and user behavior for improving the Website.",
+ "cookiePolicy27": "To store user preferences for a personalized experience.",
+ "cookiePolicy28": "To deliver relevant advertisements and marketing messages.",
+ "cookiePolicy29": "To comply with legal obligations and ensure security.",
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  "cookiePolicy30": "5. Managing Your Cookie Preferences",
+ 
+ "cookiePolicy31": "You can manage or disable cookies in the following ways:",
+ 
+ 
+"cookiePolicy32": "5.1 Browser Settings",
+ "cookiePolicy33": "Most web browsers allow you to manage your cookie preferences. You can set your browser to refuse cookies, delete existing cookies, or alert you when a cookie is being sent. Please note that disabling cookies may affect the functionality of the Website."
+ 
+ 
 
 
 

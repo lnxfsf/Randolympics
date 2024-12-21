@@ -125,23 +125,86 @@ useEffect(() => {
           <p className="text-4xl " id="cookiePolicy">
             {t("privacyPolicy.cookiePolicy1")}
           </p>
+         
 
           <br />
 
           <p className="text-2xl">{t("privacyPolicy.cookiePolicy2")} </p>
+          <p></p>
           <p>{t("privacyPolicy.cookiePolicy3")}</p>
+          <p>{t("privacyPolicy.cookiePolicy4")}</p>
           <br />
 
-          <p className="text-2xl">{t("privacyPolicy.cookiePolicy4")}</p>
-          <p>{t("privacyPolicy.cookiePolicy5")}</p>
-          <br />
 
-          <p className="text-2xl">{t("privacyPolicy.cookiePolicy6")}</p>
+
+
+          <p className="text-2xl">{t("privacyPolicy.cookiePolicy5")} </p>
+          <p></p>
+          <p>{t("privacyPolicy.cookiePolicy6")}</p>
+          <br/>
           <p>{t("privacyPolicy.cookiePolicy7")}</p>
+
+          <p><b>{t("privacyPolicy.cookiePolicy8")}</b>{t("privacyPolicy.cookiePolicy9")}</p>
+          <p><b>{t("privacyPolicy.cookiePolicy10")}</b>{t("privacyPolicy.cookiePolicy11")}</p>
+
+
           <br />
 
-          <p className="text-2xl">{t("privacyPolicy.cookiePolicy8")}</p>
-          <p>{t("privacyPolicy.cookiePolicy9")}</p>
+
+          <p className="text-2xl">{t("privacyPolicy.cookiePolicy12")} </p>
+          <p></p>
+          <p className="text-xl">{t("privacyPolicy.cookiePolicy13")} </p>
+          <p>{t("privacyPolicy.cookiePolicy14")}</p>
+          <br/>
+
+          <p className="text-xl">{t("privacyPolicy.cookiePolicy15")} </p>
+          <p>{t("privacyPolicy.cookiePolicy16")}</p>
+          <br/>
+
+          <p className="text-xl">{t("privacyPolicy.cookiePolicy17")} </p>
+          <p>{t("privacyPolicy.cookiePolicy18")}</p>
+          <br/>
+
+          <p className="text-xl">{t("privacyPolicy.cookiePolicy19")} </p>
+          <p>{t("privacyPolicy.cookiePolicy20")}</p>
+          <br/>
+
+          <p className="text-xl">{t("privacyPolicy.cookiePolicy21")} </p>
+          <p>{t("privacyPolicy.cookiePolicy22")}</p>
+          <br/>
+
+
+
+
+          <p className="text-2xl">{t("privacyPolicy.cookiePolicy23")} </p>
+          <p></p>
+          <p>{t("privacyPolicy.cookiePolicy24")}</p>
+          <br/>
+
+          <ul  className="normal-list">
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy25")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy26")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy27")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy28")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy29")}</p>
+            </li>
+          </ul>
+
+
+
         </div>
       </div>
 

@@ -38,7 +38,7 @@ const SubHeaderPart = ({
         <p className="mt-1">{athlete.athleteStatement}</p>
 
         <p key={howManySupporters} className="mt-1">
-          {howManySupporters} supporters
+          {howManySupporters} {t("campaign.content107")}
         </p>
 
 

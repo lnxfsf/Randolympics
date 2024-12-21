@@ -46,6 +46,9 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Campaign = () => {
+
+ 
+
   function formatNumber(value) {
     const number = Number(value);
 
@@ -329,7 +332,7 @@ const Campaign = () => {
                         onCancelResearch={(newValue) =>
                           setSearchFirstNameText("")
                         }
-                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        placeholder={t("campaign.content99") + searchPlaceholderFirstNameText}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -349,7 +352,7 @@ const Campaign = () => {
                           setSearchFamilyNameText("")
                         }
                         placeholder={
-                          "Search " + searchPlaceholderFamilyNameText
+                          t("campaign.content99") + searchPlaceholderFamilyNameText
                         }
                         onSearch={handleSearch}
                         style={{
@@ -374,7 +377,7 @@ const Campaign = () => {
                         onCancelResearch={(newValue) =>
                           setSearchFirstNameText("")
                         }
-                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        placeholder={t("campaign.content99") + searchPlaceholderFirstNameText}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -441,7 +444,7 @@ const Campaign = () => {
               value={searchFirstNameText}
               onChange={(newValue) => setSearchFirstNameText(newValue)}
               onCancelResearch={(newValue) => setSearchFirstNameText("")}
-              placeholder={"Enter " + searchPlaceholderFirstNameText}
+              placeholder={t("campaign.content100") + searchPlaceholderFirstNameText}
               onSearch={handleSearch}
               style={{
                 border: "1px solid #C6C6C6",
@@ -571,12 +574,15 @@ const Campaign = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 lexend-font text-black_second">
-                      <p className="hidden lg:inline">
-                        <span className="font-semibold">#</span>
+                    <div className="flex gap-2 lexend-font text-black_second justify-center items-center">
+
+                      <div className="hidden lg:flex flex-row justify-center items-center gap-1"> 
+                        <img src="supporters/team_black.png" />
                         {item.supporterCount}
-                      </p>
-                      <p className="hidden lg:inline">
+                      </div>
+
+
+                      <p className="hidden lg:inline ">
                         <span className="font-semibold">$</span>
                         <span className="text-[#44BC49] font-bold">
                           {formatNumber(item.donatedAmount)}
@@ -585,10 +591,16 @@ const Campaign = () => {
 
                       <div>
                         <div className="flex  lg:hidden  gap-2 self-baseline md:self-center lexend-font text-black_second ">
-                          <p>
+                       
+                         {/*  <p>
                             <span className="font-semibold">#</span>
                             {item.supporterCount}
-                          </p>
+                          </p> */}
+                          <div className="flex flex-row justify-center items-center gap-1"> 
+                        <img src="supporters/team_black.png" />
+                        {item.supporterCount}
+                      </div>
+
                           <p>
                             <span className="font-semibold">$</span>
                             <span className="text-[#44BC49] font-bold">

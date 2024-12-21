@@ -497,10 +497,12 @@ const Register = () => {
 
             if (axios.isAxiosError(error)) {
               if (error.response && error.response.status === 409) {
+                recaptcha.current.reset();
                 setSnackbarStatus("error");
                 setSnackbarMessage(error.response.data.message);
                 setOpenSnackbar(true);
               } else {
+                recaptcha.current.reset();
                 setSnackbarStatus("error");
                 setSnackbarMessage(
                   "An error occurred: " +
@@ -509,6 +511,7 @@ const Register = () => {
                 setOpenSnackbar(true);
               }
             } else {
+              recaptcha.current.reset();
               setSnackbarStatus("error");
               setSnackbarMessage(
                 "An unexpected error occurred: " + error.message
@@ -523,6 +526,7 @@ const Register = () => {
             setOpenSnackbar(true);
           }
         } else {
+          recaptcha.current.reset();
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content6"));
           setOpenSnackbar(true);
