@@ -11,9 +11,7 @@ export default defineConfig({
   esbuild: process.env.VITE_NODE_ENV === "production" ? {
     drop: ['console', 'debugger'],
   } : {}, 
-  server: {
-    port: 8080 
-  },
+ 
 
 })
 
