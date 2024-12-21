@@ -571,12 +571,15 @@ const Campaign = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 lexend-font text-black_second">
-                      <p className="hidden lg:inline">
-                        <span className="font-semibold">#</span>
+                    <div className="flex gap-2 lexend-font text-black_second justify-center items-center">
+
+                      <div className="hidden lg:flex flex-row justify-center items-center gap-1"> 
+                        <img src="supporters/team_black.png" />
                         {item.supporterCount}
-                      </p>
-                      <p className="hidden lg:inline">
+                      </div>
+
+
+                      <p className="hidden lg:inline ">
                         <span className="font-semibold">$</span>
                         <span className="text-[#44BC49] font-bold">
                           {formatNumber(item.donatedAmount)}
@@ -585,10 +588,16 @@ const Campaign = () => {
 
                       <div>
                         <div className="flex  lg:hidden  gap-2 self-baseline md:self-center lexend-font text-black_second ">
-                          <p>
+                       
+                         {/*  <p>
                             <span className="font-semibold">#</span>
                             {item.supporterCount}
-                          </p>
+                          </p> */}
+                          <div className="flex flex-row justify-center items-center gap-1"> 
+                        <img src="supporters/team_black.png" />
+                        {item.supporterCount}
+                      </div>
+
                           <p>
                             <span className="font-semibold">$</span>
                             <span className="text-[#44BC49] font-bold">
