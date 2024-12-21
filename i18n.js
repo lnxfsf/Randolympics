@@ -25,13 +25,13 @@ i18n
     escapeValue: false,
   },
   backend: {
- loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to the translation files
+ //loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to the translation files
    
-   // loadPath: 'https://randolympics.fra1.digitaloceanspaces.com/locales/{{lng}}/{{ns}}.json', // Path to the translation files
-   // crossDomain: true
+   loadPath: 'https://randolympics.fra1.digitaloceanspaces.com/locales/{{lng}}/{{ns}}.json', // Path to the translation files
+   crossDomain: true
 
 
-   
+
   },
   
 });

@@ -172,6 +172,39 @@ useEffect(() => {
           <p className="text-xl">{t("privacyPolicy.cookiePolicy21")} </p>
           <p>{t("privacyPolicy.cookiePolicy22")}</p>
           <br/>
+
+
+
+
+          <p className="text-2xl">{t("privacyPolicy.cookiePolicy23")} </p>
+          <p></p>
+          <p>{t("privacyPolicy.cookiePolicy24")}</p>
+          <br/>
+
+          <ul  className="normal-list">
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy25")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy26")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy27")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy28")}</p>
+            </li>
+
+            <li>
+            <p>{t("privacyPolicy.cookiePolicy29")}</p>
+            </li>
+          </ul>
+
+
+
         </div>
       </div>
 
