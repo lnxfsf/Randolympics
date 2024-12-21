@@ -46,6 +46,9 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Campaign = () => {
+
+ 
+
   function formatNumber(value) {
     const number = Number(value);
 
@@ -329,7 +332,7 @@ const Campaign = () => {
                         onCancelResearch={(newValue) =>
                           setSearchFirstNameText("")
                         }
-                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        placeholder={t("campaign.content99") + searchPlaceholderFirstNameText}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -349,7 +352,7 @@ const Campaign = () => {
                           setSearchFamilyNameText("")
                         }
                         placeholder={
-                          "Search " + searchPlaceholderFamilyNameText
+                          t("campaign.content99") + searchPlaceholderFamilyNameText
                         }
                         onSearch={handleSearch}
                         style={{
@@ -374,7 +377,7 @@ const Campaign = () => {
                         onCancelResearch={(newValue) =>
                           setSearchFirstNameText("")
                         }
-                        placeholder={"Search " + searchPlaceholderFirstNameText}
+                        placeholder={t("campaign.content99") + searchPlaceholderFirstNameText}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -441,7 +444,7 @@ const Campaign = () => {
               value={searchFirstNameText}
               onChange={(newValue) => setSearchFirstNameText(newValue)}
               onCancelResearch={(newValue) => setSearchFirstNameText("")}
-              placeholder={"Enter " + searchPlaceholderFirstNameText}
+              placeholder={t("campaign.content100") + searchPlaceholderFirstNameText}
               onSearch={handleSearch}
               style={{
                 border: "1px solid #C6C6C6",

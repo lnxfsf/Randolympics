@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 
+import { useTranslation } from "react-i18next";
+
 import SearchBar from "@mkyy/mui-search-bar";
 
 import Popup from "reactjs-popup";
@@ -33,6 +35,9 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const PassportVrfy = () => {
+
+  const { t } = useTranslation();
+
   // so, this is all users !
   const [listOfUsers, setListOfUsers] = useState([]);
   const [maxPages, setMaxPages] = useState(0);
@@ -158,7 +163,7 @@ const PassportVrfy = () => {
               border: "1px solid #C6C6C6",
               borderRadius: "10px",
             }}
-            placeholder="Search by name"
+            placeholder={t("myprofile.validationPassword.content1")}
             width="100%"
           />
         </div>

@@ -113,7 +113,7 @@ const CreatedCampaigns = () => {
                   value={searchFirstNameText}
                   onChange={(newValue) => setSearchFirstNameText(newValue)}
                   onCancelResearch={(newValue) => setSearchFirstNameText("")}
-                  placeholder={"Enter first name"}
+                  placeholder={t("campaign.content98")} 
                   onSearch={handleSearch}
                   style={{
                     border: "1px solid #C6C6C6",
