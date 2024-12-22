@@ -592,6 +592,7 @@
     "content14": "Please enter a valid email address",
     "content15": "Reset password",
     "content16": "Back to sign in",
+    
 	
 	"content17": "Login & Traffic History",
 	"content18": "Filter",
@@ -613,7 +614,11 @@
 	
 	"content32": "Nationality",
 	"content33": "Country",
-	"content34": "Number of logins"
+	"content34": "Number of logins",
+
+
+  "content35": "User doesn't exist",
+  "content36": "Email verification link resent"
 	
 	
   },

@@ -71,10 +71,39 @@ const Login = () => {
         { email: email_resend }
       );
 
-      if (response.status === 200) {
-        setResultText(response.data.message);
-      }
+
+      if ( response.status === 200 && response.data.message === "Email verification link resent") {
+
+        setSnackbarText(t('login.content36'));
+        setSnackbarSeverity("success");
+
+        setOpenSnackbar(true);
+
+
+        //setResultText(response.data.message);
+
+       
+      } 
+
+
     } catch (error) {
+
+      if(error.response){
+
+      
+      if (error.response.status === 404 && error.response.data.message === "User doesn't exist") {
+      /*   setResultText(t('login.content35'));
+        setResultTextColor("red");
+ */
+        setSnackbarText(t('login.content35'));
+        setSnackbarSeverity("error")
+        setOpenSnackbar(true);
+
+
+      } 
+
+    }
+
       console.log(error);
     }
   };
@@ -323,12 +352,14 @@ const Login = () => {
                 {resultText}
               </p>
 
+
+
               {!isEmailVerified && (
                 <p
                   onClick={handleResendEmailVerify}
                   className=""
                   style={{
-                    color: `${resultTextColor}`,
+                    color: `black`,
                     textDecoration: "underline",
                     cursor: "pointer",
                     userSelect: "none",

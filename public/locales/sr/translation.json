@@ -589,7 +589,10 @@
 	
 	"content32": "Nacionalnost",
 	"content33": "Država",
-	  "content34": "Broj prijava"
+	  "content34": "Broj prijava",
+
+     "content35": "Korisnik ne postoji",
+  "content36": "Link za verifikaciju je poslat na email"
 	  
    },
    "register":{
