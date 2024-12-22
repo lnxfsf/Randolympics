@@ -1,4 +1,7 @@
 
+const path = require('path');
+const fs = require('fs');
+
 
 const config = {
     host: process.env.HOST,
@@ -12,13 +15,14 @@ const config = {
       ssl: {
         require: true,
         rejectUnauthorized: false,
+        ca: fs.readFileSync(path.join(__dirname, 'ca-certificate.crt')),
       },
     },
    
     pool: {
       max: 5,
       min: 0,
-      acquire: 30000,
+      acquire: 60000,
       idle: 10000
     }
   };
