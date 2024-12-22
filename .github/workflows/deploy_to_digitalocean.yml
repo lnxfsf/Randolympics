@@ -1,0 +1,39 @@
+name: Deploy to org-origin
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH key for org-origin
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Add org-origin remote
+      run: git remote add org-origin git@github.com:Randolympic/main-frontend.git
+
+    - name: Fetch all branches
+      run: git fetch --all
+
+    - name: Check for merge conflicts
+      run: |
+        git fetch org-origin
+        git diff --exit-code org-origin/main...main || exit 1
+      continue-on-error: false
+
+    - name: Push changes to org-origin
+      run: git push org-origin main
+    
+    - name: Send email on failure
+      if: failure()
+      run: |
+        echo "Merge conflict detected. Action aborted." | mail -s "GitHub Action: Merge Conflict" igor.lerinc7@example.com
