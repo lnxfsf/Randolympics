@@ -119,8 +119,31 @@
       "content2": "One hundred athletes are randomly selected in each country based on campaign success and support. The top 50 men and 50 women form the national teams.",
       "content3": "During the ceremony, each athlete is randomly assigned between three and seven different sports to compete in. Let the games begin!",
       "content4": "Sign up your friend",
-      "content5": "Randomization"
-    },
+      "content5": "Randomization",
+	  
+	  "content6": "Nominations",
+	   "content7": "In Progress!",
+    "content8": "Nominate a friend, family member, or even a celebrity for the Randolympics",
+	
+	"content9": "Gather Support",
+	"content10": "Start your campaign early!",
+	"content11": "Spread the word early and take advantage!",
+	"content12": "Use social media to gather votes, shares, and donations for your nominee.",
+	
+	"content13": "National Randomization",
+	
+	"content14": "July 8th, 2026",
+	
+	"content15": "National Selection On July 8th, 2026, top 50 men and 50 women are randomly chosen from each country to form national teams.",
+	
+	"content16": "Randolympics Starts!",
+	"content17": "July 8th to July 16th, 2028",
+	"content18": "The competition in Stockholm starts! Every athlete will compete in 3-6 random sports. Let’s Make history!",
+	
+	
+	
+	
+	},
     "faq": {
       "title1": "FAQ",
       "CFR": {

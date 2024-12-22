@@ -17,50 +17,44 @@ const FifthScreenHomeNewDesign = () => {
           <div className=" min-[890px]:basis-1/2 flex justify-start flex-col  p-2  md:p-16 grow ">
             <div className="flex">
               <div className="flex flex-col items-start justify-start mb-4 w-full">
-                <p className="text-2xl font-bold">Nominations</p>
+                <p className="text-2xl font-bold">{t("home.howItWorks.content6")}</p>
 
-                <p className=" font-medium text-red_second">In Progress!</p>
-                <p>
-                  Nominate a friend, family member, or even a celebrity for the
-                  Randolympics
+                <p className=" font-medium text-red_second">{t("home.howItWorks.content7")}</p>
+                <p>{t("home.howItWorks.content8")}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col items-start justify-start  mb-4  ">
-              <p className="text-2xl font-bold">Gather Support</p>
+              <p className="text-2xl font-bold">{t("home.howItWorks.content9")}</p>
 
               <p className=" font-medium text-red_second">
-                Start your campaign early!
+              {t("home.howItWorks.content10")}
               </p>
               <p>
-                Spread the word early and take advantage!
+              {t("home.howItWorks.content11")}
                 <br />
-                Use social media to gather votes, shares, and donations for your
-                nominee.
+                {t("home.howItWorks.content12")}
               </p>
             </div>
 
             <div className="flex flex-col items-start justify-start mb-4   ">
-              <p className="text-2xl font-bold">National Randomization</p>
+              <p className="text-2xl font-bold">{t("home.howItWorks.content13")}</p>
 
-              <p className=" font-medium text-red_second">July 8th, 2026</p>
-              <p>
-                National Selection On July 8th, 2026, top 50 men and 50 women are
-                randomly chosen from each country to form national teams.
+              <p className=" font-medium text-red_second">{t("home.howItWorks.content14")}</p>
+              <p>{t("home.howItWorks.content15")}
               </p>
               <p></p>
             </div>
 
             <div className="flex flex-col items-start justify-start mb-4   ">
-              <p className="text-2xl font-bold">Randolympics Starts!</p>
+              <p className="text-2xl font-bold">{t("home.howItWorks.content16")}</p>
 
               <p className=" font-medium text-red_second">
-                July 8th to July 16th, 2028
+              {t("home.howItWorks.content17")}
               </p>
-              <p>
-                The competition in Stockholm starts! Every athlete will compete
-                in 3-6 random sports. Let’s Make history!
+              <p> {t("home.howItWorks.content18")}
+                
               </p>
               <p></p>
             </div>

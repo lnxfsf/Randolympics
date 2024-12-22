@@ -117,8 +117,29 @@
          "content2":"Sto sportista se nasumično odabire u svakoj zemlji na osnovu uspeha kampanje i podrške. Najboljih 50 muškaraca i 50 žena čine nacionalne timove.",
          "content3":"Tokom ceremonije, svaki sportista se nasumično dodeljuje između tri i sedam različitih sportova za takmičenje. Neka igre počnu!",
          "content4":"Prijavite svog prijatelja",
-         "content5":"Randomizacija"
-      },
+         "content5":"Randomizacija",
+		 
+		 "content6": "Nominacija",
+		 "content7": "U toku!",
+       "content8": "Nominirajte prijatelja, člana porodice ili čak slavnu ličnost za Randolympics",
+	   "content9": "Prikupite podršku",
+	   "content10": "Započnite svoju kampanju rano!",
+	   "content11": "Ranije raširite vest i iskoristite prednost!",
+	   "content12": "Koristite društvene medije da prikupite glasove, akcije i donacije za svog kandidata.",
+	   
+	   "content13": "Nacionalna randomizacija",
+	   
+	   "content14": "8 Jul, 2026",
+	   
+	   "content15": "Nacionalna selekcija 8. jula 2026. godine, 50 najboljih muškaraca i 50 žena su nasumično izabrani iz svake zemlje da formiraju nacionalne timove.",
+	   
+	   "content16": "Randolympics Počinje!",
+	   "content17": "Od 8. Jula do 16. Jula 2028",
+	   
+	   "content18": "Počinje takmičenje u Stokholmu! Svaki sportista će se takmičiti u 3-6 nasumičnih sportova. Hajde da napravimo istoriju!"
+	   
+	  
+	  },
       "faq":{
          "title1":"Često postavljana pitanja",
          "CFR":{
