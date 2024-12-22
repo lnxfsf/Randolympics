@@ -1791,82 +1791,19 @@
   }, 
 
   "privacyPolicy": {
-    "cookiePolicy1": "Cookie policy",
+    "cookiePolicyTitle": "Cookie policy",
 	
-	
-	
-    "cookiePolicy2": "1. Introduction",
-"cookiePolicy3": "This Cookie Policy explains how Randolympics (\"we,\" \"our,\" or \"us\") uses cookies and similar technologies on our website (\"the Website\"). By using the Website, you agree to the use of cookies as described in this policy.",
 
- "cookiePolicy4": "If you do not agree to the use of cookies, you can adjust your browser settings or disable specific cookies using the methods described below.",
+ 
+ 
+ "cookiePolicyText": "<p class=\"text-2xl\">1. Introduction</p><p>This Cookie Policy explains how Randolympics (\"we,\" \"our,\" or \"us\") uses cookies and similar technologies on our website (\"the Website\"). By using the Website, you agree to the use of cookies as described in this policy.</p><p>If you do not agree to the use of cookies, you can adjust your browser settings or disable specific cookies using the methods described below.</p><br/><p class=\"text-2xl\">2. What Are Cookies?</p><p>Cookies are small text files that are placed on your device (e.g., computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work efficiently, as well as to provide information to the site owners.</p><br/><p>There are two main types of cookies:</p><ul class=\"normal-list\"> <li><b>Session Cookies:</b> These are temporary cookies that expire when you close your browser. </li><li><b>Persistent Cookies:</b> These remain on your device until they expire or you delete them manually. </li></ul><br/><p class=\"text-2xl\">3. Types of Cookies We Use</p><br/><p class=\"text-xl\">3.1 Necessary Cookies</p><p>These cookies are essential for the Website to function properly. They enable basic features such as navigation and access to secure areas. Without these cookies, the Website may not perform as intended.</p><br/><p class=\"text-xl\">3.2 Performance Cookies</p><p>These cookies collect information about how users interact with the Website, such as which pages are visited most often. This data is aggregated and anonymized, helping us improve the Website’s functionality and user experience.</p><br/><p class=\"text-xl\">3.3 Functional Cookies</p><p>These cookies allow the Website to remember your preferences and settings, such as language or region, to provide a more personalized experience.</p><br/><p class=\"text-xl\">3.4 Advertising and Targeting Cookies</p><p>These cookies track your browsing habits to deliver relevant advertisements and measure the effectiveness of marketing campaigns. These may be set by us or third-party advertisers.</p><br/><p class=\"text-xl\">3.5 Third-Party Cookies</p><p>Our Website may use third-party services (e.g., analytics providers like Google Analytics) that set their own cookies to collect data and provide their services. We do not control these cookies and recommend reviewing the respective third-party privacy policies.</p><br/><p class=\"text-2xl\">4. Why We Use Cookies</p><p>We use cookies for the following purposes:</p><br/><ul class=\"normal-list\"><li>To enable the functionality of the Website. </li><li>To analyze traffic and user behavior for improving the Website.</li><li>To store user preferences for a personalized experience.</li><li>To deliver relevant advertisements and marketing messages.</li><li>To comply with legal obligations and ensure security.</li></ul><br/><p class=\"text-2xl\">5. Managing Your Cookie Preferences</p><p>You can manage or disable cookies in the following ways:</p><br/><p class=\"text-xl\">5.1 Browser Settings</p><p>Most web browsers allow you to manage your cookie preferences. You can set your browser to refuse cookies, delete existing cookies, or alert you when a cookie is being sent. Please note that disabling cookies may affect the functionality of the Website.</p><br/><p class=\"text-xl\">5.2 Cookie Consent Banner</p><p>When you visit the Website, you will see a cookie consent banner allowing you to accept or manage your cookie preferences. You can change your preferences at any time by clicking \"cookie settings\" available at footer. </p><br/><p class=\"text-2xl\">6. Third-Party Tools and Opt-Out Options</p><ul class=\"normal-list\" ><li><b>Google Analytics:</b> You can opt out of Google Analytics cookies by using the Google Analytics Opt-out Browser Add-on (link to the tool).</li><li><b>Advertising Networks:</b> You can opt out of targeted advertising by visiting www.youronlinechoices.com (Europe) or www.aboutads.info (USA).</li></ul><br/><p class=\"text-2xl\">7. Updates to This Policy</p><p>We may update this Cookie Policy from time to time to reflect changes in our use of cookies or legal requirements. Updates will be posted on this page with a revised \"Last Updated\" date.</p><br/>",
  
  
  
+ "privacyPolicyTitle": "Data Privacy Terms and Conditions",
  
+ "privacyPolicyText": "<p class=\"text-2xl\">1. Introduction </p><br/><p>Randolympics (\"we,\" \"our,\" or \"us\") is committed to protecting your personal data and ensuring compliance with applicable data protection laws, including the General Data Protection Regulation (GDPR). This policy explains how we collect, use, and protect your personal data when you use our website (\"the Website\").</p><p>By accessing or using the Website, you acknowledge and agree to this Data Privacy Policy.</p><br/><p class=\"text-2xl\">2. Categories of Personal Data We Collect</p><p>We may collect and process the following categories of personal data:</p><br/><ul class=\"normal-list\"><li><b>Identification and Contact Details:</b> Such as name, email address, or other information necessary for account creation or participation in campaigns.</li><li><b>Campaign-Related Information:</b> Data provided by athletes or supporters for creating and managing campaigns, such as public information displayed on the Website.</li><li><b>Transaction Data:</b> Information required for financial transactions, such as payment details or cryptocurrency addresses.</li><li><b>Technical Data:</b> Data automatically collected from your device, including IP addresses, browser type, and website usage patterns.</li><li><b>Passport data:</b> Athletes that are selected need to provide passport information.</li></ul><br/><p>The specific data collected may vary depending on your interaction with the Website (e.g., registering as an athlete, supporting a campaign).</p><br/><p class=\"text-2xl\">3. Purpose of Data Collection</p><p>We process your personal data for the following purposes:</p><br/><ul class=\"normal-list\"><li>To create and manage campaigns for athletes and supporters.</li><li>To enable secure and accurate payment processing and distribution.</li><li>To publicly display campaign information (excluding sensitive contact information such as email addresses or phone numbers).</li><li>To comply with legal and regulatory obligations.</li><li>To improve and optimize the Website.</li></ul><br/><p class=\"text-2xl\">4. Data Sharing and Disclosure</p><p>We may share your data under the following circumstances:</p><br/><ul class=\"normal-list\"><li><b>Public Campaign Information:</b> Certain campaign-related details (e.g., names of athletes and supporters) may be displayed publicly on the Website.</li><li><b>Service Providers:</b> We may share your data with trusted third-party providers to facilitate payment processing, IT support, or analytics.</li><li><b>Legal Obligations:</b> If required by law, we may disclose personal data to regulatory authorities or other legally authorized entities.</li></ul><br/><p>We do not sell or lease your personal data to third parties</p><br/><p class=\"text-2xl\">5. Your Rights</p><p>As a user, you have the following rights under GDPR:</p><br/><ul class=\"normal-list\"><li><b>Access:</b> Request access to the personal data we hold about you.</li><li><b>Correction:</b> Request correction of inaccurate or incomplete data.</li><li><b>Erasure:</b> Request deletion of your data, subject to legal retention requirements.</li><li><b>Restriction:</b> Request restricted processing of your data in certain circumstances.</li><li><b>Objection:</b> Object to processing based on legitimate interests or direct marketing</li><li><b>Data Portability:</b> Request a copy of your data in a portable format.</li></ul><br/><p>To exercise your rights, please contact us at support@randolympics.org</p><br/><p class=\"text-2xl\">6. Data Security</p><p>We implement appropriate technical and organizational measures to safeguard your data, including encryption and access controls. However, no system can guarantee absolute security, and you use the Website at your own risk.</p><br/><p class=\"text-2xl\">7. Data Retention</p><p>We retain personal data only as long as necessary for the purposes outlined in this policy, or as required by law. Data related to campaigns and transactions may be retained longer to ensure compliance with financial and legal obligations.</p><br/><p class=\"text-2xl\">8. Cookies and Website Tracking</p><p>The Website uses cookies to enhance user experience and track site usage. For more information, please see our <b class=\"cursor-pointer\" id=\"cookiePolicyButton\">Cookie Policy</b></p><br/><p class=\"text-2xl\">9. Changes to This Policy</p><p>We reserve the right to update this policy at any time. Changes will be posted on this page, and the \"Last Updated\" date will be revised. Continued use of the Website constitutes acceptance of the updated terms.</p><br/><p class=\"text-2xl\">10. Contact Us</p><p>For questions or concerns about this policy, contact us:</p><ul class=\"normal-list\"><li><b>Email:</b> support@randolympics.org </li><li><b>Mail:</b> Randolympics Office, Kurz, Gammelgårdsvägen 54, 4v, 11264 Stockholm, Sweden</li></ul><br/><p class=\"text-2xl\">11. Governing Law</p><p>This policy is governed by and construed in accordance with the laws of SWEDEN. Disputes will be resolved in the courts of Sweden.</p>"
  
- 
- "cookiePolicy5": "2. What Are Cookies?",
- "cookiePolicy6": "Cookies are small text files that are placed on your device (e.g., computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work efficiently, as well as to provide information to the site owners.",
- 
- "cookiePolicy7": "There are two main types of cookies:",
- 
- "cookiePolicy8": "Session Cookies: ", 
- "cookiePolicy9": "These are temporary cookies that expire when you close your browser.",
- 
-  "cookiePolicy10": "Persistent Cookies: ", 
- "cookiePolicy11": "These remain on your device until they expire or you delete them manually.",
- 
-
-	
-	
-	
-	"cookiePolicy12": "3. Types of Cookies We Use",
-	
-	"cookiePolicy13": "3.1 Necessary Cookies",
- "cookiePolicy14": "These cookies are essential for the Website to function properly. They enable basic features such as navigation and access to secure areas. Without these cookies, the Website may not perform as intended.",
- 
- 
- "cookiePolicy15": "3.2 Performance Cookies",
- "cookiePolicy16": "These cookies collect information about how users interact with the Website, such as which pages are visited most often. This data is aggregated and anonymized, helping us improve the Website’s functionality and user experience.",
-
- "cookiePolicy17": "3.3 Functional Cookies",
- "cookiePolicy18": "These cookies allow the Website to remember your preferences and settings, such as language or region, to provide a more personalized experience.",
-
-
- "cookiePolicy19": "3.4 Advertising and Targeting Cookies",
- "cookiePolicy20": "These cookies track your browsing habits to deliver relevant advertisements and measure the effectiveness of marketing campaigns. These may be set by us or third-party advertisers.",
-
- "cookiePolicy21": "3.5 Third-Party Cookies",
- "cookiePolicy22": "Our Website may use third-party services (e.g., analytics providers like Google Analytics) that set their own cookies to collect data and provide their services. We do not control these cookies and recommend reviewing the respective third-party privacy policies.",
- 
- 
- 
- "cookiePolicy23": "4. Why We Use Cookies",
- 
- 
-  "cookiePolicy24": "We use cookies for the following purposes:",
- 
- 
- "cookiePolicy25":  "To enable the functionality of the Website.",
- "cookiePolicy26": "To analyze traffic and user behavior for improving the Website.",
- "cookiePolicy27": "To store user preferences for a personalized experience.",
- "cookiePolicy28": "To deliver relevant advertisements and marketing messages.",
- "cookiePolicy29": "To comply with legal obligations and ensure security.",
- 
- 
- 
- 
- 
- 
- 
- 
-  "cookiePolicy30": "5. Managing Your Cookie Preferences",
- 
- "cookiePolicy31": "You can manage or disable cookies in the following ways:",
- 
- 
-"cookiePolicy32": "5.1 Browser Settings",
- "cookiePolicy33": "Most web browsers allow you to manage your cookie preferences. You can set your browser to refuse cookies, delete existing cookies, or alert you when a cookie is being sent. Please note that disabling cookies may affect the functionality of the Website."
  
  
 

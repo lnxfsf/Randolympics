@@ -2,6 +2,9 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import Flag from "react-world-flags";
 import { settingUserType } from "../../context/user_types";
 
+
+import { useTranslation } from "react-i18next";
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -16,6 +19,10 @@ const SubHeaderPart = ({
   howManySupporters,
   moreDetailsAboutSupporters,
 }) => {
+
+  
+  const { t } = useTranslation();
+
 
   return (
     <>
