@@ -26,6 +26,9 @@ var path = require("path");
 const fs = require('fs');
 
 
+var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
+
+
 const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "10m" });
 };
@@ -192,7 +195,7 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
-  var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
+  
 
   // on ovde uzima varijable
   const {
@@ -520,12 +523,21 @@ const register = async (req, res) => {
 const email_resend = async (req, res) => {
   const { email } = req.body;
 
+
   try {
     
 
     const user = await User.findOne({
       where: { email: email },
     });
+
+
+      if(!user ){
+      res.status(404).json({message: "User doesn't exist"});
+
+      return;
+    } 
+
 
     sendEmail(
       user.email,
@@ -534,7 +546,10 @@ const email_resend = async (req, res) => {
     );
 
     res.status(200).json({ message: "Email verification link resent" });
+
   } catch (error) {
+    console.log(error.stack)
+
     res.status(500).json({ error: error.message });
   }
 };
