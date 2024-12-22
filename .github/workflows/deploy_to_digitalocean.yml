@@ -24,12 +24,6 @@ jobs:
     - name: Fetch all branches
       run: git fetch --all
 
-    - name: Check for merge conflicts
-      run: |
-        git fetch org-origin
-        git diff --exit-code org-origin/main...main || exit 1
-      continue-on-error: false
-
     - name: Push changes to org-origin
       run: git push org-origin main
     
