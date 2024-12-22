@@ -8,7 +8,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@mui/material/Tooltip'],
   },
-  esbuild: process.env.VITE_NODE_ENV === "production" ? {
+  esbuild: (process.env.VITE_NODE_ENV === "production" || process.env.VITE_NODE_ENV === "staging") ? {
     drop: ['console', 'debugger'],
   } : {}, 
  
