@@ -58,17 +58,17 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 var isProduction = process.env.PRODUCTION;
 
 
-/* 
-if(isProduction === "true"){
+
+if(isProduction === "staging"){
 
   var options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/randolympics.games/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/randolympics.games/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/staging4242.randolympics.games/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/staging4242.randolympics.games/fullchain.pem'),
   };
 
 
 }
- */
+
 
 
 
@@ -117,19 +117,19 @@ app.use("/payment", paymentRoutes);
 db.sequelize.authenticate().then(() => {
  
  
- /*  if(isProduction  === "true"){
+   if(isProduction  === "staging"){
     https.createServer(options, app)
         .listen(port, function () {
             console.log(`HTTPS Server running on port: ${port}`);
         });
-  } else { */
+  } else { 
 
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`);
     });
 
-/* 
-  } */
+
+  } 
  
 
 
