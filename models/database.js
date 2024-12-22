@@ -1,8 +1,7 @@
 const dbConfig = require("../data/config");
 const { Sequelize, DataTypes } = require("sequelize");
 
-require('dotenv').config();
-
+require("dotenv").config();
 
 // this is mySQL database (local for now) connection. on 'randolympics' database
 const sequelize = new Sequelize(
@@ -12,18 +11,21 @@ const sequelize = new Sequelize(
   {
     host: dbConfig.host,
     dialect: "mysql",
-
-    
-
+    port: dbConfig.port,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
     pool: {
       max: dbConfig.pool.max,
       min: dbConfig.pool.min,
       acquire: dbConfig.pool.acquire,
       idle: dbConfig.pool.idle,
-    }
+    },
   }
 );
-
 
 sequelize
   .authenticate()
