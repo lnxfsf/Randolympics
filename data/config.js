@@ -6,7 +6,7 @@ const config = {
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     dialect: 'mysql',
-    port: process.env.PORT,
+    port: process.env.PORT_MYSQL,
     ssl: true,
     dialectOptions: {
       ssl: {
