@@ -523,8 +523,7 @@ const register = async (req, res) => {
 const email_resend = async (req, res) => {
   const { email } = req.body;
 
-console.log("email dobija")
-console.log(email)
+
   try {
     
 
@@ -535,7 +534,7 @@ console.log(email)
 
       if(!user ){
       res.status(404).json({message: "User doesn't exist"});
-console.log("user dont exist")
+
       return;
     } 
 
