@@ -23,7 +23,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 var path = require("path");
-
+const fs = require('fs');
 
 
 const generateAccessToken = (userId) => {
@@ -540,7 +540,26 @@ const email_resend = async (req, res) => {
 };
 
 const verification_success = async (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/verified.html"));
+
+  const filePath = path.join(__dirname, "../public/verified.html");
+
+
+  fs.readFile(filePath, 'utf8', (err,data) => {
+    if (err){
+      return res.status(500).send("Error reading html file");
+    }
+
+
+    const htmlUpdatedLink = data.replace('{{BASE_URL}}', process.env.BASE_URL);
+
+    res.send(htmlUpdatedLink);
+
+  })
+
+
+//  res.sendFile(path.join(__dirname, "../public/verified.html"));
+
+
 };
 
 const verify_token = async (req, res) => {
