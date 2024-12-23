@@ -496,7 +496,7 @@ const register = async (req, res) => {
       sendEmail(
         newUser.email,
         "Email Verification",
-        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken} target="_blank"">here</a> to verify your email.</p>`
+        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank" >here</a> to verify your email.</p>`
       );
 
       
@@ -542,7 +542,7 @@ const email_resend = async (req, res) => {
     sendEmail(
       user.email,
       "Email Verification",
-      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken} target="_blank""  >here</a> to verify your email.</p>`
+      `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken}" target="_blank"  >here</a> to verify your email.</p>`
     );
 
     res.status(200).json({ message: "Email verification link resent" });
