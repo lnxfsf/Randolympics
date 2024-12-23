@@ -31,7 +31,18 @@ li::marker {
 }
 
 
+
+
+.normal-list li {
+
+  list-style-position: inside;
+  margin-left: 20px; 
+}
+
+
+
 .normal-list li::marker {
+ 
   content: normal;
 }
 
