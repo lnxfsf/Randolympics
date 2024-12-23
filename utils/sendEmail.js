@@ -16,7 +16,9 @@ module.exports = async (email, subject, text) => {
 
     // here he sends mail
     await transporter.sendMail({
-      from: process.env.USER_email,
+
+     // from: process.env.USER_email,
+      from: '"Randolympics No Reply" <no-reply@randolympics.org>',
       to: email,
       subject: subject,
       html: text,
