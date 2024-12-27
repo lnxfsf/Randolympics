@@ -347,7 +347,7 @@ const SeventhScreenHome = () => {
 
                   <p className="text-sm text-black_second mt-4">
                     <span className="font-medium">
-                      {t("home.seventhScreen.content23")}
+                      {t("home.seventhScreen.content230")}
                     </span>{" "}
                     {t("home.seventhScreen.content25")}
                   </p>
@@ -382,7 +382,7 @@ const SeventhScreenHome = () => {
 
                   <p className="text-sm text-black_second mt-4">
                     <span className="font-medium">
-                      {t("home.seventhScreen.content23")}
+                      {t("home.seventhScreen.content230")}
                     </span>
                     {t("home.seventhScreen.content27")}
                   </p>
