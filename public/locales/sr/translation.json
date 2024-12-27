@@ -243,6 +243,7 @@
          "btn2":"Prijavite se sada"
       },
       "seventhScreen":{
+		  "content0": "Ko smo mi",
          "content1":"O nama",
          "content2":"Naš savetodavni odbor",
          "content3":"Naš menadžerski tim",
@@ -265,7 +266,23 @@
          "content20":"Svi koji žele učestvovati moraju biti nominovani od strane prijatelja koji će kreirati kampanju na našoj web stranici.",
          "content21":"Kliknite ovde",
          "content22":"da kreirate kampanju za prijatelja ili svoju omiljenu poznatu ličnost!",
-         "content23":"Prvih pedeset muškaraca i pedeset žena će predstavljati svoju zemlju na događaju. Ako ima više od pedeset sportista, biće izabrana kampanja sa najvišim rangom. Rangiranje uzima u obzir broj pristalica, iznos doniranog novca i nasumičan broj, osiguravajući da svako, čak i oni sa manje resursa, ima teoretsku šansu da osvoji zlatnu medalju."
+         "content23":"Prvih pedeset muškaraca i pedeset žena će predstavljati svoju zemlju na događaju. Ako ima više od pedeset sportista, biće izabrana kampanja sa najvišim rangom. Rangiranje uzima u obzir broj pristalica, iznos doniranog novca i nasumičan broj, osiguravajući da svako, čak i oni sa manje resursa, ima teoretsku šansu da osvoji zlatnu medalju.",
+		 
+		  "content23": "Snage: ",
+		   "content24": "Slabosti: ",
+		  	   "content25": "Triatlon, plivanje",
+			   
+			    "content26" : "Tekvondo, streljaštvo, golf",
+				
+				
+				"content27": "Fudbal, atletika",
+				
+				 "content28": "Golf, gimnastika, rvanje",
+				 
+				 "content29": "Trčanje, vožnja bicikla, pucanje",
+				 
+				  "content30":  "Fudbal, košarka, brejkdens"
+		  
       },
       "imagineHome":{
          "text1":"Zamislite",

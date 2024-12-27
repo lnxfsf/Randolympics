@@ -248,6 +248,9 @@
       "btn2": "Sign up now"
     },
     "seventhScreen": {
+		
+		"roleAdvisoryMember": "Advisory Board Member",
+		"content0": "Who are we",
       "content1": "About us",
       "content2": "Our Advisory Board",
       "content3": "Our Management Team",
@@ -271,7 +274,25 @@
       "content20": "Anyone wishing to participate needs to be nominated by a friend who will make a campaign on our website. ",
       "content21": "Click here",
       "content22": "to create a campaign for friend or your favourite celebrity!",
-      "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal."
+      "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal.",
+	  
+	  "content23": "Strengths: ",
+	   "content24": "Weaknesses: ",
+	   
+	   
+	   "content25": "Triathlon, Swimming",
+	   
+	   "content26" : "Taekwondo, Shooting, Golf",
+	   
+	   
+	   "content27": "Football, Athletics",
+	    "content28": "Golf, Gymnastics, Wrestling",
+	   
+	   "content29": "Running, Cycling, Shooting",
+	   
+	  "content30":  "Football, Basketball, Breakdance"
+	   
+	   
     },
     "imagineHome": {
       "text1": "Imagine",
