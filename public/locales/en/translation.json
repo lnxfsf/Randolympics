@@ -120,30 +120,26 @@
       "content3": "During the ceremony, each athlete is randomly assigned between three and seven different sports to compete in. Let the games begin!",
       "content4": "Sign up your friend",
       "content5": "Randomization",
-	  
-	  "content6": "Nominations",
-	   "content7": "In Progress!",
-    "content8": "Nominate a friend, family member, or even a celebrity for the Randolympics",
-	
-	"content9": "Gather Support",
-	"content10": "Start your campaign early!",
-	"content11": "Spread the word early and take advantage!",
-	"content12": "Use social media to gather votes, shares, and donations for your nominee.",
-	
-	"content13": "National Randomization",
-	
-	"content14": "July 8th, 2026",
-	
-	"content15": "National Selection On July 8th, 2026, top 50 men and 50 women are randomly chosen from each country to form national teams.",
-	
-	"content16": "Randolympics Starts!",
-	"content17": "July 8th to July 16th, 2028",
-	"content18": "The competition in Stockholm starts! Every athlete will compete in 3-6 random sports. Let’s Make history!"
-	
-	
-	
-	
-	},
+
+      "content6": "Nominations",
+      "content7": "In Progress!",
+      "content8": "Nominate a friend, family member, or even a celebrity for the Randolympics",
+
+      "content9": "Gather Support",
+      "content10": "Start your campaign early!",
+      "content11": "Spread the word early and take advantage!",
+      "content12": "Use social media to gather votes, shares, and donations for your nominee.",
+
+      "content13": "National Randomization",
+
+      "content14": "July 8th, 2026",
+
+      "content15": "National Selection On July 8th, 2026, top 50 men and 50 women are randomly chosen from each country to form national teams.",
+
+      "content16": "Randolympics Starts!",
+      "content17": "July 8th to July 16th, 2028",
+      "content18": "The competition in Stockholm starts! Every athlete will compete in 3-6 random sports. Let’s Make history!"
+    },
     "faq": {
       "title1": "FAQ",
       "CFR": {
@@ -248,6 +244,8 @@
       "btn2": "Sign up now"
     },
     "seventhScreen": {
+      "roleAdvisoryMember": "Advisory Board Member",
+      "content0": "Who are we",
       "content1": "About us",
       "content2": "Our Advisory Board",
       "content3": "Our Management Team",
@@ -271,7 +269,21 @@
       "content20": "Anyone wishing to participate needs to be nominated by a friend who will make a campaign on our website. ",
       "content21": "Click here",
       "content22": "to create a campaign for friend or your favourite celebrity!",
-      "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal."
+      "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal.",
+
+      "content230": "Strengths: ",
+      "content24": "Weaknesses: ",
+
+      "content25": "Triathlon, Swimming",
+
+      "content26": "Taekwondo, Shooting, Golf",
+
+      "content27": "Football, Athletics",
+      "content28": "Golf, Gymnastics, Wrestling",
+
+      "content29": "Running, Cycling, Shooting",
+
+      "content30": "Football, Basketball, Breakdance"
     },
     "imagineHome": {
       "text1": "Imagine",
@@ -305,8 +317,6 @@
       "happen16": "End up red-faced with embarrassment? 😳🍅",
       "happen17": "Feel utterly humiliated? 😔💢",
 
-
-
       "scenario1": "Your boss completing a triathlon.",
       "scenario2": "Your grandma winning gold in archery.",
       "scenario3": "Your cousin scoring the game-winning goal in football.",
@@ -318,38 +328,36 @@
       "scenario9": "Your roommate throwing the perfect discus.",
       "scenario10": "Your best friend sprinting to glory in the 200m race.",
 
-      
- "sport1": "🏹 Archery 🎯",
- "sport2": "🏃‍♂️ Athletics 🏃‍♀️",
- "sport3": "🏸 Badminton 🎾",
- "sport4": "🏀 Basketball ⛹️‍♂️",
- "sport6": "🥊 Boxing 💥",
- "sport7": "🛶 Canoeing 🌊",
- "sport8": "🚴‍♂️ Cycling 🚴‍♀️",
- "sport9": "🤿 Diving 🌊",
- "sport10": "🤺 Fencing 🗡️",
- "sport11": "🏑 Field Hockey 🥅",
- "sport12": "⛳ Golf 🏌️‍♂️",
- "sport13": "🤸‍♂️ Gymnastics 🤸‍♀️",
- "sport14": "⚽ Football 🏟️",
- "sport15": "🤾‍♂️ Handball 🤾‍♀️",
- "sport16": "🥋 Judo 🤼",
- "sport17": "🤺 Modern Pentathlon 🐎",
- "sport18": "🚣‍♂️ Rowing 🚣‍♀️",
- "sport19": "🏉 Rugby Sevens 💪",
- "sport20": "⛵ Sailing 🌬️",
- "sport21": "🔫 Shooting 🎯",
- "sport22": "🏊‍♂️ Swimming 🏊‍♀️",
- "sport23": "🏃‍♀️ Swimrun 🏊‍♂️",
- "sport24": "🤽‍♀️ Synchronized Swimming 🌊",
- "sport25": "🥋 Taekwondo 🦵",
- "sport27": "🏓 Table Tennis 🤹‍♂️",
- "sport28": "🎾 Tennis 🏆",
- "sport29": "🏃‍♂️ Triathlon 🏊‍♂️",
- "sport30": "🏐 Volleyball 🌊",
- "sport31": "🏋️‍♂️ Weightlifting 🏋️‍♀️",
- "sport33": "🤼‍♂️ Wrestling 🤼‍♀️"
-
+      "sport1": "🏹 Archery 🎯",
+      "sport2": "🏃‍♂️ Athletics 🏃‍♀️",
+      "sport3": "🏸 Badminton 🎾",
+      "sport4": "🏀 Basketball ⛹️‍♂️",
+      "sport6": "🥊 Boxing 💥",
+      "sport7": "🛶 Canoeing 🌊",
+      "sport8": "🚴‍♂️ Cycling 🚴‍♀️",
+      "sport9": "🤿 Diving 🌊",
+      "sport10": "🤺 Fencing 🗡️",
+      "sport11": "🏑 Field Hockey 🥅",
+      "sport12": "⛳ Golf 🏌️‍♂️",
+      "sport13": "🤸‍♂️ Gymnastics 🤸‍♀️",
+      "sport14": "⚽ Football 🏟️",
+      "sport15": "🤾‍♂️ Handball 🤾‍♀️",
+      "sport16": "🥋 Judo 🤼",
+      "sport17": "🤺 Modern Pentathlon 🐎",
+      "sport18": "🚣‍♂️ Rowing 🚣‍♀️",
+      "sport19": "🏉 Rugby Sevens 💪",
+      "sport20": "⛵ Sailing 🌬️",
+      "sport21": "🔫 Shooting 🎯",
+      "sport22": "🏊‍♂️ Swimming 🏊‍♀️",
+      "sport23": "🏃‍♀️ Swimrun 🏊‍♂️",
+      "sport24": "🤽‍♀️ Synchronized Swimming 🌊",
+      "sport25": "🥋 Taekwondo 🦵",
+      "sport27": "🏓 Table Tennis 🤹‍♂️",
+      "sport28": "🎾 Tennis 🏆",
+      "sport29": "🏃‍♂️ Triathlon 🏊‍♂️",
+      "sport30": "🏐 Volleyball 🌊",
+      "sport31": "🏋️‍♂️ Weightlifting 🏋️‍♀️",
+      "sport33": "🤼‍♂️ Wrestling 🤼‍♀️"
     }
   },
   "footer": {
@@ -474,23 +482,20 @@
     "content95": "Celebrity's",
     "content96": "Next",
     "content97": "No",
-	
-	"content98": "Enter first name",
-	"content99": "Search ",
-	"content100": "Enter ",
-	
-	"content101": "Has not logged in yet",
-	
-	"content102": "Logged in but no status",
-	"content103": "I'm 99% taking the challenge and going",
-	"content104": "Most likely going",
-	"content105": "I'm maybe going",
-	"content106": "I'm definitely not going",
-	
-	
+
+    "content98": "Enter first name",
+    "content99": "Search ",
+    "content100": "Enter ",
+
+    "content101": "Has not logged in yet",
+
+    "content102": "Logged in but no status",
+    "content103": "I'm 99% taking the challenge and going",
+    "content104": "Most likely going",
+    "content105": "I'm maybe going",
+    "content106": "I'm definitely not going",
+
     "content107": " supporters",
-	
-	
 
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
@@ -498,35 +503,29 @@
 
     "warningPopupFriText1": "🏋️‍♂️ Weightlifting bound? Your friend’s going to need some serious cheerleading when the heavyweights start flexing! 💪🏆",
     "warningPopupFriText2": "🤺 Fencing can be fierce—especially if their opponent is a master of the foil. Rally up the support for an epic duel! 🏅",
-    "warningPopupFriText3":"🏹 Think your friend’s archery skills are sharp? Just imagine their face when a zen master from Japan hits bullseye every time! 🎯 Ready to support them?",
+    "warningPopupFriText3": "🏹 Think your friend’s archery skills are sharp? Just imagine their face when a zen master from Japan hits bullseye every time! 🎯 Ready to support them?",
     "warningPopupFriText4": "🥊 Backing your friend in boxing? Let’s hope they’re ready for a showdown with a seasoned 5 a.m. boxer. Time to rally some support! 🥊😅",
     "warningPopupFriText5": "🚴‍♂️ Your friend’s a cyclist? They might need a little extra push when they’re up against someoe who practically lives on their bike! Let’s get them there! 🚵‍♀️",
     "warningPopupFriText6": "🏊‍♂️ Swimming through a swimrun? Just picture them racing against a seasoned pro in the water! They’ll need all the cheers they can get! 🌊😉",
     "warningPopupFriText7": "🤼‍♂️ Wrestling, you say? Your friend might just lock arms with a low-key champ. Let’s give them all the backing they’ll need! 😆",
     "warningPopupFriText8": "⚽ Football fans unite! Your friend might face footwork that’s next level. With your support, they’ll be unstoppable on the field! ⚽",
     "warningPopupFriText9": "🏐 So they’re going for volleyball glory? Better be ready for some pros! Let’s start building their cheer squad! 🏐",
-    "warningPopupFriText10":  "⛵ Got a sailor on your hands? They may need an extra gust of support when the competition heats up on the open water! 🌬️⛵",
-
+    "warningPopupFriText10": "⛵ Got a sailor on your hands? They may need an extra gust of support when the competition heats up on the open water! 🌬️⛵",
 
     "warningPopupCelebTitle1": "Watch out !",
     "warningPopupCelebTitle2": "Be careful !",
     "warningPopupCelebTitle3": "Take care !",
 
-
     "warningPopupCelebText1": "🎉 Whoa, you just nominated a superstar! Let’s see if they’re ready to face the ultimate Randolympics challenge! 🌟",
     "warningPopupCelebText2": "🔥 Fame meets fierce competition! Thanks to you, this celebrity is about to see what Randolympics is all about! 🎉",
-    "warningPopupCelebText3":"👏 Looks like we’ve got a celebrity contender! Can they handle the heat of the Randolympics arena? This is going to be good! 😎",
+    "warningPopupCelebText3": "👏 Looks like we’ve got a celebrity contender! Can they handle the heat of the Randolympics arena? This is going to be good! 😎",
     "warningPopupCelebText4": "🎬 Nice work! You just threw a celebrity into the Randolympics mix. Are they ready for the competition? Let’s find out! 🌍",
     "warningPopupCelebText5": "💥 Celebrity status might help on the red carpet… but will it help in archery? Let’s see how they handle a real challenge! 🎯",
     "warningPopupCelebText6": "🍿 Grab some popcorn! Watching a celebrity tackle this competition is going to be pure entertainment. Who’s ready to watch the showdown?",
     "warningPopupCelebText7": "🎭 They’ve won awards, but are they ready to win this? Time for your celebrity pick to face some everyday heroes in Randolympics! 🏅",
-    "warningPopupCelebText8":  "🎯 You just nominated a celebrity! Let’s see if their skills go beyond selfies and talk shows. This is gonna be epic! 😜",
-    "warningPopupCelebText9":  "🔥 VIP alert! Think they’re ready to swap the spotlight for sweat and surprise challenges? We’ll soon find out! 🏆",
-    "warningPopupCelebText10":     "😅 Reality check! Fame doesn’t always equal skill… but this is going to be a fun one to watch! Thanks for signing them up!" 
-
-
-
-
+    "warningPopupCelebText8": "🎯 You just nominated a celebrity! Let’s see if their skills go beyond selfies and talk shows. This is gonna be epic! 😜",
+    "warningPopupCelebText9": "🔥 VIP alert! Think they’re ready to swap the spotlight for sweat and surprise challenges? We’ll soon find out! 🏆",
+    "warningPopupCelebText10": "😅 Reality check! Fame doesn’t always equal skill… but this is going to be a fun one to watch! Thanks for signing them up!"
   },
   "mockupRandomizer": {
     "medals1": "one",
@@ -592,35 +591,30 @@
     "content14": "Please enter a valid email address",
     "content15": "Reset password",
     "content16": "Back to sign in",
-    
-	
-	"content17": "Login & Traffic History",
-	"content18": "Filter",
-	"content19": "Reset fields",
-	"content20": "Role",
-	
-	"content21": "None",
-	"content22": "Athlete",
-	"content23": "Global President",
-	"content24": "National President",
-	"content25": "Event Manager",
-	"content26": "IT Manager Page editor",
-	"content27": "Marketing Manager",
-	"content28": "Sales Manager",
-	"content29": "Validation Manager",
-	"content30": "Legal Manager",
-	"content31": "Referee & Support",
-	
-	
-	"content32": "Nationality",
-	"content33": "Country",
-	"content34": "Number of logins",
 
+    "content17": "Login & Traffic History",
+    "content18": "Filter",
+    "content19": "Reset fields",
+    "content20": "Role",
 
-  "content35": "User doesn't exist",
-  "content36": "Email verification link resent"
-	
-	
+    "content21": "None",
+    "content22": "Athlete",
+    "content23": "Global President",
+    "content24": "National President",
+    "content25": "Event Manager",
+    "content26": "IT Manager Page editor",
+    "content27": "Marketing Manager",
+    "content28": "Sales Manager",
+    "content29": "Validation Manager",
+    "content30": "Legal Manager",
+    "content31": "Referee & Support",
+
+    "content32": "Nationality",
+    "content33": "Country",
+    "content34": "Number of logins",
+
+    "content35": "User doesn't exist",
+    "content36": "Email verification link resent"
   },
   "register": {
     "content1": "Enter a valid email address",
@@ -664,7 +658,6 @@
     "public": "Public",
     "tos1": "I have read and understood the",
     "tos2": "Terms of Service"
-
   },
   "myprofile": {
     "side_nav": {
@@ -769,9 +762,9 @@
       "votedfor1": "You voted for ",
       "votedfor2": "You can update your vote anytime by repeating the process."
     },
-	"validationPassport": {
-		"content1": "Search by name"
-	}
+    "validationPassport": {
+      "content1": "Search by name"
+    }
   },
   "userTypes": {
     "user_type1": "Athlete",
@@ -926,8 +919,6 @@
     "sport136": "Keirin Track Cycling",
     "sport137": "Omnium Track Cycling",
     "sport138": "Team Pursuit Track Cycling"
-
-
   },
   "contact": {
     "title1": "General Inquiries",
@@ -1773,7 +1764,6 @@
           "desc": "Greco-Roman wrestling is a style that emphasizes upper body techniques and prohibits holds below the waist. It is known for its focus on throws, locks, and control maneuvers, making it a unique and challenging form of wrestling.",
           "yt_link": "dZ26MhUigI8"
         }
-       
       ]
     }
   },
@@ -1809,44 +1799,29 @@
     "text13": "privacy policy",
     "text14": "and",
     "text15": "cookie policy"
-
   },
   "pagenotfound": {
     "title1": "Random? Sure.",
     "title2": "But this page is a little too random.",
     "title3": "Let’s find you something worth competing for",
     "title4": "head back home"
-  }, 
+  },
 
   "privacyPolicy": {
     "cookiePolicyTitle": "Cookie policy",
-	
 
- 
- 
- "cookiePolicyText": "<p class=\"text-2xl\">1. Introduction</p><p>This Cookie Policy explains how Randolympics (\"we,\" \"our,\" or \"us\") uses cookies and similar technologies on our website (\"the Website\"). By using the Website, you agree to the use of cookies as described in this policy.</p><p>If you do not agree to the use of cookies, you can adjust your browser settings or disable specific cookies using the methods described below.</p><br/><p class=\"text-2xl\">2. What Are Cookies?</p><p>Cookies are small text files that are placed on your device (e.g., computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work efficiently, as well as to provide information to the site owners.</p><br/><p>There are two main types of cookies:</p><ul class=\"normal-list\"> <li><b>Session Cookies:</b> These are temporary cookies that expire when you close your browser. </li><li><b>Persistent Cookies:</b> These remain on your device until they expire or you delete them manually. </li></ul><br/><p class=\"text-2xl\">3. Types of Cookies We Use</p><br/><p class=\"text-xl\">3.1 Necessary Cookies</p><p>These cookies are essential for the Website to function properly. They enable basic features such as navigation and access to secure areas. Without these cookies, the Website may not perform as intended.</p><br/><p class=\"text-xl\">3.2 Performance Cookies</p><p>These cookies collect information about how users interact with the Website, such as which pages are visited most often. This data is aggregated and anonymized, helping us improve the Website’s functionality and user experience.</p><br/><p class=\"text-xl\">3.3 Functional Cookies</p><p>These cookies allow the Website to remember your preferences and settings, such as language or region, to provide a more personalized experience.</p><br/><p class=\"text-xl\">3.4 Advertising and Targeting Cookies</p><p>These cookies track your browsing habits to deliver relevant advertisements and measure the effectiveness of marketing campaigns. These may be set by us or third-party advertisers.</p><br/><p class=\"text-xl\">3.5 Third-Party Cookies</p><p>Our Website may use third-party services (e.g., analytics providers like Google Analytics) that set their own cookies to collect data and provide their services. We do not control these cookies and recommend reviewing the respective third-party privacy policies.</p><br/><p class=\"text-2xl\">4. Why We Use Cookies</p><p>We use cookies for the following purposes:</p><br/><ul class=\"normal-list\"><li>To enable the functionality of the Website. </li><li>To analyze traffic and user behavior for improving the Website.</li><li>To store user preferences for a personalized experience.</li><li>To deliver relevant advertisements and marketing messages.</li><li>To comply with legal obligations and ensure security.</li></ul><br/><p class=\"text-2xl\">5. Managing Your Cookie Preferences</p><p>You can manage or disable cookies in the following ways:</p><br/><p class=\"text-xl\">5.1 Browser Settings</p><p>Most web browsers allow you to manage your cookie preferences. You can set your browser to refuse cookies, delete existing cookies, or alert you when a cookie is being sent. Please note that disabling cookies may affect the functionality of the Website.</p><br/><p class=\"text-xl\">5.2 Cookie Consent Banner</p><p>When you visit the Website, you will see a cookie consent banner allowing you to accept or manage your cookie preferences. You can change your preferences at any time by clicking \"cookie settings\" available at footer. </p><br/><p class=\"text-2xl\">6. Third-Party Tools and Opt-Out Options</p><ul class=\"normal-list\" ><li><b>Google Analytics:</b> You can opt out of Google Analytics cookies by using the Google Analytics Opt-out Browser Add-on (link to the tool).</li><li><b>Advertising Networks:</b> You can opt out of targeted advertising by visiting www.youronlinechoices.com (Europe) or www.aboutads.info (USA).</li></ul><br/><p class=\"text-2xl\">7. Updates to This Policy</p><p>We may update this Cookie Policy from time to time to reflect changes in our use of cookies or legal requirements. Updates will be posted on this page with a revised \"Last Updated\" date.</p><br/>",
- 
- 
- 
- "privacyPolicyTitle": "Data Privacy Terms and Conditions",
- 
- "privacyPolicyText": "<p class=\"text-2xl\">1. Introduction </p><br/><p>Randolympics (\"we,\" \"our,\" or \"us\") is committed to protecting your personal data and ensuring compliance with applicable data protection laws, including the General Data Protection Regulation (GDPR). This policy explains how we collect, use, and protect your personal data when you use our website (\"the Website\").</p><p>By accessing or using the Website, you acknowledge and agree to this Data Privacy Policy.</p><br/><p class=\"text-2xl\">2. Categories of Personal Data We Collect</p><p>We may collect and process the following categories of personal data:</p><br/><ul class=\"normal-list\"><li><b>Identification and Contact Details:</b> Such as name, email address, or other information necessary for account creation or participation in campaigns.</li><li><b>Campaign-Related Information:</b> Data provided by athletes or supporters for creating and managing campaigns, such as public information displayed on the Website.</li><li><b>Transaction Data:</b> Information required for financial transactions, such as payment details or cryptocurrency addresses.</li><li><b>Technical Data:</b> Data automatically collected from your device, including IP addresses, browser type, and website usage patterns.</li><li><b>Passport data:</b> Athletes that are selected need to provide passport information.</li></ul><br/><p>The specific data collected may vary depending on your interaction with the Website (e.g., registering as an athlete, supporting a campaign).</p><br/><p class=\"text-2xl\">3. Purpose of Data Collection</p><p>We process your personal data for the following purposes:</p><br/><ul class=\"normal-list\"><li>To create and manage campaigns for athletes and supporters.</li><li>To enable secure and accurate payment processing and distribution.</li><li>To publicly display campaign information (excluding sensitive contact information such as email addresses or phone numbers).</li><li>To comply with legal and regulatory obligations.</li><li>To improve and optimize the Website.</li></ul><br/><p class=\"text-2xl\">4. Data Sharing and Disclosure</p><p>We may share your data under the following circumstances:</p><br/><ul class=\"normal-list\"><li><b>Public Campaign Information:</b> Certain campaign-related details (e.g., names of athletes and supporters) may be displayed publicly on the Website.</li><li><b>Service Providers:</b> We may share your data with trusted third-party providers to facilitate payment processing, IT support, or analytics.</li><li><b>Legal Obligations:</b> If required by law, we may disclose personal data to regulatory authorities or other legally authorized entities.</li></ul><br/><p>We do not sell or lease your personal data to third parties</p><br/><p class=\"text-2xl\">5. Your Rights</p><p>As a user, you have the following rights under GDPR:</p><br/><ul class=\"normal-list\"><li><b>Access:</b> Request access to the personal data we hold about you.</li><li><b>Correction:</b> Request correction of inaccurate or incomplete data.</li><li><b>Erasure:</b> Request deletion of your data, subject to legal retention requirements.</li><li><b>Restriction:</b> Request restricted processing of your data in certain circumstances.</li><li><b>Objection:</b> Object to processing based on legitimate interests or direct marketing</li><li><b>Data Portability:</b> Request a copy of your data in a portable format.</li></ul><br/><p>To exercise your rights, please contact us at support@randolympics.org</p><br/><p class=\"text-2xl\">6. Data Security</p><p>We implement appropriate technical and organizational measures to safeguard your data, including encryption and access controls. However, no system can guarantee absolute security, and you use the Website at your own risk.</p><br/><p class=\"text-2xl\">7. Data Retention</p><p>We retain personal data only as long as necessary for the purposes outlined in this policy, or as required by law. Data related to campaigns and transactions may be retained longer to ensure compliance with financial and legal obligations.</p><br/><p class=\"text-2xl\">8. Cookies and Website Tracking</p><p>The Website uses cookies to enhance user experience and track site usage. For more information, please see our <b class=\"cursor-pointer\" id=\"cookiePolicyButton\">Cookie Policy</b></p><br/><p class=\"text-2xl\">9. Changes to This Policy</p><p>We reserve the right to update this policy at any time. Changes will be posted on this page, and the \"Last Updated\" date will be revised. Continued use of the Website constitutes acceptance of the updated terms.</p><br/><p class=\"text-2xl\">10. Contact Us</p><p>For questions or concerns about this policy, contact us:</p><ul class=\"normal-list\"><li><b>Email:</b> support@randolympics.org </li><li><b>Mail:</b> Randolympics Office, Kurz, Gammelgårdsvägen 54, 4v, 11264 Stockholm, Sweden</li></ul><br/><p class=\"text-2xl\">11. Governing Law</p><p>This policy is governed by and construed in accordance with the laws of SWEDEN. Disputes will be resolved in the courts of Sweden.</p>",
- 
- 
- "ToSTitle": "Terms and Conditions",
- "ToSSubTitle1": "Donations and Selection to Randolympics",
- "ToSSubTitle2": "Terms and Conditions for the Event and Event Preparation",
- 
- "ToSText1": "<p class=\"text-2xl\">1. Introduction</p><p>These Terms and Conditions govern the donation process and selection of athletes and supporters for participation in the Randolympics. By donating to a campaign or participating in the selection process, you agree to these Terms and Conditions.</p><br/><p class=\"text-2xl\">2. Donations and Campaign Rankings</p><p class=\"text-xl\">2.1 Purpose of Donations</p><ul class=\"normal-list\">   <li>Donations made through the Randolympics platform support athlete campaigns. Higher donations, combined with the number of supporters and a random multiplier, improve the campaign’s ranking.</li>   <li>Donations are non-refundable, regardless of the campaign’s ranking or whether the athlete is ultimately selected.</li></ul><br/><p class=\"text-xl\">2.2 Campaign Ranking</p><ul class=\"normal-list\">   <li>Campaign rankings are determined by the following factors:<ul class=\"normal-list\"><li>Total amount donated</li><li>Number of unique supporters</li><li>A random (lucky) multiplier</li></ul></li>   <li>Rankings are divided into <b>three weight groups</b> for each country (for both female and male categories). This ensures fair representation across different body types: <ul class=\"normal-list\"><li>Each weight group will have between 16 and 17 athletes.</li><li>The <b>National President</b> of each country decides which weight group will have 17 athletes to balance representation.</li></ul></li></ul><br/><br/><p class=\"text-2xl\">3. Selection Process</p><p class=\"text-xl\">3.1 Top Campaigns in Each Country</p><ul class=\"normal-list\"><li>A total of <b>50 female and 50 male athletes</b> from each country will be selected, distributed across the three weight groups. </li><li>Selection is based on campaign rankings within each weight group. The final selection ensures fair representation across all groups as determined by the National President.</li></ul><br/><p class=\"text-xl\">3.2 Nomination and Confirmation</p><ul class=\"normal-list\"><li>Athletes who achieve the highest rankings in their weight group will receive a <b>nomination</b> to participate in the Randolympics.</li><li>The selected athletes must:<ul class=\"normal-list\">   <li><b>Confirm their participation within the specified time period</b> outlined in the nomination notification.</li>   <li>Provide a <b>legally valid passport</b> to confirm their national identity. Passports must be submitted no later than the acceptance of the nomination.</li><li><b>For female athletes:</b> Upon request, female participants must undergo a <b>DNA</b> test to confirm they do not have a <b>non-XX chromosome combination</b>. Women are defined as individuals with an <b>XX chromosome combination</b> in the DNA test.</li></ul></li><li><b>If confirmation or required documentation is not provided within the deadline</b>, the next highest-ranking campaign from the same weight group will be selected to replace the unconfirmed athlete.</li></ul><br/><p class=\"text-xl\">3.3 Nationality Verification</p><ul class=\"normal-list\"><li>Athletes must provide a valid passport to verify their nationality.</li><li>Supporters are not required to provide proof of nationality.</li></ul><br/><br/><p class=\"text-2xl\">4. Contribution to Travel Costs</p><p class=\"text-xl\">4.1 Eligible Participants</p><ul class=\"normal-list\"><li>Winning campaigns will receive financial support for flight tickets for: <ul class=\"normal-list\"><li>The athlete</li><li>The two supporters with the highest donations to the campaign</li></ul></li></ul><br/><p class=\"text-xl\">4.2 Contribution Details</p><ul class=\"normal-list\"><li>The organization strives to cover the <b>total cost of a low-priced economy-class flight ticket</b> for eligible participants. However, full coverage cannot be guaranteed until sufficient sponsorship and broadcasting revenues are achieved.</li><li>Contributions are exclusively for <b>flight tickets</b> and cannot be used for other expenses.</li><li>Any unused portion of the contribution must be returned to Randolympics and cannot be used for personal or non-travel-related expenses.</li></ul><br/><p class=\"text-2xl\">5. Responsibilities and Limitations</p><p class=\"text-xl\">5.1 Athlete and Supporter Obligations</p><ul class=\"normal-list\"><li>Campaign organizers, athletes, and supporters must provide accurate information during the donation and selection process. Failure to do so may result in disqualification.</li></ul><br/><p class=\"text-xl\">5.2 No Guarantee of Selection</p><ul class=\"normal-list\"><li>Donations and rankings improve the chances of selection but do not guarantee participation in the Randolympics. Final selections depend on rankings within the weight group and confirmation by the nominated athlete.</li></ul><br/><p class=\"text-2xl\">6. Miscellaneous</p><p class=\"text-xl\">6.1 Questions and Support</p><ul class=\"normal-list\"><li>For questions about the donation and selection process, please contact us at <b>support@randolympics.org</b></li></ul><br/><p class=\"text-xl\">6.2 Changes to Terms</p><ul class=\"normal-list\"><li>Randolympics reserves the right to update these Terms and Conditions at any time. Changes will be communicated on the platform and take effect immediately.</li></ul><br/><br/>",
- 
- 
- "ToSText2": "<p class=\"text-2xl\"> 1. Introduction</p><p>These Terms and Conditions govern participation in the Randolympics event, including preparation, transportation, accommodation, competition, and post-event arrangements. By accepting a nomination to participate in the Randolympics, the athlete agrees to these terms.</p><br/><p class=\"text-2xl\">2. Athlete Responsibilities and Acknowledgements</p><p class=\"text-xl\">2.1 Athlete Preparation</p><ul class=\"normal-list\"><li>Athletes are solely responsible for their own preparation for the competition, including but not limited to:<ul class=\"normal-list\"><li>Physical fitness and health</li><li>Training and technical readiness</li><li>Personal equipment and gear</li></ul></li><li>The organization is not liable for any lack of preparation, poor performance, or inadequate health of the athlete.</li></ul><p class=\"text-xl\">2.2 Participation and Representation</p><ul class=\"normal-list\"><li>By participating, the athlete agrees to:<ul class=\"normal-list\"><li>Compete to the best of their ability.</li><li>Represent their country with integrity and sportsmanship.</li></ul></li></ul><p class=\"text-xl\">2.3 Publicity and Media Rights</p><ul class=\"normal-list\"><li>Athletes consent to the use of their name, image, likeness, and performance in any media coverage, broadcasting, or promotional materials related to the Randolympics.</li><li>This consent includes live broadcasts, recorded footage, and digital or print media, without compensation beyond what is provided as part of participation.</li></ul><br/><p class=\"text-2xl\">3. Liability and Disclaimers</p><p class=\"text-xl\">3.1 General Liability</p><ul class=\"normal-list\"><li>The Randolympics organization accepts no liability for:<ul class=\"normal-list\"><li>Injuries or accidents occurring during preparation, transportation, or competition.</li><li>Poor competition outcomes due to inadequate athlete preparation or health.</li><li>Damage to or loss of personal equipment or belongings.</li></ul></li></ul><p class=\"text-xl\">3.2 Health and Fitness</p><ul class=\"normal-list\"><li>Participation is at the athlete’s own risk. Athletes are responsible for ensuring they are in good health and fit to compete.</li><li>The organization does not conduct health assessments and is not liable for any health-related issues before, during, or after the event.</li></ul><p class=\"text-xl\">3.3 Transportation</p><ul class=\"normal-list\"><li>The organization arranges transportation to and from the event. However:<ul class=\"normal-list\"><li>The organization is not liable for delays, cancellations, or other issues with travel arrangements.</li><li>Athletes must ensure they meet all travel requirements, including valid passports and visas.</li></ul></li></ul><p class=\"text-xl\">3.4 Accommodation</p><ul class=\"normal-list\"><li>The organization provides housing for athletes during the event:<ul class=\"normal-list\"><li>Accommodation standards may vary, and no guarantees are made regarding the quality of housing.</li><li>Athletes are responsible for any additional expenses incurred during their stay (e.g., room service, damages).</li></ul></li></ul><p class=\"text-xl\">3.5 Equipment</p><ul class=\"normal-list\"><li>Athletes must supply their own competition equipment.</li><li>The organization is not responsible for the adequacy, safety, or maintenance of personal or borrowed equipment.</li></ul><br/><br/><p class=\"text-2xl\">4. Costs and Financial Support</p><p class=\"text-xl\">4.1 Housing and Meals</p><ul class=\"normal-list\"><li>The organization strives to cover the cost of basic housing and meals for athletes during the event. However:<ul class=\"normal-list\"><li>Full coverage is subject to available funding from sponsors and broadcasting revenues.</li><li>Any additional housing or meal costs are the responsibility of the athlete.</li></ul></li></ul><p class=\"text-xl\">4.2 Transportation</p><ul class=\"normal-list\"><li>The organization provides financial support for transportation to and from the event as outlined in the pre-event Terms and Conditions. However:<ul class=\"normal-list\"><li>Financial contributions may vary and are not guaranteed to cover all travel-related expenses.</li></ul></li></ul><br/><p class=\"text-2xl\">5. Insurance</p><ul class=\"normal-list\"><li>Athletes are responsible for arranging their own travel, health, and accident insurance.</li><li>The organization does not provide insurance coverage and is not liable for any costs associated with injuries, accidents, or other unforeseen events.</li></ul><br/><p class=\"text-2xl\">6. Code of Conduct</p><ul class=\"normal-list\"><li>Athletes must adhere to the following guidelines:<ul class=\"normal-list\"><li>Respect event organizers, volunteers, and other participants.</li><li>Follow all event rules and regulations.</li><li>Refrain from actions that could harm the reputation of Randolympics or their country.</li></ul></li><li>Violations of the Code of Conduct may result in disqualification or removal from the event without compensation.</li></ul><br/><p class=\"text-2xl\">7. Force Majeure</p><ul class=\"normal-list\"><li>The organization is not liable for any delay, disruption, or cancellation of the event due to circumstances beyond its control, including but not limited to:<ul class=\"normal-list\"><li>Natural disasters</li><li>Acts of war or terrorism</li><li>Pandemic-related restrictions</li><li>Transportation or logistical failures</li></ul></li></ul><br/><p class=\"text-2xl\">8. Acceptance and Agreement</p><p>By accepting the nomination and participating in the Randolympics, the athlete agrees to:</p><ul class=\"normal-list\"><li>Abide by these Terms and Conditions.</li><li>Acknowledge and accept all risks associated with preparation, transportation, competition, and accommodation.</li><li>Consent to the use of their name, image, and performance as outlined in Section 2.3.</li></ul><br/><p class=\"text-2xl\">9. Governing Law</p><li>These Terms and Conditions are governed by the laws of <b>Sweden</b>, and any disputes shall be resolved in the courts of Sweden.</li>"
- 
- 
- 
+    "cookiePolicyText": "<p class=\"text-2xl\">1. Introduction</p><p>This Cookie Policy explains how Randolympics (\"we,\" \"our,\" or \"us\") uses cookies and similar technologies on our website (\"the Website\"). By using the Website, you agree to the use of cookies as described in this policy.</p><p>If you do not agree to the use of cookies, you can adjust your browser settings or disable specific cookies using the methods described below.</p><br/><p class=\"text-2xl\">2. What Are Cookies?</p><p>Cookies are small text files that are placed on your device (e.g., computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work efficiently, as well as to provide information to the site owners.</p><br/><p>There are two main types of cookies:</p><ul class=\"normal-list\"> <li><b>Session Cookies:</b> These are temporary cookies that expire when you close your browser. </li><li><b>Persistent Cookies:</b> These remain on your device until they expire or you delete them manually. </li></ul><br/><p class=\"text-2xl\">3. Types of Cookies We Use</p><br/><p class=\"text-xl\">3.1 Necessary Cookies</p><p>These cookies are essential for the Website to function properly. They enable basic features such as navigation and access to secure areas. Without these cookies, the Website may not perform as intended.</p><br/><p class=\"text-xl\">3.2 Performance Cookies</p><p>These cookies collect information about how users interact with the Website, such as which pages are visited most often. This data is aggregated and anonymized, helping us improve the Website’s functionality and user experience.</p><br/><p class=\"text-xl\">3.3 Functional Cookies</p><p>These cookies allow the Website to remember your preferences and settings, such as language or region, to provide a more personalized experience.</p><br/><p class=\"text-xl\">3.4 Advertising and Targeting Cookies</p><p>These cookies track your browsing habits to deliver relevant advertisements and measure the effectiveness of marketing campaigns. These may be set by us or third-party advertisers.</p><br/><p class=\"text-xl\">3.5 Third-Party Cookies</p><p>Our Website may use third-party services (e.g., analytics providers like Google Analytics) that set their own cookies to collect data and provide their services. We do not control these cookies and recommend reviewing the respective third-party privacy policies.</p><br/><p class=\"text-2xl\">4. Why We Use Cookies</p><p>We use cookies for the following purposes:</p><br/><ul class=\"normal-list\"><li>To enable the functionality of the Website. </li><li>To analyze traffic and user behavior for improving the Website.</li><li>To store user preferences for a personalized experience.</li><li>To deliver relevant advertisements and marketing messages.</li><li>To comply with legal obligations and ensure security.</li></ul><br/><p class=\"text-2xl\">5. Managing Your Cookie Preferences</p><p>You can manage or disable cookies in the following ways:</p><br/><p class=\"text-xl\">5.1 Browser Settings</p><p>Most web browsers allow you to manage your cookie preferences. You can set your browser to refuse cookies, delete existing cookies, or alert you when a cookie is being sent. Please note that disabling cookies may affect the functionality of the Website.</p><br/><p class=\"text-xl\">5.2 Cookie Consent Banner</p><p>When you visit the Website, you will see a cookie consent banner allowing you to accept or manage your cookie preferences. You can change your preferences at any time by clicking \"cookie settings\" available at footer. </p><br/><p class=\"text-2xl\">6. Third-Party Tools and Opt-Out Options</p><ul class=\"normal-list\" ><li><b>Google Analytics:</b> You can opt out of Google Analytics cookies by using the Google Analytics Opt-out Browser Add-on (link to the tool).</li><li><b>Advertising Networks:</b> You can opt out of targeted advertising by visiting www.youronlinechoices.com (Europe) or www.aboutads.info (USA).</li></ul><br/><p class=\"text-2xl\">7. Updates to This Policy</p><p>We may update this Cookie Policy from time to time to reflect changes in our use of cookies or legal requirements. Updates will be posted on this page with a revised \"Last Updated\" date.</p><br/>",
 
+    "privacyPolicyTitle": "Data Privacy Terms and Conditions",
 
+    "privacyPolicyText": "<p class=\"text-2xl\">1. Introduction </p><br/><p>Randolympics (\"we,\" \"our,\" or \"us\") is committed to protecting your personal data and ensuring compliance with applicable data protection laws, including the General Data Protection Regulation (GDPR). This policy explains how we collect, use, and protect your personal data when you use our website (\"the Website\").</p><p>By accessing or using the Website, you acknowledge and agree to this Data Privacy Policy.</p><br/><p class=\"text-2xl\">2. Categories of Personal Data We Collect</p><p>We may collect and process the following categories of personal data:</p><br/><ul class=\"normal-list\"><li><b>Identification and Contact Details:</b> Such as name, email address, or other information necessary for account creation or participation in campaigns.</li><li><b>Campaign-Related Information:</b> Data provided by athletes or supporters for creating and managing campaigns, such as public information displayed on the Website.</li><li><b>Transaction Data:</b> Information required for financial transactions, such as payment details or cryptocurrency addresses.</li><li><b>Technical Data:</b> Data automatically collected from your device, including IP addresses, browser type, and website usage patterns.</li><li><b>Passport data:</b> Athletes that are selected need to provide passport information.</li></ul><br/><p>The specific data collected may vary depending on your interaction with the Website (e.g., registering as an athlete, supporting a campaign).</p><br/><p class=\"text-2xl\">3. Purpose of Data Collection</p><p>We process your personal data for the following purposes:</p><br/><ul class=\"normal-list\"><li>To create and manage campaigns for athletes and supporters.</li><li>To enable secure and accurate payment processing and distribution.</li><li>To publicly display campaign information (excluding sensitive contact information such as email addresses or phone numbers).</li><li>To comply with legal and regulatory obligations.</li><li>To improve and optimize the Website.</li></ul><br/><p class=\"text-2xl\">4. Data Sharing and Disclosure</p><p>We may share your data under the following circumstances:</p><br/><ul class=\"normal-list\"><li><b>Public Campaign Information:</b> Certain campaign-related details (e.g., names of athletes and supporters) may be displayed publicly on the Website.</li><li><b>Service Providers:</b> We may share your data with trusted third-party providers to facilitate payment processing, IT support, or analytics.</li><li><b>Legal Obligations:</b> If required by law, we may disclose personal data to regulatory authorities or other legally authorized entities.</li></ul><br/><p>We do not sell or lease your personal data to third parties</p><br/><p class=\"text-2xl\">5. Your Rights</p><p>As a user, you have the following rights under GDPR:</p><br/><ul class=\"normal-list\"><li><b>Access:</b> Request access to the personal data we hold about you.</li><li><b>Correction:</b> Request correction of inaccurate or incomplete data.</li><li><b>Erasure:</b> Request deletion of your data, subject to legal retention requirements.</li><li><b>Restriction:</b> Request restricted processing of your data in certain circumstances.</li><li><b>Objection:</b> Object to processing based on legitimate interests or direct marketing</li><li><b>Data Portability:</b> Request a copy of your data in a portable format.</li></ul><br/><p>To exercise your rights, please contact us at support@randolympics.org</p><br/><p class=\"text-2xl\">6. Data Security</p><p>We implement appropriate technical and organizational measures to safeguard your data, including encryption and access controls. However, no system can guarantee absolute security, and you use the Website at your own risk.</p><br/><p class=\"text-2xl\">7. Data Retention</p><p>We retain personal data only as long as necessary for the purposes outlined in this policy, or as required by law. Data related to campaigns and transactions may be retained longer to ensure compliance with financial and legal obligations.</p><br/><p class=\"text-2xl\">8. Cookies and Website Tracking</p><p>The Website uses cookies to enhance user experience and track site usage. For more information, please see our <b class=\"cursor-pointer\" id=\"cookiePolicyButton\">Cookie Policy</b></p><br/><p class=\"text-2xl\">9. Changes to This Policy</p><p>We reserve the right to update this policy at any time. Changes will be posted on this page, and the \"Last Updated\" date will be revised. Continued use of the Website constitutes acceptance of the updated terms.</p><br/><p class=\"text-2xl\">10. Contact Us</p><p>For questions or concerns about this policy, contact us:</p><ul class=\"normal-list\"><li><b>Email:</b> support@randolympics.org </li><li><b>Mail:</b> Randolympics Office, Kurz, Gammelgårdsvägen 54, 4v, 11264 Stockholm, Sweden</li></ul><br/><p class=\"text-2xl\">11. Governing Law</p><p>This policy is governed by and construed in accordance with the laws of SWEDEN. Disputes will be resolved in the courts of Sweden.</p>",
 
+    "ToSTitle": "Terms and Conditions",
+    "ToSSubTitle1": "Donations and Selection to Randolympics",
+    "ToSSubTitle2": "Terms and Conditions for the Event and Event Preparation",
 
+    "ToSText1": "<p class=\"text-2xl\">1. Introduction</p><p>These Terms and Conditions govern the donation process and selection of athletes and supporters for participation in the Randolympics. By donating to a campaign or participating in the selection process, you agree to these Terms and Conditions.</p><br/><p class=\"text-2xl\">2. Donations and Campaign Rankings</p><p class=\"text-xl\">2.1 Purpose of Donations</p><ul class=\"normal-list\">   <li>Donations made through the Randolympics platform support athlete campaigns. Higher donations, combined with the number of supporters and a random multiplier, improve the campaign’s ranking.</li>   <li>Donations are non-refundable, regardless of the campaign’s ranking or whether the athlete is ultimately selected.</li></ul><br/><p class=\"text-xl\">2.2 Campaign Ranking</p><ul class=\"normal-list\">   <li>Campaign rankings are determined by the following factors:<ul class=\"normal-list\"><li>Total amount donated</li><li>Number of unique supporters</li><li>A random (lucky) multiplier</li></ul></li>   <li>Rankings are divided into <b>three weight groups</b> for each country (for both female and male categories). This ensures fair representation across different body types: <ul class=\"normal-list\"><li>Each weight group will have between 16 and 17 athletes.</li><li>The <b>National President</b> of each country decides which weight group will have 17 athletes to balance representation.</li></ul></li></ul><br/><br/><p class=\"text-2xl\">3. Selection Process</p><p class=\"text-xl\">3.1 Top Campaigns in Each Country</p><ul class=\"normal-list\"><li>A total of <b>50 female and 50 male athletes</b> from each country will be selected, distributed across the three weight groups. </li><li>Selection is based on campaign rankings within each weight group. The final selection ensures fair representation across all groups as determined by the National President.</li></ul><br/><p class=\"text-xl\">3.2 Nomination and Confirmation</p><ul class=\"normal-list\"><li>Athletes who achieve the highest rankings in their weight group will receive a <b>nomination</b> to participate in the Randolympics.</li><li>The selected athletes must:<ul class=\"normal-list\">   <li><b>Confirm their participation within the specified time period</b> outlined in the nomination notification.</li>   <li>Provide a <b>legally valid passport</b> to confirm their national identity. Passports must be submitted no later than the acceptance of the nomination.</li><li><b>For female athletes:</b> Upon request, female participants must undergo a <b>DNA</b> test to confirm they do not have a <b>non-XX chromosome combination</b>. Women are defined as individuals with an <b>XX chromosome combination</b> in the DNA test.</li></ul></li><li><b>If confirmation or required documentation is not provided within the deadline</b>, the next highest-ranking campaign from the same weight group will be selected to replace the unconfirmed athlete.</li></ul><br/><p class=\"text-xl\">3.3 Nationality Verification</p><ul class=\"normal-list\"><li>Athletes must provide a valid passport to verify their nationality.</li><li>Supporters are not required to provide proof of nationality.</li></ul><br/><br/><p class=\"text-2xl\">4. Contribution to Travel Costs</p><p class=\"text-xl\">4.1 Eligible Participants</p><ul class=\"normal-list\"><li>Winning campaigns will receive financial support for flight tickets for: <ul class=\"normal-list\"><li>The athlete</li><li>The two supporters with the highest donations to the campaign</li></ul></li></ul><br/><p class=\"text-xl\">4.2 Contribution Details</p><ul class=\"normal-list\"><li>The organization strives to cover the <b>total cost of a low-priced economy-class flight ticket</b> for eligible participants. However, full coverage cannot be guaranteed until sufficient sponsorship and broadcasting revenues are achieved.</li><li>Contributions are exclusively for <b>flight tickets</b> and cannot be used for other expenses.</li><li>Any unused portion of the contribution must be returned to Randolympics and cannot be used for personal or non-travel-related expenses.</li></ul><br/><p class=\"text-2xl\">5. Responsibilities and Limitations</p><p class=\"text-xl\">5.1 Athlete and Supporter Obligations</p><ul class=\"normal-list\"><li>Campaign organizers, athletes, and supporters must provide accurate information during the donation and selection process. Failure to do so may result in disqualification.</li></ul><br/><p class=\"text-xl\">5.2 No Guarantee of Selection</p><ul class=\"normal-list\"><li>Donations and rankings improve the chances of selection but do not guarantee participation in the Randolympics. Final selections depend on rankings within the weight group and confirmation by the nominated athlete.</li></ul><br/><p class=\"text-2xl\">6. Miscellaneous</p><p class=\"text-xl\">6.1 Questions and Support</p><ul class=\"normal-list\"><li>For questions about the donation and selection process, please contact us at <b>support@randolympics.org</b></li></ul><br/><p class=\"text-xl\">6.2 Changes to Terms</p><ul class=\"normal-list\"><li>Randolympics reserves the right to update these Terms and Conditions at any time. Changes will be communicated on the platform and take effect immediately.</li></ul><br/><br/>",
+
+    "ToSText2": "<p class=\"text-2xl\"> 1. Introduction</p><p>These Terms and Conditions govern participation in the Randolympics event, including preparation, transportation, accommodation, competition, and post-event arrangements. By accepting a nomination to participate in the Randolympics, the athlete agrees to these terms.</p><br/><p class=\"text-2xl\">2. Athlete Responsibilities and Acknowledgements</p><p class=\"text-xl\">2.1 Athlete Preparation</p><ul class=\"normal-list\"><li>Athletes are solely responsible for their own preparation for the competition, including but not limited to:<ul class=\"normal-list\"><li>Physical fitness and health</li><li>Training and technical readiness</li><li>Personal equipment and gear</li></ul></li><li>The organization is not liable for any lack of preparation, poor performance, or inadequate health of the athlete.</li></ul><p class=\"text-xl\">2.2 Participation and Representation</p><ul class=\"normal-list\"><li>By participating, the athlete agrees to:<ul class=\"normal-list\"><li>Compete to the best of their ability.</li><li>Represent their country with integrity and sportsmanship.</li></ul></li></ul><p class=\"text-xl\">2.3 Publicity and Media Rights</p><ul class=\"normal-list\"><li>Athletes consent to the use of their name, image, likeness, and performance in any media coverage, broadcasting, or promotional materials related to the Randolympics.</li><li>This consent includes live broadcasts, recorded footage, and digital or print media, without compensation beyond what is provided as part of participation.</li></ul><br/><p class=\"text-2xl\">3. Liability and Disclaimers</p><p class=\"text-xl\">3.1 General Liability</p><ul class=\"normal-list\"><li>The Randolympics organization accepts no liability for:<ul class=\"normal-list\"><li>Injuries or accidents occurring during preparation, transportation, or competition.</li><li>Poor competition outcomes due to inadequate athlete preparation or health.</li><li>Damage to or loss of personal equipment or belongings.</li></ul></li></ul><p class=\"text-xl\">3.2 Health and Fitness</p><ul class=\"normal-list\"><li>Participation is at the athlete’s own risk. Athletes are responsible for ensuring they are in good health and fit to compete.</li><li>The organization does not conduct health assessments and is not liable for any health-related issues before, during, or after the event.</li></ul><p class=\"text-xl\">3.3 Transportation</p><ul class=\"normal-list\"><li>The organization arranges transportation to and from the event. However:<ul class=\"normal-list\"><li>The organization is not liable for delays, cancellations, or other issues with travel arrangements.</li><li>Athletes must ensure they meet all travel requirements, including valid passports and visas.</li></ul></li></ul><p class=\"text-xl\">3.4 Accommodation</p><ul class=\"normal-list\"><li>The organization provides housing for athletes during the event:<ul class=\"normal-list\"><li>Accommodation standards may vary, and no guarantees are made regarding the quality of housing.</li><li>Athletes are responsible for any additional expenses incurred during their stay (e.g., room service, damages).</li></ul></li></ul><p class=\"text-xl\">3.5 Equipment</p><ul class=\"normal-list\"><li>Athletes must supply their own competition equipment.</li><li>The organization is not responsible for the adequacy, safety, or maintenance of personal or borrowed equipment.</li></ul><br/><br/><p class=\"text-2xl\">4. Costs and Financial Support</p><p class=\"text-xl\">4.1 Housing and Meals</p><ul class=\"normal-list\"><li>The organization strives to cover the cost of basic housing and meals for athletes during the event. However:<ul class=\"normal-list\"><li>Full coverage is subject to available funding from sponsors and broadcasting revenues.</li><li>Any additional housing or meal costs are the responsibility of the athlete.</li></ul></li></ul><p class=\"text-xl\">4.2 Transportation</p><ul class=\"normal-list\"><li>The organization provides financial support for transportation to and from the event as outlined in the pre-event Terms and Conditions. However:<ul class=\"normal-list\"><li>Financial contributions may vary and are not guaranteed to cover all travel-related expenses.</li></ul></li></ul><br/><p class=\"text-2xl\">5. Insurance</p><ul class=\"normal-list\"><li>Athletes are responsible for arranging their own travel, health, and accident insurance.</li><li>The organization does not provide insurance coverage and is not liable for any costs associated with injuries, accidents, or other unforeseen events.</li></ul><br/><p class=\"text-2xl\">6. Code of Conduct</p><ul class=\"normal-list\"><li>Athletes must adhere to the following guidelines:<ul class=\"normal-list\"><li>Respect event organizers, volunteers, and other participants.</li><li>Follow all event rules and regulations.</li><li>Refrain from actions that could harm the reputation of Randolympics or their country.</li></ul></li><li>Violations of the Code of Conduct may result in disqualification or removal from the event without compensation.</li></ul><br/><p class=\"text-2xl\">7. Force Majeure</p><ul class=\"normal-list\"><li>The organization is not liable for any delay, disruption, or cancellation of the event due to circumstances beyond its control, including but not limited to:<ul class=\"normal-list\"><li>Natural disasters</li><li>Acts of war or terrorism</li><li>Pandemic-related restrictions</li><li>Transportation or logistical failures</li></ul></li></ul><br/><p class=\"text-2xl\">8. Acceptance and Agreement</p><p>By accepting the nomination and participating in the Randolympics, the athlete agrees to:</p><ul class=\"normal-list\"><li>Abide by these Terms and Conditions.</li><li>Acknowledge and accept all risks associated with preparation, transportation, competition, and accommodation.</li><li>Consent to the use of their name, image, and performance as outlined in Section 2.3.</li></ul><br/><p class=\"text-2xl\">9. Governing Law</p><li>These Terms and Conditions are governed by the laws of <b>Sweden</b>, and any disputes shall be resolved in the courts of Sweden.</li>"
   }
 }
