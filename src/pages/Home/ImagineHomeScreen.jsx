@@ -17,6 +17,10 @@ const getRandomIndex = (array, excludeIndex) => {
   return index;
 };
 
+let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 const ImagineHomeScreen = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -127,16 +131,12 @@ const ImagineHomeScreen = () => {
   const [imageImagine1, setImageImagine1] = useState(listOfImages[3]);
   const [imageImagine2, setImageImagine2] = useState(listOfImages[1]);
 
- 
-
   useEffect(() => {
-    
     // force preload of images. it caches all images in cache, so when it switches again, it's should be faster
     listOfImages.forEach((src) => {
       const img = new Image();
       img.src = src;
     });
-
 
     const interval = setInterval(() => {
       setAnimate(true);
@@ -150,10 +150,7 @@ const ImagineHomeScreen = () => {
       const randomIndex3 = getRandomIndex(listOfScenarios);
       setScenarios(listOfScenarios[randomIndex3]);
 
-    
-
-
-    /*   const randomIndexOfImages1 = getRandomIndex(listOfImages);
+      /*   const randomIndexOfImages1 = getRandomIndex(listOfImages);
       const randomIndexOfImages2 = getRandomIndex(
         listOfImages,
         randomIndexOfImages1
@@ -161,36 +158,25 @@ const ImagineHomeScreen = () => {
 
       setImageImagine1(listOfImages[randomIndexOfImages1]);
       setImageImagine2(listOfImages[randomIndexOfImages2]); */
- 
     }, 5000);
-
 
     return () => clearInterval(interval);
   }, []);
 
-
-
-  
   useEffect(() => {
+    const interval2 = setInterval(() => {
+      const randomIndexOfImages1 = getRandomIndex(listOfImages);
+      const randomIndexOfImages2 = getRandomIndex(
+        listOfImages,
+        randomIndexOfImages1
+      );
 
- const interval2 = setInterval(() => {
+      setImageImagine1(listOfImages[randomIndexOfImages1]);
+      setImageImagine2(listOfImages[randomIndexOfImages2]);
+    }, 9100);
 
-    const randomIndexOfImages1 = getRandomIndex(listOfImages);
-    const randomIndexOfImages2 = getRandomIndex(
-      listOfImages,
-      randomIndexOfImages1
-    );
-
-    setImageImagine1(listOfImages[randomIndexOfImages1]);
-    setImageImagine2(listOfImages[randomIndexOfImages2]);
-
- }, 9100);
-
-    
     return () => clearInterval(interval2);
   }, []);
- 
-
 
   useEffect(() => {
     if (animate) {
@@ -260,11 +246,20 @@ const ImagineHomeScreen = () => {
             </div>
           </div>
 
+          {/* imagine1.jpg  h-96 */}
+          <div className="w-full  md:h-auto overflow-hidden container_imagine_pic1 mt-4 ">
+            {/*  <img src="/home/imagine_high_screen.jpg" className="imagine_pic1 " /> */}
 
-          {/* imagine1.jpg */}
-          <div className="w-full h-96 overflow-hidden container_imagine_pic1 mt-4 ">
-            <img src="/home/imagine_high_screen.jpg" className="imagine_pic1 " />
+            <video width="100%" height="100%" autoPlay muted loop>
+              <source
+                src={`${S3_BUCKET_CDN_BASE_URL}/videos/randomlympics_video.mp4`}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
+
+
 
           <div className="textBox1 inline-block mr-8">
             <p className="font-medium text-black_second pr-3 p-2 pl-3">
@@ -274,6 +269,9 @@ const ImagineHomeScreen = () => {
               {t("home.imagineHome.text3")}
             </p>
           </div>
+
+
+
         </div>
 
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between flex-col lg:flex-row">
