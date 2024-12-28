@@ -151,12 +151,7 @@ const ContactUsForm = () => {
           {t("contact.title1")}
         </p>
 
-        <b>
-          <p>dkkk</p>
-        </b>
-        <b>
-          <p>{email}</p>
-        </b>
+        
 
         <p className="text-center mt-4">{t("contact.title2")}</p>
         <p className="w-full md:w-[45em] text-center">{t("contact.title3")}</p>
