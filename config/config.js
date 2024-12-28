@@ -7,14 +7,14 @@ module.exports = {
       "username": process.env.USER,
       "password": process.env.PASSWORD,
       "database": process.env.DATABASE,
-      "host": "127.0.0.1",
+      "host": process.env.HOST,
       "dialect": "mysql"
     },
     "production": {
       "username": process.env.USER,
       "password": process.env.PASSWORD,
       "database": process.env.DATABASE,
-      "host": "127.0.0.1",
+      "host": process.env.HOST,
       "dialect": "mysql"
     }
   
