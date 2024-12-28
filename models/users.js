@@ -305,6 +305,15 @@ module.exports = function (sequelize, DataTypes) {
     tw_link: {
       type: DataTypes.STRING(255),
     },
+
+ 
+    tt_link: {
+      type: DataTypes.STRING(255),
+    },
+
+    yt_link: {
+      type: DataTypes.STRING(255),
+    },
     
 
 
