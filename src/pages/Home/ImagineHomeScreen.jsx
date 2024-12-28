@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo  } from "react";
 import "../../styles/home.scoped.scss";
 
 import { Button } from "@mui/material";
@@ -23,13 +23,13 @@ let S3_BUCKET_CDN_BASE_URL =
 
 const ImagineHomeScreen = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const lines = Array.from({ length: 100 });
 
   const [animate, setAnimate] = useState(true);
 
-  const listOfTitle1 = [
+  const listOfTitle1 = useMemo(() => [
     t("home.imagineHome.sport1"),
 
     t("home.imagineHome.sport2"),
@@ -64,9 +64,9 @@ const ImagineHomeScreen = () => {
     t("home.imagineHome.sport30"),
     t("home.imagineHome.sport31"),
     t("home.imagineHome.sport33"),
-  ];
+  ], [i18n.language]);
 
-  const listOfHappen = [
+  const listOfHappen = useMemo(() => [
     t("home.imagineHome.happen1"),
     t("home.imagineHome.happen2"),
     t("home.imagineHome.happen4"),
@@ -83,9 +83,9 @@ const ImagineHomeScreen = () => {
     t("home.imagineHome.happen15"),
     t("home.imagineHome.happen16"),
     t("home.imagineHome.happen17"),
-  ];
+  ], [i18n.language]);
 
-  const listOfScenarios = [
+  const listOfScenarios = useMemo(() => [
     t("home.imagineHome.scenario1"),
     t("home.imagineHome.scenario2"),
     t("home.imagineHome.scenario3"),
@@ -96,7 +96,7 @@ const ImagineHomeScreen = () => {
     t("home.imagineHome.scenario8"),
     t("home.imagineHome.scenario9"),
     t("home.imagineHome.scenario10"),
-  ];
+  ], [i18n.language]);
 
   const listOfImages = [
     "/home/home_random_sports/imagine3.jpg",
@@ -161,7 +161,7 @@ const ImagineHomeScreen = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     const interval2 = setInterval(() => {
