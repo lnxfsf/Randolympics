@@ -23,6 +23,7 @@ const listOfSports = require("../data/listOfSports");
 const dayjs = require("dayjs");
 
 var weekday = require("dayjs/plugin/isoWeek");
+const sendEmailContactUsForm = require("../utils/sendEmailContactUsForm");
 dayjs.extend(weekday);
 
 const rankingTop50 = async (req, res) => {
@@ -6951,12 +6952,9 @@ const informOtherSupporters = async (req, res) => {
         }
       });
     }
-    
+
     res.status(200).send("Emails sent successfully");
-
-
   } catch (e) {
-
     res.status(500).send("Emails not sent");
     console.log(e.stack);
   }
@@ -7000,6 +6998,21 @@ const allTransactionsSupportersCampaign = async (req, res) => {
   }
 };
 
+const contactUsSendEmail = async (req, res) => {
+  const { subject, message } = req.body;
+  const senderName = req.body.name;
+  const userEmail = req.body.email;
+
+  try {
+
+    sendEmailContactUsForm(userEmail, subject, message, senderName);
+
+    res.status(200).json({ message: "Email sent" });
+  } catch (error) {
+    res.status(500).json({ message: "Sending email failed" });
+  }
+};
+
 module.exports = {
   // update_rank_data,
   rankingTop50,
@@ -7032,4 +7045,6 @@ module.exports = {
 
   listCreatedCampaignsByUser,
   listUserOfCampaign,
+
+  contactUsSendEmail,
 };

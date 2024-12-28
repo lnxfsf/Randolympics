@@ -18,6 +18,8 @@ const { rankingTop50, otherUsers, lastInRank,
            informOtherSupporters,
            firstSupportersCampaign,
            allTransactionsSupportersCampaign,
+
+           contactUsSendEmail,
         
         } = require("../controllers/listDataControllers");
 const router = express.Router();
@@ -100,6 +102,11 @@ router.post("/informOtherSupporters", informOtherSupporters)
 // create campaign
 router.post("/createCampaign", createCampaign) 
 
+
+
+
+// send email (contact us form from frontend)
+router.post("/contactUsSendEmail", contactUsSendEmail),
 
 
 module.exports = router;
