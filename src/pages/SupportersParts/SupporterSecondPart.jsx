@@ -1012,12 +1012,16 @@ const SupporterSecondPart = ({
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">
                     {t("campaign.content41")}
                   </p>
+                
                   <label
                     htmlFor="fbl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
                     {t("campaign.content42")}
                   </label>
+
+
+
 
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -1113,10 +1117,7 @@ const SupporterSecondPart = ({
                       }}
 
                     />
-                  </div>
-
-
-                  
+                  </div>   
 
                   <label
                     
@@ -1151,8 +1152,6 @@ const SupporterSecondPart = ({
 
                     />
                   </div>
-
-
 
                   <label
                     

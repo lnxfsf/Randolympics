@@ -15,10 +15,9 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
-
 
 const CreatedCampaigns = () => {
   const { t } = useTranslation();
@@ -113,7 +112,7 @@ const CreatedCampaigns = () => {
                   value={searchFirstNameText}
                   onChange={(newValue) => setSearchFirstNameText(newValue)}
                   onCancelResearch={(newValue) => setSearchFirstNameText("")}
-                  placeholder={t("campaign.content98")} 
+                  placeholder={t("campaign.content98")}
                   onSearch={handleSearch}
                   style={{
                     border: "1px solid #C6C6C6",

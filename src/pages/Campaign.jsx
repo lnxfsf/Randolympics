@@ -86,6 +86,12 @@ const Campaign = () => {
   const [searchig_link, setSearchig_link] = useState("");
   const [searchtw_link, setSearchtw_link] = useState("");
 
+  const [searchtt_link, setSearchtt_link] = useState("");
+  const [searchyt_link, setSearchyt_link] = useState("");
+
+
+
+
   const [searchFamilyNameText, setSearchFamilyNameText] = useState(""); //search box
   const [searchPlaceholderFamilyNameText, setSearchPlaceholderFamilyNameText] =
     useState("family name");
@@ -113,6 +119,9 @@ const Campaign = () => {
     searchfb_link,
     searchig_link,
     searchtw_link,
+    searchtt_link,
+    searchyt_link,
+
     campaignsPage,
     filterIsCelebrity,
   ]);
@@ -141,6 +150,10 @@ const Campaign = () => {
             fb_link: searchfb_link,
             ig_link: searchig_link,
             tw_link: searchtw_link,
+
+            tt_link: searchtt_link,
+            yt_link: searchyt_link,
+
           },
         }
       );
@@ -430,6 +443,42 @@ const Campaign = () => {
                         }}
                       />
                     </div>
+
+
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content110")}</p>
+                      <SearchBar
+                        value={searchtt_link}
+                        onChange={(newValue) => setSearchtt_link(newValue)}
+                        onCancelResearch={(newValue) => setSearchtt_link("")}
+                        /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+
+                    <div className="flex items-start flex-col">
+                      <p>{t("campaign.content111")}</p>
+                      <SearchBar
+                        value={searchyt_link}
+                        onChange={(newValue) => setSearchyt_link(newValue)}
+                        onCancelResearch={(newValue) => setSearchyt_link("")}
+                        /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        onSearch={handleSearch}
+                        style={{
+                          border: "1px solid #C6C6C6", // Border color and thickness
+                          borderRadius: "10px", // Border radius
+                        }}
+                      />
+                    </div>
+
+
+
                   </div>
                 )}
               </div>

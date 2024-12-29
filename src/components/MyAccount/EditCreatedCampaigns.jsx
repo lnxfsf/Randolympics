@@ -4,6 +4,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 
+
+
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
@@ -72,6 +74,20 @@ import "reactjs-popup/dist/index.css";
 // for image zoom
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
+
+const inputLabelPropsTextField = {
+  sx: {
+    // Styles when the input is not focused and has no value
+    top: "0px", // Adjust this to move the label closer to the input
+    left: "0px", // Adjust to control horizontal position
+    "&.MuiInputLabel-shrink": {
+      top: "0px", // Position when the label shrinks (focus or input has value)
+      left: "0px",
+    },
+  },
+};
+
+
 const sxTextField = {
   m: 1,
   mt: 0,
@@ -136,6 +152,14 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const [code, setCode] = useState("");
   const [original_email, setOriginalEmail] = useState(null);
   const [userData, setUserData] = useState(null);
+
+
+  const [fb_link ,setFb_link] = useState("")
+  const [ig_link ,setIg_link] = useState("")
+  const [tw_link ,setTw_link] = useState("")
+  const [tt_link ,setTT_link] = useState("")
+  const [yt_link ,setYT_link] = useState("")
+
 
   const [files, setFiles] = useState([]);
 
@@ -267,6 +291,77 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   };
 
  
+
+
+
+  const handleFacebookLinkChange = (event) => {
+    setFb_link(event.target.value);
+
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        fb_link: event.target.value,
+      },
+    }));
+  };
+
+
+  const handleInstagramLinkChange = (event) => {
+
+    setIg_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        ig_link: event.target.value,
+      },
+    }));
+  };
+
+
+  const handleTwitterLinkChange = (event) => {
+    setTw_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        tw_link: event.target.value,
+      },
+    }));
+  };
+
+
+  
+  const handleTiktokLinkChange = (event) => {
+    setTT_link(event.target.value);
+
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        tt_link: event.target.value,
+      },
+    }));
+  };
+
+
+  
+  
+  const handleYoutubeLinkChange = (event) => {
+    setYT_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        yt_link: event.target.value,
+      },
+    }));
+  };
+
+
+
+
 
   const handleathleteStatementChange = (event) => {
     setAthleteStatement(event.target.value);
@@ -690,6 +785,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       if (response.data) {
         setUserData(response);
         setOriginalEmail(response.data.email);
+
+        setFb_link(response.data.fb_link);
+        setIg_link(response.data.ig_link);
+        setTw_link(response.data.tw_link);
+        setTT_link(response.data.tt_link);
+        setYT_link(response.data.yt_link);
+
 
         if (!toogleProfilePic) {
           setProfileImage(response.data.picture);
@@ -1544,6 +1646,187 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               />
             </div>
           </div>
+
+
+
+          {userData && userData.data.isCelebrity && (<>
+          
+          <div className="flex w-full md:w-[80%] flex-col justify-center">
+
+
+          <p className="text-lg mt-6">
+            <b className="text-2xl font-bold ">
+              {t("campaign.content85")}
+            </b>
+          </p>
+
+            <label
+                    htmlFor="fbl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content42")}
+                  </label>
+
+
+
+
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={fb_link}
+                      onChange={handleFacebookLinkChange}
+                      placeholder="/officialjohndoe"
+                      id="fbl"
+                      name="fbl"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/facebook_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+
+
+                    />
+                  </div>
+
+                  <label
+                    htmlFor="igl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content43")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={ig_link}
+                      onChange={handleInstagramLinkChange}
+                      placeholder="@officialjohndoe"
+                      id="igl"
+                      name="name"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/instagram_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+
+                    />
+                  </div>
+
+                  <label
+                    htmlFor="igl"
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                  >
+                    {t("campaign.content44")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={tw_link}
+                      onChange={handleTwitterLinkChange}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/x_logo.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+                    />
+                  </div>   
+
+                  <label
+                    
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+
+                  >
+                    {t("campaign.content108")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={tt_link}
+                      onChange={handleTiktokLinkChange}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+
+
+                      
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/tiktok_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+                    />
+                  </div>
+
+                  <label
+                    
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    
+                  >
+                    {t("campaign.content109")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={yt_link}
+                      onChange={handleYoutubeLinkChange}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/youtube_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+                    />
+                  </div>
+
+          </div>
+          </>)}
+
+
+
+
 
           <div className="flex flex-col mt-8 w-full md:w-[80%] gap-2 ">
             <Button
