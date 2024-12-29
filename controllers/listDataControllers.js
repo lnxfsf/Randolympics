@@ -6505,6 +6505,10 @@ const createCampaign = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
+
   } = req.body;
 
   // you need to validate server side  ! because you can't allow empty values for some things...
@@ -6575,6 +6579,8 @@ const createCampaign = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+    tt_link,
+    yt_link,
   };
 
   const t = await db.sequelize.transaction();
@@ -6760,6 +6766,10 @@ const listAllCampaigns = async (req, res) => {
   const ig_link = req.query.ig_link || "";
   const tw_link = req.query.tw_link || "";
 
+  const tt_link = req.query.tt_link || "";
+  const yt_link = req.query.yt_link || "";
+
+
   try {
     var allCampaigns = await Campaign.findAndCountAll({
       where: {
@@ -6789,6 +6799,14 @@ const listAllCampaigns = async (req, res) => {
 
         tw_link: {
           [Op.like]: `%${tw_link}%`,
+        },
+
+        tt_link: {
+          [Op.like]: `%${tt_link}%`,
+        },
+
+        yt_link: {
+          [Op.like]: `%${yt_link}%`,
         },
       },
       order: [["updatedAt", "DESC"]],

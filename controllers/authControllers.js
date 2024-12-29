@@ -234,6 +234,9 @@ const register = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
   
   } = req.body;
 
@@ -417,6 +420,9 @@ const register = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
   };
 
   try {
@@ -843,7 +849,7 @@ const login = async (req, res) => {
           httpOnly: true,
           secure: process.env.PRODUCTION === "true",
           sameSite: "strict",
-          path: "/auth",
+          path: "/",
         });
 
 
@@ -889,6 +895,12 @@ const login = async (req, res) => {
           passportStatus: existingUser.passportStatus,
 
           athleteStatus: existingUser.athleteStatus,
+
+          fb_link: existingUser.fb_link,
+          ig_link: existingUser.ig_link,
+          tw_link: existingUser.tw_link,
+          tt_link: existingUser.tt_link,
+          yt_link: existingUser.yt_link,
           
         });
       } else {
@@ -927,7 +939,7 @@ const refreshToken = async (req, res) => {
       httpOnly: true,
       secure: process.env.PRODUCTION === "true",
       sameSite: "strict",
-      path: "/auth",
+      path: "/",
     });
 
     res.json({ accessToken: newAccessToken });
@@ -942,7 +954,7 @@ const logout = async (req,res) => {
     expires: new Date(0),
     httpOnly: true,
     sameSite: "strict",
-    path: "/auth",
+    path: "/",
   });
 
   res
