@@ -152,6 +152,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const [tt_link, setTT_link] = useState("");
   const [yt_link, setYT_link] = useState("");
 
+
+  const [isCelebrity, setIsCelebrity] = useState(false);
+
   const [files, setFiles] = useState([]);
 
   const [profileImage, setProfileImage] = useState(null);
@@ -681,6 +684,58 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       var birthdate = null;
     }
 
+     // if all fields are empty
+     if (fb_link === "" && ig_link === "" && tw_link === "" && tt_link === "" && yt_link === "" && isCelebrity ) {
+      setSnackbarMessage("Provide at least one social media profile");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    const socialMediaRegex =
+      /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
+
+      const socialMediaRegexWithoutSlash =
+      /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
+
+    if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
+      setSnackbarMessage("Facebook link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      
+      return;
+    }
+
+    if (isCelebrity && ig_link !== "" && !socialMediaRegex.test(ig_link)) {
+      setSnackbarMessage("Instagram link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && tw_link !== "" && !socialMediaRegex.test(tw_link)) {
+      setSnackbarMessage("X (Twitter) link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
+      setSnackbarMessage("Tiktok link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
+      setSnackbarMessage("Youtube link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+
+
+
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
@@ -715,6 +770,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
           middleName,
 
           bio: bio,
+
+
+          fb_link,
+          ig_link,
+          tw_link,
+          tt_link,
+          yt_link,
         }
       );
 
@@ -762,6 +824,11 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         setTw_link(response.data.tw_link);
         setTT_link(response.data.tt_link);
         setYT_link(response.data.yt_link);
+
+
+        setIsCelebrity(response.data.isCelebrity);
+
+
 
         if (!toogleProfilePic) {
           setProfileImage(response.data.picture);
