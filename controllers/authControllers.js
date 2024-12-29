@@ -849,7 +849,7 @@ const login = async (req, res) => {
           httpOnly: true,
           secure: process.env.PRODUCTION === "true",
           sameSite: "strict",
-          path: "/auth",
+          path: "/",
         });
 
 
@@ -939,7 +939,7 @@ const refreshToken = async (req, res) => {
       httpOnly: true,
       secure: process.env.PRODUCTION === "true",
       sameSite: "strict",
-      path: "/auth",
+      path: "/",
     });
 
     res.json({ accessToken: newAccessToken });
@@ -954,7 +954,7 @@ const logout = async (req,res) => {
     expires: new Date(0),
     httpOnly: true,
     sameSite: "strict",
-    path: "/auth",
+    path: "/",
   });
 
   res
