@@ -6766,6 +6766,10 @@ const listAllCampaigns = async (req, res) => {
   const ig_link = req.query.ig_link || "";
   const tw_link = req.query.tw_link || "";
 
+  const tt_link = req.query.tt_link || "";
+  const yt_link = req.query.yt_link || "";
+
+
   try {
     var allCampaigns = await Campaign.findAndCountAll({
       where: {
@@ -6795,6 +6799,14 @@ const listAllCampaigns = async (req, res) => {
 
         tw_link: {
           [Op.like]: `%${tw_link}%`,
+        },
+
+        tt_link: {
+          [Op.like]: `%${tt_link}%`,
+        },
+
+        yt_link: {
+          [Op.like]: `%${yt_link}%`,
         },
       },
       order: [["updatedAt", "DESC"]],
