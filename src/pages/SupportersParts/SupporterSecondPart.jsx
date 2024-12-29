@@ -228,6 +228,9 @@ const SupporterSecondPart = ({
     const socialMediaRegex =
       /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
 
+      const socialMediaRegexWithoutSlash =
+      /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
+
     if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
       setSnackbarMessage("Facebook link has an incorrect format.");
       setOpenSnackbarFailure(true);
@@ -246,13 +249,13 @@ const SupporterSecondPart = ({
       return;
     }
 
-    if (isCelebrity && tt_link !== "" && !socialMediaRegex.test(tt_link)) {
+    if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
       setSnackbarMessage("Tiktok link has an incorrect format.");
       setOpenSnackbarFailure(true);
       return;
     }
 
-    if (isCelebrity && yt_link !== "" && !socialMediaRegex.test(yt_link)) {
+    if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
       setSnackbarMessage("Youtube link has an incorrect format.");
       setOpenSnackbarFailure(true);
       return;

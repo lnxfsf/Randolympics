@@ -164,7 +164,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
 {athlete.tt_link && (
                 <a
-                  href={`https://x.com/${athlete.tt_link}`}
+                  href={`https://tiktok.com/${athlete.tt_link}`}
                   target="_blank"
                   className="text-[#616673] font-semibold underline cursor-pointer select-none"
                 >
@@ -175,7 +175,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
 {athlete.yt_link && (
                 <a
-                  href={`https://x.com/${athlete.yt_link}`}
+                  href={`https://youtube.com/${athlete.yt_link}`}
                   target="_blank"
                   className="text-[#616673] font-semibold underline cursor-pointer select-none"
                 >

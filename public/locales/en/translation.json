@@ -503,7 +503,7 @@
     "content109": "Youtube",
 
 
-    
+
 
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
@@ -1788,7 +1788,12 @@
     "content10": "Facebook",
     "content11": "Instagram",
     "content12": "Twitter",
-    "content13": "Crypto"
+    "content13": "Crypto",
+
+    
+    "content14": "Tiktok",
+    "content15": "Youtube"
+
   },
   "cookies": {
     "text1": "We use cookies",
