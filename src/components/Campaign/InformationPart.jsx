@@ -16,7 +16,7 @@ const InformationPart = ({ athlete, formatDate }) => {
           {athlete.gender === "M" ? "Male" : "Female"}
         </p>
 
-        {!athlete.isCelebrity && athlete.isVerified && (
+        {(!athlete.isCelebrity && athlete.isVerified) ? (
           <>
             <>
               <p className="text-lg font-medium mt-2">
@@ -95,9 +95,9 @@ const InformationPart = ({ athlete, formatDate }) => {
               )}
             </>
           </>
-        )}
+        ) : null}
 
-        {athlete.weight !== 0 && (
+        {(athlete.weight !== 0) ? (
           <>
             <p className="text-lg font-medium mt-2">
               {t("campaign.content84")}
@@ -123,9 +123,9 @@ const InformationPart = ({ athlete, formatDate }) => {
               </>
             )}
           </>
-        )}
+        ) : null}
 
-        {athlete.isCelebrity == true && (
+        {(athlete.isCelebrity === 1) ? (
           <>
             <p className=" text-lg font-medium mt-2">
               {t("campaign.content85")}
@@ -186,9 +186,9 @@ const InformationPart = ({ athlete, formatDate }) => {
 
             </div>
           </>
-        )}
+        ) : null}
 
-        {athlete.cryptoaddress && (
+        {(athlete.cryptoaddress) ? (
           <>
             <p className="text-lg font-medium mt-2">
               {t("campaign.content89")}
@@ -207,7 +207,7 @@ const InformationPart = ({ athlete, formatDate }) => {
               />
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </>
   );
