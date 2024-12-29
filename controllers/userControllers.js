@@ -442,6 +442,17 @@ const fetchLatestData = async (req, res) => {
 
         lastName: existingUser.lastName,
         familyName: existingUser.familyName,
+
+
+
+        fb_link: existingUser.fb_link,
+        ig_link: existingUser.ig_link,
+        tw_link: existingUser.tw_link,
+        tt_link: existingUser.tt_link,
+        yt_link: existingUser.yt_link,
+
+
+
       });
     }
   } catch (error) {

@@ -895,6 +895,12 @@ const login = async (req, res) => {
           passportStatus: existingUser.passportStatus,
 
           athleteStatus: existingUser.athleteStatus,
+
+          fb_link: existingUser.fb_link,
+          ig_link: existingUser.ig_link,
+          tw_link: existingUser.tw_link,
+          tt_link: existingUser.tt_link,
+          yt_link: existingUser.yt_link,
           
         });
       } else {
