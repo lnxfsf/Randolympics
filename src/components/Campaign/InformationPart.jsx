@@ -160,6 +160,30 @@ const InformationPart = ({ athlete, formatDate }) => {
                   {t("campaign.content88")}
                 </a>
               )}
+
+
+{athlete.tt_link && (
+                <a
+                  href={`https://x.com/${athlete.tt_link}`}
+                  target="_blank"
+                  className="text-[#616673] font-semibold underline cursor-pointer select-none"
+                >
+                  {t("campaign.content108")}
+                </a>
+              )}
+
+
+{athlete.yt_link && (
+                <a
+                  href={`https://x.com/${athlete.yt_link}`}
+                  target="_blank"
+                  className="text-[#616673] font-semibold underline cursor-pointer select-none"
+                >
+                  {t("campaign.content109")}
+                </a>
+              )}
+
+
             </div>
           </>
         )}
