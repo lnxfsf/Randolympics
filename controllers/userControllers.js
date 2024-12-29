@@ -62,6 +62,16 @@ const update_user_data = async (req, res) => {
     middleName,
 
     isRejected, // then sets all 4 fields to null... (false)
+
+
+
+    fb_link,
+    ig_link,
+    tw_link,
+    tt_link,
+    yt_link,
+
+
   } = req.body;
 
 
@@ -111,6 +121,35 @@ const update_user_data = async (req, res) => {
   if (user) {
     let needsUpdate = false; // used as indicator, if we need to update or not
     const updatingObject = {};
+
+
+    if(fb_link !== user.fb_link){
+      updatingObject.fb_link = fb_link;
+      needsUpdate = true;
+    }
+
+    if(ig_link !== user.ig_link){
+      updatingObject.ig_link = ig_link;
+      needsUpdate = true;
+    }
+
+    if(tw_link !== user.tw_link){
+      updatingObject.tw_link = tw_link;
+      needsUpdate = true;
+    }
+
+    if(tt_link !== user.tt_link){
+      updatingObject.tt_link = tt_link;
+      needsUpdate = true;
+    }
+
+
+    if(yt_link !== user.yt_link){
+      updatingObject.yt_link = yt_link;
+      needsUpdate = true;
+    }
+
+
 
     if (passport_expiry !== user.passport_expiry) {
       updatingObject.passport_expiry = passport_expiry;
@@ -322,6 +361,7 @@ const update_user_data = async (req, res) => {
             tw_link
  */
 
+            
           if (campaignUser) {
             await campaignUser.update(
               {
@@ -333,6 +373,9 @@ const update_user_data = async (req, res) => {
                 friendBirthdate: validUpdatingObject.birthdate,
                 friendNationality: validUpdatingObject.nationality,
                 friendImage: validUpdatingObject.picture,
+
+
+
               },
               { transaction: t2 }
             );
