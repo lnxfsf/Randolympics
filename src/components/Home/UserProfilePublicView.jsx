@@ -245,6 +245,28 @@ const UserProfilePublicView = () => {
                       {t("userprofile.content12")}
                     </a>
                   )}
+
+
+{userData.tt_link && (
+                    <a
+                      href={`https://tiktok.com/${userData.tt_link}`}
+                      target="_blank"
+                      className="text-[#616673] font-semibold underline cursor-pointer select-none"
+                    >
+                      {t("userprofile.content14")}
+                    </a>
+                  )}
+
+{userData.yt_link && (
+                    <a
+                      href={`https://youtube.com/${userData.yt_link}`}
+                      target="_blank"
+                      className="text-[#616673] font-semibold underline cursor-pointer select-none"
+                    >
+                      {t("userprofile.content15")}
+                    </a>
+                  )}
+
                 </>
               )}
 

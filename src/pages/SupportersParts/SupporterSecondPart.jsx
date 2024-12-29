@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { Button } from "@mui/material";
+import { InputAdornment } from '@mui/material';
 
 import axios from "axios";
 
@@ -110,8 +111,17 @@ const SupporterSecondPart = ({
   setFb_link,
   ig_link,
   setIg_link,
+
   tw_link,
   setTw_link,
+
+  tt_link,
+  setTT_link,
+  yt_link,
+  setYT_link,
+
+
+
   setSecondIsVisible,
   setThirdIsVisible,
   setFirstIsVisible,
@@ -209,7 +219,7 @@ const SupporterSecondPart = ({
     }
 
     // if all fields are empty
-    if (fb_link === "" && ig_link === "" && tw_link === "" && isCelebrity) {
+    if (fb_link === "" && ig_link === "" && tw_link === "" && tt_link === "" && yt_link === "" && isCelebrity ) {
       setSnackbarMessage("Provide at least one social media profile");
       setOpenSnackbarFailure(true);
       return;
@@ -217,6 +227,9 @@ const SupporterSecondPart = ({
 
     const socialMediaRegex =
       /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
+
+      const socialMediaRegexWithoutSlash =
+      /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
 
     if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
       setSnackbarMessage("Facebook link has an incorrect format.");
@@ -235,6 +248,19 @@ const SupporterSecondPart = ({
       setOpenSnackbarFailure(true);
       return;
     }
+
+    if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
+      setSnackbarMessage("Tiktok link has an incorrect format.");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
+    if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
+      setSnackbarMessage("Youtube link has an incorrect format.");
+      setOpenSnackbarFailure(true);
+      return;
+    }
+
 
     // at last remove spaces from phone number
     setFriendPhone(friendPhone.replace(/\s+/g, ""));
@@ -986,12 +1012,16 @@ const SupporterSecondPart = ({
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">
                     {t("campaign.content41")}
                   </p>
+                
                   <label
                     htmlFor="fbl"
                     className="lexend-font mb-1 mt-1 font-medium text-sm"
                   >
                     {t("campaign.content42")}
                   </label>
+
+
+
 
                   <div className="flex flex-col justify-start">
                     <TextField
@@ -1008,6 +1038,18 @@ const SupporterSecondPart = ({
                       }}
                       InputLabelProps={inputLabelPropsTextField}
                       sx={sxTextField}
+
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/facebook_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+
+
                     />
                   </div>
 
@@ -1032,6 +1074,17 @@ const SupporterSecondPart = ({
                       }}
                       InputLabelProps={inputLabelPropsTextField}
                       sx={sxTextField}
+
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/instagram_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+
                     />
                   </div>
 
@@ -1054,8 +1107,85 @@ const SupporterSecondPart = ({
                       }}
                       InputLabelProps={inputLabelPropsTextField}
                       sx={sxTextField}
+
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/x_logo.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+                    />
+                  </div>   
+
+                  <label
+                    
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+
+                  >
+                    {t("campaign.content108")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={tt_link}
+                      onChange={(e) => {
+                        setTT_link(e.target.value);
+                      }}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+
+
+                      
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/tiktok_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
                     />
                   </div>
+
+                  <label
+                    
+                    className="lexend-font mb-1 mt-1 font-medium text-sm"
+                    
+                  >
+                    {t("campaign.content109")}
+                  </label>
+                  <div className="flex flex-col justify-start">
+                    <TextField
+                      value={yt_link}
+                      onChange={(e) => {
+                        setYT_link(e.target.value);
+                      }}
+                      placeholder="@officialjohndoe"
+                      type="text"
+                      inputProps={{
+                        maxLength: 255,
+                      }}
+                      InputLabelProps={inputLabelPropsTextField}
+                      sx={sxTextField}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                           <img width={32} src="/supporters/youtube_icon.svg" />
+                          </InputAdornment>
+                        ),
+                      }}
+
+                    />
+                  </div>
+
+
+
 
                   <label className="lexend-font  font-medium text-sm text-[#82889e]">
                     {t("campaign.content45")}

@@ -27,8 +27,7 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
-import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -46,7 +45,7 @@ registerPlugin(
   FilePondPluginImageResize,
   FilePondPluginImageTransform,
   FilePondPluginImageEdit,
-  FilePondPluginFileValidateSize,
+  FilePondPluginFileValidateSize
 );
 
 // MUI
@@ -71,6 +70,18 @@ import "reactjs-popup/dist/index.css";
 
 // for image zoom
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
+const inputLabelPropsTextField = {
+  sx: {
+    // Styles when the input is not focused and has no value
+    top: "0px", // Adjust this to move the label closer to the input
+    left: "0px", // Adjust to control horizontal position
+    "&.MuiInputLabel-shrink": {
+      top: "0px", // Position when the label shrinks (focus or input has value)
+      left: "0px",
+    },
+  },
+};
 
 const sxTextField = {
   m: 1,
@@ -103,28 +114,26 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
-  
 
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const { t } = useTranslation();
- // for snackbar message.
- const [openSnackbar, setOpenSnackbar] = useState(false);
- const [snackbarMessage, setSnackbarMessage] = useState("");
+  // for snackbar message.
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
- // error, "success"
- const [snackbarStatus, setSnackbarStatus] = useState("success");
+  // error, "success"
+  const [snackbarStatus, setSnackbarStatus] = useState("success");
 
- const handleSnackbar = (event, reason) => {
-   if (reason === "clickaway") {
-     return;
-   }
+  const handleSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-   setOpenSnackbar(false);
- };
-
+    setOpenSnackbar(false);
+  };
 
   const [toogleProfilePic, setToogleProfilePic] = useState(false);
   const [name_header, setNameHeader] = useState("");
@@ -136,6 +145,15 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
   const [code, setCode] = useState("");
   const [original_email, setOriginalEmail] = useState(null);
   const [userData, setUserData] = useState(null);
+
+  const [fb_link, setFb_link] = useState("");
+  const [ig_link, setIg_link] = useState("");
+  const [tw_link, setTw_link] = useState("");
+  const [tt_link, setTT_link] = useState("");
+  const [yt_link, setYT_link] = useState("");
+
+
+  const [isCelebrity, setIsCelebrity] = useState(false);
 
   const [files, setFiles] = useState([]);
 
@@ -183,13 +201,11 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         // return filename;
       },
       onerror: (response) => {
-
         const jsonResponse = JSON.parse(response);
 
         setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
-
 
         if (filePondRef1.current) {
           filePondRef1.current.removeFiles();
@@ -266,7 +282,62 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     }
   };
 
- 
+  const handleFacebookLinkChange = (event) => {
+    setFb_link(event.target.value);
+
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        fb_link: event.target.value,
+      },
+    }));
+  };
+
+  const handleInstagramLinkChange = (event) => {
+    setIg_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        ig_link: event.target.value,
+      },
+    }));
+  };
+
+  const handleTwitterLinkChange = (event) => {
+    setTw_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        tw_link: event.target.value,
+      },
+    }));
+  };
+
+  const handleTiktokLinkChange = (event) => {
+    setTT_link(event.target.value);
+
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        tt_link: event.target.value,
+      },
+    }));
+  };
+
+  const handleYoutubeLinkChange = (event) => {
+    setYT_link(event.target.value);
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        yt_link: event.target.value,
+      },
+    }));
+  };
 
   const handleathleteStatementChange = (event) => {
     setAthleteStatement(event.target.value);
@@ -442,18 +513,16 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         // return filename;
       },
       onerror: (response) => {
-
         const jsonResponse = JSON.parse(response);
 
         setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
 
-
         if (filePondRef2.current) {
           filePondRef2.current.removeFiles();
         }
-        
+
         console.error("Error uploading file:", response);
         return response;
       },
@@ -615,6 +684,58 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       var birthdate = null;
     }
 
+     // if all fields are empty
+     if (fb_link === "" && ig_link === "" && tw_link === "" && tt_link === "" && yt_link === "" && isCelebrity ) {
+      setSnackbarMessage("Provide at least one social media profile");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    const socialMediaRegex =
+      /^(https?:\/\/)?(www\.)?(facebook|instagram|x)\.com\/[A-Za-z0-9._%-]+$|^\/?@?[A-Za-z0-9._%-]+$/;
+
+      const socialMediaRegexWithoutSlash =
+      /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
+
+    if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
+      setSnackbarMessage("Facebook link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      
+      return;
+    }
+
+    if (isCelebrity && ig_link !== "" && !socialMediaRegex.test(ig_link)) {
+      setSnackbarMessage("Instagram link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && tw_link !== "" && !socialMediaRegex.test(tw_link)) {
+      setSnackbarMessage("X (Twitter) link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
+      setSnackbarMessage("Tiktok link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
+      setSnackbarMessage("Youtube link has an incorrect format.");
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+
+
+
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/user/update_user_data`,
@@ -649,6 +770,13 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
           middleName,
 
           bio: bio,
+
+
+          fb_link,
+          ig_link,
+          tw_link,
+          tt_link,
+          yt_link,
         }
       );
 
@@ -690,6 +818,17 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       if (response.data) {
         setUserData(response);
         setOriginalEmail(response.data.email);
+
+        setFb_link(response.data.fb_link);
+        setIg_link(response.data.ig_link);
+        setTw_link(response.data.tw_link);
+        setTT_link(response.data.tt_link);
+        setYT_link(response.data.yt_link);
+
+
+        setIsCelebrity(response.data.isCelebrity);
+
+
 
         if (!toogleProfilePic) {
           setProfileImage(response.data.picture);
@@ -779,7 +918,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               {toogleProfilePic && (
                 <>
                   <FilePond
-                   ref={filePondRef1}
+                    ref={filePondRef1}
                     className="filepond--root small"
                     type="file"
                     onupdatefiles={setFiles}
@@ -810,15 +949,17 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     styleButtonRemoveItemPosition="center  bottom"
                     styleButtonProcessItemPosition="center bottom"
                     imageEditAllowEdit={false}
-
-                    
                     allowFileSizeValidation={true}
                     maxFileSize="4Mb"
-
                     onaddfile={(error, file) => {
                       if (error) {
-                        if (error.status === 500 || error.main === "File is too large") {
-                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                        if (
+                          error.status === 500 ||
+                          error.main === "File is too large"
+                        ) {
+                          setSnackbarMessage(
+                            "File is too large! Maximum allowed size is 4MB."
+                          );
                           setSnackbarStatus("error");
                           setOpenSnackbar(true);
                           filePondRef1.current.removeFiles(); // Remove the invalid file
@@ -999,7 +1140,6 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                     type="number"
                     inputProps={{
                       maxLength: 15,
-                      
                     }}
                     sx={sxTextField}
                   />
@@ -1272,7 +1412,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
             {passportUpload && (
               <>
                 <FilePond
-                ref={filePondRef2}
+                  ref={filePondRef2}
                   className="filepond--root large"
                   type="file"
                   onupdatefiles={setFiles}
@@ -1306,24 +1446,23 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                   styleButtonRemoveItemPosition="center  bottom"
                   styleButtonProcessItemPosition="center bottom"
                   imageEditAllowEdit={false}
-
-                  
                   allowFileSizeValidation={true}
                   maxFileSize="4Mb"
-
-                  
                   onaddfile={(error, file) => {
                     if (error) {
-                      if (error.status === 500 || error.main === "File is too large") {
-                        setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                      if (
+                        error.status === 500 ||
+                        error.main === "File is too large"
+                      ) {
+                        setSnackbarMessage(
+                          "File is too large! Maximum allowed size is 4MB."
+                        );
                         setSnackbarStatus("error");
                         setOpenSnackbar(true);
                         filePondRef2.current.removeFiles(); // Remove the invalid file
                       }
                     }
                   }}
-
-
                 />
 
                 {/*   <p className="edit-photo" onClick={sendPassportUpload}>
@@ -1544,6 +1683,155 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               />
             </div>
           </div>
+
+          {userData && userData.data.isCelebrity === 1 && (
+            <>
+              <div className="flex w-full md:w-[80%] flex-col justify-center">
+                <p className="text-lg mt-6">
+                  <b className="text-2xl font-bold ">
+                    {t("campaign.content85")}
+                  </b>
+                </p>
+
+                <label
+                  htmlFor="fbl"
+                  className="lexend-font mb-1 mt-1 font-medium text-sm"
+                >
+                  {t("campaign.content42")}
+                </label>
+
+                <div className="flex flex-col justify-start">
+                  <TextField
+                    value={fb_link}
+                    onChange={handleFacebookLinkChange}
+                    placeholder="/officialjohndoe"
+                    id="fbl"
+                    name="fbl"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <img width={32} src="/supporters/facebook_icon.svg" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+
+                <label
+                  htmlFor="igl"
+                  className="lexend-font mb-1 mt-1 font-medium text-sm"
+                >
+                  {t("campaign.content43")}
+                </label>
+                <div className="flex flex-col justify-start">
+                  <TextField
+                    value={ig_link}
+                    onChange={handleInstagramLinkChange}
+                    placeholder="@officialjohndoe"
+                    id="igl"
+                    name="name"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <img
+                            width={32}
+                            src="/supporters/instagram_icon.svg"
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+
+                <label
+                  htmlFor="igl"
+                  className="lexend-font mb-1 mt-1 font-medium text-sm"
+                >
+                  {t("campaign.content44")}
+                </label>
+                <div className="flex flex-col justify-start">
+                  <TextField
+                    value={tw_link}
+                    onChange={handleTwitterLinkChange}
+                    placeholder="@officialjohndoe"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <img width={32} src="/supporters/x_logo.svg" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+
+                <label className="lexend-font mb-1 mt-1 font-medium text-sm">
+                  {t("campaign.content108")}
+                </label>
+                <div className="flex flex-col justify-start">
+                  <TextField
+                    value={tt_link}
+                    onChange={handleTiktokLinkChange}
+                    placeholder="@officialjohndoe"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <img width={32} src="/supporters/tiktok_icon.svg" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+
+                <label className="lexend-font mb-1 mt-1 font-medium text-sm">
+                  {t("campaign.content109")}
+                </label>
+                <div className="flex flex-col justify-start">
+                  <TextField
+                    value={yt_link}
+                    onChange={handleYoutubeLinkChange}
+                    placeholder="@officialjohndoe"
+                    type="text"
+                    inputProps={{
+                      maxLength: 255,
+                    }}
+                    InputLabelProps={inputLabelPropsTextField}
+                    sx={sxTextField}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <img width={32} src="/supporters/youtube_icon.svg" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="flex flex-col mt-8 w-full md:w-[80%] gap-2 ">
             <Button

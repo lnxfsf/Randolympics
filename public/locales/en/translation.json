@@ -483,6 +483,8 @@
     "content96": "Next",
     "content97": "No",
 
+
+
     "content98": "Enter first name",
     "content99": "Search ",
     "content100": "Enter ",
@@ -496,6 +498,16 @@
     "content106": "I'm definitely not going",
 
     "content107": " supporters",
+
+    "content108": "Tiktok",
+    "content109": "Youtube",
+
+    "content110": "Tiktok link",
+    "content111": "Youtube link",
+
+
+
+
 
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
@@ -1780,7 +1792,12 @@
     "content10": "Facebook",
     "content11": "Instagram",
     "content12": "Twitter",
-    "content13": "Crypto"
+    "content13": "Crypto",
+
+    
+    "content14": "Tiktok",
+    "content15": "Youtube"
+
   },
   "cookies": {
     "text1": "We use cookies",

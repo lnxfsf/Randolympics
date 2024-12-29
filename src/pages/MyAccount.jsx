@@ -144,8 +144,6 @@ const MyAccount = () => {
               </div>
             </li>
 
-
-
             <li
               style={{ listStyleType: "none" }}
               ref={createdCampaignsRef}
@@ -162,26 +160,27 @@ const MyAccount = () => {
               </div>
             </li>
 
+            {user_type !== "SPT" && (
+              <>
+                <li
+                  style={{ listStyleType: "none" }}
+                  ref={teamRef}
+                  className={`list-item ${
+                    selectedItem === "team" ? "selected" : ""
+                  }`}
+                  onClick={() => handleClick("team")}
+                >
+                  <div className="flex justify-between">
+                    <p className="text-red_second font-medium ">
+                      {t("myprofile.side_nav.side_nav3")}
+                    </p>
 
-{user_type !== "SPT" && (<>
-            <li
-              style={{ listStyleType: "none" }}
-              ref={teamRef}
-              className={`list-item ${
-                selectedItem === "team" ? "selected" : ""
-              }`}
-              onClick={() => handleClick("team")}
-            >
-              <div className="flex justify-between">
-                <p className="text-red_second font-medium ">
-                  {t("myprofile.side_nav.side_nav3")}
-                </p>
+                    <img src="/myaccount/team.svg" className="icon" />
+                  </div>
+                </li>
+              </>
+            )}
 
-                <img src="/myaccount/team.svg" className="icon" />
-              </div>
-            </li>
-            </>)}
-            
             {(user_type === "AH" || user_type === "NP") && (
               <li
                 style={{ listStyleType: "none" }}
@@ -296,7 +295,7 @@ const MyAccount = () => {
           {selectedItem === "myAccount" && <EditProfile />}
           {selectedItem === "settings" && <Settings />}
 
-          {selectedItem === "createdCampaigns" && <CreatedCampaigns /> }
+          {selectedItem === "createdCampaigns" && <CreatedCampaigns />}
           {selectedItem === "team" && <Team />}
 
           {selectedItem === "elections" && <Elections />}
@@ -305,8 +304,6 @@ const MyAccount = () => {
 
           {selectedItem === "passportVerification" && <PassportVrfy />}
           {selectedItem === "loginTrafficHistory" && <LgnTraffcHistory />}
-
-
         </div>
       </div>
 

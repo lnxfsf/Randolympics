@@ -371,6 +371,11 @@ const Supporters = () => {
           fb_link,
           ig_link,
           tw_link,
+
+          tt_link,
+          yt_link,
+
+
         }
       );
 
@@ -410,6 +415,9 @@ const Supporters = () => {
               fb_link: fb_link,
               ig_link: ig_link,
               tw_link: tw_link,
+
+              tt_link: tt_link,
+              yt_link: yt_link,
             }
           );
 
@@ -600,6 +608,8 @@ const Supporters = () => {
   const [fb_link, setFb_link] = useState("");
   const [ig_link, setIg_link] = useState("");
   const [tw_link, setTw_link] = useState("");
+  const [tt_link, setTT_link] = useState("");
+  const [yt_link, setYT_link] = useState("");
 
   // friend information
   const [friendName, setFriendName] = useState("");
@@ -874,8 +884,16 @@ const Supporters = () => {
         setFb_link={setFb_link}
         ig_link={ig_link}
         setIg_link={setIg_link}
+
         tw_link={tw_link}
         setTw_link={setTw_link}
+
+        tt_link={tt_link}
+        setTT_link={setTT_link}
+        yt_link={yt_link}
+        setYT_link={setYT_link}
+
+
         setSecondIsVisible={setSecondIsVisible}
         setThirdIsVisible={setThirdIsVisible}
         setFirstIsVisible={setFirstIsVisible}
