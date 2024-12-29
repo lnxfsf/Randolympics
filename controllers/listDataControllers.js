@@ -6505,6 +6505,10 @@ const createCampaign = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
+
   } = req.body;
 
   // you need to validate server side  ! because you can't allow empty values for some things...
@@ -6575,6 +6579,8 @@ const createCampaign = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+    tt_link,
+    yt_link,
   };
 
   const t = await db.sequelize.transaction();

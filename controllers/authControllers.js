@@ -234,6 +234,9 @@ const register = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
   
   } = req.body;
 
@@ -417,6 +420,9 @@ const register = async (req, res) => {
     fb_link,
     ig_link,
     tw_link,
+
+    tt_link,
+    yt_link,
   };
 
   try {
