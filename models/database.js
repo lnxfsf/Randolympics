@@ -36,10 +36,13 @@ sequelize
     console.log("Error" + err);
   });
 
+
+// db object is used as a container to store references to Sequelize and models
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+//factory method pattern. it immediatelly calls function with parameters passed in (which are functions themselves)
 db.users = require("./users")(sequelize, DataTypes); // model for Users
 db.traffic = require("./traffic")(sequelize, DataTypes); // this is model, and new database, for all login
 db.upcominggames = require("./upcominggames")(sequelize, DataTypes);
