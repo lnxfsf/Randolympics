@@ -46,7 +46,7 @@ const HeaderPart = ({
         </div> */}
         {athlete && (
           <>
-            <div className="circle-campaign flex justify-center items-center">
+            <div className="circle-campaign flex justify-center items-center top-10  ml-4 md:ml-8 ">
               <Avatar
                 sx={{
                   width: { xs: 80, md: 120 },
