@@ -73,3 +73,39 @@
 }
 
 
+
+
+//-------------------
+
+
+.circle-campaign {
+  position: relative;
+  border-radius: 50%;
+   width: 150px;
+  height: 150px;
+  background: linear-gradient(300deg, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 44, 0) 75%);
+  padding: 25px;
+}
+
+
+.circle-campaign::before {
+  content: '';
+ position: absolute;
+ border-radius: 50%;
+ top: 50%; 
+ left: 50%;
+ transform: translate(-50%, -50%); 
+ width: 120px;
+ height: 120px;
+ background: white; 
+}
+
+
+.text-wrapper {
+  position: absolute;
+ 
+  
+
+  z-index: 999;
+  
+}

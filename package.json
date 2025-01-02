@@ -54,6 +54,7 @@
     "react-auth-code-input": "^3.2.1",
     "react-cookie": "^7.2.2",
     "react-countdown": "^2.3.6",
+    "react-curved-text": "^3.0.1",
     "react-dom": "^18.3.1",
     "react-filepond": "^7.1.2",
     "react-flags-select": "^2.2.3",
