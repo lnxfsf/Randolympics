@@ -343,7 +343,7 @@ const SeventhScreenHome = () => {
                     </p>
                   </div>
 
-                  <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+                 <a href="https://www.linkedin.com/in/hans-peter-kurz-7b04851/"> <img src="/home/linkedIn.svg" className="w-6 mt-1" /></a>
 
                   <p className="text-sm text-black_second mt-4">
                     <span className="font-medium">
@@ -378,7 +378,7 @@ const SeventhScreenHome = () => {
                     </p>
                   </div>
 
-                  <img src="/home/linkedIn.svg" className="w-6 mt-1" />
+                  <a href="https://www.linkedin.com/in/ilijamladenovic" target="_blank"> <img src="/home/linkedIn.svg" className="w-6 mt-1" /></a>
 
                   <p className="text-sm text-black_second mt-4">
                     <span className="font-medium">
@@ -393,6 +393,47 @@ const SeventhScreenHome = () => {
                     {t("home.seventhScreen.content28")}
                   </p>
                 </div>
+
+
+
+
+                <div className="keen-slider__slide    flex flex-col justify-start items-start  p-4 ">
+                  {/* <div className="flex justify-center "> */}
+                  <img
+                    src="/home/about/katarina-cuturilo.jpg"
+                    className="h-48 mb-4 object-contain"
+                  />
+                  {/*  </div> */}
+
+                  {/*  <div className="item_div">
+                          <img src="/home/about/1.jpg" />
+                  </div> */}
+
+                  <div className="pr-10 ">
+                    <p className="font-bold">Katarina Cuturilo</p>
+                    <p className="text-[#616673]">
+                      {t("userTypes.user_type8")}
+                    </p>
+                  </div>
+
+                  <a href="" target="_blank"><img src="/home/linkedIn.svg" className="w-6 mt-1" /></a>
+
+                  <p className="text-sm text-black_second mt-4">
+                    <span className="font-medium">
+                      {t("home.seventhScreen.content230")}
+                    </span>
+                    {t("home.seventhScreen.content31")}
+                  </p>
+                  <p className="text-sm text-black_second">
+                    <span className="font-medium">
+                      {t("home.seventhScreen.content24")}
+                    </span>
+                    {t("home.seventhScreen.content32")}
+                  </p>
+                </div>
+
+
+
               </div>
 
               <div className="flex w-full justify-end p-8">
