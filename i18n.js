@@ -19,7 +19,7 @@ i18n
 .use(LanguageDetector)
 .use(Backend)
 .init({
-  lng: "sr",
+  lng: localStorage.getItem("i18nextLng") || "sr",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
