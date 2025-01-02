@@ -116,6 +116,12 @@ const sxTextField = {
 };
 
 const EditProfile = () => {
+
+
+
+  const maxAllowedDate = dayjs().subtract(15, "year");
+
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -1082,6 +1088,7 @@ const EditProfile = () => {
                     <DatePicker
                       className="w-full"
                       value={selectedDate}
+                      maxDate={maxAllowedDate}
                       onChange={handleDateChange}
                       format="MMMM DD, YYYY"
                     />

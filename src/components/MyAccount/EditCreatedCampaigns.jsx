@@ -19,6 +19,8 @@ import { Button } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 
+
+
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -119,7 +121,14 @@ let S3_BUCKET_CDN_BASE_URL =
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
+
+
   const { t } = useTranslation();
+
+  const maxAllowedDate = dayjs().subtract(15, "year");
+
+
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -1185,6 +1194,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                   <DemoContainer components={["DatePicker"]}>
                     <DatePicker
                       className="w-full"
+                      maxDate={maxAllowedDate}
                       value={selectedDate}
                       onChange={handleDateChange}
                       format="MMMM DD, YYYY"

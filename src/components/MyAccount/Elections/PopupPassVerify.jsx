@@ -37,6 +37,13 @@ let BACKEND_SERVER_BASE_URL =
 
 const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) => {
 
+
+
+const maxAllowedDate = dayjs().subtract(15, "year");
+
+
+
+
   const [open1, setOpen1] = useState(false);
 
 
@@ -411,6 +418,7 @@ const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) =
                 disabled={currentUserTypeLoggedIn === "GP"}
                 className="w-full md:w-32"
                 label="Passport Expiry Date"
+                maxDate={maxAllowedDate}
                 value={passportExpiryDate}
                 onChange={handlePassportExpiryDateChange}
                 format="MMMM DD, YYYY"
