@@ -416,7 +416,7 @@ const SeventhScreenHome = () => {
                     </p>
                   </div>
 
-                  <a href="" target="_blank"><img src="/home/linkedIn.svg" className="w-6 mt-1" /></a>
+                  <a href="https://www.linkedin.com/in/katarina-cuturilo/" target="_blank"><img src="/home/linkedIn.svg" className="w-6 mt-1" /></a>
 
                   <p className="text-sm text-black_second mt-4">
                     <span className="font-medium">
