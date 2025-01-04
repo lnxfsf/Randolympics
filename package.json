@@ -67,6 +67,7 @@
     "react-qrcode-logo": "^3.0.0",
     "react-query": "^3.39.3",
     "react-quill": "^2.0.0",
+    "react-responsive": "^10.0.0",
     "react-router-dom": "^7.0.1",
     "react-select-country-list": "^2.2.3",
     "react-slick": "^0.30.2",

@@ -3,6 +3,7 @@ import ReactCurvedText from "react-curved-text";
 
 import { Avatar, AvatarGroup } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "react-responsive";
 
 import "../../styles/myaccount.scoped.scss";
 
@@ -21,29 +22,11 @@ const HeaderPart = ({
   setSnackbarMessage,
 }) => {
   const { t } = useTranslation();
+  const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
 
   return (
     <>
       <div className="relative ">
-        {/* <div className="bg-[#F5F5F5] h-32 sm:h-40 md:h-52"></div> */}
-
-        {/* 
-        <div className="image_editProfile">
-
-          <img
-        
-            className="image_editProfile absolute top-10 left-0 right-0 h-40 sm:h-60 md:h-80 object-contain  z-10 rounded-full ml-4 mr-auto  "
-            /*  src={getImageUrl(post.cover_image)} 
-            style={{ position: "relative", zIndex: "-1" }}
-
-            src="/supporters/profile_placeholder.jpeg"
-          />
-
-
-
-
-          
-        </div> */}
         {athlete && (
           <>
             <div className="circle-campaign flex justify-center items-center top-10  ml-4 md:ml-8 ">
@@ -52,16 +35,11 @@ const HeaderPart = ({
                   width: { xs: 80, md: 120 },
                   height: { xs: 80, md: 120 },
                 }}
-                /*  src="/supporters/profile_placeholder.jpeg"
-                 */
-
                 src={
                   S3_BUCKET_CDN_BASE_URL +
                   "/profile_pictures/" +
                   athlete.picture
                 }
-                /*  className=" absolute top-10 left-5 right-0 ml-4 md:ml-8 mr-auto  " */
-
                 className="   "
               >
                 {athlete.name.charAt(0).toUpperCase()}
@@ -69,40 +47,28 @@ const HeaderPart = ({
 
               <div className="text-wrapper">
                 <ReactCurvedText
-                  width={250}
-                  height={250}
-                  cx={125}
-                  cy={125}
-                  rx={80}
-                  ry={80}
-                  startOffset="130"
+                  width={isLargeScreen ? 250 : 175}
+                  height={isLargeScreen ? 250 : 175}
+                  cx={isLargeScreen ? 125 : 87.5}
+                  cy={isLargeScreen ? 125 : 87.5}
+                  rx={isLargeScreen ? 80 : 56}
+                  ry={isLargeScreen ? 80 : 56}
+                  startOffset={isLargeScreen ? "130" : "91"}
                   reversed={false}
                   text="Most Likely Going"
                   textProps={{
                     style: {
-                      fontSize: 12,
+                      fontSize: isLargeScreen ? 12 : 8.4,
                       fill: "#fff",
                       fontFamily: "'Lexend', sans-serif",
                     },
                   }}
                   textPathProps={null}
-                  tspanProps={{ dy: "-9" }}
+                  tspanProps={{ dy: isLargeScreen ? "-9" : "-6.3" }}
                   ellipseProps={null}
                   svgProps={null}
                 />
               </div>
-
-              {/*   <img /* src="/supporters/likely_going.svg"  
-
-
-
-              src={statusImage(athlete.athleteStatus)}
-
-
-              className=" absolute top-7 min-[900px]:top-6 left-[0.45rem] min-[900px]:left-1 right-0 ml-4 md:ml-8 mr-auto w-[6.5rem] min-[900px]:w-[9.5rem] "
-            />
-
- */}
             </div>
           </>
         )}

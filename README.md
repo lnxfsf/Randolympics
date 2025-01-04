@@ -124,8 +124,4 @@ npm install react-youtube
 
 npm i react-cookie
 
-.
-
-hi
-
-dd
+npm install react-responsive
