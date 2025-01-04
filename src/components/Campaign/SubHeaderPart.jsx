@@ -4,6 +4,7 @@ import { settingUserType } from "../../context/user_types";
 
 
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -23,7 +24,7 @@ const SubHeaderPart = ({
   
   const { t } = useTranslation();
 
-
+  
   return (
     <>
       <div className="lexend-font text-black_second mt-8 m-6 md:m-8 flex-col md:flex-row">

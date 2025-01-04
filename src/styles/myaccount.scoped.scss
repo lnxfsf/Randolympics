@@ -79,6 +79,9 @@
 
 
 .circle-campaign {
+
+  --circle-color: "";
+
   position: relative;
   border-radius: 50%;
 
@@ -97,8 +100,16 @@
 
 
 
+/* 
 
-  background: linear-gradient(300deg, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 44, 0) 75%);
+  background: linear-gradient(300deg, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 0) 75%);
+ */
+/*   
+  background: linear-gradient(300deg, rgba(var(--r),var(--g), var(--b), 1) 30%, rgba(var(--r),var(--g), var(--b), 1) 30%, rgba(var(--r),var(--g), var(--b), 0) 75%);
+ */
+  background: linear-gradient(300deg, rgba(var(--circle-color), 1) 30%, rgba(var(--circle-color), 1) 30%, rgba(var(--circle-color), 0) 75%);
+
+
 
 
   padding: 25px;

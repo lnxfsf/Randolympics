@@ -62,23 +62,6 @@ function formatDate(dateString) {
   return date.toLocaleDateString("en-US", options);
 }
 
-function statusImage(athleteStatus) {
-  /* statusOfGoing */
-
-  if (athleteStatus === "s1") {
-    return "/supporters/likely_going.svg";
-  } else if (athleteStatus === "s2") {
-    return "/supporters/likely_going.svg";
-  } else if (athleteStatus === "s3") {
-    return "/supporters/going_sure.svg";
-  } else if (athleteStatus === "s4") {
-    return "/supporters/likely_going.svg";
-  } else if (athleteStatus === "s5") {
-    return "/supporters/maybe_going.svg";
-  } else if (athleteStatus === "s6") {
-    return "/supporters/not_going.svg";
-  }
-}
 
 const ItemCampaign = () => {
   const { t } = useTranslation();
@@ -379,7 +362,7 @@ const ItemCampaign = () => {
       {!viewFullActivity ? (
         <HeaderPart
           athlete={athlete}
-          statusImage={statusImage}
+          
           setOpenSnackbar={setOpenSnackbar}
           setSnackbarMessage={setSnackbarMessage}
         />

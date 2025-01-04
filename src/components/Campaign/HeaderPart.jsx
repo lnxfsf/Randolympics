@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import ReactCurvedText from "react-curved-text";
 
+import { useState, useEffect } from "react";
+
 import { Avatar, AvatarGroup } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
@@ -15,21 +17,59 @@ let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-const HeaderPart = ({
-  athlete,
-  statusImage,
-  setOpenSnackbar,
-  setSnackbarMessage,
-}) => {
-  const { t } = useTranslation();
+const HeaderPart = ({ athlete, setOpenSnackbar, setSnackbarMessage }) => {
+  const { t, i18n } = useTranslation();
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
+
+  const [statusText, setStatusText] = useState("");
+  const [colorOfStatus, setColorOfStatus] = useState("237, 172, 42");
+
+  useEffect(() => {
+    const athleteStatus = athlete?.athleteStatus;
+
+    if (athleteStatus === "s1") {
+      setStatusText(t("campaign.content112"));
+      setColorOfStatus("237, 172, 42");
+
+      //return "/supporters/likely_going.svg";
+    } else if (athleteStatus === "s2") {
+      setStatusText(t("campaign.content113"));
+      setColorOfStatus("237, 172, 42");
+      // return "/supporters/likely_going.svg";
+    } else if (athleteStatus === "s3") {
+      setStatusText(t("campaign.content114"));
+      setColorOfStatus("63, 194, 93");
+
+      //  return "/supporters/going_sure.svg";
+    } else if (athleteStatus === "s4") {
+      setStatusText(t("campaign.content115"));
+      setColorOfStatus("237, 172, 42");
+
+      // return "/supporters/likely_going.svg";
+    } else if (athleteStatus === "s5") {
+      setStatusText(t("campaign.content116"));
+      setColorOfStatus("32, 117, 209");
+
+      // return "/supporters/maybe_going.svg";
+    } else if (athleteStatus === "s6") {
+      setStatusText(t("campaign.content117"));
+      setColorOfStatus("183, 22, 19");
+
+      // return "/supporters/not_going.svg";
+    }
+  }, [athlete?.athleteStatus, i18n.language]);
 
   return (
     <>
       <div className="relative ">
         {athlete && (
           <>
-            <div className="circle-campaign flex justify-center items-center top-10  ml-4 md:ml-8 ">
+            <div
+              className="circle-campaign flex justify-center items-center top-10  ml-4 md:ml-8 "
+              style={{
+                "--circle-color": colorOfStatus,
+              }}
+            >
               <Avatar
                 sx={{
                   width: { xs: 80, md: 120 },
@@ -40,7 +80,6 @@ const HeaderPart = ({
                   "/profile_pictures/" +
                   athlete.picture
                 }
-                className="   "
               >
                 {athlete.name.charAt(0).toUpperCase()}
               </Avatar>
@@ -55,7 +94,7 @@ const HeaderPart = ({
                   ry={isLargeScreen ? 80 : 56}
                   startOffset={isLargeScreen ? "130" : "91"}
                   reversed={false}
-                  text="Most Likely Going"
+                  text={statusText}
                   textProps={{
                     style: {
                       fontSize: isLargeScreen ? 12 : 8.4,
