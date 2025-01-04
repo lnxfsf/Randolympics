@@ -4,37 +4,37 @@
          "title1":"Pravi ljudi.",
          "title2":"Slučajno odabrani.",
          "title3":"Takmiče se u 150+ olimpijskih sportova!",
-         "countdown1":"Dani",
+         "countdown1":"Dana",
          "countdown2":"Sati",
-         "countdown3":"Minuti",
-         "countdown4":"Sekunde",
+         "countdown3":"Minuta",
+         "countdown4":"Sekundi",
          "countdown5":"Stokholm, Švedska",
          "countdown6":"8. jul - 16. jul 2028",
-         "countdown7":"Pišemo istoriju za",
-         "subtitle1":"Zainteresovani za moguće rasporede?",
-         "subtitle2":"Slučajni odabir"
+         "countdown7":"Pravimo istoriju za",
+         "subtitle1":"Koji sport te čeka?",
+         "subtitle2":"Saznaj sada!"
       },
       "secondScreen":{
          "title1":"Besplatan let i ",
          "title2":"smeštaj!",
          "title3":"Zašto treba da se pridružiš?",
-         "content1":"Putuj u Stokholm sa pokrivenim troškovima",
-         "content2":"Pripremi se za nezaboravno iskustvo na prvim Randolympics!",
-         "content3":"Brinemo o tvom letu i smeštaju, tako da možeš da se fokusiraš na takmičenje i uživanje u Švedskoj, bez brige o troškovima putovanja.",
-         "content4":"",
-         "content5":"",
+         "content1":"Putuj u Stokholm sa svim troškovima pokrivenim",
+         "content2":"Pripremi se za nezaboravno iskustvo na prvim Randolimpijadama!",
+         "content3":"Putuj u Stokholm bez brige o troškovima! ✈️",
+         "content4":"Spremi se za nezaboravno iskustvo na prvoj Randolimpijadi!",
+         "content5":"Mi brinemo o tvom letu i smeštaju, a tvoj zadatak je samo da se takmičiš ili navijaš, uživaš i istražuješ Stokholm bez brige o troškovima putovanja.",
          "button1":"Obezbedi svoj besplatan put",
          "button2":"Prijavi se",
          "titleSec4":"Šansa za zlato",
-         "contentSec1":"Takmiči se u uzbudljivim i slučajno izabranim sportovima koji će te izazvati fizički i mentalno.",
-         "contentSec2":"Zakorači u svet neočekivanih izazova—gde svako ima šansu da osvoji zlato.",
-         "contentSec3":"Takmiči se u uzbudljivim slučajno izabranim sportovima i postani jedan od prvih dobitnika zlatne medalje na ovom revolucionarnom događaju!",
+         "contentSec1":"Takmiči se u uzbudljivim i nepredvidivim sportovima koji će te izazvati fizički i mentalno.",
+         "contentSec2":"Zakorači u svet nepredvidivih izazova—gde baš svako ima priliku da osvoji zlato! ",
+         "contentSec3":"Takmiči se u potpuno nasumičnim, uzbudljivim sportovima koji će te testirati i fizički i mentalno. Postani deo istorije i osvoji jednu od prvih zlatnih medalja na ovom jedinstvenom događaju!",
          "buttonSec1":"Idi po zlato!",
-         "titleRd4":"Napravi istoriju - Sa ili bez medalje",
-         "contentRd1":"Budi deo nečeg većeg",
-         "contentRd2":"Bez obzira na to da li osvojiš medalju ili ne, bićeš deo istorijskog trenutka—prvog događaja te vrste na svetu (možda čak i u svemiru!).",
-         "contentRd3":"Pridruži se i ostavi svoj trag u istoriji samo time što ćeš biti tamo.",
-         "buttonRd1":"Napiši istoriju!"
+         "titleRd4":"Budi deo istorije - sa ili bez medalje!",
+         "contentRd1":"Postani deo nečeg većeg od sebe!",
+         "contentRd2":"Bez obzira na to da li osvojiš medalju, učestvovaćeš u istorijskom trenutku—prvom događaju ove vrste na svetu (možda čak i u svemiru!).",
+         "contentRd3":"Pridruži se i ostavi svoj trag, samo svojim prisustvom na ovom jedinstvenom spektaklu.",
+         "buttonRd1":"Postani deo istorije!"
       },
       "ourCompetitions":{
          "title1":"Naši sportovi",
@@ -113,22 +113,46 @@
          "title9":"Otvorena ceremonija",
          "title10":"8. jul - 16. jul 2028.",
          "title11":"Igre: Ultimativni test",
+
+
+
          "content1":"Pomozite svom prijatelju da se vrati u formu koju je imao pre nekoliko godina! Biće zahvalan na podsticaju - i poverenju koje imate u njega - da se suoči sa tako OGROMNIM izazovom. Nominujte prijatelja ili čak poznatu ličnost da učestvuje, i okupite podršku i donacije kako biste povećali njihove šanse!",
          "content2":"Stotinu sportista se slučajno bira u svakoj zemlji na osnovu uspeha kampanje i podrške. Prvih 50 muškaraca i 50 žena formiraju nacionalne timove.",
          "content3":"Tokom ceremonije, svaki sportista slučajno dobija između tri i sedam različitih sportova u kojima će učestvovati. Neka igre počnu!",
          "content4":"Prijavite svog prijatelja",
-         "content5":"Randomizacija"
+         "content5":"Randomizacija",
+
+      "content6": "Nominacija",
+      "content7": "U toku!",
+      "content8": "Nominujte prijatelja, člana porodice ili čak poznatu ličnost za Randolimpijadu!",
+      "content9": "Prikupite podršku",
+      "content10": "Započnite svoju kampanju rano!",
+      "content11": "Ranije raširite vest i iskoristite prednost!",
+      "content12": "Koristite društvene mreže da prikupite glasove i donacije za svog kandidata (ili sebe).",
+      "content13": "Nacionalna randomizacija",
+      "content14": "8 Jul, 2026",
+      "content15": "Nacionalna selekcija 8. jula 2026. godine, 50 muškaraca i 50 žena će se nasumično izabrati iz svake zemlje da formiraju nacionalne timove.",
+      "content16": "Randolympics Počinje!",
+      "content17": "Od 8. Jula do 16. Jula 2028",
+      "content18": "Počinje takmičenje u Stokholmu! Svaki sportista će se takmičiti u 3-6 nasumičnih sportova. Hajde da ispišemo istoriju zajedno!"
+
+
+
+
+
+
+
       },
       "faq":{
          "title1":"FAQ",
          "CFR":{
             "title1":"Kampanje i prikupljanje sredstava",
-            "title2":"Da li pristalica kampanje može da prisustvuje Randolympics-u?",
+            "title2":"Da li neko ko je učestvovao u kampanji može da prisustvuje Randolimpijadi?",
             "title3":"Ko može da pokrene kampanju?",
             "title5":"Ko može da učestvuje kao sportista? Jedini uslovi su da imate važeći pasoš i da imate najmanje 15 godina. Ne postoji gornja granica starosti, tako da niko nije previše star ili previše mlad da učestvuje!",
-            "title6":"Kako mogu da dobijem više pristalica za svoju kampanju?",
-            "title7":"Zašto postoji minimalni iznos podrške od 1 USD?",
-            "title8":"Kako proveravate da je svaki pristalica jedinstven?",
+            "title6":"Kako mogu da dobijem više podrške za svoju kampanju?",
+            "title7":"Zašto postoji minimalni iznos podrške od 100 dinara?",
+            "title8":"Kako proveravate da je svaki sportista jednistven?",
             "title9":"Mogu li da napravim više od jedne kampanje?",
             "title10":"Mogu li biti i sportista i pristalica istovremeno?",
             "title11":"Šta se dešava sa novcem prikupljenim donacijama?",
@@ -136,8 +160,8 @@
             "title13":"Koja kampanja će uspeti? Kako funkcioniše nacionalni rang?",
             "title14":"Šta se dešava ako sportisti ne mogu da prisustvuju zbog povrede ili ličnih razloga?",
             "title15":"Može li sportista da postane bogat?",
-            "content1":"Da, apsolutno! Svi su dobrodošli da se pridruže i budu deo ovog neverovatnog avanturističkog iskustva. Pristalice, prijatelji i navijači su svi pozvani da dođu i bodre svoje sportiste, dožive uzbuđenje i uživaju u zajedničkoj atmosferi.",
-            "content2":"Svako može da pokrene kampanju! Sve što vam je potrebno je prijatelj koji veruje u vas i barem jedan dolar da biste počeli. Ovo je jednostavan način da motivišete nekog da postigne izuzetne ciljeve.",
+            "content1":"Naravno! Svi su dobrodošli da budu deo ovog neverovatnog avanturističkog iskustva. Prijatelji, porodica i navijači su pozvani da dođu, bodre svoje sportiste, dožive uzbuđenje i uživaju u sjajnoj atmosferi zajedništva.",
+            "content2":"Svako može da pokrene kampanju! Sve što vam je potrebno je prijatelj koji veruje u vas i barem 100 dinara da biste počeli. Ovo je jednostavan način da motivišete nekog da postigne izuzetne ciljeve.",
             "content3":"Svako može da učestvuje kao sportista! Jedini uslovi su da imate važeći pasoš i da imate najmanje 15 godina. Ne postoji gornja granica starosti, tako da niko nije previše star ili previše mlad da učestvuje!",
             "content4":"Da biste skupili više pristalica, podelite svoju kampanju na društvenim mrežama, pošaljite personalizovane poruke svojoj mreži na WhatsApp-u i širite vest u svom teretani, sportskom klubu ili zajednici. Što više ljudi sazna, to više mogu da vas podrže!",
             "content5":"Ovaj mali minimalni iznos je zaštita od lažnih ili automatizovanih naloga. Pomaže da se osigura da je svaki pristalica stvarna, jedinstvena osoba koja je iskreno zainteresovana za podršku sportisti.",
@@ -217,11 +241,12 @@
          "btn1":"Prijavi se sada",
          "text1":"Registracijom potvrđujete da se slažete sa našim ",
          "text2":"Uslovima i pravilima",
-         "title3":"Spreman da počneš?",
-         "text3":"Nominuj svog prijatelja ili poznatu ličnost!",
+         "title3":"Da li si spreman?",
+         "text3":"Nominuj svog prijatelja, poznatu ličnost ili sebe!",
          "btn2":"Prijavi se sada"
       },
       "seventhScreen":{
+         "content0": "Ko smo mi?",
          "content1":"O nama",
          "content2":"Naš savetodavni odbor",
          "content3":"Naš menadžment tim",
@@ -240,18 +265,23 @@
          "content16":"Verifikuje naloge, donacije i transakcije kako bi održao transparentnost i sigurnost naše platforme.",
          "content17":"Menadžer za događaje",
          "content18":"Organizuje ključne događaje kao što su Igre u Stokholmu 2028, osiguravajući da sve teče glatko, od logistike do upravljanja sportistima.",
-         "content19":"Mi smo grupa sportskih entuzijasta iz Stokholma, Švedska. Naša misija je da okupimo druge ljubitelje sporta, amaterske sportiste i sve druge koji se bave sportom rekreativno i koji žele da učestvuju u Randolympics koja će biti organizovana od 8. do 16. jula 2028. u Stokholmu. Randolympics je poput redovnih Olimpijskih igara, ali organizovana za obične ljude koji žele da testiraju svoju snagu i izdržljivost u sportovima od streljaštva i rvanja do hokeja na travi i golfa, i to u grupi i/ili individualno.",
+         "content19":"Mi smo grupa sportskih entuzijasta iz celog sveta! Naša misija je da okupimo druge ljubitelje sporta, amaterske sportiste i sve druge koji se bave sportom rekreativno i koji žele da učestvuju u Randolimpijadi koja će biti organizovana od 8. do 16. jula 2028. u Stokholmu. ",
+         "content19Additional":"Randolimpijada je poput redovnih Olimpijskih igara, ali organizovana za obične ljude koji žele da testiraju svoju snagu i izdržljivost u sportovima od streljaštva i rvanja do hokeja na travi i golfa, i to u grupi i/ili individualno.",
          "content20":"Svako ko želi da učestvuje mora biti nominovan od strane prijatelja koji će napraviti kampanju na našoj veb stranici.",
          "content21":"Kliknite ovde",
          "content22":"da biste napravili kampanju za prijatelja ili omiljenu poznatu ličnost!",
-         "content23":"Prvih pedeset muškaraca i pedeset žena će predstavljati svoju zemlju na događaju. Ako bude više od pedeset sportista, kampanja sa najvišim rangom biće izabrana. Rangiranje uzima u obzir broj pristalica, iznos doniranog novca i nasumičan broj, čime se osigurava da svi, čak i oni sa manjim resursima, imaju teoretsku šansu da osvoje zlatnu medalju."
+
+         "content23":" će predstavljati svoju zemlju na događaju. Ako bude više od pedeset sportista, kampanja sa najvišim rangom biće izabrana. Rangiranje uzima u obzir broj pristalica, iznos doniranog novca i nasumičan broj, čime se osigurava da svi, čak i oni sa manjim resursima, imaju šansu da osvoje zlatnu medalju.",
+         "contentBold23": "Prvih 50 muškaraca i 50 žena "
+
+
       },
       "imagineHome":{
-         "text1":"Zamisli",
+         "text1":"Zamisli...",
          "text2":"To je Randolympics!",
-         "text3":"Biće ludo i nezaboravno.",
-         "text4":"Randolympics je jedinstveni događaj u kojem nasumični ljudi takmiče u nasumičnim sportovima.",
-         "text5":"Pretvaramo obične ljude u zanimljive takmičare.",
+         "text3":"Sve je nasumično, zabavno i biće nezaboravno!",
+         "text4":"Randolimpijada je mesto gde se svako može oprobati u neočekivanim sportovima.",
+         "text5":"Pretvaramo svakodnevne ljude u sportske legende.",
          "text6":"Biće zabavno za gledanje!",
          "text7":"Kog biste želeli da vidite kako se takmiči u",
          "text8":"i",
@@ -260,6 +290,7 @@
          "text11":"Poznata ličnost",
          "text12":"Napravite svoj izbor sada!",
          "text13":"Ukupno 30 sportova",
+         "text14": "Zašto",
 
 
 
@@ -310,7 +341,7 @@
          "sport16":"🥋 Džudou 🤼",
          "sport17":"🤺 Modernom petoboju 🐎",
          "sport18":"🚣‍♂️ Veslanju 🚣‍♀️",
-         "sport19":"🏉 Ragbiju Sevens 💪",
+         "sport19":"🏉 Ragbi 7 💪",
          "sport20":"⛵ Jedrenju 🌬️",
          "sport21":"🔫 Streljaštvu 🎯",
          "sport22":"🏊‍♂️ Plivanju 🏊‍♀️",
@@ -1355,69 +1386,69 @@
          "image1":"Lgn0FhrnDzM"
       },
       "gymnastics":{
-         "maintitle":"Gymnastika (Umjetnička Gymnastika)",
-         "subtitle1":"<b>Gymnastika</b> je veoma zahtevna sportska disciplina koja kombinuje snagu, fleksibilnost, ravnotežu i koordinaciju. Obuhvata različite discipline koje prikazuju atletske sposobnosti kroz rutine na različitim spravama i površinama. Gymnastika je poznata po svojoj estetskoj privlačnosti, jer zahteva da sportisti izvode složene pokrete sa gracioznošću i preciznošću.",
+         "maintitle":"Gimnastika (Umjetnička Gimnastika)",
+         "subtitle1":"<b>Gimnastika</b> je veoma zahtevna sportska disciplina koja kombinuje snagu, fleksibilnost, ravnotežu i koordinaciju. Obuhvata različite discipline koje prikazuju atletske sposobnosti kroz rutine na različitim spravama i površinama. Gimnastika je poznata po svojoj estetskoj privlačnosti, jer zahteva da sportisti izvode složene pokrete sa gracioznošću i preciznošću.",
          "title1":"",
-         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni pregled:</b></p> <b>Cilj</b><span>: Cilj gymanstike je izvoditi rutine koje pokazuju visok nivo tehničkih veština i umetnosti. Sportisti se ocenjuju na osnovu izvedbe, težine i celokupne prezentacije.</span><br/><br/> <span class=\"text-lg md:text-xl\"><b>Disciplini:</b></span> Gymnastika je podeljena na nekoliko disciplina, uključujući: <ul> <li style=\"font-size: 16px;\" ><b>Umjetnička Gymnastika</b><span>: Obuhvata rutine na spravama kao što su sprava za skok, konj sa drškama, ruče, paralelne šipke i horizontalna šipka za muškarce, i nesparene šipke, baletna greb, i vežbe na podu za žene.</span></li> <li style=\"font-size: 16px;\" ><b>Ritmička Gymnastika</b><span>: Kombinuje elemente baleta, plesa i gymnastike, koristeći rekvizite poput traka, obruča, lopti, palica i užadi. Takmičenja se izvode na podu bez rekvizita ili sa jednim ili više rekvizita.</span></li> <li style=\"font-size: 16px;\" ><b>Trampolinska Gymnastika</b><span>: Fokusira se na izvođenje akrobatskih pokreta dok se skače na trampolinu. Sportisti izvode rutine koje uključuju flips i okrete.</span></li> <li style=\"font-size: 16px;\" ><b>Akrobatska Gymnastika</b><span>: Obuhvata rutine koje izvode grupe (parovi, trijade ili veće timove), prikazujući ravnotežu, snagu i fleksibilnost kroz koordinirane pokrete.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Ključni elementi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Rutine</b><span>: Gymnasti izvode rutine koje se sastoje od različitih elemenata koji pokazuju njihove veštine, uključujući skokove, flips, okrete i pozicije ravnoteže.</span></li> <li style=\"font-size: 16px;\" ><b>Scoring</b><span>: Takmičenja ocenjuju panel sudija koji procenjuju težinu i izvođenje rutine, dodeljujući ocene na osnovu unapred definisanih kriterijuma.</span></li> <li style=\"font-size: 16px;\" ><b>Trening</b><span>: Striktan trening je ključan za uspeh u gymnastici. Sportisti prolaze kroz programe snage i kondicije, treninge za fleksibilnost i razvoj veština pod vođstvom trenera.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Individulni Svi-Around</b><span>: Gymnasti takmiče se u više disciplina, a njihove kombinovane ocene određuju njihov ukupan rang.</span></li> <li style=\"font-size: 16px;\" ><b>Tim Takmičenja</b><span>: Timovi se formiraju kako bi kolektivno učestvovali, pri čemu najviši rezultati sportista doprinose ukupnom rezultatu tima.</span></li> <li style=\"font-size: 16px;\" ><b>Glavni događaji</b><span>: Glavni takmičenja uključuju Olimpijske igre, Svetska prvenstva i kontinentalna prvenstva. Ovi događaji često prikazuju najviši nivo talenta u gymnastici.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Gymnastika kultura:</b></p> <p><span>Gymnastika promoviše fizičku kondiciju, disciplinu i izdržljivost. Naglašava važnost posvećenosti i napornog rada, jer sportisti često treniraju mnoge godine kako bi ovladali svojim veštinama. Sport izaziva snažnu zajednicu, gde mnogi sportisti formiraju prijateljstva tokom treninga i takmičenja.</span></p> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Koristi od Gymnastike:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Fizička kondicija</b><span>: Poboljšava snagu, fleksibilnost, koordinaciju i ravnotežu.</span></li> <li style=\"font-size: 16px;\" ><b>Mentalna fokusacija</b><span>: Povećava koncentraciju i disciplinu, jer sportisti moraju biti pažljivi sa svojim rutinama i tehnikama.</span></li> <li style=\"font-size: 16px;\" ><b>Samopouzdanje</b><span>: Izgradnja veština i postizanje ciljeva mogu povećati samopoštovanje i samopouzdanje sportista.</span></li> </ul> <br/> <p><span>Bez obzira da li učestvujete na rekreativnom nivou ili takmičite na elitnom nivou, gymnastika pruža jedinstvenu kombinaciju atletske i umetničke izvedbe, čineći je zapanjujućim sportom za oba učesnika i posmatrače.</span></p> <br/>",
+         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni pregled:</b></p> <b>Cilj</b><span>: Cilj gymanstike je izvoditi rutine koje pokazuju visok nivo tehničkih veština i umetnosti. Sportisti se ocenjuju na osnovu izvedbe, težine i celokupne prezentacije.</span><br/><br/> <span class=\"text-lg md:text-xl\"><b>Disciplini:</b></span> Gimnastika je podeljena na nekoliko disciplina, uključujući: <ul> <li style=\"font-size: 16px;\" ><b>Umjetnička Gimnastika</b><span>: Obuhvata rutine na spravama kao što su sprava za skok, konj sa drškama, ruče, paralelne šipke i horizontalna šipka za muškarce, i nesparene šipke, baletna greb, i vežbe na podu za žene.</span></li> <li style=\"font-size: 16px;\" ><b>Ritmička Gimnastika</b><span>: Kombinuje elemente baleta, plesa i gymnastike, koristeći rekvizite poput traka, obruča, lopti, palica i užadi. Takmičenja se izvode na podu bez rekvizita ili sa jednim ili više rekvizita.</span></li> <li style=\"font-size: 16px;\" ><b>Trampolinska Gimnastika</b><span>: Fokusira se na izvođenje akrobatskih pokreta dok se skače na trampolinu. Sportisti izvode rutine koje uključuju flips i okrete.</span></li> <li style=\"font-size: 16px;\" ><b>Akrobatska Gimnastika</b><span>: Obuhvata rutine koje izvode grupe (parovi, trijade ili veće timove), prikazujući ravnotežu, snagu i fleksibilnost kroz koordinirane pokrete.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Ključni elementi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Rutine</b><span>: Gymnasti izvode rutine koje se sastoje od različitih elemenata koji pokazuju njihove veštine, uključujući skokove, flips, okrete i pozicije ravnoteže.</span></li> <li style=\"font-size: 16px;\" ><b>Scoring</b><span>: Takmičenja ocenjuju panel sudija koji procenjuju težinu i izvođenje rutine, dodeljujući ocene na osnovu unapred definisanih kriterijuma.</span></li> <li style=\"font-size: 16px;\" ><b>Trening</b><span>: Striktan trening je ključan za uspeh u gymnastici. Sportisti prolaze kroz programe snage i kondicije, treninge za fleksibilnost i razvoj veština pod vođstvom trenera.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Individulni Svi-Around</b><span>: Gymnasti takmiče se u više disciplina, a njihove kombinovane ocene određuju njihov ukupan rang.</span></li> <li style=\"font-size: 16px;\" ><b>Tim Takmičenja</b><span>: Timovi se formiraju kako bi kolektivno učestvovali, pri čemu najviši rezultati sportista doprinose ukupnom rezultatu tima.</span></li> <li style=\"font-size: 16px;\" ><b>Glavni događaji</b><span>: Glavni takmičenja uključuju Olimpijske igre, Svetska prvenstva i kontinentalna prvenstva. Ovi događaji često prikazuju najviši nivo talenta u gymnastici.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Gimnastika kultura:</b></p> <p><span>Gimnastika promoviše fizičku kondiciju, disciplinu i izdržljivost. Naglašava važnost posvećenosti i napornog rada, jer sportisti često treniraju mnoge godine kako bi ovladali svojim veštinama. Sport izaziva snažnu zajednicu, gde mnogi sportisti formiraju prijateljstva tokom treninga i takmičenja.</span></p> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Koristi od Gymnastike:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Fizička kondicija</b><span>: Poboljšava snagu, fleksibilnost, koordinaciju i ravnotežu.</span></li> <li style=\"font-size: 16px;\" ><b>Mentalna fokusacija</b><span>: Povećava koncentraciju i disciplinu, jer sportisti moraju biti pažljivi sa svojim rutinama i tehnikama.</span></li> <li style=\"font-size: 16px;\" ><b>Samopouzdanje</b><span>: Izgradnja veština i postizanje ciljeva mogu povećati samopoštovanje i samopouzdanje sportista.</span></li> </ul> <br/> <p><span>Bez obzira da li učestvujete na rekreativnom nivou ili takmičite na elitnom nivou, gimnastika pruža jedinstvenu kombinaciju atletske i umetničke izvedbe, čineći je zapanjujućim sportom za oba učesnika i posmatrače.</span></p> <br/>",
          "image1":"xDzFsB_V9lM",
          "variations":[
             {
-               "title":"Individulni Svi-Around Umjetnička Gymnastika",
+               "title":"Individulni Svi-Around Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutine na svim spravama (skok, nesparene šipke, baletna greb, vežbe na podu).</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Ocene sa svake sprave se kombinuju kako bi se odredio svi-around šampion. Gymnast sa najvišom ukupnom ocenom pobedjuje.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Svaka rutina se ocenjuje prema težini, izvedbi i umetničkoj izvedbi. Minimalna ocena je potrebna da se kvalifikujete za finala.</span></li> </ul>",
                "yt_link":"1OmSm1S1z60"
             },
             {
-               "title":"Tim Svi-Around Umjetnička Gymnastika",
+               "title":"Tim Svi-Around Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Timovi gymnasta izvode rutine na svim spravama.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Ocene od svakog člana tima sa svake sprave se kombinuju kako bi se odredio ukupni timski rezultat. Tim sa najvišom ukupnom ocenom pobedjuje.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Timovi se obično sastoje od četiri do šest gymnasta, pri čemu najbolje ocene sa svake sprave se računaju.</span></li> </ul>",
                "yt_link":"di0x9DyptGE"
             },
             {
-               "title":"Vežbe na Podu Umjetnička Gymnastika",
+               "title":"Vežbe na Podu Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode koreografisanu rutinu na prolećnoj podnoj podlozi.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutine se izvode uz muziku i uključuju niz akrobatskih pokreta, plesnih elemenata i akrobacija.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Rutine se ocenjuju prema težini, izvedbi i umetničkoj izvedbi. Deductions se daju za bilo koje greške ili neusaglašenost sa muzikom.</span></li> </ul>",
                "yt_link":"4ic7RNS4Dfo"
             },
             {
-               "title":"Muški Konj sa Drškama Umjetnička Gymnastika",
+               "title":"Muški Konj sa Drškama Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu na konju sa drškama.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje zamahivanje, kruženje i stojeće akrobacije sa rukama na drškama ili konju.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocena se zasniva na izvođenju, težini i kontinuitetu pokreta. Deductions se daju za greške u formi i nedostatak ritma.</span></li> </ul>",
                "yt_link":"xWLOo6pPnqE"
             },
             {
-               "title":"Muški Prstenovi Umjetnička Gymnastika",
+               "title":"Muški Prstenovi Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu na dva prstena visoko suspendovana.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje elemente snage, zamahivanja i držanja.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Sudije procenjuju snagu, ravnotežu i kontrolu. Deductions se daju za bilo kakvu nestabilnost ili greške u formi.</span></li> </ul>",
                "yt_link":"6Rkv5LfU9kI"
             },
             {
-               "title":"Skok Umjetnička Gymnastika",
+               "title":"Skok Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode skok sa jednim eksplozivnim pokretom sa sprave do konja.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina se sastoji od trčanja do skoka sa sprave i kontrole prilikom sletanja.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocena se zasniva na težini skoka, izvedbi i kvalitetu sletanja.</span></li> </ul>",
                "yt_link":"flOcsc7TdC8"
             },
             {
-               "title":"Paralelne Šipke Umjetnička Gymnastika",
+               "title":"Paralelne Šipke Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu na dve paralelne šipke.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje zamahivanje, držanja i prelaze između šipki.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Sudije ocenjuju težinu, izvedbu i prelaze između elemenata. Deductions se dodeljuju za greške u formi i skokove sa šipki.</span></li> </ul>",
                "yt_link":"Qel-dXUsozw"
             },
             {
-               "title":"Muške Horizontalne Šipke Umjetnička Gymnastika",
+               "title":"Muške Horizontalne Šipke Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu na jednoj horizontalnoj šipki.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje zamahivanje, otpuštanja i složene skokove.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocenjivanje se bazira na težini, izvedbi i kompleksnosti veština otpuštanja i ponovnog hvatanja.</span></li> </ul>",
                "yt_link":"m6rKKZAWF5Q"
             },
             {
-               "title":"Individulna Trampolinska Gymnastika",
+               "title":"Individulna Trampolinska Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu sa više visokoletnih akrobatskih veština na trampolinu.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje seriju vremenski ograničenih skokova i veština, prikazujući visinu, težinu i kontrolu.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocenjivanje se vrši na osnovu težine, izvedbe i preciznosti svake veštine, uz odbitke za greške i nedostatak kontrole.</span></li> </ul>",
                "yt_link":"hUXy7UlSXto"
             },
             {
-               "title":"Ženski Grupi Svi-Around Ritmička Gymnastika",
+               "title":"Ženski Grupi Svi-Around Ritmička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Timovi od pet gymnastkinja izvode koreografisanu rutinu sa kombinacijom sprava (obruči, lopte, trake, palice).</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje koordinisane pokrete i razmene sa spravama.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocenjivanje se vrši na osnovu težine, sinhronizacije i umetničkog izraza, uz odbitke za greške i nedostatak tečnosti.</span></li> </ul>",
                "yt_link":"zaOlOIN9jPA"
             },
             {
-               "title":"Ženska Individualna Svi-Around Ritmička Gymnastika",
+               "title":"Ženska Individualna Svi-Around Ritmička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Individualne gymnastkinje izvode rutine sa različitim spravama (obruč, lopta, traka, palice).</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Svaka gymnastkinja izvodi rutine sa svakom spravom, a ocene iz svake rutine se kombinuju da bi se odredio šampion u svi-around konkurenciji.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocenjivanje se bazira na težini rutine, izvedbi i umetničkom izrazu. Minimalna ocena je potrebna za kvalifikaciju u finale.</span></li> </ul>",
                "yt_link":"oIz_gI650cI"
             },
             {
-               "title":"Ženska Balansna Greb Umjetnička Gymnastika",
+               "title":"Ženska Balansna Greb Umjetnička Gimnastika",
                "desc":"<ul> <li style=\"font-size: 16px;\" ><span ><b>Takmičenje:</b> Gymnasti izvode rutinu na uskoj grebi visokoj 1.25 metra.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Metod Takmičenja:</b> Rutina uključuje akrobatske elemente, veštine ravnoteže i skokove sa grebe.</span></li> <li style=\"font-size: 16px;\" ><span ><b>Ključni Pravilnici:</b> Ocenjivanje se vrši na osnovu težine rutine, ravnoteže, izvedbe i preciznosti. Deductions se dodeljuju za padove, greške u ravnoteži i greške u formi.</span></li> </ul>",
                "yt_link":"BNTma0K2MwQ"
             }
@@ -1438,10 +1469,10 @@
          "image1":"ausJW71jYqA"
       },
       "judo":{
-         "maintitle":"Judo",
-         "subtitle1":"<b>Judo</b> je moderan borilački sport i borilačka veština koji je nastao u Japanu krajem 19. veka, a razvio ga je Jigoro Kano. Fokusira se na bacanja, zahvate na zglobove i drške, koristeći snagu i ravnotežu protivnika protiv njega. Judo nije samo takmičarski sport, već i način fizičkog i mentalnog razvoja.",
+         "maintitle":"Džudo",
+         "subtitle1":"<b>Džudo</b> je moderan borilački sport i borilačka veština koji je nastao u Japanu krajem 19. veka, a razvio ga je Jigoro Kano. Fokusira se na bacanja, zahvate na zglobove i drške, koristeći snagu i ravnotežu protivnika protiv njega. Džudo nije samo takmičarski sport, već i način fizičkog i mentalnog razvoja.",
          "title1":"",
-         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni Pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Glavni cilj u judu je baciti ili oboriti protivnika na zemlju sa snagom i kontrolom, držati ga ili prisiliti da se preda pomoću zahvata na zglobovima ili gušenja.</span></li> <li style=\"font-size: 16px;\" ><b>Format Treninga</b><span >: Judo se praktikuje na prostirci zvanoj \"tatami\". Trening obično uključuje tehničke vežbe i sparing (randori), što omogućava praktikantima da primene tehnike u stvarnim situacijama.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Ključni Elementi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tehnike</b><span >: Judo tehnike su podeljene u tri glavne kategorije:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Nage-waza (Tehnike Bacanja)</b><span >: Tehnike koje se koriste za bacanje protivnika, uključujući različite zahvate i rad nogu.</span></li> <li style=\"font-size: 16px;\" ><b>Ne-waza (Tehnike na Zemlji)</b><span >: Tehnike koje se izvode na zemlji, uključujući držanje, zahvate na zglobove i gušenja.</span></li> <li style=\"font-size: 16px;\" ><b>Kuzushi (Razbijanje Ravnoteže)</b><span >: Princip razbijanja ravnoteže protivnika kako bi se efikasno izveo udarac.</span></li> </ul> <li style=\"font-size: 16px;\" ><b>Bodovanje</b><span >: Poeni se dodeljuju na osnovu efikasnosti i kontrole tehnika. Savršen udarac (ippon) rezultira instant pobedom, dok manji udarci (waza-ari) mogu doneti delimične poene.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Glavni Događaji</b><span >: Judo se reguliše od strane Međunarodne Judo Federacije (IJF), koja organizuje takmičenja kao što su Svetsko Prvenstvo u Judo-u i Olimpijske Igre.</span></li> <li style=\"font-size: 16px;\" ><b>Težinske Kategorije</b><span >: Takmičenja su podeljena po težinskim kategorijama, kako bi se osigurali fer mečevi između takmičara slične veličine.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Sistem Pojasa:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Rangiranje</b><span >: Judo praktikanti napreduju kroz sistem pojaseva, počinjući od belog pojasa (početnik) do crnog pojasa (napredni). Crni pojas ima različite stepene (dan) koji predstavljaju više nivoe stručnosti i razumevanja.</span></li> </ul> <br/>",
+         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni Pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Glavni cilj u judu je baciti ili oboriti protivnika na zemlju sa snagom i kontrolom, držati ga ili prisiliti da se preda pomoću zahvata na zglobovima ili gušenja.</span></li> <li style=\"font-size: 16px;\" ><b>Format Treninga</b><span >: Džudo se praktikuje na prostirci zvanoj \"tatami\". Trening obično uključuje tehničke vežbe i sparing (randori), što omogućava praktikantima da primene tehnike u stvarnim situacijama.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Ključni Elementi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tehnike</b><span >: Džudo tehnike su podeljene u tri glavne kategorije:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Nage-waza (Tehnike Bacanja)</b><span >: Tehnike koje se koriste za bacanje protivnika, uključujući različite zahvate i rad nogu.</span></li> <li style=\"font-size: 16px;\" ><b>Ne-waza (Tehnike na Zemlji)</b><span >: Tehnike koje se izvode na zemlji, uključujući držanje, zahvate na zglobove i gušenja.</span></li> <li style=\"font-size: 16px;\" ><b>Kuzushi (Razbijanje Ravnoteže)</b><span >: Princip razbijanja ravnoteže protivnika kako bi se efikasno izveo udarac.</span></li> </ul> <li style=\"font-size: 16px;\" ><b>Bodovanje</b><span >: Poeni se dodeljuju na osnovu efikasnosti i kontrole tehnika. Savršen udarac (ippon) rezultira instant pobedom, dok manji udarci (waza-ari) mogu doneti delimične poene.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Glavni Događaji</b><span >: Džudo se reguliše od strane Međunarodne Džudo Federacije (IJF), koja organizuje takmičenja kao što su Svetsko Prvenstvo u Džudo-u i Olimpijske Igre.</span></li> <li style=\"font-size: 16px;\" ><b>Težinske Kategorije</b><span >: Takmičenja su podeljena po težinskim kategorijama, kako bi se osigurali fer mečevi između takmičara slične veličine.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Sistem Pojasa:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Rangiranje</b><span >: Džudo praktikanti napreduju kroz sistem pojaseva, počinjući od belog pojasa (početnik) do crnog pojasa (napredni). Crni pojas ima različite stepene (dan) koji predstavljaju više nivoe stručnosti i razumevanja.</span></li> </ul> <br/>",
          "image1":"OAWErlPfV64"
       },
       "modernPentathlon":{
@@ -1501,10 +1532,10 @@
          ]
       },
       "rugby":{
-         "maintitle":"Rugbi Sedmorka",
-         "subtitle1":"<b>Rugbi Sedmorka</b> je brzo i dinamično izdanje rugbija, igra se sa sedam igrača u svakoj ekipi, umesto tradicionalnih 15. Poznat po brzom tempu i dinamičnoj igri, Rugbi Sedmorka je stekao međunarodnu popularnost i prepoznaje se po uzbudljivim akcijama i jedinstvenim strategijama.",
+         "maintitle":"Rugbi 7",
+         "subtitle1":"<b>Ragbi 7</b> je brzo i dinamično izdanje rugbija, igra se sa sedam igrača u svakoj ekipi, umesto tradicionalnih 15. Poznat po brzom tempu i dinamičnoj igri, Ragbi 7 je stekao međunarodnu popularnost i prepoznaje se po uzbudljivim akcijama i jedinstvenim strategijama.",
          "title1":"",
-         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni Pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Cilj je postići više poena od protivničke ekipe nošenjem lopte preko linije za pokušaj, udaranjem lopte kroz gol ili doticanjem lopte u oblasti cilja.</span></li> <li style=\"font-size: 16px;\" ><b>Istorija</b><span >: Rugbi Sedmorka je nastao u Škotskoj 1880-ih kao način da se sport igra u kraćem formatu. Razvio se u veliki sportski događaj sa sopstvenim takmičenjima i turnirima.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Format:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Trajanje meča</b><span >: Mečevi se obično igraju u dva poluvremena po sedam minuta, sa kratkom pauzom između. U finalima, poluvremena mogu biti produžena na deset minuta.</span></li> <li style=\"font-size: 16px;\" ><b>Veličina terena</b><span >: Rugbi Sedmorka se igra na standardnom rugbi terenu, dužine 100 metara i širine 70 metara.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Poeni:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Pokušaj</b><span >: 5 poena se dodeljuju za postizanje pokušaja dodirom lopte na protivničkoj gol liniji.</span></li> <li style=\"font-size: 16px;\" ><b>Konverzija</b><span >: Nakon pokušaja, timovi mogu pokušati da postignu konverziju udarcem za dodatnih 2 poena.</span></li> <li style=\"font-size: 16px;\" ><b>Pokušaj sa penaltijem</b><span >: Dodeljuje se kada ekipa bude sprečena da postigne pokušaj prekršajem, vredan 7 poena.</span></li> <li style=\"font-size: 16px;\" ><b>Penal udarac</b><span >: Udarac dodeljen za prekršaj, vredan 3 poena ako je uspešan.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Igra:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sastav tima</b><span >: Svaki tim se sastoji od sedam igrača i do pet zamena.</span></li> <li style=\"font-size: 16px;\" ><b>Strategija igre</b><span >: Sa manje igrača na terenu, Rugbi Sedmorka naglašava brzinu, agilnost i otvorenu igru. Timovi koriste brze pasove, izbegavanje i taktičko udaranje kako bi iskoristili rupe u odbrani protivnika.</span></li> <li style=\"font-size: 16px;\"> <p><span ><b>Zamene</b><span >: Timovi mogu praviti kontinuirane zamene, što omogućava ulazak svežih igrača bez prekidanja igre.</span></span></p></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Svetska Rugbi Sedmorka Serija</b><span >: Godišnji ciklus turnira održava se u različitim zemljama, sa nacionalnim timovima koji se takmiče za poene koji određuju ukupnog šampiona.</span></li> <li style=\"font-size: 16px;\" ><b>Uključivanje u Olimpijske igre</b><span >: Rugbi Sedmorka je debitovao na Olimpijadi 2016. u Riju, što je dodatno povećalo njegov globalni profil.</span></li> <li style=\"font-size: 16px;\">  <p><span ><span ><b>Rugbi Svetski Kup Sedmorka</b><span >: Četvrogodišnji turnir na kojem učestvuju najbolji timovi sveta, a pobednici postaju svetski šampioni.</span></span></span></p> </li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Format Takmičenja</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Mečevi</b><span >: Svaki meč se sastoji od dva poluvremena, obično po 7 minuta, sa kratkom pauzom između.</span></li> <li style=\"font-size: 16px;\" ><b>Poeni</b><span >: Timovi postižu poene tako što loptu spuste u protivničkoj oblasti za pokušaj (5 poena), konvertuju pokušaj (2 poena), ili udarcima penala ili drop golom (3 poena).</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Pravila</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Broj igrača</b><span >: Svaki tim ima sedam igrača, sa do pet dozvoljenih zamena.</span></li> <li style=\"font-size: 16px;\" ><b>Tackl i Ruk</b><span >: Igra omogućava tackliranje, a kada je izvršen tackle, igrači moraju da otpuste loptu, stvarajući ruk.</span></li> <li style=\"font-size: 16px;\" ><b>Ponovno pokretanje igre</b><span >: Igra se ponovo pokreće sa scrum-om, lineout-om ili slobodnim udarcem, zavisno od situacije.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Cilj</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Cilj je postići više poena od protivničkog tima postizanjem pokušaja i konvertovanjem istih. Timovi koriste strateške igre i timski rad da bi se kretali terenom i iskoristili rupe u odbrani.</span></li> </ul> <br/> <br/>",
+         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni Pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Cilj je postići više poena od protivničke ekipe nošenjem lopte preko linije za pokušaj, udaranjem lopte kroz gol ili doticanjem lopte u oblasti cilja.</span></li> <li style=\"font-size: 16px;\" ><b>Istorija</b><span >: Ragbi 7 je nastao u Škotskoj 1880-ih kao način da se sport igra u kraćem formatu. Razvio se u veliki sportski događaj sa sopstvenim takmičenjima i turnirima.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Format:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Trajanje meča</b><span >: Mečevi se obično igraju u dva poluvremena po sedam minuta, sa kratkom pauzom između. U finalima, poluvremena mogu biti produžena na deset minuta.</span></li> <li style=\"font-size: 16px;\" ><b>Veličina terena</b><span >: Ragbi 7 se igra na standardnom rugbi terenu, dužine 100 metara i širine 70 metara.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Poeni:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Pokušaj</b><span >: 5 poena se dodeljuju za postizanje pokušaja dodirom lopte na protivničkoj gol liniji.</span></li> <li style=\"font-size: 16px;\" ><b>Konverzija</b><span >: Nakon pokušaja, timovi mogu pokušati da postignu konverziju udarcem za dodatnih 2 poena.</span></li> <li style=\"font-size: 16px;\" ><b>Pokušaj sa penaltijem</b><span >: Dodeljuje se kada ekipa bude sprečena da postigne pokušaj prekršajem, vredan 7 poena.</span></li> <li style=\"font-size: 16px;\" ><b>Penal udarac</b><span >: Udarac dodeljen za prekršaj, vredan 3 poena ako je uspešan.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Igra:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sastav tima</b><span >: Svaki tim se sastoji od sedam igrača i do pet zamena.</span></li> <li style=\"font-size: 16px;\" ><b>Strategija igre</b><span >: Sa manje igrača na terenu, Ragbi 7 naglašava brzinu, agilnost i otvorenu igru. Timovi koriste brze pasove, izbegavanje i taktičko udaranje kako bi iskoristili rupe u odbrani protivnika.</span></li> <li style=\"font-size: 16px;\"> <p><span ><b>Zamene</b><span >: Timovi mogu praviti kontinuirane zamene, što omogućava ulazak svežih igrača bez prekidanja igre.</span></span></p></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Svetska Ragbi 7 Serija</b><span >: Godišnji ciklus turnira održava se u različitim zemljama, sa nacionalnim timovima koji se takmiče za poene koji određuju ukupnog šampiona.</span></li> <li style=\"font-size: 16px;\" ><b>Uključivanje u Olimpijske igre</b><span >: Ragbi 7 je debitovao na Olimpijadi 2016. u Riju, što je dodatno povećalo njegov globalni profil.</span></li> <li style=\"font-size: 16px;\">  <p><span ><span ><b>Rugbi Svetski Kup Sedmorka</b><span >: Četvrogodišnji turnir na kojem učestvuju najbolji timovi sveta, a pobednici postaju svetski šampioni.</span></span></span></p> </li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Format Takmičenja</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Mečevi</b><span >: Svaki meč se sastoji od dva poluvremena, obično po 7 minuta, sa kratkom pauzom između.</span></li> <li style=\"font-size: 16px;\" ><b>Poeni</b><span >: Timovi postižu poene tako što loptu spuste u protivničkoj oblasti za pokušaj (5 poena), konvertuju pokušaj (2 poena), ili udarcima penala ili drop golom (3 poena).</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Pravila</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Broj igrača</b><span >: Svaki tim ima sedam igrača, sa do pet dozvoljenih zamena.</span></li> <li style=\"font-size: 16px;\" ><b>Tackl i Ruk</b><span >: Igra omogućava tackliranje, a kada je izvršen tackle, igrači moraju da otpuste loptu, stvarajući ruk.</span></li> <li style=\"font-size: 16px;\" ><b>Ponovno pokretanje igre</b><span >: Igra se ponovo pokreće sa scrum-om, lineout-om ili slobodnim udarcem, zavisno od situacije.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Cilj</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Cilj je postići više poena od protivničkog tima postizanjem pokušaja i konvertovanjem istih. Timovi koriste strateške igre i timski rad da bi se kretali terenom i iskoristili rupe u odbrani.</span></li> </ul> <br/> <br/>",
          "image1":"Tm6m5QhZ-Mg"
       },
       "sailing":{
@@ -1610,10 +1641,10 @@
          ]
       },
       "taekwondo":{
-         "maintitle":"Taekwondo",
-         "subtitle1":"<b>Taekwondo</b> je dinamična borilačka veština koja potiče iz Koreje, poznata po naglasku na visoke, brze udarce nogama, kao i skakanje i okretanje u tehnike. Kombinuje borbene veštine, samoobranu i tradicionalne vrednosti, zbog čega je popularan sport širom sveta.",
+         "maintitle":"Tekvodno",
+         "subtitle1":"<b>Tekvodno</b> je dinamična borilačka veština koja potiče iz Koreje, poznata po naglasku na visoke, brze udarce nogama, kao i skakanje i okretanje u tehnike. Kombinuje borbene veštine, samoobranu i tradicionalne vrednosti, zbog čega je popularan sport širom sveta.",
          "title1":"",
-         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Osnovni cilj u Taekwondo-u je pobediti protivnika koristeći vešte tehnike i kontrolisane udarce, dok se pridržavate principa poštovanja i discipline.</span></li> <li style=\"font-size: 16px;\" ><b>Istorija</b><span >: Taekwondo ima korene u drevnim korejskim borilačkim veštinama, koje su se značajno razvile sredinom 20. veka. Stekao je međunarodno priznanje i ušao u Olimpijske igre 2000. godine.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Pravila i bodovanje</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sparing</b><span >: Mečevi se sastoje od dva takmičara koji pokušavaju da osvoje poene udarajući zakonitim udarcima u telo i glavu protivnika. Takmičar sa najvećim brojem poena na kraju meča pobeđuje.</span></li> <li style=\"font-size: 16px;\" ><b>Oprema</b><span >: Učesnici nose zaštitnu opremu, uključujući zaštitu za glavu, zaštitu za telo, štitnike za noge i zaštitu za stopala kako bi se obezbedila bezbednost.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Cilj</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Cilj u Taekwondo takmičenjima je pokazivanje veštine, brzine i strategije u okviru težinskih kategorija, kako bi se obezbedila fer konkurencija i mogućnost sportista da pokažu svoje sposobnosti protiv isto težinskih protivnika.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><span ><b>Težinske kategorije u Taekwondo-u</b></span></p> <ol> <li style=\"font-size: 16px;\" ><b>Taekwondo Lak</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare koji su ispod određenog limita težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Takmičenje u sparingu protiv protivnika slične težine, fokusirajući se na brzinu, agilnost i tehniku.</span></li> </ul> <br/><li style=\"font-size: 16px;\" ><b>Taekwondo Srednji</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare unutar definisanog srednjeg opsega težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Korišćenje uravnotežene kombinacije snage, brzine i strategije za savladavanje protivnika.</span></li> </ul>  <br/><li style=\"font-size: 16px;\" ><b>Taekwondo Težak</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare iznad određenog limita težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Korišćenje snage i tehnike u sparingu protiv težih protivnika, fokusirajući se na efikasne udarce i odbranu.</span></li> </ul> </ol> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Stilovi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tradicionalni Taekwondo</b><span >: Fokusira se na tehnike samoobrane, forme (poomsae) i filozofiju borilačkih veština.</span></li> <li style=\"font-size: 16px;\" ><b>Sportski Taekwondo</b><span >: Centriran je na takmičenje, sa naglaskom na sparing (kyorugi) i tehnike za sticanje poena.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Tehnike:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tehnike udaraca nogom</b><span >: Udarci nogom su zaštitni znak Taekwondo-a, uključujući prednje udarce, bočne udarce, okretne udarce i skakanje u udarce.</span></li> <li style=\"font-size: 16px;\" ><b>Tehnike ruku</b><span >: Iako dominiraju udarci nogama, tehnike ruku kao što su udarci i blokovi su takođe od suštinske važnosti.</span></li> <li style=\"font-size: 16px;\" ><b>Forme (Poomsae)</b><span >: Sekvence pokreta koje predstavljaju specifične tehnike i strategije. Vežbanje poomsae pomaže u poboljšanju fokusa, tehnike i razumevanja principa borilačkih veština.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sparing (Kyorugi)</b><span >: Taekwondo mečevi uključuju dva takmičara koji stiču poene udaranjem kontrolisanih udaraca nogom i rukom na telo ili glavu protivnika. Mečevi se obično održavaju na prostirkama, a takmičari nose zaštitnu opremu.</span></li> <li style=\"font-size: 16px;\" ><b>Takmičenje u formama (Poomsae)</b><span >: Takmičari demonstriraju svoje poomsae, koje se ocenjuju na osnovu tačnosti, snage i tehnike.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Oprema:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Uniforma (Dobok)</b><span >: Praktikanti nose tradicionalnu uniformu, poznatu kao dobok, koja varira u boji i stilu u zavisnosti od škole i nivoa veštine.</span></li> <li style=\"font-size: 16px;\" ><b>Zaštitna oprema</b><span >: Tokom sparinga, takmičari nose zaštitu, uključujući šlemove, zaštitu za telo, štitnike za noge i rukavice.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Pojas i rangiranje:</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Taekwondo koristi sistem pojaseva kako bi označio rang i nivo veštine praktikanta. Učenici napreduju kroz različite boje pojaseva, a crni pojas je najviši rang, koji predstavlja naprednu veštinu i razumevanje.</span></li> </ul> <br/> <br/> <br/> <br/>",
+         "desc1":"<p class=\"text-lg md:text-xl\"><b>Osnovni pregled:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Osnovni cilj u Tekvodno-u je pobediti protivnika koristeći vešte tehnike i kontrolisane udarce, dok se pridržavate principa poštovanja i discipline.</span></li> <li style=\"font-size: 16px;\" ><b>Istorija</b><span >: Tekvodno ima korene u drevnim korejskim borilačkim veštinama, koje su se značajno razvile sredinom 20. veka. Stekao je međunarodno priznanje i ušao u Olimpijske igre 2000. godine.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Pravila i bodovanje</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sparing</b><span >: Mečevi se sastoje od dva takmičara koji pokušavaju da osvoje poene udarajući zakonitim udarcima u telo i glavu protivnika. Takmičar sa najvećim brojem poena na kraju meča pobeđuje.</span></li> <li style=\"font-size: 16px;\" ><b>Oprema</b><span >: Učesnici nose zaštitnu opremu, uključujući zaštitu za glavu, zaštitu za telo, štitnike za noge i zaštitu za stopala kako bi se obezbedila bezbednost.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Cilj</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Cilj u Tekvodno takmičenjima je pokazivanje veštine, brzine i strategije u okviru težinskih kategorija, kako bi se obezbedila fer konkurencija i mogućnost sportista da pokažu svoje sposobnosti protiv isto težinskih protivnika.</span></li> </ul> <br/> <br/> <p class=\"text-lg md:text-xl\"><span ><b>Težinske kategorije u Tekvodno-u</b></span></p> <ol> <li style=\"font-size: 16px;\" ><b>Tekvodno Lak</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare koji su ispod određenog limita težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Takmičenje u sparingu protiv protivnika slične težine, fokusirajući se na brzinu, agilnost i tehniku.</span></li> </ul> <br/><li style=\"font-size: 16px;\" ><b>Tekvodno Srednji</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare unutar definisanog srednjeg opsega težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Korišćenje uravnotežene kombinacije snage, brzine i strategije za savladavanje protivnika.</span></li> </ul>  <br/><li style=\"font-size: 16px;\" ><b>Tekvodno Težak</b><span >:</span></li> <ul> <li style=\"font-size: 16px;\" ><b>Opis</b><span >: Težinska kategorija za takmičare iznad određenog limita težine.</span></li> <li style=\"font-size: 16px;\" ><b>Cilj</b><span >: Korišćenje snage i tehnike u sparingu protiv težih protivnika, fokusirajući se na efikasne udarce i odbranu.</span></li> </ul> </ol> <br/> <br/> <p class=\"text-lg md:text-xl\"><b>Stilovi:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tradicionalni Tekvodno</b><span >: Fokusira se na tehnike samoobrane, forme (poomsae) i filozofiju borilačkih veština.</span></li> <li style=\"font-size: 16px;\" ><b>Sportski Tekvodno</b><span >: Centriran je na takmičenje, sa naglaskom na sparing (kyorugi) i tehnike za sticanje poena.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Tehnike:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Tehnike udaraca nogom</b><span >: Udarci nogom su zaštitni znak Tekvodno-a, uključujući prednje udarce, bočne udarce, okretne udarce i skakanje u udarce.</span></li> <li style=\"font-size: 16px;\" ><b>Tehnike ruku</b><span >: Iako dominiraju udarci nogama, tehnike ruku kao što su udarci i blokovi su takođe od suštinske važnosti.</span></li> <li style=\"font-size: 16px;\" ><b>Forme (Poomsae)</b><span >: Sekvence pokreta koje predstavljaju specifične tehnike i strategije. Vežbanje poomsae pomaže u poboljšanju fokusa, tehnike i razumevanja principa borilačkih veština.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Takmičenja:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Sparing (Kyorugi)</b><span >: Tekvodno mečevi uključuju dva takmičara koji stiču poene udaranjem kontrolisanih udaraca nogom i rukom na telo ili glavu protivnika. Mečevi se obično održavaju na prostirkama, a takmičari nose zaštitnu opremu.</span></li> <li style=\"font-size: 16px;\" ><b>Takmičenje u formama (Poomsae)</b><span >: Takmičari demonstriraju svoje poomsae, koje se ocenjuju na osnovu tačnosti, snage i tehnike.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Oprema:</b></p> <ul> <li style=\"font-size: 16px;\" ><b>Uniforma (Dobok)</b><span >: Praktikanti nose tradicionalnu uniformu, poznatu kao dobok, koja varira u boji i stilu u zavisnosti od škole i nivoa veštine.</span></li> <li style=\"font-size: 16px;\" ><b>Zaštitna oprema</b><span >: Tokom sparinga, takmičari nose zaštitu, uključujući šlemove, zaštitu za telo, štitnike za noge i rukavice.</span></li> </ul> <br/> <p class=\"text-lg md:text-xl\"><b>Pojas i rangiranje:</b></p> <ul> <li style=\"font-size: 16px;\" ><span >Tekvodno koristi sistem pojaseva kako bi označio rang i nivo veštine praktikanta. Učenici napreduju kroz različite boje pojaseva, a crni pojas je najviši rang, koji predstavlja naprednu veštinu i razumevanje.</span></li> </ul> <br/> <br/> <br/> <br/>",
          "image1":"7-iIq3ikA3M"
       },
       "tableTenis":{

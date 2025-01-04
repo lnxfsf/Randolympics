@@ -21,8 +21,8 @@
       "content1": "Travel to Stockholm with all expenses covered",
       "content2": "Get ready for an unforgettable experience at the first-ever Randolympics!",
       "content3": "We’ll take care of your flights and accommodation, so you can focus on competing and enjoying Sweden without worrying about travel costs.",
-      "content4": "",
-      "content5": "",
+      "content4": "Get ready for an unforgettable experience at the first Randolympics!",
+      "content5": "We take care of your flight and accommodation, and all you have to do is compete or cheer, enjoy and explore Stockholm without worrying about travel costs.",
       "button1": "Secure My Free Trip",
       "button2": "Log In",
 
@@ -286,7 +286,10 @@
       "content20": "Anyone wishing to participate needs to be nominated by a friend who will make a campaign on our website. ",
       "content21": "Click here",
       "content22": "to create a campaign for friend or your favourite celebrity!",
-      "content23": "The first fifty men and fifty women will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal.",
+      "content23": "will represent their country at the event. If there are more than fifty athletes, the campaign with the highest ranking will be selected. The ranking considers the number of supporters, the amount of donated money, and a random number, ensuring that everyone, even those with fewer resources, has a theoretical chance to win a gold medal.",
+"contentBold23": "The first 50 men and 50 women ",
+
+
 
       "content230": "Strengths: ",
       "content24": "Weaknesses: ",
@@ -321,6 +324,7 @@
       "text11": "Celebrity",
       "text12": "Make your choice now !",
       "text13": "30 sports in total",
+      "text14": "Why",
 
       "happen1": "actually, win? 🏆✨",
       "happen2": "lose hard? 😬💔",

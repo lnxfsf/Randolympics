@@ -276,7 +276,7 @@ const ImagineHomeScreen = () => {
 
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between flex-col lg:flex-row">
           <div>
-            <p className=" font-bold text-3xl md:text-4xl ">Why</p>
+            <p className=" font-bold text-3xl md:text-4xl ">{t("home.imagineHome.text14")}</p>
 
             <div className="flex items-start">
               <img className="inline w-5 mt-4 md:mt-3" src="/home/shoe.svg" />
