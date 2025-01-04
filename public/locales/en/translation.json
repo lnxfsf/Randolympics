@@ -138,7 +138,24 @@
 
       "content16": "Randolympics Starts!",
       "content17": "July 8th to July 16th, 2028",
-      "content18": "The competition in Stockholm starts! Every athlete will compete in 3-6 random sports. Let’s Make history!"
+      "content18": "The competition in Stockholm starts! Every athlete will compete in 3-6 random sports. Let’s Make history!",
+
+
+
+      "content19": "Lucky Number Generator",
+      "content20": "Click the button below to generate your lucky number!",
+      "content21": "Generate Lucky Number",
+      "content22": "Your Lucky Number is: ",
+      "content23": "If you gathered ",
+      "content24": "$100 ",
+      "content25": "and have ",
+      "content26": "10 supporters ,",
+      "content27": "times your lucky number ",
+      "content28": "your score!"
+
+
+
+
     },
     "faq": {
       "title1": "FAQ",

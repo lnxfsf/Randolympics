@@ -1,6 +1,7 @@
 import "../../styles/home.scoped.scss";
 import { useTranslation } from "react-i18next";
 
+
 const FifthScreenHomeNewDesign = () => {
   const { t } = useTranslation();
 
@@ -58,6 +59,17 @@ const FifthScreenHomeNewDesign = () => {
               </p>
               <p></p>
             </div>
+
+
+
+
+
+
+
+
+
+
+
           </div>
 
           <div className="hidden min-[890px]:flex basis-1/2 flex-col justify-start gap-4  m-16 ">
@@ -76,7 +88,17 @@ const FifthScreenHomeNewDesign = () => {
               src="/home/home3.jpg"
               className=" w-[65%] xl:w-[45%] 2xl:w-[35%]"
             />
+
+
+
+
+
           </div>
+
+
+
+
+
         </div>
       </div>
     </>

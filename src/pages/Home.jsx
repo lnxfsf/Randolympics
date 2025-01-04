@@ -54,6 +54,7 @@ import { SecondScreenHome3 } from "./Home/SecondScreenHome3";
 import { FifthScreenHomeNewDesign } from "./Home/FifthScreenHomeNewDesign";
 import { ImagineHomeScreen } from "./Home/ImagineHomeScreen";
 import { CookieMain } from "../components/cookies/CookieMain";
+import { HomeLuckyNumber } from "./Home/HomeLuckyNumber";
 
 // ? expand more, arrow icon transformation
 
@@ -86,9 +87,7 @@ const Home = () => {
     AOS.init();
   }, []); */
 
-
   const sectionRef = useRef(null);
-
 
   return (
     <>
@@ -103,18 +102,18 @@ const Home = () => {
 
       <Navbar />
 
+      <FirstScreenHome
+        scrollToSection={() =>
+          sectionRef.current.scrollIntoView({ behavior: "smooth" })
+        }
+      />
 
-
-      <FirstScreenHome scrollToSection={() => sectionRef.current.scrollIntoView({ behavior: 'smooth' })} />
-        
       <ImagineHomeScreen />
-
-
 
       <FifthScreenHomeNewDesign />
       <div className="flex items-start lexend-font text-black_second flex-col">
-      <p className="ml-6 mr-6 pl-2 pr-2 2xl:w-[50%] 2xl:text-center self-center">
-      <br /> {t("home.seventhScreen.content20")}
+        <p className="ml-6 mr-6 pl-2 pr-2 2xl:w-[50%] 2xl:text-center self-center">
+          <br /> {t("home.seventhScreen.content20")}
           <a href="/supporters" className="underline text-red_second">
             {t("home.seventhScreen.content21")}
           </a>{" "}
@@ -122,46 +121,30 @@ const Home = () => {
           <br />
           <br />
           {t("home.seventhScreen.content23")}
-          </p>
-          </div>
+        </p>
+      </div>
 
-      <SecondScreenHome sectionRef={sectionRef}/> 
-
-
+     <HomeLuckyNumber />
 
 
+
+      <SecondScreenHome sectionRef={sectionRef} />
 
       <SecondScreenHome3 />
-      
+
       <SecondScreenHome2 />
-
-
 
       {/* <FifthScreenHome /> */}
 
-     {/* <FifthScreenHomeOld /> */}
-
-
-
-
-
-
-
-
-
-
+      {/* <FifthScreenHomeOld /> */}
 
       <SixthScreenHomeAnother2 />
-      
+
       <ThirdScreenHome />
 
       <SeventhScreenHome />
 
-
-    
-
-
-    {/*   
+      {/*   
 
     // Read more about our four types of income
     
@@ -216,14 +199,13 @@ const Home = () => {
 
       <SixthScreenHomeAnother />
 
-
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
         <p className="text-4xl font-semibold  text-red_second ">News</p>
 
         <NewsNewsBlock />
       </div>
 
-    <SixthScreenHome />
+      <SixthScreenHome />
 
       <FAQ />
 
