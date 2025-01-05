@@ -134,7 +134,20 @@
       "content15": "Nacionalna selekcija 8. jula 2026. godine, 50 muškaraca i 50 žena će se nasumično izabrati iz svake zemlje da formiraju nacionalne timove.",
       "content16": "Randolympics Počinje!",
       "content17": "Od 8. Jula do 16. Jula 2028",
-      "content18": "Počinje takmičenje u Stokholmu! Svaki sportista će se takmičiti u 3-6 nasumičnih sportova. Hajde da ispišemo istoriju zajedno!"
+      "content18": "Počinje takmičenje u Stokholmu! Svaki sportista će se takmičiti u 3-6 nasumičnih sportova. Hajde da ispišemo istoriju zajedno!",
+
+      
+      "content19": "Generator Srećnih Brojeva",
+      "content20": "Kliknite na dugme ispod da biste generisali svoj srećni broj!",
+      "content21": "Generišite Srećan Broj",
+      "content22": "Vaš srećni broj je: ",
+      "content23": "Ako ste skupili ",
+      "content24": "10000 dinara ",
+      "content25": "i imate ",
+      "content26": "10 donatora ",
+      "content27": ", puta vaš srećan broj ",
+      "content28": "je vaš rezultat!"
+
 
 
 
@@ -168,7 +181,7 @@
             "content6":"Verifikujemo svakog sportistu putem njihovog važećeg pasoša, čime se osigurava da nije moguće manipulisati sistemom ili napraviti duplirane unose.",
             "content7":"Da, možete da kreirate koliko god želite kampanja! Pokretanje kampanje je ogroman kompliment prijatelju - znak da verujete u njihov potencijal da postignu izuzetne stvari. Kampanje su takođe promišljeni i inspirativni pokloni za posebne prilike, poput rođendana.",
             "content8":"Da, možete! Možete učestvovati kao sportista u kampanji koju je pokrenuo vaš prijatelj, dok istovremeno kreirate više kampanja za podršku drugima. Vaša uključenost može biti široka i podržavajuća koliko god želite.",
-            "content9":"Ako kampanja bude uspešna, prikupljeni novac će biti prebačen sportisti da podrži njihov put do Randolympics, uključujući treninge, opremu i druge pripremne troškove. Takođe, ako pristalice žele da prisustvuju događaju, do tri pristalica sa kampanje će dobiti doprinos za njihove avionske karte kako bi mogli da budu deo ovog iskustva. Ako kampanja ne uspe u dovođenju sportiste na događaj, donacije će biti upotrebljene da se obezbedi da događaj teče glatko i da bude dobro finansiran.",
+            "content9":"Ako kampanja bude uspešna, prikupljeni novac će biti prebačen sportisti da podrži njihov put do Randolympics, uključujući treninge, opremu i druge pripremne troškove. Takođe, ako donatori žele da prisustvuju događaju, do tri pristalica sa kampanje će dobiti doprinos za njihove avionske karte kako bi mogli da budu deo ovog iskustva. Ako kampanja ne uspe u dovođenju sportiste na događaj, donacije će biti upotrebljene da se obezbedi da događaj teče glatko i da bude dobro finansiran.",
             "content10":"Kampanja sa poznatom ličnošću je slična običnoj kampanji, ali sa nekoliko ključnih razlika. Za razliku od običnih kampanja, kontakt podaci i email adresa poznate ličnosti možda neće biti poznati osobi koja pokreće kampanju. Ako poznata ličnost odluči da razmotri prisustvo na Randolympics i želi da se prijavi na svoj nalog, treba da najavi svoj interes na društvenim mrežama i potom kontaktira kako Nacionalnog predsednika, tako i kreatora kampanje. Oni će koordinisati i obezbediti siguran metod prijavljivanja kako bi poznata ličnost sigurno pristupila svom nalogu.",
             "content11":"Uspeh kampanje zavisi od njenog položaja na nacionalnoj rang listi, koja se određuje kroz proces slučajnog rangiranja. Svaka kampanja se rangira na osnovu tri faktora: ukupnog iznosa prikupljenog novca, broja jedinstvenih pristalica i slučajnog broja između 0 i 1. Ovi faktori se kombinuju da bi se generisala finalna rang lista za svaku kampanju. Za formiranje svakog nacionalnog tima, izabrano je 50 najboljih muškaraca i 50 najboljih žena sa najvišim rangovima. Međutim, timovi moraju biti uravnoteženi u pogledu težinskih kategorija, pri čemu svaka od tri težinske grupe treba biti jednako zastupljena. Ovaj zahtev za ravnotežu znači da kampanja rangirana na 48. mestu možda neće ući u tim ako je ta težinska kategorija već popunjena, dok bi kampanja rangirana na 53. mestu mogla biti uključena ako je ta težinska grupa nedovoljno zastupljena.",
             "content12":"Ako sportista u top 50 ne može da prisustvuje Randolympics zbog povrede, ličnih razloga ili drugih okolnosti, biće zamenjen sledećim sportistom sa najvišim rangom iz njihove težinske kategorije. Ovo osigurava da tim ostane uravnotežen i popunjen. Sportisti koji su rangirani odmah iznad 50. još uvek imaju šansu da učestvuju ako dođe do odustajanja ili promena u sastavu, pružajući priliku onima sa nešto nižim rangom da dođu na igre.",
@@ -184,7 +197,7 @@
             "title21":"Da li postoje specifična pravila koja sportisti moraju da poštuju tokom takmičenja?",
             "title22":"Kakva je struktura ili organizacija događaja?",
             "title23":"Koje mere bezbednosti su na snazi za takmičenja?",
-            "title24":"Da li pristalice mogu učestvovati u nekim događajima ili aktivnostima?",
+            "title24":"Da li donatori mogu učestvovati u nekim događajima ili aktivnostima?",
             "title25":"Šta je sa tesnim rasporedima?",
             "content14":"Ne, jednom kada se sportovi dodele tokom otvaranja, oni se ne mogu promeniti. Slučajna dodela je deo izazova i duha Randolympics.",
             "content15":"Ne, učešće u bilo kojem takmičenju je potpuno dobrovoljno. Prioritet nam je bezbednost i dobrobit svih sportista. Ako se sportista oseća neprijatno ili nespremno za neki dodeljeni sport, nije obavezan da učestvuje. Naš cilj je podstaći učešće i pomerati granice, ali nikada na račun udobnosti ili bezbednosti sportiste.",
@@ -197,7 +210,7 @@
             "content22":"Timski sportovi poput fudbala ili tenisa: Ovi sportovi su organizovani u eliminacionom formatu, gde pobednici napreduju u sledeći krug dok ne ostanu samo četiri tima ili sportista.",
             "content23":"Trke sa kvalifikacijama poput plivanja: Ove trke se sastoje od više rundi sa kvalifikacijama, a finalna trka određuje pobednika.",
             "content24":"Sva takmičenja nadgledaju sudije i službenici za bezbednost. Biće prisutno medicinsko osoblje, a oprema će biti pregledana kako bi se osiguralo da ispunjava bezbednosne standarde.",
-            "content25":"Pristalice su pozvane da učestvuju u dodeljenim događajima i aktivnostima tokom Randolympics. Međutim, oni ne mogu učestvovati u zvaničnim sportskim događajima osim ako nisu registrovani kao sportisti.",
+            "content25":"Donatori su pozvane da učestvuju u dodeljenim događajima i aktivnostima tokom Randolympics. Međutim, oni ne mogu učestvovati u zvaničnim sportskim događajima osim ako nisu registrovani kao sportisti.",
             "content26":"Cilj nam je da planiramo dovoljno vremena između dva takmičenja kako bi sportisti imali vremena da se odmore i pripreme. Ipak, u ekstremnim situacijama, poput kašnjenja u prvom takmičenju i gužve u saobraćaju između lokacija, teorijski je moguće da sportista neće moći da učestvuje u drugom događaju. Dobra podrška može pomoći da se brzo pronađe lokacija i organizuje transport kako bi se minimizovale smetnje u takvim malo verovatnim situacijama."
          },
          "SPM":{
