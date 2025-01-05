@@ -1018,7 +1018,8 @@ return dataS.map((data, index) => { */
                       </div>
 
                       <p className="mt-7 text-center w-[70%]">
-                        {data.sportName}
+                         { t(`sports.${data.translatedSportName}`) }
+                       {/*  {data.sportName} */}
                       </p>
                     </div>
                   </>

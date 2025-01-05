@@ -582,6 +582,12 @@
       "content8":"Prijavi se",
       "content9":"Dodaj još jednog",
       "content10":"Pošaljite prijateljima",
+
+
+      "content11": "Ne znate koja ste kategorija težine?",
+      "content12": "Kliknite ovde da saznate",
+
+
       "table1":"Datum / Vreme",
       "table2":"Subota 8.",
       "table3":"Nedelja 9.",
@@ -609,6 +615,9 @@
       "select13":"Teška",
       "select14":"Ponovno nasumično",
       "select15":"Vrati se"
+
+
+
    },
    "login":{
       "content1":"Prijavi se",

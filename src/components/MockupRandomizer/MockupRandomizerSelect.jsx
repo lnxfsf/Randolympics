@@ -264,10 +264,10 @@ const MockupRandomizerSelect = ({
 
 
 <div className="w-full flex items-center justify-center mt-4 flex-col lexend-font">
-            <p className="  text-center ">Don't know which weight category you are? </p>
+            <p className="  text-center ">{t("mockupRandomizer.content11")}</p>
           <Popup
               trigger={
-                  <p className=" text-red_second cursor-pointer text-center">Click here to find it out</p>
+                  <p className=" text-red_second cursor-pointer text-center">{t("mockupRandomizer.content12")}</p>
                /*  <img
                   src="/randomizer/info.svg"
                   className="cursor-pointer select-none"
