@@ -24,6 +24,7 @@ import Alert from "@mui/material/Alert";
 import { MockupRandomizerSelect } from "./MockupRandomizer/MockupRandomizerSelect";
 
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -49,6 +50,50 @@ const days = [
 
   { day: "Sunday", date: "July 16th" },
 ];
+
+
+const whichDay = (date) => {
+  switch(date) {
+    case "July 8th":
+      return t("mockupRandomizer.table2");
+      break;
+      case "July 9th":
+        return t("mockupRandomizer.table3");
+        break;
+        case "July 10th":
+          return t("mockupRandomizer.table4");
+          break;
+          case "July 11th":
+            return t("mockupRandomizer.table5");
+            break;
+            case "July 12th":
+              return t("mockupRandomizer.table6");
+              break;
+
+              case "July 13th":
+                return t("mockupRandomizer.table7");
+                break;
+
+                case "July 14th":
+                  return t("mockupRandomizer.table8");
+                  break;
+
+                  case "July 15th":
+                    return t("mockupRandomizer.table9");
+                    break;
+
+
+                    
+                  case "July 16th":
+                    return t("mockupRandomizer.table10");
+                    break;
+
+
+
+  }
+
+}
+
 
 const Randomize = () => {
   const { t } = useTranslation();
@@ -1044,11 +1089,20 @@ return dataS.map((data, index) => { */
                 </tr>
               </thead>
               <tbody>
+            
+
                 {days.map(({ day, date }) => (
+
+
+
+                  
+
+
                   /* ovo je jedan row ! */
                   <tr key={date}>
                     <th className="thz font-medium">
-                      {day} {date.slice(-4)}
+                      {/* {day} {date.slice(-4)} */}
+                      {whichDay(date)}
                     </th>
 
                     {/* prolazi kroz svaki, pocev od '00_03' , koji je onda "slot", , ali slot je onda ime.. (stringa) index 0 vrv
