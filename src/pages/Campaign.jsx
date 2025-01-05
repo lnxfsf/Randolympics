@@ -276,7 +276,7 @@ const Campaign = () => {
                             }}
                           />
                         }
-                        label={`Celebrity`}
+                        label={t("campaign.content118")}
                       />
                       <FormControlLabel
                         value="no"
@@ -290,7 +290,7 @@ const Campaign = () => {
                             }}
                           />
                         }
-                        label={`Athlete`}
+                        label={t("campaign.content119")}
                       />
                     </FormGroup>
                   </RadioGroup>
@@ -547,7 +547,7 @@ const Campaign = () => {
                         fontWeight: 500,
                       },
                     }}
-                    label={`Celebrity`}
+                    label={t("campaign.content118")}
                   />
                   <FormControlLabel
                     value="no"
@@ -568,7 +568,7 @@ const Campaign = () => {
                         fontWeight: 500,
                       },
                     }}
-                    label={`Athlete`}
+                    label={t("campaign.content119")}
                   />
                 </FormGroup>
               </RadioGroup>
@@ -579,7 +579,7 @@ const Campaign = () => {
         {resultsAmount > 0 && (
           <>
             <p className="lexend-font text-black_second font-medium ml-4 sm:ml-6 md:ml-8 xl:ml-12 2xl:ml-16 m-4">
-              {resultsAmount} results
+              {resultsAmount} {t("campaign.content120")}
             </p>
           </>
         )}
@@ -618,7 +618,7 @@ const Campaign = () => {
                       {item.friendGender === "M" ? "Male" : "Female"}
                     </p> */}
                         <p className="text-red_second font-medium">
-                          See Profile
+                        {t("campaign.content121")}
                         </p>
                       </div>
                     </div>

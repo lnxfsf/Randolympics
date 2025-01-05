@@ -541,7 +541,10 @@
     "content116": "Maybe Going",
     "content117": "Not Going",
 
-
+    "content118": "Celebrity",
+"content119": "Athlete",
+"content120": "results",
+"content121": "See Profile",
 
 
     "warningPopupFriTitle1": "Watch out !",
@@ -627,7 +630,8 @@
     "select12": "Medium",
     "select13": "Heavy",
     "select14": "Randomize",
-    "select15": "Go Back"
+    "select15": "Go Back",
+    "select16": "Select your gender"
 
 
 
@@ -1891,7 +1895,7 @@
   
   
 
-    
+
   
   }
 }

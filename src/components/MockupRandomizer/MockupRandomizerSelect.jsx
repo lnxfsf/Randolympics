@@ -19,7 +19,7 @@ const MockupRandomizerSelect = ({
     <>
       <div className="w-full flex justify-center items-center flex-col">
         <div className="flex w-full p-4 md:w-[50%] 2xl:w-[30%]  mt-8 text-black_second lexend-font flex-col ">
-          <p className="text-xl md:text-2xl font-medium ">Select your gender</p>
+          <p className="text-xl md:text-2xl font-medium ">{t("mockupRandomizer.select16")}</p>
 
           {/* gender */}
           <div className="flex w-full gap-4 mt-4 ">
