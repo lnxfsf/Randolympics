@@ -1,11 +1,30 @@
-function formatDate(dateString) {
-  let date = new Date(dateString);
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
-}
+
+
+
+import { useTranslation } from "react-i18next";
+
 
 const ItemNewsList = ({ post, index, onClick }) => {
   // this is one post... and just, display it rendered as it
+  const { t, i18n } = useTranslation();
+
+  function formatDate(dateString) {
+    let date = new Date(dateString);
+
+    let locale = i18n.language || "en-US";
+  
+    switch(locale){
+      case "sr":
+        locale = "sr-Latn";
+        break;
+        
+    }
+
+    let options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(locale, options);
+  }
+
+  
 
   return (
     <>
@@ -34,7 +53,7 @@ const ItemNewsList = ({ post, index, onClick }) => {
             </p>
 
             <p className="justify-self-end text-red_second text-sm font-semibold cursor-pointer select-none ">
-              Read more
+              {t("home.news.content2")}
             </p>
           </div>
         </div>

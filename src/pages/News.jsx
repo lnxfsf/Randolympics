@@ -8,7 +8,12 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { FooterClean } from "../components/FooterClean";
 
+import { useTranslation } from "react-i18next";
+
 const News = () => {
+  const { t } = useTranslation();
+
+
   return (
     <>
       <Navbar />
@@ -23,7 +28,7 @@ const News = () => {
 
       <div className="flex justify-center mt-16 flex-col items-center">
         <p className="text-3xl md:text-4xl font-semibold  text-red_second ">
-          News
+          {t("home.news.title1")}
         </p>
         <NewsNewsBlock />
       </div>

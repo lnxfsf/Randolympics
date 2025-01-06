@@ -201,7 +201,7 @@ const Home = () => {
       <SixthScreenHomeAnother />
 
       <div className="flex justify-center mt-16 mb-16 flex-col items-center">
-        <p className="text-4xl font-semibold  text-red_second ">News</p>
+        <p className="text-4xl font-semibold  text-red_second ">{t("home.news.title1")}</p>
 
         <NewsNewsBlock />
       </div>

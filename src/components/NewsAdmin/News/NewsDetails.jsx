@@ -59,6 +59,8 @@ let BACKEND_SERVER_BASE_URL =
   
 
 
+import { useTranslation } from "react-i18next";
+
 const readingTime = (text) => {
   const wpm = 225;
   const words = text.trim().split(/\s+/).length;
@@ -79,6 +81,29 @@ function formatDate(dateString) {
 }
 
 const NewsDetails = ({ postZ, onBack }) => {
+
+  
+const { t, i18n } = useTranslation();
+
+
+
+function formatDate(dateString) {
+  let date = new Date(dateString);
+
+  let locale = i18n.language || "en-US";
+  
+  switch(locale){
+    case "sr":
+      locale = "sr-Latn";
+      break;
+      
+  }
+
+
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(locale, options);
+}
+
   const popupRef = useRef(null);
 
   const filePondRef = useRef(null);

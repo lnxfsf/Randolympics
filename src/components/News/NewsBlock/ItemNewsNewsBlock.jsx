@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
 import "../../../styles/news.scoped.scss";
 
 let BACKEND_SERVER_BASE_URL =
@@ -13,12 +14,6 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-
-function formatDate(dateString) {
-  let date = new Date(dateString);
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
-}
 
 const readingTime = (text) => {
   const wpm = 225;
@@ -34,6 +29,29 @@ function getImageUrl(coverImage) {
 }
 
 const ItemNewsNewsBlock = ({ number }) => {
+  
+  const { t, i18n } = useTranslation();
+
+
+  
+
+function formatDate(dateString) {
+  let date = new Date(dateString);
+  let locale = i18n.language || "en-US";
+  
+  switch(locale){
+    case "sr":
+      locale = "sr-Latn";
+      break;
+      
+  }
+
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  //return date.toLocaleDateString("en-US", options);
+  return date.toLocaleDateString(locale, options);
+
+}
+
   const [gamesPosts, setGamesPosts] = useState();
 
   const navigate = useNavigate();
@@ -95,9 +113,9 @@ const ItemNewsNewsBlock = ({ number }) => {
 
           <div className="flex justify-between items-center">
             <p className="text-xs  text-[#9D9A9A]">
-              {readingTime(gamesPosts[number].content)} min read
+              {readingTime(gamesPosts[number].content)} {t("home.news.content3")}
             </p>
-            <p className="text-xs  text-red_second font-semibold">Read More</p>
+            <p className="text-xs  text-red_second font-semibold">{t("home.news.content2")}</p>
           </div>
         </div>
       )}

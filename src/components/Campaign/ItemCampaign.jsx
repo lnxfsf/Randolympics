@@ -56,15 +56,27 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
-function formatDate(dateString) {
-  let date = new Date(dateString);
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
-}
 
 
 const ItemCampaign = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  
+function formatDate(dateString) {
+  let date = new Date(dateString);
+
+  let locale = i18n.language || "en-US";
+  
+  switch(locale){
+    case "sr":
+      locale = "sr-Latn";
+      break;
+      
+  }
+
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(locale, options);
+}
 
   const { campaignId } = useParams();
 

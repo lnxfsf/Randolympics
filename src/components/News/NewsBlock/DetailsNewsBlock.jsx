@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
 import { FooterClean } from "../../FooterClean";
 
+import { useTranslation } from "react-i18next";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -39,13 +40,32 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
+const DetailsNewsBlock = () => {
+
+
+const { t, i18n } = useTranslation();
+  
+
 function formatDate(dateString) {
   let date = new Date(dateString);
+
+  let locale = i18n.language || "en-US";
+  
+  switch(locale){
+    case "sr":
+      locale = "sr-Latn";
+      break;
+      
+  }
+
+
   let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
+  return date.toLocaleDateString(locale, options);
 }
 
-const DetailsNewsBlock = () => {
+
+
+
   const { postId } = useParams();
   const navigate = useNavigate();
 
@@ -73,6 +93,8 @@ const DetailsNewsBlock = () => {
       console.error(error);
     }
   };
+
+
 
   return (
     <>
@@ -148,7 +170,7 @@ const DetailsNewsBlock = () => {
                         {formatDate(post.createdAt)}
                       </p>
                       <p className="text-text_news text-sm">
-                        {readingTime(post.content)} min read
+                       {readingTime(post.content)}  {t("home.news.content3")}
                       </p>
                     </div>
 

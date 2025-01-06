@@ -383,6 +383,16 @@
       "sport30": "🏐 Volleyball 🌊",
       "sport31": "🏋️‍♂️ Weightlifting 🏋️‍♀️",
       "sport33": "🤼‍♂️ Wrestling 🤼‍♀️"
+    },
+    "news": {
+      "title1": "News",
+      "title2": "Top stories",
+      "featured": "Featured story",
+      "content1": "See all",
+      "content2": "Read more",
+      "content3": "min read",
+      "content4": "min read"
+      
     }
   },
   "footer": {

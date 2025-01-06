@@ -21,16 +21,30 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
 
-function formatDate(dateString) {
-  let date = new Date(dateString);
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
-}
-
 const UserProfilePublicView = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+
+  
+
+function formatDate(dateString) {
+  let date = new Date(dateString);
+  let locale = i18n.language || "en-US";
+  
+  switch(locale){
+    case "sr":
+      locale = "sr-Latn";
+      break;
+      
+  }
+
+  let options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(locale, options);
+}
+
+
   const { userId } = useParams();
 
   const [userData, setUserData] = useState();

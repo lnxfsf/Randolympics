@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -15,11 +18,7 @@ let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-function formatDate(dateString) {
-  let date = new Date(dateString);
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString("en-US", options);
-}
+
 
 function getImageUrl(coverImage) {
   return coverImage
@@ -28,6 +27,28 @@ function getImageUrl(coverImage) {
 }
 
 const NewsNewsBlock = () => {
+
+  const { t, i18n } = useTranslation();
+
+
+  function formatDate(dateString) {
+    let date = new Date(dateString);
+
+    let locale = i18n.language || "en-US";
+  
+    switch(locale){
+      case "sr":
+        locale = "sr-Latn";
+        break;
+        
+    }
+
+
+    let options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(locale, options);
+  }
+
+
   const [gamesPosts, setGamesPosts] = useState();
   const [bgImage, setBgImage] = useState("/news/news1.png");
 
@@ -80,7 +101,7 @@ const NewsNewsBlock = () => {
         >
           <div className="grow">
             <div className="w-1/2 md:w-1/3 h-9 bg-red_second text-[#fff] flex justify-start items-start p-2 pl-5 md:pl-10 rounded-tl-lg">
-              <p className="text-sm">Featured story</p>
+              <p className="text-sm">{t("home.news.featured")}</p>
             </div>
           </div>
 
@@ -102,7 +123,7 @@ const NewsNewsBlock = () => {
       {/* top stories header and read more */}
       <div className="flex justify-between items-center w-[90%] md:w-[70%] mt-8">
         <p className="text-2xl md:text-3xl text-red_second font-semibold">
-          Top stories
+        {t("home.news.title2")}
         </p>
 
         <div
@@ -111,7 +132,7 @@ const NewsNewsBlock = () => {
             navigate("/news/news");
           }}
         >
-          <p className="md:text-lg text-red_second font-medium ">See all</p>
+          <p className="md:text-lg text-red_second font-medium ">{t("home.news.content1")}</p>
           <img className="w-5 " src="news/arrow_right.svg" />
         </div>
       </div>
