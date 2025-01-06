@@ -524,7 +524,7 @@ const SupporterSecondPart = ({
                     onChange={(e) => {
                       setFriendEmail(e.target.value);
                     }}
-                    placeholder="Email Address"
+                    placeholder={t("campaign.content130")}
                     id="friendEmail"
                     type="email"
                     inputProps={{

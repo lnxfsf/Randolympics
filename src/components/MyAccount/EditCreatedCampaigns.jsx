@@ -1097,7 +1097,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 id="middleName"
                 name="middleName"
                 type="text"
-                placeholder="Middle name"
+                placeholder={t("myprofile.myaccount.content3")}
                 sx={sxTextField}
               />
             </div>
@@ -1113,7 +1113,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 id="familyName"
                 name="familyName"
                 type="text"
-                placeholder="Family name"
+                placeholder={t("myprofile.myaccount.content4")}
                 sx={sxTextField}
               />
             </div>
@@ -1129,7 +1129,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 id="lastName"
                 name="lastName"
                 type="text"
-                placeholder="Last name"
+                placeholder={t("myprofile.myaccount.content5")}
                 sx={sxTextField}
               />
             </div>
