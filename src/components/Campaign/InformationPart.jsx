@@ -13,7 +13,7 @@ const InformationPart = ({ athlete, formatDate }) => {
 
         <p className="text-lg font-medium mt-2">{t("campaign.content28")}</p>
         <p className="text-lg font-medium text-[#616673]">
-          {athlete.gender === "M" ? "Male" : "Female"}
+          {athlete.gender === "M" ? t("campaign.content29") : t("campaign.content30")}
         </p>
 
         {(!athlete.isCelebrity && athlete.isVerified) ? (

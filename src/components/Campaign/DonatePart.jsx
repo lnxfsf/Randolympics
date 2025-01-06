@@ -208,7 +208,7 @@ const DonatePart = ({
             }}
           >
             <span className="lexend-font">
-              {wantToDonate ? "Cancel" : "Donate"}
+              {wantToDonate ?  t("campaign.content129") : t("campaign.content17")}
             </span>
           </Button>
         </div>
@@ -431,7 +431,7 @@ const DonatePart = ({
                   },
                 }}
               >
-                <span className="lexend-font">Donate</span>
+                <span className="lexend-font">{t("campaign.content17")}</span>
               </Button>
 
               <div className="m-4  flex justify-center  items-center flex-col">

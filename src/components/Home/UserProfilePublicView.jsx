@@ -116,7 +116,7 @@ function formatDate(dateString) {
 
               <p className="text-lg font-medium mt-2">{t("userprofile.content3")}</p>
               <p className="text-lg font-medium text-[#616673]">
-                {userData.gender === "M" ? "Male" : "Female"}
+                {userData.gender === "M" ? t("campaign.content29") : t("campaign.content30")}
               </p>
 
               {!userData.isCelebrity && !userData.isVerified && (

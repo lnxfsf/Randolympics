@@ -1,13 +1,17 @@
 import { CardContent, Grid, Typography, OutlinedInput, InputAdornment, Button, CircularProgress } from "@mui/material";
 
+import { useTranslation } from "react-i18next";
 
-const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error }) => (
+const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error }) => {
+    
+    const { t } = useTranslation(); 
 
+   return (
     <CardContent>
         <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={12} style={{ textAlign: "center" }}>
                 {/* <Typography>Donate</Typography> */}
-                <p className="text-xl lexend-font text-black_second ">Donate</p>
+                <p className="text-xl lexend-font text-black_second ">{t("campaign.content17")}</p>
             </Grid>
 
 
@@ -65,13 +69,15 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                         
                         >
 
-                            <span className="lexend-font ">{isLoading ? <CircularProgress size="1.5rem"/> : 'Donate'}</span>
+                            <span className="lexend-font ">{isLoading ? <CircularProgress size="1.5rem"/> : t("campaign.content18")}</span>
 
                         </Button>
-                        {error && <Typography variant="alert">Something went wrong</Typography>}
+                        {error && <Typography variant="alert">{t("campaign.content128")}</Typography>}
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-    </CardContent>);
+    </CardContent>)
+    
+                    };
 export default DonationInput;

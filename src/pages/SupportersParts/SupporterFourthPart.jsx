@@ -687,7 +687,7 @@ const SupporterFourthPart = ({
                     },
                   }}
                 >
-                  <span className="lexend-font">Donate</span>
+                  <span className="lexend-font">{t("campaign.content17")}</span>
                 </Button>
 
                 <Button
