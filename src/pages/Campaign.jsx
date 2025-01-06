@@ -47,7 +47,7 @@ import Stack from "@mui/material/Stack";
 
 const Campaign = () => {
 
- 
+  const { t } = useTranslation();
 
   function formatNumber(value) {
     const number = Number(value);
@@ -79,7 +79,7 @@ const Campaign = () => {
 
   const [searchFirstNameText, setSearchFirstNameText] = useState(""); //search box
   const [searchPlaceholderFirstNameText, setSearchPlaceholderFirstNameText] =
-    useState("first name");
+    useState(t("campaign.content122"));
 
   // for celebrity
   const [searchfb_link, setSearchfb_link] = useState("");
@@ -94,7 +94,7 @@ const Campaign = () => {
 
   const [searchFamilyNameText, setSearchFamilyNameText] = useState(""); //search box
   const [searchPlaceholderFamilyNameText, setSearchPlaceholderFamilyNameText] =
-    useState("family name");
+    useState(t("campaign.content123"));
 
   const navigate = useNavigate();
 
@@ -126,7 +126,7 @@ const Campaign = () => {
     filterIsCelebrity,
   ]);
 
-  const { t } = useTranslation();
+
 
   const handlePaginationChange = (event, value) => {
     setCampaignsPage(value);
@@ -329,7 +329,7 @@ const Campaign = () => {
                   searchable={true}
                   id="nationality"
                   name="nationality"
-                  placeholder="Nationality"
+                  placeholder={t("campaign.content34")}
                 />
 
                 {/* this is for athlete NON celebrity */}
@@ -406,6 +406,7 @@ const Campaign = () => {
                         onChange={(newValue) => setSearchfb_link(newValue)}
                         onCancelResearch={(newValue) => setSearchfb_link("")}
                         /*  placeholder={""}  */
+                        placeholder={t("campaign.content99")}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -421,6 +422,7 @@ const Campaign = () => {
                         onChange={(newValue) => setSearchig_link(newValue)}
                         onCancelResearch={(newValue) => setSearchig_link("")}
                         /* placeholder={"Search " + searchPlaceholderFirstNameText} */
+                        placeholder={t("campaign.content99")}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -436,6 +438,7 @@ const Campaign = () => {
                         onChange={(newValue) => setSearchtw_link(newValue)}
                         onCancelResearch={(newValue) => setSearchtw_link("")}
                         /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        placeholder={t("campaign.content99")}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -453,6 +456,7 @@ const Campaign = () => {
                         onChange={(newValue) => setSearchtt_link(newValue)}
                         onCancelResearch={(newValue) => setSearchtt_link("")}
                         /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        placeholder={t("campaign.content99")}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
@@ -469,6 +473,7 @@ const Campaign = () => {
                         onChange={(newValue) => setSearchyt_link(newValue)}
                         onCancelResearch={(newValue) => setSearchyt_link("")}
                         /*  placeholder={"Search " + searchPlaceholderFamilyNameText} */
+                        placeholder={t("campaign.content99")}
                         onSearch={handleSearch}
                         style={{
                           border: "1px solid #C6C6C6", // Border color and thickness
