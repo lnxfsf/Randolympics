@@ -38,6 +38,17 @@
       },
       "ourCompetitions":{
          "title1":"Naši sportovi",
+
+         "title2": "Sportovi",
+"title3": "Objašnjeni",
+"title4": "Kliknite na bilo koji, da biste otvorili detalje o sportu",
+
+
+
+
+
+
+
          "sport1":"Streljaštvo",
          "sport2":"Atletika",
          "sport3":"Badminton",
@@ -513,9 +524,6 @@
       "content95":"Poznate ličnosti",
       "content96":"Dalje",
       "content97":"Ne",
-
-
-
       "content98": "Unesite ime",
       "content99": "Pretraži ",
       "content100": "Unesi ",
@@ -528,29 +536,28 @@
       "content107": " donatora",
       "content108": "Tiktok",
       "content109": "Youtube",
-  "content110": "Tiktok link",
+      "content110": "Tiktok link",
       "content111": "Youtube link",
-  
-
-      
-
-    "content112": "Verovatno Idem",
-    "content113": "Verovatno Idem",
-
-    "content114": "Definitivno Idem",
-    "content115": "Verovatno Idem",
-    "content116": "Možda Idem",
-    "content117": "Ne Idem",
-
-
-    "content118": "Poznata ličnost",
-    "content119": "Atleta",
-    "content120": "rezultata",
-    "content121": "Vidi Profil",
+      "content112": "Verovatno Idem",
+      "content113": "Verovatno Idem",
+      "content114": "Definitivno Idem",
+      "content115": "Verovatno Idem",
+      "content116": "Možda Idem",
+      "content117": "Ne Idem",
+      "content118": "Poznata ličnost",
+      "content119": "Atleta",
+      "content120": "rezultata",
+      "content121": "Vidi Profil",
+      "content122": "ime",
+      "content123": "porodično ime",
 
 
-"content122": "ime",
-"content123": "porodično ime",
+
+      "content124": "Informisanje",
+      "content125": "ljudi o ovoj kampanji da postanu donatori.",
+      "content126": "Srećno :)",
+      "content127": "Ipak nastavi",
+
 
       "warningPopupFriTitle1":"Pazi!",
       "warningPopupFriTitle2":"Budi oprezan!",
@@ -577,7 +584,20 @@
       "warningPopupCelebText7":"🎭 Osvojili su nagrade, ali da li su spremni da osvoje ovo? Vrijeme je da poznata ličnost s kojom si krenuo se takmiči sa svakodnevnim herojima na Randolimpijadi! 🏅",
       "warningPopupCelebText8":"🎯 Upravo si nominovao poznatu ličnost! Hajde da vidimo da li su njihove veštine više od selfija i emisija. Ovo će biti epski! 😜",
       "warningPopupCelebText9":"🔥 VIP alarm! Misliš da su spremni da zamene reflektore za znoj i iznenađujuće izazove? Uskoro ćemo saznati! 🏆",
-      "warningPopupCelebText10":"😅 Realnost! Slava nije uvek garancija za veštine... ali ovo će biti zabavno za gledati! Hvala što si ih prijavio!"
+      "warningPopupCelebText10":"😅 Realnost! Slava nije uvek garancija za veštine... ali ovo će biti zabavno za gledati! Hvala što si ih prijavio!",
+
+
+      "infoPopupDonating1": "Što više donirate, veće su šanse da vaša kampanja uspe.",
+      "infoPopupDonating2": "Kampanje sa 100 najviše rangiranih imaće priliku da učestvuju u događaju.",
+      "infoPopupDonating3": "Rangiranje se određuje množenjem:",
+       "infoPopupDonating4": "Broj donatora 👫",
+  "infoPopupDonating5": "Ukupno donacija 💰",
+  "infoPopupDonating6": "Slučajni srećan broj 🎲",
+
+  
+
+"infoPopupCouponText": "Ako imate kupon kod, možete donirati koristeći samo kupon kod, bez potrebe da plaćate pravim novcem (kreditna kartica, PayPal). <br /> <br /> Ako nemate kupon kod, možete nastaviti klikom na <i>Sledeće</i>, kako biste platili samo kreditnom karticom ili putem PayPala. <br /> <br /> Možete koristiti samo nacionalne kupon kodove za donacije koje se obavljaju isključivo putem kupona. Nacionalni kupon kodovi važe u zavisnosti od zemlje u kojoj se sportista kampanje nalazi. <br /> <br /> Dakle, za kampanju sportiste koji se nalazi u Švedskoj, možete koristiti samo nacionalne kupon kodove Švedske za donaciju kampanji isključivo putem kupona. <br /> <br /> Takođe, korišćenjem kupon koda, možete dodati vrednost uplate koju pravite. <br /> <br /> Tipovi kupon kodova: <b>Nacionalni</b> i <b>Globalni</b> <br /> Svi kupon kodovi imaju 6 karaktera (mogu biti bilo šta, što ne određuje njihovu vrednost), ali imaju tip koji određuje koliko dodatka će se primeniti na donaciju. <br /> <br /> <b>Nacionalni kupon kod</b> – kupon sa fiksnom cenom. Na primer, <code>SWED12</code> može biti naziv kupona (6 karaktera), koji će dodati <i>10$</i> na uplatu. Ako se donacija obavlja samo putem kupona, donacija se vrši samo unosom koda za donaciju, i to je donacija od <i>10$</i> za kampanju vašeg prijatelja. <br /> <br /> Ako, s druge strane, unesete ovaj kupon kod, kliknete <i>Sledeće</i>, i nastavite unosom iznosa za uplatu putem kreditne kartice ili PayPala, tada će vrednost kupona od 10$ biti dodata na uplatu koju napravite. Dakle, ako napravite uplatu donacije od 5$ putem kreditne kartice (ili PayPala), tada će zajedno sa nacionalnim kuponom vaša donacija biti obračunata kao <i>15$</i> <code>(10$ + 5$ = 15$)</code>. <br /> <br /> <b>Globalni kupon kod</b> – kupon sa procentualnom vrednošću, u zavisnosti od vaše uplate (kreditna kartica, PayPal). Na primer, u ovom slučaju kupon kod može biti <code>RAND18</code>, a njegova vrednost je <i>50%</i>. To znači da će <i>50%</i> biti dodato na uplatu koju napravite putem kreditne kartice (ili PayPala). Dakle, ako napravite uplatu donacije od <i>5$</i> putem kreditne kartice ili PayPala, tada će vaša stvarna donacija biti obračunata kao <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code> <code>(50% od 5$)</code>."
+
    },
    "mockupRandomizer":{
       "medals1":"jedna",

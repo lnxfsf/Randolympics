@@ -120,7 +120,7 @@ const WarningTextPopup = ({
             }}
             
           >
-            <span className="lexend-font">Proceed anyways</span>
+            <span className="lexend-font">{t("campaign.content127")}</span>
           </Button>
         </div>
       </div>

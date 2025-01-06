@@ -40,6 +40,10 @@
     },
     "ourCompetitions": {
       "title1": "Our Sports",
+"title2": "Sports",
+"title3": "Explained",
+"title4": "Click on any, to open details about sport",
+
       "sport1": "Archery",
       "sport2": "Athletics",
       "sport3": "Badminton",
@@ -70,6 +74,9 @@
       "sport30": "Basketball",
       "sport31": "Handball",
       "sport33": "Wrestling"
+
+
+      
     },
     "ourBeliefs": {
       "title1": "Our Beliefs",
@@ -517,47 +524,40 @@
     "content95": "Celebrity's",
     "content96": "Next",
     "content97": "No",
-
-
-
     "content98": "Enter first name",
     "content99": "Search ",
     "content100": "Enter ",
-
     "content101": "Has not logged in yet",
-
     "content102": "Logged in but no status",
     "content103": "I'm 99% taking the challenge and going",
     "content104": "Most likely going",
     "content105": "I'm maybe going",
     "content106": "I'm definitely not going",
-
     "content107": " supporters",
-
     "content108": "Tiktok",
     "content109": "Youtube",
-
     "content110": "Tiktok link",
     "content111": "Youtube link",
-
-
-
-
     "content112": "Most Likely Going",
     "content113": "Most Likely Going",
-
     "content114": "Definitely Going",
     "content115": "Most Likely Going",
     "content116": "Maybe Going",
     "content117": "Not Going",
-
     "content118": "Celebrity",
-"content119": "Athlete",
-"content120": "results",
-"content121": "See Profile",
+    "content119": "Athlete",
+    "content120": "results",
+    "content121": "See Profile",
+    "content122": "first name",
+    "content123": "family name",
 
-"content122": "first name",
-"content123": "family name",
+
+
+
+    "content124": "Informing",
+    "content125": "people about this campaign to become supporters.",
+    "content126": "Good luck :)",
+    "content127": "Proceed anyways",
 
 
     "warningPopupFriTitle1": "Watch out !",
@@ -588,7 +588,26 @@
     "warningPopupCelebText7": "🎭 They’ve won awards, but are they ready to win this? Time for your celebrity pick to face some everyday heroes in Randolympics! 🏅",
     "warningPopupCelebText8": "🎯 You just nominated a celebrity! Let’s see if their skills go beyond selfies and talk shows. This is gonna be epic! 😜",
     "warningPopupCelebText9": "🔥 VIP alert! Think they’re ready to swap the spotlight for sweat and surprise challenges? We’ll soon find out! 🏆",
-    "warningPopupCelebText10": "😅 Reality check! Fame doesn’t always equal skill… but this is going to be a fun one to watch! Thanks for signing them up!"
+    "warningPopupCelebText10": "😅 Reality check! Fame doesn’t always equal skill… but this is going to be a fun one to watch! Thanks for signing them up!",
+
+
+    "infoPopupDonating1": "The more you donate the higher the chances for your campaign to succeed.",
+    "infoPopupDonating2": "The campaigns with the one hundred highest rankings will have the chance to participate in the event.",
+    "infoPopupDonating3": "Rankings are determined by multiplying:",
+     "infoPopupDonating4": "Number of Supporters 👫",
+"infoPopupDonating5": "Total Donations 💰",
+"infoPopupDonating6": "A Random Lucky Number 🎲",
+
+
+
+
+"infoPopupCouponText": "If you have coupon code, you can make a donation using only coupon code, without needing to pay with real money (credit card, paypal). <br /> <br /> If you don't have coupon code, you can proceed <i>Next</i>, to pay with credit card (paypal) only. <br /> <br /> You can use only national coupon codes to make coupon-only donation to campaign. National coupon codes apply depending in what country athlete of campaign is located in. <br /> <br /> So, campaign for athlete who is located in Sweden, you can use only Sweden national coupon codes to make coupon-only donation to campaign. <br /> <br /> As well, using coupon code, you can have addition to payment you make. <br /> <br /> Types of coupon codes: <b>National</b> and <b>Global</b><br /> All coupon codes are 6 characters (which can be anything, doesn't determine it's value), but they have a type, which determines how much addition will be applied to donation. <br /> <br /> <b>National coupon code</b> - coupon of fixed price value. E.g. <code>SWED12</code> can be coupon name (6 chars), that will add <i>10$</i> to payment. If donation is done coupon-only then donation is done just by inserting donation code, and that's <i>10$</i> donation for that friend campaign. If on other hand, you insert this coupon code, and click <i>Next</i>, and proceed to insert credit card or Paypal amount you want to donate, then 10$ of coupon code value will be added to payment you make. So, if you make 5$ payment donation with credit card (or paypal), then together with national coupon, your donation will be calcualted as <i>15$</i> <code>(10$ + 5$ = 15$)</code> <br /> <br /> <b>Global coupon code</b> - coupon of percentage value, depending on your payment (credit card, paypal). E.g. In this case coupon code can be <code>RAND18</code>, and it's value is <i>50%</i>. So that means, <i>50%</i> is added onto payment you make via credit card (paypal). So, if you make <i>5$</i> payment donation via credit card or paypal, then your actual donation will be calculated as <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code><code>(50% of 5$ )</code>"
+
+
+
+
+
+
   },
   "mockupRandomizer": {
     "medals1": "one",

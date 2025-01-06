@@ -46,7 +46,7 @@ import { QueryProvider } from "../../QueryProvider";
 import DonationForm from "../../components/Payments/DonationForm";
 import DonationFormItemCampaign from "../../components/Payments/DonationFormItemCampaign";
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -235,8 +235,17 @@ const SupporterFourthPart = ({
                           maxHeight: "300px", // Set maximum height for the scrollable area
                           overflowY: "auto", // Enable vertical scrolling
                         }}
+                        dangerouslySetInnerHTML={{__html: t("campaign.infoPopupCouponText")}}
                       >
-                        If you have coupon code, you can make a donation using
+                        
+
+
+                        
+
+
+
+
+                      {/*   If you have coupon code, you can make a donation using
                         only coupon code, without needing to pay with real money
                         (credit card, paypal).
                         <br />
@@ -286,6 +295,9 @@ const SupporterFourthPart = ({
                         card or paypal, then your actual donation will be
                         calculated as <i>7.5$</i> <code>(5$ + 50% = 7.5$)</code>{" "}
                         <code>(50% of 5$ )</code>
+ */}
+                      
+
                       </div>
                     </Popup>
                   </div>
@@ -398,21 +410,20 @@ const SupporterFourthPart = ({
                         }}
                       >
                         <p className="font-bold">
-                          💡 The more you donate the higher the chances for your
-                          campaign to succeed.
+                          💡 {t("campaign.infoPopupDonating1")}
                         </p>
                         <p>
-                          The campaigns with the one hundred highest rankings
-                          will have the chance to participate in the event.
+                          {t("campaign.infoPopupDonating2")}
+                          
                         </p>
 
                         <br />
 
-                        <p>Rankings are determined by multiplying:</p>
+                        <p>{t("campaign.infoPopupDonating3")}</p>
                         <ul className="ml-4 donationInfo1">
-                          <li>Number of Supporters 👫</li>
-                          <li>Total Donations 💰</li>
-                          <li>A Random Lucky Number 🎲</li>
+                          <li>{t("campaign.infoPopupDonating4")}</li>
+                          <li>{t("campaign.infoPopupDonating5")}</li>
+                          <li>{t("campaign.infoPopupDonating6")}</li>
                         </ul>
                       </div>
                     </Popup>

@@ -281,7 +281,7 @@ const SupporterThirdPart = ({
                 onChange={(e) => {
                   setSupporterComment(e.target.value);
                 }}
-                placeholder="Good luck :)"
+                placeholder={t("campaign.content126")}
                 id="supporterComment"
                 name="name"
                 type="text"
@@ -300,7 +300,7 @@ const SupporterThirdPart = ({
                 additionalSupportersFormData.length > 0 && (
                   <>
                     <p className="lexend-font text-sm mb-6">
-                      Informing{" "}
+                      {t("campaign.content124")}{" "}
                       {/*   {additionalSupportersFormData.some(
                         (supporter) => supporter.name?.trim() === ""
                       ) === ""
@@ -320,7 +320,7 @@ const SupporterThirdPart = ({
                           return "0";
                         }
                       })()}{" "}
-                      people about this campaign to become supporters.{" "}
+                      {t("campaign.content125")}{" "}
                     </p>
                   </>
                 )}
