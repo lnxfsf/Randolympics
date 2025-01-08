@@ -42,6 +42,12 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
+
+
+let S3_BUCKET_CDN_BASE_URL =
+  import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
+  process.env.VITE_S3_BUCKET_CDN_BASE_URL;
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -606,7 +612,19 @@ const Campaign = () => {
                   */}
 
                     <div className="flex gap-4 items-center ">
-                      <Avatar sx={{ width: 55, height: 55 }}>
+
+
+
+                      <Avatar sx={{ width: 55, height: 55 }}
+                      
+                      src={
+                        S3_BUCKET_CDN_BASE_URL +
+                        "/profile_pictures/" +
+                        item.picture
+                      }
+                      
+
+                      >
                         {item.friendName.charAt(0).toUpperCase()}
                       </Avatar>
                       <div className="lexend-font text-black_second">
