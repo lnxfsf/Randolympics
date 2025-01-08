@@ -12,12 +12,12 @@ const HomeLuckyNumber = () => {
 
   
 
-  const finalResult = () => {
+  const finalResult = (luckyNum) => {
 
     const amount = 100;
     const supporters = 10;
 
-    setScore((amount*supporters*luckyNumber).toFixed(2)); 
+    setScore((amount*supporters*luckyNum).toFixed(2)); 
 
   }
 
@@ -28,7 +28,7 @@ const HomeLuckyNumber = () => {
 
     setLuckyNumber(newRandomNumber.toFixed(8));
 
-    finalResult();
+    finalResult(newRandomNumber);
   }
 
 
