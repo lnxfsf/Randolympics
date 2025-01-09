@@ -1,0 +1,33 @@
+
+
+.sponsorsHeroSection {
+
+    background-image: url("/sponsors/hero_image.png");
+
+    background-size: cover;
+    background-position: center;
+
+
+
+    height: 52.5vh;
+
+ 
+    @media screen and (min-width: 1024px) {
+      height: 55vh;
+    }
+
+
+
+
+   
+/* 
+
+ height: 105vh;
+
+
+  @media screen and (min-width: 1024px) {
+    height: 110vh;
+  } */
+
+
+}

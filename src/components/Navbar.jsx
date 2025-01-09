@@ -178,6 +178,11 @@ const Navbar = () => {
                 {t("navbar.btn3")}
               </Link>
 
+            <Link to="/sponsors" href="/sponsors" className="nav_btns">
+              {t("navbar.btn7")}            
+            </Link>
+
+
               <Link to="/faq" href="/faq"  className="nav_btns">
                 {t("navbar.btn4")}
               </Link>

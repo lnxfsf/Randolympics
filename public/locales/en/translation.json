@@ -415,6 +415,7 @@
     "btn4": "FAQ",
     "btn5": "Contact",
     "btn6": "Sports",
+    "btn7": "Sponsors",
     "profile1": "Settings",
     "profile2": "Team",
     "profile3": "Elections",
@@ -1933,5 +1934,14 @@
 
 
   
+  },
+
+  "sponsors": {
+    "hero1": "Friends & Partners of",
+    "hero2": "Randolympics",
+    "hero3": "Together, we’re building the future of global sports.",
+    "hero4": "Learn more"
+
+
   }
 }

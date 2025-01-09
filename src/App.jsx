@@ -43,6 +43,7 @@ import { CookieMain } from "./components/cookies/CookieMain";
 
 import { useCookies } from "react-cookie";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { Sponsors } from "./pages/Sponsors";
 
 const App = () => {
   const [cookies, setCookie] = useCookies(["cookieNeccessary", "cookieConsentOpen"]);
@@ -84,6 +85,7 @@ const App = () => {
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/sponsors" element={<Sponsors />} />
 
         <Route path="/competitions" element={<Competitions />} />
 
