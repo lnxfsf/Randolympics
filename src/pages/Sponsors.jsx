@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
 
 import { useRef } from "react";
+import { ContactUsForm } from "./Contact/ContactUsForm";
 
 const Sponsors = () => {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ const Sponsors = () => {
       <Navbar />
 
       <div
-        className="sponsorsHeroSection flex justify-start md:justify-center items-center flex-col lexend-font"
+        className="sponsorsHeroSection flex justify-start text-black_second md:justify-center items-center flex-col lexend-font"
         style={{ color: "white" }}
       >
         <p
@@ -62,7 +63,115 @@ const Sponsors = () => {
         </Button>
       </div>
 
-      <div ref={sponsorsRef}>ddddd ddddd</div>
+      <div ref={sponsorsRef} className="m-8">
+        <p className="text-2xl md:text-3xl font-semibold text-black_second">
+          {t("sponsors.content1")}
+          <br />
+          {t("sponsors.content2")}
+        </p>
+
+        <p className="text-red_second font-semibold mt-2">
+          {t("sponsors.content3")}
+        </p>
+
+        <p className=" font-semibold mt-2 text-black_second">{t("sponsors.content4")}</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 mt-8 text-black_second">
+          <div>
+            <div className="flex flex-col ">
+            
+            <div className="flex justify-start items-center">
+              <img src="/sponsors/acaimania.png" className="w-32" />
+
+              <div className="flex flex-col ml-4">
+                <p className=" font-semibold mt-2">
+                  {t("sponsors.firstBussiness1")}
+                </p>
+
+                <p className=" font-semibold mt-2">
+                  {t("sponsors.firstBussiness2")}
+                </p>
+
+                <p className=" font-semibold mt-2">
+                  {" "}
+                  Instagram:{" "}
+                  <a
+                    href="https://instagram.com/acaimaniashop"
+                    className="underline text-blue_first"
+                    target="_blank"
+                  >
+                    {t("sponsors.firstBussiness3")}
+                  </a>
+                </p>
+
+
+                
+              </div>
+
+              </div>
+
+
+              <p className=" font-semibold mt-2">
+                {t("sponsors.firstBussiness4")}
+              </p>
+            </div>
+          </div>
+
+
+
+          <div>
+            <div className="flex flex-col ">
+            
+            <div className="flex justify-start items-center">
+              <img src="/sponsors/izinga.png" className="w-32" />
+
+              <div className="flex flex-col ml-4">
+                <p className=" font-semibold mt-2">
+                  {t("sponsors.secondBussiness1")}
+                </p>
+
+                <p className=" font-semibold mt-2">
+                  {t("sponsors.secondBussiness2")}
+                </p>
+
+                <p className=" font-semibold mt-2">
+                  <a
+                    href="https://izinga.co"
+                    className="underline text-blue_first"
+
+                    target="_blank"
+                  >
+                    {t("sponsors.secondBussiness3")}
+                  </a>
+                </p>
+
+
+                
+              </div>
+
+              </div>
+
+
+              <p className=" font-semibold m-2">
+                {t("sponsors.secondBussiness4")}
+              </p>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+      </div>
+
+      <ContactUsForm />
 
       <FooterClean />
     </>
