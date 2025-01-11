@@ -7,6 +7,13 @@ import { Button } from "@mui/material";
 import { useRef } from "react";
 import { ContactUsForm } from "./Contact/ContactUsForm";
 
+
+let FRONTEND_SERVER_BASE_URL =
+  import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
+  process.env.VITE_FRONTEND_SERVER_BASE_URL;
+
+
+
 const Sponsors = () => {
   const { t } = useTranslation();
 
@@ -81,7 +88,7 @@ const Sponsors = () => {
             <div className="flex flex-col ">
             
             <div className="flex justify-start items-center">
-              <img src="/sponsors/acaimania.png" className="w-32" />
+              <img src="/sponsors/acaimania.png" className="w-20 md:w-32" />
 
               <div className="flex flex-col ml-4">
                 <p className=" font-semibold mt-2">
@@ -111,7 +118,7 @@ const Sponsors = () => {
               </div>
 
 
-              <p className=" font-semibold mt-2">
+              <p className=" font-semibold mt-2 mb-6">
                 {t("sponsors.firstBussiness4")}
               </p>
             </div>
@@ -123,7 +130,7 @@ const Sponsors = () => {
             <div className="flex flex-col ">
             
             <div className="flex justify-start items-center">
-              <img src="/sponsors/izinga.png" className="w-32" />
+              <img src="/sponsors/izinga.png" className="w-20 md:w-32" />
 
               <div className="flex flex-col ml-4">
                 <p className=" font-semibold mt-2">
@@ -152,7 +159,7 @@ const Sponsors = () => {
               </div>
 
 
-              <p className=" font-semibold m-2">
+              <p className="mb-6 font-semibold m-2">
                 {t("sponsors.secondBussiness4")}
               </p>
             </div>
@@ -164,12 +171,34 @@ const Sponsors = () => {
         </div>
 
 
+<div className="w-full flex justify-center flex-col items-center">
+<img src="/sponsors/FeatureYourBusiness.png" className="lg:w-[70%] 2xl:w-[50%]" />
 
 
+
+<p className="text-center font-semibold text-black_second">{t("sponsors.contact1")}<br/><a href={`${FRONTEND_SERVER_BASE_URL}/contact`}>{t("sponsors.contact2")}</a>{t("sponsors.contact3")}</p>
+
+</div>
 
 
 
       </div>
+
+
+          <div className="m-8 mt-16">
+          <p className="text-2xl md:text-3xl font-semibold text-black_second">
+          {t("sponsors.content6")}
+          
+        </p>
+
+        <p className="text-red_second font-semibold mt-2">
+          {t("sponsors.content7")}
+        </p>
+
+        <p className=" font-semibold mt-2 text-black_second">{t("sponsors.content8")}</p>
+
+          </div>
+
 
       <ContactUsForm />
 
