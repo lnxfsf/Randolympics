@@ -1245,11 +1245,15 @@ const EditProfile = () => {
                     ref={popupPassportRef}
                     trigger={
                       <img
-                        src={
+
+
+                        src={ passportImage ?
                           S3_BUCKET_CDN_BASE_URL +
                           "/passport_pictures/" +
-                          passportImage
+                          passportImage : ""
                         }
+
+                        
                         alt="Profile"
                         className="w-[120px] h-[90px] object-fit  passport-photo cursor-pointer"
                       />
@@ -1262,10 +1266,10 @@ const EditProfile = () => {
                     <TransformWrapper>
                       <TransformComponent>
                         <img
-                          src={
+                          src={passportImage ?
                             S3_BUCKET_CDN_BASE_URL +
                             "/passport_pictures/" +
-                            passportImage
+                            passportImage : ""
                           }
                           alt="Profile"
                           className="w-[500px] h-96 object-fit "
@@ -1480,7 +1484,7 @@ const EditProfile = () => {
               {userData && (
                 <>
                   <p className="text-xs mt-1 text-gray-600">
-                    {`${250 - userData.data.bio.length} ${t(
+                    {`${250 - userData.data.bio?.length} ${t(
                       "myprofile.myaccount.content34"
                     )} `}
                   </p>

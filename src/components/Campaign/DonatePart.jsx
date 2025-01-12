@@ -92,7 +92,7 @@ const DonatePart = ({
       );
 
       if (response.status === 200) {
-        setSnackbarMessage("Donation succeeded");
+        setSnackbarMessage(t("popupMessages.text1"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
