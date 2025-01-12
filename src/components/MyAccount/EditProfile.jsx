@@ -1250,7 +1250,7 @@ const EditProfile = () => {
                         src={ passportImage ?
                           S3_BUCKET_CDN_BASE_URL +
                           "/passport_pictures/" +
-                          passportImage : ""
+                          passportImage : "/myaccount/passport_placeholder.svg"
                         }
 
                         
@@ -1269,7 +1269,7 @@ const EditProfile = () => {
                           src={passportImage ?
                             S3_BUCKET_CDN_BASE_URL +
                             "/passport_pictures/" +
-                            passportImage : ""
+                            passportImage : "/myaccount/passport_placeholder.svg"
                           }
                           alt="Profile"
                           className="w-[500px] h-96 object-fit "

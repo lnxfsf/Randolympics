@@ -244,7 +244,7 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                       src={profileImage ?
                         S3_BUCKET_CDN_BASE_URL +
                         "/profile_pictures/" +
-                        profileImage : ""
+                        profileImage : "/myaccount/profile_placeholder.png"
                       }
                       className="image_editProfile"
                       style={{ position: "relative", zIndex: "-1" }}
