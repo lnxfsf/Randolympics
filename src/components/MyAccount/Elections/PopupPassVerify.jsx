@@ -212,8 +212,9 @@ const PopupPassVerify = ({
 
   return (
     <>
-      <div className="m-4 lexend-font text-black_second">
-        <div className="flex justify-between items-center gap-16 mt-2">
+      <div className=" md:m-4 lexend-font text-black_second">
+     
+        <div className="flex justify-between items-center gap-4 md:gap-16 mt-2">
           <Avatar
             sx={{ width: 97, height: 97 }}
             src={S3_BUCKET_CDN_BASE_URL + "/profile_pictures/" + user.picture}
@@ -270,7 +271,7 @@ const PopupPassVerify = ({
           </Dialog>
         </div>
 
-        <div className="flex justify-between items-center gap-16 mt-2">
+        <div className="flex justify-between md:items-center flex-col md:flex-row md:gap-16 mt-2 ">
           <p>
             <span className="font-semibold">
               {t("myprofile.validationManager.content5")}
@@ -315,7 +316,7 @@ const PopupPassVerify = ({
           </p>
         </div>
 
-        <div className="mt-2 mb-2">
+        <div className="mt-2 mb-2 items-center">
           <p>
             <span className="font-semibold">
               {t("myprofile.validationManager.content9")}
@@ -324,9 +325,9 @@ const PopupPassVerify = ({
           </p>
         </div>
 
-        <div className="flex justify-between items-center gap-16">
+        <div className="flex justify-between md:items-center flex-col md:flex-row md:gap-16">
           <p>
-            <span className="font-semibold">
+            <span className="font-semibold justify-self-end">
               {t("myprofile.validationManager.content10")}
             </span>{" "}
             {countryList().getLabel(user.nationality)}{" "}
@@ -353,9 +354,9 @@ const PopupPassVerify = ({
           />
         </div>
 
-        <div className="flex justify-between items-center gap-16">
+        <div className="flex justify-between md:items-center flex-col md:flex-row md:gap-16">
           <p>
-            <span className="font-semibold">
+            <span className="font-semibold ">
               {t("myprofile.validationManager.content12")}
             </span>{" "}
             {birhdateDate}
@@ -415,12 +416,12 @@ const PopupPassVerify = ({
           </>
         )}
 
-        <div className="flex justify-between items-center md:gap-16">
+        <div className="flex flex-col md:flex-row justify-between md:items-center md:gap-16">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["DatePicker"]}>
               <DatePicker
                 disabled={currentUserTypeLoggedIn === "GP"}
-                className="w-full md:w-32"
+                className="w-full"
                 label={t("myprofile.validationManager.content22")}
                 minDate={dayjs()}
                 value={passportExpiryDate}
@@ -455,75 +456,74 @@ const PopupPassVerify = ({
 
         {currentUserTypeLoggedIn !== "GP" && (
           <>
-            <div className="flex justify-around items-center gap-2 m-4">
-              <div>
+            <div className="flex flex-col md:flex-row justify-around items-center gap-2 mt-8 md:m-4">
+              <div className="max-md:w-full">
                 <Button
                   onClick={reject}
-                  className="w-[85px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
+                  className="w-full md:w-[85px]"
+                  style={{ marginTop: "0px", padding: "0px", textTransform: "none"  }}
                   sx={{
-                    fontSize: "8pt",
-                    height: "30px",
-                    bgcolor: "#fff",
-                    color: "#232323",
-                    borderRadius: 15,
-                    border: `1px solid #fff`,
+                    height: "45px",
+                      bgcolor: "#fff",
+                      color: "#444444",
+                      borderRadius: 3,
+                      border: `1px solid #D24949`,
+                   
                     "&:hover": {
-                      background: "rgb(196, 43, 43)",
+                      background: "rgba(210, 73, 73, 1)",
                       color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
+                      border: `1px solid rgba(210, 73, 73, 1)`,
                     },
                   }}
                 >
-                  <span className="popins-font">
+                  <span className="lexend-font text-xs">
                     {t("myprofile.validationManager.content20")}
                   </span>
                 </Button>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 max-md:w-full">
                 <Button
                   onClick={cancel}
-                  className="w-[85px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
+                  className="w-full md:w-[85px]"
+                  style={{ marginTop: "0px", padding: "0px", textTransform: "none"  }}
                   sx={{
-                    fontSize: "8pt",
-                    height: "30px",
+                    height: "45px",
                     bgcolor: "#fff",
-                    color: "#232323",
-                    borderRadius: 15,
-                    border: `1px solid #fff`,
+                    color: "#444444",
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
                     "&:hover": {
-                      background: "rgb(196, 43, 43)",
+                      background: "rgb(210, 73, 73)",
                       color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
+                      border: `1px solid rgb(210, 73, 73)`,
                     },
                   }}
                 >
-                  <span className="popins-font">
+                  <span className="lexend-font text-xs">
                     {t("myprofile.validationManager.content3")}
                   </span>
                 </Button>
 
                 <Button
                   onClick={saveChanges}
-                  className="w-[120px]"
-                  style={{ marginTop: "0px", padding: "0px" }}
+                  className=" w-full md:w-[120px]"
+                  style={{ marginTop: "0px", padding: "0px", textTransform: "none" }}
                   sx={{
-                    fontSize: "8pt",
-                    height: "30px",
-                    bgcolor: "#AF2626",
+                    
+                    height: "45px",
+                    bgcolor: "#D24949",
                     color: "#fff",
-                    borderRadius: 15,
-                    border: `1px solid #AF2626`,
+                    borderRadius: 3,
+                    border: `1px solid #D24949`,
                     "&:hover": {
-                      background: "rgb(196, 43, 43)",
+                      background: "rgb(210, 73, 73,)",
                       color: "white",
-                      border: `1px solid rgb(196, 43, 43)`,
+                      border: `1px solid rgb(210, 73, 73,)`,
                     },
                   }}
                 >
-                  <span className="popins-font">
+                  <span className="lexend-font text-xs">
                     {t("myprofile.validationManager.content4")}
                   </span>
                 </Button>

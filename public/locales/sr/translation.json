@@ -838,6 +838,28 @@
       "content3": "Otkaži",
       "content4": "Sačuvaj promene",
 
+
+      "content5": "Ime: ",
+      "content6": "Verifikuj ime",
+      "content7": "Email:",
+      "content8": "Telefon:",
+      "content9": "Kriptoadresa:",
+      "content10": "Država:",
+      "content11": "Verifikuj nacionalnost",
+      "content12": "Datum rođenja",
+      "content13": "Verifikuj datum rođenja",
+      "content14": "Status naloga",
+      "content15": "Poslednji put izmenjen profil",
+      "content16": "Pasoš je postavljen:",
+      "content17": "Poslednji potvrđen/odbijen datum:",
+      "content18": "Težina:",
+      "content19": "Verifikuj datum isteka pasoša",
+      "content20": "Odbij",
+      "content21": "Nije unešeno",
+      "content22": "Datum isteka pasoša",
+
+
+
       "userValidated": "Validan",
       "userUnvalidated": "Nevalidan",
       "userRejected": "Odbijen"

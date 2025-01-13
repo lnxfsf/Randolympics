@@ -856,8 +856,10 @@
       "content18": "Weight:",
       "content19": "Verify passport expiry date",
       "content20": "Reject",
-  "content21": "Not entered",
-"content22": "Passport Expiry Date",
+      "content21": "Not entered",
+      "content22": "Passport Expiry Date",
+
+      
 
       "userValidated": "Validated",
       "userUnvalidated": "Unvalidated",
