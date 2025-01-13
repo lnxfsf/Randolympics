@@ -12,7 +12,7 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 import countryList from "react-select-country-list";
-
+import { useTranslation } from "react-i18next";
 import React, { useState, useEffect, useRef } from "react";
 
 // for image zoom
@@ -30,22 +30,19 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-
-const PopupPassVerify = ({ user, setUpdatedPassportPopup, popupRef, setOpen }) => {
-
-
-
-const maxAllowedDate = dayjs().subtract(15, "year");
-
-
-
+const PopupPassVerify = ({
+  user,
+  setUpdatedPassportPopup,
+  popupRef,
+  setOpen,
+}) => {
+  const { t } = useTranslation();
 
   const [open1, setOpen1] = useState(false);
-
 
   const name = user.name;
   const nationality = user.nationality;
@@ -70,9 +67,8 @@ const maxAllowedDate = dayjs().subtract(15, "year");
       passportLastValidatedRejected,
       "YYYY/MM/DD  HH:mm"
     );
-    passportLastValidatedRejected = passportLastValidatedRejected.format(
-      "YYYY/MM/DD  HH:mm"
-    );
+    passportLastValidatedRejected =
+      passportLastValidatedRejected.format("YYYY/MM/DD  HH:mm");
   }
 
   const [birhdateDate, setBirhdateDate] = useState(() => {
@@ -80,7 +76,7 @@ const maxAllowedDate = dayjs().subtract(15, "year");
       let birthdate = moment(user.birthdate, "YYYY-MM-DD");
       return birthdate.format("YYYY-MM-DD");
     } else {
-      return "Not entered";
+      return t("myprofile.validationManager.content21");
     }
   });
 
@@ -154,7 +150,7 @@ const maxAllowedDate = dayjs().subtract(15, "year");
       if (response.status === 200) {
         setUpdatedPassportPopup((prev) => !prev);
 
-       // popupRef.current.close();
+        // popupRef.current.close();
         setOpen(false);
       }
     } catch (error) {
@@ -162,7 +158,7 @@ const maxAllowedDate = dayjs().subtract(15, "year");
       setOpen(false);
     }
 
-   // popupRef.current.close();
+    // popupRef.current.close();
     setOpen(false);
   };
 
@@ -176,7 +172,7 @@ const maxAllowedDate = dayjs().subtract(15, "year");
     setPassportExpiryDate(dayjs(user.passport_expiry));
 
     // and exit popup
-  //  popupRef.current.close();
+    //  popupRef.current.close();
     setOpen(false);
   };
 
@@ -203,8 +199,8 @@ const maxAllowedDate = dayjs().subtract(15, "year");
 
       if (response.status === 200) {
         setUpdatedPassportPopup((prev) => !prev);
-        
-       // popupRef.current.close();
+
+        // popupRef.current.close();
         setOpen(false);
       }
     } catch (error) {
@@ -217,84 +213,69 @@ const maxAllowedDate = dayjs().subtract(15, "year");
   return (
     <>
       <div className="m-4 lexend-font text-black_second">
-        
-        
         <div className="flex justify-between items-center gap-16 mt-2">
-          {/* <img
-            src={
-              BACKEND_SERVER_BASE_URL +
-              "/imageUpload/profile_pics/" +
-              user.picture
-            }
-            className="ProfileImagePassVerify"
-          /> */}
-
           <Avatar
             sx={{ width: 97, height: 97 }}
-            src={
-              S3_BUCKET_CDN_BASE_URL +
-              "/profile_pictures/" +
-              user.picture
-            }
-          />
-
-
-
+            src={S3_BUCKET_CDN_BASE_URL + "/profile_pictures/" + user.picture}
+          >
+            {user.name.charAt(0).toUpperCase()}
+          </Avatar>
 
           <img
-                src={
-                  S3_BUCKET_CDN_BASE_URL +
+            src={
+              user.passport_photo
+                ? S3_BUCKET_CDN_BASE_URL +
                   "/passport_pictures/" +
                   user.passport_photo
-                }
-                alt="Profile"
-                className="w-32 h-20 object-fit cursor-pointer"
-                onClick={() => {setOpen1(true);}}
-              />
-
-
+                : "/myaccount/passport_placeholder.svg"
+            }
+            alt="Profile"
+            className={`w-32 h-20 object-fit ${
+              user.passport_photo && "cursor-pointer"
+            } `}
+            onClick={() => {
+              if (user.passport_photo) {
+                setOpen1(true);
+              }
+            }}
+          />
 
           <Dialog
-          open={open1}
-          onClose={() => {
-            setOpen1(false);
-          }}
-          scroll="paper" // Or "body" for a different scrolling behavior
-          maxWidth="sm" // Adjust the width as needed
-          fullWidth
-        >
-          
-
-          <DialogContent
-            dividers={true}
-            style={{ maxHeight: "80vh", overflow: "auto" }}
+            open={open1}
+            onClose={() => {
+              setOpen1(false);
+            }}
+            scroll="paper" // Or "body" for a different scrolling behavior
+            maxWidth="sm" // Adjust the width as needed
+            fullWidth
           >
-           <TransformWrapper>
-              <TransformComponent>
-                <img
-                  src={
-                    S3_BUCKET_CDN_BASE_URL +
-                    "/passport_pictures/" +
-                    user.passport_photo
-                  }
-                  alt="Profile"
-                  className="w-[500px] h-96 object-fit "
-                />
-              </TransformComponent>
-            </TransformWrapper>
-
-          </DialogContent>
-        </Dialog>
-
-
+            <DialogContent
+              dividers={true}
+              style={{ maxHeight: "80vh", overflow: "auto" }}
+            >
+              <TransformWrapper>
+                <TransformComponent>
+                  <img
+                    src={
+                      S3_BUCKET_CDN_BASE_URL +
+                      "/passport_pictures/" +
+                      user.passport_photo
+                    }
+                    alt="Profile"
+                    className="w-[500px] h-96 object-fit "
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </DialogContent>
+          </Dialog>
         </div>
-
-
-
 
         <div className="flex justify-between items-center gap-16 mt-2">
           <p>
-            <span className="font-semibold">Name: </span> {user.name}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content5")}
+            </span>{" "}
+            {user.name}
           </p>
           <FormControlLabel
             control={
@@ -312,33 +293,42 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                 }}
               />
             }
-            label={<span>Verify name</span>}
+            label={<span>{t("myprofile.validationManager.content6")}</span>}
             labelPlacement="start"
           />
         </div>
-        {/* e, ovde pored njega samo check !  */}
-
         <div className="mt-2 mb-2">
           <p>
-            <span className="font-semibold">Email:</span> {user.email}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content7")}
+            </span>{" "}
+            {user.email}
           </p>
         </div>
 
         <div className="mt-2 mb-2">
           <p>
-            <span className="font-semibold">Phone:</span> {user.phone}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content8")}
+            </span>{" "}
+            {user.phone}
           </p>
         </div>
 
         <div className="mt-2 mb-2">
           <p>
-            <span className="font-semibold">Cryptoaddress:</span> {user.crypto}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content9")}
+            </span>{" "}
+            {user.crypto}
           </p>
         </div>
 
         <div className="flex justify-between items-center gap-16">
           <p>
-            <span className="font-semibold">Country:</span>{" "}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content10")}
+            </span>{" "}
             {countryList().getLabel(user.nationality)}{" "}
           </p>
           <FormControlLabel
@@ -357,14 +347,18 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                 }}
               />
             }
-            label={<span>Verify nationality</span>}
+            label={<span>{t("myprofile.validationManager.content11")}</span>}
             labelPlacement="start"
+            disabled={!user.passport_photo}
           />
         </div>
 
         <div className="flex justify-between items-center gap-16">
           <p>
-            <span className="font-semibold">Birthdate</span> {birhdateDate}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content12")}
+            </span>{" "}
+            {birhdateDate}
           </p>
           <FormControlLabel
             control={
@@ -376,29 +370,37 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                   },
                 }}
                 checked={birthdateVerify}
-                disabled={currentUserTypeLoggedIn === "GP"}
+                disabled={currentUserTypeLoggedIn === "GP" || !user.birthdate}
                 onChange={() => {
                   setBirthdateVerify(!birthdateVerify);
                 }}
               />
             }
-            label={<span>Verify birthdate</span>}
+            label={<span>{t("myprofile.validationManager.content13")}</span>}
             labelPlacement="start"
           />
         </div>
 
         <div className="mt-2 mb-2">
-          <p className="text-xl font-bold mb-2">Account status</p>
+          <p className="text-xl font-bold mb-2">
+            {t("myprofile.validationManager.content14")}
+          </p>
           <p>
-            <span className="font-semibold">Profile last edited:</span>{" "}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content15")}
+            </span>{" "}
             {profileLastUpdatedAt}
           </p>
           <p>
-            <span className="font-semibold">Passport Uploaded:</span>{" "}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content16")}
+            </span>{" "}
             {passportUploadedDate}
           </p>
           <p>
-            <span className="font-semibold">Last Validated/Rejected Date:</span>{" "}
+            <span className="font-semibold">
+              {t("myprofile.validationManager.content17")}
+            </span>{" "}
             {passportLastValidatedRejected}
           </p>
         </div>
@@ -406,7 +408,9 @@ const maxAllowedDate = dayjs().subtract(15, "year");
         {user_type === "AH" && (
           <>
             <div className="mt-2 mb-4">
-              <p>Weight: {user.weight}</p>
+              <p>
+                {t("myprofile.validationManager.content18")} {user.weight}
+              </p>
             </div>
           </>
         )}
@@ -417,8 +421,8 @@ const maxAllowedDate = dayjs().subtract(15, "year");
               <DatePicker
                 disabled={currentUserTypeLoggedIn === "GP"}
                 className="w-full md:w-32"
-                label="Passport Expiry Date"
-                maxDate={maxAllowedDate}
+                label={t("myprofile.validationManager.content22")}
+                minDate={dayjs()}
                 value={passportExpiryDate}
                 onChange={handlePassportExpiryDateChange}
                 format="MMMM DD, YYYY"
@@ -435,13 +439,16 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                   },
                 }}
                 checked={passportExpiryVerify}
-                disabled={currentUserTypeLoggedIn === "GP"}
+                disabled={
+                  currentUserTypeLoggedIn === "GP" ||
+                  !passportExpiryDate?.isValid()
+                }
                 onChange={() => {
                   setPassportExpiryVerify(!passportExpiryVerify);
                 }}
               />
             }
-            label={<span>Verify passport expiry date</span>}
+            label={<span>{t("myprofile.validationManager.content19")}</span>}
             labelPlacement="start"
           />
         </div>
@@ -468,7 +475,9 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                     },
                   }}
                 >
-                  <span className="popins-font">Reject</span>
+                  <span className="popins-font">
+                    {t("myprofile.validationManager.content20")}
+                  </span>
                 </Button>
               </div>
 
@@ -491,7 +500,9 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                     },
                   }}
                 >
-                  <span className="popins-font">Cancel</span>
+                  <span className="popins-font">
+                    {t("myprofile.validationManager.content3")}
+                  </span>
                 </Button>
 
                 <Button
@@ -512,7 +523,9 @@ const maxAllowedDate = dayjs().subtract(15, "year");
                     },
                   }}
                 >
-                  <span className="popins-font">Save changes</span>
+                  <span className="popins-font">
+                    {t("myprofile.validationManager.content4")}
+                  </span>
                 </Button>
               </div>
             </div>

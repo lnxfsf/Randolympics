@@ -140,7 +140,7 @@ function formatDate(dateString) {
       );
 
       if (response.status === 200) {
-        setSnackbarMessage("Donated");
+        setSnackbarMessage(t("popupMessages.text2"));
         setOpenSnackbar(true);
       } else {
         

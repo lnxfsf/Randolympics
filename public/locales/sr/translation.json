@@ -783,7 +783,9 @@
       "content33": "Sačuvaj sliku",
       "private": "Privatno",
       "public": "Javno",
-      "content34": " preostalih karaktera"
+      "content34": " preostalih karaktera",
+      "content35": "Lozinka je poslata na ",
+      "content36": "Nije navedena e-pošta"
     },
     "settings": {
       "content1": "Uspešno ste dali ostavku",
@@ -829,6 +831,18 @@
       "votegp1": "Izbori za Globalnog predsednika",
       "votedfor1": "Glasali ste za ",
       "votedfor2": "Svoj glas možete promeniti u bilo kojem trenutku ponavljanjem procesa."
+    },
+    "validationManager": {
+      "content1": "Trenutni rank",
+      "content2": "Ažuriraj rank",
+      "content3": "Otkaži",
+      "content4": "Sačuvaj promene",
+
+      "userValidated": "Validan",
+      "userUnvalidated": "Nevalidan",
+      "userRejected": "Odbijen"
+
+
     }
   },
   "userTypes": {
@@ -1930,7 +1944,8 @@
  
     },
   "popupMessages": {
-   "text1": "Donacija je uspela"
+   "text1": "Donacija je uspela",
+   "text2": "Donirano"
  }
 
 }

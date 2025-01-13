@@ -780,7 +780,10 @@
       "private": "Private",
       "public": "Public",
 
-      "content34": " characters remaining"
+      "content34": " characters remaining",
+
+      "content35": "A password had been sent to ",
+      "content36": "No email provided"
     },
     "settings": {
       "content1": "You resigned successfully",
@@ -829,6 +832,36 @@
     },
     "validationPassport": {
       "content1": "Search by name"
+    },
+    "validationManager": {
+      "content1": "Current rank",
+      "content2": "Update rank",
+      "content3": "Cancel",
+      "content4": "Save changes",
+      
+
+      "content5": "Name: ",
+      "content6": "Verify name",
+      "content7": "Email:",
+      "content8": "Phone:",
+      "content9": "Cryptoaddress:",
+      "content10": "Country:",
+      "content11": "Verify nationality",
+      "content12": "Birthdate",
+      "content13": "Verify birthdate",
+      "content14": "Account status",
+      "content15": "Profile last edited:",
+      "content16": "Passport Uploaded:",
+      "content17": "Last Validated/Rejected Date:",
+      "content18": "Weight:",
+      "content19": "Verify passport expiry date",
+      "content20": "Reject",
+  "content21": "Not entered",
+"content22": "Passport Expiry Date",
+
+      "userValidated": "Validated",
+      "userUnvalidated": "Unvalidated",
+      "userRejected": "Rejected"
     }
   },
   "userTypes": {
@@ -1929,6 +1962,7 @@
   },
 
   "popupMessages": {
-    "text1": "Donation succeeded"
+    "text1": "Donation succeeded",
+    "text2": "Donated"
   }
 }

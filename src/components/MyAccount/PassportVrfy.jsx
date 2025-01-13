@@ -300,7 +300,7 @@ const PassportVrfy = () => {
       <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
           <table className="w-full">
             <thead>
-              <tr >
+              <tr>
                 <th className="w-[20%]">Name</th>
                 <th className="w-[7%]">Country</th>{" "}
                 {/* ovo napravi kao flag !! lakse je !  (ionako moraš, da dodjes do toga, i dadneš mu  country_code, i prikazuje sa imenom, al sa slikom je bolje ionako...) */}

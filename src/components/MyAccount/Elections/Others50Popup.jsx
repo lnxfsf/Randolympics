@@ -3,13 +3,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 
-
+import { useTranslation } from "react-i18next";
 
 const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveChanges }) => {
 
 
 
-
+  const { t } = useTranslation();
 
 
 
@@ -19,14 +19,14 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
     <>
       <div className="m-4">
         <div className="flex gap-2 mb-2">
-          <p>Current rank</p>
+          <p>{t("myprofile.validationManager.content1")}</p>
           <p>
             <b>{currentRank}</b>
           </p>
         </div>
 
         <div className="flex gap-2">
-          <p>Update rank</p>
+          <p>{t("myprofile.validationManager.content2")}</p>
 
           <div className="flex justify-center items-center gap-2">
             <Button
@@ -89,7 +89,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
               },
             }}
           >
-            <span className="popins-font">Cancel</span>
+            <span className="popins-font">{t("myprofile.validationManager.content3")}</span>
           </Button>
 
           <Button
@@ -110,7 +110,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
               },
             }}
           >
-            <span className="popins-font">Save changes</span>
+            <span className="popins-font">{t("myprofile.validationManager.content4")}</span>
           </Button>
         </div>
       </div>
