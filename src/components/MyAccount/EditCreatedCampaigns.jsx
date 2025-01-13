@@ -469,6 +469,20 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     }));
   };
 
+  
+  const handleWeightPrivacyChange = (event) => {
+    setWeight_private(event.target.value);
+
+    // and also update the object..
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      data: {
+        ...prevUserData.data,
+        weight_private: event.target.value,
+      },
+    }));
+  };
+
   const handleBirthdatePrivacyChange = (event) => {
     setBirthdate_private(event.target.value);
 
@@ -595,7 +609,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       }
 
       setSnackbarStatus("success");
-      setSnackbarMessage("Profile details saved successfully !");
+      setSnackbarMessage(t("campaign.content132"));
       setOpenSnackbar(true);
     } catch (error) {
       console.log(error);
@@ -695,7 +709,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
      // if all fields are empty
      if (fb_link === "" && ig_link === "" && tw_link === "" && tt_link === "" && yt_link === "" && isCelebrity ) {
-      setSnackbarMessage("Provide at least one social media profile");
+      setSnackbarMessage(t("campaign.content133"));
       setOpenSnackbar(true);
       return;
     }
@@ -707,7 +721,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
       /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
 
     if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
-      setSnackbarMessage("Facebook link has an incorrect format.");
+      setSnackbarMessage(t("campaign.content134"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
       
@@ -715,28 +729,28 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     }
 
     if (isCelebrity && ig_link !== "" && !socialMediaRegex.test(ig_link)) {
-      setSnackbarMessage("Instagram link has an incorrect format.");
+      setSnackbarMessage(t("campaign.content135"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
       return;
     }
 
     if (isCelebrity && tw_link !== "" && !socialMediaRegex.test(tw_link)) {
-      setSnackbarMessage("X (Twitter) link has an incorrect format.");
+      setSnackbarMessage(t("campaign.content136") );
       setSnackbarStatus("error");
       setOpenSnackbar(true);
       return;
     }
 
     if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
-      setSnackbarMessage("Tiktok link has an incorrect format.");
+      setSnackbarMessage(t("campaign.content137"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
       return;
     }
 
     if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
-      setSnackbarMessage("Youtube link has an incorrect format.");
+      setSnackbarMessage(t("campaign.content138"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
       return;
@@ -791,7 +805,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
       if (response.status === 200) {
         setSnackbarStatus("success");
-        setSnackbarMessage("Profile details saved successfully !");
+        setSnackbarMessage(t("campaign.content139"));
 
         setOpenSnackbar(true);
         getCampaignDetails();
@@ -799,7 +813,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
     } catch (error) {
       console.log(error);
 
-      setSnackbarMessage("There was some error !");
+      setSnackbarMessage(t("campaign.content140"));
       setSnackbarStatus("error");
 
       setOpenSnackbar(true);
@@ -821,8 +835,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
         }
       );
 
-      console.log("detalji o campaign ");
-      console.log(response.data);
+     
 
       if (response.data) {
         setUserData(response);
@@ -857,9 +870,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
         setAthleteStatement(response.data.athleteStatement);
 
-        console.log(
-          "athlete statement prima: " + response.data.athleteStatement
-        );
+      
         setBio(response.data.bio);
 
         if (!passportUpload) {
@@ -966,9 +977,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                           error.status === 500 ||
                           error.main === "File is too large"
                         ) {
-                          setSnackbarMessage(
-                            "File is too large! Maximum allowed size is 4MB."
-                          );
+                          setSnackbarMessage(t("campaign.content141"));
                           setSnackbarStatus("error");
                           setOpenSnackbar(true);
                           filePondRef1.current.removeFiles(); // Remove the invalid file

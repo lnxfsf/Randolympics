@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
-
+import { useTranslation } from "react-i18next";
 import Flag from "react-world-flags";
 
 import moment from "moment";
@@ -25,6 +25,10 @@ const Top50 = ({
   whichVotedFor, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user..
   lastRank,
 }) => {
+
+  const { t } = useTranslation();
+
+
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId; // userId, of user in question (you're changing.. about.. )
 
@@ -174,7 +178,7 @@ const Top50 = ({
                   src="/editprofile/private_lock.svg"
                 />
                 <p className="text-lg font-medium text-[#616673] break-all">
-                  Private
+                  {t("myprofile.elections.status1")}
                 </p>
               </div>
             </td>
@@ -197,7 +201,7 @@ const Top50 = ({
                   src="/editprofile/private_lock.svg"
                 />
                 <p className="text-lg font-medium text-[#616673] break-all">
-                  Private
+                  {t("myprofile.elections.status1")}
                 </p>
               </div>
             </td>

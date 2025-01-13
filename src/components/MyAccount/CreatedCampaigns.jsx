@@ -169,7 +169,7 @@ const CreatedCampaigns = () => {
                       {item.friendGender === "M" ? "Male" : "Female"}
                     </p> */}
                             <p className="text-red_second font-medium">
-                              See Profile
+                              {t("campaign.content131")}
                             </p>
                           </div>
                         </div>

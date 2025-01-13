@@ -548,6 +548,20 @@
     "content129": "Cancel",
     "content130": "Email Address",
 
+    "content131": "See Profile",
+    "content132": "Profile details saved successfully !",
+    "content133": "Provide at least one social media profile",
+
+    "content134": "Facebook link has an incorrect format.",
+    "content135": "Instagram link has an incorrect format.",
+    "content136": "X (Twitter) link has an incorrect format.",
+    "content137": "Tiktok link has an incorrect format.",
+    "content138": "Youtube link has an incorrect format.",
+
+    "content139": "Profile details saved successfully !",
+    "content140": "There was some error !",
+    "content141": "File is too large! Maximum allowed size is 4MB.",
+
     "warningPopupFriTitle1": "Watch out !",
     "warningPopupFriTitle2": "Be careful !",
     "warningPopupFriTitle3": "Take care !",
@@ -828,7 +842,13 @@
       "votenp1": "National President Elections",
       "votegp1": "Global President Elections",
       "votedfor1": "You voted for ",
-      "votedfor2": "You can update your vote anytime by repeating the process."
+      "votedfor2": "You can update your vote anytime by repeating the process.",
+
+      "status1": "Private",
+      "content1": "Current rank",
+      "content2": "Update rank",
+      "content3": "Cancel",
+      "content4": "Save changes"
     },
     "validationPassport": {
       "content1": "Search by name"
@@ -838,7 +858,6 @@
       "content2": "Update rank",
       "content3": "Cancel",
       "content4": "Save changes",
-      
 
       "content5": "Name: ",
       "content6": "Verify name",
@@ -858,8 +877,6 @@
       "content20": "Reject",
       "content21": "Not entered",
       "content22": "Passport Expiry Date",
-
-      
 
       "userValidated": "Validated",
       "userUnvalidated": "Unvalidated",
@@ -1934,18 +1951,14 @@
     "hero3": "Together, we’re building the future of global sports.",
     "hero4": "Learn more",
 
-
     "content1": "Community Champions",
     "content2": "(Small and Medium Businesses)",
     "content3": "The heartbeat of our local and global communities, supporting Randolympics with their passion and innovation.",
     "content4": "This category highlights small and medium businesses that contribute to Randolympics, showcasing their support and involvement.",
 
-
     "content6": "Sports Heroes (Sports Clubs)",
     "content7": "Uniting people through the love of the game, these clubs are the true heroes behind the scenes.",
     "content8": "This category features sports clubs that inspire and energize Randolympics participants and fans.",
-
-
 
     "firstBussiness1": "Acaimania Smoothie & Juice Shop",
     "firstBussiness2": "Belgrade, Serbia",
@@ -1957,10 +1970,9 @@
     "secondBussiness3": "izinga.co",
     "secondBussiness4": "Dedicated small business focused on supporting entrepreneurs with tailored solutions, proudly joins Randolympics to champion the spirit of collaboration and innovation.",
 
-    
     "contact1": "Want to see your business or club featured here?",
     "contact2": "Contact us today",
-    "contact3":" to join the growing community of Randolympics supporters and be part of this exciting journey!"
+    "contact3": " to join the growing community of Randolympics supporters and be part of this exciting journey!"
   },
 
   "popupMessages": {
