@@ -224,7 +224,7 @@ const Navbar = () => {
                     </IconButton>
                     <p
                      /*  onClick={handleClick} */
-                      className="hidden md:block text-black_second text-medium lexend-font select-none cursor-pointer"
+                      className="hidden md:block text-black_second text-medium font-normal lexend-font select-none cursor-pointer"
                     >
                       {settingUserType(user_type)}
                     </p>
@@ -285,7 +285,7 @@ const Navbar = () => {
                         </Avatar>
                       )}
 
-                      <p className="lexend-font text-black_second break-all"
+                      <p className="lexend-font font-normal text-black_second break-all"
                       
                       style={{
                         wordWrap: "break-word",
@@ -307,7 +307,7 @@ const Navbar = () => {
                           className="icon"
                         />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second break-all">
+                      <span className="lexend-font text-black_second break-all font-normal">
                         {t("navbar.profile1")}
                       </span>
                     </MenuItem>
@@ -321,7 +321,7 @@ const Navbar = () => {
                           className="icon"
                         />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second break-all">
+                      <span className="lexend-font text-black_second break-all font-normal">
                         {t("navbar.profile10")}
                       </span>
                     </MenuItem>
@@ -331,7 +331,7 @@ const Navbar = () => {
                       <ListItemIcon>
                         <img src="/myaccount/team_dark.svg" className="icon" />
                       </ListItemIcon>
-                      <span className="lexend-font text-black_second break-all">
+                      <span className="lexend-font font-normal text-black_second break-all">
                         {t("navbar.profile2")}
                       </span>
                     </MenuItem>
@@ -345,7 +345,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second break-all">
+                        <span className="lexend-font text-black_second break-all font-normal">
                           {t("navbar.profile3")}
                         </span>
                       </MenuItem>
@@ -366,7 +366,7 @@ const Navbar = () => {
                               className="icon"
                             />
                           </ListItemIcon>
-                          <span className="lexend-font text-black_second break-all">
+                          <span className="lexend-font text-black_second break-all font-normal">
                             {t("navbar.profile4")}
                           </span>
                         </MenuItem>
@@ -384,7 +384,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second break-all">
+                        <span className="lexend-font text-black_second break-all font-normal">
                           {t("navbar.profile5")}
                         </span>
                       </MenuItem>
@@ -407,7 +407,7 @@ const Navbar = () => {
                             className="icon"
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second break-all">
+                        <span className="lexend-font text-black_second break-all font-normal">
                           {t("navbar.profile6")}
                         </span>
                       </MenuItem>
@@ -417,7 +417,7 @@ const Navbar = () => {
                       <ListItemIcon>
                         <Logout fontSize="small" style={{ color: "#D24949" }} />
                       </ListItemIcon>
-                      <span className="lexend-font text-red_second break-all">
+                      <span className="lexend-font text-red_second break-all font-normal">
                         {t("navbar.profile7")}
                       </span>
                     </MenuItem>
@@ -448,7 +448,7 @@ const Navbar = () => {
                     }}
                     variant="text"
                   >
-                    <span className="lexend-font font-semibold text-xs">
+                    <span className="lexend-font font-normal text-xs ">
                       {t("navbar.profile8")}
                     </span>
                   </Button>
@@ -474,7 +474,7 @@ const Navbar = () => {
                     }}
                     variant="text"
                   >
-                    <span className="lexend-font font-semibold text-xs ">
+                    <span className="lexend-font font-normal text-xs ">
                       {t("navbar.profile9")}
                     </span>
                   </Button>
@@ -498,7 +498,7 @@ const Navbar = () => {
       >
         <ListItem sx={{ mt: 1 }}>
           <Link to="/about" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font ">
               {t("navbar.btn1")}
             </span>
           </Link>
@@ -506,7 +506,7 @@ const Navbar = () => {
 
         <ListItem>
           <Link to="/campaign"  href="/campaign" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn2")}
             </span>
           </Link>
@@ -514,7 +514,7 @@ const Navbar = () => {
 
         <ListItem>
           <Link to="/competitions" href="/competitions" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn6")}
             </span>
           </Link>
@@ -522,7 +522,7 @@ const Navbar = () => {
 
         <ListItem>
           <Link to="/news" href="/news" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn3")}
             </span>
           </Link>
@@ -530,7 +530,7 @@ const Navbar = () => {
 
         <ListItem>
           <Link to="/faq" href="/faq" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn4")}
             </span>
           </Link>
@@ -538,7 +538,7 @@ const Navbar = () => {
 
         <ListItem>
           <Link to="/contact" href="/contact" className="nav_btns">
-            <span className="font-bold text-red_second lexend-font">
+            <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn5")}
             </span>
           </Link>
@@ -568,7 +568,7 @@ const Navbar = () => {
             variant="text"
           >
             <img src="supporters/right_arrow.svg" className="mr-2" />
-            <span className="lexend-font font-semibold text-xs ">
+            <span className="lexend-font font-normal text-xs ">
               {t("navbar.profile9")}
             </span>
           </Button>
@@ -597,7 +597,7 @@ const Navbar = () => {
             variant="text"
           >
             <img src="supporters/right_arrow_black.svg" className="mr-2" />
-            <span className="lexend-font font-semibold text-xs">
+            <span className="lexend-font font-normal text-xs">
               {t("navbar.profile8")}
             </span>
           </Button>
