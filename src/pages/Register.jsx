@@ -766,7 +766,7 @@ const Register = () => {
                     name="email_private"
                     id="email_private"
                     value={email_private}
-                    disableUnderline
+                  
                     onChange={handleEmailPrivacyChange}
                     sx={{
                       mt: isEmailError ? 0 : 2.2,
@@ -966,7 +966,7 @@ const Register = () => {
                     name="phone_private"
                     id="phone_private"
                     value={phone_private}
-                    disableUnderline
+                 
                     onChange={handlePhonePrivacyChange}
                     sx={{
                       minWidth: 120,
@@ -1106,7 +1106,7 @@ const Register = () => {
                       id="weight_private"
                       value={weight_private}
                       onChange={handleWeightPrivacyChange}
-                      disableUnderline
+                  
                       sx={{
                         mt: 2.2,
                         fontFamily: "'Lexend', sans-serif",

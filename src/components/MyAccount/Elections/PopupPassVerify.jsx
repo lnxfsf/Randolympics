@@ -287,7 +287,7 @@ const PopupPassVerify = ({
                     color: "#FF0000",
                   },
                 }}
-                checked={nameVerify}
+                checked={!!nameVerify}
                 disabled={currentUserTypeLoggedIn === "GP"}
                 onChange={() => {
                   setNameVerify(!nameVerify);
@@ -341,7 +341,7 @@ const PopupPassVerify = ({
                     color: "#FF0000",
                   },
                 }}
-                checked={nationalityVerify}
+                checked={!!nationalityVerify}
                 disabled={currentUserTypeLoggedIn === "GP"}
                 onChange={() => {
                   setNationalityVerify(!nationalityVerify);
@@ -370,7 +370,7 @@ const PopupPassVerify = ({
                     color: "#FF0000",
                   },
                 }}
-                checked={birthdateVerify}
+                checked={!!birthdateVerify}
                 disabled={currentUserTypeLoggedIn === "GP" || !user.birthdate}
                 onChange={() => {
                   setBirthdateVerify(!birthdateVerify);
@@ -439,7 +439,7 @@ const PopupPassVerify = ({
                     color: "#FF0000",
                   },
                 }}
-                checked={passportExpiryVerify}
+                checked={!!passportExpiryVerify}
                 disabled={
                   currentUserTypeLoggedIn === "GP" ||
                   !passportExpiryDate?.isValid()

@@ -38,7 +38,7 @@ let BACKEND_SERVER_BASE_URL =
 const PassVerify = ({ user, index, setUpdatedPassport }) => {
   const [open, setOpen] = useState(false);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   //-------------
 
@@ -200,7 +200,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
     functionSetUserTypeText();
 
     updateAnotherUpdatedPassport();
-  }, [user_type, updatedPassportPopup]);
+  }, [user_type, updatedPassportPopup, i18n.language]);
 
   const updateAnotherUpdatedPassport = () => {
     setUpdatedPassport(updatedPassportPopup);

@@ -996,7 +996,7 @@ const EditProfile = () => {
                   name="email_private"
                   id="email_private"
                   value={email_private}
-                  disableUnderline
+               
                   onChange={handleEmailPrivacyChange}
                   sx={{
                     mt: 2.5,
@@ -1052,7 +1052,7 @@ const EditProfile = () => {
                     name="phone_private"
                     id="phone_private"
                     value={phone_private}
-                    disableUnderline
+                 
                     onChange={handlePhonePrivacyChange}
                     sx={{
                       mt: 2.5,
@@ -1101,7 +1101,7 @@ const EditProfile = () => {
                   name="birthdate_private"
                   id="birthdate_private"
                   value={birthdate_private}
-                  disableUnderline
+                 
                   onChange={handleBirthdatePrivacyChange}
                   sx={{
                     mt: 3.4,
@@ -1182,7 +1182,7 @@ const EditProfile = () => {
                         id="weight_private"
                         value={weight_private}
                         onChange={handleWeightPrivacyChange}
-                        disableUnderline
+                        
                         sx={{
                           mt: 2.5,
                           fontFamily: "'Lexend', sans-serif",
