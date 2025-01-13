@@ -1416,7 +1416,7 @@ return dataS.map((data, index) => { */
                 }}
                 type="submit"
               >
-                <span className="popins-font">
+                <span className="lexend-font">
                   {t("mockupRandomizer.content10")}
                 </span>
               </Button>

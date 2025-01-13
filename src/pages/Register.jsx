@@ -1239,7 +1239,7 @@ const Register = () => {
             value="Login"
             id="login-btn"
           >
-            <span className="popins-font">{t("register.content24")}</span>
+            <span className="lexend-font">{t("register.content24")}</span>
           </Button>
         </div>
       </form>

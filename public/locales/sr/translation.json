@@ -778,7 +778,14 @@
       "public": "Javno",
       "content34": " preostalih karaktera",
       "content35": "Lozinka je poslata na ",
-      "content36": "Nije navedena e-pošta"
+      "content36": "Nije navedena e-pošta",
+
+
+      "content37": "Detalji profila su uspešno sačuvani !",
+      "content38": "Došlo je do greške !"
+
+
+
     },
     "settings": {
       "content1": "Uspešno ste dali ostavku",

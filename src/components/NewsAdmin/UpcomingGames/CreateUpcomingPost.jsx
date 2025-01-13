@@ -441,7 +441,7 @@ const CreateUpcomingPost = ({ onBack }) => {
                             }}
                             variant="text"
                         >
-                            <span className="popins-font">Cancel</span>
+                            <span className="lexend-font">Cancel</span>
                         </Button>
 
                         <Button
@@ -462,7 +462,7 @@ const CreateUpcomingPost = ({ onBack }) => {
                             type="submit"
                             variant="text"
                         >
-                            <span className="popins-font">Save</span>
+                            <span className="lexend-font">Save</span>
                         </Button>
                     </div>
 

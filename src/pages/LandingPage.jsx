@@ -84,7 +84,7 @@ const LandingPage = () => {
             }}
             id="randomize-btn"
           >
-            <span className="popins-font">Randomize</span>
+            <span className="lexend-font">Randomize</span>
           </Button>
         </div>
 
@@ -202,7 +202,7 @@ const LandingPage = () => {
                 }}
                 id="register-btn"
               >
-                <span className="popins-font">Register</span>
+                <span className="lexend-font">Register</span>
               </Button>
             </div>
           </div>

@@ -310,7 +310,7 @@ const Others = ({
                             },
                           }}
                         >
-                          <span className="popins-font">+</span>
+                          <span className="lexend-font">+</span>
                         </Button>
                         <Button
                           onClick={decreaseRank}
@@ -329,7 +329,7 @@ const Others = ({
                             },
                           }}
                         >
-                          <span className="popins-font">-</span>
+                          <span className="lexend-font">-</span>
                         </Button>
                       </div>
                     </div>
@@ -353,7 +353,7 @@ const Others = ({
                           },
                         }}
                       >
-                        <span className="popins-font">Cancel</span>
+                        <span className="lexend-font">Cancel</span>
                       </Button>
 
                       <Button
@@ -374,7 +374,7 @@ const Others = ({
                           },
                         }}
                       >
-                        <span className="popins-font">Save changes</span>
+                        <span className="lexend-font">Save changes</span>
                       </Button>
                     </div>
                   </div> */}

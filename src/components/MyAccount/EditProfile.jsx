@@ -650,7 +650,7 @@ const EditProfile = () => {
         setPassportUpload(!passportUpload);
       }
 
-      setSnackbarMessage("Profile details saved successfully !");
+      setSnackbarMessage(t("myprofile.myaccount.content37"));
       setOpenSnackbar(true);
     } catch (error) {
       console.log(error);
@@ -742,13 +742,15 @@ const EditProfile = () => {
           sessionStorage.setItem("authTokens", JSON.stringify(userData));
         }
 
-        setSnackbarMessage("Profile details saved successfully !");
+        setSnackbarMessage(t("myprofile.myaccount.content37"));
+
+
         setOpenSnackbar(true);
       }
     } catch (error) {
       console.log(error);
 
-      setSnackbarMessage("There was some error !");
+      setSnackbarMessage(t("myprofile.myaccount.content38"));
       setSnackbarStatus("error");
 
       setOpenSnackbar(true);
@@ -786,7 +788,7 @@ const EditProfile = () => {
         }
       }
 
-      setSnackbarMessage("Profile details saved successfully !");
+      setSnackbarMessage(t("myprofile.myaccount.content37"));
       setOpenSnackbar(true);
     } catch (error) {
       console.log(error);
@@ -1363,7 +1365,7 @@ const EditProfile = () => {
                     onaddfile={(error, file) => {
                       if (error) {
                         if (error.status === 500 || error.main === "File is too large") {
-                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                          setSnackbarMessage(t("campaign.content141"));
                           setSnackbarStatus("error");
                           setOpenSnackbar(true);
                           filePondRef.current.removeFiles(); // Remove the invalid file
@@ -1653,7 +1655,7 @@ const EditProfile = () => {
               type="submit"
               variant="text"
             >
-              <span className="popins-font">
+              <span className="lexend-font">
                 {t("myprofile.myaccount.content28")}
               </span>
             </Button>
@@ -1676,7 +1678,7 @@ const EditProfile = () => {
               }}
               variant="text"
             >
-              <span className="popins-font">
+              <span className="lexend-font">
                 {t("myprofile.myaccount.content29")}
               </span>
             </Button>

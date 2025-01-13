@@ -46,7 +46,7 @@ const Top50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveChange
                 },
               }}
             >
-              <span className="popins-font">+</span>
+              <span className="lexend-font">+</span>
             </Button>
             <Button
               onClick={decreaseRank}
@@ -65,7 +65,7 @@ const Top50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveChange
                 },
               }}
             >
-              <span className="popins-font">-</span>
+              <span className="lexend-font">-</span>
             </Button>
           </div>
         </div>
@@ -89,7 +89,7 @@ const Top50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveChange
               },
             }}
           >
-            <span className="popins-font">{t("myprofile.elections.content3")}</span>
+            <span className="lexend-font">{t("myprofile.elections.content3")}</span>
           </Button>
 
           <Button
@@ -110,7 +110,7 @@ const Top50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveChange
               },
             }}
           >
-            <span className="popins-font">{t("myprofile.elections.content4")}</span>
+            <span className="lexend-font">{t("myprofile.elections.content4")}</span>
           </Button>
         </div>
       </div>

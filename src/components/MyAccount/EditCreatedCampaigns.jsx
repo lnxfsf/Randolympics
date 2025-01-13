@@ -1872,7 +1872,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               type="submit"
               variant="text"
             >
-              <span className="popins-font">
+              <span className="lexend-font">
                 {t("myprofile.myaccount.content28")}
               </span>
             </Button>
@@ -1895,7 +1895,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
               }}
               variant="text"
             >
-              <span className="popins-font">
+              <span className="lexend-font">
                 {t("myprofile.myaccount.content29")}
               </span>
             </Button>

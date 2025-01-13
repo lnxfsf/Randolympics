@@ -521,7 +521,7 @@ const GameDetails = ({ postZ, onBack }) => {
                                             },
                                         }}
                                     >
-                                        <span className="popins-font">Cancel</span>
+                                        <span className="lexend-font">Cancel</span>
                                     </Button>
 
                                     <Button
@@ -542,7 +542,7 @@ const GameDetails = ({ postZ, onBack }) => {
                                             },
                                         }}
                                     >
-                                        <span className="popins-font">Delete</span>
+                                        <span className="lexend-font">Delete</span>
                                     </Button>
                                 </div>
 
@@ -781,7 +781,7 @@ const GameDetails = ({ postZ, onBack }) => {
                                         }}
                                         variant="text"
                                     >
-                                        <span className="popins-font">Cancel</span>
+                                        <span className="lexend-font">Cancel</span>
                                     </Button>
 
                                     <Button
@@ -802,7 +802,7 @@ const GameDetails = ({ postZ, onBack }) => {
                                         type="submit"
                                         variant="text"
                                     >
-                                        <span className="popins-font">Save</span>
+                                        <span className="lexend-font">Save</span>
                                     </Button>
                                 </div>
 

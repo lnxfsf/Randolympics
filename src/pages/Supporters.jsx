@@ -841,7 +841,7 @@ const Supporters = () => {
             }}
             
           >
-            <span className="popins-font">Back</span>
+            <span className="lexend-font">Back</span>
           </Button>
         </div>
       </Popup>

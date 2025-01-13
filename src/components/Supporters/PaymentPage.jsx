@@ -227,7 +227,7 @@ return (<>
           }}
           
         >
-          <span className="popins-font">Proceed</span>
+          <span className="lexend-font">Proceed</span>
         </Button>
       </div>
 

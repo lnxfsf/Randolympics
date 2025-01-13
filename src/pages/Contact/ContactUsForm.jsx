@@ -271,7 +271,7 @@ const ContactUsForm = () => {
           type="submit"
           variant="text"
         >
-          <span className="popins-font">{t("contact.content7")}</span>
+          <span className="lexend-font">{t("contact.content7")}</span>
         </Button>
       </div>
 

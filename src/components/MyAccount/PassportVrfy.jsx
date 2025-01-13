@@ -221,7 +221,7 @@ const PassportVrfy = () => {
                   },
                 }}
               >
-                <span className="popins-font">{t("login.content19")}</span>
+                <span className="lexend-font">{t("login.content19")}</span>
               </Button>
 
               <FormControl

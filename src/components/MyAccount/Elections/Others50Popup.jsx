@@ -46,7 +46,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
                 },
               }}
             >
-              <span className="popins-font">+</span>
+              <span className="lexend-font">+</span>
             </Button>
             <Button
               onClick={decreaseRank}
@@ -65,7 +65,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
                 },
               }}
             >
-              <span className="popins-font">-</span>
+              <span className="lexend-font">-</span>
             </Button>
           </div>
         </div>
@@ -89,7 +89,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
               },
             }}
           >
-            <span className="popins-font">{t("myprofile.validationManager.content3")}</span>
+            <span className="lexend-font">{t("myprofile.validationManager.content3")}</span>
           </Button>
 
           <Button
@@ -110,7 +110,7 @@ const Others50Popup = ({increaseRank, currentRank, decreaseRank, cancel, saveCha
               },
             }}
           >
-            <span className="popins-font">{t("myprofile.validationManager.content4")}</span>
+            <span className="lexend-font">{t("myprofile.validationManager.content4")}</span>
           </Button>
         </div>
       </div>

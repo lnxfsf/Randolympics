@@ -135,7 +135,7 @@ const LgnTraffcHistory = () => {
                   },
                 }}
               >
-                <span className="popins-font"> {t("login.content18")}</span>
+                <span className="lexend-font"> {t("login.content18")}</span>
               </Button>
             }
             position="bottom right"

@@ -397,7 +397,7 @@ const Settings = () => {
                 },
               }}
             >
-              <span className="popins-font">{t('myprofile.settings.no')}</span>
+              <span className="lexend-font">{t('myprofile.settings.no')}</span>
             </Button>
           </div>
         </div>

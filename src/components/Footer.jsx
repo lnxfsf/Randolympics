@@ -46,7 +46,7 @@ const Footer = () => {
                 }}
                 
               >
-                <span className="popins-font">Sign up a friend</span>
+                <span className="lexend-font">Sign up a friend</span>
               </Button>
 
               <img className="pt-16 pl-16 w-64 	" src="/footer/logo_footer.svg" />

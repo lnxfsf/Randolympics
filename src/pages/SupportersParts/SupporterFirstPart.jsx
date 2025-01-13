@@ -156,7 +156,7 @@ const SupporterFirstPart = ({
           }}
           
         >
-          <span className="popins-font">Create a campaign</span>
+          <span className="lexend-font">Create a campaign</span>
         </Button>
  */}
         {/*   <p className="text-xl text-center underline decoration-red_first mt-8">

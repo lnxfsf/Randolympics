@@ -243,7 +243,7 @@ const Campaign = () => {
                     border: `1px solid #000`,
                   }}
                 >
-                  <span className="popins-font">{t("campaign.content56")}</span>
+                  <span className="lexend-font">{t("campaign.content56")}</span>
                 </Button>
 
                 <FormControl>

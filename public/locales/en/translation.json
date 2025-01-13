@@ -795,9 +795,15 @@
       "public": "Public",
 
       "content34": " characters remaining",
-
       "content35": "A password had been sent to ",
-      "content36": "No email provided"
+      "content36": "No email provided",
+
+
+      "content37": "Profile details saved successfully !",
+      "content38": "There was some error !"
+
+
+
     },
     "settings": {
       "content1": "You resigned successfully",
