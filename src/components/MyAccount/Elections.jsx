@@ -405,15 +405,15 @@ const Elections = () => {
               <tr>
                 <th className="w-[5%]"></th>
 
-                <th className="w-[8%]">Votes</th>
+                <th className="w-[8%]">{t("myprofile.elections.content5")}</th>
 
-                <th className="w-[20%]">Name</th>
+                <th className="w-[20%]">{t("myprofile.elections.content6")}</th>
 
-                <th className="w-[27%]">Email</th>
+                <th className="w-[27%]">{t("myprofile.elections.content7")}</th>
 
-                <th className="w-[20%]">Phone</th>
+                <th className="w-[20%]">{t("myprofile.elections.content8")}</th>
 
-                <th className="w-[20%]">Status</th>
+                <th className="w-[20%]">{t("myprofile.elections.content9")}</th>
               </tr>
             </thead>
             <tbody>

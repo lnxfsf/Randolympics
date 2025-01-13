@@ -780,12 +780,8 @@
       "content35": "Lozinka je poslata na ",
       "content36": "Nije navedena e-pošta",
 
-
       "content37": "Detalji profila su uspešno sačuvani !",
       "content38": "Došlo je do greške !"
-
-
-
     },
     "settings": {
       "content1": "Uspešno ste dali ostavku",
@@ -836,7 +832,13 @@
       "content1": "Trenutni rank",
       "content2": "Ažuriraj rank",
       "content3": "Otkaži",
-      "content4": "Sačuvaj promene"
+      "content4": "Sačuvaj promene",
+
+      "content5": "Glasovi",
+      "content6": "Ime",
+      "content7": "Email",
+      "content8": "Telefon",
+      "content9": "Status"
     },
     "validationManager": {
       "content1": "Trenutni rank",
@@ -862,10 +864,18 @@
       "content20": "Odbij",
       "content21": "Nije unešeno",
       "content22": "Datum isteka pasoša",
+      "content23": "Status pasoša",
+
+      "content24": "Ime",
+      "content25": "Država",
+      "content26": "Uloga",
+      "content27": "Account creation",
 
       "userValidated": "Validan",
       "userUnvalidated": "Nevalidan",
-      "userRejected": "Odbijen"
+      "userRejected": "Odbijen",
+
+      "role1": "Ništa"
     }
   },
   "userTypes": {

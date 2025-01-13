@@ -301,7 +301,7 @@ const HeaderMyProfile = ({ ShowEditProfile, setSnackbarMessage, setSnackbarStatu
                     onaddfile={(error, file) => {
                       if (error) {
                         if (error.status === 500 || error.main === "File is too large") {
-                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
+                          setSnackbarMessage(t("campaign.content141"));
                           setSnackbarStatus("error");
                           setOpenSnackbar(true);
                           filePondRef.current.removeFiles(); // Remove the invalid file

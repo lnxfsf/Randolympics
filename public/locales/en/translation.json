@@ -798,12 +798,8 @@
       "content35": "A password had been sent to ",
       "content36": "No email provided",
 
-
       "content37": "Profile details saved successfully !",
       "content38": "There was some error !"
-
-
-
     },
     "settings": {
       "content1": "You resigned successfully",
@@ -854,7 +850,13 @@
       "content1": "Current rank",
       "content2": "Update rank",
       "content3": "Cancel",
-      "content4": "Save changes"
+      "content4": "Save changes",
+
+      "content5": "Votes",
+      "content6": "Name",
+      "content7": "Email",
+      "content8": "Phone",
+      "content9": "Status"
     },
     "validationPassport": {
       "content1": "Search by name"
@@ -884,9 +886,18 @@
       "content21": "Not entered",
       "content22": "Passport Expiry Date",
 
+      "content23": "Passport status",
+
+      "content24": "Name",
+      "content25": "Country",
+      "content26": "Role",
+      "content27": "Account creation",
+
       "userValidated": "Validated",
       "userUnvalidated": "Unvalidated",
-      "userRejected": "Rejected"
+      "userRejected": "Rejected",
+
+      "role1": "None"
     }
   },
   "userTypes": {

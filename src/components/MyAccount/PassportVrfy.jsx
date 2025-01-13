@@ -35,7 +35,6 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const PassportVrfy = () => {
-
   const { t } = useTranslation();
 
   // so, this is all users !
@@ -68,12 +67,9 @@ const PassportVrfy = () => {
     setFilterPassportStatus(event.target.value);
   };
 
-
-  
   const handlePaginationChange = (event, value) => {
     setlistOfUsersPage(value);
   };
-
 
   const resetFilterFields = () => {
     setFilterRole();
@@ -116,16 +112,8 @@ const PassportVrfy = () => {
         }
       );
 
-      
-
       setMaxPages(Math.ceil(response.data.count / 10));
       setListOfUsers(response.data.rows);
-
-      
-      
-
-    
-      
     } catch (error) {
       console.error("Error fetching top users:", error);
     }
@@ -274,7 +262,7 @@ const PassportVrfy = () => {
                 className="m-4 ml-0 mb-1"
               >
                 <InputLabel style={{ color: "#232323" }} id="roleDropdowns">
-                  <b>Passport status</b>
+                  <b>{t("myprofile.validationManager.content23")}</b>
                 </InputLabel>
 
                 <Select
@@ -284,11 +272,19 @@ const PassportVrfy = () => {
                   className="w-[300px]"
                   style={{ color: "#000" }}
                 >
-                  <MenuItem value="">None</MenuItem>
+                  <MenuItem value="">
+                    {t("myprofile.validationManager.role1")}
+                  </MenuItem>
                   <Divider />
-                  <MenuItem value="unvalidated">Unvalidated</MenuItem>
-                  <MenuItem value="rejected">Rejected</MenuItem>
-                  <MenuItem value="validated">Validated</MenuItem>
+                  <MenuItem value="unvalidated">
+                    {t("myprofile.validationManager.userUnvalidated")}
+                  </MenuItem>
+                  <MenuItem value="rejected">
+                    {t("myprofile.validationManager.userRejected")}
+                  </MenuItem>
+                  <MenuItem value="validated">
+                    {t("myprofile.validationManager.userValidated")}
+                  </MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -297,23 +293,32 @@ const PassportVrfy = () => {
       </div>
 
       <div className="container-table-mobile">
-      <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
+        <div className="mt-8 p-4 lexend-font text-black_second  table-mobile ">
           <table className="w-full">
             <thead>
               <tr>
-                <th className="w-[20%]">Name</th>
-                <th className="w-[7%]">Country</th>{" "}
+                <th className="w-[20%]">
+                  {t("myprofile.validationManager.content24")}
+                </th>
+                <th className="w-[7%]">
+                  {t("myprofile.validationManager.content25")}
+                </th>{" "}
                 {/* ovo napravi kao flag !! lakse je !  (ionako moraš, da dodjes do toga, i dadneš mu  country_code, i prikazuje sa imenom, al sa slikom je bolje ionako...) */}
-                <th className="w-[20%]">Role</th> {/* user_type */}
-                <th className="w-[20%] text-center">Passport status</th>{" "}
-
+                <th className="w-[20%]">
+                  {t("myprofile.validationManager.content26")}
+                </th>{" "}
+                {/* user_type */}
+                <th className="w-[20%] text-center">
+                  {t("myprofile.validationManager.content22")}
+                </th>{" "}
                 {/* Passport status verification, polje u database */}
-                <th className="w-[20%]">Account creation</th>{" "}
+                <th className="w-[20%]">
+                  {t("myprofile.validationManager.content27")}
+                </th>{" "}
                 {/* imaš onaj "createdAt", to je od sequelize dolazi (kad je kreirao taj row..) */}
-               {/*  <th className="w-[12%]">Passport uploaded</th>{" "} */}
-
+                {/*  <th className="w-[12%]">Passport uploaded</th>{" "} */}
                 {/* znači, moraces da upises datum, kada uspesno sačuvas passport image ! (kad se upload-uje !) */}
-               {/*  <th className="w-[12%]">Last Validated / rejected date</th> */}
+                {/*  <th className="w-[12%]">Last Validated / rejected date</th> */}
               </tr>
             </thead>
             <tbody>
@@ -329,8 +334,8 @@ const PassportVrfy = () => {
         </div>
       </div>
 
-    {/* pagination */}
-    <div className="flex justify-center items-start mt-4    w-full ">
+      {/* pagination */}
+      <div className="flex justify-center items-start mt-4 w-full ">
         <Stack>
           <Pagination
             count={maxPages}
