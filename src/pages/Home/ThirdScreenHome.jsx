@@ -52,9 +52,10 @@ const ThirdScreenHome = () => {
               <p className="text-xl  font-bold ">{t('home.ourBeliefs.subtitle3')}</p>
             </div>
 
-            <p className="font-medium mb-4 xl:w-[44em]">{t('home.ourBeliefs.content4')}
+            <p className="font-medium mb-4 xl:w-[44em]"  dangerouslySetInnerHTML={{ __html: t('home.ourBeliefs.content4') }} />
               
-            </p>
+          
+          
           </div>
         </div>
       </div>

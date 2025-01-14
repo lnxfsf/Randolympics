@@ -1081,7 +1081,14 @@
     "content4": "Text",
     "content5": "Subject",
     "content6": "Write your message...",
-    "content7": "Send"
+    "content7": "Send",
+
+    "content8": "Insert email",
+     "content9": "Insert name",
+     "content10": "Insert name"
+
+
+
   },
   "sportDetails": {
     "common1": "General Rules",
@@ -2063,4 +2070,5 @@
 
 
   }
+
 }

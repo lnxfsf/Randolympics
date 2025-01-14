@@ -75,14 +75,14 @@
       "sport33": "Rvanje"
     },
     "ourBeliefs": {
-      "title1": "Naša verovanja",
+      "title1": "Naša uverenja",
       "content1": "",
-      "content2": "Verujemo da slučajni odabir sporta ima jedinstvenu moć da okuplja ljude. U svetu punom konflikata i podela, naši događaji nude priliku da ujedinimo čovečanstvo. Takmičeći se zajedno, pokazujemo da sportski izazovi mogu povezati kulture, nacije i verovanja, pokazujući da takmičenje može podstaknuti povezanost, a ne podelu.",
-      "content3": "Svako je dobrodošao da učestvuje, bez obzira na nacionalnost, rasu, vrednosti, religiju, politička uverenja, pol ili seksualnu orijentaciju. Naši gradovi domaćini obezbeđuju da svi učesnici mogu da se pridruže. Pružaćemo potrebnu podršku za dobijanje vize. Čvrsto se protivimo bilo kojem obliku isključenja na osnovu identiteta, verovanja, religije, rase, pola ili bilo kog drugog definisanog svojstva, obezbeđujući jednake šanse za svakog.",
-      "content4": "Transparentnost je u srcu svega što radimo. Koliko god je to moguće, koristimo open-source tehnologiju za plaćanja i komunikaciju kako bi obezbedili otvorenost i sigurnost. Naš demokratski sistem daje jednaka prava i pravo glasa svakoj naciji i učesniku, podstičući pravedan, odgovoran i inkluzivan ambijent za sve.",
-      "subtitle1": "Ujediniti čovečanstvo kroz slučajan sport",
-      "subtitle2": "Inkluzivnost",
-      "subtitle3": "Transparentnost"
+      "content2": "Verujemo da slučajnost ima jedinstvenu moć da približi ljude. U svetu punom konflikata i podela, Randolimpijada pruža priliku da ujedinimo čovečanstvo. Kroz zajedničko takmičenje pokazujemo da sport ne poznaje granice – on spaja kulture, nacije i verovanja. Takmičenje ne mora da razdvaja; ono može da gradi mostove i inspiriše povezanost.",
+      "content3": "Randolimpijada je otvorena za svakoga – bez obzira na poreklo, rasu, pol, religiju, politička uverenja ili seksualnu orijentaciju. Gradovi domaćini obezbeđuju da svaki učesnik može da se pridruži, pružajući podršku, uključujući pomoć oko viza. Verujemo u jednakost i borimo se protiv bilo kakvog oblika diskriminacije. Kod nas svi imaju šansu – jer svako zaslužuje priliku da se upusti u ovu avanturu.",
+      "content4": "Transparentnost je srž našeg rada. Koristimo open-source tehnologije za plaćanja i komunikaciju kako bismo osigurali sigurnost i otvorenost. Naš demokratski sistem garantuje jednaka prava i ravnopravno glasanje svim nacijama i učesnicima, stvarajući pravedno i inkluzivno okruženje za sve. Verujemo da poverenje grade jasni postupci i otvorenost prema svima. <br/><br/>Pridružite se pokretu koji spaja ljude, briše granice i kreira istoriju – zajedno činimo sport pristupačnim i posebnim za svakoga!",
+      "subtitle1": "Ujedinimo svet kroz sport i slučajnost",
+      "subtitle2": "Inkluzivnost za sve",
+      "subtitle3": "Transparentnost na prvom mestu"
     },
     "economics": {
       "title1": "Ekonomija: Četiri vrste prihoda",
@@ -273,7 +273,7 @@
       "content16": "Verifikuje naloge, donacije i transakcije kako bi održao transparentnost i sigurnost naše platforme.",
       "content17": "Menadžer za događaje",
       "content18": "Organizuje ključne događaje kao što su Igre u Stokholmu 2028, osiguravajući da sve teče glatko, od logistike do upravljanja sportistima.",
-      "content19": "Mi smo grupa sportskih entuzijasta iz celog sveta! Naša misija je da okupimo druge ljubitelje sporta, amaterske sportiste i sve druge koji se bave sportom rekreativno i koji žele da učestvuju u Randolimpijadi koja će biti organizovana od 8. do 16. jula 2028. u Stokholmu. ",
+      "content19": "Mi smo tim sportskih entuzijasta iz svih krajeva sveta! Naša misija je da spojimo ljubitelje sporta, rekreativce i amaterske sportiste koji žele da budu deo Randolimpijade – jedinstvenog sportskog događaja koji će se održati od 8. do 16. jula 2028. u Stokholmu.",
       "content19Additional": "Randolimpijada je poput redovnih Olimpijskih igara, ali organizovana za obične ljude koji žele da testiraju svoju snagu i izdržljivost u sportovima od streljaštva i rvanja do hokeja na travi i golfa, i to u grupi i/ili individualno.",
       "content20": "Svako ko želi da učestvuje mora biti nominovan od strane prijatelja koji će napraviti kampanju na našoj veb stranici.",
       "content21": "Kliknite ovde",
@@ -424,6 +424,10 @@
     "content19": "Koliko da doniram?",
     "content20": "Imate kupon kod?",
     "content21": "Doniraj samo sa kuponom",
+
+
+    "content22": "Doniraj samo sa kuponom",
+
     "content23": "Dalje",
     "content24": "Reci nam više o tvom prijatelju",
     "content25": "Ime",
@@ -633,7 +637,7 @@
     "select11": "Laka",
     "select12": "Srednja",
     "select13": "Teška",
-    "select14": "Ponovno nasumično",
+    "select14": "Nasumičan izbor!",
     "select15": "Vrati se",
     "select16": "Izaberi svoj pol"
   },
@@ -1049,16 +1053,22 @@
   },
   "contact": {
     "title1": "Opšta Pitanja",
-    "title2": "Imate pitanje ili vam je potrebna više informacija?",
-    "title3": "Ispunite formu ispod sa vašim pitanjem, a jedan od naših članova tima će vam se javiti u najkraćem mogućem roku.",
+    "title2": "Imate nedoumicu ili želite saznati više?",
+    "title3": "Pošaljite nam svoje pitanje putem forme ispod, a naš tim će vam se brzo javiti. ",
     "title4": "Tu smo da pomognemo.",
     "content1": "Ime",
     "content2": "Email",
-    "content3": "Predmet",
+    "content3": "Naslov",
     "content4": "Tekst",
     "content5": "Predmet",
     "content6": "Napišite svoju poruku...",
     "content7": "Pošaljite"
+
+
+
+
+
+
   },
   "sportDetails": {
     "common1": "Opšta Pravila",

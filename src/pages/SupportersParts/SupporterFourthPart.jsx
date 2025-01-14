@@ -132,7 +132,7 @@ const SupporterFourthPart = ({
     }
   };
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);

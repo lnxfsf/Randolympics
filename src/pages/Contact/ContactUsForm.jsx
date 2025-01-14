@@ -86,7 +86,7 @@ const ContactUsForm = () => {
   const onSubmit = async () => {
     if (isEmailError || email === "") {
       setSnackbarStatus("error");
-      setSnackbarMessage("Insert email");
+      setSnackbarMessage(t("contact.content8"));
       setOpenSnackbar(true);
 
       isEmailErrorFocus.current.focus();
@@ -95,7 +95,7 @@ const ContactUsForm = () => {
 
     if (name === "") {
       setSnackbarStatus("error");
-      setSnackbarMessage("Insert name");
+      setSnackbarMessage(t("contact.content9"));
       setOpenSnackbar(true);
 
       nameRef.current.focus();
@@ -105,6 +105,7 @@ const ContactUsForm = () => {
     if (subject === "") {
       setSnackbarStatus("error");
       setSnackbarMessage("Insert subject");
+      setSnackbarMessage(t("contact.content9"));
       setOpenSnackbar(true);
 
       subjectRef.current.focus();

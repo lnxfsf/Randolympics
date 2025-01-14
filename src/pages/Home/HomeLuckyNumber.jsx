@@ -36,7 +36,7 @@ const HomeLuckyNumber = () => {
 
   return (
     <>
-      <div className="flex items-center lexend-font text-black_second flex-col mt-8">
+      <div className="flex items-center lexend-font text-black_second flex-col mt-8 p-8">
         <p className="text-3xl md:text-4xl font-bold  text-center">
           {t("home.howItWorks.content19")}
         </p>

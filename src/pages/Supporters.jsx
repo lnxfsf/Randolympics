@@ -6,6 +6,12 @@ import { Button } from "@mui/material";
 import "@mui/material/styles/styled";
 import { useLocation } from "react-router-dom";
 
+
+
+
+import {  useTranslation } from "react-i18next";
+
+
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -166,6 +172,9 @@ const generateRandomEmail = (usernameLength = 8) => {
 };
 
 const Supporters = () => {
+  const { t, i18n } = useTranslation();
+
+
   const [campaignId, setCampaignId] = useState("");
 
   
@@ -784,7 +793,7 @@ const Supporters = () => {
 
         break;
     }
-  }, [amount, additionalSupportersFormData]);
+  }, [amount, additionalSupportersFormData, i18n.language]);
 
   useEffect(() => {
     // Generate a new unique campaignId each time the component renders. But only once, so user can make multiple campaigns without refresh of page.
