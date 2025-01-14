@@ -19,6 +19,8 @@ import { Others50Popup } from "./Others50Popup";
 import Radio from "@mui/material/Radio";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
+import { useTranslation } from "react-i18next";
+
 
 const Others = ({
   user,
@@ -33,6 +35,10 @@ const Others = ({
   lastRank,
   setWhichVotedFor,
 }) => {
+
+  const { t } = useTranslation();
+
+
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
 
@@ -159,9 +165,7 @@ const Others = ({
                     setWhichVotedFor(user.userId);
 
                     setOpenSnackbar(true);
-                    setSnackbarText(
-                      "Congratulations! Your vote has been sent."
-                    );
+                    setSnackbarText(t("popupMessages.text23"));
                   }}
                   control={
                     <Radio
@@ -224,7 +228,7 @@ const Others = ({
                   src="/editprofile/private_lock.svg"
                 />
                 <p className="text-lg font-medium text-[#616673] break-all">
-                  Private
+                  {t("myprofile.elections.status1")}
                 </p>
               </div>
             </td>
