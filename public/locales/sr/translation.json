@@ -375,7 +375,20 @@
       "content2": "Pročitaj više",
       "content3": "minuta čitanja",
       "content4": "minut čitanja"
+    },
+    "supporters": {
+      "content1": "Kako funkcioniše",
+      "content2": "Randolympics omogućava vam da prijavite svog prijatelja ili slavnu ličnost na predstojeće takmičenje.",
+      "content3": "Nakon što nekoga prijavite i donirate - postajete Donator !",
+      "content4": "Takmičari će biti odabrani nasumično, ali oni koji dobiju više novca kroz donacije imaju veće šanse da dobiju poziv !",
+      "content5": "Nazad"
+
+
     }
+
+
+
+
   },
   "footer": {
     "copyright": "Sva prava zadržana.",
@@ -708,6 +721,9 @@
     "content25": "Treba biti u međunarodnom formatu",
     "content26": "Želite da radite sa nama puno ili na pola radnog vremena?",
     "content27": "Ako želite da radite kao Menadžer ili Nacionalni predsednik za našu organizaciju, možete se prijaviti ovde",
+
+    "content28": "Nacionalnost",
+
     "user_type1": "Atleta",
     "user_type2": "Globalni predsednik",
     "user_type3": "Nacionalni predsednik",
@@ -2012,7 +2028,17 @@
     "text13": "Email nije važeći !",
     "text14": "Izaberi zemlju",
     "text15": "Navedite najmanje jedan profil društvene mreže",
-    "text16": "Mora imati najmanje 15 godina da bi učestvovao."
+    "text16": "Mora imati najmanje 15 godina da bi učestvovao.",
+    "text17": "Email je netačan !",
+    "text18": "Pogrešna lozinka donatora!",
+    "text19": "Donator već postoji. Unesi šifru donatora.",
+    "text20": "Lozinka je ubačena sa praznom e-poštom. Prvo unesite imejl donatora ! ",
+    "text21": "Unesite svoje ime",
+    "text22": "Kreirana kampanja"
+
+
+
+
 
 
   },

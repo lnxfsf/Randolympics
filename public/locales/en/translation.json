@@ -387,6 +387,15 @@
       "content2": "Read more",
       "content3": "min read",
       "content4": "min read"
+    },
+    "supporters": {
+      "content1": "How it works",
+      "content2": "Randolympics lets you sign up your friend or a celebrity to the upcoming competition.",
+      "content3": "After you sign someone up and donate - you become a Supporter !",
+      "content4": "The competitors will be selected randomly, but those who receive more money through donations have a higher chance to get an invitation !",
+      "content5": "Back"
+
+
     }
   },
   "footer": {
@@ -724,6 +733,9 @@
     "content25": "Should be in international format",
     "content26": "Wanna work with us full time or part time?",
     "content27": "In case you want to work as a Manager or a National President for our organisation you can apply here",
+
+    "content28": "Nationality",
+
     "user_type1": "Athlete",
     "user_type2": "Global President",
     "user_type3": "National President",
@@ -2040,9 +2052,13 @@
     "text13": "Email is incorrect !",
     "text14": "Choose country",
     "text15": "Provide at least one social media profile",
-    "text16": "Must be at least 15 years old to participate."
-
-
+    "text16": "Must be at least 15 years old to participate.",
+    "text17": "Email is incorrect !",
+    "text18": "Wrong supporter password!",
+    "text19": "Supporter already exists. Type supporter password.",
+    "text20": "Password inserted with empty email. Type supporter email first ! ",
+    "text21": "Insert your name",
+    "text22": "Created campaign"
 
 
 

@@ -189,7 +189,7 @@ const Supporters = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (supporterEmail !== "" && !emailRegex.test(supporterEmail)) {
-      setSnackbarMessage("Email is incorrect !");
+      setSnackbarMessage(t("popupMessages.text17"));
       setOpenSnackbarFailure(true);
       return;
     }
@@ -231,7 +231,7 @@ const Supporters = () => {
 
           // If the password is incorrect, show an error message
           if (responseSupporterUserPasswordCheck.data.check === false) {
-            setSnackbarMessage("Wrong supporter password!");
+            setSnackbarMessage(t("popupMessages.text18"));
             setOpenSnackbarFailure(true);
             return;
           }
@@ -262,9 +262,7 @@ const Supporters = () => {
 
         if (responseSupporterUser.data.found) {
           // If the supporter exists but no password was provided, prompt the user to enter a password
-          setSnackbarMessage(
-            "Supporter already exists. Type supporter password."
-          );
+          setSnackbarMessage(t("popupMessages.text19"));
           setOpenSnackbarFailure(true);
           return;
         } else {
@@ -275,15 +273,13 @@ const Supporters = () => {
           tempDoCreateSupporterAccount = true;
         }
       } else if (supporterPassword !== "") {
-        setSnackbarMessage(
-          "Password inserted with empty email. Type supporter email first ! "
-        );
+        setSnackbarMessage(t("popupMessages.text20"));
         setOpenSnackbarFailure(true);
         return;
       }
 
       if (supporterName === "") {
-        setSnackbarMessage("Insert your name");
+        setSnackbarMessage(t("popupMessages.text21"));
         setOpenSnackbarFailure(true);
         return;
       }
@@ -470,12 +466,12 @@ const Supporters = () => {
               if (responseSupport.status === 201) {
                 supporterId = response.data.userId;
 
-                setSnackbarMessage("Created campaign");
+                setSnackbarMessage(t("popupMessages.text22"));
                 setOpenSnackbarSuccess(true);
               }
             } else {
               // if we don't create supporter account, but still we did created campaign.. with what we have
-              setSnackbarMessage("Created campaign");
+              setSnackbarMessage(t("popupMessages.text22"));
               setOpenSnackbarSuccess(true);
             }
 
@@ -814,22 +810,13 @@ const Supporters = () => {
         className="popup-content"
       >
         <div className="flex justify-center items-center flex-col">
-          <p className="text-2xl font-semibold mt-2 mb-2">How it works</p>
+          <p className="text-2xl font-semibold mt-2 mb-2">{t("home.supporters.content1")}</p>
 
-          <p className="text-center mb-3  ">
-            Randolympics lets you sign up your friend or a celebrity to the
-            upcoming competition.
-          </p>
+          <p className="text-center mb-3  ">{t("home.supporters.content2")}</p>
 
-          <p className="text-center mb-3  ">
-            After you sign someone up and donate - you become a Supporter !
-          </p>
+          <p className="text-center mb-3  ">{t("home.supporters.content3")}</p>
 
-          <p className="text-center   ">
-            The competitors will be selected randomly, but those who receive
-            more money through donations have a higher chance to get an
-            invitation !
-          </p>
+          <p className="text-center">{t("home.supporters.content4")}</p>
 
           <Button
             onClick={() => {
@@ -851,7 +838,7 @@ const Supporters = () => {
             }}
             
           >
-            <span className="lexend-font">Back</span>
+            <span className="lexend-font">{t("home.supporters.content5")}</span>
           </Button>
         </div>
       </Popup>
