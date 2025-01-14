@@ -5,7 +5,7 @@ import { Avatar } from "@mui/material";
 
 import { settingUserType } from "../../context/user_types";
 import { Navbar } from "../Navbar";
-import { FooterClean } from "../FooterClean";
+import { Footer } from "../Footer";
 
 
 import { useTranslation } from "react-i18next";
@@ -307,7 +307,7 @@ function formatDate(dateString) {
         </>
       )}
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import "../styles/sponsors.scoped.scss";
 import { useTranslation } from "react-i18next";
@@ -202,7 +202,7 @@ const Sponsors = () => {
 
       <ContactUsForm />
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

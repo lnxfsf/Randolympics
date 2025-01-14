@@ -1,10 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { ForgotPassword } from "./components/Login/ForgotPassword";
-import { Randomize } from "./components/Randomize";
+import { Randomize } from "./components/MockupRandomizer/Randomize";
 import { ToS } from "./pages/ToS";
 import { MyAccount } from "./pages/MyAccount";
 
@@ -56,7 +55,6 @@ const App = () => {
       {(cookies.cookieNeccessary !== true || cookies.cookieConsentOpen) === true && <CookieMain />}
 
       <Routes>
-        <Route path="/landingpage" element={<LandingPage />} />
         <Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />

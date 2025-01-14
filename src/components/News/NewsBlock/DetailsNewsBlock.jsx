@@ -6,14 +6,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 
 import "../../../styles/blogPosts.scoped.scss";
-import { NavbarHome } from "../../NavbarHome";
-import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
+
 
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
-import { FooterClean } from "../../FooterClean";
+import { Footer } from "../../Footer";
 
 import { useTranslation } from "react-i18next";
 
@@ -193,7 +193,7 @@ function formatDate(dateString) {
         </div>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { NavbarHomeCollapsed } from "../NavbarHomeCollapsed";
+import { Navbar } from "../Navbar";
 
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ const RegisteredByFriend = () => {
 
   return (
     <>
-      <NavbarHomeCollapsed />
+      <Navbar />
 
      
       <div className="flex justify-center items-center mt-32">

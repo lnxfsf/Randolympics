@@ -9,7 +9,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
-import { FooterClean } from "../FooterClean";
+import { Footer } from "../Footer";
 import { NavbarClean } from "../NavbarClean";
 
 import { useTranslation } from "react-i18next";
@@ -316,7 +316,7 @@ const UpdateAthleteStatus = () => {
         </Button>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

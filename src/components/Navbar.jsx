@@ -42,56 +42,11 @@ let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-
-/* 
-
-
-const settingUserType = (user_type) => {
-  switch (user_type) {
-    case "AH":
-      return "Athlete";
-
-    case "GP":
-      return "Global President";
-
-    case "NP":
-      return "National President";
-
-    case "EM":
-      return "Event Manager";
-
-    case "ITM":
-      return "IT Manager";
-
-    case "IME":
-      return "IT Manager Page Editor"; // Note: Corrected from "ITM"
-
-    case "MM":
-      return "Marketing Manager";
-
-    case "SM":
-      return "Sales Manager";
-
-    case "VM":
-      return "Validation Manager";
-
-    case "LM":
-      return "Legal Manager";
-
-    case "RS":
-      return "Referee & support";
-
-    default:
-      return "Guest";
-  }
-}; */
-
-import {settingUserType} from "../context/user_types";
+import { settingUserType } from "../context/user_types";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -170,20 +125,23 @@ const Navbar = () => {
                 {t("navbar.btn2")}
               </Link>
 
-              <Link to="/competitions" href="/competitions" className="nav_btns">
+              <Link
+                to="/competitions"
+                href="/competitions"
+                className="nav_btns"
+              >
                 {t("navbar.btn6")}
               </Link>
 
-              <Link to="/news"  href="/news" className="nav_btns">
+              <Link to="/news" href="/news" className="nav_btns">
                 {t("navbar.btn3")}
               </Link>
 
-            <Link to="/sponsors" href="/sponsors" className="nav_btns">
-              {t("navbar.btn7")}            
-            </Link>
+              <Link to="/sponsors" href="/sponsors" className="nav_btns">
+                {t("navbar.btn7")}
+              </Link>
 
-
-              <Link to="/faq" href="/faq"  className="nav_btns">
+              <Link to="/faq" href="/faq" className="nav_btns">
                 {t("navbar.btn4")}
               </Link>
 
@@ -198,230 +156,240 @@ const Navbar = () => {
 
                 <Tooltip title="Account settings">
                   <>
-                  <div className="flex gap-2 items-center justify-center select-none cursor-pointer"  onClick={handleClick}>
-                    <IconButton
-                     /*  onClick={handleClick} */
-                      size="small"
-                      sx={{ ml: 2 }}
-                      aria-controls={open1 ? "account-menu" : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open1 ? "true" : undefined}
+                    <div
+                      className="flex gap-2 items-center justify-center select-none cursor-pointer"
+                      onClick={handleClick}
                     >
-                      {profile_image ? (
-                        <Avatar
-                          sx={{ width: 32, height: 32 }}
-                          src={
-                            S3_BUCKET_CDN_BASE_URL +
-                            "/profile_pictures/" +
-                            profile_image
-                          }
-                        />
-                      ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>
-                          {username.charAt(0).toUpperCase()}
-                        </Avatar>
-                      )}
-                    </IconButton>
-                    <p
-                     /*  onClick={handleClick} */
-                      className="hidden md:block text-black_second text-medium font-normal lexend-font select-none cursor-pointer"
-                    >
-                      {settingUserType(user_type)}
-                    </p>
-                  </div>
-
-                  <Menu
-                    anchorEl={anchorEl}
-                    id="account-menu"
-                    open={open1}
-                    onClose={handleClose}
-                    onClick={handleClose}
-                     className="max-w-[26rem]"  
-                    PaperProps={{
-
-                      elevation: 0,
-                      sx: {
-                      
-                        overflowY: "auto",
-                        overflowX: "hidden",
-                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                        mt: 1.5,
-                        "& .MuiAvatar-root": {
-                          width: 32,
-                          height: 32,
-                          ml: -0.5,
-                          mr: 1,
-                        },
-                        "&::before": {
-                          content: '""',
-                          display: "block",
-                          position: "absolute",
-                          top: 0,
-                          right: 14,
-                          width: 10,
-                          height: 10,
-                          bgcolor: "background.paper",
-                          transform: "translateY(-50%) rotate(45deg)",
-                          zIndex: 0,
-                        },
-                      },
-                    }}
-                    transformOrigin={{ horizontal: "right", vertical: "top" }}
-                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                  >
-                    <MenuItem to="/myaccount#myAccount" component={Link}>
-                      {profile_image ? (
-                        <Avatar
-                          sx={{ width: 32, height: 32 }}
-                          src={
-                            S3_BUCKET_CDN_BASE_URL +
-                            "/profile_pictures/" +
-                            profile_image
-                          }
-                        />
-                      ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>
-                          {username.charAt(0).toUpperCase()}
-                        </Avatar>
-                      )}
-
-                      <p className="lexend-font font-normal text-black_second break-all"
-                      
-                      style={{
-                        wordWrap: "break-word",
-                        whiteSpace: "normal",
-                        overflowWrap: "break-word",
-                     
-                      }}
-
+                      <IconButton
+                        /*  onClick={handleClick} */
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open1 ? "account-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open1 ? "true" : undefined}
                       >
-                        {username}
+                        {profile_image ? (
+                          <Avatar
+                            sx={{ width: 32, height: 32 }}
+                            src={
+                              S3_BUCKET_CDN_BASE_URL +
+                              "/profile_pictures/" +
+                              profile_image
+                            }
+                          />
+                        ) : (
+                          <Avatar sx={{ width: 32, height: 32 }}>
+                            {username.charAt(0).toUpperCase()}
+                          </Avatar>
+                        )}
+                      </IconButton>
+                      <p
+                        /*  onClick={handleClick} */
+                        className="hidden md:block text-black_second text-medium font-normal lexend-font select-none cursor-pointer"
+                      >
+                        {settingUserType(user_type)}
                       </p>
-                    </MenuItem>
-                    <Divider />
+                    </div>
 
-                    <MenuItem to="/myaccount#settings" component={Link}>
-                      <ListItemIcon>
-                        <img
-                          src="/myaccount/settings_dark.svg"
-                          className="icon"
-                        />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second break-all font-normal">
-                        {t("navbar.profile1")}
-                      </span>
-                    </MenuItem>
+                    <Menu
+                      anchorEl={anchorEl}
+                      id="account-menu"
+                      open={open1}
+                      onClose={handleClose}
+                      onClick={handleClose}
+                      className="max-w-[26rem]"
+                      PaperProps={{
+                        elevation: 0,
+                        sx: {
+                          overflowY: "auto",
+                          overflowX: "hidden",
+                          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                          mt: 1.5,
+                          "& .MuiAvatar-root": {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                          },
+                          "&::before": {
+                            content: '""',
+                            display: "block",
+                            position: "absolute",
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: "background.paper",
+                            transform: "translateY(-50%) rotate(45deg)",
+                            zIndex: 0,
+                          },
+                        },
+                      }}
+                      transformOrigin={{ horizontal: "right", vertical: "top" }}
+                      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                    >
+                      <MenuItem to="/myaccount#myAccount" component={Link}>
+                        {profile_image ? (
+                          <Avatar
+                            sx={{ width: 32, height: 32 }}
+                            src={
+                              S3_BUCKET_CDN_BASE_URL +
+                              "/profile_pictures/" +
+                              profile_image
+                            }
+                          />
+                        ) : (
+                          <Avatar sx={{ width: 32, height: 32 }}>
+                            {username.charAt(0).toUpperCase()}
+                          </Avatar>
+                        )}
 
+                        <p
+                          className="lexend-font font-normal text-black_second break-all"
+                          style={{
+                            wordWrap: "break-word",
+                            whiteSpace: "normal",
+                            overflowWrap: "break-word",
+                          }}
+                        >
+                          {username}
+                        </p>
+                      </MenuItem>
+                      <Divider />
 
-
-                    <MenuItem to="/myaccount#createdCampaigns" component={Link}>
-                      <ListItemIcon>
-                        <img
-                          src="/myaccount/team_dark.svg"
-                          className="icon"
-                        />
-                      </ListItemIcon>
-                      <span className="lexend-font text-black_second break-all font-normal">
-                        {t("navbar.profile10")}
-                      </span>
-                    </MenuItem>
-
-{(userData.data.user_type !== "SPT") && (<>
-                    <MenuItem to="/myaccount#team" component={Link}>
-                      <ListItemIcon>
-                        <img src="/myaccount/team_dark.svg" className="icon" />
-                      </ListItemIcon>
-                      <span className="lexend-font font-normal text-black_second break-all">
-                        {t("navbar.profile2")}
-                      </span>
-                    </MenuItem>
-                    </>)}
-
-                    {(userData.data.user_type === "AH" || userData.data.user_type === "NP" ) && (<>
-                      <MenuItem to="/myaccount#elections" component={Link}>
+                      <MenuItem to="/myaccount#settings" component={Link}>
                         <ListItemIcon>
                           <img
-                            src="/myaccount/ballot_dark.png"
+                            src="/myaccount/settings_dark.svg"
                             className="icon"
                           />
                         </ListItemIcon>
                         <span className="lexend-font text-black_second break-all font-normal">
-                          {t("navbar.profile3")}
+                          {t("navbar.profile1")}
                         </span>
                       </MenuItem>
-                      </>
-                    )}
 
-                    {(userData.data.user_type === "EM" ||
-                      userData.data.user_type === "ITM" ||
-                      userData.data.user_type === "GP" ||
-                      userData.data.user_type === "ITM" ||
-                      userData.data.user_type === "SM" ||
-                      userData.data.user_type === "MM") &&
-                      userData.data.passportStatus === "validated" && (
-                        <MenuItem to="/myaccount#news" component={Link}>
+                      <MenuItem
+                        to="/myaccount#createdCampaigns"
+                        component={Link}
+                      >
+                        <ListItemIcon>
+                          <img
+                            src="/myaccount/team_dark.svg"
+                            className="icon"
+                          />
+                        </ListItemIcon>
+                        <span className="lexend-font text-black_second break-all font-normal">
+                          {t("navbar.profile10")}
+                        </span>
+                      </MenuItem>
+
+                      {userData.data.user_type !== "SPT" && (
+                        <>
+                          <MenuItem to="/myaccount#team" component={Link}>
+                            <ListItemIcon>
+                              <img
+                                src="/myaccount/team_dark.svg"
+                                className="icon"
+                              />
+                            </ListItemIcon>
+                            <span className="lexend-font font-normal text-black_second break-all">
+                              {t("navbar.profile2")}
+                            </span>
+                          </MenuItem>
+                        </>
+                      )}
+
+                      {(userData.data.user_type === "AH" ||
+                        userData.data.user_type === "NP") && (
+                        <>
+                          <MenuItem to="/myaccount#elections" component={Link}>
+                            <ListItemIcon>
+                              <img
+                                src="/myaccount/ballot_dark.png"
+                                className="icon"
+                              />
+                            </ListItemIcon>
+                            <span className="lexend-font text-black_second break-all font-normal">
+                              {t("navbar.profile3")}
+                            </span>
+                          </MenuItem>
+                        </>
+                      )}
+
+                      {(userData.data.user_type === "EM" ||
+                        userData.data.user_type === "ITM" ||
+                        userData.data.user_type === "GP" ||
+                        userData.data.user_type === "ITM" ||
+                        userData.data.user_type === "SM" ||
+                        userData.data.user_type === "MM") &&
+                        userData.data.passportStatus === "validated" && (
+                          <MenuItem to="/myaccount#news" component={Link}>
+                            <ListItemIcon>
+                              <img
+                                src="/myaccount/news_dark.svg"
+                                className="icon"
+                              />
+                            </ListItemIcon>
+                            <span className="lexend-font text-black_second break-all font-normal">
+                              {t("navbar.profile4")}
+                            </span>
+                          </MenuItem>
+                        )}
+
+                      {(userData.data.user_type === "VM" ||
+                        userData.data.user_type === "GP") && (
+                        <MenuItem
+                          to="/myaccount#passportVerification"
+                          component={Link}
+                        >
                           <ListItemIcon>
                             <img
-                              src="/myaccount/news_dark.svg"
+                              src="/myaccount/passport_dark.svg"
                               className="icon"
                             />
                           </ListItemIcon>
                           <span className="lexend-font text-black_second break-all font-normal">
-                            {t("navbar.profile4")}
+                            {t("navbar.profile5")}
                           </span>
                         </MenuItem>
                       )}
 
-                    {(userData.data.user_type === "VM" ||
-                      userData.data.user_type === "GP") && (
-                      <MenuItem
-                        to="/myaccount#passportVerification"
-                        component={Link}
-                      >
+                      {(userData.data.user_type === "VM" ||
+                        userData.data.user_type === "EM" ||
+                        userData.data.user_type === "ITM" ||
+                        userData.data.user_type === "MM" ||
+                        userData.data.user_type === "SM" ||
+                        userData.data.user_type === "LM" ||
+                        userData.data.user_type === "GP") && (
+                        <MenuItem
+                          to="/myaccount#loginTrafficHistory"
+                          component={Link}
+                        >
+                          <ListItemIcon>
+                            <img
+                              src="/myaccount/login_history_dark.svg"
+                              className="icon"
+                            />
+                          </ListItemIcon>
+                          <span className="lexend-font text-black_second break-all font-normal">
+                            {t("navbar.profile6")}
+                          </span>
+                        </MenuItem>
+                      )}
+
+                      <MenuItem onClick={logoutUser}>
                         <ListItemIcon>
-                          <img
-                            src="/myaccount/passport_dark.svg"
-                            className="icon"
+                          <Logout
+                            fontSize="small"
+                            style={{ color: "#D24949" }}
                           />
                         </ListItemIcon>
-                        <span className="lexend-font text-black_second break-all font-normal">
-                          {t("navbar.profile5")}
+                        <span className="lexend-font text-red_second break-all font-normal">
+                          {t("navbar.profile7")}
                         </span>
                       </MenuItem>
-                    )}
-
-                    {(userData.data.user_type === "VM" ||
-                      userData.data.user_type === "EM" ||
-                      userData.data.user_type === "ITM" ||
-                      userData.data.user_type === "MM" ||
-                      userData.data.user_type === "SM" ||
-                      userData.data.user_type === "LM" ||
-                      userData.data.user_type === "GP") && (
-                      <MenuItem
-                        to="/myaccount#loginTrafficHistory"
-                        component={Link}
-                      >
-                        <ListItemIcon>
-                          <img
-                            src="/myaccount/login_history_dark.svg"
-                            className="icon"
-                          />
-                        </ListItemIcon>
-                        <span className="lexend-font text-black_second break-all font-normal">
-                          {t("navbar.profile6")}
-                        </span>
-                      </MenuItem>
-                    )}
-
-                    <MenuItem onClick={logoutUser}>
-                      <ListItemIcon>
-                        <Logout fontSize="small" style={{ color: "#D24949" }} />
-                      </ListItemIcon>
-                      <span className="lexend-font text-red_second break-all font-normal">
-                        {t("navbar.profile7")}
-                      </span>
-                    </MenuItem>
-                  </Menu>
+                    </Menu>
                   </>
                 </Tooltip>
               </>
@@ -505,7 +473,7 @@ const Navbar = () => {
         </ListItem>
 
         <ListItem>
-          <Link to="/campaign"  href="/campaign" className="nav_btns">
+          <Link to="/campaign" href="/campaign" className="nav_btns">
             <span className="font-normal text-red_second lexend-font">
               {t("navbar.btn2")}
             </span>
@@ -546,7 +514,6 @@ const Navbar = () => {
 
         <ListItem>
           <Button
-            
             onClick={() => {
               navigate("/supporters");
             }}
@@ -576,7 +543,6 @@ const Navbar = () => {
 
         <ListItem>
           <Button
-          
             onClick={() => {
               navigate("/login");
             }}

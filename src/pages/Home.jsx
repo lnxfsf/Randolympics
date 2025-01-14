@@ -19,7 +19,7 @@ import { GridOfSportsHome } from "../components/Home/GridOfSportsHome";
 import { FAQ } from "../components/Home/FAQ";
 
 import { FirstScreenHome } from "./Home/FirstScreenHome";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import { SecondScreenHome } from "./Home/SecondScreenHome";
 import { Navbar } from "../components/Navbar";
 import { ThirdScreenHome } from "./Home/ThirdScreenHome";
@@ -212,7 +212,7 @@ const Home = () => {
 
       <ContactUsForm />
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

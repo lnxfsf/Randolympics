@@ -1,7 +1,6 @@
-import "../styles/randomize.scoped.scss";
+import "../../styles/randomize.scoped.scss";
 
-import { Navbar } from "./Navbar";
-import { Footer } from "../components/Footer";
+import { Navbar } from "../Navbar";
 
 import { Button, TextField, InputAdornment, IconButton } from "@mui/material";
 import { useRef, useState, useEffect } from "react";
@@ -15,13 +14,13 @@ import Menu from "@mui/material/Menu";
 
 import { useNavigate } from "react-router-dom";
 
-import { RandomizeItem } from "../components/Randomize/RandomizeItem";
+import { RandomizeItem } from "../Randomize/RandomizeItem";
 import axios from "axios";
-import { FooterClean } from "./FooterClean";
+import { Footer } from "../Footer";
 
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { MockupRandomizerSelect } from "./MockupRandomizer/MockupRandomizerSelect";
+import { MockupRandomizerSelect } from "./MockupRandomizerSelect";
 
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
@@ -51,49 +50,41 @@ const days = [
   { day: "Sunday", date: "July 16th" },
 ];
 
-
 const whichDay = (date) => {
-  switch(date) {
+  switch (date) {
     case "July 8th":
       return t("mockupRandomizer.table2");
       break;
-      case "July 9th":
-        return t("mockupRandomizer.table3");
-        break;
-        case "July 10th":
-          return t("mockupRandomizer.table4");
-          break;
-          case "July 11th":
-            return t("mockupRandomizer.table5");
-            break;
-            case "July 12th":
-              return t("mockupRandomizer.table6");
-              break;
+    case "July 9th":
+      return t("mockupRandomizer.table3");
+      break;
+    case "July 10th":
+      return t("mockupRandomizer.table4");
+      break;
+    case "July 11th":
+      return t("mockupRandomizer.table5");
+      break;
+    case "July 12th":
+      return t("mockupRandomizer.table6");
+      break;
 
-              case "July 13th":
-                return t("mockupRandomizer.table7");
-                break;
+    case "July 13th":
+      return t("mockupRandomizer.table7");
+      break;
 
-                case "July 14th":
-                  return t("mockupRandomizer.table8");
-                  break;
+    case "July 14th":
+      return t("mockupRandomizer.table8");
+      break;
 
-                  case "July 15th":
-                    return t("mockupRandomizer.table9");
-                    break;
+    case "July 15th":
+      return t("mockupRandomizer.table9");
+      break;
 
-
-                    
-                  case "July 16th":
-                    return t("mockupRandomizer.table10");
-                    break;
-
-
-
+    case "July 16th":
+      return t("mockupRandomizer.table10");
+      break;
   }
-
-}
-
+};
 
 const Randomize = () => {
   const { t } = useTranslation();
@@ -1063,8 +1054,8 @@ return dataS.map((data, index) => { */
                       </div>
 
                       <p className="mt-7 text-center w-[70%]">
-                         { t(`sports.${data.translatedSportName}`) }
-                       {/*  {data.sportName} */}
+                        {t(`sports.${data.translatedSportName}`)}
+                        {/*  {data.sportName} */}
                       </p>
                     </div>
                   </>
@@ -1089,15 +1080,7 @@ return dataS.map((data, index) => { */
                 </tr>
               </thead>
               <tbody>
-            
-
                 {days.map(({ day, date }) => (
-
-
-
-                  
-
-
                   /* ovo je jedan row ! */
                   <tr key={date}>
                     <th className="thz font-medium">
@@ -1440,7 +1423,7 @@ return dataS.map((data, index) => { */
           {snackbarText}
         </Alert>
       </Snackbar>
-      <FooterClean />
+      <Footer />
     </>
   );
 };

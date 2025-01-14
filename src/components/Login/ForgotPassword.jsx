@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { NavbarClean } from "../NavbarClean";
-import { FooterClean } from "../FooterClean";
+import { Footer } from "../Footer";
 import { useTranslation } from "react-i18next";
 
 import Snackbar from "@mui/material/Snackbar";
@@ -190,7 +190,7 @@ const ForgotPassword = () => {
         </Alert>
       </Snackbar>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

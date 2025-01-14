@@ -1,7 +1,8 @@
 import { QRCode } from "react-qr-code";
-import { NavbarHome } from "../components/NavbarHome";
+
+
 import { Button } from "@mui/material";
-import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
+
 import "@mui/material/styles/styled";
 import { useLocation } from "react-router-dom";
 
@@ -93,7 +94,7 @@ registerPlugin(
 import AuthCode from "react-auth-code-input";
 import { WarningTextPopup } from "../components/Supporters/WarningTextPopup";
 import { NavbarClean } from "../components/NavbarClean";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import { SupporterFirstPart } from "./SupportersParts/SupporterFirstPart";
 import { SupporterSecondPart } from "./SupportersParts/SupporterSecondPart";
 import { SupporterThirdPart } from "./SupportersParts/SupporterThirdPart";
@@ -1015,7 +1016,7 @@ const Supporters = () => {
         </Alert>
       </Snackbar>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

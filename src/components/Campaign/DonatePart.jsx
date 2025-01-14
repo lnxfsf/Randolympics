@@ -10,7 +10,6 @@ import Alert from "@mui/material/Alert";
 import { OutlinedInput, InputAdornment } from "@mui/material";
 
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
-import { PaymentPage } from "../Supporters/PaymentPage";
 import AuthCode from "react-auth-code-input";
 
 import { useTranslation } from "react-i18next";

@@ -25,7 +25,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { NavbarClean } from "../components/NavbarClean";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 
 import { useTranslation } from "react-i18next";
 
@@ -416,7 +416,7 @@ const Login = () => {
         </Alert>
       </Snackbar>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

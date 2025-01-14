@@ -20,7 +20,7 @@ import {
   Divider,
 } from "@mui/material";
 
-import { NavbarHomeCollapsed } from "../components/NavbarHomeCollapsed";
+
 import { useTranslation } from "react-i18next";
 
 import Radio from "@mui/material/Radio";
@@ -32,7 +32,7 @@ import FormGroup from "@mui/material/FormGroup";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { Navbar } from "../components/Navbar";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 
 let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
@@ -712,7 +712,7 @@ const Campaign = () => {
           </Stack>
         </div>
       </div>
-      <FooterClean />
+      <Footer />
     </>
   );
 };

@@ -18,13 +18,13 @@ import DonationForm from "../Payments/DonationForm";
 
 import { useParams, useNavigate } from "react-router-dom";
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
-import { PaymentPage } from "../Supporters/PaymentPage";
+
 
 import AuthCode from "react-auth-code-input";
 import { Button } from "@mui/material";
 
 import { Navbar } from "../Navbar";
-import { FooterClean } from "../FooterClean";
+import { Footer } from "../Footer";
 
 import { Avatar, AvatarGroup } from "@mui/material";
 
@@ -473,7 +473,7 @@ function formatDate(dateString) {
         </Alert>
       </Snackbar>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

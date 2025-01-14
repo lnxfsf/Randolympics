@@ -64,8 +64,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
 import zIndex from "@mui/material/styles/zIndex";
-import { NavbarClean } from "../../components/NavbarClean";
-import { FooterClean } from "../../components/FooterClean";
+
 
 import { useTranslation } from "react-i18next";
 

@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 
 import "../../../styles/blogPosts.scoped.scss";
 import { ItemUpcomingGamesList } from "../../NewsAdmin/UpcomingGames/ItemUpcomingGamesList";
-import { NavbarHome } from "../../NavbarHome";
+
+
 
 import { useNavigate } from "react-router-dom";
-import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
-import { FooterClean } from "../../FooterClean";
+import { Footer } from "../../Footer";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -122,7 +123,7 @@ const ReadMoreUpcomingGames = () => {
         </button>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

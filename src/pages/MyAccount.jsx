@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import "../styles/myaccount.scoped.scss";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -309,7 +309,7 @@ const MyAccount = () => {
 
       
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

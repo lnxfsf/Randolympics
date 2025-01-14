@@ -1,12 +1,11 @@
 import "animate.css";
 
-import { NavbarHome } from "../components/NavbarHome";
+
 import { EconomicsNewsBlock } from "../components/News/Economics/EconomicsNewsBlock";
 import { NewsNewsBlock } from "../components/News/NewsBlock/NewsNewsBlock";
 import { UpcomingGames } from "../components/News/UpcomingGames/UpcomingGames";
-import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +39,7 @@ const News = () => {
                 <EconomicsNewsBlock />
             </div> */}
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

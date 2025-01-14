@@ -1,92 +1,107 @@
-import "../styles/footer.scoped.scss";
-import { Button } from "@mui/material";
-
-
 import { useNavigate } from "react-router-dom";
+
+import { useTranslation, Trans } from "react-i18next";
+import { MenuItem, Select } from "@mui/material";
+
+import { lngs } from "../../languages";
+import { useState } from "react";
+
+
+import { useCookies } from 'react-cookie';
+
+
 
 
 const Footer = () => {
-
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
-
   
-  const handleToMainHome = () => {
-    navigate("/supporters");
-  };
+  const [cookies, setCookie] = useCookies(['cookieConsentOpen']);
 
+  const openCookieWindow = () => {
+    setCookie("cookieConsentOpen", true, {path: "/"});
+
+  }
+
+  const handleLanguageChange = (event) => {
+    i18n.changeLanguage(`${event.target.value}`);
+  };
 
   return (
     <>
-      <div>
-        <div className="fuuter flex">
-          <div className="basis-1/2">
-            <div className="basis-1/2 flex-col wrap ">
-              <h1 className="pt-20 pl-16 text-4xl	" style={{ color: "#ffffff" }}>
-                Ready to get started ?
-              </h1>
+      <div className="flex flex-col m-12">
+        <hr className="w-full" />
 
-       
-              <Button
-                onClick={handleToMainHome}
-                className="w-56 "
-                style={{ marginTop: "20px", marginLeft: "64px" }}
-                sx={{
-                  height: "60px",
-                  bgcolor: "#fff",
-                  color: "#000",
-                  borderRadius: 25,
-                  border: `1px solid #FFF`,
-                  "&:hover": {
-                    background: "rgb(255, 255, 255)",
-                    color: "black",
-                    border: `1px solid rgb(255, 255, 255)`,
-                  },
-                }}
-                
-              >
-                <span className="lexend-font">Sign up a friend</span>
-              </Button>
-
-              <img className="pt-16 pl-16 w-64 	" src="/footer/logo_footer.svg" />
-
-              <div className="flex pl-16 gap-2">
-                <img className="pt-8  w-32" src="/footer/app_store.svg" />
-                <img className="pt-8  w-32 " src="/footer/google_play.svg" />
-              </div>
-            </div>
+        <div className="flex justify-between pt-12 flex-col lg:flex-row  ">
+          <div>
+            <p className="lexend-font font-bold">
+              2024 Randolympics. 
+            </p>
           </div>
 
-          <div className="basis-1/2 flex-col wrap footer-basic">
-            <div className="footer_img">
-              <img className="main_img" src="/footer/footer_img.png" />
-            </div>
+          <div className="flex flex-col">
+            <div className="flex gap-4 text-[#d24949] lexend-font font-bold flex-col lg:flex-row mt-4 lg:mt-0">
+              <p className="cursor-pointer select-none " onClick={()=> {
+                window.scrollTo(0, 0);;
+                navigate("/privacyPolicy");
+              }}>
+                {t("footer.privacy")}
+              </p>
+              <p
+                className="cursor-pointer select-none"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  navigate("/tos");
+                }}
+              >
+                {t("footer.tos")}
+              </p>
 
-            <div className="social">
-              <a id="facebook" href="#">
-                <i
-                  className="bx bxl-facebook bx-tada-hover"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </a>
-
-              <a id="insta" href="#">
-                <i
-                  className="bx bxl-linkedin bx-tada-hover"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </a>
-
-              <a id="twitter" href="#">
-                <i
-                  className="bx bxl-twitter bx-tada-hover"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </a>
+              {/* as for now, we don't yet use non-essential cookies. https://law.stackexchange.com/questions/81602/why-does-the-gdpr-matter-to-me-a-us-citizen-with-no-property-in-europe/81624#81624 
+            https://law.stackexchange.com/questions/94052/if-website-uses-cookies-only-after-users-login-can-i-ask-for-cookie-consent-dur
+            */}
+              <p className="cursor-pointer select-none " onClick={openCookieWindow} >{t("footer.cookie")}</p>
             </div>
           </div>
         </div>
+
+
+        <div className="flex justify-between items-start mt-4  flex-col md:flex-row ">
+          <div className="flex flex-col md:flex-row">
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-3 md:space-y-2">
+    <a href="/campaign">{t("navbar.btn2")}</a>
+    <a href="/competitions">{t("navbar.btn6")}</a>
+    <a href="/news">{t("navbar.btn3")}</a>
+    <a href="/faq">{t("navbar.btn4")}</a>
+  </div>
+  
+  <div className="lexend-font text-red_second font-bold flex flex-col space-y-3 md:space-y-2 md:ml-8 mt-3 md:mt-0">
+    <a href="/supporters">{t("navbar.profile9")}</a>
+    <a href="/randomize">{t("home.firstScreen.subtitle2")}</a>
+    <a href="/login">{t("navbar.profile8")}</a>
+    <a href="/register">{t("login.content9")}</a>
+  </div>
+  </div>
+  
+  <div className="mt-4 justify-self-end		">
+    <Select
+      labelId="language-switcher"
+      value={i18n.resolvedLanguage}
+      onChange={handleLanguageChange}
+      className="sm:w-[100px] h-10 "
+      style={{ color: "#000", borderRadius: "10px" }}
+    >
+      {Object.keys(lngs).map((lng) => (
+        <MenuItem key={lng} value={lng} >
+          {lngs[lng].translations[i18n.resolvedLanguage]}
+        </MenuItem>
+      ))}
+    </Select>
+  </div>
+</div>
+
       </div>
     </>
   );

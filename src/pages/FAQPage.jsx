@@ -1,4 +1,4 @@
-import { FooterClean } from "../components/FooterClean"
+import { Footer } from "../components/Footer"
 import { FAQ } from "../components/Home/FAQ"
 import { Navbar } from "../components/Navbar"
 
@@ -10,7 +10,7 @@ const FAQPage = () => {
     
     <Navbar />
     <FAQ />
-    <FooterClean />
+    <Footer />
     </>)
 
 }

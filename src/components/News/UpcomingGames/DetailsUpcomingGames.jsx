@@ -4,10 +4,11 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import "react-quill/dist/quill.snow.css";
-import { NavbarHome } from "../../NavbarHome";
+
+
 
 import "../../../styles/blogPosts.scoped.scss";
-import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -16,7 +17,7 @@ let BACKEND_SERVER_BASE_URL =
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
-import { FooterClean } from "../../FooterClean";
+import { Footer } from "../../Footer";
 
 const readingTime = (text) => {
   const wpm = 225;
@@ -135,7 +136,7 @@ const DetailsUpcomingGames = () => {
         </div>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

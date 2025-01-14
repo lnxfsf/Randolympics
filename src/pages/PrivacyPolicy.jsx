@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 
 import { useTranslation } from "react-i18next";
 
@@ -108,7 +108,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

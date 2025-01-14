@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { NavbarClean } from "../components/NavbarClean";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ const ToS = () => {
 
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

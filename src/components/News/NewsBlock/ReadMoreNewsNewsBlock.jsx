@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import "../../../styles/blogPosts.scoped.scss";
 import { ItemNewsList } from "../../NewsAdmin/News/ItemNewsList";
 
-import { NavbarHome } from "../../NavbarHome";
+
 
 import { useNavigate } from "react-router-dom";
-import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { Navbar } from "../../Navbar";
-import { FooterClean } from "../../FooterClean";
+import { Footer } from "../../Footer";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -104,7 +104,7 @@ const ReadMoreNewsNewsBlock = () => {
         </Stack>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

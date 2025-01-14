@@ -53,9 +53,8 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginFileValidateType from "filepond-plugin-image-edit";
 import FilePondPluginFilePoster from "filepond-plugin-file-poster";
 import "@pqina/pintura/pintura.css";
-import HorizontalLinearAlternativeLabelStepper from "../components/Supporters/HorizontalLinearAlternativeLabelStepper";
 import { NavbarClean } from "../components/NavbarClean";
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 
 //registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -1260,7 +1259,7 @@ const Register = () => {
         </Alert>
       </Snackbar>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

@@ -19,7 +19,9 @@ const MockupRandomizerSelect = ({
     <>
       <div className="w-full flex justify-center items-center flex-col">
         <div className="flex w-full p-4 md:w-[50%] 2xl:w-[30%]  mt-8 text-black_second lexend-font flex-col ">
-          <p className="text-xl md:text-2xl font-medium ">{t("mockupRandomizer.select16")}</p>
+          <p className="text-xl md:text-2xl font-medium ">
+            {t("mockupRandomizer.select16")}
+          </p>
 
           {/* gender */}
           <div className="flex w-full gap-4 mt-4 ">
@@ -99,8 +101,6 @@ const MockupRandomizerSelect = ({
             <p className="text-xl md:text-2xl font-medium ">
               {t("mockupRandomizer.select3")}
             </p>
-
-            
           </div>
 
           <div className="flex w-full gap-4 mt-4 ">
@@ -254,7 +254,6 @@ const MockupRandomizerSelect = ({
                 border: `1px solid rgba(210, 73, 73, 1)`,
               },
             }}
-            
           >
             <img src="supporters/left_arrow.svg" className="mr-2" />{" "}
             <span className="lexend-font ">
@@ -262,18 +261,17 @@ const MockupRandomizerSelect = ({
             </span>
           </Button>
 
-
-<div className="w-full flex items-center justify-center mt-4 flex-col lexend-font">
+          <div className="w-full flex items-center justify-center mt-4 flex-col lexend-font">
             <p className="  text-center ">{t("mockupRandomizer.content11")}</p>
-          <Popup
+            <Popup
               trigger={
-                  <p className=" text-red_second cursor-pointer text-center">{t("mockupRandomizer.content12")}</p>
-               /*  <img
+                <p className=" text-red_second cursor-pointer text-center">
+                  {t("mockupRandomizer.content12")}
+                </p>
+                /*  <img
                   src="/randomizer/info.svg"
                   className="cursor-pointer select-none"
                 /> */
-
-                
               }
               position="right center"
               className="popup-content "
@@ -316,11 +314,8 @@ const MockupRandomizerSelect = ({
                 </div>
               </div>
             </Popup>
-            </div>
-
+          </div>
         </div>
-
-        
       </div>
     </>
   );

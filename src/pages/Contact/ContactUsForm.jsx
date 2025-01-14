@@ -1,4 +1,3 @@
-import { FooterClean } from "../../components/FooterClean";
 import { Navbar } from "../../components/Navbar";
 import { useTranslation } from "react-i18next";
 import TextField from "@mui/material/TextField";

@@ -1,4 +1,4 @@
-import { FooterClean } from "../components/FooterClean";
+import { Footer } from "../components/Footer";
 import { GridOfSportsHome } from "../components/Home/GridOfSportsHome";
 import { Navbar } from "../components/Navbar";
 
@@ -31,7 +31,7 @@ const { t } = useTranslation();
         </div>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };

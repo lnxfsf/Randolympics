@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 
 import "../../../styles/blogPosts.scoped.scss";
 
-import { NavbarHome } from "../../NavbarHome";
+
 
 import { useNavigate } from "react-router-dom";
 import { ItemEconomicsList } from "../../NewsAdmin/Economics/ItemEconomicsList";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
-import { NavbarHomeCollapsed } from "../../NavbarHomeCollapsed";
+
 import { Navbar } from "../../Navbar";
-import { FooterClean } from "../../FooterClean";
+import { Footer } from "../../Footer";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -123,7 +123,7 @@ const ReadMoreNewsEconomics = () => {
         </button>
       </div>
 
-      <FooterClean />
+      <Footer />
     </>
   );
 };
