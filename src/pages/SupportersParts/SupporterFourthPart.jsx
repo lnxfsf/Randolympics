@@ -89,7 +89,7 @@ const SupporterFourthPart = ({
       );
 
       if (response.status === 200) {
-        setSnackbarMessage("Donation succeeded");
+        setSnackbarMessage(t("popupMessages.text7"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
 
@@ -109,8 +109,8 @@ const SupporterFourthPart = ({
         { discountCode, friendNationality, amountOriginal: amount * 100 }
       );
 
-      console.log("dobija: ");
-      console.log(response);
+     
+      
 
       if (response.status !== 200) {
         setSnackbarStatus("error");

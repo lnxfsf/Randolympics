@@ -1060,7 +1060,13 @@
     "content4": "Tekst",
     "content5": "Predmet",
     "content6": "Napišite svoju poruku...",
-    "content7": "Pošaljite"
+    "content7": "Pošaljite",
+    "content8": "Unesi email",
+   "content9": "Unesi ime",
+   "content10": "Unesi naslov",
+   "content11": "Unesi poruku",
+   "content12": "Poruka poslata",
+    "content13": "Poruka nije poslata"
 
 
 
@@ -1997,7 +2003,16 @@
     "text4": "Podnaslov se ne može ostaviti prazan",
     "text5": "Ne možete ostaviti sadržaj glavnog teksta praznim",
     "text6": "Post izmenjen",
-    "text7": "Donacija uspešna"
+    "text7": "Donacija uspešna",
+    "text8": "Korisnik već postoji",
+    "text9": "Unesite ime sportiste",
+    "text10": "Unesite prezime sportiste",
+    "text11": "Unesite email",
+    "text12": "Telefon nije važeći !",
+    "text13": "Email nije važeći !",
+    "text14": "Izaberi zemlju",
+    "text15": "Navedite najmanje jedan profil društvene mreže",
+    "text16": "Mora imati najmanje 15 godina da bi učestvovao."
 
 
   },

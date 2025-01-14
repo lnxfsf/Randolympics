@@ -1083,10 +1083,18 @@
     "content5": "Subject",
     "content6": "Write your message...",
     "content7": "Send",
-
     "content8": "Insert email",
      "content9": "Insert name",
-     "content10": "Insert name"
+     "content10": "Insert subject",
+     "content11": "Insert message",
+     "content12": "Message sent",
+    "content13": "Message didn't sent"
+
+
+
+
+
+
 
 
 
@@ -2023,7 +2031,17 @@
     "text4": "Can't leave subtitle empty",
     "text5": "Can't leave body content empty",
     "text6": "Post edited",
-    "text7": "Donation succeeded"
+    "text7": "Donation succeeded",
+    "text8": "User already exists",
+    "text9": "Insert athlete first name",
+    "text10": "Insert athlete last name",
+    "text11": "Insert email",
+    "text12": "Phone is not valid !",
+    "text13": "Email is incorrect !",
+    "text14": "Choose country",
+    "text15": "Provide at least one social media profile",
+    "text16": "Must be at least 15 years old to participate."
+
 
 
 

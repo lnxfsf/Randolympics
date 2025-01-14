@@ -171,32 +171,32 @@ const SupporterSecondPart = ({
 
     // if it did, found already existing Athlete user, then it shows something else
     if (responseAthleteUser.data.found) {
-      setSnackbarMessage("User already exists");
+      setSnackbarMessage(t("popupMessages.text8"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (friendName === "") {
-      setSnackbarMessage("Insert athlete first name");
+      setSnackbarMessage(t("popupMessages.text9"));
       setOpenSnackbarFailure(true);
 
       return;
     }
 
     if (friendLastName === "") {
-      setSnackbarMessage("Insert athlete last name");
+      setSnackbarMessage(t("popupMessages.text10"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (friendEmail === "" && !isCelebrity) {
-      setSnackbarMessage("Insert email");
+      setSnackbarMessage(t("popupMessages.text11"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (isPhoneError === true) {
-      setSnackbarMessage("Phone is not valid !");
+      setSnackbarMessage(t("popupMessages.text12"));
       setOpenSnackbarFailure(true);
       return;
     }
@@ -205,21 +205,21 @@ const SupporterSecondPart = ({
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       if (!emailRegex.test(friendEmail)) {
-        setSnackbarMessage("Email is incorrect !");
+        setSnackbarMessage(t("popupMessages.text13"));
         setOpenSnackbarFailure(true);
         return;
       }
     }
 
     if (friendNationality === "") {
-      setSnackbarMessage("Choose country");
+      setSnackbarMessage(t("popupMessages.text14"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     // if all fields are empty
     if (fb_link === "" && ig_link === "" && tw_link === "" && tt_link === "" && yt_link === "" && isCelebrity ) {
-      setSnackbarMessage("Provide at least one social media profile");
+      setSnackbarMessage(t("popupMessages.text15") );
       setOpenSnackbarFailure(true);
       return;
     }
@@ -231,31 +231,31 @@ const SupporterSecondPart = ({
       /^(https?:\/\/)?(www\.)?(tiktok|youtube)\.com\/[A-Za-z0-9._%-]+$|^\@[A-Za-z0-9._%-]+$/;
 
     if (isCelebrity && fb_link !== "" && !socialMediaRegex.test(fb_link)) {
-      setSnackbarMessage("Facebook link has an incorrect format.");
+      setSnackbarMessage(t("popupMessages.content134"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (isCelebrity && ig_link !== "" && !socialMediaRegex.test(ig_link)) {
-      setSnackbarMessage("Instagram link has an incorrect format.");
+      setSnackbarMessage(t("popupMessages.content135"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (isCelebrity && tw_link !== "" && !socialMediaRegex.test(tw_link)) {
-      setSnackbarMessage("X (Twitter) link has an incorrect format.");
+      setSnackbarMessage(t("popupMessages.content136"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (isCelebrity && tt_link !== "" && !socialMediaRegexWithoutSlash.test(tt_link)) {
-      setSnackbarMessage("Tiktok link has an incorrect format.");
+      setSnackbarMessage(t("popupMessages.content137"));
       setOpenSnackbarFailure(true);
       return;
     }
 
     if (isCelebrity && yt_link !== "" && !socialMediaRegexWithoutSlash.test(yt_link)) {
-      setSnackbarMessage("Youtube link has an incorrect format.");
+      setSnackbarMessage(t("popupMessages.content138"));
       setOpenSnackbarFailure(true);
       return;
     }
@@ -387,9 +387,7 @@ const SupporterSecondPart = ({
                             error.status === 500 ||
                             error.main === "File is too large"
                           ) {
-                            setSnackbarMessage(
-                              "File is too large! Maximum allowed size is 4MB."
-                            );
+                            setSnackbarMessage(t("campaign.content141"));
                             setOpenSnackbarFailure(true);
                             filePondRef1.current.removeFiles(); // Remove the invalid file
                           }
@@ -596,7 +594,7 @@ const SupporterSecondPart = ({
                           slotProps={{
                             textField: {
                               helperText:
-                                "Must be at least 15 years old to participate.", // Add the helper text
+                                t("popupMessages.text16"), // Add the helper text
                             },
                           }}
                           format="MMMM DD, YYYY"
@@ -868,7 +866,7 @@ const SupporterSecondPart = ({
                             error.main === "File is too large"
                           ) {
                             setSnackbarMessage(
-                              "File is too large! Maximum allowed size is 4MB."
+                              t("campaign.content141")
                             );
                             setOpenSnackbarFailure(true);
                             filePondRef2.current.removeFiles();

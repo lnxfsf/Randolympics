@@ -104,8 +104,7 @@ const ContactUsForm = () => {
 
     if (subject === "") {
       setSnackbarStatus("error");
-      setSnackbarMessage("Insert subject");
-      setSnackbarMessage(t("contact.content9"));
+      setSnackbarMessage(t("contact.content10"));
       setOpenSnackbar(true);
 
       subjectRef.current.focus();
@@ -114,7 +113,7 @@ const ContactUsForm = () => {
 
     if (message === "") {
       setSnackbarStatus("error");
-      setSnackbarMessage("Insert message");
+      setSnackbarMessage(t("contact.content11"));
       setOpenSnackbar(true);
 
       messageRef.current.focus();
@@ -134,12 +133,12 @@ const ContactUsForm = () => {
 
       if (response.status === 200) {
         setSnackbarStatus("success");
-        setSnackbarMessage("Message sent");
+        setSnackbarMessage(t("contact.content12"));
         setOpenSnackbar(true);
       }
     } catch (error) {
       setSnackbarStatus("error");
-      setSnackbarMessage("Message didn't sent");
+      setSnackbarMessage(t("contact.content13"));
       setOpenSnackbar(true);
     }
   };
