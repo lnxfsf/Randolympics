@@ -464,6 +464,16 @@ const Navbar = () => {
           },
         }}
       >
+
+      <ListItem sx={{ mt: 1 }}>
+          <Link to="/" className="nav_btns">
+            <span className="font-normal text-red_second lexend-font ">
+              {t("navbar.btn8")}
+            </span>
+          </Link>
+        </ListItem>
+
+
         <ListItem sx={{ mt: 1 }}>
           <Link to="/about" className="nav_btns">
             <span className="font-normal text-red_second lexend-font ">
