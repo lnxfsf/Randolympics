@@ -92,6 +92,10 @@ const SupporterFourthPart = ({
         setSnackbarMessage("Donation succeeded");
         setSnackbarStatus("success");
         setOpenSnackbar(true);
+
+        setFourthIsVisible(false);
+        setFifthIsVisible(true);
+
       }
     } catch (e) {
       console.log(e.stack);
@@ -667,6 +671,7 @@ const SupporterFourthPart = ({
                   onClick={() => {
                     if (checkIfCouponValid()) {
                       donateBeforeStripe();
+
                     }
                   }}
                   className="self-center  w-[50%] "

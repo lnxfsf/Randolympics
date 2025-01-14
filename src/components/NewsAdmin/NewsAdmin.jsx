@@ -10,7 +10,6 @@ import { NewsDetails } from "./News/NewsDetails";
 import { CreateNewsPost } from "./News/CreateNewsPost";
 import { useTranslation } from "react-i18next";
 
-
 import { useEffect, useState } from "react";
 
 import Snackbar from "@mui/material/Snackbar";
@@ -78,7 +77,7 @@ const NewsAdmin = () => {
             user_type === "MM" ||
             user_type === "ITM" ||
             user_type === "EM" ||
-            user_type === "SM") && <Tab>News</Tab>}
+            user_type === "SM") && <Tab>{t("news.content11")}</Tab>}
         </TabList>
 
         <TabPanel>
