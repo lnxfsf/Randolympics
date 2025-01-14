@@ -876,7 +876,23 @@
       "userRejected": "Odbijen",
 
       "role1": "Ništa"
+    },
+
+    "firstLogin": {
+      "content1": "Zdravo",
+      "content2": "Koliko je verovatno da ćete prisustvovati",
+      "content3": "Randolympics Igrama",
+      "content4": "99% prihvatam izazov i idem 💪",
+      "content5": "Najverovatnije idem 😄",
+      "content6": "Možda idem 🤔",
+      "content7": "Definitivno ne idem 👎",
+      "content8": "Nastavi"
+
+
     }
+
+
+
   },
   "userTypes": {
     "user_type1": "Atleta",
@@ -1968,6 +1984,44 @@
   },
   "popupMessages": {
     "text1": "Donacija je uspela",
-    "text2": "Donirano"
+    "text2": "Donirano",
+    "text3": "Naslov se ne može ostaviti prazan",
+    "text4": "Podnaslov se ne može ostaviti prazan",
+    "text5": "Ne možete ostaviti sadržaj glavnog teksta praznim",
+    "text6": "Post izmenjen",
+    "text7": "Donacija uspešna"
+
+
+  },
+
+  "news": {
+    "content1": "Naslov",
+    "content2": "Podnaslov",
+    "content3": "Otkaži",
+    "content4": "Sačuvaj",
+    "content5": "Datum nije dostupan",
+    "content6": "Obriši",
+    "content7": "Datum objavljivanja:",
+    "content8": "Ažurirano:",
+    "content9": "Vreme čitanja:",
+    "content10": "minuta čitanja",
+    "content11": "Vesti",
+
+    "content12": "Obrisan post",
+    "content13": "Napravljen post"
+
+
+
+
+
+  },
+  
+  "payments": {
+    "content1" : "Vaša velikodušnost ide daleko !",
+    "content2": "Hvala na podršci !",
+   "content3": "Otkaži"
+
+
+
   }
 }

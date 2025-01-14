@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useCreatePaymentIntent } from "../../hooks/useCreatePaymentIntent";
 import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
-
+import { useTranslation } from "react-i18next";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
@@ -30,6 +30,10 @@ export default function DonationFormItemCampaign({
   discountCode,
   countryAthleteIsIn,
 }) {
+
+  const { t } = useTranslation();
+
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -97,7 +101,7 @@ export default function DonationFormItemCampaign({
 
       
       if (payment) {
-        setSnackbarMessage("Donation succeeded");
+        setSnackbarMessage(t("popupMessages.text7"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
@@ -152,7 +156,7 @@ export default function DonationFormItemCampaign({
         <>
           <Fade in={confirmedPayment} unmountOnExit>
             <Typography p={4} variant="h6" textAlign={"center"}>
-              Your generosity goes a long way!
+            {t("payments.content1")}
             </Typography>
           </Fade>
 

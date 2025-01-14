@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { useTranslation } from "react-i18next";
 import { useSubmitPayment } from "../../hooks/useCapturePayment";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 
@@ -26,9 +26,8 @@ const stripePromise = loadStripe(`${STRIPE_PUBLIC_KEY}`);
 
 const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCancel, handleConfirmPayment }) => {
   const [confirmData, updateConfirmData] = useState(null);
-/* 
-  
-   */
+
+  const { t } = useTranslation();
 
   const stripe = useStripe(`${STRIPE_PUBLIC_KEY}`);
 
@@ -52,7 +51,7 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
 
   return (
     <CardContent>
-        <p className="text-lg text-red_second font-semibold mb-4">Thanks for your support !</p>
+        <p className="text-lg text-red_second font-semibold mb-4">{t("payments.content2")}</p>
         <PaymentElement/>
         <CardActions sx={{ mt: 3, display: 'flex', justifyContent: 'space-between' }}>
             <Button variant="outlined" onClick={handleCancel} 
@@ -72,7 +71,7 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
             }}
 
 
-            ><span className="lexend-font ">Cancel</span></Button>
+            ><span className="lexend-font ">{t("payments.content3")}</span></Button>
             <Button variant="contained" onClick={handleSubmit} disabled={isLoading}
             
             style={{ textTransform: "none" }}

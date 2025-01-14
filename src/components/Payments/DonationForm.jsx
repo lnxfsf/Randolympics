@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useCreatePaymentIntent } from "../../hooks/useCreatePaymentIntent";
 import DonationInput from "./DonationInput";
 import StripeForm from "./StripeForm";
-
+import { useTranslation } from "react-i18next";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
@@ -20,6 +20,10 @@ import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 
 export default function DonationForm({ amount, setAmount, campaignId }) {
+
+  const { t } = useTranslation();
+
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -35,13 +39,7 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
     setOpenSnackbar(false);
   };
 
-  //let { campaignId } = useContext(AuthContext);
-  // console.log(user)
-  console.log("a iz state-a je: " + campaignId);
 
-  // var campaignId = "haha0";
-
-  // const [amount, setAmount] = useState(10);
 
   const [paymentIntent, setPaymentIntent] = useState(null);
   const [confirmedPayment, setConfirmedPayment] = useState(null);
@@ -76,9 +74,8 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
     async (payment) => {
       setConfirmedPayment(payment);
 
-    
       if (payment) {
-        setSnackbarMessage("Donation succeeded");
+        setSnackbarMessage(t("popupMessages.text7"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
@@ -133,7 +130,7 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
         <>
           <Fade in={confirmedPayment} unmountOnExit>
             <Typography p={4} variant="h6" textAlign={"center"}>
-              Your generosity goes a long way!
+              {t("payments.content1")}
             </Typography>
           </Fade>
 

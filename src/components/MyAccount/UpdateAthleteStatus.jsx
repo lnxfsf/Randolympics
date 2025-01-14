@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { FooterClean } from "../FooterClean";
 import { NavbarClean } from "../NavbarClean";
 
+import { useTranslation } from "react-i18next";
+
+
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
@@ -23,6 +26,8 @@ let BACKEND_SERVER_BASE_URL =
 
 const UpdateAthleteStatus = () => {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const [athleteStatus, setAthleteStatus] = useState(() => {
     const storedData =
@@ -173,13 +178,13 @@ const UpdateAthleteStatus = () => {
 
           {/* mt-4 */}
           <p className="text-2xl font-bold  sm:m-8 text-start sm:text-center break-all ">
-            Hello {name} 👋
+            {t("myprofile.firstLogin.content1")} {name} 👋
           </p>
         </div>
 
         <p className="text-start sm:text-start  text-xl font-semibold break-words mt-4 sm:mt-0 mb-8">
-          How probable are you to attend the <br />
-          Randolympics Games
+        {t("myprofile.firstLogin.content2")} <br />
+        {t("myprofile.firstLogin.content3")}
         </p>
 
         <FormControl>
@@ -213,7 +218,7 @@ const UpdateAthleteStatus = () => {
                   }}
                 />
               }
-              label={`I'm 99% taking the challenge and going 💪`}
+              label={t("myprofile.firstLogin.content4")}
               sx={{
                 "& .MuiTypography-root": {
                   fontFamily: "'Lexend', sans-serif",
@@ -233,7 +238,7 @@ const UpdateAthleteStatus = () => {
                   }}
                 />
               }
-              label={`Most likely going 😄`}
+              label={t("myprofile.firstLogin.content5")}
               sx={{
                 "& .MuiTypography-root": {
                   fontFamily: "'Lexend', sans-serif",
@@ -253,7 +258,7 @@ const UpdateAthleteStatus = () => {
                   }}
                 />
               }
-              label={`I'm maybe going 🤔`}
+              label={t("myprofile.firstLogin.content6")}
               sx={{
                 "& .MuiTypography-root": {
                   fontFamily: "'Lexend', sans-serif",
@@ -273,7 +278,7 @@ const UpdateAthleteStatus = () => {
                   }}
                 />
               }
-              label={`I'm definitely not going 👎`}
+              label={t("myprofile.firstLogin.content7")}
               sx={{
                 "& .MuiTypography-root": {
                   fontFamily: "'Lexend', sans-serif",
@@ -307,7 +312,7 @@ const UpdateAthleteStatus = () => {
           
         >
           <img src="/myaccount/continue.svg" className="mr-2 w-4" />
-          <span className="lexend-font font-semibold">Continue</span>
+          <span className="lexend-font font-semibold">{t("myprofile.firstLogin.content8")}</span>
         </Button>
       </div>
 

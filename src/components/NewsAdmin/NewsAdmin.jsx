@@ -8,6 +8,8 @@ import { CreateUpcomingPost } from "./UpcomingGames/CreateUpcomingPost";
 import { NewsGamesList } from "./News/NewsGamesList";
 import { NewsDetails } from "./News/NewsDetails";
 import { CreateNewsPost } from "./News/CreateNewsPost";
+import { useTranslation } from "react-i18next";
+
 
 import { useEffect, useState } from "react";
 
@@ -18,6 +20,10 @@ import { CreateEconomicsPost } from "./Economics/CreateEconomicsPost";
 import { EconomicsList } from "./Economics/EconomicsList";
 
 const NewsAdmin = () => {
+
+  const { t } = useTranslation();
+
+
   // za toast kada se obrise post (bolje izgleda)
   const [openSnackbarDeleted, setOpenSnackbarDeleted] = useState(false);
 
@@ -68,19 +74,12 @@ const NewsAdmin = () => {
     <>
       <Tabs>
         <TabList>
-          
-
-        
-
           {(user_type === "GP" ||
             user_type === "MM" ||
             user_type === "ITM" ||
             user_type === "EM" ||
             user_type === "SM") && <Tab>News</Tab>}
-
         </TabList>
-
-      
 
         <TabPanel>
           {selectedNewsPost || createNewsPost ? (
@@ -101,7 +100,6 @@ const NewsAdmin = () => {
                   if (created) {
                     setOpenSnackbarCreated(true);
                   }
-                 
                 }}
               />
             )
@@ -112,8 +110,6 @@ const NewsAdmin = () => {
             />
           )}
         </TabPanel>
-
-      
       </Tabs>
 
       <Snackbar
@@ -128,7 +124,7 @@ const NewsAdmin = () => {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Deleted post
+          {t("news.content12")}
         </Alert>
       </Snackbar>
 
@@ -144,7 +140,7 @@ const NewsAdmin = () => {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Created post
+          {t("news.content13")}
         </Alert>
       </Snackbar>
     </>

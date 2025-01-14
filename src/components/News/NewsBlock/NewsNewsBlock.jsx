@@ -107,7 +107,7 @@ const NewsNewsBlock = () => {
 
           <div className="p-4 ">
             <p className="text-[#fff] text-sm font-medium mb-2">
-              {formatDate(gamesPosts[0].updatedAt) || "Date not available"}
+              {formatDate(gamesPosts[0].updatedAt) || t("news.content5") }
             </p>
             <p className="text-[#fff] text-sm font-semibold two-line-limit">
               {gamesPosts[0].title || ""}

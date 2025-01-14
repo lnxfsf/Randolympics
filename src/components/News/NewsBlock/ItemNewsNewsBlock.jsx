@@ -97,7 +97,7 @@ function formatDate(dateString) {
             <p className="text-red_second text-xs font-medium">Randolympics</p>
             <img src="news/mdi_dot.svg" />
             <p className=" text-xs">
-              {formatDate(gamesPosts[number].updatedAt) || "Date not available"}
+              {formatDate(gamesPosts[number].updatedAt) || t("news.content5")}
             </p>
           </div>
 

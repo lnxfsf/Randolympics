@@ -29,7 +29,7 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
-import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 // FilePond css
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -46,18 +46,16 @@ registerPlugin(
   FilePondPluginImageResize,
   FilePondPluginImageTransform,
   FilePondPluginImageEdit,
-  FilePondPluginFileValidateSize,
+  FilePondPluginFileValidateSize
 );
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
-  
-
 
 import { useTranslation } from "react-i18next";
 
@@ -81,28 +79,22 @@ function formatDate(dateString) {
 }
 
 const NewsDetails = ({ postZ, onBack }) => {
+  const { t, i18n } = useTranslation();
 
-  
-const { t, i18n } = useTranslation();
+  function formatDate(dateString) {
+    let date = new Date(dateString);
 
+    let locale = i18n.language || "en-US";
 
+    switch (locale) {
+      case "sr":
+        locale = "sr-Latn";
+        break;
+    }
 
-function formatDate(dateString) {
-  let date = new Date(dateString);
-
-  let locale = i18n.language || "en-US";
-  
-  switch(locale){
-    case "sr":
-      locale = "sr-Latn";
-      break;
-      
+    let options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(locale, options);
   }
-
-
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString(locale, options);
-}
 
   const popupRef = useRef(null);
 
@@ -191,9 +183,8 @@ function formatDate(dateString) {
     }
 
     setTempEditCoverImage("");
-    
+
     onBack(false, false);
-    
   };
 
   const handleUpdatePost = async (e) => {
@@ -202,46 +193,38 @@ function formatDate(dateString) {
     var title = e.target.title.value;
     var subtitle = e.target.subtitle.value;
 
-
-
-    if(title === ""){
-      setSnackbarMessage("Can't leave title empty");
+    if (title === "") {
+      setSnackbarMessage(t("popupMessages.text3"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
 
-          return;
-  }
+      return;
+    }
 
-
-  if(subtitle === ""){
-      setSnackbarMessage("Can't leave subtitle empty");
+    if (subtitle === "") {
+      setSnackbarMessage(t("popupMessages.text4"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
 
-          return;
-  }
+      return;
+    }
 
-
-  if(editContent === "" || editContent === "<p><br></p>" || editContent === "<p></p>" ){
-      setSnackbarMessage("Can't leave body content empty");
+    if (
+      editContent === "" ||
+      editContent === "<p><br></p>" ||
+      editContent === "<p></p>"
+    ) {
+      setSnackbarMessage(t("popupMessages.text4"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
 
-          return;
-  }
+      return;
+    }
 
+    //hey, don't replace old image, if that new image is cancelled (if user uploads, and removes, then it shouldn't save it in here as emtpy)
+    // you must update it, but if tempEditCoverImage is "", which will be set on, when you error, or remove it above. and then it uses old url string, and it will work...
 
-
-
-
-
-
-   //hey, don't replace old image, if that new image is cancelled (if user uploads, and removes, then it shouldn't save it in here as emtpy)
-      // you must update it, but if tempEditCoverImage is "", which will be set on, when you error, or remove it above. and then it uses old url string, and it will work...
-  
     try {
-     
-
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/blog/updateNewsBlog`,
         {
@@ -249,7 +232,8 @@ function formatDate(dateString) {
           title,
           subtitle,
           content: editContent,
-          cover_image: tempEditCoverImage !== "" ? tempEditCoverImage : editCoverImage,
+          cover_image:
+            tempEditCoverImage !== "" ? tempEditCoverImage : editCoverImage,
         }
       );
 
@@ -257,7 +241,6 @@ function formatDate(dateString) {
         // TODO, e sada, obrises prethodnu image url sto je bio !
         // ako je doslo do promena..
 
-       
         // so, we delete previous image (if there was one)
         // it must delete that image from server that was temporary uploaded, but not yet saved to that blog post
         // i ako zaista ima neki upload uopste..
@@ -286,18 +269,15 @@ function formatDate(dateString) {
 
         setIsEditing(false);
 
-        setSnackbarMessage("Post edited");
+        setSnackbarMessage(t("popupMessages.text6"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
       }
-
     } catch (error) {
       console.log(error);
 
       // TODO, ovde onaj popup da imas..
     }
-
-
   };
 
   const toolbarOptions = [
@@ -340,14 +320,12 @@ function formatDate(dateString) {
         // setEditCoverImage(filename)
       },
       onerror: (response) => {
-
         const jsonResponse = JSON.parse(response);
-        
 
         setSnackbarMessage(jsonResponse.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
-              
+
         if (filePondRef.current) {
           filePondRef.current.removeFiles();
         }
@@ -375,7 +353,7 @@ function formatDate(dateString) {
       )
         .then((response) => {
           if (response.ok) {
-            // empty tempEditCoverImage 
+            // empty tempEditCoverImage
             setTempEditCoverImage("");
 
             load(); // Signal that the file has been reverted successfully
@@ -422,8 +400,6 @@ function formatDate(dateString) {
 
   return (
     <>
-    
-   
       <div className="m-4  ">
         {/* controls */}
         <div className="flex justify-between mb-4">
@@ -485,7 +461,7 @@ function formatDate(dateString) {
                       },
                     }}
                   >
-                    <span className="lexend-font">Cancel</span>
+                    <span className="lexend-font">{t("news.content3")}</span>
                   </Button>
 
                   <Button
@@ -506,7 +482,7 @@ function formatDate(dateString) {
                       },
                     }}
                   >
-                    <span className="lexend-font">Delete</span>
+                    <span className="lexend-font">{t("news.content6")}</span>
                   </Button>
                 </div>
               </div>
@@ -529,9 +505,16 @@ function formatDate(dateString) {
               <h2 className="text-xl">{post.subtitle}</h2>
 
               <br />
-              <p>Date of publishing: {formatDate(post.createdAt)}</p>
-              <p>Updated at: {formatDate(post.updatedAt)}</p>
-              <p>Reading time: {readingTime(post.content)} minute read</p>
+              <p>
+                {t("news.content7")} {formatDate(post.createdAt)}
+              </p>
+              <p>
+                {t("news.content8")} {formatDate(post.updatedAt)}
+              </p>
+              <p>
+                {t("news.content9")} {readingTime(post.content)}{" "}
+                {t("news.content10")}
+              </p>
               <br />
 
               {/*  <p >{post.content} </p> */}
@@ -599,21 +582,21 @@ function formatDate(dateString) {
                   styleButtonRemoveItemPosition="center  bottom"
                   styleButtonProcessItemPosition="center bottom"
                   imageEditAllowEdit={false}
-
-                    allowFileSizeValidation={true}
-                    maxFileSize="4Mb"
-
-                    onaddfile={(error, file) => {
-                      if (error) {
-                        if (error.status === 500 || error.main === "File is too large") {
-                          setSnackbarMessage("File is too large! Maximum allowed size is 4MB.");
-                          setSnackbarStatus("error");
-                          setOpenSnackbar(true);
-                          filePondRef.current.removeFiles(); // Remove the invalid file
-                        }
+                  allowFileSizeValidation={true}
+                  maxFileSize="4Mb"
+                  onaddfile={(error, file) => {
+                    if (error) {
+                      if (
+                        error.status === 500 ||
+                        error.main === "File is too large"
+                      ) {
+                        setSnackbarMessage(t("campaign.content141"));
+                        setSnackbarStatus("error");
+                        setOpenSnackbar(true);
+                        filePondRef.current.removeFiles(); // Remove the invalid file
                       }
-                    }}
-					
+                    }
+                  }}
                 />
 
                 <TextField
@@ -621,8 +604,8 @@ function formatDate(dateString) {
                   onChange={(event) => {
                     setEditTitle(event.target.value);
                   }}
-                  label="Title"
-                  placeholder="Title"
+                  label={t("news.content1")}
+                  placeholder={t("news.content1")}
                   id="name"
                   name="title"
                   type="text"
@@ -631,7 +614,7 @@ function formatDate(dateString) {
                   }}
                   sx={{
                     borderRadius: 0,
-                    
+
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 0,
@@ -653,8 +636,8 @@ function formatDate(dateString) {
                   onChange={(event) => {
                     setEditSubTitle(event.target.value);
                   }}
-                  label="Subtitle"
-                  placeholder="subtitle"
+                  label={t("news.content2")}
+                  placeholder={t("news.content2")}
                   id="name"
                   name="subtitle"
                   type="text"
@@ -662,7 +645,6 @@ function formatDate(dateString) {
                     maxLength: 255,
                   }}
                   sx={{
-                    
                     width: "auto",
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 0,
@@ -679,8 +661,7 @@ function formatDate(dateString) {
                   }}
                 />
 
-
-{editContent}
+                {editContent}
                 <ReactQuill
                   theme="snow"
                   value={editContent}
@@ -707,7 +688,7 @@ function formatDate(dateString) {
                     }}
                     variant="text"
                   >
-                    <span className="lexend-font">Cancel</span>
+                    <span className="lexend-font">{t("news.content3")}</span>
                   </Button>
 
                   <Button
@@ -728,7 +709,7 @@ function formatDate(dateString) {
                     type="submit"
                     variant="text"
                   >
-                    <span className="lexend-font">Save</span>
+                    <span className="lexend-font">{t("news.content4")}</span>
                   </Button>
                 </div>
               </div>
@@ -736,8 +717,6 @@ function formatDate(dateString) {
           </>
         )}
       </div>
-      
-
     </>
   );
 };

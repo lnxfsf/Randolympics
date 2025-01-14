@@ -307,7 +307,7 @@ const MyAccount = () => {
         </div>
       </div>
 
-      {/*   <Footer /> */}
+      
 
       <FooterClean />
     </>

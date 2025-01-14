@@ -49,7 +49,7 @@ const ItemNewsList = ({ post, index, onClick }) => {
         <div className="basis-1/2 md:basis-1/3">
           <div className="flex flex-col justify-between items-end ">
             <p className="text-text_news text-sm font-medium grow break-all">
-              {formatDate(post.updatedAt) || "Date not available"}
+              {formatDate(post.updatedAt) ||  t("news.content5")}
             </p>
 
             <p className="justify-self-end text-red_second text-sm font-semibold cursor-pointer select-none ">

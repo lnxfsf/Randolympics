@@ -898,7 +898,23 @@
       "userRejected": "Rejected",
 
       "role1": "None"
+    },
+
+    "firstLogin": {
+      "content1": "Hello",
+      "content2": "How probable are you to attend the",
+      "content3": "Randolympics Games",
+      "content4": "I'm 99% taking the challenge and going 💪",
+      "content5": "Most likely going 😄",
+      "content6": "I'm maybe going 🤔",
+      "content7": "I'm definitely not going 👎",
+      "content8": "Continue"
+
+
     }
+
+
+
   },
   "userTypes": {
     "user_type1": "Athlete",
@@ -1994,6 +2010,57 @@
 
   "popupMessages": {
     "text1": "Donation succeeded",
-    "text2": "Donated"
+    "text2": "Donated",
+    "text3": "Can't leave title empty",
+    "text4": "Can't leave subtitle empty",
+    "text5": "Can't leave body content empty",
+    "text6": "Post edited",
+    "text7": "Donation succeeded"
+
+
+
+
+  },
+
+  "news": {
+    "content1": "Title",
+    "content2": "Subtitle",
+    "content3": "Cancel",
+    "content4": "Save",
+    "content5": "Date not available",
+    "content6": "Delete",
+    "content7": "Date of publishing:",
+    "content8": "Updated at:",
+    "content9": "Reading time:",
+    "content10": "minute read",
+    "content11": "News",
+
+
+    "content12": "Deleted post",
+    "content13": "Created post"
+
+
+
+
+  },
+
+
+  "payments": {
+    "content1" : "Your generosity goes a long way !",
+    "content2": "Thanks for your support !",
+    "content3": "Cancel",
+
+
+
+
+    "content4": "Want to keep this campaign running?",
+    "content5": "Let’s see how you can support your",
+    "content6": "friend!",
+    "content7": "friend!"
+
+
+
+
+
   }
 }
