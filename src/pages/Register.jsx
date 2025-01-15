@@ -125,7 +125,7 @@ const Register = () => {
     setOpenSnackbar(false);
   };
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // ? this is for phone
   const [isPhoneError, setIsPhoneError] = useState(false);
@@ -489,6 +489,11 @@ const Register = () => {
                 cryptoaddress_type: selectedCrypto,
                 bio,
                 gender: selectedGender,
+              },
+              {
+                headers: {
+                  'Accept-Language': i18n.language || 'en',
+                }
               }
             );
           } catch (error) {
