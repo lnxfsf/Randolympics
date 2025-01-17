@@ -208,7 +208,7 @@ const Others = ({
                   src="/editprofile/private_lock.svg"
                 />
                 <p className="text-lg font-medium text-[#616673] break-all">
-                  Private
+                 {t("myprofile.elections.status1")}
                 </p>
               </div>
             </td>
