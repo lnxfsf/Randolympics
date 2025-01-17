@@ -3,8 +3,11 @@
 const https = require("https");
 const fs = require("fs");
 
+const i18next = require('./config/i18n');
+const middleware = require('i18next-http-middleware');
 
- require('log-timestamp')(function () {
+
+require('log-timestamp')(function () {
   // Create a timestamp formatted for Europe/Belgrade
   const options = {
     timeZone: 'Europe/Belgrade',
@@ -85,6 +88,7 @@ app.use('/webhook', webhookRoute);
 
 
 
+app.use(middleware.handle(i18next));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

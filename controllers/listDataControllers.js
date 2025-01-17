@@ -6453,7 +6453,7 @@ const shareTableLandingPage = async (req, res) => {
   // back to string
   const modifiedHTML = document.documentElement.outerHTML;
 
-  var email = "ivanlerinc1510@gmail.com";
+  
 
   emailsToSendTo.forEach((user) => {
     // if email is provided
@@ -6511,32 +6511,36 @@ const createCampaign = async (req, res) => {
 
   } = req.body;
 
+  // translation
+  const ttransla = req.t;
+
+
   // you need to validate server side  ! because you can't allow empty values for some things...
   if (friendName == "") {
-    res.status(409).json({ message: "First name can't be empty !" });
+    res.status(409).json({ message: ttransla('createCampaign.content1') });
     return;
   }
 
   if (friendLastName == "") {
-    res.status(409).json({ message: "Last name can't be empty !" });
+    res.status(409).json({ message:  ttransla('createCampaign.content2') });
     return;
   }
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!emailRegex.test(friendEmail)) {
-    res.status(409).json({ message: "Friend email is incorrect !" });
+    res.status(409).json({ message:  ttransla('createCampaign.content3') });
     return;
   }
 
   if (friendNationality == "") {
-    res.status(409).json({ message: "Nationality name can't be empty !" });
+    res.status(409).json({ message: ttransla('createCampaign.content4') });
     return;
   }
 
   // za supporter (yes, this is all for campaign, what we absolutelly need, information to have..)
   if (supporterName == "") {
-    res.status(409).json({ message: "Supporter name can't be empty !" });
+    res.status(409).json({ message:  ttransla('createCampaign.content5') });
     return;
   }
 
@@ -6545,7 +6549,7 @@ const createCampaign = async (req, res) => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(supporterEmail)) {
-      res.status(409).json({ message: "Supporter email is incorrect !" });
+      res.status(409).json({ message: ttransla('createCampaign.content6')  });
       return;
     }
   }
@@ -6589,10 +6593,10 @@ const createCampaign = async (req, res) => {
     const newCampaign = await Campaign.create(campaign, { transaction: t });
     await t.commit();
 
-    res.status(201).json({ message: "Campaign created successfully!" });
+    res.status(201).json({ message: ttransla('createCampaign.content7')  });
   } catch (error) {
     await t.rollback();
-    console.log("he fails to make campaign because: ");
+ 
     console.log(error.stack);
   }
 };
@@ -6952,6 +6956,10 @@ const informOtherSupporters = async (req, res) => {
   /* additionalSupporterEmailsToSendTo, */
   const { campaignURL, name } = req.body;
 
+
+  const t = req.t;
+
+
   const additionalSupporterEmailsToSendTo = JSON.parse(
     req.body.additionalSupporterEmailsToSendTo
   );
@@ -6963,18 +6971,28 @@ const informOtherSupporters = async (req, res) => {
         if (user.email) {
           sendEmail(
             user.email,
-            "Invitation to participate in Randolympics",
-            `We're signing up ${name} to participate in campaign.
-        Check him <a href=${campaignURL}>out here</a>
-      `
+            t('informOtherSupporters.content1'),
+            t('informOtherSupporters.content2',{
+              name: name,
+              campaignURL: campaignURL
+            }
+              
+
+            )
           );
+
+         /*  `We're signing up ${name} to participate in campaign.
+        Check him <a href=${campaignURL}>out here</a>
+      ` */
+
+
         }
       });
     }
 
-    res.status(200).send("Emails sent successfully");
+    res.status(200).send(t('informOtherSupporters.content3') );
   } catch (e) {
-    res.status(500).send("Emails not sent");
+    res.status(500).send( t('informOtherSupporters.content4'));
     console.log(e.stack);
   }
 };
@@ -6984,8 +7002,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
   const limitA = parseInt(req.query.limitA); // with this, we list all (no offset needed, we list all, just give back to frontend, one by one.. if they scroll down )
   const offset = parseInt(req.query.offset);
 
-  console.log("limit je ------>" + limitA);
-
+ 
   // we don't show creator, on there..
   /*  const firstSupporterCampaign = await Campaign.findOne({
     where: {
@@ -7007,9 +7024,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
       order: [["amount", "DESC"]],
     });
 
-    console.log("stamp aon ovde: allTransactionsSupportersCampaign: ");
-    console.log("campaignId: " + campaignId);
-    console.log(allCommentsSupporters);
+  
 
     res.status(200).json(allCommentsSupporters);
   } catch (error) {
@@ -7022,13 +7037,16 @@ const contactUsSendEmail = async (req, res) => {
   const senderName = req.body.name;
   const userEmail = req.body.email;
 
+  const t = req.t;
+
+
   try {
 
     sendEmailContactUsForm(userEmail, subject, message, senderName);
 
-    res.status(200).json({ message: "Email sent" });
+    res.status(200).json({ message: t('contactUsSendEmail.content1')  });
   } catch (error) {
-    res.status(500).json({ message: "Sending email failed" });
+    res.status(500).json({ message: t('contactUsSendEmail.content2') });
   }
 };
 

@@ -44,25 +44,7 @@ const makePayment = async (req, res) => {
     countryAthleteIsIn,
   } = req.body;
 
-  console.log(campaignId);
-  console.log(amount);
 
-  console.log("on dobija supporterName: " + supporterName);
-  console.log("dobija i supporterEmail: " + supporterEmail);
-  console.log("dobija i supporterComment: " + supporterComment);
-
-  console.log("dobija i discountCode: " + discountCode);
-
-  console.log("dobija i countryAthleteIsIn: " + countryAthleteIsIn);
-
-  console.log("separateDonationThruPage: " + separateDonationThruPage);
-  // TODO, da, sa ovime, on mora da kreira tabelu, jer fino u backend samo posalji sve sto ti treba, da se ne cimam sa FE, insecure je ionako to jako...
-
-  // TODO ovde, amount . si 100% siguran kolko novca dano !
-
-  // TODO i success (mora biti potvrdjen payment ! kako on dobija ovde !)
-
-  console.log("passed once");
 
   try {
     // ovde ne treba transaction, ovo je za stripe request

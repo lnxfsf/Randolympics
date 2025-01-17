@@ -23,18 +23,18 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 var path = require("path");
-const fs = require('fs');
-
+const fs = require("fs");
 
 var BASE_URL_BACKEND = process.env.BASE_URL_BACKEND;
-
 
 const generateAccessToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "10m" });
 };
 
 const generateRefreshToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: "7d" });
+  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, {
+    expiresIn: "7d",
+  });
 };
 
 // When a user signs up, generate a unique verification token and save it in the database with user email.
@@ -53,11 +53,8 @@ const generatePassword = (length = 8) => {
   return password;
 };
 
-
-
 const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
-  console.log("tip user-a je:");
-  console.log(user_type);
+
 
   try {
     if (insert_in_this) {
@@ -195,8 +192,6 @@ const lastInRank = async (user_type, insert_in_this, nationality, gender) => {
 };
 
 const register = async (req, res) => {
-  
-
   // on ovde uzima varijable
   const {
     user_type,
@@ -224,32 +219,24 @@ const register = async (req, res) => {
     supporterComment,
 
     sendEmailToFriend, // should we send it to friend ! (invitation ! )
-    
 
     signingAsSupporter, // then if those are empty, we avoid checking them.. (as we don't need to signup them (later on, if password is provided, then we make account, if not, then we don't. do it in backend here, so, no user can mess with this...)..)
-  
 
-
-    isCelebrity, 
+    isCelebrity,
     fb_link,
     ig_link,
     tw_link,
 
     tt_link,
     yt_link,
-  
   } = req.body;
 
-
-
-  
-  
+  // i18n, load from middleware
+  const t = req.t;
 
   // if he's signedByFriend , then we generate password
   if (signedByFriend) {
     var password = generatePassword();
-
-
   } else {
     var { password } = req.body;
   }
@@ -258,38 +245,28 @@ const register = async (req, res) => {
 
   // we do validate for name, on server, even for supporter. why not..
   if (name == "") {
-    res.status(409).json({ message: "Name can't be empty !" });
+    res.status(409).json({ message: t("register.content1") });
     return;
   }
 
-
-  console.log("----------> !isCelebrity   je: " + !isCelebrity)
-  console.log("----> !signingAsSupporter" + !signingAsSupporter)
-
-
   // we don't verify email, for celebrity, just use it as placeholder, it need to be fake email after all..
   if (!signingAsSupporter && !isCelebrity) {
-
-
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      res.status(409).json({ message: "Email is incorrect !" });
+      res.status(409).json({ message: t("register.content2") });
       return;
     }
-
   } else if (signingAsSupporter && email !== "" && !isCelebrity) {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      res.status(409).json({ message: "Email is incorrect !" });
+      res.status(409).json({ message: t("register.content2") });
       return;
     }
   }
 
-
-
-/* 
+  /* 
   if (!signingAsSupporter  && phone !== "" && !isCelebrity) {
 
    
@@ -318,9 +295,7 @@ const register = async (req, res) => {
     const passwordRegex = /^.{4,}$/;
 
     if (!passwordRegex.test(password)) {
-      res
-        .status(409)
-        .json({ message: "Password should be longer than 4 characters !" });
+      res.status(409).json({ message: t("register.content3") });
       return;
     }
   }
@@ -329,13 +304,13 @@ const register = async (req, res) => {
   if (!signingAsSupporter) {
     // nationality
     if (nationality === "") {
-      res.status(409).json({ message: "Select nationality !" });
+      res.status(409).json({ message: t("register.content4") });
       return;
     }
 
     // last name
     if (lastName === "") {
-      res.status(409).json({ message: "Last name can't be empty !" });
+      res.status(409).json({ message: t("register.content5") });
       return;
     }
   }
@@ -343,7 +318,7 @@ const register = async (req, res) => {
   //weight // only if it's "AH" user_type  ( user_type  , you get it ..)
   if (user_type === "AH") {
     if (weight === null) {
-      res.status(409).json({ message: "Weight not inserted !" });
+      res.status(409).json({ message: t("register.content6") });
       return;
     }
   }
@@ -414,9 +389,8 @@ const register = async (req, res) => {
 
     supporterComment,
 
-
     // yes, also put these in database.. for case when we have celebrity
-    isCelebrity,  // we will need this, later on, to give them higher priority probably..
+    isCelebrity, // we will need this, later on, to give them higher priority probably..
     fb_link,
     ig_link,
     tw_link,
@@ -426,96 +400,105 @@ const register = async (req, res) => {
   };
 
   try {
-    
-
     const userAlreadyExists = await User.findOne({
       where: { email: user_data.email },
     });
 
     if (userAlreadyExists) {
-      return res.status(409).json({ message: "User already exists" });
+      return res.status(409).json({ message: t("register.content7") });
     }
-
 
     /* const t = await db.sequelize.transaction(); */
 
-   /*  try { */
+    /*  try { */
     // Create a new user
-      var newUser = await User.create(user_data);
+    var newUser = await User.create(user_data);
 
     /*   await t.commit(); */
-      
+
     /* } catch (e){
       await t.rollback();
     } */
-   /*  if(newUser){ */
+    /*  if(newUser){ */
+
     if (!signedByFriend) {
+      /*  `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank">here</a> to verify your email.</p>`
+       */
+
       sendEmail(
         newUser.email,
-        "Email Verification",
-        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank">here</a> to verify your email.</p>`
+        t("register.emailVerification1"),
+        t("register.emailVerification2", {
+          url: `${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}`,
+        })
       );
     } else {
       // maybe we want to keep it a secret.. (then he have to confirm email and receive new password, when trying to get it.. (but it's unusual scenario maybe.. ))
       if (sendEmailToFriend) {
         sendEmail(
           newUser.email,
-          "Invitation to participate in Randolympics",
+          t("register.emailVerification3"),
 
-          `
-            
-          
-    <p>
-      ${
-        supporterName ? supporterName : "someone"
-      } invited you to participate in Randolympics !
-      
-      
-    </p>
-
-    <p>
-      He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
-    </p>
-    <p>
-      Your email: <b>${email}</b>  <br/>
-      Your password: <b>${password}</b>
-      
-    </p>
-
-    <p>You can access your campaign in: <a href=${campaignURL}>here</a></p>
-
-    <br/>
-    <p>But first you need to verify your account as well </p>
-    <p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
-            newUser.verificationToken
-          }" target="_blank">here</a> to verify your email.</p>
-
-
-            
-            
-            `
+          t("register.emailVerification4", {
+            supporterName: supporterName || "someone",
+            email: email,
+            password: password,
+            campaignURL: campaignURL,
+            verificationURL: `${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}`,
+          })
         );
+
+        /*   `
+            
+                  
+            <p>
+              ${
+                supporterName ? supporterName : "someone"
+              } invited you to participate in Randolympics !
+              
+              
+            </p>
+
+            <p>
+              He created profile for you, at least the basics. Else is up to you to fill it up with your liking. 
+            </p>
+            <p>
+              Your email: <b>${email}</b>  <br/>
+              Your password: <b>${password}</b>
+            </p>
+
+            <p>You can access your campaign in: <a href=${campaignURL}>here</a></p>
+
+            <br/>
+            <p>But first you need to verify your account as well </p>
+            <p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${
+                    newUser.verificationToken
+                  }" target="_blank">here</a> to verify your email.</p>
+
+
+            
+            
+            ` */
       }
 
       // this is for supporter (invitation.. )
       // first send confirmation email, to current made supporter email !!! just to verify email address !
       sendEmail(
         newUser.email,
-        "Email Verification",
-        `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank" >here</a> to verify your email.</p>`
+        t("register.emailVerification1"),
+        t("register.emailVerification5", {
+          verificationURL: `${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}`,
+        })
       );
 
-      
-      
-
-     
-   /*  } */
-  }
+      /* `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${newUser.verificationToken}" target="_blank" >here</a> to verify your email.</p>`
+       */
+    }
 
     res.status(201).json({
-      message: "User created successfully!",
+      message: t("register.content8"),
       userId: user_data.userId,
-      verificationToken: newUser.verificationToken
+      verificationToken: newUser.verificationToken,
     });
   } catch (error) {
     //console.log("error zasto je: ")
@@ -529,21 +512,18 @@ const register = async (req, res) => {
 const email_resend = async (req, res) => {
   const { email } = req.body;
 
+  const t = req.t;
 
   try {
-    
-
     const user = await User.findOne({
       where: { email: email },
     });
 
-
-      if(!user ){
-      res.status(404).json({message: "User doesn't exist"});
+    if (!user) {
+      res.status(404).json({ message: t('email_resend.content1') });
 
       return;
-    } 
-
+    }
 
     sendEmail(
       user.email,
@@ -551,44 +531,36 @@ const email_resend = async (req, res) => {
       `<p>Click <a href="${BASE_URL_BACKEND}/auth/verify/${user.verificationToken}" target="_blank"  >here</a> to verify your email.</p>`
     );
 
-    res.status(200).json({ message: "Email verification link resent" });
-
+    res.status(200).json({ message: t('email_resend.content2') });
   } catch (error) {
-    console.log(error.stack)
+    console.log(error.stack);
 
     res.status(500).json({ error: error.message });
   }
 };
 
-const verification_success = async (req, res) => {
 
+// ! this will go on frontend, and then it will be localized. so backend wont be directly accessed anymore ,so it won't need to send html anymore
+const verification_success = async (req, res) => {
   const filePath = path.join(__dirname, "../public/verified.html");
 
-
-  fs.readFile(filePath, 'utf8', (err,data) => {
-    if (err){
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
       return res.status(500).send("Error reading html file");
     }
 
-
-    const htmlUpdatedLink = data.replace('{{BASE_URL}}', process.env.BASE_URL);
+    const htmlUpdatedLink = data.replace("{{BASE_URL}}", process.env.BASE_URL);
 
     res.send(htmlUpdatedLink);
+  });
 
-  })
-
-
-//  res.sendFile(path.join(__dirname, "../public/verified.html"));
-
-
+  //  res.sendFile(path.join(__dirname, "../public/verified.html"));
 };
 
 const verify_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    
-
     const user = await User.findOne({ where: { verificationToken: token } });
 
     if (!user) {
@@ -599,7 +571,7 @@ const verify_token = async (req, res) => {
     user.verificationToken = null;
 
     await user.save();
-    console.log("user verified");
+   
 
     return res.redirect("/auth/verification-success");
   } catch (error) {
@@ -613,14 +585,15 @@ const verify_token = async (req, res) => {
 const forgot_password = async (req, res) => {
   const { email } = req.body;
 
-  try {
-    
+  const t = req.t;
 
+
+  try {
     const user = await User.findOne({
       where: { email: email },
     });
 
-    console.log("korisnik je: " + user.name);
+   
 
     if (user && user.isVerified) {
       const token = generateVerificationToken();
@@ -628,16 +601,22 @@ const forgot_password = async (req, res) => {
       user.verificationToken = token;
       await user.save();
 
-      console.log("password reset token saved in user");
+     
+     /*  `<p>Click <a href="${process.env.BASE_URL_BACKEND}/auth/reset_password/${token}">here</a> to reset your password.</p>`
+ */
 
       sendEmail(
         email,
-        "Password Reset",
-        `<p>Click <a href="${process.env.BASE_URL_BACKEND}/auth/reset_password/${token}">here</a> to reset your password.</p>`
-      );
+       t('forgot_password.content1'),
+       t('forgot_password.content2', {
+        resetPassUrl: `${process.env.BASE_URL_BACKEND}/auth/reset_password/${token}`
+       }));
 
-      res.status(200).json({ message: "Password reset link sent to corresponding email" });
+       
 
+      res
+        .status(200)
+        .json({ message:  t('forgot_password.content3') });
 
       //res.redirect(`/auth/reset_password/${token}`);
     } else {
@@ -652,8 +631,6 @@ const reset_password_token = async (req, res) => {
   const token = req.params.token;
 
   try {
-    
-
     // Check if the token exists and is still valid
     const user = await User.findOne({ where: { verificationToken: token } });
 
@@ -734,13 +711,10 @@ const reset_password = async (req, res) => {
   const { token, password } = req.body;
 
   try {
-    
-
     const user = await User.findOne({ where: { verificationToken: token } });
 
     if (user) {
-      console.log("email mu je:" + user.email);
-
+    
       // hash password ! don't forget, and then send it
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt); //hash password
@@ -764,16 +738,16 @@ const reset_password = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
+  const t = req.t;
+  
   if (!email || !password) {
     res
       .status(400)
-      .json({ error: "Email or Password fields cannot be empty!" });
+      .json({ error: t('login.content1')  });
     return;
   }
 
   try {
-    
-
     const existingUser = await User.findOne({
       where: { email: email },
     });
@@ -781,13 +755,13 @@ const login = async (req, res) => {
     if (existingUser) {
       if (existingUser.isVerified) {
         if (!existingUser.password) {
-          res.status(401).json({ message: "Invalid credentials" });
+          res.status(401).json({ message: t('login.content2') });
 
           return;
         }
       } else {
         res.status(401).json({
-          message: "Email is not verified !",
+          message: t('login.content3'),
           email: existingUser.email,
         });
 
@@ -815,35 +789,29 @@ const login = async (req, res) => {
         if (loginEntry) {
           await loginEntry.increment("numberOfLogins", { by: 1 });
         } else {
-         
-          
-         
           const t = await db.sequelize.transaction();
 
           try {
-          // create that entry, if there's no found..
-          // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
-          const newLoginEntry = await Traffic.create({
-            trafficHistoryId: uuidv4(),
-            user_type: existingUser.user_type,
-            nationality: existingUser.nationality,
-            numberOfLogins: 1, // we already put 1, as this is our first immediatelly..
-          }, { transaction: t });
+            // create that entry, if there's no found..
+            // and increment in that (i mean, just put value as 1, because this is it's first entry, and to increment it immediatelly)
+            const newLoginEntry = await Traffic.create(
+              {
+                trafficHistoryId: uuidv4(),
+                user_type: existingUser.user_type,
+                nationality: existingUser.nationality,
+                numberOfLogins: 1, // we already put 1, as this is our first immediatelly..
+              },
+              { transaction: t }
+            );
 
-
-          await t.commit();
-        } catch (e) {
-          await t.rollback();
+            await t.commit();
+          } catch (e) {
+            await t.rollback();
+          }
         }
-
-
-
-        }
-
 
         const refreshToken = generateRefreshToken(existingUser.userId);
 
-       
         // Store refresh token in HTTP-only cookie
         res.cookie("refreshToken", refreshToken, {
           httpOnly: true,
@@ -851,7 +819,6 @@ const login = async (req, res) => {
           sameSite: "strict",
           path: "/",
         });
-
 
         res.status(200).json({
           userId: existingUser.userId,
@@ -901,38 +868,31 @@ const login = async (req, res) => {
           tw_link: existingUser.tw_link,
           tt_link: existingUser.tt_link,
           yt_link: existingUser.yt_link,
-          
         });
       } else {
-        res.status(401).json({ message: "Invalid credentials" });
+        res.status(401).json({ message: t('login.content2') });
       }
     } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: t('login.content2') });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-
 const refreshToken = async (req, res) => {
-
   const refreshToken = req.cookies.refreshToken;
 
-  
-
-  if (!refreshToken) return res.status(401).json({ message: "No refresh token" });
+  if (!refreshToken)
+    return res.status(401).json({ message: "No refresh token" });
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid refresh token" });
     // so if refresh token expires, user will simply be logged out
-    
 
     // Generate new access token
     const newAccessToken = generateAccessToken(decoded.userId);
     const newRefreshToken = generateRefreshToken(decoded.userId);
-
-
 
     // Send new refresh token in HTTP-only cookie
     res.cookie("refreshToken", newRefreshToken, {
@@ -944,13 +904,10 @@ const refreshToken = async (req, res) => {
 
     res.json({ accessToken: newAccessToken });
   });
-
-
 };
 
-const logout = async (req,res) => {
-
-  res.cookie("refreshToken", '', {
+const logout = async (req, res) => {
+  res.cookie("refreshToken", "", {
     expires: new Date(0),
     httpOnly: true,
     sameSite: "strict",
@@ -958,14 +915,9 @@ const logout = async (req,res) => {
   });
 
   res
-        .status(200)
-        .json({ success: true, message: 'User logged out successfully' })
-
-
-
-
-
-}
+    .status(200)
+    .json({ success: true, message: "User logged out successfully" });
+};
 
 const campaignDoesUserExist = async (req, res) => {
   const { email } = req.query;
@@ -989,9 +941,6 @@ const campaignIsSupporterPassCorrect = async (req, res) => {
   const { email, password } = req.query;
 
   try {
-
-
-
     const supporterUser = await User.findOne({
       where: {
         email: email,
@@ -999,50 +948,27 @@ const campaignIsSupporterPassCorrect = async (req, res) => {
     });
 
 
-    // da problem je, sto on mozda i nema account napravljen  ! 
-    
-    console.log("sta radis ovde")
-    console.log(supporterUser)
-
-
-    if(supporterUser){
-
-
+  
+    if (supporterUser) {
       const passwordMatch = await bcrypt.compare(
         password,
         supporterUser.password
       );
-      
 
-      
-
-      if(passwordMatch){
-
+      if (passwordMatch) {
         // it have email and password right, so we just return true, we can use it
 
         // ispravna sifra vraca true
         return res.json({ check: true });
-
-
       } else {
-
         // vraca true, ako je pogresna sifra
         return res.json({ check: false });
       }
-
     }
-
-
-
-   
-
-
   } catch (e) {
     console.log(e.stack);
   }
 };
-
-
 
 module.exports = {
   register,

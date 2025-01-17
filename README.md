@@ -170,7 +170,7 @@ npm i log-timestamp
 npm install sharp
 
 
-
+npm install i18next i18next-http-middleware i18next-fs-backend
 
 -----------
 

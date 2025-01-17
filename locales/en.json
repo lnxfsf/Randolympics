@@ -1,0 +1,81 @@
+{
+  "register": {
+    "content1": "Name can't be empty!",
+    "content2": "Email is incorrect!",
+
+    "content3": "Password should be longer than 4 characters !",
+    "content4": "Select nationality !",
+    "content5": "Last name can't be empty !",
+    "content6": "Weight not inserted !",
+    "content7": "User already exists!",
+
+    "content8": "User created successfully!",
+
+    "emailVerification1": "Email Verification",
+    "emailVerification2": "Click <a href='{{url}}' target='_blank'>here</a> to verify your email.",
+
+    "emailVerification3": "Invitation to participate in Randolympics",
+
+    "emailVerification4": "<p>{{supporterName}} invited you to participate in Randolympics!</p><p>They created a profile for you, at least the basics. The rest is up to you to fill it with your preferences.</p><p>Your email: <b>{{email}}</b><br/>Your password: <b>{{password}}</b></p><p>You can access your campaign <a href=\"{{campaignURL}}\">here</a>.</p><p>But first, you need to verify your account as well.</p>\n<p>Click <a href=\"{{verificationURL}}\" target=\"_blank\">here</a> to verify your email.</p>",
+
+    "emailVerification5": "<p>Click <a href=\"{{verificationURL}}\" target=\"_blank\" >here</a> to verify your email.</p>"
+  },
+
+  "email_resend": {
+    "content1": "User doesn't exist",
+    "content2": "Email verification link resent"
+  },
+
+
+  "forgot_password": {
+    "content1": "Password Reset",
+    "content2": "<p>Click <a href=\"{{resetPassUrl}}\">here</a> to reset your password.</p>",
+    "content3": "Password reset link sent to corresponding email"
+  },
+
+  "login": {
+    "content1": "Email or Password fields cannot be empty!",
+    "content2": "Invalid credentials",
+    "content3": "Email is not verified !"
+  },
+
+  "deletegamepost": {
+    "content1": "Blog post deleted successfully"
+  },
+
+ "createnewspost": {
+    "content1": "Post created successfully!"
+ },
+
+ "updateNewsBlog": {
+    "content1": "Blog updated"
+ },
+
+ "createCampaign": {
+    "content1": "First name can't be empty !",
+    "content2": "Last name can't be empty !",
+    "content3": "Friend email is incorrect !",
+    "content4": "Nationality name can't be empty !" ,
+    "content5": "Supporter name can't be empty !" ,
+    "content6": "Supporter email is incorrect !" ,
+    "content7": "Campaign created successfully!" 
+ },
+
+ "informOtherSupporters": {
+    "content1": "Invitation to participate in Randolympics",
+    "content2": "We're signing up {{name}} to participate in campaign. Check him <a href=\"{{campaignURL}}\">out here</a>.",
+    "content3": "Emails sent successfully",
+    "content4":  "Emails not sent"
+ },
+
+ "contactUsSendEmail": {
+    "content1": "Email sent",
+    "content2": "Sending email failed"
+ }
+  
+
+
+
+
+
+}

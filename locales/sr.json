@@ -1,0 +1,84 @@
+{
+  "register": {
+    "content1": "Ime ne može biti prazno!",
+    "content2": "Email nije ispravan!",
+    "content3": "Šifra treba biti duža od 4 karaktera !",
+    "content4": "Izaberi nacionalnost !",
+    "content5": "Prezime ne može biti prazno!",
+    "content6": "Težina nije uneta !",
+    "content7": "Korisnik već postoji!",
+
+    "content8": "Korisnik je uspešno kreiran!",
+
+    "emailVerification1": "Email Verifikacija",
+    "emailVerification2": "Klikni <a href='{{url}}' target='_blank'>ovde</a> da verifikujete svoj email.",
+
+    "emailVerification3": "Poziv za učešće na Randolympics",
+
+    "emailVerification4": "<p>{{supporterName}} pozvao vas da učestvujete u Randolympics!</p><p>Napravili su vam profil, barem osnove. Ostalo je na vama da ga ispunite svojim željama.</p><p>Vaš email: <b>{{email}}</b><br/>Vaša šifra: <b>{{password}}</b></p><p>Možete pristupiti svojoj kampanji <a href=\"{{campaignURL}}\">ovde</a>.</p><p>Ali prvo morate da verifikujete i svoj nalog.</p>\n<p>Klikni <a href=\"{{verificationURL}}\" target=\"_blank\">ovde</a> da verifikuješ email.</p>",
+
+    "emailVerification5": "<p>Klikni <a href=\"{{verificationURL}}\" target=\"_blank\" >ovde</a> da verifikuješ email.</p>"
+  },
+
+  "email_resend": {
+    "content1": "Korisnik ne postoji",
+    "content2": "Email verifikacioni link ponovo poslat"
+  },
+
+  "forgot_password": {
+    "content1": "Resetovanje lozinke",
+    "content2": "<p>Klikni <a href=\"{{resetPassUrl}}\">ovde</a> da resetujete lozinku.</p>",
+    "content3": "Link za resetovanje lozinke je poslata na odgovarajući email"
+  },
+
+  "login": {
+    "content1": "Polja email-a ili lozinka ne mogu biti prazni!",
+    "content2": "Nevažeći kredencijali",
+    "content3": "Email nije verifikovan !"
+  },
+
+  "deletegamepost": {
+    "content1": "Post na blogu je uspešno izbrisan"
+  },
+  
+  "createnewspost": {
+    "content1": "Post uspešno kreiran!"
+ },
+
+ "updateNewsBlog": {
+    "content1": "Blog ažuriran"
+ },
+
+ 
+ "createCampaign": {
+    "content1": "Ime ne može biti prazno!",
+    "content2": "Prezime ne može biti prazno !",
+    "content3": "Email prijatelja je u pogrešnom formatu !",
+    "content4": "Nacionalnost ne može biti prazna !" ,
+    "content5": "Ime donatora ne može biti prazno !" ,
+    "content6": "Email donatora je u pogrešnom formatu !" ,
+    "content7": "Kampanja je uspešno napravljena!" 
+ },
+
+ "informOtherSupporters": {
+    "content1": "Poziv za učešće na Randolympics igrama",
+    "content2": "Prijavljujemo {{name}} da učestvuje u kampanji. Pogledajte <a href=\"{{campaignURL}}\">ga ovde</a>.",
+    "content3": "Emails uspešno poslati",
+    "content4":  "Emails nisu poslati"
+ },
+
+ "contactUsSendEmail": {
+    "content1": "Email poslati",
+    "content2": "Slanje email-a neuspešno"
+ }
+
+
+
+
+
+
+
+
+
+
+}
