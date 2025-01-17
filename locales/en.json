@@ -71,7 +71,64 @@
  "contactUsSendEmail": {
     "content1": "Email sent",
     "content2": "Sending email failed"
+ },
+
+
+
+
+
+ "donateOnlyWithDiscountCode": {
+    "content1": "Code empty",
+
+
+     "content2": "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+     "content3": "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+     "content4": "Code invalid",
+      "content5": "Coupon code expired",
+      "content6": "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+
+
+      "content7": "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+
+
+      "content8": "Donated",
+
+      "content9": "Coupon code expired",
+
+      "content10": "Coupon confirmed"
+
+
+
+ },
+
+ "checkIfCouponValid": {
+
+    "content1": "Code expired",
+    "content2": "Coupon code ok",
+    "content3": "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia.",
+
+    "content4":  "Amount you want to credit is higher than coupon can accept. Coupon hit limit of max spending amount. Try donating less. As global code is calculated by adding percent to your payment.",
+
+    "content5": "Code invalid",
+
+    "content6": "You can't use global coupon codes for standalone payment with coupon code only (only with national coupons)",
+
+    "content7": "National coupon code can only be used for athletes from the country it represents. E.g. coupon code 'HR' can only be used for athletes that are from Croatia."
+
+
+
+
+ },
+
+ "tempPaymentBeforeStripe": {
+    "content1": "Payment verified and saved",
+    "content2": "Error verifying payment",
+     "content3": "Amount needs to be positive number"
+
+
  }
+
+
   
 
 

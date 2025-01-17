@@ -70,7 +70,47 @@
  "contactUsSendEmail": {
     "content1": "Email poslati",
     "content2": "Slanje email-a neuspešno"
+ },
+
+
+
+ 
+
+ "donateOnlyWithDiscountCode": {
+    "content1": "Kod prazan",
+     "content2": "Ne možete da koristite globalne kodove kupona za samostalno plaćanje samo sa kodom kupona (može samo sa nacionalnim kuponima)",
+     "content3": "Nacionalni kod kupona se može koristiti samo za sportiste iz zemlje koju predstavlja. Npr. kod kupona 'HR' se može koristiti samo za sportiste koji su iz Hrvatske",
+     "content4": "Nevažeći kod",
+      "content5": "Istekao kod kupona",
+      "content6": "Ne možete da koristite globalne kodove kupona za samostalno plaćanje samo sa kodom kupona (može samo sa nacionalnim kuponima)",
+      "content7": "Nacionalni kod kupona se može koristiti samo za sportiste iz zemlje koju predstavlja. Npr. kod kupona 'HR' se može koristiti samo za sportiste koji su iz Hrvatske",
+      "content8": "Donirano",
+      "content9": "Istekao kod kupona",
+      "content10": "Kupon potvrđen"
+ },
+
+ "checkIfCouponValid": {
+    "content1": "Istekao kod kupona",
+    "content2": "Kod kupona ok",
+    "content3": "Nacionalni kod kupona se može koristiti samo za sportiste iz zemlje koju predstavlja. Npr. kod kupona 'HR' se može koristiti samo za sportiste koji su iz Hrvatske",
+    "content4":  "Iznos koji želite da kreditirate je veći nego što kupon može da prihvati. Ograničenje maksimalnog iznosa potrošnje kupona. Pokušajte da donirate manje. Pošto se globalni kod izračunava dodavanjem procenta vašoj uplati.",
+    "content5": "Nevažeći kod",
+    "content6": "Ne možete da koristite globalne kodove kupona za samostalno plaćanje samo sa kodom kupona (može samo sa nacionalnim kuponima)",
+    "content7": "Nacionalni kod kupona se može koristiti samo za sportiste iz zemlje koju predstavlja. Npr. kod kupona 'HR' se može koristiti samo za sportiste koji su iz Hrvatske"
+
+
+
+
+ },
+
+ "tempPaymentBeforeStripe": {
+    "content1": "Uplata verifikovana i sačuvana",
+    "content2": "Greška pri verifikaciji plaćanja",
+     "content3": "Iznos mora biti pozitivan broj"
+
+
  }
+
 
 
 
