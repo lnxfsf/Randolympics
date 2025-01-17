@@ -47,7 +47,7 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const CreateNewsPost = ({ onBack }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const filePondRef = useRef(null);
 
@@ -145,6 +145,11 @@ const CreateNewsPost = ({ onBack }) => {
           subtitle: editSubTitle,
           content: editContent,
           cover_image: tempEditCoverImage,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 

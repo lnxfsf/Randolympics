@@ -47,7 +47,7 @@ const validateEmail = (email) => {
 };
 
 const ContactUsForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -128,6 +128,11 @@ const ContactUsForm = () => {
           subject,
           message,
           email: email,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 

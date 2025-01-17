@@ -234,6 +234,11 @@ const NewsDetails = ({ postZ, onBack }) => {
           content: editContent,
           cover_image:
             tempEditCoverImage !== "" ? tempEditCoverImage : editCoverImage,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 

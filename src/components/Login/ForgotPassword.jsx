@@ -17,7 +17,7 @@ let BACKEND_SERVER_BASE_URL =
 import axios from "axios";
 
 const ForgotPassword = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [resultText, setResultText] = useState(t("register.content13"));
 
@@ -60,7 +60,12 @@ const ForgotPassword = () => {
       try {
         var response = await axios.post(
           `${BACKEND_SERVER_BASE_URL}/auth/forgot_password`,
-          { email }
+          { email },
+          {
+            headers: {
+              'Accept-Language': i18n.language || 'en',
+            }
+          }
         );
       } catch (error) {
         //console.log(error);

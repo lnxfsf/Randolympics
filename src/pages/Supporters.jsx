@@ -382,6 +382,11 @@ const Supporters = () => {
           yt_link,
 
 
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 
@@ -424,6 +429,11 @@ const Supporters = () => {
 
               tt_link: tt_link,
               yt_link: yt_link,
+            },
+            {
+              headers: {
+                'Accept-Language': i18n.language || 'en',
+              }
             }
           );
 
@@ -460,6 +470,11 @@ const Supporters = () => {
                   campaignURL: urlForCampaign,
 
                   signingAsSupporter: true,
+                },
+                {
+                  headers: {
+                    'Accept-Language': i18n.language || 'en',
+                  }
                 }
               );
 
@@ -572,6 +587,11 @@ const Supporters = () => {
           ),
           campaignURL: urlForCampaign,
           name: friendName,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
     } catch (error) {
@@ -664,6 +684,11 @@ const Supporters = () => {
           supporterEmail: supporterEmail,
           supporterName: supporterName,
           supporterComment: supporterComment,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 

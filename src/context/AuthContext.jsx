@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -13,6 +14,10 @@ let BACKEND_SERVER_BASE_URL =
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+
+  const { t, i18n } = useTranslation();
+
+
   // declare it here, and define later
   async function refreshAccessToken() {}
 
@@ -45,7 +50,11 @@ export const AuthProvider = ({ children }) => {
           email,
           password,
         },
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
+         }
       ); // it needs withCredentials: true, so it can receive and setCookie refreshToken
     } catch (error) {
       if (error.response.status === 401) {

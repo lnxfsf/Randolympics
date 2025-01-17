@@ -87,6 +87,11 @@ const DonatePart = ({
           discountCode: discountCode,
           countryAthleteIsIn,
           amountOriginal: amount * 100,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 
@@ -104,7 +109,12 @@ const DonatePart = ({
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
-        { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 }
+        { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
+        }
       );
 
       if (response.status !== 200) {
@@ -127,7 +137,7 @@ const DonatePart = ({
   };
 
   const [amount, setAmount] = useState(10);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);

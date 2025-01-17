@@ -85,6 +85,11 @@ const SupporterFourthPart = ({
           discountCode: discountCode,
           friendNationality,
           amountOriginal: amount * 100,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 
@@ -106,7 +111,12 @@ const SupporterFourthPart = ({
     try {
       const response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
-        { discountCode, friendNationality, amountOriginal: amount * 100 }
+        { discountCode, friendNationality, amountOriginal: amount * 100 },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
+        }
       );
 
      

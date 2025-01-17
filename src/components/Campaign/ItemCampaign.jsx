@@ -136,6 +136,11 @@ function formatDate(dateString) {
           supporterEmail: supporterEmail,
           supporterName: supporterName,
           supporterComment: supporterComment,
+        },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
         }
       );
 

@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
+import { useTranslation } from "react-i18next";
  
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -91,6 +92,9 @@ function getImageUrl(coverImage) {
 
 
 const GameDetails = ({ postZ, onBack }) => {
+
+    const { t, i18n } = useTranslation();
+
     const popupRef = useRef(null);
     const filePondRef = useRef(null);
 
@@ -130,6 +134,10 @@ const GameDetails = ({ postZ, onBack }) => {
         try {
             const response = await axios.post(`${BACKEND_SERVER_BASE_URL}/blog/deletegamepost`, {
                 postId: post.postId
+            }, {
+                headers: {
+                    'Accept-Language': i18n.language || 'en',
+                  }
             });
 
 

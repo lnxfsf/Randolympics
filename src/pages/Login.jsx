@@ -34,7 +34,7 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Login = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   let { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -68,7 +68,12 @@ const Login = () => {
     try {
       var response = await axios.post(
         `${BACKEND_SERVER_BASE_URL}/auth/email_resend`,
-        { email: email_resend }
+        { email: email_resend },
+        {
+          headers: {
+            'Accept-Language': i18n.language || 'en',
+          }
+        }
       );
 
 
