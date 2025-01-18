@@ -15,6 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import moment from "moment";
 
 import dayjs from "dayjs";
+import "dayjs/locale/sr";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
 import formatDate from "../../../utils/formatDate";
@@ -135,9 +136,9 @@ const Others = ({
   var status_date = user.status_date; // we need to format this.
 
   if (status_date) {
-    status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
-
-    status_date = formatDate(status_date, true);
+    status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss").locale(i18n.language);
+    status_date = status_date.format("(HH:mm LL)");
+    //status_date = formatDate(status_date, true);
   }
 
   // za toast
