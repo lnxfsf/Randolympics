@@ -80,8 +80,7 @@ const CreatedCampaigns = () => {
 
       setCampaigns(response.data.rows);
 
-      console.log("campaigns for this user");
-      console.log(response.data.rows);
+   
     } catch (e) {
       console.log(e.stack);
     }

@@ -150,10 +150,9 @@ const Navbar = () => {
               </Link>
             </nav>
 
-            {user ? (
-              <>
-                {/* // when logged in */}
 
+          {/* // when logged in */}
+            {user ? (
                 <Tooltip title="Account settings">
                   <>
                     <div
@@ -388,9 +387,7 @@ const Navbar = () => {
                     </Menu>
                   </>
                 </Tooltip>
-              </>
             ) : (
-              <>
                 <div className="flex gap-2">
                   <Button
                     onClick={() => {
@@ -443,7 +440,6 @@ const Navbar = () => {
                     </span>
                   </Button>
                 </div>
-              </>
             )}
           </Toolbar>
         </AppBar>
