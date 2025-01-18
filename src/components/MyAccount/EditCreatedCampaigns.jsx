@@ -1063,7 +1063,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
           </div>
 
           <div className="flex flex-col justify-center pl-4">
-            <Flag className="flag-photo" code={code} />
+            <Flag className="flag-photo shadow-flags-shadow" code={code} />
           </div>
         </div>
       </div>

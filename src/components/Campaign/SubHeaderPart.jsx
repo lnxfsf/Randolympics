@@ -35,7 +35,7 @@ const SubHeaderPart = ({
           </p>
 
           <div>
-            <Flag className="w-4 md:w-8 " code={athlete.nationality} />
+            <Flag className="w-4 md:w-8 shadow-flags-shadow " code={athlete.nationality} />
           </div>
         </div>
 

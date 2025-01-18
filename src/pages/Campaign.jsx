@@ -682,7 +682,7 @@ const Campaign = () => {
                         </div>
 
                         <Flag
-                          className="w-12 justify-self-end "
+                          className="w-12 justify-self-end shadow-flags-shadow "
                           code={item.friendNationality}
                         />
                       </div>

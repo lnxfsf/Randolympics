@@ -184,7 +184,7 @@ const CreatedCampaigns = () => {
 
                         <div>
                           <Flag
-                            className="w-12 "
+                            className="w-12 shadow-flags-shadow"
                             code={item.friendNationality}
                           />
                         </div>

@@ -221,7 +221,7 @@ const SearchForUsers = () => {
                   )} */}
 
                     <div>
-                      <Flag className="w-12 " code={item.nationality} />
+                      <Flag className="w-12 shadow-flags-shadow" code={item.nationality} />
                     </div>
                   </div>
                 </div>

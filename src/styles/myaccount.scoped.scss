@@ -1,13 +1,9 @@
-
-
-
 // for list items..
 .list {
   list-style-type: none;
 }
 
 .list-item {
- 
   display: flex;
   align-items: center;
 
@@ -15,21 +11,21 @@
   cursor: pointer;
 
   background-color: white;
-  
+
   //border-radius: 5px;
 }
 
 .list-item:hover {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 
   color: black;
- // border-radius: 5px;
+  // border-radius: 5px;
 }
 
 .selected {
-  background-color: #FFE9E9;
- /*  color: white; */
- // border-radius: 5px;
+  background-color: #ffe9e9;
+  /*  color: white; */
+  // border-radius: 5px;
 }
 
 .icon {
@@ -41,113 +37,88 @@
 
 // for list items..
 
-
-
-
-
-
 // error box
 .error_box {
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   ///border-color: white;
-  border-color: #FFD77C;
+  border-color: #ffd77c;
   border-radius: 20px;
-  background-color: #FFFCF5;
-  color: #BD673B;
-
-  
+  background-color: #fffcf5;
+  color: #bd673b;
 }
-
-
 
 // error box
 .error_box_rejected {
   border-width: 1px;
   border-style: solid;
-  border-color: #FF0000;  /* Bright red border */
+  border-color: #ff0000; /* Bright red border */
   border-radius: 20px;
-  background-color: #FFEBEB; /* Light red background */
-  color: #8B0000; /* Dark red text */
+  background-color: #ffebeb; /* Light red background */
+  color: #8b0000; /* Dark red text */
   padding: 10px; /* Added some padding for better spacing */
 }
 
-
-
-
 //-------------------
 
-
 .circle-campaign {
-
   --circle-color: "";
 
   position: relative;
   border-radius: 50%;
 
-
-   /* width: 150px;
+  /* width: 150px;
   height: 150px; */
 
-  
   width: 105px;
   height: 105px;
 
-  @media(min-width: 900px) {
+  @media (min-width: 900px) {
     width: 150px;
     height: 150px;
   }
 
-
-
-/* 
+  /* 
 
   background: linear-gradient(300deg, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 1) 30%, rgba(237, 172, 42, 0) 75%);
  */
-/*   
+  /*   
   background: linear-gradient(300deg, rgba(var(--r),var(--g), var(--b), 1) 30%, rgba(var(--r),var(--g), var(--b), 1) 30%, rgba(var(--r),var(--g), var(--b), 0) 75%);
  */
-  background: linear-gradient(300deg, rgba(var(--circle-color), 1) 30%, rgba(var(--circle-color), 1) 30%, rgba(var(--circle-color), 0) 75%);
-
-
-
+  background: linear-gradient(
+    300deg,
+    rgba(var(--circle-color), 1) 30%,
+    rgba(var(--circle-color), 1) 30%,
+    rgba(var(--circle-color), 0) 75%
+  );
 
   padding: 25px;
 }
 
-
 .circle-campaign::before {
-  content: '';
- position: absolute;
- border-radius: 50%;
- top: 50%; 
- left: 50%;
- transform: translate(-50%, -50%); 
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-/*  width: 120px;
+  /*  width: 120px;
  height: 120px; */
 
- 
+  width: 75px;
+  height: 75px;
 
- width: 75px;
- height: 75px;
+  @media (min-width: 900px) {
+    width: 120px;
+    height: 120px;
+  }
 
- @media(min-width: 900px) {
-  width: 120px;
-  height: 120px; 
- }
-
-
-
- background: white; 
+  background: white;
 }
-
 
 .text-wrapper {
   position: absolute;
- 
-  
 
   z-index: 999;
-  
 }

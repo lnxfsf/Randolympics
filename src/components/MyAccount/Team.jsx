@@ -250,7 +250,7 @@ const Team = () => {
               <p className="text-xl font-bold">
                 {countryList().getLabel(code)}
               </p>
-              <Flag className="flag-photo-team " code={code} />
+              <Flag className="flag-photo-team shadow-flags-shadow" code={code} />
             </div>
           </div>
         </div>
