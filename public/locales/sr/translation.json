@@ -856,7 +856,13 @@
       "content6": "Ime",
       "content7": "Email",
       "content8": "Telefon",
-      "content9": "Status"
+      "content9": "Status",
+
+      "content10": "Kandidat",
+      "content11": "Trenutni Globalni Predsednik",
+      "content12": "Podneo ostavku"
+
+
     },
     "validationManager": {
       "content1": "Trenutni rank",

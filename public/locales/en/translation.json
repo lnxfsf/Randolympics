@@ -869,7 +869,14 @@
       "content6": "Name",
       "content7": "Email",
       "content8": "Phone",
-      "content9": "Status"
+      "content9": "Status",
+
+
+      "content10": "Candidate",
+      "content11": "Acting Global President",
+      "content12": "Resigned"
+
+      
     },
     "validationPassport": {
       "content1": "Search by name"

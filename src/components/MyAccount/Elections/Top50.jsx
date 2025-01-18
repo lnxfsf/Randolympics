@@ -14,6 +14,11 @@ import moment from "moment";
 
 import { Top50Popup } from "./Top50Popup";
 
+import formatDate from "../../../utils/formatDate";
+
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
 const Top50 = ({
   user, // we just send one big object, and get properties (as they change depending on user_type)
   currentUserPassportStatus,
@@ -25,9 +30,9 @@ const Top50 = ({
   whichVotedFor, // we get votedFor (if it's AH (so for NP vote)) | or votedForGP, if it's in selection dropdown menu "GP", and from NP user..
   lastRank,
 }) => {
+  const { t, i18n } = useTranslation();
 
-  const { t } = useTranslation();
-
+  dayjs.extend(localizedFormat);
 
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId; // userId, of user in question (you're changing.. about.. )
@@ -64,14 +69,14 @@ const Top50 = ({
   }
 
   const name = user.name;
-/* 
+  /* 
   if (user.birthdate_private == 1) {
     var age = "private";
   } else {
     var age = calculateAge(user.birthdate);
   } */
 
-/*   if (user.email_private == 1) {
+  /*   if (user.email_private == 1) {
     var email = "private";
   } else {
     var email = user.email;
@@ -79,14 +84,14 @@ const Top50 = ({
 
   // private je 1
   // public je 0
-/*   if (user.phone_private == 1) {
+  /*   if (user.phone_private == 1) {
     var phone = "private";
   } else {
     var phone = user.phone;
   } */
 
-    var email = user.email;
-    var phone = user.phone;
+  var email = user.email;
+  var phone = user.phone;
 
   const gender = user.gender;
   const nationality = user.nationality;
@@ -98,7 +103,7 @@ const Top50 = ({
   }
 
   // we calculate age on the fly..
-/*   function calculateAge(birthdate) {
+  /*   function calculateAge(birthdate) {
     // if birthdate is empty, or invalid..
     if (!birthdate || !moment(birthdate).isValid()) {
       return "-";
@@ -117,18 +122,15 @@ const Top50 = ({
 
   if (status_date) {
     status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
-    status_date = status_date.format("(HH:mm MMMM Do YYYY)");
+
+    status_date = formatDate(status_date, true);
+
   }
 
-
-
-  useEffect(() => {
-
-  }, [whichVotedFor])
+  useEffect(() => {}, [whichVotedFor]);
 
   return (
     <>
-    
       <tr
         key={index}
         className="bg-[#f2fff3] border-b-[1px] border-t-[1px] border-[#DEE2E6]"
@@ -168,7 +170,6 @@ const Top50 = ({
 
         <td>{name}</td>
 
-      
         {user.email_private === 1 ? (
           <>
             <td>
@@ -188,9 +189,6 @@ const Top50 = ({
             <td>{email}</td>
           </>
         )}
-
-
-        
 
         {user.phone_private === 1 ? (
           <>
@@ -214,7 +212,14 @@ const Top50 = ({
 
         <td>
           <p>
-            {status} <br />
+            {status === "Candidate"
+              ? t("myprofile.elections.content10")
+              : status === "Acting Global President"
+              ? t("myprofile.elections.content11")
+              : t("myprofile.elections.content12")}
+
+            <br />
+
             {status_date}
           </p>
         </td>

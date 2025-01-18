@@ -14,13 +14,17 @@ import Checkbox from "@mui/material/Checkbox";
 
 import moment from "moment";
 
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+import formatDate from "../../../utils/formatDate";
+
 import { Others50Popup } from "./Others50Popup";
 
 import Radio from "@mui/material/Radio";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import { useTranslation } from "react-i18next";
-
 
 const Others = ({
   user,
@@ -35,9 +39,9 @@ const Others = ({
   lastRank,
   setWhichVotedFor,
 }) => {
-
   const { t } = useTranslation();
 
+  dayjs.extend(localizedFormat);
 
   // set up, (and also depends on user_type, as we won't use all of it)
   const userId = user.userId;
@@ -73,18 +77,18 @@ const Others = ({
 
   const nationality = user.nationality;
 
-/*   if (user.email_private == 1) {
+  /*   if (user.email_private == 1) {
     var email = "private";
   } else {
     var email = user.email;
   } */
 
-    var email = user.email;
-    var phone = user.phone;
+  var email = user.email;
+  var phone = user.phone;
 
   // private je 1
   // public je 0
-/*   if (user.phone_private == 1) {
+  /*   if (user.phone_private == 1) {
     var phone = "private";
   } else {
     var phone = user.phone;
@@ -132,7 +136,8 @@ const Others = ({
 
   if (status_date) {
     status_date = moment(status_date, "YYYY-MM-DD HH:mm:ss");
-    status_date = status_date.format("(HH:mm MMMM Do YYYY)");
+
+    status_date = formatDate(status_date, true);
   }
 
   // za toast
@@ -197,8 +202,6 @@ const Others = ({
 
         <td>{name}</td>
 
-        
-
         {user.email_private === 1 ? (
           <>
             <td>
@@ -208,7 +211,7 @@ const Others = ({
                   src="/editprofile/private_lock.svg"
                 />
                 <p className="text-lg font-medium text-[#616673] break-all">
-                 {t("myprofile.elections.status1")}
+                  {t("myprofile.elections.status1")}
                 </p>
               </div>
             </td>
@@ -241,7 +244,12 @@ const Others = ({
 
         <td>
           <p>
-            {status} <br />
+            {status === "Candidate"
+              ? t("myprofile.elections.content10")
+              : status === "Acting Global President"
+              ? t("myprofile.elections.content11")
+              : t("myprofile.elections.content12")}
+            <br />
             {status_date}
           </p>
         </td>
