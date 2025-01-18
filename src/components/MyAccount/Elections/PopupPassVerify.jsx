@@ -25,6 +25,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import dayjs from "dayjs";
+import "dayjs/locale/sr";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -42,6 +43,10 @@ const PopupPassVerify = ({
 }) => {
   const { t } = useTranslation();
 
+  
+     dayjs.locale(i18n.language);
+
+     
   const [open1, setOpen1] = useState(false);
 
   const name = user.name;

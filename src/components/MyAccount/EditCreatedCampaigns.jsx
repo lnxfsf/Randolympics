@@ -8,6 +8,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 import dayjs from "dayjs";
+import "dayjs/locale/sr";
 
 import ReactFlagsSelect from "react-flags-select";
 import supportedCountry from "../../context/supportedCountry";
@@ -124,6 +125,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
 
   const { t } = useTranslation();
+
+
+   dayjs.locale(i18n.language);
 
   const maxAllowedDate = dayjs().subtract(15, "year");
 
@@ -1199,7 +1203,7 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 <p className="text-sm font-medium">
                   {t("myprofile.myaccount.content8")}
                 </p>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
                   <DemoContainer components={["DatePicker"]}>
                     <DatePicker
                       className="w-full"

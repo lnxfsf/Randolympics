@@ -36,6 +36,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import dayjs from "dayjs";
+import "dayjs/locale/sr";
 
 // FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -115,7 +116,15 @@ const sxTextField = {
   },
 };
 
+
+
+
+
+
+
 const EditProfile = () => {
+
+  
 
 
 
@@ -145,7 +154,11 @@ const EditProfile = () => {
   const filePondRef = useRef(null);
    
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+
+
+
 
   const handleathleteStatementChange = (event) => {
     // "prevUserData" comes from the useState hook
@@ -281,6 +294,9 @@ const EditProfile = () => {
 
   const [passportExpiryDate, setPassportExpiryDate] = useState(null);
 
+  dayjs.locale(i18n.language);
+
+  
   useEffect(() => {
     // this is the one that will be edited, as we input (onChange) input fields. this is the one we upload to backend (as a whole)
     const storedData =
@@ -332,6 +348,13 @@ const EditProfile = () => {
       // fetch latest data, and store it in localstorage. (so it can display realtime data for passport updates.. ). okay, this will execute just once ! at render ! so no problem here !
       fetchLatestInLocalStorage(userJson.data.userId);
     }
+
+
+    
+
+    
+
+
   }, []);
 
   const fetchLatestInLocalStorage = async (userId) => {
@@ -1085,7 +1108,7 @@ const EditProfile = () => {
                 <p className="text-sm font-medium">
                   {t("myprofile.myaccount.content8")}
                 </p>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
                   <DemoContainer components={["DatePicker"]}>
                     <DatePicker
                       className="w-full"
