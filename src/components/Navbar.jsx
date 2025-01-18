@@ -285,8 +285,7 @@ const Navbar = () => {
                       </MenuItem>
 
                       {userData.data.user_type !== "SPT" && (
-                        <>
-                          <MenuItem to="/myaccount#team" component={Link}>
+                       <MenuItem to="/myaccount#team" component={Link}>
                             <ListItemIcon>
                               <img
                                 src="/myaccount/team_dark.svg"
@@ -297,12 +296,10 @@ const Navbar = () => {
                               {t("navbar.profile2")}
                             </span>
                           </MenuItem>
-                        </>
                       )}
 
                       {(userData.data.user_type === "AH" ||
                         userData.data.user_type === "NP") && (
-                        <>
                           <MenuItem to="/myaccount#elections" component={Link}>
                             <ListItemIcon>
                               <img
@@ -314,7 +311,6 @@ const Navbar = () => {
                               {t("navbar.profile3")}
                             </span>
                           </MenuItem>
-                        </>
                       )}
 
                       {(userData.data.user_type === "EM" ||

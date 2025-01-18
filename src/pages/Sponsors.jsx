@@ -7,17 +7,16 @@ import { Button } from "@mui/material";
 import { useRef } from "react";
 import { ContactUsForm } from "./Contact/ContactUsForm";
 
-
 let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
-
-
 
 const Sponsors = () => {
   const { t } = useTranslation();
 
   const sponsorsRef = useRef(null);
+  const contactRef = useRef(null);
+
 
   return (
     <>
@@ -81,42 +80,38 @@ const Sponsors = () => {
           {t("sponsors.content3")}
         </p>
 
-        <p className=" font-semibold mt-2 text-black_second">{t("sponsors.content4")}</p>
+        <p className=" font-semibold mt-2 text-black_second">
+          {t("sponsors.content4")}
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 mt-8 text-black_second">
           <div>
             <div className="flex flex-col ">
-            
-            <div className="flex justify-start items-center">
-              <img src="/sponsors/acaimania.png" className="w-20 md:w-32" />
+              <div className="flex justify-start items-center">
+                <img src="/sponsors/acaimania.png" className="w-20 md:w-32" />
 
-              <div className="flex flex-col ml-4">
-                <p className=" font-semibold mt-2">
-                  {t("sponsors.firstBussiness1")}
-                </p>
+                <div className="flex flex-col ml-4">
+                  <p className=" font-semibold mt-2">
+                    {t("sponsors.firstBussiness1")}
+                  </p>
 
-                <p className=" font-semibold mt-2">
-                  {t("sponsors.firstBussiness2")}
-                </p>
+                  <p className=" font-semibold mt-2">
+                    {t("sponsors.firstBussiness2")}
+                  </p>
 
-                <p className=" font-semibold mt-2">
-                  {" "}
-                  Instagram:{" "}
-                  <a
-                    href="https://instagram.com/acaimaniashop"
-                    className="underline text-blue_first"
-                    target="_blank"
-                  >
-                    {t("sponsors.firstBussiness3")}
-                  </a>
-                </p>
-
-
-                
+                  <p className=" font-semibold mt-2">
+                    {" "}
+                    Instagram:{" "}
+                    <a
+                      href="https://instagram.com/acaimaniashop"
+                      className="underline text-blue_first"
+                      target="_blank"
+                    >
+                      {t("sponsors.firstBussiness3")}
+                    </a>
+                  </p>
+                </div>
               </div>
-
-              </div>
-
 
               <p className=" font-semibold mt-2 mb-6">
                 {t("sponsors.firstBussiness4")}
@@ -124,82 +119,71 @@ const Sponsors = () => {
             </div>
           </div>
 
-
-
           <div>
             <div className="flex flex-col ">
-            
-            <div className="flex justify-start items-center">
-              <img src="/sponsors/izinga.png" className="w-20 md:w-32" />
+              <div className="flex justify-start items-center">
+                <img src="/sponsors/izinga.png" className="w-20 md:w-32" />
 
-              <div className="flex flex-col ml-4">
-                <p className=" font-semibold mt-2">
-                  {t("sponsors.secondBussiness1")}
-                </p>
+                <div className="flex flex-col ml-4">
+                  <p className=" font-semibold mt-2">
+                    {t("sponsors.secondBussiness1")}
+                  </p>
 
-                <p className=" font-semibold mt-2">
-                  {t("sponsors.secondBussiness2")}
-                </p>
+                  <p className=" font-semibold mt-2">
+                    {t("sponsors.secondBussiness2")}
+                  </p>
 
-                <p className=" font-semibold mt-2">
-                  <a
-                    href="https://izinga.co"
-                    className="underline text-blue_first"
-
-                    target="_blank"
-                  >
-                    {t("sponsors.secondBussiness3")}
-                  </a>
-                </p>
-
-
-                
+                  <p className=" font-semibold mt-2">
+                    <a
+                      href="https://izinga.co"
+                      className="underline text-blue_first"
+                      target="_blank"
+                    >
+                      {t("sponsors.secondBussiness3")}
+                    </a>
+                  </p>
+                </div>
               </div>
-
-              </div>
-
 
               <p className="mb-6 font-semibold m-2">
                 {t("sponsors.secondBussiness4")}
               </p>
             </div>
           </div>
-
-
-
-
         </div>
 
+        <div className="w-full flex justify-center flex-col items-center">
+          <img
+            src="/sponsors/FeatureYourBusiness.png"
+            className="lg:w-[70%] 2xl:w-[50%]"
+          />
 
-<div className="w-full flex justify-center flex-col items-center">
-<img src="/sponsors/FeatureYourBusiness.png" className="lg:w-[70%] 2xl:w-[50%]" />
-
-
-
-<p className="text-center font-semibold text-black_second">{t("sponsors.contact1")}<br/><a href={`${FRONTEND_SERVER_BASE_URL}/contact`}>{t("sponsors.contact2")}</a>{t("sponsors.contact3")}</p>
-
-</div>
-
-
-
+          <p className="text-center font-semibold text-black_second">
+            {t("sponsors.contact1")}
+            <br />
+            <a  onClick={() => {contactRef.current.scrollIntoView({ behavior: "smooth" });}} className="text-red_second cursor-pointer underline decoration-red_second" >
+              {t("sponsors.contact2")}
+            </a>
+            {t("sponsors.contact3")}
+          </p>
+        </div>
       </div>
 
-
-          <div className="m-8 mt-16">
-          <p className="text-2xl md:text-3xl font-semibold text-black_second">
+      <div className="m-8 mt-16">
+        <p className="text-2xl md:text-3xl font-semibold text-black_second">
           {t("sponsors.content6")}
-          
         </p>
 
         <p className="text-red_second font-semibold mt-2">
           {t("sponsors.content7")}
         </p>
 
-        <p className=" font-semibold mt-2 text-black_second">{t("sponsors.content8")}</p>
+        <p className=" font-semibold mt-2 text-black_second">
+          {t("sponsors.content8")}
+        </p>
+      </div>
 
-          </div>
-
-
+      <div ref={contactRef} />
       <ContactUsForm />
 
       <Footer />
