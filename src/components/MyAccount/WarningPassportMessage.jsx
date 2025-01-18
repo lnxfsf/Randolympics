@@ -64,7 +64,7 @@ const WarningPassportMessage = () => {
               </p>
             </div>
 
-            <div className="pl-8 pt-2 break-all">{warningMessage}</div>
+            <div className="pl-8 pt-2 break-word">{warningMessage}</div>
 
             <div className="pl-8 pt-4">
               {" "}
