@@ -178,6 +178,16 @@ const Campaign = () => {
     setFilterNationality_selected("");
     setSearchFirstNameText("");
 
+
+    setSearchfb_link("");
+    setSearchig_link("");
+    setSearchtw_link("");
+    setSearchtt_link("");
+    setSearchyt_link("");
+
+
+
+
     setSearchFamilyNameText("");
     setFilterIsCelebrity(0);
   };
@@ -186,7 +196,7 @@ const Campaign = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen">
+      <div className="min-h-screen" >
         <div className="flex justify-center items-center mt-4 ">
           <div className="w-full md:w-[50%] flex justify-between  items-center gap-6 p-2">
             <p className="text-xl md:text-3xl flex justify-center  lexend-font text-black_second font-bold">
@@ -501,6 +511,7 @@ const Campaign = () => {
           <div className="w-full md:w-[50%] ">
             <SearchBar
               width="100%"
+              
               value={searchFirstNameText}
               onChange={(newValue) => setSearchFirstNameText(newValue)}
               onCancelResearch={(newValue) => setSearchFirstNameText("")}

@@ -427,14 +427,20 @@
     "content8": "Pogledaj kampanju",
     "content9": "Kopirano u clipboard",
     "content10": "Podeli",
+
+
     "content11": "Da li želite da neko uđe u",
     "content12": "Randolimpijske igre?",
     "content13": "Želim da prijavim prijatelja",
     "content14": "Želim da prijavim poznatu ličnost",
     "content15": "Informacije o tvom prijatelju",
     "content16": "Tvoje informacije",
+
+
     "content17": "Doniraj",
     "content18": "Hajde da prikupimo novac!",
+
+
     "content19": "Koliko da doniram?",
     "content20": "Imate kupon kod?",
     "content22": "Doniraj putem kupona",
@@ -2040,7 +2046,7 @@
     "text19": "Donator već postoji. Unesi šifru donatora.",
     "text20": "Lozinka je ubačena sa praznom e-poštom. Prvo unesite imejl donatora ! ",
     "text21": "Unesite svoje ime",
-    "text22": "Kreirana kampanja",
+    "text22": "Kreirana kampanja. Verifikujte svoju e-poštu pre nego što se prijavite.",
 
      "text23": "Čestitamo! Vaš glas je poslat."
 

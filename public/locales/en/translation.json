@@ -435,13 +435,19 @@
     "content8": "See The Campaign",
     "content9": "Copied to clipboard",
     "content10": "Share",
+
+
     "content11": "Do you want someone to get into the",
     "content12": "Randolympic Games?",
     "content13": "I want to sign up a friend",
     "content14": "I want to sign up a celebrity",
+
+
     "content15": "Your friend's",
     "content16": "information",
+
     "content17": "Your information",
+
     "content18": "Donate",
     "content19": "Let's raise some money !",
     "content20": "How much should I donate?",
@@ -2065,7 +2071,7 @@
     "text19": "Supporter already exists. Type supporter password.",
     "text20": "Password inserted with empty email. Type supporter email first ! ",
     "text21": "Insert your name",
-    "text22": "Created campaign",
+    "text22": "Created campaign. Make sure to verify email before logging in. ",
 
     "text23": "Congratulations! Your vote has been sent."
 
