@@ -44,6 +44,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { InformAdditionalSupporter } from "./InformAdditionalSupporter";
 
 import { useTranslation } from "react-i18next";
+import { createdCampaignSuccess } from "../../utils/facebookPixelEvent";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -365,8 +366,13 @@ const SupporterThirdPart = ({
                 onClick={() => {
                   window.scrollTo(0, 0);
                   
+                  createdCampaignSuccess();
+
+                  
                   setSecondIsVisible(true);
                   setThirdIsVisible(false);
+
+                
 
                 
 

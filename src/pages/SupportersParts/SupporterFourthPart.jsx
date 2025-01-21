@@ -47,6 +47,7 @@ import DonationForm from "../../components/Payments/DonationForm";
 import DonationFormItemCampaign from "../../components/Payments/DonationFormItemCampaign";
 
 import { Trans, useTranslation } from "react-i18next";
+import { createdCampaignSuccess } from "../../utils/facebookPixelEvent";
 
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
@@ -102,6 +103,8 @@ const SupporterFourthPart = ({
 
         setFourthIsVisible(false);
         setFifthIsVisible(true);
+
+        createdCampaignSuccess();
 
         window.scrollTo(0, 0);
 
@@ -715,6 +718,9 @@ const SupporterFourthPart = ({
                   onClick={() => {
                     setFourthIsVisible(false);
                     setFifthIsVisible(true);
+
+                    createdCampaignSuccess();
+
 
                     window.scrollTo(0, 0);
 
