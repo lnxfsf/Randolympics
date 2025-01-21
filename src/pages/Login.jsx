@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-
 // MUI
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -71,48 +70,40 @@ const Login = () => {
         { email: email_resend },
         {
           headers: {
-            'Accept-Language': i18n.language || 'en',
-          }
+            "Accept-Language": i18n.language || "en",
+          },
         }
       );
 
-
-      if ( response.status === 200 && response.data.message === "Email verification link resent") {
-
-        setSnackbarText(t('login.content36'));
+      if (
+        response.status === 200 &&
+        response.data.message === "Email verification link resent"
+      ) {
+        setSnackbarText(t("login.content36"));
         setSnackbarSeverity("success");
 
         setOpenSnackbar(true);
 
-
         //setResultText(response.data.message);
-
-       
-      } 
-
-
+      }
     } catch (error) {
-
-      if(error.response){
-
-      
-      if (error.response.status === 404 && error.response.data.message === "User doesn't exist") {
-      /*   setResultText(t('login.content35'));
+      if (error.response) {
+        if (
+          error.response.status === 404 &&
+          error.response.data.message === "User doesn't exist"
+        ) {
+          /*   setResultText(t('login.content35'));
         setResultTextColor("red");
  */
-        setSnackbarText(t('login.content35'));
-        setSnackbarSeverity("error")
-        setOpenSnackbar(true);
-
-
-      } 
-
-    }
+          setSnackbarText(t("login.content35"));
+          setSnackbarSeverity("error");
+          setOpenSnackbar(true);
+        }
+      }
 
       console.log(error);
     }
   };
-
 
   // snackbar
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -127,10 +118,9 @@ const Login = () => {
 
   const [snackbarText, setSnackbarText] = useState("");
 
-	//"error", "success"
-	const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  //"error", "success"
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   // snackbar
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -145,7 +135,7 @@ const Login = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     if (!emailRegex.test(email)) {
-      setResultText(t('login.content10'));
+      setResultText(t("login.content10"));
       setResultTextColor("red");
     }
 
@@ -153,19 +143,18 @@ const Login = () => {
     // ? this is just to pass to store auth in (local|session) storage
     let login = await loginUser(email, password, rememberChecked);
 
-    if(login === 1){
-      setSnackbarText(t('login.content11'));
-
+    if (login === 1) {
+      setSnackbarText(t("login.content11"));
       setOpenSnackbar(true);
-
-    }else if (login === 0){
-
-      setSnackbarText(t('login.content12'));
-      setSnackbarSeverity("error")
+    } else if (login.response.status === 401) {
+      setSnackbarText(login.response.data.message);
+      setSnackbarSeverity("error");
       setOpenSnackbar(true);
-
+    } else {
+      setSnackbarText(t("login.content12"));
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
     }
-
   };
 
   const handleSignUp = () => {
@@ -357,8 +346,6 @@ const Login = () => {
                 {resultText}
               </p>
 
-
-
               {!isEmailVerified && (
                 <p
                   onClick={handleResendEmailVerify}
@@ -377,7 +364,7 @@ const Login = () => {
           </form>
           {/* END FORM SUBMISSION (login), FOR LOGIN */}
 
-        {/*   <div className="flex justify-center mt-0 max-md:w-full ">
+          {/*   <div className="flex justify-center mt-0 max-md:w-full ">
             <Button
               onClick={handleSignUp}
               className="w-full md:w-[420px]"
@@ -404,7 +391,6 @@ const Login = () => {
         </div>
       </div>
 
-      
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}

@@ -56,13 +56,22 @@ export const AuthProvider = ({ children }) => {
           }
          }
       ); // it needs withCredentials: true, so it can receive and setCookie refreshToken
+
+
+
     } catch (error) {
       if (error.response.status === 401) {
-        // alert(error.response.data.message);
-        return 0;
+        
+       // alert(error.response.data.message);
+
+
+        return error;
+
+
+
       } else {
         console.log(error);
-        return 0;
+        return error;
       }
     }
 

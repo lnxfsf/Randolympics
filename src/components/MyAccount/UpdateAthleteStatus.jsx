@@ -169,10 +169,10 @@ const UpdateAthleteStatus = () => {
             className="w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] object-cover rounded-full"
             /* src="/ariana_profile.jpg"
              */
-            src={
+            src={profilePicture ?
               S3_BUCKET_CDN_BASE_URL +
               "/profile_pictures/" +
-              profilePicture
+              profilePicture : "/myaccount/profile_placeholder.png"
             }
           />
 
