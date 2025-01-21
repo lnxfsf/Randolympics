@@ -98,8 +98,12 @@ const SupporterFourthPart = ({
         setSnackbarStatus("success");
         setOpenSnackbar(true);
 
+
+
         setFourthIsVisible(false);
         setFifthIsVisible(true);
+
+        window.scrollTo(0, 0);
 
       }
     } catch (e) {
@@ -160,6 +164,8 @@ const SupporterFourthPart = ({
   };
 
   const [payWithCreditCard, setPayWithCreditCard] = useState(false);
+
+
 
   return (
     <>
@@ -709,6 +715,9 @@ const SupporterFourthPart = ({
                   onClick={() => {
                     setFourthIsVisible(false);
                     setFifthIsVisible(true);
+
+                    window.scrollTo(0, 0);
+
                   }}
                   className="self-center  w-[50%]"
                   /* w-full md:w-50% */

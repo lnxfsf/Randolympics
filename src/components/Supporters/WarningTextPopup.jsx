@@ -97,6 +97,8 @@ const WarningTextPopup = ({
               setSecondIsVisible(false);
               setThirdIsVisible(true);
 
+              window.scrollTo(0, 0);
+
               setPopupWarning(false); // then close this popup
             }}
             className="w-full md:w-56"

@@ -363,8 +363,13 @@ const SupporterThirdPart = ({
 
               <Button
                 onClick={() => {
+                  window.scrollTo(0, 0);
+                  
                   setSecondIsVisible(true);
                   setThirdIsVisible(false);
+
+                
+
                 }}
                 className="w-full md:w-50%"
                 style={{ textTransform: "none" }}
