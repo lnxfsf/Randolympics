@@ -250,7 +250,7 @@ const ImagineHomeScreen = () => {
           <div className="w-full  md:h-auto overflow-hidden container_imagine_pic1 mt-4 ">
             {/*  <img src="/home/imagine_high_screen.jpg" className="imagine_pic1 " /> */}
 
-            <video width="100%" height="100%" autoPlay muted loop>
+            <video width="100%" height="100%" autoPlay muted loop controls>
               <source
                 src={`${S3_BUCKET_CDN_BASE_URL}/videos/randomlympics_video.mp4`}
                 type="video/mp4"
