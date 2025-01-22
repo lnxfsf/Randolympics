@@ -7,7 +7,7 @@ module.exports = async (email, subject, text) => {
       port: process.env.EMAIL_PORT,
 
       secure: true,
-
+      pool: true,
       auth: {
         user: process.env.USER_email,
         pass: process.env.PASS_email,
