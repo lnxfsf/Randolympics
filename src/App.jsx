@@ -40,28 +40,12 @@ import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Sponsors } from "./pages/Sponsors";
 
 
-import i18n, { i18nPromise } from "../i18n";
-
-import {useState, useEffect} from 'react';
 
 
 const App = () => {
   const [cookies, setCookie] = useCookies(["cookieNeccessary", "cookieConsentOpen"]);
 
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    i18nPromise.then(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
   
 
   return (
@@ -149,6 +133,9 @@ const App = () => {
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+
+
+
     </>
   );
 };

@@ -29,8 +29,8 @@ async function fetchGeoIPLanguage() {
 
 
       // this geoIP should run only once.  Store detected language in localStorage
-      const detectedLanguage = countryToLanguage[data.country_code] || "en";
-      localStorage.setItem("i18nextLng", detectedLanguage);
+    const detectedLanguage = countryToLanguage[data.country_code] || "en";
+    localStorage.setItem("i18nextLng", detectedLanguage);
 
 
 
@@ -45,10 +45,11 @@ async function fetchGeoIPLanguage() {
 
 async function detectLanguage() {
   // First check localStorage, navigator, etc.
-
+  console.log("proveri ima li lokalni")
   const detectedLanguage = localStorage.getItem("i18nextLng");
 
   if (detectedLanguage) {
+    console.log("detektovan lang stavi")
     return detectedLanguage;
   }
 
