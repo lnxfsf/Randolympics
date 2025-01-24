@@ -278,11 +278,19 @@ const Supporters = () => {
         return;
       }
 
+      const noSpecialCharsRegex = /^[a-zA-Z]+$/;
+
       if (supporterName === "") {
         setSnackbarMessage(t("popupMessages.text21"));
         setOpenSnackbarFailure(true);
         return;
+      }else if(!noSpecialCharsRegex.test(supporterName)){
+        setSnackbarMessage(t("popupMessages.text24"));
+        setOpenSnackbarFailure(true);
+        return;
+
       }
+
     }
 
     // makes it for them

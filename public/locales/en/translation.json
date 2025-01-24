@@ -2072,8 +2072,15 @@
     "text20": "Password inserted with empty email. Type supporter email first ! ",
     "text21": "Insert your name",
     "text22": "Created campaign.",
+    "text23": "Congratulations! Your vote has been sent.",
 
-    "text23": "Congratulations! Your vote has been sent."
+    "text24": "Name can't contain numbers or special characters",
+    "text25": "Last name can't contain numbers or special characters",
+     "text26": "Middle name can't contain numbers or special characters"
+
+
+
+
 
 
 

@@ -402,6 +402,9 @@ const Register = () => {
       }
     }
 
+    const noSpecialCharsRegex = /^[a-zA-Z]+$/;
+    
+
     var cryptoaddr = e.target.cryptoaddr.value;
 
     // check again, if email is correctly inserted
@@ -451,7 +454,9 @@ const Register = () => {
         nationality_selected &&
         isEmailError === false &&
         isPhoneError === false &&
-        isPasswordError === false
+        isPasswordError === false &&
+        (!noSpecialCharsRegex.test(name)) && 
+        (!noSpecialCharsRegex.test(lastName))
       ) {
         const res = await fetch(`${BACKEND_SERVER_BASE_URL}/captcha/verify`, {
           method: "POST",
@@ -543,16 +548,40 @@ const Register = () => {
           setSnackbarMessage(t("register.content7"));
           setOpenSnackbar(true);
         } else if (isEmailError === true) {
+          recaptcha.current.reset();
+
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content8"));
           setOpenSnackbar(true);
         } else if (isPasswordError === true) {
+          recaptcha.current.reset();
+
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content10"));
           setOpenSnackbar(true);
         } else if (isPhoneError === true) {
+          recaptcha.current.reset();
+
           setSnackbarStatus("error");
           setSnackbarMessage(t("register.content9"));
+          setOpenSnackbar(true);
+        } else if (!noSpecialCharsRegex.test(name)){
+          recaptcha.current.reset();
+
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("popupMessages.text24"));
+          setOpenSnackbar(true);
+        } else if (!noSpecialCharsRegex.test(lastName)){
+          recaptcha.current.reset();
+
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("popupMessages.text25"));
+          setOpenSnackbar(true);
+        }else if (!noSpecialCharsRegex.test(middleName)){
+          recaptcha.current.reset();
+
+          setSnackbarStatus("error");
+          setSnackbarMessage(t("popupMessages.text26"));
           setOpenSnackbar(true);
         }
       }

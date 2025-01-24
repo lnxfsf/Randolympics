@@ -2047,8 +2047,12 @@
     "text20": "Lozinka je ubačena sa praznom e-poštom. Prvo unesite imejl donatora ! ",
     "text21": "Unesite svoje ime",
     "text22": "Kreirana kampanja.",
+     "text23": "Čestitamo! Vaš glas je poslat.",
 
-     "text23": "Čestitamo! Vaš glas je poslat."
+     "text24": "Ime ne može da sadrži brojeve ili specijalne znakove",
+     "text25": "Prezime ne može da sadrži brojeve ili specijalne znakove",
+     "text26": "Srednje ime ne može da sadrži brojeve ili specijalne znakove"
+
 
 
 

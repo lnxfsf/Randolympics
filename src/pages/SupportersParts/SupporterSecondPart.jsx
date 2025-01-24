@@ -176,17 +176,32 @@ const SupporterSecondPart = ({
       return;
     }
 
+
+    const noSpecialCharsRegex = /^[a-zA-Z]+$/;
     if (friendName === "") {
       setSnackbarMessage(t("popupMessages.text9"));
       setOpenSnackbarFailure(true);
 
       return;
-    }
+    } else if(!noSpecialCharsRegex.test(friendName)){
+        setSnackbarMessage(t("popupMessages.text24"));
+        setOpenSnackbarFailure(true);
+        return;
+
+      }
+    
+
+    
 
     if (friendLastName === "") {
       setSnackbarMessage(t("popupMessages.text10"));
       setOpenSnackbarFailure(true);
       return;
+    } else if(!noSpecialCharsRegex.test(friendLastName)){
+        setSnackbarMessage(t("popupMessages.text25"));
+        setOpenSnackbarFailure(true);
+        return;
+
     }
 
     if (friendEmail === "" && !isCelebrity) {
