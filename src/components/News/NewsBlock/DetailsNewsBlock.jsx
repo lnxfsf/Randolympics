@@ -44,7 +44,7 @@ const DetailsNewsBlock = () => {
 
 
 const { t, i18n } = useTranslation();
-  
+
 
 function formatDate(dateString) {
   let date = new Date(dateString);

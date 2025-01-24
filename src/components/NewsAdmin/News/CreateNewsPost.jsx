@@ -48,6 +48,7 @@ let BACKEND_SERVER_BASE_URL =
 
 const CreateNewsPost = ({ onBack }) => {
   const { t, i18n } = useTranslation();
+ 
 
   const filePondRef = useRef(null);
 

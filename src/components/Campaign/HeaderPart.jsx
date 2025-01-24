@@ -19,6 +19,10 @@ let S3_BUCKET_CDN_BASE_URL =
 
 const HeaderPart = ({ athlete, setOpenSnackbar, setSnackbarMessage }) => {
   const { t, i18n } = useTranslation();
+
+
+
+
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
 
   const [statusText, setStatusText] = useState("");

@@ -4,12 +4,13 @@ import { useTranslation, Trans } from "react-i18next";
 import { MenuItem, Select } from "@mui/material";
 
 import { lngs } from "../../languages";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useCookies } from "react-cookie";
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
+
 
   const navigate = useNavigate();
 

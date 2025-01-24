@@ -12,6 +12,7 @@ const ItemEconomicsList = ({ post, index, onClick }) => {
 const { t, i18n } = useTranslation();
 
 
+
 function formatDate(dateString) {
   let date = new Date(dateString);
   let locale = i18n.language || "en-US";

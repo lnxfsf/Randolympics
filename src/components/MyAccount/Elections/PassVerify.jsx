@@ -40,6 +40,7 @@ const PassVerify = ({ user, index, setUpdatedPassport }) => {
 
   const { t, i18n } = useTranslation();
 
+
   //-------------
 
   const [updatedPassportPopup, setUpdatedPassportPopup] = useState(false);

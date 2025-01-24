@@ -139,6 +139,8 @@ const DonatePart = ({
   const [amount, setAmount] = useState(10);
   const { t, i18n } = useTranslation();
 
+
+
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");

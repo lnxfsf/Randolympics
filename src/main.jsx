@@ -13,6 +13,7 @@ import "./index.css";
 import "@mui/material/styles/styled";
 import { HelmetProvider } from "react-helmet-async";
 
+
 import "../i18n";
 
 // analytics
@@ -26,6 +27,8 @@ const VITE_PUBLIC_POSTHOG_HOST =
 const VITE_PUBLIC_POSTHOG_KEY =
   import.meta.env.VITE_PUBLIC_POSTHOG_KEY ||
   process.env.VITE_PUBLIC_POSTHOG_KEY;
+
+
 
 
 

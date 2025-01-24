@@ -16,6 +16,11 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
 
   const { t, i18n } = useTranslation();
+  
+  if (!i18n.isInitialized) {
+    return <div></div>;
+  }
+  
 
 
   // declare it here, and define later
@@ -149,7 +154,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
+
   useEffect(() => {
+  
+
     // only for first time, but only if there is some user.. and that means we have accessToken in there.. as we can't send refreshToken if it's expired (when logout)
     if (
       localStorage.getItem("accessToken") ||
