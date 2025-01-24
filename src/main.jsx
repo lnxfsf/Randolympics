@@ -39,20 +39,6 @@ posthog.init(VITE_PUBLIC_POSTHOG_KEY, {
   person_profiles: "always", // or 'always' to create profiles for anonymous users as well
 });
 
-/* 
-const [loading, setLoading] = useState(true);
-
-useEffect(() => {
-  i18nPromise.then(() => setLoading(false));
-}, [loading]);
-
-if (loading) {
-  return (
-    <div>
-      
-    </div>
-  );
-} */
 
 /* 
 import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||

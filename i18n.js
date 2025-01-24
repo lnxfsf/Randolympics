@@ -7,18 +7,14 @@ let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
-
-
-
 async function fetchGeoIPLanguage() {
   try {
     const response = await fetch("https://ipapi.co/json/");
-    
 
     const data = await response.json();
 
-    console.log("GeoIP Response:", )
-    console.log(data);
+
+    
 
     if (data && data.country_code) {
       const countryToLanguage = {
@@ -27,13 +23,9 @@ async function fetchGeoIPLanguage() {
         ME: "sr",
       };
 
-
       // this geoIP should run only once.  Store detected language in localStorage
-    const detectedLanguage = countryToLanguage[data.country_code] || "en";
-    localStorage.setItem("i18nextLng", detectedLanguage);
-
-
-
+      const detectedLanguage = countryToLanguage[data.country_code] || "en";
+      localStorage.setItem("i18nextLng", detectedLanguage);
 
       return countryToLanguage[data.country_code] || "en";
     }
@@ -45,11 +37,9 @@ async function fetchGeoIPLanguage() {
 
 async function detectLanguage() {
   // First check localStorage, navigator, etc.
-  console.log("proveri ima li lokalni")
   const detectedLanguage = localStorage.getItem("i18nextLng");
 
   if (detectedLanguage) {
-    console.log("detektovan lang stavi")
     return detectedLanguage;
   }
 
@@ -62,10 +52,6 @@ async function detectLanguage() {
 }
 
 export const i18nPromise = detectLanguage().then((language) =>
-
-
- 
-
   i18n
     .use(initReactI18next)
     .use(LanguageDetector)
@@ -85,17 +71,6 @@ export const i18nPromise = detectLanguage().then((language) =>
         //  crossDomain: true
       },
     })
-
-  );
-
-
-
- 
-
-
-
-
-
-
+);
 
 export default i18n;
