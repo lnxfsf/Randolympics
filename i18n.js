@@ -45,6 +45,7 @@ async function fetchGeoIPLanguage() {
 
 async function detectLanguage() {
   // First check localStorage, navigator, etc.
+
   const detectedLanguage = localStorage.getItem("i18nextLng");
 
   if (detectedLanguage) {
