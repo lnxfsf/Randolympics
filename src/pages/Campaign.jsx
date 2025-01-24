@@ -346,6 +346,8 @@ const Campaign = () => {
                   id="nationality"
                   name="nationality"
                   placeholder={t("campaign.content34")}
+
+                  selectButtonClassName="h-14"
                 />
 
                 {/* this is for athlete NON celebrity */}

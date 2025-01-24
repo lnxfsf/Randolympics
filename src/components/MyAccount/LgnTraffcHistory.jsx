@@ -232,6 +232,8 @@ const LgnTraffcHistory = () => {
                 id="nationality"
                 name="nationality"
                 placeholder={t("login.content32")}
+
+                selectButtonClassName="h-11"
               />
             </div>
           </Popup>

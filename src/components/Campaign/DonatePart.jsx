@@ -219,7 +219,7 @@ const DonatePart = ({
             }}
           >
             <span className="lexend-font">
-              {wantToDonate ?  t("campaign.content129") : t("campaign.content17")}
+              {wantToDonate ?  t("campaign.content129") : t("campaign.content18")}
             </span>
           </Button>
         </div>
@@ -259,6 +259,7 @@ const DonatePart = ({
                 }}
                 InputLabelProps={inputLabelPropsTextField}
                 sx={sxTextField}
+               
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
@@ -442,7 +443,7 @@ const DonatePart = ({
                   },
                 }}
               >
-                <span className="lexend-font">{t("campaign.content17")}</span>
+                <span className="lexend-font">{t("campaign.content18")}</span>
               </Button>
 
               <div className="m-4  flex justify-center  items-center flex-col">

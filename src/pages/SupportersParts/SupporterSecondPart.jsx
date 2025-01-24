@@ -335,7 +335,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      {t("campaign.content17")}
+                      {t("campaign.content18")}
                     </p>
                   </div>
 
@@ -650,6 +650,8 @@ const SupporterSecondPart = ({
                     searchable={true}
                     id="nationality"
                     name="nationality"
+
+                    selectButtonClassName="h-14"
                   />
 
                   <FormControl>
@@ -813,7 +815,7 @@ const SupporterSecondPart = ({
                     </div>
 
                     <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                      {t("campaign.content17")}
+                      {t("campaign.content18")}
                     </p>
                   </div>
 
@@ -1019,6 +1021,8 @@ const SupporterSecondPart = ({
                     searchable={true}
                     id="nationality"
                     name="nationality"
+
+                    selectButtonClassName="h-14"
                   />
 
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">

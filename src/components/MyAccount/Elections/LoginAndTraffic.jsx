@@ -1,7 +1,14 @@
 import Flag from "react-world-flags";
 import { useState, useEffect, useRef } from "react";
+import {useTranslation} from "react-i18next";
 
 const LoginAndTraffic = ({ row, index }) => {
+
+  const { t, i18n } = useTranslation();
+
+
+
+
   const nationality = row.nationality;
   const user_type = row.user_type;
   const numberOfLogins = row.numberOfLogins;
@@ -13,29 +20,29 @@ const LoginAndTraffic = ({ row, index }) => {
 
   useEffect(() => {
     functionSetUserTypeText();
-  }, []);
+  }, [i18n.language]);
 
   const functionSetUserTypeText = () => {
     if (user_type === "AH") {
-      setUserTypeText("Athlete");
+      setUserTypeText(t("userTypes.user_type1"));
     } else if (user_type === "GP") {
-      setUserTypeText("Global President");
+      setUserTypeText(t("userTypes.user_type2"));
     } else if (user_type === "NP") {
-      setUserTypeText("National President");
+      setUserTypeText(t("userTypes.user_type3"));
     } else if (user_type === "EM") {
-      setUserTypeText("Event Manager");
+      setUserTypeText(t("userTypes.user_type4"));
     } else if (user_type === "ITM") {
-      setUserTypeText("IT Manager Page editor");
+      setUserTypeText(t("userTypes.user_type6"));
     } else if (user_type === "MM") {
-      setUserTypeText("Marketing Manager");
+      setUserTypeText(t("userTypes.user_type7"));
     } else if (user_type === "SM") {
-      setUserTypeText("Sales Manager");
+      setUserTypeText(t("userTypes.user_type8"));
     } else if (user_type === "VM") {
-      setUserTypeText("Validation Manager");
+      setUserTypeText(t("userTypes.user_type9"));
     } else if (user_type === "LM") {
-      setUserTypeText("Legal Manager");
+      setUserTypeText(t("userTypes.user_type10"));
     } else if (user_type === "RS") {
-      setUserTypeText("Referee & Support");
+      setUserTypeText(t("userTypes.user_type11"));
     }
   };
 

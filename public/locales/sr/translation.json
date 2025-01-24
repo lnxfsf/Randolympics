@@ -434,15 +434,21 @@
     "content13": "Želim da prijavim prijatelja",
     "content14": "Želim da prijavim poznatu ličnost",
     "content15": "Informacije o tvom prijatelju",
-    "content16": "Tvoje informacije",
+    "content16": "",
 
 
-    "content17": "Doniraj",
-    "content18": "Hajde da prikupimo novac!",
+    "content17": "Tvoje informacije ",
+
+    "content18": "Doniraj",
+
+    "content19": "Hajde da prikupimo novac!",
+
+    "content20": "Koliko da doniram?",
 
 
-    "content19": "Koliko da doniram?",
-    "content20": "Imate kupon kod?",
+    "content21": "Imate kupon kod?",
+
+
     "content22": "Doniraj putem kupona",
 
     "content23": "Dalje",

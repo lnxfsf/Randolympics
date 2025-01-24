@@ -1255,6 +1255,8 @@ const EditProfile = () => {
                 id="nationality"
                 name="nationality"
                 placeholder={t("myprofile.myaccount.content11")}
+
+                selectButtonClassName="h-14"
               />
             </div>
           </div>

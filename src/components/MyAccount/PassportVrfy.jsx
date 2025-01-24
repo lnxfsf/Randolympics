@@ -254,6 +254,8 @@ const PassportVrfy = () => {
                 id="nationality"
                 name="nationality"
                 placeholder="Nationality"
+
+                selectButtonClassName="h-14"
               />
 
               <FormControl

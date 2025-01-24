@@ -1028,11 +1028,17 @@ const Register = () => {
                 countries={supportedCountry}
                 selected={nationality_selected}
                 onSelect={(code) => setNationality_selected(code)}
-                className="w-full lexend-font "
+                className="w-full lexend-font"
                 searchable={true}
                 id="nationality"
                 name="nationality"
                 placeholder={t("register.content28") + " *"} 
+
+
+                selectButtonClassName="h-14"
+                
+                
+                
               />
 
               <label

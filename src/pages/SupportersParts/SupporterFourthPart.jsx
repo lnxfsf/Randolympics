@@ -210,7 +210,7 @@ const SupporterFourthPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                  {t("campaign.content17")}
+                  {t("campaign.content18")}
                 </p>
               </div>
 
@@ -711,7 +711,7 @@ const SupporterFourthPart = ({
                     },
                   }}
                 >
-                  <span className="lexend-font">{t("campaign.content17")}</span>
+                  <span className="lexend-font">{t("campaign.content18")}</span>
                 </Button>
 
                 <Button
