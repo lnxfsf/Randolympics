@@ -13,9 +13,6 @@ async function fetchGeoIPLanguage() {
 
     const data = await response.json();
 
-
-    
-
     if (data && data.country_code) {
       const countryToLanguage = {
         US: "en",
@@ -51,6 +48,7 @@ async function detectLanguage() {
   // navigator.language;
 }
 
+// we also export i18nPromise
 export const i18nPromise = detectLanguage().then((language) =>
   i18n
     .use(initReactI18next)
