@@ -44,9 +44,10 @@ const makePayment = async (req, res) => {
     countryAthleteIsIn,
   } = req.body;
 
-
+console.log("makepayment ")
 
   try {
+
     // ovde ne treba transaction, ovo je za stripe request
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,
@@ -475,6 +476,8 @@ const donateOnlyWithDiscountCode = async (req, res) => {
   }
 };
 
+
+
 const checkIfCouponValid = async (req, res) => {
   const { discountCode, countryAthleteIsIn, amountOriginal } = req.body;
 
@@ -530,7 +533,7 @@ const checkIfCouponValid = async (req, res) => {
 
 
 
-    } else if(oneCoupon.country !== oneAthlete.nationality.toUpperCase() && oneCoupon.country !== "GLOBAL"){
+    } else if(oneCoupon.country !== countryAthleteIsIn  && oneCoupon.country !== "GLOBAL"){
 
       res.status(400).json({ message: t('checkIfCouponValid.content3') });
 
@@ -578,7 +581,7 @@ const checkIfCouponValid = async (req, res) => {
       res.status(400).json({
         message: t('checkIfCouponValid.content6'),
       });
-    } else if (oneCoupon.country !== oneAthlete.nationality.toUpperCase()) {
+    } else if (oneCoupon.country !== countryAthleteIsIn) {
       res.status(400).json({
         message: t('checkIfCouponValid.content7'),
       });
