@@ -20,7 +20,7 @@ let S3_BUCKET_CDN_BASE_URL =
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
 const CreatedCampaigns = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [maxPages, setMaxPages] = useState(0);
   const [resultsAmount, setResultsAmount] = useState();

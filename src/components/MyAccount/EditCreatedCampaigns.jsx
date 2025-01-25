@@ -124,7 +124,7 @@ let S3_BUCKET_CDN_BASE_URL =
 const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
 
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
 
    dayjs.locale(i18n.language);

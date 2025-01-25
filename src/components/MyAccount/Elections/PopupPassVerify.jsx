@@ -41,7 +41,7 @@ const PopupPassVerify = ({
   popupRef,
   setOpen,
 }) => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
 
   
      dayjs.locale(i18n.language);
