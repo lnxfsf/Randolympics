@@ -278,7 +278,7 @@ const Supporters = () => {
         return;
       }
 
-      const noSpecialCharsRegex = /^[a-zA-Z]+$/;
+      const noSpecialCharsRegex = /^[\p{L}]+$/u;
 
       if (supporterName === "") {
         setSnackbarMessage(t("popupMessages.text21"));

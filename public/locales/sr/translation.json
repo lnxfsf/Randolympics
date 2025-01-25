@@ -2055,9 +2055,9 @@
     "text22": "Kreirana kampanja.",
      "text23": "Čestitamo! Vaš glas je poslat.",
 
-     "text24": "Ime ne može da sadrži brojeve ili specijalne znakove",
-     "text25": "Prezime ne može da sadrži brojeve ili specijalne znakove",
-     "text26": "Srednje ime ne može da sadrži brojeve ili specijalne znakove"
+     "text24": "Ime ne može da sadrži brojeve, specijalne znakove ili razmak",
+     "text25": "Prezime ne može da sadrži brojeve, specijalne znakove ili razmak",
+     "text26": "Srednje ime ne može da sadrži brojeve, specijalne znakove ili razmak"
 
 
 

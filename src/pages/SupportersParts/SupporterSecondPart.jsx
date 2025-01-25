@@ -177,7 +177,7 @@ const SupporterSecondPart = ({
     }
 
 
-    const noSpecialCharsRegex = /^[a-zA-Z]+$/;
+    const noSpecialCharsRegex = /^[\p{L}]+$/u;
     if (friendName === "") {
       setSnackbarMessage(t("popupMessages.text9"));
       setOpenSnackbarFailure(true);
