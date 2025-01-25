@@ -6,6 +6,7 @@ import StripeForm from "./StripeForm";
 import { useTranslation } from "react-i18next";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import axios from "axios";
 
 import {
   Button,
@@ -19,6 +20,10 @@ import {
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 
+let BACKEND_SERVER_BASE_URL =
+  import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
+  process.env.VITE_BACKEND_SERVER_BASE_URL;
+
 export default function DonationFormItemCampaign({
   amount,
   setAmount,
@@ -27,14 +32,16 @@ export default function DonationFormItemCampaign({
   supporterEmail,
   separateDonationThruPage,
   supporterComment,
-  discountCode,
+  discountCode = "",
   countryAthleteIsIn,
+
+  setSnackbarMessage,
+  setSnackbarStatus,
+  setOpenSnackbar,
 }) {
+  const { t, i18n } = useTranslation();
 
-  const { t } = useTranslation();
-
-
-  // for snackbar message.
+  /*   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -47,6 +54,52 @@ export default function DonationFormItemCampaign({
     }
 
     setOpenSnackbar(false);
+  }; */
+
+  const checkIfCouponValid = async () => {
+    try {
+      // do not check if the coupon has not been entered at all
+      if (discountCode !== "") {
+        const response = await axios.post(
+          `${BACKEND_SERVER_BASE_URL}/payment/checkIfCouponValid`,
+          { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 },
+          {
+            headers: {
+              "Accept-Language": i18n.language || "en",
+            },
+          }
+        );
+
+        console.log("koji kupon on dobija ?");
+        console.log(discountCode);
+
+        if (response.status !== 200) {
+          setSnackbarStatus("error");
+          setSnackbarMessage(
+            response?.data?.message || "An unexpected error occurred."
+          );
+          setOpenSnackbar(true);
+
+          return false;
+        }
+
+        return true;
+      }
+
+      return true;
+    } catch (error) {
+      console.log("koji kupon on dobija error je ?");
+      console.log(discountCode);
+
+      console.log(error.response?.data?.message || error.message);
+
+      setSnackbarStatus("error");
+      setSnackbarMessage(error.response?.data?.message || error.message);
+      setOpenSnackbar(true);
+
+      console.log(error.stack);
+      return false;
+    }
   };
 
   //let { campaignId } = useContext(AuthContext);
@@ -65,17 +118,22 @@ export default function DonationFormItemCampaign({
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
-  const handleSubmit = () => {
-    mutate({
-      amount,
-      campaignId,
-      supporterName,
-      supporterEmail,
-      separateDonationThruPage,
-      supporterComment,
-      discountCode,
-      countryAthleteIsIn,
-    });
+
+  const handleSubmit = async () => {
+ 
+
+    if (await checkIfCouponValid()) {
+      mutate({
+        amount,
+        campaignId,
+        supporterName,
+        supporterEmail,
+        separateDonationThruPage,
+        supporterComment,
+        discountCode,
+        countryAthleteIsIn,
+      });
+    }
   };
 
   const handleClear = useCallback(() => {
@@ -99,7 +157,6 @@ export default function DonationFormItemCampaign({
     async (payment) => {
       setConfirmedPayment(payment);
 
-      
       if (payment) {
         setSnackbarMessage(t("popupMessages.text7"));
         setSnackbarStatus("success");
@@ -119,8 +176,6 @@ export default function DonationFormItemCampaign({
 
   useEffect(() => {
     if (data) setPaymentIntent(data);
-
-  
   }, [data]);
 
   return (
@@ -141,7 +196,6 @@ export default function DonationFormItemCampaign({
       )}
 
       {paymentIntent && (
-        
         <Fade in={paymentIntent} unmountOnExit>
           <Container>
             <StripeForm
@@ -159,11 +213,11 @@ export default function DonationFormItemCampaign({
         <>
           <Fade in={confirmedPayment} unmountOnExit>
             <Typography p={4} variant="h6" textAlign={"center"}>
-            {t("payments.content1")}
+              {t("payments.content1")}
             </Typography>
           </Fade>
 
-          <Snackbar
+          {/*    <Snackbar
             open={openSnackbar}
             autoHideDuration={15000}
             onClose={handleSnackbar}
@@ -177,7 +231,7 @@ export default function DonationFormItemCampaign({
             >
               {snackbarMessage}
             </Alert>
-          </Snackbar>
+          </Snackbar> */}
         </>
       )}
     </Card>

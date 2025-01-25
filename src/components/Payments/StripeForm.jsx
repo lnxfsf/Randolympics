@@ -75,11 +75,11 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
             <Button variant="contained" onClick={handleSubmit} disabled={isLoading}
             
             style={{ textTransform: "none" }}
-
+            disableElevation
             sx={{
               height: "50px",
               bgcolor: "#D24949",
-
+              
               color: "#fff",
               borderRadius: 3,
               border: `1px solid #D24949`,

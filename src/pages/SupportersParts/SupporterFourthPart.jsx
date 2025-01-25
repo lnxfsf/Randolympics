@@ -541,7 +541,8 @@ const SupporterFourthPart = ({
                   </div>
                 </div>
 
-<div className="m-8">
+              
+
                 <ThemeProvider theme={theme}>
                       <QueryProvider>
                          {/*  <DonationForm    */}
@@ -557,12 +558,17 @@ const SupporterFourthPart = ({
                           discountCode={discountCode}
                           countryAthleteIsIn={friendNationality}
                           separateDonationThruPage={false}
+
+
+                          setSnackbarMessage={setSnackbarMessage}
+                          setSnackbarStatus={setSnackbarStatus}
+                          setOpenSnackbar={setOpenSnackbar}
+
                         />
                       {/*   />  */}
                       </QueryProvider>
                     </ThemeProvider>
-                    </div>
-
+                  
                 {/*    <div className="flex  flex-col justify-center items-center w-full">
                   <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                     {/*  <img className="w-12" src="/supporters/pay.svg" />
@@ -658,7 +664,7 @@ const SupporterFourthPart = ({
                 </div>
  */}
 
-                <div className=" self-center w-[50%] mb-2">
+              {/*   <div className=" self-center w-[50%] mb-2">
                   <OutlinedInput
                     type="number"
                     value={amount}
@@ -666,7 +672,7 @@ const SupporterFourthPart = ({
                       setAmount(e.target.value);
 
                       /* no negative numbers allowed for donation */
-                      /* allow it to be cleared */
+                      /* allow it to be cleared 
                       if (e.target.value === "") {
                         setAmount(e.target.value);
                       } else {
@@ -716,7 +722,7 @@ const SupporterFourthPart = ({
                     }
                   }}
                   className="self-center  w-[50%] "
-                  /* w-full md:w-50% */
+                  /* w-full md:w-50% 
                   style={{ textTransform: "none" }}
                   sx={{
                     mb: 8,
@@ -734,7 +740,7 @@ const SupporterFourthPart = ({
                   }}
                 >
                   <span className="lexend-font">{t("campaign.content18")}</span>
-                </Button>
+                </Button> */}
 
                 <Button
                   onClick={() => {

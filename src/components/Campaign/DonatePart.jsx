@@ -292,6 +292,10 @@ const DonatePart = ({
                       discountCode={discountCode}
                       countryAthleteIsIn={countryAthleteIsIn}
                       separateDonationThruPage={true}
+
+                      setSnackbarMessage={setSnackbarMessage}
+                      setSnackbarStatus={setSnackbarStatus}
+                      setOpenSnackbar={setOpenSnackbar}
                     />
                   </QueryProvider>
                 </ThemeProvider>
@@ -388,13 +392,13 @@ const DonatePart = ({
                 </div>
               </div> */}
 
-              <div className=" self-center w-[50%] mb-2 mt-8">
+            {/*   <div className=" self-center w-[50%] mb-2 mt-8">
                 <OutlinedInput
                   type="number"
                   value={amount}
                   onChange={(e) => {
                     /* no negative numbers allowed for donation */
-                    /* allow it to be cleared */
+                    /* allow it to be cleared 
                     if (e.target.value === "") {
                       setAmount(e.target.value);
                     } else {
@@ -434,7 +438,7 @@ const DonatePart = ({
                     },
                   }}
                 />
-              </div>
+              </div> 
 
               <Button
                 onClick={() => {
@@ -443,7 +447,7 @@ const DonatePart = ({
                   }
                 }}
                 className="self-center  w-[50%] "
-                /* w-full md:w-50% */
+                /* w-full md:w-50% 
                 style={{ textTransform: "none" }}
                 sx={{
                   mb: 8,
@@ -462,6 +466,8 @@ const DonatePart = ({
               >
                 <span className="lexend-font">{t("campaign.content18")}</span>
               </Button>
+
+              */}
 
               <div className="m-4  flex justify-center  items-center flex-col">
                 <p>{t("campaign.content78")}</p>

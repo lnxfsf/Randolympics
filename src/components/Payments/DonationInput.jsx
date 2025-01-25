@@ -11,7 +11,7 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
         <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={12} style={{ textAlign: "center" }}>
                 {/* <Typography>Donate</Typography> */}
-                <p className="text-xl lexend-font text-black_second ">{t("campaign.content17")}</p>
+               {/*  <p className="text-xl lexend-font text-black_second ">{t("campaign.content17")}</p> */}
             </Grid>
 
 
@@ -48,13 +48,13 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Button fullWidth variant="contained" type="submit" onClick={handleSubmit} disabled={isLoading}
+                        <Button fullWidth variant="contained" type="submit"  onClick={handleSubmit} disabled={isLoading}
                         
                         style={{ textTransform: "none" }}
-
+                        disableElevation
                         sx={{
                             
-                          height: "40px",
+                          height: "50px",
                           bgcolor: "#D24949",
             
                           color: "#fff",
