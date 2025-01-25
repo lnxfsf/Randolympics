@@ -119,6 +119,9 @@ export default function DonationFormItemCampaign({
 
   useEffect(() => {
     if (data) setPaymentIntent(data);
+
+    console.log("paymentIntent")
+    console.log(paymentIntent)
   }, [data]);
 
   return (
@@ -139,6 +142,7 @@ export default function DonationFormItemCampaign({
       )}
 
       {paymentIntent && (
+        
         <Fade in={paymentIntent} unmountOnExit>
           <Container>
             <StripeForm

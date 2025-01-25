@@ -99,7 +99,12 @@ const StripeFormComponent = ({ client_secret, amount, paymentIntent, handleCance
 
 const StripeForm = (props) => {
    
-    
+    console.log("dobija client_secret");
+  console.log(props)
+    console.log(props.client_secret)
+
+
+
   return (
     <>
       <Elements

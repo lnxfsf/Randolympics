@@ -541,6 +541,28 @@ const SupporterFourthPart = ({
                   </div>
                 </div>
 
+<div className="m-8">
+                <ThemeProvider theme={theme}>
+                      <QueryProvider>
+                         {/*  <DonationForm    */}
+                         <DonationFormItemCampaign 
+                   
+                      
+                          amount={amount}
+                          setAmount={setAmount}
+                          campaignId={campaignId}
+                          supporterName={supporterName}
+                          supporterEmail={supporterEmail}
+                          supporterComment={supporterComment}
+                          discountCode={discountCode}
+                          countryAthleteIsIn={friendNationality}
+                          separateDonationThruPage={false}
+                        />
+                      {/*   />  */}
+                      </QueryProvider>
+                    </ThemeProvider>
+                    </div>
+
                 {/*    <div className="flex  flex-col justify-center items-center w-full">
                   <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                     {/*  <img className="w-12" src="/supporters/pay.svg" />
