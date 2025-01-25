@@ -210,7 +210,7 @@ const SupporterFourthPart = ({
                 </div>
 
                 <p className="text-sm font-medium text-center mt-3 text-[#82889E] ">
-                  {t("campaign.content18")}
+                  {t("campaign.content17")}
                 </p>
               </div>
 
