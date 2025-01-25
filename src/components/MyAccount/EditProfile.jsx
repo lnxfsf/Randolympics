@@ -6,7 +6,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries } from "../../context/supportedCountry";
 
 import { HeaderMyProfile } from "./HeaderMyProfile";
 
@@ -1255,8 +1255,9 @@ const EditProfile = () => {
                 id="nationality"
                 name="nationality"
                 placeholder={t("myprofile.myaccount.content11")}
-
                 selectButtonClassName="h-14"
+                searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                customLabels={getTranslatedCountries()}
               />
             </div>
           </div>

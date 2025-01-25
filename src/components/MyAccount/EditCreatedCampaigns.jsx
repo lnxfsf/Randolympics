@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/sr";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries } from "../../context/supportedCountry";
 
 import React, { useState, useEffect, useRef } from "react";
 import Flag from "react-world-flags";
@@ -1349,8 +1349,9 @@ const EditCreatedCampaigns = ({ campaignId, handleCampaignUpdated }) => {
                 id="nationality"
                 name="nationality"
                 placeholder={t("myprofile.myaccount.content11")}
-
                 selectButtonClassName="h-14"
+                searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                customLabels={getTranslatedCountries()}
               />
             </div>
           </div>

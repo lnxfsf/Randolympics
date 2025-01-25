@@ -19,7 +19,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import RestoreIcon from "@mui/icons-material/Restore";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries  } from "../../context/supportedCountry";
 
 import {
   FormControl,
@@ -232,8 +232,9 @@ const LgnTraffcHistory = () => {
                 id="nationality"
                 name="nationality"
                 placeholder={t("login.content32")}
-
                 selectButtonClassName="h-11"
+                searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                customLabels={getTranslatedCountries()}
               />
             </div>
           </Popup>

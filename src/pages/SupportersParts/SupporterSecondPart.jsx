@@ -29,7 +29,7 @@ import ReactFlagsSelect from "react-flags-select";
 
 import "../../styles/supporters.scoped.scss";
 
-import supportedCountry from "../../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries } from "../../context/supportedCountry";
 
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -652,6 +652,8 @@ const SupporterSecondPart = ({
                     name="nationality"
 
                     selectButtonClassName="h-14"
+                    searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                    customLabels={getTranslatedCountries()}
                   />
 
                   <FormControl>
@@ -1010,7 +1012,6 @@ const SupporterSecondPart = ({
                     placeholder={t("campaign.content63")}
                     countries={supportedCountry}
                     className="w-full rounded-md p-0 lexend-font"
-                    /*  bg-[#fff]  */
 
                     // to fill it with the one, which user's is currently selected...
                     selected={friendNationality}
@@ -1023,6 +1024,8 @@ const SupporterSecondPart = ({
                     name="nationality"
 
                     selectButtonClassName="h-14"
+                    searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                    customLabels={getTranslatedCountries()}
                   />
 
                   <p className="lexend-font text-2xl font-semibold mb-1 mt-3">

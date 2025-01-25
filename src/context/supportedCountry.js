@@ -1,3 +1,7 @@
+
+import i18next from 'i18next';
+
+
 var supportedCountry = [
   "RS",
   "ME",
@@ -95,9 +99,124 @@ var supportedCountry = [
   "UZ",
   "VE",
   "VN",
-  "XK",
   "ZA",
   "ZW",
 ];
 
+
+
+var translatedCountries = {
+  "RS": () => i18next.t("flagsDropdown.RS"),
+  "ME": () => i18next.t("flagsDropdown.ME"),
+  "HR": () => i18next.t("flagsDropdown.HR"),
+  "BA": () => i18next.t("flagsDropdown.BA"),
+  "AL": () => i18next.t("flagsDropdown.AL"),
+  "AE": () => i18next.t("flagsDropdown.AE"),
+  "AM": () => i18next.t("flagsDropdown.AM"),
+  "AR": () => i18next.t("flagsDropdown.AR"),
+  "AT": () => i18next.t("flagsDropdown.AT"),
+  "AU": () => i18next.t("flagsDropdown.AU"),
+  "AZ": () => i18next.t("flagsDropdown.AZ"),
+  "BE": () => i18next.t("flagsDropdown.BE"),
+  "BG": () => i18next.t("flagsDropdown.BG"),
+  "BH": () => i18next.t("flagsDropdown.BH"),
+  "BR": () => i18next.t("flagsDropdown.BR"),
+  "BS": () => i18next.t("flagsDropdown.BS"),
+  "BY": () => i18next.t("flagsDropdown.BY"),
+  "CA": () => i18next.t("flagsDropdown.CA"),
+  "CH": () => i18next.t("flagsDropdown.CH"),
+  "CI": () => i18next.t("flagsDropdown.CI"),
+  "CN": () => i18next.t("flagsDropdown.CN"),
+  "CO": () => i18next.t("flagsDropdown.CO"),
+  "CU": () => i18next.t("flagsDropdown.CU"),
+  "CZ": () => i18next.t("flagsDropdown.CZ"),
+  "DE": () => i18next.t("flagsDropdown.DE"),
+  "DK": () => i18next.t("flagsDropdown.DK"),
+  "DO": () => i18next.t("flagsDropdown.DO"),
+  "DZ": () => i18next.t("flagsDropdown.DZ"),
+  "EE": () => i18next.t("flagsDropdown.EE"),
+  "EG": () => i18next.t("flagsDropdown.EG"),
+  "ES": () => i18next.t("flagsDropdown.ES"),
+  "ET": () => i18next.t("flagsDropdown.ET"),
+  "FI": () => i18next.t("flagsDropdown.FI"),
+  "FR": () => i18next.t("flagsDropdown.FR"),
+  "GB": () => i18next.t("flagsDropdown.GB"),
+  "GE": () => i18next.t("flagsDropdown.GE"),
+  "GH": () => i18next.t("flagsDropdown.GH"),
+  "GR": () => i18next.t("flagsDropdown.GR"),
+  "HK": () => i18next.t("flagsDropdown.HK"),
+  "HU": () => i18next.t("flagsDropdown.HU"),
+  "ID": () => i18next.t("flagsDropdown.ID"),
+  "IE": () => i18next.t("flagsDropdown.IE"),
+  "IL": () => i18next.t("flagsDropdown.IL"),
+  "IN": () => i18next.t("flagsDropdown.IN"),
+  "IR": () => i18next.t("flagsDropdown.IR"),
+  "IS": () => i18next.t("flagsDropdown.IS"),
+  "IT": () => i18next.t("flagsDropdown.IT"),
+  "JM": () => i18next.t("flagsDropdown.JM"),
+  "JO": () => i18next.t("flagsDropdown.JO"),
+  "JP": () => i18next.t("flagsDropdown.JP"),
+  "KE": () => i18next.t("flagsDropdown.KE"),
+  "KG": () => i18next.t("flagsDropdown.KG"),
+  "KP": () => i18next.t("flagsDropdown.KP"),
+  "KR": () => i18next.t("flagsDropdown.KR"),
+  "KZ": () => i18next.t("flagsDropdown.KZ"),
+  "LB": () => i18next.t("flagsDropdown.LB"),
+  "LT": () => i18next.t("flagsDropdown.LT"),
+  "LU": () => i18next.t("flagsDropdown.LU"),
+  "LV": () => i18next.t("flagsDropdown.LV"),
+  "MA": () => i18next.t("flagsDropdown.MA"),
+  "MD": () => i18next.t("flagsDropdown.MD"),
+  "MK": () => i18next.t("flagsDropdown.MK"),
+  "MN": () => i18next.t("flagsDropdown.MN"),
+  "MX": () => i18next.t("flagsDropdown.MX"),
+  "MY": () => i18next.t("flagsDropdown.MY"),
+  "NG": () => i18next.t("flagsDropdown.NG"),
+  "NL": () => i18next.t("flagsDropdown.NL"),
+  "NO": () => i18next.t("flagsDropdown.NO"),
+  "NZ": () => i18next.t("flagsDropdown.NZ"),
+  "PE": () => i18next.t("flagsDropdown.PE"),
+  "PH": () => i18next.t("flagsDropdown.PH"),
+  "PK": () => i18next.t("flagsDropdown.PK"),
+  "PL": () => i18next.t("flagsDropdown.PL"),
+  "PR": () => i18next.t("flagsDropdown.PR"),
+  "PT": () => i18next.t("flagsDropdown.PT"),
+  "QA": () => i18next.t("flagsDropdown.QA"),
+  "RO": () => i18next.t("flagsDropdown.RO"),
+  "RU": () => i18next.t("flagsDropdown.RU"),
+  "SA": () => i18next.t("flagsDropdown.SA"),
+  "SE": () => i18next.t("flagsDropdown.SE"),
+  "SG": () => i18next.t("flagsDropdown.SG"),
+  "SI": () => i18next.t("flagsDropdown.SI"),
+  "SK": () => i18next.t("flagsDropdown.SK"),
+  "SY": () => i18next.t("flagsDropdown.SY"),
+  "TH": () => i18next.t("flagsDropdown.TH"),
+  "TJ": () => i18next.t("flagsDropdown.TJ"),
+  "TN": () => i18next.t("flagsDropdown.TN"),
+  "TR": () => i18next.t("flagsDropdown.TR"),
+  "TT": () => i18next.t("flagsDropdown.TT"),
+  "TW": () => i18next.t("flagsDropdown.TW"),
+  "UA": () => i18next.t("flagsDropdown.UA"),
+  "UG": () => i18next.t("flagsDropdown.UG"),
+  "US": () => i18next.t("flagsDropdown.US"),
+  "UZ": () => i18next.t("flagsDropdown.UZ"),
+  "VE": () => i18next.t("flagsDropdown.VE"),
+  "VN": () => i18next.t("flagsDropdown.VN"),
+  "ZA": () => i18next.t("flagsDropdown.ZA"),
+  "ZW": () => i18next.t("flagsDropdown.ZW")
+}
+
+
+export const getTranslatedCountries = () => {
+  // Resolve the functions to actual translations
+  return Object.keys(translatedCountries).reduce((acc, key) => {
+    acc[key] = translatedCountries[key](); 
+    return acc;
+  }, {});
+};
+
+
+
+
 export default supportedCountry;
+

@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries } from "../context/supportedCountry";
 
 // MUI
 import IconButton from "@mui/material/IconButton";
@@ -106,6 +106,7 @@ let BACKEND_SERVER_BASE_URL =
   process.env.VITE_BACKEND_SERVER_BASE_URL;
 
 const Register = () => {
+
 
 
   const filePondRef = useRef(null);
@@ -1024,21 +1025,21 @@ const Register = () => {
                 </FormControl>
               </div>
 
+
+
+
               <ReactFlagsSelect
                 countries={supportedCountry}
                 selected={nationality_selected}
                 onSelect={(code) => setNationality_selected(code)}
-                className="w-full lexend-font"
+                className="w-full lexend-font "
                 searchable={true}
                 id="nationality"
                 name="nationality"
                 placeholder={t("register.content28") + " *"} 
-
-
                 selectButtonClassName="h-14"
-                
-                
-                
+                searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                customLabels={getTranslatedCountries()}
               />
 
               <label

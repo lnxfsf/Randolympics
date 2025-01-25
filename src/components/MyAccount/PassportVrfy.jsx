@@ -16,7 +16,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import RestoreIcon from "@mui/icons-material/Restore";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries  } from "../../context/supportedCountry";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -253,9 +253,10 @@ const PassportVrfy = () => {
                 searchable={true}
                 id="nationality"
                 name="nationality"
-                placeholder="Nationality"
-
+                placeholder={t("login.content32")}
                 selectButtonClassName="h-14"
+                searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                customLabels={getTranslatedCountries()}
               />
 
               <FormControl

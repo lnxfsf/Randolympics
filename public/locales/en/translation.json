@@ -394,8 +394,6 @@
       "content3": "After you sign someone up and donate - you become a Supporter !",
       "content4": "The competitors will be selected randomly, but those who receive more money through donations have a higher chance to get an invitation !",
       "content5": "Back"
-
-
     }
   },
   "footer": {
@@ -436,30 +434,21 @@
     "content9": "Copied to clipboard",
     "content10": "Share",
 
-
     "content11": "Do you want someone to get into the",
     "content12": "Randolympic Games?",
     "content13": "I want to sign up a friend",
     "content14": "I want to sign up a celebrity",
 
-
     "content15": "Your friend's",
     "content16": "information",
 
-
-
     "content17": "Your information",
     "content18": "Donate",
-
-
-
 
     "content19": "Let's raise some money !",
     "content20": "How much should I donate?",
     "content21": "Got a coupon code ?",
     "content22": "Donate with coupon only",
-
-
 
     "content24": "Tell us more about your friend",
     "content25": "First Name",
@@ -885,12 +874,9 @@
       "content8": "Phone",
       "content9": "Status",
 
-
       "content10": "Candidate",
       "content11": "Acting Global President",
       "content12": "Resigned"
-
-      
     },
     "validationPassport": {
       "content1": "Search by name"
@@ -943,12 +929,7 @@
       "content6": "I'm maybe going 🤔",
       "content7": "I'm definitely not going 👎",
       "content8": "Continue"
-
-
     }
-
-
-
   },
   "userTypes": {
     "user_type1": "Athlete",
@@ -1117,20 +1098,11 @@
     "content6": "Write your message...",
     "content7": "Send",
     "content8": "Insert email",
-     "content9": "Insert name",
-     "content10": "Insert subject",
-     "content11": "Insert message",
-     "content12": "Message sent",
+    "content9": "Insert name",
+    "content10": "Insert subject",
+    "content11": "Insert message",
+    "content12": "Message sent",
     "content13": "Message didn't sent"
-
-
-
-
-
-
-
-
-
   },
   "sportDetails": {
     "common1": "General Rules",
@@ -2084,14 +2056,7 @@
 
     "text24": "Name can't contain numbers or special characters",
     "text25": "Last name can't contain numbers or special characters",
-     "text26": "Middle name can't contain numbers or special characters"
-
-
-
-
-
-
-
+    "text26": "Middle name can't contain numbers or special characters"
   },
 
   "news": {
@@ -2107,33 +2072,121 @@
     "content10": "minute read",
     "content11": "News",
 
-
     "content12": "Deleted post",
     "content13": "Created post"
-
-
-
-
   },
 
-
   "payments": {
-    "content1" : "Your generosity goes a long way !",
+    "content1": "Your generosity goes a long way !",
     "content2": "Thanks for your support !",
     "content3": "Cancel",
-
-
-
 
     "content4": "Want to keep this campaign running?",
     "content5": "Let’s see how you can support your",
     "content6": "friend!",
     "content7": "friend!"
+  },
 
+  "flagsDropdown": {
+    "search_placeholder": "Search",
 
-
-
-
+    "RS": "Serbia",
+    "ME": "Montenegro",
+    "HR": "Croatia",
+    "BA": "Bosnia and Herzegovina",
+    "AL": "Albania",
+    "AE": "United Arab Emirates",
+    "AM": "Armenia",
+    "AR": "Argentina",
+    "AT": "Austria",
+    "AU": "Australia",
+    "AZ": "Azerbaijan",
+    "BE": "Belgium",
+    "BG": "Bulgaria",
+    "BH": "Bahrain",
+    "BR": "Brazil",
+    "BS": "Bahamas",
+    "BY": "Belarus",
+    "CA": "Canada",
+    "CH": "Switzerland",
+    "CI": "Ivory Coast (Côte d'Ivoire)",
+    "CN": "China",
+    "CO": "Colombia",
+    "CU": "Cuba",
+    "CZ": "Czech Republic",
+    "DE": "Germany",
+    "DK": "Denmark",
+    "DO": "Dominican Republic",
+    "DZ": "Algeria",
+    "EE": "Estonia",
+    "EG": "Egypt",
+    "ES": "Spain",
+    "ET": "Ethiopia",
+    "FI": "Finland",
+    "FR": "France",
+    "GB": "United Kingdom",
+    "GE": "Georgia",
+    "GH": "Ghana",
+    "GR": "Greece",
+    "HK": "Hong Kong",
+    "HU": "Hungary",
+    "ID": "Indonesia",
+    "IE": "Ireland",
+    "IL": "Israel",
+    "IN": "India",
+    "IR": "Iran",
+    "IS": "Iceland",
+    "IT": "Italy",
+    "JM": "Jamaica",
+    "JO": "Jordan",
+    "JP": "Japan",
+    "KE": "Kenya",
+    "KG": "Kyrgyzstan",
+    "KP": "North Korea",
+    "KR": "South Korea",
+    "KZ": "Kazakhstan",
+    "LB": "Lebanon",
+    "LT": "Lithuania",
+    "LU": "Luxembourg",
+    "LV": "Latvia",
+    "MA": "Morocco",
+    "MD": "Moldova",
+    "MK": "North Macedonia",
+    "MN": "Mongolia",
+    "MX": "Mexico",
+    "MY": "Malaysia",
+    "NG": "Nigeria",
+    "NL": "Netherlands",
+    "NO": "Norway",
+    "NZ": "New Zealand",
+    "PE": "Peru",
+    "PH": "Philippines",
+    "PK": "Pakistan",
+    "PL": "Poland",
+    "PR": "Puerto Rico",
+    "PT": "Portugal",
+    "QA": "Qatar",
+    "RO": "Romania",
+    "RU": "Russia",
+    "SA": "Saudi Arabia",
+    "SE": "Sweden",
+    "SG": "Singapore",
+    "SI": "Slovenia",
+    "SK": "Slovakia",
+    "SY": "Syria",
+    "TH": "Thailand",
+    "TJ": "Tajikistan",
+    "TN": "Tunisia",
+    "TR": "Turkey",
+    "TT": "Trinidad and Tobago",
+    "TW": "Taiwan",
+    "UA": "Ukraine",
+    "UG": "Uganda",
+    "US": "United States of America (USA)",
+    "UZ": "Uzbekistan",
+    "VE": "Venezuela",
+    "VN": "Vietnam",
+    "ZA": "South Africa",
+    "ZW": "Zimbabwe"
   }
-
 }

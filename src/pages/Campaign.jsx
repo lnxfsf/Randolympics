@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "@mkyy/mui-search-bar";
 
 import ReactFlagsSelect from "react-flags-select";
-import supportedCountry from "../context/supportedCountry";
+import supportedCountry, { getTranslatedCountries } from "../context/supportedCountry";
 
 import { Button, Avatar } from "@mui/material";
 
@@ -346,8 +346,9 @@ const Campaign = () => {
                   id="nationality"
                   name="nationality"
                   placeholder={t("campaign.content34")}
-
                   selectButtonClassName="h-14"
+                  searchPlaceholder={t("flagsDropdown.search_placeholder")}
+                  customLabels={getTranslatedCountries()}
                 />
 
                 {/* this is for athlete NON celebrity */}
