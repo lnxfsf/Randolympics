@@ -119,14 +119,14 @@ const DonatePart = ({
 
       if (response.status !== 200) {
         setSnackbarStatus("error");
-        setSnackbarMessage(error.response?.data?.message || error.message);
+        setSnackbarMessage(response?.data?.message || "An unexpected error occurred.");
         setOpenSnackbar(true);
 
         return false;
       }
 
       return true;
-    } catch (e) {
+    } catch (error) {
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
@@ -278,6 +278,23 @@ const DonatePart = ({
                 InputLabelProps={inputLabelPropsTextField}
                 sx={sxTextField}
               />
+
+
+<ThemeProvider theme={theme}>
+                  <QueryProvider>
+                    <DonationFormItemCampaign
+                      amount={amount}
+                      setAmount={setAmount}
+                      campaignId={campaignId}
+                      supporterName={supporterName}
+                      supporterEmail={supporterEmail}
+                      supporterComment={supporterComment}
+                      discountCode={discountCode}
+                      countryAthleteIsIn={countryAthleteIsIn}
+                      separateDonationThruPage={true}
+                    />
+                  </QueryProvider>
+                </ThemeProvider>
 
               {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
                 <ThemeProvider theme={theme}>

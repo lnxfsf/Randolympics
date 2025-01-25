@@ -280,11 +280,12 @@ const Supporters = () => {
 
       const noSpecialCharsRegex = /^[\p{L}]+$/u;
 
+      const noSpecialCharsRegexWithSpaces = /^[\p{L} ]+$/u;
       if (supporterName === "") {
         setSnackbarMessage(t("popupMessages.text21"));
         setOpenSnackbarFailure(true);
         return;
-      }else if(!noSpecialCharsRegex.test(supporterName)){
+      }else if(!noSpecialCharsRegexWithSpaces.test(supporterName)){
         setSnackbarMessage(t("popupMessages.text24"));
         setOpenSnackbarFailure(true);
         return;

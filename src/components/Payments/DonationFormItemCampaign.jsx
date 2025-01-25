@@ -120,12 +120,11 @@ export default function DonationFormItemCampaign({
   useEffect(() => {
     if (data) setPaymentIntent(data);
 
-    console.log("paymentIntent")
-    console.log(paymentIntent)
+  
   }, [data]);
 
   return (
-    <Card>
+    <Card elevation={0} className="drop-shadow-none ">
       {!paymentIntent && (
         <Fade in={!paymentIntent} unmountOnExit>
           <Container>
