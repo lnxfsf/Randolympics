@@ -6835,8 +6835,8 @@ const listAllCampaigns = async (req, res) => {
         return {
           ...campaign.toJSON(),
           donatedAmount: user ? user.donatedAmount / 100 : 0,
-          supporterCount: supporterCount,
-          picture: user.picture ?? null,
+          supporterCount: supporterCount ?? 0,
+          picture: user?.picture ?? null,
         };
       })
     );
