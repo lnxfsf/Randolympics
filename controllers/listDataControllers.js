@@ -6846,7 +6846,7 @@ const listAllCampaigns = async (req, res) => {
       rows: modifiedRows,
     });
   } catch (error) {
-    console.log(e.stack)
+    console.log(error.stack)
     res.status(500).json({ error: "Internal server error" });
   }
 };
