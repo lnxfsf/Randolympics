@@ -30,7 +30,12 @@ export default function DonationFormItemCampaign({
   campaignId,
   supporterName,
   supporterEmail,
+
   separateDonationThruPage,
+  setFourthIsVisible,
+  setFifthIsVisible,
+
+
   supporterComment,
   discountCode = "",
   countryAthleteIsIn,
@@ -192,7 +197,19 @@ export default function DonationFormItemCampaign({
         setSnackbarMessage(t("popupMessages.text7"));
         setSnackbarStatus("success");
         setOpenSnackbar(true);
+
+
+        // and go on next page, if this is first time donating
+        if(!separateDonationThruPage){
+          setFourthIsVisible(false);
+          setFifthIsVisible(true);
+
+
+        }
       }
+
+
+
 
       handleClear(); // Clear the payment intent
 

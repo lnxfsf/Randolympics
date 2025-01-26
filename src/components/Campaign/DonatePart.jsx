@@ -90,8 +90,8 @@ const DonatePart = ({
         },
         {
           headers: {
-            'Accept-Language': i18n.language || 'en',
-          }
+            "Accept-Language": i18n.language || "en",
+          },
         }
       );
 
@@ -112,14 +112,16 @@ const DonatePart = ({
         { discountCode, countryAthleteIsIn, amountOriginal: amount * 100 },
         {
           headers: {
-            'Accept-Language': i18n.language || 'en',
-          }
+            "Accept-Language": i18n.language || "en",
+          },
         }
       );
 
       if (response.status !== 200) {
         setSnackbarStatus("error");
-        setSnackbarMessage(response?.data?.message || "An unexpected error occurred.");
+        setSnackbarMessage(
+          response?.data?.message || "An unexpected error occurred."
+        );
         setOpenSnackbar(true);
 
         return false;
@@ -138,8 +140,6 @@ const DonatePart = ({
 
   const [amount, setAmount] = useState(10);
   const { t, i18n } = useTranslation();
-
-
 
   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -219,7 +219,9 @@ const DonatePart = ({
             }}
           >
             <span className="lexend-font">
-              {wantToDonate ?  t("campaign.content129") : t("campaign.content18")}
+              {wantToDonate
+                ? t("campaign.content129")
+                : t("campaign.content18")}
             </span>
           </Button>
         </div>
@@ -259,7 +261,6 @@ const DonatePart = ({
                 }}
                 InputLabelProps={inputLabelPropsTextField}
                 sx={sxTextField}
-               
               />
 
               <p className="lexend-font text-black_second text-sm mb-1 mt-2">
@@ -279,8 +280,8 @@ const DonatePart = ({
                 sx={sxTextField}
               />
 
-
-<ThemeProvider theme={theme}>
+              <div className="mt-6">
+                <ThemeProvider theme={theme}>
                   <QueryProvider>
                     <DonationFormItemCampaign
                       amount={amount}
@@ -292,14 +293,13 @@ const DonatePart = ({
                       discountCode={discountCode}
                       countryAthleteIsIn={countryAthleteIsIn}
                       separateDonationThruPage={true}
-
                       setSnackbarMessage={setSnackbarMessage}
                       setSnackbarStatus={setSnackbarStatus}
                       setOpenSnackbar={setOpenSnackbar}
                     />
                   </QueryProvider>
                 </ThemeProvider>
-
+              </div>
               {/*  <div className=" mt-4 flex flex-col w-full h-auto   rounded-lg  justify-center items-center">
                 <ThemeProvider theme={theme}>
                   <QueryProvider>
@@ -392,13 +392,13 @@ const DonatePart = ({
                 </div>
               </div> */}
 
-            {/*   <div className=" self-center w-[50%] mb-2 mt-8">
+              {/*   <div className=" self-center w-[50%] mb-2 mt-8">
                 <OutlinedInput
                   type="number"
                   value={amount}
                   onChange={(e) => {
                     /* no negative numbers allowed for donation */
-                    /* allow it to be cleared 
+              /* allow it to be cleared 
                     if (e.target.value === "") {
                       setAmount(e.target.value);
                     } else {

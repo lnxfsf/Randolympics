@@ -557,7 +557,12 @@ const SupporterFourthPart = ({
                           supporterComment={supporterComment}
                           discountCode={discountCode}
                           countryAthleteIsIn={friendNationality}
+                       
+                       
+                       
                           separateDonationThruPage={false}
+                          setFourthIsVisible={setFourthIsVisible}
+                          setFifthIsVisible={setFifthIsVisible}
 
 
                           setSnackbarMessage={setSnackbarMessage}
