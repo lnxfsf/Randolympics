@@ -278,19 +278,34 @@ const Supporters = () => {
         return;
       }
 
+
       const noSpecialCharsRegex = /^[\p{L}]+$/u;
+
+      const emailRegexSupporter = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 
       const noSpecialCharsRegexWithSpaces = /^[\p{L} ]+$/u;
       if (supporterName === "") {
         setSnackbarMessage(t("popupMessages.text21"));
         setOpenSnackbarFailure(true);
         return;
-      }else if(!noSpecialCharsRegexWithSpaces.test(supporterName)){
+      } else if(!noSpecialCharsRegexWithSpaces.test(supporterName)){
         setSnackbarMessage(t("popupMessages.text24"));
         setOpenSnackbarFailure(true);
         return;
 
-      }
+      } else if(supporterEmail === ""){
+        setSnackbarMessage(t("popupMessages.text27")); 
+        setOpenSnackbarFailure(true);
+        return;
+
+      } else if (!emailRegex.test(supporterEmail)) {
+        setSnackbarMessage(t("register.content8")); 
+        setOpenSnackbarFailure(true);
+        return;
+        
+       }
+ 
 
     }
 

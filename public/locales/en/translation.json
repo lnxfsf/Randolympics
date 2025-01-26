@@ -2056,7 +2056,10 @@
 
     "text24": "Name can't contain numbers, special characters or space",
     "text25": "Last name can't contain numbers, special characters or space",
-    "text26": "Middle name can't contain numbers, special characters or space"
+    "text26": "Middle name can't contain numbers, special characters or space",
+
+
+    "text27": "Insert supporter email"
   },
 
   "news": {

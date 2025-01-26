@@ -476,7 +476,7 @@
     "content45": "Pruži barem jedan profil sa društvene mreže",
     "content46": "Sada, reci nam o tebi, kreatoru kampanje za",
     "content47": "Tvoje ime",
-    "content48": "Tvoj email (opciono)",
+    "content48": "Tvoj email (obavezno)",
     "content49": "Tvoj telefon (opciono)",
     "content50": "Lozinka za donatora (tvoja)",
     "content51": "prikazivanje lozinke",
@@ -2057,7 +2057,10 @@
 
      "text24": "Ime ne može da sadrži brojeve, specijalne znakove ili razmak",
      "text25": "Prezime ne može da sadrži brojeve, specijalne znakove ili razmak",
-     "text26": "Srednje ime ne može da sadrži brojeve, specijalne znakove ili razmak"
+     "text26": "Srednje ime ne može da sadrži brojeve, specijalne znakove ili razmak",
+
+
+     "text27": "Unesi email donatora"
 
 
 

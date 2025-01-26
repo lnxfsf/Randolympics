@@ -102,6 +102,37 @@ export default function DonationFormItemCampaign({
     }
   };
 
+
+  const checkValidityOfFields = () => {
+
+    
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+
+  /*   if(supporterEmail) */
+
+
+    if(supporterEmail === ""){
+      setSnackbarMessage(t("popupMessages.text27")); 
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+
+      return false;
+    } else if (!emailRegex.test(supporterEmail)) {
+       setSnackbarMessage(t("register.content8")); 
+       setSnackbarStatus("error");
+       setOpenSnackbar(true);
+
+       return false;
+       
+      }
+
+      return true;
+
+
+
+  }
+
   //let { campaignId } = useContext(AuthContext);
   // console.log(user)
   /*  console.log("a iz state-a je: "+campaignId) */
@@ -122,7 +153,7 @@ export default function DonationFormItemCampaign({
   const handleSubmit = async () => {
  
 
-    if (await checkIfCouponValid()) {
+    if (await checkIfCouponValid() && checkValidityOfFields()) {
       mutate({
         amount,
         campaignId,
