@@ -7,17 +7,18 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
     const { t } = useTranslation(); 
 
    return (
-    <CardContent>
-        <Grid container spacing={2} justifyContent={"center"}>
-            <Grid item xs={12} style={{ textAlign: "center" }}>
-                {/* <Typography>Donate</Typography> */}
-               {/*  <p className="text-xl lexend-font text-black_second ">{t("campaign.content17")}</p> */}
-            </Grid>
-
+    <div className="mb-4">
+        <Grid container spacing={0} justifyContent={"center"} >
+          
+          
 
             {/* <Grid item xs={6}> */}
-            <Grid item xs={7}>
+            <Grid item xs={0} width={"53%"}>
+               
+               
                 <Grid container spacing={2}>
+
+
                     <Grid item xs={12}>
                         <OutlinedInput
                             type="number"
@@ -74,10 +75,12 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                         </Button>
                         {error && <Typography variant="alert">{t("campaign.content128")}</Typography>}
                     </Grid>
+
+
                 </Grid>
             </Grid>
         </Grid>
-    </CardContent>)
+    </div>)
     
                     };
 export default DonationInput;

@@ -542,8 +542,8 @@ const SupporterFourthPart = ({
                 </div>
 
               
-
-                <ThemeProvider theme={theme}>
+<div className="self-center  w-full" >
+                <ThemeProvider theme={theme}  > 
                       <QueryProvider>
                          {/*  <DonationForm    */}
                          <DonationFormItemCampaign 
@@ -569,6 +569,7 @@ const SupporterFourthPart = ({
                       </QueryProvider>
                     </ThemeProvider>
                   
+                    </div>
                 {/*    <div className="flex  flex-col justify-center items-center w-full">
                   <div className=" pay-container flex flex-col w-64 h-auto   rounded-lg  justify-center items-center">
                     {/*  <img className="w-12" src="/supporters/pay.svg" />
