@@ -6766,6 +6766,8 @@ const listAllCampaigns = async (req, res) => {
 
   const isCelebrity = parseInt(req.query.isCelebrity);
 
+
+
   const fb_link = req.query.fb_link || "";
   const ig_link = req.query.ig_link || "";
   const tw_link = req.query.tw_link || "";
@@ -6844,6 +6846,7 @@ const listAllCampaigns = async (req, res) => {
       rows: modifiedRows,
     });
   } catch (error) {
+    console.log(e.stack)
     res.status(500).json({ error: "Internal server error" });
   }
 };
