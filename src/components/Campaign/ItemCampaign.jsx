@@ -158,12 +158,12 @@ const ItemCampaign = () => {
 
   useEffect(() => {
     // we connect to server, to receive Server Sent Events, if there's new data on backend. it will check only for this campaignId periodically
-    const eventSource = new EventSource(
+   /*  const eventSource = new EventSource(
       `${BACKEND_SERVER_BASE_URL}/SSE/itemCampaign?campaignId=${campaignId}`
-    );
+    ); */
 
     // all data is in json format sent form backend, when there's new data
-    eventSource.onmessage = (event) => {
+   /*  eventSource.onmessage = (event) => {
       // it parses json object from stringified json
       const data = JSON.parse(event.data);
 
@@ -178,26 +178,26 @@ const ItemCampaign = () => {
 
         setLastTransactionsSupporters(data.lastCommentsSupporters);
       }
-    };
+    }; */
 
-    eventSource.onerror = (err) => {
+   /*  eventSource.onerror = (err) => {
       console.error("EventSource error:", err);
       console.error("Connection lost");
       eventSource.close();
-    };
+    }; */
 
     getAllTransactions(); // you call this again, when opening "All transactions"
     updateLatestData();
 
     // this is old, polling, shouldn't use anymore
-    /*  const interval = setInterval(() => {
+    const interval = setInterval(() => {
       updateLatestData();
-    }, 1000);  */
+    }, 1000);  
 
     return () => {
       // close connection to SSE
-      eventSource.close();
-      /* clearInterval(interval); */
+     // eventSource.close();
+       clearInterval(interval); 
     };
   }, [limitAllTransactions, allTransactionsPage]);
 
