@@ -60,7 +60,11 @@ const NewsNewsBlock = () => {
     if (gamesPosts && gamesPosts[0]?.cover_image) {
       checkImage();
     }
-  }, [gamesPosts]);
+
+
+  }, []);
+/* gamesPosts */
+
 
   const checkImage = async () => {
     const imageUrl = getImageUrl(gamesPosts[0]?.cover_image);

@@ -92,7 +92,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>Randolympics</title>
         <meta
           name="description"
           content="Real People. Randomly Selected. Competing in Olympic Sports"
