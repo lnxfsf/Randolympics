@@ -118,13 +118,15 @@ const itemCampaign = async (req, res) => {
     }, 2000);
 
     // Send a heartbeat message to keep connection alive
-    interval = setInterval(() => {
+    const aliveInterval = setInterval(() => {
       res.write("data: {}\n\n");
     }, 30000);
 
     // Clear the interval on client disconnect
     req.on("close", () => {
+
       clearInterval(interval); 
+      clearInterval(aliveInterval);
       console.log("Client disconnected");
     });
   } catch (error) {
