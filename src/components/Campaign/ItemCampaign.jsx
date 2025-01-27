@@ -19,7 +19,6 @@ import DonationForm from "../Payments/DonationForm";
 import { useParams, useNavigate } from "react-router-dom";
 import DonationFormItemCampaign from "../Payments/DonationFormItemCampaign";
 
-
 import AuthCode from "react-auth-code-input";
 import { Button } from "@mui/material";
 
@@ -46,7 +45,7 @@ let FRONTEND_SERVER_BASE_URL =
   import.meta.env.VITE_FRONTEND_SERVER_BASE_URL ||
   process.env.VITE_FRONTEND_SERVER_BASE_URL;
 
-  let S3_BUCKET_CDN_BASE_URL =
+let S3_BUCKET_CDN_BASE_URL =
   import.meta.env.VITE_S3_BUCKET_CDN_BASE_URL ||
   process.env.VITE_S3_BUCKET_CDN_BASE_URL;
 
@@ -56,27 +55,25 @@ function getImageUrl(coverImage) {
     : "news/news1.png";
 }
 
-
-
 const ItemCampaign = () => {
   const { t, i18n } = useTranslation();
 
-  
-function formatDate(dateString) {
-  let date = new Date(dateString);
+  const [messages, setMessages] = useState([]);
 
-  let locale = i18n.language || "en-US";
-  
-  switch(locale){
-    case "sr":
-      locale = "sr-Latn";
-      break;
-      
+  function formatDate(dateString) {
+    let date = new Date(dateString);
+
+    let locale = i18n.language || "en-US";
+
+    switch (locale) {
+      case "sr":
+        locale = "sr-Latn";
+        break;
+    }
+
+    let options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(locale, options);
   }
-
-  let options = { year: "numeric", month: "long", day: "numeric" };
-  return date.toLocaleDateString(locale, options);
-}
 
   const { campaignId } = useParams();
 
@@ -105,7 +102,8 @@ function formatDate(dateString) {
   const [supporterComment, setSupporterComment] = useState("");
 
   const [howManySupporters, setHowManySupporters] = useState();
-  const [moreDetailsAboutSupporters, setMoreDetailsAboutSupporters] = useState();
+  const [moreDetailsAboutSupporters, setMoreDetailsAboutSupporters] =
+    useState();
   const [lastCommentsSupporters, setLastCommentsSupporters] = useState();
   const [lastTransactionsSupporters, setLastTransactionsSupporters] =
     useState();
@@ -119,11 +117,6 @@ function formatDate(dateString) {
   const [payment, setPayment] = useState(false);
 
   const [showAllSupporters, setShowAllSupporters] = useState(false);
-
-
-
-
-
 
   const donateWithCouponOnly = async () => {
     try {
@@ -139,8 +132,8 @@ function formatDate(dateString) {
         },
         {
           headers: {
-            'Accept-Language': i18n.language || 'en',
-          }
+            "Accept-Language": i18n.language || "en",
+          },
         }
       );
 
@@ -148,14 +141,11 @@ function formatDate(dateString) {
         setSnackbarMessage(t("popupMessages.text2"));
         setOpenSnackbar(true);
       } else {
-        
         setSnackbarMessage(error.response?.data?.message || error.message);
         setSnackbarStatus("error");
         setOpenSnackbar(true);
       }
     } catch (error) {
-
-      
       setSnackbarMessage(error.response?.data?.message || error.message);
       setSnackbarStatus("error");
       setOpenSnackbar(true);
@@ -163,27 +153,54 @@ function formatDate(dateString) {
     }
   };
 
-  
   const [allTransactionsPage, setAllTransactionsPage] = useState(1);
   const [maxPages, setMaxPages] = useState(0);
 
-
   useEffect(() => {
+    // we connect to server, to receive Server Sent Events, if there's new data on backend. it will check only for this campaignId periodically
+    const eventSource = new EventSource(
+      `${BACKEND_SERVER_BASE_URL}/SSE/itemCampaign?campaignId=${campaignId}`
+    );
 
+    // all data is in json format sent form backend, when there's new data
+    eventSource.onmessage = (event) => {
+      // it parses json object from stringified json
+      const data = JSON.parse(event.data);
 
-    
-    getAllTransactions(); // you call this again, when opening "All transactions" 
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setCampaign(data.oneCampaign);
+        setAthlete(data.thatAthlete);
+
+        setHowManySupporters(data.supporters.count);
+        setMoreDetailsAboutSupporters(data.supporters.rows);
+
+        setLastTransactionsSupporters(data.lastCommentsSupporters);
+      }
+    };
+
+    eventSource.onerror = (err) => {
+      console.error("EventSource error:", err);
+      console.error("Connection lost");
+      eventSource.close();
+    };
+
+    getAllTransactions(); // you call this again, when opening "All transactions"
     updateLatestData();
 
-    const interval = setInterval(() => {
+    // this is old, polling, shouldn't use anymore
+    /*  const interval = setInterval(() => {
       updateLatestData();
-    }, 1000); 
+    }, 1000);  */
 
-   
-    return () => clearInterval(interval);
+    return () => {
+      // close connection to SSE
+      eventSource.close();
+      /* clearInterval(interval); */
+    };
   }, [limitAllTransactions, allTransactionsPage]);
 
-  
   const handlePaginationChangeAllTransactions = (event, value) => {
     setAllTransactionsPage(value);
   };
@@ -198,10 +215,6 @@ function formatDate(dateString) {
           },
         }
       );
-
-      
-
-      
 
       setCampaign(response.data.oneCampaign);
       setAthlete(response.data.thatAthlete);
@@ -256,15 +269,11 @@ function formatDate(dateString) {
 
       setHowManySupporters(response.data.count);
       setMoreDetailsAboutSupporters(response.data.rows);
-
-     
-
-
     } catch (error) {
       console.error(error);
     }
 
-    // get last 3 comments from supporters
+    // get last 3 comments from supporters. // ! not really used
     try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/lastCommentsSupportersCampaign`,
@@ -274,8 +283,6 @@ function formatDate(dateString) {
           },
         }
       );
-
-      
 
       setLastCommentsSupporters(response.data);
     } catch (error) {
@@ -294,7 +301,6 @@ function formatDate(dateString) {
         }
       );
 
-      
       setLastTransactionsSupporters(response.data);
     } catch (error) {
       console.error(error);
@@ -312,46 +318,36 @@ function formatDate(dateString) {
         }
       );
 
-      
-      
-
       setFirstSupportersCampaign(response.data);
     } catch (error) {
       console.error(error);
     }
-
-   
   };
 
-
   const getAllTransactions = async () => {
-     /* all transactions , activity */
-     try {
-      
+    /* all transactions , activity */
+    try {
       const response = await axios.get(
         `${BACKEND_SERVER_BASE_URL}/listsData/allTransactionsSupportersCampaign`,
         {
           params: {
             campaignId: campaignId,
             limitA: 10,
-            offset: (allTransactionsPage-1) * 10,
+            offset: (allTransactionsPage - 1) * 10,
           },
         }
       );
 
-     /*  
+      /*  
       
  */
 
       setMaxPages(Math.ceil(response.data.count / 10));
       setAllTransactionsSupporters(response.data.rows);
-      
     } catch (error) {
       console.error(error);
     }
-  }
-  
-
+  };
 
   const popupRef = useRef(null);
 
@@ -376,10 +372,13 @@ function formatDate(dateString) {
     <>
       <Navbar />
 
+      {messages.map((msg, index) => (
+        <li key={index}>{msg.time}</li>
+      ))}
+
       {!viewFullActivity ? (
         <HeaderPart
           athlete={athlete}
-          
           setOpenSnackbar={setOpenSnackbar}
           setSnackbarMessage={setSnackbarMessage}
         />
@@ -391,8 +390,6 @@ function formatDate(dateString) {
         <>
           {!viewFullActivity ? (
             <>
-
-
               <SubHeaderPart
                 athlete={athlete}
                 howManySupporters={howManySupporters}
@@ -450,10 +447,10 @@ function formatDate(dateString) {
                 setViewFullActivity={setViewFullActivity}
                 viewFullActivity={viewFullActivity}
                 howManySupporters={howManySupporters}
-
                 allTransactionsSupporters={allTransactionsSupporters}
-
-                handlePaginationChangeAllTransactions={handlePaginationChangeAllTransactions}
+                handlePaginationChangeAllTransactions={
+                  handlePaginationChangeAllTransactions
+                }
                 allTransactionsPage={allTransactionsPage}
                 maxPages={maxPages}
               />
