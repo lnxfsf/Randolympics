@@ -99,7 +99,7 @@ app.use("/payment", paymentRoutes);
 
 
 // Server Sent Events
-app.use("/SSE", SSERoutes);
+/* app.use("/SSE", SSERoutes); */
 
 db.sequelize.authenticate().then(() => {
   if (isProduction === "staging") {
