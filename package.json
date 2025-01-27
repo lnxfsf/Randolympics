@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "kill-port 5000 && nodemon server.js",
     "test": "npx mocha --ignore test/emailService.test.js ",
     "test:jest": "npx jest -- test/emailService.test.js"
   },
@@ -46,5 +46,8 @@
     "superagent": "^10.1.0",
     "supertest": "^7.0.0",
     "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
   }
 }
