@@ -33,6 +33,13 @@ const StripeFormComponent = ({
 
   const { t } = useTranslation();
 
+  const translatedError = (message) => {
+      if(message.includes("Your card number is incorrect")){
+        return t("popupMessages.text28");
+      }
+
+  }
+
   const stripe = useStripe(`${STRIPE_PUBLIC_KEY}`);
 
   const elements = useElements();
@@ -49,7 +56,9 @@ const StripeFormComponent = ({
 
     mutate(undefined, {
       onError: (error) => {
-        setSnackbarMessage(error?.message);
+        console.log("<StripeForm error: ")
+        console.log(error?.message)
+        setSnackbarMessage(translatedError(error?.message));
         setSnackbarStatus("error");
         setOpenSnackbar(true);
       },

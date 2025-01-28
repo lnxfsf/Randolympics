@@ -2,7 +2,7 @@ import { CardContent, Grid, Typography, OutlinedInput, InputAdornment, Button, C
 
 import { useTranslation } from "react-i18next";
 
-const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error }) => {
+const DonationInput = ({ amount,  handleChange, handleSubmit, isLoading, error }) => {
     
     const { t } = useTranslation(); 
 
@@ -24,11 +24,19 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                             type="number"
 
                             value={amount}
-                            onChange={handleChange}
+
+
+
+                            onChange={handleChange} 
+
+                           
+
+
                             startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
                             fullWidth
 
-                            inputProps={{ min: 1 }}
+                            inputProps={{ min: 1,  inputMode: "numeric",
+                                pattern: "/^\d+(\.\d{1,2})?$/", }}
 
                             sx={{
                                 fontFamily: "'Lexend', sans-serif",
@@ -46,6 +54,12 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                                     MozAppearance: 'textfield',
                                 },
                             }}
+
+
+                            
+
+
+
                         />
                     </Grid>
                     <Grid item xs={12}>

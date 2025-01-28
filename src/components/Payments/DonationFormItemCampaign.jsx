@@ -11,6 +11,8 @@ import axios from "axios";
 import {createPaymentIntent} from '../../functions/createPaymentIntent';
 
 
+
+
 import {
   Button,
   CardActionArea,
@@ -26,6 +28,10 @@ import AuthContext from "../../context/AuthContext";
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
+
+
+
+
 
 export default function DonationFormItemCampaign({
   amount,
@@ -47,6 +53,16 @@ export default function DonationFormItemCampaign({
   setOpenSnackbar,
 }) {
   const { t, i18n } = useTranslation();
+
+
+
+  const translatedError = (message) => {
+
+   /*  if(message === "") */
+
+
+  }
+
 
   /*   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -81,6 +97,9 @@ export default function DonationFormItemCampaign({
 
         if (response.status !== 200) {
           setSnackbarStatus("error");
+          
+          
+
           setSnackbarMessage(
             response?.data?.message || "An unexpected error occurred."
           );
@@ -143,7 +162,25 @@ export default function DonationFormItemCampaign({
   
 
 
+
+
   const handleChange = (e) => {
+    const onlyPositiveNums = /^(\d+(\.\d{1,2})?)?$/;
+    const value = e.target.value;
+
+    if (value && !onlyPositiveNums.test(value)) {
+      e.target.value = value.slice(0, -1);
+    }
+
+
+    if (parseFloat(value) > 999999) {
+      e.target.value = "999999.99"; 
+    }
+
+    if(parseFloat(value) === 0){
+      e.target.value = "1";
+    }
+
     setAmount(e.target.value);
   };
 
@@ -162,7 +199,15 @@ export default function DonationFormItemCampaign({
         discountCode,
         countryAthleteIsIn,
       }, {onError: (error) => {
-         setSnackbarMessage(error?.response?.data?.error );
+
+
+        setSnackbarMessage(error?.response?.data?.error);
+        console.log("snackbar: ")
+        console.log(translatedError(error?.response?.data?.error));
+
+       //  setSnackbarMessage(translatedError(error?.response?.data?.error));
+
+
           setSnackbarStatus("error");
           setOpenSnackbar(true);
       }}); 

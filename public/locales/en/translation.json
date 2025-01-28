@@ -2053,13 +2053,14 @@
     "text21": "Insert your name",
     "text22": "Created campaign.",
     "text23": "Congratulations! Your vote has been sent.",
-
     "text24": "Name can't contain numbers, special characters or space",
     "text25": "Last name can't contain numbers, special characters or space",
     "text26": "Middle name can't contain numbers, special characters or space",
+    "text27": "Insert supporter email",
+
+    "text28": "Your card number is incorrect"
 
 
-    "text27": "Insert supporter email"
   },
 
   "news": {

@@ -45,10 +45,16 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
   const [confirmedPayment, setConfirmedPayment] = useState(null);
 
   const { mutate, isLoading, data, error } = useCreatePaymentIntent();
+/* 
+  const handleChange = (event) => {
 
-  const handleChange = (e) => {
-    setAmount(e.target.value);
-  };
+    
+
+
+      setAmount(event.target.value);
+ 
+
+  }; */
   const handleSubmit = () => {
     mutate({ amount, campaignId });
   };
@@ -91,6 +97,11 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
     [handleClear, setConfirmedPayment] // Dependencies that will cause the function to update if they change
   );
 
+
+  const handleSetAmount = useCallback((amount) => {
+    setAmount(amount);
+  })
+
   useEffect(() => {
     if (data) setPaymentIntent(data);
   }, [data]);
@@ -102,6 +113,8 @@ export default function DonationForm({ amount, setAmount, campaignId }) {
           <Container>
             <DonationInput
               amount={amount}
+              setAmount={setAmount}
+              handleSetAmount={handleSetAmount}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
               isLoading={isLoading}
