@@ -2058,7 +2058,10 @@
     "text26": "Middle name can't contain numbers, special characters or space",
     "text27": "Insert supporter email",
 
-    "text28": "Your card number is incorrect"
+    "text28": "Your card number is incorrect",
+    "text29": "Can't have characters in donation field",
+    "text30": "Can't leave donation field empty"
+
 
 
   },

@@ -29,8 +29,7 @@ const DonationInput = ({ amount,  handleChange, handleSubmit, isLoading, error }
 
                             onChange={handleChange} 
 
-                           
-
+                          
 
                             startAdornment={<InputAdornment position="start" sx={{fontFamily: "'Lexend', sans-serif",}}>$</InputAdornment>}
                             fullWidth

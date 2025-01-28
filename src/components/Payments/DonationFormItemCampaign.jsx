@@ -8,10 +8,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
 
-import {createPaymentIntent} from '../../functions/createPaymentIntent';
-
-
-
+import { createPaymentIntent } from "../../functions/createPaymentIntent";
 
 import {
   Button,
@@ -28,10 +25,6 @@ import AuthContext from "../../context/AuthContext";
 let BACKEND_SERVER_BASE_URL =
   import.meta.env.VITE_BACKEND_SERVER_BASE_URL ||
   process.env.VITE_BACKEND_SERVER_BASE_URL;
-
-
-
-
 
 export default function DonationFormItemCampaign({
   amount,
@@ -54,15 +47,9 @@ export default function DonationFormItemCampaign({
 }) {
   const { t, i18n } = useTranslation();
 
-
-
   const translatedError = (message) => {
-
-   /*  if(message === "") */
-
-
-  }
-
+    /*  if(message === "") */
+  };
 
   /*   // for snackbar message.
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -93,12 +80,8 @@ export default function DonationFormItemCampaign({
           }
         );
 
-      
-
         if (response.status !== 200) {
           setSnackbarStatus("error");
-          
-          
 
           setSnackbarMessage(
             response?.data?.message || "An unexpected error occurred."
@@ -113,7 +96,6 @@ export default function DonationFormItemCampaign({
 
       return true;
     } catch (error) {
-   
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
@@ -156,70 +138,74 @@ export default function DonationFormItemCampaign({
   const [paymentIntent, setPaymentIntent] = useState(null);
   const [confirmedPayment, setConfirmedPayment] = useState(null);
 
-   const { mutate, isLoading, data, error } = useCreatePaymentIntent();
-
- 
-  
-
-
-
+  const { mutate, isLoading, data, error } = useCreatePaymentIntent();
 
   const handleChange = (e) => {
     const onlyPositiveNums = /^(\d+(\.\d{1,2})?)?$/;
-    const value = e.target.value;
+    let value = e.target.value;
 
+    value = value.replace(/[^0-9.]/g, "");
+
+    // only 2 digits
     if (value && !onlyPositiveNums.test(value)) {
-      e.target.value = value.slice(0, -1);
+      value = value.slice(0, -1);
     }
-
 
     if (parseFloat(value) > 999999) {
-      e.target.value = "999999.99"; 
+      value = "999999.99";
     }
 
-    if(parseFloat(value) === 0){
-      e.target.value = "1";
+    if (parseFloat(value) === 0) {
+      value = "1";
     }
 
-    setAmount(e.target.value);
+    setAmount(value);
   };
 
   const handleSubmit = async () => {
+    const noCharsInAmount = /^\d+(\.\d{0,2})?$/;
 
+    
 
-    if ((await checkIfCouponValid()) && checkValidityOfFields()) {
+    if (
+      (await checkIfCouponValid()) &&
+      checkValidityOfFields() &&
+      noCharsInAmount.test(amount)
+    ) {
+      mutate(
+        {
+          amount,
+          campaignId,
+          supporterName,
+          supporterEmail,
+          separateDonationThruPage,
+          supporterComment,
+          discountCode,
+          countryAthleteIsIn,
+        },
+        {
+          onError: (error) => {
+            setSnackbarMessage(error?.response?.data?.error);
+            console.log("snackbar: ");
+            console.log(translatedError(error?.response?.data?.error));
 
-       mutate({
-        amount,
-        campaignId,
-        supporterName,
-        supporterEmail,
-        separateDonationThruPage,
-        supporterComment,
-        discountCode,
-        countryAthleteIsIn,
-      }, {onError: (error) => {
+            //  setSnackbarMessage(translatedError(error?.response?.data?.error));
 
-
-        setSnackbarMessage(error?.response?.data?.error);
-        console.log("snackbar: ")
-        console.log(translatedError(error?.response?.data?.error));
-
-       //  setSnackbarMessage(translatedError(error?.response?.data?.error));
-
-
-          setSnackbarStatus("error");
-          setOpenSnackbar(true);
-      }}); 
-
-
+            setSnackbarStatus("error");
+            setOpenSnackbar(true);
+          },
+        }
+      );
+    } else if (!noCharsInAmount.test(amount) && amount !== "") {
+      setSnackbarMessage(t("popupMessages.text29"));
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
+    } else if (amount === "") {
+      setSnackbarMessage(t("popupMessages.text30"));
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
     }
-
-
   };
-
-
-
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);
@@ -269,13 +255,6 @@ export default function DonationFormItemCampaign({
     if (data) setPaymentIntent(data);
   }, [data]);
 
-
-
-
-
-
-
-
   return (
     <Card elevation={0} className="drop-shadow-none ">
       {!paymentIntent && (
@@ -302,9 +281,8 @@ export default function DonationFormItemCampaign({
               paymentIntent={paymentIntent}
               handleCancel={handleClear}
               handleConfirmPayment={handleConfirmPayment}
-
-              setSnackbarMessage={setSnackbarMessage} 
-              setSnackbarStatus={setSnackbarStatus} 
+              setSnackbarMessage={setSnackbarMessage}
+              setSnackbarStatus={setSnackbarStatus}
               setOpenSnackbar={setOpenSnackbar}
             />
           </Container>
