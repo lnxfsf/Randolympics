@@ -196,15 +196,11 @@ export default function DonationFormItemCampaign({
           },
         }
       );
-    } else if (!noCharsInAmount.test(amount) && amount !== "") {
+    } else if (!noCharsInAmount.test(amount) ) {
       setSnackbarMessage(t("popupMessages.text29"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
-    } else if (amount === "") {
-      setSnackbarMessage(t("popupMessages.text30"));
-      setSnackbarStatus("error");
-      setOpenSnackbar(true);
-    }
+    } 
   };
 
   const handleClear = useCallback(() => {
