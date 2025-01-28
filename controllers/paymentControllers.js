@@ -124,6 +124,7 @@ console.log("makepayment ")
       } catch (error) {
         await t1.rollback();
         console.log(error.stack);
+        res.status(500).json({ error: error.message });
       }
     } else {
       // this get executed when it's first user
@@ -157,6 +158,7 @@ console.log("makepayment ")
         await t2.rollback();
 
         console.log(error.stack);
+        res.status(500).json({ error: error.message });
       }
     }
   } catch (error) {

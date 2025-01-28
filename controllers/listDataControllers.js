@@ -6632,6 +6632,7 @@ const howManySupportersCampaign = async (req, res) => {
     const countOfSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
+        payment_status: "succeeded",
       },
     });
 
@@ -6667,6 +6668,7 @@ const lastCommentsSupportersCampaign = async (req, res) => {
   const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
+      payment_status: "succeeded",
     },
   });
 
@@ -6700,6 +6702,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
   const firstSupporterCampaign = await Campaign.findOne({
     where: {
       campaignId: campaignId,
+      
     },
   });
 
@@ -6707,6 +6710,7 @@ const lastTransactionsSupportersCampaign = async (req, res) => {
     const lastCommentsSupporters = await Statscampaign.findAll({
       where: {
         campaignId: campaignId,
+        payment_status: "succeeded",
         /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
@@ -6733,6 +6737,7 @@ const firstSupportersCampaign = async (req, res) => {
     const firstSupporterCampaign = await Campaign.findOne({
       where: {
         campaignId: campaignId,
+        payment_status: "succeeded",
       },
     });
 
@@ -7017,6 +7022,7 @@ const allTransactionsSupportersCampaign = async (req, res) => {
     const allCommentsSupporters = await Statscampaign.findAndCountAll({
       where: {
         campaignId: campaignId,
+        payment_status: "succeeded",
         /* supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
       },
 
