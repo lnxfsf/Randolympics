@@ -73,7 +73,7 @@ const DonationInput = ({ amount, handleChange, handleSubmit, isLoading, error })
                             <span className="lexend-font ">{isLoading ? <CircularProgress size="1.5rem"/> : t("campaign.content18")}</span>
 
                         </Button>
-                        {error && <Typography variant="alert">{t("campaign.content128")}</Typography>}
+                       
                     </Grid>
 
 

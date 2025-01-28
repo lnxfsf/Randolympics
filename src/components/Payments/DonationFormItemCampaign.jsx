@@ -8,6 +8,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
 
+import {createPaymentIntent} from '../../functions/createPaymentIntent';
+
+
 import {
   Button,
   CardActionArea,
@@ -34,7 +37,6 @@ export default function DonationFormItemCampaign({
   separateDonationThruPage,
   setFourthIsVisible,
   setFifthIsVisible,
-
 
   supporterComment,
   discountCode = "",
@@ -75,8 +77,7 @@ export default function DonationFormItemCampaign({
           }
         );
 
-        console.log("koji kupon on dobija ?");
-        console.log(discountCode);
+      
 
         if (response.status !== 200) {
           setSnackbarStatus("error");
@@ -93,11 +94,7 @@ export default function DonationFormItemCampaign({
 
       return true;
     } catch (error) {
-      console.log("koji kupon on dobija error je ?");
-      console.log(discountCode);
-
-      console.log(error.response?.data?.message || error.message);
-
+   
       setSnackbarStatus("error");
       setSnackbarMessage(error.response?.data?.message || error.message);
       setOpenSnackbar(true);
@@ -107,36 +104,27 @@ export default function DonationFormItemCampaign({
     }
   };
 
-
   const checkValidityOfFields = () => {
-
-    
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
+    /*   if(supporterEmail) */
 
-  /*   if(supporterEmail) */
-
-
-    if(supporterEmail === ""){
-      setSnackbarMessage(t("popupMessages.text27")); 
+    if (supporterEmail === "") {
+      setSnackbarMessage(t("popupMessages.text27"));
       setSnackbarStatus("error");
       setOpenSnackbar(true);
 
       return false;
     } else if (!emailRegex.test(supporterEmail)) {
-       setSnackbarMessage(t("register.content8")); 
-       setSnackbarStatus("error");
-       setOpenSnackbar(true);
+      setSnackbarMessage(t("register.content8"));
+      setSnackbarStatus("error");
+      setOpenSnackbar(true);
 
-       return false;
-       
-      }
+      return false;
+    }
 
-      return true;
-
-
-
-  }
+    return true;
+  };
 
   //let { campaignId } = useContext(AuthContext);
   // console.log(user)
@@ -149,17 +137,22 @@ export default function DonationFormItemCampaign({
   const [paymentIntent, setPaymentIntent] = useState(null);
   const [confirmedPayment, setConfirmedPayment] = useState(null);
 
-  const { mutate, isLoading, data, error } = useCreatePaymentIntent();
+   const { mutate, isLoading, data, error } = useCreatePaymentIntent();
+
+ 
+  
+
 
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
 
   const handleSubmit = async () => {
- 
 
-    if (await checkIfCouponValid() && checkValidityOfFields()) {
-      mutate({
+
+    if ((await checkIfCouponValid()) && checkValidityOfFields()) {
+
+       mutate({
         amount,
         campaignId,
         supporterName,
@@ -168,9 +161,20 @@ export default function DonationFormItemCampaign({
         supporterComment,
         discountCode,
         countryAthleteIsIn,
-      });
+      }, {onError: (error) => {
+         setSnackbarMessage(error?.response?.data?.error );
+          setSnackbarStatus("error");
+          setOpenSnackbar(true);
+      }}); 
+
+
     }
+
+
   };
+
+
+
 
   const handleClear = useCallback(() => {
     setPaymentIntent(null);
@@ -198,18 +202,12 @@ export default function DonationFormItemCampaign({
         setSnackbarStatus("success");
         setOpenSnackbar(true);
 
-
         // and go on next page, if this is first time donating
-        if(!separateDonationThruPage){
+        if (!separateDonationThruPage) {
           setFourthIsVisible(false);
           setFifthIsVisible(true);
-
-
         }
       }
-
-
-
 
       handleClear(); // Clear the payment intent
 
@@ -225,6 +223,13 @@ export default function DonationFormItemCampaign({
   useEffect(() => {
     if (data) setPaymentIntent(data);
   }, [data]);
+
+
+
+
+
+
+
 
   return (
     <Card elevation={0} className="drop-shadow-none ">
@@ -252,6 +257,10 @@ export default function DonationFormItemCampaign({
               paymentIntent={paymentIntent}
               handleCancel={handleClear}
               handleConfirmPayment={handleConfirmPayment}
+
+              setSnackbarMessage={setSnackbarMessage} 
+              setSnackbarStatus={setSnackbarStatus} 
+              setOpenSnackbar={setOpenSnackbar}
             />
           </Container>
         </Fade>
@@ -264,22 +273,6 @@ export default function DonationFormItemCampaign({
               {t("payments.content1")}
             </Typography>
           </Fade>
-
-          {/*    <Snackbar
-            open={openSnackbar}
-            autoHideDuration={15000}
-            onClose={handleSnackbar}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <Alert
-              onClose={handleSnackbar}
-              severity={snackbarStatus}
-              variant="filled"
-              sx={{ width: "100%" }}
-            >
-              {snackbarMessage}
-            </Alert>
-          </Snackbar> */}
         </>
       )}
     </Card>

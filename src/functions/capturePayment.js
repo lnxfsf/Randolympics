@@ -2,9 +2,12 @@ const capturePayment = async (elements, stripe, clientSecret) => {
     if (!stripe) {
         throw new Error("Stripe hasn't yet loaded.");
     }
+
+
     const { error: submitError } = await elements.submit();
+
     if (submitError) {
-        throw submitError;
+           throw submitError; 
     }
 
     const { error } = await stripe.confirmPayment({
@@ -15,6 +18,7 @@ const capturePayment = async (elements, stripe, clientSecret) => {
 
     if (error) {
         throw error;
+       
     }
     else return {status: "success"};
 };
