@@ -1,10 +1,12 @@
+
+/*
 const db = require("../models/database");
 
 const Campaign = db.campaign;
 const User = db.users;
 const Statscampaign = db.statscampaign;
 
-const itemCampaign = async (req, res) => {
+ const itemCampaign = async (req, res) => {
   // this is SSE, for checking ItemCampaign if there's something new
 
   // Set headers for SSE
@@ -73,7 +75,7 @@ const itemCampaign = async (req, res) => {
         const lastCommentsSupporters = await Statscampaign.findAll({
           where: {
             campaignId: campaignId,
-            /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, */
+            /*  supporterEmail: { [Op.ne]: firstSupporterCampaign.supporterEmail }, 
           },
 
           limit: 3,
@@ -108,7 +110,7 @@ const itemCampaign = async (req, res) => {
             },
             lastCommentsSupporters,
           })}\n\n`
-        ); */
+        );
       } catch (error) {
         console.error("Database error:", error);
         res.write(
@@ -133,8 +135,9 @@ const itemCampaign = async (req, res) => {
     console.error("Unexpected error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
+}; 
 
 module.exports = {
   itemCampaign,
 };
+*/

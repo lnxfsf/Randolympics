@@ -358,6 +358,10 @@ const donateOnlyWithDiscountCode = async (req, res) => {
 
       // znaci kreiras jedan row .. (da, treba da upises, i u Athlete isto), i ovaj ce jedini biti odmah "success", jer on ne radi potvrdu..
 
+
+      // we create new record. This is for   Statscampaign.create(supporter_data, { transaction: t4 })
+      const t4 = await db.sequelize.transaction();
+
       try {
         const currentDate = new Date();
         const expiryDate = new Date(oneCoupon.expiryDate);
@@ -460,17 +464,20 @@ const donateOnlyWithDiscountCode = async (req, res) => {
           amount: amount,
         };
 
-        // we create new record.
-        const t4 = await db.sequelize.transaction();
+        
+        
 
         await Statscampaign.create(supporter_data, { transaction: t4 });
 
         await t4.commit();
 
+        console.log("t4 donated succeeded")
         res.status(200).json({ message: t('donateOnlyWithDiscountCode.content10') });
       } catch (e) {
-        await t4.rollback();
+        console.log("t4 rollback, only if some mysql access fails above, it will abort transaction")
+        await t4.rollback(); 
         console.log(e.stack);
+
       }
     }
   } catch (e) {

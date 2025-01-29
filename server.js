@@ -35,7 +35,9 @@ const votingRoutes = require("./routes/votingRoutes");
 const userRoutes = require("./routes/userRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const webhookRoute = require("./routes/webhookRoutes");
-const SSERoutes = require("./routes/SSERoutes");
+/* const SSERoutes = require("./routes/SSERoutes"); */
+
+ 
 
 
 const db = require("./models/database");
