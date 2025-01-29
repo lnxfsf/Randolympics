@@ -403,7 +403,7 @@ const Register = () => {
       }
     }
 
-    const noSpecialCharsRegex = /^[\p{L}]+$/u;
+    const noSpecialCharsRegex = /^[\p{L} ]+$/u;
     
 
     var cryptoaddr = e.target.cryptoaddr.value;

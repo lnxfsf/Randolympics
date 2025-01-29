@@ -279,7 +279,7 @@ const Supporters = () => {
       }
 
 
-      const noSpecialCharsRegex = /^[\p{L}]+$/u;
+      const noSpecialCharsRegex = /^[\p{L} ]+$/u;
 
       const emailRegexSupporter = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
