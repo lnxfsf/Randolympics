@@ -18,7 +18,6 @@ async function fetchGeoIPLanguage() {
         US: "en",
         RS: "sr",
         ME: "sr",
-        HR: "hr"
       };
 
       // this geoIP should run only once.  Store detected language in localStorage
