@@ -6784,6 +6784,7 @@ const listAllCampaigns = async (req, res) => {
   try {
     var allCampaigns = await Campaign.findAndCountAll({
       where: {
+        
         friendGender: {
           [Op.like]: `%${filterGender}%`,
         },
@@ -6833,7 +6834,7 @@ const listAllCampaigns = async (req, res) => {
 
         // Count rows in statscampaigns table for this campaignId
         const supporterCount = await Statscampaign.count({
-          where: { campaignId: campaign.campaignId },
+          where: { campaignId: campaign.campaignId, payment_status: "succeeded", },
         });
 
         // Return the campaign with additional fields
