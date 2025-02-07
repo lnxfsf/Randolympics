@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 
 
-const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewFullActivity }) => {
+const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewFullActivity, howManySupporters }) => {
 
   const { t } = useTranslation();
 
@@ -49,8 +49,7 @@ const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewF
               ))}
           </div>
 
-          {lastTransactionsSupporters &&
-            lastTransactionsSupporters.length === 0 && (
+          {howManySupporters === 0 && (
               <>
                 <div className="lexend-font text-black_second">
                   <p className="text-1xl md:text-2xl font-bold">{t("campaign.content67")}</p>

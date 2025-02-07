@@ -217,6 +217,7 @@ const ItemCampaign = () => {
       );
 
       setCampaign(response.data.oneCampaign);
+      
       setAthlete(response.data.thatAthlete);
 
       if (response.data.thatAthlete) {
@@ -300,6 +301,7 @@ const ItemCampaign = () => {
           },
         }
       );
+
 
       setLastTransactionsSupporters(response.data);
     } catch (error) {
@@ -424,6 +426,7 @@ const ItemCampaign = () => {
                 lastTransactionsSupporters={lastTransactionsSupporters}
                 setViewFullActivity={setViewFullActivity}
                 getAllTransactions={getAllTransactions}
+                howManySupporters={howManySupporters}
               />
             </>
           ) : (
