@@ -19,9 +19,8 @@ const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewF
           <p className="font-bold text-xl md:text-2xl">{t("campaign.content65")}</p>
 
           <div className="flex w-full flex-col mt-4" >
-            {lastTransactionsSupporters &&
-              lastTransactionsSupporters.map((item, index) => (
-                <React.Fragment key={index}>
+            {lastTransactionsSupporters?.map((item, index) => (
+                <div key={index}>
                   {/* pl-4 pr-4 */}
                   <div  className="flex w-full flex-col justify-start items-start mt-1 mb-1   ">
                     <div className="flex w-full  items-center justify-between">
@@ -45,7 +44,7 @@ const ActivityPart = ({ getAllTransactions, lastTransactionsSupporters, setViewF
                       {item.supporterComment}
                     </p>
                   </div>
-                  </React.Fragment>
+                  </div>
               ))}
           </div>
 
