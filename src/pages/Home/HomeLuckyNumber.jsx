@@ -17,7 +17,7 @@ const HomeLuckyNumber = () => {
     const amount = 100;
     const supporters = 10;
 
-    setScore((amount*supporters*luckyNum).toFixed(2)); 
+    setScore((amount*supporters*luckyNum).toFixed(0)); 
 
   }
 

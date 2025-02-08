@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo  } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "../../styles/home.scoped.scss";
 
 import { Button } from "@mui/material";
@@ -29,74 +29,83 @@ const ImagineHomeScreen = () => {
 
   const [animate, setAnimate] = useState(true);
 
-  const listOfTitle1 = useMemo(() => [
-    t("home.imagineHome.sport1"),
+  const listOfTitle1 = useMemo(
+    () => [
+      t("home.imagineHome.sport1"),
 
-    t("home.imagineHome.sport2"),
-    t("home.imagineHome.sport3"),
-    t("home.imagineHome.sport4"),
-    t("home.imagineHome.sport6"),
-    t("home.imagineHome.sport7"),
-    t("home.imagineHome.sport8"),
-    t("home.imagineHome.sport9"),
-    t("home.imagineHome.sport10"),
+      t("home.imagineHome.sport2"),
+      t("home.imagineHome.sport3"),
+      t("home.imagineHome.sport4"),
+      t("home.imagineHome.sport6"),
+      t("home.imagineHome.sport7"),
+      t("home.imagineHome.sport8"),
+      t("home.imagineHome.sport9"),
+      t("home.imagineHome.sport10"),
 
-    t("home.imagineHome.sport11"),
-    t("home.imagineHome.sport12"),
-    t("home.imagineHome.sport13"),
-    t("home.imagineHome.sport14"),
-    t("home.imagineHome.sport15"),
-    t("home.imagineHome.sport16"),
-    t("home.imagineHome.sport17"),
-    t("home.imagineHome.sport18"),
-    t("home.imagineHome.sport19"),
+      t("home.imagineHome.sport11"),
+      t("home.imagineHome.sport12"),
+      t("home.imagineHome.sport13"),
+      t("home.imagineHome.sport14"),
+      t("home.imagineHome.sport15"),
+      t("home.imagineHome.sport16"),
+      t("home.imagineHome.sport17"),
+      t("home.imagineHome.sport18"),
+      t("home.imagineHome.sport19"),
 
-    t("home.imagineHome.sport20"),
-    t("home.imagineHome.sport21"),
-    t("home.imagineHome.sport22"),
-    t("home.imagineHome.sport23"),
-    t("home.imagineHome.sport24"),
-    t("home.imagineHome.sport25"),
-    t("home.imagineHome.sport27"),
-    t("home.imagineHome.sport28"),
+      t("home.imagineHome.sport20"),
+      t("home.imagineHome.sport21"),
+      t("home.imagineHome.sport22"),
+      t("home.imagineHome.sport23"),
+      t("home.imagineHome.sport24"),
+      t("home.imagineHome.sport25"),
+      t("home.imagineHome.sport27"),
+      t("home.imagineHome.sport28"),
 
-    t("home.imagineHome.sport29"),
-    t("home.imagineHome.sport30"),
-    t("home.imagineHome.sport31"),
-    t("home.imagineHome.sport33"),
-  ], [i18n.language]);
+      t("home.imagineHome.sport29"),
+      t("home.imagineHome.sport30"),
+      t("home.imagineHome.sport31"),
+      t("home.imagineHome.sport33"),
+    ],
+    [i18n.language]
+  );
 
-  const listOfHappen = useMemo(() => [
-    t("home.imagineHome.happen1"),
-    t("home.imagineHome.happen2"),
-    t("home.imagineHome.happen4"),
-    t("home.imagineHome.happen5"),
-    t("home.imagineHome.happen6"),
-    t("home.imagineHome.happen7"),
-    t("home.imagineHome.happen8"),
-    t("home.imagineHome.happen9"),
-    t("home.imagineHome.happen11"),
-    t("home.imagineHome.happen12"),
+  const listOfHappen = useMemo(
+    () => [
+      t("home.imagineHome.happen1"),
+      t("home.imagineHome.happen2"),
+      t("home.imagineHome.happen4"),
+      t("home.imagineHome.happen5"),
+      t("home.imagineHome.happen6"),
+      t("home.imagineHome.happen7"),
+      t("home.imagineHome.happen8"),
+      t("home.imagineHome.happen9"),
+      t("home.imagineHome.happen11"),
+      t("home.imagineHome.happen12"),
 
-    t("home.imagineHome.happen13"),
-    t("home.imagineHome.happen14"),
-    t("home.imagineHome.happen15"),
-    t("home.imagineHome.happen16"),
-    t("home.imagineHome.happen17"),
-  ], [i18n.language]);
+      t("home.imagineHome.happen13"),
+      t("home.imagineHome.happen14"),
+      t("home.imagineHome.happen15"),
+      t("home.imagineHome.happen16"),
+      t("home.imagineHome.happen17"),
+    ],
+    [i18n.language]
+  );
 
-  const listOfScenarios = useMemo(() => [
-    t("home.imagineHome.scenario1"),
-    t("home.imagineHome.scenario2"),
-    t("home.imagineHome.scenario3"),
-    t("home.imagineHome.scenario4"),
-    t("home.imagineHome.scenario5"),
-    t("home.imagineHome.scenario6"),
-    t("home.imagineHome.scenario7"),
-    t("home.imagineHome.scenario8"),
-    t("home.imagineHome.scenario9"),
-    t("home.imagineHome.scenario10"),
-  ], [i18n.language]);
+  const listOfScenarios = useMemo(
+    () => [
+      t("home.imagineHome.scenario1"),
+      t("home.imagineHome.scenario2"),
+      t("home.imagineHome.scenario3"),
+      t("home.imagineHome.scenario4"),
+      t("home.imagineHome.scenario5"),
+      t("home.imagineHome.scenario6"),
+      t("home.imagineHome.scenario7"),
+      t("home.imagineHome.scenario8"),
+      t("home.imagineHome.scenario9"),
+      t("home.imagineHome.scenario10"),
+    ],
+    [i18n.language]
+  );
 
   const listOfImages = [
     "/home/home_random_sports/imagine3.jpg",
@@ -259,8 +268,6 @@ const ImagineHomeScreen = () => {
             </video>
           </div>
 
-
-
           <div className="textBox1 inline-block mr-8">
             <p className="font-medium text-black_second pr-3 p-2 pl-3">
               <span className="text-red-600 mr-2">
@@ -269,14 +276,13 @@ const ImagineHomeScreen = () => {
               {t("home.imagineHome.text3")}
             </p>
           </div>
-
-
-
         </div>
 
         <div className="pl-8 pr-8 w-full 2xl:w-[70%] flex justify-between flex-col lg:flex-row">
           <div>
-            <p className=" font-bold text-3xl md:text-4xl ">{t("home.imagineHome.text14")}</p>
+            <p className=" font-bold text-3xl md:text-4xl ">
+              {t("home.imagineHome.text14")}
+            </p>
 
             <div className="flex items-start">
               <img className="inline w-5 mt-4 md:mt-3" src="/home/shoe.svg" />
@@ -350,7 +356,34 @@ const ImagineHomeScreen = () => {
             </div>
 
             <div className="w-full flex justify-center items-center pt-8 flex-col">
-              <div className="flex max-md:w-full items-center gap-2">
+
+            <Button
+                  onClick={() => {
+                    navigate("/supporters#myself");
+                  }}
+                  className="w-full md:w-60 self-center "
+                  style={{ textTransform: "none" }}
+                  sx={{
+                    height: "45px",
+                    bgcolor: "#D24949",
+
+                    color: "#fff",
+                    borderRadius: 2,
+                    border: `1px solid #D24949`,
+                    "&:hover": {
+                      background: "rgba(210, 73, 73, 1)",
+                      color: "white",
+                      border: `1px solid rgba(210, 73, 73, 1)`,
+                    },
+                  }}
+                >
+                  <span className="lexend-font">
+                    {t("home.imagineHome.text15")}
+                  </span>
+                </Button>
+
+
+              <div className="flex max-md:w-full items-center gap-2 mt-4">
                 <Button
                   onClick={() => {
                     navigate("/supporters#friend");
@@ -440,12 +473,7 @@ const ImagineHomeScreen = () => {
                   : "animate__animated animate__bounceOutRight"
               } */}
             <img
-              className={`2xl:w-96
-                
-
-                
-                
-                `}
+              className={`2xl:w-96`}
               src={imageImagine1}
             />
 
@@ -457,11 +485,7 @@ ${
 }
  */}
             <img
-              className={`2xl:w-96 mt-6 
-                
-                 
-                
-                `}
+              className={`2xl:w-96 mt-6`}
               src={imageImagine2}
             />
           </div>

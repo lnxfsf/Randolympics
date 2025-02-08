@@ -320,6 +320,7 @@
       "text12": "Make your choice now !",
       "text13": "30 sports in total",
       "text14": "Why",
+      "text15": "Myself",
 
       "happen1": "actually, win? 🏆✨",
       "happen2": "lose hard? 😬💔",
@@ -419,7 +420,7 @@
     "profile6": "Login & Traffic History",
     "profile7": "Logout",
     "profile8": "Log In",
-    "profile9": "Sign Up Your Friend",
+    "profile9": "Sign Up",
     "profile10": "Created campaigns"
   },
   "campaign": {
