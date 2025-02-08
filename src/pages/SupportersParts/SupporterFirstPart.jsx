@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const SupporterFirstPart = ({
+  setSignUpMySelf,
   firstIsVisible,
   setIsCelebrity,
   setFriendEmail,
@@ -83,6 +84,8 @@ const SupporterFirstPart = ({
 <div className="gap-4 flex flex-col md:flex-row">        
   <Button
             onClick={() => {
+              
+              setSignUpMySelf(true);
               setIsCelebrity(false);
               setFriendEmail("");
 

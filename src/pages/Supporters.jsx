@@ -197,7 +197,7 @@ const Supporters = () => {
     var tempDoCreateSupporterAccount = false;
 
     // if user is logged in, no need to check it. it won't create another supporter account when making campaign
-    if (!user) {
+    if (!(user || signUpMySelf)) {
       // ako je password PRAZAN ! PRAZAN. onda proverava samo za email, i kaze, da moze da popuni password jer account postoji !
       if (supporterPassword !== "" && supporterEmail !== "") {
         // ALI AKO UNESE ŠIFRU !
@@ -686,6 +686,8 @@ const Supporters = () => {
 
   const [isCelebrity, setIsCelebrity] = useState(false);
 
+  const [signUpMySelf, setSignUpMySelf] = useState(false);
+
   const location = useLocation();
   const hash = location.hash.replace("#", "");
 
@@ -815,7 +817,19 @@ const Supporters = () => {
 
   useEffect(() => {
     switch (hash) {
-      case "friend" :
+      case "myself":
+        if(firstIsVisible){
+          
+        setSignUpMySelf(true);
+        setIsCelebrity(false);
+        setFriendEmail("");
+
+        setFirstIsVisible(false);
+        setSecondIsVisible(true);
+      }
+        break;
+      
+      case "friend":
         if(firstIsVisible){
         setIsCelebrity(false);
         setFriendEmail("");
@@ -838,7 +852,10 @@ const Supporters = () => {
 
         break;
     }
-  }, [amount, additionalSupportersFormData, i18n.language]);
+
+    console.log("signUpMySelf je: ", signUpMySelf)
+
+  }, [amount, additionalSupportersFormData, i18n.language, signUpMySelf]);
 
   useEffect(() => {
     // Generate a new unique campaignId each time the component renders. But only once, so user can make multiple campaigns without refresh of page.
@@ -892,8 +909,9 @@ const Supporters = () => {
         </div>
       </Popup>
 
-      {/* first */}
+      {/* first. this is initial page (white page with 3 buttons), where user chooses */}
       <SupporterFirstPart
+        setSignUpMySelf={setSignUpMySelf}
         firstIsVisible={firstIsVisible}
         setIsCelebrity={setIsCelebrity}
         setFriendEmail={setFriendEmail}
@@ -902,7 +920,7 @@ const Supporters = () => {
         generateRandomEmail={generateRandomEmail}
       />
 
-      {/* second */}
+      {/* second. page where user inserts athlete information */}
       <SupporterSecondPart
         secondIsVisible={secondIsVisible}
         setHowItWorks={setHowItWorks}
@@ -960,8 +978,9 @@ const Supporters = () => {
         filePondRef2={filePondRef2}
       />
 
-      {/* treca */}
+      {/* treca. page where user inserts supporter information*/}
       <SupporterThirdPart
+      signUpMySelf={signUpMySelf}
       isCelebrity={isCelebrity}
         thirdIsVisible={thirdIsVisible}
         friendName={friendName}
@@ -987,9 +1006,13 @@ const Supporters = () => {
         setSecondIsVisible={setSecondIsVisible}
         setThirdIsVisible={setThirdIsVisible}
         validateSupporter={validateSupporter}
+
+        friendEmail={friendEmail}
+        friendPhone={friendPhone}
+
       />
 
-      {/* cetvrta */}
+      {/* cetvrta. page where user donates money with credit card and/or with coupon codes */}
       <SupporterFourthPart
       isCelebrity={isCelebrity}
         fourthIsVisible={fourthIsVisible}
@@ -1008,7 +1031,7 @@ const Supporters = () => {
       />
 
       {/*  zavrsna, i ovde dobija url, od ovog posta, koji je.. (ovo prikazivanje (cetvrta), salje ga na novi page za to) */}
-
+       {/*  page where user can view link to campaign he created */}
       <SupporterFifthPart
         fifthIsVisible={fifthIsVisible}
         urlForCampaign={urlForCampaign}

@@ -80,12 +80,21 @@ const SupporterThirdPart = ({
   setThirdIsVisible,
   validateSupporter,
   isCelebrity,
+  signUpMySelf,
+  friendEmail,
+  friendPhone,
+
 }) => {
   const { t } = useTranslation();
 
   let { user } = useContext(AuthContext);
 
-  // if there's signed up user, then use his Name, Email, and Phone (if exists), in account he's currently logged in
+ 
+
+
+  useEffect(()=> {
+
+     // if there's signed up user, then use his Name, Email, and Phone (if exists), in account he's currently logged in
   if (user) {
     let tokens = JSON.parse(
       localStorage.getItem("authTokens") || sessionStorage.getItem("authTokens")
@@ -94,7 +103,40 @@ const SupporterThirdPart = ({
     setSupporterName(tokens.data.name);
     setSupporterEmail(tokens.data.email);
     setSupporterPhone(tokens.data.phone);
+
+    console.log("prijavljen korisnik, dobija");
+    console.log(tokens.data.name)
+    console.log(tokens.data.email)
+    console.log(tokens.data.phone)
+
   }
+
+
+
+    console.log("third (supporter info), signUpMySelf je: ",signUpMySelf)
+    // if we sign up for myself, then we just set these fields, same as it was inserted in athlete information
+     if(signUpMySelf){
+      setSupporterName(friendName);
+      setSupporterEmail(friendEmail); 
+      if(friendPhone){
+        setSupporterPhone(friendPhone);
+      }
+
+
+      console.log("sign up myself, dobija");
+    console.log(friendName)
+    console.log(friendEmail)
+    console.log(friendPhone)
+
+
+
+  
+    } 
+
+
+
+  })
+ 
 
   return (
     <>
@@ -163,7 +205,7 @@ const SupporterThirdPart = ({
 
             {/* main fields */}
             <div className="flex flex-col w-full">
-              {!user && (
+              {!(user || signUpMySelf) && (
                 <>
                   <label
                     htmlFor="name"
