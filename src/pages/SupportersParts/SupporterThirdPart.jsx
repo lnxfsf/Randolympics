@@ -104,16 +104,13 @@ const SupporterThirdPart = ({
     setSupporterEmail(tokens.data.email);
     setSupporterPhone(tokens.data.phone);
 
-    console.log("prijavljen korisnik, dobija");
-    console.log(tokens.data.name)
-    console.log(tokens.data.email)
-    console.log(tokens.data.phone)
+    
 
   }
 
 
 
-    console.log("third (supporter info), signUpMySelf je: ",signUpMySelf)
+   
     // if we sign up for myself, then we just set these fields, same as it was inserted in athlete information
      if(signUpMySelf){
       setSupporterName(friendName);
@@ -123,10 +120,6 @@ const SupporterThirdPart = ({
       }
 
 
-      console.log("sign up myself, dobija");
-    console.log(friendName)
-    console.log(friendEmail)
-    console.log(friendPhone)
 
 
 

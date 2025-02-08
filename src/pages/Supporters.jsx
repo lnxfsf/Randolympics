@@ -853,7 +853,6 @@ const Supporters = () => {
         break;
     }
 
-    console.log("signUpMySelf je: ", signUpMySelf)
 
   }, [amount, additionalSupportersFormData, i18n.language, signUpMySelf]);
 
