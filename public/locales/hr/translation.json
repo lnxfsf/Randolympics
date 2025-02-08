@@ -414,7 +414,7 @@
     "profile6": "Prijava i istorija saobraćaja",
     "profile7": "Odjava",
     "profile8": "Prijavi se",
-    "profile9": "Registruj prijatelja",
+    "profile9": "Registruj se",
     "profile10": "Kreirane kampanje"
   },
   "campaign": {
@@ -576,6 +576,8 @@
     "content139": "Detalji profila su uspešno sačuvani !",
     "content140": "Došlo je do greške !",
     "content141": "Fajl je prevelik! Maksimalna dozvoljena veličina je 4MB.",
+
+    "content142": "Želim da prijavim sebe",
 
     "warningPopupFriTitle1": "Pazi!",
     "warningPopupFriTitle2": "Budi oprezan!",

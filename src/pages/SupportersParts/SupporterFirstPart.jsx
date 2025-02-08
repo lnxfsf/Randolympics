@@ -76,7 +76,39 @@ const SupporterFirstPart = ({
         </FormControl>
  */}
 
-        <div className="flex gap-4 mt-6 md:mt-10 flex-col md:flex-row">
+
+{/* md:flex-row */}
+        <div className="flex  gap-4 mt-6 md:mt-10 flex-col items-center ">
+       
+<div className="gap-4 flex flex-col md:flex-row">        
+  <Button
+            onClick={() => {
+              setIsCelebrity(false);
+              setFriendEmail("");
+
+              setFirstIsVisible(false);
+              setSecondIsVisible(true);
+            }}
+            className="w-64 "
+            style={{ textTransform: "none", fontWeight: "bold" }}
+            sx={{
+              height: "50px",
+              bgcolor: "rgba(210, 73, 73, 1)",
+              color: "#fff",
+              borderRadius: 3,
+              border: `1px solid #FFF`,
+              "&:hover": {
+                background: "rgba(210, 73, 73, 1)",
+                color: "white",
+                border: `1px solid rgba(210, 73, 73, 1)`,
+              },
+            }}
+            
+          >
+            <span className="lexend-font">{t("campaign.content142")}</span>
+          </Button>
+       
+       
           <Button
             onClick={() => {
               setIsCelebrity(false);
@@ -103,6 +135,8 @@ const SupporterFirstPart = ({
           >
             <span className="lexend-font">{t("campaign.content13")}</span>
           </Button>
+          </div>
+
 
           <Button
             onClick={() => {
