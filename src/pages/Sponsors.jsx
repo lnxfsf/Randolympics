@@ -85,6 +85,11 @@ const Sponsors = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 mt-8 text-black_second">
+         
+         
+
+         {/* 
+         
           <div>
             <div className="flex flex-col ">
               <div className="flex justify-start items-center">
@@ -150,6 +155,12 @@ const Sponsors = () => {
               </p>
             </div>
           </div>
+ */}
+
+
+
+
+
         </div>
 
         <div className="w-full flex justify-center flex-col items-center">
